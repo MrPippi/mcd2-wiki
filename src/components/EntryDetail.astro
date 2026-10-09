@@ -1,0 +1,44 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../lib/i18n";
+import { relatedLinks } from "../lib/related";
+import EntryIcon from "./EntryIcon.astro";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  entry: Entry;
+}
+
+const { lang, entry } = Astro.props;
+const related = relatedLinks(lang, entry);
+---
+<article class="entry-detail" data-pagefind-body>
+  <header class="entry-head">
+    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={128} />
+    <div>
+      <LangText as="h1" lang={lang} value={entry.name} />
+      <p class="tags">
+        <span class="tag">{CATEGORY_LABEL[entry.category][lang]}</span>
+        <span class="tag">{t(lang, entry.variant)}</span>
+        {entry.armorPiece && <span class="tag">{PIECE_LABEL[entry.armorPiece][lang]}</span>}
+        {entry.untranslated?.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+      </p>
+    </div>
+  </header>
+  {entry.description && <LangText as="p" class="description" lang={lang} value={entry.description} html />}
+  {entry.descriptionLong && <LangText as="p" class="description-long" lang={lang} value={entry.descriptionLong} html />}
+  {related.length > 0 && (
+    <section class="related">
+      <h2>{t(lang, "related")}</h2>
+      <ul>
+        {related.map((link) => (
+          <li>
+            <span class="related-label">{t(lang, link.labelKey)}</span>
+            <a href={link.href}><LangText lang={lang} value={link.name} /></a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )}
+</article>
