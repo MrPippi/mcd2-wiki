@@ -1,0 +1,34 @@
+---
+import { LANGS, type Category } from "../../../../scripts/extract/config";
+import EntryCard from "../../../components/EntryCard.astro";
+import EntryTable from "../../../components/EntryTable.astro";
+import ListFilter from "../../../components/ListFilter.astro";
+import Base from "../../../layouts/Base.astro";
+import { entriesIn } from "../../../lib/data";
+import { CATEGORY_LABEL, GRID_CATEGORIES, TABLE_CATEGORIES, t, type Lang } from "../../../lib/i18n";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    [...GRID_CATEGORIES, ...TABLE_CATEGORIES].map((category) => ({ params: { lang, category } })),
+  );
+}
+
+const lang = Astro.params.lang as Lang;
+const category = Astro.params.category as Category;
+const entries = entriesIn(category);
+const isTable = (TABLE_CATEGORIES as readonly Category[]).includes(category);
+---
+<Base lang={lang} title={CATEGORY_LABEL[category][lang]}>
+  <h1>{CATEGORY_LABEL[category][lang]} <span class="count">({entries.length})</span></h1>
+  <ListFilter lang={lang} showVariant={!isTable} />
+  {isTable ? (
+    <>
+      <p class="note">{t(lang, "placeholderNote")}</p>
+      <EntryTable lang={lang} entries={entries} />
+    </>
+  ) : (
+    <ul class="entry-grid">
+      {entries.map((entry) => <EntryCard lang={lang} entry={entry} />)}
+    </ul>
+  )}
+</Base>

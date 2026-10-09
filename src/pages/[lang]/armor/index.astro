@@ -1,0 +1,35 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import { ARMOR_PIECES } from "../../../../scripts/extract/schemas";
+import EntryIcon from "../../../components/EntryIcon.astro";
+import LangText from "../../../components/LangText.astro";
+import ListFilter from "../../../components/ListFilter.astro";
+import Base from "../../../layouts/Base.astro";
+import { allArmorSets, findEntry } from "../../../lib/data";
+import { CATEGORY_LABEL, type Lang } from "../../../lib/i18n";
+import { href } from "../../../lib/url";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Lang;
+const cards = allArmorSets.map((set) => {
+  const firstSlug = ARMOR_PIECES.map((piece) => set.pieces[piece]).find((slug) => slug !== undefined);
+  return { set, icon: firstSlug ? findEntry("armor", firstSlug)?.icon : undefined };
+});
+---
+<Base lang={lang} title={CATEGORY_LABEL.armor[lang]}>
+  <h1>{CATEGORY_LABEL.armor[lang]} <span class="count">({cards.length})</span></h1>
+  <ListFilter lang={lang} showVariant={true} />
+  <ul class="entry-grid">
+    {cards.map(({ set, icon }) => (
+      <li class="entry-card" data-variant={set.variant} data-names={`${set.name.zh} ${set.name.en}`.toLowerCase()}>
+        <a href={href(lang, "armor", set.slug)}>
+          <EntryIcon icon={icon} alt={set.name[lang]} />
+          <LangText lang={lang} value={set.name} class="card-name" />
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>

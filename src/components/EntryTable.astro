@@ -1,0 +1,25 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { t, type Lang } from "../lib/i18n";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  entries: readonly Entry[];
+}
+
+const { lang, entries } = Astro.props;
+---
+<table class="entry-table" data-pagefind-body>
+  <thead>
+    <tr><th>{t(lang, "name")}</th><th>{t(lang, "description")}</th></tr>
+  </thead>
+  <tbody>
+    {entries.map((entry) => (
+      <tr id={entry.slug} data-variant={entry.variant} data-names={`${entry.name.zh} ${entry.name.en}`.toLowerCase()}>
+        <th scope="row"><LangText lang={lang} value={entry.name} /></th>
+        <td>{entry.description ? <LangText lang={lang} value={entry.description} html /> : "—"}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
