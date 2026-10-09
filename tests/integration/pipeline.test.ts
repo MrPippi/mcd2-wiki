@@ -1,0 +1,110 @@
+import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { beforeEach, describe, expect, it } from "vitest";
+import { ExtractError } from "../../scripts/extract/issues";
+import { runExtract } from "../../scripts/extract/pipeline";
+import type { ArmorSet, Entry } from "../../scripts/extract/schemas";
+import { makeLocales, ns } from "../helpers/locales";
+
+const ICON_ROOT = "Assets/Art/Characters/Player/Equipment";
+const QUIVER = `${ICON_ROOT}/Artifacts/Quivers/T_UI_Quiver_Freezing_Icon.png`;
+
+let sourceRoot: string;
+let outRoot: string;
+let overridesPath: string;
+
+async function put(root: string, relative: string, content: string): Promise<void> {
+  const file = path.join(root, ...relative.split("/"));
+  await mkdir(path.dirname(file), { recursive: true });
+  await writeFile(file, content, "utf8");
+}
+
+beforeEach(async () => {
+  sourceRoot = await mkdtemp(path.join(tmpdir(), "mcd2-src-"));
+  outRoot = await mkdtemp(path.join(tmpdir(), "mcd2-out-"));
+  overridesPath = path.join(sourceRoot, "overrides.json");
+  const locales = makeLocales({
+    [ns("DT_ItemDefinitionMelee")]: {
+      SW_Item_Sword_SW_TextEntry_Name: ["Sword", "劍"],
+      SW_Item_Sword_SW_TextEntry_Description: ["A classic sword.", "經典的劍。"],
+      SW_Item_Sword_Unique1_SW_TextEntry_Name: ["The Burning Blade", "燃燒之刃"],
+    },
+    [ns("DT_R3ItemDefinitionMelee")]: { SW_Item_Halberd_SW_TextEntry_Name: ["Halberd", "戟"] },
+    [ns("DT_ItemDefinitionArmor")]: {
+      SW_Item_DiscipleHelmet_SW_TextEntry_Name: ["Disciple mask", "修行者面具"],
+      SW_Item_DiscipleChest_SW_TextEntry_Name: ["Disciple Robe", "修行者長袍"],
+    },
+    [ns("DT_ItemDefinitionArtifact")]: { SW_Item_Artifact_FrostQuiver_SW_TextEntry_Name: ["Frost Quiver", "冰霜箭袋"] },
+    [ns("DT_EnchantmentDefinition")]: {
+      SW_Enchantment_Arcane_SW_TextEntry_Name: ["Artifact Amplifier", "神器增幅"],
+      SW_Enchantment_Arcane_SW_TextEntry_Description_EffectTotal: ["{0}", "{0}"],
+    },
+    [ns("DT_ItemDefinitionEnchantmentBook")]: {
+      SW_Item_EnchantmentBook_Arcane_SW_TextEntry_Name: ["Artifact Amplifier", "神器增幅"],
+    },
+    [ns("DT_EffectDefinition")]: {
+      SW_Effect_CriticalEdge_SW_TextEntry_Name: ["Critical Edge", "致命鋒刃"],
+      SW_Effect_CriticalEdge_SW_TextEntry_Description: ["All critical hits deal {0} more damage.", "暴擊造成的傷害提高 {0}。"],
+    },
+  });
+  await put(sourceRoot, "Localization/All/en/All.json", JSON.stringify(locales.en));
+  await put(sourceRoot, "Localization/All/zh-Hant/All.json", JSON.stringify(locales.zh));
+  await put(sourceRoot, `${ICON_ROOT}/Weapons/Sword/T_UI_Sword_Icon.png`, "png:sword");
+  await put(sourceRoot, `${ICON_ROOT}/Weapons/Sword/Sword_Unique/T_UI_Sword_Unique_Icon.png`, "png:sword-unique");
+  await put(sourceRoot, `${ICON_ROOT}/Armor/Disciple_Armor/T_UI_Helmet_Disciple_Icon.png`, "png:helmet");
+  await put(sourceRoot, QUIVER, "png:quiver");
+  await writeFile(overridesPath, JSON.stringify({ Artifact_FrostQuiver: QUIVER }), "utf8");
+});
+
+const readJson = async <T,>(relative: string): Promise<T> =>
+  JSON.parse(await readFile(path.join(outRoot, ...relative.split("/")), "utf8")) as T;
+
+describe("runExtract", () => {
+  it("writes entries, armor sets, icons and a report", async () => {
+    await put(outRoot, "public/icons/stale.png", "old");
+    const summary = await runExtract({ sourceRoot, outRoot, overridesPath });
+    const entries = await readJson<Entry[]>("src/data/entries.json");
+    const find = (category: string, slug: string) => entries.find((e) => e.category === category && e.slug === slug);
+
+    expect(find("melee", "sword")).toMatchObject({
+      name: { zh: "劍", en: "Sword" },
+      icon: "icons/melee/sword.png",
+      links: { variants: ["sword-unique1"] },
+    });
+    expect(await readFile(path.join(outRoot, "public", "icons", "melee", "sword.png"), "utf8")).toBe("png:sword");
+    expect(existsSync(path.join(outRoot, "public", "icons", "stale.png"))).toBe(false);
+    expect(find("melee", "halberd")).toMatchObject({ release: "upcoming", links: {} });
+    expect(find("melee", "halberd")?.icon).toBeUndefined();
+    expect(find("artifact", "frost-quiver")?.icon).toBe("icons/artifact/frost-quiver.png");
+    expect(find("enchantment", "arcane")?.links).toEqual({ enchantmentBook: "arcane" });
+    expect(find("effect", "critical-edge")?.description?.zh).toContain('<span class="placeholder">{數值}</span>');
+
+    expect(await readJson<ArmorSet[]>("src/data/armor-sets.json")).toEqual([
+      {
+        id: "Disciple",
+        slug: "disciple",
+        variant: "normal",
+        name: { zh: "修行者", en: "Disciple" },
+        pieces: { helmet: "disciple-helmet", chest: "disciple-chest" },
+      },
+    ]);
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).toContain("### missing-icon (1)\n\n- armor:DiscipleChest");
+    expect(summary).toMatchObject({ entries: 9, armorSets: 1, icons: 4 });
+  });
+
+  it("produces identical output on a second run", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    const first = await readFile(path.join(outRoot, "src", "data", "entries.json"), "utf8");
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(await readFile(path.join(outRoot, "src", "data", "entries.json"), "utf8")).toBe(first);
+  });
+
+  it("fails clearly when the locale files are missing", async () => {
+    const empty = await mkdtemp(path.join(tmpdir(), "mcd2-empty-"));
+    await expect(runExtract({ sourceRoot: empty, outRoot, overridesPath })).rejects.toThrow(ExtractError);
+    await expect(runExtract({ sourceRoot: empty, outRoot, overridesPath })).rejects.toThrow("找不到語系檔");
+  });
+});
