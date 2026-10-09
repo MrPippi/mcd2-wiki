@@ -1,0 +1,28 @@
+import type { Category, UiIconKey } from "../../scripts/extract/config";
+import type { ArmorPiece, UiIcons } from "../../scripts/extract/schemas";
+import { extractedUiIcons } from "./data";
+
+/** Game inventory tab icon for each site category; artifacts and statuses have none in game. */
+const CATEGORY_ICON: Readonly<Partial<Record<Category, UiIconKey>>> = {
+  melee: "melee",
+  ranged: "ranged",
+  armor: "armor",
+  enchantment: "enchantment",
+  "enchantment-book": "enchantment",
+  effect: "effect",
+};
+
+const GROUP_ICON: Readonly<Record<string, UiIconKey>> = { equipment: "equipment" };
+
+const lookup = (key: UiIconKey | undefined, icons: UiIcons): string | undefined => (key ? icons[key] : undefined);
+
+export const uiIcon = (key: UiIconKey, icons: UiIcons = extractedUiIcons): string | undefined => lookup(key, icons);
+
+export const categoryIcon = (category: Category, icons: UiIcons = extractedUiIcons): string | undefined =>
+  lookup(CATEGORY_ICON[category], icons);
+
+export const pieceIcon = (piece: ArmorPiece, icons: UiIcons = extractedUiIcons): string | undefined =>
+  lookup(piece, icons);
+
+export const groupIcon = (group: string, icons: UiIcons = extractedUiIcons): string | undefined =>
+  lookup(GROUP_ICON[group], icons);

@@ -3,6 +3,8 @@ import { LANGS } from "../../../../scripts/extract/config";
 import { ARMOR_PIECES, type ArmorSet } from "../../../../scripts/extract/schemas";
 import EntryIcon from "../../../components/EntryIcon.astro";
 import LangText from "../../../components/LangText.astro";
+import UiIcon from "../../../components/UiIcon.astro";
+import { pieceIcon } from "../../../lib/ui-icons";
 import Base from "../../../layouts/Base.astro";
 import { allArmorSets, findEntry } from "../../../lib/data";
 import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../../../lib/i18n";
@@ -33,7 +35,7 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
           <a href={entryHref(lang, entry)}>
             <EntryIcon icon={entry.icon} alt={entry.name[lang]} category={entry.category} variant={entry.variant} />
             <span>
-              <span class="piece-label">{PIECE_LABEL[piece][lang]}</span>{" "}
+              <span class="piece-label"><UiIcon src={pieceIcon(piece)} />{PIECE_LABEL[piece][lang]}</span>{" "}
               <LangText lang={lang} value={entry.name} />
             </span>
           </a>

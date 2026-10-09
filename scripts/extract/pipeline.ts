@@ -1,8 +1,8 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { assembleEntry, assertUniqueSlugs } from "./assemble";
-import { planFrames } from "./frames";
-import { ICON_SOURCES, TABLES, type IconSource } from "./config";
+import { planAssets } from "./ui-assets";
+import { FRAME_SOURCES, ICON_SOURCES, TABLES, UI_ICON_SOURCES, type IconSource } from "./config";
 import { groupEntries, type RawEntry } from "./group-entries";
 import { listIconFiles, loadOverrides } from "./icon-files";
 import { issue, type Issue } from "./issues";
@@ -84,16 +84,19 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const copies = plans.flatMap((plan) =>
     plan.source ? [{ from: plan.source, to: path.join(options.outRoot, "public", ...webPathOf(plan.raw).split("/")) }] : [],
   );
-  const framePlan = planFrames(options.sourceRoot, options.outRoot);
-  await copyIcons([...copies, ...framePlan.copies], path.join(options.outRoot, "public", "icons"));
+  const frames = planAssets(options.sourceRoot, options.outRoot, FRAME_SOURCES, "frames", "missing-frame");
+  const uiIcons = planAssets(options.sourceRoot, options.outRoot, UI_ICON_SOURCES, "ui", "missing-ui-icon");
+  await copyIcons([...copies, ...frames.copies, ...uiIcons.copies], path.join(options.outRoot, "public", "icons"));
   const issues = [
     ...catalog.issues,
-    ...framePlan.issues,
+    ...frames.issues,
+    ...uiIcons.issues,
     ...grouped.issues,
     ...plans.flatMap((plan) => plan.issues),
     ...assembled.flatMap((result) => result.issues),
     ...linked.issues,
   ];
-  await writeOutputs(options.outRoot, output, framePlan.frames, renderReport({ ...output, issues }));
+  const extraData = { "frames.json": frames.paths, "category-icons.json": uiIcons.paths };
+  await writeOutputs(options.outRoot, output, extraData, renderReport({ ...output, issues }));
   return { entries: output.entries.length, armorSets: output.armorSets.length, icons: copies.length, issues };
 }

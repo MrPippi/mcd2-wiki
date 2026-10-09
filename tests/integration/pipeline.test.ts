@@ -56,6 +56,7 @@ beforeEach(async () => {
   await put(sourceRoot, "Assets/UI/Icons/Enchantments/T_UI_Icon_Enchantment_Arcane.png", "png:arcane");
   await put(sourceRoot, "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Burning.png", "png:burning");
   await put(sourceRoot, "Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png", "png:artifact-frame");
+  await put(sourceRoot, "Assets/UI/Icons/Categories/T_UI_Icon_Category_Melee.png", "png:melee-category");
   await put(sourceRoot, "Localization/All/en/All.json", JSON.stringify(locales.en));
   await put(sourceRoot, "Localization/All/zh-Hant/All.json", JSON.stringify(locales.zh));
   await put(sourceRoot, `${ICON_ROOT}/Weapons/Sword/T_UI_Sword_Icon.png`, "png:sword");
@@ -114,6 +115,15 @@ describe("runExtract", () => {
     expect(await readFile(path.join(outRoot, "public", "icons", "frames", "artifact.png"), "utf8")).toBe("png:artifact-frame");
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-frame (1)\n\n- Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png");
+  });
+
+  it("copies available category icons and reports missing ones", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(await readJson<Record<string, string>>("src/data/category-icons.json")).toEqual({ melee: "icons/ui/melee.png" });
+    expect(await readFile(path.join(outRoot, "public", "icons", "ui", "melee.png"), "utf8")).toBe("png:melee-category");
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).toContain("### missing-ui-icon (10)");
+    expect(report).toContain("- Assets/UI/Icons/Categories/T_UI_Icon_Category_Ranged.png");
   });
 
   it("produces identical output on a second run", async () => {

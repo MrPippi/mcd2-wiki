@@ -3,7 +3,9 @@ import { LANGS, type Category } from "../../../scripts/extract/config";
 import Base from "../../layouts/Base.astro";
 import { allArmorSets, entriesIn } from "../../lib/data";
 import { CATEGORY_LABEL, NAV_GROUPS, t, type Lang } from "../../lib/i18n";
+import { categoryIcon, groupIcon } from "../../lib/ui-icons";
 import { href } from "../../lib/url";
+import UiIcon from "../../components/UiIcon.astro";
 
 export function getStaticPaths() {
   return LANGS.map((lang) => ({ params: { lang } }));
@@ -21,12 +23,12 @@ const countOf = (category: Category): number =>
   </form>
   {NAV_GROUPS.map((group) => (
     <section>
-      <h2>{t(lang, group.key)}</h2>
+      <h2><UiIcon src={groupIcon(group.key)} /> {t(lang, group.key)}</h2>
       <ul class="category-grid">
         {group.categories.map((category) => (
           <li>
             <a href={href(lang, category)}>
-              <span>{CATEGORY_LABEL[category][lang]}</span>
+              <span class="category-name"><UiIcon src={categoryIcon(category)} />{CATEGORY_LABEL[category][lang]}</span>
               <span class="count">{countOf(category)}</span>
             </a>
           </li>

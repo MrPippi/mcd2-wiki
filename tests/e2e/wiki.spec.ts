@@ -13,7 +13,7 @@ test("entry page shows bilingual name and icon", async ({ page }) => {
   await expect(page).toHaveURL(/\/zh\/melee\/sword\/$/);
   await expect(page.locator("h1 .primary")).toHaveText("劍");
   await expect(page.locator("h1 .alt")).toHaveText("Sword");
-  await expect(page.locator(".entry-head img")).toBeVisible();
+  await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();
 });
 
 test("language switch keeps the same entry", async ({ page }) => {
@@ -85,7 +85,7 @@ test("status table shows icons next to names", async ({ page }) => {
 
 test("enchantment cards show icons", async ({ page }) => {
   await page.goto("/zh/enchantment/arcane/");
-  await expect(page.locator(".entry-head img")).toBeVisible();
+  await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();
 });
 
 test("enchantment page explains it comes from an enchantment book", async ({ page }) => {
@@ -150,6 +150,19 @@ test("enchantment icons fill the diamond window of the book frame", async ({ pag
     (el) => getComputedStyle(el, "::after").backgroundImage,
   );
   expect(frameOnTop).toContain("frames/enchantment.png");
+});
+
+test("navigation, home cards and headings show the game's category icons", async ({ page }) => {
+  await page.goto("/zh/");
+  await expect(page.locator(".site-nav a", { hasText: "近戰武器" }).locator("img.ui-icon")).toBeVisible();
+  await expect(page.locator(".category-grid a", { hasText: "附魔" }).locator("img.ui-icon")).toBeVisible();
+  await page.goto("/zh/effect/");
+  await expect(page.locator("h1 img.ui-icon")).toBeVisible();
+});
+
+test("armor pieces are labelled with their slot icon", async ({ page }) => {
+  await page.goto("/zh/armor/disciple/");
+  await expect(page.getByTestId("set-piece").first().locator(".piece-label img.ui-icon")).toBeVisible();
 });
 
 test("effect table shows placeholder markers", async ({ page }) => {

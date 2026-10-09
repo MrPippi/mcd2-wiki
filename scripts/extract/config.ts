@@ -85,6 +85,24 @@ export const FRAME_SOURCES = {
 } as const;
 export type FrameName = keyof typeof FRAME_SOURCES;
 
+const categoryIcon = (name: string): string => `Assets/UI/Icons/Categories/T_UI_Icon_Category_${name}.png`;
+
+/** In-game inventory tab icons, copied to public/icons/ui/<key>.png. Artifacts and statuses have none. */
+export const UI_ICON_SOURCES = {
+  melee: categoryIcon("Melee"),
+  ranged: categoryIcon("Ranged"),
+  armor: categoryIcon("Chest"),
+  enchantment: categoryIcon("Enchantment"),
+  effect: categoryIcon("Effects"),
+  helmet: categoryIcon("Helmet"),
+  chest: categoryIcon("Chest"),
+  leggings: categoryIcon("Legs"),
+  boots: categoryIcon("Boots"),
+  equipment: categoryIcon("Weapons"),
+  all: categoryIcon("All"),
+} as const;
+export type UiIconKey = keyof typeof UI_ICON_SOURCES;
+
 export const PATHS = {
   localeFile: (sourceRoot: string, culture: string): string =>
     path.join(sourceRoot, "Localization", "All", culture, "All.json"),

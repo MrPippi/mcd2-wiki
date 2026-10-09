@@ -1,0 +1,13 @@
+{
+  "melee": "icons/ui/melee.png",
+  "ranged": "icons/ui/ranged.png",
+  "armor": "icons/ui/armor.png",
+  "enchantment": "icons/ui/enchantment.png",
+  "effect": "icons/ui/effect.png",
+  "helmet": "icons/ui/helmet.png",
+  "chest": "icons/ui/chest.png",
+  "leggings": "icons/ui/leggings.png",
+  "boots": "icons/ui/boots.png",
+  "equipment": "icons/ui/equipment.png",
+  "all": "icons/ui/all.png"
+}

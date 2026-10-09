@@ -1,7 +1,9 @@
 ---
 import "../styles/global.css";
 import { CATEGORY_LABEL, HTML_LANG, NAV_GROUPS, otherLang, t, type Lang } from "../lib/i18n";
+import { categoryIcon } from "../lib/ui-icons";
 import { href, swapLangPath } from "../lib/url";
+import UiIcon from "../components/UiIcon.astro";
 
 interface Props {
   lang: Lang;
@@ -33,7 +35,12 @@ const categories = NAV_GROUPS.flatMap((group) => group.categories);
     <header class="site-header">
       <a class="brand" href={href(lang)}>{t(lang, "siteTitle")}</a>
       <nav class="site-nav" aria-label={t(lang, "home")}>
-        {categories.map((category) => <a href={href(lang, category)}>{CATEGORY_LABEL[category][lang]}</a>)}
+        {categories.map((category) => (
+          <a href={href(lang, category)}>
+            <UiIcon src={categoryIcon(category)} />
+            <span>{CATEGORY_LABEL[category][lang]}</span>
+          </a>
+        ))}
         <a href={href(lang, "search")}>{t(lang, "search")}</a>
       </nav>
       <div class="site-tools">

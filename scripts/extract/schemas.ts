@@ -53,3 +53,6 @@ export const FramesSchema = z.object({
   artifact: z.string().optional(),
 });
 export type Frames = z.infer<typeof FramesSchema>;
+
+export const UiIconsSchema = z.record(z.string(), z.string());
+export type UiIcons = z.infer<typeof UiIconsSchema>;

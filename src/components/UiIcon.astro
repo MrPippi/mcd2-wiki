@@ -1,0 +1,11 @@
+---
+import { assetUrl } from "../lib/url";
+
+interface Props {
+  /** Published icon path; nothing is rendered when it is missing. */
+  src?: string;
+}
+
+const { src } = Astro.props;
+---
+{src && <img class="ui-icon" src={assetUrl(src)} alt="" aria-hidden="true" width="56" height="56" decoding="async" />}

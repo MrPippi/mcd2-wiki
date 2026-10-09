@@ -1,5 +1,7 @@
 ---
 import { t, type Lang } from "../lib/i18n";
+import { uiIcon } from "../lib/ui-icons";
+import UiIcon from "./UiIcon.astro";
 
 interface Props {
   lang: Lang;
@@ -15,6 +17,7 @@ const VARIANTS = ["all", "normal", "unique"] as const;
     <div class="filter-variant" role="group">
       {VARIANTS.map((variant) => (
         <button type="button" data-variant={variant} aria-pressed={variant === "all" ? "true" : "false"}>
+          {variant === "all" && <UiIcon src={uiIcon("all")} />}
           {t(lang, variant)}
         </button>
       ))}

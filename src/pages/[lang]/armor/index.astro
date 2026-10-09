@@ -4,6 +4,8 @@ import { ARMOR_PIECES } from "../../../../scripts/extract/schemas";
 import EntryIcon from "../../../components/EntryIcon.astro";
 import LangText from "../../../components/LangText.astro";
 import ListFilter from "../../../components/ListFilter.astro";
+import UiIcon from "../../../components/UiIcon.astro";
+import { categoryIcon } from "../../../lib/ui-icons";
 import Base from "../../../layouts/Base.astro";
 import { allArmorSets, findEntry } from "../../../lib/data";
 import { CATEGORY_LABEL, type Lang } from "../../../lib/i18n";
@@ -20,7 +22,7 @@ const cards = allArmorSets.map((set) => {
 });
 ---
 <Base lang={lang} title={CATEGORY_LABEL.armor[lang]}>
-  <h1>{CATEGORY_LABEL.armor[lang]} <span class="count">({cards.length})</span></h1>
+  <h1><UiIcon src={categoryIcon("armor")} /> {CATEGORY_LABEL.armor[lang]} <span class="count">({cards.length})</span></h1>
   <ListFilter lang={lang} showVariant={true} />
   <ul class="entry-grid">
     {cards.map(({ set, icon }) => (
