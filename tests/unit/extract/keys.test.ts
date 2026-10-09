@@ -18,6 +18,16 @@ describe("parseKey", () => {
     expect(parseKey("Sw_Effect_Taunter_SW_TextEntry_Name")).toEqual({ kind: "Effect", id: "Taunter", field: "Name" });
   });
 
+  it("parses skin keys", () => {
+    expect(parseKey("SW_Skin_AlexPreorder_SW_TextEntry_Name")).toEqual({ kind: "Skin", id: "AlexPreorder", field: "Name" });
+  });
+
+  it("repairs the game's Cosmetec typo so the field joins its cape", () => {
+    expect(parseKey("SW_Item_Cosmetec_Cape_CorruptedCreeper_SW_TextEntry_UnlockExplanation")?.id).toBe(
+      "Cosmetic_Cape_CorruptedCreeper",
+    );
+  });
+
   it("rejects keys without an id", () => {
     expect(parseKey("SW_Enchantment_SW_TextEntry_Name_Tiered")).toBeNull();
   });
@@ -38,6 +48,10 @@ describe("toSlug", () => {
     ["DiscipleBoots_Unique", "disciple-boots-unique"],
     ["Artifact_Buff_FireBracelet", "buff-fire-bracelet"],
     ["XPGain", "xp-gain"],
+    ["Talisman_AmmoCapacity", "ammo-capacity"],
+    ["Cosmetic_Cape_Hero", "hero"],
+    ["Cosmetic_Pet_SlimeSupreme", "slime-supreme"],
+    ["AlexPreorder", "alex-preorder"],
   ])("%s → %s", (id, slug) => {
     expect(toSlug(id)).toBe(slug);
   });

@@ -34,6 +34,14 @@ describe("listIconFiles", () => {
     ]);
   });
 
+  it("accepts a custom file pattern for icons not named T_UI_*", async () => {
+    await touch("Assets/Skins/Darian/T_Darian_Skin_Icon.png");
+    await touch("Assets/Skins/Darian/T_Darian_Skin.png");
+    await expect(listIconFiles(dir, "Assets/Skins", /(?:^|\/)T_[^/]*_Icon\.png$/i)).resolves.toEqual([
+      "Assets/Skins/Darian/T_Darian_Skin_Icon.png",
+    ]);
+  });
+
   it("returns null when the icon root does not exist", async () => {
     await expect(listIconFiles(dir, "Assets/Missing")).resolves.toBeNull();
   });

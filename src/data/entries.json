@@ -6560,6 +6560,386 @@
     "links": {}
   },
   {
+    "id": "Talisman_AmmoCapacity",
+    "slug": "ammo-capacity",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "黑橡木枝條",
+      "en": "Twig of Dark Oak"
+    },
+    "icon": "icons/talisman/ammo-capacity.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_ArtifactCooldown",
+    "slug": "artifact-cooldown",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "效率精華",
+      "en": "Essence of Efficiency"
+    },
+    "icon": "icons/talisman/artifact-cooldown.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_Brawling",
+    "slug": "brawling",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "鐵拳",
+      "en": "Fist of Iron"
+    },
+    "icon": "icons/talisman/brawling.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_DoubleDrop",
+    "slug": "double-drop",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "幸運草",
+      "en": "Lucky Clover"
+    },
+    "icon": "icons/talisman/double-drop.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_DropChance",
+    "slug": "drop-chance",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "尋寶者護符",
+      "en": "Looter's Charm"
+    },
+    "icon": "icons/talisman/drop-chance.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_EmeraldIncrease",
+    "slug": "emerald-increase",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "幸運綠寶石",
+      "en": "Emerald of Good Fortune"
+    },
+    "icon": "icons/talisman/emerald-increase.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_ExperienceIncrease",
+    "slug": "experience-increase",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "經驗之眼",
+      "en": "The Eye of Experience"
+    },
+    "icon": "icons/talisman/experience-increase.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_FiringEmeralds",
+    "slug": "firing-emeralds",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "節儉墜飾",
+      "en": "Thrifty Pendant"
+    },
+    "description": {
+      "zh": "依據持有的綠寶石數量，最多可獲得 <span class=\"placeholder\">{數值}</span> 傷害加成，最多 <span class=\"placeholder\">{數值}</span> 顆綠寶石生效。",
+      "en": "Grants up to a <span class=\"placeholder\">{value}</span> damage bonus based on emeralds held, effective to a maximum of <span class=\"placeholder\">{value}</span> emeralds."
+    },
+    "icon": "icons/talisman/firing-emeralds.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_Healing",
+    "slug": "healing",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "療癒之心",
+      "en": "Healing Heart"
+    },
+    "icon": "icons/talisman/healing.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_HealthBoost",
+    "slug": "health-boost",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "蜂蠟印記",
+      "en": "Sigil of Beeswax"
+    },
+    "icon": "icons/talisman/health-boost.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_HealthyStrike",
+    "slug": "healthy-strike",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "浮鬚的捲鬚",
+      "en": "Tendrils of the Sprout"
+    },
+    "description": {
+      "zh": "當生命值高於 <span class=\"placeholder\">{數值}</span> 時，傷害提高 <span class=\"placeholder\">{數值}</span>。",
+      "en": "Grants a <span class=\"placeholder\">{value}</span> damage increase while health is above <span class=\"placeholder\">{value}</span>."
+    },
+    "icon": "icons/talisman/healthy-strike.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_IronGolem",
+    "slug": "iron-golem",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "魔像工具組",
+      "en": "Golem Kit"
+    },
+    "description": {
+      "zh": "召喚一名披甲守護者，防止你受到傷害！",
+      "en": "Summons a plated protector to prevent you from being harmed!"
+    },
+    "icon": "icons/talisman/iron-golem.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_LifeLeechMelee",
+    "slug": "life-leech-melee",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "upcoming",
+    "name": {
+      "zh": "隙浮特尖牙",
+      "en": "Fang of Sifter"
+    },
+    "links": {}
+  },
+  {
+    "id": "Talisman_LifeLeechRanged",
+    "slug": "life-leech-ranged",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "upcoming",
+    "name": {
+      "zh": "君主之羽",
+      "en": "Plume of Monarch"
+    },
+    "links": {}
+  },
+  {
+    "id": "Talisman_Llama",
+    "slug": "llama",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "神奇小麥",
+      "en": "Wonderful Wheat"
+    },
+    "description": {
+      "zh": "召喚一名毛茸茸的漫遊者，在戰鬥中守護你！",
+      "en": "Summons a woolly wanderer to watch over you in battle!"
+    },
+    "icon": "icons/talisman/llama.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_Plummeting",
+    "slug": "plummeting",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "豹貓之爪",
+      "en": "Ocelot's Paw"
+    },
+    "icon": "icons/talisman/plummeting.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_PotionCooldown",
+    "slug": "potion-cooldown",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "螢石瓶",
+      "en": "Glowstone Flask"
+    },
+    "icon": "icons/talisman/potion-cooldown.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_Prickle",
+    "slug": "prickle",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "刺刺蟲印記",
+      "en": "Prickle's Mark"
+    },
+    "description": {
+      "zh": "召喚一名帶刺的夥伴加入戰鬥！",
+      "en": "Summons a prickly pal to participate in the fight!"
+    },
+    "icon": "icons/talisman/prickle.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_RangedBuff",
+    "slug": "ranged-buff",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "紫水晶透鏡",
+      "en": "Amethyst Lens"
+    },
+    "icon": "icons/talisman/ranged-buff.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_RollingCooldown",
+    "slug": "rolling-cooldown",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "犰狳護身符",
+      "en": "Armadillo Amulet"
+    },
+    "icon": "icons/talisman/rolling-cooldown.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_SoulCapacity",
+    "slug": "soul-capacity",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "靈魂碎片",
+      "en": "Soul Chip"
+    },
+    "icon": "icons/talisman/soul-capacity.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_SoulGather",
+    "slug": "soul-gather",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "扭曲之牙",
+      "en": "Twisted Tooth"
+    },
+    "icon": "icons/talisman/soul-gather.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_SpeedIncrement",
+    "slug": "speed-increment",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "動能勳章",
+      "en": "Medallion of Momentum"
+    },
+    "description": {
+      "zh": "移動超過 <span class=\"placeholder\">{數值}</span> 秒後，移動速度提高 <span class=\"placeholder\">{數值}</span>。",
+      "en": "Increases movement speed by <span class=\"placeholder\">{value}</span> if moving for more than <span class=\"placeholder\">{value}</span> seconds."
+    },
+    "icon": "icons/talisman/speed-increment.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_StatusBuff",
+    "slug": "status-buff",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "伏聆徽章",
+      "en": "Sculk Badge"
+    },
+    "icon": "icons/talisman/status-buff.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_SuccessiveHits",
+    "slug": "successive-hits",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "upcoming",
+    "name": {
+      "zh": "魔物巨構碎片",
+      "en": "Fragment of Soul Construct"
+    },
+    "links": {}
+  },
+  {
+    "id": "Talisman_Wobble",
+    "slug": "wobble",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "晃墩墩石",
+      "en": "Wobblestone"
+    },
+    "description": {
+      "zh": "召喚一個搖搖晃晃的守衛，協助你作戰！",
+      "en": "Summons a wobbly ward to aid you in battle!"
+    },
+    "icon": "icons/talisman/wobble.png",
+    "links": {}
+  },
+  {
+    "id": "Talisman_Wolf",
+    "slug": "wolf",
+    "category": "talisman",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "美味骨頭",
+      "en": "Tasty Bone"
+    },
+    "description": {
+      "zh": "召喚一位毛茸茸的夥伴，與你並肩作戰！",
+      "en": "Summons a furry friend to fight by your side!"
+    },
+    "icon": "icons/talisman/wolf.png",
+    "links": {}
+  },
+  {
     "id": "Arcane",
     "slug": "arcane",
     "category": "enchantment",
@@ -10373,6 +10753,572 @@
       "en": "Rolling and jumping are blocked, and movement speed is greatly reduced."
     },
     "icon": "icons/status/webbed.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Cape_CorruptedCreeper",
+    "slug": "corrupted-creeper",
+    "category": "cape",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "腐化苦力怕披風",
+      "en": "Corrupted Creeper Cape"
+    },
+    "description": {
+      "zh": "威風又時尚。",
+      "en": "Fearsome and fashionable."
+    },
+    "unlock": {
+      "zh": "升級至 Minecraft Dungeons II 豪華版即可解鎖",
+      "en": "Upgrade to Minecraft Dungeons II Deluxe Edition to unlock"
+    },
+    "icon": "icons/cape/corrupted-creeper.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Cape_Hero",
+    "slug": "hero",
+    "category": "cape",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "英雄披風",
+      "en": "Hero Cape"
+    },
+    "description": {
+      "zh": "歲月只讓這件可靠的披風更加閃耀。",
+      "en": "The years have only made this trusty cape shine brighter than ever."
+    },
+    "unlock": {
+      "zh": "升級至 Minecraft Dungeons II 豪華版即可解鎖",
+      "en": "Upgrade to Minecraft Dungeons II Deluxe Edition to unlock"
+    },
+    "icon": "icons/cape/hero.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Cape_Mojang",
+    "slug": "mojang",
+    "category": "cape",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "Mojang 披風",
+      "en": "Mojang Cape"
+    },
+    "description": {
+      "zh": "以熱情與毅力打造。",
+      "en": "Crafted with passion and perseverence."
+    },
+    "unlock": {
+      "zh": "團隊的一分子",
+      "en": "Part of the crew"
+    },
+    "icon": "icons/cape/mojang.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Cape_SliceSlayer",
+    "slug": "slice-slayer",
+    "category": "cape",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "美食殺手披風",
+      "en": "Slice Slayer Cape"
+    },
+    "description": {
+      "zh": "這個圖案會讓人回憶起與朋友共享美食的時光，如今也能在你對抗無盡敵人時帶來幾分慰藉。",
+      "en": "With a pattern that evokes memories of tastier times with friends, it now provides a measure of comfort while battling endless foes."
+    },
+    "unlock": {
+      "zh": "升級至 Minecraft Dungeons II 豪華版即可解鎖",
+      "en": "Upgrade to Minecraft Dungeons II Deluxe Edition to unlock"
+    },
+    "icon": "icons/cape/slice-slayer.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Cape_Soul",
+    "slug": "soul",
+    "category": "cape",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "靈魂披風",
+      "en": "Soul Cape"
+    },
+    "description": {
+      "zh": "這件披風極適合有勇氣面對壞村民高階議會的英雄。",
+      "en": "A cape fit for heroes who are brave enough to face off against the Illager High Council."
+    },
+    "unlock": {
+      "zh": "升級至 Minecraft Dungeons II 豪華版即可解鎖",
+      "en": "Upgrade to Minecraft Dungeons II Deluxe Edition to unlock"
+    },
+    "icon": "icons/cape/soul.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Cape_Special",
+    "slug": "special",
+    "category": "cape",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "特別披風",
+      "en": "Special Cape"
+    },
+    "description": {
+      "zh": "這件服飾只會送給最特別的英雄，現在它屬於你了！",
+      "en": "A garment given to only the most special of heroes; now it&#39;s yours!"
+    },
+    "unlock": {
+      "zh": "升級至 Minecraft Dungeons II 豪華版即可解鎖",
+      "en": "Upgrade to Minecraft Dungeons II Deluxe Edition to unlock"
+    },
+    "icon": "icons/cape/special.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Cape_Twisted",
+    "slug": "twisted",
+    "category": "cape",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "扭曲披風",
+      "en": "Twisted Cape"
+    },
+    "description": {
+      "zh": "披上後就能變成這個敵人的模樣，展現十足的威嚇力。",
+      "en": "Wrapping yourself in the form of this foe makes for quite the intimidating statement."
+    },
+    "unlock": {
+      "zh": "升級至 Minecraft Dungeons II 豪華版即可解鎖",
+      "en": "Upgrade to Minecraft Dungeons II Deluxe Edition to unlock"
+    },
+    "icon": "icons/cape/twisted.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Pet_Blub",
+    "slug": "blub",
+    "category": "pet",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "凝泡怪寵物",
+      "en": "Blub Pet"
+    },
+    "description": {
+      "zh": "離鄉遠行的迷路凝泡怪，無論你去哪裡都會熱情跟著你。",
+      "en": "Traveling far from its home, this lost blub will eagerly follow you wherever you go."
+    },
+    "unlock": {
+      "zh": "升級至 Minecraft Dungeons II 豪華版即可解鎖",
+      "en": "Upgrade to Minecraft Dungeons II Deluxe Edition to unlock"
+    },
+    "icon": "icons/pet/blub.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Pet_SlimeSupreme",
+    "slug": "slime-supreme",
+    "category": "pet",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "起司方塊寵物",
+      "en": "Cheesy Cube Pet"
+    },
+    "description": {
+      "zh": "和這位可口夥伴展開漫長的冒險後，任何英雄都會忍不住問自己：「現在是地下城時間……還是晚餐時間？」",
+      "en": "Long days adventuring with this savory sidekick will have any hero asking themselves, &#39;Is it dungeon time... or dinner time?&#39;"
+    },
+    "icon": "icons/pet/slime-supreme.png",
+    "links": {}
+  },
+  {
+    "id": "Cosmetic_Pet_TwistedChicken",
+    "slug": "twisted-chicken",
+    "category": "pet",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "扭曲雞寵物",
+      "en": "Twisted Chicken Pet"
+    },
+    "description": {
+      "zh": "別帶雞上戰場，除非那隻雞是個搞不清狀況、灌注了靈魂的異常個體。幸好這隻就是。",
+      "en": "Don&#39;t take a chicken into combat - unless that chicken is a clueless, soul-infused anomaly. Luckily, this one is."
+    },
+    "icon": "icons/pet/twisted-chicken.png",
+    "links": {}
+  },
+  {
+    "id": "AlexPreorder",
+    "slug": "alex-preorder",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "冒險者艾莉克絲外觀",
+      "en": "Adventure Alex Skin"
+    },
+    "icon": "icons/skin/alex-preorder.png",
+    "links": {}
+  },
+  {
+    "id": "Brown",
+    "slug": "brown",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "艾德森外觀",
+      "en": "Edson Skin"
+    },
+    "icon": "icons/skin/brown.png",
+    "links": {}
+  },
+  {
+    "id": "Darian",
+    "slug": "darian",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "達里安外觀",
+      "en": "Darian Skin"
+    },
+    "icon": "icons/skin/darian.png",
+    "links": {}
+  },
+  {
+    "id": "Eshe",
+    "slug": "eshe",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "艾許外觀",
+      "en": "Eshe Skin"
+    },
+    "icon": "icons/skin/eshe.png",
+    "links": {}
+  },
+  {
+    "id": "Esperanza",
+    "slug": "esperanza",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "埃斯佩蘭薩外觀",
+      "en": "Esperanza Skin"
+    },
+    "icon": "icons/skin/esperanza.png",
+    "links": {}
+  },
+  {
+    "id": "Gray",
+    "slug": "gray",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "圖拉外觀",
+      "en": "Tula Skin"
+    },
+    "icon": "icons/skin/gray.png",
+    "links": {}
+  },
+  {
+    "id": "Green",
+    "slug": "green",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "皮姆外觀",
+      "en": "Pim Skin"
+    },
+    "icon": "icons/skin/green.png",
+    "links": {}
+  },
+  {
+    "id": "Greta",
+    "slug": "greta",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "格蕾塔外觀",
+      "en": "Greta Skin"
+    },
+    "icon": "icons/skin/greta.png",
+    "links": {}
+  },
+  {
+    "id": "Healer",
+    "slug": "healer",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "弗洛雷斯外觀",
+      "en": "Flores Skin"
+    },
+    "icon": "icons/skin/healer.png",
+    "links": {}
+  },
+  {
+    "id": "HealerDeluxe",
+    "slug": "healer-deluxe",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "華麗弗洛雷斯外觀",
+      "en": "Fancy Flores Skin"
+    },
+    "icon": "icons/skin/healer-deluxe.png",
+    "links": {}
+  },
+  {
+    "id": "Javier",
+    "slug": "javier",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "哈維爾外觀",
+      "en": "Javier Skin"
+    },
+    "icon": "icons/skin/javier.png",
+    "links": {}
+  },
+  {
+    "id": "Mint",
+    "slug": "mint",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "雷文外觀",
+      "en": "Raven Skin"
+    },
+    "icon": "icons/skin/mint.png",
+    "links": {}
+  },
+  {
+    "id": "Nuru",
+    "slug": "nuru",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "努魯外觀",
+      "en": "Nuru Skin"
+    },
+    "icon": "icons/skin/nuru.png",
+    "links": {}
+  },
+  {
+    "id": "Pink",
+    "slug": "pink",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "史黛拉外觀",
+      "en": "Stella Skin"
+    },
+    "icon": "icons/skin/pink.png",
+    "links": {}
+  },
+  {
+    "id": "PizzaChef",
+    "slug": "pizza-chef",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "披薩廚師外觀",
+      "en": "Pizza Cook Skin"
+    },
+    "icon": "icons/skin/pizza-chef.png",
+    "links": {}
+  },
+  {
+    "id": "Plum",
+    "slug": "plum",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "里格斯外觀",
+      "en": "Riggs Skin"
+    },
+    "icon": "icons/skin/plum.png",
+    "links": {}
+  },
+  {
+    "id": "Purple",
+    "slug": "purple",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "加斯頓外觀",
+      "en": "Gaston Skin"
+    },
+    "icon": "icons/skin/purple.png",
+    "links": {}
+  },
+  {
+    "id": "Qamar",
+    "slug": "qamar",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "卡瑪律外觀",
+      "en": "Qamar Skin"
+    },
+    "icon": "icons/skin/qamar.png",
+    "links": {}
+  },
+  {
+    "id": "Ranger",
+    "slug": "ranger",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "倫恩外觀",
+      "en": "Ren Skin"
+    },
+    "icon": "icons/skin/ranger.png",
+    "links": {}
+  },
+  {
+    "id": "RangerDeluxe",
+    "slug": "ranger-deluxe",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "華麗蓮外觀",
+      "en": "Fancy Ren Skin"
+    },
+    "icon": "icons/skin/ranger-deluxe.png",
+    "links": {}
+  },
+  {
+    "id": "Silver",
+    "slug": "silver",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "古比斯外觀",
+      "en": "Gubbis Skin"
+    },
+    "icon": "icons/skin/silver.png",
+    "links": {}
+  },
+  {
+    "id": "StevePreorder",
+    "slug": "steve-preorder",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "冒險者史蒂夫外觀",
+      "en": "Adventure Steve Skin"
+    },
+    "icon": "icons/skin/steve-preorder.png",
+    "links": {}
+  },
+  {
+    "id": "Tank",
+    "slug": "tank",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "凱倫外觀",
+      "en": "Kellen Skin"
+    },
+    "icon": "icons/skin/tank.png",
+    "links": {}
+  },
+  {
+    "id": "TankDeluxe",
+    "slug": "tank-deluxe",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "華麗凱倫外觀",
+      "en": "Fancy Kellen Skin"
+    },
+    "icon": "icons/skin/tank-deluxe.png",
+    "links": {}
+  },
+  {
+    "id": "Valorie",
+    "slug": "valorie",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "瓦樂莉外觀",
+      "en": "Valorie Skin"
+    },
+    "icon": "icons/skin/valorie.png",
+    "links": {}
+  },
+  {
+    "id": "ValorieDeluxe",
+    "slug": "valorie-deluxe",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "華麗瓦樂莉外觀",
+      "en": "Fancy Valorie Skin"
+    },
+    "icon": "icons/skin/valorie-deluxe.png",
+    "links": {}
+  },
+  {
+    "id": "Violet",
+    "slug": "violet",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "紫羅蘭外觀",
+      "en": "Violet Skin"
+    },
+    "icon": "icons/skin/violet.png",
+    "links": {}
+  },
+  {
+    "id": "Yellow",
+    "slug": "yellow",
+    "category": "skin",
+    "variant": "normal",
+    "release": "base",
+    "name": {
+      "zh": "馬茨外觀",
+      "en": "Mats Skin"
+    },
+    "icon": "icons/skin/yellow.png",
     "links": {}
   }
 ]

@@ -62,6 +62,50 @@ describe("matchIcon", () => {
   });
 });
 
+describe("matchIcon — talismans and cosmetics", () => {
+  const TALISMANS = [
+    "T/T_UI_AmmoCapacity_Icon1.png",
+    "T/T_UI_AmmoCapacity_Icon2.png",
+    "T/T_UI_AmmoCapacity_Icon3.png",
+    "T/T_UI_Talisman_ArtifactCooldown.png",
+  ];
+  const COSMETICS = ["C/T_UI_Cape_Hero_Icon.png", "P/T_UI_Pet_Blub_Icon.png"];
+  const SKINS = ["S/T_Alex_Skin_PreOrder_Skin_Icon.png", "S/T_Healer_Skin_Icon.png", "S/T_Healer_Skin_Deluxe_Icon.png"];
+
+  it("treats Icon1 as the base talisman icon and higher tiers as variants", () => {
+    expect(tokenize("T_UI_AmmoCapacity_Icon1")).toEqual(["ammo", "capacity"]);
+    expect(tokenize("T_UI_AmmoCapacity_Icon3")).toEqual(["ammo", "capacity", "tier3"]);
+    expect(matchIcon("Talisman_AmmoCapacity", buildIconIndex(TALISMANS), {})).toEqual({
+      kind: "matched",
+      file: TALISMANS[0],
+      via: "auto",
+    });
+  });
+
+  it("reads a tier number glued to the last word", () => {
+    expect(tokenize("T_UI_Talisman_ArtifactCooldown2_Icon")).toEqual(["artifact", "cooldown", "tier2"]);
+    const files = ["T/T_UI_Talisman_DropChance1_Icon.png", "T/T_UI_Talisman_DropChance2_Icon.png"];
+    expect(matchIcon("Talisman_DropChance", buildIconIndex(files), {})).toMatchObject({ file: files[0] });
+  });
+
+  it("matches talisman icons that carry a Talisman prefix", () => {
+    expect(matchIcon("Talisman_ArtifactCooldown", buildIconIndex(TALISMANS), {})).toMatchObject({ file: TALISMANS[3] });
+  });
+
+  it("matches capes and pets", () => {
+    const index = buildIconIndex(COSMETICS);
+    expect(matchIcon("Cosmetic_Cape_Hero", index, {})).toMatchObject({ file: COSMETICS[0] });
+    expect(matchIcon("Cosmetic_Pet_Blub", index, {})).toMatchObject({ file: COSMETICS[1] });
+  });
+
+  it("matches skins, keeping deluxe skins apart", () => {
+    const index = buildIconIndex(SKINS);
+    expect(matchIcon("AlexPreorder", index, {})).toMatchObject({ file: SKINS[0] });
+    expect(matchIcon("Healer", index, {})).toMatchObject({ file: SKINS[1] });
+    expect(matchIcon("HealerDeluxe", index, {})).toMatchObject({ file: SKINS[2] });
+  });
+});
+
 describe("matchIcon — enchantment and status icons", () => {
   const ENCHANTS = ["U/Enchantments/T_UI_Icon_Enchantment_Arcane.png", "U/Enchantments/T_UI_Icon_Enchantment_FireAspect.png"];
   const STATUSES = ["U/Statuses/T_UI_Icon_Status_Burning.png", "U/Statuses/T_UI_Icon_Status_FireBracelet.png"];

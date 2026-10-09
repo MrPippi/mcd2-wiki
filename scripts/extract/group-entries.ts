@@ -11,9 +11,10 @@ export interface RawEntry {
   readonly name: Localized;
   readonly description?: Localized;
   readonly descriptionLong?: Localized;
+  readonly unlock?: Localized;
 }
 
-type TextField = "name" | "description" | "descriptionLong";
+type TextField = "name" | "description" | "descriptionLong" | "unlock";
 type Draft = Omit<RawEntry, "name"> & { readonly name?: Localized };
 
 interface Cell {
@@ -29,14 +30,17 @@ const FIELD_MAP: Readonly<Record<string, TextField>> = {
   name: "name",
   description: "description",
   description_long: "descriptionLong",
+  unlockexplanation: "unlock",
 };
 const PLACEHOLDER_ONLY = /^\s*(?:\{\w+\}\s*)+$/;
+/** Untranslated developer stubs such as "Ammo Capacity Talisman Description". */
+const DEVELOPER_STUB = /^[\w\s]+ Description$/;
 
 const isMissing = (value: string | undefined, key: string): boolean =>
   value === undefined || value.trim() === "" || value === key;
 
 const isPlaceholderOnly = (text: Localized): boolean =>
-  PLACEHOLDER_ONLY.test(text.en) && PLACEHOLDER_ONLY.test(text.zh);
+  (PLACEHOLDER_ONLY.test(text.en) && PLACEHOLDER_ONLY.test(text.zh)) || DEVELOPER_STUB.test(text.en.trim());
 
 export function resolveText(
   key: string,

@@ -110,6 +110,33 @@ describe("groupEntries", () => {
     expect(groupEntries(locales, [EFFECT]).entries[0].description).toEqual({ en: "Deal {0} more.", zh: "提高 {0}。" });
   });
 
+  it("keeps the unlock explanation of cosmetics", () => {
+    const CAPE: TableSource = { namespace: ns("DT_ItemDefinitionCape"), category: "cape", release: "base" };
+    const locales = makeLocales({
+      [CAPE.namespace]: {
+        SW_Item_Cosmetic_Cape_Hero_SW_TextEntry_Name: ["Hero Cape", "英雄披風"],
+        SW_Item_Cosmetic_Cape_Hero_SW_TextEntry_UnlockExplanation: ["Upgrade to Deluxe.", "升級至豪華版。"],
+      },
+    });
+    expect(groupEntries(locales, [CAPE]).entries[0].unlock).toEqual({ en: "Upgrade to Deluxe.", zh: "升級至豪華版。" });
+  });
+
+  it("drops developer placeholder descriptions", () => {
+    const TALISMAN: TableSource = { namespace: ns("DT_ItemDefinitionTalisman"), category: "talisman", release: "base" };
+    const locales = makeLocales({
+      [TALISMAN.namespace]: {
+        SW_Item_Talisman_AmmoCapacity_SW_TextEntry_Name: ["Twig of Dark Oak", "黑橡木枝條"],
+        SW_Item_Talisman_AmmoCapacity_SW_TextEntry_Description: [
+          "Ammo Capacity Talisman Description",
+          "Ammo Capacity Talisman Description",
+        ],
+      },
+    });
+    const { entries, issues } = groupEntries(locales, [TALISMAN]);
+    expect(entries[0].description).toBeUndefined();
+    expect(issues).toContainEqual({ type: "placeholder-only", detail: "Talisman_AmmoCapacity.Description" });
+  });
+
   it("skips entries that have no name", () => {
     const locales = makeLocales({
       [MELEE.namespace]: { SW_Item_Ghost_SW_TextEntry_Description: ["Boo.", "嚇。"] },

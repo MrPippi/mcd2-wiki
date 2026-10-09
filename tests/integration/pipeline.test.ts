@@ -52,7 +52,21 @@ beforeEach(async () => {
       SW_Status_Burning_SW_TextEntry_Name: ["Burning", "燃燒"],
       SW_Status_Burning_Infinite_SW_TextEntry_Name: ["Burning", "燃燒"],
     },
+    [ns("DT_ItemDefinitionTalisman")]: {
+      SW_Item_Talisman_AmmoCapacity_SW_TextEntry_Name: ["Twig of Dark Oak", "黑橡木枝條"],
+      SW_Item_Talisman_AmmoCapacity_SW_TextEntry_Description: ["Ammo Capacity Talisman Description", "說明"],
+    },
+    [ns("DT_ItemDefinitionCape")]: {
+      SW_Item_Cosmetic_Cape_Creeper_SW_TextEntry_Name: ["Corrupted Creeper Cape", "腐化苦力怕披風"],
+      SW_Item_Cosmetic_Cape_CorruptedCreeper_SW_TextEntry_Name: ["Corrupted Creeper Cape", "腐化苦力怕披風"],
+      SW_Item_Cosmetec_Cape_CorruptedCreeper_SW_TextEntry_UnlockExplanation: ["Upgrade to Deluxe.", "升級至豪華版。"],
+    },
+    [ns("DT_SkinDefinition")]: { SW_Skin_Darian_SW_TextEntry_Name: ["Darian Skin", "達里安外觀"] },
   });
+  await put(sourceRoot, "Assets/Art/Characters/Player/Equipment/Talismans/AmmoCapacity/T_UI_AmmoCapacity_Icon1.png", "png:twig");
+  await put(sourceRoot, "Assets/Art/Characters/Player/Equipment/Talismans/AmmoCapacity/T_UI_AmmoCapacity_Icon2.png", "png:twig2");
+  await put(sourceRoot, "Assets/Art/Characters/Player/Capes/Skins/T_UI_Cape_CorruptedCreeper_Icon.png", "png:cape");
+  await put(sourceRoot, "Assets/Art/Characters/Player/Skins/Darian/T_Darian_Skin_Icon.png", "png:darian");
   await put(sourceRoot, "Assets/UI/Icons/Enchantments/T_UI_Icon_Enchantment_Arcane.png", "png:arcane");
   await put(sourceRoot, "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Burning.png", "png:burning");
   await put(sourceRoot, "Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png", "png:artifact-frame");
@@ -106,7 +120,24 @@ describe("runExtract", () => {
     ]);
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-icon (1)\n\n- armor:DiscipleChest");
-    expect(summary).toMatchObject({ entries: 11, armorSets: 1, icons: 8 });
+    expect(summary).toMatchObject({ entries: 14, armorSets: 1, icons: 11 });
+  });
+
+  it("extracts talismans and cosmetics with icons, unlock text and no duplicates", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    const entries = await readJson<Entry[]>("src/data/entries.json");
+    const find = (category: string, slug: string) => entries.find((e) => e.category === category && e.slug === slug);
+    expect(find("talisman", "ammo-capacity")).toMatchObject({ icon: "icons/talisman/ammo-capacity.png" });
+    expect(find("talisman", "ammo-capacity")?.description).toBeUndefined();
+    expect(await readFile(path.join(outRoot, "public", "icons", "talisman", "ammo-capacity.png"), "utf8")).toBe("png:twig");
+    expect(entries.filter((e) => e.category === "cape").map((e) => e.slug)).toEqual(["corrupted-creeper"]);
+    expect(find("cape", "corrupted-creeper")).toMatchObject({
+      icon: "icons/cape/corrupted-creeper.png",
+      unlock: { en: "Upgrade to Deluxe.", zh: "升級至豪華版。" },
+    });
+    expect(find("skin", "darian")?.icon).toBe("icons/skin/darian.png");
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).toContain("- cape:Cosmetic_Cape_Creeper (same name as Cosmetic_Cape_CorruptedCreeper)");
   });
 
   it("copies available icon frames and reports missing ones", async () => {
@@ -122,7 +153,7 @@ describe("runExtract", () => {
     expect(await readJson<Record<string, string>>("src/data/category-icons.json")).toEqual({ melee: "icons/ui/melee.png" });
     expect(await readFile(path.join(outRoot, "public", "icons", "ui", "melee.png"), "utf8")).toBe("png:melee-category");
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
-    expect(report).toContain("### missing-ui-icon (10)");
+    expect(report).toContain("### missing-ui-icon (13)");
     expect(report).toContain("- Assets/UI/Icons/Categories/T_UI_Icon_Category_Ranged.png");
   });
 

@@ -14,6 +14,13 @@ describe("ui icons", () => {
     expect(categoryIcon("armor", ICONS)).toBe("icons/ui/armor.png");
   });
 
+  it("uses the game's tab icons for talismans, capes and pets", () => {
+    expect(categoryIcon("talisman")).toBe("icons/ui/talisman.png");
+    expect(categoryIcon("cape")).toBe("icons/ui/cape.png");
+    expect(categoryIcon("pet")).toBe("icons/ui/pet.png");
+    expect(categoryIcon("skin")).toBeUndefined();
+  });
+
   it("has no icon for categories the game gives none, or when it was not extracted", () => {
     expect(categoryIcon("artifact", ICONS)).toBeUndefined();
     expect(categoryIcon("status", ICONS)).toBeUndefined();

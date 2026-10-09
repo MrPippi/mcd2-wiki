@@ -22,6 +22,7 @@ export const EntrySchema = z.object({
   name: LocalizedSchema,
   description: LocalizedSchema.optional(),
   descriptionLong: LocalizedSchema.optional(),
+  unlock: LocalizedSchema.optional(),
   icon: z.string().optional(),
   armorPiece: z.enum(ARMOR_PIECES).optional(),
   untranslated: z.array(z.enum(LANGS)).optional(),

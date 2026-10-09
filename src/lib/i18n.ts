@@ -29,6 +29,8 @@ const UI = {
     description: "描述",
     equipment: "裝備",
     enchanting: "附魔與效果",
+    cosmetics: "外觀造型",
+    unlock: "解鎖",
     placeholderNote: "「{數值}」表示遊戲內會顯示實際數值，原始資料未提供。",
     disclaimer: "非官方粉絲網站，與 Mojang Studios／Microsoft 無關。遊戲文字與圖像版權歸原權利人所有。",
     source: "資料來源：Minecraft Dungeons II 遊戲語系檔（繁體中文／英文）。",
@@ -54,6 +56,8 @@ const UI = {
     description: "Description",
     equipment: "Equipment",
     enchanting: "Enchantments & Effects",
+    cosmetics: "Cosmetics",
+    unlock: "Unlock",
     placeholderNote: "\"{value}\" marks a number the game fills in; it is not in the source data.",
     disclaimer: "Unofficial fan site, not affiliated with Mojang Studios or Microsoft. Game text and images belong to their respective owners.",
     source: "Source: Minecraft Dungeons II localization files (Traditional Chinese / English).",
@@ -69,6 +73,10 @@ export const CATEGORY_LABEL: Readonly<Record<Category, Readonly<Record<Lang, str
   ranged: { zh: "遠程武器", en: "Ranged Weapons" },
   armor: { zh: "護甲", en: "Armor" },
   artifact: { zh: "神器", en: "Artifacts" },
+  talisman: { zh: "護符", en: "Talismans" },
+  cape: { zh: "披風", en: "Capes" },
+  pet: { zh: "寵物", en: "Pets" },
+  skin: { zh: "外觀", en: "Skins" },
   enchantment: { zh: "附魔", en: "Enchantments" },
   "enchantment-book": { zh: "附魔書", en: "Enchantment Books" },
   effect: { zh: "效果", en: "Effects" },
@@ -83,10 +91,20 @@ export const PIECE_LABEL: Readonly<Record<ArmorPiece, Readonly<Record<Lang, stri
 };
 
 export const NAV_GROUPS: readonly { key: UiKey; categories: readonly Category[] }[] = [
-  { key: "equipment", categories: ["melee", "ranged", "armor", "artifact"] },
+  { key: "equipment", categories: ["melee", "ranged", "armor", "artifact", "talisman"] },
   { key: "enchanting", categories: ["enchantment", "effect", "status"] },
+  { key: "cosmetics", categories: ["cape", "pet", "skin"] },
 ];
 
 // Enchantment books have no pages of their own: each one is shown on the enchantment it grants.
-export const GRID_CATEGORIES = ["melee", "ranged", "artifact", "enchantment"] as const satisfies readonly Category[];
+export const GRID_CATEGORIES = [
+  "melee",
+  "ranged",
+  "artifact",
+  "talisman",
+  "enchantment",
+  "cape",
+  "pet",
+  "skin",
+] as const satisfies readonly Category[];
 export const TABLE_CATEGORIES = ["effect", "status"] as const satisfies readonly Category[];

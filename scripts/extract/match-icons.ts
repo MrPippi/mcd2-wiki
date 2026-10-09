@@ -1,6 +1,18 @@
 import path from "node:path";
 
-const DROP_TOKENS: ReadonlySet<string> = new Set(["t", "ui", "icon", "png", "status", "enchantment", "buff"]);
+const DROP_TOKENS: ReadonlySet<string> = new Set([
+  "t", "ui", "icon", "png", "status", "enchantment", "buff", "talisman", "cosmetic", "skin",
+]);
+/**
+ * Talisman icons come in tiers 1–3, written as "Icon2" or glued to the last word ("Cooldown2").
+ * Tier 1 is the base icon; higher tiers stay distinct. "Unique1" is a variant, not a tier.
+ */
+const tierTokens = (token: string): string[] => {
+  const match = /^([a-z]+?)([1-3])$/.exec(token);
+  if (!match || match[1] === "unique") return [token];
+  const word = match[1] === "icon" ? [] : [match[1]];
+  return match[2] === "1" ? word : [...word, `tier${match[2]}`];
+};
 const TOKEN_ALIASES: Readonly<Record<string, string>> = { chestplate: "chest", gauntlets: "gauntlet" };
 const MAX_PERMUTATION_TOKENS = 6;
 const ID_PREFIX = /^(?:Artifact_|EnchantmentBook_)/;
@@ -21,6 +33,7 @@ export function tokenize(name: string): string[] {
     .replace(/([a-z0-9])([A-Z])/g, "$1_$2")
     .split(/[_\s-]+/)
     .map((token) => token.toLowerCase())
+    .flatMap(tierTokens)
     .filter((token) => token !== "" && !DROP_TOKENS.has(token))
     .map((token) => TOKEN_ALIASES[token] ?? token)
     .map((token) => (/^unique\d*$/.test(token) ? "unique" : token));

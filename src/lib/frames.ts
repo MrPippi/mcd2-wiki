@@ -12,6 +12,10 @@ const FRAMES_FOR: Readonly<Partial<Record<Category, readonly FrameKind[]>>> = {
   armor: ["inventory"],
   artifact: ["artifact", "inventory"],
   status: ["inventory"],
+  talisman: ["inventory"],
+  cape: ["inventory"],
+  pet: ["inventory"],
+  skin: ["inventory"],
   enchantment: ["enchantment"],
   "enchantment-book": ["enchantment"],
 };

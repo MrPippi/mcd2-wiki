@@ -165,6 +165,33 @@ test("armor pieces are labelled with their slot icon", async ({ page }) => {
   await expect(page.getByTestId("set-piece").first().locator(".piece-label img.ui-icon")).toBeVisible();
 });
 
+test("talismans, capes, pets and skins have their own pages", async ({ page }) => {
+  await page.goto("/zh/talisman/");
+  await expect(page.locator(".entry-card")).toHaveCount(24);
+  await page.goto("/zh/talisman/ammo-capacity/");
+  await expect(page.locator("h1 .primary")).toHaveText("黑橡木枝條");
+  await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();
+  await page.goto("/zh/cape/");
+  await expect(page.locator(".entry-card", { hasText: "腐化苦力怕披風" })).toHaveCount(1);
+  await page.goto("/zh/pet/");
+  await expect(page.locator(".entry-card")).toHaveCount(3);
+  await page.goto("/zh/skin/");
+  await expect(page.locator(".entry-card")).toHaveCount(28);
+});
+
+test("the normal/unique filter only appears where unique items exist", async ({ page }) => {
+  await page.goto("/zh/skin/");
+  await expect(page.locator("button[data-variant='unique']")).toHaveCount(0);
+  await page.goto("/zh/melee/");
+  await expect(page.locator("button[data-variant='unique']")).toHaveCount(1);
+});
+
+test("cosmetics show how to unlock them", async ({ page }) => {
+  await page.goto("/zh/cape/hero/");
+  await expect(page.getByTestId("unlock")).toContainText("解鎖");
+  await expect(page.getByTestId("unlock")).toContainText("豪華版");
+});
+
 test("effect table shows placeholder markers", async ({ page }) => {
   await page.goto("/zh/effect/");
   await expect(page.locator(".placeholder").first()).toHaveText("{數值}");

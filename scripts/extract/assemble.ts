@@ -23,6 +23,7 @@ export function assembleEntry(raw: RawEntry, icon?: string): { entry: Entry; iss
   const where = `${raw.category}:${raw.id}`;
   const description = raw.description ? renderLocalized(raw.description, where) : undefined;
   const descriptionLong = raw.descriptionLong ? renderLocalized(raw.descriptionLong, where) : undefined;
+  const unlock = raw.unlock ? renderLocalized(raw.unlock, where) : undefined;
   const armorPiece = raw.category === "armor" ? armorPieceOf(raw.id) : undefined;
   const entry: Entry = {
     id: raw.id,
@@ -33,12 +34,16 @@ export function assembleEntry(raw: RawEntry, icon?: string): { entry: Entry; iss
     name: { zh: stripMarkup(raw.name.zh), en: stripMarkup(raw.name.en) },
     ...(description ? { description: description.value } : {}),
     ...(descriptionLong ? { descriptionLong: descriptionLong.value } : {}),
+    ...(unlock ? { unlock: unlock.value } : {}),
     ...(icon ? { icon } : {}),
     ...(armorPiece ? { armorPiece } : {}),
     ...(raw.untranslated.length > 0 ? { untranslated: [...raw.untranslated] } : {}),
     links: {},
   };
-  return { entry, issues: [...(description?.issues ?? []), ...(descriptionLong?.issues ?? [])] };
+  return {
+    entry,
+    issues: [...(description?.issues ?? []), ...(descriptionLong?.issues ?? []), ...(unlock?.issues ?? [])],
+  };
 }
 
 export function assertUniqueSlugs(entries: readonly Entry[]): void {

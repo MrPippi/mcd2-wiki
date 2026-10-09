@@ -8,13 +8,17 @@ import { readJsonFile } from "./read-json";
 const ICON_FILE = /(?:^|\/)T_UI_[^/]*\.png$/i;
 const OverridesSchema = z.record(z.string(), z.string().nullable());
 
-export async function listIconFiles(sourceRoot: string, iconRoot: string): Promise<string[] | null> {
+export async function listIconFiles(
+  sourceRoot: string,
+  iconRoot: string,
+  pattern: RegExp = ICON_FILE,
+): Promise<string[] | null> {
   const root = path.join(sourceRoot, ...iconRoot.split("/"));
   try {
     const names = await readdir(root, { recursive: true });
     return names
       .map((name) => name.split(path.sep).join("/"))
-      .filter((name) => ICON_FILE.test(name))
+      .filter((name) => pattern.test(name))
       .map((name) => `${iconRoot}/${name}`)
       .sort();
   } catch (error) {

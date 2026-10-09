@@ -10,10 +10,14 @@ export const CATEGORIES = [
   "ranged",
   "armor",
   "artifact",
+  "talisman",
   "enchantment",
   "enchantment-book",
   "effect",
   "status",
+  "cape",
+  "pet",
+  "skin",
 ] as const;
 export type Category = (typeof CATEGORIES)[number];
 
@@ -52,6 +56,11 @@ export const TABLES: readonly TableSource[] = [
   table("DT_StatusDefinition", "status", "base"),
   table("DT_R3StatusEffectDefinition", "status", "upcoming"),
   table("DT_R4StatusEffectDefinition", "status", "upcoming"),
+  table("DT_ItemDefinitionTalisman", "talisman", "base"),
+  table("DT_R3ItemDefinitionTalisman", "talisman", "upcoming"),
+  table("DT_ItemDefinitionCape", "cape", "base"),
+  table("DT_ItemDefinitionPet", "pet", "base"),
+  table("DT_SkinDefinition", "skin", "base"),
 ];
 
 export interface IconSource {
@@ -59,11 +68,21 @@ export interface IconSource {
   readonly root: string;
   /** Retry with the id's first segment (Burning_Infinite → Burning) when no icon matches. */
   readonly fallbackToBase: boolean;
+  /** File name pattern, when the icons are not named T_UI_*.png. */
+  readonly pattern?: RegExp;
 }
 
 const EQUIPMENT_ICONS: IconSource = { root: "Assets/Art/Characters/Player/Equipment", fallbackToBase: false };
 const ENCHANTMENT_ICONS: IconSource = { root: "Assets/UI/Icons/Enchantments", fallbackToBase: true };
 const STATUS_ICONS: IconSource = { root: "Assets/UI/Icons/Statuses", fallbackToBase: true };
+const TALISMAN_ICONS: IconSource = { root: "Assets/Art/Characters/Player/Equipment/Talismans", fallbackToBase: false };
+const CAPE_ICONS: IconSource = { root: "Assets/Art/Characters/Player/Capes", fallbackToBase: false };
+const PET_ICONS: IconSource = { root: "Assets/Art/Characters/Friendlies/Pets", fallbackToBase: false };
+const SKIN_ICONS: IconSource = {
+  root: "Assets/Art/Characters/Player/Skins",
+  fallbackToBase: false,
+  pattern: /(?:^|\/)T_[^/]*_Icon\.png$/i,
+};
 
 export const ICON_SOURCES: Readonly<Partial<Record<Category, IconSource>>> = {
   melee: EQUIPMENT_ICONS,
@@ -73,6 +92,10 @@ export const ICON_SOURCES: Readonly<Partial<Record<Category, IconSource>>> = {
   enchantment: ENCHANTMENT_ICONS,
   "enchantment-book": ENCHANTMENT_ICONS,
   status: STATUS_ICONS,
+  talisman: TALISMAN_ICONS,
+  cape: CAPE_ICONS,
+  pet: PET_ICONS,
+  skin: SKIN_ICONS,
 };
 
 /**
@@ -100,6 +123,9 @@ export const UI_ICON_SOURCES = {
   boots: categoryIcon("Boots"),
   equipment: categoryIcon("Weapons"),
   all: categoryIcon("All"),
+  talisman: categoryIcon("Talisman"),
+  cape: categoryIcon("Cape"),
+  pet: categoryIcon("Pet"),
 } as const;
 export type UiIconKey = keyof typeof UI_ICON_SOURCES;
 

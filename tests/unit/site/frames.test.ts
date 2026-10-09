@@ -13,6 +13,12 @@ describe("frameFor", () => {
     expect(frameFor("status", ALL)).toEqual({ name: "inventory" });
   });
 
+  it("draws talismans and cosmetics in the inventory slot", () => {
+    for (const category of ["talisman", "cape", "pet", "skin"] as const) {
+      expect(frameFor(category, ALL)).toEqual({ name: "inventory" });
+    }
+  });
+
   it("frames artifacts with the hotbar artifact slot", () => {
     expect(frameFor("artifact", ALL)).toEqual({ name: "artifact", path: "icons/frames/artifact.png" });
   });

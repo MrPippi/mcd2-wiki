@@ -20,6 +20,11 @@ describe("i18n", () => {
     }
   });
 
+  it("groups talismans with equipment and cosmetics on their own", () => {
+    expect(NAV_GROUPS.find((group) => group.key === "equipment")?.categories).toContain("talisman");
+    expect(NAV_GROUPS.find((group) => group.key === "cosmetics")?.categories).toEqual(["cape", "pet", "skin"]);
+  });
+
   it("navigates to every category except enchantment books, which merge into enchantments", () => {
     const shown = CATEGORIES.filter((category) => category !== "enchantment-book").sort();
     expect(NAV_GROUPS.flatMap((group) => group.categories).sort()).toEqual(shown);

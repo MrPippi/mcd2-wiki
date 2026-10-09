@@ -9,5 +9,8 @@
   "leggings": "icons/ui/leggings.png",
   "boots": "icons/ui/boots.png",
   "equipment": "icons/ui/equipment.png",
-  "all": "icons/ui/all.png"
+  "all": "icons/ui/all.png",
+  "talisman": "icons/ui/talisman.png",
+  "cape": "icons/ui/cape.png",
+  "pet": "icons/ui/pet.png"
 }

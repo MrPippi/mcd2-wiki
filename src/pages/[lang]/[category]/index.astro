@@ -19,10 +19,11 @@ const lang = Astro.params.lang as Lang;
 const category = Astro.params.category as Category;
 const entries = entriesIn(category);
 const isTable = (TABLE_CATEGORIES as readonly Category[]).includes(category);
+const hasUnique = entries.some((entry) => entry.variant === "unique");
 ---
 <Base lang={lang} title={CATEGORY_LABEL[category][lang]}>
   <h1><UiIcon src={categoryIcon(category)} /> <span data-pagefind-meta="title">{CATEGORY_LABEL[category][lang]}</span> <span class="count">({entries.length})</span></h1>
-  <ListFilter lang={lang} showVariant={!isTable} />
+  <ListFilter lang={lang} showVariant={!isTable && hasUnique} />
   {isTable ? (
     <>
       <p class="note">{t(lang, "placeholderNote")}</p>

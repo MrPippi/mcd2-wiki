@@ -95,6 +95,20 @@
   - `Artifact_FireBracelet` ↔ `T_UI_BraceletFire_Icon`
   - `MoonSword` ↔ `T_UI_Moonsword_Icon`
 
+### 2.5 第二批分類（護符與外觀造型）
+
+| 分類 | Namespace | release | 圖示來源 |
+|---|---|---|---|
+| `talisman` | `DT_ItemDefinitionTalisman.csv`／`DT_R3ItemDefinitionTalisman.csv` | base／upcoming | `Equipment/Talismans/`，取第 1 階圖示（`Icon1` 或 `…1_Icon`） |
+| `cape` | `DT_ItemDefinitionCape.csv` | base | `Player/Capes/` |
+| `pet` | `DT_ItemDefinitionPet.csv` | base | `Friendlies/Pets/` |
+| `skin` | `DT_SkinDefinition.csv`（key 前綴 `SW_Skin_`） | base | `Player/Skins/`，檔名 `T_<名稱>_Skin_Icon.png` |
+
+- 護符描述在遊戲檔中是開發用占位文字（如「Ammo Capacity Talisman Description」），一律捨棄。
+- 外觀類的 `UnlockExplanation` 欄位存為 `unlock`，在條目頁以「解鎖」顯示。遊戲檔有一個拼錯的 key（`Cosmetec_Cape_…`），解析時修正。
+- 披風／寵物／外觀若有同名條目（遊戲檔遺留的重複列），只保留有圖示的一筆，其餘列入報告（`duplicate-entry`）。
+- 導覽：護符歸在「裝備」，披風、寵物、外觀為新群組「外觀造型」；護符、披風、寵物使用遊戲分類圖示，外觀沒有。只有含獨特物品的分類才顯示「一般／獨特」篩選。
+
 ## 3. 架構
 
 ### 3.1 目錄結構

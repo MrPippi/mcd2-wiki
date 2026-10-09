@@ -1,7 +1,9 @@
 import type { ArmorPiece } from "./schemas";
 
-const KEY_PATTERN = /^SW_(Item|Enchantment|Effect|Status)_(.+?)_SW_TextEntry_(.+)$/i;
-const SLUG_PREFIX = /^(?:Artifact_|EnchantmentBook_)/;
+const KEY_PATTERN = /^SW_(Item|Enchantment|Effect|Status|Skin)_(.+?)_SW_TextEntry_(.+)$/i;
+const SLUG_PREFIX = /^(?:Artifact_|EnchantmentBook_|Talisman_|Cosmetic_(?:Cape|Pet)_)/;
+/** One cape key in the game files misspells "Cosmetic"; repair it so the field joins its cape. */
+const ID_TYPOS: readonly (readonly [RegExp, string])[] = [[/^Cosmetec_/, "Cosmetic_"]];
 const UNIQUE_SUFFIX = /_Unique\d*$/i;
 const PIECE_PATTERN = /(Helmet|Chest|Leggings|Boots)/;
 
@@ -14,7 +16,8 @@ export interface ParsedKey {
 export function parseKey(key: string): ParsedKey | null {
   const match = KEY_PATTERN.exec(key);
   if (!match) return null;
-  return { kind: match[1], id: match[2], field: match[3] };
+  const id = ID_TYPOS.reduce((current, [typo, fix]) => current.replace(typo, fix), match[2]);
+  return { kind: match[1], id, field: match[3] };
 }
 
 export function toSlug(id: string): string {

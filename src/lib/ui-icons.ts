@@ -10,6 +10,9 @@ const CATEGORY_ICON: Readonly<Partial<Record<Category, UiIconKey>>> = {
   enchantment: "enchantment",
   "enchantment-book": "enchantment",
   effect: "effect",
+  talisman: "talisman",
+  cape: "cape",
+  pet: "pet",
 };
 
 const GROUP_ICON: Readonly<Record<string, UiIconKey>> = { equipment: "equipment" };

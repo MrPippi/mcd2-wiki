@@ -33,6 +33,12 @@ const related = relatedLinks(lang, entry);
   </header>
   {entry.description && <LangText as="p" class="description" lang={lang} value={entry.description} html />}
   {entry.descriptionLong && <LangText as="p" class="description-long" lang={lang} value={entry.descriptionLong} html />}
+  {entry.unlock && (
+    <p class="unlock" data-testid="unlock">
+      <span class="tag">{t(lang, "unlock")}</span>{" "}
+      <LangText lang={lang} value={entry.unlock} html />
+    </p>
+  )}
   {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
   {related.length > 0 && (
     <section class="related">

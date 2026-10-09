@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { assembleEntry, assertUniqueSlugs } from "./assemble";
+import { dedupeByName } from "./dedupe";
 import { planAssets } from "./ui-assets";
 import { FRAME_SOURCES, ICON_SOURCES, TABLES, UI_ICON_SOURCES, type IconSource } from "./config";
 import { groupEntries, type RawEntry } from "./group-entries";
@@ -39,8 +40,10 @@ interface IconCatalog {
 
 async function loadIconCatalog(sourceRoot: string): Promise<IconCatalog> {
   const sources = Object.values(ICON_SOURCES).filter((source): source is IconSource => source !== undefined);
-  const roots = [...new Set(sources.map((source) => source.root))];
-  const listed = await Promise.all(roots.map(async (root) => ({ root, files: await listIconFiles(sourceRoot, root) })));
+  const byRoot = new Map(sources.map((source) => [source.root, source]));
+  const listed = await Promise.all(
+    [...byRoot.values()].map(async ({ root, pattern }) => ({ root, files: await listIconFiles(sourceRoot, root, pattern) })),
+  );
   return {
     indexes: new Map(listed.map(({ root, files }) => [root, buildIconIndex(files ?? [])])),
     issues: listed.filter(({ files }) => files === null).map(({ root }) => issue("missing-icon-root", root)),
@@ -77,12 +80,13 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const catalog = await loadIconCatalog(options.sourceRoot);
   const plans = grouped.entries.map((raw) => planIcon(raw, catalog, overrides, options.sourceRoot));
   const assembled = plans.map((plan) => assembleEntry(plan.raw, plan.source ? webPathOf(plan.raw) : undefined));
-  const entries = assembled.map((result) => result.entry);
-  assertUniqueSlugs(entries);
-  const linked = linkEntries(entries);
+  const deduped = dedupeByName(assembled.map((result) => result.entry));
+  assertUniqueSlugs(deduped.entries);
+  const linked = linkEntries(deduped.entries);
   const output = validateOutput(sortEntries(linked.entries), linked.armorSets);
+  const kept = new Set(deduped.entries.map((entry) => `${entry.category}:${entry.id}`));
   const copies = plans.flatMap((plan) =>
-    plan.source ? [{ from: plan.source, to: path.join(options.outRoot, "public", ...webPathOf(plan.raw).split("/")) }] : [],
+    plan.source && kept.has(`${plan.raw.category}:${plan.raw.id}`) ? [{ from: plan.source, to: path.join(options.outRoot, "public", ...webPathOf(plan.raw).split("/")) }] : [],
   );
   const frames = planAssets(options.sourceRoot, options.outRoot, FRAME_SOURCES, "frames", "missing-frame");
   const uiIcons = planAssets(options.sourceRoot, options.outRoot, UI_ICON_SOURCES, "ui", "missing-ui-icon");
@@ -92,8 +96,9 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...frames.issues,
     ...uiIcons.issues,
     ...grouped.issues,
-    ...plans.flatMap((plan) => plan.issues),
+    ...plans.filter((plan) => kept.has(`${plan.raw.category}:${plan.raw.id}`)).flatMap((plan) => plan.issues),
     ...assembled.flatMap((result) => result.issues),
+    ...deduped.issues,
     ...linked.issues,
   ];
   const extraData = { "frames.json": frames.paths, "category-icons.json": uiIcons.paths };
