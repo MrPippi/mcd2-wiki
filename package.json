@@ -6,7 +6,7 @@
     "dev": "astro dev",
     "extract": "tsx scripts/extract/index.ts",
     "build": "astro build && pagefind --site dist",
-    "preview": "astro preview --port 4321",
+    "preview": "astro preview --port 4329",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "npm run build && playwright test"
