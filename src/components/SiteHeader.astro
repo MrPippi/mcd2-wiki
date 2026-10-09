@@ -1,0 +1,51 @@
+---
+import { HTML_LANG, otherLang, t, type Lang } from "../lib/i18n";
+import { href, swapLangPath } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alt = otherLang(lang);
+const switchHref = swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, alt);
+---
+<header class="site-header">
+  <a class="brand" href={href(lang)}>{t(lang, "siteTitle")}</a>
+  <form class="header-search" action={href(lang, "search")} method="get" role="search">
+    <input type="search" name="q" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
+  </form>
+  <div class="site-tools">
+    <button type="button" class="compare-toggle" aria-pressed="true" data-testid="compare-toggle">
+      {t(lang, "compare")}
+    </button>
+    <a class="lang-switch button" href={switchHref} hreflang={HTML_LANG[alt]} data-testid="lang-switch">
+      {t(lang, "switchLang")}
+    </a>
+  </div>
+</header>
+<script>
+  import { withCurrentLocation } from "../lib/lang-switch";
+
+  const STORAGE_KEY = "mcd2-compare";
+  const root = document.documentElement;
+  const button = document.querySelector<HTMLButtonElement>(".compare-toggle");
+  const syncCompare = () => button?.setAttribute("aria-pressed", String(root.dataset.compare !== "off"));
+  syncCompare();
+  button?.addEventListener("click", () => {
+    const next = root.dataset.compare === "off" ? "on" : "off";
+    root.dataset.compare = next;
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      // Storage unavailable: the choice lasts for this page view only.
+    }
+    syncCompare();
+  });
+
+  const langLink = document.querySelector<HTMLAnchorElement>("[data-testid='lang-switch']");
+  const langBase = langLink?.getAttribute("href") ?? "";
+  const syncLang = () => langLink?.setAttribute("href", withCurrentLocation(langBase, location.search, location.hash));
+  syncLang();
+  window.addEventListener("hashchange", syncLang);
+</script>

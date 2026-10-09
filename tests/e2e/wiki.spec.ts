@@ -263,3 +263,51 @@ test("the game palette and self-hosted fonts are in use", async ({ page, request
   expect(fonts).toEqual({ pixel: true, label: true });
   expect((await request.get("/licenses/Cubic-11-OFL.txt")).status()).toBe(200);
 });
+
+test("category tabs mark the current category", async ({ page }) => {
+  await page.goto("/zh/melee/");
+  await expect(page.locator(".category-tabs a[aria-current='page']")).toHaveAttribute("data-category", "melee");
+  await page.goto("/zh/melee/sword/");
+  await expect(page.locator(".category-tabs a[aria-current='page']")).toHaveAttribute("data-category", "melee");
+  await page.goto("/zh/armor/piece/disciple-helmet/");
+  await expect(page.locator(".category-tabs a[aria-current='page']")).toHaveAttribute("data-category", "armor");
+});
+
+test("Q and E switch between category tabs", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "keyboard shortcuts are a desktop feature");
+  await page.goto("/zh/melee/");
+  await page.keyboard.press("e");
+  await expect(page).toHaveURL(/\/zh\/ranged\/$/);
+  await page.keyboard.press("q");
+  await expect(page).toHaveURL(/\/zh\/melee\/$/);
+  await page.keyboard.press("q");
+  await expect(page).toHaveURL(/\/zh\/effect\/$/);
+});
+
+test("typing in search boxes never switches tabs", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "keyboard shortcuts are a desktop feature");
+  await page.goto("/zh/melee/");
+  await page.locator(".header-search input").press("e");
+  await page.locator(".filter-text").press("q");
+  await page.waitForTimeout(300);
+  await expect(page).toHaveURL(/\/zh\/melee\/$/);
+  await page.goto("/zh/search/");
+  await page.locator("#search input").press("e");
+  await page.waitForTimeout(300);
+  await expect(page).toHaveURL(/\/zh\/search\/$/);
+});
+
+test("the header search goes to the search page", async ({ page }) => {
+  await page.goto("/zh/melee/");
+  await page.locator(".header-search input").fill("sword");
+  await page.locator(".header-search input").press("Enter");
+  await expect(page).toHaveURL(/\/zh\/search\/\?q=sword$/);
+  await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
+});
+
+test("the language switch keeps the search query and anchor", async ({ page }) => {
+  await page.goto(`/zh/search/?q=${encodeURIComponent("劍")}`);
+  await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/search/?q=%E5%8A%8D");
+  await page.goto("/zh/effect/#critical-edge");
+  await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/effect/#critical-edge");
+});

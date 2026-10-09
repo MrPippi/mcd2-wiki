@@ -17,6 +17,6 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Lang;
 const { entry } = Astro.props as { entry: Entry };
 ---
-<Base lang={lang} title={entry.name[lang]}>
+<Base lang={lang} title={entry.name[lang]} current={entry.category}>
   <EntryDetail lang={lang} entry={entry} />
 </Base>

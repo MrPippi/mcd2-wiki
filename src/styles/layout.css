@@ -1,0 +1,44 @@
+.site-header {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 10px 16px;
+  background: var(--surface-2); border-bottom: 2px solid var(--border);
+}
+.brand { font-family: var(--font-pixel); font-size: 1.15rem; color: var(--accent); text-decoration: none; text-shadow: 2px 2px 0 #000; }
+.header-search { flex: 1 1 240px; display: flex; justify-content: center; }
+.header-search input { width: 100%; max-width: 420px; }
+.site-tools { display: flex; gap: 8px; }
+
+.category-tabs {
+  display: flex; align-items: center; justify-content: center; gap: 14px; padding: 8px 16px;
+  background: var(--surface); border-bottom: 2px solid var(--border);
+}
+.tab-key { font-family: var(--font-label); font-size: 0.75rem; background: var(--text); color: var(--bg); padding: 0 6px; line-height: 1.6; }
+.tab-list { list-style: none; display: flex; gap: 6px; margin: 0; padding: 0; }
+.tab-list a {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 40px; border-bottom: 3px solid transparent;
+}
+.tab-list .ui-icon { width: 26px; height: 26px; vertical-align: 0; opacity: 0.55; }
+.tab-list a:hover .ui-icon, .tab-list a:focus-visible .ui-icon { opacity: 0.9; }
+.tab-list a[aria-current="page"] { border-bottom-color: var(--accent); }
+.tab-list a[aria-current="page"] .ui-icon { opacity: 1; filter: drop-shadow(0 0 3px var(--accent)); }
+.tab-label {
+  position: absolute; top: calc(100% + 4px); left: 50%; transform: translateX(-50%); z-index: 5;
+  white-space: nowrap; background: var(--surface-2); border: 2px solid var(--border); padding: 0 8px;
+  font-family: var(--font-pixel); font-size: 0.85rem; color: var(--text); pointer-events: none; opacity: 0;
+}
+.tab-list a:hover .tab-label, .tab-list a:focus-visible .tab-label { opacity: 1; }
+
+.site-main { max-width: var(--max); margin: 0 auto; padding: 24px 16px 48px; }
+.site-footer {
+  border-top: 2px solid var(--border); background: var(--surface); color: var(--muted);
+  font-size: 0.85rem; padding: 16px; text-align: center;
+}
+
+@media (max-width: 699px) {
+  .header-search { order: 3; flex-basis: 100%; }
+  .category-tabs { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
+  .tab-key, .tab-label { display: none; }
+}
+@media (hover: none) {
+  .tab-key { display: none; }
+}

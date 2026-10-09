@@ -22,7 +22,7 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
   return entry ? [{ piece, entry }] : [];
 });
 ---
-<Base lang={lang} title={set.name[lang]}>
+<Base lang={lang} title={set.name[lang]} current="armor">
   <article class="armor-set" data-pagefind-body>
     <LangText as="h1" lang={lang} value={set.name} searchTitle />
     <p class="tags">

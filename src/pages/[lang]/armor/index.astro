@@ -21,7 +21,7 @@ const cards = allArmorSets.map((set) => {
   return { set, icon: firstSlug ? findEntry("armor", firstSlug)?.icon : undefined };
 });
 ---
-<Base lang={lang} title={CATEGORY_LABEL.armor[lang]}>
+<Base lang={lang} title={CATEGORY_LABEL.armor[lang]} current="armor">
   <h1><UiIcon src={categoryIcon("armor")} /> {CATEGORY_LABEL.armor[lang]} <span class="count">({cards.length})</span></h1>
   <ListFilter lang={lang} showVariant={true} />
   <ul class="entry-grid">
