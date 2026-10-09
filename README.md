@@ -21,5 +21,5 @@ npm run build        # 產生 dist/ 與 Pagefind 索引
 
 ## 部署
 
-`.github/workflows/deploy.yml` 在推送到 `main` 時建置並發布到 GitHub Pages，`BASE_PATH` 自動設為 `/<repo>/`。
+`.github/workflows/deploy.yml` 在推送到 `master` 時建置並發布到 GitHub Pages，`BASE_PATH` 自動設為 `/<repo>/`。
 若 repo 是 `<user>.github.io`，請把 `BASE_PATH` 改成 `/`。
