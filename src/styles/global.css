@@ -69,17 +69,16 @@ h1.lang-text .alt { font-size: 0.5em; }
   background: linear-gradient(135deg, #7d421e 0%, #2d2018 38%, #271b15 100%);
 }
 .icon-frame.frame-inventory > .entry-icon { width: 82%; height: 82%; object-fit: contain; image-rendering: pixelated; }
-.slot-star {
-  position: absolute; left: calc(var(--px) * -3); top: calc(var(--px) * -3); z-index: 1;
-  width: calc(var(--px) * 22); height: calc(var(--px) * 22);
-  display: flex; align-items: center; justify-content: center;
-  background: #ffc103; box-shadow: inset calc(var(--px) * -2) calc(var(--px) * -2) 0 #e58201;
-  color: #3e1a01; font-size: calc(var(--px) * 15); line-height: 1;
-}
-.slot-steps {
-  position: absolute; left: calc(var(--px) * 19); top: calc(var(--px) * 11); z-index: 1;
-  width: calc(var(--px) * 6); height: calc(var(--px) * 6); background: #ff7e2f;
-  box-shadow: calc(var(--px) * 6) calc(var(--px) * 6) 0 #ff7e2f, calc(var(--px) * -8) calc(var(--px) * 8) 0 #ff7e2f;
+/* Unique rarity mark: a small orange × of five pixel squares in the top-left corner. */
+.slot-mark {
+  --sq: max(1px, calc(var(--px) * 3));
+  position: absolute; left: calc(var(--px) * 9); top: calc(var(--px) * 9); z-index: 1;
+  width: var(--sq); height: var(--sq); background: #ff7e2f;
+  box-shadow:
+    calc(var(--sq) * 2) 0 0 #ff7e2f,
+    var(--sq) var(--sq) 0 #ff7e2f,
+    0 calc(var(--sq) * 2) 0 #ff7e2f,
+    calc(var(--sq) * 2) calc(var(--sq) * 2) 0 #ff7e2f;
 }
 /* Hotbar artifact slot (T_UI_ArtifactSlot_Default): interior spans x 34–186, y 22–174 of 220px. */
 .icon-frame.frame-artifact > .entry-icon { position: absolute; left: 15.5%; top: 10%; width: 69%; height: 69%; }

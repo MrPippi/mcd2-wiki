@@ -123,12 +123,12 @@ test("normal gear uses the plain inventory slot", async ({ page }) => {
   await expect(slot.locator(".slot-star")).toHaveCount(0);
 });
 
-test("unique gear uses the orange slot with the star badge", async ({ page }) => {
+test("unique gear uses the orange slot with the corner rarity mark and no star", async ({ page }) => {
   await page.goto("/zh/melee/sword-unique1/");
   const slot = page.locator(".entry-head .icon-frame.frame-inventory.is-unique");
   expect(await slot.evaluate(slotBorder)).toBe("#ff7e2f");
-  await expect(slot.locator(".slot-star")).toBeVisible();
-  await expect(slot.locator(".slot-steps")).toHaveCount(1);
+  await expect(slot.locator(".slot-mark")).toBeVisible();
+  await expect(slot.locator(".slot-star")).toHaveCount(0);
 });
 
 test("artifacts sit in the hotbar artifact slot", async ({ page }) => {

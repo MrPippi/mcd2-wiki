@@ -10,7 +10,7 @@ interface Props {
   size?: number;
   /** Draws the game's slot frame for this category behind the icon. */
   category?: Category;
-  /** Unique gear gets the orange inventory slot with the star badge. */
+  /** Unique gear gets the orange inventory slot with the corner rarity mark. */
   variant?: Entry["variant"];
 }
 
@@ -32,8 +32,7 @@ const frameStyle = frame?.path
     ) : (
       <span class="entry-icon framed-placeholder" role="img" aria-label={alt}>?</span>
     )}
-    {unique && <span class="slot-steps" aria-hidden="true" />}
-    {unique && <span class="slot-star" aria-hidden="true">★</span>}
+    {unique && <span class="slot-mark" aria-hidden="true" />}
   </span>
 ) : icon ? (
   <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
