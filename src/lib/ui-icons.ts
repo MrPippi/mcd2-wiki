@@ -2,11 +2,12 @@ import type { Category, UiIconKey } from "../../scripts/extract/config";
 import type { ArmorPiece, UiIcons } from "../../scripts/extract/schemas";
 import { extractedUiIcons } from "./data";
 
-/** Game inventory tab icon for each site category; artifacts and statuses have none in game. */
+/** Game inventory tab icon for each site category; statuses and skins have none in game. */
 const CATEGORY_ICON: Readonly<Partial<Record<Category, UiIconKey>>> = {
   melee: "melee",
   ranged: "ranged",
   armor: "armor",
+  artifact: "artifact",
   enchantment: "enchantment",
   "enchantment-book": "enchantment",
   effect: "effect",

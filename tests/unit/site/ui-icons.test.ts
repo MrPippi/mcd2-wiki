@@ -21,6 +21,10 @@ describe("ui icons", () => {
     expect(categoryIcon("skin")).toBeUndefined();
   });
 
+  it("uses the game's potion tab icon for artifacts", () => {
+    expect(categoryIcon("artifact")).toBe("icons/ui/artifact.png");
+  });
+
   it("has no icon for categories the game gives none, or when it was not extracted", () => {
     expect(categoryIcon("artifact", ICONS)).toBeUndefined();
     expect(categoryIcon("status", ICONS)).toBeUndefined();

@@ -153,7 +153,8 @@ describe("runExtract", () => {
     expect(await readJson<Record<string, string>>("src/data/category-icons.json")).toEqual({ melee: "icons/ui/melee.png" });
     expect(await readFile(path.join(outRoot, "public", "icons", "ui", "melee.png"), "utf8")).toBe("png:melee-category");
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
-    expect(report).toContain("### missing-ui-icon (13)");
+    expect(report).toContain("### missing-ui-icon (14)");
+    expect(report).toContain("- Assets/UI/Icons/Categories/T_UI_Icon_Category_Potion.png");
     expect(report).toContain("- Assets/UI/Icons/Categories/T_UI_Icon_Category_Ranged.png");
   });
 

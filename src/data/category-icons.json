@@ -2,6 +2,7 @@
   "melee": "icons/ui/melee.png",
   "ranged": "icons/ui/ranged.png",
   "armor": "icons/ui/armor.png",
+  "artifact": "icons/ui/artifact.png",
   "enchantment": "icons/ui/enchantment.png",
   "effect": "icons/ui/effect.png",
   "helmet": "icons/ui/helmet.png",
