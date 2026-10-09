@@ -1,0 +1,25 @@
+---
+import type { Localized } from "../../scripts/extract/schemas";
+import { HTML_LANG, otherLang, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang: Lang;
+  value: Localized;
+  html?: boolean;
+  as?: string;
+  class?: string;
+}
+
+const { lang, value, html = false, as: Tag = "span", class: className } = Astro.props;
+const alt = otherLang(lang);
+const showAlt = value[alt] !== value[lang];
+---
+<Tag class:list={["lang-text", className]}>
+  {html ? <span class="primary" set:html={value[lang]} /> : <span class="primary">{value[lang]}</span>}
+  {showAlt &&
+    (html ? (
+      <span class="alt" lang={HTML_LANG[alt]} set:html={value[alt]} />
+    ) : (
+      <span class="alt" lang={HTML_LANG[alt]}>{value[alt]}</span>
+    ))}
+</Tag>

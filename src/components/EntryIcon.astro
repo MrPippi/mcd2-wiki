@@ -1,0 +1,16 @@
+---
+import { assetUrl } from "../lib/url";
+
+interface Props {
+  icon?: string;
+  alt: string;
+  size?: number;
+}
+
+const { icon, alt, size = 64 } = Astro.props;
+---
+{icon ? (
+  <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+) : (
+  <span class="entry-icon placeholder-icon" style={`width:${size}px;height:${size}px`} role="img" aria-label={alt}>?</span>
+)}
