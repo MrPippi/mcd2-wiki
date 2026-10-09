@@ -22,28 +22,28 @@ const listCategory = entry.category === "enchantment-book" ? "enchantment" : ent
   </div>
   <dl class="facts">
     <div>
-      <dt>{t(lang, "category")}</dt>
+      <dt data-pagefind-ignore>{t(lang, "category")}</dt>
       <dd><a href={href(lang, listCategory)}><UiIcon src={categoryIcon(entry.category)} />{CATEGORY_LABEL[entry.category][lang]}</a></dd>
     </div>
     <div>
-      <dt>{t(lang, "rarity")}</dt>
+      <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
       <dd class:list={{ "is-unique": entry.variant === "unique" }}>{t(lang, entry.variant)}</dd>
     </div>
     {entry.armorPiece && (
       <div>
-        <dt>{t(lang, "armorPiece")}</dt>
+        <dt data-pagefind-ignore>{t(lang, "armorPiece")}</dt>
         <dd><UiIcon src={pieceIcon(entry.armorPiece)} />{PIECE_LABEL[entry.armorPiece][lang]}</dd>
       </div>
     )}
     {set && (
       <div>
-        <dt>{t(lang, "armorSet")}</dt>
+        <dt data-pagefind-ignore>{t(lang, "armorSet")}</dt>
         <dd><a href={href(lang, "armor", set.slug)}>{set.name[lang]}</a></dd>
       </div>
     )}
     {entry.untranslated?.includes(lang) && (
       <div>
-        <dt>{t(lang, "translation")}</dt>
+        <dt data-pagefind-ignore>{t(lang, "translation")}</dt>
         <dd><span class="tag warn">{t(lang, "untranslated")}</span></dd>
       </div>
     )}

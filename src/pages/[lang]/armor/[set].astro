@@ -36,11 +36,11 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
         </div>
         <dl class="facts">
           <div>
-            <dt>{t(lang, "rarity")}</dt>
+            <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
             <dd class:list={{ "is-unique": set.variant === "unique" }}>{t(lang, set.variant)}</dd>
           </div>
           <div>
-            <dt>{t(lang, "pieces")}</dt>
+            <dt data-pagefind-ignore>{t(lang, "pieces")}</dt>
             <dd>{pieces.length}</dd>
           </div>
         </dl>

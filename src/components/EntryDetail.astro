@@ -44,7 +44,7 @@ const related = relatedLinks(lang, entry);
           <ul class="related">
             {related.map((link) => (
               <li>
-                <span class="related-label">{t(lang, link.labelKey)}</span>
+                <span class="related-label" data-pagefind-ignore>{t(lang, link.labelKey)}</span>
                 <a href={link.href}>
                   {link.icon && <EntryIcon icon={link.icon} alt="" size={40} category={link.category} variant={link.variant} />}
                   <LangText lang={lang} value={link.name} />

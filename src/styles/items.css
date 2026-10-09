@@ -46,3 +46,13 @@
 @media (max-width: 899px) {
   .item-tooltip { display: none; }
 }
+
+.entry-table { width: 100%; border-collapse: collapse; background: var(--surface); border: 2px solid var(--border); }
+.entry-table thead th {
+  background: var(--surface-2); font-family: var(--font-label); font-size: 0.75rem;
+  letter-spacing: 1px; color: var(--muted);
+}
+.entry-table th, .entry-table td { text-align: left; vertical-align: top; padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.entry-table tr:has(:target) { background: var(--surface-2); }
+.row-name { margin: 0; font-size: 1.05rem; }
+.row-head { display: flex; gap: 8px; align-items: center; }

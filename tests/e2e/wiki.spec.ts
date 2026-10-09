@@ -456,3 +456,38 @@ test("armor set pages use the same info box layout", async ({ page }) => {
   await expect(page.getByTestId("info-box").locator(".set-preview img.entry-icon")).toHaveCount(4);
   await expect(page.getByTestId("set-piece")).toHaveCount(4);
 });
+
+test("the effects table and search results use the game palette", async ({ page }) => {
+  await page.goto("/zh/effect/");
+  const head = await page.locator(".entry-table thead th").first().evaluate((el) => getComputedStyle(el).backgroundColor);
+  expect(head).toBe("rgb(28, 43, 49)");
+  await page.goto("/zh/search/?q=sword");
+  await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
+  const primary = await page.locator("#search .pagefind-ui").evaluate((el) =>
+    getComputedStyle(el).getPropertyValue("--pagefind-ui-primary").trim().toLowerCase(),
+  );
+  expect(primary).toBe("#ff7e2f");
+});
+
+test("no purple from the old theme remains", async ({ page }) => {
+  for (const path of ["/zh/", "/zh/melee/", "/zh/melee/sword/", "/zh/armor/disciple/", "/zh/effect/"]) {
+    await page.goto(path);
+    const purple = await page.evaluate(() =>
+      [...document.querySelectorAll("body *")].some((el) => {
+        const s = getComputedStyle(el);
+        return ["rgb(21, 18, 28)", "rgb(34, 29, 43)", "rgb(45, 38, 56)", "rgb(61, 52, 72)"].some(
+          (c) => s.backgroundColor === c || s.borderTopColor === c,
+        );
+      }),
+    );
+    expect(purple, path).toBe(false);
+  }
+});
+
+test("search excerpts leave out the info box and section labels", async ({ page }) => {
+  await page.goto("/zh/search/?q=sword");
+  const excerpts = page.locator(".pagefind-ui__result-excerpt");
+  await expect(excerpts.first()).toBeVisible({ timeout: 15_000 });
+  const text = (await excerpts.allTextContents()).join(" ");
+  for (const label of ["DESCRIPTION", "RELATED", "稀有度", "相關條目"]) expect(text, label).not.toContain(label);
+});

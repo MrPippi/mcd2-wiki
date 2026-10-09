@@ -9,6 +9,6 @@ interface Props {
 const { title, en, testid } = Astro.props;
 ---
 <section class="entry-section" data-testid={testid}>
-  <h2 class="section-title"><span class="section-en">{en}</span><span>{title}</span></h2>
+  <h2 class="section-title" data-pagefind-ignore><span class="section-en">{en}</span><span>{title}</span></h2>
   <slot />
 </section>
