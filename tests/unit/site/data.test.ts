@@ -15,10 +15,19 @@ describe("site data", () => {
 
   it("finds the enchantment books that grant an enchantment", () => {
     expect(booksFor("arcane").map((book) => book.id)).toEqual(["EnchantmentBook_Arcane"]);
-    expect(booksFor("fire-aspect-unique").map((book) => book.id).sort()).toEqual([
-      "EnchantmentBook_FireAspect_Unique",
-      "EnchantmentBook_FlameBelch_Unique",
-    ]);
+    expect(booksFor("fire-aspect-unique").map((book) => book.id)).toEqual(["EnchantmentBook_FireAspect_Unique"]);
+  });
+
+  it("hides entries that should have an icon but have none", () => {
+    expect(findEntry("enchantment", "clawing-shadow-unique")).toBeUndefined();
+    expect(findEntry("enchantment", "multi-potion")).toBeUndefined();
+    for (const category of ["melee", "ranged", "armor", "artifact", "talisman", "enchantment"] as const) {
+      expect(entriesIn(category).every((entry) => entry.icon !== undefined), category).toBe(true);
+    }
+  });
+
+  it("keeps categories that never have icons", () => {
+    expect(entriesIn("effect").length).toBeGreaterThan(0);
   });
 
   it("gives every published enchantment at least one book", () => {

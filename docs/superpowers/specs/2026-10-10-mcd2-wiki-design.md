@@ -88,6 +88,7 @@
   - `artifact`：`Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png`（快捷列神器欄），用於神器；缺檔時退回物品欄格
   - **物品欄格**（武器、護甲、狀態）：遊戲中由 `M_SlotFrame` 著色器繪製、沒有對應貼圖，網站以 CSS 重現，色值取自遊戲物品欄截圖：由外而內 1px 黑邊、2px 稀有度框（一般 `#897A6D`、獨特 `#FF7E2F`）、1px `#353535`、1px `#0D0D0D`、1px 內光（獨特 `#AB6F2E`）；底色一般 `#161616`，獨特為左上橘色漸層至 `#271B15`，並在左上角加上由 5 個橘色方塊組成的「×」稀有度標記（遊戲截圖中的金色星章是「新物品／收藏」標記，與稀有度無關，不呈現）。「稀有（藍框）」是掉落時的稀有度而非物品屬性，網站不呈現
   - `enchantment`：`Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png`，用於附魔與附魔書
+- **有圖示來源的分類（裝備、護符、附魔、附魔書），沒有圖示的條目不發布**（不產生頁面、不出現在列表與相關連結）；效果沒有圖示來源，照常發布
 - 附魔與狀態允許「退回基底 Id」比對（`Burning_Infinite`→`Burning`、`FireAspect_II`→`FireAspect`）；裝備不退回，避免獨特版誤用一般版圖示。
 - 檔名與 Id 不一致，例：
   - `Sword_Unique1` ↔ `T_UI_Sword_Unique_Icon`

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { Category } from "../../scripts/extract/config";
+import { ICON_SOURCES, type Category } from "../../scripts/extract/config";
 import {
   ArmorSetSchema,
   EntrySchema,
@@ -20,7 +20,12 @@ export const extractedUiIcons: UiIcons = UiIconsSchema.parse(rawCategoryIcons);
 
 const entries: readonly Entry[] = z.array(EntrySchema).parse(rawEntries);
 
-export const publishedEntries: readonly Entry[] = entries.filter((entry) => entry.release === "base");
+/** Categories with an icon source must have an icon to be published; effects never have icons. */
+const hasRequiredIcon = (entry: Entry): boolean => ICON_SOURCES[entry.category] === undefined || entry.icon !== undefined;
+
+export const publishedEntries: readonly Entry[] = entries.filter(
+  (entry) => entry.release === "base" && hasRequiredIcon(entry),
+);
 
 export const allArmorSets: readonly ArmorSet[] = z.array(ArmorSetSchema).parse(rawSets);
 

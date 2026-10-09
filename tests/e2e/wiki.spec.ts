@@ -90,8 +90,14 @@ test("enchantment page explains it comes from an enchantment book", async ({ pag
 });
 
 test("enchantment page shows a book description that differs from the enchantment", async ({ page }) => {
-  await page.goto("/zh/enchantment/mauler-dive/");
-  await expect(page.getByTestId("book-source")).toContainText("跳躍攻擊會產生閃電與冰霜波動");
+  await page.goto("/zh/enchantment/fire-aspect-ii/");
+  await expect(page.getByTestId("book-source")).toContainText("波動會造成相當於武器傷害");
+});
+
+test("entries without an icon are not published", async ({ page, request }) => {
+  expect((await request.get("/zh/enchantment/clawing-shadow-unique/")).status()).toBe(404);
+  await page.goto("/zh/enchantment/");
+  await expect(page.locator(".entry-card .framed-placeholder")).toHaveCount(0);
 });
 
 test("enchantment books no longer have their own section", async ({ page, request }) => {
