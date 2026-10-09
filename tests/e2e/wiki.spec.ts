@@ -78,6 +78,16 @@ test("armor set page lists its pieces and links back", async ({ page }) => {
   await expect(page.locator(".related a[href='/zh/armor/disciple/']")).toBeVisible();
 });
 
+test("status table shows icons next to names", async ({ page }) => {
+  await page.goto("/zh/status/");
+  await expect(page.locator("tr:has(#burning) img.entry-icon")).toBeVisible();
+});
+
+test("enchantment cards show icons", async ({ page }) => {
+  await page.goto("/zh/enchantment/arcane/");
+  await expect(page.locator(".entry-head img")).toBeVisible();
+});
+
 test("effect table shows placeholder markers", async ({ page }) => {
   await page.goto("/zh/effect/");
   await expect(page.locator(".placeholder").first()).toHaveText("{數值}");

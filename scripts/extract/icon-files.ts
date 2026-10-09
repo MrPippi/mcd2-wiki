@@ -1,7 +1,6 @@
 import { readdir } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
-import { PATHS } from "./config";
 import { ExtractError, formatZodIssue } from "./issues";
 import type { IconOverrides } from "./match-icons";
 import { readJsonFile } from "./read-json";
@@ -9,14 +8,14 @@ import { readJsonFile } from "./read-json";
 const ICON_FILE = /(?:^|\/)T_UI_[^/]*\.png$/i;
 const OverridesSchema = z.record(z.string(), z.string().nullable());
 
-export async function listIconFiles(sourceRoot: string): Promise<string[] | null> {
-  const root = path.join(sourceRoot, ...PATHS.iconRootRel.split("/"));
+export async function listIconFiles(sourceRoot: string, iconRoot: string): Promise<string[] | null> {
+  const root = path.join(sourceRoot, ...iconRoot.split("/"));
   try {
     const names = await readdir(root, { recursive: true });
     return names
       .map((name) => name.split(path.sep).join("/"))
       .filter((name) => ICON_FILE.test(name))
-      .map((name) => `${PATHS.iconRootRel}/${name}`)
+      .map((name) => `${iconRoot}/${name}`)
       .sort();
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return null;

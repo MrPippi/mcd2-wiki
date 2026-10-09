@@ -54,10 +54,28 @@ export const TABLES: readonly TableSource[] = [
   table("DT_R4StatusEffectDefinition", "status", "upcoming"),
 ];
 
-export const ICON_CATEGORIES: ReadonlySet<Category> = new Set(["melee", "ranged", "armor", "artifact"]);
+export interface IconSource {
+  /** Folder under source-data that holds this category's T_UI_*.png icons. */
+  readonly root: string;
+  /** Retry with the id's first segment (Burning_Infinite → Burning) when no icon matches. */
+  readonly fallbackToBase: boolean;
+}
+
+const EQUIPMENT_ICONS: IconSource = { root: "Assets/Art/Characters/Player/Equipment", fallbackToBase: false };
+const ENCHANTMENT_ICONS: IconSource = { root: "Assets/UI/Icons/Enchantments", fallbackToBase: true };
+const STATUS_ICONS: IconSource = { root: "Assets/UI/Icons/Statuses", fallbackToBase: true };
+
+export const ICON_SOURCES: Readonly<Partial<Record<Category, IconSource>>> = {
+  melee: EQUIPMENT_ICONS,
+  ranged: EQUIPMENT_ICONS,
+  armor: EQUIPMENT_ICONS,
+  artifact: EQUIPMENT_ICONS,
+  enchantment: ENCHANTMENT_ICONS,
+  "enchantment-book": ENCHANTMENT_ICONS,
+  status: STATUS_ICONS,
+};
 
 export const PATHS = {
-  iconRootRel: "Assets/Art/Characters/Player/Equipment",
   localeFile: (sourceRoot: string, culture: string): string =>
     path.join(sourceRoot, "Localization", "All", culture, "All.json"),
 } as const;

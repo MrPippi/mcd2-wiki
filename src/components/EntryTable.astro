@@ -1,6 +1,7 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
 import { t, type Lang } from "../lib/i18n";
+import EntryIcon from "./EntryIcon.astro";
 import LangText from "./LangText.astro";
 
 interface Props {
@@ -17,7 +18,12 @@ const { lang, entries } = Astro.props;
   <tbody>
     {entries.map((entry) => (
       <tr data-variant={entry.variant} data-names={`${entry.name.zh} ${entry.name.en}`.toLowerCase()}>
-        <th scope="row"><LangText as="h3" id={entry.slug} class="row-name" lang={lang} value={entry.name} /></th>
+        <th scope="row">
+          <div class="row-head">
+            {entry.icon && <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={32} />}
+            <LangText as="h3" id={entry.slug} class="row-name" lang={lang} value={entry.name} />
+          </div>
+        </th>
         <td>{entry.description ? <LangText lang={lang} value={entry.description} html /> : "—"}</td>
       </tr>
     ))}

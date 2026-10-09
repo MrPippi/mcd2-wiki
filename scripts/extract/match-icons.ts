@@ -1,14 +1,17 @@
 import path from "node:path";
 
-const DROP_TOKENS: ReadonlySet<string> = new Set(["t", "ui", "icon", "png"]);
+const DROP_TOKENS: ReadonlySet<string> = new Set(["t", "ui", "icon", "png", "status", "enchantment", "buff"]);
 const TOKEN_ALIASES: Readonly<Record<string, string>> = { chestplate: "chest", gauntlets: "gauntlet" };
 const MAX_PERMUTATION_TOKENS = 6;
-const ID_PREFIX = /^Artifact_/;
+const ID_PREFIX = /^(?:Artifact_|EnchantmentBook_)/;
 
 export type IconIndex = ReadonlyMap<string, readonly string[]>;
 export type IconOverrides = Readonly<Record<string, string | null>>;
+export interface MatchOptions {
+  readonly fallbackToBase?: boolean;
+}
 export type IconMatch =
-  | { readonly kind: "matched"; readonly file: string; readonly via: "auto" | "override" }
+  | { readonly kind: "matched"; readonly file: string; readonly via: "auto" | "override" | "fallback" }
   | { readonly kind: "none" }
   | { readonly kind: "missing" }
   | { readonly kind: "ambiguous"; readonly candidates: readonly string[] };
@@ -41,14 +44,20 @@ export function buildIconIndex(files: readonly string[]): IconIndex {
   return index;
 }
 
-export function matchIcon(id: string, index: IconIndex, overrides: IconOverrides): IconMatch {
+const candidatesFor = (name: string, index: IconIndex): string[] => [
+  ...new Set(index.get(tokenize(name).join("")) ?? []),
+];
+
+export function matchIcon(id: string, index: IconIndex, overrides: IconOverrides, options: MatchOptions = {}): IconMatch {
   if (Object.hasOwn(overrides, id)) {
     const file = overrides[id];
     return file === null ? { kind: "none" } : { kind: "matched", file, via: "override" };
   }
-  const key = tokenize(id.replace(ID_PREFIX, "")).join("");
-  const candidates = [...new Set(index.get(key) ?? [])];
+  const name = id.replace(ID_PREFIX, "");
+  const candidates = candidatesFor(name, index);
   if (candidates.length === 1) return { kind: "matched", file: candidates[0], via: "auto" };
-  if (candidates.length === 0) return { kind: "missing" };
-  return { kind: "ambiguous", candidates };
+  if (candidates.length > 1) return { kind: "ambiguous", candidates };
+  const base = name.split("_")[0];
+  const fallback = options.fallbackToBase && base !== name ? candidatesFor(base, index) : [];
+  return fallback.length === 1 ? { kind: "matched", file: fallback[0], via: "fallback" } : { kind: "missing" };
 }

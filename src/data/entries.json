@@ -6577,6 +6577,7 @@
       "zh": "使用神器會獲得「巧工」狀態，縮短神器冷卻時間，同時提高神器傷害與靈魂收集量。",
       "en": "Using an artifact grants the Artificing status, decreasing artifact cooldown while increasing artifact damage and soul gathering."
     },
+    "icon": "icons/enchantment/arcane.png",
     "links": {
       "enchantmentBook": "arcane"
     }
@@ -6619,6 +6620,7 @@
       "zh": "跳躍攻擊會造成衝擊，對附近敵人造成額外傷害並擊退敵人。",
       "en": "Jump attacks cause an impact that deals additional damage to nearby enemies and knocks them back."
     },
+    "icon": "icons/enchantment/blowback.png",
     "links": {
       "enchantmentBook": "blowback"
     }
@@ -6641,6 +6643,7 @@
       "zh": "武器攻擊會部署終界水晶，在敵人接近時或經過一小段時間後爆炸。",
       "en": "Weapon attacks deploy End crystals that explode in proximity to enemies or after a short time."
     },
+    "icon": "icons/enchantment/borealis.png",
     "links": {
       "enchantmentBook": "borealis"
     }
@@ -6663,6 +6666,7 @@
       "zh": "翻滾會連續向附近敵人射出一陣箭雨。",
       "en": "Rolling fires a barrage of arrows targeting nearby enemies."
     },
+    "icon": "icons/enchantment/burst-bowstring.png",
     "links": {
       "enchantmentBook": "burst-bowstring"
     }
@@ -6685,6 +6689,7 @@
       "zh": "遠程攻擊命中時，有機率向附近敵人射出額外投射物。",
       "en": "Successful ranged hits have a chance to fire off additional projectiles at nearby enemies."
     },
+    "icon": "icons/enchantment/chain-reaction.png",
     "links": {
       "enchantmentBook": "chain-reaction"
     }
@@ -6707,6 +6712,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生閃電波動，傷害敵人並短暫電擊敵人，使其變弱但速度變快。",
       "en": "Jump attacks and final hits create a wave of lightning that damages enemies and zaps them for a short time, making them weaker but faster."
     },
+    "icon": "icons/enchantment/channeling.png",
     "links": {
       "enchantmentBook": "channeling"
     }
@@ -6771,6 +6777,7 @@
       "zh": "暴擊會將箭矢回復至箭袋中。",
       "en": "Critical hits restore arrows to your quiver."
     },
+    "icon": "icons/enchantment/critical-quiver.png",
     "links": {
       "enchantmentBook": "critical-quiver"
     }
@@ -6793,6 +6800,7 @@
       "zh": "翻滾會提高你的下一次近戰或遠程攻擊傷害，每次使用時效果都會堆疊。",
       "en": "Rolling amplifies the damage of your next melee or ranged attack, stacking with each use."
     },
+    "icon": "icons/enchantment/dynamo.png",
     "links": {
       "enchantmentBook": "dynamo"
     }
@@ -6815,6 +6823,7 @@
       "zh": "提高你的箭矢容量上限。",
       "en": "Increases your maximum arrow capacity."
     },
+    "icon": "icons/enchantment/expanded-quiver.png",
     "links": {
       "enchantmentBook": "expanded-quiver"
     }
@@ -6837,6 +6846,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生火焰波動，傷害敵人並使其短暫著火。",
       "en": "Jump attacks and final hits create a wave of fire that damages enemies and sets them on fire for a short time."
     },
+    "icon": "icons/enchantment/fire-aspect.png",
     "links": {
       "variants": [
         "fire-aspect-unique"
@@ -6854,6 +6864,7 @@
       "zh": "炮烙魔法",
       "en": "Pyromancy"
     },
+    "icon": "icons/enchantment/fire-aspect-ii.png",
     "links": {
       "enchantmentBook": "fire-aspect-ii"
     }
@@ -6876,6 +6887,7 @@
       "zh": "一種附魔效果，能在戰鬥中使武器燃起火焰。",
       "en": "An enchantment that sets a weapon on fire during combat."
     },
+    "icon": "icons/enchantment/fire-aspect-unique.png",
     "links": {
       "variants": [
         "fire-aspect"
@@ -6901,6 +6913,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生冰霜波動，傷害敵人並短暫凍結敵人，使其攻擊與移動速度降低。",
       "en": "Jump attacks and final hits create a wave of ice that damages enemies and freezes them for a short time, slowing their attacks and movement."
     },
+    "icon": "icons/enchantment/frost-crescent.png",
     "links": {
       "enchantmentBook": "frost-crescent"
     }
@@ -6923,6 +6936,7 @@
       "zh": "使用神器時，會將附近所有敵人拉向你。",
       "en": "Using an artifact pulls all nearby enemies toward you."
     },
+    "icon": "icons/enchantment/gravity-pulse.png",
     "links": {
       "variants": [
         "gravity-pulse-unique"
@@ -6948,6 +6962,7 @@
       "zh": "一種附魔效果，能賦予武器力量而將敵人拉近。",
       "en": "An enchantment that grants weapons the power to pull enemies closer."
     },
+    "icon": "icons/enchantment/gravity-pulse-unique.png",
     "links": {
       "variants": [
         "gravity-pulse"
@@ -6973,6 +6988,7 @@
       "zh": "擊敗敵人時有機率創造一座泉水，賦予你和盟友強固狀態，而不受到敵人傷害。",
       "en": "Defeating an enemy has a chance to create a well that grants you and your allies the Fortifying status, protecting you from enemies."
     },
+    "icon": "icons/enchantment/guarding-strike.png",
     "links": {
       "enchantmentBook": "guarding-strike"
     }
@@ -6995,6 +7011,7 @@
       "zh": "使用神器來恢復生命值。",
       "en": "Using an artifact regenerates health."
     },
+    "icon": "icons/enchantment/health-synergy.png",
     "links": {
       "enchantmentBook": "health-synergy"
     }
@@ -7017,6 +7034,7 @@
       "zh": "使用神器會提高你的下一次近戰或遠程攻擊傷害，每次使用效果都會堆疊。",
       "en": "Using an artifact amplifies the damage of your next melee or ranged attack, stacking with each use."
     },
+    "icon": "icons/enchantment/lingering-power.png",
     "links": {
       "enchantmentBook": "lingering-power"
     }
@@ -7061,6 +7079,7 @@
       "zh": "額外獲得生命藥水使用次數。",
       "en": "Grants additional uses of health potion."
     },
+    "icon": "icons/enchantment/multi-potion.png",
     "links": {
       "enchantmentBook": "multi-potion"
     }
@@ -7083,6 +7102,7 @@
       "zh": "獲得連續多次翻滾的能力。",
       "en": "Grants the ability to perform multiple rolls in a row."
     },
+    "icon": "icons/enchantment/multi-roll.png",
     "links": {
       "enchantmentBook": "multi-roll"
     }
@@ -7127,6 +7147,7 @@
       "zh": "使射出的箭矢與投射物可以穿透多個目標。",
       "en": "Allows fired arrows and projectiles to pierce through multiple targets."
     },
+    "icon": "icons/enchantment/piercing.png",
     "links": {
       "enchantmentBook": "piercing"
     }
@@ -7149,6 +7170,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生劇毒波動，傷害敵人並讓敵人中毒一段時間。",
       "en": "Jump attacks and final hits create a wave of poison that damages enemies and poisons them for a time."
     },
+    "icon": "icons/enchantment/poison-fog.png",
     "links": {
       "enchantmentBook": "poison-fog"
     }
@@ -7171,6 +7193,7 @@
       "zh": "使用生命藥水時，會創造一座泉水，賦予你與盟友強固狀態，保護你們不受到敵人傷害。即使生命值全滿，也能使用藥水。",
       "en": "Using health potion creates a well that grants you and your allies the Fortifying status, protecting you from enemies. Allows potion to be used even at full health."
     },
+    "icon": "icons/enchantment/potion-barrier.png",
     "links": {
       "enchantmentBook": "potion-barrier"
     }
@@ -7193,6 +7216,7 @@
       "zh": "使用生命藥水時，會創造一座泉水，賦予你與盟友再生狀態，恢復你們的生命值。即使生命值全滿，也能使用藥水。",
       "en": "Using health potion creates a well that grants you and your allies the Regenerating status, restoring your health. Allows potion to be used even at full health."
     },
+    "icon": "icons/enchantment/potion-sharing.png",
     "links": {
       "enchantmentBook": "potion-sharing"
     }
@@ -7215,6 +7239,7 @@
       "zh": "擊敗敵人時有機率創造一座泉水，賦予盟友再生狀態，恢復他們的生命值。",
       "en": "Defeating an enemy has a chance to create a well that grants allies the Regenerating status, restoring their health."
     },
+    "icon": "icons/enchantment/radiance.png",
     "links": {
       "enchantmentBook": "radiance"
     }
@@ -7237,6 +7262,7 @@
       "zh": "使射出的箭矢與投射物可以在多個目標之間彈射。",
       "en": "Allows fired arrows and projectiles to bounce between multiple targets."
     },
+    "icon": "icons/enchantment/ricochet.png",
     "links": {
       "enchantmentBook": "ricochet"
     }
@@ -7259,6 +7285,7 @@
       "zh": "擊敗敵人時有機率獲得潛影狀態，讓敵人看不見你。",
       "en": "Defeating an enemy has a chance to grant Shadowcloaking, making you invisible to enemies."
     },
+    "icon": "icons/enchantment/shadow-strike.png",
     "links": {
       "variants": [
         "shadow-strike-unique"
@@ -7284,6 +7311,7 @@
       "zh": "一種附魔效果，能在攻擊時進入潛影狀態。",
       "en": "An enchantment that grants the ability to enter a state of shadowcloaking while attacking."
     },
+    "icon": "icons/enchantment/shadow-strike-unique.png",
     "links": {
       "variants": [
         "shadow-strike"
@@ -7309,6 +7337,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生衝擊波，傷害敵人並擊退敵人。",
       "en": "Jump attacks and final hits create a shockwave that damages enemies and knocks them back."
     },
+    "icon": "icons/enchantment/shockwave.png",
     "links": {
       "enchantmentBook": "shockwave"
     }
@@ -7331,6 +7360,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生靈魂波動，傷害敵人並持續造成額外靈魂傷害。",
       "en": "Jump attacks and final hits create a wave of souls that damages enemies and deals additional soul damage over time."
     },
+    "icon": "icons/enchantment/soul-fire-aspect.png",
     "links": {
       "enchantmentBook": "soul-aspect"
     }
@@ -7353,6 +7383,7 @@
       "zh": "使用生命藥水時也會獲得額外靈魂。即使生命值全滿，也能使用藥水。",
       "en": "Using health potion also grants additional souls. Allows potion to be used even at full health."
     },
+    "icon": "icons/enchantment/soul-infused-potion.png",
     "links": {
       "enchantmentBook": "soul-infused-potion"
     }
@@ -7375,6 +7406,7 @@
       "zh": "使用神器會獲得「疾行」狀態，加快移動速度。",
       "en": "Using an artifact grants the Hurrying status, increasing movement speed."
     },
+    "icon": "icons/enchantment/spring-loaded.png",
     "links": {
       "enchantmentBook": "spring-loaded"
     }
@@ -7417,6 +7449,7 @@
       "zh": "武器攻擊會釋放一陣旋風，對附近敵人造成額外傷害。",
       "en": "Weapon attacks unleash a swirl of air which deals additional damage to nearby enemies."
     },
+    "icon": "icons/enchantment/swirling.png",
     "links": {
       "variants": [
         "swirling-unique"
@@ -7442,6 +7475,7 @@
       "zh": "一種附魔效果，能在不頭暈的情況下施展強力的旋轉攻擊。",
       "en": "An enchantment that grants the ability to perform powerful spinning attacks without getting dizzy."
     },
+    "icon": "icons/enchantment/swirling-unique.png",
     "links": {
       "variants": [
         "swirling"
@@ -7467,6 +7501,7 @@
       "zh": "擊敗敵人時有機率獲得疾行狀態，短暫提升移動速度。",
       "en": "Defeating an enemy has a chance to grant the Hurrying status, increasing movement speed for a short time."
     },
+    "icon": "icons/enchantment/tempo-theft.png",
     "links": {
       "enchantmentBook": "tempo-theft"
     }
@@ -7489,6 +7524,7 @@
       "zh": "攻擊有機率將閃電傷害擴散至附近敵人。",
       "en": "Attacks have a chance to spread lightning damage to nearby enemies."
     },
+    "icon": "icons/enchantment/thundering.png",
     "links": {
       "enchantmentBook": "thundering"
     }
@@ -7511,6 +7547,7 @@
       "zh": "全速衝刺一小段時間後，撞向敵人會造成傷害並將敵人撞開。",
       "en": "After sprinting at full speed for a short time, slamming into enemies deals damage and knocks them out of your way."
     },
+    "icon": "icons/enchantment/unstoppable.png",
     "links": {
       "enchantmentBook": "unstoppable"
     }
@@ -7529,6 +7566,7 @@
       "zh": "使用神器會獲得「巧工」狀態，縮短神器冷卻時間，同時提高神器傷害與靈魂收集量。",
       "en": "Using an artifact grants the Artificing status, decreasing artifact cooldown while increasing artifact damage and soul gathering."
     },
+    "icon": "icons/enchantment-book/arcane.png",
     "links": {
       "enchantment": "arcane"
     }
@@ -7563,6 +7601,7 @@
       "zh": "跳躍攻擊會造成衝擊，對附近敵人造成額外傷害並擊退敵人。",
       "en": "Jump attacks cause an impact that deals additional damage to nearby enemies and knocks them back."
     },
+    "icon": "icons/enchantment-book/blowback.png",
     "links": {
       "enchantment": "blowback"
     }
@@ -7581,6 +7620,7 @@
       "zh": "武器攻擊會部署終界水晶，在敵人接近時或經過一小段時間後爆炸。",
       "en": "Weapon attacks deploy End crystals that explode in proximity to enemies or after a short time."
     },
+    "icon": "icons/enchantment-book/borealis.png",
     "links": {
       "enchantment": "borealis"
     }
@@ -7599,6 +7639,7 @@
       "zh": "翻滾會連續向附近敵人射出一陣箭雨。",
       "en": "Rolling fires a barrage of arrows targeting nearby enemies."
     },
+    "icon": "icons/enchantment-book/burst-bowstring.png",
     "links": {
       "enchantment": "burst-bowstring"
     }
@@ -7617,6 +7658,7 @@
       "zh": "遠程攻擊命中時，有機率向附近敵人射出額外投射物。",
       "en": "Successful ranged hits have a chance to fire off additional projectiles at nearby enemies."
     },
+    "icon": "icons/enchantment-book/chain-reaction.png",
     "links": {
       "enchantment": "chain-reaction"
     }
@@ -7635,6 +7677,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生閃電波動，傷害敵人並短暫電擊敵人，使其變弱但速度變快。",
       "en": "Jump attacks and final hits create a wave of lightning that damages enemies and zaps them for a short time, making them weaker but faster."
     },
+    "icon": "icons/enchantment-book/channeling.png",
     "links": {
       "enchantment": "channeling"
     }
@@ -7687,6 +7730,7 @@
       "zh": "暴擊會將箭矢回復至箭袋中。",
       "en": "Critical hits restore arrows to your quiver."
     },
+    "icon": "icons/enchantment-book/critical-quiver.png",
     "links": {
       "enchantment": "critical-quiver"
     }
@@ -7705,6 +7749,7 @@
       "zh": "翻滾會提高你的下一次近戰或遠程攻擊傷害，每次使用時效果都會堆疊。",
       "en": "Rolling amplifies the damage of your next melee or ranged attack, stacking with each use."
     },
+    "icon": "icons/enchantment-book/dynamo.png",
     "links": {
       "enchantment": "dynamo"
     }
@@ -7723,6 +7768,7 @@
       "zh": "提高你的箭矢容量上限。",
       "en": "Increases your maximum arrow capacity."
     },
+    "icon": "icons/enchantment-book/expanded-quiver.png",
     "links": {
       "enchantment": "expanded-quiver"
     }
@@ -7741,6 +7787,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生火焰波動，傷害敵人並使其短暫著火。",
       "en": "Jump attacks and final hits create a wave of fire that damages enemies and sets them on fire for a short time."
     },
+    "icon": "icons/enchantment-book/fire-aspect.png",
     "links": {
       "variants": [
         "fire-aspect-unique"
@@ -7762,6 +7809,7 @@
       "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
       "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
+    "icon": "icons/enchantment-book/fire-aspect-ii.png",
     "links": {
       "enchantment": "fire-aspect-ii"
     }
@@ -7780,6 +7828,7 @@
       "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
       "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
+    "icon": "icons/enchantment-book/fire-aspect-unique.png",
     "links": {
       "variants": [
         "fire-aspect"
@@ -7819,6 +7868,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生冰霜波動，傷害敵人並短暫凍結敵人，使其攻擊與移動速度降低。",
       "en": "Jump attacks and final hits create a wave of ice that damages enemies and freezes them for a short time, slowing their attacks and movement."
     },
+    "icon": "icons/enchantment-book/frost-crescent.png",
     "links": {
       "enchantment": "frost-crescent"
     }
@@ -7837,6 +7887,7 @@
       "zh": "使用神器時，會將附近所有敵人拉向你。",
       "en": "Using an artifact pulls all nearby enemies toward you."
     },
+    "icon": "icons/enchantment-book/gravity-pulse.png",
     "links": {
       "variants": [
         "gravity-pulse-unique"
@@ -7858,6 +7909,7 @@
       "zh": "攻擊有機率將 <span class=\"placeholder\">{數值}</span> 格內的所有敵人拉向你。",
       "en": "Attacks have a chance to pull all enemies within <span class=\"placeholder\">{value}</span> blocks toward you."
     },
+    "icon": "icons/enchantment-book/gravity-pulse-unique.png",
     "links": {
       "variants": [
         "gravity-pulse"
@@ -7879,6 +7931,7 @@
       "zh": "擊敗敵人時有機率創造一座泉水，賦予你和盟友強固狀態，而不受到敵人傷害。",
       "en": "Defeating an enemy has a chance to create a well that grants you and your allies the Fortifying status, protecting you from enemies."
     },
+    "icon": "icons/enchantment-book/guarding-strike.png",
     "links": {
       "enchantment": "guarding-strike"
     }
@@ -7897,6 +7950,7 @@
       "zh": "使用神器來恢復生命值。",
       "en": "Using an artifact regenerates health."
     },
+    "icon": "icons/enchantment-book/health-synergy.png",
     "links": {
       "enchantment": "health-synergy"
     }
@@ -7915,6 +7969,7 @@
       "zh": "使用神器會提高你的下一次近戰或遠程攻擊傷害，每次使用效果都會堆疊。",
       "en": "Using an artifact amplifies the damage of your next melee or ranged attack, stacking with each use."
     },
+    "icon": "icons/enchantment-book/lingering-power.png",
     "links": {
       "enchantment": "lingering-power"
     }
@@ -7951,6 +8006,7 @@
       "zh": "額外獲得生命藥水使用次數。",
       "en": "Grants additional uses of health potion."
     },
+    "icon": "icons/enchantment-book/multi-potion.png",
     "links": {
       "enchantment": "multi-potion"
     }
@@ -7969,6 +8025,7 @@
       "zh": "獲得連續多次翻滾的能力。",
       "en": "Grants the ability to perform multiple rolls in a row."
     },
+    "icon": "icons/enchantment-book/multi-roll.png",
     "links": {
       "enchantment": "multi-roll"
     }
@@ -8005,6 +8062,7 @@
       "zh": "使射出的箭矢與投射物可以穿透多個目標。",
       "en": "Allows fired arrows and projectiles to pierce through multiple targets."
     },
+    "icon": "icons/enchantment-book/piercing.png",
     "links": {
       "enchantment": "piercing"
     }
@@ -8023,6 +8081,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生劇毒波動，傷害敵人並使敵人中毒一段時間。",
       "en": "Jump attacks and final hits create a wave of poison that damages enemies and poisons them for a time."
     },
+    "icon": "icons/enchantment-book/poison-fog.png",
     "links": {
       "enchantment": "poison-fog"
     }
@@ -8041,6 +8100,7 @@
       "zh": "使用生命藥水時，會創造一座泉水，賦予你與盟友強固狀態，保護你們不受到敵人傷害。即使生命值全滿，也能使用藥水。",
       "en": "Using health potion creates a well that grants you and your allies the Fortifying status, protecting you from enemies. Allows potion to be used even at full health."
     },
+    "icon": "icons/enchantment-book/potion-barrier.png",
     "links": {
       "enchantment": "potion-barrier"
     }
@@ -8059,6 +8119,7 @@
       "zh": "使用生命藥水時，會創造一座泉水，賦予你與盟友再生狀態，恢復你們的生命值。即使生命值全滿，也能使用藥水。",
       "en": "Using health potion creates a well that grants you and your allies the Regenerating status, restoring your health. Allows potion to be used even at full health."
     },
+    "icon": "icons/enchantment-book/potion-sharing.png",
     "links": {
       "enchantment": "potion-sharing"
     }
@@ -8077,6 +8138,7 @@
       "zh": "擊敗敵人時有機率創造一座泉水，賦予盟友再生狀態，恢復他們的生命值。",
       "en": "Defeating an enemy has a chance to create a well that grants allies the Regenerating status, restoring their health."
     },
+    "icon": "icons/enchantment-book/radiance.png",
     "links": {
       "enchantment": "radiance"
     }
@@ -8095,6 +8157,7 @@
       "zh": "使射出的箭矢與投射物可以在多個目標之間彈射。",
       "en": "Allows fired arrows and projectiles to bounce between multiple targets."
     },
+    "icon": "icons/enchantment-book/ricochet.png",
     "links": {
       "enchantment": "ricochet"
     }
@@ -8113,6 +8176,7 @@
       "zh": "擊敗敵人時有機率獲得潛影狀態，讓敵人看不見你。",
       "en": "Defeating an enemy has a chance to grant Shadowcloaking, making you invisible to enemies."
     },
+    "icon": "icons/enchantment-book/shadow-strike.png",
     "links": {
       "variants": [
         "shadow-strike-unique"
@@ -8134,6 +8198,7 @@
       "zh": "攻擊敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率進入潛影狀態。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
     },
+    "icon": "icons/enchantment-book/shadow-strike-unique.png",
     "links": {
       "variants": [
         "shadow-strike"
@@ -8155,6 +8220,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生衝擊波，傷害敵人並擊退敵人。",
       "en": "Jump attacks and final hits create a shockwave that damages enemies and knocks them back."
     },
+    "icon": "icons/enchantment-book/shockwave.png",
     "links": {
       "enchantment": "shockwave"
     }
@@ -8173,6 +8239,7 @@
       "zh": "跳躍攻擊與終結攻擊會產生靈魂波動，傷害敵人並持續造成額外靈魂傷害。",
       "en": "Jump attacks and final hits create a wave of souls that damages enemies and deals additional soul damage over time."
     },
+    "icon": "icons/enchantment-book/soul-aspect.png",
     "links": {
       "enchantment": "soul-fire-aspect"
     }
@@ -8191,6 +8258,7 @@
       "zh": "使用生命藥水時也會獲得額外靈魂。即使生命值全滿，也能使用藥水。",
       "en": "Using health potion also grants additional souls. Allows potion to be used even at full health."
     },
+    "icon": "icons/enchantment-book/soul-infused-potion.png",
     "links": {
       "enchantment": "soul-infused-potion"
     }
@@ -8209,6 +8277,7 @@
       "zh": "使用神器會獲得「疾行」狀態，加快移動速度。",
       "en": "Using an artifact grants the Hurrying status, increasing movement speed."
     },
+    "icon": "icons/enchantment-book/spring-loaded.png",
     "links": {
       "enchantment": "spring-loaded"
     }
@@ -8243,6 +8312,7 @@
       "zh": "武器攻擊會釋放一陣旋風，對附近敵人造成額外傷害。",
       "en": "Weapon attacks unleash a swirl of air which deals additional damage to nearby enemies."
     },
+    "icon": "icons/enchantment-book/swirling.png",
     "links": {
       "variants": [
         "swirling-unique"
@@ -8264,6 +8334,7 @@
       "zh": "一種附魔效果，能在不頭暈的情況下施展強力的旋轉攻擊。",
       "en": "An enchantment that grants the ability to perform powerful spinning attacks without getting dizzy."
     },
+    "icon": "icons/enchantment-book/swirling-unique.png",
     "links": {
       "variants": [
         "swirling"
@@ -8285,6 +8356,7 @@
       "zh": "擊敗敵人時有機率獲得疾行狀態，短暫提升移動速度。",
       "en": "Defeating an enemy has a chance to grant the Hurrying status, increasing movement speed for a short time."
     },
+    "icon": "icons/enchantment-book/tempo-theft.png",
     "links": {
       "enchantment": "tempo-theft"
     }
@@ -8303,6 +8375,7 @@
       "zh": "攻擊有機率將閃電傷害擴散至附近敵人。",
       "en": "Attacks have a chance to spread lightning damage to nearby enemies."
     },
+    "icon": "icons/enchantment-book/thundering.png",
     "links": {
       "enchantment": "thundering"
     }
@@ -8321,6 +8394,7 @@
       "zh": "全速衝刺一小段時間後，撞向敵人會造成傷害並將敵人撞開。",
       "en": "After sprinting at full speed for a short time, slamming into enemies deals damage and knocks them out of your way."
     },
+    "icon": "icons/enchantment-book/unstoppable.png",
     "links": {
       "enchantment": "unstoppable"
     }
@@ -9639,6 +9713,7 @@
       "zh": "近戰與遠程攻擊速度提高。",
       "en": "Melee and ranged attack speed is increased."
     },
+    "icon": "icons/status/acceleration.png",
     "links": {}
   },
   {
@@ -9655,6 +9730,7 @@
       "zh": "神器傷害與靈魂收集量提高，且神器冷卻時間縮短。",
       "en": "Artifact damage and soul gathering are increased, and artifact cooldown is reduced."
     },
+    "icon": "icons/status/arcane.png",
     "links": {}
   },
   {
@@ -9667,6 +9743,7 @@
       "zh": "巧工",
       "en": "Artificing"
     },
+    "icon": "icons/status/arcane-infinite.png",
     "links": {}
   },
   {
@@ -9683,6 +9760,7 @@
       "zh": "近戰攻擊會造成額外的閃電傷害。",
       "en": "Melee attacks deal additional Lightning damage."
     },
+    "icon": "icons/status/buff-conductive-bracelet.png",
     "links": {}
   },
   {
@@ -9699,6 +9777,7 @@
       "zh": "移動速度與近戰攻擊速度提高。",
       "en": "Movement speed and melee attack speed are increased."
     },
+    "icon": "icons/status/buff-deathcap-mushroom.png",
     "links": {}
   },
   {
@@ -9715,6 +9794,7 @@
       "zh": "近戰攻擊會造成額外的火焰傷害。",
       "en": "Melee attacks deal additional Fire damage."
     },
+    "icon": "icons/status/buff-fire-bracelet.png",
     "links": {}
   },
   {
@@ -9731,6 +9811,7 @@
       "zh": "近戰攻擊會造成額外的冰霜傷害。",
       "en": "Melee attacks deal additional Frost damage."
     },
+    "icon": "icons/status/buff-frost-bracelet.png",
     "links": {}
   },
   {
@@ -9747,6 +9828,7 @@
       "zh": "所有攻擊造成的額外傷害提高。",
       "en": "All attacks deal increased additive damage."
     },
+    "icon": "icons/status/buff-grindstone.png",
     "links": {}
   },
   {
@@ -9763,6 +9845,7 @@
       "zh": "近戰攻擊會造成額外的劇毒傷害。",
       "en": "Melee attacks deal additional Poison damage."
     },
+    "icon": "icons/status/buff-poison-bracelet.png",
     "links": {}
   },
   {
@@ -9779,6 +9862,7 @@
       "zh": "近戰攻擊命中時會引發小型爆炸。",
       "en": "Melee attacks cause tiny explosions on hit."
     },
+    "icon": "icons/status/buff-powershaker.png",
     "links": {}
   },
   {
@@ -9795,6 +9879,7 @@
       "zh": "持續受到火焰傷害。",
       "en": "Fire damage is being taken over time."
     },
+    "icon": "icons/status/burning.png",
     "links": {}
   },
   {
@@ -9807,6 +9892,7 @@
       "zh": "灼燒",
       "en": "Burned"
     },
+    "icon": "icons/status/burning-infinite.png",
     "links": {}
   },
   {
@@ -9823,6 +9909,7 @@
       "zh": "無法移動，且效果可傳播至範圍內的多個目標。",
       "en": "Movement is completely disabled and can spread to multiple targets within range."
     },
+    "icon": "icons/status/chained.png",
     "links": {}
   },
   {
@@ -9835,6 +9922,7 @@
       "zh": "鎖鏈",
       "en": "Chained"
     },
+    "icon": "icons/status/chained-propagated.png",
     "links": {}
   },
   {
@@ -9851,6 +9939,7 @@
       "zh": "移動速度提高，但傷害抗性大幅降低。",
       "en": "Movement speed is increased at the cost of greatly reduced damage resistance."
     },
+    "icon": "icons/status/conductive.png",
     "links": {}
   },
   {
@@ -9867,6 +9956,7 @@
       "zh": "攻擊必定造成暴擊。",
       "en": "Attacks are guaranteed critical hits."
     },
+    "icon": "icons/status/critical-chance-increase.png",
     "links": {}
   },
   {
@@ -9883,6 +9973,7 @@
       "zh": "暴擊傷害提高。",
       "en": "Critical hit damage is increased."
     },
+    "icon": "icons/status/critical-damage-increase.png",
     "links": {}
   },
   {
@@ -9899,6 +9990,7 @@
       "zh": "所有投射物都會偏轉。",
       "en": "All projectiles are being deflected."
     },
+    "icon": "icons/status/deflection.png",
     "links": {}
   },
   {
@@ -9915,6 +10007,7 @@
       "zh": "攻擊速度與移動速度降低。",
       "en": "Attack speed and movement speed are reduced."
     },
+    "icon": "icons/status/freezing.png",
     "links": {}
   },
   {
@@ -9947,6 +10040,7 @@
       "zh": "神器完全無法使用。",
       "en": "Artifact usage is completely blocked."
     },
+    "icon": "icons/status/gloaming.png",
     "links": {}
   },
   {
@@ -9963,6 +10057,7 @@
       "zh": "移動速度降低。",
       "en": "Movement speed is reduced."
     },
+    "icon": "icons/status/honeyed.png",
     "links": {}
   },
   {
@@ -9979,6 +10074,7 @@
       "zh": "不會受到任何傷害。",
       "en": "No damage is being taken."
     },
+    "icon": "icons/status/invulnerable.png",
     "links": {}
   },
   {
@@ -9991,6 +10087,7 @@
       "zh": "無敵",
       "en": "Invulnerable"
     },
+    "icon": "icons/status/invulnerable-infinite.png",
     "links": {}
   },
   {
@@ -10007,6 +10104,7 @@
       "zh": "持續受到毒素傷害。",
       "en": "Poison damage is being taken over time."
     },
+    "icon": "icons/status/poisoned.png",
     "links": {}
   },
   {
@@ -10019,6 +10117,7 @@
       "zh": "中毒",
       "en": "Poisoned"
     },
+    "icon": "icons/status/poisoned-infinite.png",
     "links": {}
   },
   {
@@ -10035,6 +10134,7 @@
       "zh": "生命值逐漸恢復。",
       "en": "Health is being gradually restored."
     },
+    "icon": "icons/status/regeneration.png",
     "links": {}
   },
   {
@@ -10047,6 +10147,7 @@
       "zh": "再生",
       "en": "Regenerating"
     },
+    "icon": "icons/status/regeneration-infinite.png",
     "links": {}
   },
   {
@@ -10063,6 +10164,7 @@
       "zh": "受到的所有傷害降低。",
       "en": "All damage taken is reduced."
     },
+    "icon": "icons/status/resistance.png",
     "links": {}
   },
   {
@@ -10079,6 +10181,7 @@
       "zh": "對怪物隱形，且下一次攻擊必定造成暴擊；在進行下一次攻擊或使用神器後效果結束。",
       "en": "Invisible to mobs and the next attack is a critical hit, ending on the next attack or artifact use."
     },
+    "icon": "icons/status/shadow-form.png",
     "links": {}
   },
   {
@@ -10095,6 +10198,7 @@
       "zh": "移動速度降低。",
       "en": "Movement speed is reduced."
     },
+    "icon": "icons/status/slowed.png",
     "links": {}
   },
   {
@@ -10107,6 +10211,7 @@
       "zh": "緩速",
       "en": "Slowed"
     },
+    "icon": "icons/status/slowed-slowed-maw.png",
     "links": {}
   },
   {
@@ -10119,6 +10224,7 @@
       "zh": "緩速",
       "en": "Slowed"
     },
+    "icon": "icons/status/slowed-slowed-spider.png",
     "links": {}
   },
   {
@@ -10135,6 +10241,7 @@
       "zh": "持續受到靈魂傷害，並同時降低生命值與靈魂數量。",
       "en": "Soul damage is being taken over time, reducing both health and souls."
     },
+    "icon": "icons/status/soul-charged.png",
     "links": {}
   },
   {
@@ -10151,6 +10258,7 @@
       "zh": "所有攻擊造成的乘算傷害提高。",
       "en": "All attacks deal increased multiplicative damage."
     },
+    "icon": "icons/status/strength.png",
     "links": {}
   },
   {
@@ -10163,6 +10271,7 @@
       "zh": "強化",
       "en": "Strengthened"
     },
+    "icon": "icons/status/strength-infinite.png",
     "links": {}
   },
   {
@@ -10179,6 +10288,7 @@
       "zh": "移動速度提高。",
       "en": "Movement speed is increased."
     },
+    "icon": "icons/status/swiftness.png",
     "links": {}
   },
   {
@@ -10211,6 +10321,7 @@
       "zh": "移動速度小幅提高，撞上怪物時會將其擊退並造成傷害。",
       "en": "Movement speed is slightly increased and running into mobs knocks them back and deals damage."
     },
+    "icon": "icons/status/unstoppable.png",
     "links": {}
   },
   {
@@ -10227,6 +10338,7 @@
       "zh": "完全無法移動。",
       "en": "Movement is completely disabled."
     },
+    "icon": "icons/status/vined.png",
     "links": {}
   },
   {
@@ -10243,6 +10355,7 @@
       "zh": "造成的傷害降低，且受到的傷害提高。",
       "en": "Damage dealt is reduced and damage taken is increased."
     },
+    "icon": "icons/status/weakness.png",
     "links": {}
   },
   {
@@ -10259,6 +10372,7 @@
       "zh": "無法翻滾或跳躍，移動速度大幅降低。",
       "en": "Rolling and jumping are blocked, and movement speed is greatly reduced."
     },
+    "icon": "icons/status/webbed.png",
     "links": {}
   }
 ]

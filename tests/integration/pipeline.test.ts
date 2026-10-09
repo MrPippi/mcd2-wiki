@@ -48,7 +48,13 @@ beforeEach(async () => {
       SW_Effect_CriticalEdge_SW_TextEntry_Name: ["Critical Edge", "致命鋒刃"],
       SW_Effect_CriticalEdge_SW_TextEntry_Description: ["All critical hits deal {0} more damage.", "暴擊造成的傷害提高 {0}。"],
     },
+    [ns("DT_StatusDefinition")]: {
+      SW_Status_Burning_SW_TextEntry_Name: ["Burning", "燃燒"],
+      SW_Status_Burning_Infinite_SW_TextEntry_Name: ["Burning", "燃燒"],
+    },
   });
+  await put(sourceRoot, "Assets/UI/Icons/Enchantments/T_UI_Icon_Enchantment_Arcane.png", "png:arcane");
+  await put(sourceRoot, "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Burning.png", "png:burning");
   await put(sourceRoot, "Localization/All/en/All.json", JSON.stringify(locales.en));
   await put(sourceRoot, "Localization/All/zh-Hant/All.json", JSON.stringify(locales.zh));
   await put(sourceRoot, `${ICON_ROOT}/Weapons/Sword/T_UI_Sword_Icon.png`, "png:sword");
@@ -80,6 +86,12 @@ describe("runExtract", () => {
     expect(find("artifact", "frost-quiver")?.icon).toBe("icons/artifact/frost-quiver.png");
     expect(find("enchantment", "arcane")?.links).toEqual({ enchantmentBook: "arcane" });
     expect(find("effect", "critical-edge")?.description?.zh).toContain('<span class="placeholder">{數值}</span>');
+    expect(find("effect", "critical-edge")?.icon).toBeUndefined();
+    expect(find("enchantment", "arcane")?.icon).toBe("icons/enchantment/arcane.png");
+    expect(find("enchantment-book", "arcane")?.icon).toBe("icons/enchantment-book/arcane.png");
+    expect(find("status", "burning")?.icon).toBe("icons/status/burning.png");
+    expect(find("status", "burning-infinite")?.icon).toBe("icons/status/burning-infinite.png");
+    expect(await readFile(path.join(outRoot, "public", "icons", "status", "burning-infinite.png"), "utf8")).toBe("png:burning");
 
     expect(await readJson<ArmorSet[]>("src/data/armor-sets.json")).toEqual([
       {
@@ -92,7 +104,7 @@ describe("runExtract", () => {
     ]);
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-icon (1)\n\n- armor:DiscipleChest");
-    expect(summary).toMatchObject({ entries: 9, armorSets: 1, icons: 4 });
+    expect(summary).toMatchObject({ entries: 11, armorSets: 1, icons: 8 });
   });
 
   it("produces identical output on a second run", async () => {

@@ -79,7 +79,12 @@
 `R3`／`R4` 表推測為未上線內容（無對應圖示），標記 `release: "upcoming"`，**原型不產生頁面**，但保留於資料中。
 
 ### 2.4 圖示
-- 搜尋範圍：`source-data/Assets/Art/Characters/Player/Equipment/**/T_UI_*_Icon.png`（約 262 張）。
+- 各分類的圖示來源目錄（皆在 `source-data/` 下，只收 `T_UI_*.png`）：
+  - 裝備（近戰／遠程／護甲／神器）：`Assets/Art/Characters/Player/Equipment/`（約 262 張）
+  - 附魔與附魔書：`Assets/UI/Icons/Enchantments/`（`T_UI_Icon_Enchantment_<Id>.png`；附魔書沿用對應附魔的圖示）
+  - 狀態：`Assets/UI/Icons/Statuses/`（`T_UI_Icon_Status_<Id>.png`）
+  - 效果：無圖示
+- 附魔與狀態允許「退回基底 Id」比對（`Burning_Infinite`→`Burning`、`FireAspect_II`→`FireAspect`）；裝備不退回，避免獨特版誤用一般版圖示。
 - 檔名與 Id 不一致，例：
   - `Sword_Unique1` ↔ `T_UI_Sword_Unique_Icon`
   - `DiscipleBoots` ↔ `T_UI_Boots_Disciple_Icon`

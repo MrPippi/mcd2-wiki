@@ -61,3 +61,38 @@ describe("matchIcon", () => {
     expect(matchIcon("Sword", index, { Sword: null })).toEqual({ kind: "none" });
   });
 });
+
+describe("matchIcon — enchantment and status icons", () => {
+  const ENCHANTS = ["U/Enchantments/T_UI_Icon_Enchantment_Arcane.png", "U/Enchantments/T_UI_Icon_Enchantment_FireAspect.png"];
+  const STATUSES = ["U/Statuses/T_UI_Icon_Status_Burning.png", "U/Statuses/T_UI_Icon_Status_FireBracelet.png"];
+  const enchantIndex = buildIconIndex(ENCHANTS);
+  const statusIndex = buildIconIndex(STATUSES);
+
+  it("drops status, enchantment and buff tokens", () => {
+    expect(tokenize("T_UI_Icon_Status_FireBracelet")).toEqual(["fire", "bracelet"]);
+    expect(tokenize("Artifact_Buff_FireBracelet")).toEqual(["artifact", "fire", "bracelet"]);
+  });
+
+  it("matches enchantments and their books by id", () => {
+    expect(matchIcon("Arcane", enchantIndex, {})).toEqual({ kind: "matched", file: ENCHANTS[0], via: "auto" });
+    expect(matchIcon("EnchantmentBook_Arcane", enchantIndex, {})).toEqual({ kind: "matched", file: ENCHANTS[0], via: "auto" });
+  });
+
+  it("matches artifact buff statuses", () => {
+    expect(matchIcon("Artifact_Buff_FireBracelet", statusIndex, {})).toEqual({ kind: "matched", file: STATUSES[1], via: "auto" });
+  });
+
+  it("falls back to the base id only when asked", () => {
+    expect(matchIcon("Burning_Infinite", statusIndex, {})).toEqual({ kind: "missing" });
+    expect(matchIcon("Burning_Infinite", statusIndex, {}, { fallbackToBase: true })).toEqual({
+      kind: "matched",
+      file: STATUSES[0],
+      via: "fallback",
+    });
+    expect(matchIcon("EnchantmentBook_FireAspect_II", enchantIndex, {}, { fallbackToBase: true })).toEqual({
+      kind: "matched",
+      file: ENCHANTS[1],
+      via: "fallback",
+    });
+  });
+});

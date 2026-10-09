@@ -24,11 +24,18 @@ describe("listIconFiles", () => {
     await touch(`${root}/Weapons/Sword/T_UI_Sword_Icon.png`);
     await touch(`${root}/Weapons/Sword/T_Sword.png`);
     await touch(`${root}/Weapons/Sword/T_UI_Notes.txt`);
-    await expect(listIconFiles(dir)).resolves.toEqual([`${root}/Weapons/Sword/T_UI_Sword_Icon.png`]);
+    await expect(listIconFiles(dir, root)).resolves.toEqual([`${root}/Weapons/Sword/T_UI_Sword_Icon.png`]);
+  });
+
+  it("lists files under any given root", async () => {
+    await touch("Assets/UI/Icons/Statuses/T_UI_Icon_Status_Burning.png");
+    await expect(listIconFiles(dir, "Assets/UI/Icons/Statuses")).resolves.toEqual([
+      "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Burning.png",
+    ]);
   });
 
   it("returns null when the icon root does not exist", async () => {
-    await expect(listIconFiles(dir)).resolves.toBeNull();
+    await expect(listIconFiles(dir, "Assets/Missing")).resolves.toBeNull();
   });
 });
 
