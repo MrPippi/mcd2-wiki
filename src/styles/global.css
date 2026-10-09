@@ -50,10 +50,12 @@ h1.lang-text .alt { font-size: 0.5em; }
 .entry-card a:hover { border-color: var(--accent); }
 .entry-card[data-variant="unique"] a { border-color: color-mix(in srgb, var(--unique) 50%, var(--border)); }
 .entry-icon { object-fit: contain; }
-.icon-frame { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; background: var(--frame) center / 100% 100% no-repeat; }
+.icon-frame { position: relative; display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; background: var(--frame) center / 100% 100% no-repeat; }
 .icon-frame > .entry-icon { width: 78%; height: 78%; }
-.icon-frame.frame-enchantment { image-rendering: pixelated; }
-.icon-frame.frame-enchantment > .entry-icon { width: 50%; height: 50%; image-rendering: auto; }
+/* The book slot art has a transparent diamond window (x 39–217, y 13–195 of 256px): the icon sits behind it and the frame is drawn on top. */
+.icon-frame.frame-enchantment { background: none; }
+.icon-frame.frame-enchantment::after { content: ""; position: absolute; inset: 0; background: var(--frame) center / 100% 100% no-repeat; image-rendering: pixelated; pointer-events: none; }
+.icon-frame.frame-enchantment > .entry-icon { position: absolute; left: 15.2%; top: 5%; width: 69.6%; height: 71.5%; image-rendering: pixelated; }
 .framed-placeholder { display: inline-flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1.5rem; }
 .placeholder-icon { display: inline-flex; align-items: center; justify-content: center; background: var(--surface-2); border-radius: 8px; color: var(--muted); font-size: 1.5rem; }
 

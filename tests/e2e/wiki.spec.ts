@@ -114,6 +114,21 @@ test("icons sit inside the game's slot frames", async ({ page, request }) => {
   }
 });
 
+test("enchantment icons fill the diamond window of the book frame", async ({ page }) => {
+  await page.goto("/zh/enchantment/arcane/");
+  const frame = await page.locator(".entry-head .icon-frame").boundingBox();
+  const icon = await page.locator(".entry-head .icon-frame img").boundingBox();
+  if (!frame || !icon) throw new Error("icon or frame not rendered");
+  // The diamond window spans x 39–217 and y 13–195 of the 256px frame art.
+  expect(icon.width / frame.width).toBeCloseTo(178 / 256, 1);
+  expect((icon.x - frame.x) / frame.width).toBeCloseTo(39 / 256, 1);
+  expect((icon.y + icon.height / 2 - frame.y) / frame.height).toBeCloseTo(104 / 256, 1);
+  const frameOnTop = await page.locator(".entry-head .icon-frame").evaluate(
+    (el) => getComputedStyle(el, "::after").backgroundImage,
+  );
+  expect(frameOnTop).toContain("frames/enchantment.png");
+});
+
 test("effect table shows placeholder markers", async ({ page }) => {
   await page.goto("/zh/effect/");
   await expect(page.locator(".placeholder").first()).toHaveText("{數值}");
