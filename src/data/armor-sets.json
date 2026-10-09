@@ -1,0 +1,572 @@
+[
+  {
+    "id": "CaveCrawler",
+    "slug": "cave-crawler",
+    "variant": "normal",
+    "name": {
+      "zh": "伏聆挖掘者",
+      "en": "Sculk Digger"
+    },
+    "pieces": {
+      "helmet": "cave-crawler-helmet",
+      "chest": "cave-crawler-chest",
+      "leggings": "cave-crawler-leggings",
+      "boots": "cave-crawler-boots"
+    }
+  },
+  {
+    "id": "CaveCrawler_Unique",
+    "slug": "cave-crawler-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "扭曲伏守者",
+      "en": "Twisted Warden"
+    },
+    "pieces": {
+      "helmet": "cave-crawler-helmet-unique",
+      "chest": "cave-crawler-chest-unique",
+      "leggings": "cave-crawler-leggings-unique",
+      "boots": "cave-crawler-boots-unique"
+    }
+  },
+  {
+    "id": "Disciple",
+    "slug": "disciple",
+    "variant": "normal",
+    "name": {
+      "zh": "修行者",
+      "en": "Disciple"
+    },
+    "pieces": {
+      "helmet": "disciple-helmet",
+      "chest": "disciple-chest",
+      "leggings": "disciple-leggings",
+      "boots": "disciple-boots"
+    }
+  },
+  {
+    "id": "Disciple_Unique",
+    "slug": "disciple-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "賢者",
+      "en": "Sage"
+    },
+    "pieces": {
+      "helmet": "disciple-helmet-unique",
+      "chest": "disciple-chest-unique",
+      "leggings": "disciple-leggings-unique",
+      "boots": "disciple-boots-unique"
+    }
+  },
+  {
+    "id": "Evocation",
+    "slug": "evocation",
+    "variant": "normal",
+    "name": {
+      "zh": "術士",
+      "en": "Sorcerer"
+    },
+    "pieces": {
+      "helmet": "evocation-helmet",
+      "chest": "evocation-chest",
+      "leggings": "evocation-leggings",
+      "boots": "evocation-boots"
+    }
+  },
+  {
+    "id": "Evocation_Unique",
+    "slug": "evocation-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "煉金術士",
+      "en": "Alchemist"
+    },
+    "pieces": {
+      "helmet": "evocation-helmet-unique",
+      "chest": "evocation-chest-unique",
+      "leggings": "evocation-leggings-unique",
+      "boots": "evocation-boots-unique"
+    }
+  },
+  {
+    "id": "FrostRime",
+    "slug": "frost-rime",
+    "variant": "normal",
+    "name": {
+      "zh": "鋼絲",
+      "en": "Steel Wool"
+    },
+    "pieces": {
+      "helmet": "frost-rime-helmet",
+      "chest": "frost-rime-chest",
+      "leggings": "frost-rime-leggings",
+      "boots": "frost-rime-boots"
+    }
+  },
+  {
+    "id": "FrostRime_Unique",
+    "slug": "frost-rime-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "霜寒",
+      "en": "Rimefrost"
+    },
+    "pieces": {
+      "helmet": "frost-rime-helmet-unique",
+      "chest": "frost-rime-chest-unique",
+      "leggings": "frost-rime-leggings-unique",
+      "boots": "frost-rime-boots-unique"
+    }
+  },
+  {
+    "id": "HewnBark",
+    "slug": "hewn-bark",
+    "variant": "normal",
+    "name": {
+      "zh": "擁樹者",
+      "en": "Treehugger"
+    },
+    "pieces": {
+      "helmet": "hewn-bark-helmet",
+      "chest": "hewn-bark-chest",
+      "leggings": "hewn-bark-leggings",
+      "boots": "hewn-bark-boots"
+    }
+  },
+  {
+    "id": "HewnBark_Unique",
+    "slug": "hewn-bark-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "林精",
+      "en": "Woodsprite"
+    },
+    "pieces": {
+      "helmet": "hewn-bark-helmet-unique",
+      "chest": "hewn-bark-chest-unique",
+      "leggings": "hewn-bark-leggings-unique",
+      "boots": "hewn-bark-boots-unique"
+    }
+  },
+  {
+    "id": "Honey",
+    "slug": "honey",
+    "variant": "normal",
+    "name": {
+      "zh": "養蜂人",
+      "en": "Beekeeper"
+    },
+    "pieces": {
+      "helmet": "honey-helmet",
+      "chest": "honey-chest",
+      "leggings": "honey-leggings",
+      "boots": "honey-boots"
+    }
+  },
+  {
+    "id": "Honey_Unique",
+    "slug": "honey-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "蜂巢意志",
+      "en": "Hivemind"
+    },
+    "pieces": {
+      "helmet": "honey-helmet-unique",
+      "chest": "honey-chest-unique",
+      "leggings": "honey-leggings-unique",
+      "boots": "honey-boots-unique"
+    }
+  },
+  {
+    "id": "Mushroom",
+    "slug": "mushroom",
+    "variant": "normal",
+    "name": {
+      "zh": "蘑菇",
+      "en": "Mushroom"
+    },
+    "pieces": {
+      "helmet": "mushroom-helmet",
+      "chest": "mushroom-chest",
+      "leggings": "mushroom-leggings",
+      "boots": "mushroom-boots"
+    }
+  },
+  {
+    "id": "Mushroom_Unique",
+    "slug": "mushroom-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "毒蠅傘",
+      "en": "Fly Agaric"
+    },
+    "pieces": {
+      "helmet": "mushroom-helmet-unique",
+      "chest": "mushroom-chest-unique",
+      "leggings": "mushroom-leggings-unique",
+      "boots": "mushroom-boots-unique"
+    }
+  },
+  {
+    "id": "Mystic",
+    "slug": "mystic",
+    "variant": "normal",
+    "name": {
+      "zh": "祕法",
+      "en": "Mystic"
+    },
+    "pieces": {
+      "helmet": "mystic-helmet",
+      "chest": "mystic-chest",
+      "leggings": "mystic-leggings",
+      "boots": "mystic-boots"
+    }
+  },
+  {
+    "id": "Mystic_Unique",
+    "slug": "mystic-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "神諭",
+      "en": "Oracle"
+    },
+    "pieces": {
+      "helmet": "mystic-helmet-unique",
+      "chest": "mystic-chest-unique",
+      "leggings": "mystic-leggings-unique",
+      "boots": "mystic-boots-unique"
+    }
+  },
+  {
+    "id": "Phantom",
+    "slug": "phantom",
+    "variant": "normal",
+    "name": {
+      "zh": "幻影",
+      "en": "Phantom"
+    },
+    "pieces": {
+      "helmet": "phantom-helmet",
+      "chest": "phantom-chest",
+      "leggings": "phantom-leggings",
+      "boots": "phantom-boots"
+    }
+  },
+  {
+    "id": "Phantom_Unique",
+    "slug": "phantom-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "夢境主宰",
+      "en": "Dreamruler"
+    },
+    "pieces": {
+      "helmet": "phantom-helmet-unique",
+      "chest": "phantom-chest-unique",
+      "leggings": "phantom-leggings-unique",
+      "boots": "phantom-boots-unique"
+    }
+  },
+  {
+    "id": "Realmreacher",
+    "slug": "realmreacher",
+    "variant": "normal",
+    "name": {
+      "zh": "遊俠",
+      "en": "Ranger"
+    },
+    "pieces": {
+      "helmet": "realmreacher-helmet",
+      "chest": "realmreacher-chest",
+      "leggings": "realmreacher-leggings",
+      "boots": "realmreacher-boots"
+    }
+  },
+  {
+    "id": "Realmreacher_Unique",
+    "slug": "realmreacher-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "神射手",
+      "en": "Sharpshooter"
+    },
+    "pieces": {
+      "helmet": "realmreacher-helmet-unique",
+      "chest": "realmreacher-chest-unique",
+      "leggings": "realmreacher-leggings-unique",
+      "boots": "realmreacher-boots-unique"
+    }
+  },
+  {
+    "id": "Redstone",
+    "slug": "redstone",
+    "variant": "normal",
+    "name": {
+      "zh": "紅石",
+      "en": "Redstone"
+    },
+    "pieces": {
+      "helmet": "redstone-helmet",
+      "chest": "redstone-chest",
+      "leggings": "redstone-leggings",
+      "boots": "redstone-boots"
+    }
+  },
+  {
+    "id": "Redstone_Unique",
+    "slug": "redstone-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "巨獸",
+      "en": "Monstrosity"
+    },
+    "pieces": {
+      "helmet": "redstone-helmet-unique",
+      "chest": "redstone-chest-unique",
+      "leggings": "redstone-leggings-unique",
+      "boots": "redstone-boots-unique"
+    }
+  },
+  {
+    "id": "Scamp",
+    "slug": "scamp",
+    "variant": "normal",
+    "name": {
+      "zh": "小惡棍",
+      "en": "Scamp"
+    },
+    "pieces": {
+      "helmet": "scamp-helmet",
+      "chest": "scamp-chest",
+      "leggings": "scamp-leggings",
+      "boots": "scamp-boots"
+    }
+  },
+  {
+    "id": "Scamp_Unique",
+    "slug": "scamp-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "無賴",
+      "en": "Scoundrel"
+    },
+    "pieces": {
+      "helmet": "scamp-helmet-unique",
+      "chest": "scamp-chest-unique",
+      "leggings": "scamp-leggings-unique",
+      "boots": "scamp-boots-unique"
+    }
+  },
+  {
+    "id": "Scavenger",
+    "slug": "scavenger",
+    "variant": "normal",
+    "name": {
+      "zh": "伏聆者",
+      "en": "Sculker"
+    },
+    "pieces": {
+      "helmet": "scavenger-helmet",
+      "chest": "scavenger-chest",
+      "leggings": "scavenger-leggings",
+      "boots": "scavenger-boots"
+    }
+  },
+  {
+    "id": "Scavenger_Unique",
+    "slug": "scavenger-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "君主",
+      "en": "Monarch"
+    },
+    "pieces": {
+      "helmet": "scavenger-helmet-unique",
+      "chest": "scavenger-chest-unique",
+      "leggings": "scavenger-leggings-unique",
+      "boots": "scavenger-boots-unique"
+    }
+  },
+  {
+    "id": "Stalwart",
+    "slug": "stalwart",
+    "variant": "normal",
+    "name": {
+      "zh": "守護者",
+      "en": "Protector"
+    },
+    "pieces": {
+      "helmet": "stalwart-helmet",
+      "chest": "stalwart-chest",
+      "leggings": "stalwart-leggings",
+      "boots": "stalwart-boots"
+    }
+  },
+  {
+    "id": "Stalwart_Unique",
+    "slug": "stalwart-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "轟鳴蟲",
+      "en": "Humbler"
+    },
+    "pieces": {
+      "helmet": "stalwart-helmet-unique",
+      "chest": "stalwart-chest-unique",
+      "leggings": "stalwart-leggings-unique",
+      "boots": "stalwart-boots-unique"
+    }
+  },
+  {
+    "id": "Timeworn",
+    "slug": "timeworn",
+    "variant": "normal",
+    "name": {
+      "zh": "界域行者",
+      "en": "Realmreacher"
+    },
+    "pieces": {
+      "helmet": "timeworn-helmet",
+      "chest": "timeworn-chest",
+      "leggings": "timeworn-leggings",
+      "boots": "timeworn-boots"
+    }
+  },
+  {
+    "id": "Timeworn_Unique",
+    "slug": "timeworn-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "靈魂腐化者",
+      "en": "Soul Corruptor"
+    },
+    "pieces": {
+      "helmet": "timeworn-helmet-unique",
+      "chest": "timeworn-chest-unique",
+      "leggings": "timeworn-leggings-unique",
+      "boots": "timeworn-boots-unique"
+    }
+  },
+  {
+    "id": "Undaunted",
+    "slug": "undaunted",
+    "variant": "normal",
+    "name": {
+      "zh": "賞金獵人",
+      "en": "Bounty Hunter"
+    },
+    "pieces": {
+      "helmet": "undaunted-helmet",
+      "chest": "undaunted-chest",
+      "leggings": "undaunted-leggings",
+      "boots": "undaunted-boots"
+    }
+  },
+  {
+    "id": "Undaunted_Unique",
+    "slug": "undaunted-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "無畏",
+      "en": "Dauntless"
+    },
+    "pieces": {
+      "helmet": "undaunted-helmet-unique",
+      "chest": "undaunted-chest-unique",
+      "leggings": "undaunted-leggings-unique",
+      "boots": "undaunted-boots-unique"
+    }
+  },
+  {
+    "id": "Voyager",
+    "slug": "voyager",
+    "variant": "normal",
+    "name": {
+      "zh": "遊牧者",
+      "en": "Nomad"
+    },
+    "pieces": {
+      "helmet": "voyager-helmet",
+      "chest": "voyager-chest",
+      "leggings": "voyager-leggings",
+      "boots": "voyager-boots"
+    }
+  },
+  {
+    "id": "Voyager_Unique",
+    "slug": "voyager-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "漫遊者",
+      "en": "Rover"
+    },
+    "pieces": {
+      "helmet": "voyager-helmet-unique",
+      "chest": "voyager-chest-unique",
+      "leggings": "voyager-leggings-unique",
+      "boots": "voyager-boots-unique"
+    }
+  },
+  {
+    "id": "Wellspring",
+    "slug": "wellspring",
+    "variant": "normal",
+    "name": {
+      "zh": "隙浮特",
+      "en": "Sifter"
+    },
+    "pieces": {
+      "helmet": "wellspring-helmet",
+      "chest": "wellspring-chest",
+      "leggings": "wellspring-leggings",
+      "boots": "wellspring-boots"
+    }
+  },
+  {
+    "id": "Wellspring_Unique",
+    "slug": "wellspring-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "狂化隙浮特",
+      "en": "Mad Sifter"
+    },
+    "pieces": {
+      "helmet": "wellspring-helmet-unique",
+      "chest": "wellspring-chest-unique",
+      "leggings": "wellspring-leggings-unique",
+      "boots": "wellspring-boots-unique"
+    }
+  },
+  {
+    "id": "Wolfclutch",
+    "slug": "wolfclutch",
+    "variant": "normal",
+    "name": {
+      "zh": "狼群",
+      "en": "Wolfpack"
+    },
+    "pieces": {
+      "helmet": "wolfclutch-helmet",
+      "chest": "wolfclutch-chest",
+      "leggings": "wolfclutch-leggings",
+      "boots": "wolfclutch-boots"
+    }
+  },
+  {
+    "id": "Wolfclutch_Unique",
+    "slug": "wolfclutch-unique",
+    "variant": "unique",
+    "name": {
+      "zh": "領袖",
+      "en": "Packleader"
+    },
+    "pieces": {
+      "helmet": "wolfclutch-helmet-unique",
+      "chest": "wolfclutch-chest-unique",
+      "leggings": "wolfclutch-leggings-unique",
+      "boots": "wolfclutch-boots-unique"
+    }
+  }
+]

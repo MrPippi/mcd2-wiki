@@ -1,0 +1,16 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const target = `${base}zh/`;
+---
+<!doctype html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={target} />
+    <title>Minecraft Dungeons II 中文 Wiki</title>
+  </head>
+  <body>
+    <a href={target}>前往繁體中文版</a>
+  </body>
+</html>

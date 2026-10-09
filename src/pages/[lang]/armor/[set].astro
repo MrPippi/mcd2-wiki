@@ -1,0 +1,47 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import { ARMOR_PIECES, type ArmorSet } from "../../../../scripts/extract/schemas";
+import EntryIcon from "../../../components/EntryIcon.astro";
+import LangText from "../../../components/LangText.astro";
+import UiIcon from "../../../components/UiIcon.astro";
+import { pieceIcon } from "../../../lib/ui-icons";
+import Base from "../../../layouts/Base.astro";
+import { allArmorSets, findEntry } from "../../../lib/data";
+import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../../../lib/i18n";
+import { entryHref } from "../../../lib/url";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => allArmorSets.map((set) => ({ params: { lang, set: set.slug }, props: { set } })));
+}
+
+const lang = Astro.params.lang as Lang;
+const { set } = Astro.props as { set: ArmorSet };
+const pieces = ARMOR_PIECES.flatMap((piece) => {
+  const slug = set.pieces[piece];
+  const entry = slug ? findEntry("armor", slug) : undefined;
+  return entry ? [{ piece, entry }] : [];
+});
+---
+<Base lang={lang} title={set.name[lang]}>
+  <article class="armor-set" data-pagefind-body>
+    <LangText as="h1" lang={lang} value={set.name} searchTitle />
+    <p class="tags">
+      <span class="tag">{CATEGORY_LABEL.armor[lang]}</span>{" "}
+      <span class="tag">{t(lang, set.variant)}</span>
+    </p>
+    <ul class="set-pieces">
+      {pieces.map(({ piece, entry }) => (
+        <li class="set-piece" data-testid="set-piece">
+          <a href={entryHref(lang, entry)}>
+            <EntryIcon icon={entry.icon} alt={entry.name[lang]} category={entry.category} variant={entry.variant} />
+            <span>
+              <span class="piece-label"><UiIcon src={pieceIcon(piece)} />{PIECE_LABEL[piece][lang]}</span>{" "}
+              <LangText lang={lang} value={entry.name} />
+            </span>
+          </a>
+          {entry.description && <LangText as="p" lang={lang} value={entry.description} html />}
+        </li>
+      ))}
+    </ul>
+  </article>
+</Base>

@@ -1,0 +1,17 @@
+{
+  "Artifact_Buff_DeathcapMushroom": "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Deathcap.png",
+  "Artifact_FlameQuiver": "Assets/Art/Characters/Player/Equipment/Artifacts/ElementalQuivers/Quiver_Fire/T_UI_Quiver_Burning_Icon.png",
+  "Artifact_FrostBracelet": "Assets/Art/Characters/Player/Equipment/Artifacts/Bracelet/Bracelet_Freezing/T_UI_BraceletFreezing_Icon.png",
+  "Artifact_FrostQuiver": "Assets/Art/Characters/Player/Equipment/Artifacts/ElementalQuivers/Quiver_Freezing/T_UI_Quiver_Freezing_Icon.png",
+  "Artifact_LightningQuiver": "Assets/Art/Characters/Player/Equipment/Artifacts/ElementalQuivers/Quiver_Conductive/T_UI_Quiver_Conductor_Icon.png",
+  "Artifact_PoisonQuiver": "Assets/Art/Characters/Player/Equipment/Artifacts/ElementalQuivers/Quiver_Poison/T_UI_Quiver_Poisoned_Icon.png",
+  "Artifact_RedstoneMines": "Assets/Art/Characters/Player/Equipment/Artifacts/RedstoneMineLauncher/T_UI_RedstoneMinelauncher_Icon.png",
+  "Artifact_WarriorsDrums": "Assets/Art/Characters/Player/Equipment/Artifacts/Instruments/WarriorsDrum/T_UI_Icon_WarriorsDrum.png",
+  "Conductive": "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Conductor.png",
+  "Critical_Chance_Increase": "Assets/UI/Icons/Statuses/T_UI_Icon_Status_CriticalChanceUp.png",
+  "Critical_Damage_Increase": "Assets/UI/Icons/Statuses/T_UI_Icon_Status_CriticalDamageUp.png",
+  "EnchantmentBook_SoulAspect": "Assets/UI/Icons/Enchantments/T_UI_Icon_Enchantment_SoulFireAspect.png",
+  "SoulCharged": "Assets/UI/Icons/Statuses/T_UI_Icon_Status_SoulWeariness.png",
+  "Talisman_ExperienceIncrease": "Assets/Art/Characters/Player/Equipment/Talismans/ExperienceIncrease/T_UI_ExperianceIncrease_Icon1.png",
+  "Talisman_StatusBuff": "Assets/Art/Characters/Player/Equipment/Talismans/StatusBuff/T_UI_Talisman_StatusBuff1_Icon.png"
+}

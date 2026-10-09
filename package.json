@@ -1,0 +1,27 @@
+{
+  "name": "mcd2-wiki",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "extract": "tsx scripts/extract/index.ts",
+    "build": "astro build && pagefind --site dist",
+    "preview": "astro preview --port 4329",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "npm run build && playwright test"
+  },
+  "dependencies": {
+    "astro": "^7.3.8",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.0",
+    "@types/node": "^24.19.1",
+    "@vitest/coverage-v8": "^5.0.3",
+    "pagefind": "^1.5.2",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.3"
+  }
+}

@@ -79,12 +79,36 @@
 `R3`／`R4` 表推測為未上線內容（無對應圖示），標記 `release: "upcoming"`，**原型不產生頁面**，但保留於資料中。
 
 ### 2.4 圖示
-- 搜尋範圍：`source-data/Assets/Art/Characters/Player/Equipment/**/T_UI_*_Icon.png`（約 262 張）。
+- 各分類的圖示來源目錄（皆在 `source-data/` 下，只收 `T_UI_*.png`）：
+  - 裝備（近戰／遠程／護甲／神器）：`Assets/Art/Characters/Player/Equipment/`（約 262 張）
+  - 附魔與附魔書：`Assets/UI/Icons/Enchantments/`（`T_UI_Icon_Enchantment_<Id>.png`；附魔書沿用對應附魔的圖示）
+  - 狀態：`Assets/UI/Icons/Statuses/`（`T_UI_Icon_Status_<Id>.png`）
+  - 效果：無圖示
+- 圖示外框（複製到 `public/icons/frames/`，清單寫入 `src/data/frames.json`；缺檔時列入報告、網站改為無框）：
+  - `artifact`：`Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png`（快捷列神器欄），用於神器；缺檔時退回物品欄格
+  - **物品欄格**（武器、護甲、狀態）：遊戲中由 `M_SlotFrame` 著色器繪製、沒有對應貼圖，網站以 CSS 重現，色值取自遊戲物品欄截圖：由外而內 1px 黑邊、2px 稀有度框（一般 `#897A6D`、獨特 `#FF7E2F`）、1px `#353535`、1px `#0D0D0D`、1px 內光（獨特 `#AB6F2E`）；底色一般 `#161616`，獨特為左上橘色漸層至 `#271B15`，並在左上角加上由 5 個橘色方塊組成的「×」稀有度標記（遊戲截圖中的金色星章是「新物品／收藏」標記，與稀有度無關，不呈現）。「稀有（藍框）」是掉落時的稀有度而非物品屬性，網站不呈現
+  - `enchantment`：`Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png`，用於附魔與附魔書
+- **有圖示來源的分類（裝備、護符、附魔、附魔書），沒有圖示的條目不發布**（不產生頁面、不出現在列表與相關連結）；效果沒有圖示來源，照常發布
+- 附魔與狀態允許「退回基底 Id」比對（`Burning_Infinite`→`Burning`、`FireAspect_II`→`FireAspect`）；裝備不退回，避免獨特版誤用一般版圖示。
 - 檔名與 Id 不一致，例：
   - `Sword_Unique1` ↔ `T_UI_Sword_Unique_Icon`
   - `DiscipleBoots` ↔ `T_UI_Boots_Disciple_Icon`
   - `Artifact_FireBracelet` ↔ `T_UI_BraceletFire_Icon`
   - `MoonSword` ↔ `T_UI_Moonsword_Icon`
+
+### 2.5 第二批分類（護符與外觀造型）
+
+| 分類 | Namespace | release | 圖示來源 |
+|---|---|---|---|
+| `talisman` | `DT_ItemDefinitionTalisman.csv`／`DT_R3ItemDefinitionTalisman.csv` | base／upcoming | `Equipment/Talismans/`，取第 1 階圖示（`Icon1` 或 `…1_Icon`） |
+| `cape` | `DT_ItemDefinitionCape.csv` | base | `Player/Capes/` |
+| `pet` | `DT_ItemDefinitionPet.csv` | base | `Friendlies/Pets/` |
+| `skin` | `DT_SkinDefinition.csv`（key 前綴 `SW_Skin_`） | base | `Player/Skins/`，檔名 `T_<名稱>_Skin_Icon.png` |
+
+- 護符描述在遊戲檔中是開發用占位文字（如「Ammo Capacity Talisman Description」），一律捨棄。
+- 外觀類的 `UnlockExplanation` 欄位存為 `unlock`，在條目頁以「解鎖」顯示。遊戲檔有一個拼錯的 key（`Cosmetec_Cape_…`），解析時修正。
+- 披風／寵物／外觀若有同名條目（遊戲檔遺留的重複列），只保留有圖示的一筆，其餘列入報告（`duplicate-entry`）。
+- 導覽：護符歸在「裝備」。**狀態、披風、寵物、外觀目前仍會抽取，但暫不發布到網站**（不產生頁面也不出現在導覽）；護符、披風、寵物使用遊戲分類圖示，神器使用遊戲的 Potion 分頁圖示，外觀與狀態沒有。只有含獨特物品的分類才顯示「一般／獨特」篩選。
 
 ## 3. 架構
 
@@ -236,7 +260,7 @@ interface ArmorSet {
 |---|---|
 | `/` | 導向 `/zh/` |
 | `/[lang]/` | 首頁 |
-| `/[lang]/[category]/` | 分類列表（melee、ranged、artifact、enchantment、enchantment-book） |
+| `/[lang]/[category]/` | 分類列表（melee、ranged、artifact、enchantment）。附魔書不另建頁面，併入其對應的附魔頁（「附魔書」區塊列出書名，書的描述與附魔不同時一併顯示） |
 | `/[lang]/[category]/[slug]/` | 條目頁 |
 | `/[lang]/armor/` | 護甲套裝列表 |
 | `/[lang]/armor/[setSlug]/` | 護甲套裝頁（含四部位） |

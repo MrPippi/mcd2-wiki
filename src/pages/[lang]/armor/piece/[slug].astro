@@ -1,0 +1,20 @@
+---
+import { LANGS } from "../../../../../scripts/extract/config";
+import type { Entry } from "../../../../../scripts/extract/schemas";
+import EntryDetail from "../../../../components/EntryDetail.astro";
+import Base from "../../../../layouts/Base.astro";
+import { entriesIn } from "../../../../lib/data";
+import type { Lang } from "../../../../lib/i18n";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) =>
+    entriesIn("armor").map((entry) => ({ params: { lang, slug: entry.slug }, props: { entry } })),
+  );
+}
+
+const lang = Astro.params.lang as Lang;
+const { entry } = Astro.props as { entry: Entry };
+---
+<Base lang={lang} title={entry.name[lang]}>
+  <EntryDetail lang={lang} entry={entry} />
+</Base>

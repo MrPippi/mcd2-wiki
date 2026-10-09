@@ -1,0 +1,41 @@
+---
+import type { Category } from "../../scripts/extract/config";
+import type { Entry } from "../../scripts/extract/schemas";
+import { frameFor } from "../lib/frames";
+import { assetUrl } from "../lib/url";
+
+interface Props {
+  icon?: string;
+  alt: string;
+  size?: number;
+  /** Draws the game's slot frame for this category behind the icon. */
+  category?: Category;
+  /** Unique gear gets the orange inventory slot with the corner rarity mark. */
+  variant?: Entry["variant"];
+}
+
+// The in-game inventory slot is about 103px wide; its borders are measured in those pixels.
+const INVENTORY_SLOT_PX = 103;
+
+const { icon, alt, size = 64, category, variant = "normal" } = Astro.props;
+const frame = category ? frameFor(category) : undefined;
+const box = `width:${size}px;height:${size}px`;
+const unique = frame?.name === "inventory" && variant === "unique";
+const frameStyle = frame?.path
+  ? `${box};--frame:url("${assetUrl(frame.path)}")`
+  : `${box};--px:${(size / INVENTORY_SLOT_PX).toFixed(3)}px`;
+---
+{frame ? (
+  <span class:list={["icon-frame", `frame-${frame.name}`, { "is-unique": unique }]} style={frameStyle}>
+    {icon ? (
+      <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+    ) : (
+      <span class="entry-icon framed-placeholder" role="img" aria-label={alt}>?</span>
+    )}
+    {unique && <span class="slot-mark" aria-hidden="true" />}
+  </span>
+) : icon ? (
+  <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+) : (
+  <span class="entry-icon placeholder-icon" style={box} role="img" aria-label={alt}>?</span>
+)}

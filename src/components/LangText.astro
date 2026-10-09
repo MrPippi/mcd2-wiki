@@ -1,0 +1,34 @@
+---
+import type { Localized } from "../../scripts/extract/schemas";
+import { HTML_LANG, otherLang, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang: Lang;
+  value: Localized;
+  html?: boolean;
+  as?: string;
+  class?: string;
+  id?: string;
+  /** Marks the primary text as the Pagefind result title. */
+  searchTitle?: boolean;
+}
+
+const { lang, value, html = false, as: Tag = "span", class: className, id, searchTitle = false } = Astro.props;
+const alt = otherLang(lang);
+const showAlt = value[alt] !== value[lang];
+const titleMeta = searchTitle ? "title" : undefined;
+---
+<Tag class:list={["lang-text", className]} id={id}>
+  {html ? (
+    <span class="primary" data-pagefind-meta={titleMeta} set:html={value[lang]} />
+  ) : (
+    <span class="primary" data-pagefind-meta={titleMeta}>{value[lang]}</span>
+  )}
+  {showAlt && " "}
+  {showAlt &&
+    (html ? (
+      <span class="alt" lang={HTML_LANG[alt]} set:html={value[alt]} />
+    ) : (
+      <span class="alt" lang={HTML_LANG[alt]}>{value[alt]}</span>
+    ))}
+</Tag>

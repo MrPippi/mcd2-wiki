@@ -1,0 +1,55 @@
+---
+import { t, type Lang } from "../lib/i18n";
+import { uiIcon } from "../lib/ui-icons";
+import UiIcon from "./UiIcon.astro";
+
+interface Props {
+  lang: Lang;
+  showVariant: boolean;
+}
+
+const { lang, showVariant } = Astro.props;
+const VARIANTS = ["all", "normal", "unique"] as const;
+---
+<div class="list-filter" data-testid="list-filter">
+  <input type="search" class="filter-text" placeholder={t(lang, "filterPlaceholder")} aria-label={t(lang, "filterPlaceholder")} />
+  {showVariant && (
+    <div class="filter-variant" role="group">
+      {VARIANTS.map((variant) => (
+        <button type="button" data-variant={variant} aria-pressed={variant === "all" ? "true" : "false"}>
+          {variant === "all" && <UiIcon src={uiIcon("all")} />}
+          {t(lang, variant)}
+        </button>
+      ))}
+    </div>
+  )}
+</div>
+<p class="no-results" hidden>{t(lang, "noResults")}</p>
+<script>
+  const filter = document.querySelector<HTMLElement>(".list-filter");
+  const input = filter?.querySelector<HTMLInputElement>(".filter-text");
+  const buttons = [...(filter?.querySelectorAll<HTMLButtonElement>("button[data-variant]") ?? [])];
+  const items = [...document.querySelectorAll<HTMLElement>("[data-names]")];
+  const noResults = document.querySelector<HTMLElement>(".no-results");
+  let variant = "all";
+
+  const apply = () => {
+    const text = input?.value.trim().toLowerCase() ?? "";
+    let visible = 0;
+    for (const item of items) {
+      const show = (variant === "all" || item.dataset.variant === variant) && (item.dataset.names ?? "").includes(text);
+      item.hidden = !show;
+      if (show) visible += 1;
+    }
+    if (noResults) noResults.hidden = visible > 0;
+  };
+
+  input?.addEventListener("input", apply);
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      variant = button.dataset.variant ?? "all";
+      for (const other of buttons) other.setAttribute("aria-pressed", String(other === button));
+      apply();
+    });
+  }
+</script>
