@@ -1,0 +1,9 @@
+{
+  "Artifact_FlameQuiver": "Assets/Art/Characters/Player/Equipment/Artifacts/ElementalQuivers/Quiver_Fire/T_UI_Quiver_Burning_Icon.png",
+  "Artifact_FrostBracelet": "Assets/Art/Characters/Player/Equipment/Artifacts/Bracelet/Bracelet_Freezing/T_UI_BraceletFreezing_Icon.png",
+  "Artifact_FrostQuiver": "Assets/Art/Characters/Player/Equipment/Artifacts/ElementalQuivers/Quiver_Freezing/T_UI_Quiver_Freezing_Icon.png",
+  "Artifact_LightningQuiver": "Assets/Art/Characters/Player/Equipment/Artifacts/ElementalQuivers/Quiver_Conductive/T_UI_Quiver_Conductor_Icon.png",
+  "Artifact_PoisonQuiver": "Assets/Art/Characters/Player/Equipment/Artifacts/ElementalQuivers/Quiver_Poison/T_UI_Quiver_Poisoned_Icon.png",
+  "Artifact_RedstoneMines": "Assets/Art/Characters/Player/Equipment/Artifacts/RedstoneMineLauncher/T_UI_RedstoneMinelauncher_Icon.png",
+  "Artifact_WarriorsDrums": "Assets/Art/Characters/Player/Equipment/Artifacts/Instruments/WarriorsDrum/T_UI_Icon_WarriorsDrum.png"
+}
