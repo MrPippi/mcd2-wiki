@@ -13,7 +13,7 @@ const { lang } = Astro.props;
     <p class="tooltip-hint">{t(lang, "tooltipHint")}</p>
   </aside>
 </div>
-<div class="item-sheet panel" data-testid="item-sheet" role="dialog" aria-label={t(lang, "itemDetails")} hidden>
+<div class="item-sheet panel" data-testid="item-sheet" role="dialog" aria-label={t(lang, "itemDetails")} tabindex="-1" hidden>
   <button type="button" class="sheet-close" aria-label={t(lang, "close")}>×</button>
   <div class="sheet-body"></div>
   <a class="sheet-view button" href="#">{t(lang, "view")} ›</a>
@@ -41,7 +41,10 @@ const { lang } = Astro.props;
   };
 
   const closeSheet = () => {
-    if (sheet) sheet.hidden = true;
+    if (!sheet || sheet.hidden) return;
+    sheet.hidden = true;
+    // Give focus back to the item that opened the sheet.
+    openCard?.querySelector<HTMLAnchorElement>("a.item-link")?.focus();
     openCard = null;
   };
 
@@ -51,6 +54,7 @@ const { lang } = Astro.props;
     sheetBody.replaceChildren(content);
     sheetView.href = href;
     sheet.hidden = false;
+    sheet.focus();
     openCard = card;
   };
 

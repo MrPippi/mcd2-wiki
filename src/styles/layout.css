@@ -37,7 +37,9 @@
 @media (max-width: 699px) {
   .header-search { order: 3; flex-basis: 100%; }
   .category-tabs { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
-  .tab-key, .tab-label { display: none; }
+  .tab-key { display: none; }
+  /* Visually hidden, but still the link's accessible name. */
+  .tab-label { top: 0; left: 0; transform: none; width: 1px; height: 1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 }
 @media (hover: none) {
   .tab-key { display: none; }

@@ -491,3 +491,40 @@ test("search excerpts leave out the info box and section labels", async ({ page 
   const text = (await excerpts.allTextContents()).join(" ");
   for (const label of ["DESCRIPTION", "RELATED", "稀有度", "相關條目"]) expect(text, label).not.toContain(label);
 });
+
+test("category tabs keep their names for screen readers on every screen size", async ({ page }) => {
+  await page.goto("/zh/melee/");
+  const tabs = page.locator(".category-tabs");
+  for (const name of ["近戰武器", "遠程武器", "效果"]) await expect(tabs.getByRole("link", { name, exact: true })).toHaveCount(1);
+});
+
+test("the details sheet takes focus and gives it back when closed", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "touch interaction");
+  await page.goto("/zh/melee/");
+  const link = cardNamed(page, "燃燒之刃").locator("a.item-link");
+  await link.click();
+  const sheet = page.getByTestId("item-sheet");
+  await expect(sheet).toBeVisible();
+  expect(await sheet.evaluate((el) => el.contains(document.activeElement))).toBe(true);
+  await page.keyboard.press("Escape");
+  await expect(sheet).toBeHidden();
+  await expect(link).toBeFocused();
+  await link.click();
+  await sheet.locator(".sheet-close").click();
+  await expect(link).toBeFocused();
+});
+
+test("wide touch screens use the whole width for the grid instead of a hover panel", async ({ browser }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "one wide touch context is enough");
+  const context = await browser.newContext({
+    viewport: { width: 1180, height: 820 },
+    isMobile: true,
+    hasTouch: true,
+    baseURL: testInfo.project.use.baseURL,
+  });
+  const page = await context.newPage();
+  await page.goto("/zh/melee/");
+  expect(await page.evaluate(() => matchMedia("(hover: none)").matches)).toBe(true);
+  await expect(page.getByTestId("item-tooltip")).toBeHidden();
+  await context.close();
+});
