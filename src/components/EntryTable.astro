@@ -16,8 +16,8 @@ const { lang, entries } = Astro.props;
   </thead>
   <tbody>
     {entries.map((entry) => (
-      <tr id={entry.slug} data-variant={entry.variant} data-names={`${entry.name.zh} ${entry.name.en}`.toLowerCase()}>
-        <th scope="row"><LangText lang={lang} value={entry.name} /></th>
+      <tr data-variant={entry.variant} data-names={`${entry.name.zh} ${entry.name.en}`.toLowerCase()}>
+        <th scope="row"><LangText as="h3" id={entry.slug} class="row-name" lang={lang} value={entry.name} /></th>
         <td>{entry.description ? <LangText lang={lang} value={entry.description} html /> : "—"}</td>
       </tr>
     ))}

@@ -19,7 +19,7 @@ const entries = entriesIn(category);
 const isTable = (TABLE_CATEGORIES as readonly Category[]).includes(category);
 ---
 <Base lang={lang} title={CATEGORY_LABEL[category][lang]}>
-  <h1>{CATEGORY_LABEL[category][lang]} <span class="count">({entries.length})</span></h1>
+  <h1><span data-pagefind-meta="title">{CATEGORY_LABEL[category][lang]}</span> <span class="count">({entries.length})</span></h1>
   <ListFilter lang={lang} showVariant={!isTable} />
   {isTable ? (
     <>

@@ -17,11 +17,11 @@ const related = relatedLinks(lang, entry);
   <header class="entry-head">
     <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={128} />
     <div>
-      <LangText as="h1" lang={lang} value={entry.name} />
+      <LangText as="h1" lang={lang} value={entry.name} searchTitle />
       <p class="tags">
-        <span class="tag">{CATEGORY_LABEL[entry.category][lang]}</span>
-        <span class="tag">{t(lang, entry.variant)}</span>
-        {entry.armorPiece && <span class="tag">{PIECE_LABEL[entry.armorPiece][lang]}</span>}
+        <span class="tag">{CATEGORY_LABEL[entry.category][lang]}</span>{" "}
+        <span class="tag">{t(lang, entry.variant)}</span>{" "}
+        {entry.armorPiece && <span class="tag">{PIECE_LABEL[entry.armorPiece][lang]}</span>}{" "}
         {entry.untranslated?.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
       </p>
     </div>
@@ -34,7 +34,7 @@ const related = relatedLinks(lang, entry);
       <ul>
         {related.map((link) => (
           <li>
-            <span class="related-label">{t(lang, link.labelKey)}</span>
+            <span class="related-label">{t(lang, link.labelKey)}</span>{" "}
             <a href={link.href}><LangText lang={lang} value={link.name} /></a>
           </li>
         ))}

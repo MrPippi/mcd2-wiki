@@ -8,14 +8,23 @@ interface Props {
   html?: boolean;
   as?: string;
   class?: string;
+  id?: string;
+  /** Marks the primary text as the Pagefind result title. */
+  searchTitle?: boolean;
 }
 
-const { lang, value, html = false, as: Tag = "span", class: className } = Astro.props;
+const { lang, value, html = false, as: Tag = "span", class: className, id, searchTitle = false } = Astro.props;
 const alt = otherLang(lang);
 const showAlt = value[alt] !== value[lang];
+const titleMeta = searchTitle ? "title" : undefined;
 ---
-<Tag class:list={["lang-text", className]}>
-  {html ? <span class="primary" set:html={value[lang]} /> : <span class="primary">{value[lang]}</span>}
+<Tag class:list={["lang-text", className]} id={id}>
+  {html ? (
+    <span class="primary" data-pagefind-meta={titleMeta} set:html={value[lang]} />
+  ) : (
+    <span class="primary" data-pagefind-meta={titleMeta}>{value[lang]}</span>
+  )}
+  {showAlt && " "}
   {showAlt &&
     (html ? (
       <span class="alt" lang={HTML_LANG[alt]} set:html={value[alt]} />

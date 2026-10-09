@@ -90,6 +90,25 @@ test("search finds entries by Chinese and English terms", async ({ page }) => {
   }
 });
 
+test("search on the English site finds entries by their Chinese name", async ({ page }) => {
+  await page.goto(`/en/search/?q=${encodeURIComponent("遊牧者兜帽")}`);
+  await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
+});
+
+test("search result titles keep the two languages apart", async ({ page }) => {
+  await page.goto("/zh/search/?q=sword");
+  const titles = page.locator(".pagefind-ui__result-title");
+  await expect(titles.first()).toBeVisible({ timeout: 15_000 });
+  for (const title of await titles.allInnerTexts()) {
+    expect(title).not.toMatch(/[一-鿿][A-Za-z]|[A-Za-z][一-鿿]/);
+  }
+});
+
+test("searching an effect links to its table row", async ({ page }) => {
+  await page.goto(`/zh/search/?q=${encodeURIComponent("致命鋒刃")}`);
+  await expect(page.locator('.pagefind-ui__results a[href*="#critical-edge"]').first()).toBeVisible({ timeout: 15_000 });
+});
+
 test("all internal links and images resolve", async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium", "crawl once");
   test.setTimeout(300_000);

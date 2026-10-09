@@ -22,9 +22,9 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
 ---
 <Base lang={lang} title={set.name[lang]}>
   <article class="armor-set" data-pagefind-body>
-    <LangText as="h1" lang={lang} value={set.name} />
+    <LangText as="h1" lang={lang} value={set.name} searchTitle />
     <p class="tags">
-      <span class="tag">{CATEGORY_LABEL.armor[lang]}</span>
+      <span class="tag">{CATEGORY_LABEL.armor[lang]}</span>{" "}
       <span class="tag">{t(lang, set.variant)}</span>
     </p>
     <ul class="set-pieces">
@@ -33,7 +33,7 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
           <a href={entryHref(lang, entry)}>
             <EntryIcon icon={entry.icon} alt={entry.name[lang]} />
             <span>
-              <span class="piece-label">{PIECE_LABEL[piece][lang]}</span>
+              <span class="piece-label">{PIECE_LABEL[piece][lang]}</span>{" "}
               <LangText lang={lang} value={entry.name} />
             </span>
           </a>
