@@ -79,6 +79,7 @@ export const ICON_SOURCES: Readonly<Partial<Record<Category, IconSource>>> = {
 export const FRAME_SOURCES = {
   slot: "Assets/UI/Icons/Enchantments/T_UI_Slot_Background.png",
   enchantment: "Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png",
+  artifact: "Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png",
 } as const;
 export type FrameName = keyof typeof FRAME_SOURCES;
 

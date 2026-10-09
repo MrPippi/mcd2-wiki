@@ -114,6 +114,30 @@ test("icons sit inside the game's slot frames", async ({ page, request }) => {
   }
 });
 
+test("item slot icons use the game's inner fill, inner frame line and placement", async ({ page }) => {
+  await page.goto("/zh/melee/sword/");
+  const icon = page.locator(".entry-head .icon-frame.frame-slot img");
+  const style = await icon.evaluate((el) => {
+    const s = getComputedStyle(el);
+    return { fill: s.backgroundColor, line: s.outlineColor, shadow: s.backgroundImage };
+  });
+  expect(style.fill).toBe("rgb(15, 15, 15)");
+  expect(style.line).toBe("rgb(53, 53, 53)");
+  expect(style.shadow).toContain("linear-gradient");
+  const frame = await page.locator(".entry-head .icon-frame").boundingBox();
+  const box = await icon.boundingBox();
+  if (!frame || !box) throw new Error("icon or frame not rendered");
+  // The slot art's dark interior spans x 24–232 and y 19–225 of 256px.
+  expect((box.x - frame.x) / frame.width).toBeCloseTo(24 / 256, 1);
+  expect(box.width / frame.width).toBeCloseTo(208 / 256, 1);
+});
+
+test("artifacts sit in the hotbar artifact slot", async ({ page }) => {
+  await page.goto("/zh/artifact/");
+  await page.locator(".entry-card a").first().click();
+  await expect(page.locator(".entry-head .icon-frame.frame-artifact img")).toBeVisible();
+});
+
 test("enchantment icons fill the diamond window of the book frame", async ({ page }) => {
   await page.goto("/zh/enchantment/arcane/");
   const frame = await page.locator(".entry-head .icon-frame").boundingBox();

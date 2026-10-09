@@ -114,7 +114,8 @@ describe("runExtract", () => {
     expect(await readFile(path.join(outRoot, "public", "icons", "frames", "slot.png"), "utf8")).toBe("png:slot-frame");
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("- Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png");
-    expect(report).toContain("### missing-frame (1)");
+    expect(report).toContain("- Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png");
+    expect(report).toContain("### missing-frame (2)");
   });
 
   it("produces identical output on a second run", async () => {
