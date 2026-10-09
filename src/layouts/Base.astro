@@ -1,5 +1,10 @@
 ---
-import "../styles/global.css";
+import "@fontsource/silkscreen/400.css";
+import "@fontsource/silkscreen/700.css";
+import "../styles/tokens.css";
+import "../styles/base.css";
+import "../styles/frames.css";
+import "../styles/legacy.css";
 import { CATEGORY_LABEL, HTML_LANG, NAV_GROUPS, otherLang, t, type Lang } from "../lib/i18n";
 import { categoryIcon } from "../lib/ui-icons";
 import { href, swapLangPath } from "../lib/url";
@@ -47,7 +52,7 @@ const categories = NAV_GROUPS.flatMap((group) => group.categories);
         <button type="button" class="compare-toggle" aria-pressed="true" data-testid="compare-toggle">
           {t(lang, "compare")}
         </button>
-        <a class="lang-switch" href={switchHref} hreflang={HTML_LANG[alt]} data-testid="lang-switch">
+        <a class="lang-switch button" href={switchHref} hreflang={HTML_LANG[alt]} data-testid="lang-switch">
           {t(lang, "switchLang")}
         </a>
       </div>

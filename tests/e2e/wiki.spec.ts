@@ -246,3 +246,20 @@ test("all internal links and images resolve", async ({ request }, testInfo) => {
   }
   expect(broken).toEqual([]);
 });
+
+test("the game palette and self-hosted fonts are in use", async ({ page, request }) => {
+  await page.goto("/zh/");
+  const background = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  expect(background).toBe("rgb(11, 26, 32)");
+  const fonts = await page.evaluate(async () => {
+    await document.fonts.ready;
+    // check() is also true for families the page never declared, so require a loaded face as well.
+    const loaded = (family: string) => [...document.fonts].some((face) => face.family.replace(/"/g, "") === family && face.status === "loaded");
+    return {
+      pixel: document.fonts.check("16px Cubic11", "劍") && loaded("Cubic11"),
+      label: document.fonts.check("16px Silkscreen", "A") && loaded("Silkscreen"),
+    };
+  });
+  expect(fonts).toEqual({ pixel: true, label: true });
+  expect((await request.get("/licenses/Cubic-11-OFL.txt")).status()).toBe(200);
+});

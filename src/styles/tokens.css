@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "Cubic11";
+  src: url("../assets/fonts/cubic-11/Cubic_11.woff2") format("woff2");
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --bg: #0b1a20;
+  --surface: #10222a;
+  --surface-2: #1c2b31;
+  --border: #2c3b42;
+  --text: #e8e2d8;
+  --muted: #8fa3aa;
+  --accent: #ff7e2f;
+  --link: #8fd6e0;
+  --danger: #e06666;
+  --radius: 0;
+  --max: 1180px;
+  --font-body: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+  --font-pixel: "Cubic11", var(--font-body);
+  --font-label: "Silkscreen", "Cubic11", monospace;
+}

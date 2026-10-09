@@ -1,0 +1,40 @@
+.entry-icon { object-fit: contain; }
+.icon-frame { position: relative; display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; background: var(--frame) center / 100% 100% no-repeat; }
+.icon-frame > .entry-icon { width: 78%; height: 78%; }
+/* Inventory slot, drawn after the in-game inventory. Layers from the edge inward (in --px, the slot's
+   own pixels at 103px): 1 black, 2 rarity border, 1 #353535 inner frame, 1 #0D0D0D, 1 inner glow. */
+.icon-frame.frame-inventory {
+  --slot-border: #897a6d; --slot-glow: #0d0d0d;
+  background: #161616;
+  box-shadow:
+    0 0 0 max(1px, var(--px)) #000,
+    inset 0 0 0 max(1px, calc(var(--px) * 2)) var(--slot-border),
+    inset 0 0 0 calc(var(--px) * 3) #353535,
+    inset 0 0 0 calc(var(--px) * 4) #0d0d0d,
+    inset 0 0 0 calc(var(--px) * 5) var(--slot-glow);
+}
+.icon-frame.frame-inventory.is-unique {
+  --slot-border: #ff7e2f; --slot-glow: #ab6f2e;
+  background: linear-gradient(135deg, #7d421e 0%, #2d2018 38%, #271b15 100%);
+}
+.icon-frame.frame-inventory > .entry-icon { width: 82%; height: 82%; object-fit: contain; image-rendering: pixelated; }
+/* Unique rarity mark: a small orange × of five pixel squares in the top-left corner. */
+.slot-mark {
+  --sq: max(1px, calc(var(--px) * 3));
+  position: absolute; left: calc(var(--px) * 9); top: calc(var(--px) * 9); z-index: 1;
+  width: var(--sq); height: var(--sq); background: #ff7e2f;
+  box-shadow:
+    calc(var(--sq) * 2) 0 0 #ff7e2f,
+    var(--sq) var(--sq) 0 #ff7e2f,
+    0 calc(var(--sq) * 2) 0 #ff7e2f,
+    calc(var(--sq) * 2) calc(var(--sq) * 2) 0 #ff7e2f;
+}
+/* Hotbar artifact slot (T_UI_ArtifactSlot_Default): interior spans x 34–186, y 22–174 of 220px. */
+.icon-frame.frame-artifact > .entry-icon { position: absolute; left: 15.5%; top: 10%; width: 69%; height: 69%; }
+.icon-frame.frame-artifact > img.entry-icon { box-sizing: border-box; padding: 6%; object-fit: contain; }
+/* The book slot art has a transparent diamond window (x 39–217, y 13–195 of 256px): the icon sits behind it and the frame is drawn on top. */
+.icon-frame.frame-enchantment { background: none; }
+.icon-frame.frame-enchantment::after { content: ""; position: absolute; inset: 0; background: var(--frame) center / 100% 100% no-repeat; image-rendering: pixelated; pointer-events: none; }
+.icon-frame.frame-enchantment > .entry-icon { position: absolute; left: 15.2%; top: 5%; width: 69.6%; height: 71.5%; image-rendering: pixelated; }
+.framed-placeholder { display: inline-flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1.5rem; }
+.placeholder-icon { display: inline-flex; align-items: center; justify-content: center; background: var(--surface-2); border-radius: var(--radius); color: var(--muted); font-size: 1.5rem; }
