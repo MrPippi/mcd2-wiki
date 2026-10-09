@@ -20,8 +20,9 @@ describe("i18n", () => {
     }
   });
 
-  it("puts every category in the navigation and every non-armor category in a page group", () => {
-    expect(NAV_GROUPS.flatMap((group) => group.categories).sort()).toEqual([...CATEGORIES].sort());
-    expect([...GRID_CATEGORIES, ...TABLE_CATEGORIES, "armor"].sort()).toEqual([...CATEGORIES].sort());
+  it("navigates to every category except enchantment books, which merge into enchantments", () => {
+    const shown = CATEGORIES.filter((category) => category !== "enchantment-book").sort();
+    expect(NAV_GROUPS.flatMap((group) => group.categories).sort()).toEqual(shown);
+    expect([...GRID_CATEGORIES, ...TABLE_CATEGORIES, "armor"].sort()).toEqual(shown);
   });
 });

@@ -21,6 +21,11 @@ describe("relatedLinks", () => {
     );
   });
 
+  it("does not link enchantments to separate book pages", () => {
+    const arcane = findEntry("enchantment", "arcane");
+    expect(relatedLinks("zh", arcane!).map((link) => link.labelKey)).not.toContain("enchantmentBook");
+  });
+
   it("drops links whose target does not exist", () => {
     const orphan = makeEntry("Ghost", "melee", { links: { variants: ["no-such-slug"], armorSet: "nope" } });
     expect(relatedLinks("zh", orphan)).toEqual([]);

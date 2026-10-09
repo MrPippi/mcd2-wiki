@@ -14,12 +14,10 @@ const toLink = (lang: Lang, labelKey: UiKey, target: Entry | undefined): Related
   target ? [{ labelKey, href: entryHref(lang, target), name: target.name }] : [];
 
 export function relatedLinks(lang: Lang, entry: Entry): RelatedLink[] {
-  const { variants = [], enchantmentBook, enchantment, armorSet } = entry.links;
+  const { variants = [], armorSet } = entry.links;
   const set = armorSet ? findArmorSet(armorSet) : undefined;
   return [
     ...variants.flatMap((slug) => toLink(lang, "relatedVariant", findEntry(entry.category, slug))),
-    ...toLink(lang, "enchantmentBook", enchantmentBook ? findEntry("enchantment-book", enchantmentBook) : undefined),
-    ...toLink(lang, "enchantment", enchantment ? findEntry("enchantment", enchantment) : undefined),
     ...(set ? [{ labelKey: "armorSet" as const, href: href(lang, "armor", set.slug), name: set.name }] : []),
   ];
 }

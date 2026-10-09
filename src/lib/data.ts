@@ -16,4 +16,9 @@ export const entriesIn = (category: Category): Entry[] =>
 export const findEntry = (category: Category, slug: string): Entry | undefined =>
   publishedEntries.find((entry) => entry.category === category && entry.slug === slug);
 
+export const booksFor = (enchantmentSlug: string): Entry[] =>
+  publishedEntries.filter(
+    (entry) => entry.category === "enchantment-book" && entry.links.enchantment === enchantmentSlug,
+  );
+
 export const findArmorSet = (slug: string): ArmorSet | undefined => allArmorSets.find((set) => set.slug === slug);

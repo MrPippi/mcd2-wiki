@@ -241,7 +241,7 @@ interface ArmorSet {
 |---|---|
 | `/` | 導向 `/zh/` |
 | `/[lang]/` | 首頁 |
-| `/[lang]/[category]/` | 分類列表（melee、ranged、artifact、enchantment、enchantment-book） |
+| `/[lang]/[category]/` | 分類列表（melee、ranged、artifact、enchantment）。附魔書不另建頁面，併入其對應的附魔頁（「附魔書」區塊列出書名，書的描述與附魔不同時一併顯示） |
 | `/[lang]/[category]/[slug]/` | 條目頁 |
 | `/[lang]/armor/` | 護甲套裝列表 |
 | `/[lang]/armor/[setSlug]/` | 護甲套裝頁（含四部位） |

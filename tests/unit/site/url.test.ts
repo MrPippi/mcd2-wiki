@@ -24,4 +24,9 @@ describe("url helpers", () => {
     expect(entryHref("zh", makeEntry("DiscipleBoots", "armor"))).toBe("/zh/armor/piece/disciple-boots/");
     expect(entryHref("en", makeEntry("CriticalEdge", "effect"))).toBe("/en/effect/#critical-edge");
   });
+
+  it("sends enchantment books to their enchantment page", () => {
+    const book = makeEntry("EnchantmentBook_SoulAspect", "enchantment-book", { links: { enchantment: "soul-fire-aspect" } });
+    expect(entryHref("zh", book)).toBe("/zh/enchantment/soul-fire-aspect/");
+  });
 });

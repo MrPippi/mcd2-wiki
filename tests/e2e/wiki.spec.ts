@@ -88,6 +88,22 @@ test("enchantment cards show icons", async ({ page }) => {
   await expect(page.locator(".entry-head img")).toBeVisible();
 });
 
+test("enchantment page explains it comes from an enchantment book", async ({ page }) => {
+  await page.goto("/zh/enchantment/arcane/");
+  await expect(page.getByTestId("book-source")).toContainText("附魔書");
+});
+
+test("enchantment page shows a book description that differs from the enchantment", async ({ page }) => {
+  await page.goto("/zh/enchantment/mauler-dive/");
+  await expect(page.getByTestId("book-source")).toContainText("跳躍攻擊會產生閃電與冰霜波動");
+});
+
+test("enchantment books no longer have their own section", async ({ page, request }) => {
+  await page.goto("/zh/");
+  await expect(page.locator(".site-nav a", { hasText: "附魔書" })).toHaveCount(0);
+  expect((await request.get("/zh/enchantment-book/")).status()).toBe(404);
+});
+
 test("effect table shows placeholder markers", async ({ page }) => {
   await page.goto("/zh/effect/");
   await expect(page.locator(".placeholder").first()).toHaveText("{數值}");

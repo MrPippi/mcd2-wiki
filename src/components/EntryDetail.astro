@@ -2,6 +2,7 @@
 import type { Entry } from "../../scripts/extract/schemas";
 import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../lib/i18n";
 import { relatedLinks } from "../lib/related";
+import BookSource from "./BookSource.astro";
 import EntryIcon from "./EntryIcon.astro";
 import LangText from "./LangText.astro";
 
@@ -28,6 +29,7 @@ const related = relatedLinks(lang, entry);
   </header>
   {entry.description && <LangText as="p" class="description" lang={lang} value={entry.description} html />}
   {entry.descriptionLong && <LangText as="p" class="description-long" lang={lang} value={entry.descriptionLong} html />}
+  {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
   {related.length > 0 && (
     <section class="related">
       <h2>{t(lang, "related")}</h2>

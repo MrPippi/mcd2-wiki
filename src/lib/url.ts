@@ -20,6 +20,7 @@ export function swapLangPath(pathname: string, base: string, target: Lang): stri
 
 export function entryHref(lang: Lang, entry: Entry): string {
   if (entry.category === "armor") return href(lang, "armor", "piece", entry.slug);
+  if (entry.category === "enchantment-book") return href(lang, "enchantment", entry.links.enchantment ?? entry.slug);
   if (TABLE_CATEGORIES.has(entry.category)) return `${href(lang, entry.category)}#${entry.slug}`;
   return href(lang, entry.category, entry.slug);
 }

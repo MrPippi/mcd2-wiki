@@ -22,8 +22,8 @@ const UI = {
     untranslated: "未翻譯",
     related: "相關條目",
     relatedVariant: "另一版本",
-    enchantmentBook: "對應附魔書",
-    enchantment: "對應附魔",
+    enchantmentBook: "附魔書",
+    obtainedFromBook: "附魔書可用來為物品附上特殊力量與能力。若要使用附魔書，你必須前往英雄港與附魔匠交談。附魔書可無限次使用。",
     armorSet: "所屬套裝",
     name: "名稱",
     description: "描述",
@@ -48,7 +48,7 @@ const UI = {
     related: "Related",
     relatedVariant: "Other variant",
     enchantmentBook: "Enchantment book",
-    enchantment: "Enchantment",
+    obtainedFromBook: "Enchantment books can be used to enchant your items with special powers and abilities. In order to use the enchantment books you will have to travel to Brave Haven and talk to the Enchantsmith. Enchantment books can be used unlimited times.",
     armorSet: "Armor set",
     name: "Name",
     description: "Description",
@@ -84,8 +84,9 @@ export const PIECE_LABEL: Readonly<Record<ArmorPiece, Readonly<Record<Lang, stri
 
 export const NAV_GROUPS: readonly { key: UiKey; categories: readonly Category[] }[] = [
   { key: "equipment", categories: ["melee", "ranged", "armor", "artifact"] },
-  { key: "enchanting", categories: ["enchantment", "enchantment-book", "effect", "status"] },
+  { key: "enchanting", categories: ["enchantment", "effect", "status"] },
 ];
 
-export const GRID_CATEGORIES = ["melee", "ranged", "artifact", "enchantment", "enchantment-book"] as const satisfies readonly Category[];
+// Enchantment books have no pages of their own: each one is shown on the enchantment it grants.
+export const GRID_CATEGORIES = ["melee", "ranged", "artifact", "enchantment"] as const satisfies readonly Category[];
 export const TABLE_CATEGORIES = ["effect", "status"] as const satisfies readonly Category[];

@@ -57,6 +57,9 @@ h1.lang-text .alt { font-size: 0.5em; }
 .entry-table tr:has(:target) { background: var(--surface-2); }
 .row-name { margin: 0; font-size: 1rem; }
 .row-head { display: flex; gap: 8px; align-items: center; }
+.book-source ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+.book-source .book { display: flex; gap: 10px; align-items: flex-start; }
+.book-source .book p { margin: 4px 0 0; }
 
 .entry-head { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0; }
