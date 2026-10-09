@@ -1,0 +1,24 @@
+import type { Category, FrameName } from "../../scripts/extract/config";
+import type { Frames } from "../../scripts/extract/schemas";
+import { extractedFrames } from "./data";
+
+const FRAME_FOR: Readonly<Partial<Record<Category, FrameName>>> = {
+  melee: "slot",
+  ranged: "slot",
+  armor: "slot",
+  artifact: "slot",
+  status: "slot",
+  enchantment: "enchantment",
+  "enchantment-book": "enchantment",
+};
+
+export interface IconFrame {
+  readonly name: FrameName;
+  readonly path: string;
+}
+
+export function frameFor(category: Category, available: Frames = extractedFrames): IconFrame | undefined {
+  const name = FRAME_FOR[category];
+  const path = name ? available[name] : undefined;
+  return name && path ? { name, path } : undefined;
+}

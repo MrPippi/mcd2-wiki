@@ -11,6 +11,7 @@ export type IssueType =
   | "missing-icon"
   | "ambiguous-icon"
   | "override-missing-file"
+  | "missing-frame"
   | "unlinked-enchantment"
   | "armor-set-name-fallback";
 

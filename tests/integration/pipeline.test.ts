@@ -55,6 +55,7 @@ beforeEach(async () => {
   });
   await put(sourceRoot, "Assets/UI/Icons/Enchantments/T_UI_Icon_Enchantment_Arcane.png", "png:arcane");
   await put(sourceRoot, "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Burning.png", "png:burning");
+  await put(sourceRoot, "Assets/UI/Icons/Enchantments/T_UI_Slot_Background.png", "png:slot-frame");
   await put(sourceRoot, "Localization/All/en/All.json", JSON.stringify(locales.en));
   await put(sourceRoot, "Localization/All/zh-Hant/All.json", JSON.stringify(locales.zh));
   await put(sourceRoot, `${ICON_ROOT}/Weapons/Sword/T_UI_Sword_Icon.png`, "png:sword");
@@ -105,6 +106,15 @@ describe("runExtract", () => {
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-icon (1)\n\n- armor:DiscipleChest");
     expect(summary).toMatchObject({ entries: 11, armorSets: 1, icons: 8 });
+  });
+
+  it("copies available icon frames and reports missing ones", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(await readJson<Record<string, string>>("src/data/frames.json")).toEqual({ slot: "icons/frames/slot.png" });
+    expect(await readFile(path.join(outRoot, "public", "icons", "frames", "slot.png"), "utf8")).toBe("png:slot-frame");
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).toContain("- Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png");
+    expect(report).toContain("### missing-frame (1)");
   });
 
   it("produces identical output on a second run", async () => {

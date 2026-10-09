@@ -14,7 +14,7 @@ const { lang, entry } = Astro.props;
 ---
 <li class="entry-card" data-variant={entry.variant} data-names={`${entry.name.zh} ${entry.name.en}`.toLowerCase()}>
   <a href={entryHref(lang, entry)}>
-    <EntryIcon icon={entry.icon} alt={entry.name[lang]} />
+    <EntryIcon icon={entry.icon} alt={entry.name[lang]} category={entry.category} />
     <LangText lang={lang} value={entry.name} class="card-name" />
   </a>
 </li>

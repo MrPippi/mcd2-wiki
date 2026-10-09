@@ -75,6 +75,13 @@ export const ICON_SOURCES: Readonly<Partial<Record<Category, IconSource>>> = {
   status: STATUS_ICONS,
 };
 
+/** Slot frames drawn behind icons on the site, copied to public/icons/frames/<name>.png. */
+export const FRAME_SOURCES = {
+  slot: "Assets/UI/Icons/Enchantments/T_UI_Slot_Background.png",
+  enchantment: "Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png",
+} as const;
+export type FrameName = keyof typeof FRAME_SOURCES;
+
 export const PATHS = {
   localeFile: (sourceRoot: string, culture: string): string =>
     path.join(sourceRoot, "Localization", "All", culture, "All.json"),

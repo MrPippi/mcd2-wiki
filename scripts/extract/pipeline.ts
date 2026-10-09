@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { assembleEntry, assertUniqueSlugs } from "./assemble";
+import { planFrames } from "./frames";
 import { ICON_SOURCES, TABLES, type IconSource } from "./config";
 import { groupEntries, type RawEntry } from "./group-entries";
 import { listIconFiles, loadOverrides } from "./icon-files";
@@ -83,14 +84,16 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const copies = plans.flatMap((plan) =>
     plan.source ? [{ from: plan.source, to: path.join(options.outRoot, "public", ...webPathOf(plan.raw).split("/")) }] : [],
   );
-  await copyIcons(copies, path.join(options.outRoot, "public", "icons"));
+  const framePlan = planFrames(options.sourceRoot, options.outRoot);
+  await copyIcons([...copies, ...framePlan.copies], path.join(options.outRoot, "public", "icons"));
   const issues = [
     ...catalog.issues,
+    ...framePlan.issues,
     ...grouped.issues,
     ...plans.flatMap((plan) => plan.issues),
     ...assembled.flatMap((result) => result.issues),
     ...linked.issues,
   ];
-  await writeOutputs(options.outRoot, output, renderReport({ ...output, issues }));
+  await writeOutputs(options.outRoot, output, framePlan.frames, renderReport({ ...output, issues }));
   return { entries: output.entries.length, armorSets: output.armorSets.length, icons: copies.length, issues };
 }

@@ -84,6 +84,9 @@
   - 附魔與附魔書：`Assets/UI/Icons/Enchantments/`（`T_UI_Icon_Enchantment_<Id>.png`；附魔書沿用對應附魔的圖示）
   - 狀態：`Assets/UI/Icons/Statuses/`（`T_UI_Icon_Status_<Id>.png`）
   - 效果：無圖示
+- 圖示外框（複製到 `public/icons/frames/`，清單寫入 `src/data/frames.json`；缺檔時列入報告、網站改為無框）：
+  - `slot`：`Assets/UI/Icons/Enchantments/T_UI_Slot_Background.png`，用於裝備與狀態
+  - `enchantment`：`Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png`，用於附魔與附魔書
 - 附魔與狀態允許「退回基底 Id」比對（`Burning_Infinite`→`Burning`、`FireAspect_II`→`FireAspect`）；裝備不退回，避免獨特版誤用一般版圖示。
 - 檔名與 Id 不一致，例：
   - `Sword_Unique1` ↔ `T_UI_Sword_Unique_Icon`

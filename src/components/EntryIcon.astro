@@ -1,16 +1,30 @@
 ---
+import type { Category } from "../../scripts/extract/config";
+import { frameFor } from "../lib/frames";
 import { assetUrl } from "../lib/url";
 
 interface Props {
   icon?: string;
   alt: string;
   size?: number;
+  /** Draws the game's slot frame for this category behind the icon. */
+  category?: Category;
 }
 
-const { icon, alt, size = 64 } = Astro.props;
+const { icon, alt, size = 64, category } = Astro.props;
+const frame = category ? frameFor(category) : undefined;
+const box = `width:${size}px;height:${size}px`;
 ---
-{icon ? (
+{frame ? (
+  <span class={`icon-frame frame-${frame.name}`} style={`${box};--frame:url("${assetUrl(frame.path)}")`}>
+    {icon ? (
+      <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+    ) : (
+      <span class="entry-icon framed-placeholder" role="img" aria-label={alt}>?</span>
+    )}
+  </span>
+) : icon ? (
   <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
 ) : (
-  <span class="entry-icon placeholder-icon" style={`width:${size}px;height:${size}px`} role="img" aria-label={alt}>?</span>
+  <span class="entry-icon placeholder-icon" style={box} role="img" aria-label={alt}>?</span>
 )}

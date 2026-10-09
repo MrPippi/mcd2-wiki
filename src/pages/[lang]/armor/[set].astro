@@ -31,7 +31,7 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
       {pieces.map(({ piece, entry }) => (
         <li class="set-piece" data-testid="set-piece">
           <a href={entryHref(lang, entry)}>
-            <EntryIcon icon={entry.icon} alt={entry.name[lang]} />
+            <EntryIcon icon={entry.icon} alt={entry.name[lang]} category={entry.category} />
             <span>
               <span class="piece-label">{PIECE_LABEL[piece][lang]}</span>{" "}
               <LangText lang={lang} value={entry.name} />

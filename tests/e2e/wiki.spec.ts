@@ -104,6 +104,16 @@ test("enchantment books no longer have their own section", async ({ page, reques
   expect((await request.get("/zh/enchantment-book/")).status()).toBe(404);
 });
 
+test("icons sit inside the game's slot frames", async ({ page, request }) => {
+  await page.goto("/zh/melee/sword/");
+  await expect(page.locator(".entry-head .icon-frame.frame-slot img")).toBeVisible();
+  await page.goto("/zh/enchantment/arcane/");
+  await expect(page.locator(".entry-head .icon-frame.frame-enchantment img")).toBeVisible();
+  for (const frame of ["slot", "enchantment"]) {
+    expect((await request.get(`/icons/frames/${frame}.png`)).status()).toBe(200);
+  }
+});
+
 test("effect table shows placeholder markers", async ({ page }) => {
   await page.goto("/zh/effect/");
   await expect(page.locator(".placeholder").first()).toHaveText("{數值}");

@@ -20,7 +20,7 @@ const { lang, entries } = Astro.props;
       <tr data-variant={entry.variant} data-names={`${entry.name.zh} ${entry.name.en}`.toLowerCase()}>
         <th scope="row">
           <div class="row-head">
-            {entry.icon && <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={32} />}
+            {entry.icon && <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={40} category={entry.category} />}
             <LangText as="h3" id={entry.slug} class="row-name" lang={lang} value={entry.name} />
           </div>
         </th>

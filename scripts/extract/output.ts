@@ -3,7 +3,7 @@ import path from "node:path";
 import { z } from "zod";
 import { CATEGORIES, type Category } from "./config";
 import { ExtractError, formatZodIssue } from "./issues";
-import { ArmorSetSchema, EntrySchema, type ArmorSet, type Entry } from "./schemas";
+import { ArmorSetSchema, EntrySchema, type ArmorSet, type Entry, type Frames } from "./schemas";
 
 export interface IconCopy {
   readonly from: string;
@@ -37,11 +37,17 @@ export function validateOutput(entries: readonly Entry[], armorSets: readonly Ar
 
 const toJson = (value: unknown): string => `${JSON.stringify(value, null, 2)}\n`;
 
-export async function writeOutputs(outRoot: string, output: ExtractOutput, report: string): Promise<void> {
+export async function writeOutputs(
+  outRoot: string,
+  output: ExtractOutput,
+  frames: Frames,
+  report: string,
+): Promise<void> {
   const dataDir = path.join(outRoot, "src", "data");
   await mkdir(dataDir, { recursive: true });
   await writeFile(path.join(dataDir, "entries.json"), toJson(output.entries), "utf8");
   await writeFile(path.join(dataDir, "armor-sets.json"), toJson(output.armorSets), "utf8");
+  await writeFile(path.join(dataDir, "frames.json"), toJson(frames), "utf8");
   await writeFile(path.join(outRoot, "extract-report.md"), report, "utf8");
 }
 
