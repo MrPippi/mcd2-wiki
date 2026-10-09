@@ -1,0 +1,19 @@
+# 原始遊戲解包檔（版權素材，僅本機使用）
+source-data/
+
+# Dependencies / build
+node_modules/
+dist/
+.astro/
+
+# Reports / tooling
+extract-report.md
+coverage/
+playwright-report/
+test-results/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
