@@ -7459,7 +7459,6 @@
       "zh": "額外獲得生命藥水使用次數。",
       "en": "Grants additional uses of health potion."
     },
-    "icon": "icons/enchantment/multi-potion.png",
     "links": {
       "enchantmentBook": "multi-potion"
     }
@@ -8386,7 +8385,6 @@
       "zh": "額外獲得生命藥水使用次數。",
       "en": "Grants additional uses of health potion."
     },
-    "icon": "icons/enchantment-book/multi-potion.png",
     "links": {
       "enchantment": "multi-potion"
     }
