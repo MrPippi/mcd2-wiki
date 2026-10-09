@@ -20,13 +20,18 @@ describe("i18n", () => {
     }
   });
 
-  it("groups talismans with equipment and cosmetics on their own", () => {
+  it("groups talismans with equipment", () => {
     expect(NAV_GROUPS.find((group) => group.key === "equipment")?.categories).toContain("talisman");
-    expect(NAV_GROUPS.find((group) => group.key === "cosmetics")?.categories).toEqual(["cape", "pet", "skin"]);
   });
 
-  it("navigates to every category except enchantment books, which merge into enchantments", () => {
-    const shown = CATEGORIES.filter((category) => category !== "enchantment-book").sort();
+  it("does not publish statuses or cosmetics for now", () => {
+    const published = [...NAV_GROUPS.flatMap((group) => group.categories), ...GRID_CATEGORIES, ...TABLE_CATEGORIES];
+    for (const hidden of ["status", "cape", "pet", "skin"]) expect(published).not.toContain(hidden);
+  });
+
+  it("navigates to every published category; books merge into enchantments", () => {
+    const hidden = new Set(["enchantment-book", "status", "cape", "pet", "skin"]);
+    const shown = CATEGORIES.filter((category) => !hidden.has(category)).sort();
     expect(NAV_GROUPS.flatMap((group) => group.categories).sort()).toEqual(shown);
     expect([...GRID_CATEGORIES, ...TABLE_CATEGORIES, "armor"].sort()).toEqual(shown);
   });
