@@ -107,9 +107,7 @@ mcd2-wiki/
 │   └─ report.ts                # 產出 extract-report.md
 ├─ src/
 │   ├─ data/                    # 抽取結果（進 git）
-│   │   ├─ items.json
-│   │   ├─ enchantments.json
-│   │   ├─ effects.json
+│   │   ├─ entries.json         # 全部分類的條目
 │   │   └─ armor-sets.json
 │   ├─ i18n/                    # 介面文字 zh / en
 │   ├─ content/guides/          # 預留：手寫攻略 Markdown
@@ -158,8 +156,8 @@ interface Entry {
   name: Localized;            // 純文字
   description?: Localized;    // 已渲染的安全 HTML
   descriptionLong?: Localized;
-  effectTotal?: Localized;    // Description_EffectTotal(Adjusted)
-  icon?: string;              // "/icons/melee/sword-unique1.png"
+  icon?: string;              // "icons/melee/sword-unique1.png"（頁面再加 base）
+  armorPiece?: "helmet" | "chest" | "leggings" | "boots";
   untranslated?: Lang[];      // 缺翻譯而回退的語言
   links: {
     variants?: string[];      // 一般 / 獨特 互連 slug
@@ -184,9 +182,10 @@ interface ArmorSet {
 ### 4.3 規則
 - **variant**：Id 含 `_Unique` 或 `_Unique<n>` 為 `unique`，否則為 `normal`。
 - **基底 Id**：去除 `_Unique\d*` 後綴；同基底的 normal/unique 互連。
-- **slug**：Id 轉小寫，`_` 與大小寫邊界轉 `-`；`Artifact_` 前綴移除。全分類內唯一，衝突時建置失敗。
-- **護甲部位**：Id 中出現 `Helmet`／`Chest`／`Leggings`／`Boots` 決定部位，其餘部分為套裝名。
-- **附魔 ↔ 附魔書**：以英文名稱正規化比對（去除 "Book"、"Tome" 等字樣後相等）。比對不到不連結，列入報告。
+- **slug**：Id 轉小寫，`_` 與大小寫邊界轉 `-`；`Artifact_`、`EnchantmentBook_` 前綴移除。**同一分類內**唯一（網址含分類），衝突時建置失敗。
+- **護甲部位**：Id 中出現 `Helmet`／`Chest`／`Leggings`／`Boots` 決定部位，其餘部分為套裝 Id。
+- **附魔 ↔ 附魔書**：先以 Id 比對（附魔書 Id 去掉 `EnchantmentBook_` 等於附魔 Id），再以正規化英文名稱比對。比對不到不連結，列入報告。
+- **連結只指向 base 條目**；upcoming 條目不建立任何連結。
 
 ## 5. 抽取管線細節
 
@@ -196,16 +195,18 @@ interface ArmorSet {
 
 ### 5.2 group-entries
 - 只處理 §2.3 列出的 namespace。
-- 以 regex `^SW_(Item|Enchantment|Effect|Status)_(.+)_SW_TextEntry_(.+)$` 拆解 key；不符者列入報告並略過。
+- 以 regex `^SW_(Item|Enchantment|Effect|Status)_(.+?)_SW_TextEntry_(.+)$`（不分大小寫，實際資料有 `Sw_Effect_…`）拆解 key；不符者（如無 Id 的 `SW_Enchantment_SW_TextEntry_Name_Tiered`）列入報告並略過。
+- 只使用 `Name`、`Description`、`Description_Long` 欄位。`Description_EffectTotal(Adjusted)`、`Name_Tiered` 在實際資料中只有佔位符，捨棄（報告只計數）。
+- 整段只有佔位符（如 `{0}`）的描述欄位捨棄。
 - 同 Id 的欄位合併為單一條目。
 - 缺 `Name` 的條目：列入報告並略過。
 
 ### 5.3 match-icons
 - 先查 `icon-overrides.json`（`{ "<Id>": "<相對於 source-data 的路徑>" | null }`，`null` 表示明確無圖示）。
-- 否則以 token 集合比對：
-  - 圖示檔名去除 `T_UI_` 與 `_Icon`，Id 去除 `Artifact_`；
-  - 依 `_` 與大小寫邊界拆成 token，轉小寫，`Unique\d*` 正規化為 `unique`；
-  - token 集合相等即配對。
+- 否則自動比對（候選為圖示根目錄下所有 `T_UI_*.png`，不要求 `_Icon` 尾碼）：
+  - 依 `_` 與小寫→大寫邊界拆詞並轉小寫；丟掉 `t`、`ui`、`icon`、`png`；`chestplate→chest`、`gauntlets→gauntlet`；`unique\d*→unique`；Id 去除 `Artifact_`；
+  - 圖示以「詞的所有排列串接」建索引，Id 以「詞依序串接」查詢，相等即配對（可處理詞序差異與 `Moonsword`／`MoonSword` 這類拆詞差異）。
+- 已知無法自動配對的 7 個神器預先寫入 `icon-overrides.json`。
 - 多於一個候選：視為未配對並列入報告。
 - 未配對：`icon` 留空，列入報告。
 
@@ -240,8 +241,8 @@ interface ArmorSet {
 | `/[lang]/armor/` | 護甲套裝列表 |
 | `/[lang]/armor/[setSlug]/` | 護甲套裝頁（含四部位） |
 | `/[lang]/armor/piece/[slug]/` | 護甲單件頁 |
-| `/[lang]/effect/`、`/[lang]/status/` | 效果／狀態表格頁（不另建單頁） |
-| `/[lang]/search/` | 搜尋頁 |
+| `/[lang]/effect/`、`/[lang]/status/` | 效果／狀態表格頁（不另建單頁；每列以 `#slug` 錨點連結） |
+| `/[lang]/search/` | 搜尋頁（支援 `?q=` 預填） |
 
 `lang` ∈ `zh`、`en`。只為 `release: "base"` 條目建頁。
 
@@ -257,7 +258,7 @@ interface ArmorSet {
 
 ### 6.4 條目頁
 - 圖示（無則顯示佔位圖）、中英名稱、分類標籤、variant 標籤。
-- 描述、長描述、effectTotal。
+- 描述、長描述。
 - 相關連結：另一 variant、附魔書／附魔、所屬護甲套裝。
 - 未翻譯欄位顯示「未翻譯」標記。
 
@@ -324,5 +325,5 @@ interface ArmorSet {
 ## 11. 風險與待定事項
 - **圖示配對率**：自動比對可能仍有缺漏 → 以 `icon-overrides.json` 逐步補齊；原型接受部分缺圖。
 - **R3／R4 判斷**：「未上線」為推測。若確認已上線，改 config 即可產生頁面。
-- **護甲套裝名稱**：語系檔無獨立套裝名稱，以部位名稱推導（例如去除「頭盔」等字樣）；推導失敗時退回顯示套裝 Id。
+- **護甲套裝名稱**：語系檔無獨立套裝名稱，取各部位名稱的最長共同前綴（en 退到詞邊界、zh 去掉結尾「之」，例：「修行者」／Disciple、「賢者」／Sage）；少於 2 個部位或結果太短時退回套裝 Id 並列入報告。
 - **版權**：使用解包素材，網站須維持非商業並保留聲明。
