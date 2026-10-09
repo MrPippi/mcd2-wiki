@@ -22,7 +22,7 @@ const shownTexts = new Set([enchantment.description?.[lang], enchantment.descrip
     <ul>
       {books.map((book) => (
         <li class="book">
-          <EntryIcon icon={book.icon} alt={book.name[lang]} size={40} category={book.category} />
+          <EntryIcon icon={book.icon} alt={book.name[lang]} size={40} category={book.category} variant={book.variant} />
           <div>
             <LangText lang={lang} value={book.name} />
             {book.description && !shownTexts.has(book.description[lang]) && (

@@ -75,9 +75,11 @@ export const ICON_SOURCES: Readonly<Partial<Record<Category, IconSource>>> = {
   status: STATUS_ICONS,
 };
 
-/** Slot frames drawn behind icons on the site, copied to public/icons/frames/<name>.png. */
+/**
+ * Slot frame art drawn around icons on the site, copied to public/icons/frames/<name>.png.
+ * The inventory slot for gear is drawn in CSS instead: in game it is a flat shader-drawn slot.
+ */
 export const FRAME_SOURCES = {
-  slot: "Assets/UI/Icons/Enchantments/T_UI_Slot_Background.png",
   enchantment: "Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png",
   artifact: "Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png",
 } as const;

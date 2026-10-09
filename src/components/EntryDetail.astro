@@ -16,7 +16,7 @@ const related = relatedLinks(lang, entry);
 ---
 <article class="entry-detail" data-pagefind-body>
   <header class="entry-head">
-    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={128} category={entry.category} />
+    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={128} category={entry.category} variant={entry.variant} />
     <div>
       <LangText as="h1" lang={lang} value={entry.name} searchTitle />
       <p class="tags">

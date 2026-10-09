@@ -106,30 +106,29 @@ test("enchantment books no longer have their own section", async ({ page, reques
 
 test("icons sit inside the game's slot frames", async ({ page, request }) => {
   await page.goto("/zh/melee/sword/");
-  await expect(page.locator(".entry-head .icon-frame.frame-slot img")).toBeVisible();
+  await expect(page.locator(".entry-head .icon-frame.frame-inventory img")).toBeVisible();
   await page.goto("/zh/enchantment/arcane/");
   await expect(page.locator(".entry-head .icon-frame.frame-enchantment img")).toBeVisible();
-  for (const frame of ["slot", "enchantment"]) {
+  for (const frame of ["artifact", "enchantment"]) {
     expect((await request.get(`/icons/frames/${frame}.png`)).status()).toBe(200);
   }
 });
 
-test("item slot icons use the game's inner fill, inner frame line and placement", async ({ page }) => {
+const slotBorder = (el: Element) => getComputedStyle(el).getPropertyValue("--slot-border").trim().toLowerCase();
+
+test("normal gear uses the plain inventory slot", async ({ page }) => {
   await page.goto("/zh/melee/sword/");
-  const icon = page.locator(".entry-head .icon-frame.frame-slot img");
-  const style = await icon.evaluate((el) => {
-    const s = getComputedStyle(el);
-    return { fill: s.backgroundColor, line: s.outlineColor, shadow: s.backgroundImage };
-  });
-  expect(style.fill).toBe("rgb(15, 15, 15)");
-  expect(style.line).toBe("rgb(53, 53, 53)");
-  expect(style.shadow).toContain("linear-gradient");
-  const frame = await page.locator(".entry-head .icon-frame").boundingBox();
-  const box = await icon.boundingBox();
-  if (!frame || !box) throw new Error("icon or frame not rendered");
-  // The slot art's dark interior spans x 24–232 and y 19–225 of 256px.
-  expect((box.x - frame.x) / frame.width).toBeCloseTo(24 / 256, 1);
-  expect(box.width / frame.width).toBeCloseTo(208 / 256, 1);
+  const slot = page.locator(".entry-head .icon-frame.frame-inventory");
+  expect(await slot.evaluate(slotBorder)).toBe("#897a6d");
+  await expect(slot.locator(".slot-star")).toHaveCount(0);
+});
+
+test("unique gear uses the orange slot with the star badge", async ({ page }) => {
+  await page.goto("/zh/melee/sword-unique1/");
+  const slot = page.locator(".entry-head .icon-frame.frame-inventory.is-unique");
+  expect(await slot.evaluate(slotBorder)).toBe("#ff7e2f");
+  await expect(slot.locator(".slot-star")).toBeVisible();
+  await expect(slot.locator(".slot-steps")).toHaveCount(1);
 });
 
 test("artifacts sit in the hotbar artifact slot", async ({ page }) => {

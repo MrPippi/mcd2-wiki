@@ -85,9 +85,8 @@
   - 狀態：`Assets/UI/Icons/Statuses/`（`T_UI_Icon_Status_<Id>.png`）
   - 效果：無圖示
 - 圖示外框（複製到 `public/icons/frames/`，清單寫入 `src/data/frames.json`；缺檔時列入報告、網站改為無框）：
-  - `slot`：`Assets/UI/Icons/Enchantments/T_UI_Slot_Background.png`，用於武器、護甲與狀態。圖示放在內框（256px 中的 x 24–232、y 19–225），並依 `M_SlotFrame` 參數加上內底色 `#0F0F0F`、內框線 `#353535` 與 50% 黑色漸層陰影
-  - `artifact`：`Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png`（快捷列神器欄），用於神器；缺檔時退回 `slot`
-  - 稀有度（獨特）外框由遊戲著色器以色相偏移即時產生，解包資產中沒有對應貼圖或色值，獨特裝備沿用 CSS 邊框色
+  - `artifact`：`Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png`（快捷列神器欄），用於神器；缺檔時退回物品欄格
+  - **物品欄格**（武器、護甲、狀態）：遊戲中由 `M_SlotFrame` 著色器繪製、沒有對應貼圖，網站以 CSS 重現，色值取自遊戲物品欄截圖：由外而內 1px 黑邊、2px 稀有度框（一般 `#897A6D`、獨特 `#FF7E2F`）、1px `#353535`、1px `#0D0D0D`、1px 內光（獨特 `#AB6F2E`）；底色一般 `#161616`，獨特為左上橘色漸層至 `#271B15`，並加上左上角金色星章（`#FFC103`／`#E58201`）與橘色階梯方塊。「稀有（藍框）」是掉落時的稀有度而非物品屬性，網站不呈現
   - `enchantment`：`Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png`，用於附魔與附魔書
 - 附魔與狀態允許「退回基底 Id」比對（`Burning_Infinite`→`Burning`、`FireAspect_II`→`FireAspect`）；裝備不退回，避免獨特版誤用一般版圖示。
 - 檔名與 Id 不一致，例：

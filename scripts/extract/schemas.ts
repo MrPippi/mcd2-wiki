@@ -49,7 +49,6 @@ export const ArmorSetSchema = z.object({
 export type ArmorSet = z.infer<typeof ArmorSetSchema>;
 
 export const FramesSchema = z.object({
-  slot: z.string().optional(),
   enchantment: z.string().optional(),
   artifact: z.string().optional(),
 });

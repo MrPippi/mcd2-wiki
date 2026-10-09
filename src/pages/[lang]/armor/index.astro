@@ -26,7 +26,7 @@ const cards = allArmorSets.map((set) => {
     {cards.map(({ set, icon }) => (
       <li class="entry-card" data-variant={set.variant} data-names={`${set.name.zh} ${set.name.en}`.toLowerCase()}>
         <a href={href(lang, "armor", set.slug)}>
-          <EntryIcon icon={icon} alt={set.name[lang]} category="armor" />
+          <EntryIcon icon={icon} alt={set.name[lang]} category="armor" variant={set.variant} />
           <LangText lang={lang} value={set.name} class="card-name" />
         </a>
       </li>
