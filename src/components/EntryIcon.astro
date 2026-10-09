@@ -12,12 +12,14 @@ interface Props {
   category?: Category;
   /** Unique gear gets the orange inventory slot with the corner rarity mark. */
   variant?: Entry["variant"];
+  /** Above-the-fold icons load eagerly. */
+  loading?: "lazy" | "eager";
 }
 
 // The in-game inventory slot is about 103px wide; its borders are measured in those pixels.
 const INVENTORY_SLOT_PX = 103;
 
-const { icon, alt, size = 64, category, variant = "normal" } = Astro.props;
+const { icon, alt, size = 64, category, variant = "normal", loading = "lazy" } = Astro.props;
 const frame = category ? frameFor(category) : undefined;
 const box = `width:${size}px;height:${size}px`;
 const unique = frame?.name === "inventory" && variant === "unique";
@@ -28,14 +30,14 @@ const frameStyle = frame?.path
 {frame ? (
   <span class:list={["icon-frame", `frame-${frame.name}`, { "is-unique": unique }]} style={frameStyle}>
     {icon ? (
-      <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+      <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading={loading} decoding="async" />
     ) : (
       <span class="entry-icon framed-placeholder" role="img" aria-label={alt}>?</span>
     )}
     {unique && <span class="slot-mark" aria-hidden="true" />}
   </span>
 ) : icon ? (
-  <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading="lazy" decoding="async" />
+  <img class="entry-icon" src={assetUrl(icon)} alt={alt} width={size} height={size} loading={loading} decoding="async" />
 ) : (
   <span class="entry-icon placeholder-icon" style={box} role="img" aria-label={alt}>?</span>
 )}

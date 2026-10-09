@@ -418,3 +418,41 @@ test("a long details sheet scrolls while its view button stays on screen", async
   await sheet.locator(".sheet-view").click();
   await expect(page).toHaveURL(/\/zh\/melee\/sword\/$/);
 });
+
+test("entry pages show an info box with the key facts", async ({ page }) => {
+  await page.goto("/zh/armor/piece/disciple-helmet/");
+  await expect(page.locator(".entry-kicker")).toHaveText("ARMOR");
+  const box = page.getByTestId("info-box");
+  await expect(box.locator("dl.facts")).toContainText("護甲");
+  await expect(box.locator("dl.facts")).toContainText("頭盔");
+  await expect(box.locator("a[href='/zh/armor/disciple/']")).toBeVisible();
+  await expect(page.locator(".entry-head img.entry-icon")).toHaveAttribute("loading", "eager");
+});
+
+test("unique entries use the unique kicker and an orange title", async ({ page }) => {
+  await page.goto("/zh/melee/sword-unique1/");
+  await expect(page.locator(".entry-kicker")).toHaveText("UNIQUE MELEE WEAPON");
+  await expect(page.locator("h1.is-unique .primary")).toHaveText("燃燒之刃");
+  await expect(page.getByTestId("info-box").locator("dl.facts")).toContainText("獨特");
+});
+
+test("the info box sits beside the content on desktop", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "desktop layout");
+  await page.goto("/zh/melee/sword/");
+  const box = await page.getByTestId("info-box").boundingBox();
+  const title = await page.locator("h1").boundingBox();
+  if (!box || !title) throw new Error("layout not rendered");
+  expect(box.x + box.width).toBeLessThanOrEqual(title.x);
+});
+
+test("related entries show their slot icon", async ({ page }) => {
+  await page.goto("/zh/melee/sword/");
+  await expect(page.locator(".related a[href='/zh/melee/sword-unique1/'] img.entry-icon")).toBeVisible();
+});
+
+test("armor set pages use the same info box layout", async ({ page }) => {
+  await page.goto("/zh/armor/disciple/");
+  await expect(page.locator(".entry-kicker")).toHaveText("ARMOR SET");
+  await expect(page.getByTestId("info-box").locator(".set-preview img.entry-icon")).toHaveCount(4);
+  await expect(page.getByTestId("set-piece")).toHaveCount(4);
+});

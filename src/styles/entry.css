@@ -1,0 +1,33 @@
+.entry-kicker { margin-bottom: 8px; }
+.entry-layout { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
+.info-box { padding: 16px; }
+.info-box .entry-head { display: flex; justify-content: center; margin-bottom: 14px; }
+.facts { margin: 0; }
+.facts > div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--border); }
+.facts dt { color: var(--muted); font-size: 0.85rem; }
+.facts dd { margin: 0; text-align: right; font-family: var(--font-pixel); display: inline-flex; align-items: center; gap: 4px; }
+.facts dd a { display: inline-flex; align-items: center; gap: 4px; }
+.facts dd.is-unique { color: var(--accent); }
+.entry-content h1 { margin: 0 0 8px; font-size: clamp(1.6rem, 4vw, 2.4rem); }
+.entry-content h1.is-unique .primary { color: var(--accent); }
+.description { font-size: 1.05rem; }
+
+.related { list-style: none; padding: 0; display: grid; gap: 10px; }
+.related li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.related-label { color: var(--muted); font-size: 0.8rem; min-width: 5em; }
+.related a { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; }
+
+.set-preview { display: grid; grid-template-columns: repeat(2, 72px); gap: 10px; justify-content: center; margin-bottom: 14px; }
+.set-pieces { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.set-piece { background: var(--surface); border: 2px solid var(--border); padding: 12px; }
+.set-piece a { display: flex; gap: 10px; align-items: center; color: var(--text); text-decoration: none; }
+.piece-label { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font-size: 0.8rem; }
+
+.book-source ul { list-style: none; padding: 0; display: grid; gap: 8px; }
+.book-source .book { display: flex; gap: 10px; align-items: flex-start; }
+.book-source .book p { margin: 4px 0 0; }
+
+@media (min-width: 900px) {
+  .entry-layout { grid-template-columns: 260px 1fr; }
+  .info-box { position: sticky; top: 16px; }
+}
