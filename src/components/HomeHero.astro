@@ -1,0 +1,36 @@
+---
+import type { Category } from "../../scripts/extract/config";
+import { allArmorSets, entriesIn } from "../lib/data";
+import { CATEGORY_LABEL, t, type Lang } from "../lib/i18n";
+import { TAB_ORDER } from "../lib/tabs";
+import { categoryIcon } from "../lib/ui-icons";
+import { href } from "../lib/url";
+import UiIcon from "./UiIcon.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const countOf = (category: Category): number =>
+  category === "armor" ? allArmorSets.length : entriesIn(category).length;
+---
+<section class="home-hero">
+  <p class="kicker">UNOFFICIAL FAN WIKI</p>
+  <h1 class="home-title">{t(lang, "siteTitle")}</h1>
+  <form class="home-search" action={href(lang, "search")} method="get" role="search">
+    <input type="search" name="q" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
+    <button type="submit">{t(lang, "search")}</button>
+  </form>
+  <ul class="category-grid">
+    {TAB_ORDER.map((category) => (
+      <li>
+        <a href={href(lang, category)}>
+          <span class="category-slot"><UiIcon src={categoryIcon(category)} /></span>
+          <span class="category-name">{CATEGORY_LABEL[category][lang]}</span>
+          <span class="count">{countOf(category)}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>

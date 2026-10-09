@@ -311,3 +311,14 @@ test("the language switch keeps the search query and anchor", async ({ page }) =
   await page.goto("/zh/effect/#critical-edge");
   await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/effect/#critical-edge");
 });
+
+test("the home page is a title banner with a slot for every category", async ({ page }) => {
+  await page.goto("/zh/");
+  await expect(page.locator(".home-hero .kicker")).toHaveText("UNOFFICIAL FAN WIKI");
+  await expect(page.locator(".home-title")).toContainText("Minecraft Dungeons II");
+  await expect(page.locator(".category-grid li")).toHaveCount(7);
+  await expect(page.locator(".category-grid .category-slot img.ui-icon")).toHaveCount(7);
+  await page.locator(".home-search input").fill("劍");
+  await page.locator(".home-search button").click();
+  await expect(page).toHaveURL(/\/zh\/search\/\?q=/);
+});
