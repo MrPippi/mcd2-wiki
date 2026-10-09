@@ -7,7 +7,7 @@ export const HTML_LANG: Readonly<Record<Lang, string>> = { zh: "zh-TW", en: "en"
 
 export const otherLang = (lang: Lang): Lang => (lang === "zh" ? "en" : "zh");
 
-const UI = {
+export const UI_STRINGS = {
   zh: {
     siteTitle: "Minecraft Dungeons II 中文 Wiki",
     home: "首頁",
@@ -30,6 +30,21 @@ const UI = {
     equipment: "裝備",
     enchanting: "附魔與效果",
     unlock: "解鎖",
+    searchPlaceholder: "搜尋物品、附魔、效果…",
+    categories: "分類",
+    fontLicense: "字型授權",
+    viewEntry: "查看完整條目",
+    view: "查看",
+    close: "關閉",
+    itemDetails: "物品說明",
+    tooltipHint: "將游標移到物品上即可查看說明。",
+    category: "分類",
+    rarity: "稀有度",
+    armorPiece: "部位",
+    translation: "翻譯",
+    details: "詳細說明",
+    pieces: "部位數",
+    setPieces: "套裝部位",
     placeholderNote: "「{數值}」表示遊戲內會顯示實際數值，原始資料未提供。",
     disclaimer: "非官方粉絲網站，與 Mojang Studios／Microsoft 無關。遊戲文字與圖像版權歸原權利人所有。",
     source: "資料來源：Minecraft Dungeons II 遊戲語系檔（繁體中文／英文）。",
@@ -56,15 +71,30 @@ const UI = {
     equipment: "Equipment",
     enchanting: "Enchantments & Effects",
     unlock: "Unlock",
+    searchPlaceholder: "Search items, enchantments, effects…",
+    categories: "Categories",
+    fontLicense: "Font license",
+    viewEntry: "View full entry",
+    view: "View",
+    close: "Close",
+    itemDetails: "Item details",
+    tooltipHint: "Hover over an item to see its details.",
+    category: "Category",
+    rarity: "Rarity",
+    armorPiece: "Slot",
+    translation: "Translation",
+    details: "Details",
+    pieces: "Pieces",
+    setPieces: "Set pieces",
     placeholderNote: "\"{value}\" marks a number the game fills in; it is not in the source data.",
     disclaimer: "Unofficial fan site, not affiliated with Mojang Studios or Microsoft. Game text and images belong to their respective owners.",
     source: "Source: Minecraft Dungeons II localization files (Traditional Chinese / English).",
   },
 } as const satisfies Record<Lang, Record<string, string>>;
 
-export type UiKey = keyof (typeof UI)["zh"];
+export type UiKey = keyof (typeof UI_STRINGS)["zh"];
 
-export const t = (lang: Lang, key: UiKey): string => UI[lang][key];
+export const t = (lang: Lang, key: UiKey): string => UI_STRINGS[lang][key];
 
 export const CATEGORY_LABEL: Readonly<Record<Category, Readonly<Record<Lang, string>>>> = {
   melee: { zh: "近戰武器", en: "Melee Weapons" },

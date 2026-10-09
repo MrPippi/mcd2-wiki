@@ -35,4 +35,11 @@ describe("i18n", () => {
     expect(NAV_GROUPS.flatMap((group) => group.categories).sort()).toEqual(shown);
     expect([...GRID_CATEGORIES, ...TABLE_CATEGORIES, "armor"].sort()).toEqual(shown);
   });
+
+  it("defines every UI string in both languages", async () => {
+    const zh = Object.keys((await import("../../../src/lib/i18n")).UI_STRINGS.zh).sort();
+    const en = Object.keys((await import("../../../src/lib/i18n")).UI_STRINGS.en).sort();
+    expect(en).toEqual(zh);
+    for (const key of ["searchPlaceholder", "viewEntry", "tooltipHint", "rarity", "setPieces"]) expect(zh).toContain(key);
+  });
 });
