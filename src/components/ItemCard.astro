@@ -1,0 +1,32 @@
+---
+import type { Category } from "../../scripts/extract/config";
+import type { Entry, Localized } from "../../scripts/extract/schemas";
+import type { Lang } from "../lib/i18n";
+import EntryIcon from "./EntryIcon.astro";
+import TooltipPanel from "./TooltipPanel.astro";
+
+interface Props {
+  lang: Lang;
+  href: string;
+  name: Localized;
+  icon?: string;
+  category: Category;
+  variant: Entry["variant"];
+  kicker: string;
+  description?: Localized;
+}
+
+const { lang, href, name, icon, category, variant, kicker, description } = Astro.props;
+const unique = variant === "unique";
+---
+<li class="entry-card" data-variant={variant} data-names={`${name.zh} ${name.en}`.toLowerCase()}>
+  <a class="item-link" href={href}>
+    <EntryIcon icon={icon} alt={name[lang]} category={category} variant={variant} />
+    <span class:list={["primary", "item-name", { "is-unique": unique }]}>{name[lang]}</span>
+  </a>
+  <template class="item-tip">
+    <TooltipPanel lang={lang} kicker={kicker} name={name} description={description} href={href} unique={unique}>
+      <slot />
+    </TooltipPanel>
+  </template>
+</li>

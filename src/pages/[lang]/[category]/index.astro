@@ -1,13 +1,16 @@
 ---
 import { LANGS, type Category } from "../../../../scripts/extract/config";
-import EntryCard from "../../../components/EntryCard.astro";
 import EntryTable from "../../../components/EntryTable.astro";
+import ItemBrowser from "../../../components/ItemBrowser.astro";
+import ItemCard from "../../../components/ItemCard.astro";
 import ListFilter from "../../../components/ListFilter.astro";
-import Base from "../../../layouts/Base.astro";
 import UiIcon from "../../../components/UiIcon.astro";
+import Base from "../../../layouts/Base.astro";
 import { entriesIn } from "../../../lib/data";
-import { categoryIcon } from "../../../lib/ui-icons";
 import { CATEGORY_LABEL, GRID_CATEGORIES, TABLE_CATEGORIES, t, type Lang } from "../../../lib/i18n";
+import { itemKicker } from "../../../lib/kicker";
+import { categoryIcon } from "../../../lib/ui-icons";
+import { entryHref } from "../../../lib/url";
 
 export function getStaticPaths() {
   return LANGS.flatMap((lang) =>
@@ -30,8 +33,19 @@ const hasUnique = entries.some((entry) => entry.variant === "unique");
       <EntryTable lang={lang} entries={entries} />
     </>
   ) : (
-    <ul class="entry-grid">
-      {entries.map((entry) => <EntryCard lang={lang} entry={entry} />)}
-    </ul>
+    <ItemBrowser lang={lang}>
+      {entries.map((entry) => (
+        <ItemCard
+          lang={lang}
+          href={entryHref(lang, entry)}
+          name={entry.name}
+          icon={entry.icon}
+          category={entry.category}
+          variant={entry.variant}
+          kicker={itemKicker(entry.category, entry.variant)}
+          description={entry.description}
+        />
+      ))}
+    </ItemBrowser>
   )}
 </Base>

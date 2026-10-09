@@ -1,0 +1,48 @@
+.list-filter { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+.filter-text { flex: 1 1 220px; }
+.filter-variant { display: flex; gap: 6px; }
+.filter-variant button { display: inline-flex; align-items: center; gap: 4px; }
+
+.item-browser { display: grid; grid-template-columns: 1fr; gap: 16px; align-items: start; }
+.item-grid {
+  list-style: none; margin: 0; padding: 0; display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 14px 10px;
+}
+.item-grid .entry-card a {
+  display: flex; flex-direction: column; align-items: center; gap: 6px; height: auto;
+  padding: 0; background: none; border: 0; color: var(--text); text-decoration: none; text-align: center;
+}
+.item-grid .entry-card.is-active .icon-frame,
+.item-grid .entry-card a:hover .icon-frame,
+.item-grid .entry-card a:focus-visible .icon-frame { outline: 2px solid #fff; outline-offset: 2px; }
+.item-name { font-family: var(--font-pixel); font-size: 0.85rem; line-height: 1.25; }
+.item-name.is-unique, .tooltip-name.is-unique .primary { color: var(--accent); }
+
+.item-tooltip { padding: 12px 14px; min-height: 160px; }
+.tooltip-hint { color: var(--muted); margin: 0; }
+.tooltip-name { font-family: var(--font-pixel); font-size: 1.3rem; margin: 2px 0 6px; }
+.tooltip-desc { margin: 0 0 8px; }
+.tooltip-link { font-size: 0.85rem; }
+.tooltip-pieces { list-style: none; padding: 0; margin: 0 0 8px; }
+
+/* The body scrolls inside the sheet so the view button below it always stays on screen. */
+.item-sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; max-height: 60vh;
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 14px 16px 18px; border-top: 3px solid var(--accent); box-shadow: 0 -8px 24px rgb(0 0 0 / 60%);
+}
+.sheet-body { flex: 1 1 auto; min-height: 0; overflow: auto; align-self: stretch; padding-right: 32px; }
+.item-sheet .tooltip-link { display: none; }
+.sheet-close { position: absolute; top: 8px; right: 8px; }
+.sheet-view {
+  flex-shrink: 0; margin-top: 8px; background: var(--accent); color: #1a0e05;
+  border-color: #000; font-family: var(--font-label);
+}
+
+@media (min-width: 900px) {
+  .item-browser { grid-template-columns: 1fr 300px; }
+  .item-tooltip { position: sticky; top: 16px; }
+}
+@media (max-width: 899px) {
+  .item-tooltip { display: none; }
+}

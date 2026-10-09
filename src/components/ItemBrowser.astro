@@ -1,0 +1,76 @@
+---
+import { t, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+<div class="item-browser">
+  <ul class="entry-grid item-grid"><slot /></ul>
+  <aside class="item-tooltip panel" data-testid="item-tooltip" aria-live="polite">
+    <p class="tooltip-hint">{t(lang, "tooltipHint")}</p>
+  </aside>
+</div>
+<div class="item-sheet panel" data-testid="item-sheet" role="dialog" aria-label={t(lang, "itemDetails")} hidden>
+  <button type="button" class="sheet-close" aria-label={t(lang, "close")}>×</button>
+  <div class="sheet-body"></div>
+  <a class="sheet-view button" href="#">{t(lang, "view")} ›</a>
+</div>
+<script>
+  const browser = document.querySelector<HTMLElement>(".item-browser");
+  const tooltip = browser?.querySelector<HTMLElement>(".item-tooltip");
+  const sheet = document.querySelector<HTMLElement>(".item-sheet");
+  const sheetBody = sheet?.querySelector<HTMLElement>(".sheet-body");
+  const sheetView = sheet?.querySelector<HTMLAnchorElement>(".sheet-view");
+  const cards = [...(browser?.querySelectorAll<HTMLElement>(".entry-card") ?? [])];
+  const canHover = window.matchMedia("(hover: hover)").matches;
+  let openCard: HTMLElement | null = null;
+
+  const contentOf = (card: HTMLElement): DocumentFragment | null => {
+    const template = card.querySelector<HTMLTemplateElement>("template.item-tip");
+    return template ? (template.content.cloneNode(true) as DocumentFragment) : null;
+  };
+
+  const showTooltip = (card: HTMLElement) => {
+    const content = contentOf(card);
+    if (!tooltip || !content) return;
+    tooltip.replaceChildren(content);
+    for (const other of cards) other.classList.toggle("is-active", other === card);
+  };
+
+  const closeSheet = () => {
+    if (sheet) sheet.hidden = true;
+    openCard = null;
+  };
+
+  const openSheet = (card: HTMLElement, href: string) => {
+    const content = contentOf(card);
+    if (!sheet || !sheetBody || !sheetView || !content) return;
+    sheetBody.replaceChildren(content);
+    sheetView.href = href;
+    sheet.hidden = false;
+    openCard = card;
+  };
+
+  for (const card of cards) {
+    const link = card.querySelector<HTMLAnchorElement>("a.item-link");
+    if (!link) continue;
+    if (canHover) {
+      card.addEventListener("mouseenter", () => showTooltip(card));
+      card.addEventListener("focusin", () => showTooltip(card));
+      continue;
+    }
+    link.addEventListener("click", (event) => {
+      if (openCard === card) return;
+      event.preventDefault();
+      openSheet(card, link.href);
+    });
+  }
+
+  sheet?.querySelector(".sheet-close")?.addEventListener("click", closeSheet);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") closeSheet();
+  });
+</script>
