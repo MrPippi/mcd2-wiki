@@ -2,13 +2,12 @@
 import type { Category } from "../../scripts/extract/config";
 import { catalogLabel, categoryCount, entryNumber } from "../lib/catalog";
 import { entriesIn, publishedEntries } from "../lib/data";
-import { frameFor } from "../lib/frames";
 import { CATEGORY_LABEL, HTML_LANG, otherLang, t, type Lang } from "../lib/i18n";
 import { itemKicker } from "../lib/kicker";
 import { pickShowcase } from "../lib/showcase";
 import { TAB_ORDER } from "../lib/tabs";
 import { categoryIcon } from "../lib/ui-icons";
-import { assetUrl, entryHref, href } from "../lib/url";
+import { entryHref, href } from "../lib/url";
 import EntryIcon from "./EntryIcon.astro";
 import LangText from "./LangText.astro";
 import UiIcon from "./UiIcon.astro";
@@ -31,11 +30,8 @@ const PREVIEW_SPRITES = 6;
 const [featured, ...others] = pickShowcase(publishedEntries, ["melee", "ranged", "armor", "talisman", "artifact", "enchantment"]);
 const sideSpecimens = others.slice(0, SIDE_SPECIMENS);
 const featuredNumber = featured ? entryNumber(featured) : undefined;
-// Enchantment art is a square painting meant for the book window; on its own it reads as a grey tile.
-const previewOf = (category: Category) =>
-  frameFor(category)?.name === "enchantment"
-    ? []
-    : entriesIn(category).filter((entry) => entry.icon !== undefined).slice(0, PREVIEW_SPRITES);
+const PREVIEW_SIZE = 32;
+const previewOf = (category: Category) => entriesIn(category).filter((entry) => entry.icon !== undefined).slice(0, PREVIEW_SPRITES);
 ---
 <section class="home-hero">
   <div class="hero-copy">
@@ -91,7 +87,7 @@ const previewOf = (category: Category) =>
           <span class="category-alt item-alt" lang={HTML_LANG[alt]}>{CATEGORY_LABEL[category][alt]}</span>
           <span class="category-preview" aria-hidden="true">
             {previewOf(category).map((entry) => (
-              <img src={assetUrl(entry.icon ?? "")} alt="" width="32" height="32" loading="lazy" decoding="async" />
+              <EntryIcon icon={entry.icon} alt="" size={PREVIEW_SIZE} category={entry.category} variant={entry.variant} />
             ))}
           </span>
           <span class="count">{categoryCount(category)}</span>
