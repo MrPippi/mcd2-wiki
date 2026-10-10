@@ -6,6 +6,7 @@
     "dev": "astro dev",
     "extract": "tsx scripts/extract/index.ts",
     "assets": "tsx scripts/assets/index.ts",
+    "tiles": "tsx scripts/map-tiles/index.ts",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview --port 4329",
     "test": "vitest run",

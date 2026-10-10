@@ -1,0 +1,251 @@
+{
+  "imageSize": 7168,
+  "zMax": 5,
+  "sources": [
+    {
+      "name": "Sift_00_00.png",
+      "size": 77275,
+      "mtimeMs": 1791562078137
+    },
+    {
+      "name": "Sift_00_01.png",
+      "size": 77275,
+      "mtimeMs": 1791562077972
+    },
+    {
+      "name": "Sift_00_02.png",
+      "size": 77275,
+      "mtimeMs": 1791562077970
+    },
+    {
+      "name": "Sift_00_03.png",
+      "size": 77275,
+      "mtimeMs": 1791562078066
+    },
+    {
+      "name": "Sift_00_04.png",
+      "size": 77275,
+      "mtimeMs": 1791562078128
+    },
+    {
+      "name": "Sift_00_05.png",
+      "size": 77275,
+      "mtimeMs": 1791562078093
+    },
+    {
+      "name": "Sift_00_06.png",
+      "size": 77275,
+      "mtimeMs": 1791562077934
+    },
+    {
+      "name": "Sift_01_00.png",
+      "size": 77275,
+      "mtimeMs": 1791562078199
+    },
+    {
+      "name": "Sift_01_01.png",
+      "size": 77275,
+      "mtimeMs": 1791562078055
+    },
+    {
+      "name": "Sift_01_02.png",
+      "size": 77275,
+      "mtimeMs": 1791562078085
+    },
+    {
+      "name": "Sift_01_03.png",
+      "size": 77275,
+      "mtimeMs": 1791562078051
+    },
+    {
+      "name": "Sift_01_04.png",
+      "size": 77275,
+      "mtimeMs": 1791562077965
+    },
+    {
+      "name": "Sift_01_05.png",
+      "size": 77275,
+      "mtimeMs": 1791562078061
+    },
+    {
+      "name": "Sift_01_06.png",
+      "size": 77275,
+      "mtimeMs": 1791562078006
+    },
+    {
+      "name": "Sift_02_00.png",
+      "size": 77275,
+      "mtimeMs": 1791562077985
+    },
+    {
+      "name": "Sift_02_01.png",
+      "size": 77275,
+      "mtimeMs": 1791562078082
+    },
+    {
+      "name": "Sift_02_02.png",
+      "size": 77275,
+      "mtimeMs": 1791562077931
+    },
+    {
+      "name": "Sift_02_03.png",
+      "size": 77275,
+      "mtimeMs": 1791562077993
+    },
+    {
+      "name": "Sift_02_04.png",
+      "size": 77275,
+      "mtimeMs": 1791562078074
+    },
+    {
+      "name": "Sift_02_05.png",
+      "size": 77275,
+      "mtimeMs": 1791562078083
+    },
+    {
+      "name": "Sift_02_06.png",
+      "size": 77275,
+      "mtimeMs": 1791562078077
+    },
+    {
+      "name": "Sift_03_00.png",
+      "size": 77275,
+      "mtimeMs": 1791562078154
+    },
+    {
+      "name": "Sift_03_01.png",
+      "size": 77275,
+      "mtimeMs": 1791562077931
+    },
+    {
+      "name": "Sift_03_02.png",
+      "size": 77275,
+      "mtimeMs": 1791562078197
+    },
+    {
+      "name": "Sift_03_03.png",
+      "size": 77275,
+      "mtimeMs": 1791562078043
+    },
+    {
+      "name": "Sift_03_04.png",
+      "size": 77275,
+      "mtimeMs": 1791562077995
+    },
+    {
+      "name": "Sift_03_05.png",
+      "size": 77275,
+      "mtimeMs": 1791562078157
+    },
+    {
+      "name": "Sift_03_06.png",
+      "size": 77275,
+      "mtimeMs": 1791562078098
+    },
+    {
+      "name": "Sift_04_00.png",
+      "size": 1032203,
+      "mtimeMs": 1791562078255
+    },
+    {
+      "name": "Sift_04_01.png",
+      "size": 457327,
+      "mtimeMs": 1791562078009
+    },
+    {
+      "name": "Sift_04_02.png",
+      "size": 151145,
+      "mtimeMs": 1791562078043
+    },
+    {
+      "name": "Sift_04_03.png",
+      "size": 378783,
+      "mtimeMs": 1791562078241
+    },
+    {
+      "name": "Sift_04_04.png",
+      "size": 476426,
+      "mtimeMs": 1791562078032
+    },
+    {
+      "name": "Sift_04_05.png",
+      "size": 715352,
+      "mtimeMs": 1791562078177
+    },
+    {
+      "name": "Sift_04_06.png",
+      "size": 801224,
+      "mtimeMs": 1791562078275
+    },
+    {
+      "name": "Sift_05_00.png",
+      "size": 1251595,
+      "mtimeMs": 1791562078207
+    },
+    {
+      "name": "Sift_05_01.png",
+      "size": 1347240,
+      "mtimeMs": 1791562078343
+    },
+    {
+      "name": "Sift_05_02.png",
+      "size": 1273754,
+      "mtimeMs": 1791562078298
+    },
+    {
+      "name": "Sift_05_03.png",
+      "size": 1487008,
+      "mtimeMs": 1791562078308
+    },
+    {
+      "name": "Sift_05_04.png",
+      "size": 1272681,
+      "mtimeMs": 1791562078329
+    },
+    {
+      "name": "Sift_05_05.png",
+      "size": 1180803,
+      "mtimeMs": 1791562078273
+    },
+    {
+      "name": "Sift_05_06.png",
+      "size": 1020413,
+      "mtimeMs": 1791562078182
+    },
+    {
+      "name": "Sift_06_00.png",
+      "size": 1219374,
+      "mtimeMs": 1791562078342
+    },
+    {
+      "name": "Sift_06_01.png",
+      "size": 770271,
+      "mtimeMs": 1791562078157
+    },
+    {
+      "name": "Sift_06_02.png",
+      "size": 402709,
+      "mtimeMs": 1791562077999
+    },
+    {
+      "name": "Sift_06_03.png",
+      "size": 474466,
+      "mtimeMs": 1791562078261
+    },
+    {
+      "name": "Sift_06_04.png",
+      "size": 1093757,
+      "mtimeMs": 1791562078319
+    },
+    {
+      "name": "Sift_06_05.png",
+      "size": 711853,
+      "mtimeMs": 1791562078260
+    },
+    {
+      "name": "Sift_06_06.png",
+      "size": 612253,
+      "mtimeMs": 1791562078066
+    }
+  ]
+}
