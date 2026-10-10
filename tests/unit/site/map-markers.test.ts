@@ -41,6 +41,14 @@ describe("searchMarkers", () => {
     expect(searchMarkers(istanbul, "君士坦丁堡", "ja")).toEqual([]);
   });
 
+  it("folds Turkish I so dotted, dotless and English names all match on a Turkish page", () => {
+    const iron = [marker("iron", "merchant", "鐵匠", "Iron Smith", undefined, { tr: "Işıltılı Demirci" })];
+    expect(searchMarkers(iron, "iron", "tr").map((m) => m.id)).toEqual(["iron"]);
+    expect(searchMarkers(iron, "IRON", "tr").map((m) => m.id)).toEqual(["iron"]);
+    expect(searchMarkers(iron, "Işıltılı", "tr").map((m) => m.id)).toEqual(["iron"]);
+    expect(searchMarkers(iron, "ışıltılı", "tr").map((m) => m.id)).toEqual(["iron"]);
+  });
+
   it("returns nothing for an empty query and respects the limit", () => {
     expect(searchMarkers(MARKERS, "   ", "zh")).toEqual([]);
     expect(searchMarkers(MARKERS, "a", "en", 2)).toHaveLength(2);

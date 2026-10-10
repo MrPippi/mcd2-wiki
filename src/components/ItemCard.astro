@@ -3,7 +3,7 @@ import type { Category } from "../../scripts/extract/config";
 import type { Entry, Localized } from "../../scripts/extract/schemas";
 import { catalogLabel } from "../lib/catalog";
 import type { Lang } from "../lib/i18n";
-import { compareLang, htmlLang, lowerFor } from "../lib/lang";
+import { compareLang, htmlLang, searchNames } from "../lib/lang";
 import EntryIcon from "./EntryIcon.astro";
 import TooltipPanel from "./TooltipPanel.astro";
 
@@ -24,7 +24,7 @@ const { lang, href, name, icon, category, variant, kicker, description, index = 
 const unique = variant === "unique";
 const alt = compareLang(lang);
 ---
-<li class="entry-card" style={`--i:${index}`} data-variant={variant} data-names={[lang, alt].map((l) => lowerFor(name[l], lang)).join(" ")}>
+<li class="entry-card" style={`--i:${index}`} data-variant={variant} data-names={searchNames(name, lang)}>
   <a class="item-link" href={href}>
     <span class="card-no" aria-hidden="true">{catalogLabel(index + 1)}</span>
     <span class="card-art"><EntryIcon icon={icon} alt={name[lang]} size={72} category={category} variant={variant} /></span>

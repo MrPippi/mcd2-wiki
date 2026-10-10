@@ -39,3 +39,20 @@ export const htmlLang = (lang: Lang): string => LANG_META[lang].htmlLang;
 
 /** Lowercases with the language's own casing rules (e.g. Turkish dotted I). */
 export const lowerFor = (text: string, lang: Lang): string => text.toLocaleLowerCase(htmlLang(lang));
+
+const COMBINING_DOT_ABOVE = new RegExp(String.fromCodePoint(0x0307), "g");
+const DOTLESS_I = new RegExp(String.fromCodePoint(0x0131), "g");
+
+/**
+ * Search key for text in the language whose html lang tag is `locale`: lowercased by that language's rules,
+ * then with Turkish dotted and dotless I folded to a plain "i" so İ/I/ı/i all meet. Dependency-free for browser scripts.
+ */
+export const foldForSearch = (text: string, locale: string): string =>
+  text.toLocaleLowerCase(locale).replace(COMBINING_DOT_ABOVE, "").replace(DOTLESS_I, "i");
+
+/** foldForSearch for a site language. Haystacks and queries must both go through this fold. */
+export const searchFold = (text: string, lang: Lang): string => foldForSearch(text, htmlLang(lang));
+
+/** The searchable names of an entry on a `lang` page: its own name and its comparison-language name, each folded by its own language. */
+export const searchNames = (name: Localized, lang: Lang): string =>
+  [lang, compareLang(lang)].map((l) => searchFold(name[l], l)).join(" ");

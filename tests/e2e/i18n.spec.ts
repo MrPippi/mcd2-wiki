@@ -142,3 +142,29 @@ test("alt text is uppercased only when the alt text itself is Latin script", asy
   await expect(page.locator("h1 .alt").first()).toHaveAttribute("lang", "zh-TW");
   expect(await transform("h1 .alt")).toBe("none");
 });
+
+const visibleNames = (page: Page) => page.locator(".entry-card:visible .item-name").allTextContents();
+
+test("the Turkish list filter matches dotted İ queries", async ({ page }) => {
+  await page.goto("/tr/melee/");
+  await page.locator(".filter-text").fill("İki");
+  await expect(page.locator(".entry-card:visible").first()).toBeVisible();
+  expect(await visibleNames(page)).toContain("İki Elli Kılıç");
+});
+
+test("the Turkish list filter matches dotless I queries and English compare names", async ({ page }) => {
+  await page.goto("/tr/talisman/");
+  await page.locator(".filter-text").fill("Işık");
+  await expect(page.locator(".entry-card:visible").first()).toBeVisible();
+  expect((await visibleNames(page)).some((name) => name.startsWith("Işık"))).toBe(true);
+  await page.locator(".filter-text").fill("iron");
+  await expect(page.locator(".entry-card:visible").first()).toBeVisible();
+  expect(await visibleNames(page)).toContain("Demir Yumruk");
+});
+
+test("the English site compares with Traditional Chinese", async ({ page }) => {
+  await page.goto("/en/melee/sword/");
+  await expect(page.locator("h1 .primary")).toHaveText("Sword");
+  await expect(page.locator("h1 .alt")).toHaveAttribute("lang", "zh-TW");
+  await expect(page.locator("h1 .alt")).toHaveText("劍");
+});

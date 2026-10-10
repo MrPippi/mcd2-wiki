@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ALL_LANGS, LANG_META } from "../../../scripts/extract/config";
-import { compareLang, lowerFor, mapLocalized, pick } from "../../../src/lib/lang";
+import { compareLang, foldForSearch, lowerFor, mapLocalized, pick, searchFold, searchNames } from "../../../src/lib/lang";
 import { loc } from "../../helpers/localized";
 
 describe("language registry", () => {
@@ -37,5 +37,34 @@ describe("language helpers", () => {
     expect(lowerFor("İSTANBUL", "tr")).toBe("istanbul");
     expect(lowerFor("I", "tr")).toBe("ı");
     expect(lowerFor("I", "en")).toBe("i");
+  });
+});
+
+describe("search folding", () => {
+  it("folds Turkish dotted and dotless I so a Turkish query meets Turkish names", () => {
+    const name = searchFold("İki Elli Kılıç", "tr");
+    expect(name.includes(searchFold("İki", "tr"))).toBe(true);
+    expect(name.includes(searchFold("iki", "tr"))).toBe(true);
+    expect(searchFold("Işıltılı Bıçak", "tr").includes(searchFold("Işıltılı", "tr"))).toBe(true);
+    expect(searchFold("Işıltılı Bıçak", "tr").includes(searchFold("ışıltılı", "tr"))).toBe(true);
+  });
+
+  it("finds an English compare name on a Turkish page", () => {
+    const haystack = searchNames(loc({ zh: "鐵拳", en: "Fist of Iron", tr: "Demir Yumruk" }), "tr");
+    expect(haystack.includes(searchFold("iron", "tr"))).toBe(true);
+    expect(haystack.includes(searchFold("IRON", "tr"))).toBe(true);
+    expect(haystack.includes(searchFold("demir", "tr"))).toBe(true);
+  });
+
+  it("lists the page language then its comparison language, each folded", () => {
+    expect(searchNames(loc({ zh: "劍", en: "Sword" }), "en")).toBe("sword 劍");
+    expect(searchNames(loc({ zh: "劍", en: "Sword", ru: "Меч" }), "ru")).toBe("меч sword");
+  });
+
+  it("folds by a locale tag for browser code that only knows the page's html lang", () => {
+    expect(foldForSearch("İki", "tr")).toBe("iki");
+    expect(foldForSearch("IŞIK", "tr")).toBe("işik");
+    expect(foldForSearch("İki", "en")).toBe("iki");
+    expect(foldForSearch("Straße", "de")).toBe("straße");
   });
 });

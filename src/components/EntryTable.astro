@@ -2,7 +2,7 @@
 import type { Entry } from "../../scripts/extract/schemas";
 import { describedEntry } from "../lib/gear-values";
 import { t, type Lang } from "../lib/i18n";
-import { compareLang, lowerFor } from "../lib/lang";
+import { searchNames } from "../lib/lang";
 import EntryIcon from "./EntryIcon.astro";
 import LangText from "./LangText.astro";
 
@@ -19,7 +19,7 @@ const { lang, entries } = Astro.props;
   </thead>
   <tbody>
     {entries.map((entry) => (
-      <tr data-variant={entry.variant} data-names={[lang, compareLang(lang)].map((l) => lowerFor(entry.name[l], lang)).join(" ")}>
+      <tr data-variant={entry.variant} data-names={searchNames(entry.name, lang)}>
         <th scope="row">
           <div class="row-head">
             {entry.icon && <EntryIcon icon={entry.icon} alt="" size={32} category={entry.category} variant={entry.variant} />}
