@@ -12,7 +12,7 @@ export type Usage = keyof typeof USAGES;
 
 /** Extracted icons shown next to a published category rather than as one: enchantment books on enchantment pages. */
 const SHOWN_WITH: Readonly<Record<string, string>> = { enchantment: "enchantment-book" };
-const UI_DIRS: ReadonlySet<string> = new Set(["ui", "frames"]);
+const UI_DIRS: ReadonlySet<string> = new Set(["ui", "frames", "brand"]);
 
 /** Icon folders the site shows, derived from its category tabs so a newly published category counts at once. */
 export function publishedIconDirs(tabs: readonly string[]): ReadonlySet<string> {
