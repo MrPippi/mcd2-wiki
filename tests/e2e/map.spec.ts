@@ -60,6 +60,16 @@ test("an unknown world falls back to the overworld", async ({ page }) => {
   await page.goto("/zh/map/?world=nether");
   await expect(page.locator(".map-tabs [aria-current='page']")).toHaveText(/主世界/);
   await expect(page.locator(".world-map")).toHaveAttribute("data-world", "overworld");
+  await expect(page).toHaveURL(/\?world=overworld/);
+});
+
+test("a modified click on a world tab leaves the current map alone", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+  await page.locator(".map-tabs a", { hasText: "隙浮" }).click({ modifiers: ["Control"] });
+  await page.waitForTimeout(300);
+  await expect(page.locator(".world-map")).toHaveAttribute("data-world", "overworld");
+  for (const other of page.context().pages()) if (other !== page) await other.close();
 });
 
 test("switching worlds does not reuse the previous world's view", async ({ page }) => {
@@ -87,6 +97,14 @@ test("searching flies to a marker and opens its details", async ({ page }) => {
   await page.getByTestId("map-results").getByRole("button", { name: /鐵匠/ }).click();
   await expect(page.locator(".leaflet-popup-content")).toContainText("鐵匠");
   await expect(page).toHaveURL(/#\d+\/\d+\/\d+$/);
+});
+
+test("a rift result does not repeat its kind label", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await page.getByTestId("map-search").fill("裂隙");
+  const first = page.getByTestId("map-results").locator("button").first();
+  await expect(first).toBeVisible();
+  await expect(first).not.toContainText("裂隙 · 裂隙");
 });
 
 test("a search with no match says so", async ({ page }) => {
@@ -119,4 +137,10 @@ test("area names appear only when zoomed in", async ({ page }) => {
   await expect(page.locator(".map-marker--area").first()).toBeHidden();
   await page.goto("/zh/map/#4/432/4416");
   await expect(page.locator(".world-map")).toHaveAttribute("data-labels", "on");
+});
+
+test("area labels do not capture clicks meant for the pin beneath", async ({ page }) => {
+  await page.goto("/zh/map/#4/432/4416");
+  await expect(page.locator(".map-marker--area").first()).toBeAttached();
+  await expect(page.locator(".map-marker--area.leaflet-interactive")).toHaveCount(0);
 });

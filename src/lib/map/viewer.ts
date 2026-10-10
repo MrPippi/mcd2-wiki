@@ -49,7 +49,13 @@ function writeHidden(hidden: ReadonlySet<MarkerKind>): void {
 }
 
 function replaceLocation(search: string, hash: string): void {
-  history.replaceState(history.state, "", `${location.pathname}${search}${hash}`);
+  if (search === location.search && hash === location.hash) return;
+  try {
+    history.replaceState(history.state, "", `${location.pathname}${search}${hash}`);
+  } catch {
+    // Browsers may throttle or refuse replaceState (Safari); a failed write must not break Leaflet's moveend handler.
+    return;
+  }
   window.dispatchEvent(new Event("mcd2:locationchange"));
 }
 
@@ -62,8 +68,10 @@ function addPins(map: L.Map, world: WorldMap, lang: Lang, labels: Payload["label
       html: pinElement(marker, lang),
       iconSize: marker.kind === "area" ? [0, 0] : PIN_SIZE,
     });
-    const pin = L.marker(toLatLng(world, marker.px, marker.py), { icon, title: marker.name[lang], keyboard: marker.kind !== "area" });
-    pin.bindPopup(popupElement(marker, lang, labels[marker.kind]));
+    // Area labels sit on top of the teleport-statue pins: they stay inert so clicks reach the pin beneath.
+    const isArea = marker.kind === "area";
+    const pin = L.marker(toLatLng(world, marker.px, marker.py), { icon, title: marker.name[lang], keyboard: !isArea, interactive: !isArea });
+    if (!isArea) pin.bindPopup(popupElement(marker, lang, labels[marker.kind]));
     layers.get(marker.kind)?.addLayer(pin);
     pins.set(marker.id, pin);
   }
@@ -138,6 +146,7 @@ function bindTabs(root: HTMLElement, payload: Payload, onSwitch: (next: WorldMap
     link.addEventListener("click", (event) => {
       const next = payload.worlds.find((world) => world.key === link.dataset.world);
       if (!next) return;
+      if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       onSwitch(next);
     });
@@ -158,6 +167,7 @@ export function mountWorldMap(root: HTMLElement): void {
   const canvas = root.querySelector<HTMLElement>("[data-map-canvas]");
   const keys = (payload.worlds ?? []).map((world) => world.key);
   const initial = payload.worlds?.find((world) => world.key === parseWorld(location.search, keys));
+  const requested = new URLSearchParams(location.search).get("world");
   const search = root.querySelector<HTMLInputElement>("[data-testid='map-search']");
   if (!canvas || !initial) return;
   let hidden = readHidden();
@@ -168,6 +178,7 @@ export function mountWorldMap(root: HTMLElement): void {
     console.error("World map failed to start", error);
     return;
   }
+  if (requested !== null && requested !== initial.key) replaceLocation(worldSearch(location.search, initial.key), location.hash);
   syncPanel(root, shown.world, hidden);
   root.dataset.ready = "true";
 

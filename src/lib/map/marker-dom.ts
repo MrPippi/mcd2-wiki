@@ -39,7 +39,8 @@ export function popupElement(marker: MapMarker, lang: Lang, kindLabel: string): 
 
 export function resultElement(marker: MapMarker, lang: Lang, kindLabel: string): HTMLLIElement {
   const item = element("li", "");
-  const button = element("button", "map-result", [marker.name[lang], kindLabel, marker.area?.[lang]].filter(Boolean).join(" · "));
+  const kind = kindLabel === marker.name[lang] ? undefined : kindLabel;
+  const button = element("button", "map-result", [marker.name[lang], kind, marker.area?.[lang]].filter(Boolean).join(" · "));
   button.type = "button";
   button.dataset.markerId = marker.id;
   item.append(button);
