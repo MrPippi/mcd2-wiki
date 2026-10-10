@@ -15,12 +15,23 @@ const gameValue = (lang: Lang, key: string): string | undefined => GAME_STRINGS[
 /** Traditional Chinese and English are written by hand, so the file wins; other languages take the game's own wording first. */
 const HAND_WRITTEN: readonly Lang[] = ["zh", "en"];
 
-function lookup(lang: Lang, key: UiKey): UiValue {
-  const own = fileValue(lang, key);
-  const game = gameValue(lang, key);
-  const found = HAND_WRITTEN.includes(lang) ? (own ?? game) : (game ?? own);
-  return found ?? fileValue("zh", key) ?? key;
+export interface UiCandidates {
+  /** The language file's value. */
+  readonly own?: UiValue;
+  /** The game's own wording. */
+  readonly game?: string;
+  /** The English file's value, the fallback for a missing key. */
+  readonly english?: UiValue;
 }
+
+/** Picks the text: hand-written languages prefer their file, the others the game; then English, then the key itself. Never throws. */
+export function resolveUiValue(key: string, handWritten: boolean, { own, game, english }: UiCandidates): UiValue {
+  const found = handWritten ? (own ?? game) : (game ?? own);
+  return found ?? english ?? key;
+}
+
+const lookup = (lang: Lang, key: UiKey): UiValue =>
+  resolveUiValue(key, HAND_WRITTEN.includes(lang), { own: fileValue(lang, key), game: gameValue(lang, key), english: fileValue("en", key) });
 
 /** The text for a key; for a unit with plural forms, the general form. */
 export const t = (lang: Lang, key: UiKey): string => plainText(lookup(lang, key));
