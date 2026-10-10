@@ -1,0 +1,66 @@
+---
+import { MARKER_KINDS, type WorldMap } from "../../scripts/extract/map-schema";
+import { MARKER_LABEL, t, type Lang } from "../lib/i18n";
+import { countByKind } from "../lib/map/markers";
+import { overviewTile } from "../lib/map/tiles";
+import { assetUrl } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+  worlds: readonly WorldMap[];
+}
+
+const { lang, worlds } = Astro.props;
+const [first] = worlds;
+const counts = first ? countByKind(first.markers) : undefined;
+const labels = Object.fromEntries(MARKER_KINDS.map((kind) => [kind, MARKER_LABEL[kind][lang]]));
+// Escape "<" so no game text can close the script element early.
+const payload = JSON.stringify({ worlds, labels }).replace(/</g, "\\u003c");
+---
+{first ? (
+  <div class="world-map" data-lang={lang} data-world={first.key}>
+    <nav class="map-tabs" aria-label={t(lang, "worldMap")}>
+      <ol>
+        {worlds.map((world) => (
+          <li>
+            <a href={`?world=${world.key}`} data-world={world.key} aria-current={world.key === first.key ? "page" : undefined}>
+              {world.name[lang]}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+    <div class="map-body">
+      <div class="map-stage">
+        <div class="map-canvas" data-map-canvas></div>
+        <div class="map-fallback">
+          <img src={assetUrl(overviewTile(first.key))} alt={first.name[lang]} width="256" height="256" />
+          <p>{t(lang, "mapNeedsJs")}</p>
+        </div>
+      </div>
+      <aside class="map-panel">
+        <fieldset class="map-filters">
+          <legend>{t(lang, "mapMarkers")}</legend>
+          {MARKER_KINDS.map((kind) => (
+            <label class="map-filter">
+              <input type="checkbox" name="kind" value={kind} checked />
+              <span class={`map-swatch map-swatch--${kind}`} aria-hidden="true"></span>
+              <span class="map-filter-label">{MARKER_LABEL[kind][lang]}</span>
+              <span class="map-count mono" data-count={kind}>{counts?.[kind] ?? 0}</span>
+            </label>
+          ))}
+        </fieldset>
+        <div class="map-search">
+          <label for="map-search">{t(lang, "mapSearch")}</label>
+          <input id="map-search" type="search" data-testid="map-search" placeholder={t(lang, "mapSearchPlaceholder")} autocomplete="off" />
+          <ul class="map-results" data-testid="map-results"></ul>
+          <p class="map-empty" data-testid="map-empty" hidden>{t(lang, "mapNoResults")}</p>
+        </div>
+        <p class="map-note">{t(lang, "mapSource")}</p>
+      </aside>
+    </div>
+    <script type="application/json" data-map-json set:html={payload}></script>
+  </div>
+) : (
+  <p class="map-no-data">{t(lang, "mapNoData")}</p>
+)}

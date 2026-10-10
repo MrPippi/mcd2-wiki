@@ -94,3 +94,5 @@
 @media (min-width: 960px) {
   .home-hero { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 64px; align-items: center; padding-top: 24px; }
 }
+
+.category-preview .map-preview { width: 32px; height: 32px; object-fit: cover; border: 1px solid var(--rule); }
