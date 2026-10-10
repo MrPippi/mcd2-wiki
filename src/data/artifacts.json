@@ -1,0 +1,3116 @@
+{
+  "rallying-horn": {
+    "cooldownSeconds": 4,
+    "soulCost": 25,
+    "compatible": [
+      {
+        "effect": "vivify",
+        "tiers": [
+          0.15,
+          0.3,
+          0.5
+        ]
+      },
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "healing-focus",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "friendship",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "expand",
+        "tiers": [
+          0.2,
+          0.3,
+          0.4
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "friends-forever",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      }
+    ]
+  },
+  "totem-of-regeneration": {
+    "cooldownSeconds": 27,
+    "soulCost": 65,
+    "compatible": [
+      {
+        "effect": "vivify",
+        "tiers": [
+          0.15,
+          0.3,
+          0.5
+        ]
+      },
+      {
+        "effect": "opportunist",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "healing-focus",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "looting",
+        "tiers": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "effect": "lucky",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "beast-boss",
+        "tiers": [
+          0.2,
+          0.25,
+          0.3
+        ]
+      },
+      {
+        "effect": "potion-cooldown",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.2
+        ]
+      },
+      {
+        "effect": "emeralds-increase",
+        "tiers": [
+          0.05,
+          0.1,
+          0.15
+        ]
+      },
+      {
+        "effect": "opulence",
+        "tiers": [
+          0.01,
+          0.02,
+          0.03
+        ]
+      },
+      {
+        "effect": "soul-gather-multiply",
+        "tiers": [
+          0.25,
+          0.35,
+          0.45
+        ]
+      },
+      {
+        "effect": "chains",
+        "tiers": [
+          0.1,
+          0.15,
+          0.25
+        ]
+      },
+      {
+        "effect": "friendship",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      },
+      {
+        "effect": "saboteur",
+        "tiers": [
+          0.4,
+          0.6,
+          0.8
+        ]
+      },
+      {
+        "effect": "expand",
+        "tiers": [
+          0.2,
+          0.3,
+          0.4
+        ]
+      },
+      {
+        "effect": "friends-forever",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      }
+    ]
+  },
+  "soul-harvester": {
+    "cooldownSeconds": 5,
+    "soulCost": 15,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "picnic-blanket": {
+    "cooldownSeconds": 15,
+    "soulCost": 15,
+    "compatible": [
+      {
+        "effect": "vivify",
+        "tiers": [
+          0.15,
+          0.3,
+          0.5
+        ]
+      },
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "healing-focus",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "expand",
+        "tiers": [
+          0.2,
+          0.3,
+          0.4
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "corrupted-beacon": {
+    "cooldownSeconds": 7,
+    "soulCost": 0,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "corrupted-seeds": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "deathcap-mushroom": {
+    "cooldownSeconds": 4,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "totem-of-shielding": {
+    "cooldownSeconds": 15,
+    "soulCost": 30,
+    "lifetimeSeconds": 10,
+    "range": 12,
+    "compatible": [
+      {
+        "effect": "vivify",
+        "tiers": [
+          0.15,
+          0.3,
+          0.5
+        ]
+      },
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "healing-focus",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "expand",
+        "tiers": [
+          0.2,
+          0.3,
+          0.4
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "totem-of-casting": {
+    "cooldownSeconds": 15,
+    "soulCost": 30,
+    "compatible": [
+      {
+        "effect": "vivify",
+        "tiers": [
+          0.15,
+          0.3,
+          0.5
+        ]
+      },
+      {
+        "effect": "opportunist",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "elemental-protection",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "healing-focus",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "looting",
+        "tiers": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "effect": "lucky",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "potion-cooldown",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.2
+        ]
+      },
+      {
+        "effect": "emeralds-increase",
+        "tiers": [
+          0.05,
+          0.1,
+          0.15
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "opulence",
+        "tiers": [
+          0.01,
+          0.02,
+          0.03
+        ]
+      },
+      {
+        "effect": "soul-gather-multiply",
+        "tiers": [
+          0.25,
+          0.35,
+          0.45
+        ]
+      },
+      {
+        "effect": "chains",
+        "tiers": [
+          0.1,
+          0.15,
+          0.25
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "saboteur",
+        "tiers": [
+          0.4,
+          0.6,
+          0.8
+        ]
+      },
+      {
+        "effect": "expand",
+        "tiers": [
+          0.2,
+          0.3,
+          0.4
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "smoke-bomb": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "redstone-mines": {
+    "cooldownSeconds": 5,
+    "soulCost": 40,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "witches-brew": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "satchel-fire": {
+    "cooldownSeconds": 5,
+    "soulCost": 40,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "satchel-freezing": {
+    "cooldownSeconds": 5,
+    "soulCost": 40,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "satchel-poison": {
+    "cooldownSeconds": 5,
+    "soulCost": 40,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "satchel-conductive": {
+    "cooldownSeconds": 5,
+    "soulCost": 40,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "creeper-candle": {
+    "cooldownSeconds": 5,
+    "soulCost": 25,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "lightning-rod": {
+    "cooldownSeconds": 6,
+    "soulCost": 0,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "maiming-mushroom": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "haste-mushroom": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "warriors-drums": {
+    "cooldownSeconds": 5,
+    "soulCost": 45,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "carapace-ocarina": {
+    "cooldownSeconds": 10,
+    "soulCost": 40,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "fighters-fife": {
+    "cooldownSeconds": 5,
+    "soulCost": 45,
+    "compatible": [
+      {
+        "effect": "vivify",
+        "tiers": [
+          0.15,
+          0.3,
+          0.5
+        ]
+      },
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "healing-focus",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "friendship",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "friends-forever",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      }
+    ]
+  },
+  "grindstone": {
+    "cooldownSeconds": 4,
+    "soulCost": 30,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "iron-hide-lute": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "warding-chimes": {
+    "cooldownSeconds": 15,
+    "soulCost": 40,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "war-banner": {
+    "cooldownSeconds": 10,
+    "soulCost": 45,
+    "compatible": [
+      {
+        "effect": "vivify",
+        "tiers": [
+          0.15,
+          0.3,
+          0.5
+        ]
+      },
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "healing-focus",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "friendship",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "expand",
+        "tiers": [
+          0.2,
+          0.3,
+          0.4
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "friends-forever",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      }
+    ]
+  },
+  "honeypot": {
+    "cooldownSeconds": 15,
+    "soulCost": 45,
+    "compatible": [
+      {
+        "effect": "vivify",
+        "tiers": [
+          0.15,
+          0.3,
+          0.5
+        ]
+      },
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "healing-focus",
+        "tiers": [
+          0.25,
+          0.35,
+          0.5
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "friendship",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "friends-forever",
+        "tiers": [
+          -0.05,
+          -0.1,
+          -0.15
+        ]
+      }
+    ]
+  },
+  "flame-sceptre": {
+    "cooldownSeconds": 5,
+    "soulCost": 25,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "blizzard-staff": {
+    "cooldownSeconds": 5,
+    "soulCost": 0,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "fire-bracelet": {
+    "cooldownSeconds": 6,
+    "soulCost": 35,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "frost-bracelet": {
+    "cooldownSeconds": 6,
+    "soulCost": 35,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "poison-bracelet": {
+    "cooldownSeconds": 6,
+    "soulCost": 35,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "conductive-bracelet": {
+    "cooldownSeconds": 6,
+    "soulCost": 35,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "powershaker": {
+    "cooldownSeconds": 16,
+    "soulCost": 35,
+    "compatible": [
+      {
+        "effect": "cooldown",
+        "tiers": [
+          -0.1,
+          -0.15,
+          -0.2
+        ]
+      },
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "vestige",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "soul-max",
+        "tiers": [
+          1.25,
+          1.3,
+          1.35
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "firework-quiver": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "looting",
+        "tiers": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "effect": "lucky",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "emeralds-increase",
+        "tiers": [
+          0.05,
+          0.1,
+          0.15
+        ]
+      },
+      {
+        "effect": "opulence",
+        "tiers": [
+          0.01,
+          0.02,
+          0.03
+        ]
+      }
+    ]
+  },
+  "flame-quiver": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "looting",
+        "tiers": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "effect": "lucky",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "emeralds-increase",
+        "tiers": [
+          0.05,
+          0.1,
+          0.15
+        ]
+      },
+      {
+        "effect": "opulence",
+        "tiers": [
+          0.01,
+          0.02,
+          0.03
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "poison-quiver": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "looting",
+        "tiers": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "effect": "lucky",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "emeralds-increase",
+        "tiers": [
+          0.05,
+          0.1,
+          0.15
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "opulence",
+        "tiers": [
+          0.01,
+          0.02,
+          0.03
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "frost-quiver": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "lightning-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "looting",
+        "tiers": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "effect": "lucky",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "emeralds-increase",
+        "tiers": [
+          0.05,
+          0.1,
+          0.15
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "opulence",
+        "tiers": [
+          0.01,
+          0.02,
+          0.03
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  },
+  "lightning-quiver": {
+    "cooldownSeconds": 5,
+    "soulCost": 20,
+    "compatible": [
+      {
+        "effect": "frost-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "looting",
+        "tiers": [
+          0.2,
+          0.4,
+          0.6
+        ]
+      },
+      {
+        "effect": "lucky",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "emeralds-increase",
+        "tiers": [
+          0.05,
+          0.1,
+          0.15
+        ]
+      },
+      {
+        "effect": "fire-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "opulence",
+        "tiers": [
+          0.01,
+          0.02,
+          0.03
+        ]
+      },
+      {
+        "effect": "soul-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      },
+      {
+        "effect": "poison-focus",
+        "tiers": [
+          0.1,
+          0.15,
+          0.2
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,56 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { t, type Lang } from "../lib/i18n";
+import { weaponStatsView } from "../lib/weapon-stats";
+import EntrySection from "./EntrySection.astro";
+
+interface Props {
+  lang: Lang;
+  weapon: Entry;
+}
+
+const { lang, weapon } = Astro.props;
+const view = weaponStatsView(lang, weapon);
+---
+{view && (
+  <EntrySection title={t(lang, "weaponStats")} testid="weapon-stats">
+    {view.tiles.length > 0 && (
+      <dl class="stat-grid" data-pagefind-ignore>
+        {view.tiles.map(({ label, value }) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+    {view.facts.length > 0 && (
+      <dl class="stat-facts" data-pagefind-ignore>
+        {view.facts.map(({ label, value }) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+    )}
+    {view.combo && (
+      <div class="table-scroll" tabindex="0" role="region" aria-label={t(lang, "comboTable")}>
+        <table class="combo-table" data-pagefind-ignore>
+          <thead>
+            <tr>{view.combo.columns.map((column) => <th scope="col">{column}</th>)}</tr>
+          </thead>
+          <tbody>
+            {view.combo.rows.map(([head, ...cells]) => (
+              <tr>
+                <th scope="row">{head}</th>
+                {cells.map((cell) => <td>{cell === "-" ? <span class="empty-cell">-</span> : cell}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    )}
+    <p class="note" data-pagefind-ignore>{t(lang, "statsNote")}</p>
+  </EntrySection>
+)}

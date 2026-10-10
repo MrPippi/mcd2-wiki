@@ -1,6 +1,7 @@
 ---
-import "@fontsource/silkscreen/400.css";
-import "@fontsource/silkscreen/700.css";
+import "@fontsource/noto-serif-tc/700.css";
+import "@fontsource-variable/geist";
+import "@fontsource-variable/geist-mono";
 import "../styles/tokens.css";
 import "../styles/base.css";
 import "../styles/frames.css";
@@ -58,7 +59,7 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
     {socialImage && <meta property="og:image:height" content="480" />}
     {socialImage && <meta property="og:image:alt" content="Minecraft Dungeons II" />}
     <meta name="twitter:card" content="summary" />
-    <meta name="theme-color" content="#1c2b31" />
+    <meta name="theme-color" content="#f3f4f1" />
     <link rel="icon" type={favicon.type} href={favicon.href} />
     {appIcon && <link rel="apple-touch-icon" href={appIcon} />}
     <script is:inline>
@@ -79,9 +80,12 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
     <main class="site-main" id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer">
       <div class="footer-inner">
-        <p>{t(lang, "disclaimer")}</p>
-        <p>{t(lang, "source")}</p>
-        <p class="footer-license"><a href={assetUrl("licenses/Cubic-11-OFL.txt")}>{t(lang, "fontLicense")}</a></p>
+        <p class="footer-mark">{t(lang, "siteTitle")}</p>
+        <div class="footer-meta">
+          <p>{t(lang, "disclaimer")}</p>
+          <p>{t(lang, "source")}</p>
+        </div>
+        <p class="footer-license">{t(lang, "fontCredit")}</p>
       </div>
     </footer>
   </body>

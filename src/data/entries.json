@@ -8229,6 +8229,7 @@
       "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
       "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
+    "icon": "icons/enchantment-book/flame-belch-unique.png",
     "links": {
       "enchantment": "fire-aspect-unique"
     }
@@ -8791,6 +8792,7 @@
       "zh": "可多攜帶 <span class=\"placeholder\">{數值}</span> 支箭矢。",
       "en": "Carry <span class=\"placeholder\">{value}</span> more ammo."
     },
+    "icon": "icons/effect/ammo-capacity.png",
     "links": {}
   },
   {
@@ -8807,6 +8809,7 @@
       "zh": "每收集一個靈魂，便可恢復最高生命值的 <span class=\"placeholder\">{數值}</span>。",
       "en": "Restores <span class=\"placeholder\">{value}</span> of max health for each soul gathered."
     },
+    "icon": "icons/effect/anima-conduit.png",
     "links": {}
   },
   {
@@ -8823,6 +8826,7 @@
       "zh": "在取回彈藥時，有 <span class=\"placeholder\">{數值}</span> 的機率額外獲得一支箭矢。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to gain an additional arrow when ammo is regained."
     },
+    "icon": "icons/effect/arrow-burst.png",
     "links": {}
   },
   {
@@ -8839,6 +8843,7 @@
       "zh": "啟用神器時，恢復最高生命值的 <span class=\"placeholder\">{數值}</span>。",
       "en": "Restores <span class=\"placeholder\">{value}</span> of max health when activating an artifact."
     },
+    "icon": "icons/effect/artifact-healing.png",
     "links": {}
   },
   {
@@ -8855,6 +8860,7 @@
       "zh": "夥伴造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Companions deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/beast-boss.png",
     "links": {}
   },
   {
@@ -8871,6 +8877,7 @@
       "zh": "攻擊命中時，有 <span class=\"placeholder\">{數值}</span> 的機率使目標陷入綑綁狀態。",
       "en": "Attacks have a <span class=\"placeholder\">{value}</span> chance to inflict the Chained status on hits."
     },
+    "icon": "icons/effect/chains.png",
     "links": {}
   },
   {
@@ -8887,6 +8894,7 @@
       "zh": "對受傷的敵人造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Deal <span class=\"placeholder\">{value}</span> more damage to wounded enemies."
     },
+    "icon": "icons/effect/committed.png",
     "links": {}
   },
   {
@@ -8903,6 +8911,7 @@
       "zh": "受到的所有治療效果提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases all healing received by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/constitution.png",
     "links": {}
   },
   {
@@ -8919,6 +8928,7 @@
       "zh": "神器的冷卻時間縮短 <span class=\"placeholder\">{數值}</span>。",
       "en": "Reduces artifact cooldown time by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/cooldown.png",
     "links": {}
   },
   {
@@ -8935,6 +8945,7 @@
       "zh": "暴擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "All critical hits deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/critical-edge.png",
     "links": {}
   },
   {
@@ -8951,6 +8962,7 @@
       "zh": "暴擊的機率提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases chance of critical hits by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/critical-hit.png",
     "links": {}
   },
   {
@@ -8967,6 +8979,7 @@
       "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率偏轉敵人射來的投射物。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to deflect enemy projectiles."
     },
+    "icon": "icons/effect/deflect.png",
     "links": {}
   },
   {
@@ -8983,6 +8996,7 @@
       "zh": "提高造成的傷害，相當於玩家已失去生命值總量的 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases damage dealt by <span class=\"placeholder\">{value}</span> of player&#39;s total missing health."
     },
+    "icon": "icons/effect/desperation.png",
     "links": {}
   },
   {
@@ -8999,6 +9013,7 @@
       "zh": "擊敗敵人時掉落戰利品的機率提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> increased chance for defeated enemies to drop loot."
     },
+    "icon": "icons/effect/drop-chance.png",
     "links": {}
   },
   {
@@ -9015,6 +9030,7 @@
       "zh": "近戰攻擊對主要目標造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Melee attacks deal <span class=\"placeholder\">{value}</span> more damage to primary targets."
     },
+    "icon": "icons/effect/duelist.png",
     "links": {}
   },
   {
@@ -9031,6 +9047,7 @@
       "zh": "遠程攻擊的暴擊的機率提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases chance of critical hits from ranged attacks by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/eagle-eye.png",
     "links": {}
   },
   {
@@ -9047,6 +9064,7 @@
       "zh": "擊敗敵人時，有機會獲得隨機的元素近戰增益效果。",
       "en": "Chance to grant random elemental melee buff when defeating an enemy."
     },
+    "icon": "icons/effect/elemental-hit.png",
     "links": {}
   },
   {
@@ -9063,6 +9081,7 @@
       "zh": "受到的元素攻擊傷害降低 <span class=\"placeholder\">{數值}</span>。",
       "en": "Reduces damage taken from elemental attacks by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/elemental-protection.png",
     "links": {}
   },
   {
@@ -9079,6 +9098,7 @@
       "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率獲得額外的綠寶石。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to receive additional emeralds."
     },
+    "icon": "icons/effect/emeralds-increase.png",
     "links": {}
   },
   {
@@ -9095,6 +9115,7 @@
       "zh": "正面狀態效果的作用範圍提升 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases the area of all positive status effects by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/expand.png",
     "links": {}
   },
   {
@@ -9111,6 +9132,7 @@
       "zh": "獲得的經驗值提升 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases experience gained by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/experience-increase.png",
     "links": {}
   },
   {
@@ -9127,6 +9149,7 @@
       "zh": "用此武器命中敵人時，會在撞擊時引發爆炸！",
       "en": "Hits with this weapon explode on impact!"
     },
+    "icon": "icons/effect/explosive-strike.png",
     "links": {}
   },
   {
@@ -9143,6 +9166,7 @@
       "zh": "跳躍或翻滾時，提高攻擊傷害 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases attack damage by <span class=\"placeholder\">{value}</span> when jumping or rolling."
     },
+    "icon": "icons/effect/finesse.png",
     "links": {}
   },
   {
@@ -9159,6 +9183,7 @@
       "zh": "火焰攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Fire attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/fire-focus.png",
     "links": {}
   },
   {
@@ -9175,6 +9200,7 @@
       "zh": "依據持有的綠寶石數量，最多可獲得 <span class=\"placeholder\">{數值}</span> 傷害加成，最多 <span class=\"placeholder\">{數值}</span> 顆綠寶石生效。",
       "en": "Grants up to a <span class=\"placeholder\">{value}</span> damage bonus based on emeralds held, effective to a maximum of <span class=\"placeholder\">{value}</span> emeralds."
     },
+    "icon": "icons/effect/firing-emerald.png",
     "links": {}
   },
   {
@@ -9191,6 +9217,7 @@
       "zh": "被擊敗的夥伴復活速度加快 <span class=\"placeholder\">{數值}</span>。",
       "en": "Defeated companions come back <span class=\"placeholder\">{value}</span> faster."
     },
+    "icon": "icons/effect/friends-forever.png",
     "links": {}
   },
   {
@@ -9207,6 +9234,7 @@
       "zh": "夥伴受到的傷害降低 <span class=\"placeholder\">{數值}</span>。",
       "en": "Companions take <span class=\"placeholder\">{value}</span> less damage."
     },
+    "icon": "icons/effect/friendship.png",
     "links": {}
   },
   {
@@ -9223,6 +9251,7 @@
       "zh": "冰霜攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Frost attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/frost-focus.png",
     "links": {}
   },
   {
@@ -9239,6 +9268,7 @@
       "zh": "攻擊時有 <span class=\"placeholder\">{數值}</span> 的機率維持潛影狀態。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to stay in Shadowcloaking when attacking."
     },
+    "icon": "icons/effect/gambler.png",
     "links": {}
   },
   {
@@ -9255,6 +9285,7 @@
       "zh": "使遠程武器的射擊間隔縮短 <span class=\"placeholder\">{數值}</span>。",
       "en": "Reduces time between shots with ranged weapons by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/hairtrigger.png",
     "links": {}
   },
   {
@@ -9271,6 +9302,7 @@
       "zh": "提高對自身與盟友的治療效果 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases healing given to yourself and allies by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/healing-focus.png",
     "links": {}
   },
   {
@@ -9287,6 +9319,7 @@
       "zh": "提高玩家的最高生命值 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases the player&#39;s maximum health by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/health-boost.png",
     "links": {}
   },
   {
@@ -9303,6 +9336,7 @@
       "zh": "當生命值高於 <span class=\"placeholder\">{數值}</span> 時，傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> damage increase while health is above <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/healthy-strike.png",
     "links": {}
   },
   {
@@ -9335,6 +9369,7 @@
       "zh": "攻擊造成額外 <span class=\"placeholder\">{數值}</span> 的擊退效果。",
       "en": "Attacks do <span class=\"placeholder\">{value}</span> more knockback."
     },
+    "icon": "icons/effect/knockback.png",
     "links": {}
   },
   {
@@ -9367,6 +9402,7 @@
       "zh": "閃電攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Lightning attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/lightning-focus.png",
     "links": {}
   },
   {
@@ -9383,6 +9419,7 @@
       "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率掉落額外的戰利品。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to get additional loot drops."
     },
+    "icon": "icons/effect/looting.png",
     "links": {}
   },
   {
@@ -9399,6 +9436,7 @@
       "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率掉落物品的重複變體。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to drop duplicate variations of items."
     },
+    "icon": "icons/effect/lucky.png",
     "links": {}
   },
   {
@@ -9415,6 +9453,7 @@
       "zh": "遠程武器的暴擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Critical hits with ranged weapons deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/master-marksman.png",
     "links": {}
   },
   {
@@ -9431,6 +9470,7 @@
       "zh": "近戰武器的暴擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Critical hits with melee weapons deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/master-strike.png",
     "links": {}
   },
   {
@@ -9447,6 +9487,7 @@
       "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率發射出額外的投射物。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to fire additional projectiles."
     },
+    "icon": "icons/effect/multi-shot.png",
     "links": {}
   },
   {
@@ -9463,6 +9504,7 @@
       "zh": "對受到負面狀態影響的敵人造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Deal <span class=\"placeholder\">{value}</span> more damage to enemies affected by a negative status."
     },
+    "icon": "icons/effect/opportunist.png",
     "links": {}
   },
   {
@@ -9479,6 +9521,7 @@
       "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率掉落更稀有的戰利品。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance of higher rarity loot drops."
     },
+    "icon": "icons/effect/opulence.png",
     "links": {}
   },
   {
@@ -9495,6 +9538,7 @@
       "zh": "跳躍近戰攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Jumping melee attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/plummeting.png",
     "links": {}
   },
   {
@@ -9511,6 +9555,7 @@
       "zh": "在近距離時，遠程攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Ranged attacks deal <span class=\"placeholder\">{value}</span> more damage at close range."
     },
+    "icon": "icons/effect/point-blank.png",
     "links": {}
   },
   {
@@ -9527,6 +9572,7 @@
       "zh": "毒素攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Poison attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/poison-focus.png",
     "links": {}
   },
   {
@@ -9543,6 +9589,7 @@
       "zh": "藥水的冷卻時間縮短 <span class=\"placeholder\">{數值}</span>。",
       "en": "Reduces potion cooldown time by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/potion-cooldown.png",
     "links": {}
   },
   {
@@ -9559,6 +9606,7 @@
       "zh": "遠程攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Ranged attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/power.png",
     "links": {}
   },
   {
@@ -9575,6 +9623,7 @@
       "zh": "近戰攻擊的暴擊的機率提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases chance of critical hits with melee attacks by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/precision.png",
     "links": {}
   },
   {
@@ -9591,6 +9640,7 @@
       "zh": "受到的遠程攻擊傷害降低 <span class=\"placeholder\">{數值}</span>。",
       "en": "Take <span class=\"placeholder\">{value}</span> less damage from ranged attacks."
     },
+    "icon": "icons/effect/projectile-protection.png",
     "links": {}
   },
   {
@@ -9607,6 +9657,7 @@
       "zh": "受到的傷害降低 <span class=\"placeholder\">{數值}</span>。",
       "en": "Take <span class=\"placeholder\">{value}</span> less damage."
     },
+    "icon": "icons/effect/protection.png",
     "links": {}
   },
   {
@@ -9623,6 +9674,7 @@
       "zh": "近戰攻擊速度提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases melee attack speed by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/rapid-strike.png",
     "links": {}
   },
   {
@@ -9639,6 +9691,7 @@
       "zh": "使遠程彈藥的冷卻時間縮短 <span class=\"placeholder\">{數值}</span>。",
       "en": "Reduces ranged ammo cooldown time by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/reconstruction.png",
     "links": {}
   },
   {
@@ -9655,6 +9708,7 @@
       "zh": "命中時，使敵人陷入蹣跚的機率提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases chance to stagger enemies on hit by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/reeling.png",
     "links": {}
   },
   {
@@ -9671,6 +9725,7 @@
       "zh": "脫離戰鬥 5 秒後，每秒恢復 <span class=\"placeholder\">{數值}</span> 生命值。",
       "en": "Restores health by <span class=\"placeholder\">{value}</span> per second after 5 seconds out of combat."
     },
+    "icon": "icons/effect/regeneration.png",
     "links": {}
   },
   {
@@ -9687,6 +9742,7 @@
       "zh": "從負面狀態中復原的速度提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Recover from negative statuses <span class=\"placeholder\">{value}</span> faster."
     },
+    "icon": "icons/effect/resilience.png",
     "links": {}
   },
   {
@@ -9703,6 +9759,7 @@
       "zh": "翻滾的冷卻時間縮短 <span class=\"placeholder\">{數值}</span>。",
       "en": "Reduces rolling cooldown time by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/roll-cooldown.png",
     "links": {}
   },
   {
@@ -9719,6 +9776,7 @@
       "zh": "敵人身上的負面狀態持續時間延長 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases duration of negative statuses on enemies by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/saboteur.png",
     "links": {}
   },
   {
@@ -9735,6 +9793,7 @@
       "zh": "潛影的持續時間延長 <span class=\"placeholder\">{數值}</span>。",
       "en": "Shadowcloaking lasts <span class=\"placeholder\">{value}</span> longer."
     },
+    "icon": "icons/effect/shadow-walk.png",
     "links": {}
   },
   {
@@ -9751,6 +9810,7 @@
       "zh": "近戰攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Melee attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/sharpness.png",
     "links": {}
   },
   {
@@ -9767,6 +9827,7 @@
       "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率閃避近戰傷害。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to evade melee damage."
     },
+    "icon": "icons/effect/sidestep.png",
     "links": {}
   },
   {
@@ -9783,6 +9844,7 @@
       "zh": "在遠距離時，遠程攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Ranged attacks deal <span class=\"placeholder\">{value}</span> more damage from far away."
     },
+    "icon": "icons/effect/sniper.png",
     "links": {}
   },
   {
@@ -9799,6 +9861,7 @@
       "zh": "命中敵人時，施加魂疫狀態。",
       "en": "Applies Soulsick status to enemies on hit."
     },
+    "icon": "icons/effect/soul-curse.png",
     "links": {}
   },
   {
@@ -9815,6 +9878,7 @@
       "zh": "靈魂攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Soul attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/soul-focus.png",
     "links": {}
   },
   {
@@ -9847,6 +9911,7 @@
       "zh": "獲得的靈魂增加 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases souls gained by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/soul-gather-multiply.png",
     "links": {}
   },
   {
@@ -9863,6 +9928,7 @@
       "zh": "靈魂容量提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases Soul capacity by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/soul-max.png",
     "links": {}
   },
   {
@@ -9879,6 +9945,7 @@
       "zh": "移動速度提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases movement speed by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/speed-boost.png",
     "links": {}
   },
   {
@@ -9895,6 +9962,7 @@
       "zh": "移動超過 <span class=\"placeholder\">{數值}</span> 秒後，移動速度提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases movement speed by <span class=\"placeholder\">{value}</span> if moving for more than <span class=\"placeholder\">{value}</span> seconds."
     },
+    "icon": "icons/effect/speed-increment.png",
     "links": {}
   },
   {
@@ -9931,6 +9999,7 @@
       "zh": "攻擊命中時，有 <span class=\"placeholder\">{數值}</span> 的機率獲得強力狀態。",
       "en": "Attacks have a <span class=\"placeholder\">{value}</span> chance to grant the Strength status on hit."
     },
+    "icon": "icons/effect/status-on-hit-strength.png",
     "links": {}
   },
   {
@@ -9963,6 +10032,7 @@
       "zh": "蓄力的遠程攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Charged ranged attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/supercharge.png",
     "links": {}
   },
   {
@@ -9979,6 +10049,7 @@
       "zh": "近戰攻擊對次要目標造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Melee attacks deal <span class=\"placeholder\">{value}</span> more damage to secondary targets."
     },
+    "icon": "icons/effect/sweeping-edge.png",
     "links": {}
   },
   {
@@ -10027,6 +10098,7 @@
       "zh": "將所受傷害的 <span class=\"placeholder\">{數值}</span> 反彈給攻擊者。",
       "en": "Deals <span class=\"placeholder\">{value}</span> of received damage back to the attacker."
     },
+    "icon": "icons/effect/thorns.png",
     "links": {}
   },
   {
@@ -10043,6 +10115,7 @@
       "zh": "對生命值全滿的敵人造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Deal <span class=\"placeholder\">{value}</span> more damage to enemies who are at full health."
     },
+    "icon": "icons/effect/vanguard.png",
     "links": {}
   },
   {
@@ -10059,6 +10132,7 @@
       "zh": "神器攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Artifact attacks deal <span class=\"placeholder\">{value}</span> more damage."
     },
+    "icon": "icons/effect/vestige.png",
     "links": {}
   },
   {
@@ -10075,6 +10149,7 @@
       "zh": "對自己與盟友所施加的正面狀態持續時間延長 <span class=\"placeholder\">{數值}</span>。",
       "en": "Positive statuses you apply to yourself and allies last <span class=\"placeholder\">{value}</span> longer."
     },
+    "icon": "icons/effect/vivify.png",
     "links": {}
   },
   {

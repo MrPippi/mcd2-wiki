@@ -14,14 +14,11 @@ const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.
 ---
 <header class="site-header">
   <a class="brand" href={href(lang)}>
+    <span class="brand-mark" aria-hidden="true">MCD2</span>
     <span class="brand-full">{t(lang, "siteTitle")}</span><span class="brand-short">{t(lang, "siteShort")}</span>
   </a>
-  <button type="button" class="search-toggle" aria-expanded="false" aria-controls="header-search" aria-label={t(lang, "search")}>
-    <svg viewBox="0 0 9 9" aria-hidden="true" fill="currentColor">
-      <path d="M2 0h3v1H2zM1 1h1v1H1zM5 1h1v1H5zM0 2h1v3H0zM6 2h1v3H6zM1 5h1v1H1zM5 5h1v1H5zM2 6h3v1H2zM6 6h1v1H6zM7 7h1v1H7zM8 8h1v1H8z" />
-    </svg>
-  </button>
-  <form id="header-search" class="header-search" action={href(lang, "search")} method="get" role="search">
+  <button type="button" class="search-toggle" aria-expanded="false" aria-controls="header-search">{t(lang, "search")}</button>
+  <form id="header-search" class="header-search" action={href(lang, "search")} method="get" role="search" aria-label={t(lang, "siteSearch")}>
     <input type="search" name="q" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
   </form>
   <div class="site-tools">
@@ -58,7 +55,7 @@ const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.
   syncLang();
   window.addEventListener("hashchange", syncLang);
 
-  // Narrow screens fold the header search behind an icon button (see layout.css).
+  // Narrow screens fold the header search behind a button (see layout.css).
   const searchToggle = document.querySelector<HTMLButtonElement>(".search-toggle");
   const searchForm = document.querySelector<HTMLFormElement>(".header-search");
   const setSearchOpen = (open: boolean) => {

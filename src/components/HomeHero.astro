@@ -1,14 +1,15 @@
 ---
-import type { ImageMetadata } from "astro";
-import { Image } from "astro:assets";
 import type { Category } from "../../scripts/extract/config";
-import { allArmorSets, entriesIn, publishedEntries } from "../lib/data";
-import { CATEGORY_LABEL, t, type Lang } from "../lib/i18n";
+import { catalogLabel, categoryCount, entryNumber } from "../lib/catalog";
+import { entriesIn, publishedEntries } from "../lib/data";
+import { CATEGORY_LABEL, HTML_LANG, otherLang, t, type Lang } from "../lib/i18n";
+import { itemKicker } from "../lib/kicker";
 import { pickShowcase } from "../lib/showcase";
 import { TAB_ORDER } from "../lib/tabs";
 import { categoryIcon } from "../lib/ui-icons";
-import { href } from "../lib/url";
+import { entryHref, href } from "../lib/url";
 import EntryIcon from "./EntryIcon.astro";
+import LangText from "./LangText.astro";
 import UiIcon from "./UiIcon.astro";
 
 interface Props {
@@ -16,33 +17,30 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const countOf = (category: Category): number =>
-  category === "armor" ? allArmorSets.length : entriesIn(category).length;
-// Slot sizes for the collage, largest first; each item gets its own place in the home.css grid.
-const SHOWCASE_SIZES = [152, 112, 128, 96, 104, 88] as const;
+const alt = otherLang(lang);
 // The game name gets a line of its own, and "II" never wraps away from "Dungeons".
 const GAME_NAME = "Minecraft Dungeons II";
 const siteTitle = t(lang, "siteTitle");
 const titleRest = siteTitle.startsWith(GAME_NAME) ? siteTitle.slice(GAME_NAME.length).trim() : undefined;
-// The splash comes from the extract step; a glob keeps the build working when it has not been extracted.
-const splashModules = import.meta.glob<{ default: ImageMetadata }>("../assets/brand/splash.png", { eager: true });
-const splash = Object.values(splashModules)[0]?.default;
-const showcase = pickShowcase(publishedEntries, ["melee", "ranged", "armor", "talisman", "artifact", "enchantment"])
-  .slice(0, SHOWCASE_SIZES.length);
+// A trailing "(zh-TW)" is a qualifier, not part of the name: set it small instead of at display size.
+const [, titleWord = titleRest, titleTag] = titleRest?.match(/^(.*?)\s*(\(.+\))$/) ?? [];
+const FEATURED_SIZE = 240;
+const SIDE_SPECIMENS = 4;
+const PREVIEW_SPRITES = 6;
+const [featured, ...others] = pickShowcase(publishedEntries, ["melee", "ranged", "armor", "talisman", "artifact", "enchantment"]);
+const sideSpecimens = others.slice(0, SIDE_SPECIMENS);
+const featuredNumber = featured ? entryNumber(featured) : undefined;
+const PREVIEW_SIZE = 32;
+const previewOf = (category: Category) => entriesIn(category).filter((entry) => entry.icon !== undefined).slice(0, PREVIEW_SPRITES);
 ---
 <section class="home-hero">
-  {splash && (
-    <div class="hero-backdrop" aria-hidden="true">
-      <Image src={splash} alt="" widths={[960, 1600]} sizes="(min-width: 900px) 1180px, 100vw" format="webp" quality={68} loading="eager" fetchpriority="high" />
-    </div>
-  )}
   <div class="hero-copy">
     <p class="kicker">UNOFFICIAL FAN WIKI</p>
     <h1 class="home-title">
       {titleRest === undefined ? siteTitle : (
         <>
-          <span class="title-game">{GAME_NAME.replace(" II", "\u00a0II")}</span>{" "}
-          <span class="title-rest">{titleRest}</span>
+          <span class="title-game">{GAME_NAME.replace(" II", " II")}</span>{" "}
+          <span class="title-rest">{titleWord}{titleTag && <span class="title-tag">{titleTag}</span>}</span>
         </>
       )}
     </h1>
@@ -52,23 +50,47 @@ const showcase = pickShowcase(publishedEntries, ["melee", "ranged", "armor", "ta
       <button type="submit">{t(lang, "search")}</button>
     </form>
   </div>
-  <div class="hero-showcase" aria-hidden="true">
-    {showcase.map((entry, index) => (
-      <span class={`showcase-item showcase-${index + 1}`} style={`--i:${index}`}>
-        <EntryIcon icon={entry.icon} alt="" size={SHOWCASE_SIZES[index]} category={entry.category} variant={entry.variant} loading="eager" />
-      </span>
-    ))}
-  </div>
+  {featured && (
+    <figure class="hero-specimen">
+      <a class="specimen-plate" href={entryHref(lang, featured)}>
+        <span class="plate-no mono">{featuredNumber !== undefined ? `No. ${catalogLabel(featuredNumber)}` : ""}</span>
+        <span class="plate-art">
+          <EntryIcon icon={featured.icon} alt={featured.name[lang]} size={FEATURED_SIZE} category={featured.category} variant={featured.variant} loading="eager" />
+        </span>
+        <span class="plate-scale" aria-hidden="true"></span>
+      </a>
+      <figcaption class="specimen-caption">
+        <span class="caption-kicker">{itemKicker(featured.category, featured.variant)}</span>
+        <LangText lang={lang} value={featured.name} class={featured.variant === "unique" ? "caption-name is-unique" : "caption-name"} />
+      </figcaption>
+      <ul class="side-specimens" aria-label={t(lang, "browse")}>
+        {sideSpecimens.map((entry, index) => (
+          <li style={`--i:${index}`}>
+            <a href={entryHref(lang, entry)} title={entry.name[lang]}>
+              <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={56} category={entry.category} variant={entry.variant} loading="eager" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </figure>
+  )}
 </section>
 <section class="home-categories" aria-labelledby="browse-title">
-  <h2 class="section-title" id="browse-title"><span class="section-en">BROWSE</span><span>{t(lang, "browse")}</span></h2>
+  <h2 class="section-title" id="browse-title">{t(lang, "browse")}</h2>
   <ul class="category-grid">
     {TAB_ORDER.map((category, index) => (
       <li style={`--i:${index}`}>
         <a href={href(lang, category)}>
+          <span class="category-index mono" aria-hidden="true">{catalogLabel(index + 1).slice(1)}</span>
           <span class="category-slot"><UiIcon src={categoryIcon(category)} /></span>
           <span class="category-name">{CATEGORY_LABEL[category][lang]}</span>
-          <span class="count">{countOf(category)}</span>
+          <span class="category-alt item-alt" lang={HTML_LANG[alt]}>{CATEGORY_LABEL[category][alt]}</span>
+          <span class="category-preview" aria-hidden="true">
+            {previewOf(category).map((entry) => (
+              <EntryIcon icon={entry.icon} alt="" size={PREVIEW_SIZE} category={entry.category} variant={entry.variant} />
+            ))}
+          </span>
+          <span class="count">{categoryCount(category)}</span>
         </a>
       </li>
     ))}

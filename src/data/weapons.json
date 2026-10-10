@@ -1,0 +1,10301 @@
+{
+  "weapons": {
+    "war-hammer": {
+      "archetypes": [
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 40,
+            "hits": 1,
+            "stagger": 90,
+            "reach": 2.5,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 40,
+          "stagger": 90,
+          "reach": 1.75,
+          "knockback": 1610
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "pike": {
+      "archetypes": [
+        "Ranger",
+        "Summoner"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 28,
+            "reach": 4.95,
+            "knockback": 650
+          },
+          {
+            "damage": 17,
+            "hits": 1,
+            "stagger": 28,
+            "reach": 4.95,
+            "knockback": 650
+          },
+          {
+            "damage": 22,
+            "hits": 1,
+            "stagger": 50,
+            "reach": 5.25,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "sword": {
+      "archetypes": [
+        "Fighter"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 2.75,
+            "knockback": 500
+          },
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 2.75,
+            "knockback": 500
+          },
+          {
+            "damage": 22,
+            "hits": 1,
+            "stagger": 40,
+            "reach": 3.85,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37.5,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "gauntlet": {
+      "archetypes": [
+        "Fighter"
+      ],
+      "melee": {
+        "swings": [
+          {
+            "damage": 9,
+            "hits": 1,
+            "stagger": 14,
+            "reach": 2.4,
+            "knockback": 300
+          },
+          {
+            "damage": 9,
+            "hits": 1,
+            "stagger": 14,
+            "reach": 2.4,
+            "knockback": 300
+          },
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 20,
+            "reach": 2.75,
+            "knockback": 850
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 42,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "daggers": {
+      "archetypes": [
+        "Ranger",
+        "Support"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 6,
+            "hits": 1,
+            "stagger": 12.5,
+            "reach": 2.35,
+            "knockback": 500
+          },
+          {
+            "damage": 6,
+            "hits": 1,
+            "stagger": 12.5,
+            "reach": 2.35,
+            "knockback": 500
+          },
+          {
+            "damage": 9,
+            "hits": 1,
+            "stagger": 17.5,
+            "reach": 2.75,
+            "knockback": 750
+          }
+        ],
+        "jump": {
+          "damage": 14,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "axe": {
+      "archetypes": [
+        "Ranger",
+        "Summoner"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 27.5,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 27.5,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 22,
+            "hits": 1,
+            "stagger": 45,
+            "reach": 3.5,
+            "knockback": 700
+          }
+        ],
+        "jump": {
+          "damage": 21,
+          "stagger": 42.5,
+          "reach": 2.5,
+          "knockback": 1250
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "short-spear": {
+      "archetypes": [
+        "Ranger",
+        "Summoner"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 22.5,
+            "reach": 4,
+            "knockback": 500
+          },
+          {
+            "damage": 8,
+            "hits": 1,
+            "stagger": 8,
+            "reach": 4,
+            "knockback": 500
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 40,
+            "reach": 4.5,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "pickaxe": {
+      "archetypes": [
+        "Support"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 2.75,
+            "knockback": 500
+          },
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 2.75,
+            "knockback": 500
+          },
+          {
+            "damage": 24,
+            "hits": 1,
+            "stagger": 60,
+            "reach": 3,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 28,
+          "stagger": 45,
+          "reach": 2.5,
+          "knockback": 1250
+        }
+      },
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "rapier": {
+      "archetypes": [
+        "Support",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 6,
+            "hits": 1,
+            "stagger": 7.5,
+            "reach": 3.75,
+            "knockback": 500
+          },
+          {
+            "damage": 8,
+            "hits": 1,
+            "stagger": 7.5,
+            "reach": 3.75,
+            "knockback": 500
+          },
+          {
+            "damage": 28,
+            "hits": 1,
+            "stagger": 37.5,
+            "reach": 4.25,
+            "knockback": 750
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        }
+      ]
+    },
+    "war-hammer-unique1": {
+      "archetypes": [
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 40,
+            "hits": 1,
+            "stagger": 90,
+            "reach": 3,
+            "knockback": 900
+          }
+        ],
+        "jump": {
+          "damage": 40,
+          "stagger": 90,
+          "reach": 1.75,
+          "knockback": 1650
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "explosive-strike",
+        "value": 1
+      }
+    },
+    "pike-unique1": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 28,
+            "reach": 4.95,
+            "knockback": 650
+          },
+          {
+            "damage": 17,
+            "hits": 1,
+            "stagger": 28,
+            "reach": 4.95,
+            "knockback": 650
+          },
+          {
+            "damage": 22,
+            "hits": 1,
+            "stagger": 50,
+            "reach": 5.25,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "lightning-focus",
+        "value": 0.25
+      }
+    },
+    "sword-unique1": {
+      "archetypes": [
+        "Fighter"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 2.75,
+            "knockback": 500
+          },
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 2.75,
+            "knockback": 500
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 40,
+            "reach": 3.85,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37.5,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "fire-focus",
+        "value": 0.2
+      }
+    },
+    "gauntlet-unique1": {
+      "archetypes": [
+        "Fighter"
+      ],
+      "melee": {
+        "swings": [
+          {
+            "damage": 10,
+            "hits": 1,
+            "stagger": 14,
+            "reach": 2.4,
+            "knockback": 250
+          },
+          {
+            "damage": 11,
+            "hits": 1,
+            "stagger": 14,
+            "reach": 2.4,
+            "knockback": 300
+          },
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 20,
+            "reach": 2.75,
+            "knockback": 850
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 42,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "mauler-dive",
+        "values": [
+          "60%"
+        ]
+      }
+    },
+    "daggers-unique1": {
+      "archetypes": [
+        "Trickster"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 6,
+            "hits": 1,
+            "stagger": 12.5,
+            "reach": 2.45,
+            "knockback": 500
+          },
+          {
+            "damage": 6,
+            "hits": 1,
+            "stagger": 12.5,
+            "reach": 2.45,
+            "knockback": 500
+          },
+          {
+            "damage": 9,
+            "hits": 1,
+            "stagger": 17.5,
+            "reach": 2.85,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 14,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "poison-focus",
+        "value": 0.2
+      }
+    },
+    "axe-unique1": {
+      "archetypes": [
+        "Ranger",
+        "Summoner"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 27.5,
+            "reach": 2,
+            "knockback": 500
+          },
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 27.5,
+            "reach": 2,
+            "knockback": 500
+          },
+          {
+            "damage": 21,
+            "hits": 1,
+            "stagger": 45,
+            "reach": 3.5,
+            "knockback": 700
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 42.5,
+          "reach": 2.5,
+          "knockback": 1280
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "reconstruction",
+        "value": -0.35
+      }
+    },
+    "short-spear-unique1": {
+      "archetypes": [
+        "Ranger",
+        "Summoner"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 22.5,
+            "reach": 4,
+            "knockback": 500
+          },
+          {
+            "damage": 8,
+            "hits": 1,
+            "stagger": 8,
+            "reach": 4,
+            "knockback": 500
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 40,
+            "reach": 4.5,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "phantom-lance",
+        "values": [
+          "90%"
+        ]
+      }
+    },
+    "giant-club-unique1": {
+      "archetypes": [
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 35,
+            "hits": 1,
+            "stagger": 80,
+            "reach": 4,
+            "knockback": 1000
+          }
+        ],
+        "jump": {
+          "damage": 28,
+          "stagger": 85,
+          "reach": 2.5,
+          "knockback": 1650
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment-book",
+        "slug": "flame-belch-unique",
+        "values": [
+          "80%"
+        ]
+      }
+    },
+    "pickaxe-unique1": {
+      "archetypes": [
+        "Support"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 2.75,
+            "knockback": 500
+          },
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 2.75,
+            "knockback": 500
+          },
+          {
+            "damage": 24,
+            "hits": 1,
+            "stagger": 60,
+            "reach": 3,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 28,
+          "stagger": 45,
+          "reach": 2.5,
+          "knockback": 1280
+        }
+      },
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "emeralds-increase",
+        "value": 0.2
+      }
+    },
+    "rapier-unique1": {
+      "archetypes": [
+        "Trickster"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 6,
+            "hits": 1,
+            "stagger": 7.5,
+            "reach": 3.75,
+            "knockback": 500
+          },
+          {
+            "damage": 8,
+            "hits": 1,
+            "stagger": 7.5,
+            "reach": 3.75,
+            "knockback": 500
+          },
+          {
+            "damage": 28,
+            "hits": 1,
+            "stagger": 37.5,
+            "reach": 4.25,
+            "knockback": 750
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "rapid-strike",
+        "value": 0.3
+      }
+    },
+    "claymore": {
+      "archetypes": [
+        "Fighter",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3,
+            "knockback": 650
+          },
+          {
+            "damage": 25,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.85,
+            "knockback": 650
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 45,
+            "reach": 3.2,
+            "knockback": 750
+          }
+        ],
+        "jump": {
+          "damage": 25,
+          "stagger": 65,
+          "reach": 2.5,
+          "knockback": 1265
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "greatsword": {
+      "archetypes": [
+        "Fighter",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 50,
+            "reach": 4,
+            "knockback": 900
+          }
+        ],
+        "jump": {
+          "damage": 18,
+          "stagger": 75,
+          "reach": 2.5,
+          "knockback": 1265
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "claws": {
+      "archetypes": [
+        "Summoner",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 12.5,
+            "reach": 1.6,
+            "knockback": 500
+          },
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 12.5,
+            "reach": 1.7,
+            "knockback": 500
+          },
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 17.5,
+            "reach": 1.8,
+            "knockback": 700
+          }
+        ],
+        "jump": {
+          "damage": 12,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        }
+      ]
+    },
+    "glaive": {
+      "archetypes": [
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 3,
+            "knockback": 500
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 3,
+            "knockback": 500
+          },
+          {
+            "damage": 28,
+            "hits": 1,
+            "stagger": 40,
+            "reach": 3.5,
+            "knockback": 1000
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37.5,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "battlestaff": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 26,
+            "hits": 1,
+            "stagger": 60,
+            "reach": 3.25,
+            "knockback": 500
+          },
+          {
+            "damage": 26,
+            "hits": 1,
+            "stagger": 80,
+            "reach": 3.25,
+            "knockback": 500
+          },
+          {
+            "damage": 30,
+            "hits": 1,
+            "stagger": 100,
+            "reach": 4.5,
+            "knockback": 700
+          }
+        ],
+        "jump": {
+          "damage": 26,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "cleaver": {
+      "archetypes": [
+        "Summoner",
+        "Support"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 13,
+            "hits": 1,
+            "stagger": 15,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 13,
+            "hits": 1,
+            "stagger": 15,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.5,
+            "knockback": 700
+          }
+        ],
+        "jump": {
+          "damage": 20,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "sickles": {
+      "archetypes": [
+        "Summoner",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 9,
+            "hits": 1,
+            "stagger": 13,
+            "reach": 2.2,
+            "knockback": 500
+          },
+          {
+            "damage": 9,
+            "hits": 1,
+            "stagger": 13,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 13,
+            "hits": 1,
+            "stagger": 20,
+            "reach": 3,
+            "knockback": 750
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        }
+      ]
+    },
+    "scythe": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 22,
+            "hits": 1,
+            "stagger": 20,
+            "reach": 3,
+            "knockback": 700
+          },
+          {
+            "damage": 26,
+            "hits": 1,
+            "stagger": 20,
+            "reach": 3,
+            "knockback": 700
+          },
+          {
+            "damage": 30,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.5,
+            "knockback": 900
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "giant-club": {
+      "archetypes": [
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 35,
+            "hits": 1,
+            "stagger": 80,
+            "reach": 4,
+            "knockback": 1000
+          }
+        ],
+        "jump": {
+          "damage": 28,
+          "stagger": 85,
+          "reach": 2.5,
+          "knockback": 1610
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "curved-greatsword": {
+      "archetypes": [
+        "Fighter",
+        "Trickster"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 2,
+            "knockback": 650
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 2.5,
+            "knockback": 650
+          },
+          {
+            "damage": 30,
+            "hits": 1,
+            "stagger": 45,
+            "reach": 5,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 20,
+          "stagger": 65,
+          "reach": 2.5,
+          "knockback": 1265
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "giant-mallet": {
+      "archetypes": [
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 18,
+            "hits": 5,
+            "stagger": 75,
+            "reach": 4.2,
+            "knockback": 800
+          },
+          {
+            "damage": 24,
+            "hits": 1,
+            "stagger": 90,
+            "reach": 4.5,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 85,
+          "reach": 3.5,
+          "knockback": 1610
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "straight-sword": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 22.5,
+            "reach": 3.85,
+            "knockback": 500
+          },
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 22.5,
+            "reach": 4,
+            "knockback": 500
+          },
+          {
+            "damage": 26,
+            "hits": 1,
+            "stagger": 42,
+            "reach": 4.75,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 30,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "curved-longsword": {
+      "archetypes": [
+        "Fighter"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 10,
+            "reach": 3.2,
+            "knockback": 500
+          },
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 6,
+            "reach": 3.2,
+            "knockback": 500
+          },
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.2,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 20,
+          "stagger": 37.5,
+          "reach": 2,
+          "knockback": 1265
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "shovel": {
+      "archetypes": [
+        "Support",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 2.5,
+            "knockback": 400
+          },
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 2.5,
+            "knockback": 750
+          },
+          {
+            "damage": 60,
+            "hits": 1,
+            "stagger": 80,
+            "reach": 4,
+            "knockback": 850
+          }
+        ],
+        "jump": {
+          "damage": 30,
+          "stagger": 75,
+          "reach": 2.5,
+          "knockback": 850
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "mace": {
+      "archetypes": [
+        "Summoner",
+        "Tank"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 32,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 32,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 24,
+            "hits": 1,
+            "stagger": 48,
+            "reach": 2.5,
+            "knockback": 850
+          }
+        ],
+        "jump": {
+          "damage": 35,
+          "stagger": 48,
+          "reach": 3,
+          "knockback": 1250
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "dagger": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 25,
+            "hits": 1,
+            "stagger": 15,
+            "reach": 2.8,
+            "knockback": 500
+          }
+        ],
+        "jump": {
+          "damage": 28,
+          "stagger": 25,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "sabre": {
+      "archetypes": [
+        "Fighter",
+        "Support"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 23,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 23,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 22,
+            "hits": 1,
+            "stagger": 45,
+            "reach": 3.5,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 20,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "hammer": {
+      "archetypes": [
+        "Support",
+        "Tank"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 34,
+            "reach": 2.5,
+            "knockback": 400
+          },
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 34,
+            "reach": 2.5,
+            "knockback": 400
+          },
+          {
+            "damage": 25,
+            "hits": 1,
+            "stagger": 50,
+            "reach": 3,
+            "knockback": 900
+          }
+        ],
+        "jump": {
+          "damage": 30,
+          "stagger": 50,
+          "reach": 3,
+          "knockback": 1250
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "moon-sword": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 22,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 22,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 19,
+            "hits": 1,
+            "stagger": 38,
+            "reach": 3,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 36,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ]
+    },
+    "great-axe": {
+      "archetypes": [
+        "Fighter",
+        "Support"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 28,
+            "hits": 1,
+            "stagger": 48,
+            "reach": 3.5,
+            "knockback": 600
+          },
+          {
+            "damage": 30,
+            "hits": 1,
+            "stagger": 48,
+            "reach": 3.5,
+            "knockback": 1150
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 75,
+          "reach": 2.5,
+          "knockback": 1330
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "claymore-unique1": {
+      "archetypes": [
+        "Fighter",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3,
+            "knockback": 650
+          },
+          {
+            "damage": 25,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.85,
+            "knockback": 650
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 45,
+            "reach": 3.2,
+            "knockback": 750
+          }
+        ],
+        "jump": {
+          "damage": 25,
+          "stagger": 65,
+          "reach": 2.5,
+          "knockback": 1300
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "sweeping-edge",
+        "value": 0.5
+      }
+    },
+    "greatsword-unique1": {
+      "archetypes": [
+        "Fighter",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 50,
+            "reach": 4,
+            "knockback": 900
+          }
+        ],
+        "jump": {
+          "damage": 18,
+          "stagger": 75,
+          "reach": 2.5,
+          "knockback": 1300
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "gravity-pulse-unique"
+      }
+    },
+    "claws-unique1": {
+      "archetypes": [
+        "Summoner",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 12.5,
+            "reach": 1.6,
+            "knockback": 500
+          },
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 12.5,
+            "reach": 1.7,
+            "knockback": 500
+          },
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 17.5,
+            "reach": 1.8,
+            "knockback": 700
+          }
+        ],
+        "jump": {
+          "damage": 12,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "clawing-shadow-unique",
+        "values": [
+          "8%"
+        ]
+      }
+    },
+    "glaive-unique1": {
+      "archetypes": [
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 3,
+            "knockback": 500
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 3,
+            "knockback": 500
+          },
+          {
+            "damage": 28,
+            "hits": 1,
+            "stagger": 40,
+            "reach": 3.5,
+            "knockback": 1000
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37.5,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "vanguard",
+        "value": 0.6
+      }
+    },
+    "battlestaff-unique1": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 24,
+            "hits": 1,
+            "stagger": 90,
+            "reach": 3.25,
+            "knockback": 500
+          },
+          {
+            "damage": 24,
+            "hits": 1,
+            "stagger": 60,
+            "reach": 3.25,
+            "knockback": 500
+          },
+          {
+            "damage": 30,
+            "hits": 1,
+            "stagger": 100,
+            "reach": 4.5,
+            "knockback": 700
+          }
+        ],
+        "jump": {
+          "damage": 26,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "elemental-hit",
+        "value": 1
+      }
+    },
+    "cleaver-unique1": {
+      "archetypes": [
+        "Summoner",
+        "Support"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 13,
+            "hits": 1,
+            "stagger": 15,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 13,
+            "hits": 1,
+            "stagger": 15,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.5,
+            "knockback": 700
+          }
+        ],
+        "jump": {
+          "damage": 20,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1150
+        }
+      },
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "anima-conduit",
+        "value": 0.07
+      }
+    },
+    "sickles-unique1": {
+      "archetypes": [
+        "Summoner",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 9,
+            "hits": 1,
+            "stagger": 13,
+            "reach": 2.2,
+            "knockback": 500
+          },
+          {
+            "damage": 9,
+            "hits": 1,
+            "stagger": 13,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 13,
+            "hits": 1,
+            "stagger": 20,
+            "reach": 3,
+            "knockback": 750
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "healing-focus",
+        "value": 0.5
+      }
+    },
+    "scythe-unique1": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 22,
+            "hits": 1,
+            "stagger": 20,
+            "reach": 3,
+            "knockback": 500
+          },
+          {
+            "damage": 26,
+            "hits": 1,
+            "stagger": 20,
+            "reach": 3,
+            "knockback": 500
+          },
+          {
+            "damage": 30,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.5,
+            "knockback": 600
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "soul-gather-multiply",
+        "value": 0.6
+      }
+    },
+    "curved-greatsword-unique1": {
+      "archetypes": [
+        "Mage",
+        "Support"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 3,
+            "knockback": 650
+          },
+          {
+            "damage": 20,
+            "hits": 1,
+            "stagger": 25,
+            "reach": 3.85,
+            "knockback": 650
+          },
+          {
+            "damage": 30,
+            "hits": 1,
+            "stagger": 45,
+            "reach": 3.6,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 20,
+          "stagger": 65,
+          "reach": 2.5,
+          "knockback": 1300
+        }
+      },
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "soul-curse",
+        "value": 1
+      }
+    },
+    "giant-mallet-unique1": {
+      "archetypes": [
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 16,
+            "hits": 5,
+            "stagger": 75,
+            "reach": 3.8,
+            "knockback": 800
+          },
+          {
+            "damage": 24,
+            "hits": 1,
+            "stagger": 90,
+            "reach": 4.5,
+            "knockback": 1200
+          }
+        ],
+        "jump": {
+          "damage": 18,
+          "stagger": 85,
+          "reach": 3.5,
+          "knockback": 1650
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "protection",
+        "value": -0.25
+      }
+    },
+    "straight-sword-unique1": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 22.5,
+            "reach": 3.85,
+            "knockback": 500
+          },
+          {
+            "damage": 18,
+            "hits": 1,
+            "stagger": 22.5,
+            "reach": 4,
+            "knockback": 500
+          },
+          {
+            "damage": 26,
+            "hits": 1,
+            "stagger": 42,
+            "reach": 4.75,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 30,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "frost-focus",
+        "value": 0.3
+      }
+    },
+    "curved-longsword-unique1": {
+      "archetypes": [
+        "Fighter"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 10,
+            "reach": 3.2,
+            "knockback": 500
+          },
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 6,
+            "reach": 3.2,
+            "knockback": 500
+          },
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.2,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 20,
+          "stagger": 37.5,
+          "reach": 2,
+          "knockback": 1300
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "duelist",
+        "value": 0.4
+      }
+    },
+    "shovel-unique1": {
+      "archetypes": [
+        "Support",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 2.5,
+            "knockback": 400
+          },
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 2.5,
+            "knockback": 750
+          },
+          {
+            "damage": 60,
+            "hits": 1,
+            "stagger": 50,
+            "reach": 4,
+            "knockback": 850
+          }
+        ],
+        "jump": {
+          "damage": 30,
+          "stagger": 75,
+          "reach": 2.5,
+          "knockback": 1000
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "shockwave",
+        "values": [
+          "20%",
+          "200%"
+        ]
+      }
+    },
+    "mace-unique1": {
+      "archetypes": [
+        "Summoner",
+        "Tank"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 32,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 16,
+            "hits": 1,
+            "stagger": 32,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 24,
+            "hits": 1,
+            "stagger": 48,
+            "reach": 3,
+            "knockback": 850
+          }
+        ],
+        "jump": {
+          "damage": 35,
+          "stagger": 48,
+          "reach": 3,
+          "knockback": 1280
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "finesse",
+        "value": 0.35
+      }
+    },
+    "dagger-unique1": {
+      "archetypes": [
+        "Mage",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "melee": {
+        "swings": [
+          {
+            "damage": 25,
+            "hits": 1,
+            "stagger": 15,
+            "reach": 2.8,
+            "knockback": 500
+          }
+        ],
+        "jump": {
+          "damage": 28,
+          "stagger": 25,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "soul-focus",
+        "value": 0.2
+      }
+    },
+    "sabre-unique1": {
+      "archetypes": [
+        "Fighter",
+        "Trickster"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 12,
+            "hits": 1,
+            "stagger": 23,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 14,
+            "hits": 1,
+            "stagger": 23,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 22,
+            "hits": 1,
+            "stagger": 45,
+            "reach": 3.5,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 20,
+          "stagger": 37,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "roll-cooldown",
+        "value": 0.4
+      }
+    },
+    "hammer-unique1": {
+      "archetypes": [
+        "Support",
+        "Tank"
+      ],
+      "weight": "Medium",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 34,
+            "reach": 2.5,
+            "knockback": 400
+          },
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 34,
+            "reach": 2.5,
+            "knockback": 400
+          },
+          {
+            "damage": 25,
+            "hits": 1,
+            "stagger": 50,
+            "reach": 3,
+            "knockback": 900
+          }
+        ],
+        "jump": {
+          "damage": 30,
+          "stagger": 50,
+          "reach": 3,
+          "knockback": 1280
+        }
+      },
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "opulence",
+        "value": 0.05
+      }
+    },
+    "moon-sword-unique1": {
+      "archetypes": [
+        "Mage"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 22,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 15,
+            "hits": 1,
+            "stagger": 22,
+            "reach": 2.5,
+            "knockback": 500
+          },
+          {
+            "damage": 23,
+            "hits": 1,
+            "stagger": 38,
+            "reach": 3,
+            "knockback": 800
+          }
+        ],
+        "jump": {
+          "damage": 22,
+          "stagger": 36,
+          "reach": 2.5,
+          "knockback": 1175
+        }
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "reeling",
+        "value": 0.6
+      }
+    },
+    "great-axe-unique1": {
+      "archetypes": [
+        "Fighter",
+        "Support"
+      ],
+      "weight": "Heavy",
+      "melee": {
+        "swings": [
+          {
+            "damage": 28,
+            "hits": 1,
+            "stagger": 30,
+            "reach": 3.1,
+            "knockback": 800
+          },
+          {
+            "damage": 30,
+            "hits": 1,
+            "stagger": 48,
+            "reach": 3.3,
+            "knockback": 600
+          }
+        ],
+        "jump": {
+          "damage": 24,
+          "stagger": 75,
+          "reach": 2.5,
+          "knockback": 1370
+        }
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "duelist",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "finesse",
+          "tiers": [
+            0.15,
+            0.25,
+            0.35
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "precision",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "status-on-hit-strength",
+        "value": 0.06
+      }
+    },
+    "bow": {
+      "archetypes": [],
+      "weight": "Light",
+      "ranged": {
+        "damage": 18,
+        "projectiles": 1,
+        "chargedMultiplier": 3,
+        "attackRateSeconds": 0.4,
+        "ammo": 15,
+        "range": 7.5,
+        "chargeSeconds": 0.35,
+        "rechargeSeconds": 1.2,
+        "jumpShotMultiplier": 1,
+        "stagger": 22.5,
+        "knockback": 500
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        }
+      ]
+    },
+    "crossbow": {
+      "archetypes": [
+        "Fighter"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 24,
+        "projectiles": 1,
+        "chargedMultiplier": 2.5,
+        "attackRateSeconds": 0.6,
+        "ammo": 15,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 1.5,
+        "jumpShotMultiplier": 1,
+        "stagger": 35.1,
+        "knockback": 500
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "shortbow": {
+      "archetypes": [
+        "Ranger",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 11,
+        "projectiles": 1,
+        "chargedMultiplier": 3,
+        "attackRateSeconds": 0.2,
+        "ammo": 18,
+        "range": 7.5,
+        "chargeSeconds": 0.125,
+        "rechargeSeconds": 1,
+        "jumpShotMultiplier": 1,
+        "stagger": 17.1,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "supercharge",
+          "tiers": [
+            0.3,
+            0.35,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        }
+      ]
+    },
+    "trickbow": {
+      "archetypes": [
+        "Trickster"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 14,
+        "projectiles": 1,
+        "chargedMultiplier": 3,
+        "attackRateSeconds": 0.3,
+        "ammo": 15,
+        "range": 7.5,
+        "chargeSeconds": 0.2,
+        "rechargeSeconds": 1.2,
+        "jumpShotMultiplier": 1.5,
+        "stagger": 13.5,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        }
+      ]
+    },
+    "longbow": {
+      "archetypes": [
+        "Ranger"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 25,
+        "projectiles": 1,
+        "chargedMultiplier": 3,
+        "attackRateSeconds": 0.5,
+        "ammo": 12,
+        "range": 7.5,
+        "chargeSeconds": 0.4,
+        "rechargeSeconds": 1.5,
+        "jumpShotMultiplier": 1,
+        "stagger": 29.7,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "supercharge",
+          "tiers": [
+            0.3,
+            0.35,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        }
+      ]
+    },
+    "powerbow": {
+      "archetypes": [
+        "Fighter",
+        "Ranger"
+      ],
+      "weight": "Heavy",
+      "ranged": {
+        "damage": 40,
+        "projectiles": 1,
+        "chargedMultiplier": 4,
+        "attackRateSeconds": 0.5,
+        "ammo": 12,
+        "range": 7.5,
+        "chargeSeconds": 0.4,
+        "rechargeSeconds": 1.5,
+        "jumpShotMultiplier": 0.75,
+        "stagger": 27,
+        "knockback": 750
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "supercharge",
+          "tiers": [
+            0.3,
+            0.35,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "scatter-crossbow": {
+      "archetypes": [
+        "Summoner",
+        "Support"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 12,
+        "projectiles": 3,
+        "chargedMultiplier": 1,
+        "attackRateSeconds": 0.4,
+        "ammo": 12,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 1.5,
+        "jumpShotMultiplier": 1,
+        "stagger": 12.6,
+        "knockback": 300
+      },
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        }
+      ]
+    },
+    "heavy-crossbow": {
+      "archetypes": [
+        "Fighter",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "ranged": {
+        "damage": 108,
+        "projectiles": 1,
+        "chargedMultiplier": 1,
+        "attackRateSeconds": 0.95,
+        "ammo": 8,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 2,
+        "jumpShotMultiplier": 1,
+        "stagger": 60.75,
+        "knockback": 800
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "point-blank",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "dual-crossbow": {
+      "archetypes": [
+        "Mage",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 12,
+        "projectiles": 2,
+        "chargedMultiplier": 1,
+        "attackRateSeconds": 0.6,
+        "ammo": 20,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 1,
+        "jumpShotMultiplier": 1,
+        "stagger": 16.2,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        }
+      ]
+    },
+    "rapid-crossbow": {
+      "archetypes": [
+        "Ranger",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 8,
+        "projectiles": 1,
+        "chargedMultiplier": 1,
+        "attackRateSeconds": 0.2,
+        "ammo": 25,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 0.8,
+        "jumpShotMultiplier": 1,
+        "stagger": 8.1,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        }
+      ]
+    },
+    "bow-unique1": {
+      "archetypes": [],
+      "weight": "Light",
+      "ranged": {
+        "damage": 18,
+        "projectiles": 1,
+        "chargedMultiplier": 3,
+        "attackRateSeconds": 0.4,
+        "ammo": 15,
+        "range": 7.5,
+        "chargeSeconds": 0.3,
+        "rechargeSeconds": 0.8,
+        "jumpShotMultiplier": 1,
+        "stagger": 22.5,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "eagle-eye",
+        "value": 0.25
+      }
+    },
+    "crossbow-unique1": {
+      "archetypes": [
+        "Fighter"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 24,
+        "projectiles": 1,
+        "chargedMultiplier": 2.5,
+        "attackRateSeconds": 0.6,
+        "ammo": 15,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 1.5,
+        "jumpShotMultiplier": 1,
+        "stagger": 35.1,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "chains",
+        "value": 0.3
+      }
+    },
+    "shortbow-unique1": {
+      "archetypes": [
+        "Ranger",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 11,
+        "projectiles": 1,
+        "chargedMultiplier": 3,
+        "attackRateSeconds": 0.2,
+        "ammo": 18,
+        "range": 7.5,
+        "chargeSeconds": 0.125,
+        "rechargeSeconds": 1,
+        "jumpShotMultiplier": 1,
+        "stagger": 17.1,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "supercharge",
+          "tiers": [
+            0.3,
+            0.35,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "sidestep",
+        "value": 0.2
+      }
+    },
+    "trickbow-unique1": {
+      "archetypes": [
+        "Trickster"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 14,
+        "projectiles": 1,
+        "chargedMultiplier": 3,
+        "attackRateSeconds": 0.3,
+        "ammo": 15,
+        "range": 7.5,
+        "chargeSeconds": 0.2,
+        "rechargeSeconds": 1.2,
+        "jumpShotMultiplier": 1.5,
+        "stagger": 13.5,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "jumpshot",
+        "value": 0.06
+      }
+    },
+    "longbow-unique1": {
+      "archetypes": [
+        "Ranger"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 25,
+        "projectiles": 1,
+        "chargedMultiplier": 3,
+        "attackRateSeconds": 0.5,
+        "ammo": 12,
+        "range": 7.5,
+        "chargeSeconds": 0.4,
+        "rechargeSeconds": 1.5,
+        "jumpShotMultiplier": 1,
+        "stagger": 29.7,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "supercharge",
+          "tiers": [
+            0.3,
+            0.35,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "sniper",
+        "value": 1
+      }
+    },
+    "powerbow-unique1": {
+      "archetypes": [
+        "Fighter",
+        "Ranger"
+      ],
+      "weight": "Heavy",
+      "ranged": {
+        "damage": 40,
+        "projectiles": 1,
+        "chargedMultiplier": 4,
+        "attackRateSeconds": 0.5,
+        "ammo": 12,
+        "range": 7.5,
+        "chargeSeconds": 0.4,
+        "rechargeSeconds": 1.5,
+        "jumpShotMultiplier": 1,
+        "stagger": 27,
+        "knockback": 750
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "supercharge",
+          "tiers": [
+            0.3,
+            0.35,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "power",
+        "value": 0.3
+      }
+    },
+    "scatter-crossbow-unique1": {
+      "archetypes": [
+        "Summoner",
+        "Support"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 12,
+        "projectiles": 3,
+        "chargedMultiplier": 1,
+        "attackRateSeconds": 0.4,
+        "ammo": 12,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 1.5,
+        "jumpShotMultiplier": 1,
+        "stagger": 12.6,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "tiers": [
+            0.25,
+            0.35,
+            0.5
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "effect": "chains",
+          "tiers": [
+            0.1,
+            0.15,
+            0.25
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "multi-shot",
+        "value": 0.6
+      }
+    },
+    "heavy-crossbow-unique1": {
+      "archetypes": [
+        "Fighter",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "ranged": {
+        "damage": 108,
+        "projectiles": 1,
+        "chargedMultiplier": 1,
+        "attackRateSeconds": 0.95,
+        "ammo": 8,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 2,
+        "jumpShotMultiplier": 1,
+        "stagger": 60.75,
+        "knockback": 800
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "point-blank",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "point-blank",
+        "value": 1
+      }
+    },
+    "rapid-crossbow-unique1": {
+      "archetypes": [
+        "Ranger",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 8,
+        "projectiles": 1,
+        "chargedMultiplier": 1,
+        "attackRateSeconds": 0.2,
+        "ammo": 25,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 0.8,
+        "jumpShotMultiplier": 1,
+        "stagger": 8.1,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "hairtrigger",
+        "value": 0.4
+      }
+    },
+    "greatbow": {
+      "archetypes": [
+        "Fighter",
+        "Ranger"
+      ],
+      "weight": "Heavy",
+      "ranged": {
+        "damage": 72,
+        "projectiles": 1,
+        "chargedMultiplier": 4,
+        "attackRateSeconds": 0.4,
+        "ammo": 10,
+        "range": 7.5,
+        "chargeSeconds": 0.3,
+        "rechargeSeconds": 1.2,
+        "jumpShotMultiplier": 0.75,
+        "stagger": 27,
+        "knockback": 1000
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "supercharge",
+          "tiers": [
+            0.3,
+            0.35,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ]
+    },
+    "dual-crossbow-unique1": {
+      "archetypes": [
+        "Mage",
+        "Trickster"
+      ],
+      "weight": "Light",
+      "ranged": {
+        "damage": 12,
+        "projectiles": 2,
+        "chargedMultiplier": 1,
+        "attackRateSeconds": 0.6,
+        "ammo": 20,
+        "range": 7.5,
+        "chargeSeconds": 0,
+        "rechargeSeconds": 1,
+        "jumpShotMultiplier": 1,
+        "stagger": 16.2,
+        "knockback": 400
+      },
+      "compatible": [
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "tiers": [
+            0.25,
+            0.35,
+            0.45
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "dynamo",
+        "values": [
+          "50%"
+        ]
+      }
+    },
+    "greatbow-unique1": {
+      "archetypes": [
+        "Fighter",
+        "Ranger",
+        "Tank"
+      ],
+      "weight": "Heavy",
+      "ranged": {
+        "damage": 72,
+        "projectiles": 1,
+        "chargedMultiplier": 4,
+        "attackRateSeconds": 0.4,
+        "ammo": 10,
+        "range": 7.5,
+        "chargeSeconds": 0.3,
+        "rechargeSeconds": 1.2,
+        "jumpShotMultiplier": 0.75,
+        "stagger": 27,
+        "knockback": 1000
+      },
+      "compatible": [
+        {
+          "effect": "eagle-eye",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "committed",
+          "tiers": [
+            0.2,
+            0.25,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "tiers": [
+            0.05,
+            0.1,
+            0.15
+          ]
+        },
+        {
+          "effect": "power",
+          "tiers": [
+            0.1,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "knockback",
+          "tiers": [
+            0.15,
+            0.2,
+            0.3
+          ]
+        },
+        {
+          "effect": "looting",
+          "tiers": [
+            0.2,
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "effect": "master-marksman",
+          "tiers": [
+            0.15,
+            0.2,
+            0.25
+          ]
+        },
+        {
+          "effect": "reeling",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "desperation",
+          "tiers": [
+            0.1,
+            0.15,
+            0.2
+          ]
+        },
+        {
+          "effect": "point-blank",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        },
+        {
+          "effect": "opulence",
+          "tiers": [
+            0.01,
+            0.02,
+            0.03
+          ]
+        },
+        {
+          "effect": "multi-shot",
+          "tiers": [
+            0.2,
+            0.3,
+            0.4
+          ]
+        },
+        {
+          "effect": "supercharge",
+          "tiers": [
+            0.3,
+            0.35,
+            0.4
+          ]
+        },
+        {
+          "effect": "sniper",
+          "tiers": [
+            0.25,
+            0.5,
+            0.75
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "tiers": [
+            0.2,
+            0.35,
+            0.5
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "piercing",
+        "values": [
+          "10"
+        ]
+      }
+    }
+  },
+  "effectFormats": {
+    "protection": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "sharpness": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "rapid-strike": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "speed-boost": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "cooldown": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "power": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "constitution": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "hairtrigger": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "sidestep": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "regeneration": {
+      "percent": true,
+      "multiplier": 2,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "finesse": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "fire-focus": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "projectile-protection": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "vestige": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "lightning-focus": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "soul-focus": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "poison-focus": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "critical-hit": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "critical-edge": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "precision": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "master-strike": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "eagle-eye": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "master-marksman": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "reeling": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "knockback": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "reconstruction": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "desperation": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "supercharge": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "health-boost": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": -1,
+      "maxFractionDigits": 2
+    },
+    "plummeting": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": -1,
+      "maxFractionDigits": 2
+    },
+    "expand": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "elemental-protection": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "opportunist": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "deflect": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "looting": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "opulence": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "swift-sneak": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "gambler": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "soul-gather": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "potion-cooldown": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "emeralds-increase": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "drop-chance": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "artifact-healing": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "sweeping-edge": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "thorns": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "frost-focus": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "point-blank": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "sniper": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "roll-cooldown": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "soul-max": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": -1,
+      "maxFractionDigits": 2
+    },
+    "soul-gather-multiply": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "anima-conduit": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "multi-shot": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "vivify": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "resilience": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "saboteur": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "chains": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "healing-focus": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "shadow-walk": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "duelist": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "lucky": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "beast-boss": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "arrow-burst": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "ammo-capacity": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": -1,
+      "maxFractionDigits": 2
+    },
+    "friendship": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "friends-forever": {
+      "percent": true,
+      "multiplier": -1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "committed": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "vanguard": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    },
+    "status-buff": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": -1,
+      "maxFractionDigits": 2
+    },
+    "experience-increase": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": -1,
+      "maxFractionDigits": 2
+    },
+    "jumpshot": {
+      "percent": true,
+      "multiplier": 1,
+      "offset": 0,
+      "maxFractionDigits": 2
+    }
+  }
+}

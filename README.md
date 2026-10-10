@@ -7,6 +7,7 @@
 1. 將遊戲解包檔放在 `source-data/`（不進 git）。
 2. `npm run extract` → 更新 `src/data/*.json`、`public/icons/`，並產生 `extract-report.md`。
 3. 檢查報告；缺圖示時編輯 `scripts/extract/icon-overrides.json` 後重跑。
+   效果圖示在遊戲的 OreUI 外掛裡，不在 `Assets/` 下：把解包的 `Plugins/OreUI/Content/UI/Icons/Effects/` 以相同路徑放進 `source-data/`。效果沒有圖示時照常發布，只是不顯示圖。
 4. Commit `src/data`、`public/icons`、`src/assets/brand`、`scripts/extract/icon-overrides.json`。
 
 網站圖示（favicon、主畫面圖示、分享預覽圖）與首頁背景取自遊戲 `Assets/UI/Icons/` 的 Logo 與 SplashScreen，同樣由 `npm run extract` 複製；首頁背景在 build 時轉成 WebP。分享預覽圖需要絕對網址，部署時由 `SITE_URL` 提供。
@@ -27,6 +28,21 @@
 
 網站新增公開分類時（`src/lib/tabs.ts`），對應圖示會自動改判為「網站已發布」。
 
+## 武器數值與效果（遊戲資料表）
+
+`npm run extract` 也會讀遊戲的 DataTables，產生 `src/data/weapons.json`：每一擊／每一發的數值、定位與重量、可出現的效果（含 I/II/III 數值）與獨特武器的固定效果。
+同一步驟也會產生：
+
+- `src/data/artifacts.json`：神器的冷卻時間、靈魂消耗、持續時間、範圍與可出現的效果。
+- `src/data/effects.json`：效果說明中的數值（I/II/III），取自各等級的效果模板。
+- `src/data/enchantments.json`：附魔說明中的數值（I/II/III），依附魔技能的 key value 與各等級的 Override／Add 調整計算；整數型的機率值已是百分比（8 = 8%）。
+
+- 資料表放在 `source-data/DataTables/UFS/`（解包的 `Content/Spicewood/Core/DataTables/`）；缺少時武器數值與效果不會產生，報告會列出 `missing-datatables`。
+- 可出現的效果依遊戲規則計算：掉落表依武器標籤選出效果群組，再以各效果基底模板的 `IncompatibleTagsQuery` 排除不適用的武器種類。
+- 每一擊的時間與每秒傷害來自動畫檔，不在資料表裡，因此沒有顯示。
+- 效果、附魔、附魔書與護符的說明若有遊戲資料算不出的數值，整個條目暫不上架（附魔書無法填值時，其附魔也一併隱藏）；獨特武器的固定效果卡同理。
+- 資料表沒有的固定效果數值（存在技能藍圖中）寫在 `src/data/fixed-bonus-overrides.json`，每筆註明確認來源。
+
 ## 開發
 
 ```bash
@@ -39,8 +55,8 @@ npm run build        # 產生 dist/ 與 Pagefind 索引
 
 ## 字型
 
-- 俐方體 11 號（Cubic 11，`src/assets/fonts/cubic-11/`）與 Silkscreen（`@fontsource/silkscreen`）皆為 SIL Open Font License 1.1。
-- 授權全文：`public/licenses/Cubic-11-OFL.txt`（網站頁尾有連結）；Silkscreen 授權隨 npm 套件提供。
+- Noto Serif TC（`@fontsource/noto-serif-tc`，標題）、Geist 與 Geist Mono（`@fontsource-variable/geist`、`@fontsource-variable/geist-mono`，內文與編號）皆為 SIL Open Font License 1.1。
+- 授權全文隨各 npm 套件提供；網站頁尾列出使用的字型。
 
 ## 部署
 

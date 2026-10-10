@@ -69,6 +69,7 @@ beforeEach(async () => {
   await put(sourceRoot, "Assets/Art/Characters/Player/Skins/Darian/T_Darian_Skin_Icon.png", "png:darian");
   await put(sourceRoot, "Assets/UI/Icons/Enchantments/T_UI_Icon_Enchantment_Arcane.png", "png:arcane");
   await put(sourceRoot, "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Burning.png", "png:burning");
+  await put(sourceRoot, "Plugins/OreUI/Content/UI/Icons/Effects/T_UI_Icon_Effect_CriticalEdge.png", "png:critical-edge");
   await put(sourceRoot, "Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png", "png:artifact-frame");
   await put(sourceRoot, "Assets/UI/Icons/Categories/T_UI_Icon_Category_Melee.png", "png:melee-category");
   await put(sourceRoot, "Assets/UI/Icons/SmallLogo.png", "png:small-logo");
@@ -105,7 +106,8 @@ describe("runExtract", () => {
     expect(find("artifact", "frost-quiver")?.icon).toBe("icons/artifact/frost-quiver.png");
     expect(find("enchantment", "arcane")?.links).toEqual({ enchantmentBook: "arcane" });
     expect(find("effect", "critical-edge")?.description?.zh).toContain('<span class="placeholder">{數值}</span>');
-    expect(find("effect", "critical-edge")?.icon).toBeUndefined();
+    expect(find("effect", "critical-edge")?.icon).toBe("icons/effect/critical-edge.png");
+    expect(await readFile(path.join(outRoot, "public", "icons", "effect", "critical-edge.png"), "utf8")).toBe("png:critical-edge");
     expect(find("enchantment", "arcane")?.icon).toBe("icons/enchantment/arcane.png");
     expect(find("enchantment-book", "arcane")?.icon).toBe("icons/enchantment-book/arcane.png");
     expect(find("status", "burning")?.icon).toBe("icons/status/burning.png");
@@ -123,7 +125,7 @@ describe("runExtract", () => {
     ]);
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-icon (1)\n\n- armor:DiscipleChest");
-    expect(summary).toMatchObject({ entries: 14, armorSets: 1, icons: 11 });
+    expect(summary).toMatchObject({ entries: 14, armorSets: 1, icons: 12 });
   });
 
   it("extracts talismans and cosmetics with icons, unlock text and no duplicates", async () => {

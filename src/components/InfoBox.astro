@@ -1,10 +1,13 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
+import { catalogLabel, entryNumber } from "../lib/catalog";
 import { findArmorSet } from "../lib/data";
 import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../lib/i18n";
 import { categoryIcon, pieceIcon } from "../lib/ui-icons";
 import { href } from "../lib/url";
 import EntryIcon from "./EntryIcon.astro";
+import RarityTags from "./RarityTags.astro";
+import RarityTerm from "./RarityTerm.astro";
 import UiIcon from "./UiIcon.astro";
 
 interface Props {
@@ -15,10 +18,14 @@ interface Props {
 const { lang, entry } = Astro.props;
 const set = entry.links.armorSet ? findArmorSet(entry.links.armorSet) : undefined;
 const listCategory = entry.category === "enchantment-book" ? "enchantment" : entry.category;
+const number = entryNumber(entry);
+const PLATE_ICON_SIZE = 200;
 ---
-<aside class="info-box panel" data-testid="info-box">
-  <div class="entry-head">
-    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={160} category={entry.category} variant={entry.variant} loading="eager" searchImage />
+<aside class="info-box" data-testid="info-box">
+  <div class="entry-head specimen-plate">
+    {number !== undefined && <span class="plate-no mono" aria-hidden="true" data-pagefind-ignore>No. {catalogLabel(number)}</span>}
+    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={PLATE_ICON_SIZE} category={entry.category} variant={entry.variant} loading="eager" searchImage />
+    <span class="plate-scale" aria-hidden="true"></span>
   </div>
   <dl class="facts" data-pagefind-ignore>
     <div>
@@ -26,8 +33,8 @@ const listCategory = entry.category === "enchantment-book" ? "enchantment" : ent
       <dd><a href={href(lang, listCategory)}><UiIcon src={categoryIcon(entry.category)} />{CATEGORY_LABEL[entry.category][lang]}</a></dd>
     </div>
     <div>
-      <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
-      <dd class:list={{ "is-unique": entry.variant === "unique" }}>{t(lang, entry.variant)}</dd>
+      <dt data-pagefind-ignore><RarityTerm lang={lang} variant={entry.variant} /></dt>
+      <dd class:list={{ "is-unique": entry.variant === "unique" }}><RarityTags lang={lang} variant={entry.variant} /></dd>
     </div>
     {entry.armorPiece && (
       <div>

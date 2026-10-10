@@ -97,8 +97,8 @@ test("enchantment page explains it comes from an enchantment book", async ({ pag
 });
 
 test("enchantment page shows a book description that differs from the enchantment", async ({ page }) => {
-  await page.goto("/zh/enchantment/fire-aspect-ii/");
-  await expect(page.getByTestId("book-source")).toContainText("波動會造成相當於武器傷害");
+  await page.goto("/zh/enchantment/poison-fog/");
+  await expect(page.getByTestId("book-source")).toContainText("劇毒波動");
 });
 
 test("entries without an icon are not published", async ({ page, request }) => {
@@ -118,9 +118,7 @@ test("icons sit inside the game's slot frames", async ({ page, request }) => {
   await expect(page.locator(".entry-head .icon-frame.frame-inventory img")).toBeVisible();
   await page.goto("/zh/enchantment/arcane/");
   await expect(page.locator(".entry-head .icon-frame.frame-enchantment img")).toBeVisible();
-  for (const frame of ["artifact", "enchantment"]) {
-    expect((await request.get(`/icons/frames/${frame}.png`)).status()).toBe(200);
-  }
+  expect((await request.get("/icons/frames/enchantment.png")).status()).toBe(200);
 });
 
 const slotBorder = (el: Element) => getComputedStyle(el).getPropertyValue("--slot-border").trim().toLowerCase();
@@ -128,22 +126,66 @@ const slotBorder = (el: Element) => getComputedStyle(el).getPropertyValue("--slo
 test("normal gear uses the plain inventory slot", async ({ page }) => {
   await page.goto("/zh/melee/sword/");
   const slot = page.locator(".entry-head .icon-frame.frame-inventory");
-  expect(await slot.evaluate(slotBorder)).toBe("#897a6d");
+  expect(await slot.evaluate(slotBorder)).toBe("#cfd2cc");
   await expect(slot.locator(".slot-star")).toHaveCount(0);
 });
 
-test("unique gear uses the orange slot with the corner rarity mark and no star", async ({ page }) => {
+const tagArt = (el: Element) => getComputedStyle(el).borderImageSource;
+
+test("the rarity row shows the game's rarity tags with the name inside", async ({ page }) => {
+  await page.goto("/zh/melee/sword-unique1/");
+  const uniqueTags = page.getByTestId("info-box").locator(".rarity-tag");
+  await expect(uniqueTags).toHaveCount(1);
+  await expect(uniqueTags).toHaveText("獨特");
+  expect(await uniqueTags.evaluate(tagArt)).toMatch(/unique\.[\w-]+\.png/);
+
+  // "Every item can be common, rare, or special" (official wiki), so all three are listed.
+  await page.goto("/zh/melee/sword/");
+  const normalTags = page.getByTestId("info-box").locator(".rarity-tag");
+  await expect(normalTags).toHaveText(["普通", "稀有", "特殊"]);
+  const arts = await normalTags.evaluateAll((els) => els.map((el) => getComputedStyle(el).borderImageSource));
+  ["common", "rare", "special"].forEach((tier, i) => expect(arts[i]).toContain(`/${tier}.`));
+
+  await page.goto("/en/armor/disciple/");
+  await expect(page.getByTestId("info-box").locator(".rarity-tag")).toHaveText(["Common", "Rare", "Special"]);
+});
+
+test("the rarity label explains the tiers on hover and focus, not in the row", async ({ page }) => {
+  await page.goto("/zh/melee/sword/");
+  const box = page.getByTestId("info-box");
+  await expect(box.locator(".rarity")).not.toContainText("可能為");
+  const term = box.locator(".rarity-term");
+  const hint = page.locator(`#${await term.getAttribute("aria-describedby")}`);
+  await expect(hint).toBeHidden();
+  await term.hover();
+  await expect(hint).toBeVisible();
+  await expect(hint).toHaveText("每件物品都可能是普通、稀有或特殊品質，這裡列出所有可能。");
+  await page.mouse.move(5, 5);
+  await expect(hint).toBeHidden();
+  await term.focus();
+  await expect(hint).toBeVisible();
+
+  await page.goto("/zh/melee/sword-unique1/");
+  const uniqueTerm = page.getByTestId("info-box").locator(".rarity-term");
+  await uniqueTerm.hover();
+  await expect(page.locator(`#${await uniqueTerm.getAttribute("aria-describedby")}`)).toHaveText(
+    "獨特版本是此物品的另一種型態，有自己的名稱與外觀。",
+  );
+});
+
+test("unique gear uses the vermilion crop marks and no star", async ({ page }) => {
   await page.goto("/zh/melee/sword-unique1/");
   const slot = page.locator(".entry-head .icon-frame.frame-inventory.is-unique");
-  expect(await slot.evaluate(slotBorder)).toBe("#ff7e2f");
+  expect(await slot.evaluate(slotBorder)).toBe("#c4391f");
   await expect(slot.locator(".slot-mark")).toBeVisible();
   await expect(slot.locator(".slot-star")).toHaveCount(0);
 });
 
-test("artifacts sit in the hotbar artifact slot", async ({ page }) => {
+test("artifacts are shown bare on the plate like other gear", async ({ page }) => {
   await page.goto("/zh/artifact/");
+  await expect(page.locator(".entry-card .icon-frame.frame-artifact")).toHaveCount(0);
   await openFromList(page, page.locator(".entry-card").first());
-  await expect(page.locator(".entry-head .icon-frame.frame-artifact img")).toBeVisible();
+  await expect(page.locator(".entry-head .icon-frame.frame-inventory img")).toBeVisible();
 });
 
 test("enchantment icons fill the diamond window of the book frame", async ({ page }) => {
@@ -176,7 +218,8 @@ test("armor pieces are labelled with their slot icon", async ({ page }) => {
 
 test("talismans have their own pages", async ({ page }) => {
   await page.goto("/zh/talisman/");
-  await expect(page.locator(".entry-card")).toHaveCount(24);
+  // 24 talismans, less the 3 whose descriptions need values the game data cannot give (Firing Emeralds, Healthy Strike, Speed Increment).
+  await expect(page.locator(".entry-card")).toHaveCount(21);
   await page.goto("/zh/talisman/ammo-capacity/");
   await expect(page.locator("h1 .primary")).toHaveText("黑橡木枝條");
   await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();
@@ -199,9 +242,14 @@ test("the normal/unique filter only appears where unique items exist", async ({ 
   await expect(page.locator("button[data-variant='unique']")).toHaveCount(1);
 });
 
-test("effect table shows placeholder markers", async ({ page }) => {
+test("pages show filled values and never an unfilled placeholder; entries the data cannot fill are hidden", async ({ page, request }) => {
+  for (const path of ["/zh/effect/", "/zh/enchantment/", "/zh/talisman/", "/zh/enchantment/shockwave/", "/zh/melee/greatsword-unique1/", "/zh/enchantment/fire-aspect/"]) {
+    await page.goto(path);
+    await expect(page.locator(".placeholder"), path).toHaveCount(0);
+  }
   await page.goto("/zh/effect/");
-  await expect(page.locator(".placeholder").first()).toHaveText("{數值}");
+  await expect(page.locator("tr", { has: page.locator("#critical-edge") }).locator(".value").first()).toHaveText("10%~30%");
+  expect((await request.get("/zh/enchantment/gravity-pulse/")).status()).toBe(404);
 });
 
 test("search finds entries by Chinese and English terms", async ({ page }) => {
@@ -254,21 +302,20 @@ test("all internal links and images resolve", async ({ request }, testInfo) => {
   expect(broken).toEqual([]);
 });
 
-test("the game palette and self-hosted fonts are in use", async ({ page, request }) => {
+test("the specimen palette and self-hosted fonts are in use", async ({ page }) => {
   await page.goto("/zh/");
   const background = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  expect(background).toBe("rgb(11, 26, 32)");
+  expect(background).toBe("rgb(243, 244, 241)");
   const fonts = await page.evaluate(async () => {
     await document.fonts.ready;
     // check() is also true for families the page never declared, so require a loaded face as well.
     const loaded = (family: string) => [...document.fonts].some((face) => face.family.replace(/"/g, "") === family && face.status === "loaded");
     return {
-      pixel: document.fonts.check("16px Cubic11", "劍") && loaded("Cubic11"),
-      label: document.fonts.check("16px Silkscreen", "A") && loaded("Silkscreen"),
+      display: document.fonts.check("700 16px 'Noto Serif TC'", "劍") && loaded("Noto Serif TC"),
+      body: document.fonts.check("16px 'Geist Variable'", "A") && loaded("Geist Variable"),
     };
   });
-  expect(fonts).toEqual({ pixel: true, label: true });
-  expect((await request.get("/licenses/Cubic-11-OFL.txt")).status()).toBe(200);
+  expect(fonts).toEqual({ display: true, body: true });
 });
 
 test("category tabs mark the current category", async ({ page }) => {
@@ -328,12 +375,13 @@ test("the language switch keeps the search query and anchor", async ({ page }) =
   await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/effect/#critical-edge");
 });
 
-test("the home page is a title banner with a slot for every category", async ({ page }) => {
+test("the home page is a cover with a featured specimen and a row for every category", async ({ page }) => {
   await page.goto("/zh/");
   await expect(page.locator(".home-hero .kicker")).toHaveText("UNOFFICIAL FAN WIKI");
   await expect(page.locator(".home-title")).toContainText("Minecraft Dungeons II");
   await expect(page.locator(".category-grid li")).toHaveCount(7);
   await expect(page.locator(".category-grid .category-slot img.ui-icon")).toHaveCount(7);
+  await expect(page.locator(".hero-specimen .specimen-plate img.entry-icon")).toBeVisible();
   await page.locator(".home-search input").fill("劍");
   await page.locator(".home-search button").click();
   await expect(page).toHaveURL(/\/zh\/search\/\?q=/);
@@ -510,17 +558,17 @@ test("armor set pages use the same info box layout", async ({ page }) => {
   await expect(page.getByTestId("set-piece")).toHaveCount(4);
 });
 
-test("the effects table and search results use the game palette", async ({ page }) => {
+test("the effects table and search results use the specimen palette", async ({ page }) => {
   await page.goto("/zh/effect/");
   const head = await page.locator(".entry-table thead th").first().evaluate((el) => getComputedStyle(el).backgroundColor);
-  expect(head).toBe("rgb(28, 43, 49)");
+  expect(head).toBe("rgba(0, 0, 0, 0)");
   await page.goto("/zh/search/?q=sword");
   await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
   const primary = await page.locator("#search .pagefind-ui").evaluate((el) =>
     getComputedStyle(el).getPropertyValue("--pagefind-ui-primary").trim().toLowerCase(),
   );
-  // Interface teal; game orange is reserved for rarity and the current tab.
-  expect(primary).toBe("#8fd6e0");
+  // Vermilion marks the current place; it is the only accent.
+  expect(primary).toBe("#c4391f");
 });
 
 test("no purple from the old theme remains", async ({ page }) => {
@@ -628,16 +676,123 @@ test("the details sheet closes on an outside tap or when the filter hides its it
   await expect(page.locator(".filter-text")).toBeFocused();
 });
 
-test("the site uses the game's own icons and splash art", async ({ page, request }) => {
+test("the site uses the game's own icons", async ({ page, request }) => {
   await page.goto("/zh/");
   const icon = await page.locator('link[rel="icon"]').getAttribute("href");
   expect(icon).toBe("/icons/brand/favicon.png");
   expect((await request.get(icon ?? "")).status()).toBe(200);
   const touch = await page.locator('link[rel="apple-touch-icon"]').getAttribute("href");
   expect((await request.get(touch ?? "")).status()).toBe(200);
-  // The 2.7 MB splash is resized and re-encoded at build time, never shipped as the original PNG.
-  const backdrop = page.locator(".hero-backdrop img");
-  await expect(backdrop).toHaveAttribute("src", /\.webp$/);
-  expect(await backdrop.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
-  expect(await backdrop.getAttribute("alt")).toBe("");
+});
+
+test("weapon pages list the effects the game lets them roll, with tier values", async ({ page }) => {
+  await page.goto("/zh/melee/axe/");
+  await expect(page.getByTestId("unique-effect")).toHaveCount(0);
+  const section = page.getByTestId("compatible-effects");
+  const first = section.locator("tbody tr").first();
+  await expect(section.locator("tbody tr")).toHaveCount(9);
+  await expect(first).toContainText("致命鋒刃");
+  await expect(first.locator(".tier-value")).toHaveText(["10%", "20%", "30%"]);
+  await expect(first.locator(".effect-desc .primary .value")).toHaveText("10%~30%");
+  await expect(first.locator("img.entry-icon")).toHaveAttribute("src", "/icons/effect/critical-edge.png");
+  await expect(first.locator("a[href='/zh/effect/#critical-edge']")).toBeVisible();
+  await expect(page.getByTestId("effect-source")).toHaveText("效果資料取自遊戲資料檔。");
+});
+
+test("unique weapons show their fixed effect with its value filled in", async ({ page }) => {
+  await page.goto("/zh/melee/axe-unique1/");
+  const fixed = page.getByTestId("unique-effect");
+  await expect(fixed).toContainText("製箭師");
+  await expect(fixed.locator(".fixed-desc .primary .value")).toHaveText("35%");
+  await expect(fixed.locator(".fixed-desc .alt .value")).toHaveText("35%");
+  await expect(fixed.locator("a[href='/zh/effect/#reconstruction']")).toBeVisible();
+  await expect(fixed.locator("img.entry-icon")).toBeVisible();
+});
+
+test("ranged weapons get their effects and unique effect from the game data too", async ({ page }) => {
+  await page.goto("/zh/ranged/bow/");
+  const section = page.getByTestId("compatible-effects");
+  await expect(section.locator("tbody tr", { hasText: "致命鋒刃" }).locator(".tier-value")).toHaveText(["10%", "20%", "30%"]);
+
+  await page.goto("/zh/ranged/longbow-unique1/");
+  await expect(page.getByTestId("unique-effect").locator(".fixed-desc .primary .value")).toHaveText("100%");
+});
+
+test("weapon pages show game stats, with a combo table for melee only", async ({ page }) => {
+  await page.goto("/zh/melee/axe/");
+  const melee = page.getByTestId("weapon-stats");
+  await expect(melee).toContainText("整套連擊");
+  await expect(melee.locator(".combo-table tbody tr").first()).toContainText("第 1 擊");
+
+  await page.goto("/zh/ranged/bow/");
+  const ranged = page.getByTestId("weapon-stats");
+  await expect(ranged).toContainText("每發傷害");
+  await expect(ranged).toContainText("蓄力時間");
+  await expect(ranged.locator(".combo-table")).toHaveCount(0);
+});
+
+test("the effects table shows each effect's game icon where the game has one", async ({ page }) => {
+  await page.goto("/zh/effect/");
+  const row = page.locator("tr", { has: page.locator("#critical-edge") });
+  await expect(row.locator("img.entry-icon")).toHaveAttribute("src", "/icons/effect/critical-edge.png");
+  expect(await row.locator("img.entry-icon").evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+});
+
+test("Redstone Wrecker shows its in-game fixed enchantment with the FlameBelch icon and no dead link", async ({ page }) => {
+  await page.goto("/zh/melee/giant-club-unique1/");
+  const fixed = page.getByTestId("unique-effect");
+  await expect(fixed).toContainText("炮烙魔法");
+  await expect(fixed.locator("img.entry-icon")).toHaveAttribute("src", "/icons/enchantment-book/flame-belch-unique.png");
+  await expect(fixed.locator("a")).toHaveCount(0);
+  await expect(fixed.locator(".fixed-desc .primary .value")).toHaveText("80%");
+  // The 80% now comes from the game data (FlameBelch.Unique overrides the damage multiplier), not from a hand check.
+  await expect(page.getByTestId("effect-source")).not.toContainText("人工確認");
+});
+
+test("unique enchantments have no book, and enchantments list the unique weapons that carry them", async ({ page }) => {
+  await page.goto("/zh/enchantment/swirling-unique/");
+  await expect(page.getByTestId("book-source")).toHaveCount(0);
+  await page.goto("/zh/enchantment/shockwave/");
+  await expect(page.getByTestId("fixed-on").locator("a[href='/zh/melee/shovel-unique1/']")).toBeVisible();
+});
+
+test("home category rows show their items on every screen size", async ({ page }) => {
+  for (const [width, shown] of [[1440, 6], [390, 3]] as const) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/zh/");
+    const row = page.locator(".category-grid a", { hasText: "近戰武器" });
+    const icons = row.locator(".category-preview > *");
+    await expect(icons.first()).toBeVisible();
+    expect(await icons.evaluateAll((els) => els.filter((el) => getComputedStyle(el).display !== "none").length)).toBe(shown);
+    await expect(page.locator(".category-grid a", { hasText: "附魔" }).locator(".category-preview .frame-enchantment").first()).toBeVisible();
+  }
+});
+
+test("with a mouse, home category items rest in grey and colour in on hover", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "hover is a desktop interaction");
+  await page.goto("/zh/");
+  const row = page.locator(".category-grid a", { hasText: "近戰武器" });
+  const first = row.locator(".category-preview > *").first();
+  expect(await first.evaluate((el) => getComputedStyle(el).filter)).toContain("grayscale");
+  await row.hover();
+  await expect.poll(() => first.evaluate((el) => getComputedStyle(el).filter)).toBe("none");
+});
+
+test("enchantment pages fill their description with the tier range and list each tier", async ({ page }) => {
+  await page.goto("/zh/enchantment/shockwave/");
+  const description = page.locator(".description .primary");
+  await expect(description.locator(".value")).toHaveText(["20%~50%", "125%~175%"]);
+  const tiers = page.getByTestId("enchantment-tiers");
+  await expect(tiers.locator("tbody tr")).toHaveCount(3);
+  await expect(tiers.locator("tbody tr").first().locator(".value").first()).toHaveText("20%");
+});
+
+test("artifact pages show cooldown, soul cost and the effects they can roll", async ({ page }) => {
+  await page.goto("/zh/artifact/totem-of-shielding/");
+  const stats = page.getByTestId("artifact-stats");
+  await expect(stats).toContainText("冷卻時間");
+  await expect(stats).toContainText("靈魂消耗");
+  await expect(stats).toContainText("12 格");
+  await expect(page.getByTestId("compatible-effects").locator("tbody tr", { hasText: "冷卻" }).first()).toBeVisible();
+  await expect(page.getByTestId("unique-effect")).toHaveCount(0);
 });

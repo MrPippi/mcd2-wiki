@@ -1,43 +1,153 @@
-.entry-kicker { margin-bottom: 8px; }
-.entry-layout { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
-.info-box { padding: 16px; }
-.info-box .entry-head { display: flex; justify-content: center; margin-bottom: 14px; }
-.facts { margin: 0; }
-.facts > div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--border); }
-.facts dt { color: var(--muted); font-size: 0.85rem; }
-.facts dd { margin: 0; text-align: right; font-family: var(--font-pixel); font-size: var(--fs-pixel-m); display: inline-flex; align-items: center; gap: 4px; }
-.facts dd a { display: inline-flex; align-items: center; gap: 4px; }
-.facts dd.is-unique { color: var(--accent); }
-.entry-content { min-width: 0; }
-.entry-content h1 { margin: 0 0 8px; font-size: var(--fs-pixel-xl); }
-.entry-content p, .book-source .book p { max-width: 65ch; }
-.entry-content h1.is-unique .primary { color: var(--accent); }
-.description { font-size: 1.05rem; }
+/* Specimen sheet: the plate and its register on the left, the written description on the right. */
+.entry-layout { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+.info-box { display: flex; flex-direction: column; gap: 0; }
+.specimen-plate.entry-head, .specimen-plate.set-preview { aspect-ratio: 1; }
+.entry-head .icon-frame, .entry-head > .entry-icon { animation: rise-in 700ms 250ms var(--ease-out) both; }
+.set-preview { display: grid; grid-template-columns: repeat(2, auto); gap: 8px 16px; place-content: center; }
 
-.related { list-style: none; padding: 0; display: grid; gap: 10px; }
-.related li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.related-label { color: var(--muted); font-size: 0.8rem; min-width: 5em; }
-.related a { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; }
-.related a .icon-frame, .set-piece a .icon-frame { transition: transform var(--dur) var(--ease-spring); }
-.related a:hover .icon-frame, .set-piece a:hover .icon-frame { transform: translateY(-2px); }
-.related a:hover .primary, .set-piece a:hover .primary { color: var(--link); }
-
-.set-preview { display: grid; grid-template-columns: repeat(2, 72px); gap: 10px; justify-content: center; margin-bottom: 14px; }
-.set-pieces { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-.set-piece {
-  background: var(--surface); border: 2px solid var(--border); padding: 12px;
-  transition: border-color var(--dur-fast) var(--ease-out);
+.facts { margin: 0; border-left: 1px solid var(--rule-strong); border-right: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong); }
+.facts > div { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; align-items: center; padding: 10px 14px; }
+.facts > div + div { border-top: 1px solid var(--rule); }
+.facts dt { font-size: 13px; color: var(--muted); }
+.facts dd { margin: 0; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 15px; }
+.facts dd a { display: inline-flex; align-items: center; gap: 6px; }
+/* Rarity: the game's tag art carries the colour, so the words stay in ink. */
+.rarity { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+/* The rarity label explains the tiers in a hint on hover, keyboard focus or tap. */
+.facts dt { position: relative; }
+.rarity-term {
+  padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: inherit; cursor: help;
+  text-decoration: underline dotted; text-underline-offset: 3px;
 }
-.set-piece:hover { border-color: var(--border-strong); }
-.set-piece a { display: flex; gap: 10px; align-items: center; color: var(--text); text-decoration: none; }
-.piece-label { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font-size: 0.8rem; }
+.rarity-term:hover, .rarity-term:active { background: none; transform: none; }
+.rarity-hint {
+  display: none; position: absolute; left: 0; top: calc(100% + 8px); z-index: var(--z-tooltip);
+  width: max-content; max-width: 260px; padding: 10px 12px; background: var(--paper); border: 1px solid var(--rule-strong);
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 10%, transparent); color: var(--text); font-size: 13px; line-height: 1.6;
+}
+.rarity-term:hover + .rarity-hint, .rarity-term:focus + .rarity-hint { display: block; animation: fade-in-quick 120ms var(--ease-out); }
+.rarity-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 8px; }
+/* The game's tag art stretched around the name as a nine-slice frame, drawn at half size. Source edges are
+   10px (black, dark rim, highlight) on top and sides and 22px at the bottom, which adds the drop shadow. */
+.rarity-tag {
+  display: inline-flex; align-items: center; padding: 0 5px;
+  border-style: solid; border-width: 5px 5px 11px; border-image: var(--tag-art) 10 10 22 fill / 5px 5px 11px stretch;
+  image-rendering: pixelated; color: var(--ink); font-weight: 700; font-size: 14px; line-height: 1.5;
+}
 
-.book-source ul { list-style: none; padding: 0; display: grid; gap: 8px; }
-.book-source .book { display: flex; gap: 10px; align-items: flex-start; }
+/* Display sizes are tuned for four-character Chinese names; English names scale with the column instead. */
+.entry-content { min-width: 0; container-type: inline-size; }
+.entry-kicker { margin-bottom: 14px; }
+.entry-content h1 { margin: 0 0 8px; font-size: var(--fs-display-xl); line-height: 1; }
+.entry-content h1.is-unique .primary { color: var(--accent); }
+.entry-content h1:lang(en) { font-size: clamp(36px, 11cqi, 96px); line-height: 1.02; }
+.entry-content p, .book-source .book p { max-width: 62ch; }
+.description { font-size: 19px; line-height: 1.7; }
+.description .alt, .description-long .alt { display: block; margin-top: 10px; font-size: 15px; }
+.entry-section .section-title { font-size: 20px; margin-top: 40px; }
+
+/* Weapon stats: big numbers in a ruled grid, then the facts, then the swing-by-swing combo. */
+.stat-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); margin: 0;
+  border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);
+}
+.stat-grid > div { padding: 12px 14px; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+.stat-grid dt { font-size: 13px; color: var(--muted); }
+.stat-grid dd { margin: 4px 0 0; font-family: var(--font-mono); font-size: 22px; font-variant-numeric: tabular-nums; }
+.stat-facts { display: flex; flex-wrap: wrap; gap: 8px 28px; margin: 14px 0 0; }
+.stat-facts > div { display: flex; gap: 8px; align-items: baseline; }
+.stat-facts dt { font-size: 13px; color: var(--muted); }
+.stat-facts dd { margin: 0; }
+.table-scroll .combo-table { margin-top: 18px; }
+.combo-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.combo-table th, .combo-table td { padding: 8px clamp(6px, 1.5vw, 10px); border-bottom: 1px solid var(--rule); text-align: right; white-space: nowrap; }
+.combo-table thead th { font-size: 12px; font-weight: 400; color: var(--muted); border-bottom-color: var(--rule-strong); }
+.combo-table tbody th { text-align: left; font-weight: 600; }
+.combo-table td { font-family: var(--font-mono); font-size: 14px; }
+.combo-table thead th:first-child { text-align: left; }
+/* Only the table scrolls sideways on very narrow screens, never the section around it. */
+.table-scroll { overflow-x: auto; }
+.table-scroll:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+/* Weapon effects from the Minecraft Wiki: the fixed bonus as a marked card, compatible effects as a tier table. */
+.fixed-effect {
+  display: grid; gap: 4px; padding: 14px 16px; background: var(--paper);
+  border: 1px solid var(--rule-strong); box-shadow: inset 3px 0 0 var(--accent);
+}
+/* The icon sits in its own column beside the name, description and note. */
+.fixed-effect.has-icon { grid-template-columns: auto 1fr; column-gap: 14px; }
+.fixed-effect.has-icon > :not(.icon-frame, .entry-icon) { grid-column: 2; }
+.fixed-effect.has-icon > .entry-icon, .fixed-effect.has-icon > .icon-frame { grid-row: 1 / span 3; align-self: start; }
+.fixed-name { justify-self: start; color: var(--text); text-decoration: none; }
+.fixed-name .primary { font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+a.fixed-name:hover .primary { color: var(--accent); }
+.fixed-desc { display: flex; margin: 4px 0 0; }
+.fixed-effect .note { margin: 4px 0 0; }
+.value { font-weight: 700; font-variant-numeric: tabular-nums; }
+.effect-table { width: 100%; border-collapse: collapse; margin-top: 12px; border-top: 1px solid var(--rule-strong); }
+.effect-table thead th {
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule);
+}
+.effect-table th.tier, .effect-table td.tier-value { width: 4.5em; text-align: right; }
+.effect-table tbody th, .effect-table td { padding: 10px; border-bottom: 1px solid var(--rule); vertical-align: top; text-align: left; font-weight: 400; }
+.effect-table tbody tr:hover { background: var(--paper); }
+.effect-table tbody th.has-icon { display: grid; grid-template-columns: 32px 1fr; column-gap: 12px; }
+.effect-table tbody th.has-icon > :not(.entry-icon) { grid-column: 2; }
+.effect-table tbody th.has-icon > .entry-icon { grid-row: 1 / span 2; margin-top: 2px; }
+.effect-name { color: var(--text); text-decoration: none; }
+/* Name and its other-language name on one line; the description on its own lines below. */
+.effect-name .lang-text { flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: 8px; }
+.effect-name .primary { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+.effect-name:hover .primary { color: var(--accent); }
+.effect-desc { display: flex; margin: 4px 0 0; font-size: 13px; color: var(--text-2); }
+.effect-desc .alt { font-size: 12px; }
+.tier-table th.tier-label { width: 4.5em; font-family: var(--font-mono); color: var(--muted); }
+.tier-table .effect-desc { margin: 0; font-size: 15px; color: var(--text); }
+.tier-value { font-family: var(--font-mono); font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.effect-source { margin: 12px 0 0; font-size: 12px; color: var(--muted); }
+.effect-source a { color: var(--muted); }
+
+.related { list-style: none; padding: 0; margin: 0; display: grid; }
+.related li { display: grid; grid-template-columns: 7em 1fr; align-items: center; gap: 12px; padding: 10px 0; }
+.related li + li { border-top: 1px solid var(--rule); }
+.related-label { font-size: 13px; color: var(--muted); }
+.related a { display: flex; align-items: center; gap: 14px; color: var(--text); text-decoration: none; }
+.related a .icon-frame, .set-piece a .icon-frame { transition: transform var(--dur) var(--ease-spring); }
+.related a:hover .icon-frame, .set-piece a:hover .icon-frame { transform: translateY(-3px) scale(1.05); }
+.related a .primary, .set-piece a .primary { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.related a:hover .primary, .set-piece a:hover .primary { color: var(--accent); }
+
+/* Set pieces: one ruled row each, sprite and name on the left, the game text beside them. */
+.set-pieces { list-style: none; padding: 0; margin: 0; display: grid; }
+.set-piece { display: grid; grid-template-columns: 1fr; gap: 6px 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.set-piece a { display: flex; gap: 14px; align-items: center; color: var(--text); text-decoration: none; }
+.set-piece p { margin: 0; color: var(--text-2); font-size: 15px; }
+.piece-label { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--muted); }
+.set-piece a > span { display: flex; flex-direction: column; gap: 2px; }
+
+.book-source ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; }
+.book-source .book { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--rule); }
 .book-source .book p { margin: 4px 0 0; }
 
-@media (min-width: 900px) {
-  .entry-layout { grid-template-columns: 260px 1fr; gap: 32px; }
-  .entry-content h1 { font-size: var(--fs-pixel-2xl); }
-  .info-box { position: sticky; top: 16px; }
+/* Phones: the effect takes the full width and its three tier values sit in a row underneath. */
+@media (max-width: 599px) {
+  .combo-table thead th { white-space: normal; vertical-align: bottom; line-height: 1.3; }
+  .combo-table td, .combo-table tbody th { font-size: 13px; }
+  .effect-table thead { display: none; }
+  .effect-table tbody tr { display: grid; grid-template-columns: repeat(3, auto) 1fr; column-gap: 18px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .effect-table tbody th { grid-column: 1 / -1; padding: 0 0 6px; border: 0; }
+  .effect-table td.tier-value { width: auto; padding: 0; border: 0; text-align: left; }
+  .effect-table td.tier-value::before { content: attr(data-tier) " "; color: var(--muted); font-size: var(--fs-mono-s); }
+  /* Line the tiers up with the text, past the 32px icon and its 12px gap. */
+  .effect-table tbody tr:has(> th.has-icon) > td.tier-value:nth-child(2) { margin-left: 44px; }
+}
+
+@media (min-width: 720px) {
+  .set-piece { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; }
+}
+
+@media (min-width: 960px) {
+  .entry-layout { grid-template-columns: minmax(300px, 5fr) minmax(0, 7fr); gap: 64px; }
+  .info-box { position: sticky; top: 24px; }
 }

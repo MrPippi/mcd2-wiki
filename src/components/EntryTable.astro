@@ -1,5 +1,6 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
+import { describedEntry } from "../lib/gear-values";
 import { t, type Lang } from "../lib/i18n";
 import EntryIcon from "./EntryIcon.astro";
 import LangText from "./LangText.astro";
@@ -20,11 +21,11 @@ const { lang, entries } = Astro.props;
       <tr data-variant={entry.variant} data-names={`${entry.name.zh} ${entry.name.en}`.toLowerCase()}>
         <th scope="row">
           <div class="row-head">
-            {entry.icon && <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={40} category={entry.category} variant={entry.variant} />}
-            <LangText as="h3" id={entry.slug} class="row-name" lang={lang} value={entry.name} />
+            {entry.icon && <EntryIcon icon={entry.icon} alt="" size={32} category={entry.category} variant={entry.variant} />}
+            <LangText as="h2" id={entry.slug} class="row-name" lang={lang} value={entry.name} />
           </div>
         </th>
-        <td>{entry.description ? <LangText lang={lang} value={entry.description} html /> : "—"}</td>
+        <td>{describedEntry(entry) ? <LangText lang={lang} value={describedEntry(entry)!} html /> : <span class="empty-cell">-</span>}</td>
       </tr>
     ))}
   </tbody>

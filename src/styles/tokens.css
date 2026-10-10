@@ -1,64 +1,51 @@
-@font-face {
-  font-family: "Cubic11";
-  src: url("../assets/fonts/cubic-11/Cubic_11.woff2") format("woff2");
-  font-display: swap;
-}
-
+/* Specimen catalogue: cool paper, ink, one vermilion. Every item is a specimen on a mounting plate. */
 :root {
-  color-scheme: dark;
-  --bg: #0b1a20;
-  --surface: #10222a;
-  --surface-2: #1c2b31;
-  --border: #2c3b42;
-  --border-strong: #3d5058;
-  --text: #e8e2d8;
-  --muted: #8fa3aa;
-  /* Game orange means two things only: unique rarity and the current category tab. */
-  --accent: #ff7e2f;
-  /* Interface teal: links, pressed buttons, focus, primary actions. */
-  --link: #8fd6e0;
-  --focus: var(--link);
-  --on-link: #0b1a20;
-  --danger: #e06666;
-  --on-danger: #fff7f0;
-  /* Off-black for pixel drop shadows and keycaps, never pure #000. */
-  --ink: #05090b;
+  color-scheme: light;
+  --bg: #f3f4f1;
+  --paper: #fafaf8;
+  --plate: #e9ebe6;
+  --rule: #cfd2cc;
+  --rule-strong: #16181a;
+  --text: #16181a;
+  --text-2: #3d4246;
+  --muted: #5f6569;
+  /* Vermilion means two things only: unique rarity and the current place (tab, focus). */
+  --accent: #c4391f;
+  --accent-soft: #f4ddd6;
+  --on-accent: #fafaf8;
+  --link: var(--text);
+  --focus: var(--accent);
+  --danger: #a3241a;
+  --on-danger: #fafaf8;
+  /* Off-black for pictograms and hard shadows, never pure #000. */
+  --ink: #16181a;
   --radius: 0;
-  --max: 1180px;
+  --max: 1320px;
+  --gutter: clamp(16px, 4vw, 48px);
 
-  /* In-game inventory slot (frames.css, home category slots). */
-  --slot-bg: #161616;
-  --slot-edge: #000;
-  --slot-border: #897a6d;
-  --slot-inner: #353535;
-  --slot-deep: #0d0d0d;
+  /* Mounting plate grid: a faint dot every 16px, like a graph-paper backing board. */
+  --dots: radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--ink) 16%, transparent) 1px, transparent 1.4px) 0 0 / 16px 16px;
+
+  /* Gear slot: a bare specimen; rarity shows only as the corner mark. */
+  --slot-border: var(--rule);
   --slot-unique-border: var(--accent);
-  --slot-unique-glow: #ab6f2e;
-  --slot-unique-top: #7d421e;
-  --slot-unique-mid: #2d2018;
-  --slot-unique-low: #271b15;
 
-  --font-body: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
-  --font-pixel: "Cubic11", var(--font-body);
-  --font-label: "Silkscreen", "Cubic11", monospace;
+  --font-display: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --font-body: "Geist Variable", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "Cascadia Mono", monospace;
 
-  /* Pixel fonts stay sharp at whole multiples of their grid: Cubic 11 is drawn on 12px, Silkscreen on 8px.
-     The half steps (18px, 12px label) land on whole device pixels on 2x screens. */
-  --fs-pixel-s: 12px;
-  --fs-pixel-m: 18px;
-  --fs-pixel-l: 24px;
-  --fs-pixel-xl: 36px;
-  --fs-pixel-2xl: 48px;
-  --fs-label-s: 8px;
-  --fs-label-m: 12px;
-  --fs-label-l: 16px;
+  --fs-mono-s: 11px;
+  --fs-mono-m: 12px;
+  --fs-display-m: clamp(28px, 3vw, 36px);
+  --fs-display-l: clamp(40px, 6vw, 72px);
+  --fs-display-xl: clamp(48px, 9vw, 120px);
 
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
   --dur-fast: 160ms;
-  --dur: 260ms;
+  --dur: 320ms;
 
-  --z-tab-label: 5;
+  --z-sticky: 10;
   --z-sheet: 20;
   --z-tooltip: 30;
   --z-grain: 40;

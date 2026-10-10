@@ -1,0 +1,89 @@
+---
+import type { Entry, Localized } from "../../scripts/extract/schemas";
+import { t, type Lang } from "../lib/i18n";
+import { entryHref } from "../lib/url";
+import { fillPlaceholders } from "../lib/gear-values";
+import { tierRange, weaponEffectsOf } from "../lib/weapon-effects";
+import EntryIcon from "./EntryIcon.astro";
+import EntrySection from "./EntrySection.astro";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  weapon: Entry;
+}
+
+const TIERS = ["I", "II", "III"] as const;
+// Effect icons are 64px pixel art: whole-number scales keep them sharp.
+const EFFECT_ICON = { row: 32, fixed: 64 } as const;
+
+const { lang, weapon } = Astro.props;
+const effects = weaponEffectsOf(weapon);
+// A fixed bonus whose text still has a value the game data cannot fill is left out, like hidden entries.
+const fixedFull = effects?.fixed;
+const withValues = (text: Localized, values: readonly string[]): Localized => ({
+  zh: fillPlaceholders(text.zh, values),
+  en: fillPlaceholders(text.en, values),
+});
+const fixedText: Localized | undefined =
+  fixedFull?.entry.description && fixedFull.values ? withValues(fixedFull.entry.description, fixedFull.values) : fixedFull?.entry.description;
+const fixed = fixedText && /class="placeholder"/.test(`${fixedText.zh}${fixedText.en}`) ? undefined : fixedFull;
+---
+{effects && (
+  <>
+    {fixed && (
+      <EntrySection title={t(lang, "uniqueEffect")} testid="unique-effect">
+        <div class:list={["fixed-effect", { "has-icon": fixed.entry.icon }]}>
+          {fixed.entry.icon && (
+            <EntryIcon
+              icon={fixed.entry.icon}
+              alt=""
+              size={EFFECT_ICON.fixed}
+              category={fixed.entry.category === "enchantment-book" ? undefined : fixed.entry.category}
+              variant={fixed.entry.variant}
+            />
+          )}
+          {fixed.linked ? (
+            <a class="fixed-name" href={entryHref(lang, fixed.entry)}><LangText lang={lang} value={fixed.entry.name} /></a>
+          ) : (
+            <span class="fixed-name"><LangText lang={lang} value={fixed.entry.name} /></span>
+          )}
+          {fixedText && <LangText as="p" class="fixed-desc" lang={lang} value={fixedText} html />}
+          <p class="note" data-pagefind-ignore>{t(lang, fixed.kind === "effect" ? "fixedEffectNote" : "fixedEnchantmentNote")}</p>
+        </div>
+      </EntrySection>
+    )}
+    <EntrySection title={t(lang, "compatibleEffects")} testid="compatible-effects">
+      {effects.compatible.length > 0 ? (
+        <>
+          <p class="note" data-pagefind-ignore>{t(lang, "compatibleEffectsIntro")}</p>
+          <table class="effect-table" data-pagefind-ignore>
+            <thead>
+              <tr>
+                <th scope="col">{t(lang, "effect")}</th>
+                {TIERS.map((tier) => <th scope="col" class="tier">{tier}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {effects.compatible.map(({ effect, values }) => (
+                <tr>
+                  <th scope="row" class:list={{ "has-icon": effect.icon }}>
+                    {effect.icon && <EntryIcon icon={effect.icon} alt="" size={EFFECT_ICON.row} />}
+                    <a class="effect-name" href={entryHref(lang, effect)}><LangText lang={lang} value={effect.name} /></a>
+                    {effect.description && <LangText as="p" class="effect-desc" lang={lang} value={withValues(effect.description, [tierRange(values)])} html />}
+                  </th>
+                  {values.map((value, i) => <td class="tier-value" data-tier={TIERS[i]}>{value}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <p class="note" data-pagefind-ignore>{t(lang, "noEffectData")}</p>
+      )}
+      <p class="effect-source" data-testid="effect-source" data-pagefind-ignore>
+        {t(lang, "effectSource")}{fixed?.manualValue && t(lang, "effectSourceManual")}
+      </p>
+    </EntrySection>
+  </>
+)}

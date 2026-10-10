@@ -15,6 +15,13 @@ import {
   type IconSource,
 } from "./config";
 import { groupEntries, type RawEntry } from "./group-entries";
+import { WeaponDataSchema, type WeaponData } from "./weapon-schema";
+import { DATATABLES_DIR, loadGameTables } from "./game-tables";
+import { buildWeaponData } from "./weapons";
+import { buildArtifactData } from "./artifacts";
+import { buildEffectData } from "./effects";
+import { buildEnchantmentData } from "./enchantments";
+import { ArtifactDataSchema, EnchantmentDataSchema } from "./gear-schema";
 import { listIconFiles, loadOverrides } from "./icon-files";
 import { issue, type Issue } from "./issues";
 import { toSlug } from "./keys";
@@ -116,6 +123,13 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     path.join(options.outRoot, "public", "icons"),
   );
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
+  const weaponTables = await loadGameTables(options.sourceRoot);
+  const weapons = weaponTables
+    ? buildWeaponData(output.entries, weaponTables)
+    : { data: { weapons: {}, effectFormats: {} } satisfies WeaponData, issues: [issue("missing-datatables", DATATABLES_DIR)] };
+  const artifacts = weaponTables ? buildArtifactData(output.entries, weaponTables) : { data: {}, issues: [] };
+  const enchantments = weaponTables ? buildEnchantmentData(output.entries, weaponTables) : { data: {}, issues: [] };
+  const effectValues = weaponTables ? buildEffectData(output.entries, weaponTables) : {};
   const issues = [
     ...catalog.issues,
     ...frames.issues,
@@ -127,8 +141,19 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...assembled.flatMap((result) => result.issues),
     ...deduped.issues,
     ...linked.issues,
+    ...weapons.issues,
+    ...artifacts.issues,
+    ...enchantments.issues,
   ];
-  const extraData = { "frames.json": frames.paths, "category-icons.json": uiIcons.paths, "brand.json": brand.paths };
+  const extraData = {
+    "frames.json": frames.paths,
+    "category-icons.json": uiIcons.paths,
+    "brand.json": brand.paths,
+    "weapons.json": WeaponDataSchema.parse(weapons.data),
+    "artifacts.json": ArtifactDataSchema.parse(artifacts.data),
+    "enchantments.json": EnchantmentDataSchema.parse(enchantments.data),
+    "effects.json": EnchantmentDataSchema.parse(effectValues),
+  };
   await writeOutputs(options.outRoot, output, extraData, renderReport({ ...output, issues }));
   return { entries: output.entries.length, armorSets: output.armorSets.length, icons: copies.length, issues };
 }

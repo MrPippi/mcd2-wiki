@@ -1,86 +1,96 @@
-.home-hero {
-  position: relative; isolation: isolate; display: grid; grid-template-columns: 1fr; gap: 24px; align-items: center;
-  padding: 16px 0 32px;
+/* Cover: title copy on the left, one specimen mounted on the right. */
+.home-hero { display: grid; grid-template-columns: 1fr; gap: 40px; padding: 8px 0 24px; }
+.hero-copy { display: flex; flex-direction: column; align-items: flex-start; }
+.home-title { margin: 20px 0 24px; font-size: inherit; line-height: 1; }
+.title-game {
+  display: block; font-family: var(--font-body); font-weight: 500; letter-spacing: -0.03em;
+  font-size: clamp(28px, 4.2vw, 56px); line-height: 1.05;
 }
-.hero-copy { position: relative; }
-/* Game splash art behind the hero: dimmed, darkest behind the title, fading out at every edge into the page. */
-.hero-backdrop { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.hero-backdrop img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 70% 40%; opacity: 0.5;
-  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 70%, transparent),
-    linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
-  mask-composite: intersect;
+.title-rest {
+  display: block; margin-top: 0.08em; font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em;
+  font-size: var(--fs-display-xl); line-height: 0.95;
 }
-.hero-backdrop::after {
-  content: ""; position: absolute; inset: 0;
-  background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 45%, transparent 80%);
+.title-tag {
+  display: inline-block; margin-left: 0.3em; vertical-align: 0.9em; font-family: var(--font-mono); font-weight: 500;
+  font-size: var(--fs-mono-m); letter-spacing: 0.04em; padding: 2px 6px; border: 1px solid var(--rule-strong);
 }
-.home-title { font-size: var(--fs-pixel-xl); color: var(--text); margin: 10px 0 14px; }
-.title-game { display: block; }
-.title-rest { color: var(--muted); }
-.hero-lede { color: var(--muted); max-width: 34em; margin: 0 0 24px; }
-.home-search { display: flex; gap: 8px; max-width: 520px; }
+.hero-lede { color: var(--text-2); max-width: 30em; margin: 0 0 32px; font-size: 17px; }
+.home-search { display: flex; align-items: flex-end; gap: 12px; width: 100%; max-width: 460px; }
 .home-search input { flex: 1; min-width: 0; }
-.home-search button { background: var(--link); color: var(--on-link); border-color: var(--link); font-weight: 700; }
-.home-search button:hover { background: var(--text); border-color: var(--text); }
+.home-search button { background: var(--ink); color: var(--paper); border-color: var(--ink); padding: 8px 18px; }
+.home-search button:hover { background: var(--accent); border-color: var(--accent); }
 
-/* Unique gear floating in their slots; decoration only, so it is hidden from assistive tech. */
-.hero-showcase {
-  position: relative; display: flex; gap: 12px; overflow: hidden; padding: 8px 0;
-  mask-image: linear-gradient(90deg, #000 70%, transparent);
+.hero-specimen { margin: 0; display: grid; grid-template-columns: 1fr; gap: 14px 16px; align-content: start; }
+.hero-specimen .specimen-plate { grid-column: 1 / -1; aspect-ratio: 5 / 4; text-decoration: none; color: var(--text); overflow: hidden; }
+.plate-art { display: flex; width: min(240px, 56%); aspect-ratio: 1; transition: transform 600ms var(--ease-spring); }
+/* EntryIcon sizes itself inline; let the plate decide on small screens. */
+.plate-art > .icon-frame { width: 100% !important; height: 100% !important; }
+.specimen-plate:hover .plate-art { transform: scale(1.04) rotate(-2deg); }
+.specimen-caption { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.caption-name .primary { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; }
+.caption-name.is-unique .primary { color: var(--accent); }
+.side-specimens { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-self: end; }
+@media (min-width: 560px) {
+  .hero-specimen { grid-template-columns: minmax(0, 1fr) auto; }
 }
-.hero-showcase::before {
-  content: ""; position: absolute; inset: -20%; z-index: -1;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--link) 14%, transparent), transparent);
+.side-specimens li { animation: rise-in 500ms var(--ease-out) both; animation-delay: calc(var(--i) * 70ms + 500ms); }
+.side-specimens a {
+  display: flex; padding: 4px; border: 1px solid var(--rule); background: var(--paper);
+  transition: border-color var(--dur-fast) var(--ease-out), transform var(--dur) var(--ease-spring);
 }
-.showcase-item { display: flex; zoom: 0.5; animation: slot-in 700ms var(--ease-spring) both; animation-delay: calc(var(--i) * 90ms + 120ms); }
-.showcase-item .icon-frame { animation: float 5s ease-in-out infinite alternate; animation-delay: calc(var(--i) * -1.3s); }
+.side-specimens a:hover { border-color: var(--rule-strong); transform: translateY(-3px); }
 
-.home-categories .section-title { margin-top: 8px; }
-.category-grid {
-  list-style: none; padding: 0; margin: 16px 0 0;
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 10px;
-}
-.category-grid li { animation: rise-in 500ms var(--ease-out) both; animation-delay: calc(var(--i) * 50ms); }
+/* Contents: one ruled row per category, a strip of its specimens slides in on hover. */
+.home-categories .section-title { margin-top: 56px; }
+.category-grid { list-style: none; padding: 0; margin: 0; }
+.category-grid li { border-bottom: 1px solid var(--rule); animation: rise-in 500ms var(--ease-out) both; animation-delay: calc(var(--i) * 50ms); }
 .category-grid a {
-  display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
-  color: var(--text); text-decoration: none;
+  display: grid; grid-template-columns: 2.5em 32px minmax(0, auto) 1fr auto; align-items: center; gap: 0 14px;
+  padding: 16px 4px; color: var(--text); text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-out), padding var(--dur) var(--ease-out);
 }
-.category-slot {
-  width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; background: var(--slot-bg);
-  box-shadow: 0 0 0 1px var(--slot-edge), inset 0 0 0 2px var(--slot-border), inset 0 0 0 3px var(--slot-inner), inset 0 0 0 4px var(--slot-deep);
-  transition: box-shadow var(--dur-fast) var(--ease-out), transform var(--dur) var(--ease-spring);
+.category-index { grid-row: 1 / span 2; font-size: var(--fs-mono-m); color: var(--muted); }
+.category-slot { grid-row: 1 / span 2; display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; }
+.category-slot .ui-icon { width: 24px; height: 24px; vertical-align: 0; }
+.category-grid .category-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.2; }
+.category-alt { grid-column: 3; grid-row: 2; font-family: var(--font-mono); font-size: var(--fs-mono-s); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
+/* Each category shows its first items; with a mouse they rest in grey and colour in, lifting in turn, on hover.
+   Touch screens cannot hover, so they keep the colour. Phones keep three. */
+.category-preview { grid-column: 4; grid-row: 1 / span 2; display: flex; justify-content: flex-end; gap: 4px; }
+.category-preview > * {
+  transition: transform var(--dur) var(--ease-spring), filter var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out);
 }
-.category-slot .ui-icon { width: 32px; height: 32px; vertical-align: 0; }
-.category-grid a:hover .category-slot, .category-grid a:focus-visible .category-slot {
-  box-shadow: 0 0 0 1px var(--slot-edge), inset 0 0 0 2px var(--link), inset 0 0 0 3px var(--slot-inner), inset 0 0 0 4px var(--slot-deep);
-  transform: translateY(-3px);
+@media (hover: hover) {
+  .category-preview > * { filter: grayscale(1); opacity: 0.55; }
+  .category-grid a:hover .category-preview > *, .category-grid a:focus-visible .category-preview > * { filter: none; opacity: 1; }
 }
-.category-grid a:active .category-slot { transform: translateY(1px); }
-.category-grid .category-name { font-family: var(--font-pixel); font-size: var(--fs-pixel-m); line-height: 1.25; }
+.category-preview > :nth-child(n + 4) { display: none; }
+.category-grid .count { grid-column: 5; grid-row: 1 / span 2; font-size: 14px; min-width: 3ch; text-align: right; }
+.category-grid a:hover, .category-grid a:focus-visible { background: var(--paper); padding-left: 14px; }
+.category-grid a:hover .category-name { color: var(--accent); }
+.category-grid a:hover .category-preview > *, .category-grid a:focus-visible .category-preview > * { transform: translateY(-3px); }
+.category-grid a:hover .category-preview > :nth-child(2) { transition-delay: 40ms; }
+.category-grid a:hover .category-preview > :nth-child(3) { transition-delay: 80ms; }
+.category-grid a:hover .category-preview > :nth-child(4) { transition-delay: 120ms; }
+.category-grid a:hover .category-preview > :nth-child(5) { transition-delay: 160ms; }
+.category-grid a:hover .category-preview > :nth-child(6) { transition-delay: 200ms; }
+[data-compare="off"] .category-grid .category-name { grid-row: 1 / span 2; }
 
-@media (min-width: 900px) {
-  .home-hero { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px; min-height: 440px; padding: 32px 0 40px; }
-  .home-title { font-size: var(--fs-pixel-2xl); }
-  .hero-showcase {
-    display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(6, 64px);
-    overflow: visible; padding: 0; mask-image: none;
-  }
-  .showcase-item { zoom: 1; place-self: center; }
-  .showcase-1 { grid-column: 3 / span 3; grid-row: 2 / span 3; }
-  .showcase-2 { grid-column: 1 / span 2; grid-row: 1 / span 2; }
-  .showcase-3 { grid-column: 5 / span 2; grid-row: 5 / span 2; }
-  .showcase-4 { grid-column: 1 / span 2; grid-row: 4 / span 2; }
-  .showcase-5 { grid-column: 6 / span 1; grid-row: 1 / span 2; }
-  .showcase-6 { grid-column: 3 / span 2; grid-row: 5 / span 2; }
-  .category-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); }
+/* Very narrow phones: drop the row number and give the item strip its own line under the name. */
+@media (max-width: 379px) {
+  .category-grid a { grid-template-columns: 32px minmax(0, 1fr) auto; }
+  .category-index { display: none; }
+  .category-slot { grid-column: 1; }
+  .category-grid .category-name, .category-alt { grid-column: 2; }
+  .category-preview { grid-column: 2; grid-row: 3; justify-content: flex-start; margin-top: 8px; }
+  .category-grid .count { grid-column: 3; }
 }
 
-@keyframes slot-in {
-  from { opacity: 0; transform: translateY(16px) scale(0.9); }
-  to { opacity: 1; transform: none; }
+@media (min-width: 760px) {
+  .category-preview { gap: 6px; }
+  .category-preview > :nth-child(n + 4) { display: inline-flex; }
 }
-@keyframes float {
-  from { transform: translateY(0); }
-  to { transform: translateY(-8px); }
+
+@media (min-width: 960px) {
+  .home-hero { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 64px; align-items: center; padding-top: 24px; }
 }

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import { describedEntry, describedLong } from "../../../src/lib/gear-values";
 import { allArmorSets, booksFor, entriesIn, findArmorSet, findEntry, publishedEntries } from "../../../src/lib/data";
 
 describe("site data", () => {
@@ -15,7 +16,9 @@ describe("site data", () => {
 
   it("finds the enchantment books that grant an enchantment", () => {
     expect(booksFor("arcane").map((book) => book.id)).toEqual(["EnchantmentBook_Arcane"]);
-    expect(booksFor("fire-aspect-unique").map((book) => book.id)).toEqual(["EnchantmentBook_FireAspect_Unique"]);
+    // Unique enchantments come fixed on unique gear, never as books.
+    expect(booksFor("fire-aspect-unique")).toEqual([]);
+    expect(publishedEntries.some((entry) => entry.category === "enchantment-book" && entry.variant === "unique")).toBe(false);
   });
 
   it("hides entries that should have an icon but have none", () => {
@@ -30,8 +33,21 @@ describe("site data", () => {
     expect(entriesIn("effect").length).toBeGreaterThan(0);
   });
 
-  it("gives every published enchantment at least one book", () => {
-    expect(entriesIn("enchantment").filter((entry) => booksFor(entry.slug).length === 0)).toEqual([]);
+  it("hides effects, enchantments and talismans whose description has a value the game data cannot fill", () => {
+    const shown = publishedEntries.filter((entry) => ["effect", "enchantment", "talisman"].includes(entry.category));
+    const unfilled = shown.filter((entry) => /class="placeholder"/.test(`${describedEntry(entry)?.zh ?? ""}${describedLong(entry)?.zh ?? ""}`));
+    expect(unfilled.map((entry) => entry.slug)).toEqual([]);
+    expect(findEntry("enchantment", "shadow-strike")).toBeDefined();
+    expect(findEntry("effect", "critical-edge")).toBeDefined();
+    expect(findEntry("enchantment", "gravity-pulse")).toBeUndefined();
+    expect(findEntry("enchantment-book", "fire-aspect-ii")).toBeUndefined();
+    expect(findEntry("enchantment", "fire-aspect-ii")).toBeUndefined();
+    expect(findEntry("effect", "jumpshot")).toBeUndefined();
+  });
+
+  it("gives every published non-unique enchantment at least one book", () => {
+    const normal = entriesIn("enchantment").filter((entry) => entry.variant === "normal");
+    expect(normal.filter((entry) => booksFor(entry.slug).length === 0)).toEqual([]);
   });
 
   it("finds armor sets", () => {

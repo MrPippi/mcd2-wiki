@@ -1,0 +1,26 @@
+---
+import type { Category } from "../../scripts/extract/config";
+import { CATEGORY_LABEL, HTML_LANG, otherLang, type Lang } from "../lib/i18n";
+import { categoryIcon } from "../lib/ui-icons";
+import ListFilter from "./ListFilter.astro";
+import UiIcon from "./UiIcon.astro";
+
+interface Props {
+  lang: Lang;
+  category: Category;
+  count: number;
+  showVariant: boolean;
+}
+
+const { lang, category, count, showVariant } = Astro.props;
+const alt = otherLang(lang);
+---
+<header class="catalog-head">
+  <h1 class="catalog-title">
+    <UiIcon src={categoryIcon(category)} />
+    <span data-pagefind-meta="title">{CATEGORY_LABEL[category][lang]}</span>
+    <span class="count">({count})</span>
+  </h1>
+  <p class="catalog-alt item-alt" lang={HTML_LANG[alt]}>{CATEGORY_LABEL[category][alt]}</p>
+  <ListFilter lang={lang} showVariant={showVariant} />
+</header>

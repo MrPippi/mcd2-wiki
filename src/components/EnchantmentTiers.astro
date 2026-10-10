@@ -1,0 +1,36 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { enchantmentTiers } from "../lib/gear-values";
+import { t, type Lang } from "../lib/i18n";
+import EntrySection from "./EntrySection.astro";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  enchantment: Entry;
+}
+
+const { lang, enchantment } = Astro.props;
+const tiers = enchantmentTiers(enchantment);
+---
+{tiers && (
+  <EntrySection title={t(lang, "tierValues")} testid="enchantment-tiers">
+    <table class="effect-table tier-table" data-pagefind-ignore>
+      <thead>
+        <tr>
+          <th scope="col" class="tier">{t(lang, "tier")}</th>
+          <th scope="col">{t(lang, "description")}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tiers.map(({ label, text }) => (
+          <tr>
+            <th scope="row" class="tier-label">{label}</th>
+            <td><LangText as="p" class="effect-desc" lang={lang} value={text} html /></td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="effect-source" data-pagefind-ignore>{t(lang, "effectSource")}</p>
+  </EntrySection>
+)}

@@ -140,3 +140,17 @@ describe("matchIcon — enchantment and status icons", () => {
     });
   });
 });
+
+describe("matchIcon — effect icons", () => {
+  const effects = buildIconIndex([
+    "P/Effects/T_UI_Icon_Effect_CriticalEdge.png",
+    "P/Effects/T_UI_Icon_Effect_Eagle_Eye.png",
+    "P/Effects/T_UI_Icon_Effect_CoolDown.png",
+  ]);
+
+  it("drops the Effect token, so ids match however the file splits its words", () => {
+    expect(matchIcon("CriticalEdge", effects, {})).toMatchObject({ kind: "matched", file: "P/Effects/T_UI_Icon_Effect_CriticalEdge.png" });
+    expect(matchIcon("EagleEye", effects, {})).toMatchObject({ kind: "matched", file: "P/Effects/T_UI_Icon_Effect_Eagle_Eye.png" });
+    expect(matchIcon("Cooldown", effects, {})).toMatchObject({ kind: "matched", file: "P/Effects/T_UI_Icon_Effect_CoolDown.png" });
+  });
+});

@@ -1,99 +1,94 @@
+/* Masthead: brand, search and tools on one hairline row; the category index runs beneath it. */
 .site-header {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 10px 16px;
-  background: var(--surface-2); border-bottom: 2px solid var(--border);
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px 32px;
+  max-width: var(--max); width: 100%; margin: 0 auto; padding: 18px var(--gutter) 14px;
 }
 .brand {
-  font-family: var(--font-pixel); font-size: var(--fs-pixel-m); color: var(--text); text-decoration: none;
-  text-shadow: 2px 2px 0 var(--ink); white-space: nowrap; transition: color var(--dur-fast) var(--ease-out);
+  display: inline-flex; align-items: baseline; gap: 12px; min-width: 0;
+  color: var(--text); text-decoration: none; white-space: nowrap;
 }
-.brand:hover { color: var(--link); }
+.brand-mark {
+  font-family: var(--font-mono); font-size: var(--fs-mono-m); font-weight: 600; letter-spacing: 0.08em;
+  padding: 1px 6px; background: var(--ink); color: var(--paper);
+}
+.brand-full, .brand-short { font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
+.brand:hover .brand-mark { background: var(--accent); }
 .brand-short, .label-short { display: none; }
-.header-search { flex: 1 1 240px; display: flex; justify-content: center; }
-.header-search input { width: 100%; max-width: 420px; }
-.search-toggle { display: none; width: 40px; height: 40px; padding: 0; }
-.search-toggle svg { width: 18px; height: 18px; shape-rendering: crispEdges; }
-.search-toggle[aria-expanded="true"] { border-color: var(--link); color: var(--link); }
-.site-tools { display: flex; gap: 8px; }
+.header-search { justify-self: end; width: min(100%, 360px); }
+.header-search input { width: 100%; }
+.search-toggle { display: none; }
+.site-tools { display: flex; gap: 6px; }
 
+/* The category index: numbered like a catalogue's section tabs. */
 .category-tabs {
-  display: flex; align-items: center; justify-content: center; gap: 14px; padding: 8px 16px;
-  background: var(--surface); border-bottom: 2px solid var(--border);
+  max-width: var(--max); width: 100%; margin: 0 auto; padding: 0 var(--gutter);
 }
-.tab-key {
-  display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px;
-  font-family: var(--font-label); font-size: var(--fs-label-m); background: var(--text); color: var(--ink);
-  box-shadow: inset 0 -3px 0 var(--muted);
+.tab-list {
+  list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr));
+  border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong);
 }
-.tab-list { list-style: none; display: flex; gap: 6px; margin: 0; padding: 0; }
+.tab-list li + li { border-left: 1px solid var(--rule); }
 .tab-list a {
-  position: relative; display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 40px; border-bottom: 3px solid transparent; text-decoration: none;
-  transition: border-color var(--dur) var(--ease-out);
+  position: relative; display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 8px;
+  padding: 10px 12px; color: var(--text); text-decoration: none; font-size: 14px; white-space: nowrap;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
-.tab-list .ui-icon {
-  width: 26px; height: 26px; vertical-align: 0; opacity: 0.55;
-  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur) var(--ease-spring);
+.tab-index, .tab-count { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); font-variant-numeric: tabular-nums; }
+.tab-list .ui-icon { width: 16px; height: 16px; vertical-align: 0; }
+.tab-label { overflow: hidden; text-overflow: ellipsis; }
+.tab-list a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: var(--accent);
+  transform: scaleX(0); transform-origin: left; transition: transform var(--dur) var(--ease-out);
 }
-.tab-list a:hover .ui-icon, .tab-list a:focus-visible .ui-icon { opacity: 0.9; transform: translateY(-2px); }
-.tab-list a:active .ui-icon { transform: translateY(1px); }
-.tab-list a[aria-current="page"] { border-bottom-color: var(--accent); }
-.tab-list a[aria-current="page"] .ui-icon { opacity: 1; filter: drop-shadow(0 0 3px var(--accent)); }
-.tab-label {
-  position: absolute; top: calc(100% + 4px); left: 50%; transform: translate(-50%, -4px); z-index: var(--z-tab-label);
-  white-space: nowrap; background: var(--surface-2); border: 2px solid var(--border); padding: 0 8px;
-  font-family: var(--font-pixel); font-size: var(--fs-pixel-s); color: var(--text); pointer-events: none; opacity: 0;
-  transition: opacity var(--dur-fast) var(--ease-out), transform var(--dur) var(--ease-out);
-}
-.tab-list a:hover .tab-label, .tab-list a:focus-visible .tab-label { opacity: 1; transform: translate(-50%, 0); }
+.tab-list a:hover { background: var(--paper); }
+.tab-list a:hover::after { transform: scaleX(0.35); }
+.tab-list a[aria-current="page"] { background: var(--paper); font-weight: 600; }
+.tab-list a[aria-current="page"]::after { transform: scaleX(1); }
+.tab-list a[aria-current="page"] .tab-index { color: var(--accent); }
+.tab-list a:focus-visible { outline-offset: -2px; }
+:lang(en) .tab-index { display: none; }
+:lang(en) .tab-list a { grid-template-columns: auto 1fr auto; gap: 6px; padding: 10px; font-size: 13px; }
 
-.site-main { flex: 1 0 auto; width: 100%; max-width: var(--max); margin: 0 auto; padding: 24px 16px 56px; }
+.site-main { flex: 1 0 auto; width: 100%; max-width: var(--max); margin: 0 auto; padding: 40px var(--gutter) 96px; }
 .site-main:focus { outline: none; }
-.site-footer {
-  border-top: 2px solid var(--border); background: var(--surface); color: var(--muted); font-size: 0.85rem;
-}
-.footer-inner {
-  max-width: var(--max); margin: 0 auto; padding: 20px 16px 24px;
-  display: grid; grid-template-columns: 1fr; gap: 4px 32px;
-}
-.footer-inner p { margin: 0; }
-.footer-license { align-self: end; }
 
-@media (min-width: 700px) {
-  .footer-inner { grid-template-columns: 1fr auto; }
-  .footer-license { grid-column: 2; grid-row: 1 / span 2; }
+/* Colophon: the catalogue's back page. */
+.site-footer { border-top: 1px solid var(--rule-strong); color: var(--muted); font-size: 13px; }
+.footer-inner {
+  max-width: var(--max); margin: 0 auto; padding: 24px var(--gutter) 32px;
+  display: grid; grid-template-columns: 1fr; gap: 6px 48px;
+}
+.footer-inner p { margin: 0; max-width: 60ch; }
+.footer-mark { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--text); }
+.footer-license { font-family: var(--font-mono); font-size: var(--fs-mono-m); }
+.footer-license a { color: var(--muted); }
+
+@media (min-width: 900px) {
+  .footer-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr) auto; align-items: start; }
+  .footer-meta { display: grid; gap: 4px; }
+}
+
+@media (max-width: 1099px) {
+  .tab-list { display: flex; overflow-x: auto; scrollbar-width: none; }
+  .tab-list::-webkit-scrollbar { display: none; }
+  .tab-list li { flex: 0 0 auto; }
 }
 
 @media (max-width: 699px) {
-  .site-header { flex-wrap: wrap; gap: 8px; }
-  .brand { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+  .site-header { grid-template-columns: minmax(0, 1fr) auto auto; gap: 8px; padding-top: 12px; padding-bottom: 10px; }
+  .brand { overflow: hidden; }
   .brand-full, .label-long { display: none; }
   .brand-short, .label-short { display: inline; }
-  .site-tools button, .site-tools .button { min-height: 40px; }
-  .header-search { order: 3; flex-basis: 100%; }
-  .header-search input { max-width: none; }
-  /* With scripts the search folds into the icon button; without them it stays open. */
+  .brand-short { overflow: hidden; text-overflow: ellipsis; font-size: 17px; }
+  .brand-mark { display: none; }
+  .site-tools button, .site-tools .button, .search-toggle { min-height: 40px; }
+  .header-search { grid-column: 1 / -1; order: 3; width: 100%; justify-self: stretch; }
+  /* With scripts the search folds into the button; without them it stays open. */
   .js .search-toggle { display: inline-flex; }
+  .search-toggle[aria-expanded="true"] { background: var(--ink); color: var(--paper); }
   .js .header-search:not(.is-open) { display: none; }
-  .header-search.is-open { animation: drop-in var(--dur) var(--ease-out); }
-  .category-tabs { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; }
-  .tab-key { display: none; }
-  /* Visually hidden, but still the link's accessible name. */
-  .tab-label { top: 0; left: 0; transform: none; width: 1px; height: 1px; padding: 0; border: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-}
-@media (hover: none) {
-  .tab-key { display: none; }
-}
-/* Touch screens wide enough for text: no hover to reveal the floating label, so show it under the icon. */
-@media (hover: none) and (min-width: 700px) {
-  .tab-list a { width: auto; height: auto; min-width: 56px; flex-direction: column; gap: 2px; padding: 2px 4px; }
-  .tab-label {
-    position: static; transform: none; opacity: 1; background: none; border: 0; padding: 0;
-    font-size: var(--fs-pixel-s); color: var(--muted);
-  }
-  .tab-list a[aria-current="page"] .tab-label { color: var(--text); }
-}
-
-@keyframes drop-in {
-  from { opacity: 0; transform: translateY(-6px); }
-  to { opacity: 1; transform: none; }
+  .header-search.is-open { animation: fade-in var(--dur) var(--ease-out); }
+  .tab-list a { padding: 10px 12px; }
+  .tab-index { display: none; }
+  .site-main { padding-top: 28px; }
 }

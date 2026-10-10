@@ -1,0 +1,33 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { CATEGORY_LABEL, t, type Lang } from "../lib/i18n";
+import { entryHref } from "../lib/url";
+import { fixedOn } from "../lib/weapon-effects";
+import EntryIcon from "./EntryIcon.astro";
+import EntrySection from "./EntrySection.astro";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  /** An effect or enchantment that some unique weapons carry as their fixed bonus. */
+  entry: Entry;
+}
+
+const { lang, entry } = Astro.props;
+const weapons = fixedOn(entry);
+---
+{weapons.length > 0 && (
+  <EntrySection title={t(lang, "fixedOn")} testid="fixed-on">
+    <ul class="related" data-pagefind-ignore>
+      {weapons.map((weapon) => (
+        <li>
+          <span class="related-label">{CATEGORY_LABEL[weapon.category][lang]}</span>
+          <a href={entryHref(lang, weapon)}>
+            {weapon.icon && <EntryIcon icon={weapon.icon} alt="" size={40} category={weapon.category} variant={weapon.variant} />}
+            <LangText lang={lang} value={weapon.name} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </EntrySection>
+)}

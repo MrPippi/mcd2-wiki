@@ -1,0 +1,29 @@
+---
+import type { ImageMetadata } from "astro";
+import type { Entry } from "../../scripts/extract/schemas";
+import { t, type Lang } from "../lib/i18n";
+import { RARITY_LABEL, rarityTiers, type RarityTier } from "../lib/rarity";
+// Recoloured from the game's channel-packed T_UI_Rarity_* masks with each MI_RarityTag_* TagColor.
+// Kept in src/assets rather than public/icons, which `npm run extract` clears and rebuilds.
+import common from "../assets/rarity/common.png";
+import rare from "../assets/rarity/rare.png";
+import special from "../assets/rarity/special.png";
+import unique from "../assets/rarity/unique.png";
+
+interface Props {
+  lang: Lang;
+  variant: Entry["variant"];
+}
+
+const TAG_ART: Readonly<Record<RarityTier, ImageMetadata>> = { common, rare, special, unique };
+
+const { lang, variant } = Astro.props;
+const tiers = rarityTiers(variant);
+---
+<span class="rarity">
+  <ul class="rarity-tags">
+    {tiers.map((tier) => (
+      <li class={`rarity-tag rarity-${tier}`} style={`--tag-art:url("${TAG_ART[tier].src}")`}>{t(lang, RARITY_LABEL[tier])}</li>
+    ))}
+  </ul>
+</span>
