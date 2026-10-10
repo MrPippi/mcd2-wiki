@@ -3,7 +3,7 @@ import { ArtifactDataSchema, EnchantmentDataSchema, type ArtifactData, type Ench
 import rawArtifacts from "../data/artifacts.json";
 import rawEffects from "../data/effects.json";
 import rawEnchantments from "../data/enchantments.json";
-import { LANGS } from "../../scripts/extract/config";
+import { LANGS } from "../../scripts/extract/langs";
 import type { Lang } from "./i18n";
 import { mapLocalized } from "./lang";
 

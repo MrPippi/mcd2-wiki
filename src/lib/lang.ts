@@ -1,4 +1,4 @@
-import { LANGS, LANG_META, type Lang } from "../../scripts/extract/config";
+import { LANGS, LANG_META, type Lang } from "../../scripts/extract/langs";
 import type { Localized } from "../../scripts/extract/schemas";
 
 export type { Lang };
