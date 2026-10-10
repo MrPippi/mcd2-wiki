@@ -13,10 +13,12 @@
 .facts dd a { display: inline-flex; align-items: center; gap: 6px; }
 .facts dd.is-unique { color: var(--accent); font-weight: 600; }
 
-.entry-content { min-width: 0; }
+/* Display sizes are tuned for four-character Chinese names; English names scale with the column instead. */
+.entry-content { min-width: 0; container-type: inline-size; }
 .entry-kicker { margin-bottom: 14px; }
 .entry-content h1 { margin: 0 0 8px; font-size: var(--fs-display-xl); line-height: 1; }
 .entry-content h1.is-unique .primary { color: var(--accent); }
+.entry-content h1:lang(en) { font-size: clamp(36px, 11cqi, 96px); line-height: 1.02; }
 .entry-content p, .book-source .book p { max-width: 62ch; }
 .description { font-size: 19px; line-height: 1.7; }
 .description .alt, .description-long .alt { display: block; margin-top: 10px; font-size: 15px; }

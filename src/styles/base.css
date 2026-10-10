@@ -16,7 +16,7 @@ body::after {
 ::selection { background: var(--accent); color: var(--on-accent); }
 a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
 a:hover { text-decoration-color: var(--accent); }
-h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
 h1 { font-size: var(--fs-display-l); margin: 0; }
 p { text-wrap: pretty; }
 img { max-width: 100%; }
