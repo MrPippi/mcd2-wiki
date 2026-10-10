@@ -29,6 +29,23 @@ const RIFT_ID = /\.rifts\.\d+$/i;
 const NAME_TEXT = /SW\.TextEntry\.Name/;
 const AREA_ICON_DIR = "Assets/UI/Icons/Location/AreaIcons";
 const PORTAL_ICON = `${AREA_ICON_DIR}/T_UI_Icon_Town_Portal.png`;
+const WORLD_MAP_ICON_DIR = "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/WorldMap/Icons";
+const MINECART_ICON = "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/Icons/T_UI_Icon_Minecart.png";
+const RIFT_ICON = `${WORLD_MAP_ICON_DIR}/T_UI_Icon_Rift.png`;
+const MERCHANT_ICON = `${WORLD_MAP_ICON_DIR}/T_UI_Icon_VillageMerchant.png`;
+/** DT_MerchantLocationsDefinition MarkerType → icon. */
+const MERCHANT_ICONS: Readonly<Record<string, string>> = {
+  Merchant: MERCHANT_ICON,
+  Enchantsmith: `${WORLD_MAP_ICON_DIR}/T_UI_Icon_Enchantsmith.png`,
+  Blacksmith: `${WORLD_MAP_ICON_DIR}/T_UI_Icon_Blacksmith.png`,
+};
+/** Icon source per kind for the filter swatches; the area kind has none. */
+const LEGEND_SOURCES: Readonly<Record<string, string>> = {
+  minecart: MINECART_ICON,
+  rift: RIFT_ICON,
+  portal: PORTAL_ICON,
+  merchant: MERCHANT_ICON,
+};
 
 /** A point found in the tables, before it is placed in a world. */
 interface Candidate {
@@ -125,7 +142,7 @@ function minecarts(tables: MapTables, ctx: Context): Gathered {
       const point = byId.get(lower(row.TeleportTag.TagName));
       if (!point) return { candidates: [], issues: [issue("map-unmatched-tag", `${row.Name} → ${row.TeleportTag.TagName}`)] };
       const areaTag = point.AreaTag.TagName;
-      return placed({ id: row.Name, kind: "minecart", block: toBlocks(point.Location), areaTag }, ctx.areaName(areaTag));
+      return placed({ id: row.Name, kind: "minecart", block: toBlocks(point.Location), areaTag, iconSource: MINECART_ICON }, ctx.areaName(areaTag));
     }),
   );
 }
@@ -137,7 +154,7 @@ function rifts(tables: MapTables, ctx: Context): Gathered {
       .filter((row) => row.Type === "Area" && RIFT_ID.test(row.IdTag.TagName))
       .map((row) => {
         const areaTag = row.AreaTag.TagName;
-        const base = { id: row.Name, kind: "rift" as const, block: toBlocks(row.Location), areaTag };
+        const base = { id: row.Name, kind: "rift" as const, block: toBlocks(row.Location), areaTag, iconSource: RIFT_ICON };
         return placed({ ...base, ...optional("area", ctx.areaName(areaTag)), ...optional("note", note) }, ctx.text(WORLD_LABELS, "worldmap_tooltip_title_rift"));
       }),
   );
@@ -159,7 +176,13 @@ function merchants(tables: MapTables, ctx: Context): Gathered {
   return merge(
     tables.merchants.map((row) =>
       placed(
-        { id: row.Name, kind: "merchant", block: toBlocks(row.Location), ...optional("note", ctx.loc(row.MerchantDescription)) },
+        {
+          id: row.Name,
+          kind: "merchant",
+          block: toBlocks(row.Location),
+          ...optional("note", ctx.loc(row.MerchantDescription)),
+          ...optional("iconSource", row.MarkerType === undefined ? undefined : MERCHANT_ICONS[row.MarkerType]),
+        },
         ctx.loc(row.MerchantName),
       ),
     ),
@@ -215,6 +238,11 @@ function iconsOf(candidates: readonly Candidate[], ctx: Context, iconExists: (re
   return present.map((from) => ({ from, published: publishedIcon(from) }));
 }
 
+function legendOf(iconExists: (relative: string) => boolean): MapData["legend"] {
+  const present = Object.entries(LEGEND_SOURCES).filter(([, source]) => iconExists(source));
+  return Object.fromEntries(present.map(([kind, source]) => [kind, publishedIcon(source)]));
+}
+
 export function buildMapData(tables: MapTables, locales: Locales, iconExists: (relative: string) => boolean): MapResult {
   const ctx = makeContext(tables, locales);
   const { frames, issues: frameIssues } = worldFrames(tables, ctx);
@@ -224,6 +252,7 @@ export function buildMapData(tables: MapTables, locales: Locales, iconExists: (r
   return {
     data: {
       worlds: frames.map((frame) => buildWorld(frame, placedCandidates.filter((c) => isInside(frame.frame, c.block)), ctx, iconExists)),
+      legend: legendOf(iconExists),
     },
     icons: iconsOf(placedCandidates, ctx, iconExists),
     issues: [

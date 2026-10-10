@@ -110,7 +110,7 @@ async function copySplash(sourceRoot: string, outRoot: string): Promise<Issue[]>
 async function extractMap(sourceRoot: string, locales: Readonly<Record<Lang, LocaleFile>>): Promise<MapResult> {
   const tables = await loadMapTables(sourceRoot);
   if (!tables) {
-    return { data: { worlds: [] }, icons: [], issues: [issue("missing-map-tables", `${DATATABLES_DIR}/DT_WorldRegionMapData.json`)] };
+    return { data: { worlds: [], legend: {} }, icons: [], issues: [issue("missing-map-tables", `${DATATABLES_DIR}/DT_WorldRegionMapData.json`)] };
   }
   return buildMapData(tables, locales, (relative) => existsSync(path.join(sourceRoot, ...relative.split("/"))));
 }

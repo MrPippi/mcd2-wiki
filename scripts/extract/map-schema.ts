@@ -39,5 +39,9 @@ export const WorldMapSchema = z.object({
 });
 export type WorldMap = z.infer<typeof WorldMapSchema>;
 
-export const MapDataSchema = z.object({ worlds: z.array(WorldMapSchema) });
+export const MapDataSchema = z.object({
+  worlds: z.array(WorldMapSchema),
+  /** Published icon path per marker kind, for the filter swatches. */
+  legend: z.partialRecord(z.enum(MARKER_KINDS), z.string()),
+});
 export type MapData = z.infer<typeof MapDataSchema>;

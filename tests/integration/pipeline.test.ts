@@ -203,7 +203,7 @@ describe("runExtract", () => {
 
   it("writes an empty map and reports it when the map tables are missing", async () => {
     await runExtract({ sourceRoot, outRoot, overridesPath });
-    expect(await readJson<{ worlds: unknown[] }>("src/data/map.json")).toEqual({ worlds: [] });
+    expect(await readJson<{ worlds: unknown[]; legend: unknown }>("src/data/map.json")).toEqual({ worlds: [], legend: {} });
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-map-tables (1)");
     expect(report).toContain("- DataTables/UFS/DT_WorldRegionMapData.json");

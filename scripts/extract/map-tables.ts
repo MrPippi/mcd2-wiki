@@ -18,7 +18,7 @@ const RegionRow = z.object({
 });
 const TeleportRow = z.object({ Name: z.string(), AreaTag: Tag, IdTag: Tag, Type: z.string(), Location: Vec });
 const ExplorationRow = z.object({ Name: z.string(), TeleportTag: Tag });
-const MerchantRow = z.object({ Name: z.string(), Location: Vec, MerchantName: z.string(), MerchantDescription: z.string() });
+const MerchantRow = z.object({ Name: z.string(), Location: Vec, MerchantName: z.string(), MerchantDescription: z.string(), MarkerType: z.string().optional() });
 const AreaRow = z.object({
   Name: z.string(),
   TypeTag: Tag,

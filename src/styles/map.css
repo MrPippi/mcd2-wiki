@@ -23,7 +23,7 @@
   padding: 0; margin-bottom: 8px; font-family: var(--font-mono); font-size: var(--fs-mono-s);
   text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted);
 }
-.map-filter { display: grid; grid-template-columns: auto 16px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--rule); cursor: pointer; }
+.map-filter { display: grid; grid-template-columns: auto 20px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--rule); cursor: pointer; }
 .map-filter input { accent-color: var(--accent); margin: 0; }
 .map-count { color: var(--muted); font-size: var(--fs-mono-m); }
 .map-search { display: grid; gap: 6px; }
@@ -47,8 +47,9 @@
 .world-map .leaflet-container { background: transparent; font: inherit; }
 .map-marker { background: none; border: 0; }
 .map-marker .map-pin { width: 100%; height: 100%; }
-.map-pin-icon { display: block; width: 24px; height: 24px; margin: -6px; }
-.map-marker--portal .map-pin:has(.map-pin-icon) { background: none; border: 0; box-shadow: none; }
+.map-swatch-icon { width: 20px; height: 20px; image-rendering: pixelated; }
+.map-pin:has(.map-pin-icon) { background: none; border: 0; box-shadow: none; border-radius: 0; transform: none; }
+.map-pin-icon { display: block; width: 28px; height: 28px; image-rendering: pixelated; }
 .map-label {
   position: absolute; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
   font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--ink);

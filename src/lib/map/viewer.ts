@@ -16,6 +16,7 @@ const LABEL_LEVELS = 3;
 /** Search results open no further out than one level below the top zoom. */
 const FOCUS_LEVELS = 1;
 const PIN_SIZE: L.PointTuple = [16, 16];
+const ICON_PIN_SIZE: L.PointTuple = [28, 28];
 
 interface Payload {
   readonly worlds: readonly WorldMap[];
@@ -59,6 +60,11 @@ function replaceLocation(search: string, hash: string): void {
   window.dispatchEvent(new Event("mcd2:locationchange"));
 }
 
+function pinSize(marker: WorldMap["markers"][number]): L.PointTuple {
+  if (marker.kind === "area") return [0, 0];
+  return marker.icon ? ICON_PIN_SIZE : PIN_SIZE;
+}
+
 function addPins(map: L.Map, world: WorldMap, lang: Lang, labels: Payload["labels"], hidden: ReadonlySet<MarkerKind>) {
   const layers = new Map(MARKER_KINDS.map((kind) => [kind, L.layerGroup()] as const));
   const pins = new Map<string, L.Marker>();
@@ -66,7 +72,7 @@ function addPins(map: L.Map, world: WorldMap, lang: Lang, labels: Payload["label
     const icon = L.divIcon({
       className: `map-marker map-marker--${marker.kind}`,
       html: pinElement(marker, lang),
-      iconSize: marker.kind === "area" ? [0, 0] : PIN_SIZE,
+      iconSize: pinSize(marker),
     });
     // Area labels sit on top of the teleport-statue pins: they stay inert so clicks reach the pin beneath.
     const isArea = marker.kind === "area";

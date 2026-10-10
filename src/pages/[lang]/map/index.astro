@@ -16,6 +16,6 @@ const lang = Astro.params.lang as Lang;
   <div class="map-page">
     <h1>{t(lang, "worldMap")}</h1>
     <p class="map-intro">{t(lang, "mapIntro")}</p>
-    <WorldMap lang={lang} worlds={mapData.worlds} />
+    <WorldMap lang={lang} worlds={mapData.worlds} legend={mapData.legend} />
   </div>
 </Base>

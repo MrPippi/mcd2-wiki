@@ -9,6 +9,14 @@ test("map page shows its title, world tabs and marker filters", async ({ page })
   await expect(page.locator("[data-count='rift']")).toHaveText(/^[1-9]\d*$/);
 });
 
+test("the rift filter swatch is the game's icon", async ({ page }) => {
+  await page.goto("/zh/map/");
+  const swatch = page.locator(".map-filter", { has: page.locator("input[value='rift']") }).locator(".map-swatch-icon");
+  await expect(swatch).toHaveCount(1);
+  await expect(swatch).toHaveJSProperty("tagName", "IMG");
+  await expect(swatch).toHaveAttribute("src", /t_ui_icon_rift\.png$/);
+});
+
 test("the header and the home page link to the map", async ({ page }) => {
   await page.goto("/zh/");
   await page.locator(".category-grid a", { hasText: "世界地圖" }).click();

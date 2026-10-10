@@ -6,8 +6,8 @@ import { MAP_LOCALES, MAP_TABLES } from "../../helpers/map-tables";
 
 const everyIcon = () => true;
 const noIcon = () => false;
-const run = (tables = MAP_TABLES, iconExists = everyIcon) => buildMapData(tables, MAP_LOCALES, iconExists);
-const markersOf = (world: string, tables = MAP_TABLES, iconExists = everyIcon): MapMarker[] =>
+const run = (tables = MAP_TABLES, iconExists: (source: string) => boolean = everyIcon) => buildMapData(tables, MAP_LOCALES, iconExists);
+const markersOf = (world: string, tables = MAP_TABLES, iconExists: (source: string) => boolean = everyIcon): MapMarker[] =>
   run(tables, iconExists).data.worlds.find((w) => w.key === world)?.markers ?? [];
 const byId = (world: string, id: string) => markersOf(world).find((m) => m.id === id);
 
@@ -84,7 +84,35 @@ describe("buildMapData", () => {
       py: 4282.8,
       name: { zh: "鐵匠", en: "Blacksmith" },
       note: { zh: "強化裝備。", en: "Upgrade your gear." },
+      icon: "icons/map/t_ui_icon_blacksmith.png",
     });
+  });
+
+  it("picks the merchant icon from MarkerType and leaves unknown types without one", () => {
+    const merchant = MAP_TABLES.merchants[0];
+    const withType = (MarkerType?: string) => ({ ...MAP_TABLES, merchants: [{ ...merchant, MarkerType }] });
+    const iconFor = (MarkerType?: string) => markersOf("overworld", withType(MarkerType)).find((m) => m.kind === "merchant")?.icon;
+    expect(iconFor("Merchant")).toBe("icons/map/t_ui_icon_villagemerchant.png");
+    expect(iconFor("Enchantsmith")).toBe("icons/map/t_ui_icon_enchantsmith.png");
+    expect(iconFor("Mystery")).toBeUndefined();
+    expect(iconFor(undefined)).toBeUndefined();
+  });
+
+  it("gives rifts and minecart stations the game's icons", () => {
+    expect(byId("overworld", "Rift1")?.icon).toBe("icons/map/t_ui_icon_rift.png");
+    expect(byId("overworld", "ForestA1-Outpost")?.icon).toBe("icons/map/t_ui_icon_minecart.png");
+    expect(markersOf("sift").find((m) => m.id === "CarapaceA1-North")?.icon).toBe("icons/map/t_ui_icon_minecart.png");
+  });
+
+  it("offers a legend icon per kind, leaving out files that are missing", () => {
+    expect(run().data.legend).toEqual({
+      minecart: "icons/map/t_ui_icon_minecart.png",
+      rift: "icons/map/t_ui_icon_rift.png",
+      portal: "icons/map/t_ui_icon_town_portal.png",
+      merchant: "icons/map/t_ui_icon_villagemerchant.png",
+    });
+    expect(run(MAP_TABLES, noIcon).data.legend).toEqual({});
+    expect(run(MAP_TABLES, (source) => source.endsWith("T_UI_Icon_Rift.png")).data.legend).toEqual({ rift: "icons/map/t_ui_icon_rift.png" });
   });
 
   it("places rifts with the game's rift label, area and description", () => {
@@ -127,8 +155,11 @@ describe("buildMapData", () => {
 
   it("lists the icons to copy, once each", () => {
     expect(run().icons).toEqual([
+      { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/Icons/T_UI_Icon_Minecart.png", published: "icons/map/t_ui_icon_minecart.png" },
+      { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/WorldMap/Icons/T_UI_Icon_Rift.png", published: "icons/map/t_ui_icon_rift.png" },
       { from: "Assets/UI/Icons/Location/AreaIcons/T_UI_Icon_Town_Portal.png", published: "icons/map/t_ui_icon_town_portal.png" },
       { from: "Assets/UI/Icons/Location/AreaIcons/T_UI_Icon_BraveHaven.png", published: "icons/map/t_ui_icon_bravehaven.png" },
+      { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/WorldMap/Icons/T_UI_Icon_Blacksmith.png", published: "icons/map/t_ui_icon_blacksmith.png" },
     ]);
   });
 

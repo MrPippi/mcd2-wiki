@@ -55,6 +55,7 @@ export const MAP_TABLES: MapTables = {
   merchants: [
     {
       Name: "TheTownBlacksmithComplete",
+      MarkerType: "Blacksmith",
       Location: vec(16451.924232, -10210.710687),
       MerchantName: 'LOCTABLE("VendorLabels.csv", "vendor_blacksmith_titleshort")',
       MerchantDescription: 'LOCTABLE("VendorLabels.csv", "vendor_blacksmith_mappin_tooltip")',

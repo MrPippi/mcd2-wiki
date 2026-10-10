@@ -25,7 +25,8 @@
           "name": {
             "zh": "冰封高地",
             "en": "Frozen Highlands"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "DesertA1-Fortress",
@@ -35,7 +36,8 @@
           "name": {
             "zh": "冰封高地",
             "en": "Frozen Highlands"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "DesertA1-Fortress2",
@@ -45,7 +47,8 @@
           "name": {
             "zh": "冰封高地",
             "en": "Frozen Highlands"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "DesertA1-IceLagoon",
@@ -55,7 +58,8 @@
           "name": {
             "zh": "冰封高地",
             "en": "Frozen Highlands"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "DesertA1-IceShelf",
@@ -65,7 +69,8 @@
           "name": {
             "zh": "冰封高地",
             "en": "Frozen Highlands"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "DesertA1-MountainPass",
@@ -75,7 +80,8 @@
           "name": {
             "zh": "冰封高地",
             "en": "Frozen Highlands"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "ForestA1-DangerZone",
@@ -85,7 +91,8 @@
           "name": {
             "zh": "咆哮森林",
             "en": "Howling Woods"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "ForestA1-NWPass",
@@ -95,7 +102,8 @@
           "name": {
             "zh": "咆哮森林",
             "en": "Howling Woods"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "ForestA1-Outpost",
@@ -105,7 +113,8 @@
           "name": {
             "zh": "咆哮森林",
             "en": "Howling Woods"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "ForestA1-SpiderCaveExit",
@@ -115,7 +124,8 @@
           "name": {
             "zh": "咆哮森林",
             "en": "Howling Woods"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "PlainsA1-Barn",
@@ -125,7 +135,8 @@
           "name": {
             "zh": "蜂巢原野",
             "en": "Honeycomb Fields"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "PlainsA1-Border",
@@ -135,7 +146,8 @@
           "name": {
             "zh": "蜂巢原野",
             "en": "Honeycomb Fields"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "PlainsA2-Central",
@@ -145,7 +157,8 @@
           "name": {
             "zh": "多雨平原",
             "en": "Rainy Plains"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "PlainsA2-IllagerCamp",
@@ -155,7 +168,8 @@
           "name": {
             "zh": "多雨平原",
             "en": "Rainy Plains"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "PlainsA2-NorthWestBridge",
@@ -165,7 +179,8 @@
           "name": {
             "zh": "多雨平原",
             "en": "Rainy Plains"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "PlainsA2-SouthEastBridge",
@@ -175,7 +190,8 @@
           "name": {
             "zh": "多雨平原",
             "en": "Rainy Plains"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "PlainsA2-VillagerOasis",
@@ -185,7 +201,8 @@
           "name": {
             "zh": "多雨平原",
             "en": "Rainy Plains"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "Town",
@@ -195,7 +212,8 @@
           "name": {
             "zh": "英雄港",
             "en": "Brave Haven"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "TownFountain",
@@ -205,7 +223,8 @@
           "name": {
             "zh": "英雄港",
             "en": "Brave Haven"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1539361911",
@@ -223,7 +242,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1770012913",
@@ -241,7 +261,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1826487914",
@@ -259,7 +280,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1882573915",
@@ -277,7 +299,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1955382917",
@@ -295,7 +318,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1988503918",
@@ -313,7 +337,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A75602_2042183919",
@@ -331,7 +356,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1209905116",
@@ -349,7 +375,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1254420117",
@@ -367,7 +394,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1542514118",
@@ -385,7 +413,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1586013119",
@@ -403,7 +432,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1618880120",
@@ -421,7 +451,8 @@
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
             "en": "Enter to find Enchantment Books, Echo Shards and other loot."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_rift.png"
         },
         {
           "id": "Townportal_portal",
@@ -450,7 +481,8 @@
           "note": {
             "zh": "購買不同稀有度等級的物品。",
             "en": "Purchase items of different rarity levels."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_villagemerchant.png"
         },
         {
           "id": "TheTownBlacksmithComplete",
@@ -464,7 +496,8 @@
           "note": {
             "zh": "提升物品的強度，並重擲其效果。",
             "en": "Increase the power of your items and reroll effects on them."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_blacksmith.png"
         },
         {
           "id": "TheTownEnchantsmithComplete",
@@ -478,7 +511,8 @@
           "note": {
             "zh": "使用附魔書為物品附魔。",
             "en": "Enchant your items using enchantment books."
-          }
+          },
+          "icon": "icons/map/t_ui_icon_enchantsmith.png"
         },
         {
           "id": "area:sw.area.desert.a1",
@@ -562,7 +596,8 @@
           "name": {
             "zh": "轟鳴蟲殼骸之地",
             "en": "Humbler Huskland"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "CarapaceA1-Centre",
@@ -572,7 +607,8 @@
           "name": {
             "zh": "轟鳴蟲殼骸之地",
             "en": "Humbler Huskland"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "CarapaceA1-North",
@@ -582,7 +618,8 @@
           "name": {
             "zh": "轟鳴蟲殼骸之地",
             "en": "Humbler Huskland"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "MeadowA1-BehindPortal",
@@ -592,7 +629,8 @@
           "name": {
             "zh": "吟唱者草甸",
             "en": "Singer's Meadow"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "MeadowA1-SingersHaven",
@@ -602,7 +640,8 @@
           "name": {
             "zh": "吟唱者草甸",
             "en": "Singer's Meadow"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "MeadowA1-SouthEast",
@@ -612,7 +651,8 @@
           "name": {
             "zh": "吟唱者草甸",
             "en": "Singer's Meadow"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "MeadowA1-SouthWest",
@@ -622,7 +662,8 @@
           "name": {
             "zh": "吟唱者草甸",
             "en": "Singer's Meadow"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "MeadowA2-Fortress",
@@ -632,7 +673,8 @@
           "name": {
             "zh": "安眠丘陵",
             "en": "Lullaby Hills"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "MeadowA2-Hilltop",
@@ -642,7 +684,8 @@
           "name": {
             "zh": "安眠丘陵",
             "en": "Lullaby Hills"
-          }
+          },
+          "icon": "icons/map/t_ui_icon_minecart.png"
         },
         {
           "id": "area:sw.area.carapace.a1",
@@ -697,5 +740,11 @@
       "zMax": 4,
       "markers": []
     }
-  ]
+  ],
+  "legend": {
+    "minecart": "icons/map/t_ui_icon_minecart.png",
+    "rift": "icons/map/t_ui_icon_rift.png",
+    "portal": "icons/map/t_ui_icon_town_portal.png",
+    "merchant": "icons/map/t_ui_icon_villagemerchant.png"
+  }
 }
