@@ -1,8 +1,10 @@
 {
   "giant-club-unique1": {
-    "kind": "enchantment-book",
-    "slug": "flame-belch-unique",
     "value": "80%",
-    "source": "In-game check: Redstone Wrecker's fixed enchantment is FlameBelch_Unique (Pyromancy) at 80%. The Minecraft Wiki does not name it."
+    "source": "In-game check: Redstone Wrecker's Pyromancy (FlameBelch_Unique) deals 80% of weapon damage. The DataTables hold it in the ability, not as a printable value."
+  },
+  "great-axe-unique1": {
+    "value": "70%",
+    "source": "Minecraft Wiki and dungeons.tools: Awesomeaxe's Strengthening Hit has a 70% chance. The game reads it from the ability's key values, which the DataTables do not include."
   }
 }

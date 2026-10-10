@@ -28,14 +28,14 @@
 
 網站新增公開分類時（`src/lib/tabs.ts`），對應圖示會自動改判為「網站已發布」。
 
-## 武器效果（Minecraft Wiki）
+## 武器數值與效果（遊戲資料表）
 
-遊戲匯出資料沒有「武器可出現的效果」與「獨特武器的固定效果」，這兩項取自 [Minecraft Wiki](https://minecraft.wiki/w/Dungeons_II:Weapon)。
+`npm run extract` 也會讀遊戲的 DataTables，產生 `src/data/weapons.json`：每一擊／每一發的數值、定位與重量、可出現的效果（含 I/II/III 數值）與獨特武器的固定效果。
 
-- `npm run wiki` 透過 MediaWiki API 讀取每把武器的頁面，解析「Compatible effects」與「Unique effect」，對應到網站的效果／附魔條目後寫入 `src/data/weapon-effects.json`（需要網路；build 不連網）。
-- 終端機會列出 Wiki 尚未收錄的武器，以及對不上網站資料的名稱；對不上的名稱不會猜，直接略過。
-- Wiki 內容採 [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) 授權：每個使用這份資料的頁面都標示來源頁面與授權，衍生內容沿用相同授權、限非商業用途。
-- 遊戲改版或 Wiki 更新後重跑 `npm run wiki`，檢查差異後 commit `src/data/weapon-effects.json`。
+- 資料表放在 `source-data/DataTables/UFS/`（解包的 `Content/Spicewood/Core/DataTables/`）；缺少時武器數值與效果不會產生，報告會列出 `missing-datatables`。
+- 可出現的效果依遊戲規則計算：掉落表依武器標籤選出效果群組，再以各效果基底模板的 `IncompatibleTagsQuery` 排除不適用的武器種類。
+- 每一擊的時間與每秒傷害來自動畫檔，不在資料表裡，因此沒有顯示。
+- 資料表沒有的固定效果數值（存在技能藍圖中）寫在 `src/data/fixed-bonus-overrides.json`，每筆註明確認來源。
 
 ## 開發
 

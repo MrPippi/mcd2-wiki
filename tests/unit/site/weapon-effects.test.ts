@@ -1,8 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { findEntry } from "../../../src/lib/data";
-import { fillPlaceholder, fixedOn, tierRange, weaponEffectsOf, wikiPageUrl } from "../../../src/lib/weapon-effects";
+import { fillPlaceholder, fixedOn, formatMagnitude, tierRange, weaponEffectsOf } from "../../../src/lib/weapon-effects";
 
 const PLACEHOLDER = '<span class="placeholder">{value}</span>';
+const PERCENT = { percent: true, multiplier: 1, offset: 0, maxFractionDigits: 2 };
+
+const weaponOf = (category: "melee" | "ranged", slug: string) => {
+  const weapon = findEntry(category, slug);
+  return weapon ? weaponEffectsOf(weapon) : undefined;
+};
 
 describe("fillPlaceholder", () => {
   it("puts the value where the game text has its one placeholder", () => {
@@ -17,39 +23,50 @@ describe("fillPlaceholder", () => {
 });
 
 describe("tierRange", () => {
-  it("spans tier I to tier III", () => {
+  it("spans tier I to tier III, or gives one value when they match", () => {
     expect(tierRange(["5%", "10%", "15%"])).toBe("5%~15%");
-  });
-
-  it("gives one value when every tier is the same", () => {
     expect(tierRange(["2", "2", "2"])).toBe("2");
   });
 });
 
-describe("wikiPageUrl", () => {
-  it("links a page title the way the wiki writes its URLs", () => {
-    expect(wikiPageUrl("Dungeons II:Hunter's Hatchet")).toBe("https://minecraft.wiki/w/Dungeons_II:Hunter's_Hatchet");
+describe("formatMagnitude", () => {
+  it("prints a magnitude the way the effect's description does", () => {
+    expect(formatMagnitude(0.1, PERCENT)).toBe("10%");
+    expect(formatMagnitude(-0.35, { ...PERCENT, multiplier: -1 })).toBe("35%");
+    expect(formatMagnitude(0.123456, PERCENT)).toBe("12.35%");
+    expect(formatMagnitude(2, { ...PERCENT, percent: false })).toBe("2");
   });
 });
 
 describe("weaponEffectsOf", () => {
-  it("resolves compatible effects and a unique weapon's fixed effect to site entries", () => {
-    const hatchet = findEntry("melee", "axe-unique1");
-    const effects = hatchet ? weaponEffectsOf(hatchet) : undefined;
-    expect(effects?.pageUrl).toBe("https://minecraft.wiki/w/Dungeons_II:Hunter's_Hatchet");
-    expect(effects?.compatible.length).toBeGreaterThan(0);
-    expect(effects?.compatible.every(({ effect }) => effect.category === "effect")).toBe(true);
-    expect(effects?.fixed?.entry.name.en).toBe("Fletcher");
-    expect(effects?.fixed?.value).toBe("35%");
+  it("lists the effects a weapon can roll with their printed tier values", () => {
+    const hatchet = weaponOf("melee", "axe-unique1");
+    const edge = hatchet?.compatible.find(({ effect }) => effect.slug === "critical-edge");
+    expect(edge?.values).toEqual(["10%", "20%", "30%"]);
   });
 
-  it("fills a fixed bonus the wiki does not name from the manual list, with its own icon and no page", () => {
-    const wrecker = findEntry("melee", "giant-club-unique1");
-    const fixed = wrecker ? weaponEffectsOf(wrecker)?.fixed : undefined;
+  it("reads a unique weapon's built-in effect and its value from the game data", () => {
+    const fixed = weaponOf("melee", "axe-unique1")?.fixed;
+    expect(fixed).toMatchObject({ kind: "effect", value: "35%", linked: true, manualValue: false });
+    expect(fixed?.entry.name.en).toBe("Fletcher");
+  });
+
+  it("shows Redstone Wrecker's Pyromancy from its book, unlinked, with the value checked in game", () => {
+    const fixed = weaponOf("melee", "giant-club-unique1")?.fixed;
     expect(fixed?.entry.name.zh).toBe("炮烙魔法");
     expect(fixed?.entry.icon).toBe("icons/enchantment-book/flame-belch-unique.png");
-    expect(fixed?.linked).toBe(false);
-    expect(fixed?.value).toBe("80%");
+    expect(fixed).toMatchObject({ kind: "enchantment", value: "80%", linked: false, manualValue: true });
+  });
+
+  it("uses the hand-checked value where the game reads it from an ability", () => {
+    expect(weaponOf("melee", "great-axe-unique1")?.fixed).toMatchObject({ value: "70%", manualValue: true });
+  });
+
+  it("covers ranged weapons, which the wiki did not", () => {
+    const reach = weaponOf("ranged", "longbow-unique1");
+    expect(reach?.compatible.length).toBeGreaterThan(0);
+    expect(reach?.fixed?.entry.name.en).toBe("Sniper");
+    expect(reach?.fixed?.value).toBe("100%");
   });
 
   it("is undefined for anything that is not a weapon", () => {

@@ -10,6 +10,7 @@ import InfoBox from "./InfoBox.astro";
 import LangText from "./LangText.astro";
 import FixedOn from "./FixedOn.astro";
 import WeaponEffects from "./WeaponEffects.astro";
+import WeaponStats from "./WeaponStats.astro";
 
 interface Props {
   lang: Lang;
@@ -40,6 +41,7 @@ const related = relatedLinks(lang, entry);
           <LangText as="p" lang={lang} value={entry.unlock} html />
         </EntrySection>
       )}
+      <WeaponStats lang={lang} weapon={entry} />
       <WeaponEffects lang={lang} weapon={entry} />
       {(entry.category === "enchantment" || entry.category === "effect") && <FixedOn lang={lang} entry={entry} />}
       {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}

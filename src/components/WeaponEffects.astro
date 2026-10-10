@@ -2,7 +2,7 @@
 import type { Entry, Localized } from "../../scripts/extract/schemas";
 import { t, type Lang } from "../lib/i18n";
 import { entryHref } from "../lib/url";
-import { fillPlaceholder, tierRange, weaponEffects, weaponEffectsOf } from "../lib/weapon-effects";
+import { fillPlaceholder, tierRange, weaponEffectsOf } from "../lib/weapon-effects";
 import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
 import LangText from "./LangText.astro";
@@ -18,13 +18,10 @@ const EFFECT_ICON = { row: 32, fixed: 64 } as const;
 
 const { lang, weapon } = Astro.props;
 const effects = weaponEffectsOf(weapon);
-const { source } = weaponEffects;
 const fixed = effects?.fixed;
 const withValue = (text: Localized, value: string): Localized => ({ zh: fillPlaceholder(text.zh, value), en: fillPlaceholder(text.en, value) });
 const fixedText: Localized | undefined =
   fixed?.entry.description && fixed.value ? withValue(fixed.entry.description, fixed.value) : fixed?.entry.description;
-const pageName = effects?.page.replace(/^Dungeons II:/, "");
-const [open, close] = lang === "zh" ? ["（", "）"] : [" (", ")"];
 ---
 {effects && (
   <>
@@ -79,7 +76,7 @@ const [open, close] = lang === "zh" ? ["（", "）"] : [" (", ")"];
         <p class="note" data-pagefind-ignore>{t(lang, "noEffectData")}</p>
       )}
       <p class="effect-source" data-testid="effect-source" data-pagefind-ignore>
-        {t(lang, "effectSource")}<a href={effects.pageUrl}>{source.site}: {pageName}</a>{open}<a href={source.licenseUrl} rel="license">{source.license}</a>{close}
+        {t(lang, "effectSource")}{fixed?.manualValue && t(lang, "effectSourceManual")}
       </p>
     </EntrySection>
   </>

@@ -5,6 +5,8 @@ export type IssueType =
   | "missing-text"
   | "placeholder-only"
   | "missing-name"
+  | "weapon-unmatched"
+  | "missing-datatables"
   | "untranslated"
   | "markup-warning"
   | "missing-icon-root"

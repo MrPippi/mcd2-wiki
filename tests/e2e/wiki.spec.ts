@@ -679,7 +679,7 @@ test("the site uses the game's own icons", async ({ page, request }) => {
   expect((await request.get(touch ?? "")).status()).toBe(200);
 });
 
-test("weapon pages list the wiki's compatible effects with tier values and credit the wiki", async ({ page }) => {
+test("weapon pages list the effects the game lets them roll, with tier values", async ({ page }) => {
   await page.goto("/zh/melee/axe/");
   await expect(page.getByTestId("unique-effect")).toHaveCount(0);
   const section = page.getByTestId("compatible-effects");
@@ -690,9 +690,7 @@ test("weapon pages list the wiki's compatible effects with tier values and credi
   await expect(first.locator(".effect-desc .primary .value")).toHaveText("10%~30%");
   await expect(first.locator("img.entry-icon")).toHaveAttribute("src", "/icons/effect/critical-edge.png");
   await expect(first.locator("a[href='/zh/effect/#critical-edge']")).toBeVisible();
-  const credit = page.getByTestId("effect-source");
-  await expect(credit.locator("a[href='https://minecraft.wiki/w/Dungeons_II:Axe']")).toBeVisible();
-  await expect(credit.locator("a[href='https://creativecommons.org/licenses/by-nc-sa/3.0/']")).toHaveText("CC BY-NC-SA 3.0");
+  await expect(page.getByTestId("effect-source")).toHaveText("效果資料取自遊戲資料檔。");
 });
 
 test("unique weapons show their fixed effect with its value filled in", async ({ page }) => {
@@ -705,12 +703,26 @@ test("unique weapons show their fixed effect with its value filled in", async ({
   await expect(fixed.locator("img.entry-icon")).toBeVisible();
 });
 
-test("weapons the wiki has not covered yet say so instead of showing an empty table", async ({ page }) => {
+test("ranged weapons get their effects and unique effect from the game data too", async ({ page }) => {
   await page.goto("/zh/ranged/bow/");
   const section = page.getByTestId("compatible-effects");
-  await expect(section).toContainText("Minecraft Wiki 尚未收錄");
-  await expect(section.locator("table")).toHaveCount(0);
-  await expect(page.getByTestId("effect-source").locator("a[href='https://minecraft.wiki/w/Dungeons_II:Bow']")).toBeVisible();
+  await expect(section.locator("tbody tr", { hasText: "致命鋒刃" }).locator(".tier-value")).toHaveText(["10%", "20%", "30%"]);
+
+  await page.goto("/zh/ranged/longbow-unique1/");
+  await expect(page.getByTestId("unique-effect").locator(".fixed-desc .primary .value")).toHaveText("100%");
+});
+
+test("weapon pages show game stats, with a combo table for melee only", async ({ page }) => {
+  await page.goto("/zh/melee/axe/");
+  const melee = page.getByTestId("weapon-stats");
+  await expect(melee).toContainText("整套連擊");
+  await expect(melee.locator(".combo-table tbody tr").first()).toContainText("第 1 擊");
+
+  await page.goto("/zh/ranged/bow/");
+  const ranged = page.getByTestId("weapon-stats");
+  await expect(ranged).toContainText("每發傷害");
+  await expect(ranged).toContainText("蓄力時間");
+  await expect(ranged.locator(".combo-table")).toHaveCount(0);
 });
 
 test("the effects table shows each effect's game icon where the game has one", async ({ page }) => {
@@ -727,6 +739,7 @@ test("Redstone Wrecker shows its in-game fixed enchantment with the FlameBelch i
   await expect(fixed.locator("img.entry-icon")).toHaveAttribute("src", "/icons/enchantment-book/flame-belch-unique.png");
   await expect(fixed.locator("a")).toHaveCount(0);
   await expect(fixed.locator(".fixed-desc .primary .value")).toHaveText("80%");
+  await expect(page.getByTestId("effect-source")).toContainText("人工確認");
 });
 
 test("unique enchantments list the weapons that carry them instead of a book", async ({ page }) => {
