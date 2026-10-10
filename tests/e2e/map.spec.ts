@@ -115,6 +115,18 @@ test("a rift result does not repeat its kind label", async ({ page }) => {
   await expect(first).not.toContainText("裂隙 · 裂隙");
 });
 
+test("the Russian map renders markers and its search finds Russian and English names", async ({ page }) => {
+  await page.goto("/ru/map/");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator(".map-marker--minecart").first()).toBeAttached();
+  await page.getByTestId("map-search").fill("Кузнец");
+  await expect(page.getByTestId("map-results").getByRole("button", { name: /Кузнец/ }).first()).toBeVisible();
+  await page.getByTestId("map-search").fill("blacksmith");
+  await expect(page.getByTestId("map-results").getByRole("button", { name: /Кузнец/ }).first()).toBeVisible();
+  await page.getByTestId("map-results").getByRole("button", { name: /Кузнец/ }).first().click();
+  await expect(page.locator(".leaflet-popup-content")).toContainText("Кузнец");
+});
+
 test("a search with no match says so", async ({ page }) => {
   await page.goto("/zh/map/");
   await page.getByTestId("map-search").fill("zzzz");
