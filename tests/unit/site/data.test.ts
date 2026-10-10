@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { describedEntry, describedLong } from "../../../src/lib/gear-values";
-import { allArmorSets, booksFor, entriesIn, findArmorSet, findEntry, publishedEntries } from "../../../src/lib/data";
+import { makeEntry } from "../../helpers/entries";
+import { allArmorSets, booksFor, hasRequiredIcon, entriesIn, findArmorSet, findEntry, publishedEntries } from "../../../src/lib/data";
 
 describe("site data", () => {
   it("publishes only base entries", () => {
@@ -21,12 +22,21 @@ describe("site data", () => {
     expect(publishedEntries.some((entry) => entry.category === "enchantment-book" && entry.variant === "unique")).toBe(false);
   });
 
-  it("hides entries that should have an icon but have none", () => {
-    expect(findEntry("enchantment", "clawing-shadow-unique")).toBeUndefined();
-    expect(findEntry("enchantment", "multi-potion")).toBeUndefined();
+  it("publishes only entries that have the icon their category requires", () => {
+    // The game's IconReference names these icons; before it was read they had none and stayed hidden.
+    for (const slug of ["clawing-shadow-unique", "multi-potion", "mauler-dive", "phantom-lance"]) {
+      expect(findEntry("enchantment", slug)?.icon, slug).toBeDefined();
+    }
     for (const category of ["melee", "ranged", "armor", "artifact", "talisman", "enchantment"] as const) {
       expect(entriesIn(category).every((entry) => entry.icon !== undefined), category).toBe(true);
     }
+  });
+
+  it("requires an icon on gear and enchantments but not on effects", () => {
+    expect(hasRequiredIcon(makeEntry("Sword", "melee"))).toBe(false);
+    expect(hasRequiredIcon(makeEntry("Arcane", "enchantment"))).toBe(false);
+    expect(hasRequiredIcon(makeEntry("Sword", "melee", { icon: "icons/melee/sword.png" }))).toBe(true);
+    expect(hasRequiredIcon(makeEntry("CriticalEdge", "effect"))).toBe(true);
   });
 
   it("keeps categories that never have icons", () => {

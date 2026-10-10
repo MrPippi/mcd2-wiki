@@ -128,6 +128,37 @@ describe("runExtract", () => {
     expect(summary).toMatchObject({ entries: 14, armorSets: 1, icons: 12 });
   });
 
+  it("takes an icon the DataTables' IconReference names, even when no file name matches", async () => {
+    const tables = [
+      "DT_ItemDefinitionMelee", "DT_ItemDefinitionRanged", "DT_MeleePropertyDefinition", "DT_RangedPropertyDefinition",
+      "DT_ProjectileDefinition", "DT_EffectTemplateDefinition", "DT_EffectTemplateGroupDefinition",
+      "DT_EffectTemplateGroupDropTableDefinition", "DT_EffectDefinition", "DT_EnchantmentDefinition", "DT_ItemDefinitionArtifact",
+    ];
+    await Promise.all(tables.map((name) => put(sourceRoot, `DataTables/UFS/${name}.json`, "[]")));
+    const reference = "/Game/Spicewood/Art/Characters/Player/Equipment/Armor/Disciple_Armor/Chest_Texture.Chest_Texture";
+    await put(sourceRoot, "DataTables/UFS/DT_ItemDefinitionArmor.json", JSON.stringify([{ Name: "DiscipleChest", IconReference: reference }]));
+    await put(sourceRoot, `${ICON_ROOT}/Armor/Disciple_Armor/Chest_Texture.png`, "png:referenced-chest");
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    const entries = await readJson<Entry[]>("src/data/entries.json");
+    expect(entries.find((e) => e.category === "armor" && e.slug === "disciple-chest")?.icon).toBe("icons/armor/disciple-chest.png");
+    expect(await readFile(path.join(outRoot, "public", "icons", "armor", "disciple-chest.png"), "utf8")).toBe("png:referenced-chest");
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).not.toContain("armor:DiscipleChest");
+  });
+
+  it("falls back to file-name matching when the IconReference file is missing", async () => {
+    await put(sourceRoot, "DataTables/UFS/DT_ItemDefinitionMelee.json", JSON.stringify([{ Name: "Sword", IconReference: "/Game/Spicewood/Art/Nowhere/Missing.Missing" }]));
+    await Promise.all(
+      ["DT_ItemDefinitionRanged", "DT_MeleePropertyDefinition", "DT_RangedPropertyDefinition", "DT_ProjectileDefinition", "DT_EffectTemplateDefinition",
+        "DT_EffectTemplateGroupDefinition", "DT_EffectTemplateGroupDropTableDefinition", "DT_EffectDefinition", "DT_EnchantmentDefinition", "DT_ItemDefinitionArtifact"]
+        .map((name) => put(sourceRoot, `DataTables/UFS/${name}.json`, "[]")),
+    );
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    const entries = await readJson<Entry[]>("src/data/entries.json");
+    expect(entries.find((e) => e.category === "melee" && e.slug === "sword")?.icon).toBe("icons/melee/sword.png");
+    expect(await readFile(path.join(outRoot, "public", "icons", "melee", "sword.png"), "utf8")).toBe("png:sword");
+  });
+
   it("extracts talismans and cosmetics with icons, unlock text and no duplicates", async () => {
     await runExtract({ sourceRoot, outRoot, overridesPath });
     const entries = await readJson<Entry[]>("src/data/entries.json");
