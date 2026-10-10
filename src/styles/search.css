@@ -1,12 +1,32 @@
 /* Pagefind sets its defaults on .pagefind-ui, so override on that element with higher specificity. */
 #search .pagefind-ui {
-  --pagefind-ui-primary: #ff7e2f;
+  --pagefind-ui-primary: var(--link);
   --pagefind-ui-text: var(--text);
   --pagefind-ui-background: var(--surface);
   --pagefind-ui-border: var(--border);
   --pagefind-ui-tag: var(--surface-2);
   --pagefind-ui-border-width: 2px;
   --pagefind-ui-border-radius: 0;
+  --pagefind-ui-image-border-radius: 0;
+  --pagefind-ui-image-box-ratio: 1 / 1;
   --pagefind-ui-font: var(--font-body);
 }
-#search .pagefind-ui__result-title { font-family: var(--font-pixel); }
+#search .pagefind-ui__result-title { font-family: var(--font-pixel); font-size: var(--fs-pixel-m); font-weight: 400; }
+#search .pagefind-ui__result-link:hover { color: var(--link); text-decoration: none; }
+#search .pagefind-ui__result { animation: fade-in var(--dur) var(--ease-out); }
+#search .pagefind-ui__result-excerpt { color: var(--muted); }
+#search mark {
+  background: color-mix(in srgb, var(--link) 22%, transparent); color: var(--text);
+  box-shadow: inset 0 -2px 0 var(--link); padding: 0 1px;
+}
+/* Result icons sit in an inventory slot like everywhere else on the site. */
+#search .pagefind-ui__result-thumb {
+  width: 56px; max-width: 56px; flex-shrink: 0; background: var(--slot-bg);
+  box-shadow: 0 0 0 1px var(--slot-edge), inset 0 0 0 2px var(--slot-border), inset 0 0 0 3px var(--slot-inner);
+}
+#search .pagefind-ui__result-image {
+  top: 50%; width: 76%; height: 76%; max-width: none; max-height: none; object-fit: contain;
+  transform: translate(-50%, -50%); image-rendering: pixelated;
+}
+#search .pagefind-ui__button { font-family: var(--font-pixel); color: var(--text); }
+#search .pagefind-ui__button:hover { border-color: var(--link); }

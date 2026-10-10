@@ -34,9 +34,10 @@ const hasUnique = entries.some((entry) => entry.variant === "unique");
     </>
   ) : (
     <ItemBrowser lang={lang}>
-      {entries.map((entry) => (
+      {entries.map((entry, index) => (
         <ItemCard
           lang={lang}
+          index={index}
           href={entryHref(lang, entry)}
           name={entry.name}
           icon={entry.icon}

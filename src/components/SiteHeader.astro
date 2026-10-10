@@ -4,23 +4,32 @@ import { href, swapLangPath } from "../lib/url";
 
 interface Props {
   lang: Lang;
+  /** Overrides the language switch target for pages without a same-path counterpart. */
+  switchHref?: string;
 }
 
-const { lang } = Astro.props;
+const { lang, switchHref: override } = Astro.props;
 const alt = otherLang(lang);
-const switchHref = swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, alt);
+const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, alt);
 ---
 <header class="site-header">
-  <a class="brand" href={href(lang)}>{t(lang, "siteTitle")}</a>
-  <form class="header-search" action={href(lang, "search")} method="get" role="search">
+  <a class="brand" href={href(lang)}>
+    <span class="brand-full">{t(lang, "siteTitle")}</span><span class="brand-short">{t(lang, "siteShort")}</span>
+  </a>
+  <button type="button" class="search-toggle" aria-expanded="false" aria-controls="header-search" aria-label={t(lang, "search")}>
+    <svg viewBox="0 0 9 9" aria-hidden="true" fill="currentColor">
+      <path d="M2 0h3v1H2zM1 1h1v1H1zM5 1h1v1H5zM0 2h1v3H0zM6 2h1v3H6zM1 5h1v1H1zM5 5h1v1H5zM2 6h3v1H2zM6 6h1v1H6zM7 7h1v1H7zM8 8h1v1H8z" />
+    </svg>
+  </button>
+  <form id="header-search" class="header-search" action={href(lang, "search")} method="get" role="search">
     <input type="search" name="q" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
   </form>
   <div class="site-tools">
     <button type="button" class="compare-toggle" aria-pressed="true" data-testid="compare-toggle">
-      {t(lang, "compare")}
+      <span class="label-long">{t(lang, "compare")}</span><span class="label-short">{t(lang, "compareShort")}</span>
     </button>
     <a class="lang-switch button" href={switchHref} hreflang={HTML_LANG[alt]} data-testid="lang-switch">
-      {t(lang, "switchLang")}
+      <span class="label-long">{t(lang, "switchLang")}</span><span class="label-short">{t(lang, "switchLangShort")}</span>
     </a>
   </div>
 </header>
@@ -48,4 +57,22 @@ const switchHref = swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, al
   const syncLang = () => langLink?.setAttribute("href", withCurrentLocation(langBase, location.search, location.hash));
   syncLang();
   window.addEventListener("hashchange", syncLang);
+
+  // Narrow screens fold the header search behind an icon button (see layout.css).
+  const searchToggle = document.querySelector<HTMLButtonElement>(".search-toggle");
+  const searchForm = document.querySelector<HTMLFormElement>(".header-search");
+  const setSearchOpen = (open: boolean) => {
+    searchForm?.classList.toggle("is-open", open);
+    searchToggle?.setAttribute("aria-expanded", String(open));
+  };
+  searchToggle?.addEventListener("click", () => {
+    const open = searchToggle.getAttribute("aria-expanded") !== "true";
+    setSearchOpen(open);
+    if (open) searchForm?.querySelector("input")?.focus();
+  });
+  searchForm?.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || searchToggle?.offsetParent === null) return;
+    setSearchOpen(false);
+    searchToggle?.focus();
+  });
 </script>

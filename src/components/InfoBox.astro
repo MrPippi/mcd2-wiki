@@ -18,9 +18,9 @@ const listCategory = entry.category === "enchantment-book" ? "enchantment" : ent
 ---
 <aside class="info-box panel" data-testid="info-box">
   <div class="entry-head">
-    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={160} category={entry.category} variant={entry.variant} loading="eager" />
+    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={160} category={entry.category} variant={entry.variant} loading="eager" searchImage />
   </div>
-  <dl class="facts">
+  <dl class="facts" data-pagefind-ignore>
     <div>
       <dt data-pagefind-ignore>{t(lang, "category")}</dt>
       <dd><a href={href(lang, listCategory)}><UiIcon src={categoryIcon(entry.category)} />{CATEGORY_LABEL[entry.category][lang]}</a></dd>

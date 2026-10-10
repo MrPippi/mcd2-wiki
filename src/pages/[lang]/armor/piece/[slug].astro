@@ -4,6 +4,7 @@ import type { Entry } from "../../../../../scripts/extract/schemas";
 import EntryDetail from "../../../../components/EntryDetail.astro";
 import Base from "../../../../layouts/Base.astro";
 import { entriesIn } from "../../../../lib/data";
+import { plainText } from "../../../../lib/meta";
 import type { Lang } from "../../../../lib/i18n";
 
 export function getStaticPaths() {
@@ -14,7 +15,8 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Lang;
 const { entry } = Astro.props as { entry: Entry };
+const description = plainText(entry.description?.[lang] ?? "");
 ---
-<Base lang={lang} title={entry.name[lang]} current="armor">
+<Base lang={lang} title={entry.name[lang]} description={description} current="armor">
   <EntryDetail lang={lang} entry={entry} />
 </Base>

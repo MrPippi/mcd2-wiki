@@ -10,7 +10,11 @@ const { lang } = Astro.props;
 <div class="item-browser">
   <ul class="entry-grid item-grid"><slot /></ul>
   <aside class="item-tooltip panel" data-testid="item-tooltip" aria-live="polite">
-    <p class="tooltip-hint">{t(lang, "tooltipHint")}</p>
+    <div class="tooltip-empty">
+      <span class="empty-slot" aria-hidden="true"></span>
+      <p class="tooltip-hint">{t(lang, "tooltipHint")}</p>
+      <p class="tooltip-keys">{t(lang, "tooltipKeys")}</p>
+    </div>
   </aside>
 </div>
 <div class="item-sheet panel" data-testid="item-sheet" role="dialog" aria-label={t(lang, "itemDetails")} tabindex="-1" hidden>
