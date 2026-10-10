@@ -22,7 +22,8 @@ export type IssueType =
   | "missing-map-tables"
   | "map-marker-outside"
   | "map-missing-name"
-  | "map-unmatched-tag";
+  | "map-unmatched-tag"
+  | "missing-ui-game-string";
 
 export interface Issue {
   readonly type: IssueType;

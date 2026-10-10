@@ -1,6 +1,6 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
-import { CATEGORY_LABEL, t, type Lang } from "../lib/i18n";
+import { categoryLabel, t, type Lang } from "../lib/i18n";
 import { entryHref } from "../lib/url";
 import { fixedOn } from "../lib/weapon-effects";
 import EntryIcon from "./EntryIcon.astro";
@@ -21,7 +21,7 @@ const weapons = fixedOn(entry);
     <ul class="related" data-pagefind-ignore>
       {weapons.map((weapon) => (
         <li>
-          <span class="related-label">{CATEGORY_LABEL[weapon.category][lang]}</span>
+          <span class="related-label">{categoryLabel(weapon.category, lang)}</span>
           <a href={entryHref(lang, weapon)}>
             {weapon.icon && <EntryIcon icon={weapon.icon} alt="" size={40} category={weapon.category} variant={weapon.variant} />}
             <LangText lang={lang} value={weapon.name} />

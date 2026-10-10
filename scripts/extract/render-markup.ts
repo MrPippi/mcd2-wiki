@@ -1,6 +1,8 @@
+import { fileValue, plainText } from "../../src/lib/ui-dicts";
 import type { Lang } from "./config";
 
-const PLACEHOLDER_LABEL: Readonly<Record<Lang, string>> = { zh: "{數值}", en: "{value}" };
+/** The label shown in place of a value that is filled in later, from the language file (wrapped in braces). */
+const placeholderLabel = (lang: Lang): string => plainText(fileValue(lang, "placeholderLabel") ?? "{}");
 const HEX_COLOR = /^#([0-9A-Fa-f]{6})(?:[0-9A-Fa-f]{2})?$/;
 const TOKEN = /<([A-Za-z]+)((?:\s+[A-Za-z]+="[^"]*")*)\s*>|<\/>|\{(\d+)\}\|plural\(([^)]*)\)|\{(\w+)\}|\r?\n/g;
 const ATTRIBUTE = /([A-Za-z]+)="([^"]*)"/g;
@@ -67,7 +69,7 @@ export function renderMarkup(text: string, lang: Lang): RenderResult {
       const forms = escapeHtml(JSON.stringify(parsePluralForms(pluralBody ?? "")));
       html += `<span class="plural" data-slot="${pluralSlot}" data-forms="${forms}"></span>`;
     } else if (placeholder !== undefined) {
-      html += `<span class="placeholder" data-slot="${placeholder}">${PLACEHOLDER_LABEL[lang]}</span>`;
+      html += `<span class="placeholder" data-slot="${placeholder}">${placeholderLabel(lang)}</span>`;
     } else {
       html += "<br>";
     }

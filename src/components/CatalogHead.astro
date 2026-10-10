@@ -1,6 +1,6 @@
 ---
 import type { Category } from "../../scripts/extract/config";
-import { CATEGORY_LABEL, type Lang } from "../lib/i18n";
+import { categoryLabel, type Lang } from "../lib/i18n";
 import { compareLang, htmlLang } from "../lib/lang";
 import { categoryIcon } from "../lib/ui-icons";
 import ListFilter from "./ListFilter.astro";
@@ -19,9 +19,9 @@ const alt = compareLang(lang);
 <header class="catalog-head">
   <h1 class="catalog-title">
     <UiIcon src={categoryIcon(category)} />
-    <span data-pagefind-meta="title">{CATEGORY_LABEL[category][lang]}</span>
+    <span data-pagefind-meta="title">{categoryLabel(category, lang)}</span>
     <span class="count">({count})</span>
   </h1>
-  <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{CATEGORY_LABEL[category][alt]}</p>
+  <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{categoryLabel(category, alt)}</p>
   <ListFilter lang={lang} showVariant={showVariant} />
 </header>

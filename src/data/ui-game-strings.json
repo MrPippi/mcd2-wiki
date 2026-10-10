@@ -1,0 +1,102 @@
+{
+  "categoryMelee": {
+    "en": "Melee",
+    "zh": "近戰武器"
+  },
+  "categoryRanged": {
+    "en": "Ranged",
+    "zh": "遠程武器"
+  },
+  "categoryArmor": {
+    "en": "Armor",
+    "zh": "護甲"
+  },
+  "categoryArtifact": {
+    "en": "Artifacts",
+    "zh": "神器"
+  },
+  "categoryTalisman": {
+    "en": "Talismans",
+    "zh": "護符"
+  },
+  "categoryCape": {
+    "en": "Capes",
+    "zh": "披風"
+  },
+  "categoryPet": {
+    "en": "Pets",
+    "zh": "寵物"
+  },
+  "categoryEnchantment": {
+    "en": "Enchantments",
+    "zh": "附魔"
+  },
+  "categoryEnchantmentBook": {
+    "en": "Enchantment Books",
+    "zh": "附魔書"
+  },
+  "categoryEffect": {
+    "en": "Effects",
+    "zh": "效果"
+  },
+  "categoryStatus": {
+    "en": "Statuses",
+    "zh": "狀態"
+  },
+  "pieceHelmet": {
+    "en": "Helmet",
+    "zh": "頭盔"
+  },
+  "pieceChest": {
+    "en": "Chest",
+    "zh": "胸甲"
+  },
+  "pieceLeggings": {
+    "en": "Leggings",
+    "zh": "護腿"
+  },
+  "pieceBoots": {
+    "en": "Boots",
+    "zh": "靴子"
+  },
+  "rarityCommon": {
+    "en": "Common",
+    "zh": "普通"
+  },
+  "rarityRare": {
+    "en": "Rare",
+    "zh": "稀有"
+  },
+  "raritySpecial": {
+    "en": "Special",
+    "zh": "特殊"
+  },
+  "unique": {
+    "en": "Unique",
+    "zh": "獨特"
+  },
+  "rarity": {
+    "en": "Rarity",
+    "zh": "稀有度"
+  },
+  "map": {
+    "en": "Map",
+    "zh": "地圖"
+  },
+  "markerMinecart": {
+    "en": "Minecart Stations",
+    "zh": "礦車站"
+  },
+  "markerRift": {
+    "en": "Rift",
+    "zh": "裂隙"
+  },
+  "markerPortal": {
+    "en": "Teleport Statue",
+    "zh": "傳送雕像"
+  },
+  "markerMerchant": {
+    "en": "Merchant",
+    "zh": "商人"
+  }
+}

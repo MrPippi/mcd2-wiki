@@ -7,7 +7,7 @@ import ItemCard from "../../../components/ItemCard.astro";
 import Base from "../../../layouts/Base.astro";
 import { entriesIn } from "../../../lib/data";
 import { describedEntry } from "../../../lib/gear-values";
-import { CATEGORY_LABEL, GRID_CATEGORIES, TABLE_CATEGORIES, t, type Lang } from "../../../lib/i18n";
+import { categoryLabel, GRID_CATEGORIES, TABLE_CATEGORIES, t, type Lang } from "../../../lib/i18n";
 import { itemKicker } from "../../../lib/kicker";
 import { entryHref } from "../../../lib/url";
 
@@ -23,7 +23,7 @@ const entries = entriesIn(category);
 const isTable = (TABLE_CATEGORIES as readonly Category[]).includes(category);
 const hasUnique = entries.some((entry) => entry.variant === "unique");
 ---
-<Base lang={lang} title={CATEGORY_LABEL[category][lang]} current={category}>
+<Base lang={lang} title={categoryLabel(category, lang)} current={category}>
   <div class="catalog">
   <CatalogHead lang={lang} category={category} count={entries.length} showVariant={!isTable && hasUnique} />
   <p class="no-results" hidden>{t(lang, "noResults")}</p>

@@ -2,7 +2,7 @@
 import type { Category } from "../../scripts/extract/config";
 import { catalogLabel, categoryCount, entryNumber } from "../lib/catalog";
 import { entriesIn, publishedEntries } from "../lib/data";
-import { CATEGORY_LABEL, t, type Lang } from "../lib/i18n";
+import { categoryLabel, t, type Lang } from "../lib/i18n";
 import { compareLang, htmlLang } from "../lib/lang";
 import { itemKicker } from "../lib/kicker";
 import { mapData, markerTotal } from "../lib/map/data";
@@ -57,7 +57,7 @@ const previewOf = (category: Category) => entriesIn(category).filter((entry) => 
   {featured && (
     <figure class="hero-specimen">
       <a class="specimen-plate" href={entryHref(lang, featured)}>
-        <span class="plate-no mono">{featuredNumber !== undefined ? `No. ${catalogLabel(featuredNumber)}` : ""}</span>
+        <span class="plate-no mono">{featuredNumber !== undefined ? `${t(lang, "catalogNo")} ${catalogLabel(featuredNumber)}` : ""}</span>
         <span class="plate-art">
           <EntryIcon icon={featured.icon} alt={featured.name[lang]} size={FEATURED_SIZE} category={featured.category} variant={featured.variant} loading="eager" />
         </span>
@@ -87,8 +87,8 @@ const previewOf = (category: Category) => entriesIn(category).filter((entry) => 
         <a href={href(lang, category)}>
           <span class="category-index mono" aria-hidden="true">{catalogLabel(index + 1).slice(1)}</span>
           <span class="category-slot"><UiIcon src={categoryIcon(category)} /></span>
-          <span class="category-name">{CATEGORY_LABEL[category][lang]}</span>
-          <span class="category-alt item-alt" lang={htmlLang(alt)}>{CATEGORY_LABEL[category][alt]}</span>
+          <span class="category-name">{categoryLabel(category, lang)}</span>
+          <span class="category-alt item-alt" lang={htmlLang(alt)}>{categoryLabel(category, alt)}</span>
           <span class="category-preview" aria-hidden="true">
             {previewOf(category).map((entry) => (
               <EntryIcon icon={entry.icon} alt="" size={PREVIEW_SIZE} category={entry.category} variant={entry.variant} />
