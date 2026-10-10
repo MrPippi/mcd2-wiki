@@ -117,11 +117,11 @@ const merge = (parts: readonly Gathered[]): Gathered => ({
 });
 
 function minecarts(tables: MapTables, ctx: Context): Gathered {
-  const byId = new Map<string, TeleportRowValue>(
-    tables.teleports.filter((row) => row.Type !== "Debug").map((row) => [lower(row.IdTag.TagName), row]),
-  );
+  // Many real stations only exist as Debug rows; when a tag repeats, the non-Debug row wins (it is inserted last).
+  const debugFirst = [...tables.teleports].sort((a, b) => Number(b.Type === "Debug") - Number(a.Type === "Debug"));
+  const byId = new Map<string, TeleportRowValue>(debugFirst.map((row) => [lower(row.IdTag.TagName), row]));
   return merge(
-    tables.exploration.map((row) => {
+    tables.exploration.filter((row) => !/^test/i.test(row.Name)).map((row) => {
       const point = byId.get(lower(row.TeleportTag.TagName));
       if (!point) return { candidates: [], issues: [issue("map-unmatched-tag", `${row.Name} → ${row.TeleportTag.TagName}`)] };
       const areaTag = point.AreaTag.TagName;

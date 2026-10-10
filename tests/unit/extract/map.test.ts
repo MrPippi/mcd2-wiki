@@ -11,6 +11,42 @@ const markersOf = (world: string, tables = MAP_TABLES, iconExists = everyIcon): 
   run(tables, iconExists).data.worlds.find((w) => w.key === world)?.markers ?? [];
 const byId = (world: string, id: string) => markersOf(world).find((m) => m.id === id);
 
+const row = (Name: string, IdTag: string, Type: string, X: number, Y: number) => ({
+  Name,
+  IdTag: { TagName: IdTag },
+  AreaTag: { TagName: "SW.Area.Forest.A1" },
+  Type,
+  Location: { X, Y, Z: 0 },
+});
+const withStations = (teleports: ReturnType<typeof row>[], names: string[]) => ({
+  ...MAP_TABLES,
+  teleports: [...MAP_TABLES.teleports, ...teleports],
+  exploration: names.map((Name) => ({ Name, TeleportTag: { TagName: teleports.find((t) => t.Name === Name)?.IdTag.TagName ?? "" } })),
+});
+
+describe("minecart stations", () => {
+  it("places a station whose only teleport row is tagged Debug", () => {
+    const tables = withStations([row("DbgStation", "SW.TeleportPoint.Dbg.MinecartStation", "Debug", 10000, 50000)], ["DbgStation"]);
+    expect(markersOf("overworld", tables).find((m) => m.id === "DbgStation")?.kind).toBe("minecart");
+  });
+
+  it("uses the non-Debug row when an IdTag appears twice", () => {
+    const tag = "SW.TeleportPoint.Dup.MinecartStation";
+    const rows = [row("DupDebug", tag, "Debug", 30000, 90000), row("DupArea", tag, "Area", 20000, 80000), row("DupDebug2", tag, "Debug", 30000, 90000)];
+    const tables = { ...withStations(rows, []), exploration: [{ Name: "Dup", TeleportTag: { TagName: tag } }] };
+    const marker = markersOf("overworld", tables).find((m) => m.id === "Dup");
+    const expected = toImagePixel(run(tables).data.worlds[0].frame, toBlocks({ X: 20000, Y: 80000 }));
+    expect([marker?.px, marker?.py]).toEqual([Math.round(expected.px * 10) / 10, Math.round(expected.py * 10) / 10]);
+  });
+
+  it("silently skips exploration rows named Test*", () => {
+    const tables = withStations([row("TestGym-1", "SW.TeleportPoint.Test.Gym.MinecartStation", "Debug", 10000, 50000)], ["TestGym-1"]);
+    const result = run(tables);
+    expect(markersOf("overworld", tables).map((m) => m.id)).not.toContain("TestGym-1");
+    expect(result.issues.map((i) => i.detail).join(" | ")).not.toContain("TestGym");
+  });
+});
+
 describe("buildMapData", () => {
   it("lists the worlds in display order with their names, frames and top zoom", () => {
     const { worlds } = run().data;
