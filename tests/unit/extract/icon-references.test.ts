@@ -56,6 +56,10 @@ describe("referenceFor", () => {
     expect(referenceFor(refs, "enchantment", "MaulerDive")).toBe("/Game/Spicewood/Mauler.X");
     expect(referenceFor(refs, "enchantment-book", "EnchantmentBook_MaulerDive")).toBe("/Game/Spicewood/Mauler.X");
   });
+  it("does not take a _Unique row for other categories", () => {
+    const gear = buildIconReferences({ melee: [{ Name: "Axe.Unique", IconReference: "/Game/Spicewood/U.U" }] });
+    expect(referenceFor(gear, "melee", "Axe")).toBeUndefined();
+  });
   it("returns nothing for categories without a table", () => {
     expect(referenceFor(refs, "skin", "Axe")).toBeUndefined();
   });

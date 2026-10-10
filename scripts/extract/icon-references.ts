@@ -33,6 +33,9 @@ const LOOKUP_ORDER: Readonly<Partial<Record<Category, readonly Category[]>>> = {
   "enchantment-book": ["enchantment-book", "enchantment"],
 };
 
+/** Only enchantments have Unique-tier rows (MaulerDive.Unique) that stand for the plain id. */
+const UNIQUE_FALLBACK: ReadonlySet<Category> = new Set(["enchantment", "enchantment-book"]);
+
 const BOOK_PREFIX = /^EnchantmentBook_/;
 
 export type IconReferences = ReadonlyMap<Category, ReadonlyMap<string, string>>;
@@ -74,7 +77,7 @@ export function referenceFor(references: IconReferences, category: Category, id:
   const key = (category === "enchantment-book" ? id.replace(BOOK_PREFIX, "") : id).toLowerCase();
   for (const table of LOOKUP_ORDER[category] ?? [category]) {
     const rows = references.get(table);
-    const found = rows?.get(key) ?? rows?.get(`${key}_unique`);
+    const found = rows?.get(key) ?? (UNIQUE_FALLBACK.has(table) ? rows?.get(`${key}_unique`) : undefined);
     if (found) return found;
   }
   return undefined;
