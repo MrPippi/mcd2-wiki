@@ -90,8 +90,8 @@ test("armor set pages mark a set name that fell back to English", async ({ page 
   await page.goto("/fr/armor/disciple/");
   await expect(page.locator("h1")).toHaveText("Disciple");
   await expect(page.locator(".facts .tag.warn")).toHaveCount(1);
-  await page.goto("/de/armor/disciple/");
-  await expect(page.locator("h1")).toContainText("Anhänger");
+  await page.goto("/ja/armor/disciple/");
+  await expect(page.locator("h1")).toContainText("門弟");
   await expect(page.locator(".facts .tag.warn")).toHaveCount(0);
 });
 

@@ -71,11 +71,23 @@ describe("linkEntries — armor sets", () => {
       id: "Disciple",
       slug: "disciple",
       variant: "normal",
-      name: loc({ zh: "修行者", "zh-hans": "门徒", en: "Disciple", ja: "門弟", ko: "수련자", de: "Anhänger", tr: "Mürit" }),
-      untranslated: ["fr", "es", "it", "pt", "ru", "pl", "nl", "sv", "uk"],
+      name: loc({ zh: "修行者", "zh-hans": "门徒", en: "Disciple", ja: "門弟", ko: "수련자" }),
+      untranslated: ["de", "fr", "es", "it", "pt", "ru", "pl", "nl", "sv", "tr", "uk"],
       pieces: { helmet: "disciple-helmet", chest: "disciple-chest" },
     });
     expect(issues).toEqual([]);
+  });
+
+  it("names a German set once its piece tails recur in three sets", () => {
+    const set = (prefix: string, de: string) => [
+      makeEntry(prefix + "Helmet", "armor", { name: loc({ zh: prefix + "頭盔", en: prefix + " Helm", de: de + "helm" }) }),
+      makeEntry(prefix + "Chest", "armor", { name: loc({ zh: prefix + "長袍", en: prefix + " Robe", de: de + "robe" }) }),
+    ];
+    const { armorSets } = linkEntries([...set("Alpha", "Alpha"), ...set("Beta", "Beta"), ...set("Gamma", "Gamma"), ...set("Delta", "Delta")]);
+    expect(armorSets.map((entry) => entry.name.de)).toEqual(["Alpha", "Beta", "Delta", "Gamma"]);
+    expect(armorSets.every((entry) => !entry.untranslated?.includes("de"))).toBe(true);
+    const lonely = linkEntries([...set("Alpha", "Alpha"), ...set("Beta", "Beta")]).armorSets;
+    expect(lonely.every((entry) => entry.untranslated?.includes("de"))).toBe(true);
   });
 
   it("does not name a set from English text that stands in for missing translations", () => {
@@ -85,7 +97,8 @@ describe("linkEntries — armor sets", () => {
       flagged("DiscipleChest", "修行者長袍", "Disciple Robe"),
     ]);
     expect(armorSets[0].name.ja).toBe("Disciple");
-    expect(armorSets[0].untranslated).toEqual(["ja"]);
+    expect(armorSets[0].untranslated).toContain("ja");
+    expect(armorSets[0].untranslated).not.toContain("zh");
   });
 
   it("names the unique set from the pieces' common prefix", () => {
@@ -143,16 +156,34 @@ describe("setNameFor — per writing system", () => {
   const names = (lang: keyof typeof DISCIPLE_HELMET) => [DISCIPLE_HELMET[lang], DISCIPLE_CHEST[lang]];
   it("cuts Latin names at a word boundary", () => {
     expect(setNameFor("en", names("en"))).toBe("Disciple");
-    expect(setNameFor("tr", names("tr"))).toBe("Mürit");
+    expect(setNameFor("tr", names("tr"), new Set(["maskesi", "cübbesi"]))).toBe("Mürit");
     expect(setNameFor("pl", names("pl"))).toBeUndefined();
-    expect(setNameFor("sv", names("sv"))).toBeUndefined();
+  });
+
+  it("falls back for Swedish whatever the names share", () => {
+    expect(setNameFor("sv", ["Lärjungemask", "Lärjungedräkt"])).toBeUndefined();
+    expect(setNameFor("sv", ["Sculkgrävarens hjälm", "Sculkgrävarens rustning"])).toBeUndefined();
+  });
+
+  it("rejects a prefix whose piece remainder is not a known tail", () => {
+    const known = new Set(["helm", "robe"]);
+    expect(setNameFor("de", ["Stahlwollkappe", "Stahlwollpullover"], known)).toBeUndefined();
+    expect(setNameFor("nl", ["Dolle Sifterhelm", "Dolle Siftercape"], new Set(["helm"]))).toBeUndefined();
+    expect(setNameFor("nl", ["Dolle helm", "Dolle robe"], known)).toBe("Dolle");
+  });
+
+  it("rejects a Cyrillic prefix that ends like an adjective", () => {
+    expect(setNameFor("ru", ["Чудовищные шлем", "Чудовищные латы"])).toBeUndefined();
+    expect(setNameFor("uk", ["Лісовий шолом", "Лісовий плащ"])).toBeUndefined();
+    expect(setNameFor("ru", ["Монарх шлем", "Монарх латы"], new Set(["шлем", "латы"]))).toBe("Монарх");
   });
 
   it("allows a German compound prefix of 4+ letters followed by letters", () => {
-    expect(setNameFor("de", names("de"))).toBe("Anhänger");
-    expect(setNameFor("de", ["Jüngerhelm", "Jüngerrobe"])).toBe("Jünger");
+    const known = new Set(["helm", "robe", "maske", "umhang"]);
+    expect(setNameFor("de", names("de"), known)).toBe("Anhänger");
+    expect(setNameFor("de", ["Jüngerhelm", "Jüngerrobe"], known)).toBe("Jünger");
     expect(setNameFor("de", ["Abc", "Abcd"])).toBeUndefined();
-    expect(setNameFor("de", ["Sifter-Helm", "Sifter-Robe"])).toBe("Sifter");
+    expect(setNameFor("de", ["Sifter-Helm", "Sifter-Robe"], known)).toBe("Sifter");
     expect(setNameFor("de", ["Jünger Helm", "Jünger Robe"])).toBe("Jünger");
   });
 
@@ -166,6 +197,11 @@ describe("setNameFor — per writing system", () => {
     expect(setNameFor("zh-hans", names("zh-hans"))).toBe("门徒");
     expect(setNameFor("ja", names("ja"))).toBe("門弟");
     expect(setNameFor("ko", names("ko"))).toBe("수련자");
+  });
+
+  it("rejects a Japanese cut inside a katakana run", () => {
+    expect(setNameFor("ja", ["ハイヴマインドのヘルメット", "ハイブマインドの胸当て"])).toBeUndefined();
+    expect(setNameFor("ja", ["ハイブマインドのヘルメット", "ハイブマインドの胸当て"])).toBe("ハイブマインド");
   });
 
   it("rejects a name shorter than 2 characters or equal to a piece name", () => {
