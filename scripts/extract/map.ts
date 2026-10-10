@@ -5,7 +5,7 @@ import { WORLDS, imageSizeOf, zMaxFor, type WorldSource } from "../../src/lib/ma
 import { localizedFrom } from "../../src/lib/lang";
 import type { Lang } from "./config";
 import { issue, type Issue } from "./issues";
-import { localize, locRef } from "./loc-table";
+import { englishFallbacks, localize, locRef } from "./loc-table";
 import { MARKER_KINDS, type MapData, type MapMarker, type MarkerKind, type WorldMap } from "./map-schema";
 import type { AreaRowValue, MapTables, TeleportRowValue } from "./map-tables";
 import type { LocaleFile, Localized } from "./schemas";
@@ -70,6 +70,8 @@ interface Context {
   readonly loc: (text: string) => Localized | undefined;
   readonly areaName: (tag: string) => Localized | undefined;
   readonly areaIcon: (tag: string) => string | undefined;
+  /** Map texts read so far that show English in some language (spec §1.2.2: fallbacks must be visible). */
+  readonly fallbackIssues: () => Issue[];
 }
 
 interface Frame {
@@ -86,7 +88,17 @@ const optional = <K extends string, V>(key: K, value: V | undefined): Partial<Re
 
 function makeContext(tables: MapTables, locales: Locales): Context {
   const areas = new Map<string, AreaRowValue>(tables.areas.map((row) => [lower(row.TypeTag.TagName), row]));
-  const text = (namespace: string, key: string) => localize(locales, namespace, key);
+  // Every text the map reads, by namespace and key, so English fallbacks can be reported once each.
+  const used = new Map<string, { namespace: string; key: string }>();
+  const text = (namespace: string, key: string) => {
+    used.set(`${namespace} ${key}`, { namespace, key });
+    return localize(locales, namespace, key);
+  };
+  const fallbackIssues = (): Issue[] =>
+    [...used.values()].flatMap(({ namespace, key }) => {
+      const langs = englishFallbacks(locales, namespace, key);
+      return langs.length ? [issue("map-text-fallback", `${namespace} ${key}: ${langs.join(", ")}`)] : [];
+    });
   const loc = (value: string) => {
     const ref = locRef(value);
     return ref ? text(ref.namespace, ref.key) : undefined;
@@ -100,7 +112,7 @@ function makeContext(tables: MapTables, locales: Locales): Context {
     const match = /\/AreaIcons\/([^./]+)\./.exec(areas.get(lower(tag))?.AreaIcon ?? "");
     return match ? `${AREA_ICON_DIR}/${match[1]}.png` : undefined;
   };
-  return { text, loc, areaName, areaIcon };
+  return { text, loc, areaName, areaIcon, fallbackIssues };
 }
 
 function worldFrames(tables: MapTables, ctx: Context): { frames: Frame[]; issues: Issue[] } {
@@ -250,9 +262,10 @@ export function buildMapData(tables: MapTables, locales: Locales, iconExists: (r
   const gathered = merge([minecarts(tables, ctx), rifts(tables, ctx), portals(tables, ctx), merchants(tables, ctx)]);
   const inside = (candidate: Candidate) => frames.some((frame) => isInside(frame.frame, candidate.block));
   const placedCandidates = gathered.candidates.filter(inside);
+  const worlds = frames.map((frame) => buildWorld(frame, placedCandidates.filter((c) => isInside(frame.frame, c.block)), ctx, iconExists));
   return {
     data: {
-      worlds: frames.map((frame) => buildWorld(frame, placedCandidates.filter((c) => isInside(frame.frame, c.block)), ctx, iconExists)),
+      worlds,
       legend: legendOf(iconExists),
     },
     icons: iconsOf(placedCandidates, ctx, iconExists),
@@ -260,6 +273,7 @@ export function buildMapData(tables: MapTables, locales: Locales, iconExists: (r
       ...frameIssues,
       ...gathered.issues,
       ...gathered.candidates.filter((c) => !inside(c)).map((c) => issue("map-marker-outside", `${c.kind}:${c.id}`)),
+      ...ctx.fallbackIssues(),
     ],
   };
 }

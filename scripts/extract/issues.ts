@@ -24,6 +24,7 @@ export type IssueType =
   | "map-marker-outside"
   | "map-missing-name"
   | "map-unmatched-tag"
+  | "map-text-fallback"
   | "missing-ui-game-string";
 
 export interface Issue {
