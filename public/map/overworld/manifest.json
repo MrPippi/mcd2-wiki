@@ -1,0 +1,326 @@
+{
+  "imageSize": 8192,
+  "zMax": 5,
+  "sources": [
+    {
+      "name": "Overworld_00_00.png",
+      "size": 77124,
+      "mtimeMs": 1791562077900
+    },
+    {
+      "name": "Overworld_00_01.png",
+      "size": 77124,
+      "mtimeMs": 1791562077595
+    },
+    {
+      "name": "Overworld_00_02.png",
+      "size": 77124,
+      "mtimeMs": 1791562077791
+    },
+    {
+      "name": "Overworld_00_03.png",
+      "size": 77124,
+      "mtimeMs": 1791562077446
+    },
+    {
+      "name": "Overworld_00_04.png",
+      "size": 77124,
+      "mtimeMs": 1791562077518
+    },
+    {
+      "name": "Overworld_00_05.png",
+      "size": 77124,
+      "mtimeMs": 1791562077622
+    },
+    {
+      "name": "Overworld_00_06.png",
+      "size": 77124,
+      "mtimeMs": 1791562077706
+    },
+    {
+      "name": "Overworld_00_07.png",
+      "size": 77124,
+      "mtimeMs": 1791562077542
+    },
+    {
+      "name": "Overworld_01_00.png",
+      "size": 77124,
+      "mtimeMs": 1791562077604
+    },
+    {
+      "name": "Overworld_01_01.png",
+      "size": 77124,
+      "mtimeMs": 1791562077513
+    },
+    {
+      "name": "Overworld_01_02.png",
+      "size": 77124,
+      "mtimeMs": 1791562077579
+    },
+    {
+      "name": "Overworld_01_03.png",
+      "size": 77124,
+      "mtimeMs": 1791562077648
+    },
+    {
+      "name": "Overworld_01_04.png",
+      "size": 77124,
+      "mtimeMs": 1791562077618
+    },
+    {
+      "name": "Overworld_01_05.png",
+      "size": 77124,
+      "mtimeMs": 1791562077510
+    },
+    {
+      "name": "Overworld_01_06.png",
+      "size": 77124,
+      "mtimeMs": 1791562077753
+    },
+    {
+      "name": "Overworld_01_07.png",
+      "size": 77124,
+      "mtimeMs": 1791562077863
+    },
+    {
+      "name": "Overworld_02_00.png",
+      "size": 77124,
+      "mtimeMs": 1791562077566
+    },
+    {
+      "name": "Overworld_02_01.png",
+      "size": 77124,
+      "mtimeMs": 1791562077889
+    },
+    {
+      "name": "Overworld_02_02.png",
+      "size": 77124,
+      "mtimeMs": 1791562077629
+    },
+    {
+      "name": "Overworld_02_03.png",
+      "size": 77124,
+      "mtimeMs": 1791562077707
+    },
+    {
+      "name": "Overworld_02_04.png",
+      "size": 77124,
+      "mtimeMs": 1791562077442
+    },
+    {
+      "name": "Overworld_02_05.png",
+      "size": 215952,
+      "mtimeMs": 1791562077858
+    },
+    {
+      "name": "Overworld_02_06.png",
+      "size": 194858,
+      "mtimeMs": 1791562077840
+    },
+    {
+      "name": "Overworld_02_07.png",
+      "size": 116263,
+      "mtimeMs": 1791562077718
+    },
+    {
+      "name": "Overworld_03_00.png",
+      "size": 384666,
+      "mtimeMs": 1791562077630
+    },
+    {
+      "name": "Overworld_03_01.png",
+      "size": 874009,
+      "mtimeMs": 1791562077791
+    },
+    {
+      "name": "Overworld_03_02.png",
+      "size": 900289,
+      "mtimeMs": 1791562077593
+    },
+    {
+      "name": "Overworld_03_03.png",
+      "size": 1052187,
+      "mtimeMs": 1791562078042
+    },
+    {
+      "name": "Overworld_03_04.png",
+      "size": 1015045,
+      "mtimeMs": 1791562078006
+    },
+    {
+      "name": "Overworld_03_05.png",
+      "size": 1046125,
+      "mtimeMs": 1791562077724
+    },
+    {
+      "name": "Overworld_03_06.png",
+      "size": 1236250,
+      "mtimeMs": 1791562077891
+    },
+    {
+      "name": "Overworld_03_07.png",
+      "size": 655917,
+      "mtimeMs": 1791562077968
+    },
+    {
+      "name": "Overworld_04_00.png",
+      "size": 723688,
+      "mtimeMs": 1791562077818
+    },
+    {
+      "name": "Overworld_04_01.png",
+      "size": 994976,
+      "mtimeMs": 1791562077970
+    },
+    {
+      "name": "Overworld_04_02.png",
+      "size": 968288,
+      "mtimeMs": 1791562077740
+    },
+    {
+      "name": "Overworld_04_03.png",
+      "size": 939039,
+      "mtimeMs": 1791562077771
+    },
+    {
+      "name": "Overworld_04_04.png",
+      "size": 971481,
+      "mtimeMs": 1791562077965
+    },
+    {
+      "name": "Overworld_04_05.png",
+      "size": 1139918,
+      "mtimeMs": 1791562077914
+    },
+    {
+      "name": "Overworld_04_06.png",
+      "size": 1008029,
+      "mtimeMs": 1791562077988
+    },
+    {
+      "name": "Overworld_04_07.png",
+      "size": 824272,
+      "mtimeMs": 1791562077610
+    },
+    {
+      "name": "Overworld_05_00.png",
+      "size": 128979,
+      "mtimeMs": 1791562077810
+    },
+    {
+      "name": "Overworld_05_01.png",
+      "size": 208949,
+      "mtimeMs": 1791562077653
+    },
+    {
+      "name": "Overworld_05_02.png",
+      "size": 318106,
+      "mtimeMs": 1791562077814
+    },
+    {
+      "name": "Overworld_05_03.png",
+      "size": 333743,
+      "mtimeMs": 1791562077973
+    },
+    {
+      "name": "Overworld_05_04.png",
+      "size": 785150,
+      "mtimeMs": 1791562077865
+    },
+    {
+      "name": "Overworld_05_05.png",
+      "size": 802318,
+      "mtimeMs": 1791562077945
+    },
+    {
+      "name": "Overworld_05_06.png",
+      "size": 497624,
+      "mtimeMs": 1791562077889
+    },
+    {
+      "name": "Overworld_05_07.png",
+      "size": 367814,
+      "mtimeMs": 1791562077720
+    },
+    {
+      "name": "Overworld_06_00.png",
+      "size": 77124,
+      "mtimeMs": 1791562077804
+    },
+    {
+      "name": "Overworld_06_01.png",
+      "size": 112751,
+      "mtimeMs": 1791562077799
+    },
+    {
+      "name": "Overworld_06_02.png",
+      "size": 298832,
+      "mtimeMs": 1791562077915
+    },
+    {
+      "name": "Overworld_06_03.png",
+      "size": 455700,
+      "mtimeMs": 1791562077578
+    },
+    {
+      "name": "Overworld_06_04.png",
+      "size": 806391,
+      "mtimeMs": 1791562077936
+    },
+    {
+      "name": "Overworld_06_05.png",
+      "size": 610964,
+      "mtimeMs": 1791562077816
+    },
+    {
+      "name": "Overworld_06_06.png",
+      "size": 471764,
+      "mtimeMs": 1791562077552
+    },
+    {
+      "name": "Overworld_06_07.png",
+      "size": 247545,
+      "mtimeMs": 1791562077947
+    },
+    {
+      "name": "Overworld_07_00.png",
+      "size": 77124,
+      "mtimeMs": 1791562077444
+    },
+    {
+      "name": "Overworld_07_01.png",
+      "size": 164093,
+      "mtimeMs": 1791562077791
+    },
+    {
+      "name": "Overworld_07_02.png",
+      "size": 245826,
+      "mtimeMs": 1791562077670
+    },
+    {
+      "name": "Overworld_07_03.png",
+      "size": 81831,
+      "mtimeMs": 1791562077889
+    },
+    {
+      "name": "Overworld_07_04.png",
+      "size": 862623,
+      "mtimeMs": 1791562077864
+    },
+    {
+      "name": "Overworld_07_05.png",
+      "size": 680347,
+      "mtimeMs": 1791562077934
+    },
+    {
+      "name": "Overworld_07_06.png",
+      "size": 349616,
+      "mtimeMs": 1791562077552
+    },
+    {
+      "name": "Overworld_07_07.png",
+      "size": 114775,
+      "mtimeMs": 1791562077521
+    }
+  ]
+}

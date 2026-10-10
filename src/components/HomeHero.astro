@@ -4,10 +4,12 @@ import { catalogLabel, categoryCount, entryNumber } from "../lib/catalog";
 import { entriesIn, publishedEntries } from "../lib/data";
 import { CATEGORY_LABEL, HTML_LANG, otherLang, t, type Lang } from "../lib/i18n";
 import { itemKicker } from "../lib/kicker";
+import { mapData, markerTotal } from "../lib/map/data";
+import { overviewTile } from "../lib/map/tiles";
 import { pickShowcase } from "../lib/showcase";
 import { TAB_ORDER } from "../lib/tabs";
-import { categoryIcon } from "../lib/ui-icons";
-import { entryHref, href } from "../lib/url";
+import { categoryIcon, uiIcon } from "../lib/ui-icons";
+import { assetUrl, entryHref, href } from "../lib/url";
 import EntryIcon from "./EntryIcon.astro";
 import LangText from "./LangText.astro";
 import UiIcon from "./UiIcon.astro";
@@ -31,6 +33,7 @@ const [featured, ...others] = pickShowcase(publishedEntries, ["melee", "ranged",
 const sideSpecimens = others.slice(0, SIDE_SPECIMENS);
 const featuredNumber = featured ? entryNumber(featured) : undefined;
 const PREVIEW_SIZE = 32;
+const [firstWorld] = mapData.worlds;
 const previewOf = (category: Category) => entriesIn(category).filter((entry) => entry.icon !== undefined).slice(0, PREVIEW_SPRITES);
 ---
 <section class="home-hero">
@@ -94,5 +97,19 @@ const previewOf = (category: Category) => entriesIn(category).filter((entry) => 
         </a>
       </li>
     ))}
+    {firstWorld && (
+      <li style={`--i:${TAB_ORDER.length}`}>
+        <a href={href(lang, "map")}>
+          <span class="category-index mono" aria-hidden="true">{catalogLabel(TAB_ORDER.length + 1).slice(1)}</span>
+          <span class="category-slot"><UiIcon src={uiIcon("map")} /></span>
+          <span class="category-name">{t(lang, "worldMap")}</span>
+          <span class="category-alt item-alt" lang={HTML_LANG[alt]}>{t(alt, "worldMap")}</span>
+          <span class="category-preview" aria-hidden="true">
+            <img class="map-preview" src={assetUrl(overviewTile(firstWorld.key))} alt="" width="32" height="32" loading="lazy" />
+          </span>
+          <span class="count">{markerTotal()}</span>
+        </a>
+      </li>
+    )}
   </ul>
 </section>

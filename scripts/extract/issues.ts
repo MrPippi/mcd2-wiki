@@ -18,7 +18,11 @@ export type IssueType =
   | "missing-brand"
   | "duplicate-entry"
   | "unlinked-enchantment"
-  | "armor-set-name-fallback";
+  | "armor-set-name-fallback"
+  | "missing-map-tables"
+  | "map-marker-outside"
+  | "map-missing-name"
+  | "map-unmatched-tag";
 
 export interface Issue {
   readonly type: IssueType;

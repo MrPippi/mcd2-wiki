@@ -13,7 +13,12 @@ import {
   TABLES,
   UI_ICON_SOURCES,
   type IconSource,
+  type Lang,
 } from "./config";
+import { buildMapData, type MapResult } from "./map";
+import { MapDataSchema } from "./map-schema";
+import { loadMapTables } from "./map-tables";
+import type { LocaleFile } from "./schemas";
 import { groupEntries, type RawEntry } from "./group-entries";
 import { WeaponDataSchema, type WeaponData } from "./weapon-schema";
 import { DATATABLES_DIR, loadGameTables } from "./game-tables";
@@ -101,8 +106,18 @@ async function copySplash(sourceRoot: string, outRoot: string): Promise<Issue[]>
   return [];
 }
 
+/** World map markers; with no region table in source-data the map is left empty and reported. */
+async function extractMap(sourceRoot: string, locales: Readonly<Record<Lang, LocaleFile>>): Promise<MapResult> {
+  const tables = await loadMapTables(sourceRoot);
+  if (!tables) {
+    return { data: { worlds: [], legend: {} }, icons: [], issues: [issue("missing-map-tables", `${DATATABLES_DIR}/DT_WorldRegionMapData.json`)] };
+  }
+  return buildMapData(tables, locales, (relative) => existsSync(path.join(sourceRoot, ...relative.split("/"))));
+}
+
 export async function runExtract(options: ExtractOptions): Promise<ExtractSummary> {
-  const grouped = groupEntries(await loadLocales(options.sourceRoot), TABLES);
+  const locales = await loadLocales(options.sourceRoot);
+  const grouped = groupEntries(locales, TABLES);
   const overrides = await loadOverrides(options.overridesPath);
   const catalog = await loadIconCatalog(options.sourceRoot);
   const plans = grouped.entries.map((raw) => planIcon(raw, catalog, overrides, options.sourceRoot));
@@ -118,8 +133,13 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const frames = planAssets(options.sourceRoot, options.outRoot, FRAME_SOURCES, "frames", "missing-frame");
   const uiIcons = planAssets(options.sourceRoot, options.outRoot, UI_ICON_SOURCES, "ui", "missing-ui-icon");
   const brand = planAssets(options.sourceRoot, options.outRoot, BRAND_SOURCES, "brand", "missing-brand");
+  const map = await extractMap(options.sourceRoot, locales);
+  const mapIcons = map.icons.map((icon) => ({
+    from: path.join(options.sourceRoot, ...icon.from.split("/")),
+    to: path.join(options.outRoot, "public", ...icon.published.split("/")),
+  }));
   await copyIcons(
-    [...copies, ...frames.copies, ...uiIcons.copies, ...brand.copies],
+    [...copies, ...frames.copies, ...uiIcons.copies, ...brand.copies, ...mapIcons],
     path.join(options.outRoot, "public", "icons"),
   );
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
@@ -144,6 +164,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...weapons.issues,
     ...artifacts.issues,
     ...enchantments.issues,
+    ...map.issues,
   ];
   const extraData = {
     "frames.json": frames.paths,
@@ -153,6 +174,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "artifacts.json": ArtifactDataSchema.parse(artifacts.data),
     "enchantments.json": EnchantmentDataSchema.parse(enchantments.data),
     "effects.json": EnchantmentDataSchema.parse(effectValues),
+    "map.json": MapDataSchema.parse(map.data),
   };
   await writeOutputs(options.outRoot, output, extraData, renderReport({ ...output, issues }));
   return { entries: output.entries.length, armorSets: output.armorSets.length, icons: copies.length, issues };

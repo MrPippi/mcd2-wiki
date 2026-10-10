@@ -1,5 +1,6 @@
 import type { Category, Lang } from "../../scripts/extract/config";
 import type { ArmorPiece } from "../../scripts/extract/schemas";
+import type { MarkerKind } from "./map/kinds";
 
 export type { Lang };
 
@@ -77,6 +78,16 @@ export const UI_STRINGS = {
     setPieces: "套裝部位",
     disclaimer: "非官方粉絲網站，與 Mojang Studios／Microsoft 無關。遊戲文字與圖像版權歸原權利人所有。",
     source: "資料來源：Minecraft Dungeons II 遊戲語系檔（繁體中文／英文）。",
+    map: "地圖",
+    worldMap: "世界地圖",
+    mapIntro: "遊戲內的俯視全圖，標出礦車站、裂隙、傳送雕像、商人與各區域。",
+    mapMarkers: "標記",
+    mapSearch: "搜尋地點",
+    mapSearchPlaceholder: "名稱或區域…",
+    mapNoResults: "找不到符合的地點",
+    mapNeedsJs: "需要 JavaScript 才能縮放地圖與查看標記。",
+    mapNoData: "目前沒有地圖資料。",
+    mapSource: "地圖與標記位置取自遊戲資料檔。",
   },
   en: {
     siteTitle: "Minecraft Dungeons II Wiki (zh-TW)",
@@ -147,6 +158,16 @@ export const UI_STRINGS = {
     setPieces: "Set pieces",
     disclaimer: "Unofficial fan site, not affiliated with Mojang Studios or Microsoft. Game text and images belong to their respective owners.",
     source: "Source: Minecraft Dungeons II localization files (Traditional Chinese / English).",
+    map: "Map",
+    worldMap: "World Map",
+    mapIntro: "The game's own top-down map, with minecart stations, rifts, the teleport statue, merchants and areas.",
+    mapMarkers: "Markers",
+    mapSearch: "Search places",
+    mapSearchPlaceholder: "Name or area…",
+    mapNoResults: "No matching places",
+    mapNeedsJs: "JavaScript is needed to zoom the map and see its markers.",
+    mapNoData: "No map data yet.",
+    mapSource: "Map and marker positions come from the game's data files.",
   },
 } as const satisfies Record<Lang, Record<string, string>>;
 
@@ -174,6 +195,14 @@ export const PIECE_LABEL: Readonly<Record<ArmorPiece, Readonly<Record<Lang, stri
   chest: { zh: "胸甲", en: "Chest" },
   leggings: { zh: "護腿", en: "Leggings" },
   boots: { zh: "靴子", en: "Boots" },
+};
+
+export const MARKER_LABEL: Readonly<Record<MarkerKind, Readonly<Record<Lang, string>>>> = {
+  minecart: { zh: "礦車站", en: "Minecart station" },
+  rift: { zh: "裂隙", en: "Rift" },
+  portal: { zh: "傳送雕像", en: "Teleport statue" },
+  merchant: { zh: "商人", en: "Merchant" },
+  area: { zh: "區域", en: "Area" },
 };
 
 export const NAV_GROUPS: readonly { key: UiKey; categories: readonly Category[] }[] = [

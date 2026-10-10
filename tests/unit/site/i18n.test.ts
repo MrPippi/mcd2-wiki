@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { CATEGORIES } from "../../../scripts/extract/config";
-import { CATEGORY_LABEL, GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES, otherLang, t } from "../../../src/lib/i18n";
+import { MARKER_KINDS } from "../../../scripts/extract/map-schema";
+import { CATEGORY_LABEL, GRID_CATEGORIES, MARKER_LABEL, NAV_GROUPS, TABLE_CATEGORIES, otherLang, t } from "../../../src/lib/i18n";
 
 describe("i18n", () => {
   it("swaps languages", () => {
@@ -41,5 +42,11 @@ describe("i18n", () => {
     const en = Object.keys((await import("../../../src/lib/i18n")).UI_STRINGS.en).sort();
     expect(en).toEqual(zh);
     for (const key of ["searchPlaceholder", "view", "itemDetails", "rarity", "setPieces"]) expect(zh).toContain(key);
+  });
+  it("labels every map marker kind in both languages", () => {
+    for (const kind of MARKER_KINDS) {
+      expect(MARKER_LABEL[kind].zh).not.toBe("");
+      expect(MARKER_LABEL[kind].en).not.toBe("");
+    }
   });
 });

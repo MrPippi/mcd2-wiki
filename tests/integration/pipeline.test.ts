@@ -183,7 +183,7 @@ describe("runExtract", () => {
     expect(await readJson<Record<string, string>>("src/data/category-icons.json")).toEqual({ melee: "icons/ui/melee.png" });
     expect(await readFile(path.join(outRoot, "public", "icons", "ui", "melee.png"), "utf8")).toBe("png:melee-category");
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
-    expect(report).toContain("### missing-ui-icon (14)");
+    expect(report).toContain("### missing-ui-icon (15)");
     expect(report).toContain("- Assets/UI/Icons/Categories/T_UI_Icon_Category_Potion.png");
     expect(report).toContain("- Assets/UI/Icons/Categories/T_UI_Icon_Category_Ranged.png");
   });
@@ -199,5 +199,13 @@ describe("runExtract", () => {
     const empty = await mkdtemp(path.join(tmpdir(), "mcd2-empty-"));
     await expect(runExtract({ sourceRoot: empty, outRoot, overridesPath })).rejects.toThrow(ExtractError);
     await expect(runExtract({ sourceRoot: empty, outRoot, overridesPath })).rejects.toThrow("找不到語系檔");
+  });
+
+  it("writes an empty map and reports it when the map tables are missing", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(await readJson<{ worlds: unknown[]; legend: unknown }>("src/data/map.json")).toEqual({ worlds: [], legend: {} });
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).toContain("### missing-map-tables (1)");
+    expect(report).toContain("- DataTables/UFS/DT_WorldRegionMapData.json");
   });
 });

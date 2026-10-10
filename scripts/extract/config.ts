@@ -133,6 +133,8 @@ export const UI_ICON_SOURCES = {
   talisman: categoryIcon("Talisman"),
   cape: categoryIcon("Cape"),
   pet: categoryIcon("Pet"),
+  // The map entry uses the game's location pin.
+  map: "Assets/UI/Icons/Location/T_UI_Icon_Location.png",
 } as const;
 export type UiIconKey = keyof typeof UI_ICON_SOURCES;
 

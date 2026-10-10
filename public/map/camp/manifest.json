@@ -1,0 +1,51 @@
+{
+  "imageSize": 3072,
+  "zMax": 4,
+  "sources": [
+    {
+      "name": "Camp_00_00.png",
+      "size": 63144,
+      "mtimeMs": 1791562077449
+    },
+    {
+      "name": "Camp_00_01.png",
+      "size": 123501,
+      "mtimeMs": 1791562077505
+    },
+    {
+      "name": "Camp_00_02.png",
+      "size": 77275,
+      "mtimeMs": 1791562077437
+    },
+    {
+      "name": "Camp_01_00.png",
+      "size": 362721,
+      "mtimeMs": 1791562077542
+    },
+    {
+      "name": "Camp_01_01.png",
+      "size": 491227,
+      "mtimeMs": 1791562077503
+    },
+    {
+      "name": "Camp_01_02.png",
+      "size": 77275,
+      "mtimeMs": 1791562077431
+    },
+    {
+      "name": "Camp_02_00.png",
+      "size": 998471,
+      "mtimeMs": 1791562077673
+    },
+    {
+      "name": "Camp_02_01.png",
+      "size": 168778,
+      "mtimeMs": 1791562077474
+    },
+    {
+      "name": "Camp_02_02.png",
+      "size": 77275,
+      "mtimeMs": 1791562077446
+    }
+  ]
+}

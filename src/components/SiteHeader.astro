@@ -10,6 +10,7 @@ interface Props {
 
 const { lang, switchHref: override } = Astro.props;
 const alt = otherLang(lang);
+const onMap = /\/map\/$/.test(Astro.url.pathname);
 const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, alt);
 ---
 <header class="site-header">
@@ -22,6 +23,7 @@ const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.
     <input type="search" name="q" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
   </form>
   <div class="site-tools">
+    <a class="map-link button" href={href(lang, "map")} data-testid="map-link" aria-current={onMap ? "page" : undefined}>{t(lang, "map")}</a>
     <button type="button" class="compare-toggle" aria-pressed="true" data-testid="compare-toggle">
       <span class="label-long">{t(lang, "compare")}</span><span class="label-short">{t(lang, "compareShort")}</span>
     </button>
@@ -54,6 +56,8 @@ const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.
   const syncLang = () => langLink?.setAttribute("href", withCurrentLocation(langBase, location.search, location.hash));
   syncLang();
   window.addEventListener("hashchange", syncLang);
+  // The map page rewrites its query and hash with history.replaceState, which fires no event of its own.
+  window.addEventListener("mcd2:locationchange", syncLang);
 
   // Narrow screens fold the header search behind a button (see layout.css).
   const searchToggle = document.querySelector<HTMLButtonElement>(".search-toggle");
