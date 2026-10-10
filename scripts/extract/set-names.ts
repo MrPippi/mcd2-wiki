@@ -3,7 +3,7 @@ import { LANGS, LANG_META, type Lang } from "./config";
 const MIN_SET_NAME_LENGTH = 2;
 const MIN_COMPOUND_PREFIX_LENGTH = 4;
 /** A piece tail (the part after the set name) must occur in this many different sets to count as a known one. */
-export const MIN_TAIL_SETS = 3;
+export const MIN_TAIL_SETS = 2;
 /** Joiners that end a CJK set-name prefix (之 zh, の ja, 의 ko) and any space after it. */
 const TRAILING_CONNECTOR = /[\s之の의]+$/u;
 /** A German compound joined with a hyphen (Sifter-Helm) shares the hyphen too. */
@@ -27,6 +27,8 @@ export type NamesByLang = Readonly<Partial<Record<Lang, readonly string[]>>>;
 interface Candidate {
   readonly name: string;
   readonly tails: readonly string[];
+  /** The cut falls inside a katakana run, so only known piece tails can vouch for it. */
+  readonly insideKatakanaRun: boolean;
 }
 
 const charCount = (text: string): number => [...text].length;
@@ -56,18 +58,18 @@ function isGermanCompound(prefix: string, names: readonly string[]): boolean {
   return charCount(prefix) >= MIN_COMPOUND_PREFIX_LENGTH && names.every(continuesWithLetter);
 }
 
-/** A cut inside a katakana run (ハイ|ブマインド) is not a word end. */
+/** A cut inside a katakana run (ハイ|ブマインド, スチールウール|キャップ) is not a visible word end. */
 function splitsKatakanaRun(prefix: string, names: readonly string[]): boolean {
   return KATAKANA.test(prefix.slice(-1)) && names.some((name) => KATAKANA.test(name.charAt(prefix.length)));
 }
 
-function cutPrefix(lang: Lang, prefix: string, names: readonly string[]): string | undefined {
+function cutPrefix(lang: Lang, prefix: string, names: readonly string[]): string {
   switch (LANG_META[lang].fontScript) {
     case "tc":
     case "sc":
     case "jp":
     case "kr":
-      return splitsKatakanaRun(prefix, names) ? undefined : prefix.replace(TRAILING_CONNECTOR, "");
+      return prefix.replace(TRAILING_CONNECTOR, "");
     default:
       if (lang === "de" && isGermanCompound(prefix, names)) return prefix.replace(GERMAN_COMPOUND_HYPHEN, "");
       return trimToWordBoundary(prefix, names);
@@ -82,28 +84,37 @@ function endsLikeAdjective(lang: Lang, name: string): boolean {
 /** The shared prefix with its tails, before the known-tail check; undefined when it is no usable set name. */
 function candidateFor(lang: Lang, names: readonly string[]): Candidate | undefined {
   if (names.length < 2 || lang === "sv") return undefined;
-  const raw = cutPrefix(lang, commonPrefix(names), names);
-  if (raw === undefined) return undefined;
+  const shared = commonPrefix(names);
+  const raw = cutPrefix(lang, shared, names);
   const name = raw.trim();
   const usable = charCount(name) >= MIN_SET_NAME_LENGTH && !names.includes(name) && !endsLikeAdjective(lang, name);
-  return usable ? { name, tails: names.map((piece) => normalizeTail(piece.slice(raw.length))) } : undefined;
+  if (!usable) return undefined;
+  return {
+    name,
+    tails: names.map((piece) => normalizeTail(piece.slice(raw.length))),
+    insideKatakanaRun: !isLatinOrCyrillic(lang) && splitsKatakanaRun(shared, names),
+  };
 }
 
-/** The gate applies to Latin and Cyrillic names other than English, which is the source of the fallback itself. */
-const needsKnownTails = (lang: Lang): boolean => {
+const isLatinOrCyrillic = (lang: Lang): boolean => {
   const script = LANG_META[lang].fontScript;
-  return lang !== "en" && (script === "latin" || script === "cyrillic");
+  return script === "latin" || script === "cyrillic";
 };
+
+/** Latin and Cyrillic names other than English (the source of the fallback itself), and CJK cuts inside a katakana run. */
+const needsKnownTails = (lang: Lang, candidate: Candidate): boolean =>
+  candidate.insideKatakanaRun || (lang !== "en" && isLatinOrCyrillic(lang));
 
 /**
  * The part of the pieces' names they share, cut where each writing system ends a word.
  * Undefined (English takes over) when nothing usable is left, the last word is an adjective or genitive, the language is
- * Swedish, or `tails` is given and a piece's remainder is not a known tail of that language.
+ * Swedish, or `tails` is given and the cut needs them (Latin/Cyrillic, or inside a katakana run) and a piece's remainder
+ * is not a known tail of that language.
  */
 export function setNameFor(lang: Lang, names: readonly string[], tails?: ReadonlySet<string>): string | undefined {
   const candidate = candidateFor(lang, names);
   if (!candidate) return undefined;
-  const known = !tails || !needsKnownTails(lang) || candidate.tails.every((tail) => tails.has(tail));
+  const known = !tails || !needsKnownTails(lang, candidate) || candidate.tails.every((tail) => tails.has(tail));
   return known ? candidate.name : undefined;
 }
 

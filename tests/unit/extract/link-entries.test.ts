@@ -78,7 +78,7 @@ describe("linkEntries — armor sets", () => {
     expect(issues).toEqual([]);
   });
 
-  it("names a German set once its piece tails recur in three sets", () => {
+  it("names a German set once its piece tails recur in two sets", () => {
     const set = (prefix: string, de: string) => [
       makeEntry(prefix + "Helmet", "armor", { name: loc({ zh: prefix + "頭盔", en: prefix + " Helm", de: de + "helm" }) }),
       makeEntry(prefix + "Chest", "armor", { name: loc({ zh: prefix + "長袍", en: prefix + " Robe", de: de + "robe" }) }),
@@ -86,7 +86,7 @@ describe("linkEntries — armor sets", () => {
     const { armorSets } = linkEntries([...set("Alpha", "Alpha"), ...set("Beta", "Beta"), ...set("Gamma", "Gamma"), ...set("Delta", "Delta")]);
     expect(armorSets.map((entry) => entry.name.de)).toEqual(["Alpha", "Beta", "Delta", "Gamma"]);
     expect(armorSets.every((entry) => !entry.untranslated?.includes("de"))).toBe(true);
-    const lonely = linkEntries([...set("Alpha", "Alpha"), ...set("Beta", "Beta")]).armorSets;
+    const lonely = linkEntries(set("Alpha", "Alpha")).armorSets;
     expect(lonely.every((entry) => entry.untranslated?.includes("de"))).toBe(true);
   });
 
@@ -199,8 +199,14 @@ describe("setNameFor — per writing system", () => {
     expect(setNameFor("ko", names("ko"))).toBe("수련자");
   });
 
-  it("rejects a Japanese cut inside a katakana run", () => {
-    expect(setNameFor("ja", ["ハイヴマインドのヘルメット", "ハイブマインドの胸当て"])).toBeUndefined();
+  it("accepts a cut inside a katakana run only when every piece remainder is a known tail", () => {
+    const known = new Set(["キャップ", "セーター", "レギンス", "ブーツ"]);
+    const wool = ["スチールウールキャップ", "スチールウールセーター", "スチールウールレギンス", "スチールウールブーツ"];
+    expect(setNameFor("ja", wool, known)).toBe("スチールウール");
+    expect(setNameFor("ja", wool, new Set(["レギンス", "ブーツ"]))).toBeUndefined();
+    expect(setNameFor("ja", ["ハイヴマインドのヘルメット", "ハイブマインドの胸当て"], known)).toBeUndefined();
+    expect(setNameFor("ja", ["ハイヴマインドのヘルメット", "ハイブマインドの胸当て"])).toBe("ハイ");
+    expect(setNameFor("zh", ["狂化隙浮特之爪", "狂化隙浮特之牙"], known)).toBe("狂化隙浮特");
     expect(setNameFor("ja", ["ハイブマインドのヘルメット", "ハイブマインドの胸当て"])).toBe("ハイブマインド");
   });
 
