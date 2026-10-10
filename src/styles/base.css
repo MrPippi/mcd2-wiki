@@ -58,7 +58,8 @@ button:focus-visible, a:focus-visible, .button:focus-visible { outline: 2px soli
 
 .lang-text { display: inline-flex; flex-direction: column; }
 .lang-text .alt { color: var(--muted); font-size: 0.8em; font-weight: 400; font-family: var(--font-body); letter-spacing: 0; }
-h1.lang-text .alt { font-size: 0.32em; margin-top: 0.4em; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: 0.04em; }
+h1.lang-text .alt { font-size: 0.32em; margin-top: 0.4em; font-family: var(--font-mono); letter-spacing: 0.04em; }
+h1.lang-text .alt:lang(en) { text-transform: uppercase; }
 [data-compare="off"] .lang-text .alt, [data-compare="off"] .item-alt { display: none; }
 
 /* Game pictograms are white; print them in ink like museum wayfinding. */

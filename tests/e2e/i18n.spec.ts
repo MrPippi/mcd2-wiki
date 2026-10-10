@@ -104,3 +104,41 @@ test("the 404 page sends visitors home in the language of the missing URL", asyn
   await expect(page.locator("form[data-lang-form]")).toHaveAttribute("action", "/ja/search/");
   await expect(page.locator(".lang-picker a[data-lang='de']")).toHaveAttribute("href", "/de/");
 });
+
+const FONT_CASES = [
+  { path: "/ko/", family: "Noto Serif KR", sample: "한국어" },
+  { path: "/ja/", family: "Noto Serif JP", sample: "日本語" },
+  { path: "/zh-hans/", family: "Noto Serif SC", sample: "简体中文" },
+  { path: "/ru/", family: "Noto Serif", sample: "Русский" },
+];
+
+for (const { path, family, sample } of FONT_CASES) {
+  test(`${path} headings use ${family} and the font loads`, async ({ page }) => {
+    await page.goto(path);
+    const first = await page.locator("h1").first().evaluate((el) => getComputedStyle(el).fontFamily.split(",")[0].trim().replace(/["']/g, ""));
+    expect(first).toBe(family);
+    const loaded = await page.evaluate(
+      async ({ family, sample }) => {
+        await document.fonts.load(`700 32px '${family}'`, sample);
+        return document.fonts.check(`700 32px '${family}'`, sample);
+      },
+      { family, sample },
+    );
+    expect(loaded).toBe(true);
+  });
+}
+
+test("the Japanese site's search finds entries through the English reference text", async ({ page }) => {
+  await page.goto("/ja/search/?q=Sword");
+  await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
+});
+
+test("alt text is uppercased only when the alt text itself is Latin script", async ({ page }) => {
+  const transform = (selector: string) => page.locator(selector).first().evaluate((el) => getComputedStyle(el).textTransform);
+  await page.goto("/ru/melee/sword/");
+  await expect(page.locator("h1 .alt").first()).toHaveAttribute("lang", "en");
+  expect(await transform("h1 .alt")).toBe("uppercase");
+  await page.goto("/en/melee/sword/");
+  await expect(page.locator("h1 .alt").first()).toHaveAttribute("lang", "zh-TW");
+  expect(await transform("h1 .alt")).toBe("none");
+});
