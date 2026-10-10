@@ -7115,6 +7115,7 @@
       "zh": "一種附魔效果，能在攻擊時進入潛影狀態。",
       "en": "An enchantment that grants the ability to enter a state of shadowcloaking while attacking."
     },
+    "icon": "icons/enchantment/clawing-shadow-unique.png",
     "links": {
       "enchantmentBook": "clawing-shadow-unique"
     }
@@ -7437,6 +7438,7 @@
       "zh": "一種附魔效果，能為跳躍攻擊注入冰霜與雷電之力。",
       "en": "An enchantment that imbues jump attacks with ice and lightning powers."
     },
+    "icon": "icons/enchantment/mauler-dive.png",
     "links": {
       "enchantmentBook": "mauler-dive"
     }
@@ -7459,6 +7461,7 @@
       "zh": "額外獲得生命藥水使用次數。",
       "en": "Grants additional uses of health potion."
     },
+    "icon": "icons/enchantment/multi-potion.png",
     "links": {
       "enchantmentBook": "multi-potion"
     }
@@ -7504,6 +7507,7 @@
       "zh": "一種附魔效果，能讓攻擊觸發以靈魂驅動的靈漿爆裂。",
       "en": "An enchantment that imbues attacks with a soul-powered ichor blast."
     },
+    "icon": "icons/enchantment/phantom-lance.png",
     "links": {
       "enchantmentBook": "phantom-lance"
     }
@@ -8075,6 +8079,7 @@
       "zh": "攻擊敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率進入潛影狀態。",
       "en": "Grants a <span class=\"placeholder\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
     },
+    "icon": "icons/enchantment-book/clawing-shadow-unique.png",
     "links": {
       "enchantment": "clawing-shadow-unique"
     }
@@ -8368,6 +8373,7 @@
       "zh": "跳躍攻擊會產生閃電與冰霜波動，傷害敵人。",
       "en": "Jump attacks create waves of lightning and ice that damages enemies."
     },
+    "icon": "icons/enchantment-book/mauler-dive.png",
     "links": {
       "enchantment": "mauler-dive"
     }
@@ -8386,6 +8392,7 @@
       "zh": "額外獲得生命藥水使用次數。",
       "en": "Grants additional uses of health potion."
     },
+    "icon": "icons/enchantment-book/multi-potion.png",
     "links": {
       "enchantment": "multi-potion"
     }
@@ -8423,6 +8430,7 @@
       "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並施加魂疫狀態，短暫造成額外傷害。",
       "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and inflicts the Soulsick status, dealing additional damage for a short time."
     },
+    "icon": "icons/enchantment-book/phantom-lance.png",
     "links": {
       "enchantment": "phantom-lance"
     }
@@ -9353,6 +9361,7 @@
       "zh": "使跳躍射擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases jump shot damage dealt by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/jumpshot.png",
     "links": {}
   },
   {
@@ -9895,6 +9904,7 @@
       "zh": "獲得的靈魂增加 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases souls gained by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/soul-gather.png",
     "links": {}
   },
   {
@@ -9979,6 +9989,7 @@
       "zh": "施加在自己身上的正面狀態持續時間延長 <span class=\"placeholder\">{數值}</span>。",
       "en": "Increases duration of positive statuses applied to you by <span class=\"placeholder\">{value}</span>."
     },
+    "icon": "icons/effect/status-buff.png",
     "links": {}
   },
   {
