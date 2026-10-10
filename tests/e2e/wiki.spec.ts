@@ -291,7 +291,7 @@ test("searching an effect links to its table row", async ({ page }) => {
 test("all internal links and images resolve", async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium", "crawl once");
   test.setTimeout(300_000);
-  const queue = ["/zh/", "/en/"];
+  const queue = ["/zh/", "/en/", "/ja/", "/ru/", "/zh-hans/"];
   const seen = new Set(queue);
   const broken: string[] = [];
   while (queue.length > 0) {
