@@ -3,32 +3,35 @@ import { assembleEntry, assertUniqueSlugs } from "../../../scripts/extract/assem
 import type { RawEntry } from "../../../scripts/extract/group-entries";
 import { ExtractError } from "../../../scripts/extract/issues";
 import { makeEntry } from "../../helpers/entries";
+import { loc } from "../../helpers/localized";
 
 const raw = (overrides: Partial<RawEntry> = {}): RawEntry => ({
   id: "Sword_Unique1",
   category: "melee",
   release: "base",
   untranslated: [],
-  name: { zh: "燃燒之刃", en: "The Burning Blade" },
+  name: loc({ zh: "燃燒之刃", en: "The Burning Blade" }),
   ...overrides,
 });
 
 describe("assembleEntry", () => {
   it("derives slug and variant and renders descriptions per language", () => {
     const { entry, issues } = assembleEntry(
-      raw({ description: { zh: "造成 {0} 傷害。\n好用", en: "Deals {0} damage.\nNice" } }),
+      raw({ description: loc({ zh: "造成 {0} 傷害。\n好用", en: "Deals {0} damage.\nNice", ja: "{0} ダメージ" }) }),
     );
     expect(entry).toMatchObject({ slug: "sword-unique1", variant: "unique", links: {} });
-    expect(entry.description).toEqual({
+    expect(entry.description).toMatchObject({
       zh: '造成 <span class="placeholder" data-slot="0">{數值}</span> 傷害。<br>好用',
       en: 'Deals <span class="placeholder" data-slot="0">{value}</span> damage.<br>Nice',
+      de: 'Deals <span class="placeholder" data-slot="0">{value}</span> damage.<br>Nice',
     });
+    expect(entry.description?.ja).toMatch(/^<span class="placeholder" data-slot="0">\{[^}]+\}<\/span> ダメージ$/);
     expect(issues).toEqual([]);
   });
 
   it("strips markup from names", () => {
-    const { entry } = assembleEntry(raw({ name: { zh: "<emphasis>賢者</>腰帶", en: "<emphasis>Sage</> Belt" } }));
-    expect(entry.name).toEqual({ zh: "賢者腰帶", en: "Sage Belt" });
+    const { entry } = assembleEntry(raw({ name: loc({ zh: "<emphasis>賢者</>腰帶", en: "<emphasis>Sage</> Belt" }) }));
+    expect(entry.name).toEqual(loc({ zh: "賢者腰帶", en: "Sage Belt" }));
   });
 
   it("includes the icon only when given", () => {
@@ -47,7 +50,7 @@ describe("assembleEntry", () => {
   });
 
   it("reports markup warnings with the entry location", () => {
-    const { issues } = assembleEntry(raw({ id: "Sword", description: { zh: "<foo>x</>", en: "<foo>x</>" } }));
+    const { issues } = assembleEntry(raw({ id: "Sword", description: loc({ zh: "<foo>x</>", en: "<foo>x</>" }) }));
     expect(issues).toEqual([{ type: "markup-warning", detail: "melee:Sword: unknown tag <foo>" }]);
   });
 });

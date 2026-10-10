@@ -1,7 +1,7 @@
 /** The map page's client: Leaflet in CRS.Simple over the tile pyramid, plus the filter and search panel. */
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import type { MapMarker, WorldMap } from "../../../scripts/extract/map-schema";
+import type { PayloadMarker, PayloadWorld } from "./payload";
 import type { Lang } from "../i18n";
 import { MARKER_KINDS, type MarkerKind } from "./kinds";
 import { pinElement, popupElement, resultElement } from "./marker-dom";
@@ -21,19 +21,19 @@ const ICON_PIN_SIZE: L.PointTuple = [28, 28];
 const POPUP_OPTIONS: L.PopupOptions = { minWidth: 200, maxWidth: 280 };
 
 interface Payload {
-  readonly worlds: readonly WorldMap[];
+  readonly worlds: readonly PayloadWorld[];
   readonly labels: Readonly<Record<MarkerKind, string>>;
 }
 
 interface Shown {
-  readonly world: WorldMap;
+  readonly world: PayloadWorld;
   readonly map: L.Map;
   readonly layers: ReadonlyMap<MarkerKind, L.LayerGroup>;
   readonly pins: ReadonlyMap<string, L.Marker>;
 }
 
 /** A pixel on the full-size render as a LatLng: CRS.Simple maps one unit to 2^z pixels. */
-const toLatLng = (world: WorldMap, px: number, py: number): L.LatLng => L.latLng(-py / 2 ** world.zMax, px / 2 ** world.zMax);
+const toLatLng = (world: PayloadWorld, px: number, py: number): L.LatLng => L.latLng(-py / 2 ** world.zMax, px / 2 ** world.zMax);
 
 function readHidden(): Set<MarkerKind> {
   try {
@@ -62,12 +62,12 @@ function replaceLocation(search: string, hash: string): void {
   window.dispatchEvent(new Event("mcd2:locationchange"));
 }
 
-function pinSize(marker: WorldMap["markers"][number]): L.PointTuple {
+function pinSize(marker: PayloadWorld["markers"][number]): L.PointTuple {
   if (marker.kind === "area") return [0, 0];
   return marker.icon ? ICON_PIN_SIZE : PIN_SIZE;
 }
 
-function addPins(map: L.Map, world: WorldMap, lang: Lang, labels: Payload["labels"], hidden: ReadonlySet<MarkerKind>) {
+function addPins(map: L.Map, world: PayloadWorld, lang: Lang, labels: Payload["labels"], hidden: ReadonlySet<MarkerKind>) {
   const layers = new Map(MARKER_KINDS.map((kind) => [kind, L.layerGroup()] as const));
   const pins = new Map<string, L.Marker>();
   for (const marker of world.markers) {
@@ -88,7 +88,7 @@ function addPins(map: L.Map, world: WorldMap, lang: Lang, labels: Payload["label
 }
 
 /** Keep the zoom floor at the level where the render still fills the panel, so zooming out never shows empty space. */
-function limitZoomOut(map: L.Map, world: WorldMap): void {
+function limitZoomOut(map: L.Map, world: PayloadWorld): void {
   const apply = () => {
     const { x, y } = map.getSize();
     map.setMinZoom(fillZoom({ width: x, height: y }, world.frame.imageSize, world.zMax));
@@ -97,7 +97,7 @@ function limitZoomOut(map: L.Map, world: WorldMap): void {
   apply();
 }
 
-function trackView(root: HTMLElement, map: L.Map, world: WorldMap): void {
+function trackView(root: HTMLElement, map: L.Map, world: PayloadWorld): void {
   const update = () => {
     const zoom = map.getZoom();
     const centre = map.project(map.getCenter(), world.zMax);
@@ -109,7 +109,7 @@ function trackView(root: HTMLElement, map: L.Map, world: WorldMap): void {
   update();
 }
 
-function showWorld(root: HTMLElement, canvas: HTMLElement, world: WorldMap, payload: Payload, hidden: ReadonlySet<MarkerKind>, useHash: boolean): Shown {
+function showWorld(root: HTMLElement, canvas: HTMLElement, world: PayloadWorld, payload: Payload, hidden: ReadonlySet<MarkerKind>, useHash: boolean): Shown {
   const lang = root.dataset.lang as Lang;
   const size = world.frame.imageSize;
   const bounds = L.latLngBounds(toLatLng(world, 0, size), toLatLng(world, size, 0));
@@ -126,7 +126,7 @@ function showWorld(root: HTMLElement, canvas: HTMLElement, world: WorldMap, payl
   return { world, map, layers, pins };
 }
 
-function syncPanel(root: HTMLElement, world: WorldMap, hidden: ReadonlySet<MarkerKind>): void {
+function syncPanel(root: HTMLElement, world: PayloadWorld, hidden: ReadonlySet<MarkerKind>): void {
   const counts = countByKind(world.markers);
   for (const link of root.querySelectorAll<HTMLAnchorElement>(".map-tabs a[data-world]")) {
     if (link.dataset.world === world.key) link.setAttribute("aria-current", "page");
@@ -140,7 +140,7 @@ function syncPanel(root: HTMLElement, world: WorldMap, hidden: ReadonlySet<Marke
   }
 }
 
-function renderResults(root: HTMLElement, shown: Shown, labels: Payload["labels"], query: string, focus: (marker: MapMarker) => void): void {
+function renderResults(root: HTMLElement, shown: Shown, labels: Payload["labels"], query: string, focus: (marker: PayloadMarker) => void): void {
   const lang = root.dataset.lang as Lang;
   const list = root.querySelector<HTMLUListElement>("[data-testid='map-results']");
   const empty = root.querySelector<HTMLElement>("[data-testid='map-empty']");
@@ -160,7 +160,7 @@ function bindFilters(root: HTMLElement, onChange: (kind: MarkerKind, visible: bo
   }
 }
 
-function bindTabs(root: HTMLElement, payload: Payload, onSwitch: (next: WorldMap) => void): void {
+function bindTabs(root: HTMLElement, payload: Payload, onSwitch: (next: PayloadWorld) => void): void {
   for (const link of root.querySelectorAll<HTMLAnchorElement>(".map-tabs a[data-world]")) {
     link.addEventListener("click", (event) => {
       const next = payload.worlds.find((world) => world.key === link.dataset.world);
@@ -210,14 +210,14 @@ export function mountWorldMap(root: HTMLElement): void {
     syncPanel(root, shown.world, hidden);
   };
 
-  const focus = (marker: MapMarker) => {
+  const focus = (marker: PayloadMarker) => {
     if (hidden.has(marker.kind)) setKind(marker.kind, true);
     const zoom = Math.max(shown.map.getZoom(), shown.world.zMax - FOCUS_LEVELS);
     shown.map.setView(toLatLng(shown.world, marker.px, marker.py), zoom);
     shown.pins.get(marker.id)?.openPopup();
   };
 
-  const switchWorld = (next: WorldMap) => {
+  const switchWorld = (next: PayloadWorld) => {
     if (next.key === shown.world.key) return;
     shown.map.remove();
     replaceLocation(worldSearch(location.search, next.key), "");

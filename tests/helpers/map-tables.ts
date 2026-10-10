@@ -70,20 +70,20 @@ export const MAP_TABLES: MapTables = {
 
 export const MAP_LOCALES = makeLocales({
   [ns("WorldMapLabels")]: {
-    worldmap_dimension_overworld: ["Overworld", "主世界"],
-    worldmap_dimension_wellspring: ["The Sift", "隙浮"],
-    worldmap_dimension_camp: ["Camp", "營地"],
-    worldmap_tooltip_title_rift: ["Rift", "裂隙"],
-    worldmap_tooltip_description_rift: ["Enter to find loot.", "進入以尋找戰利品。"],
+    worldmap_dimension_overworld: { en: "Overworld", zh: "主世界" },
+    worldmap_dimension_wellspring: { en: "The Sift", zh: "隙浮" },
+    worldmap_dimension_camp: { en: "Camp", zh: "營地" },
+    worldmap_tooltip_title_rift: { en: "Rift", zh: "裂隙" },
+    worldmap_tooltip_description_rift: { en: "Enter to find loot.", zh: "進入以尋找戰利品。" },
   },
-  [ns("SettingsLabels")]: { Input_TownPortal: ["Teleport Statue", "傳送雕像"] },
+  [ns("SettingsLabels")]: { Input_TownPortal: { en: "Teleport Statue", zh: "傳送雕像" } },
   [ns("VendorLabels")]: {
-    vendor_blacksmith_titleshort: ["Blacksmith", "鐵匠"],
-    vendor_blacksmith_mappin_tooltip: ["Upgrade your gear.", "強化裝備。"],
+    vendor_blacksmith_titleshort: { en: "Blacksmith", zh: "鐵匠" },
+    vendor_blacksmith_mappin_tooltip: { en: "Upgrade your gear.", zh: "強化裝備。" },
   },
   [ns("DT_AreaDefinition")]: {
-    SW_Area_Town_SW_TextEntry_Name: ["Brave Haven", "英雄港"],
-    SW_Area_Forest_A1_SW_TextEntry_Name: ["Howling Woods", "咆哮森林"],
-    SW_Area_Carapace_A1_SW_TextEntry_Name: ["Humbler Huskland", "轟鳴蟲殼骸之地"],
+    SW_Area_Town_SW_TextEntry_Name: { en: "Brave Haven", zh: "英雄港" },
+    SW_Area_Forest_A1_SW_TextEntry_Name: { en: "Howling Woods", zh: "咆哮森林" },
+    SW_Area_Carapace_A1_SW_TextEntry_Name: { en: "Humbler Huskland", zh: "轟鳴蟲殼骸之地" },
   },
 });

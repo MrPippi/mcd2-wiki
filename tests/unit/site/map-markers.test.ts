@@ -1,14 +1,16 @@
 import { describe, expect, it } from "vitest";
 import type { MapMarker } from "../../../scripts/extract/map-schema";
+import type { Localized } from "../../../scripts/extract/schemas";
+import { loc } from "../../helpers/localized";
 import { countByKind, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "../../../src/lib/map/markers";
 
-const marker = (id: string, kind: MapMarker["kind"], zh: string, en: string, area?: [string, string]): MapMarker => ({
+const marker = (id: string, kind: MapMarker["kind"], zh: string, en: string, area?: [string, string], extra: Partial<Localized> = {}): MapMarker => ({
   id,
   kind,
   px: 0,
   py: 0,
-  name: { zh, en },
-  ...(area ? { area: { zh: area[0], en: area[1] } } : {}),
+  name: loc({ zh, en, ...extra }),
+  ...(area ? { area: loc({ zh: area[0], en: area[1] }) } : {}),
 });
 
 const MARKERS: readonly MapMarker[] = [
@@ -27,6 +29,16 @@ describe("searchMarkers", () => {
   it("matches the area a marker sits in", () => {
     expect(searchMarkers(MARKERS, "  BRAVE haven ", "en").map((m) => m.id)).toEqual(["portal"]);
     expect(searchMarkers(MARKERS, "咆哮", "en").map((m) => m.id)).toEqual(["rift1"]);
+  });
+
+  it("searches the page language and its comparison language only, cased by the page language", () => {
+    const istanbul = [marker("ist", "merchant", "君士坦丁堡", "Constantinople", undefined, { tr: "İSTANBUL", ja: "イスタンブール" })];
+    expect(searchMarkers(istanbul, "istanbul", "tr").map((m) => m.id)).toEqual(["ist"]);
+    expect(searchMarkers(istanbul, "İstanbul", "tr").map((m) => m.id)).toEqual(["ist"]);
+    expect(searchMarkers(istanbul, "イスタンブール", "ja").map((m) => m.id)).toEqual(["ist"]);
+    expect(searchMarkers(istanbul, "CONSTANTINOPLE", "ja").map((m) => m.id)).toEqual(["ist"]);
+    expect(searchMarkers(istanbul, "イスタンブール", "de")).toEqual([]);
+    expect(searchMarkers(istanbul, "君士坦丁堡", "ja")).toEqual([]);
   });
 
   it("returns nothing for an empty query and respects the limit", () => {

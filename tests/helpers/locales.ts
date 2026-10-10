@@ -1,17 +1,19 @@
 import type { Lang } from "../../scripts/extract/config";
 import type { LocaleFile } from "../../scripts/extract/schemas";
+import { byLang } from "../../src/lib/lang";
 
 export const ns = (table: string): string => `Text/Release/${table}.csv`;
 
-type Rows = Record<string, Record<string, readonly [en: string, zh: string]>>;
+/** Texts by namespace, then key, then language; a language left out takes the English text. */
+type Rows = Record<string, Record<string, Partial<Record<Lang, string>> & { en: string }>>;
 
 export function makeLocales(rows: Rows): Record<Lang, LocaleFile> {
-  const pick = (index: 0 | 1): LocaleFile =>
+  const fileFor = (lang: Lang): LocaleFile =>
     Object.fromEntries(
       Object.entries(rows).map(([namespace, keys]) => [
         namespace,
-        Object.fromEntries(Object.entries(keys).map(([key, pair]) => [key, pair[index]])),
+        Object.fromEntries(Object.entries(keys).map(([key, texts]) => [key, texts[lang] ?? texts.en])),
       ]),
     );
-  return { en: pick(0), zh: pick(1) };
+  return byLang(fileFor);
 }

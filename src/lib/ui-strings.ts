@@ -2,12 +2,12 @@ import type { Lang } from "../../scripts/extract/langs";
 import rawGameStrings from "../data/ui-game-strings.json";
 import zh from "../i18n/zh.json";
 import { z } from "zod";
-import { LANG_META } from "../../scripts/extract/langs";
+import { LANGS, LANG_META } from "../../scripts/extract/langs";
 import { UI_DICTS, fileValue, plainText, type UiValue } from "./ui-dicts";
 
 export type UiKey = Exclude<keyof typeof zh, "_machine">;
 
-const GameStringsSchema = z.record(z.string(), z.object({ zh: z.string(), en: z.string() }));
+const GameStringsSchema = z.record(z.string(), z.record(z.enum(LANGS), z.string()));
 /** Official UI wording read from the game's localization files by `npm run extract`, by site key. */
 const GAME_STRINGS = GameStringsSchema.parse(rawGameStrings);
 

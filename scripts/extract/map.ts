@@ -2,6 +2,7 @@
 import path from "node:path";
 import { isInside, toBlocks, toImagePixel, type BlockPoint, type WorldFrame } from "../../src/lib/map/transform";
 import { WORLDS, imageSizeOf, zMaxFor, type WorldSource } from "../../src/lib/map/worlds";
+import { localizedFrom } from "../../src/lib/lang";
 import type { Lang } from "./config";
 import { issue, type Issue } from "./issues";
 import { localize, locRef } from "./loc-table";
@@ -117,7 +118,7 @@ function worldFrames(tables: MapTables, ctx: Context): { frames: Frame[]; issues
         ratio: row.RegionData.FancyMapSizeRatio.X,
         imageSize: imageSizeOf(world),
       };
-      return [{ world, frame, name: ctx.text(WORLD_LABELS, world.label) ?? { zh: world.region, en: world.region } }];
+      return [{ world, frame, name: ctx.text(WORLD_LABELS, world.label) ?? localizedFrom(() => world.region) }];
     }),
     issues: found.filter(({ row }) => !row).map(({ world }) => issue("missing-map-tables", `DT_WorldRegionMapData › ${world.region}`)),
   };

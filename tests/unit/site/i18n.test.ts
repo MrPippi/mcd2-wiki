@@ -2,20 +2,14 @@ import { describe, expect, it } from "vitest";
 import { CATEGORIES } from "../../../scripts/extract/config";
 import { MARKER_KINDS } from "../../../scripts/extract/map-schema";
 import { LANGS } from "../../../scripts/extract/langs";
-import { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES, categoryLabel, markerLabel, otherLang, pieceLabel, t } from "../../../src/lib/i18n";
+import { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES, categoryLabel, markerLabel, pieceLabel, t } from "../../../src/lib/i18n";
 import { machineKeys, tCount } from "../../../src/lib/ui-strings";
-import en from "../../../src/i18n/en.json";
+import { UI_DICTS } from "../../../src/lib/ui-dicts";
 import zh from "../../../src/i18n/zh.json";
 
-const FILES = { zh, en } as const;
 const keysOf = (file: Record<string, unknown>): string[] => Object.keys(file).filter((key) => key !== "_machine").sort();
 
 describe("i18n", () => {
-  it("swaps languages", () => {
-    expect(otherLang("zh")).toBe("en");
-    expect(otherLang("en")).toBe("zh");
-  });
-
   it("translates UI keys", () => {
     expect(t("zh", "switchLang")).toBe("English");
     expect(t("en", "switchLang")).toBe("繁體中文");
@@ -45,7 +39,7 @@ describe("i18n", () => {
   });
 
   it("defines every UI string in every language file", () => {
-    for (const lang of LANGS) expect(keysOf(FILES[lang])).toEqual(keysOf(zh));
+    for (const lang of LANGS) expect(keysOf(UI_DICTS[lang].values)).toEqual(keysOf(zh));
     for (const key of ["searchPlaceholder", "view", "itemDetails", "rarity", "setPieces", "placeholderLabel", "swingN", "unitBlocks"]) expect(keysOf(zh)).toContain(key);
   });
 

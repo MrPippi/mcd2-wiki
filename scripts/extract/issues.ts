@@ -8,6 +8,7 @@ export type IssueType =
   | "weapon-unmatched"
   | "missing-datatables"
   | "untranslated"
+  | "untranslated-namespace"
   | "markup-warning"
   | "missing-icon-root"
   | "missing-icon"

@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { commonPrefix, linkEntries, setNameFor } from "../../../scripts/extract/link-entries";
 import { makeEntry } from "../../helpers/entries";
+import { loc } from "../../helpers/localized";
 
 const find = (entries: ReturnType<typeof linkEntries>["entries"], id: string) => entries.find((e) => e.id === id);
 
@@ -29,7 +30,7 @@ describe("linkEntries — enchantment books", () => {
   });
 
   it("falls back to the English name when ids differ", () => {
-    const name = { zh: "靈魂火焰", en: "Soul Fire Aspect" };
+    const name = loc({ zh: "靈魂火焰", en: "Soul Fire Aspect" });
     const { entries, issues } = linkEntries([
       makeEntry("SoulFireAspect", "enchantment", { name }),
       makeEntry("EnchantmentBook_SoulAspect", "enchantment-book", { name: { ...name, en: " soul fire aspect " } }),
@@ -44,12 +45,15 @@ describe("linkEntries — enchantment books", () => {
   });
 });
 
+/** Languages whose set names fall back to English until they get their own naming rule. */
+const LATER_LANGS = ["zh-hans", "ja", "ko", "de", "fr", "es", "it", "pt", "ru", "pl", "nl", "sv", "tr", "uk"];
+
 describe("linkEntries — armor sets", () => {
   const disciple = [
-    makeEntry("DiscipleHelmet", "armor", { name: { zh: "修行者面具", en: "Disciple mask" } }),
-    makeEntry("DiscipleChest", "armor", { name: { zh: "修行者長袍", en: "Disciple Robe" } }),
-    makeEntry("DiscipleHelmet_Unique", "armor", { name: { zh: "賢者頭帶", en: "Sage Headband" } }),
-    makeEntry("DiscipleChest_Unique", "armor", { name: { zh: "賢者短袍", en: "Sage Tunic" } }),
+    makeEntry("DiscipleHelmet", "armor", { name: loc({ zh: "修行者面具", en: "Disciple mask" }) }),
+    makeEntry("DiscipleChest", "armor", { name: loc({ zh: "修行者長袍", en: "Disciple Robe" }) }),
+    makeEntry("DiscipleHelmet_Unique", "armor", { name: loc({ zh: "賢者頭帶", en: "Sage Headband" }) }),
+    makeEntry("DiscipleChest_Unique", "armor", { name: loc({ zh: "賢者短袍", en: "Sage Tunic" }) }),
   ];
 
   it("groups pieces into normal and unique sets named by their common prefix", () => {
@@ -59,14 +63,16 @@ describe("linkEntries — armor sets", () => {
         id: "Disciple",
         slug: "disciple",
         variant: "normal",
-        name: { zh: "修行者", en: "Disciple" },
+        name: loc({ zh: "修行者", en: "Disciple" }),
+        untranslated: LATER_LANGS,
         pieces: { helmet: "disciple-helmet", chest: "disciple-chest" },
       },
       {
         id: "Disciple_Unique",
         slug: "disciple-unique",
         variant: "unique",
-        name: { zh: "賢者", en: "Sage" },
+        name: loc({ zh: "賢者", en: "Sage" }),
+        untranslated: LATER_LANGS,
         pieces: { helmet: "disciple-helmet-unique", chest: "disciple-chest-unique" },
       },
     ]);
@@ -85,9 +91,9 @@ describe("linkEntries — armor sets", () => {
 
   it("falls back to the set id for a single-piece set", () => {
     const { armorSets, issues } = linkEntries([
-      makeEntry("WolfclutchHelmet_Unique", "armor", { name: { zh: "狼爪頭盔", en: "Wolf Helm" } }),
+      makeEntry("WolfclutchHelmet_Unique", "armor", { name: loc({ zh: "狼爪頭盔", en: "Wolf Helm" }) }),
     ]);
-    expect(armorSets[0].name).toEqual({ zh: "Wolfclutch (Unique)", en: "Wolfclutch (Unique)" });
+    expect(armorSets[0].name).toEqual(loc({ zh: "Wolfclutch (Unique)", en: "Wolfclutch (Unique)" }));
     expect(issues).toEqual([{ type: "armor-set-name-fallback", detail: "Wolfclutch_Unique" }]);
   });
 

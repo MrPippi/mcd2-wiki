@@ -3,6 +3,7 @@ import { buildMapData } from "../../../scripts/extract/map";
 import type { MapMarker } from "../../../scripts/extract/map-schema";
 import { toBlocks, toImagePixel } from "../../../src/lib/map/transform";
 import { MAP_LOCALES, MAP_TABLES } from "../../helpers/map-tables";
+import { loc } from "../../helpers/localized";
 
 const everyIcon = () => true;
 const noIcon = () => false;
@@ -64,8 +65,8 @@ describe("buildMapData", () => {
       kind: "portal",
       px: 432.6,
       py: 4416.3,
-      name: { zh: "傳送雕像", en: "Teleport Statue" },
-      area: { zh: "英雄港", en: "Brave Haven" },
+      name: loc({ zh: "傳送雕像", en: "Teleport Statue" }),
+      area: loc({ zh: "英雄港", en: "Brave Haven" }),
       icon: "icons/map/t_ui_icon_town_portal.png",
     });
   });
@@ -82,8 +83,8 @@ describe("buildMapData", () => {
       kind: "merchant",
       px: 357.9,
       py: 4282.8,
-      name: { zh: "鐵匠", en: "Blacksmith" },
-      note: { zh: "強化裝備。", en: "Upgrade your gear." },
+      name: loc({ zh: "鐵匠", en: "Blacksmith" }),
+      note: loc({ zh: "強化裝備。", en: "Upgrade your gear." }),
       icon: "icons/map/t_ui_icon_blacksmith.png",
     });
   });

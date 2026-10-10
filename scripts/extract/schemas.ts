@@ -4,7 +4,8 @@ import { CATEGORIES, LANGS } from "./config";
 export const LocaleFileSchema = z.record(z.string(), z.record(z.string(), z.string()));
 export type LocaleFile = z.infer<typeof LocaleFileSchema>;
 
-export const LocalizedSchema = z.object({ zh: z.string(), en: z.string() });
+/** Text in every site language (all required, so a missed language is a type error). */
+export const LocalizedSchema = z.record(z.enum(LANGS), z.string());
 export type Localized = z.infer<typeof LocalizedSchema>;
 
 export const ARMOR_PIECES = ["helmet", "chest", "leggings", "boots"] as const;
@@ -40,6 +41,8 @@ export const ArmorSetSchema = z.object({
   slug: SlugSchema,
   variant: VariantSchema,
   name: LocalizedSchema,
+  /** Languages whose set name is the English one because no rule produced their own. */
+  untranslated: z.array(z.enum(LANGS)).optional(),
   pieces: z.object({
     helmet: SlugSchema.optional(),
     chest: SlugSchema.optional(),

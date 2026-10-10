@@ -2,9 +2,10 @@ import { describe, expect, it } from "vitest";
 import { buildUiGameStrings } from "../../../scripts/extract/ui-game-strings";
 import keys from "../../../scripts/extract/ui-game-keys.json";
 import { makeLocales, ns } from "../../helpers/locales";
+import { loc } from "../../helpers/localized";
 
 const LOCALES = makeLocales({
-  [ns("InventoryLabels")]: { header_armor: ["Armor", "護甲"], Equipment_Helmet: ["Helmet", ""] },
+  [ns("InventoryLabels")]: { header_armor: { en: "Armor", zh: "護甲", ru: "Броня" }, Equipment_Helmet: { en: "Helmet", zh: "" } },
 });
 
 describe("buildUiGameStrings", () => {
@@ -13,8 +14,8 @@ describe("buildUiGameStrings", () => {
       categoryArmor: { namespace: ns("InventoryLabels"), key: "header_armor" },
       pieceHelmet: { namespace: ns("InventoryLabels"), key: "Equipment_Helmet" },
     });
-    expect(result.strings.categoryArmor).toEqual({ en: "Armor", zh: "護甲" });
-    expect(result.strings.pieceHelmet).toEqual({ en: "Helmet", zh: "Helmet" });
+    expect(result.strings.categoryArmor).toEqual(loc({ en: "Armor", zh: "護甲", ru: "Броня" }));
+    expect(result.strings.pieceHelmet).toEqual(loc({ en: "Helmet" }));
     expect(result.issues).toEqual([]);
   });
 

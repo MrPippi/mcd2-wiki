@@ -1,7 +1,8 @@
-import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
+import { ALL_LANGS, LANG_META } from "../../../scripts/extract/config";
 import { ExtractError } from "../../../scripts/extract/issues";
 import { loadLocaleFile, loadLocales } from "../../../scripts/extract/parse-locale";
 
@@ -47,12 +48,21 @@ describe("loadLocaleFile", () => {
 });
 
 describe("loadLocales", () => {
-  it("reads the zh-Hant and en culture files", async () => {
-    await write("Localization/All/en/All.json", JSON.stringify({ N: { K: "Sword" } }));
-    await write("Localization/All/zh-Hant/All.json", JSON.stringify({ N: { K: "劍" } }));
-    await expect(loadLocales(dir)).resolves.toEqual({
-      en: { N: { K: "Sword" } },
-      zh: { N: { K: "劍" } },
-    });
+  const writeAll = () =>
+    Promise.all(ALL_LANGS.map((lang) => write(`Localization/All/${LANG_META[lang].culture}/All.json`, JSON.stringify({ N: { K: `${lang}:Sword` } }))));
+
+  it("reads every language's culture file", async () => {
+    await writeAll();
+    const locales = await loadLocales(dir);
+    expect(Object.keys(locales)).toEqual([...ALL_LANGS]);
+    expect(locales.zh).toEqual({ N: { K: "zh:Sword" } });
+    expect(locales["zh-hans"]).toEqual({ N: { K: "zh-hans:Sword" } });
+    expect(locales.pt).toEqual({ N: { K: "pt:Sword" } });
+  });
+
+  it("fails naming the file of a missing language", async () => {
+    await writeAll();
+    await rm(path.join(dir, "Localization", "All", "ru-RU", "All.json"));
+    await expect(loadLocales(dir)).rejects.toThrow(/找不到語系檔：.*ru-RU/);
   });
 });

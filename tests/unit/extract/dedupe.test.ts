@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { dedupeByName } from "../../../scripts/extract/dedupe";
 import { makeEntry } from "../../helpers/entries";
+import { loc } from "../../helpers/localized";
 
-const name = { zh: "腐化苦力怕披風", en: "Corrupted Creeper Cape" };
+const name = loc({ zh: "腐化苦力怕披風", en: "Corrupted Creeper Cape" });
 
 describe("dedupeByName", () => {
   it("keeps the same-named cosmetic that has an icon and reports the other", () => {
@@ -22,7 +23,7 @@ describe("dedupeByName", () => {
   });
 
   it("leaves non-cosmetic categories and upcoming entries alone", () => {
-    const burning = { zh: "燃燒", en: "Burning" };
+    const burning = loc({ zh: "燃燒", en: "Burning" });
     const input = [
       makeEntry("Burning", "status", { name: burning }),
       makeEntry("Burning_Infinite", "status", { name: burning }),

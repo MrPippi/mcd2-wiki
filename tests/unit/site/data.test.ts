@@ -10,7 +10,7 @@ describe("site data", () => {
   });
 
   it("finds entries by category and slug", () => {
-    expect(findEntry("melee", "sword")?.name).toEqual({ zh: "劍", en: "Sword" });
+    expect(findEntry("melee", "sword")?.name).toMatchObject({ zh: "劍", en: "Sword", ja: "剣", ru: "Меч" });
     expect(findEntry("melee", "does-not-exist")).toBeUndefined();
     expect(entriesIn("melee").every((entry) => entry.category === "melee")).toBe(true);
   });

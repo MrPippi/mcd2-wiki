@@ -3,6 +3,7 @@ import { existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
+import { ALL_LANGS, LANG_META } from "../../scripts/extract/config";
 import { ExtractError } from "../../scripts/extract/issues";
 import { runExtract } from "../../scripts/extract/pipeline";
 import type { ArmorSet, Entry } from "../../scripts/extract/schemas";
@@ -10,6 +11,9 @@ import { makeLocales, ns } from "../helpers/locales";
 
 const ICON_ROOT = "Assets/Art/Characters/Player/Equipment";
 const QUIVER = `${ICON_ROOT}/Artifacts/Quivers/T_UI_Quiver_Freezing_Icon.png`;
+const JA_LOCALE = {
+  [ns("DT_ItemDefinitionMelee")]: { SW_Item_Sword_SW_TextEntry_Name: "剣", SW_Item_Sword_SW_TextEntry_Description: "古典的な剣。" },
+};
 
 let sourceRoot: string;
 let outRoot: string;
@@ -27,41 +31,41 @@ beforeEach(async () => {
   overridesPath = path.join(sourceRoot, "overrides.json");
   const locales = makeLocales({
     [ns("DT_ItemDefinitionMelee")]: {
-      SW_Item_Sword_SW_TextEntry_Name: ["Sword", "劍"],
-      SW_Item_Sword_SW_TextEntry_Description: ["A classic sword.", "經典的劍。"],
-      SW_Item_Sword_Unique1_SW_TextEntry_Name: ["The Burning Blade", "燃燒之刃"],
+      SW_Item_Sword_SW_TextEntry_Name: { en: "Sword", zh: "劍" },
+      SW_Item_Sword_SW_TextEntry_Description: { en: "A classic sword.", zh: "經典的劍。" },
+      SW_Item_Sword_Unique1_SW_TextEntry_Name: { en: "The Burning Blade", zh: "燃燒之刃" },
     },
-    [ns("DT_R3ItemDefinitionMelee")]: { SW_Item_Halberd_SW_TextEntry_Name: ["Halberd", "戟"] },
+    [ns("DT_R3ItemDefinitionMelee")]: { SW_Item_Halberd_SW_TextEntry_Name: { en: "Halberd", zh: "戟" } },
     [ns("DT_ItemDefinitionArmor")]: {
-      SW_Item_DiscipleHelmet_SW_TextEntry_Name: ["Disciple mask", "修行者面具"],
-      SW_Item_DiscipleChest_SW_TextEntry_Name: ["Disciple Robe", "修行者長袍"],
+      SW_Item_DiscipleHelmet_SW_TextEntry_Name: { en: "Disciple mask", zh: "修行者面具" },
+      SW_Item_DiscipleChest_SW_TextEntry_Name: { en: "Disciple Robe", zh: "修行者長袍" },
     },
-    [ns("DT_ItemDefinitionArtifact")]: { SW_Item_Artifact_FrostQuiver_SW_TextEntry_Name: ["Frost Quiver", "冰霜箭袋"] },
+    [ns("DT_ItemDefinitionArtifact")]: { SW_Item_Artifact_FrostQuiver_SW_TextEntry_Name: { en: "Frost Quiver", zh: "冰霜箭袋" } },
     [ns("DT_EnchantmentDefinition")]: {
-      SW_Enchantment_Arcane_SW_TextEntry_Name: ["Artifact Amplifier", "神器增幅"],
-      SW_Enchantment_Arcane_SW_TextEntry_Description_EffectTotal: ["{0}", "{0}"],
+      SW_Enchantment_Arcane_SW_TextEntry_Name: { en: "Artifact Amplifier", zh: "神器增幅" },
+      SW_Enchantment_Arcane_SW_TextEntry_Description_EffectTotal: { en: "{0}", zh: "{0}" },
     },
     [ns("DT_ItemDefinitionEnchantmentBook")]: {
-      SW_Item_EnchantmentBook_Arcane_SW_TextEntry_Name: ["Artifact Amplifier", "神器增幅"],
+      SW_Item_EnchantmentBook_Arcane_SW_TextEntry_Name: { en: "Artifact Amplifier", zh: "神器增幅" },
     },
     [ns("DT_EffectDefinition")]: {
-      SW_Effect_CriticalEdge_SW_TextEntry_Name: ["Critical Edge", "致命鋒刃"],
-      SW_Effect_CriticalEdge_SW_TextEntry_Description: ["All critical hits deal {0} more damage.", "暴擊造成的傷害提高 {0}。"],
+      SW_Effect_CriticalEdge_SW_TextEntry_Name: { en: "Critical Edge", zh: "致命鋒刃" },
+      SW_Effect_CriticalEdge_SW_TextEntry_Description: { en: "All critical hits deal {0} more damage.", zh: "暴擊造成的傷害提高 {0}。" },
     },
     [ns("DT_StatusDefinition")]: {
-      SW_Status_Burning_SW_TextEntry_Name: ["Burning", "燃燒"],
-      SW_Status_Burning_Infinite_SW_TextEntry_Name: ["Burning", "燃燒"],
+      SW_Status_Burning_SW_TextEntry_Name: { en: "Burning", zh: "燃燒" },
+      SW_Status_Burning_Infinite_SW_TextEntry_Name: { en: "Burning", zh: "燃燒" },
     },
     [ns("DT_ItemDefinitionTalisman")]: {
-      SW_Item_Talisman_AmmoCapacity_SW_TextEntry_Name: ["Twig of Dark Oak", "黑橡木枝條"],
-      SW_Item_Talisman_AmmoCapacity_SW_TextEntry_Description: ["Ammo Capacity Talisman Description", "說明"],
+      SW_Item_Talisman_AmmoCapacity_SW_TextEntry_Name: { en: "Twig of Dark Oak", zh: "黑橡木枝條" },
+      SW_Item_Talisman_AmmoCapacity_SW_TextEntry_Description: { en: "Ammo Capacity Talisman Description", zh: "說明" },
     },
     [ns("DT_ItemDefinitionCape")]: {
-      SW_Item_Cosmetic_Cape_Creeper_SW_TextEntry_Name: ["Corrupted Creeper Cape", "腐化苦力怕披風"],
-      SW_Item_Cosmetic_Cape_CorruptedCreeper_SW_TextEntry_Name: ["Corrupted Creeper Cape", "腐化苦力怕披風"],
-      SW_Item_Cosmetec_Cape_CorruptedCreeper_SW_TextEntry_UnlockExplanation: ["Upgrade to Deluxe.", "升級至豪華版。"],
+      SW_Item_Cosmetic_Cape_Creeper_SW_TextEntry_Name: { en: "Corrupted Creeper Cape", zh: "腐化苦力怕披風" },
+      SW_Item_Cosmetic_Cape_CorruptedCreeper_SW_TextEntry_Name: { en: "Corrupted Creeper Cape", zh: "腐化苦力怕披風" },
+      SW_Item_Cosmetec_Cape_CorruptedCreeper_SW_TextEntry_UnlockExplanation: { en: "Upgrade to Deluxe.", zh: "升級至豪華版。" },
     },
-    [ns("DT_SkinDefinition")]: { SW_Skin_Darian_SW_TextEntry_Name: ["Darian Skin", "達里安外觀"] },
+    [ns("DT_SkinDefinition")]: { SW_Skin_Darian_SW_TextEntry_Name: { en: "Darian Skin", zh: "達里安外觀" } },
   });
   await put(sourceRoot, "Assets/Art/Characters/Player/Equipment/Talismans/AmmoCapacity/T_UI_AmmoCapacity_Icon1.png", "png:twig");
   await put(sourceRoot, "Assets/Art/Characters/Player/Equipment/Talismans/AmmoCapacity/T_UI_AmmoCapacity_Icon2.png", "png:twig2");
@@ -77,6 +81,9 @@ beforeEach(async () => {
   await put(sourceRoot, "Assets/UI/Icons/SplashScreen.png", "png:splash");
   await put(sourceRoot, "Localization/All/en/All.json", JSON.stringify(locales.en));
   await put(sourceRoot, "Localization/All/zh-Hant/All.json", JSON.stringify(locales.zh));
+  await put(sourceRoot, "Localization/All/ja-JP/All.json", JSON.stringify(JA_LOCALE));
+  const empty = ALL_LANGS.filter((lang) => !["en", "zh", "ja"].includes(lang));
+  await Promise.all(empty.map((lang) => put(sourceRoot, `Localization/All/${LANG_META[lang].culture}/All.json`, "{}")));
   await put(sourceRoot, `${ICON_ROOT}/Weapons/Sword/T_UI_Sword_Icon.png`, "png:sword");
   await put(sourceRoot, `${ICON_ROOT}/Weapons/Sword/Sword_Unique/T_UI_Sword_Unique_Icon.png`, "png:sword-unique");
   await put(sourceRoot, `${ICON_ROOT}/Armor/Disciple_Armor/T_UI_Helmet_Disciple_Icon.png`, "png:helmet");
@@ -95,10 +102,13 @@ describe("runExtract", () => {
     const find = (category: string, slug: string) => entries.find((e) => e.category === category && e.slug === slug);
 
     expect(find("melee", "sword")).toMatchObject({
-      name: { zh: "劍", en: "Sword" },
+      name: { zh: "劍", en: "Sword", ja: "剣", de: "Sword" },
       icon: "icons/melee/sword.png",
       links: { variants: ["sword-unique1"] },
     });
+    expect(find("melee", "sword")?.untranslated).toContain("de");
+    expect(find("melee", "sword")?.untranslated).not.toContain("ja");
+    expect(find("melee", "sword")?.description).toMatchObject({ ja: "古典的な剣。", de: "A classic sword." });
     expect(await readFile(path.join(outRoot, "public", "icons", "melee", "sword.png"), "utf8")).toBe("png:sword");
     expect(existsSync(path.join(outRoot, "public", "icons", "stale.png"))).toBe(false);
     expect(find("melee", "halberd")).toMatchObject({ release: "upcoming", links: {} });
@@ -114,15 +124,18 @@ describe("runExtract", () => {
     expect(find("status", "burning-infinite")?.icon).toBe("icons/status/burning-infinite.png");
     expect(await readFile(path.join(outRoot, "public", "icons", "status", "burning-infinite.png"), "utf8")).toBe("png:burning");
 
-    expect(await readJson<ArmorSet[]>("src/data/armor-sets.json")).toEqual([
+    const sets = await readJson<ArmorSet[]>("src/data/armor-sets.json");
+    expect(sets).toMatchObject([
       {
         id: "Disciple",
         slug: "disciple",
         variant: "normal",
-        name: { zh: "修行者", en: "Disciple" },
+        name: { zh: "修行者", en: "Disciple", ja: "Disciple" },
         pieces: { helmet: "disciple-helmet", chest: "disciple-chest" },
       },
     ]);
+    expect(sets[0].untranslated).toContain("ja");
+    expect(sets[0].untranslated).not.toContain("zh");
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-icon (1)\n\n- armor:DiscipleChest");
     expect(summary).toMatchObject({ entries: 14, armorSets: 1, icons: 12 });
@@ -143,7 +156,7 @@ describe("runExtract", () => {
     expect(entries.find((e) => e.category === "armor" && e.slug === "disciple-chest")?.icon).toBe("icons/armor/disciple-chest.png");
     expect(await readFile(path.join(outRoot, "public", "icons", "armor", "disciple-chest.png"), "utf8")).toBe("png:referenced-chest");
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
-    expect(report).not.toContain("armor:DiscipleChest");
+    expect(report).not.toMatch(/^- armor:DiscipleChest$/m);
   });
 
   it("falls back to file-name matching when the IconReference file is missing", async () => {

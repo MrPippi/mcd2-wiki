@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { Entry } from "../../../scripts/extract/schemas";
 import { buildWeaponData } from "../../../scripts/extract/weapons";
 import { TABLES } from "../../helpers/datatables";
+import { loc } from "../../helpers/localized";
 
 const entry = (category: Entry["category"], slug: string, id: string, variant: Entry["variant"] = "normal"): Entry => ({
   id,
@@ -9,7 +10,7 @@ const entry = (category: Entry["category"], slug: string, id: string, variant: E
   category,
   variant,
   release: "base",
-  name: { zh: id, en: id },
+  name: loc({ zh: id, en: id }),
   links: {},
 });
 

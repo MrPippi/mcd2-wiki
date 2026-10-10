@@ -29,11 +29,7 @@ export const LANG_META: Readonly<Record<AnyLang, LangMeta>> = {
   uk: { culture: "uk-UA", htmlLang: "uk", ogLocale: "uk_UA", nativeName: "Українська", fontScript: "cyrillic" },
 };
 
-/** Languages the pipeline and site currently handle; widened to ALL_LANGS once the data supports it. */
-export const LANGS = ["zh", "en"] as const;
-export type Lang = (typeof LANGS)[number];
+/** Languages the pipeline and site handle. */
+export const LANGS = ALL_LANGS;
+export type Lang = AnyLang;
 
-export const CULTURE: Readonly<Record<Lang, string>> = {
-  zh: LANG_META.zh.culture,
-  en: LANG_META.en.culture,
-};

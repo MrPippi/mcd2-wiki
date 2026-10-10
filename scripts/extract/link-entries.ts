@@ -1,4 +1,5 @@
-import type { Lang } from "./config";
+import { byLang, localizedFrom } from "../../src/lib/lang";
+import { LANGS, type Lang } from "./config";
 import { issue, type Issue } from "./issues";
 import { baseId, toSlug } from "./keys";
 import { ARMOR_PIECES, type ArmorSet, type Entry } from "./schemas";
@@ -86,19 +87,24 @@ function setIdentity(entry: Entry): { id: string; slug: string } | undefined {
     : { id: setBase, slug: toSlug(setBase) };
 }
 
+/** Languages whose set names come from the pieces' common prefix; the rest take English until Task 5 adds their rules. */
+const PREFIX_LANGS: readonly Lang[] = ["zh", "en"];
+
 function toArmorSet(draft: SetDraft): { set: ArmorSet; issues: Issue[] } {
   const fallback = draft.variant === "unique" ? `${draft.id.replace(/_Unique$/, "")} (Unique)` : draft.id;
-  const zh = setNameFor("zh", draft.members.map((member) => member.name.zh));
-  const en = setNameFor("en", draft.members.map((member) => member.name.en));
+  const prefixed = byLang((lang) => (PREFIX_LANGS.includes(lang) ? setNameFor(lang, draft.members.map((member) => member.name[lang])) : undefined));
+  const english = prefixed.en ?? fallback;
+  const untranslated = LANGS.filter((lang) => lang !== "en" && prefixed[lang] === undefined);
   const pieces = Object.fromEntries(
     ARMOR_PIECES.flatMap((piece) => {
       const member = draft.members.find((candidate) => candidate.armorPiece === piece);
       return member ? [[piece, member.slug]] : [];
     }),
   ) as ArmorSet["pieces"];
+  const name = localizedFrom((lang) => prefixed[lang] ?? (lang === "zh" ? fallback : english));
   return {
-    set: { id: draft.id, slug: draft.slug, variant: draft.variant, name: { zh: zh ?? fallback, en: en ?? fallback }, pieces },
-    issues: zh && en ? [] : [issue("armor-set-name-fallback", draft.id)],
+    set: { id: draft.id, slug: draft.slug, variant: draft.variant, name, pieces, ...(untranslated.length > 0 ? { untranslated } : {}) },
+    issues: prefixed.zh && prefixed.en ? [] : [issue("armor-set-name-fallback", draft.id)],
   };
 }
 

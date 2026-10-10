@@ -1,13 +1,9 @@
 import type { Category, Lang } from "../../scripts/extract/config";
-import { compareLang } from "./lang";
 import type { ArmorPiece } from "../../scripts/extract/schemas";
 import type { MarkerKind } from "./map/kinds";
 import { t, type UiKey } from "./ui-strings";
 
 export type { Lang };
-
-/** Kept for existing callers; Task 4 removes it in favour of compareLang. */
-export const otherLang = compareLang;
 
 export { t, tCount, type UiKey } from "./ui-strings";
 

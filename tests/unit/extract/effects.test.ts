@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { buildEffectData } from "../../../scripts/extract/effects";
 import type { Entry } from "../../../scripts/extract/schemas";
 import { TABLES } from "../../helpers/datatables";
+import { loc } from "../../helpers/localized";
 
 const entry = (slug: string, id: string): Entry => ({
   id,
@@ -9,7 +10,7 @@ const entry = (slug: string, id: string): Entry => ({
   category: "effect",
   variant: "normal",
   release: "base",
-  name: { zh: id, en: id },
+  name: loc({ zh: id, en: id }),
   links: {},
 });
 

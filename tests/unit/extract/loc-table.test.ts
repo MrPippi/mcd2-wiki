@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { localize, locRef } from "../../../scripts/extract/loc-table";
 import { makeLocales, ns } from "../../helpers/locales";
+import { loc } from "../../helpers/localized";
 
 describe("locRef", () => {
   it("reads the table and key of a LOCTABLE reference", () => {
@@ -17,16 +18,20 @@ describe("locRef", () => {
 });
 
 describe("localize", () => {
-  const locales = makeLocales({
-    [ns("VendorLabels")]: { smith: ["Blacksmith", "鐵匠"], cost: ["Cost", ""] },
+  const locales = {
+    ...makeLocales({
+      [ns("VendorLabels")]: { smith: { en: "Blacksmith", zh: "鐵匠", ja: "鍛冶屋" }, cost: { en: "Cost", zh: "", ja: "" } },
+    }),
+    de: {},
+  };
+
+  it("returns every language", () => {
+    expect(localize(locales, ns("VendorLabels"), "smith")).toEqual(loc({ en: "Blacksmith", zh: "鐵匠", ja: "鍛冶屋" }));
   });
 
-  it("returns both languages", () => {
-    expect(localize(locales, ns("VendorLabels"), "smith")).toEqual({ zh: "鐵匠", en: "Blacksmith" });
-  });
-
-  it("falls back to English when Chinese is empty", () => {
-    expect(localize(locales, ns("VendorLabels"), "cost")).toEqual({ zh: "Cost", en: "Cost" });
+  it("falls back to English for an empty text or a language without the namespace", () => {
+    expect(localize(locales, ns("VendorLabels"), "cost")).toEqual(loc({ en: "Cost" }));
+    expect(localize(locales, ns("VendorLabels"), "smith")?.de).toBe("Blacksmith");
   });
 
   it("returns undefined when the key is missing", () => {
