@@ -1,12 +1,13 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
-import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../lib/i18n";
+import { t, type Lang } from "../lib/i18n";
+import { itemKicker } from "../lib/kicker";
 import { relatedLinks } from "../lib/related";
 import BookSource from "./BookSource.astro";
 import EntryIcon from "./EntryIcon.astro";
+import EntrySection from "./EntrySection.astro";
+import InfoBox from "./InfoBox.astro";
 import LangText from "./LangText.astro";
-import UiIcon from "./UiIcon.astro";
-import { categoryIcon, pieceIcon } from "../lib/ui-icons";
 
 interface Props {
   lang: Lang;
@@ -17,40 +18,42 @@ const { lang, entry } = Astro.props;
 const related = relatedLinks(lang, entry);
 ---
 <article class="entry-detail" data-pagefind-body>
-  <header class="entry-head">
-    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={128} category={entry.category} variant={entry.variant} />
-    <div>
-      <LangText as="h1" lang={lang} value={entry.name} searchTitle />
-      <p class="tags">
-        <span class="tag"><UiIcon src={categoryIcon(entry.category)} />{CATEGORY_LABEL[entry.category][lang]}</span>{" "}
-        <span class="tag">{t(lang, entry.variant)}</span>{" "}
-        {entry.armorPiece && (
-          <span class="tag"><UiIcon src={pieceIcon(entry.armorPiece)} />{PIECE_LABEL[entry.armorPiece][lang]}</span>
-        )}{" "}
-        {entry.untranslated?.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
-      </p>
+  <p class="kicker entry-kicker" data-pagefind-ignore>{itemKicker(entry.category, entry.variant)}</p>
+  <div class="entry-layout">
+    <InfoBox lang={lang} entry={entry} />
+    <div class="entry-content">
+      <LangText as="h1" lang={lang} value={entry.name} searchTitle class={entry.variant === "unique" ? "is-unique" : undefined} />
+      {entry.description && (
+        <EntrySection title={t(lang, "description")} en="DESCRIPTION">
+          <LangText as="p" class="description" lang={lang} value={entry.description} html />
+        </EntrySection>
+      )}
+      {entry.descriptionLong && (
+        <EntrySection title={t(lang, "details")} en="DETAILS">
+          <LangText as="p" class="description-long" lang={lang} value={entry.descriptionLong} html />
+        </EntrySection>
+      )}
+      {entry.unlock && (
+        <EntrySection title={t(lang, "unlock")} en="UNLOCK" testid="unlock">
+          <LangText as="p" lang={lang} value={entry.unlock} html />
+        </EntrySection>
+      )}
+      {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
+      {related.length > 0 && (
+        <EntrySection title={t(lang, "related")} en="RELATED">
+          <ul class="related">
+            {related.map((link) => (
+              <li>
+                <span class="related-label" data-pagefind-ignore>{t(lang, link.labelKey)}</span>
+                <a href={link.href}>
+                  {link.icon && <EntryIcon icon={link.icon} alt="" size={40} category={link.category} variant={link.variant} />}
+                  <LangText lang={lang} value={link.name} />
+                </a>
+              </li>
+            ))}
+          </ul>
+        </EntrySection>
+      )}
     </div>
-  </header>
-  {entry.description && <LangText as="p" class="description" lang={lang} value={entry.description} html />}
-  {entry.descriptionLong && <LangText as="p" class="description-long" lang={lang} value={entry.descriptionLong} html />}
-  {entry.unlock && (
-    <p class="unlock" data-testid="unlock">
-      <span class="tag">{t(lang, "unlock")}</span>{" "}
-      <LangText lang={lang} value={entry.unlock} html />
-    </p>
-  )}
-  {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
-  {related.length > 0 && (
-    <section class="related">
-      <h2>{t(lang, "related")}</h2>
-      <ul>
-        {related.map((link) => (
-          <li>
-            <span class="related-label">{t(lang, link.labelKey)}</span>{" "}
-            <a href={link.href}><LangText lang={lang} value={link.name} /></a>
-          </li>
-        ))}
-      </ul>
-    </section>
-  )}
+  </div>
 </article>

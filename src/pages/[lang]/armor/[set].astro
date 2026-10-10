@@ -2,12 +2,14 @@
 import { LANGS } from "../../../../scripts/extract/config";
 import { ARMOR_PIECES, type ArmorSet } from "../../../../scripts/extract/schemas";
 import EntryIcon from "../../../components/EntryIcon.astro";
+import EntrySection from "../../../components/EntrySection.astro";
 import LangText from "../../../components/LangText.astro";
 import UiIcon from "../../../components/UiIcon.astro";
-import { pieceIcon } from "../../../lib/ui-icons";
 import Base from "../../../layouts/Base.astro";
 import { allArmorSets, findEntry } from "../../../lib/data";
-import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../../../lib/i18n";
+import { PIECE_LABEL, t, type Lang } from "../../../lib/i18n";
+import { setKicker } from "../../../lib/kicker";
+import { pieceIcon } from "../../../lib/ui-icons";
 import { entryHref } from "../../../lib/url";
 
 export function getStaticPaths() {
@@ -22,26 +24,46 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
   return entry ? [{ piece, entry }] : [];
 });
 ---
-<Base lang={lang} title={set.name[lang]}>
-  <article class="armor-set" data-pagefind-body>
-    <LangText as="h1" lang={lang} value={set.name} searchTitle />
-    <p class="tags">
-      <span class="tag">{CATEGORY_LABEL.armor[lang]}</span>{" "}
-      <span class="tag">{t(lang, set.variant)}</span>
-    </p>
-    <ul class="set-pieces">
-      {pieces.map(({ piece, entry }) => (
-        <li class="set-piece" data-testid="set-piece">
-          <a href={entryHref(lang, entry)}>
-            <EntryIcon icon={entry.icon} alt={entry.name[lang]} category={entry.category} variant={entry.variant} />
-            <span>
-              <span class="piece-label"><UiIcon src={pieceIcon(piece)} />{PIECE_LABEL[piece][lang]}</span>{" "}
-              <LangText lang={lang} value={entry.name} />
-            </span>
-          </a>
-          {entry.description && <LangText as="p" lang={lang} value={entry.description} html />}
-        </li>
-      ))}
-    </ul>
+<Base lang={lang} title={set.name[lang]} current="armor">
+  <article class="entry-detail armor-set" data-pagefind-body>
+    <p class="kicker entry-kicker" data-pagefind-ignore>{setKicker(set.variant)}</p>
+    <div class="entry-layout">
+      <aside class="info-box panel" data-testid="info-box">
+        <div class="set-preview">
+          {pieces.map(({ entry }) => (
+            <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={72} category={entry.category} variant={entry.variant} loading="eager" />
+          ))}
+        </div>
+        <dl class="facts">
+          <div>
+            <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
+            <dd class:list={{ "is-unique": set.variant === "unique" }}>{t(lang, set.variant)}</dd>
+          </div>
+          <div>
+            <dt data-pagefind-ignore>{t(lang, "pieces")}</dt>
+            <dd>{pieces.length}</dd>
+          </div>
+        </dl>
+      </aside>
+      <div class="entry-content">
+        <LangText as="h1" lang={lang} value={set.name} searchTitle class={set.variant === "unique" ? "is-unique" : undefined} />
+        <EntrySection title={t(lang, "setPieces")} en="PIECES">
+          <ul class="set-pieces">
+            {pieces.map(({ piece, entry }) => (
+              <li class="set-piece" data-testid="set-piece">
+                <a href={entryHref(lang, entry)}>
+                  <EntryIcon icon={entry.icon} alt={entry.name[lang]} category={entry.category} variant={entry.variant} />
+                  <span>
+                    <span class="piece-label"><UiIcon src={pieceIcon(piece)} />{PIECE_LABEL[piece][lang]}</span>{" "}
+                    <LangText lang={lang} value={entry.name} />
+                  </span>
+                </a>
+                {entry.description && <LangText as="p" lang={lang} value={entry.description} html />}
+              </li>
+            ))}
+          </ul>
+        </EntrySection>
+      </div>
+    </div>
   </article>
 </Base>

@@ -1,0 +1,12 @@
+/* Pagefind sets its defaults on .pagefind-ui, so override on that element with higher specificity. */
+#search .pagefind-ui {
+  --pagefind-ui-primary: #ff7e2f;
+  --pagefind-ui-text: var(--text);
+  --pagefind-ui-background: var(--surface);
+  --pagefind-ui-border: var(--border);
+  --pagefind-ui-tag: var(--surface-2);
+  --pagefind-ui-border-width: 2px;
+  --pagefind-ui-border-radius: 0;
+  --pagefind-ui-font: var(--font-body);
+}
+#search .pagefind-ui__result-title { font-family: var(--font-pixel); }

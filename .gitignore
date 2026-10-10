@@ -17,3 +17,6 @@ test-results/
 Thumbs.db
 .vscode/
 .idea/
+
+# Brainstorm companion and workflow scratch
+.superpowers/

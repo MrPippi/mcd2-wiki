@@ -1,4 +1,11 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
+
+/** Opens an entry from a category list; on touch devices the first tap opens the details sheet. */
+async function openFromList(page: Page, card: Locator): Promise<void> {
+  await card.locator("a.item-link").click();
+  const sheet = page.getByTestId("item-sheet");
+  if (await sheet.isVisible()) await sheet.locator(".sheet-view").click();
+}
 
 test("home lists categories and links to them", async ({ page }) => {
   await page.goto("/zh/");
@@ -9,7 +16,7 @@ test("home lists categories and links to them", async ({ page }) => {
 
 test("entry page shows bilingual name and icon", async ({ page }) => {
   await page.goto("/zh/melee/");
-  await page.locator(".entry-card a", { has: page.locator(".primary", { hasText: /^劍$/ }) }).click();
+  await openFromList(page, page.locator(".entry-card", { has: page.locator(".primary", { hasText: /^劍$/ }) }));
   await expect(page).toHaveURL(/\/zh\/melee\/sword\/$/);
   await expect(page.locator("h1 .primary")).toHaveText("劍");
   await expect(page.locator("h1 .alt")).toHaveText("Sword");
@@ -135,7 +142,7 @@ test("unique gear uses the orange slot with the corner rarity mark and no star",
 
 test("artifacts sit in the hotbar artifact slot", async ({ page }) => {
   await page.goto("/zh/artifact/");
-  await page.locator(".entry-card a").first().click();
+  await openFromList(page, page.locator(".entry-card").first());
   await expect(page.locator(".entry-head .icon-frame.frame-artifact img")).toBeVisible();
 });
 
@@ -245,4 +252,324 @@ test("all internal links and images resolve", async ({ request }, testInfo) => {
     }
   }
   expect(broken).toEqual([]);
+});
+
+test("the game palette and self-hosted fonts are in use", async ({ page, request }) => {
+  await page.goto("/zh/");
+  const background = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+  expect(background).toBe("rgb(11, 26, 32)");
+  const fonts = await page.evaluate(async () => {
+    await document.fonts.ready;
+    // check() is also true for families the page never declared, so require a loaded face as well.
+    const loaded = (family: string) => [...document.fonts].some((face) => face.family.replace(/"/g, "") === family && face.status === "loaded");
+    return {
+      pixel: document.fonts.check("16px Cubic11", "劍") && loaded("Cubic11"),
+      label: document.fonts.check("16px Silkscreen", "A") && loaded("Silkscreen"),
+    };
+  });
+  expect(fonts).toEqual({ pixel: true, label: true });
+  expect((await request.get("/licenses/Cubic-11-OFL.txt")).status()).toBe(200);
+});
+
+test("category tabs mark the current category", async ({ page }) => {
+  await page.goto("/zh/melee/");
+  await expect(page.locator(".category-tabs a[aria-current='page']")).toHaveAttribute("data-category", "melee");
+  await page.goto("/zh/melee/sword/");
+  await expect(page.locator(".category-tabs a[aria-current='page']")).toHaveAttribute("data-category", "melee");
+  await page.goto("/zh/armor/piece/disciple-helmet/");
+  await expect(page.locator(".category-tabs a[aria-current='page']")).toHaveAttribute("data-category", "armor");
+});
+
+test("Q and E switch between category tabs", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "keyboard shortcuts are a desktop feature");
+  await page.goto("/zh/melee/");
+  await page.keyboard.press("e");
+  await expect(page).toHaveURL(/\/zh\/ranged\/$/);
+  await page.keyboard.press("q");
+  await expect(page).toHaveURL(/\/zh\/melee\/$/);
+  await page.keyboard.press("q");
+  await expect(page).toHaveURL(/\/zh\/effect\/$/);
+});
+
+test("typing in search boxes never switches tabs", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "keyboard shortcuts are a desktop feature");
+  await page.goto("/zh/melee/");
+  await page.locator(".header-search input").press("e");
+  await page.locator(".filter-text").press("q");
+  await page.waitForTimeout(300);
+  await expect(page).toHaveURL(/\/zh\/melee\/$/);
+  await page.goto("/zh/search/");
+  await page.locator("#search input").press("e");
+  await page.waitForTimeout(300);
+  await expect(page).toHaveURL(/\/zh\/search\/$/);
+});
+
+test("the header search goes to the search page", async ({ page }) => {
+  await page.goto("/zh/melee/");
+  await page.locator(".header-search input").fill("sword");
+  await page.locator(".header-search input").press("Enter");
+  await expect(page).toHaveURL(/\/zh\/search\/\?q=sword$/);
+  await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
+});
+
+test("the language switch keeps the search query and anchor", async ({ page }) => {
+  await page.goto(`/zh/search/?q=${encodeURIComponent("劍")}`);
+  await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/search/?q=%E5%8A%8D");
+  await page.goto("/zh/effect/#critical-edge");
+  await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/effect/#critical-edge");
+});
+
+test("the home page is a title banner with a slot for every category", async ({ page }) => {
+  await page.goto("/zh/");
+  await expect(page.locator(".home-hero .kicker")).toHaveText("UNOFFICIAL FAN WIKI");
+  await expect(page.locator(".home-title")).toContainText("Minecraft Dungeons II");
+  await expect(page.locator(".category-grid li")).toHaveCount(7);
+  await expect(page.locator(".category-grid .category-slot img.ui-icon")).toHaveCount(7);
+  await page.locator(".home-search input").fill("劍");
+  await page.locator(".home-search button").click();
+  await expect(page).toHaveURL(/\/zh\/search\/\?q=/);
+});
+
+const cardNamed = (page: Page, name: string) =>
+  page.locator(".entry-card", { has: page.locator(".primary", { hasText: new RegExp(`^${name}$`) }) });
+
+test("items show their names under the slots", async ({ page }) => {
+  await page.goto("/zh/melee/");
+  await expect(cardNamed(page, "劍").locator(".item-name")).toBeVisible();
+  await expect(cardNamed(page, "燃燒之刃").locator(".item-name.is-unique")).toBeVisible();
+});
+
+test("hovering or focusing an item shows its details beside the grid", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "hover is a desktop interaction");
+  await page.goto("/zh/melee/");
+  const tooltip = page.getByTestId("item-tooltip");
+  await expect(tooltip).toContainText("將游標移到物品上");
+  await cardNamed(page, "劍").hover();
+  await expect(tooltip.locator(".tooltip-name .primary")).toHaveText("劍");
+  await expect(tooltip.locator(".kicker")).toHaveText("MELEE WEAPON");
+  await expect(tooltip).toContainText("經典");
+  await cardNamed(page, "燃燒之刃").locator("a.item-link").focus();
+  await expect(tooltip.locator(".kicker")).toHaveText("UNIQUE MELEE WEAPON");
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/zh\/melee\/sword-unique1\/$/);
+});
+
+test("the details panel hides English when compare mode is off", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "hover is a desktop interaction");
+  await page.goto("/zh/melee/");
+  await page.getByTestId("compare-toggle").click();
+  await cardNamed(page, "劍").hover();
+  const alt = page.getByTestId("item-tooltip").locator(".tooltip-name .alt");
+  await expect(alt).toHaveCount(1);
+  await expect(alt).toBeHidden();
+});
+
+test("tapping an item on a phone opens the details sheet instead of leaving", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "touch interaction");
+  await page.goto("/zh/melee/");
+  const card = cardNamed(page, "燃燒之刃");
+  await card.locator("a.item-link").click();
+  await expect(page).toHaveURL(/\/zh\/melee\/$/);
+  const sheet = page.getByTestId("item-sheet");
+  await expect(sheet).toBeVisible();
+  await expect(sheet.locator(".kicker")).toHaveText("UNIQUE MELEE WEAPON");
+  await expect(sheet.locator(".sheet-view")).toBeInViewport();
+  await page.keyboard.press("Escape");
+  await expect(sheet).toBeHidden();
+  await card.locator("a.item-link").click();
+  await sheet.locator(".sheet-close").click();
+  await expect(sheet).toBeHidden();
+  await card.locator("a.item-link").click();
+  await sheet.locator(".sheet-view").click();
+  await expect(page).toHaveURL(/\/zh\/melee\/sword-unique1\/$/);
+});
+
+test("items stay plain links without JavaScript", async ({ browser }) => {
+  const context = await browser.newContext({ javaScriptEnabled: false });
+  const page = await context.newPage();
+  await page.goto("http://localhost:4329/zh/melee/");
+  await expect(page.getByTestId("item-sheet")).toBeHidden();
+  await cardNamed(page, "劍").locator("a.item-link").click();
+  await expect(page).toHaveURL(/\/zh\/melee\/sword\/$/);
+  await context.close();
+});
+
+test("the armor list shows sets with their pieces in the details", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "hover is a desktop interaction");
+  await page.goto("/zh/armor/");
+  await cardNamed(page, "修行者").hover();
+  const tooltip = page.getByTestId("item-tooltip");
+  await expect(tooltip.locator(".kicker")).toHaveText("ARMOR SET");
+  await expect(tooltip.locator(".tooltip-pieces li")).toHaveCount(4);
+});
+
+test("a long details sheet scrolls while its view button stays on screen", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "touch interaction");
+  await page.goto("/zh/melee/");
+  const card = cardNamed(page, "劍");
+  await card.locator("template.item-tip").evaluate((template: HTMLTemplateElement) => {
+    const desc = template.content.querySelector(".tooltip-desc");
+    for (let i = 0; i < 40; i += 1) desc?.append(Object.assign(document.createElement("p"), { textContent: `第 ${i} 行很長的說明文字` }));
+  });
+  await card.locator("a.item-link").click();
+  const sheet = page.getByTestId("item-sheet");
+  await expect(sheet).toBeVisible();
+  await expect(sheet.locator(".sheet-view")).toBeInViewport({ ratio: 1 });
+  await sheet.locator(".sheet-view").click();
+  await expect(page).toHaveURL(/\/zh\/melee\/sword\/$/);
+});
+
+test("entry pages show an info box with the key facts", async ({ page }) => {
+  await page.goto("/zh/armor/piece/disciple-helmet/");
+  await expect(page.locator(".entry-kicker")).toHaveText("ARMOR");
+  const box = page.getByTestId("info-box");
+  await expect(box.locator("dl.facts")).toContainText("護甲");
+  await expect(box.locator("dl.facts")).toContainText("頭盔");
+  await expect(box.locator("a[href='/zh/armor/disciple/']")).toBeVisible();
+  await expect(page.locator(".entry-head img.entry-icon")).toHaveAttribute("loading", "eager");
+});
+
+test("unique entries use the unique kicker and an orange title", async ({ page }) => {
+  await page.goto("/zh/melee/sword-unique1/");
+  await expect(page.locator(".entry-kicker")).toHaveText("UNIQUE MELEE WEAPON");
+  await expect(page.locator("h1.is-unique .primary")).toHaveText("燃燒之刃");
+  await expect(page.getByTestId("info-box").locator("dl.facts")).toContainText("獨特");
+});
+
+test("the info box sits beside the content on desktop", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "desktop layout");
+  await page.goto("/zh/melee/sword/");
+  const box = await page.getByTestId("info-box").boundingBox();
+  const title = await page.locator("h1").boundingBox();
+  if (!box || !title) throw new Error("layout not rendered");
+  expect(box.x + box.width).toBeLessThanOrEqual(title.x);
+});
+
+test("related entries show their slot icon", async ({ page }) => {
+  await page.goto("/zh/melee/sword/");
+  await expect(page.locator(".related a[href='/zh/melee/sword-unique1/'] img.entry-icon")).toBeVisible();
+});
+
+test("armor set pages use the same info box layout", async ({ page }) => {
+  await page.goto("/zh/armor/disciple/");
+  await expect(page.locator(".entry-kicker")).toHaveText("ARMOR SET");
+  await expect(page.getByTestId("info-box").locator(".set-preview img.entry-icon")).toHaveCount(4);
+  await expect(page.getByTestId("set-piece")).toHaveCount(4);
+});
+
+test("the effects table and search results use the game palette", async ({ page }) => {
+  await page.goto("/zh/effect/");
+  const head = await page.locator(".entry-table thead th").first().evaluate((el) => getComputedStyle(el).backgroundColor);
+  expect(head).toBe("rgb(28, 43, 49)");
+  await page.goto("/zh/search/?q=sword");
+  await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
+  const primary = await page.locator("#search .pagefind-ui").evaluate((el) =>
+    getComputedStyle(el).getPropertyValue("--pagefind-ui-primary").trim().toLowerCase(),
+  );
+  expect(primary).toBe("#ff7e2f");
+});
+
+test("no purple from the old theme remains", async ({ page }) => {
+  for (const path of ["/zh/", "/zh/melee/", "/zh/melee/sword/", "/zh/armor/disciple/", "/zh/effect/"]) {
+    await page.goto(path);
+    const purple = await page.evaluate(() =>
+      [...document.querySelectorAll("body *")].some((el) => {
+        const s = getComputedStyle(el);
+        return ["rgb(21, 18, 28)", "rgb(34, 29, 43)", "rgb(45, 38, 56)", "rgb(61, 52, 72)"].some(
+          (c) => s.backgroundColor === c || s.borderTopColor === c,
+        );
+      }),
+    );
+    expect(purple, path).toBe(false);
+  }
+});
+
+test("search excerpts leave out the info box and section labels", async ({ page }) => {
+  await page.goto("/zh/search/?q=sword");
+  const excerpts = page.locator(".pagefind-ui__result-excerpt");
+  await expect(excerpts.first()).toBeVisible({ timeout: 15_000 });
+  const text = (await excerpts.allTextContents()).join(" ");
+  for (const label of ["DESCRIPTION", "RELATED", "稀有度", "相關條目"]) expect(text, label).not.toContain(label);
+});
+
+test("category tabs keep their names for screen readers on every screen size", async ({ page }) => {
+  await page.goto("/zh/melee/");
+  const tabs = page.locator(".category-tabs");
+  for (const name of ["近戰武器", "遠程武器", "效果"]) await expect(tabs.getByRole("link", { name, exact: true })).toHaveCount(1);
+});
+
+test("the details sheet takes focus and gives it back when closed", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "touch interaction");
+  await page.goto("/zh/melee/");
+  const link = cardNamed(page, "燃燒之刃").locator("a.item-link");
+  await link.click();
+  const sheet = page.getByTestId("item-sheet");
+  await expect(sheet).toBeVisible();
+  expect(await sheet.evaluate((el) => el.contains(document.activeElement))).toBe(true);
+  await page.keyboard.press("Escape");
+  await expect(sheet).toBeHidden();
+  await expect(link).toBeFocused();
+  await link.click();
+  await sheet.locator(".sheet-close").click();
+  await expect(link).toBeFocused();
+});
+
+test("wide touch screens use the whole width for the grid instead of a hover panel", async ({ browser }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "one wide touch context is enough");
+  const context = await browser.newContext({
+    viewport: { width: 1180, height: 820 },
+    isMobile: true,
+    hasTouch: true,
+    baseURL: testInfo.project.use.baseURL,
+  });
+  const page = await context.newPage();
+  await page.goto("/zh/melee/");
+  expect(await page.evaluate(() => matchMedia("(hover: none)").matches)).toBe(true);
+  await expect(page.getByTestId("item-tooltip")).toBeHidden();
+  await context.close();
+});
+
+test("the English kicker is not part of the search index", async ({ page }) => {
+  await page.goto("/zh/search/?q=weapon");
+  await expect(page.locator(".pagefind-ui__message")).toBeVisible({ timeout: 15_000 });
+  const text = (await page.locator(".pagefind-ui__result-excerpt").allTextContents()).join(" ");
+  for (const kicker of ["MELEE WEAPON", "RANGED WEAPON"]) expect(text, kicker).not.toContain(kicker);
+});
+
+test("wide touch screens label the category tabs", async ({ browser }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "one wide touch context is enough");
+  const context = await browser.newContext({
+    viewport: { width: 820, height: 1180 },
+    isMobile: true,
+    hasTouch: true,
+    baseURL: testInfo.project.use.baseURL,
+  });
+  const page = await context.newPage();
+  await page.goto("/zh/melee/");
+  const labels = page.locator(".category-tabs .tab-label");
+  await expect(labels).toHaveCount(7);
+  const shown = await labels.evaluateAll((els) =>
+    els.map((el) => {
+      const box = el.getBoundingClientRect();
+      return getComputedStyle(el).opacity === "1" && box.width > 10 && box.height > 10;
+    }),
+  );
+  expect(shown).toEqual(Array(7).fill(true));
+  await context.close();
+});
+
+test("the details sheet closes on an outside tap or when the filter hides its item", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "touch interaction");
+  await page.goto("/zh/melee/");
+  const sheet = page.getByTestId("item-sheet");
+  const link = cardNamed(page, "燃燒之刃").locator("a.item-link");
+  await link.click();
+  await expect(sheet).toBeVisible();
+  await page.locator("h1").click();
+  await expect(sheet).toBeHidden();
+  await link.click();
+  await expect(sheet).toBeVisible();
+  await page.locator(".filter-text").fill("zzz-no-such-item");
+  await expect(sheet).toBeHidden();
+  await expect(page.locator(".filter-text")).toBeFocused();
 });

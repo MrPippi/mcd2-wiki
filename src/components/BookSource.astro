@@ -3,6 +3,7 @@ import type { Entry } from "../../scripts/extract/schemas";
 import { booksFor } from "../lib/data";
 import { t, type Lang } from "../lib/i18n";
 import EntryIcon from "./EntryIcon.astro";
+import EntrySection from "./EntrySection.astro";
 import LangText from "./LangText.astro";
 
 interface Props {
@@ -16,21 +17,22 @@ const books = booksFor(enchantment.slug);
 const shownTexts = new Set([enchantment.description?.[lang], enchantment.descriptionLong?.[lang]]);
 ---
 {books.length > 0 && (
-  <section class="book-source" data-testid="book-source">
-    <h2>{t(lang, "enchantmentBook")}</h2>
-    <p class="note">{t(lang, "obtainedFromBook")}</p>
-    <ul>
-      {books.map((book) => (
-        <li class="book">
-          <EntryIcon icon={book.icon} alt={book.name[lang]} size={40} category={book.category} variant={book.variant} />
-          <div>
-            <LangText lang={lang} value={book.name} />
-            {book.description && !shownTexts.has(book.description[lang]) && (
-              <LangText as="p" lang={lang} value={book.description} html />
-            )}
-          </div>
-        </li>
-      ))}
-    </ul>
-  </section>
+  <EntrySection title={t(lang, "enchantmentBook")} en="ENCHANTMENT BOOK" testid="book-source">
+    <div class="book-source">
+      <p class="note">{t(lang, "obtainedFromBook")}</p>
+      <ul>
+        {books.map((book) => (
+          <li class="book">
+            <EntryIcon icon={book.icon} alt={book.name[lang]} size={40} category={book.category} variant={book.variant} />
+            <div>
+              <LangText lang={lang} value={book.name} />
+              {book.description && !shownTexts.has(book.description[lang]) && (
+                <LangText as="p" lang={lang} value={book.description} html />
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </EntrySection>
 )}

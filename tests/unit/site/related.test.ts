@@ -11,14 +11,23 @@ describe("relatedLinks", () => {
       labelKey: "relatedVariant",
       href: "/zh/melee/sword-unique1/",
       name: { zh: "燃燒之刃", en: "The Burning Blade" },
+      icon: "icons/melee/sword-unique1.png",
+      category: "melee",
+      variant: "unique",
     });
   });
 
   it("links an armor piece to its set", () => {
     const helmet = findEntry("armor", "disciple-helmet");
     expect(relatedLinks("en", helmet!)).toContainEqual(
-      expect.objectContaining({ labelKey: "armorSet", href: "/en/armor/disciple/" }),
+      expect.objectContaining({ labelKey: "armorSet", href: "/en/armor/disciple/", category: "armor" }),
     );
+  });
+
+  it("shows an armor set with its first piece's icon", () => {
+    const helmet = findEntry("armor", "disciple-helmet");
+    const setLink = relatedLinks("zh", helmet!).find((link) => link.labelKey === "armorSet");
+    expect(setLink?.icon).toBe(helmet!.icon);
   });
 
   it("does not link enchantments to separate book pages", () => {

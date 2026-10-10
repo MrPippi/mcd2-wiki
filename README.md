@@ -19,6 +19,11 @@ npm run test:e2e     # build 後執行 Playwright（預覽伺服器使用 port 4
 npm run build        # 產生 dist/ 與 Pagefind 索引
 ```
 
+## 字型
+
+- 俐方體 11 號（Cubic 11，`src/assets/fonts/cubic-11/`）與 Silkscreen（`@fontsource/silkscreen`）皆為 SIL Open Font License 1.1。
+- 授權全文：`public/licenses/Cubic-11-OFL.txt`（網站頁尾有連結）；Silkscreen 授權隨 npm 套件提供。
+
 ## 部署
 
 `.github/workflows/deploy.yml` 在推送到 `master` 時建置並發布到 GitHub Pages，`BASE_PATH` 自動設為 `/<repo>/`。
