@@ -56,3 +56,7 @@ export const searchFold = (text: string, lang: Lang): string => foldForSearch(te
 /** The searchable names of an entry on a `lang` page: its own name and its comparison-language name, each folded by its own language. */
 export const searchNames = (name: Localized, lang: Lang): string =>
   [lang, compareLang(lang)].map((l) => searchFold(name[l], l)).join(" ");
+
+/** Accessible name of the language menu button: it contains the visible native name and the code shown on narrow screens (WCAG 2.5.3). */
+export const langMenuLabel = (lang: Lang, menuWord: string): string =>
+  `${menuWord}: ${LANG_META[lang].nativeName} (${lang.toUpperCase()})`;

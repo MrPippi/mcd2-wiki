@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { ALL_LANGS, LANG_META } from "../../../scripts/extract/config";
-import { compareLang, foldForSearch, lowerFor, mapLocalized, pick, searchFold, searchNames } from "../../../src/lib/lang";
+import { compareLang, foldForSearch, langMenuLabel, lowerFor, mapLocalized, pick, searchFold, searchNames } from "../../../src/lib/lang";
 import { loc } from "../../helpers/localized";
 
 describe("language registry", () => {
@@ -66,5 +66,12 @@ describe("search folding", () => {
     expect(foldForSearch("IŞIK", "tr")).toBe("işik");
     expect(foldForSearch("İki", "en")).toBe("iki");
     expect(foldForSearch("Straße", "de")).toBe("straße");
+  });
+});
+
+describe("langMenuLabel", () => {
+  it("names the menu, the current language and the code shown on narrow screens", () => {
+    expect(langMenuLabel("ja", "言語")).toBe("言語: 日本語 (JA)");
+    expect(langMenuLabel("zh-hans", "语言")).toBe("语言: 简体中文 (ZH-HANS)");
   });
 });

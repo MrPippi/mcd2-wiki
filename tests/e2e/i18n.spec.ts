@@ -29,6 +29,7 @@ test("the menu lists 16 languages, marks the current one and closes on Esc and o
   await openMenu(page);
   await expect(page.locator(".lang-picker a")).toHaveCount(16);
   await expect(page.locator(".lang-picker a[aria-current='true']")).toHaveText("한국어");
+  await expect(page.getByTestId("lang-switch")).toHaveAttribute("aria-label", "언어: 한국어 (KO)");
   await page.keyboard.press("Escape");
   await expect(page.locator(".lang-picker")).not.toHaveAttribute("open", "");
   await expect(page.getByTestId("lang-switch")).toBeFocused();
