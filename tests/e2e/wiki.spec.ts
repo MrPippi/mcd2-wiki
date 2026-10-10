@@ -139,7 +139,7 @@ test("the rarity row shows the game's rarity tags with the name inside", async (
   await expect(uniqueTags).toHaveText("獨特");
   expect(await uniqueTags.evaluate(tagArt)).toMatch(/unique\.[\w-]+\.png/);
 
-  // Non-unique items have no fixed tier in the data, so every tier they can have is listed.
+  // "Every item can be common, rare, or special" (official wiki), so all three are listed.
   await page.goto("/zh/melee/sword/");
   const normalTags = page.getByTestId("info-box").locator(".rarity-tag");
   await expect(normalTags).toHaveText(["普通", "稀有", "特殊"]);

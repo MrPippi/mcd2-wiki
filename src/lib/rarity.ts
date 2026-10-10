@@ -7,8 +7,9 @@ export type RarityTier = "common" | "rare" | "special" | "unique";
 const NON_UNIQUE_TIERS: readonly RarityTier[] = ["common", "rare", "special"];
 
 /**
- * Tiers to show for an entry. Unique items are always Unique. The extracted data has no fixed tier for
- * other items (the game only reads SW.Rarity.* when an item drops), so every tier they can have is listed.
+ * Tiers to show for an entry. Per the official wiki, "every item can be common, rare, or special" (the tier
+ * is not fixed per item, so all three are listed) and "unique variants signify a distinct form of the item
+ * with its own name and appearance"; the game tags those SW.Rarity.Unique, a tier of its own.
  */
 export const rarityTiers = (variant: Entry["variant"]): readonly RarityTier[] =>
   variant === "unique" ? ["unique"] : NON_UNIQUE_TIERS;
