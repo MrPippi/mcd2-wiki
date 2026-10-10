@@ -9,6 +9,22 @@
 3. 檢查報告；缺圖示時編輯 `scripts/extract/icon-overrides.json` 後重跑。
 4. Commit `src/data`、`public/icons`、`scripts/extract/icon-overrides.json`。
 
+## 原始素材索引
+
+`npm run assets` 掃描 `source-data/Assets/`，依分類／分項／細項整理所有素材，並以檔案內容比對 `public/icons/` 標出用途（網站已發布、網站介面、已抽取未發布、未使用）。
+
+- 報告：`asset-index.md`（不進 git）——各分類統計、與上次比較、未分類資料夾、未使用的圖示、原始檔 → 網站路徑。
+- 瀏覽頁：`source-data/asset-gallery.html`——用瀏覽器直接開，可依分類、用途、類型、變動篩選與搜尋。
+
+遊戲改版加入新素材時：
+
+1. 更新 `source-data/` 後先跑 `npm run extract`，再跑 `npm run assets`。
+2. 報告「與上次比較」列出新增、變更、移除的檔案；瀏覽頁可用「變動 → 新增」只看新素材。
+3. 報告「未分類資料夾」列出沒有規則的新資料夾：在 `scripts/assets/rules.json` 加一條規則（`prefix` → `group`，`sub` 固定分項或用下一層資料夾名當分項，`names` 可替資料夾取中文名），重跑即可。既有前綴下的新資料夾（例如新的場景）會自動成為分項，不必改規則。
+4. 確認後 commit `scripts/assets/snapshot.json`（素材雜湊快照，作為下次比較的基準）。只想重看差異而不更新快照時用 `npm run assets -- --keep-snapshot`。
+
+網站新增公開分類時（`src/lib/tabs.ts`），對應圖示會自動改判為「網站已發布」。
+
 ## 開發
 
 ```bash

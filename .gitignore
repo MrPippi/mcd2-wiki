@@ -8,6 +8,7 @@ dist/
 
 # Reports / tooling
 extract-report.md
+asset-index.md
 coverage/
 playwright-report/
 test-results/
