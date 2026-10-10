@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "Оружие, броня, артефакты, талисманы, зачарования и эффекты — с текстами из самой игры, которые можно сравнить с английскими.",
   "skipToContent": "Перейти к основному содержимому",
   "compareShort": "Сравн.",
-  "switchLangShort": "EN",
   "browse": "Разделы",
   "notFoundTitle": "Страница не найдена",
   "notFoundBody": "Эта ячейка пуста. Возможно, адрес набран с ошибкой или статьи ещё нет в вики.",
@@ -130,7 +130,6 @@
   "search": "Поиск",
   "siteSearch": "Поиск по сайту",
   "compare": "С английским",
-  "switchLang": "English",
   "all": "Все",
   "normal": "Обычные",
   "unique": "Уникальный",
@@ -265,5 +264,6 @@
   "catalogNo": "№",
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Перейти на русскую версию"
+  "goToLanguage": "Перейти на русскую версию",
+  "languageMenu": "Язык"
 }

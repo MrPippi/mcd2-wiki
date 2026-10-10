@@ -4,7 +4,6 @@
   "tagline": "Weapons, armor, artifacts, talismans, enchantments and effects, with the game's own text, comparable with Traditional Chinese.",
   "skipToContent": "Skip to main content",
   "compareShort": "Dual",
-  "switchLangShort": "中文",
   "browse": "Browse",
   "notFoundTitle": "Page not found",
   "notFoundBody": "This slot is empty. The address may be mistyped, or the entry is not in the wiki yet.",
@@ -13,7 +12,6 @@
   "search": "Search",
   "siteSearch": "Site search",
   "compare": "Bilingual",
-  "switchLang": "繁體中文",
   "all": "All",
   "normal": "Normal",
   "unique": "Unique",
@@ -146,5 +144,6 @@
   "catalogNo": "No.",
   "labelColon": "：",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Go to the English site"
+  "goToLanguage": "Go to the English site",
+  "languageMenu": "Language"
 }

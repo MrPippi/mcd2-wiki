@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "무기, 방어구, 유물, 부적, 마법 부여, 효과를 수록했습니다. 게임 속 텍스트를 영어와 대조해 볼 수 있습니다.",
   "skipToContent": "본문으로 건너뛰기",
   "compareShort": "대조",
-  "switchLangShort": "EN",
   "browse": "카테고리 둘러보기",
   "notFoundTitle": "페이지를 찾을 수 없습니다",
   "notFoundBody": "이 칸은 비어 있습니다. 주소가 잘못되었거나 아직 수록되지 않은 항목입니다.",
@@ -130,7 +130,6 @@
   "search": "검색",
   "siteSearch": "사이트 검색",
   "compare": "영어 병기",
-  "switchLang": "English",
   "all": "전체",
   "normal": "일반",
   "unique": "유일",
@@ -260,5 +259,6 @@
   "catalogNo": "No.",
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "한국어 사이트로 이동"
+  "goToLanguage": "한국어 사이트로 이동",
+  "languageMenu": "언어"
 }

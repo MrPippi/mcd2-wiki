@@ -135,6 +135,7 @@ test("language switch keeps the world and the view", async ({ page }) => {
   await page.goto("/zh/map/?world=sift#3/3000/5000");
   await expect(page.locator(".world-map")).toHaveAttribute("data-zoom", "3");
   await page.getByTestId("lang-switch").click();
+  await page.locator(".lang-picker a[data-lang='en']").click();
   await expect(page).toHaveURL(/\/en\/map\/\?world=sift#3\/\d+\/\d+$/);
   await expect(page.locator(".map-tabs [aria-current='page']")).toHaveText(/The Sift/);
 });

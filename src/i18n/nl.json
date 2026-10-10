@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "Wapens, pantsers, artefacten, talismannen, betoveringen en effecten, met de teksten uit het spel zelf, te vergelijken met het Engels.",
   "skipToContent": "Naar de hoofdinhoud",
   "compareShort": "Vergelijk",
-  "switchLangShort": "EN",
   "browse": "Bladeren",
   "notFoundTitle": "Pagina niet gevonden",
   "notFoundBody": "Dit vak is leeg. Het adres is misschien verkeerd getypt, of het artikel staat nog niet in de wiki.",
@@ -130,7 +130,6 @@
   "search": "Zoeken",
   "siteSearch": "Zoeken op de site",
   "compare": "Met Engels",
-  "switchLang": "English",
   "all": "Alle",
   "normal": "Normaal",
   "unique": "Uniek",
@@ -263,5 +262,6 @@
   "catalogNo": "Nr.",
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Naar de Nederlandse site"
+  "goToLanguage": "Naar de Nederlandse site",
+  "languageMenu": "Taal"
 }

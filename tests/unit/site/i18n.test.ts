@@ -11,8 +11,8 @@ const keysOf = (file: Record<string, unknown>): string[] => Object.keys(file).fi
 
 describe("i18n", () => {
   it("translates UI keys", () => {
-    expect(t("zh", "switchLang")).toBe("English");
-    expect(t("en", "switchLang")).toBe("繁體中文");
+    expect(t("zh", "languageMenu")).toBe("語言");
+    expect(t("en", "languageMenu")).toBe("Language");
   });
 
   it("labels every category in both languages", () => {

@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "武器、防具、アーティファクト、タリスマン、エンチャント、効果を収録。ゲーム内テキストを英語と対照できます。",
   "skipToContent": "本文へスキップ",
   "compareShort": "対照",
-  "switchLangShort": "EN",
   "browse": "カテゴリ一覧",
   "notFoundTitle": "ページが見つかりません",
   "notFoundBody": "このスロットは空です。URL が間違っているか、まだ収録されていない項目です。",
@@ -130,7 +130,6 @@
   "search": "検索",
   "siteSearch": "サイト内検索",
   "compare": "英語を併記",
-  "switchLang": "English",
   "all": "すべて",
   "normal": "通常",
   "unique": "ユニーク",
@@ -260,5 +259,6 @@
   "catalogNo": "No.",
   "labelColon": "：",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "日本語版へ"
+  "goToLanguage": "日本語版へ",
+  "languageMenu": "言語"
 }

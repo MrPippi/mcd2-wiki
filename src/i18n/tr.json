@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "Silahlar, zırhlar, eserler, tılsımlar, büyüler ve etkiler; oyunun kendi metinleriyle, İngilizceyle karşılaştırılabilir.",
   "skipToContent": "Ana içeriğe geç",
   "compareShort": "Kıyas",
-  "switchLangShort": "EN",
   "browse": "Göz at",
   "notFoundTitle": "Sayfa bulunamadı",
   "notFoundBody": "Bu yuva boş. Adres yanlış yazılmış olabilir ya da bu madde henüz vikide yok.",
@@ -130,7 +130,6 @@
   "search": "Ara",
   "siteSearch": "Sitede ara",
   "compare": "İngilizceyle",
-  "switchLang": "English",
   "all": "Tümü",
   "normal": "Normal",
   "unique": "Eşsiz",
@@ -263,5 +262,6 @@
   "catalogNo": "No.",
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Türkçe siteye git"
+  "goToLanguage": "Türkçe siteye git",
+  "languageMenu": "Dil"
 }

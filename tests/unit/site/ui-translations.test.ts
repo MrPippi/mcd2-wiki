@@ -6,8 +6,8 @@ import { UI_DICTS, plainText } from "../../../src/lib/ui-dicts";
 const HAND_WRITTEN: readonly Lang[] = ["zh", "en"];
 const TRANSLATED = LANGS.filter((lang) => !HAND_WRITTEN.includes(lang));
 const GAME_KEYS = new Set(Object.keys(gameKeys));
-/** Keys whose value is fixed rather than translated: the site title set by the spec, and the switch to English. */
-const FIXED_KEYS = new Set(["siteTitle", "rootRedirectTitle", "switchLang", "switchLangShort"]);
+/** Keys whose value is fixed rather than translated: the site title set by the spec. */
+const FIXED_KEYS = new Set(["siteTitle", "rootRedirectTitle"]);
 const COMPARE_KEYS = ["tagline", "source", "compare"] as const;
 
 describe("UI translations", () => {

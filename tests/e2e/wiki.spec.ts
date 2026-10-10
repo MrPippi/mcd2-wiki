@@ -23,9 +23,10 @@ test("entry page shows bilingual name and icon", async ({ page }) => {
   await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();
 });
 
-test("language switch keeps the same entry", async ({ page }) => {
+test("the language menu keeps the same entry", async ({ page }) => {
   await page.goto("/zh/melee/sword/");
   await page.getByTestId("lang-switch").click();
+  await page.locator(".lang-picker a[data-lang='en']").click();
   await expect(page).toHaveURL(/\/en\/melee\/sword\/$/);
   await expect(page.locator("h1 .primary")).toHaveText("Sword");
 });
@@ -377,11 +378,11 @@ test("the header search goes to the search page", async ({ page }) => {
   await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
 });
 
-test("the language switch keeps the search query and anchor", async ({ page }) => {
+test("the language menu keeps the search query and anchor", async ({ page }) => {
   await page.goto(`/zh/search/?q=${encodeURIComponent("劍")}`);
-  await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/search/?q=%E5%8A%8D");
+  await expect(page.locator(".lang-picker a[data-lang='en']")).toHaveAttribute("href", "/en/search/?q=%E5%8A%8D");
   await page.goto("/zh/effect/#critical-edge");
-  await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/effect/#critical-edge");
+  await expect(page.locator(".lang-picker a[data-lang='ja']")).toHaveAttribute("href", "/ja/effect/#critical-edge");
 });
 
 test("the home page is a cover with a featured specimen and a row for every category", async ({ page }) => {

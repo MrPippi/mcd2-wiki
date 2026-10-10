@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "Waffen, Rüstungen, Artefakte, Talismane, Verzauberungen und Effekte – mit den Originaltexten des Spiels, vergleichbar mit Englisch.",
   "skipToContent": "Zum Hauptinhalt springen",
   "compareShort": "Vergl.",
-  "switchLangShort": "EN",
   "browse": "Kategorien",
   "notFoundTitle": "Seite nicht gefunden",
   "notFoundBody": "Dieser Platz ist leer. Die Adresse ist vielleicht falsch geschrieben, oder der Eintrag ist noch nicht im Wiki.",
@@ -130,7 +130,6 @@
   "search": "Suchen",
   "siteSearch": "Website durchsuchen",
   "compare": "Mit Englisch",
-  "switchLang": "English",
   "all": "Alle",
   "normal": "Normal",
   "unique": "Einzigartig",
@@ -263,5 +262,6 @@
   "catalogNo": "Nr.",
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Zur deutschen Website"
+  "goToLanguage": "Zur deutschen Website",
+  "languageMenu": "Sprache"
 }

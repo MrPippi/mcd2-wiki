@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "Armes, armures, artéfacts, talismans, enchantements et effets, avec les textes du jeu, comparables à l'anglais.",
   "skipToContent": "Aller au contenu principal",
   "compareShort": "Comparer",
-  "switchLangShort": "EN",
   "browse": "Parcourir",
   "notFoundTitle": "Page introuvable",
   "notFoundBody": "Cet emplacement est vide. L'adresse est peut-être mal saisie, ou l'entrée n'est pas encore dans le wiki.",
@@ -130,7 +130,6 @@
   "search": "Rechercher",
   "siteSearch": "Rechercher sur le site",
   "compare": "Avec l'anglais",
-  "switchLang": "English",
   "all": "Tout",
   "normal": "Normal",
   "unique": "Unique",
@@ -264,5 +263,6 @@
   "catalogNo": "N°",
   "labelColon": " : ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Aller au site en français"
+  "goToLanguage": "Aller au site en français",
+  "languageMenu": "Langue"
 }

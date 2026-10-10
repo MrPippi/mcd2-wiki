@@ -4,7 +4,6 @@
   "tagline": "收錄武器、護甲、神器、護符、附魔與效果，遊戲內文字可對照英文。",
   "skipToContent": "跳到主要內容",
   "compareShort": "對照",
-  "switchLangShort": "EN",
   "browse": "瀏覽分類",
   "notFoundTitle": "找不到這個頁面",
   "notFoundBody": "這一格是空的。網址可能打錯了，或這個條目尚未收錄。",
@@ -13,7 +12,6 @@
   "search": "搜尋",
   "siteSearch": "全站搜尋",
   "compare": "對照英文",
-  "switchLang": "English",
   "all": "全部",
   "normal": "一般",
   "unique": "獨特",
@@ -143,5 +141,6 @@
   "catalogNo": "No.",
   "labelColon": "：",
   "rootRedirectTitle": "Minecraft Dungeons II 中文 Wiki",
-  "goToLanguage": "前往繁體中文版"
+  "goToLanguage": "前往繁體中文版",
+  "languageMenu": "語言"
 }

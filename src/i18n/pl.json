@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "Broń, pancerze, artefakty, talizmany, zaklęcia i efekty – z tekstami z samej gry, do porównania z angielskimi.",
   "skipToContent": "Przejdź do głównej treści",
   "compareShort": "Porównaj",
-  "switchLangShort": "EN",
   "browse": "Przeglądaj",
   "notFoundTitle": "Nie znaleziono strony",
   "notFoundBody": "To pole jest puste. Adres może zawierać literówkę albo tego hasła nie ma jeszcze w wiki.",
@@ -130,7 +130,6 @@
   "search": "Szukaj",
   "siteSearch": "Szukaj w witrynie",
   "compare": "Z angielskim",
-  "switchLang": "English",
   "all": "Wszystkie",
   "normal": "Zwykłe",
   "unique": "Unikalny",
@@ -265,5 +264,6 @@
   "catalogNo": "Nr",
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Przejdź do polskiej wersji"
+  "goToLanguage": "Przejdź do polskiej wersji",
+  "languageMenu": "Język"
 }

@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "Зброя, обладунки, артефакти, талісмани, чари та ефекти — з текстами з самої гри, які можна порівняти з англійськими.",
   "skipToContent": "Перейти до основного вмісту",
   "compareShort": "Порівн.",
-  "switchLangShort": "EN",
   "browse": "Розділи",
   "notFoundTitle": "Сторінку не знайдено",
   "notFoundBody": "Ця комірка порожня. Можливо, адресу введено з помилкою або статті ще немає у вікі.",
@@ -130,7 +130,6 @@
   "search": "Пошук",
   "siteSearch": "Пошук на сайті",
   "compare": "З англійською",
-  "switchLang": "English",
   "all": "Усі",
   "normal": "Звичайні",
   "unique": "Унікальні",
@@ -265,5 +264,6 @@
   "catalogNo": "№",
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Перейти до української версії"
+  "goToLanguage": "Перейти до української версії",
+  "languageMenu": "Мова"
 }

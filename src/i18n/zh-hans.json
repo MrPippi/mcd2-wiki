@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II 中文 Wiki（简体）",
   "siteShort": "MCD2 中文 Wiki",
   "tagline": "收录武器、盔甲、法器、护身符、附魔与效果，游戏内文字可对照英文。",
   "skipToContent": "跳到主要内容",
   "compareShort": "对照",
-  "switchLangShort": "EN",
   "browse": "浏览分类",
   "notFoundTitle": "找不到这个页面",
   "notFoundBody": "这一格是空的。网址可能输错了，或这个条目尚未收录。",
@@ -130,7 +130,6 @@
   "search": "搜索",
   "siteSearch": "全站搜索",
   "compare": "对照英文",
-  "switchLang": "English",
   "all": "全部",
   "normal": "一般",
   "unique": "独特",
@@ -260,5 +259,6 @@
   "catalogNo": "No.",
   "labelColon": "：",
   "rootRedirectTitle": "Minecraft Dungeons II 中文 Wiki（简体）",
-  "goToLanguage": "前往简体中文版"
+  "goToLanguage": "前往简体中文版",
+  "languageMenu": "语言"
 }

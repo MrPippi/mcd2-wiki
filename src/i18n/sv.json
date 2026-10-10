@@ -114,14 +114,14 @@
     "placeholderLabel",
     "catalogNo",
     "labelColon",
-    "goToLanguage"
+    "goToLanguage",
+    "languageMenu"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
   "tagline": "Vapen, rustningar, artefakter, talismaner, förtrollningar och effekter, med spelets egna texter, jämförbara med engelska.",
   "skipToContent": "Hoppa till huvudinnehållet",
   "compareShort": "Jämför",
-  "switchLangShort": "EN",
   "browse": "Bläddra",
   "notFoundTitle": "Sidan hittades inte",
   "notFoundBody": "Den här platsen är tom. Adressen kan vara felskriven, eller så finns artikeln inte i wikin än.",
@@ -130,7 +130,6 @@
   "search": "Sök",
   "siteSearch": "Sök på webbplatsen",
   "compare": "Med engelska",
-  "switchLang": "English",
   "all": "Alla",
   "normal": "Vanliga",
   "unique": "Unik",
@@ -263,5 +262,6 @@
   "catalogNo": "Nr",
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
-  "goToLanguage": "Till den svenska webbplatsen"
+  "goToLanguage": "Till den svenska webbplatsen",
+  "languageMenu": "Språk"
 }
