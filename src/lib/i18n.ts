@@ -41,12 +41,4 @@ export const categoryLabel = (category: Category, lang: Lang): string => t(lang,
 export const pieceLabel = (piece: ArmorPiece, lang: Lang): string => t(lang, PIECE_KEY[piece]);
 export const markerLabel = (kind: MarkerKind, lang: Lang): string => t(lang, MARKER_KEY[kind]);
 
-export const NAV_GROUPS: readonly { key: UiKey; categories: readonly Category[] }[] = [
-  { key: "equipment", categories: ["melee", "ranged", "armor", "artifact", "talisman"] },
-  { key: "enchanting", categories: ["enchantment", "effect"] },
-];
-
-// Published categories. Enchantment books have no pages of their own: each one is shown on the
-// enchantment it grants. Statuses, capes, pets and skins are still extracted but not published for now.
-export const GRID_CATEGORIES = ["melee", "ranged", "artifact", "talisman", "enchantment"] as const satisfies readonly Category[];
-export const TABLE_CATEGORIES = ["effect"] as const satisfies readonly Category[];
+export { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES } from "./nav";

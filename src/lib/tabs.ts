@@ -1,5 +1,5 @@
 import type { Category } from "../../scripts/extract/config";
-import { NAV_GROUPS } from "./i18n";
+import { NAV_GROUPS } from "./nav";
 
 /** The category tab strip, in navigation order. */
 export const TAB_ORDER: readonly Category[] = NAV_GROUPS.flatMap((group) => group.categories);
