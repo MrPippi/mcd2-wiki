@@ -26,6 +26,10 @@ describe("parseView", () => {
     expect(parseView("#-2/10.5/20", LIMITS)).toEqual({ z: 0, px: 10.5, py: 20 });
   });
 
+  it("opens at the minimum zoom when the hash asks for less", () => {
+    expect(parseView("#0/100/100", { zMin: 2, zMax: 5, imageSize: 8192 })?.z).toBe(2);
+  });
+
   it("ignores anything that is not a view", () => {
     expect(parseView("", LIMITS)).toBeUndefined();
     expect(parseView("#abc", LIMITS)).toBeUndefined();
