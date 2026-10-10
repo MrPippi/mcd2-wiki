@@ -130,6 +130,23 @@ test("normal gear uses the plain inventory slot", async ({ page }) => {
   await expect(slot.locator(".slot-star")).toHaveCount(0);
 });
 
+test("the rarity row shows the game's rarity tags", async ({ page }) => {
+  await page.goto("/zh/melee/sword-unique1/");
+  const uniqueTags = page.getByTestId("info-box").locator(".rarity-tag");
+  await expect(uniqueTags).toHaveCount(1);
+  await expect(uniqueTags).toHaveText("獨特");
+  await expect(uniqueTags.locator("img")).toBeVisible();
+
+  // Non-unique items have no fixed tier in the data, so every tier they can have is listed.
+  await page.goto("/zh/melee/sword/");
+  const normalTags = page.getByTestId("info-box").locator(".rarity-tag");
+  await expect(normalTags).toHaveText(["普通", "稀有", "特殊"]);
+  for (const img of await normalTags.locator("img").all()) await expect(img).toBeVisible();
+
+  await page.goto("/en/armor/disciple/");
+  await expect(page.getByTestId("info-box").locator(".rarity-tag")).toHaveText(["Common", "Rare", "Special"]);
+});
+
 test("unique gear uses the vermilion crop marks and no star", async ({ page }) => {
   await page.goto("/zh/melee/sword-unique1/");
   const slot = page.locator(".entry-head .icon-frame.frame-inventory.is-unique");

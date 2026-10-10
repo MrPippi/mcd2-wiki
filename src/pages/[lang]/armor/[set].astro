@@ -4,6 +4,7 @@ import { ARMOR_PIECES, type ArmorSet } from "../../../../scripts/extract/schemas
 import EntryIcon from "../../../components/EntryIcon.astro";
 import EntrySection from "../../../components/EntrySection.astro";
 import LangText from "../../../components/LangText.astro";
+import RarityTags from "../../../components/RarityTags.astro";
 import UiIcon from "../../../components/UiIcon.astro";
 import Base from "../../../layouts/Base.astro";
 import { catalogLabel, setNumber } from "../../../lib/catalog";
@@ -39,7 +40,7 @@ const number = setNumber(set);
         <dl class="facts" data-pagefind-ignore>
           <div>
             <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
-            <dd class:list={{ "is-unique": set.variant === "unique" }}>{t(lang, set.variant)}</dd>
+            <dd class:list={{ "is-unique": set.variant === "unique" }}><RarityTags lang={lang} variant={set.variant} /></dd>
           </div>
           <div>
             <dt data-pagefind-ignore>{t(lang, "pieces")}</dt>

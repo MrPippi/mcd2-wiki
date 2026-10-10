@@ -6,6 +6,7 @@ import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../lib/i18n";
 import { categoryIcon, pieceIcon } from "../lib/ui-icons";
 import { href } from "../lib/url";
 import EntryIcon from "./EntryIcon.astro";
+import RarityTags from "./RarityTags.astro";
 import UiIcon from "./UiIcon.astro";
 
 interface Props {
@@ -32,7 +33,7 @@ const PLATE_ICON_SIZE = 200;
     </div>
     <div>
       <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
-      <dd class:list={{ "is-unique": entry.variant === "unique" }}>{t(lang, entry.variant)}</dd>
+      <dd class:list={{ "is-unique": entry.variant === "unique" }}><RarityTags lang={lang} variant={entry.variant} /></dd>
     </div>
     {entry.armorPiece && (
       <div>
