@@ -8,6 +8,7 @@ import { itemKicker } from "../lib/kicker";
 import { mapData, markerTotal } from "../lib/map/data";
 import { overviewTile } from "../lib/map/tiles";
 import { pickShowcase } from "../lib/showcase";
+import { splitSiteTitle } from "../lib/site-title";
 import { TAB_ORDER } from "../lib/tabs";
 import { categoryIcon, uiIcon } from "../lib/ui-icons";
 import { assetUrl, entryHref, href } from "../lib/url";
@@ -21,12 +22,10 @@ interface Props {
 
 const { lang } = Astro.props;
 const alt = compareLang(lang);
-// The game name gets a line of its own, and "II" never wraps away from "Dungeons".
-const GAME_NAME = "Minecraft Dungeons II";
 const siteTitle = t(lang, "siteTitle");
-const titleRest = siteTitle.startsWith(GAME_NAME) ? siteTitle.slice(GAME_NAME.length).trim() : undefined;
-// A trailing "(zh-TW)" is a qualifier, not part of the name: set it small instead of at display size.
-const [, titleWord = titleRest, titleTag] = titleRest?.match(/^(.*?)\s*(\(.+\))$/) ?? [];
+// The game name gets a line of its own, and "II" never wraps away from "Dungeons".
+// A trailing qualifier such as "（简体）" is set small instead of at display size.
+const titleParts = splitSiteTitle(siteTitle);
 const FEATURED_SIZE = 240;
 const SIDE_SPECIMENS = 4;
 const PREVIEW_SPRITES = 6;
@@ -41,10 +40,10 @@ const previewOf = (category: Category) => entriesIn(category).filter((entry) => 
   <div class="hero-copy">
     <p class="kicker">UNOFFICIAL FAN WIKI</p>
     <h1 class="home-title">
-      {titleRest === undefined ? siteTitle : (
+      {titleParts === undefined ? siteTitle : (
         <>
-          <span class="title-game">{GAME_NAME.replace(" II", " II")}</span>{" "}
-          <span class="title-rest">{titleWord}{titleTag && <span class="title-tag">{titleTag}</span>}</span>
+          <span class="title-game">{titleParts.game.replace(" II", " II")}</span>{" "}
+          <span class="title-rest">{titleParts.word}{titleParts.tag && <span class="title-tag">{titleParts.tag}</span>}</span>
         </>
       )}
     </h1>
