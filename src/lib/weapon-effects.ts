@@ -4,6 +4,7 @@ import { WeaponDataSchema, type EffectFormat, type WeaponData } from "../../scri
 import rawOverrides from "../data/fixed-bonus-overrides.json";
 import rawWeapons from "../data/weapons.json";
 import { findBaseEntry, publishedEntries } from "./data";
+import { artifactData } from "./gear-values";
 
 /** Weapon stats and effect rules read from the game's DataTables by `npm run extract`. */
 export const weaponData: WeaponData = WeaponDataSchema.parse(rawWeapons);
@@ -21,20 +22,13 @@ export interface ResolvedWeaponEffects {
   readonly fixed?: {
     readonly kind: "effect" | "enchantment";
     readonly entry: Entry;
-    readonly value?: string;
+    /** The values its description prints, in order. */
+    readonly values?: readonly string[];
     /** Whether the entry has a page of its own to link to. */
     readonly linked: boolean;
     /** The value was checked by hand, not read from the game data. */
     readonly manualValue: boolean;
   };
-}
-
-const PLACEHOLDER = /<span class="placeholder">\{[^}]*\}<\/span>/g;
-
-/** Game text with its single `{value}` placeholder replaced by `value`; text with none or several stays as it is. */
-export function fillPlaceholder(html: string, value: string): string {
-  const matches = html.match(PLACEHOLDER) ?? [];
-  return matches.length === 1 ? html.replace(PLACEHOLDER, `<span class="value">${value}</span>`) : html;
 }
 
 /** Tier I to tier III as one range, e.g. "5%~15%"; a single value when the tiers do not differ. */
@@ -61,20 +55,21 @@ function fixedBonus(weapon: Entry): ResolvedWeaponEffects["fixed"] {
   if (!entry) return undefined;
   const override = valueOverrides[weapon.slug];
   const format = weaponData.effectFormats[fixed.slug];
-  const value = override?.value ?? (fixed.kind === "effect" && fixed.value !== undefined && format ? formatMagnitude(fixed.value, format) : undefined);
+  const effectValue = fixed.kind === "effect" && fixed.value !== undefined && format ? [formatMagnitude(fixed.value, format)] : undefined;
+  const values = override ? [override.value] : (effectValue ?? fixed.values);
   return {
     kind: fixed.kind === "effect" ? "effect" : "enchantment",
     entry,
-    ...(value ? { value } : {}),
+    ...(values ? { values } : {}),
     linked: page !== undefined,
     manualValue: override !== undefined,
   };
 }
 
-/** A weapon's game effect data joined to the site's entries; undefined when the entry is not a weapon. */
-export function weaponEffectsOf(weapon: Entry): ResolvedWeaponEffects | undefined {
-  if (weapon.category !== "melee" && weapon.category !== "ranged") return undefined;
-  const data = weaponData.weapons[weapon.slug];
+/** Rollable effects and fixed bonus of a weapon or artifact, joined to the site's entries; undefined for anything else. */
+export function weaponEffectsOf(item: Entry): ResolvedWeaponEffects | undefined {
+  const isWeapon = item.category === "melee" || item.category === "ranged";
+  const data = isWeapon ? weaponData.weapons[item.slug] : item.category === "artifact" ? artifactData[item.slug] : undefined;
   if (!data) return undefined;
   const compatible = data.compatible.flatMap(({ effect, tiers }) => {
     const entry = published("effect", effect);
@@ -82,7 +77,7 @@ export function weaponEffectsOf(weapon: Entry): ResolvedWeaponEffects | undefine
     const values = tiers.map((tier) => formatMagnitude(tier, format)) as [string, string, string];
     return entry ? [{ effect: entry, values }] : [];
   });
-  const fixed = fixedBonus(weapon);
+  const fixed = isWeapon ? fixedBonus(item) : undefined;
   return { compatible, ...(fixed ? { fixed } : {}) };
 }
 

@@ -67,6 +67,7 @@
 .combo-table thead th:first-child { text-align: left; }
 /* Only the table scrolls sideways on very narrow screens, never the section around it. */
 .table-scroll { overflow-x: auto; }
+.table-scroll:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
 /* Weapon effects from the Minecraft Wiki: the fixed bonus as a marked card, compatible effects as a tier table. */
 .fixed-effect {
@@ -101,6 +102,8 @@ a.fixed-name:hover .primary { color: var(--accent); }
 .effect-name:hover .primary { color: var(--accent); }
 .effect-desc { display: flex; margin: 4px 0 0; font-size: 13px; color: var(--text-2); }
 .effect-desc .alt { font-size: 12px; }
+.tier-table th.tier-label { width: 4.5em; font-family: var(--font-mono); color: var(--muted); }
+.tier-table .effect-desc { margin: 0; font-size: 15px; color: var(--text); }
 .tier-value { font-family: var(--font-mono); font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .effect-source { margin: 12px 0 0; font-size: 12px; color: var(--muted); }
 .effect-source a { color: var(--muted); }

@@ -6,6 +6,7 @@ import CatalogHead from "../../../components/CatalogHead.astro";
 import ItemCard from "../../../components/ItemCard.astro";
 import Base from "../../../layouts/Base.astro";
 import { entriesIn } from "../../../lib/data";
+import { describedEntry } from "../../../lib/gear-values";
 import { CATEGORY_LABEL, GRID_CATEGORIES, TABLE_CATEGORIES, t, type Lang } from "../../../lib/i18n";
 import { itemKicker } from "../../../lib/kicker";
 import { entryHref } from "../../../lib/url";
@@ -43,7 +44,7 @@ const hasUnique = entries.some((entry) => entry.variant === "unique");
           category={entry.category}
           variant={entry.variant}
           kicker={itemKicker(entry.category, entry.variant)}
-          description={entry.description}
+          description={describedEntry(entry)}
         />
       ))}
     </ItemBrowser>

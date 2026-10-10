@@ -56,7 +56,14 @@ export const WeaponSchema = z.object({
    * that has no entry of its own (the game names it only on its book).
    */
   fixed: z
-    .object({ kind: z.enum(["effect", "enchantment", "enchantment-book"]), slug: SlugSchema, value: z.number().optional() })
+    .object({
+      kind: z.enum(["effect", "enchantment", "enchantment-book"]),
+      slug: SlugSchema,
+      /** An effect's raw magnitude. */
+      value: z.number().optional(),
+      /** An enchantment's description values, already formatted as the game prints them. */
+      values: z.array(z.string()).optional(),
+    })
     .optional(),
 });
 export type Weapon = z.infer<typeof WeaponSchema>;

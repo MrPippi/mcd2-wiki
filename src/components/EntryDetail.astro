@@ -1,9 +1,12 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
+import { describedEntry } from "../lib/gear-values";
 import { t, type Lang } from "../lib/i18n";
 import { itemKicker } from "../lib/kicker";
 import { relatedLinks } from "../lib/related";
+import ArtifactStats from "./ArtifactStats.astro";
 import BookSource from "./BookSource.astro";
+import EnchantmentTiers from "./EnchantmentTiers.astro";
 import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
 import InfoBox from "./InfoBox.astro";
@@ -18,6 +21,7 @@ interface Props {
 }
 
 const { lang, entry } = Astro.props;
+const description = describedEntry(entry);
 const related = relatedLinks(lang, entry);
 ---
 <article class="entry-detail" data-pagefind-body>
@@ -26,9 +30,9 @@ const related = relatedLinks(lang, entry);
     <div class="entry-content">
       <p class="kicker entry-kicker" data-pagefind-ignore>{itemKicker(entry.category, entry.variant)}</p>
       <LangText as="h1" lang={lang} value={entry.name} searchTitle class={entry.variant === "unique" ? "is-unique" : undefined} />
-      {entry.description && (
+      {description && (
         <EntrySection title={t(lang, "description")}>
-          <LangText as="p" class="description" lang={lang} value={entry.description} html />
+          <LangText as="p" class="description" lang={lang} value={description} html />
         </EntrySection>
       )}
       {entry.descriptionLong && (
@@ -41,6 +45,8 @@ const related = relatedLinks(lang, entry);
           <LangText as="p" lang={lang} value={entry.unlock} html />
         </EntrySection>
       )}
+      {entry.category === "enchantment" && <EnchantmentTiers lang={lang} enchantment={entry} />}
+      {entry.category === "artifact" && <ArtifactStats lang={lang} artifact={entry} />}
       <WeaponStats lang={lang} weapon={entry} />
       <WeaponEffects lang={lang} weapon={entry} />
       {(entry.category === "enchantment" || entry.category === "effect") && <FixedOn lang={lang} entry={entry} />}

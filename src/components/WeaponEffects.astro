@@ -2,7 +2,8 @@
 import type { Entry, Localized } from "../../scripts/extract/schemas";
 import { t, type Lang } from "../lib/i18n";
 import { entryHref } from "../lib/url";
-import { fillPlaceholder, tierRange, weaponEffectsOf } from "../lib/weapon-effects";
+import { fillPlaceholders } from "../lib/gear-values";
+import { tierRange, weaponEffectsOf } from "../lib/weapon-effects";
 import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
 import LangText from "./LangText.astro";
@@ -19,9 +20,12 @@ const EFFECT_ICON = { row: 32, fixed: 64 } as const;
 const { lang, weapon } = Astro.props;
 const effects = weaponEffectsOf(weapon);
 const fixed = effects?.fixed;
-const withValue = (text: Localized, value: string): Localized => ({ zh: fillPlaceholder(text.zh, value), en: fillPlaceholder(text.en, value) });
+const withValues = (text: Localized, values: readonly string[]): Localized => ({
+  zh: fillPlaceholders(text.zh, values),
+  en: fillPlaceholders(text.en, values),
+});
 const fixedText: Localized | undefined =
-  fixed?.entry.description && fixed.value ? withValue(fixed.entry.description, fixed.value) : fixed?.entry.description;
+  fixed?.entry.description && fixed.values ? withValues(fixed.entry.description, fixed.values) : fixed?.entry.description;
 ---
 {effects && (
   <>
@@ -64,7 +68,7 @@ const fixedText: Localized | undefined =
                   <th scope="row" class:list={{ "has-icon": effect.icon }}>
                     {effect.icon && <EntryIcon icon={effect.icon} alt="" size={EFFECT_ICON.row} />}
                     <a class="effect-name" href={entryHref(lang, effect)}><LangText lang={lang} value={effect.name} /></a>
-                    {effect.description && <LangText as="p" class="effect-desc" lang={lang} value={withValue(effect.description, tierRange(values))} html />}
+                    {effect.description && <LangText as="p" class="effect-desc" lang={lang} value={withValues(effect.description, [tierRange(values)])} html />}
                   </th>
                   {values.map((value, i) => <td class="tier-value" data-tier={TIERS[i]}>{value}</td>)}
                 </tr>

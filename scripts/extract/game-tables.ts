@@ -14,6 +14,7 @@ const TextEntry = z.object({
   ValuesToGet: z
     .array(
       z.object({
+        TagToExtractFrom: Tag.optional(),
         FormattingData: z
           .object({ IsPercentage: z.boolean(), Multiplier: z.number(), Offset: z.number(), MaxFractionalDigits: z.number() })
           .optional(),
@@ -24,7 +25,14 @@ const TextEntry = z.object({
 const TextData = z.object({ Texts: z.record(z.string(), TextEntry) }).optional();
 const Knockback = z.object({ Strength: z.number() }).optional();
 
-const ItemRow = z.object({ Name: z.string(), Traits: Tags, Effects: Tags, TypeTextData: TextData });
+/** A gameplay ability key value: only numbers are kept, other kinds (tags, containers) become undefined. */
+const KeyValue = z.object({ TypeTag: Tag, Float: z.number().optional(), Int: z.number().optional(), Bool: z.boolean().optional() });
+const Ability = z.object({
+  Ability: z.string(),
+  SpecificKeyValues: z.array(KeyValue).optional(),
+  CommonKeyValues: z.array(KeyValue).optional(),
+});
+const ItemRow = z.object({ Name: z.string(), Traits: Tags, Effects: Tags, TypeTextData: TextData, KeyValues: z.array(KeyValue).optional() });
 const MeleeRow = z.object({
   Name: z.string(),
   AttackVariants: z.object({
@@ -70,8 +78,28 @@ const WeightedTags = z.object({ Tags: z.array(z.object({ TypeTag: Tag })).option
 const GroupRow = z.object({ TypeTag: Tag, TagList: WeightedTags });
 const DropRow = z.object({ TypeTag: Tag, PrimaryETG: WeightedTags, SecondaryETG: WeightedTags });
 const NamedRow = z.object({ Name: z.string(), TypeTag: Tag, TypeTextData: TextData });
+const EnchantmentRow = z.object({
+  Name: z.string(),
+  TypeTag: Tag,
+  Traits: Tags,
+  TypeTextData: TextData,
+  TemplateData: z.object({ FixedEffectValue: z.number().optional() }).optional(),
+  Abilities: z.array(Ability).optional(),
+  AbilitySpecialization: z
+    .object({
+      Specializations: z
+        .array(
+          z.object({
+            Ability: z.string(),
+            KeyValueSpecializations: z.array(z.object({ KeyValue: KeyValue, ModOp: z.string() })).optional(),
+          }),
+        )
+        .optional(),
+    })
+    .optional(),
+});
 
-export const WeaponTablesSchema = z.object({
+export const GameTablesSchema = z.object({
   items: z.array(ItemRow),
   melee: z.array(MeleeRow),
   ranged: z.array(RangedRow),
@@ -80,15 +108,18 @@ export const WeaponTablesSchema = z.object({
   groups: z.array(GroupRow),
   dropTable: z.array(DropRow),
   effects: z.array(NamedRow),
-  enchantments: z.array(NamedRow),
+  enchantments: z.array(EnchantmentRow),
+  artifacts: z.array(ItemRow),
 });
-export type WeaponTables = z.infer<typeof WeaponTablesSchema>;
+export type GameTables = z.infer<typeof GameTablesSchema>;
 export type TextDataValue = z.infer<typeof TextData>;
+export type EnchantmentRowValue = z.infer<typeof EnchantmentRow>;
+export type AbilityValue = z.infer<typeof Ability>;
 
 /** DataTables copied from the export's Content/Spicewood/Core/DataTables, beside Localization in source-data. */
 export const DATATABLES_DIR = "DataTables/UFS";
 
-const FILES: Readonly<Record<keyof WeaponTables, readonly string[]>> = {
+const FILES: Readonly<Record<keyof GameTables, readonly string[]>> = {
   items: ["DT_ItemDefinitionMelee", "DT_ItemDefinitionRanged"],
   melee: ["DT_MeleePropertyDefinition"],
   ranged: ["DT_RangedPropertyDefinition"],
@@ -98,10 +129,11 @@ const FILES: Readonly<Record<keyof WeaponTables, readonly string[]>> = {
   dropTable: ["DT_EffectTemplateGroupDropTableDefinition"],
   effects: ["DT_EffectDefinition"],
   enchantments: ["DT_EnchantmentDefinition"],
+  artifacts: ["DT_ItemDefinitionArtifact"],
 };
 
 /** Reads the weapon tables; undefined when source-data has no DataTables folder (weapon data is then left out). */
-export async function loadWeaponTables(sourceRoot: string): Promise<WeaponTables | undefined> {
+export async function loadGameTables(sourceRoot: string): Promise<GameTables | undefined> {
   const dir = path.join(sourceRoot, ...DATATABLES_DIR.split("/"));
   if (!existsSync(dir)) return undefined;
   const readTable = async (name: string): Promise<unknown[]> => {
@@ -115,7 +147,7 @@ export async function loadWeaponTables(sourceRoot: string): Promise<WeaponTables
       Object.entries(FILES).map(async ([key, names]) => [key, (await Promise.all(names.map(readTable))).flat()] as const),
     ),
   );
-  const parsed = WeaponTablesSchema.safeParse(raw);
+  const parsed = GameTablesSchema.safeParse(raw);
   if (!parsed.success) throw new ExtractError(`資料表欄位與預期不符（遊戲更新了格式？）：${parsed.error.issues.slice(0, 3).map(formatZodIssue).join("；")}`);
   return parsed.data;
 }

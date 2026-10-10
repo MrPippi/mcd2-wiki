@@ -1,0 +1,27 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { artifactStatsView } from "../lib/gear-values";
+import { t, type Lang } from "../lib/i18n";
+import EntrySection from "./EntrySection.astro";
+
+interface Props {
+  lang: Lang;
+  artifact: Entry;
+}
+
+const { lang, artifact } = Astro.props;
+const rows = artifactStatsView(lang, artifact);
+---
+{rows && rows.length > 0 && (
+  <EntrySection title={t(lang, "artifactStats")} testid="artifact-stats">
+    <dl class="stat-grid" data-pagefind-ignore>
+      {rows.map(({ label, value }) => (
+        <div>
+          <dt>{label}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="note" data-pagefind-ignore>{t(lang, "artifactStatsNote")}</p>
+  </EntrySection>
+)}

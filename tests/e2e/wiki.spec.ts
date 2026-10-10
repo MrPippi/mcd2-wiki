@@ -739,7 +739,8 @@ test("Redstone Wrecker shows its in-game fixed enchantment with the FlameBelch i
   await expect(fixed.locator("img.entry-icon")).toHaveAttribute("src", "/icons/enchantment-book/flame-belch-unique.png");
   await expect(fixed.locator("a")).toHaveCount(0);
   await expect(fixed.locator(".fixed-desc .primary .value")).toHaveText("80%");
-  await expect(page.getByTestId("effect-source")).toContainText("人工確認");
+  // The 80% now comes from the game data (FlameBelch.Unique overrides the damage multiplier), not from a hand check.
+  await expect(page.getByTestId("effect-source")).not.toContainText("人工確認");
 });
 
 test("unique enchantments list the weapons that carry them instead of a book", async ({ page }) => {
@@ -768,4 +769,23 @@ test("with a mouse, home category items rest in grey and colour in on hover", as
   expect(await first.evaluate((el) => getComputedStyle(el).filter)).toContain("grayscale");
   await row.hover();
   await expect.poll(() => first.evaluate((el) => getComputedStyle(el).filter)).toBe("none");
+});
+
+test("enchantment pages fill their description with the tier range and list each tier", async ({ page }) => {
+  await page.goto("/zh/enchantment/shockwave/");
+  const description = page.locator(".description .primary");
+  await expect(description.locator(".value")).toHaveText(["20%~50%", "125%~175%"]);
+  const tiers = page.getByTestId("enchantment-tiers");
+  await expect(tiers.locator("tbody tr")).toHaveCount(3);
+  await expect(tiers.locator("tbody tr").first().locator(".value").first()).toHaveText("20%");
+});
+
+test("artifact pages show cooldown, soul cost and the effects they can roll", async ({ page }) => {
+  await page.goto("/zh/artifact/totem-of-shielding/");
+  const stats = page.getByTestId("artifact-stats");
+  await expect(stats).toContainText("冷卻時間");
+  await expect(stats).toContainText("靈魂消耗");
+  await expect(stats).toContainText("12 格");
+  await expect(page.getByTestId("compatible-effects").locator("tbody tr", { hasText: "冷卻" }).first()).toBeVisible();
+  await expect(page.getByTestId("unique-effect")).toHaveCount(0);
 });

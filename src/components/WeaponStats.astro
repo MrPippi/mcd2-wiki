@@ -35,7 +35,7 @@ const view = weaponStatsView(lang, weapon);
       </dl>
     )}
     {view.combo && (
-      <div class="table-scroll">
+      <div class="table-scroll" tabindex="0" role="region" aria-label={t(lang, "comboTable")}>
         <table class="combo-table" data-pagefind-ignore>
           <thead>
             <tr>{view.combo.columns.map((column) => <th scope="col">{column}</th>)}</tr>

@@ -1602,7 +1602,10 @@
       ],
       "fixed": {
         "kind": "enchantment",
-        "slug": "mauler-dive"
+        "slug": "mauler-dive",
+        "values": [
+          "60%"
+        ]
       }
     },
     "daggers-unique1": {
@@ -1959,7 +1962,10 @@
       ],
       "fixed": {
         "kind": "enchantment",
-        "slug": "phantom-lance"
+        "slug": "phantom-lance",
+        "values": [
+          "90%"
+        ]
       }
     },
     "giant-club-unique1": {
@@ -2060,7 +2066,10 @@
       ],
       "fixed": {
         "kind": "enchantment-book",
-        "slug": "flame-belch-unique"
+        "slug": "flame-belch-unique",
+        "values": [
+          "80%"
+        ]
       }
     },
     "pickaxe-unique1": {
@@ -5298,7 +5307,10 @@
       ],
       "fixed": {
         "kind": "enchantment",
-        "slug": "clawing-shadow-unique"
+        "slug": "clawing-shadow-unique",
+        "values": [
+          "8%"
+        ]
       }
     },
     "glaive-unique1": {
@@ -6534,7 +6546,11 @@
       ],
       "fixed": {
         "kind": "enchantment",
-        "slug": "shockwave"
+        "slug": "shockwave",
+        "values": [
+          "20%",
+          "200%"
+        ]
       }
     },
     "mace-unique1": {
@@ -9689,7 +9705,10 @@
       ],
       "fixed": {
         "kind": "enchantment",
-        "slug": "dynamo"
+        "slug": "dynamo",
+        "values": [
+          "50%"
+        ]
       }
     },
     "greatbow-unique1": {
@@ -9844,7 +9863,10 @@
       ],
       "fixed": {
         "kind": "enchantment",
-        "slug": "piercing"
+        "slug": "piercing",
+        "values": [
+          "10"
+        ]
       }
     }
   },

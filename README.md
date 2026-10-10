@@ -31,6 +31,10 @@
 ## 武器數值與效果（遊戲資料表）
 
 `npm run extract` 也會讀遊戲的 DataTables，產生 `src/data/weapons.json`：每一擊／每一發的數值、定位與重量、可出現的效果（含 I/II/III 數值）與獨特武器的固定效果。
+同一步驟也會產生：
+
+- `src/data/artifacts.json`：神器的冷卻時間、靈魂消耗、持續時間、範圍與可出現的效果。
+- `src/data/enchantments.json`：附魔說明中的數值（I/II/III），依附魔技能的 key value 與各等級的 Override／Add 調整計算；整數型的機率值已是百分比（8 = 8%）。
 
 - 資料表放在 `source-data/DataTables/UFS/`（解包的 `Content/Spicewood/Core/DataTables/`）；缺少時武器數值與效果不會產生，報告會列出 `missing-datatables`。
 - 可出現的效果依遊戲規則計算：掉落表依武器標籤選出效果群組，再以各效果基底模板的 `IncompatibleTagsQuery` 排除不適用的武器種類。

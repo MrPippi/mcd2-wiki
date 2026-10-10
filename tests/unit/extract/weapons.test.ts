@@ -77,7 +77,7 @@ describe("buildWeaponData", () => {
   });
 
   it("falls back to the enchantment book when a built-in enchantment has no entry of its own", () => {
-    expect(data.weapons["giant-club-unique1"]?.fixed).toEqual({ kind: "enchantment-book", slug: "flame-belch-unique" });
+    expect(data.weapons["giant-club-unique1"]?.fixed).toEqual({ kind: "enchantment-book", slug: "flame-belch-unique", values: ["80%"] });
   });
 
   it("reads a unique-tier enchantment as its base enchantment when neither it nor its book has an entry", () => {
