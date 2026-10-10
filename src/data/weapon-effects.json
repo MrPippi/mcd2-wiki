@@ -1,0 +1,5656 @@
+{
+  "source": {
+    "site": "Minecraft Wiki",
+    "url": "https://minecraft.wiki/",
+    "license": "CC BY-NC-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-nc-sa/3.0/"
+  },
+  "weapons": {
+    "axe": {
+      "page": "Dungeons II:Axe",
+      "revision": 3820563,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "axe-unique1": {
+      "page": "Dungeons II:Hunter's Hatchet",
+      "revision": 3817931,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "reconstruction",
+        "value": "35%"
+      }
+    },
+    "battlestaff": {
+      "page": "Dungeons II:Battlestaff",
+      "revision": 3817936,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "battlestaff-unique1": {
+      "page": "Dungeons II:Elemental Staff",
+      "revision": 3817934,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "elemental-hit"
+      }
+    },
+    "claws": {
+      "page": "Dungeons II:Wolf Claws",
+      "revision": 3820016,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        }
+      ]
+    },
+    "claws-unique1": {
+      "page": "Dungeons II:Sculker Claws",
+      "revision": 3822699,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "shadow-strike-unique"
+      }
+    },
+    "claymore": {
+      "page": "Dungeons II:Claymore",
+      "revision": 3818271,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "claymore-unique1": {
+      "page": "Dungeons II:Slaymore",
+      "revision": 3812142,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "sweeping-edge",
+        "value": "50%"
+      }
+    },
+    "cleaver": {
+      "page": "Dungeons II:Meat Cleaver",
+      "revision": 3817761,
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "cleaver-unique1": {
+      "page": "Dungeons II:Cacaphonous Cleaver",
+      "revision": 3810788,
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "anima-conduit",
+        "value": "7%"
+      }
+    },
+    "curved-greatsword": {
+      "page": "Dungeons II:Cookiecutter",
+      "revision": 3820565,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "curved-greatsword-unique1": {
+      "page": "Dungeons II:Lullaby Blade",
+      "revision": 3811084,
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "soul-curse"
+      }
+    },
+    "curved-longsword": {
+      "page": "Dungeons II:Riftslasher",
+      "revision": 3820575,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "curved-longsword-unique1": {
+      "page": "Dungeons II:Pride of the Plains",
+      "revision": 3820576,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "duelist",
+        "value": "40%"
+      }
+    },
+    "dagger": {
+      "page": "Dungeons II:Twilight Dagger",
+      "revision": 3811350,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "dagger-unique1": {
+      "page": "Dungeons II:Sculker's Bane",
+      "revision": 3811234,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "soul-focus",
+        "value": "20%"
+      }
+    },
+    "daggers": {
+      "page": "Dungeons II:Double Daggers",
+      "revision": 3820567,
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "daggers-unique1": {
+      "page": "Dungeons II:Venomous Fangs",
+      "revision": 3827517,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "poison-focus",
+        "value": "20%"
+      }
+    },
+    "gauntlet": {
+      "page": "Dungeons II:Gauntlets",
+      "revision": 3820438,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "gauntlet-unique1": {
+      "page": "Dungeons II:Prime Enchanter's Gauntlets",
+      "revision": 3829401,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "giant-club": {
+      "page": "Dungeons II:Clobberer",
+      "revision": 3817756,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "giant-club-unique1": {
+      "page": "Dungeons II:Redstone Wrecker",
+      "revision": 3811182,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "giant-mallet": {
+      "page": "Dungeons II:Mob Mallet",
+      "revision": 3820825,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "giant-mallet-unique1": {
+      "page": "Dungeons II:Monster Masher",
+      "revision": 3831094,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "protection",
+        "value": "25%"
+      }
+    },
+    "glaive": {
+      "page": "Dungeons II:Glaive",
+      "revision": 3820571,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "glaive-unique1": {
+      "page": "Dungeons II:Golden Glaive",
+      "revision": 3811023,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "vanguard",
+        "value": "60%"
+      }
+    },
+    "great-axe": {
+      "page": "Dungeons II:Greataxe",
+      "revision": 3810988,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "great-axe-unique1": {
+      "page": "Dungeons II:Awesomeaxe",
+      "revision": 3824738,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "status-on-hit-strength",
+        "value": "70%"
+      }
+    },
+    "greatsword": {
+      "page": "Dungeons II:Greatsword",
+      "revision": 3824737,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "greatsword-unique1": {
+      "page": "Dungeons II:The Darkshard",
+      "revision": 3811329,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "gravity-pulse-unique"
+      }
+    },
+    "hammer": {
+      "page": "Dungeons II:Battle Hammer",
+      "revision": 3817755,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "hammer-unique1": {
+      "page": "Dungeons II:Emerald Hammer",
+      "revision": 3810946,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "opulence",
+        "value": "5%"
+      }
+    },
+    "mace": {
+      "page": "Dungeons II:Mace",
+      "revision": 3820573,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "mace-unique1": {
+      "page": "Dungeons II:Carapace Mace",
+      "revision": 3810821,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "finesse",
+        "value": "35%"
+      }
+    },
+    "moon-sword": {
+      "page": "Dungeons II:Tidal Sickle",
+      "revision": 3820577,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "moon-sword-unique1": {
+      "page": "Dungeons II:Lunar Sickle",
+      "revision": 3811086,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "reeling",
+        "value": "60%"
+      }
+    },
+    "pickaxe": {
+      "page": "Dungeons II:Pickaxe",
+      "revision": 3811121,
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "pickaxe-unique1": {
+      "page": "Dungeons II:The Prospector's Pick",
+      "revision": 3817461,
+      "compatible": [
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "emeralds-increase",
+        "value": "20%"
+      }
+    },
+    "pike": {
+      "page": "Dungeons II:Pike",
+      "revision": 3811123,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "pike-unique1": {
+      "page": "Dungeons II:Stormcaller",
+      "revision": 3811282,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "lightning-focus",
+        "value": "25%"
+      }
+    },
+    "rapier": {
+      "page": "Dungeons II:Rapier",
+      "revision": 3831231,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        }
+      ]
+    },
+    "rapier-unique1": {
+      "page": "Dungeons II:The Thousand Cuts",
+      "revision": 3811342,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "rapid-strike",
+        "value": "30%"
+      }
+    },
+    "sabre": {
+      "page": "Dungeons II:Sabre",
+      "revision": 3811218,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "sabre-unique1": {
+      "page": "Dungeons II:Rascal's Razor",
+      "revision": 3817443,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "roll-cooldown",
+        "value": "40%"
+      }
+    },
+    "scythe": {
+      "page": "Dungeons II:Scythe",
+      "revision": 3811242,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "scythe-unique1": {
+      "page": "Dungeons II:Soul Reaper",
+      "revision": 3811265,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "soul-gather-multiply",
+        "value": "60%"
+      }
+    },
+    "short-spear": {
+      "page": "Dungeons II:Short Spear",
+      "revision": 3811248,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "short-spear-unique1": {
+      "page": "Dungeons II:Spectral Spear",
+      "revision": 3811274,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "shovel": {
+      "page": "Dungeons II:Shovel",
+      "revision": 3811250,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "shovel-unique1": {
+      "page": "Dungeons II:Diamond Shovel",
+      "revision": 3820422,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "opportunist",
+          "values": [
+            "25%",
+            "35%",
+            "50%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "chains",
+          "values": [
+            "10%",
+            "15%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "enchantment",
+        "slug": "shockwave"
+      }
+    },
+    "sickles": {
+      "page": "Dungeons II:Double Sickles",
+      "revision": 3810888,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        }
+      ]
+    },
+    "sickles-unique1": {
+      "page": "Dungeons II:Sift Sickles",
+      "revision": 3831105,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "beast-boss",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "healing-focus",
+        "value": "50%"
+      }
+    },
+    "straight-sword": {
+      "page": "Dungeons II:Longsword",
+      "revision": 3817760,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "straight-sword-unique1": {
+      "page": "Dungeons II:Frostbiter",
+      "revision": 3815472,
+      "compatible": [
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "soul-gather-multiply",
+          "values": [
+            "25%",
+            "35%",
+            "45%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "frost-focus",
+        "value": "30%"
+      }
+    },
+    "sword": {
+      "page": "Dungeons II:Sword",
+      "revision": 3817264,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ]
+    },
+    "sword-unique1": {
+      "page": "Dungeons II:The Burning Blade",
+      "revision": 3813084,
+      "compatible": [
+        {
+          "effect": "committed",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "duelist",
+          "values": [
+            "20%",
+            "25%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "finesse",
+          "values": [
+            "15%",
+            "25%",
+            "35%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "precision",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "master-strike",
+          "values": [
+            "15%",
+            "20%",
+            "25%"
+          ]
+        },
+        {
+          "effect": "vanguard",
+          "values": [
+            "20%",
+            "35%",
+            "50%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "fire-focus",
+        "value": "20%"
+      }
+    },
+    "war-hammer": {
+      "page": "Dungeons II:War Hammer",
+      "revision": 3816249,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ]
+    },
+    "war-hammer-unique1": {
+      "page": "Dungeons II:Heartbreaker",
+      "revision": 3815780,
+      "compatible": [
+        {
+          "effect": "sweeping-edge",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "critical-edge",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "critical-hit",
+          "values": [
+            "5%",
+            "10%",
+            "15%"
+          ]
+        },
+        {
+          "effect": "knockback",
+          "values": [
+            "15%",
+            "20%",
+            "30%"
+          ]
+        },
+        {
+          "effect": "looting",
+          "values": [
+            "20%",
+            "40%",
+            "60%"
+          ]
+        },
+        {
+          "effect": "reeling",
+          "values": [
+            "20%",
+            "30%",
+            "40%"
+          ]
+        },
+        {
+          "effect": "desperation",
+          "values": [
+            "10%",
+            "15%",
+            "20%"
+          ]
+        },
+        {
+          "effect": "opulence",
+          "values": [
+            "1%",
+            "2%",
+            "3%"
+          ]
+        },
+        {
+          "effect": "sharpness",
+          "values": [
+            "10%",
+            "20%",
+            "30%"
+          ]
+        }
+      ],
+      "fixed": {
+        "kind": "effect",
+        "slug": "explosive-strike"
+      }
+    },
+    "bow": {
+      "page": "Dungeons II:Bow",
+      "revision": 3817771,
+      "compatible": []
+    },
+    "bow-unique1": {
+      "page": "Dungeons II:Ranger's Promise",
+      "revision": 3820543,
+      "compatible": []
+    },
+    "crossbow": {
+      "page": "Dungeons II:Crossbow",
+      "revision": 3820552,
+      "compatible": []
+    },
+    "crossbow-unique1": {
+      "page": "Dungeons II:The Shackler",
+      "revision": 3820554,
+      "compatible": []
+    },
+    "dual-crossbow": {
+      "page": "Dungeons II:Dual Crossbows",
+      "revision": 3813262,
+      "compatible": []
+    },
+    "dual-crossbow-unique1": {
+      "page": "Dungeons II:Double Crossers",
+      "revision": 3813265,
+      "compatible": []
+    },
+    "greatbow": {
+      "page": "Dungeons II:Greatbow",
+      "revision": 3820539,
+      "compatible": []
+    },
+    "greatbow-unique1": {
+      "page": "Dungeons II:Humbler Heartstring",
+      "revision": 3831099,
+      "compatible": []
+    },
+    "heavy-crossbow": {
+      "page": "Dungeons II:Heavy Crossbow",
+      "revision": 3817773,
+      "compatible": []
+    },
+    "heavy-crossbow-unique1": {
+      "page": "Dungeons II:The Close Ranger",
+      "revision": 3817787,
+      "compatible": []
+    },
+    "longbow": {
+      "page": "Dungeons II:Longbow",
+      "revision": 3817766,
+      "compatible": []
+    },
+    "longbow-unique1": {
+      "page": "Dungeons II:Creaking's Reach",
+      "revision": 3820538,
+      "compatible": []
+    },
+    "powerbow": {
+      "page": "Dungeons II:Powerbow",
+      "revision": 3821117,
+      "compatible": []
+    },
+    "powerbow-unique1": {
+      "page": "Dungeons II:Paragon",
+      "revision": 3821113,
+      "compatible": []
+    },
+    "rapid-crossbow": {
+      "page": "Dungeons II:Rapid Crossbow",
+      "revision": 3820559,
+      "compatible": []
+    },
+    "rapid-crossbow-unique1": {
+      "page": "Dungeons II:The Cross Pollinator",
+      "revision": 3820561,
+      "compatible": []
+    },
+    "scatter-crossbow": {
+      "page": "Dungeons II:Scatter Crossbow",
+      "revision": 3816726,
+      "compatible": []
+    },
+    "scatter-crossbow-unique1": {
+      "page": "Dungeons II:Harp Crossbow",
+      "revision": 3813281,
+      "compatible": []
+    },
+    "shortbow": {
+      "page": "Dungeons II:Shortbow",
+      "revision": 3817772,
+      "compatible": []
+    },
+    "shortbow-unique1": {
+      "page": "Dungeons II:Shooting Star",
+      "revision": 3813246,
+      "compatible": []
+    },
+    "trickbow": {
+      "page": "Dungeons II:Trickbow",
+      "revision": 3820550,
+      "compatible": []
+    },
+    "trickbow-unique1": {
+      "page": "Dungeons II:Phantom Wing",
+      "revision": 3817769,
+      "compatible": []
+    }
+  }
+}

@@ -27,6 +27,15 @@
 
 網站新增公開分類時（`src/lib/tabs.ts`），對應圖示會自動改判為「網站已發布」。
 
+## 武器效果（Minecraft Wiki）
+
+遊戲匯出資料沒有「武器可出現的效果」與「獨特武器的固定效果」，這兩項取自 [Minecraft Wiki](https://minecraft.wiki/w/Dungeons_II:Weapon)。
+
+- `npm run wiki` 透過 MediaWiki API 讀取每把武器的頁面，解析「Compatible effects」與「Unique effect」，對應到網站的效果／附魔條目後寫入 `src/data/weapon-effects.json`（需要網路；build 不連網）。
+- 終端機會列出 Wiki 尚未收錄的武器，以及對不上網站資料的名稱；對不上的名稱不會猜，直接略過。
+- Wiki 內容採 [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) 授權：每個使用這份資料的頁面都標示來源頁面與授權，衍生內容沿用相同授權、限非商業用途。
+- 遊戲改版或 Wiki 更新後重跑 `npm run wiki`，檢查差異後 commit `src/data/weapon-effects.json`。
+
 ## 開發
 
 ```bash

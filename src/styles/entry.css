@@ -46,6 +46,36 @@
 .description .alt, .description-long .alt { display: block; margin-top: 10px; font-size: 15px; }
 .entry-section .section-title { font-size: 20px; margin-top: 40px; }
 
+/* Weapon effects from the Minecraft Wiki: the fixed bonus as a marked card, compatible effects as a tier table. */
+.fixed-effect {
+  display: grid; gap: 4px; padding: 14px 16px; background: var(--paper);
+  border: 1px solid var(--rule-strong); box-shadow: inset 3px 0 0 var(--accent);
+}
+.fixed-name { justify-self: start; color: var(--text); text-decoration: none; }
+.fixed-name .primary { font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+.fixed-name:hover .primary { color: var(--accent); }
+.fixed-desc { display: flex; margin: 4px 0 0; }
+.fixed-effect .note { margin: 4px 0 0; }
+.value { font-weight: 700; font-variant-numeric: tabular-nums; }
+.effect-table { width: 100%; border-collapse: collapse; margin-top: 12px; border-top: 1px solid var(--rule-strong); }
+.effect-table thead th {
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.06em;
+  text-transform: uppercase; color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule);
+}
+.effect-table th.tier, .effect-table td.tier-value { width: 4.5em; text-align: right; }
+.effect-table tbody th, .effect-table td { padding: 10px; border-bottom: 1px solid var(--rule); vertical-align: top; text-align: left; font-weight: 400; }
+.effect-table tbody tr:hover { background: var(--paper); }
+.effect-name { color: var(--text); text-decoration: none; }
+/* Name and its other-language name on one line; the description on its own lines below. */
+.effect-name .lang-text { flex-direction: row; flex-wrap: wrap; align-items: baseline; column-gap: 8px; }
+.effect-name .primary { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+.effect-name:hover .primary { color: var(--accent); }
+.effect-desc { display: flex; margin: 4px 0 0; font-size: 13px; color: var(--text-2); }
+.effect-desc .alt { font-size: 12px; }
+.tier-value { font-family: var(--font-mono); font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.effect-source { margin: 12px 0 0; font-size: 12px; color: var(--muted); }
+.effect-source a { color: var(--muted); }
+
 .related { list-style: none; padding: 0; margin: 0; display: grid; }
 .related li { display: grid; grid-template-columns: 7em 1fr; align-items: center; gap: 12px; padding: 10px 0; }
 .related li + li { border-top: 1px solid var(--rule); }
@@ -67,6 +97,15 @@
 .book-source ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; }
 .book-source .book { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--rule); }
 .book-source .book p { margin: 4px 0 0; }
+
+/* Phones: the effect takes the full width and its three tier values sit in a row underneath. */
+@media (max-width: 599px) {
+  .effect-table thead { display: none; }
+  .effect-table tbody tr { display: grid; grid-template-columns: repeat(3, auto) 1fr; column-gap: 18px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .effect-table tbody th { grid-column: 1 / -1; padding: 0 0 6px; border: 0; }
+  .effect-table td.tier-value { width: auto; padding: 0; border: 0; text-align: left; }
+  .effect-table td.tier-value::before { content: attr(data-tier) " "; color: var(--muted); font-size: var(--fs-mono-s); }
+}
 
 @media (min-width: 720px) {
   .set-piece { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; }

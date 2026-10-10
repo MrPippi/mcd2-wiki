@@ -1,0 +1,70 @@
+---
+import type { Entry, Localized } from "../../scripts/extract/schemas";
+import { t, type Lang } from "../lib/i18n";
+import { entryHref } from "../lib/url";
+import { fillPlaceholder, weaponEffects, weaponEffectsOf } from "../lib/weapon-effects";
+import EntrySection from "./EntrySection.astro";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  weapon: Entry;
+}
+
+const TIERS = ["I", "II", "III"] as const;
+
+const { lang, weapon } = Astro.props;
+const effects = weaponEffectsOf(weapon);
+const { source } = weaponEffects;
+const fixed = effects?.fixed;
+const fixedText: Localized | undefined =
+  fixed?.entry.description && fixed.value
+    ? { zh: fillPlaceholder(fixed.entry.description.zh, fixed.value), en: fillPlaceholder(fixed.entry.description.en, fixed.value) }
+    : fixed?.entry.description;
+const pageName = effects?.page.replace(/^Dungeons II:/, "");
+const [open, close] = lang === "zh" ? ["（", "）"] : [" (", ")"];
+---
+{effects && (
+  <>
+    {fixed && (
+      <EntrySection title={t(lang, "uniqueEffect")} testid="unique-effect">
+        <div class="fixed-effect">
+          <a class="fixed-name" href={entryHref(lang, fixed.entry)}><LangText lang={lang} value={fixed.entry.name} /></a>
+          {fixedText && <LangText as="p" class="fixed-desc" lang={lang} value={fixedText} html />}
+          <p class="note" data-pagefind-ignore>{t(lang, fixed.kind === "effect" ? "fixedEffectNote" : "fixedEnchantmentNote")}</p>
+        </div>
+      </EntrySection>
+    )}
+    <EntrySection title={t(lang, "compatibleEffects")} testid="compatible-effects">
+      {effects.compatible.length > 0 ? (
+        <>
+          <p class="note" data-pagefind-ignore>{t(lang, "compatibleEffectsIntro")}</p>
+          <table class="effect-table" data-pagefind-ignore>
+            <thead>
+              <tr>
+                <th scope="col">{t(lang, "effect")}</th>
+                {TIERS.map((tier) => <th scope="col" class="tier">{tier}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {effects.compatible.map(({ effect, values }) => (
+                <tr>
+                  <th scope="row">
+                    <a class="effect-name" href={entryHref(lang, effect)}><LangText lang={lang} value={effect.name} /></a>
+                    {effect.description && <LangText as="p" class="effect-desc" lang={lang} value={effect.description} html />}
+                  </th>
+                  {values.map((value, i) => <td class="tier-value" data-tier={TIERS[i]}>{value}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </>
+      ) : (
+        <p class="note" data-pagefind-ignore>{t(lang, "noEffectData")}</p>
+      )}
+      <p class="effect-source" data-testid="effect-source" data-pagefind-ignore>
+        {t(lang, "effectSource")}<a href={effects.pageUrl}>{source.site}: {pageName}</a>{open}<a href={source.licenseUrl} rel="license">{source.license}</a>{close}
+      </p>
+    </EntrySection>
+  </>
+)}

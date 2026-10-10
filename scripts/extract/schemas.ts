@@ -10,7 +10,7 @@ export type Localized = z.infer<typeof LocalizedSchema>;
 export const ARMOR_PIECES = ["helmet", "chest", "leggings", "boots"] as const;
 export type ArmorPiece = (typeof ARMOR_PIECES)[number];
 
-const SlugSchema = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+export const SlugSchema = z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
 const VariantSchema = z.enum(["normal", "unique"]);
 
 export const EntrySchema = z.object({
