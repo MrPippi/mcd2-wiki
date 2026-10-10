@@ -168,3 +168,14 @@ test("the English site compares with Traditional Chinese", async ({ page }) => {
   await expect(page.locator("h1 .alt")).toHaveAttribute("lang", "zh-TW");
   await expect(page.locator("h1 .alt")).toHaveText("劍");
 });
+
+test("English armor tooltips separate the slot from the name with an ASCII colon", async ({ page }) => {
+  await page.goto("/en/armor/");
+  const pieces = await page
+    .locator(".entry-card .item-tip")
+    .first()
+    .evaluate((tpl) => [...(tpl as HTMLTemplateElement).content.querySelectorAll(".tooltip-pieces li")].map((li) => li.textContent ?? ""));
+  expect(pieces.length).toBeGreaterThan(0);
+  expect(pieces.some((text) => /^Helmet: \S/.test(text))).toBe(true);
+  expect(pieces.join("")).not.toContain("：");
+});
