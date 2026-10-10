@@ -71,8 +71,8 @@ describe("weaponEffectsOf", () => {
 
 describe("fixedOn", () => {
   it("lists the unique weapons that carry an enchantment as their fixed bonus", () => {
-    const gravity = findEntry("enchantment", "gravity-pulse-unique");
-    expect(gravity ? fixedOn(gravity).map((weapon) => weapon.slug) : []).toEqual(["greatsword-unique1"]);
+    const shockwave = findEntry("enchantment", "shockwave");
+    expect(shockwave ? fixedOn(shockwave).map((weapon) => weapon.slug) : []).toEqual(["shovel-unique1"]);
   });
 
   it("is empty for an enchantment no weapon carries", () => {

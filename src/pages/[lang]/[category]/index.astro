@@ -29,7 +29,6 @@ const hasUnique = entries.some((entry) => entry.variant === "unique");
   <p class="no-results" hidden>{t(lang, "noResults")}</p>
   {isTable ? (
     <>
-      <p class="note">{t(lang, "placeholderNote")}</p>
       <EntryTable lang={lang} entries={entries} />
     </>
   ) : (

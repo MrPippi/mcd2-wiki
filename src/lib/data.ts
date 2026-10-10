@@ -17,6 +17,7 @@ import rawBrand from "../data/brand.json";
 import rawCategoryIcons from "../data/category-icons.json";
 import rawEntries from "../data/entries.json";
 import rawFrames from "../data/frames.json";
+import { isFullyDescribed } from "./gear-values";
 
 export const extractedFrames: Frames = FramesSchema.parse(rawFrames);
 export const extractedUiIcons: UiIcons = UiIconsSchema.parse(rawCategoryIcons);
@@ -30,11 +31,19 @@ const hasRequiredIcon = (entry: Entry): boolean => {
   return source === undefined || source.optional === true || entry.icon !== undefined;
 };
 
+/** Entries whose texts show values: hidden until the game data can fill all of them. */
+const VALUE_CATEGORIES: ReadonlySet<Category> = new Set(["effect", "enchantment", "enchantment-book", "talisman"]);
+/** An enchantment's page also prints its books' texts, so a book with unknown values hides its enchantment too. */
+const booksKnown = (entry: Entry): boolean =>
+  entry.category !== "enchantment" ||
+  entries.every((book) => book.category !== "enchantment-book" || book.links.enchantment !== entry.slug || book.release !== "base" || isFullyDescribed(book));
+const hasKnownValues = (entry: Entry): boolean => !VALUE_CATEGORIES.has(entry.category) || (isFullyDescribed(entry) && booksKnown(entry));
+
 /** Unique enchantments come fixed on unique gear and cannot be rerolled, so their books are not obtainable. */
 const isObtainable = (entry: Entry): boolean => !(entry.category === "enchantment-book" && entry.variant === "unique");
 
 export const publishedEntries: readonly Entry[] = entries.filter(
-  (entry) => entry.release === "base" && hasRequiredIcon(entry) && isObtainable(entry),
+  (entry) => entry.release === "base" && hasRequiredIcon(entry) && isObtainable(entry) && hasKnownValues(entry),
 );
 
 /** Any released entry, published or not: for text and art shown inside another entry's page. */

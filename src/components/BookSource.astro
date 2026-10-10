@@ -1,6 +1,7 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
 import { booksFor } from "../lib/data";
+import { describedEntry, describedLong } from "../lib/gear-values";
 import { t, type Lang } from "../lib/i18n";
 import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
@@ -13,8 +14,9 @@ interface Props {
 
 const { lang, enchantment } = Astro.props;
 const books = booksFor(enchantment.slug);
+const bookText = (book: Entry) => describedEntry(book);
 // A book usually repeats the enchantment's own text; only show its description when it adds something.
-const shownTexts = new Set([enchantment.description?.[lang], enchantment.descriptionLong?.[lang]]);
+const shownTexts = new Set([describedEntry(enchantment)?.[lang], describedLong(enchantment)?.[lang]]);
 ---
 {books.length > 0 && (
   <EntrySection title={t(lang, "enchantmentBook")} testid="book-source">
@@ -26,8 +28,8 @@ const shownTexts = new Set([enchantment.description?.[lang], enchantment.descrip
             <EntryIcon icon={book.icon} alt={book.name[lang]} size={40} category={book.category} variant={book.variant} />
             <div>
               <LangText lang={lang} value={book.name} />
-              {book.description && !shownTexts.has(book.description[lang]) && (
-                <LangText as="p" lang={lang} value={book.description} html />
+              {bookText(book) && !shownTexts.has(bookText(book)?.[lang]) && (
+                <LangText as="p" lang={lang} value={bookText(book)!} html />
               )}
             </div>
           </li>

@@ -1,12 +1,15 @@
 import type { Entry, Localized } from "../../scripts/extract/schemas";
 import { ArtifactDataSchema, EnchantmentDataSchema, type ArtifactData, type EnchantmentData } from "../../scripts/extract/gear-schema";
 import rawArtifacts from "../data/artifacts.json";
+import rawEffects from "../data/effects.json";
 import rawEnchantments from "../data/enchantments.json";
 import type { Lang } from "./i18n";
 
 /** Artifact numbers and enchantment description values read from the game's DataTables by `npm run extract`. */
 export const artifactData: ArtifactData = ArtifactDataSchema.parse(rawArtifacts);
 export const enchantmentData: EnchantmentData = EnchantmentDataSchema.parse(rawEnchantments);
+/** Effect description values per tier (one template per tier, the same wherever the effect rolls). */
+export const effectData: EnchantmentData = EnchantmentDataSchema.parse(rawEffects);
 
 const PLACEHOLDER = /<span class="placeholder">\{[^}]*\}<\/span>/g;
 const TIER_LABELS = ["I", "II", "III"] as const;
@@ -32,11 +35,31 @@ const ranges = (tiers: readonly (readonly string[])[]): string[] =>
     return low === high ? low : `${low}~${high}`;
   });
 
-/** An entry's description with any values the game data gives filled in. */
+/** The tier values that fill an entry's texts: its own, or for a book, its enchantment's. */
+function tiersOf(entry: Entry): readonly (readonly string[])[] | undefined {
+  if (entry.category === "effect") return effectData[entry.slug]?.tiers;
+  if (entry.category === "enchantment") return enchantmentData[entry.slug]?.tiers;
+  if (entry.category === "enchantment-book" && entry.links.enchantment) return enchantmentData[entry.links.enchantment]?.tiers;
+  return undefined;
+}
+
+/** An entry's description with any values the game data gives filled in (as the tier I–III range). */
 export function describedEntry(entry: Entry): Localized | undefined {
-  const tiers = entry.category === "enchantment" ? enchantmentData[entry.slug]?.tiers : undefined;
+  const tiers = tiersOf(entry);
   return entry.description && tiers ? fill(entry.description, ranges(tiers)) : entry.description;
 }
+
+/** The long description, filled the same way. */
+export function describedLong(entry: Entry): Localized | undefined {
+  const tiers = tiersOf(entry);
+  return entry.descriptionLong && tiers ? fill(entry.descriptionLong, ranges(tiers)) : entry.descriptionLong;
+}
+
+const UNFILLED = /class="placeholder"/;
+
+/** Whether every value in the entry's texts could be filled from the game data. */
+export const isFullyDescribed = (entry: Entry): boolean =>
+  !UNFILLED.test(`${describedEntry(entry)?.zh ?? ""}${describedEntry(entry)?.en ?? ""}${describedLong(entry)?.zh ?? ""}${describedLong(entry)?.en ?? ""}`);
 
 /** An enchantment's description filled at each tier (I–III), for a tier table; undefined without game values. */
 export function enchantmentTiers(entry: Entry): { label: string; text: Localized }[] | undefined {

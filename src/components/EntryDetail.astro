@@ -1,6 +1,6 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
-import { describedEntry } from "../lib/gear-values";
+import { describedEntry, describedLong } from "../lib/gear-values";
 import { t, type Lang } from "../lib/i18n";
 import { itemKicker } from "../lib/kicker";
 import { relatedLinks } from "../lib/related";
@@ -22,6 +22,7 @@ interface Props {
 
 const { lang, entry } = Astro.props;
 const description = describedEntry(entry);
+const descriptionLong = describedLong(entry);
 const related = relatedLinks(lang, entry);
 ---
 <article class="entry-detail" data-pagefind-body>
@@ -35,9 +36,9 @@ const related = relatedLinks(lang, entry);
           <LangText as="p" class="description" lang={lang} value={description} html />
         </EntrySection>
       )}
-      {entry.descriptionLong && (
+      {descriptionLong && (
         <EntrySection title={t(lang, "details")}>
-          <LangText as="p" class="description-long" lang={lang} value={entry.descriptionLong} html />
+          <LangText as="p" class="description-long" lang={lang} value={descriptionLong} html />
         </EntrySection>
       )}
       {entry.unlock && (

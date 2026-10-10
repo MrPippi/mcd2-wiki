@@ -97,8 +97,8 @@ test("enchantment page explains it comes from an enchantment book", async ({ pag
 });
 
 test("enchantment page shows a book description that differs from the enchantment", async ({ page }) => {
-  await page.goto("/zh/enchantment/fire-aspect-ii/");
-  await expect(page.getByTestId("book-source")).toContainText("波動會造成相當於武器傷害");
+  await page.goto("/zh/enchantment/poison-fog/");
+  await expect(page.getByTestId("book-source")).toContainText("劇毒波動");
 });
 
 test("entries without an icon are not published", async ({ page, request }) => {
@@ -218,7 +218,8 @@ test("armor pieces are labelled with their slot icon", async ({ page }) => {
 
 test("talismans have their own pages", async ({ page }) => {
   await page.goto("/zh/talisman/");
-  await expect(page.locator(".entry-card")).toHaveCount(24);
+  // 24 talismans, less the 3 whose descriptions need values the game data cannot give (Firing Emeralds, Healthy Strike, Speed Increment).
+  await expect(page.locator(".entry-card")).toHaveCount(21);
   await page.goto("/zh/talisman/ammo-capacity/");
   await expect(page.locator("h1 .primary")).toHaveText("黑橡木枝條");
   await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();
@@ -241,9 +242,14 @@ test("the normal/unique filter only appears where unique items exist", async ({ 
   await expect(page.locator("button[data-variant='unique']")).toHaveCount(1);
 });
 
-test("effect table shows placeholder markers", async ({ page }) => {
+test("pages show filled values and never an unfilled placeholder; entries the data cannot fill are hidden", async ({ page, request }) => {
+  for (const path of ["/zh/effect/", "/zh/enchantment/", "/zh/talisman/", "/zh/enchantment/shockwave/", "/zh/melee/greatsword-unique1/", "/zh/enchantment/fire-aspect/"]) {
+    await page.goto(path);
+    await expect(page.locator(".placeholder"), path).toHaveCount(0);
+  }
   await page.goto("/zh/effect/");
-  await expect(page.locator(".placeholder").first()).toHaveText("{數值}");
+  await expect(page.locator("tr", { has: page.locator("#critical-edge") }).locator(".value").first()).toHaveText("10%~30%");
+  expect((await request.get("/zh/enchantment/gravity-pulse/")).status()).toBe(404);
 });
 
 test("search finds entries by Chinese and English terms", async ({ page }) => {
@@ -743,10 +749,11 @@ test("Redstone Wrecker shows its in-game fixed enchantment with the FlameBelch i
   await expect(page.getByTestId("effect-source")).not.toContainText("人工確認");
 });
 
-test("unique enchantments list the weapons that carry them instead of a book", async ({ page }) => {
-  await page.goto("/zh/enchantment/gravity-pulse-unique/");
+test("unique enchantments have no book, and enchantments list the unique weapons that carry them", async ({ page }) => {
+  await page.goto("/zh/enchantment/swirling-unique/");
   await expect(page.getByTestId("book-source")).toHaveCount(0);
-  await expect(page.getByTestId("fixed-on").locator("a[href='/zh/melee/greatsword-unique1/']")).toBeVisible();
+  await page.goto("/zh/enchantment/shockwave/");
+  await expect(page.getByTestId("fixed-on").locator("a[href='/zh/melee/shovel-unique1/']")).toBeVisible();
 });
 
 test("home category rows show their items on every screen size", async ({ page }) => {

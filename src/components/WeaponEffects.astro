@@ -19,13 +19,15 @@ const EFFECT_ICON = { row: 32, fixed: 64 } as const;
 
 const { lang, weapon } = Astro.props;
 const effects = weaponEffectsOf(weapon);
-const fixed = effects?.fixed;
+// A fixed bonus whose text still has a value the game data cannot fill is left out, like hidden entries.
+const fixedFull = effects?.fixed;
 const withValues = (text: Localized, values: readonly string[]): Localized => ({
   zh: fillPlaceholders(text.zh, values),
   en: fillPlaceholders(text.en, values),
 });
 const fixedText: Localized | undefined =
-  fixed?.entry.description && fixed.values ? withValues(fixed.entry.description, fixed.values) : fixed?.entry.description;
+  fixedFull?.entry.description && fixedFull.values ? withValues(fixedFull.entry.description, fixedFull.values) : fixedFull?.entry.description;
+const fixed = fixedText && /class="placeholder"/.test(`${fixedText.zh}${fixedText.en}`) ? undefined : fixedFull;
 ---
 {effects && (
   <>

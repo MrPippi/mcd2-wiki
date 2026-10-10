@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import rawEntries from "../../../src/data/entries.json";
+import { describedEntry, describedLong } from "../../../src/lib/gear-values";
 import { allArmorSets, booksFor, entriesIn, findArmorSet, findEntry, publishedEntries } from "../../../src/lib/data";
 
 describe("site data", () => {
@@ -33,10 +33,16 @@ describe("site data", () => {
     expect(entriesIn("effect").length).toBeGreaterThan(0);
   });
 
-  it("publishes every base effect whether or not the game has an icon for it", () => {
-    const effects = rawEntries.filter((entry) => entry.category === "effect" && entry.release === "base");
-    expect(entriesIn("effect")).toHaveLength(effects.length);
-    expect(entriesIn("effect").some((entry) => entry.icon !== undefined)).toBe(true);
+  it("hides effects, enchantments and talismans whose description has a value the game data cannot fill", () => {
+    const shown = publishedEntries.filter((entry) => ["effect", "enchantment", "talisman"].includes(entry.category));
+    const unfilled = shown.filter((entry) => /class="placeholder"/.test(`${describedEntry(entry)?.zh ?? ""}${describedLong(entry)?.zh ?? ""}`));
+    expect(unfilled.map((entry) => entry.slug)).toEqual([]);
+    expect(findEntry("enchantment", "shadow-strike")).toBeDefined();
+    expect(findEntry("effect", "critical-edge")).toBeDefined();
+    expect(findEntry("enchantment", "gravity-pulse")).toBeUndefined();
+    expect(findEntry("enchantment-book", "fire-aspect-ii")).toBeUndefined();
+    expect(findEntry("enchantment", "fire-aspect-ii")).toBeUndefined();
+    expect(findEntry("effect", "jumpshot")).toBeUndefined();
   });
 
   it("gives every published non-unique enchantment at least one book", () => {

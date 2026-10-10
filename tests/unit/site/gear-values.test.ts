@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { findEntry } from "../../../src/lib/data";
+import { findBaseEntry, findEntry, publishedEntries } from "../../../src/lib/data";
 import { artifactStatsView, describedEntry, enchantmentTiers, fillPlaceholders } from "../../../src/lib/gear-values";
 
 const PLACEHOLDER = '<span class="placeholder">{value}</span>';
@@ -22,7 +22,7 @@ describe("enchantmentTiers", () => {
   });
 
   it("is undefined for enchantments the game data gives no values for", () => {
-    const gravity = findEntry("enchantment", "gravity-pulse");
+    const gravity = findBaseEntry("enchantment", "gravity-pulse");
     expect(gravity ? enchantmentTiers(gravity) : "missing").toBeUndefined();
   });
 });
@@ -33,6 +33,16 @@ describe("describedEntry", () => {
     const text = shockwave ? describedEntry(shockwave) : undefined;
     expect(text?.zh).toContain('<span class="value">20%~50%</span>');
     expect(text?.zh).toContain('<span class="value">125%~175%</span>');
+  });
+
+  it("fills an effect's description with its tier I–III range", () => {
+    const edge = findEntry("effect", "critical-edge");
+    expect(edge ? describedEntry(edge)?.zh : undefined).toContain('<span class="value">10%~30%</span>');
+  });
+
+  it("fills an enchantment book with its enchantment's values", () => {
+    const book = findBaseEntry("enchantment-book", "phantom-lance");
+    expect(book ? describedEntry(book)?.zh : undefined).toContain('<span class="value">90%</span>');
   });
 
   it("leaves other entries' descriptions as they are", () => {

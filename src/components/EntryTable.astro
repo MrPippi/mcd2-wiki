@@ -1,5 +1,6 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
+import { describedEntry } from "../lib/gear-values";
 import { t, type Lang } from "../lib/i18n";
 import EntryIcon from "./EntryIcon.astro";
 import LangText from "./LangText.astro";
@@ -24,7 +25,7 @@ const { lang, entries } = Astro.props;
             <LangText as="h2" id={entry.slug} class="row-name" lang={lang} value={entry.name} />
           </div>
         </th>
-        <td>{entry.description ? <LangText lang={lang} value={entry.description} html /> : <span class="empty-cell">-</span>}</td>
+        <td>{describedEntry(entry) ? <LangText lang={lang} value={describedEntry(entry)!} html /> : <span class="empty-cell">-</span>}</td>
       </tr>
     ))}
   </tbody>
