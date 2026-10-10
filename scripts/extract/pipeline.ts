@@ -22,6 +22,7 @@ import { buildArtifactData } from "./artifacts";
 import { buildEffectData } from "./effects";
 import { buildEnchantmentData } from "./enchantments";
 import { ArtifactDataSchema, EnchantmentDataSchema } from "./gear-schema";
+import { loadIconReferences, referenceFor, referencePaths, type IconReferences } from "./icon-references";
 import { listIconFiles, loadOverrides } from "./icon-files";
 import { issue, type Issue } from "./issues";
 import { toSlug } from "./keys";
@@ -67,9 +68,20 @@ async function loadIconCatalog(sourceRoot: string): Promise<IconCatalog> {
   };
 }
 
-function planIcon(raw: RawEntry, catalog: IconCatalog, overrides: IconOverrides, sourceRoot: string): IconPlan {
+/** The first existing file the game's IconReference names for this entry, if any. */
+function referencedIcon(raw: RawEntry, references: IconReferences, sourceRoot: string): string | undefined {
+  const reference = referenceFor(references, raw.category, raw.id);
+  return reference
+    ? referencePaths(reference).map((file) => path.join(sourceRoot, ...file.split("/"))).find((file) => existsSync(file))
+    : undefined;
+}
+
+/** Icon order: hand override, then the game's IconReference, then file-name matching. */
+function planIcon(raw: RawEntry, catalog: IconCatalog, overrides: IconOverrides, references: IconReferences, sourceRoot: string): IconPlan {
   const iconSource = ICON_SOURCES[raw.category];
   if (!iconSource || raw.release !== "base") return { raw, issues: [] };
+  const referenced = Object.hasOwn(overrides, raw.id) ? undefined : referencedIcon(raw, references, sourceRoot);
+  if (referenced) return { raw, source: referenced, issues: [] };
   const where = `${raw.category}:${raw.id}`;
   const index = catalog.indexes.get(iconSource.root) ?? new Map<string, readonly string[]>();
   const match = matchIcon(raw.id, index, overrides, { fallbackToBase: iconSource.fallbackToBase });
@@ -105,7 +117,8 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const grouped = groupEntries(await loadLocales(options.sourceRoot), TABLES);
   const overrides = await loadOverrides(options.overridesPath);
   const catalog = await loadIconCatalog(options.sourceRoot);
-  const plans = grouped.entries.map((raw) => planIcon(raw, catalog, overrides, options.sourceRoot));
+  const references = await loadIconReferences(options.sourceRoot);
+  const plans = grouped.entries.map((raw) => planIcon(raw, catalog, overrides, references, options.sourceRoot));
   const assembled = plans.map((plan) => assembleEntry(plan.raw, plan.source ? webPathOf(plan.raw) : undefined));
   const deduped = dedupeByName(assembled.map((result) => result.entry));
   assertUniqueSlugs(deduped.entries);
