@@ -27,7 +27,7 @@ const unique = variant === "unique";
     <span class:list={["primary", "item-name", { "is-unique": unique }]}>{name[lang]}</span>
   </a>
   <template class="item-tip">
-    <TooltipPanel lang={lang} kicker={kicker} name={name} description={description} href={href} unique={unique}>
+    <TooltipPanel lang={lang} kicker={kicker} name={name} description={description} unique={unique}>
       <slot />
     </TooltipPanel>
   </template>

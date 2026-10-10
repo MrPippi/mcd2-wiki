@@ -1,6 +1,6 @@
 ---
 import type { Localized } from "../../scripts/extract/schemas";
-import { t, type Lang } from "../lib/i18n";
+import type { Lang } from "../lib/i18n";
 import LangText from "./LangText.astro";
 
 interface Props {
@@ -8,16 +8,14 @@ interface Props {
   kicker: string;
   name: Localized;
   description?: Localized;
-  href: string;
   unique?: boolean;
 }
 
-const { lang, kicker, name, description, href, unique = false } = Astro.props;
+const { lang, kicker, name, description, unique = false } = Astro.props;
 ---
 <div class="tooltip-panel">
   <p class="kicker">{kicker}</p>
   <LangText as="p" lang={lang} value={name} class={unique ? "tooltip-name is-unique" : "tooltip-name"} />
   {description && <LangText as="p" class="tooltip-desc" lang={lang} value={description} html />}
   <slot />
-  <a class="tooltip-link" href={href}>{t(lang, "viewEntry")} ›</a>
 </div>
