@@ -10,7 +10,8 @@ const FRAMES_FOR: Readonly<Partial<Record<Category, readonly FrameKind[]>>> = {
   melee: ["inventory"],
   ranged: ["inventory"],
   armor: ["inventory"],
-  artifact: ["artifact", "inventory"],
+  // The hotbar slot art is dark game chrome; on the specimen plate artifacts sit bare like other gear.
+  artifact: ["inventory"],
   status: ["inventory"],
   talisman: ["inventory"],
   cape: ["inventory"],

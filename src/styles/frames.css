@@ -15,9 +15,6 @@
     linear-gradient(var(--c), var(--c)) bottom right / var(--arm) var(--line) no-repeat,
     linear-gradient(var(--c), var(--c)) bottom right / var(--line) var(--arm) no-repeat;
 }
-/* Hotbar artifact slot (T_UI_ArtifactSlot_Default): interior spans x 34–186, y 22–174 of 220px. */
-.icon-frame.frame-artifact > .entry-icon { position: absolute; left: 15.5%; top: 10%; width: 69%; height: 69%; }
-.icon-frame.frame-artifact > img.entry-icon { box-sizing: border-box; padding: 6%; object-fit: contain; }
 /* The book slot art has a transparent diamond window (x 39–217, y 13–195 of 256px): the icon sits behind it and the frame is drawn on top. */
 .icon-frame.frame-enchantment { background: none; }
 .icon-frame.frame-enchantment::after { content: ""; position: absolute; inset: 0; background: var(--frame) center / 100% 100% no-repeat; image-rendering: pixelated; pointer-events: none; }

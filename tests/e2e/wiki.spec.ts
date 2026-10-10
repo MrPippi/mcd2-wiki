@@ -118,9 +118,7 @@ test("icons sit inside the game's slot frames", async ({ page, request }) => {
   await expect(page.locator(".entry-head .icon-frame.frame-inventory img")).toBeVisible();
   await page.goto("/zh/enchantment/arcane/");
   await expect(page.locator(".entry-head .icon-frame.frame-enchantment img")).toBeVisible();
-  for (const frame of ["artifact", "enchantment"]) {
-    expect((await request.get(`/icons/frames/${frame}.png`)).status()).toBe(200);
-  }
+  expect((await request.get("/icons/frames/enchantment.png")).status()).toBe(200);
 });
 
 const slotBorder = (el: Element) => getComputedStyle(el).getPropertyValue("--slot-border").trim().toLowerCase();
@@ -140,10 +138,11 @@ test("unique gear uses the vermilion crop marks and no star", async ({ page }) =
   await expect(slot.locator(".slot-star")).toHaveCount(0);
 });
 
-test("artifacts sit in the hotbar artifact slot", async ({ page }) => {
+test("artifacts are shown bare on the plate like other gear", async ({ page }) => {
   await page.goto("/zh/artifact/");
+  await expect(page.locator(".entry-card .icon-frame.frame-artifact")).toHaveCount(0);
   await openFromList(page, page.locator(".entry-card").first());
-  await expect(page.locator(".entry-head .icon-frame.frame-artifact img")).toBeVisible();
+  await expect(page.locator(".entry-head .icon-frame.frame-inventory img")).toBeVisible();
 });
 
 test("enchantment icons fill the diamond window of the book frame", async ({ page }) => {

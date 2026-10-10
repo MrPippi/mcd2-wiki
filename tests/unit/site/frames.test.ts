@@ -19,11 +19,8 @@ describe("frameFor", () => {
     }
   });
 
-  it("frames artifacts with the hotbar artifact slot", () => {
-    expect(frameFor("artifact", ALL)).toEqual({ name: "artifact", path: "icons/frames/artifact.png" });
-  });
-
-  it("falls back to the inventory slot when the artifact slot was not extracted", () => {
+  it("shows artifacts bare like other gear, even when the hotbar slot art was extracted", () => {
+    expect(frameFor("artifact", ALL)).toEqual({ name: "inventory" });
     expect(frameFor("artifact", {})).toEqual({ name: "inventory" });
   });
 
@@ -38,6 +35,6 @@ describe("frameFor", () => {
   });
 
   it("uses the extracted frames by default", () => {
-    expect(frameFor("artifact")?.path).toBe("icons/frames/artifact.png");
+    expect(frameFor("enchantment")?.path).toBe("icons/frames/enchantment.png");
   });
 });
