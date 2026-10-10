@@ -7,11 +7,11 @@ import { UI_DICTS, fileValue, plainText, type UiValue } from "./ui-dicts";
 
 export type UiKey = Exclude<keyof typeof zh, "_machine">;
 
-const GameStringsSchema = z.record(z.string(), z.record(z.enum(LANGS), z.string()));
+const GameStringsSchema = z.record(z.string(), z.partialRecord(z.enum(LANGS), z.string()));
+type GameStrings = z.infer<typeof GameStringsSchema>;
 /** Official UI wording read from the game's localization files by `npm run extract`, by site key. */
 const GAME_STRINGS = GameStringsSchema.parse(rawGameStrings);
 
-const gameValue = (lang: Lang, key: string): string | undefined => GAME_STRINGS[key]?.[lang] || undefined;
 /** Traditional Chinese and English are written by hand, so the file wins; other languages take the game's own wording first. */
 const HAND_WRITTEN: readonly Lang[] = ["zh", "en"];
 
@@ -30,8 +30,11 @@ export function resolveUiValue(key: string, handWritten: boolean, { own, game, e
   return found ?? english ?? key;
 }
 
-const lookup = (lang: Lang, key: UiKey): UiValue =>
-  resolveUiValue(key, HAND_WRITTEN.includes(lang), { own: fileValue(lang, key), game: gameValue(lang, key), english: fileValue("en", key) });
+/** The value for a key given the game's strings (exported for tests; a language the game lacks falls through to its file). */
+export const lookupWith = (game: GameStrings, lang: Lang, key: UiKey): UiValue =>
+  resolveUiValue(key, HAND_WRITTEN.includes(lang), { own: fileValue(lang, key), game: game[key]?.[lang] || undefined, english: fileValue("en", key) });
+
+const lookup = (lang: Lang, key: UiKey): UiValue => lookupWith(GAME_STRINGS, lang, key);
 
 /** The text for a key; for a unit with plural forms, the general form. */
 export const t = (lang: Lang, key: UiKey): string => plainText(lookup(lang, key));

@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { resolveUiValue, t } from "../../../src/lib/ui-strings";
+import ko from "../../../src/i18n/ko.json";
+import { lookupWith, resolveUiValue, t } from "../../../src/lib/ui-strings";
 
 describe("resolveUiValue", () => {
   const all = { own: "file", game: "game", english: "english" };
@@ -26,5 +27,17 @@ describe("label colons", () => {
     expect(t("en", "labelColon")).toBe(": ");
     expect(t("zh", "labelColon")).toBe("：");
     expect(t("ja", "labelColon")).toBe("：");
+  });
+});
+
+describe("lookupWith", () => {
+  it("falls through to the language file when the game lacks that language", () => {
+    const game = { categoryMelee: { en: "Melee", zh: "近戰" } };
+    expect(lookupWith(game, "ko", "categoryMelee")).toBe(ko.categoryMelee);
+    expect(ko.categoryMelee).not.toBe("Melee");
+  });
+
+  it("prefers the game's wording when it has the language", () => {
+    expect(lookupWith({ categoryMelee: { en: "Melee", ko: "근접 무기 (game)" } }, "ko", "categoryMelee")).toBe("근접 무기 (game)");
   });
 });
