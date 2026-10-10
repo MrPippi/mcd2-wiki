@@ -28,6 +28,7 @@ const placeholder = t(lang, "search");
         showImages: true,
         translations: { placeholder },
       });
+      document.querySelector("#search .pagefind-ui__search-input")?.setAttribute("aria-label", placeholder);
       const query = new URLSearchParams(window.location.search).get("q");
       if (query) ui.triggerSearch(query);
     });

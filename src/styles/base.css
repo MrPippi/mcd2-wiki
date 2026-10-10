@@ -39,15 +39,20 @@ button, .button {
   transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out),
     transform var(--dur-fast) var(--ease-out);
 }
-button:hover, .button:hover { background: var(--ink); color: var(--paper); }
+button:hover, .button:hover { background: var(--plate); }
 button:active, .button:active { transform: translateY(1px); }
-button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+button[aria-pressed="true"], button[aria-pressed="true"]:hover { background: var(--ink); color: var(--paper); }
 input[type="search"] {
   font: inherit; font-size: 15px; padding: 8px 0; background: transparent; color: var(--text);
   border: 0; border-bottom: 1px solid var(--rule-strong); border-radius: var(--radius);
   transition: border-color var(--dur-fast) var(--ease-out), box-shadow var(--dur-fast) var(--ease-out);
 }
 input[type="search"]::placeholder { color: var(--muted); opacity: 1; }
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none; appearance: none; width: 12px; height: 12px; cursor: pointer;
+  background: linear-gradient(45deg, transparent 44%, var(--ink) 44% 56%, transparent 56%),
+    linear-gradient(-45deg, transparent 44%, var(--ink) 44% 56%, transparent 56%);
+}
 input[type="search"]:focus { outline: none; border-bottom-color: var(--accent); box-shadow: 0 1px 0 var(--accent); }
 button:focus-visible, a:focus-visible, .button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 

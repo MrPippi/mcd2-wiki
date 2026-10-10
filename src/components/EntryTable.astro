@@ -21,7 +21,7 @@ const { lang, entries } = Astro.props;
         <th scope="row">
           <div class="row-head">
             {entry.icon && <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={40} category={entry.category} variant={entry.variant} />}
-            <LangText as="h3" id={entry.slug} class="row-name" lang={lang} value={entry.name} />
+            <LangText as="h2" id={entry.slug} class="row-name" lang={lang} value={entry.name} />
           </div>
         </th>
         <td>{entry.description ? <LangText lang={lang} value={entry.description} html /> : <span class="empty-cell">-</span>}</td>

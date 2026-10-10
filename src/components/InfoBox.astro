@@ -21,7 +21,7 @@ const PLATE_ICON_SIZE = 200;
 ---
 <aside class="info-box" data-testid="info-box">
   <div class="entry-head specimen-plate">
-    {number !== undefined && <span class="plate-no mono" aria-hidden="true">No. {catalogLabel(number)}</span>}
+    {number !== undefined && <span class="plate-no mono" aria-hidden="true" data-pagefind-ignore>No. {catalogLabel(number)}</span>}
     <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={PLATE_ICON_SIZE} category={entry.category} variant={entry.variant} loading="eager" searchImage />
     <span class="plate-scale" aria-hidden="true"></span>
   </div>

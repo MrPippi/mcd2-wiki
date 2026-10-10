@@ -18,7 +18,7 @@ const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.
     <span class="brand-full">{t(lang, "siteTitle")}</span><span class="brand-short">{t(lang, "siteShort")}</span>
   </a>
   <button type="button" class="search-toggle" aria-expanded="false" aria-controls="header-search">{t(lang, "search")}</button>
-  <form id="header-search" class="header-search" action={href(lang, "search")} method="get" role="search">
+  <form id="header-search" class="header-search" action={href(lang, "search")} method="get" role="search" aria-label={t(lang, "siteSearch")}>
     <input type="search" name="q" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
   </form>
   <div class="site-tools">

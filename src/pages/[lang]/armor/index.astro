@@ -6,7 +6,7 @@ import CatalogHead from "../../../components/CatalogHead.astro";
 import ItemCard from "../../../components/ItemCard.astro";
 import Base from "../../../layouts/Base.astro";
 import { allArmorSets, findEntry } from "../../../lib/data";
-import { CATEGORY_LABEL, PIECE_LABEL, type Lang } from "../../../lib/i18n";
+import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../../../lib/i18n";
 import { setKicker } from "../../../lib/kicker";
 import { href } from "../../../lib/url";
 
@@ -27,6 +27,7 @@ const cards = allArmorSets.map((set) => {
 <Base lang={lang} title={CATEGORY_LABEL.armor[lang]} current="armor">
   <div class="catalog">
   <CatalogHead lang={lang} category="armor" count={cards.length} showVariant={true} />
+  <p class="no-results" hidden>{t(lang, "noResults")}</p>
   <ItemBrowser lang={lang}>
     {cards.map(({ set, pieces, icon }, index) => (
       <ItemCard

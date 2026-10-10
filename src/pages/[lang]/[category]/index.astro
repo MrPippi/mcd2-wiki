@@ -25,6 +25,7 @@ const hasUnique = entries.some((entry) => entry.variant === "unique");
 <Base lang={lang} title={CATEGORY_LABEL[category][lang]} current={category}>
   <div class="catalog">
   <CatalogHead lang={lang} category={category} count={entries.length} showVariant={!isTable && hasUnique} />
+  <p class="no-results" hidden>{t(lang, "noResults")}</p>
   {isTable ? (
     <>
       <p class="note">{t(lang, "placeholderNote")}</p>

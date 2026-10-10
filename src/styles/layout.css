@@ -46,6 +46,8 @@
 .tab-list a[aria-current="page"]::after { transform: scaleX(1); }
 .tab-list a[aria-current="page"] .tab-index { color: var(--accent); }
 .tab-list a:focus-visible { outline-offset: -2px; }
+:lang(en) .tab-index { display: none; }
+:lang(en) .tab-list a { grid-template-columns: auto 1fr auto; gap: 6px; padding: 10px; font-size: 13px; }
 
 .site-main { flex: 1 0 auto; width: 100%; max-width: var(--max); margin: 0 auto; padding: 40px var(--gutter) 96px; }
 .site-main:focus { outline: none; }

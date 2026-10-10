@@ -10,6 +10,10 @@
   display: block; margin-top: 0.08em; font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em;
   font-size: var(--fs-display-xl); line-height: 0.95;
 }
+.title-tag {
+  display: inline-block; margin-left: 0.3em; vertical-align: 0.9em; font-family: var(--font-mono); font-weight: 500;
+  font-size: var(--fs-mono-m); letter-spacing: 0.04em; padding: 2px 6px; border: 1px solid var(--rule-strong);
+}
 .hero-lede { color: var(--text-2); max-width: 30em; margin: 0 0 32px; font-size: 17px; }
 .home-search { display: flex; align-items: flex-end; gap: 12px; width: 100%; max-width: 460px; }
 .home-search input { flex: 1; min-width: 0; }
@@ -18,12 +22,14 @@
 
 .hero-specimen { margin: 0; display: grid; grid-template-columns: 1fr; gap: 14px 16px; align-content: start; }
 .hero-specimen .specimen-plate { grid-column: 1 / -1; aspect-ratio: 5 / 4; text-decoration: none; color: var(--text); overflow: hidden; }
-.plate-art { display: flex; transition: transform 600ms var(--ease-spring); }
+.plate-art { display: flex; width: min(240px, 56%); aspect-ratio: 1; transition: transform 600ms var(--ease-spring); }
+/* EntryIcon sizes itself inline; let the plate decide on small screens. */
+.plate-art > .icon-frame { width: 100% !important; height: 100% !important; }
 .specimen-plate:hover .plate-art { transform: scale(1.04) rotate(-2deg); }
 .specimen-caption { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .caption-name .primary { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; }
 .caption-name.is-unique .primary { color: var(--accent); }
-.side-specimens { list-style: none; margin: 0; padding: 0; display: flex; gap: 8px; align-self: end; }
+.side-specimens { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; align-self: end; }
 @media (min-width: 560px) {
   .hero-specimen { grid-template-columns: minmax(0, 1fr) auto; }
 }

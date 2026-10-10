@@ -23,6 +23,8 @@ const alt = otherLang(lang);
 const GAME_NAME = "Minecraft Dungeons II";
 const siteTitle = t(lang, "siteTitle");
 const titleRest = siteTitle.startsWith(GAME_NAME) ? siteTitle.slice(GAME_NAME.length).trim() : undefined;
+// A trailing "(zh-TW)" is a qualifier, not part of the name: set it small instead of at display size.
+const [, titleWord = titleRest, titleTag] = titleRest?.match(/^(.*?)\s*(\(.+\))$/) ?? [];
 const FEATURED_SIZE = 240;
 const SIDE_SPECIMENS = 4;
 const PREVIEW_SPRITES = 6;
@@ -42,7 +44,7 @@ const previewOf = (category: Category) =>
       {titleRest === undefined ? siteTitle : (
         <>
           <span class="title-game">{GAME_NAME.replace(" II", " II")}</span>{" "}
-          <span class="title-rest">{titleRest}</span>
+          <span class="title-rest">{titleWord}{titleTag && <span class="title-tag">{titleTag}</span>}</span>
         </>
       )}
     </h1>
