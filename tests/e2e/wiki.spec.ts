@@ -101,7 +101,7 @@ test("enchantment page shows a book description that differs from the enchantmen
   await expect(page.getByTestId("book-source")).toContainText("劇毒波動");
 });
 
-test("entries are published with their icon, none left as a placeholder", async ({ page, request }) => {
+test("icon-referenced enchantments are published and no card shows an icon placeholder", async ({ page, request }) => {
   expect((await request.get("/zh/enchantment/clawing-shadow-unique/")).status()).toBe(200);
   await page.goto("/zh/enchantment/");
   await expect(page.locator(".entry-card .framed-placeholder")).toHaveCount(0);

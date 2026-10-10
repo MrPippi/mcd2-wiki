@@ -26,7 +26,7 @@ export const extractedBrand: Brand = BrandSchema.parse(rawBrand);
 const entries: readonly Entry[] = z.array(EntrySchema).parse(rawEntries);
 
 /** Categories with an icon source must have an icon to be published, unless their icons are optional (effects). */
-const hasRequiredIcon = (entry: Entry): boolean => {
+export const hasRequiredIcon = (entry: Entry): boolean => {
   const source = ICON_SOURCES[entry.category];
   return source === undefined || source.optional === true || entry.icon !== undefined;
 };

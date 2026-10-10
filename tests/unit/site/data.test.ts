@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { describedEntry, describedLong } from "../../../src/lib/gear-values";
-import { allArmorSets, booksFor, entriesIn, findArmorSet, findEntry, publishedEntries } from "../../../src/lib/data";
+import { makeEntry } from "../../helpers/entries";
+import { allArmorSets, booksFor, hasRequiredIcon, entriesIn, findArmorSet, findEntry, publishedEntries } from "../../../src/lib/data";
 
 describe("site data", () => {
   it("publishes only base entries", () => {
@@ -29,6 +30,13 @@ describe("site data", () => {
     for (const category of ["melee", "ranged", "armor", "artifact", "talisman", "enchantment"] as const) {
       expect(entriesIn(category).every((entry) => entry.icon !== undefined), category).toBe(true);
     }
+  });
+
+  it("requires an icon on gear and enchantments but not on effects", () => {
+    expect(hasRequiredIcon(makeEntry("Sword", "melee"))).toBe(false);
+    expect(hasRequiredIcon(makeEntry("Arcane", "enchantment"))).toBe(false);
+    expect(hasRequiredIcon(makeEntry("Sword", "melee", { icon: "icons/melee/sword.png" }))).toBe(true);
+    expect(hasRequiredIcon(makeEntry("CriticalEdge", "effect"))).toBe(true);
   });
 
   it("keeps categories that never have icons", () => {
