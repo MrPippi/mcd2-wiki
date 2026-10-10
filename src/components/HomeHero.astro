@@ -1,4 +1,6 @@
 ---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
 import type { Category } from "../../scripts/extract/config";
 import { allArmorSets, entriesIn, publishedEntries } from "../lib/data";
 import { CATEGORY_LABEL, t, type Lang } from "../lib/i18n";
@@ -22,10 +24,18 @@ const SHOWCASE_SIZES = [152, 112, 128, 96, 104, 88] as const;
 const GAME_NAME = "Minecraft Dungeons II";
 const siteTitle = t(lang, "siteTitle");
 const titleRest = siteTitle.startsWith(GAME_NAME) ? siteTitle.slice(GAME_NAME.length).trim() : undefined;
+// The splash comes from the extract step; a glob keeps the build working when it has not been extracted.
+const splashModules = import.meta.glob<{ default: ImageMetadata }>("../assets/brand/splash.png", { eager: true });
+const splash = Object.values(splashModules)[0]?.default;
 const showcase = pickShowcase(publishedEntries, ["melee", "ranged", "armor", "talisman", "artifact", "enchantment"])
   .slice(0, SHOWCASE_SIZES.length);
 ---
 <section class="home-hero">
+  {splash && (
+    <div class="hero-backdrop" aria-hidden="true">
+      <Image src={splash} alt="" widths={[960, 1600]} sizes="(min-width: 900px) 1180px, 100vw" format="webp" quality={68} loading="eager" fetchpriority="high" />
+    </div>
+  )}
   <div class="hero-copy">
     <p class="kicker">UNOFFICIAL FAN WIKI</p>
     <h1 class="home-title">

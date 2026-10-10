@@ -55,5 +55,12 @@ export const FramesSchema = z.object({
 });
 export type Frames = z.infer<typeof FramesSchema>;
 
+export const BrandSchema = z.object({
+  favicon: z.string().optional(),
+  "app-icon": z.string().optional(),
+  social: z.string().optional(),
+});
+export type Brand = z.infer<typeof BrandSchema>;
+
 export const UiIconsSchema = z.record(z.string(), z.string());
 export type UiIcons = z.infer<typeof UiIconsSchema>;

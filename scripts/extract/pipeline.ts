@@ -1,9 +1,19 @@
 import { existsSync } from "node:fs";
+import { copyFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { assembleEntry, assertUniqueSlugs } from "./assemble";
 import { dedupeByName } from "./dedupe";
 import { planAssets } from "./ui-assets";
-import { FRAME_SOURCES, ICON_SOURCES, TABLES, UI_ICON_SOURCES, type IconSource } from "./config";
+import {
+  BRAND_SOURCES,
+  FRAME_SOURCES,
+  ICON_SOURCES,
+  SPLASH_SOURCE,
+  SPLASH_TARGET,
+  TABLES,
+  UI_ICON_SOURCES,
+  type IconSource,
+} from "./config";
 import { groupEntries, type RawEntry } from "./group-entries";
 import { listIconFiles, loadOverrides } from "./icon-files";
 import { issue, type Issue } from "./issues";
@@ -74,6 +84,16 @@ function planIcon(raw: RawEntry, catalog: IconCatalog, overrides: IconOverrides,
 
 const webPathOf = (raw: RawEntry): string => iconWebPath(raw.category, toSlug(raw.id));
 
+/** Copies the splash art into the site sources; a missing file is reported, and the home page goes without it. */
+async function copySplash(sourceRoot: string, outRoot: string): Promise<Issue[]> {
+  const from = path.join(sourceRoot, ...SPLASH_SOURCE.split("/"));
+  if (!existsSync(from)) return [issue("missing-brand", SPLASH_SOURCE)];
+  const to = path.join(outRoot, ...SPLASH_TARGET.split("/"));
+  await mkdir(path.dirname(to), { recursive: true });
+  await copyFile(from, to);
+  return [];
+}
+
 export async function runExtract(options: ExtractOptions): Promise<ExtractSummary> {
   const grouped = groupEntries(await loadLocales(options.sourceRoot), TABLES);
   const overrides = await loadOverrides(options.overridesPath);
@@ -90,18 +110,25 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   );
   const frames = planAssets(options.sourceRoot, options.outRoot, FRAME_SOURCES, "frames", "missing-frame");
   const uiIcons = planAssets(options.sourceRoot, options.outRoot, UI_ICON_SOURCES, "ui", "missing-ui-icon");
-  await copyIcons([...copies, ...frames.copies, ...uiIcons.copies], path.join(options.outRoot, "public", "icons"));
+  const brand = planAssets(options.sourceRoot, options.outRoot, BRAND_SOURCES, "brand", "missing-brand");
+  await copyIcons(
+    [...copies, ...frames.copies, ...uiIcons.copies, ...brand.copies],
+    path.join(options.outRoot, "public", "icons"),
+  );
+  const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const issues = [
     ...catalog.issues,
     ...frames.issues,
     ...uiIcons.issues,
+    ...brand.issues,
+    ...splashIssues,
     ...grouped.issues,
     ...plans.filter((plan) => kept.has(`${plan.raw.category}:${plan.raw.id}`)).flatMap((plan) => plan.issues),
     ...assembled.flatMap((result) => result.issues),
     ...deduped.issues,
     ...linked.issues,
   ];
-  const extraData = { "frames.json": frames.paths, "category-icons.json": uiIcons.paths };
+  const extraData = { "frames.json": frames.paths, "category-icons.json": uiIcons.paths, "brand.json": brand.paths };
   await writeOutputs(options.outRoot, output, extraData, renderReport({ ...output, issues }));
   return { entries: output.entries.length, armorSets: output.armorSets.length, icons: copies.length, issues };
 }

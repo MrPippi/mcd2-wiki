@@ -1,4 +1,4 @@
-import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
@@ -71,6 +71,9 @@ beforeEach(async () => {
   await put(sourceRoot, "Assets/UI/Icons/Statuses/T_UI_Icon_Status_Burning.png", "png:burning");
   await put(sourceRoot, "Assets/UI/HUD/Player/Hotbar/Artifacts/Slot/T_UI_ArtifactSlot_Default.png", "png:artifact-frame");
   await put(sourceRoot, "Assets/UI/Icons/Categories/T_UI_Icon_Category_Melee.png", "png:melee-category");
+  await put(sourceRoot, "Assets/UI/Icons/SmallLogo.png", "png:small-logo");
+  await put(sourceRoot, "Assets/UI/Icons/Logo.png", "png:logo");
+  await put(sourceRoot, "Assets/UI/Icons/SplashScreen.png", "png:splash");
   await put(sourceRoot, "Localization/All/en/All.json", JSON.stringify(locales.en));
   await put(sourceRoot, "Localization/All/zh-Hant/All.json", JSON.stringify(locales.zh));
   await put(sourceRoot, `${ICON_ROOT}/Weapons/Sword/T_UI_Sword_Icon.png`, "png:sword");
@@ -146,6 +149,31 @@ describe("runExtract", () => {
     expect(await readFile(path.join(outRoot, "public", "icons", "frames", "artifact.png"), "utf8")).toBe("png:artifact-frame");
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-frame (1)\n\n- Assets/UI/Icons/Enchantments/T_UI_Enchantment_Book_Slot.png");
+  });
+
+  it("copies available brand art and reports missing pieces", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(await readJson<Record<string, string>>("src/data/brand.json")).toEqual({
+      favicon: "icons/brand/favicon.png",
+      "app-icon": "icons/brand/app-icon.png",
+    });
+    expect(await readFile(path.join(outRoot, "public", "icons", "brand", "favicon.png"), "utf8")).toBe("png:small-logo");
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).toContain("### missing-brand (1)\n\n- Assets/UI/Icons/Square480x480Logo.png");
+  });
+
+  it("copies the splash art into src/assets so the site build can optimise it", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(await readFile(path.join(outRoot, "src", "assets", "brand", "splash.png"), "utf8")).toBe("png:splash");
+  });
+
+  it("reports missing splash art without failing", async () => {
+    await rm(path.join(sourceRoot, "Assets", "UI", "Icons", "SplashScreen.png"));
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(existsSync(path.join(outRoot, "src", "assets", "brand", "splash.png"))).toBe(false);
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).toContain("### missing-brand (2)");
+    expect(report).toContain("- Assets/UI/Icons/SplashScreen.png");
   });
 
   it("copies available category icons and reports missing ones", async () => {

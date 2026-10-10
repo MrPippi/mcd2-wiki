@@ -13,6 +13,7 @@ export type IssueType =
   | "override-missing-file"
   | "missing-frame"
   | "missing-ui-icon"
+  | "missing-brand"
   | "duplicate-entry"
   | "unlinked-enchantment"
   | "armor-set-name-fallback";

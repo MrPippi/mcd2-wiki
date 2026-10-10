@@ -627,3 +627,17 @@ test("the details sheet closes on an outside tap or when the filter hides its it
   await expect(sheet).toBeHidden();
   await expect(page.locator(".filter-text")).toBeFocused();
 });
+
+test("the site uses the game's own icons and splash art", async ({ page, request }) => {
+  await page.goto("/zh/");
+  const icon = await page.locator('link[rel="icon"]').getAttribute("href");
+  expect(icon).toBe("/icons/brand/favicon.png");
+  expect((await request.get(icon ?? "")).status()).toBe(200);
+  const touch = await page.locator('link[rel="apple-touch-icon"]').getAttribute("href");
+  expect((await request.get(touch ?? "")).status()).toBe(200);
+  // The 2.7 MB splash is resized and re-encoded at build time, never shipped as the original PNG.
+  const backdrop = page.locator(".hero-backdrop img");
+  await expect(backdrop).toHaveAttribute("src", /\.webp$/);
+  expect(await backdrop.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+  expect(await backdrop.getAttribute("alt")).toBe("");
+});

@@ -2,21 +2,25 @@ import { z } from "zod";
 import { ICON_SOURCES, type Category } from "../../scripts/extract/config";
 import {
   ArmorSetSchema,
+  BrandSchema,
   EntrySchema,
   FramesSchema,
   UiIconsSchema,
   type ArmorSet,
+  type Brand,
   type Entry,
   type Frames,
   type UiIcons,
 } from "../../scripts/extract/schemas";
 import rawSets from "../data/armor-sets.json";
+import rawBrand from "../data/brand.json";
 import rawCategoryIcons from "../data/category-icons.json";
 import rawEntries from "../data/entries.json";
 import rawFrames from "../data/frames.json";
 
 export const extractedFrames: Frames = FramesSchema.parse(rawFrames);
 export const extractedUiIcons: UiIcons = UiIconsSchema.parse(rawCategoryIcons);
+export const extractedBrand: Brand = BrandSchema.parse(rawBrand);
 
 const entries: readonly Entry[] = z.array(EntrySchema).parse(rawEntries);
 
