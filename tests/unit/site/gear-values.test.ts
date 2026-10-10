@@ -29,6 +29,15 @@ describe("fillPlaceholders by slot", () => {
     expect(fillPlaceholders(html, ["3"], "ru")).toBe('<span class="value">3</span> <span class="plural">секунды</span>');
   });
 
+  it("agrees with the last number of a range or a unit value", () => {
+    const form = (value: string) => fillPlaceholders(plural(0, RU_SECONDS), [value], "ru");
+    expect(form("1~3")).toBe('<span class="plural">секунды</span>');
+    expect(form("5~21")).toBe('<span class="plural">секунду</span>');
+    expect(form("20%")).toBe('<span class="plural">секунд</span>');
+    expect(form("+2~11")).toBe('<span class="plural">секунд</span>');
+    expect(form("1.5")).toBe('<span class="plural">секунды (other)</span>');
+  });
+
   it("takes the other form for a value that is not a number", () => {
     expect(fillPlaceholders(plural(0, RU_SECONDS), ["—"], "ru")).toBe('<span class="plural">секунды (other)</span>');
   });

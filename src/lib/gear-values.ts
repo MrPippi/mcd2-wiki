@@ -22,12 +22,20 @@ const FormsSchema = z.record(z.string(), z.string());
 
 const unescapeQuotes = (text: string): string => text.replace(/&quot;/g, '"');
 
-/** The plural form of `forms` (a JSON map) for a value; a non-numeric value takes "other". */
+const NUMBER_RUN = /\d+(?:\.\d+)?/g;
+
+/** The number a plural agrees with: the last one in the value ("1~3" → 3, "20%" → 20), as nouns agree with the nearest numeral. */
+const lastNumber = (value: string): number | undefined => {
+  const runs = value.match(NUMBER_RUN);
+  return runs ? Number(runs[runs.length - 1]) : undefined;
+};
+
+/** The plural form of `forms` (a JSON map) for a value; a value with no number takes "other". */
 function pluralForm(forms: string, value: string, lang: Lang): string {
   const parsed = FormsSchema.safeParse(JSON.parse(unescapeQuotes(forms)));
   const map = parsed.success ? parsed.data : {};
-  const number = Number.parseFloat(value);
-  const category = Number.isFinite(number) ? new Intl.PluralRules(htmlLang(lang)).select(number) : "other";
+  const number = lastNumber(value);
+  const category = number === undefined ? "other" : new Intl.PluralRules(htmlLang(lang)).select(number);
   return map[category] ?? map.other ?? Object.values(map)[0] ?? "";
 }
 
