@@ -18,7 +18,7 @@ const { lang, entry } = Astro.props;
 const related = relatedLinks(lang, entry);
 ---
 <article class="entry-detail" data-pagefind-body>
-  <p class="kicker entry-kicker">{itemKicker(entry.category, entry.variant)}</p>
+  <p class="kicker entry-kicker" data-pagefind-ignore>{itemKicker(entry.category, entry.variant)}</p>
   <div class="entry-layout">
     <InfoBox lang={lang} entry={entry} />
     <div class="entry-content">

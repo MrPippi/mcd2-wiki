@@ -15,7 +15,7 @@
 .tab-list { list-style: none; display: flex; gap: 6px; margin: 0; padding: 0; }
 .tab-list a {
   position: relative; display: flex; align-items: center; justify-content: center;
-  width: 44px; height: 40px; border-bottom: 3px solid transparent;
+  width: 44px; height: 40px; border-bottom: 3px solid transparent; text-decoration: none;
 }
 .tab-list .ui-icon { width: 26px; height: 26px; vertical-align: 0; opacity: 0.55; }
 .tab-list a:hover .ui-icon, .tab-list a:focus-visible .ui-icon { opacity: 0.9; }
@@ -43,4 +43,13 @@
 }
 @media (hover: none) {
   .tab-key { display: none; }
+}
+/* Touch screens wide enough for text: no hover to reveal the floating label, so show it under the icon. */
+@media (hover: none) and (min-width: 700px) {
+  .tab-list a { width: auto; height: auto; min-width: 56px; flex-direction: column; gap: 2px; padding: 2px 4px; }
+  .tab-label {
+    position: static; transform: none; opacity: 1; background: none; border: 0; padding: 0;
+    font-size: 0.75rem; color: var(--muted);
+  }
+  .tab-list a[aria-current="page"] .tab-label { color: var(--text); }
 }

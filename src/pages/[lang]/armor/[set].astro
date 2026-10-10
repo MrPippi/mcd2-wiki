@@ -26,7 +26,7 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
 ---
 <Base lang={lang} title={set.name[lang]} current="armor">
   <article class="entry-detail armor-set" data-pagefind-body>
-    <p class="kicker entry-kicker">{setKicker(set.variant)}</p>
+    <p class="kicker entry-kicker" data-pagefind-ignore>{setKicker(set.variant)}</p>
     <div class="entry-layout">
       <aside class="info-box panel" data-testid="info-box">
         <div class="set-preview">

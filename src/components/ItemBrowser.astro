@@ -40,11 +40,11 @@ const { lang } = Astro.props;
     for (const other of cards) other.classList.toggle("is-active", other === card);
   };
 
-  const closeSheet = () => {
+  /** Esc and × give focus back to the item; an outside tap or the filter leaves focus where the user put it. */
+  const closeSheet = (restoreFocus: boolean) => {
     if (!sheet || sheet.hidden) return;
     sheet.hidden = true;
-    // Give focus back to the item that opened the sheet.
-    openCard?.querySelector<HTMLAnchorElement>("a.item-link")?.focus();
+    if (restoreFocus) openCard?.querySelector<HTMLAnchorElement>("a.item-link")?.focus();
     openCard = null;
   };
 
@@ -73,8 +73,17 @@ const { lang } = Astro.props;
     });
   }
 
-  sheet?.querySelector(".sheet-close")?.addEventListener("click", closeSheet);
+  sheet?.querySelector(".sheet-close")?.addEventListener("click", () => closeSheet(true));
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeSheet();
+    if (event.key === "Escape") closeSheet(true);
   });
+  document.addEventListener("click", (event) => {
+    const target = event.target as Element | null;
+    if (target?.closest(".item-sheet, .entry-card a.item-link")) return;
+    closeSheet(false);
+  });
+  // ListFilter hides cards by setting `hidden`; never leave the sheet showing an item that is filtered out.
+  new MutationObserver(() => {
+    if (openCard?.hidden) closeSheet(false);
+  }).observe(browser ?? document.body, { attributes: true, attributeFilter: ["hidden"], subtree: true });
 </script>

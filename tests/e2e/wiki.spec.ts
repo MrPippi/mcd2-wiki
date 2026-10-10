@@ -528,3 +528,48 @@ test("wide touch screens use the whole width for the grid instead of a hover pan
   await expect(page.getByTestId("item-tooltip")).toBeHidden();
   await context.close();
 });
+
+test("the English kicker is not part of the search index", async ({ page }) => {
+  await page.goto("/zh/search/?q=weapon");
+  await expect(page.locator(".pagefind-ui__message")).toBeVisible({ timeout: 15_000 });
+  const text = (await page.locator(".pagefind-ui__result-excerpt").allTextContents()).join(" ");
+  for (const kicker of ["MELEE WEAPON", "RANGED WEAPON"]) expect(text, kicker).not.toContain(kicker);
+});
+
+test("wide touch screens label the category tabs", async ({ browser }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "one wide touch context is enough");
+  const context = await browser.newContext({
+    viewport: { width: 820, height: 1180 },
+    isMobile: true,
+    hasTouch: true,
+    baseURL: testInfo.project.use.baseURL,
+  });
+  const page = await context.newPage();
+  await page.goto("/zh/melee/");
+  const labels = page.locator(".category-tabs .tab-label");
+  await expect(labels).toHaveCount(7);
+  const shown = await labels.evaluateAll((els) =>
+    els.map((el) => {
+      const box = el.getBoundingClientRect();
+      return getComputedStyle(el).opacity === "1" && box.width > 10 && box.height > 10;
+    }),
+  );
+  expect(shown).toEqual(Array(7).fill(true));
+  await context.close();
+});
+
+test("the details sheet closes on an outside tap or when the filter hides its item", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "mobile", "touch interaction");
+  await page.goto("/zh/melee/");
+  const sheet = page.getByTestId("item-sheet");
+  const link = cardNamed(page, "燃燒之刃").locator("a.item-link");
+  await link.click();
+  await expect(sheet).toBeVisible();
+  await page.locator("h1").click();
+  await expect(sheet).toBeHidden();
+  await link.click();
+  await expect(sheet).toBeVisible();
+  await page.locator(".filter-text").fill("zzz-no-such-item");
+  await expect(sheet).toBeHidden();
+  await expect(page.locator(".filter-text")).toBeFocused();
+});
