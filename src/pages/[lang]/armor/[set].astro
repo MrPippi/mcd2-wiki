@@ -30,11 +30,11 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
     <div class="entry-layout">
       <aside class="info-box panel" data-testid="info-box">
         <div class="set-preview">
-          {pieces.map(({ entry }) => (
-            <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={72} category={entry.category} variant={entry.variant} loading="eager" />
+          {pieces.map(({ entry }, index) => (
+            <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={72} category={entry.category} variant={entry.variant} loading="eager" searchImage={index === 0} />
           ))}
         </div>
-        <dl class="facts">
+        <dl class="facts" data-pagefind-ignore>
           <div>
             <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
             <dd class:list={{ "is-unique": set.variant === "unique" }}>{t(lang, set.variant)}</dd>

@@ -4,30 +4,30 @@
 /* Inventory slot, drawn after the in-game inventory. Layers from the edge inward (in --px, the slot's
    own pixels at 103px): 1 black, 2 rarity border, 1 #353535 inner frame, 1 #0D0D0D, 1 inner glow. */
 .icon-frame.frame-inventory {
-  --slot-border: #897a6d; --slot-glow: #0d0d0d;
-  background: #161616;
+  --slot-glow: var(--slot-deep);
+  background: var(--slot-bg);
   box-shadow:
-    0 0 0 max(1px, var(--px)) #000,
+    0 0 0 max(1px, var(--px)) var(--slot-edge),
     inset 0 0 0 max(1px, calc(var(--px) * 2)) var(--slot-border),
-    inset 0 0 0 calc(var(--px) * 3) #353535,
-    inset 0 0 0 calc(var(--px) * 4) #0d0d0d,
+    inset 0 0 0 calc(var(--px) * 3) var(--slot-inner),
+    inset 0 0 0 calc(var(--px) * 4) var(--slot-deep),
     inset 0 0 0 calc(var(--px) * 5) var(--slot-glow);
 }
 .icon-frame.frame-inventory.is-unique {
-  --slot-border: #ff7e2f; --slot-glow: #ab6f2e;
-  background: linear-gradient(135deg, #7d421e 0%, #2d2018 38%, #271b15 100%);
+  --slot-border: var(--slot-unique-border); --slot-glow: var(--slot-unique-glow);
+  background: linear-gradient(135deg, var(--slot-unique-top) 0%, var(--slot-unique-mid) 38%, var(--slot-unique-low) 100%);
 }
 .icon-frame.frame-inventory > .entry-icon { width: 82%; height: 82%; object-fit: contain; image-rendering: pixelated; }
 /* Unique rarity mark: a small orange × of five pixel squares in the top-left corner. */
 .slot-mark {
   --sq: max(1px, calc(var(--px) * 3));
   position: absolute; left: calc(var(--px) * 9); top: calc(var(--px) * 9); z-index: 1;
-  width: var(--sq); height: var(--sq); background: #ff7e2f;
+  width: var(--sq); height: var(--sq); background: var(--slot-unique-border);
   box-shadow:
-    calc(var(--sq) * 2) 0 0 #ff7e2f,
-    var(--sq) var(--sq) 0 #ff7e2f,
-    0 calc(var(--sq) * 2) 0 #ff7e2f,
-    calc(var(--sq) * 2) calc(var(--sq) * 2) 0 #ff7e2f;
+    calc(var(--sq) * 2) 0 0 var(--slot-unique-border),
+    var(--sq) var(--sq) 0 var(--slot-unique-border),
+    0 calc(var(--sq) * 2) 0 var(--slot-unique-border),
+    calc(var(--sq) * 2) calc(var(--sq) * 2) 0 var(--slot-unique-border);
 }
 /* Hotbar artifact slot (T_UI_ArtifactSlot_Default): interior spans x 34–186, y 22–174 of 220px. */
 .icon-frame.frame-artifact > .entry-icon { position: absolute; left: 15.5%; top: 10%; width: 69%; height: 69%; }

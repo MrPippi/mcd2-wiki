@@ -14,12 +14,14 @@ interface Props {
   variant: Entry["variant"];
   kicker: string;
   description?: Localized;
+  /** Position in the list; staggers the cascade-in animation. */
+  index?: number;
 }
 
-const { lang, href, name, icon, category, variant, kicker, description } = Astro.props;
+const { lang, href, name, icon, category, variant, kicker, description, index = 0 } = Astro.props;
 const unique = variant === "unique";
 ---
-<li class="entry-card" data-variant={variant} data-names={`${name.zh} ${name.en}`.toLowerCase()}>
+<li class="entry-card" style={`--i:${index}`} data-variant={variant} data-names={`${name.zh} ${name.en}`.toLowerCase()}>
   <a class="item-link" href={href}>
     <EntryIcon icon={icon} alt={name[lang]} category={category} variant={variant} />
     <span class:list={["primary", "item-name", { "is-unique": unique }]}>{name[lang]}</span>

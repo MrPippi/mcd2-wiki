@@ -30,9 +30,10 @@ const cards = allArmorSets.map((set) => {
   <h1><UiIcon src={categoryIcon("armor")} /> {CATEGORY_LABEL.armor[lang]} <span class="count">({cards.length})</span></h1>
   <ListFilter lang={lang} showVariant={true} />
   <ItemBrowser lang={lang}>
-    {cards.map(({ set, pieces, icon }) => (
+    {cards.map(({ set, pieces, icon }, index) => (
       <ItemCard
         lang={lang}
+        index={index}
         href={href(lang, "armor", set.slug)}
         name={set.name}
         icon={icon}

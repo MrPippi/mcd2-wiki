@@ -10,14 +10,56 @@
   --surface: #10222a;
   --surface-2: #1c2b31;
   --border: #2c3b42;
+  --border-strong: #3d5058;
   --text: #e8e2d8;
   --muted: #8fa3aa;
+  /* Game orange means two things only: unique rarity and the current category tab. */
   --accent: #ff7e2f;
+  /* Interface teal: links, pressed buttons, focus, primary actions. */
   --link: #8fd6e0;
+  --focus: var(--link);
+  --on-link: #0b1a20;
   --danger: #e06666;
+  --on-danger: #fff7f0;
+  /* Off-black for pixel drop shadows and keycaps, never pure #000. */
+  --ink: #05090b;
   --radius: 0;
   --max: 1180px;
+
+  /* In-game inventory slot (frames.css, home category slots). */
+  --slot-bg: #161616;
+  --slot-edge: #000;
+  --slot-border: #897a6d;
+  --slot-inner: #353535;
+  --slot-deep: #0d0d0d;
+  --slot-unique-border: var(--accent);
+  --slot-unique-glow: #ab6f2e;
+  --slot-unique-top: #7d421e;
+  --slot-unique-mid: #2d2018;
+  --slot-unique-low: #271b15;
+
   --font-body: "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
   --font-pixel: "Cubic11", var(--font-body);
   --font-label: "Silkscreen", "Cubic11", monospace;
+
+  /* Pixel fonts stay sharp at whole multiples of their grid: Cubic 11 is drawn on 12px, Silkscreen on 8px.
+     The half steps (18px, 12px label) land on whole device pixels on 2x screens. */
+  --fs-pixel-s: 12px;
+  --fs-pixel-m: 18px;
+  --fs-pixel-l: 24px;
+  --fs-pixel-xl: 36px;
+  --fs-pixel-2xl: 48px;
+  --fs-label-s: 8px;
+  --fs-label-m: 12px;
+  --fs-label-l: 16px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 160ms;
+  --dur: 260ms;
+
+  --z-tab-label: 5;
+  --z-sheet: 20;
+  --z-grain: 40;
+  --z-skip: 50;
 }

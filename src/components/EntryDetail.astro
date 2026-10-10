@@ -41,7 +41,7 @@ const related = relatedLinks(lang, entry);
       {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
       {related.length > 0 && (
         <EntrySection title={t(lang, "related")} en="RELATED">
-          <ul class="related">
+          <ul class="related" data-pagefind-ignore>
             {related.map((link) => (
               <li>
                 <span class="related-label" data-pagefind-ignore>{t(lang, link.labelKey)}</span>

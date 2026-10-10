@@ -13,6 +13,7 @@ import type { Category } from "../../scripts/extract/config";
 import CategoryTabs from "../components/CategoryTabs.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { HTML_LANG, t, type Lang } from "../lib/i18n";
+import { metaDescription } from "../lib/meta";
 import { assetUrl } from "../lib/url";
 
 interface Props {
@@ -20,18 +21,36 @@ interface Props {
   title: string;
   /** The category this page belongs to; highlights its tab. */
   current?: Category;
+  /** Plain-text page summary for search engines and link previews; defaults to the site tagline. */
+  description?: string;
+  /** Where the language switch leads when the page has no counterpart at the same path (the 404 page). */
+  langSwitchHref?: string;
 }
 
-const { lang, title, current } = Astro.props;
+const OG_LOCALE: Readonly<Record<Lang, string>> = { zh: "zh_TW", en: "en_US" };
+
+const { lang, title, current, description = "", langSwitchHref } = Astro.props;
+const fullTitle = `${title} | ${t(lang, "siteTitle")}`;
+const summary = metaDescription(description, 160, t(lang, "tagline"));
 ---
 <!doctype html>
 <html lang={HTML_LANG[lang]} data-compare="on">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{`${title} | ${t(lang, "siteTitle")}`}</title>
+    <title>{fullTitle}</title>
+    <meta name="description" content={summary} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={t(lang, "siteTitle")} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={summary} />
+    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="theme-color" content="#1c2b31" />
+    <link rel="icon" type="image/svg+xml" href={assetUrl("favicon.svg")} />
     <script is:inline>
       (function () {
+        document.documentElement.classList.add("js");
         try {
           if (localStorage.getItem("mcd2-compare") === "off") document.documentElement.dataset.compare = "off";
         } catch (error) {
@@ -41,13 +60,16 @@ const { lang, title, current } = Astro.props;
     </script>
   </head>
   <body>
-    <SiteHeader lang={lang} />
+    <a class="skip-link" href="#main">{t(lang, "skipToContent")}</a>
+    <SiteHeader lang={lang} switchHref={langSwitchHref} />
     <CategoryTabs lang={lang} current={current} />
-    <main class="site-main"><slot /></main>
+    <main class="site-main" id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer">
-      <p>{t(lang, "disclaimer")}</p>
-      <p>{t(lang, "source")}</p>
-      <p><a href={assetUrl("licenses/Cubic-11-OFL.txt")}>{t(lang, "fontLicense")}</a></p>
+      <div class="footer-inner">
+        <p>{t(lang, "disclaimer")}</p>
+        <p>{t(lang, "source")}</p>
+        <p class="footer-license"><a href={assetUrl("licenses/Cubic-11-OFL.txt")}>{t(lang, "fontLicense")}</a></p>
+      </div>
     </footer>
   </body>
 </html>

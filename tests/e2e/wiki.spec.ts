@@ -282,11 +282,14 @@ test("category tabs mark the current category", async ({ page }) => {
 
 test("Q and E switch between category tabs", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium", "keyboard shortcuts are a desktop feature");
+  // The URL changes before the new page's key handler is attached; wait for it before the next key.
   await page.goto("/zh/melee/");
   await page.keyboard.press("e");
   await expect(page).toHaveURL(/\/zh\/ranged\/$/);
+  await page.waitForLoadState("domcontentloaded");
   await page.keyboard.press("q");
   await expect(page).toHaveURL(/\/zh\/melee\/$/);
+  await page.waitForLoadState("domcontentloaded");
   await page.keyboard.press("q");
   await expect(page).toHaveURL(/\/zh\/effect\/$/);
 });
@@ -306,6 +309,12 @@ test("typing in search boxes never switches tabs", async ({ page }, testInfo) =>
 
 test("the header search goes to the search page", async ({ page }) => {
   await page.goto("/zh/melee/");
+  // Phones fold the header search behind an icon button.
+  const toggle = page.locator(".search-toggle");
+  if (await toggle.isVisible()) {
+    await toggle.click();
+    await expect(page.locator(".header-search input")).toBeFocused();
+  }
   await page.locator(".header-search input").fill("sword");
   await page.locator(".header-search input").press("Enter");
   await expect(page).toHaveURL(/\/zh\/search\/\?q=sword$/);
@@ -466,7 +475,8 @@ test("the effects table and search results use the game palette", async ({ page 
   const primary = await page.locator("#search .pagefind-ui").evaluate((el) =>
     getComputedStyle(el).getPropertyValue("--pagefind-ui-primary").trim().toLowerCase(),
   );
-  expect(primary).toBe("#ff7e2f");
+  // Interface teal; game orange is reserved for rarity and the current tab.
+  expect(primary).toBe("#8fd6e0");
 });
 
 test("no purple from the old theme remains", async ({ page }) => {

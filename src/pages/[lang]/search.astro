@@ -23,7 +23,7 @@ const placeholder = t(lang, "search");
         element: "#search",
         baseUrl: base,
         showSubResults: true,
-        showImages: false,
+        showImages: true,
         translations: { placeholder },
       });
       const query = new URLSearchParams(window.location.search).get("q");
