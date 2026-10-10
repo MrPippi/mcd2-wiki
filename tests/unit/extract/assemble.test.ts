@@ -23,7 +23,7 @@ describe("assembleEntry", () => {
     expect(entry.description).toMatchObject({
       zh: '造成 <span class="placeholder" data-slot="0">{數值}</span> 傷害。<br>好用',
       en: 'Deals <span class="placeholder" data-slot="0">{value}</span> damage.<br>Nice',
-      de: 'Deals <span class="placeholder" data-slot="0">{value}</span> damage.<br>Nice',
+      de: 'Deals <span class="placeholder" data-slot="0">{Wert}</span> damage.<br>Nice',
     });
     expect(entry.description?.ja).toMatch(/^<span class="placeholder" data-slot="0">\{[^}]+\}<\/span> ダメージ$/);
     expect(issues).toEqual([]);

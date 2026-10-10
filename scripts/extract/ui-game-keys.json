@@ -23,5 +23,6 @@
   "markerMinecart": { "namespace": "Text/Release/WorldMapLabels.csv", "key": "worldmap_action_bar_minecartstations" },
   "markerRift": { "namespace": "Text/Release/WorldMapLabels.csv", "key": "worldmap_tooltip_title_rift" },
   "markerPortal": { "namespace": "Text/Release/SettingsLabels.csv", "key": "Input_TownPortal" },
-  "markerMerchant": { "namespace": "Text/Release/VendorLabels.csv", "key": "vendor_village_merchant_titleshort" }
+  "markerMerchant": { "namespace": "Text/Release/VendorLabels.csv", "key": "vendor_village_merchant_titleshort" },
+  "obtainedFromBook": { "namespace": "Text/Release/InventoryLabels.csv", "key": "enchantment_info_description" }
 }
