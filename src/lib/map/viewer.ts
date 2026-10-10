@@ -9,6 +9,7 @@ import { countByKind, parseHiddenKinds, searchMarkers, serializeHiddenKinds, wit
 import { tileUrlTemplate } from "./tiles";
 import { formatView, parseView, parseWorld, worldSearch } from "./view-state";
 import { TILE } from "./worlds";
+import { fillZoom } from "./zoom";
 
 const STORAGE_KEY = "mcd2-map-hidden";
 /** Area names show from this many levels below the top zoom. */
@@ -17,6 +18,7 @@ const LABEL_LEVELS = 3;
 const FOCUS_LEVELS = 1;
 const PIN_SIZE: L.PointTuple = [16, 16];
 const ICON_PIN_SIZE: L.PointTuple = [28, 28];
+const POPUP_OPTIONS: L.PopupOptions = { minWidth: 200, maxWidth: 280 };
 
 interface Payload {
   readonly worlds: readonly WorldMap[];
@@ -77,12 +79,22 @@ function addPins(map: L.Map, world: WorldMap, lang: Lang, labels: Payload["label
     // Area labels sit on top of the teleport-statue pins: they stay inert so clicks reach the pin beneath.
     const isArea = marker.kind === "area";
     const pin = L.marker(toLatLng(world, marker.px, marker.py), { icon, title: marker.name[lang], keyboard: !isArea, interactive: !isArea });
-    if (!isArea) pin.bindPopup(popupElement(marker, lang, labels[marker.kind]));
+    if (!isArea) pin.bindPopup(popupElement(marker, lang, labels[marker.kind]), POPUP_OPTIONS);
     layers.get(marker.kind)?.addLayer(pin);
     pins.set(marker.id, pin);
   }
   for (const [kind, layer] of layers) if (!hidden.has(kind)) layer.addTo(map);
   return { layers, pins };
+}
+
+/** Keep the zoom floor at the level where the render still fills the panel, so zooming out never shows empty space. */
+function limitZoomOut(map: L.Map, world: WorldMap): void {
+  const apply = () => {
+    const { x, y } = map.getSize();
+    map.setMinZoom(fillZoom({ width: x, height: y }, world.frame.imageSize, world.zMax));
+  };
+  map.on("resize", apply);
+  apply();
 }
 
 function trackView(root: HTMLElement, map: L.Map, world: WorldMap): void {
@@ -101,10 +113,11 @@ function showWorld(root: HTMLElement, canvas: HTMLElement, world: WorldMap, payl
   const lang = root.dataset.lang as Lang;
   const size = world.frame.imageSize;
   const bounds = L.latLngBounds(toLatLng(world, 0, size), toLatLng(world, size, 0));
-  const map = L.map(canvas, { crs: L.CRS.Simple, minZoom: 0, maxZoom: world.zMax, zoomSnap: 1, maxBounds: bounds.pad(0.25), attributionControl: false });
+  const map = L.map(canvas, { crs: L.CRS.Simple, minZoom: 0, maxZoom: world.zMax, zoomSnap: 1, maxBounds: bounds, maxBoundsViscosity: 1, attributionControl: false });
+  limitZoomOut(map, world);
   L.tileLayer(tileUrlTemplate(import.meta.env.BASE_URL, world.key), { tileSize: TILE, maxNativeZoom: world.zMax, maxZoom: world.zMax, noWrap: true, bounds }).addTo(map);
   const { layers, pins } = addPins(map, world, lang, payload.labels, hidden);
-  const view = useHash ? parseView(location.hash, { zMin: 0, zMax: world.zMax, imageSize: size }) : undefined;
+  const view = useHash ? parseView(location.hash, { zMin: map.getMinZoom(), zMax: world.zMax, imageSize: size }) : undefined;
   if (view) map.setView(toLatLng(world, view.px, view.py), view.z, { animate: false });
   else if (world.markers.length > 0) map.fitBounds(L.latLngBounds(world.markers.map((m) => toLatLng(world, m.px, m.py))).pad(0.1), { animate: false });
   else map.fitBounds(bounds, { animate: false });
@@ -163,7 +176,7 @@ function bindTabs(root: HTMLElement, payload: Payload, onSwitch: (next: WorldMap
 function bindHash(getShown: () => Shown): void {
   window.addEventListener("hashchange", () => {
     const { world, map } = getShown();
-    const view = parseView(location.hash, { zMin: 0, zMax: world.zMax, imageSize: world.frame.imageSize });
+    const view = parseView(location.hash, { zMin: map.getMinZoom(), zMax: world.zMax, imageSize: world.frame.imageSize });
     if (view) map.setView(toLatLng(world, view.px, view.py), view.z, { animate: false });
   });
 }

@@ -140,7 +140,10 @@ test("language switch keeps the world and the view", async ({ page }) => {
 });
 
 test("area names appear only when zoomed in", async ({ page }) => {
+  // The minimum zoom follows the panel; a small panel keeps it below the zoom where names appear (zMax - 3).
+  await page.setViewportSize({ width: 360, height: 480 });
   await page.goto("/zh/map/#0/4096/4096");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-zoom", "1");
   await expect(page.locator(".world-map")).toHaveAttribute("data-labels", "off");
   await expect(page.locator(".map-marker--area").first()).toBeHidden();
   await page.goto("/zh/map/#4/432/4416");
@@ -151,4 +154,52 @@ test("area labels do not capture clicks meant for the pin beneath", async ({ pag
   await page.goto("/zh/map/#4/432/4416");
   await expect(page.locator(".map-marker--area").first()).toBeAttached();
   await expect(page.locator(".map-marker--area.leaflet-interactive")).toHaveCount(0);
+});
+
+test.describe("zoom limits and popups", () => {
+  test.use({ viewport: { width: 1440, height: 900 } });
+
+  test("zooming out stops once the render fills the panel", async ({ page }) => {
+    await page.goto("/zh/map/#0/4096/4096");
+    const root = page.locator(".world-map");
+    await expect(root).toHaveAttribute("data-ready", "true");
+    const zoom = Number(await root.getAttribute("data-zoom"));
+    expect(zoom).toBeGreaterThanOrEqual(1);
+    await expect(page.locator(".leaflet-control-zoom-out")).toHaveClass(/leaflet-disabled/);
+    await expect
+      .poll(async () =>
+        page.evaluate(() => {
+          const canvas = document.querySelector(".map-canvas")!.getBoundingClientRect();
+          const tiles = [...document.querySelectorAll(".leaflet-tile-loaded")].map((tile) => tile.getBoundingClientRect());
+          if (tiles.length === 0) return false;
+          const left = Math.min(...tiles.map((t) => t.left));
+          const top = Math.min(...tiles.map((t) => t.top));
+          const right = Math.max(...tiles.map((t) => t.right));
+          const bottom = Math.max(...tiles.map((t) => t.bottom));
+          return left <= canvas.left + 1 && top <= canvas.top + 1 && right >= canvas.right - 1 && bottom >= canvas.bottom - 1;
+        }),
+      )
+      .toBe(true);
+  });
+
+  test("zooming in stops at the top zoom", async ({ page }) => {
+    await page.goto("/zh/map/#99/4096/4096");
+    await expect(page.locator(".world-map")).toHaveAttribute("data-zoom", "5");
+    await expect(page.locator(".leaflet-control-zoom-in")).toHaveClass(/leaflet-disabled/);
+  });
+
+  test("a marker popup is wide enough to read", async ({ page }) => {
+    await page.goto("/zh/map/");
+    await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+    await page.locator(".map-marker--rift").first().click();
+    const content = page.locator(".leaflet-popup-content");
+    await expect(content).toBeVisible();
+    expect((await content.boundingBox())!.width).toBeGreaterThanOrEqual(200);
+  });
+
+  test("the world tabs do not scroll vertically", async ({ page }) => {
+    await page.goto("/zh/map/");
+    const overflow = await page.locator(".map-tabs ol").evaluate((el) => el.scrollHeight - el.clientHeight);
+    expect(overflow).toBeLessThanOrEqual(0);
+  });
 });
