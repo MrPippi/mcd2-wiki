@@ -8229,6 +8229,7 @@
       "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
       "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
+    "icon": "icons/enchantment-book/flame-belch-unique.png",
     "links": {
       "enchantment": "fire-aspect-unique"
     }

@@ -16,7 +16,9 @@ describe("site data", () => {
 
   it("finds the enchantment books that grant an enchantment", () => {
     expect(booksFor("arcane").map((book) => book.id)).toEqual(["EnchantmentBook_Arcane"]);
-    expect(booksFor("fire-aspect-unique").map((book) => book.id)).toEqual(["EnchantmentBook_FireAspect_Unique"]);
+    // Unique enchantments come fixed on unique gear, never as books.
+    expect(booksFor("fire-aspect-unique")).toEqual([]);
+    expect(publishedEntries.some((entry) => entry.category === "enchantment-book" && entry.variant === "unique")).toBe(false);
   });
 
   it("hides entries that should have an icon but have none", () => {
@@ -37,8 +39,9 @@ describe("site data", () => {
     expect(entriesIn("effect").some((entry) => entry.icon !== undefined)).toBe(true);
   });
 
-  it("gives every published enchantment at least one book", () => {
-    expect(entriesIn("enchantment").filter((entry) => booksFor(entry.slug).length === 0)).toEqual([]);
+  it("gives every published non-unique enchantment at least one book", () => {
+    const normal = entriesIn("enchantment").filter((entry) => entry.variant === "normal");
+    expect(normal.filter((entry) => booksFor(entry.slug).length === 0)).toEqual([]);
   });
 
   it("finds armor sets", () => {

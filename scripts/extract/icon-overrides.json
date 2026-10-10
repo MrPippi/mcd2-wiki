@@ -12,6 +12,7 @@
   "Critical_Damage_Increase": "Assets/UI/Icons/Statuses/T_UI_Icon_Status_CriticalDamageUp.png",
   "ElementalHit": "Plugins/OreUI/Content/UI/Icons/Effects/T_UI_Icon_Effect_Randomancer.png",
   "EmeraldsIncrease": "Plugins/OreUI/Content/UI/Icons/Effects/T_UI_Icon_Effect_Prospector.png",
+  "EnchantmentBook_FlameBelch_Unique": "Plugins/OreUI/Content/UI/Icons/Effects/T_UI_Icon_Effect_FlameBelch.png",
   "EnchantmentBook_SoulAspect": "Assets/UI/Icons/Enchantments/T_UI_Icon_Enchantment_SoulFireAspect.png",
   "SoulCharged": "Assets/UI/Icons/Statuses/T_UI_Icon_Status_SoulWeariness.png",
   "SpeedIncrement": "Plugins/OreUI/Content/UI/Icons/Effects/T_UI_Icon_Effect_SpeedIncriment.png",

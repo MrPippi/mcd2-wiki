@@ -57,7 +57,7 @@
 .fixed-effect.has-icon > .entry-icon, .fixed-effect.has-icon > .icon-frame { grid-row: 1 / span 3; align-self: start; }
 .fixed-name { justify-self: start; color: var(--text); text-decoration: none; }
 .fixed-name .primary { font-family: var(--font-display); font-weight: 700; font-size: 20px; }
-.fixed-name:hover .primary { color: var(--accent); }
+a.fixed-name:hover .primary { color: var(--accent); }
 .fixed-desc { display: flex; margin: 4px 0 0; }
 .fixed-effect .note { margin: 4px 0 0; }
 .value { font-weight: 700; font-variant-numeric: tabular-nums; }

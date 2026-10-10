@@ -30,9 +30,16 @@ const hasRequiredIcon = (entry: Entry): boolean => {
   return source === undefined || source.optional === true || entry.icon !== undefined;
 };
 
+/** Unique enchantments come fixed on unique gear and cannot be rerolled, so their books are not obtainable. */
+const isObtainable = (entry: Entry): boolean => !(entry.category === "enchantment-book" && entry.variant === "unique");
+
 export const publishedEntries: readonly Entry[] = entries.filter(
-  (entry) => entry.release === "base" && hasRequiredIcon(entry),
+  (entry) => entry.release === "base" && hasRequiredIcon(entry) && isObtainable(entry),
 );
+
+/** Any released entry, published or not: for text and art shown inside another entry's page. */
+export const findBaseEntry = (category: Category, slug: string): Entry | undefined =>
+  entries.find((entry) => entry.release === "base" && entry.category === category && entry.slug === slug);
 
 export const allArmorSets: readonly ArmorSet[] = z.array(ArmorSetSchema).parse(rawSets);
 

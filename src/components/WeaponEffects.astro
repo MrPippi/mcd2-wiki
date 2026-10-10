@@ -31,8 +31,20 @@ const [open, close] = lang === "zh" ? ["（", "）"] : [" (", ")"];
     {fixed && (
       <EntrySection title={t(lang, "uniqueEffect")} testid="unique-effect">
         <div class:list={["fixed-effect", { "has-icon": fixed.entry.icon }]}>
-          {fixed.entry.icon && <EntryIcon icon={fixed.entry.icon} alt="" size={EFFECT_ICON.fixed} category={fixed.entry.category} variant={fixed.entry.variant} />}
-          <a class="fixed-name" href={entryHref(lang, fixed.entry)}><LangText lang={lang} value={fixed.entry.name} /></a>
+          {fixed.entry.icon && (
+            <EntryIcon
+              icon={fixed.entry.icon}
+              alt=""
+              size={EFFECT_ICON.fixed}
+              category={fixed.entry.category === "enchantment-book" ? undefined : fixed.entry.category}
+              variant={fixed.entry.variant}
+            />
+          )}
+          {fixed.linked ? (
+            <a class="fixed-name" href={entryHref(lang, fixed.entry)}><LangText lang={lang} value={fixed.entry.name} /></a>
+          ) : (
+            <span class="fixed-name"><LangText lang={lang} value={fixed.entry.name} /></span>
+          )}
           {fixedText && <LangText as="p" class="fixed-desc" lang={lang} value={fixedText} html />}
           <p class="note" data-pagefind-ignore>{t(lang, fixed.kind === "effect" ? "fixedEffectNote" : "fixedEnchantmentNote")}</p>
         </div>

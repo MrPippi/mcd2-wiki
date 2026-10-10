@@ -719,3 +719,18 @@ test("the effects table shows each effect's game icon where the game has one", a
   await expect(row.locator("img.entry-icon")).toHaveAttribute("src", "/icons/effect/critical-edge.png");
   expect(await row.locator("img.entry-icon").evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
 });
+
+test("Redstone Wrecker shows its in-game fixed enchantment with the FlameBelch icon and no dead link", async ({ page }) => {
+  await page.goto("/zh/melee/giant-club-unique1/");
+  const fixed = page.getByTestId("unique-effect");
+  await expect(fixed).toContainText("炮烙魔法");
+  await expect(fixed.locator("img.entry-icon")).toHaveAttribute("src", "/icons/enchantment-book/flame-belch-unique.png");
+  await expect(fixed.locator("a")).toHaveCount(0);
+  await expect(fixed.locator(".fixed-desc .primary .value")).toHaveText("80%");
+});
+
+test("unique enchantments list the weapons that carry them instead of a book", async ({ page }) => {
+  await page.goto("/zh/enchantment/gravity-pulse-unique/");
+  await expect(page.getByTestId("book-source")).toHaveCount(0);
+  await expect(page.getByTestId("fixed-on").locator("a[href='/zh/melee/greatsword-unique1/']")).toBeVisible();
+});
