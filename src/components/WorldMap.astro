@@ -64,3 +64,10 @@ const payload = JSON.stringify({ worlds, labels }).replace(/</g, "\\u003c");
 ) : (
   <p class="map-no-data">{t(lang, "mapNoData")}</p>
 )}
+
+<script>
+  import { mountWorldMap } from "../lib/map/viewer";
+
+  const root = document.querySelector<HTMLElement>(".world-map");
+  if (root) mountWorldMap(root);
+</script>
