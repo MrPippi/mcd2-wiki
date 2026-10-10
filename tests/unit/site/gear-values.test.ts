@@ -2,14 +2,29 @@ import { describe, expect, it } from "vitest";
 import { findBaseEntry, findEntry, publishedEntries } from "../../../src/lib/data";
 import { artifactStatsView, describedEntry, enchantmentTiers, fillPlaceholders } from "../../../src/lib/gear-values";
 
-const PLACEHOLDER = '<span class="placeholder">{value}</span>';
+const SLOT = (n: number) => `<span class="placeholder" data-slot="${n}">{value}</span>`;
+const PLACEHOLDER = '<span class="placeholder" data-slot="0">{value}</span>';
 
 describe("fillPlaceholders", () => {
   it("fills placeholders in order and leaves extra ones alone", () => {
-    expect(fillPlaceholders(`${PLACEHOLDER} and ${PLACEHOLDER}`, ["20%", "125%"])).toBe(
+    expect(fillPlaceholders(`${SLOT(0)} and ${SLOT(1)}`, ["20%", "125%"], "en")).toBe(
       '<span class="value">20%</span> and <span class="value">125%</span>',
     );
-    expect(fillPlaceholders(`${PLACEHOLDER} and ${PLACEHOLDER}`, ["20%"])).toBe(`<span class="value">20%</span> and ${PLACEHOLDER}`);
+    expect(fillPlaceholders(`${SLOT(0)} and ${SLOT(1)}`, ["20%"], "en")).toBe(`<span class="value">20%</span> and ${SLOT(1)}`);
+  });
+});
+
+describe("fillPlaceholders by slot", () => {
+  it("fills placeholders by slot, not by order of appearance", () => {
+    const html = '移動超過 <span class="placeholder" data-slot="1">{數值}</span> 秒後，提高 <span class="placeholder" data-slot="0">{數值}</span>。';
+    expect(fillPlaceholders(html, ["20%", "3"], "zh")).toBe('移動超過 <span class="value">3</span> 秒後，提高 <span class="value">20%</span>。');
+  });
+
+  it("picks the plural form for the value", () => {
+    const forms = JSON.stringify({ one: "секунду", few: "секунды", many: "секунд", other: "секунды" }).replace(/"/g, "&quot;");
+    const html = `<span class="placeholder" data-slot="0">{x}</span> <span class="plural" data-slot="0" data-forms="${forms}"></span>`;
+    // English plural rules put 5 in "other"; Task 4 switches this to "ru" (expecting "секунд").
+    expect(fillPlaceholders(html, ["5"], "en")).toBe('<span class="value">5</span> <span class="plural">секунды</span>');
   });
 });
 

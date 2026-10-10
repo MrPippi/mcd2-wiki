@@ -23,10 +23,10 @@ const { lang, weapon } = Astro.props;
 const effects = weaponEffectsOf(weapon);
 // A fixed bonus whose text still has a value the game data cannot fill is left out, like hidden entries.
 const fixedFull = effects?.fixed;
-const withValues = (text: Localized, values: readonly string[]): Localized => mapLocalized(text, (html) => fillPlaceholders(html, values));
+const withValues = (text: Localized, values: readonly string[]): Localized => mapLocalized(text, (html, l) => fillPlaceholders(html, values, l));
 const fixedText: Localized | undefined =
   fixedFull?.entry.description && fixedFull.values ? withValues(fixedFull.entry.description, fixedFull.values) : fixedFull?.entry.description;
-const fixed = fixedText && /class="placeholder"/.test(LANGS.map((l) => fixedText[l]).join("")) ? undefined : fixedFull;
+const fixed = fixedText && /class="placeholder" data-slot="/.test(LANGS.map((l) => fixedText[l]).join("")) ? undefined : fixedFull;
 ---
 {effects && (
   <>

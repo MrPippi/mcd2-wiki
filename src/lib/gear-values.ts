@@ -1,11 +1,12 @@
 import type { Entry, Localized } from "../../scripts/extract/schemas";
 import { ArtifactDataSchema, EnchantmentDataSchema, type ArtifactData, type EnchantmentData } from "../../scripts/extract/gear-schema";
+import { z } from "zod";
 import rawArtifacts from "../data/artifacts.json";
 import rawEffects from "../data/effects.json";
 import rawEnchantments from "../data/enchantments.json";
 import { LANGS } from "../../scripts/extract/langs";
 import type { Lang } from "./i18n";
-import { mapLocalized } from "./lang";
+import { htmlLang, mapLocalized } from "./lang";
 
 /** Artifact numbers and enchantment description values read from the game's DataTables by `npm run extract`. */
 export const artifactData: ArtifactData = ArtifactDataSchema.parse(rawArtifacts);
@@ -13,19 +14,31 @@ export const enchantmentData: EnchantmentData = EnchantmentDataSchema.parse(rawE
 /** Effect description values per tier (one template per tier, the same wherever the effect rolls). */
 export const effectData: EnchantmentData = EnchantmentDataSchema.parse(rawEffects);
 
-const PLACEHOLDER = /<span class="placeholder">\{[^}]*\}<\/span>/g;
+const SLOT = /<span class="(placeholder|plural)" data-slot="([^"]*)"(?: data-forms="([^"]*)")?>(?:\{[^}]*\})?<\/span>/g;
 const TIER_LABELS = ["I", "II", "III"] as const;
+const FormsSchema = z.record(z.string(), z.string());
 
-/** Game text with its placeholders filled in order; placeholders beyond the given values stay as they are. */
-export function fillPlaceholders(html: string, values: readonly string[]): string {
-  let next = 0;
-  return html.replace(PLACEHOLDER, (placeholder) => {
-    const value = values[next++];
-    return value === undefined ? placeholder : `<span class="value">${value}</span>`;
+const unescapeQuotes = (text: string): string => text.replace(/&quot;/g, '"');
+
+/** The plural form of `forms` (a JSON map) for a value; a non-numeric value takes "other". */
+function pluralForm(forms: string, value: string, lang: Lang): string {
+  const parsed = FormsSchema.safeParse(JSON.parse(unescapeQuotes(forms)));
+  const map = parsed.success ? parsed.data : {};
+  const number = Number.parseFloat(value);
+  const category = Number.isFinite(number) ? new Intl.PluralRules(htmlLang(lang)).select(number) : "other";
+  return map[category] ?? map.other ?? Object.values(map)[0] ?? "";
+}
+
+/** Game text with its placeholders filled by slot number (and plural forms chosen for the value); slots with no value stay as they are. */
+export function fillPlaceholders(html: string, values: readonly string[], lang: Lang): string {
+  return html.replace(SLOT, (match, kind: string, slot: string, forms: string | undefined) => {
+    const value = /^\d+$/.test(slot) ? values[Number(slot)] : undefined;
+    if (value === undefined) return match;
+    return kind === "plural" ? `<span class="plural">${pluralForm(forms ?? "{}", value, lang)}</span>` : `<span class="value">${value}</span>`;
   });
 }
 
-const fill = (text: Localized, values: readonly string[]): Localized => mapLocalized(text, (html) => fillPlaceholders(html, values));
+const fill = (text: Localized, values: readonly string[]): Localized => mapLocalized(text, (html, lang) => fillPlaceholders(html, values, lang));
 
 /** Each slot from tier I to tier III, e.g. "20%~50%"; one value when the tiers do not differ. */
 const ranges = (tiers: readonly (readonly string[])[]): string[] =>
@@ -54,7 +67,7 @@ export function describedLong(entry: Entry): Localized | undefined {
   return entry.descriptionLong && tiers ? fill(entry.descriptionLong, ranges(tiers)) : entry.descriptionLong;
 }
 
-const UNFILLED = /class="placeholder"/;
+const UNFILLED = /class="placeholder" data-slot="/;
 
 /** Whether every value in the entry's texts could be filled from the game data. */
 export const isFullyDescribed = (entry: Entry): boolean =>

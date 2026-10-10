@@ -20,8 +20,8 @@ describe("assembleEntry", () => {
     );
     expect(entry).toMatchObject({ slug: "sword-unique1", variant: "unique", links: {} });
     expect(entry.description).toEqual({
-      zh: '造成 <span class="placeholder">{數值}</span> 傷害。<br>好用',
-      en: 'Deals <span class="placeholder">{value}</span> damage.<br>Nice',
+      zh: '造成 <span class="placeholder" data-slot="0">{數值}</span> 傷害。<br>好用',
+      en: 'Deals <span class="placeholder" data-slot="0">{value}</span> damage.<br>Nice',
     });
     expect(issues).toEqual([]);
   });

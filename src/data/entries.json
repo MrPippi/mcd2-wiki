@@ -6661,8 +6661,8 @@
       "en": "Thrifty Pendant"
     },
     "description": {
-      "zh": "依據持有的綠寶石數量，最多可獲得 <span class=\"placeholder\">{數值}</span> 傷害加成，最多 <span class=\"placeholder\">{數值}</span> 顆綠寶石生效。",
-      "en": "Grants up to a <span class=\"placeholder\">{value}</span> damage bonus based on emeralds held, effective to a maximum of <span class=\"placeholder\">{value}</span> emeralds."
+      "zh": "依據持有的綠寶石數量，最多可獲得 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 傷害加成，最多 <span class=\"placeholder\" data-slot=\"1\">{數值}</span> 顆綠寶石生效。",
+      "en": "Grants up to a <span class=\"placeholder\" data-slot=\"0\">{value}</span> damage bonus based on emeralds held, effective to a maximum of <span class=\"placeholder\" data-slot=\"1\">{value}</span> emeralds."
     },
     "icon": "icons/talisman/firing-emeralds.png",
     "links": {}
@@ -6704,8 +6704,8 @@
       "en": "Tendrils of the Sprout"
     },
     "description": {
-      "zh": "當生命值高於 <span class=\"placeholder\">{數值}</span> 時，傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> damage increase while health is above <span class=\"placeholder\">{value}</span>."
+      "zh": "當生命值高於 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 時，傷害提高 <span class=\"placeholder\" data-slot=\"1\">{數值}</span>。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"1\">{value}</span> damage increase while health is above <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/talisman/healthy-strike.png",
     "links": {}
@@ -6874,8 +6874,8 @@
       "en": "Medallion of Momentum"
     },
     "description": {
-      "zh": "移動超過 <span class=\"placeholder\">{數值}</span> 秒後，移動速度提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases movement speed by <span class=\"placeholder\">{value}</span> if moving for more than <span class=\"placeholder\">{value}</span> seconds."
+      "zh": "移動超過 <span class=\"placeholder\" data-slot=\"1\">{數值}</span> 秒後，移動速度提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases movement speed by <span class=\"placeholder\" data-slot=\"0\">{value}</span> if moving for more than <span class=\"placeholder\" data-slot=\"1\">{value}</span> seconds."
     },
     "icon": "icons/talisman/speed-increment.png",
     "links": {}
@@ -6950,8 +6950,8 @@
       "en": "Artifact Amplifier"
     },
     "description": {
-      "zh": "使用神器後，會縮短神器冷卻時間並提升傷害，持續 <span class=\"placeholder\">{數值}</span> 秒。",
-      "en": "Artifact usage improves artifact cooldown and damage for <span class=\"placeholder\">{value}</span> seconds."
+      "zh": "使用神器後，會縮短神器冷卻時間並提升傷害，持續 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 秒。",
+      "en": "Artifact usage improves artifact cooldown and damage for <span class=\"placeholder\" data-slot=\"0\">{value}</span> seconds."
     },
     "descriptionLong": {
       "zh": "使用神器會獲得「巧工」狀態，縮短神器冷卻時間，同時提高神器傷害與靈魂收集量。",
@@ -6973,8 +6973,8 @@
       "en": "Mage's Familiar"
     },
     "description": {
-      "zh": "敵人遭夥伴擊敗時，有 <span class=\"placeholder\">{數值}</span> 的機率爆炸。",
-      "en": "<span class=\"placeholder\">{value}</span> chance of enemies exploding when defeated by companions."
+      "zh": "敵人遭夥伴擊敗時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率爆炸。",
+      "en": "<span class=\"placeholder\" data-slot=\"0\">{value}</span> chance of enemies exploding when defeated by companions."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能賦予夥伴爆炸魔法力量。",
@@ -6993,8 +6993,8 @@
       "en": "Crash Landing"
     },
     "description": {
-      "zh": "跳躍攻擊落地時會額外造成 <span class=\"placeholder\">{數值}</span> 點傷害，並使擊退效果提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Jump attack landings deal <span class=\"placeholder\">{value}</span> additional damage and increases knockback by <span class=\"placeholder\">{value}</span>."
+      "zh": "跳躍攻擊落地時會額外造成 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 點傷害，並使擊退效果提高 <span class=\"placeholder\" data-slot=\"1\">{數值}</span>。",
+      "en": "Jump attack landings deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> additional damage and increases knockback by <span class=\"placeholder\" data-slot=\"1\">{value}</span>."
     },
     "descriptionLong": {
       "zh": "跳躍攻擊會造成衝擊，對附近敵人造成額外傷害並擊退敵人。",
@@ -7016,8 +7016,8 @@
       "en": "Ender Mines"
     },
     "description": {
-      "zh": "武器攻擊會部署 <span class=\"placeholder\">{數值}</span> 枚地雷，在敵人接近時或經過一小段時間後爆炸。",
-      "en": "Weapon attacks deploy <span class=\"placeholder\">{value}</span> mines that explode in proximity to enemies or after a short time."
+      "zh": "武器攻擊會部署 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 枚地雷，在敵人接近時或經過一小段時間後爆炸。",
+      "en": "Weapon attacks deploy <span class=\"placeholder\" data-slot=\"0\">{value}</span> mines that explode in proximity to enemies or after a short time."
     },
     "descriptionLong": {
       "zh": "武器攻擊會部署終界水晶，在敵人接近時或經過一小段時間後爆炸。",
@@ -7039,8 +7039,8 @@
       "en": "Tumbleshot"
     },
     "description": {
-      "zh": "翻滾會連續射出 <span class=\"placeholder\">{數值}</span> 支箭矢，造成相當於遠程武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害。",
-      "en": "Rolling fires a barrage of <span class=\"placeholder\">{value}</span> arrows, dealing <span class=\"placeholder\">{value}</span> of ranged weapon damage."
+      "zh": "翻滾會連續射出 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 支箭矢，造成相當於遠程武器傷害 <span class=\"placeholder\" data-slot=\"1\">{數值}</span> 的傷害。",
+      "en": "Rolling fires a barrage of <span class=\"placeholder\" data-slot=\"0\">{value}</span> arrows, dealing <span class=\"placeholder\" data-slot=\"1\">{value}</span> of ranged weapon damage."
     },
     "descriptionLong": {
       "zh": "翻滾會連續向附近敵人射出一陣箭雨。",
@@ -7062,8 +7062,8 @@
       "en": "Chain Reaction"
     },
     "description": {
-      "zh": "投射物有 <span class=\"placeholder\">{數值}</span> 的機率額外生成 <span class=\"placeholder\">{數值}</span> 枚投射物。",
-      "en": "Projectiles have a <span class=\"placeholder\">{value}</span> chance to spawn <span class=\"placeholder\">{value}</span> additional projectiles."
+      "zh": "投射物有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率額外生成 <span class=\"placeholder\" data-slot=\"1\">{數值}</span> 枚投射物。",
+      "en": "Projectiles have a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to spawn <span class=\"placeholder\" data-slot=\"1\">{value}</span> additional projectiles."
     },
     "descriptionLong": {
       "zh": "遠程攻擊命中時，有機率向附近敵人射出額外投射物。",
@@ -7085,8 +7085,8 @@
       "en": "Lightning Surge"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並短暫電擊生物，使其變弱但速度變快。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and zaps mobs for a short time, making them weaker but faster."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並短暫電擊生物，使其變弱但速度變快。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and zaps mobs for a short time, making them weaker but faster."
     },
     "descriptionLong": {
       "zh": "跳躍攻擊與終結攻擊會產生閃電波動，傷害敵人並短暫電擊敵人，使其變弱但速度變快。",
@@ -7108,8 +7108,8 @@
       "en": "Shadowclaw"
     },
     "description": {
-      "zh": "攻擊敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率進入潛影狀態。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
+      "zh": "攻擊敵人時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率進入潛影狀態。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能在攻擊時進入潛影狀態。",
@@ -7131,8 +7131,8 @@
       "en": "Critical Rampage"
     },
     "description": {
-      "zh": "暴擊會使下一次攻擊的暴擊機率提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Critical hits increase critical hit chance of the next attack by <span class=\"placeholder\">{value}</span>."
+      "zh": "暴擊會使下一次攻擊的暴擊機率提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Critical hits increase critical hit chance of the next attack by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能在連續暴擊時提升暴擊準度。",
@@ -7151,8 +7151,8 @@
       "en": "Critical Quiver"
     },
     "description": {
-      "zh": "暴擊會回復 <span class=\"placeholder\">{數值}</span> 支箭矢。",
-      "en": "Critical hits restore <span class=\"placeholder\">{value}</span> arrows."
+      "zh": "暴擊會回復 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 支箭矢。",
+      "en": "Critical hits restore <span class=\"placeholder\" data-slot=\"0\">{value}</span> arrows."
     },
     "descriptionLong": {
       "zh": "暴擊會將箭矢回復至箭袋中。",
@@ -7174,8 +7174,8 @@
       "en": "Dynamo"
     },
     "description": {
-      "zh": "翻滾會讓你的下一次近戰或遠程攻擊獲得 <span class=\"placeholder\">{數值}</span> 傷害增幅。",
-      "en": "Rolling applies <span class=\"placeholder\">{value}</span> damage amplification to your next melee or ranged attack."
+      "zh": "翻滾會讓你的下一次近戰或遠程攻擊獲得 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 傷害增幅。",
+      "en": "Rolling applies <span class=\"placeholder\" data-slot=\"0\">{value}</span> damage amplification to your next melee or ranged attack."
     },
     "descriptionLong": {
       "zh": "翻滾會提高你的下一次近戰或遠程攻擊傷害，每次使用時效果都會堆疊。",
@@ -7197,8 +7197,8 @@
       "en": "Ender Quiver"
     },
     "description": {
-      "zh": "獲得 <span class=\"placeholder\">{數值}</span> 支額外箭矢。",
-      "en": "Grants <span class=\"placeholder\">{value}</span> additional arrows."
+      "zh": "獲得 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 支額外箭矢。",
+      "en": "Grants <span class=\"placeholder\" data-slot=\"0\">{value}</span> additional arrows."
     },
     "descriptionLong": {
       "zh": "提高你的箭矢容量上限。",
@@ -7220,8 +7220,8 @@
       "en": "Fire Aspect"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並讓生物短暫著火。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
     "descriptionLong": {
       "zh": "跳躍攻擊與終結攻擊會產生火焰波動，傷害敵人並使其短暫著火。",
@@ -7261,8 +7261,8 @@
       "en": "Pyromancy"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並讓生物短暫著火。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能在戰鬥中使武器燃起火焰。",
@@ -7287,8 +7287,8 @@
       "en": "Frost Crescent"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並短暫凍結生物，使其攻擊與移動速度降低。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and freezes mobs for a short time, slowing their attacks and movement."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並短暫凍結生物，使其攻擊與移動速度降低。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and freezes mobs for a short time, slowing their attacks and movement."
     },
     "descriptionLong": {
       "zh": "跳躍攻擊與終結攻擊會產生冰霜波動，傷害敵人並短暫凍結敵人，使其攻擊與移動速度降低。",
@@ -7310,8 +7310,8 @@
       "en": "Gravity Pulse"
     },
     "description": {
-      "zh": "使用神器時，會將 <span class=\"placeholder\">{數值}</span> 格內的所有敵人拉向你。",
-      "en": "Artifact usage pulls all enemies within <span class=\"placeholder\">{value}</span> blocks toward you."
+      "zh": "使用神器時，會將 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 格內的所有敵人拉向你。",
+      "en": "Artifact usage pulls all enemies within <span class=\"placeholder\" data-slot=\"0\">{value}</span> blocks toward you."
     },
     "descriptionLong": {
       "zh": "使用神器時，會將附近所有敵人拉向你。",
@@ -7336,8 +7336,8 @@
       "en": "Gravity Strike"
     },
     "description": {
-      "zh": "攻擊有機率將 <span class=\"placeholder\">{數值}</span> 格內的所有敵人拉向你。",
-      "en": "Attacks have a chance to pull all enemies within <span class=\"placeholder\">{value}</span> blocks toward you."
+      "zh": "攻擊有機率將 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 格內的所有敵人拉向你。",
+      "en": "Attacks have a chance to pull all enemies within <span class=\"placeholder\" data-slot=\"0\">{value}</span> blocks toward you."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能賦予武器力量而將敵人拉近。",
@@ -7362,8 +7362,8 @@
       "en": "Shielding Smite"
     },
     "description": {
-      "zh": "擊敗敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率為盟友創造強固之泉。",
-      "en": "Defeating an enemy has a <span class=\"placeholder\">{value}</span> chance to create a Fortifying well for allies."
+      "zh": "擊敗敵人時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率為盟友創造強固之泉。",
+      "en": "Defeating an enemy has a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to create a Fortifying well for allies."
     },
     "descriptionLong": {
       "zh": "擊敗敵人時有機率創造一座泉水，賦予你和盟友強固狀態，而不受到敵人傷害。",
@@ -7385,8 +7385,8 @@
       "en": "Health Synergy"
     },
     "description": {
-      "zh": "使用神器時，會恢復你最大生命值的 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Artifact usage heals <span class=\"placeholder\">{value}</span> of your maximum health."
+      "zh": "使用神器時，會恢復你最大生命值的 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Artifact usage heals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of your maximum health."
     },
     "descriptionLong": {
       "zh": "使用神器來恢復生命值。",
@@ -7408,8 +7408,8 @@
       "en": "Power Amplifier"
     },
     "description": {
-      "zh": "使用神器時，會讓你的下一次近戰或遠程攻擊獲得 <span class=\"placeholder\">{數值}</span> 的傷害增幅。",
-      "en": "Artifact usage applies <span class=\"placeholder\">{value}</span> damage amplification to your next melee or ranged attack."
+      "zh": "使用神器時，會讓你的下一次近戰或遠程攻擊獲得 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害增幅。",
+      "en": "Artifact usage applies <span class=\"placeholder\" data-slot=\"0\">{value}</span> damage amplification to your next melee or ranged attack."
     },
     "descriptionLong": {
       "zh": "使用神器會提高你的下一次近戰或遠程攻擊傷害，每次使用效果都會堆疊。",
@@ -7454,8 +7454,8 @@
       "en": "Bottomless Brew"
     },
     "description": {
-      "zh": "額外獲得 <span class=\"placeholder\">{數值}</span> 瓶生命藥水。",
-      "en": "Grants <span class=\"placeholder\">{value}</span> additional health potions."
+      "zh": "額外獲得 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 瓶生命藥水。",
+      "en": "Grants <span class=\"placeholder\" data-slot=\"0\">{value}</span> additional health potions."
     },
     "descriptionLong": {
       "zh": "額外獲得生命藥水使用次數。",
@@ -7477,8 +7477,8 @@
       "en": "Somersault"
     },
     "description": {
-      "zh": "額外獲得 <span class=\"placeholder\">{數值}</span> 次翻滾。",
-      "en": "Grants <span class=\"placeholder\">{value}</span> additional rolls."
+      "zh": "額外獲得 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 次翻滾。",
+      "en": "Grants <span class=\"placeholder\" data-slot=\"0\">{value}</span> additional rolls."
     },
     "descriptionLong": {
       "zh": "獲得連續多次翻滾的能力。",
@@ -7500,8 +7500,8 @@
       "en": "Ichor Blast"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並短暫造成額外靈魂傷害。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and deals additional soul damage for a short time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並短暫造成額外靈魂傷害。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and deals additional soul damage for a short time."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能讓攻擊觸發以靈魂驅動的靈漿爆裂。",
@@ -7523,8 +7523,8 @@
       "en": "Piercing"
     },
     "description": {
-      "zh": "投射物最多可以穿透 <span class=\"placeholder\">{數值}</span> 名敵人。",
-      "en": "Projectiles can pierce up to <span class=\"placeholder\">{value}</span> enemies."
+      "zh": "投射物最多可以穿透 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 名敵人。",
+      "en": "Projectiles can pierce up to <span class=\"placeholder\" data-slot=\"0\">{value}</span> enemies."
     },
     "descriptionLong": {
       "zh": "使射出的箭矢與投射物可以穿透多個目標。",
@@ -7546,8 +7546,8 @@
       "en": "Poison Fog"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並使生物中毒一段時間。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and poisons mobs for a time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並使生物中毒一段時間。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and poisons mobs for a time."
     },
     "descriptionLong": {
       "zh": "跳躍攻擊與終結攻擊會產生劇毒波動，傷害敵人並讓敵人中毒一段時間。",
@@ -7569,8 +7569,8 @@
       "en": "Barrier Brew"
     },
     "description": {
-      "zh": "使用生命藥水時，會為盟友創造持續 <span class=\"placeholder\">{數值}</span> 秒的強固之泉。",
-      "en": "Potion usage creates a Fortifying well for allies lasting <span class=\"placeholder\">{value}</span> seconds."
+      "zh": "使用生命藥水時，會為盟友創造持續 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 秒的強固之泉。",
+      "en": "Potion usage creates a Fortifying well for allies lasting <span class=\"placeholder\" data-slot=\"0\">{value}</span> seconds."
     },
     "descriptionLong": {
       "zh": "使用生命藥水時，會創造一座泉水，賦予你與盟友強固狀態，保護你們不受到敵人傷害。即使生命值全滿，也能使用藥水。",
@@ -7592,8 +7592,8 @@
       "en": "Buddy Brew"
     },
     "description": {
-      "zh": "使用生命藥水時，會為盟友創造持續 <span class=\"placeholder\">{數值}</span> 秒的再生之泉。",
-      "en": "Potion usage creates a Regenerating well for allies lasting <span class=\"placeholder\">{value}</span> seconds."
+      "zh": "使用生命藥水時，會為盟友創造持續 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 秒的再生之泉。",
+      "en": "Potion usage creates a Regenerating well for allies lasting <span class=\"placeholder\" data-slot=\"0\">{value}</span> seconds."
     },
     "descriptionLong": {
       "zh": "使用生命藥水時，會創造一座泉水，賦予你與盟友再生狀態，恢復你們的生命值。即使生命值全滿，也能使用藥水。",
@@ -7615,8 +7615,8 @@
       "en": "Healing Smite"
     },
     "description": {
-      "zh": "擊敗敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率為盟友創造再生之泉。",
-      "en": "Defeating an enemy has a <span class=\"placeholder\">{value}</span> chance to create a Regenerating well for allies."
+      "zh": "擊敗敵人時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率為盟友創造再生之泉。",
+      "en": "Defeating an enemy has a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to create a Regenerating well for allies."
     },
     "descriptionLong": {
       "zh": "擊敗敵人時有機率創造一座泉水，賦予盟友再生狀態，恢復他們的生命值。",
@@ -7638,8 +7638,8 @@
       "en": "Ricochet"
     },
     "description": {
-      "zh": "投射物最多可彈射 <span class=\"placeholder\">{數值}</span> 次。",
-      "en": "Projectiles can bounce up to <span class=\"placeholder\">{value}</span> times."
+      "zh": "投射物最多可彈射 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 次。",
+      "en": "Projectiles can bounce up to <span class=\"placeholder\" data-slot=\"0\">{value}</span> times."
     },
     "descriptionLong": {
       "zh": "使射出的箭矢與投射物可以在多個目標之間彈射。",
@@ -7661,8 +7661,8 @@
       "en": "Shadowcloak"
     },
     "description": {
-      "zh": "擊敗敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率進入潛影狀態。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to enter Shadowcloaking when defeating enemies."
+      "zh": "擊敗敵人時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率進入潛影狀態。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to enter Shadowcloaking when defeating enemies."
     },
     "descriptionLong": {
       "zh": "擊敗敵人時有機率獲得潛影狀態，讓敵人看不見你。",
@@ -7687,8 +7687,8 @@
       "en": "Shadowclaw"
     },
     "description": {
-      "zh": "攻擊敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率進入潛影狀態。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
+      "zh": "攻擊敵人時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率進入潛影狀態。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能在攻擊時進入潛影狀態。",
@@ -7713,8 +7713,8 @@
       "en": "Shockwave"
     },
     "description": {
-      "zh": "衝擊波會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並使擊退效果提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Shockwave deals <span class=\"placeholder\">{value}</span> of weapon damage and increases knockback by <span class=\"placeholder\">{value}</span>."
+      "zh": "衝擊波會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並使擊退效果提高 <span class=\"placeholder\" data-slot=\"1\">{數值}</span>。",
+      "en": "Shockwave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and increases knockback by <span class=\"placeholder\" data-slot=\"1\">{value}</span>."
     },
     "descriptionLong": {
       "zh": "跳躍攻擊與終結攻擊會產生衝擊波，傷害敵人並擊退敵人。",
@@ -7736,8 +7736,8 @@
       "en": "Soul Blast"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並持續造成額外靈魂傷害。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and deals additional soul damage over time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並持續造成額外靈魂傷害。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and deals additional soul damage over time."
     },
     "descriptionLong": {
       "zh": "跳躍攻擊與終結攻擊會產生靈魂波動，傷害敵人並持續造成額外靈魂傷害。",
@@ -7759,8 +7759,8 @@
       "en": "Ancient Alchemy"
     },
     "description": {
-      "zh": "使用藥水會獲得 <span class=\"placeholder\">{數值}</span> 個靈魂。",
-      "en": "Potion usage grants <span class=\"placeholder\">{value}</span> souls."
+      "zh": "使用藥水會獲得 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 個靈魂。",
+      "en": "Potion usage grants <span class=\"placeholder\" data-slot=\"0\">{value}</span> souls."
     },
     "descriptionLong": {
       "zh": "使用生命藥水時也會獲得額外靈魂。即使生命值全滿，也能使用藥水。",
@@ -7782,8 +7782,8 @@
       "en": "Springload"
     },
     "description": {
-      "zh": "使用神器時，會獲得持續 <span class=\"placeholder\">{數值}</span> 秒的「疾行」狀態，加快移動速度。",
-      "en": "Artifact usage grants the Hurrying status for <span class=\"placeholder\">{value}</span> seconds, increasing movement speed."
+      "zh": "使用神器時，會獲得持續 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 秒的「疾行」狀態，加快移動速度。",
+      "en": "Artifact usage grants the Hurrying status for <span class=\"placeholder\" data-slot=\"0\">{value}</span> seconds, increasing movement speed."
     },
     "descriptionLong": {
       "zh": "使用神器會獲得「疾行」狀態，加快移動速度。",
@@ -7805,8 +7805,8 @@
       "en": "Power Potion"
     },
     "description": {
-      "zh": "使用藥水獲得「強化」狀態，持續 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Potion usage grants the Strengthened status with <span class=\"placeholder\">{value}</span> duration."
+      "zh": "使用藥水獲得「強化」狀態，持續 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Potion usage grants the Strengthened status with <span class=\"placeholder\" data-slot=\"0\">{value}</span> duration."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能讓生命藥水提升攻擊力。",
@@ -7825,8 +7825,8 @@
       "en": "Swirling"
     },
     "description": {
-      "zh": "旋轉攻擊會對附近敵人額外造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害。",
-      "en": "Swirl deals an additional <span class=\"placeholder\">{value}</span> of weapon damage to nearby enemies."
+      "zh": "旋轉攻擊會對附近敵人額外造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害。",
+      "en": "Swirl deals an additional <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage to nearby enemies."
     },
     "descriptionLong": {
       "zh": "武器攻擊會釋放一陣旋風，對附近敵人造成額外傷害。",
@@ -7851,8 +7851,8 @@
       "en": "Tornado"
     },
     "description": {
-      "zh": "每次攻擊時，都會使旋轉攻擊造成相當於近戰武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害。",
-      "en": "Swirling deals <span class=\"placeholder\">{value}</span> of melee weapon damage with every attack."
+      "zh": "每次攻擊時，都會使旋轉攻擊造成相當於近戰武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害。",
+      "en": "Swirling deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of melee weapon damage with every attack."
     },
     "descriptionLong": {
       "zh": "一種附魔效果，能在不頭暈的情況下施展強力的旋轉攻擊。",
@@ -7877,8 +7877,8 @@
       "en": "Tempo Theft"
     },
     "description": {
-      "zh": "擊敗敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率提升移動速度。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to increase movement speed when defeating enemies."
+      "zh": "擊敗敵人時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率提升移動速度。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to increase movement speed when defeating enemies."
     },
     "descriptionLong": {
       "zh": "擊敗敵人時有機率獲得疾行狀態，短暫提升移動速度。",
@@ -7900,8 +7900,8 @@
       "en": "Thundering"
     },
     "description": {
-      "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率讓相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害擴散為閃電傷害。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance for <span class=\"placeholder\">{value}</span> of weapon damage to spread as lightning damage."
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率讓相當於武器傷害 <span class=\"placeholder\" data-slot=\"1\">{數值}</span> 的傷害擴散為閃電傷害。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance for <span class=\"placeholder\" data-slot=\"1\">{value}</span> of weapon damage to spread as lightning damage."
     },
     "descriptionLong": {
       "zh": "攻擊有機率將閃電傷害擴散至附近敵人。",
@@ -8076,8 +8076,8 @@
       "en": "Shadowclaw"
     },
     "description": {
-      "zh": "攻擊敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率進入潛影狀態。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
+      "zh": "攻擊敵人時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率進入潛影狀態。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
     },
     "icon": "icons/enchantment-book/clawing-shadow-unique.png",
     "links": {
@@ -8190,8 +8190,8 @@
       "en": "Pyromancy"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並讓生物短暫著火。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
     "icon": "icons/enchantment-book/fire-aspect-ii.png",
     "links": {
@@ -8209,8 +8209,8 @@
       "en": "Pyromancy"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並讓生物短暫著火。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
     "icon": "icons/enchantment-book/fire-aspect-unique.png",
     "links": {
@@ -8231,8 +8231,8 @@
       "en": "Pyromancy"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並讓生物短暫著火。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and sets mobs on fire for a short time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並讓生物短暫著火。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and sets mobs on fire for a short time."
     },
     "icon": "icons/enchantment-book/flame-belch-unique.png",
     "links": {
@@ -8291,8 +8291,8 @@
       "en": "Gravity Strike"
     },
     "description": {
-      "zh": "攻擊有機率將 <span class=\"placeholder\">{數值}</span> 格內的所有敵人拉向你。",
-      "en": "Attacks have a chance to pull all enemies within <span class=\"placeholder\">{value}</span> blocks toward you."
+      "zh": "攻擊有機率將 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 格內的所有敵人拉向你。",
+      "en": "Attacks have a chance to pull all enemies within <span class=\"placeholder\" data-slot=\"0\">{value}</span> blocks toward you."
     },
     "icon": "icons/enchantment-book/gravity-pulse-unique.png",
     "links": {
@@ -8427,8 +8427,8 @@
       "en": "Ichor Blast"
     },
     "description": {
-      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\">{數值}</span> 的傷害，並施加魂疫狀態，短暫造成額外傷害。",
-      "en": "Wave deals <span class=\"placeholder\">{value}</span> of weapon damage and inflicts the Soulsick status, dealing additional damage for a short time."
+      "zh": "波動會造成相當於武器傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的傷害，並施加魂疫狀態，短暫造成額外傷害。",
+      "en": "Wave deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of weapon damage and inflicts the Soulsick status, dealing additional damage for a short time."
     },
     "icon": "icons/enchantment-book/phantom-lance.png",
     "links": {
@@ -8582,8 +8582,8 @@
       "en": "Shadowclaw"
     },
     "description": {
-      "zh": "攻擊敵人時，有 <span class=\"placeholder\">{數值}</span> 的機率進入潛影狀態。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
+      "zh": "攻擊敵人時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率進入潛影狀態。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to enter Shadowcloaking when attacking enemies."
     },
     "icon": "icons/enchantment-book/shadow-strike-unique.png",
     "links": {
@@ -8797,8 +8797,8 @@
       "en": "Quiver"
     },
     "description": {
-      "zh": "可多攜帶 <span class=\"placeholder\">{數值}</span> 支箭矢。",
-      "en": "Carry <span class=\"placeholder\">{value}</span> more ammo."
+      "zh": "可多攜帶 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 支箭矢。",
+      "en": "Carry <span class=\"placeholder\" data-slot=\"0\">{value}</span> more ammo."
     },
     "icon": "icons/effect/ammo-capacity.png",
     "links": {}
@@ -8814,8 +8814,8 @@
       "en": "Alchemist"
     },
     "description": {
-      "zh": "每收集一個靈魂，便可恢復最高生命值的 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Restores <span class=\"placeholder\">{value}</span> of max health for each soul gathered."
+      "zh": "每收集一個靈魂，便可恢復最高生命值的 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Restores <span class=\"placeholder\" data-slot=\"0\">{value}</span> of max health for each soul gathered."
     },
     "icon": "icons/effect/anima-conduit.png",
     "links": {}
@@ -8831,8 +8831,8 @@
       "en": "Bowyer"
     },
     "description": {
-      "zh": "在取回彈藥時，有 <span class=\"placeholder\">{數值}</span> 的機率額外獲得一支箭矢。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to gain an additional arrow when ammo is regained."
+      "zh": "在取回彈藥時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率額外獲得一支箭矢。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to gain an additional arrow when ammo is regained."
     },
     "icon": "icons/effect/arrow-burst.png",
     "links": {}
@@ -8848,8 +8848,8 @@
       "en": "Relic"
     },
     "description": {
-      "zh": "啟用神器時，恢復最高生命值的 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Restores <span class=\"placeholder\">{value}</span> of max health when activating an artifact."
+      "zh": "啟用神器時，恢復最高生命值的 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Restores <span class=\"placeholder\" data-slot=\"0\">{value}</span> of max health when activating an artifact."
     },
     "icon": "icons/effect/artifact-healing.png",
     "links": {}
@@ -8865,8 +8865,8 @@
       "en": "Pack Leader"
     },
     "description": {
-      "zh": "夥伴造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Companions deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "夥伴造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Companions deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/beast-boss.png",
     "links": {}
@@ -8882,8 +8882,8 @@
       "en": "Shackler"
     },
     "description": {
-      "zh": "攻擊命中時，有 <span class=\"placeholder\">{數值}</span> 的機率使目標陷入綑綁狀態。",
-      "en": "Attacks have a <span class=\"placeholder\">{value}</span> chance to inflict the Chained status on hits."
+      "zh": "攻擊命中時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率使目標陷入綑綁狀態。",
+      "en": "Attacks have a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to inflict the Chained status on hits."
     },
     "icon": "icons/effect/chains.png",
     "links": {}
@@ -8899,8 +8899,8 @@
       "en": "Bounty Hunter"
     },
     "description": {
-      "zh": "對受傷的敵人造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Deal <span class=\"placeholder\">{value}</span> more damage to wounded enemies."
+      "zh": "對受傷的敵人造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage to wounded enemies."
     },
     "icon": "icons/effect/committed.png",
     "links": {}
@@ -8916,8 +8916,8 @@
       "en": "Recovery"
     },
     "description": {
-      "zh": "受到的所有治療效果提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases all healing received by <span class=\"placeholder\">{value}</span>."
+      "zh": "受到的所有治療效果提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases all healing received by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/constitution.png",
     "links": {}
@@ -8933,8 +8933,8 @@
       "en": "Cooldown"
     },
     "description": {
-      "zh": "神器的冷卻時間縮短 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Reduces artifact cooldown time by <span class=\"placeholder\">{value}</span>."
+      "zh": "神器的冷卻時間縮短 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Reduces artifact cooldown time by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/cooldown.png",
     "links": {}
@@ -8950,8 +8950,8 @@
       "en": "Critical Edge"
     },
     "description": {
-      "zh": "暴擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "All critical hits deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "暴擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "All critical hits deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/critical-edge.png",
     "links": {}
@@ -8967,8 +8967,8 @@
       "en": "Critical Hit"
     },
     "description": {
-      "zh": "暴擊的機率提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases chance of critical hits by <span class=\"placeholder\">{value}</span>."
+      "zh": "暴擊的機率提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases chance of critical hits by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/critical-hit.png",
     "links": {}
@@ -8984,8 +8984,8 @@
       "en": "Deflection"
     },
     "description": {
-      "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率偏轉敵人射來的投射物。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to deflect enemy projectiles."
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率偏轉敵人射來的投射物。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to deflect enemy projectiles."
     },
     "icon": "icons/effect/deflect.png",
     "links": {}
@@ -9001,8 +9001,8 @@
       "en": "Persistence"
     },
     "description": {
-      "zh": "提高造成的傷害，相當於玩家已失去生命值總量的 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases damage dealt by <span class=\"placeholder\">{value}</span> of player&#39;s total missing health."
+      "zh": "提高造成的傷害，相當於玩家已失去生命值總量的 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases damage dealt by <span class=\"placeholder\" data-slot=\"0\">{value}</span> of player&#39;s total missing health."
     },
     "icon": "icons/effect/desperation.png",
     "links": {}
@@ -9018,8 +9018,8 @@
       "en": "DropChance_TalismanEffect"
     },
     "description": {
-      "zh": "擊敗敵人時掉落戰利品的機率提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> increased chance for defeated enemies to drop loot."
+      "zh": "擊敗敵人時掉落戰利品的機率提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> increased chance for defeated enemies to drop loot."
     },
     "icon": "icons/effect/drop-chance.png",
     "links": {}
@@ -9035,8 +9035,8 @@
       "en": "Duelist"
     },
     "description": {
-      "zh": "近戰攻擊對主要目標造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Melee attacks deal <span class=\"placeholder\">{value}</span> more damage to primary targets."
+      "zh": "近戰攻擊對主要目標造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Melee attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage to primary targets."
     },
     "icon": "icons/effect/duelist.png",
     "links": {}
@@ -9052,8 +9052,8 @@
       "en": "Aim"
     },
     "description": {
-      "zh": "遠程攻擊的暴擊的機率提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases chance of critical hits from ranged attacks by <span class=\"placeholder\">{value}</span>."
+      "zh": "遠程攻擊的暴擊的機率提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases chance of critical hits from ranged attacks by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/eagle-eye.png",
     "links": {}
@@ -9086,8 +9086,8 @@
       "en": "Elemental Protection"
     },
     "description": {
-      "zh": "受到的元素攻擊傷害降低 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Reduces damage taken from elemental attacks by <span class=\"placeholder\">{value}</span>."
+      "zh": "受到的元素攻擊傷害降低 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Reduces damage taken from elemental attacks by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/elemental-protection.png",
     "links": {}
@@ -9103,8 +9103,8 @@
       "en": "Prospector"
     },
     "description": {
-      "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率獲得額外的綠寶石。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to receive additional emeralds."
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率獲得額外的綠寶石。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to receive additional emeralds."
     },
     "icon": "icons/effect/emeralds-increase.png",
     "links": {}
@@ -9120,8 +9120,8 @@
       "en": "Totem Radius"
     },
     "description": {
-      "zh": "正面狀態效果的作用範圍提升 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases the area of all positive status effects by <span class=\"placeholder\">{value}</span>."
+      "zh": "正面狀態效果的作用範圍提升 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases the area of all positive status effects by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/expand.png",
     "links": {}
@@ -9137,8 +9137,8 @@
       "en": "Prodigy"
     },
     "description": {
-      "zh": "獲得的經驗值提升 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases experience gained by <span class=\"placeholder\">{value}</span>."
+      "zh": "獲得的經驗值提升 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases experience gained by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/experience-increase.png",
     "links": {}
@@ -9171,8 +9171,8 @@
       "en": "Finesse"
     },
     "description": {
-      "zh": "跳躍或翻滾時，提高攻擊傷害 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases attack damage by <span class=\"placeholder\">{value}</span> when jumping or rolling."
+      "zh": "跳躍或翻滾時，提高攻擊傷害 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases attack damage by <span class=\"placeholder\" data-slot=\"0\">{value}</span> when jumping or rolling."
     },
     "icon": "icons/effect/finesse.png",
     "links": {}
@@ -9188,8 +9188,8 @@
       "en": "Pyromancer"
     },
     "description": {
-      "zh": "火焰攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Fire attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "火焰攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Fire attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/fire-focus.png",
     "links": {}
@@ -9205,8 +9205,8 @@
       "en": "Slinger of Bling"
     },
     "description": {
-      "zh": "依據持有的綠寶石數量，最多可獲得 <span class=\"placeholder\">{數值}</span> 傷害加成，最多 <span class=\"placeholder\">{數值}</span> 顆綠寶石生效。",
-      "en": "Grants up to a <span class=\"placeholder\">{value}</span> damage bonus based on emeralds held, effective to a maximum of <span class=\"placeholder\">{value}</span> emeralds."
+      "zh": "依據持有的綠寶石數量，最多可獲得 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 傷害加成，最多 <span class=\"placeholder\" data-slot=\"1\">{數值}</span> 顆綠寶石生效。",
+      "en": "Grants up to a <span class=\"placeholder\" data-slot=\"0\">{value}</span> damage bonus based on emeralds held, effective to a maximum of <span class=\"placeholder\" data-slot=\"1\">{value}</span> emeralds."
     },
     "icon": "icons/effect/firing-emerald.png",
     "links": {}
@@ -9222,8 +9222,8 @@
       "en": "Veterinarian"
     },
     "description": {
-      "zh": "被擊敗的夥伴復活速度加快 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Defeated companions come back <span class=\"placeholder\">{value}</span> faster."
+      "zh": "被擊敗的夥伴復活速度加快 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Defeated companions come back <span class=\"placeholder\" data-slot=\"0\">{value}</span> faster."
     },
     "icon": "icons/effect/friends-forever.png",
     "links": {}
@@ -9239,8 +9239,8 @@
       "en": "Shepherd"
     },
     "description": {
-      "zh": "夥伴受到的傷害降低 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Companions take <span class=\"placeholder\">{value}</span> less damage."
+      "zh": "夥伴受到的傷害降低 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Companions take <span class=\"placeholder\" data-slot=\"0\">{value}</span> less damage."
     },
     "icon": "icons/effect/friendship.png",
     "links": {}
@@ -9256,8 +9256,8 @@
       "en": "Cryomancer"
     },
     "description": {
-      "zh": "冰霜攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Frost attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "冰霜攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Frost attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/frost-focus.png",
     "links": {}
@@ -9273,8 +9273,8 @@
       "en": "Assassin"
     },
     "description": {
-      "zh": "攻擊時有 <span class=\"placeholder\">{數值}</span> 的機率維持潛影狀態。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to stay in Shadowcloaking when attacking."
+      "zh": "攻擊時有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率維持潛影狀態。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to stay in Shadowcloaking when attacking."
     },
     "icon": "icons/effect/gambler.png",
     "links": {}
@@ -9290,8 +9290,8 @@
       "en": "Reload"
     },
     "description": {
-      "zh": "使遠程武器的射擊間隔縮短 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Reduces time between shots with ranged weapons by <span class=\"placeholder\">{value}</span>."
+      "zh": "使遠程武器的射擊間隔縮短 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Reduces time between shots with ranged weapons by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/hairtrigger.png",
     "links": {}
@@ -9307,8 +9307,8 @@
       "en": "Healer"
     },
     "description": {
-      "zh": "提高對自身與盟友的治療效果 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases healing given to yourself and allies by <span class=\"placeholder\">{value}</span>."
+      "zh": "提高對自身與盟友的治療效果 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases healing given to yourself and allies by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/healing-focus.png",
     "links": {}
@@ -9324,8 +9324,8 @@
       "en": "Constitution"
     },
     "description": {
-      "zh": "提高玩家的最高生命值 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases the player&#39;s maximum health by <span class=\"placeholder\">{value}</span>."
+      "zh": "提高玩家的最高生命值 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases the player&#39;s maximum health by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/health-boost.png",
     "links": {}
@@ -9341,8 +9341,8 @@
       "en": "Healthy Strike"
     },
     "description": {
-      "zh": "當生命值高於 <span class=\"placeholder\">{數值}</span> 時，傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> damage increase while health is above <span class=\"placeholder\">{value}</span>."
+      "zh": "當生命值高於 <span class=\"placeholder\" data-slot=\"1\">{數值}</span> 時，傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> damage increase while health is above <span class=\"placeholder\" data-slot=\"1\">{value}</span>."
     },
     "icon": "icons/effect/healthy-strike.png",
     "links": {}
@@ -9358,8 +9358,8 @@
       "en": "Jumpshot"
     },
     "description": {
-      "zh": "使跳躍射擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases jump shot damage dealt by <span class=\"placeholder\">{value}</span>."
+      "zh": "使跳躍射擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases jump shot damage dealt by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/jumpshot.png",
     "links": {}
@@ -9375,8 +9375,8 @@
       "en": "Knockback"
     },
     "description": {
-      "zh": "攻擊造成額外 <span class=\"placeholder\">{數值}</span> 的擊退效果。",
-      "en": "Attacks do <span class=\"placeholder\">{value}</span> more knockback."
+      "zh": "攻擊造成額外 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的擊退效果。",
+      "en": "Attacks do <span class=\"placeholder\" data-slot=\"0\">{value}</span> more knockback."
     },
     "icon": "icons/effect/knockback.png",
     "links": {}
@@ -9392,8 +9392,8 @@
       "en": "Leeching"
     },
     "description": {
-      "zh": "造成的近戰傷害有 <span class=\"placeholder\">{數值}</span> 會轉化為生命值。",
-      "en": "Convert <span class=\"placeholder\">{value}</span> of melee damage dealt into health."
+      "zh": "造成的近戰傷害有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 會轉化為生命值。",
+      "en": "Convert <span class=\"placeholder\" data-slot=\"0\">{value}</span> of melee damage dealt into health."
     },
     "links": {}
   },
@@ -9408,8 +9408,8 @@
       "en": "Electromancer"
     },
     "description": {
-      "zh": "閃電攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Lightning attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "閃電攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Lightning attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/lightning-focus.png",
     "links": {}
@@ -9425,8 +9425,8 @@
       "en": "Looter"
     },
     "description": {
-      "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率掉落額外的戰利品。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to get additional loot drops."
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率掉落額外的戰利品。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to get additional loot drops."
     },
     "icon": "icons/effect/looting.png",
     "links": {}
@@ -9442,8 +9442,8 @@
       "en": "Luck"
     },
     "description": {
-      "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率掉落物品的重複變體。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to drop duplicate variations of items."
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率掉落物品的重複變體。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to drop duplicate variations of items."
     },
     "icon": "icons/effect/lucky.png",
     "links": {}
@@ -9459,8 +9459,8 @@
       "en": "Marksman"
     },
     "description": {
-      "zh": "遠程武器的暴擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Critical hits with ranged weapons deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "遠程武器的暴擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Critical hits with ranged weapons deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/master-marksman.png",
     "links": {}
@@ -9476,8 +9476,8 @@
       "en": "Strength"
     },
     "description": {
-      "zh": "近戰武器的暴擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Critical hits with melee weapons deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "近戰武器的暴擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Critical hits with melee weapons deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/master-strike.png",
     "links": {}
@@ -9493,8 +9493,8 @@
       "en": "Ranger"
     },
     "description": {
-      "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率發射出額外的投射物。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to fire additional projectiles."
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率發射出額外的投射物。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to fire additional projectiles."
     },
     "icon": "icons/effect/multi-shot.png",
     "links": {}
@@ -9510,8 +9510,8 @@
       "en": "Bully"
     },
     "description": {
-      "zh": "對受到負面狀態影響的敵人造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Deal <span class=\"placeholder\">{value}</span> more damage to enemies affected by a negative status."
+      "zh": "對受到負面狀態影響的敵人造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage to enemies affected by a negative status."
     },
     "icon": "icons/effect/opportunist.png",
     "links": {}
@@ -9527,8 +9527,8 @@
       "en": "Raider"
     },
     "description": {
-      "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率掉落更稀有的戰利品。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance of higher rarity loot drops."
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率掉落更稀有的戰利品。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance of higher rarity loot drops."
     },
     "icon": "icons/effect/opulence.png",
     "links": {}
@@ -9544,8 +9544,8 @@
       "en": "Leaper"
     },
     "description": {
-      "zh": "跳躍近戰攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Jumping melee attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "跳躍近戰攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Jumping melee attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/plummeting.png",
     "links": {}
@@ -9561,8 +9561,8 @@
       "en": "Point Blank"
     },
     "description": {
-      "zh": "在近距離時，遠程攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Ranged attacks deal <span class=\"placeholder\">{value}</span> more damage at close range."
+      "zh": "在近距離時，遠程攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Ranged attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage at close range."
     },
     "icon": "icons/effect/point-blank.png",
     "links": {}
@@ -9578,8 +9578,8 @@
       "en": "Venomancer"
     },
     "description": {
-      "zh": "毒素攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Poison attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "毒素攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Poison attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/poison-focus.png",
     "links": {}
@@ -9595,8 +9595,8 @@
       "en": "Potion Maker"
     },
     "description": {
-      "zh": "藥水的冷卻時間縮短 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Reduces potion cooldown time by <span class=\"placeholder\">{value}</span>."
+      "zh": "藥水的冷卻時間縮短 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Reduces potion cooldown time by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/potion-cooldown.png",
     "links": {}
@@ -9612,8 +9612,8 @@
       "en": "Impact"
     },
     "description": {
-      "zh": "遠程攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Ranged attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "遠程攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Ranged attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/power.png",
     "links": {}
@@ -9629,8 +9629,8 @@
       "en": "Precision"
     },
     "description": {
-      "zh": "近戰攻擊的暴擊的機率提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases chance of critical hits with melee attacks by <span class=\"placeholder\">{value}</span>."
+      "zh": "近戰攻擊的暴擊的機率提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases chance of critical hits with melee attacks by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/precision.png",
     "links": {}
@@ -9646,8 +9646,8 @@
       "en": "Projectile Protection"
     },
     "description": {
-      "zh": "受到的遠程攻擊傷害降低 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Take <span class=\"placeholder\">{value}</span> less damage from ranged attacks."
+      "zh": "受到的遠程攻擊傷害降低 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Take <span class=\"placeholder\" data-slot=\"0\">{value}</span> less damage from ranged attacks."
     },
     "icon": "icons/effect/projectile-protection.png",
     "links": {}
@@ -9663,8 +9663,8 @@
       "en": "Protection"
     },
     "description": {
-      "zh": "受到的傷害降低 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Take <span class=\"placeholder\">{value}</span> less damage."
+      "zh": "受到的傷害降低 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Take <span class=\"placeholder\" data-slot=\"0\">{value}</span> less damage."
     },
     "icon": "icons/effect/protection.png",
     "links": {}
@@ -9680,8 +9680,8 @@
       "en": "Swiftness"
     },
     "description": {
-      "zh": "近戰攻擊速度提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases melee attack speed by <span class=\"placeholder\">{value}</span>."
+      "zh": "近戰攻擊速度提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases melee attack speed by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/rapid-strike.png",
     "links": {}
@@ -9697,8 +9697,8 @@
       "en": "Fletcher"
     },
     "description": {
-      "zh": "使遠程彈藥的冷卻時間縮短 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Reduces ranged ammo cooldown time by <span class=\"placeholder\">{value}</span>."
+      "zh": "使遠程彈藥的冷卻時間縮短 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Reduces ranged ammo cooldown time by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/reconstruction.png",
     "links": {}
@@ -9714,8 +9714,8 @@
       "en": "Momentum"
     },
     "description": {
-      "zh": "命中時，使敵人陷入蹣跚的機率提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases chance to stagger enemies on hit by <span class=\"placeholder\">{value}</span>."
+      "zh": "命中時，使敵人陷入蹣跚的機率提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases chance to stagger enemies on hit by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/reeling.png",
     "links": {}
@@ -9731,8 +9731,8 @@
       "en": "Regeneration"
     },
     "description": {
-      "zh": "脫離戰鬥 5 秒後，每秒恢復 <span class=\"placeholder\">{數值}</span> 生命值。",
-      "en": "Restores health by <span class=\"placeholder\">{value}</span> per second after 5 seconds out of combat."
+      "zh": "脫離戰鬥 5 秒後，每秒恢復 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 生命值。",
+      "en": "Restores health by <span class=\"placeholder\" data-slot=\"0\">{value}</span> per second after 5 seconds out of combat."
     },
     "icon": "icons/effect/regeneration.png",
     "links": {}
@@ -9748,8 +9748,8 @@
       "en": "Resilience"
     },
     "description": {
-      "zh": "從負面狀態中復原的速度提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Recover from negative statuses <span class=\"placeholder\">{value}</span> faster."
+      "zh": "從負面狀態中復原的速度提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Recover from negative statuses <span class=\"placeholder\" data-slot=\"0\">{value}</span> faster."
     },
     "icon": "icons/effect/resilience.png",
     "links": {}
@@ -9765,8 +9765,8 @@
       "en": "Acrobat"
     },
     "description": {
-      "zh": "翻滾的冷卻時間縮短 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Reduces rolling cooldown time by <span class=\"placeholder\">{value}</span>."
+      "zh": "翻滾的冷卻時間縮短 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Reduces rolling cooldown time by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/roll-cooldown.png",
     "links": {}
@@ -9782,8 +9782,8 @@
       "en": "Tainted"
     },
     "description": {
-      "zh": "敵人身上的負面狀態持續時間延長 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases duration of negative statuses on enemies by <span class=\"placeholder\">{value}</span>."
+      "zh": "敵人身上的負面狀態持續時間延長 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases duration of negative statuses on enemies by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/saboteur.png",
     "links": {}
@@ -9799,8 +9799,8 @@
       "en": "Stealth"
     },
     "description": {
-      "zh": "潛影的持續時間延長 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Shadowcloaking lasts <span class=\"placeholder\">{value}</span> longer."
+      "zh": "潛影的持續時間延長 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Shadowcloaking lasts <span class=\"placeholder\" data-slot=\"0\">{value}</span> longer."
     },
     "icon": "icons/effect/shadow-walk.png",
     "links": {}
@@ -9816,8 +9816,8 @@
       "en": "Sharpness"
     },
     "description": {
-      "zh": "近戰攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Melee attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "近戰攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Melee attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/sharpness.png",
     "links": {}
@@ -9833,8 +9833,8 @@
       "en": "Evasion"
     },
     "description": {
-      "zh": "有 <span class=\"placeholder\">{數值}</span> 的機率閃避近戰傷害。",
-      "en": "Grants a <span class=\"placeholder\">{value}</span> chance to evade melee damage."
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率閃避近戰傷害。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to evade melee damage."
     },
     "icon": "icons/effect/sidestep.png",
     "links": {}
@@ -9850,8 +9850,8 @@
       "en": "Sniper"
     },
     "description": {
-      "zh": "在遠距離時，遠程攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Ranged attacks deal <span class=\"placeholder\">{value}</span> more damage from far away."
+      "zh": "在遠距離時，遠程攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Ranged attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage from far away."
     },
     "icon": "icons/effect/sniper.png",
     "links": {}
@@ -9884,8 +9884,8 @@
       "en": "Soulmancer"
     },
     "description": {
-      "zh": "靈魂攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Soul attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "靈魂攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Soul attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/soul-focus.png",
     "links": {}
@@ -9901,8 +9901,8 @@
       "en": "SoulGather_TalismanEffect"
     },
     "description": {
-      "zh": "獲得的靈魂增加 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases souls gained by <span class=\"placeholder\">{value}</span>."
+      "zh": "獲得的靈魂增加 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases souls gained by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/soul-gather.png",
     "links": {}
@@ -9918,8 +9918,8 @@
       "en": "Reaper"
     },
     "description": {
-      "zh": "獲得的靈魂增加 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases souls gained by <span class=\"placeholder\">{value}</span>."
+      "zh": "獲得的靈魂增加 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases souls gained by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/soul-gather-multiply.png",
     "links": {}
@@ -9935,8 +9935,8 @@
       "en": "Spiritual"
     },
     "description": {
-      "zh": "靈魂容量提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases Soul capacity by <span class=\"placeholder\">{value}</span>."
+      "zh": "靈魂容量提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases Soul capacity by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/soul-max.png",
     "links": {}
@@ -9952,8 +9952,8 @@
       "en": "Speed"
     },
     "description": {
-      "zh": "移動速度提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases movement speed by <span class=\"placeholder\">{value}</span>."
+      "zh": "移動速度提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases movement speed by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/speed-boost.png",
     "links": {}
@@ -9969,8 +9969,8 @@
       "en": "Speed Increment"
     },
     "description": {
-      "zh": "移動超過 <span class=\"placeholder\">{數值}</span> 秒後，移動速度提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases movement speed by <span class=\"placeholder\">{value}</span> if moving for more than <span class=\"placeholder\">{value}</span> seconds."
+      "zh": "移動超過 <span class=\"placeholder\" data-slot=\"1\">{數值}</span> 秒後，移動速度提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases movement speed by <span class=\"placeholder\" data-slot=\"0\">{value}</span> if moving for more than <span class=\"placeholder\" data-slot=\"1\">{value}</span> seconds."
     },
     "icon": "icons/effect/speed-increment.png",
     "links": {}
@@ -9986,8 +9986,8 @@
       "en": "Boost"
     },
     "description": {
-      "zh": "施加在自己身上的正面狀態持續時間延長 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases duration of positive statuses applied to you by <span class=\"placeholder\">{value}</span>."
+      "zh": "施加在自己身上的正面狀態持續時間延長 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases duration of positive statuses applied to you by <span class=\"placeholder\" data-slot=\"0\">{value}</span>."
     },
     "icon": "icons/effect/status-buff.png",
     "links": {}
@@ -10003,12 +10003,12 @@
       "en": "Strengthening Hit"
     },
     "description": {
-      "zh": "攻擊命中時，有 <span class=\"placeholder\">{數值}</span> 的機率獲得強力狀態。",
-      "en": "Attacks have a <span class=\"placeholder\">{value}</span> chance to grant the Strength status on hit."
+      "zh": "攻擊命中時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率獲得強力狀態。",
+      "en": "Attacks have a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to grant the Strength status on hit."
     },
     "descriptionLong": {
-      "zh": "攻擊命中時，有 <span class=\"placeholder\">{數值}</span> 的機率獲得強力狀態。",
-      "en": "Attacks have a <span class=\"placeholder\">{value}</span> chance to grant the Strength status on hit."
+      "zh": "攻擊命中時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率獲得強力狀態。",
+      "en": "Attacks have a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to grant the Strength status on hit."
     },
     "icon": "icons/effect/status-on-hit-strength.png",
     "links": {}
@@ -10024,8 +10024,8 @@
       "en": "Successive Hits"
     },
     "description": {
-      "zh": "命中會使傷害提高 <span class=\"placeholder\">{數值}</span> (最高 <span class=\"placeholder\">{數值}</span>)，若 <span class=\"placeholder\">{數值}</span> 秒內沒有造成傷害，加成就會消失。",
-      "en": "Hits increase damage by <span class=\"placeholder\">{value}</span> (up to a maximum of <span class=\"placeholder\">{value}</span>), bonus is lost if no damage is dealt for <span class=\"placeholder\">{value}</span> seconds."
+      "zh": "命中會使傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> (最高 <span class=\"placeholder\" data-slot=\"1\">{數值}</span>)，若 <span class=\"placeholder\" data-slot=\"2\">{數值}</span> 秒內沒有造成傷害，加成就會消失。",
+      "en": "Hits increase damage by <span class=\"placeholder\" data-slot=\"0\">{value}</span> (up to a maximum of <span class=\"placeholder\" data-slot=\"1\">{value}</span>), bonus is lost if no damage is dealt for <span class=\"placeholder\" data-slot=\"2\">{value}</span> seconds."
     },
     "links": {}
   },
@@ -10040,8 +10040,8 @@
       "en": "Sharpshooter"
     },
     "description": {
-      "zh": "蓄力的遠程攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Charged ranged attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "蓄力的遠程攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Charged ranged attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/supercharge.png",
     "links": {}
@@ -10057,8 +10057,8 @@
       "en": "Brawler"
     },
     "description": {
-      "zh": "近戰攻擊對次要目標造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Melee attacks deal <span class=\"placeholder\">{value}</span> more damage to secondary targets."
+      "zh": "近戰攻擊對次要目標造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Melee attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage to secondary targets."
     },
     "icon": "icons/effect/sweeping-edge.png",
     "links": {}
@@ -10074,8 +10074,8 @@
       "en": "Prowler"
     },
     "description": {
-      "zh": "潛影期間，移動速度提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Increases movement speed by <span class=\"placeholder\">{value}</span> while Shadowcloaking."
+      "zh": "潛影期間，移動速度提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Increases movement speed by <span class=\"placeholder\" data-slot=\"0\">{value}</span> while Shadowcloaking."
     },
     "links": {}
   },
@@ -10090,8 +10090,8 @@
       "en": "Taunter"
     },
     "description": {
-      "zh": "攻擊命中時，有 <span class=\"placeholder\">{數值}</span> 的機率使目標陷入嘲諷狀態。",
-      "en": "Attacks have a <span class=\"placeholder\">{value}</span> chance to inflict the Taunted status on hit."
+      "zh": "攻擊命中時，有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率使目標陷入嘲諷狀態。",
+      "en": "Attacks have a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to inflict the Taunted status on hit."
     },
     "links": {}
   },
@@ -10106,8 +10106,8 @@
       "en": "Prickly"
     },
     "description": {
-      "zh": "將所受傷害的 <span class=\"placeholder\">{數值}</span> 反彈給攻擊者。",
-      "en": "Deals <span class=\"placeholder\">{value}</span> of received damage back to the attacker."
+      "zh": "將所受傷害的 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 反彈給攻擊者。",
+      "en": "Deals <span class=\"placeholder\" data-slot=\"0\">{value}</span> of received damage back to the attacker."
     },
     "icon": "icons/effect/thorns.png",
     "links": {}
@@ -10123,8 +10123,8 @@
       "en": "Vanguard"
     },
     "description": {
-      "zh": "對生命值全滿的敵人造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Deal <span class=\"placeholder\">{value}</span> more damage to enemies who are at full health."
+      "zh": "對生命值全滿的敵人造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage to enemies who are at full health."
     },
     "icon": "icons/effect/vanguard.png",
     "links": {}
@@ -10140,8 +10140,8 @@
       "en": "Sorcerer"
     },
     "description": {
-      "zh": "神器攻擊造成的傷害提高 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Artifact attacks deal <span class=\"placeholder\">{value}</span> more damage."
+      "zh": "神器攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Artifact attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage."
     },
     "icon": "icons/effect/vestige.png",
     "links": {}
@@ -10157,8 +10157,8 @@
       "en": "Ally"
     },
     "description": {
-      "zh": "對自己與盟友所施加的正面狀態持續時間延長 <span class=\"placeholder\">{數值}</span>。",
-      "en": "Positive statuses you apply to yourself and allies last <span class=\"placeholder\">{value}</span> longer."
+      "zh": "對自己與盟友所施加的正面狀態持續時間延長 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "en": "Positive statuses you apply to yourself and allies last <span class=\"placeholder\" data-slot=\"0\">{value}</span> longer."
     },
     "icon": "icons/effect/vivify.png",
     "links": {}

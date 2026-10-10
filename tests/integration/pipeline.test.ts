@@ -105,7 +105,7 @@ describe("runExtract", () => {
     expect(find("melee", "halberd")?.icon).toBeUndefined();
     expect(find("artifact", "frost-quiver")?.icon).toBe("icons/artifact/frost-quiver.png");
     expect(find("enchantment", "arcane")?.links).toEqual({ enchantmentBook: "arcane" });
-    expect(find("effect", "critical-edge")?.description?.zh).toContain('<span class="placeholder">{數值}</span>');
+    expect(find("effect", "critical-edge")?.description?.zh).toContain('<span class="placeholder" data-slot="0">{數值}</span>');
     expect(find("effect", "critical-edge")?.icon).toBe("icons/effect/critical-edge.png");
     expect(await readFile(path.join(outRoot, "public", "icons", "effect", "critical-edge.png"), "utf8")).toBe("png:critical-edge");
     expect(find("enchantment", "arcane")?.icon).toBe("icons/enchantment/arcane.png");
