@@ -735,7 +735,7 @@ test("unique enchantments list the weapons that carry them instead of a book", a
   await expect(page.getByTestId("fixed-on").locator("a[href='/zh/melee/greatsword-unique1/']")).toBeVisible();
 });
 
-test("home category rows show their items in colour on every screen size", async ({ page }) => {
+test("home category rows show their items on every screen size", async ({ page }) => {
   for (const [width, shown] of [[1440, 6], [390, 3]] as const) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto("/zh/");
@@ -743,7 +743,16 @@ test("home category rows show their items in colour on every screen size", async
     const icons = row.locator(".category-preview > *");
     await expect(icons.first()).toBeVisible();
     expect(await icons.evaluateAll((els) => els.filter((el) => getComputedStyle(el).display !== "none").length)).toBe(shown);
-    expect(await icons.first().evaluate((el) => getComputedStyle(el).filter)).toBe("none");
     await expect(page.locator(".category-grid a", { hasText: "附魔" }).locator(".category-preview .frame-enchantment").first()).toBeVisible();
   }
+});
+
+test("with a mouse, home category items rest in grey and colour in on hover", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "hover is a desktop interaction");
+  await page.goto("/zh/");
+  const row = page.locator(".category-grid a", { hasText: "近戰武器" });
+  const first = row.locator(".category-preview > *").first();
+  expect(await first.evaluate((el) => getComputedStyle(el).filter)).toContain("grayscale");
+  await row.hover();
+  await expect.poll(() => first.evaluate((el) => getComputedStyle(el).filter)).toBe("none");
 });

@@ -54,9 +54,16 @@
 .category-slot .ui-icon { width: 24px; height: 24px; vertical-align: 0; }
 .category-grid .category-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(22px, 2.6vw, 32px); line-height: 1.2; }
 .category-alt { grid-column: 3; grid-row: 2; font-family: var(--font-mono); font-size: var(--fs-mono-s); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
-/* Each category shows its first items in full colour; they lift in turn on hover. Phones keep three. */
+/* Each category shows its first items; with a mouse they rest in grey and colour in, lifting in turn, on hover.
+   Touch screens cannot hover, so they keep the colour. Phones keep three. */
 .category-preview { grid-column: 4; grid-row: 1 / span 2; display: flex; justify-content: flex-end; gap: 4px; }
-.category-preview > * { transition: transform var(--dur) var(--ease-spring); }
+.category-preview > * {
+  transition: transform var(--dur) var(--ease-spring), filter var(--dur) var(--ease-out), opacity var(--dur) var(--ease-out);
+}
+@media (hover: hover) {
+  .category-preview > * { filter: grayscale(1); opacity: 0.55; }
+  .category-grid a:hover .category-preview > *, .category-grid a:focus-visible .category-preview > * { filter: none; opacity: 1; }
+}
 .category-preview > :nth-child(n + 4) { display: none; }
 .category-grid .count { grid-column: 5; grid-row: 1 / span 2; font-size: 14px; min-width: 3ch; text-align: right; }
 .category-grid a:hover, .category-grid a:focus-visible { background: var(--paper); padding-left: 14px; }
