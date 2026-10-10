@@ -1,6 +1,7 @@
 ---
 import type { Localized } from "../../scripts/extract/schemas";
-import { HTML_LANG, otherLang, type Lang } from "../lib/i18n";
+import type { Lang } from "../lib/i18n";
+import { compareLang, htmlLang } from "../lib/lang";
 
 interface Props {
   lang: Lang;
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const { lang, value, html = false, as: Tag = "span", class: className, id, searchTitle = false } = Astro.props;
-const alt = otherLang(lang);
+const alt = compareLang(lang);
 const showAlt = value[alt] !== value[lang];
 const titleMeta = searchTitle ? "title" : undefined;
 ---
@@ -27,8 +28,8 @@ const titleMeta = searchTitle ? "title" : undefined;
   {showAlt && " "}
   {showAlt &&
     (html ? (
-      <span class="alt" lang={HTML_LANG[alt]} set:html={value[alt]} />
+      <span class="alt" lang={htmlLang(alt)} set:html={value[alt]} />
     ) : (
-      <span class="alt" lang={HTML_LANG[alt]}>{value[alt]}</span>
+      <span class="alt" lang={htmlLang(alt)}>{value[alt]}</span>
     ))}
 </Tag>

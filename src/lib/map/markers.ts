@@ -1,20 +1,24 @@
+import type { Lang } from "../i18n";
+import { compareLang, lowerFor } from "../lang";
 import type { MapMarker } from "../../../scripts/extract/map-schema";
 import { MARKER_KINDS, type MarkerKind } from "./kinds";
 
 const DEFAULT_LIMIT = 20;
 
-const normalize = (text: string): string => text.trim().toLocaleLowerCase();
+const normalize = (text: string, lang: Lang): string => lowerFor(text.trim(), lang);
 
-const searchableText = (marker: MapMarker): string[] =>
-  [marker.name.zh, marker.name.en, marker.area?.zh, marker.area?.en]
+/** Names and areas in the page language and its comparison language, lowercased by the page language's rules. */
+const searchableText = (marker: MapMarker, lang: Lang): string[] =>
+  [lang, compareLang(lang)]
+    .flatMap((l) => [marker.name[l], marker.area?.[l]])
     .filter((text): text is string => text !== undefined)
-    .map(normalize);
+    .map((text) => normalize(text, lang));
 
 /** Markers whose name or area contains the query, in their original order. */
-export function searchMarkers(markers: readonly MapMarker[], query: string, limit = DEFAULT_LIMIT): MapMarker[] {
-  const needle = normalize(query);
+export function searchMarkers(markers: readonly MapMarker[], query: string, lang: Lang, limit = DEFAULT_LIMIT): MapMarker[] {
+  const needle = normalize(query, lang);
   if (needle === "") return [];
-  return markers.filter((marker) => searchableText(marker).some((text) => text.includes(needle))).slice(0, limit);
+  return markers.filter((marker) => searchableText(marker, lang).some((text) => text.includes(needle))).slice(0, limit);
 }
 
 export const countByKind = (markers: readonly MapMarker[]): Record<MarkerKind, number> =>

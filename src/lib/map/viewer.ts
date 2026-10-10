@@ -145,7 +145,7 @@ function renderResults(root: HTMLElement, shown: Shown, labels: Payload["labels"
   const list = root.querySelector<HTMLUListElement>("[data-testid='map-results']");
   const empty = root.querySelector<HTMLElement>("[data-testid='map-empty']");
   if (!list || !empty) return;
-  const found = searchMarkers(shown.world.markers, query);
+  const found = searchMarkers(shown.world.markers, query, lang);
   list.replaceChildren(...found.map((marker) => resultElement(marker, lang, labels[marker.kind])));
   empty.hidden = query.trim() === "" || found.length > 0;
   for (const button of list.querySelectorAll<HTMLButtonElement>("button[data-marker-id]")) {

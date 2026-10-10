@@ -1,5 +1,6 @@
 ---
-import { HTML_LANG, otherLang, t, type Lang } from "../lib/i18n";
+import { t, type Lang } from "../lib/i18n";
+import { compareLang, htmlLang } from "../lib/lang";
 import { href, swapLangPath } from "../lib/url";
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 }
 
 const { lang, switchHref: override } = Astro.props;
-const alt = otherLang(lang);
+const alt = compareLang(lang);
 const onMap = /\/map\/$/.test(Astro.url.pathname);
 const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, alt);
 ---
@@ -27,7 +28,7 @@ const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.
     <button type="button" class="compare-toggle" aria-pressed="true" data-testid="compare-toggle">
       <span class="label-long">{t(lang, "compare")}</span><span class="label-short">{t(lang, "compareShort")}</span>
     </button>
-    <a class="lang-switch button" href={switchHref} hreflang={HTML_LANG[alt]} data-testid="lang-switch">
+    <a class="lang-switch button" href={switchHref} hreflang={htmlLang(alt)} data-testid="lang-switch">
       <span class="label-long">{t(lang, "switchLang")}</span><span class="label-short">{t(lang, "switchLangShort")}</span>
     </a>
   </div>

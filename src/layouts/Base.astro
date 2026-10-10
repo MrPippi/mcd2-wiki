@@ -10,10 +10,11 @@ import "../styles/home.css";
 import "../styles/items.css";
 import "../styles/entry.css";
 import "../styles/search.css";
-import type { Category } from "../../scripts/extract/config";
+import { LANG_META, type Category } from "../../scripts/extract/config";
 import CategoryTabs from "../components/CategoryTabs.astro";
 import SiteHeader from "../components/SiteHeader.astro";
-import { HTML_LANG, t, type Lang } from "../lib/i18n";
+import { t, type Lang } from "../lib/i18n";
+import { htmlLang } from "../lib/lang";
 import { extractedBrand } from "../lib/data";
 import { metaDescription } from "../lib/meta";
 import { assetUrl } from "../lib/url";
@@ -29,7 +30,6 @@ interface Props {
   langSwitchHref?: string;
 }
 
-const OG_LOCALE: Readonly<Record<Lang, string>> = { zh: "zh_TW", en: "en_US" };
 
 const { lang, title, current, description = "", langSwitchHref } = Astro.props;
 const fullTitle = `${title} | ${t(lang, "siteTitle")}`;
@@ -43,7 +43,7 @@ const appIcon = extractedBrand["app-icon"] ? assetUrl(extractedBrand["app-icon"]
 const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extractedBrand.social), Astro.site).href : undefined;
 ---
 <!doctype html>
-<html lang={HTML_LANG[lang]} data-compare="on">
+<html lang={htmlLang(lang)} data-compare="on">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,7 +53,7 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
     <meta property="og:site_name" content={t(lang, "siteTitle")} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={summary} />
-    <meta property="og:locale" content={OG_LOCALE[lang]} />
+    <meta property="og:locale" content={LANG_META[lang].ogLocale} />
     {socialImage && <meta property="og:image" content={socialImage} />}
     {socialImage && <meta property="og:image:width" content="480" />}
     {socialImage && <meta property="og:image:height" content="480" />}

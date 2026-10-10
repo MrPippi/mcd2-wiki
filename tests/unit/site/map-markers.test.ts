@@ -20,23 +20,23 @@ const MARKERS: readonly MapMarker[] = [
 
 describe("searchMarkers", () => {
   it("matches names in either language, ignoring case and surrounding spaces", () => {
-    expect(searchMarkers(MARKERS, "鐵匠").map((m) => m.id)).toEqual(["smith"]);
-    expect(searchMarkers(MARKERS, "  blackSMITH ").map((m) => m.id)).toEqual(["smith"]);
+    expect(searchMarkers(MARKERS, "鐵匠", "zh").map((m) => m.id)).toEqual(["smith"]);
+    expect(searchMarkers(MARKERS, "  blackSMITH ", "zh").map((m) => m.id)).toEqual(["smith"]);
   });
 
   it("matches the area a marker sits in", () => {
-    expect(searchMarkers(MARKERS, "  BRAVE haven ").map((m) => m.id)).toEqual(["portal"]);
-    expect(searchMarkers(MARKERS, "咆哮").map((m) => m.id)).toEqual(["rift1"]);
+    expect(searchMarkers(MARKERS, "  BRAVE haven ", "en").map((m) => m.id)).toEqual(["portal"]);
+    expect(searchMarkers(MARKERS, "咆哮", "en").map((m) => m.id)).toEqual(["rift1"]);
   });
 
   it("returns nothing for an empty query and respects the limit", () => {
-    expect(searchMarkers(MARKERS, "   ")).toEqual([]);
-    expect(searchMarkers(MARKERS, "a", 2)).toHaveLength(2);
+    expect(searchMarkers(MARKERS, "   ", "zh")).toEqual([]);
+    expect(searchMarkers(MARKERS, "a", "en", 2)).toHaveLength(2);
   });
 
   it("leaves the input untouched", () => {
     const copy = structuredClone(MARKERS);
-    searchMarkers(MARKERS, "rift");
+    searchMarkers(MARKERS, "rift", "en");
     expect(MARKERS).toEqual(copy);
   });
 });

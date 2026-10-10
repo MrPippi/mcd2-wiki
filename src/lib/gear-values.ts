@@ -3,7 +3,9 @@ import { ArtifactDataSchema, EnchantmentDataSchema, type ArtifactData, type Ench
 import rawArtifacts from "../data/artifacts.json";
 import rawEffects from "../data/effects.json";
 import rawEnchantments from "../data/enchantments.json";
+import { LANGS } from "../../scripts/extract/config";
 import type { Lang } from "./i18n";
+import { mapLocalized } from "./lang";
 
 /** Artifact numbers and enchantment description values read from the game's DataTables by `npm run extract`. */
 export const artifactData: ArtifactData = ArtifactDataSchema.parse(rawArtifacts);
@@ -23,10 +25,7 @@ export function fillPlaceholders(html: string, values: readonly string[]): strin
   });
 }
 
-const fill = (text: Localized, values: readonly string[]): Localized => ({
-  zh: fillPlaceholders(text.zh, values),
-  en: fillPlaceholders(text.en, values),
-});
+const fill = (text: Localized, values: readonly string[]): Localized => mapLocalized(text, (html) => fillPlaceholders(html, values));
 
 /** Each slot from tier I to tier III, e.g. "20%~50%"; one value when the tiers do not differ. */
 const ranges = (tiers: readonly (readonly string[])[]): string[] =>
@@ -59,7 +58,7 @@ const UNFILLED = /class="placeholder"/;
 
 /** Whether every value in the entry's texts could be filled from the game data. */
 export const isFullyDescribed = (entry: Entry): boolean =>
-  !UNFILLED.test(`${describedEntry(entry)?.zh ?? ""}${describedEntry(entry)?.en ?? ""}${describedLong(entry)?.zh ?? ""}${describedLong(entry)?.en ?? ""}`);
+  !UNFILLED.test([describedEntry(entry), describedLong(entry)].flatMap((text) => LANGS.map((lang) => text?.[lang] ?? "")).join(""));
 
 /** An enchantment's description filled at each tier (I–III), for a tier table; undefined without game values. */
 export function enchantmentTiers(entry: Entry): { label: string; text: Localized }[] | undefined {

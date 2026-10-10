@@ -1,12 +1,12 @@
 import type { Category, Lang } from "../../scripts/extract/config";
+import { compareLang } from "./lang";
 import type { ArmorPiece } from "../../scripts/extract/schemas";
 import type { MarkerKind } from "./map/kinds";
 
 export type { Lang };
 
-export const HTML_LANG: Readonly<Record<Lang, string>> = { zh: "zh-TW", en: "en" };
-
-export const otherLang = (lang: Lang): Lang => (lang === "zh" ? "en" : "zh");
+/** Kept for existing callers; Task 4 removes it in favour of compareLang. */
+export const otherLang = compareLang;
 
 export const UI_STRINGS = {
   zh: {
