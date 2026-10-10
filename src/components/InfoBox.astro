@@ -7,6 +7,7 @@ import { categoryIcon, pieceIcon } from "../lib/ui-icons";
 import { href } from "../lib/url";
 import EntryIcon from "./EntryIcon.astro";
 import RarityTags from "./RarityTags.astro";
+import RarityTerm from "./RarityTerm.astro";
 import UiIcon from "./UiIcon.astro";
 
 interface Props {
@@ -32,7 +33,7 @@ const PLATE_ICON_SIZE = 200;
       <dd><a href={href(lang, listCategory)}><UiIcon src={categoryIcon(entry.category)} />{CATEGORY_LABEL[entry.category][lang]}</a></dd>
     </div>
     <div>
-      <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
+      <dt data-pagefind-ignore><RarityTerm lang={lang} variant={entry.variant} /></dt>
       <dd class:list={{ "is-unique": entry.variant === "unique" }}><RarityTags lang={lang} variant={entry.variant} /></dd>
     </div>
     {entry.armorPiece && (

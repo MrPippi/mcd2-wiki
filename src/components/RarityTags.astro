@@ -21,7 +21,6 @@ const { lang, variant } = Astro.props;
 const tiers = rarityTiers(variant);
 ---
 <span class="rarity">
-  {variant !== "unique" && <span class="rarity-lead">{t(lang, "possibleRarity")}</span>}
   <ul class="rarity-tags">
     {tiers.map((tier) => (
       <li class={`rarity-tag rarity-${tier}`} style={`--tag-art:url("${TAG_ART[tier].src}")`}>{t(lang, RARITY_LABEL[tier])}</li>

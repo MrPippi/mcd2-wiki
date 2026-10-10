@@ -1,0 +1,15 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { t, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang: Lang;
+  variant: Entry["variant"];
+}
+
+const { lang, variant } = Astro.props;
+// One rarity row per page, so a fixed id is unique.
+const HINT_ID = "rarity-hint";
+---
+<button type="button" class="rarity-term" aria-describedby={HINT_ID}>{t(lang, "rarity")}</button>
+<span class="rarity-hint" id={HINT_ID} role="tooltip">{t(lang, variant === "unique" ? "rarityHintUnique" : "rarityHintNormal")}</span>

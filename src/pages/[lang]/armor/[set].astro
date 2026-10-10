@@ -5,6 +5,7 @@ import EntryIcon from "../../../components/EntryIcon.astro";
 import EntrySection from "../../../components/EntrySection.astro";
 import LangText from "../../../components/LangText.astro";
 import RarityTags from "../../../components/RarityTags.astro";
+import RarityTerm from "../../../components/RarityTerm.astro";
 import UiIcon from "../../../components/UiIcon.astro";
 import Base from "../../../layouts/Base.astro";
 import { catalogLabel, setNumber } from "../../../lib/catalog";
@@ -39,7 +40,7 @@ const number = setNumber(set);
         </div>
         <dl class="facts" data-pagefind-ignore>
           <div>
-            <dt data-pagefind-ignore>{t(lang, "rarity")}</dt>
+            <dt data-pagefind-ignore><RarityTerm lang={lang} variant={set.variant} /></dt>
             <dd class:list={{ "is-unique": set.variant === "unique" }}><RarityTags lang={lang} variant={set.variant} /></dd>
           </div>
           <div>

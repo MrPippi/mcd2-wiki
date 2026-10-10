@@ -150,6 +150,29 @@ test("the rarity row shows the game's rarity tags with the name inside", async (
   await expect(page.getByTestId("info-box").locator(".rarity-tag")).toHaveText(["Common", "Rare", "Special"]);
 });
 
+test("the rarity label explains the tiers on hover and focus, not in the row", async ({ page }) => {
+  await page.goto("/zh/melee/sword/");
+  const box = page.getByTestId("info-box");
+  await expect(box.locator(".rarity")).not.toContainText("可能為");
+  const term = box.locator(".rarity-term");
+  const hint = page.locator(`#${await term.getAttribute("aria-describedby")}`);
+  await expect(hint).toBeHidden();
+  await term.hover();
+  await expect(hint).toBeVisible();
+  await expect(hint).toHaveText("每件物品都可能是普通、稀有或特殊品質，這裡列出所有可能。");
+  await page.mouse.move(5, 5);
+  await expect(hint).toBeHidden();
+  await term.focus();
+  await expect(hint).toBeVisible();
+
+  await page.goto("/zh/melee/sword-unique1/");
+  const uniqueTerm = page.getByTestId("info-box").locator(".rarity-term");
+  await uniqueTerm.hover();
+  await expect(page.locator(`#${await uniqueTerm.getAttribute("aria-describedby")}`)).toHaveText(
+    "獨特版本是此物品的另一種型態，有自己的名稱與外觀。",
+  );
+});
+
 test("unique gear uses the vermilion crop marks and no star", async ({ page }) => {
   await page.goto("/zh/melee/sword-unique1/");
   const slot = page.locator(".entry-head .icon-frame.frame-inventory.is-unique");

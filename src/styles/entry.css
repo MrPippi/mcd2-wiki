@@ -13,7 +13,19 @@
 .facts dd a { display: inline-flex; align-items: center; gap: 6px; }
 /* Rarity: the game's tag art carries the colour, so the words stay in ink. */
 .rarity { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
-.rarity-lead { color: var(--muted); font-size: 13px; }
+/* The rarity label explains the tiers in a hint on hover, keyboard focus or tap. */
+.facts dt { position: relative; }
+.rarity-term {
+  padding: 0; border: 0; background: none; color: inherit; font: inherit; line-height: inherit; cursor: help;
+  text-decoration: underline dotted; text-underline-offset: 3px;
+}
+.rarity-term:hover, .rarity-term:active { background: none; transform: none; }
+.rarity-hint {
+  display: none; position: absolute; left: 0; top: calc(100% + 8px); z-index: var(--z-tooltip);
+  width: max-content; max-width: 260px; padding: 10px 12px; background: var(--paper); border: 1px solid var(--rule-strong);
+  box-shadow: 6px 6px 0 color-mix(in srgb, var(--ink) 10%, transparent); color: var(--text); font-size: 13px; line-height: 1.6;
+}
+.rarity-term:hover + .rarity-hint, .rarity-term:focus + .rarity-hint { display: block; animation: fade-in-quick 120ms var(--ease-out); }
 .rarity-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 8px; }
 /* The game's tag art stretched around the name as a nine-slice frame, drawn at half size. Source edges are
    10px (black, dark rim, highlight) on top and sides and 22px at the bottom, which adds the drop shadow. */
