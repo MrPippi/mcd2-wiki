@@ -47,6 +47,12 @@ const number = setNumber(set);
             <dt data-pagefind-ignore>{t(lang, "pieces")}</dt>
             <dd>{pieces.length}</dd>
           </div>
+          {set.untranslated?.includes(lang) && (
+            <div>
+              <dt data-pagefind-ignore>{t(lang, "translation")}</dt>
+              <dd><span class="tag warn">{t(lang, "untranslated")}</span></dd>
+            </div>
+          )}
         </dl>
       </aside>
       <div class="entry-content">

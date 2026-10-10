@@ -86,6 +86,15 @@ test("armor set page lists its pieces and links back", async ({ page }) => {
 });
 
 
+test("armor set pages mark a set name that fell back to English", async ({ page }) => {
+  await page.goto("/fr/armor/disciple/");
+  await expect(page.locator("h1")).toHaveText("Disciple");
+  await expect(page.locator(".facts .tag.warn")).toHaveCount(1);
+  await page.goto("/de/armor/disciple/");
+  await expect(page.locator("h1")).toContainText("Anhänger");
+  await expect(page.locator(".facts .tag.warn")).toHaveCount(0);
+});
+
 test("enchantment cards show icons", async ({ page }) => {
   await page.goto("/zh/enchantment/arcane/");
   await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();

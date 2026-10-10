@@ -26,6 +26,7 @@ export const EntrySchema = z.object({
   unlock: LocalizedSchema.optional(),
   icon: z.string().optional(),
   armorPiece: z.enum(ARMOR_PIECES).optional(),
+  /** Languages in which at least one text field of this entry is missing and shows the English text instead. */
   untranslated: z.array(z.enum(LANGS)).optional(),
   links: z.object({
     variants: z.array(SlugSchema).optional(),
@@ -41,7 +42,7 @@ export const ArmorSetSchema = z.object({
   slug: SlugSchema,
   variant: VariantSchema,
   name: LocalizedSchema,
-  /** Languages whose set name is the English one because no rule produced their own. */
+  /** Languages whose set name is the English name because the pieces' names in that language share no usable prefix. */
   untranslated: z.array(z.enum(LANGS)).optional(),
   pieces: z.object({
     helmet: SlugSchema.optional(),

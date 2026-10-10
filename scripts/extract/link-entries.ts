@@ -1,5 +1,5 @@
 import { byLang, localizedFrom } from "../../src/lib/lang";
-import { LANGS, type Lang } from "./config";
+import { LANGS, LANG_META, type Lang } from "./config";
 import { issue, type Issue } from "./issues";
 import { baseId, toSlug } from "./keys";
 import { ARMOR_PIECES, type ArmorSet, type Entry } from "./schemas";
@@ -31,18 +31,50 @@ export function commonPrefix(values: readonly string[]): string {
   });
 }
 
-function trimToWordBoundary(prefix: string, names: readonly string[]): string {
-  const atBoundary =
-    /\s$/.test(prefix) || names.every((name) => name.length === prefix.length || /\s/.test(name.charAt(prefix.length)));
-  return atBoundary ? prefix : prefix.slice(0, prefix.lastIndexOf(" ") + 1);
+const MIN_SET_NAME_LENGTH = 2;
+const MIN_COMPOUND_PREFIX_LENGTH = 4;
+/** Joiners that end a CJK set-name prefix (之 zh, の ja, 의 ko) and any space after it. */
+const TRAILING_CONNECTOR = /[\s之の의]+$/u;
+
+/** A German compound joined with a hyphen (Sifter-Helm) shares the hyphen too. */
+const GERMAN_COMPOUND_HYPHEN = /-$/;
+
+const charCount = (text: string): number => [...text].length;
+
+function atWordBoundary(prefix: string, names: readonly string[]): boolean {
+  const endsWord = (name: string): boolean => name.length === prefix.length || /\s/.test(name.charAt(prefix.length));
+  return /\s$/.test(prefix) || names.every(endsWord);
 }
 
+function trimToWordBoundary(prefix: string, names: readonly string[]): string {
+  return atWordBoundary(prefix, names) ? prefix : prefix.slice(0, prefix.lastIndexOf(" ") + 1);
+}
+
+/** German glues the piece name onto the set name (Jünger|helm): a long enough prefix that every piece continues with a letter. */
+function isGermanCompound(prefix: string, names: readonly string[]): boolean {
+  const continuesWithLetter = (name: string): boolean => /^\p{L}/u.test(name.slice(prefix.length));
+  return charCount(prefix) >= MIN_COMPOUND_PREFIX_LENGTH && names.every(continuesWithLetter);
+}
+
+function cutPrefix(lang: Lang, prefix: string, names: readonly string[]): string {
+  switch (LANG_META[lang].fontScript) {
+    case "tc":
+    case "sc":
+    case "jp":
+    case "kr":
+      return prefix.replace(TRAILING_CONNECTOR, "");
+    default:
+      if (lang === "de" && isGermanCompound(prefix, names)) return prefix.replace(GERMAN_COMPOUND_HYPHEN, "");
+      return trimToWordBoundary(prefix, names);
+  }
+}
+
+/** The part of the pieces' names they share, cut where each writing system ends a word; undefined when nothing usable is left. */
 export function setNameFor(lang: Lang, names: readonly string[]): string | undefined {
   if (names.length < 2) return undefined;
-  const prefix = commonPrefix(names);
-  const cut = lang === "en" ? trimToWordBoundary(prefix, names) : prefix.replace(/之$/, "");
-  const trimmed = cut.trim();
-  return [...trimmed].length >= 2 ? trimmed : undefined;
+  const cut = cutPrefix(lang, commonPrefix(names), names).trim();
+  const usable = charCount(cut) >= MIN_SET_NAME_LENGTH && !names.includes(cut);
+  return usable ? cut : undefined;
 }
 
 function variantLinks(published: readonly Entry[]): Map<string, string[]> {
@@ -87,12 +119,20 @@ function setIdentity(entry: Entry): { id: string; slug: string } | undefined {
     : { id: setBase, slug: toSlug(setBase) };
 }
 
-/** Languages whose set names come from the pieces' common prefix; the rest take English until Task 5 adds their rules. */
-const PREFIX_LANGS: readonly Lang[] = ["zh", "en"];
+/** A piece's name in `lang`, or undefined when that is only the English name standing in for a missing translation. */
+function ownName(member: Entry, lang: Lang): string | undefined {
+  const standsInForEnglish = lang !== "en" && member.untranslated?.includes(lang) && member.name[lang] === member.name.en;
+  return standsInForEnglish ? undefined : member.name[lang];
+}
+
+function prefixName(lang: Lang, members: readonly Entry[]): string | undefined {
+  const names = members.map((member) => ownName(member, lang));
+  return names.every((name): name is string => name !== undefined) ? setNameFor(lang, names) : undefined;
+}
 
 function toArmorSet(draft: SetDraft): { set: ArmorSet; issues: Issue[] } {
   const fallback = draft.variant === "unique" ? `${draft.id.replace(/_Unique$/, "")} (Unique)` : draft.id;
-  const prefixed = byLang((lang) => (PREFIX_LANGS.includes(lang) ? setNameFor(lang, draft.members.map((member) => member.name[lang])) : undefined));
+  const prefixed = byLang((lang) => prefixName(lang, draft.members));
   const english = prefixed.en ?? fallback;
   const untranslated = LANGS.filter((lang) => lang !== "en" && prefixed[lang] === undefined);
   const pieces = Object.fromEntries(
@@ -103,7 +143,14 @@ function toArmorSet(draft: SetDraft): { set: ArmorSet; issues: Issue[] } {
   ) as ArmorSet["pieces"];
   const name = localizedFrom((lang) => prefixed[lang] ?? (lang === "zh" ? fallback : english));
   return {
-    set: { id: draft.id, slug: draft.slug, variant: draft.variant, name, pieces, ...(untranslated.length > 0 ? { untranslated } : {}) },
+    set: {
+      id: draft.id,
+      slug: draft.slug,
+      variant: draft.variant,
+      name,
+      pieces,
+      ...(untranslated.length > 0 ? { untranslated } : {}),
+    },
     issues: prefixed.zh && prefixed.en ? [] : [issue("armor-set-name-fallback", draft.id)],
   };
 }
