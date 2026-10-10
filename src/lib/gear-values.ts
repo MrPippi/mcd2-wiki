@@ -84,7 +84,7 @@ export function artifactStatsView(lang: Lang, artifact: Entry): { label: string;
   if (!data) return undefined;
   const seconds = (value: number) => (lang === "zh" ? `${round(value)} 秒` : `${round(value)} sec`);
   const blocks = (value: number) => (lang === "zh" ? `${round(value)} 格` : `${round(value)} ${value === 1 ? "block" : "blocks"}`);
-  const rows = [
+  const rows: ({ label: string; value: string } | undefined)[] = [
     data.cooldownSeconds !== undefined ? { label: LABEL.cooldownSeconds[lang], value: seconds(data.cooldownSeconds) } : undefined,
     data.soulCost !== undefined ? { label: LABEL.soulCost[lang], value: round(data.soulCost) } : undefined,
     data.lifetimeSeconds !== undefined ? { label: LABEL.lifetimeSeconds[lang], value: seconds(data.lifetimeSeconds) } : undefined,
