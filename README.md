@@ -1,4 +1,4 @@
-# Minecraft Dungeons II 繁體中文 Wiki（原型）
+# Minecraft Dungeons II 繁體中文 Wiki
 
 非官方粉絲網站，與 Mojang Studios／Microsoft 無關。遊戲文字與圖像版權歸原權利人所有。
 
