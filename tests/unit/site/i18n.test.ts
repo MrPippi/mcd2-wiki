@@ -40,6 +40,6 @@ describe("i18n", () => {
     const zh = Object.keys((await import("../../../src/lib/i18n")).UI_STRINGS.zh).sort();
     const en = Object.keys((await import("../../../src/lib/i18n")).UI_STRINGS.en).sort();
     expect(en).toEqual(zh);
-    for (const key of ["searchPlaceholder", "viewEntry", "tooltipHint", "rarity", "setPieces"]) expect(zh).toContain(key);
+    for (const key of ["searchPlaceholder", "view", "itemDetails", "rarity", "setPieces"]) expect(zh).toContain(key);
   });
 });

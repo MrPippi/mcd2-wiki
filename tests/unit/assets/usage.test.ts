@@ -21,6 +21,7 @@ describe("usageOf", () => {
     expect(usageOf(["icons/status/burning.png"], published)).toBe("unpublished");
     expect(usageOf(["icons/ui/melee.png"], published)).toBe("site-ui");
     expect(usageOf(["icons/frames/artifact.png"], published)).toBe("site-ui");
+    expect(usageOf(["icons/brand/favicon.png"], published)).toBe("site-ui");
   });
 
   it("treats a newly published category as published without code changes", () => {

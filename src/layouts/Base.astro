@@ -13,6 +13,7 @@ import type { Category } from "../../scripts/extract/config";
 import CategoryTabs from "../components/CategoryTabs.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { HTML_LANG, t, type Lang } from "../lib/i18n";
+import { extractedBrand } from "../lib/data";
 import { metaDescription } from "../lib/meta";
 import { assetUrl } from "../lib/url";
 
@@ -32,6 +33,13 @@ const OG_LOCALE: Readonly<Record<Lang, string>> = { zh: "zh_TW", en: "en_US" };
 const { lang, title, current, description = "", langSwitchHref } = Astro.props;
 const fullTitle = `${title} | ${t(lang, "siteTitle")}`;
 const summary = metaDescription(description, 160, t(lang, "tagline"));
+// Game icons from the extract step; the hand-drawn SVG covers a checkout without extracted art.
+const favicon = extractedBrand.favicon
+  ? { href: assetUrl(extractedBrand.favicon), type: "image/png" }
+  : { href: assetUrl("favicon.svg"), type: "image/svg+xml" };
+const appIcon = extractedBrand["app-icon"] ? assetUrl(extractedBrand["app-icon"]) : undefined;
+// Link previews need an absolute URL, which needs the deployed site address (SITE_URL at build time).
+const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extractedBrand.social), Astro.site).href : undefined;
 ---
 <!doctype html>
 <html lang={HTML_LANG[lang]} data-compare="on">
@@ -45,9 +53,14 @@ const summary = metaDescription(description, 160, t(lang, "tagline"));
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={summary} />
     <meta property="og:locale" content={OG_LOCALE[lang]} />
+    {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImage && <meta property="og:image:width" content="480" />}
+    {socialImage && <meta property="og:image:height" content="480" />}
+    {socialImage && <meta property="og:image:alt" content="Minecraft Dungeons II" />}
     <meta name="twitter:card" content="summary" />
     <meta name="theme-color" content="#1c2b31" />
-    <link rel="icon" type="image/svg+xml" href={assetUrl("favicon.svg")} />
+    <link rel="icon" type={favicon.type} href={favicon.href} />
+    {appIcon && <link rel="apple-touch-icon" href={appIcon} />}
     <script is:inline>
       (function () {
         document.documentElement.classList.add("js");

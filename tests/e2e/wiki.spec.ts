@@ -348,17 +348,61 @@ test("items show their names under the slots", async ({ page }) => {
   await expect(cardNamed(page, "燃燒之刃").locator(".item-name.is-unique")).toBeVisible();
 });
 
-test("hovering or focusing an item shows its details beside the grid", async ({ page }, testInfo) => {
+const boxOf = async (locator: Locator) => {
+  const box = await locator.boundingBox();
+  if (!box) throw new Error("element is not rendered");
+  return box;
+};
+
+test("hovering an item shows its details next to the cursor and follows it", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium", "hover is a desktop interaction");
+  // Tall enough that the tooltip fits below the cursor on the first row of slots.
+  await page.setViewportSize({ width: 1280, height: 1000 });
   await page.goto("/zh/melee/");
   const tooltip = page.getByTestId("item-tooltip");
-  await expect(tooltip).toContainText("將游標移到物品上");
-  await cardNamed(page, "劍").hover();
-  await expect(tooltip.locator(".tooltip-name .primary")).toHaveText("劍");
-  await expect(tooltip.locator(".kicker")).toHaveText("MELEE WEAPON");
-  await expect(tooltip).toContainText("經典");
-  await cardNamed(page, "燃燒之刃").locator("a.item-link").focus();
+  await expect(tooltip).toBeHidden();
+  const first = page.locator(".entry-card").first();
+  const name = (await first.locator(".item-name").textContent())?.trim() ?? "";
+  const slot = await boxOf(first.locator(".icon-frame"));
+  await page.mouse.move(slot.x + 10, slot.y + 10);
+  await expect(tooltip.locator(".tooltip-name .primary")).toHaveText(name);
+  await expect(tooltip.locator(".kicker")).toHaveText(/MELEE WEAPON$/);
+  await expect.poll(async () => (await boxOf(tooltip)).x).toBeCloseTo(slot.x + 10 + 16, 0);
+  await expect.poll(async () => (await boxOf(tooltip)).y).toBeCloseTo(slot.y + 10 + 16, 0);
+  await page.mouse.move(slot.x + 40, slot.y + 30);
+  await expect.poll(async () => (await boxOf(tooltip)).x).toBeCloseTo(slot.x + 40 + 16, 0);
+  await page.mouse.move(5, 5);
+  await expect(tooltip).toBeHidden();
+});
+
+test("the cursor tooltip flips to the left near the right edge of the window", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "hover is a desktop interaction");
+  await page.setViewportSize({ width: 700, height: 800 });
+  await page.goto("/zh/melee/");
+  const cards = page.locator(".entry-card .icon-frame");
+  const boxes = await Promise.all((await cards.all()).slice(0, 12).map(boxOf));
+  const rightmost = boxes.reduce((a, b) => (b.x > a.x ? b : a));
+  const cursor = { x: rightmost.x + rightmost.width - 4, y: rightmost.y + 10 };
+  await page.mouse.move(cursor.x, cursor.y);
+  const tooltip = page.getByTestId("item-tooltip");
+  await expect(tooltip).toBeVisible();
+  const box = await boxOf(tooltip);
+  expect(box.x + box.width).toBeLessThanOrEqual(cursor.x - 16 + 1);
+  expect(box.x).toBeGreaterThanOrEqual(8);
+});
+
+test("keyboard focus shows the details beside the item", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name !== "chromium", "hover is a desktop interaction");
+  await page.goto("/zh/melee/");
+  const link = cardNamed(page, "燃燒之刃").locator("a.item-link");
+  await link.focus();
+  const tooltip = page.getByTestId("item-tooltip");
   await expect(tooltip.locator(".kicker")).toHaveText("UNIQUE MELEE WEAPON");
+  await expect(link).toHaveAttribute("aria-describedby", "item-tooltip");
+  const card = await boxOf(cardNamed(page, "燃燒之刃"));
+  const box = await boxOf(tooltip);
+  const beside = box.x >= card.x + card.width || box.x + box.width <= card.x;
+  expect(beside).toBe(true);
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/zh\/melee\/sword-unique1\/$/);
 });
@@ -582,4 +626,18 @@ test("the details sheet closes on an outside tap or when the filter hides its it
   await page.locator(".filter-text").fill("zzz-no-such-item");
   await expect(sheet).toBeHidden();
   await expect(page.locator(".filter-text")).toBeFocused();
+});
+
+test("the site uses the game's own icons and splash art", async ({ page, request }) => {
+  await page.goto("/zh/");
+  const icon = await page.locator('link[rel="icon"]').getAttribute("href");
+  expect(icon).toBe("/icons/brand/favicon.png");
+  expect((await request.get(icon ?? "")).status()).toBe(200);
+  const touch = await page.locator('link[rel="apple-touch-icon"]').getAttribute("href");
+  expect((await request.get(touch ?? "")).status()).toBe(200);
+  // The 2.7 MB splash is resized and re-encoded at build time, never shipped as the original PNG.
+  const backdrop = page.locator(".hero-backdrop img");
+  await expect(backdrop).toHaveAttribute("src", /\.webp$/);
+  expect(await backdrop.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+  expect(await backdrop.getAttribute("alt")).toBe("");
 });

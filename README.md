@@ -7,7 +7,9 @@
 1. 將遊戲解包檔放在 `source-data/`（不進 git）。
 2. `npm run extract` → 更新 `src/data/*.json`、`public/icons/`，並產生 `extract-report.md`。
 3. 檢查報告；缺圖示時編輯 `scripts/extract/icon-overrides.json` 後重跑。
-4. Commit `src/data`、`public/icons`、`scripts/extract/icon-overrides.json`。
+4. Commit `src/data`、`public/icons`、`src/assets/brand`、`scripts/extract/icon-overrides.json`。
+
+網站圖示（favicon、主畫面圖示、分享預覽圖）與首頁背景取自遊戲 `Assets/UI/Icons/` 的 Logo 與 SplashScreen，同樣由 `npm run extract` 複製；首頁背景在 build 時轉成 WebP。分享預覽圖需要絕對網址，部署時由 `SITE_URL` 提供。
 
 ## 原始素材索引
 

@@ -131,6 +131,18 @@ export const UI_ICON_SOURCES = {
 } as const;
 export type UiIconKey = keyof typeof UI_ICON_SOURCES;
 
+/** Game branding, copied to public/icons/brand/<key>.png: browser tab icon, home-screen icon, link-preview image. */
+export const BRAND_SOURCES = {
+  favicon: "Assets/UI/Icons/SmallLogo.png",
+  "app-icon": "Assets/UI/Icons/Logo.png",
+  social: "Assets/UI/Icons/Square480x480Logo.png",
+} as const;
+export type BrandKey = keyof typeof BRAND_SOURCES;
+
+/** Full-screen splash art (1920×1080, ~2.7 MB). It goes to src/assets so the site build resizes and re-encodes it. */
+export const SPLASH_SOURCE = "Assets/UI/Icons/SplashScreen.png";
+export const SPLASH_TARGET = "src/assets/brand/splash.png";
+
 export const PATHS = {
   localeFile: (sourceRoot: string, culture: string): string =>
     path.join(sourceRoot, "Localization", "All", culture, "All.json"),
