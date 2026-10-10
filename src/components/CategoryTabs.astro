@@ -1,5 +1,6 @@
 ---
 import type { Category } from "../../scripts/extract/config";
+import { catalogLabel, categoryCount } from "../lib/catalog";
 import { CATEGORY_LABEL, t, type Lang } from "../lib/i18n";
 import { TAB_ORDER } from "../lib/tabs";
 import { categoryIcon } from "../lib/ui-icons";
@@ -14,18 +15,18 @@ interface Props {
 const { lang, current } = Astro.props;
 ---
 <nav class="site-nav category-tabs" aria-label={t(lang, "categories")} data-current={current}>
-  <span class="tab-key" aria-hidden="true">Q</span>
-  <ul class="tab-list">
-    {TAB_ORDER.map((category) => (
+  <ol class="tab-list">
+    {TAB_ORDER.map((category, index) => (
       <li>
         <a href={href(lang, category)} data-category={category} aria-current={category === current ? "page" : undefined}>
+          <span class="tab-index" aria-hidden="true">{catalogLabel(index + 1).slice(1)}</span>
           <UiIcon src={categoryIcon(category)} />
           <span class="tab-label">{CATEGORY_LABEL[category][lang]}</span>
+          <span class="tab-count" aria-hidden="true">{categoryCount(category)}</span>
         </a>
       </li>
     ))}
-  </ul>
-  <span class="tab-key" aria-hidden="true">E</span>
+  </ol>
 </nav>
 <script>
   import type { Category } from "../../scripts/extract/config";

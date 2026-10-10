@@ -1,7 +1,8 @@
 ---
 import type { Category } from "../../scripts/extract/config";
 import type { Entry, Localized } from "../../scripts/extract/schemas";
-import type { Lang } from "../lib/i18n";
+import { catalogLabel } from "../lib/catalog";
+import { HTML_LANG, otherLang, type Lang } from "../lib/i18n";
 import EntryIcon from "./EntryIcon.astro";
 import TooltipPanel from "./TooltipPanel.astro";
 
@@ -14,17 +15,22 @@ interface Props {
   variant: Entry["variant"];
   kicker: string;
   description?: Localized;
-  /** Position in the list; staggers the cascade-in animation. */
+  /** Position in the list; staggers the cascade-in animation and gives the specimen its number. */
   index?: number;
 }
 
 const { lang, href, name, icon, category, variant, kicker, description, index = 0 } = Astro.props;
 const unique = variant === "unique";
+const alt = otherLang(lang);
 ---
 <li class="entry-card" style={`--i:${index}`} data-variant={variant} data-names={`${name.zh} ${name.en}`.toLowerCase()}>
   <a class="item-link" href={href}>
-    <EntryIcon icon={icon} alt={name[lang]} category={category} variant={variant} />
-    <span class:list={["primary", "item-name", { "is-unique": unique }]}>{name[lang]}</span>
+    <span class="card-no" aria-hidden="true">{catalogLabel(index + 1)}</span>
+    <span class="card-art"><EntryIcon icon={icon} alt={name[lang]} size={72} category={category} variant={variant} /></span>
+    <span class="card-names">
+      <span class:list={["primary", "item-name", { "is-unique": unique }]}>{name[lang]}</span>
+      {name[alt] !== name[lang] && <span class="item-alt" lang={HTML_LANG[alt]}>{name[alt]}</span>}
+    </span>
   </a>
   <template class="item-tip">
     <TooltipPanel lang={lang} kicker={kicker} name={name} description={description} unique={unique}>

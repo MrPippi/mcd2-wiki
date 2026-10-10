@@ -1,14 +1,12 @@
 ---
 interface Props {
   title: string;
-  /** Uppercase English label shown in the game's label font. */
-  en: string;
   testid?: string;
 }
 
-const { title, en, testid } = Astro.props;
+const { title, testid } = Astro.props;
 ---
 <section class="entry-section" data-testid={testid}>
-  <h2 class="section-title" data-pagefind-ignore><span class="section-en">{en}</span><span>{title}</span></h2>
+  <h2 class="section-title" data-pagefind-ignore>{title}</h2>
   <slot />
 </section>

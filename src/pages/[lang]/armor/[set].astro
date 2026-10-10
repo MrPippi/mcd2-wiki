@@ -6,6 +6,7 @@ import EntrySection from "../../../components/EntrySection.astro";
 import LangText from "../../../components/LangText.astro";
 import UiIcon from "../../../components/UiIcon.astro";
 import Base from "../../../layouts/Base.astro";
+import { catalogLabel, setNumber } from "../../../lib/catalog";
 import { allArmorSets, findEntry } from "../../../lib/data";
 import { PIECE_LABEL, t, type Lang } from "../../../lib/i18n";
 import { setKicker } from "../../../lib/kicker";
@@ -23,15 +24,16 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
   const entry = slug ? findEntry("armor", slug) : undefined;
   return entry ? [{ piece, entry }] : [];
 });
+const number = setNumber(set);
 ---
 <Base lang={lang} title={set.name[lang]} current="armor">
   <article class="entry-detail armor-set" data-pagefind-body>
-    <p class="kicker entry-kicker" data-pagefind-ignore>{setKicker(set.variant)}</p>
     <div class="entry-layout">
-      <aside class="info-box panel" data-testid="info-box">
-        <div class="set-preview">
+      <aside class="info-box" data-testid="info-box">
+        <div class="set-preview specimen-plate">
+          {number !== undefined && <span class="plate-no mono" aria-hidden="true">No. {catalogLabel(number)}</span>}
           {pieces.map(({ entry }, index) => (
-            <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={72} category={entry.category} variant={entry.variant} loading="eager" searchImage={index === 0} />
+            <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={96} category={entry.category} variant={entry.variant} loading="eager" searchImage={index === 0} />
           ))}
         </div>
         <dl class="facts" data-pagefind-ignore>
@@ -46,8 +48,9 @@ const pieces = ARMOR_PIECES.flatMap((piece) => {
         </dl>
       </aside>
       <div class="entry-content">
+        <p class="kicker entry-kicker" data-pagefind-ignore>{setKicker(set.variant)}</p>
         <LangText as="h1" lang={lang} value={set.name} searchTitle class={set.variant === "unique" ? "is-unique" : undefined} />
-        <EntrySection title={t(lang, "setPieces")} en="PIECES">
+        <EntrySection title={t(lang, "setPieces")}>
           <ul class="set-pieces">
             {pieces.map(({ piece, entry }) => (
               <li class="set-piece" data-testid="set-piece">

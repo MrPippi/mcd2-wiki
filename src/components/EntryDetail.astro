@@ -18,29 +18,29 @@ const { lang, entry } = Astro.props;
 const related = relatedLinks(lang, entry);
 ---
 <article class="entry-detail" data-pagefind-body>
-  <p class="kicker entry-kicker" data-pagefind-ignore>{itemKicker(entry.category, entry.variant)}</p>
   <div class="entry-layout">
     <InfoBox lang={lang} entry={entry} />
     <div class="entry-content">
+      <p class="kicker entry-kicker" data-pagefind-ignore>{itemKicker(entry.category, entry.variant)}</p>
       <LangText as="h1" lang={lang} value={entry.name} searchTitle class={entry.variant === "unique" ? "is-unique" : undefined} />
       {entry.description && (
-        <EntrySection title={t(lang, "description")} en="DESCRIPTION">
+        <EntrySection title={t(lang, "description")}>
           <LangText as="p" class="description" lang={lang} value={entry.description} html />
         </EntrySection>
       )}
       {entry.descriptionLong && (
-        <EntrySection title={t(lang, "details")} en="DETAILS">
+        <EntrySection title={t(lang, "details")}>
           <LangText as="p" class="description-long" lang={lang} value={entry.descriptionLong} html />
         </EntrySection>
       )}
       {entry.unlock && (
-        <EntrySection title={t(lang, "unlock")} en="UNLOCK" testid="unlock">
+        <EntrySection title={t(lang, "unlock")} testid="unlock">
           <LangText as="p" lang={lang} value={entry.unlock} html />
         </EntrySection>
       )}
       {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
       {related.length > 0 && (
-        <EntrySection title={t(lang, "related")} en="RELATED">
+        <EntrySection title={t(lang, "related")}>
           <ul class="related" data-pagefind-ignore>
             {related.map((link) => (
               <li>

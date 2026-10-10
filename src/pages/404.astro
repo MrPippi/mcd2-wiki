@@ -30,18 +30,19 @@ const lang = "zh";
 </Base>
 <style>
   .not-found {
-    display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; padding: 24px 0 16px;
+    display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; padding: 16px 0;
   }
   .not-found-copy p { max-width: 52ch; }
-  .not-found-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 24px; }
+  .not-found-copy h1 { margin: 16px 0 20px; }
+  .not-found-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 28px; }
+  /* An empty mounting plate: the specimen that should be here is missing. */
   .not-found-slot {
-    order: -1; width: 128px; height: 128px; display: flex; align-items: center; justify-content: center;
-    border: 3px dashed var(--border-strong); color: var(--border-strong);
-    font-family: var(--font-pixel); font-size: var(--fs-pixel-2xl);
+    order: -1; width: 160px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    background: var(--paper) var(--dots); border: 1px dashed var(--rule-strong); color: var(--muted);
+    font-family: var(--font-display); font-weight: 700; font-size: 64px;
   }
-  .not-found-slot span { animation: breathe 2.4s ease-in-out infinite; }
   @media (min-width: 900px) {
-    .not-found { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); min-height: 420px; }
-    .not-found-slot { order: 0; width: 200px; height: 200px; justify-self: center; font-size: 96px; }
+    .not-found { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); min-height: 440px; gap: 64px; }
+    .not-found-slot { order: 0; width: 100%; max-width: 360px; justify-self: end; font-size: 120px; }
   }
 </style>

@@ -2,14 +2,12 @@
 import { LANGS, type Category } from "../../../../scripts/extract/config";
 import EntryTable from "../../../components/EntryTable.astro";
 import ItemBrowser from "../../../components/ItemBrowser.astro";
+import CatalogHead from "../../../components/CatalogHead.astro";
 import ItemCard from "../../../components/ItemCard.astro";
-import ListFilter from "../../../components/ListFilter.astro";
-import UiIcon from "../../../components/UiIcon.astro";
 import Base from "../../../layouts/Base.astro";
 import { entriesIn } from "../../../lib/data";
 import { CATEGORY_LABEL, GRID_CATEGORIES, TABLE_CATEGORIES, t, type Lang } from "../../../lib/i18n";
 import { itemKicker } from "../../../lib/kicker";
-import { categoryIcon } from "../../../lib/ui-icons";
 import { entryHref } from "../../../lib/url";
 
 export function getStaticPaths() {
@@ -25,8 +23,8 @@ const isTable = (TABLE_CATEGORIES as readonly Category[]).includes(category);
 const hasUnique = entries.some((entry) => entry.variant === "unique");
 ---
 <Base lang={lang} title={CATEGORY_LABEL[category][lang]} current={category}>
-  <h1><UiIcon src={categoryIcon(category)} /> <span data-pagefind-meta="title">{CATEGORY_LABEL[category][lang]}</span> <span class="count">({entries.length})</span></h1>
-  <ListFilter lang={lang} showVariant={!isTable && hasUnique} />
+  <div class="catalog">
+  <CatalogHead lang={lang} category={category} count={entries.length} showVariant={!isTable && hasUnique} />
   {isTable ? (
     <>
       <p class="note">{t(lang, "placeholderNote")}</p>
@@ -49,4 +47,5 @@ const hasUnique = entries.some((entry) => entry.variant === "unique");
       ))}
     </ItemBrowser>
   )}
+  </div>
 </Base>

@@ -1,43 +1,54 @@
-.entry-kicker { margin-bottom: 8px; }
-.entry-layout { display: grid; grid-template-columns: 1fr; gap: 20px; align-items: start; }
-.info-box { padding: 16px; }
-.info-box .entry-head { display: flex; justify-content: center; margin-bottom: 14px; }
-.facts { margin: 0; }
-.facts > div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--border); }
-.facts dt { color: var(--muted); font-size: 0.85rem; }
-.facts dd { margin: 0; text-align: right; font-family: var(--font-pixel); font-size: var(--fs-pixel-m); display: inline-flex; align-items: center; gap: 4px; }
-.facts dd a { display: inline-flex; align-items: center; gap: 4px; }
-.facts dd.is-unique { color: var(--accent); }
+/* Specimen sheet: the plate and its register on the left, the written description on the right. */
+.entry-layout { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+.info-box { display: flex; flex-direction: column; gap: 0; }
+.specimen-plate.entry-head, .specimen-plate.set-preview { aspect-ratio: 1; }
+.entry-head .icon-frame, .entry-head > .entry-icon { animation: rise-in 700ms 250ms var(--ease-out) both; }
+.set-preview { display: grid; grid-template-columns: repeat(2, auto); gap: 8px 16px; place-content: center; }
+
+.facts { margin: 0; border-left: 1px solid var(--rule-strong); border-right: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule-strong); }
+.facts > div { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; align-items: baseline; padding: 10px 14px; }
+.facts > div + div { border-top: 1px solid var(--rule); }
+.facts dt { font-size: 13px; color: var(--muted); }
+.facts dd { margin: 0; display: inline-flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 15px; }
+.facts dd a { display: inline-flex; align-items: center; gap: 6px; }
+.facts dd.is-unique { color: var(--accent); font-weight: 600; }
+
 .entry-content { min-width: 0; }
-.entry-content h1 { margin: 0 0 8px; font-size: var(--fs-pixel-xl); }
-.entry-content p, .book-source .book p { max-width: 65ch; }
+.entry-kicker { margin-bottom: 14px; }
+.entry-content h1 { margin: 0 0 8px; font-size: var(--fs-display-xl); line-height: 1; }
 .entry-content h1.is-unique .primary { color: var(--accent); }
-.description { font-size: 1.05rem; }
+.entry-content p, .book-source .book p { max-width: 62ch; }
+.description { font-size: 19px; line-height: 1.7; }
+.description .alt, .description-long .alt { display: block; margin-top: 10px; font-size: 15px; }
+.entry-section .section-title { font-size: 20px; margin-top: 40px; }
 
-.related { list-style: none; padding: 0; display: grid; gap: 10px; }
-.related li { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.related-label { color: var(--muted); font-size: 0.8rem; min-width: 5em; }
-.related a { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; }
+.related { list-style: none; padding: 0; margin: 0; display: grid; }
+.related li { display: grid; grid-template-columns: 7em 1fr; align-items: center; gap: 12px; padding: 10px 0; }
+.related li + li { border-top: 1px solid var(--rule); }
+.related-label { font-size: 13px; color: var(--muted); }
+.related a { display: flex; align-items: center; gap: 14px; color: var(--text); text-decoration: none; }
 .related a .icon-frame, .set-piece a .icon-frame { transition: transform var(--dur) var(--ease-spring); }
-.related a:hover .icon-frame, .set-piece a:hover .icon-frame { transform: translateY(-2px); }
-.related a:hover .primary, .set-piece a:hover .primary { color: var(--link); }
+.related a:hover .icon-frame, .set-piece a:hover .icon-frame { transform: translateY(-3px) scale(1.05); }
+.related a .primary, .set-piece a .primary { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.related a:hover .primary, .set-piece a:hover .primary { color: var(--accent); }
 
-.set-preview { display: grid; grid-template-columns: repeat(2, 72px); gap: 10px; justify-content: center; margin-bottom: 14px; }
-.set-pieces { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-.set-piece {
-  background: var(--surface); border: 2px solid var(--border); padding: 12px;
-  transition: border-color var(--dur-fast) var(--ease-out);
-}
-.set-piece:hover { border-color: var(--border-strong); }
-.set-piece a { display: flex; gap: 10px; align-items: center; color: var(--text); text-decoration: none; }
-.piece-label { display: inline-flex; align-items: center; gap: 4px; color: var(--muted); font-size: 0.8rem; }
+/* Set pieces: one ruled row each, sprite and name on the left, the game text beside them. */
+.set-pieces { list-style: none; padding: 0; margin: 0; display: grid; }
+.set-piece { display: grid; grid-template-columns: 1fr; gap: 6px 32px; padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.set-piece a { display: flex; gap: 14px; align-items: center; color: var(--text); text-decoration: none; }
+.set-piece p { margin: 0; color: var(--text-2); font-size: 15px; }
+.piece-label { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--muted); }
+.set-piece a > span { display: flex; flex-direction: column; gap: 2px; }
 
-.book-source ul { list-style: none; padding: 0; display: grid; gap: 8px; }
-.book-source .book { display: flex; gap: 10px; align-items: flex-start; }
+.book-source ul { list-style: none; padding: 0; margin: 16px 0 0; display: grid; }
+.book-source .book { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--rule); }
 .book-source .book p { margin: 4px 0 0; }
 
-@media (min-width: 900px) {
-  .entry-layout { grid-template-columns: 260px 1fr; gap: 32px; }
-  .entry-content h1 { font-size: var(--fs-pixel-2xl); }
-  .info-box { position: sticky; top: 16px; }
+@media (min-width: 720px) {
+  .set-piece { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; }
+}
+
+@media (min-width: 960px) {
+  .entry-layout { grid-template-columns: minmax(300px, 5fr) minmax(0, 7fr); gap: 64px; }
+  .info-box { position: sticky; top: 24px; }
 }

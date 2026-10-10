@@ -17,7 +17,7 @@ const books = booksFor(enchantment.slug);
 const shownTexts = new Set([enchantment.description?.[lang], enchantment.descriptionLong?.[lang]]);
 ---
 {books.length > 0 && (
-  <EntrySection title={t(lang, "enchantmentBook")} en="ENCHANTMENT BOOK" testid="book-source">
+  <EntrySection title={t(lang, "enchantmentBook")} testid="book-source">
     <div class="book-source">
       <p class="note">{t(lang, "obtainedFromBook")}</p>
       <ul>

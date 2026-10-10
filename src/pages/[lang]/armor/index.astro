@@ -2,14 +2,12 @@
 import { LANGS } from "../../../../scripts/extract/config";
 import { ARMOR_PIECES } from "../../../../scripts/extract/schemas";
 import ItemBrowser from "../../../components/ItemBrowser.astro";
+import CatalogHead from "../../../components/CatalogHead.astro";
 import ItemCard from "../../../components/ItemCard.astro";
-import ListFilter from "../../../components/ListFilter.astro";
-import UiIcon from "../../../components/UiIcon.astro";
 import Base from "../../../layouts/Base.astro";
 import { allArmorSets, findEntry } from "../../../lib/data";
 import { CATEGORY_LABEL, PIECE_LABEL, type Lang } from "../../../lib/i18n";
 import { setKicker } from "../../../lib/kicker";
-import { categoryIcon } from "../../../lib/ui-icons";
 import { href } from "../../../lib/url";
 
 export function getStaticPaths() {
@@ -27,8 +25,8 @@ const cards = allArmorSets.map((set) => {
 });
 ---
 <Base lang={lang} title={CATEGORY_LABEL.armor[lang]} current="armor">
-  <h1><UiIcon src={categoryIcon("armor")} /> {CATEGORY_LABEL.armor[lang]} <span class="count">({cards.length})</span></h1>
-  <ListFilter lang={lang} showVariant={true} />
+  <div class="catalog">
+  <CatalogHead lang={lang} category="armor" count={cards.length} showVariant={true} />
   <ItemBrowser lang={lang}>
     {cards.map(({ set, pieces, icon }, index) => (
       <ItemCard
@@ -47,4 +45,5 @@ const cards = allArmorSets.map((set) => {
       </ItemCard>
     ))}
   </ItemBrowser>
+  </div>
 </Base>

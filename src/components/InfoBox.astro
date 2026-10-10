@@ -1,5 +1,6 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
+import { catalogLabel, entryNumber } from "../lib/catalog";
 import { findArmorSet } from "../lib/data";
 import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../lib/i18n";
 import { categoryIcon, pieceIcon } from "../lib/ui-icons";
@@ -15,10 +16,14 @@ interface Props {
 const { lang, entry } = Astro.props;
 const set = entry.links.armorSet ? findArmorSet(entry.links.armorSet) : undefined;
 const listCategory = entry.category === "enchantment-book" ? "enchantment" : entry.category;
+const number = entryNumber(entry);
+const PLATE_ICON_SIZE = 200;
 ---
-<aside class="info-box panel" data-testid="info-box">
-  <div class="entry-head">
-    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={160} category={entry.category} variant={entry.variant} loading="eager" searchImage />
+<aside class="info-box" data-testid="info-box">
+  <div class="entry-head specimen-plate">
+    {number !== undefined && <span class="plate-no mono" aria-hidden="true">No. {catalogLabel(number)}</span>}
+    <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={PLATE_ICON_SIZE} category={entry.category} variant={entry.variant} loading="eager" searchImage />
+    <span class="plate-scale" aria-hidden="true"></span>
   </div>
   <dl class="facts" data-pagefind-ignore>
     <div>

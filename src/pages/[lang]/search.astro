@@ -14,8 +14,10 @@ const placeholder = t(lang, "search");
 ---
 <Base lang={lang} title={t(lang, "search")}>
   <link rel="stylesheet" href={assetUrl("pagefind/pagefind-ui.css")} />
-  <h1>{t(lang, "search")}</h1>
-  <div id="search" data-testid="search"></div>
+  <div class="search-page">
+    <h1>{t(lang, "search")}</h1>
+    <div id="search" data-testid="search"></div>
+  </div>
   <script is:inline src={assetUrl("pagefind/pagefind-ui.js")}></script>
   <script is:inline define:vars={{ base, placeholder }}>
     window.addEventListener("DOMContentLoaded", () => {

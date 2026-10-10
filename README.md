@@ -39,8 +39,8 @@ npm run build        # 產生 dist/ 與 Pagefind 索引
 
 ## 字型
 
-- 俐方體 11 號（Cubic 11，`src/assets/fonts/cubic-11/`）與 Silkscreen（`@fontsource/silkscreen`）皆為 SIL Open Font License 1.1。
-- 授權全文：`public/licenses/Cubic-11-OFL.txt`（網站頁尾有連結）；Silkscreen 授權隨 npm 套件提供。
+- Noto Serif TC（`@fontsource/noto-serif-tc`，標題）、Geist 與 Geist Mono（`@fontsource-variable/geist`、`@fontsource-variable/geist-mono`，內文與編號）皆為 SIL Open Font License 1.1。
+- 授權全文隨各 npm 套件提供；網站頁尾列出使用的字型。
 
 ## 部署
 

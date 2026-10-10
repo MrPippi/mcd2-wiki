@@ -1,33 +1,19 @@
 .entry-icon { object-fit: contain; }
 .icon-frame { position: relative; display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; background: var(--frame) center / 100% 100% no-repeat; }
 .icon-frame > .entry-icon { width: 78%; height: 78%; }
-/* Inventory slot, drawn after the in-game inventory. Layers from the edge inward (in --px, the slot's
-   own pixels at 103px): 1 black, 2 rarity border, 1 #353535 inner frame, 1 #0D0D0D, 1 inner glow. */
-.icon-frame.frame-inventory {
-  --slot-glow: var(--slot-deep);
-  background: var(--slot-bg);
-  box-shadow:
-    0 0 0 max(1px, var(--px)) var(--slot-edge),
-    inset 0 0 0 max(1px, calc(var(--px) * 2)) var(--slot-border),
-    inset 0 0 0 calc(var(--px) * 3) var(--slot-inner),
-    inset 0 0 0 calc(var(--px) * 4) var(--slot-deep),
-    inset 0 0 0 calc(var(--px) * 5) var(--slot-glow);
-}
-.icon-frame.frame-inventory.is-unique {
-  --slot-border: var(--slot-unique-border); --slot-glow: var(--slot-unique-glow);
-  background: linear-gradient(135deg, var(--slot-unique-top) 0%, var(--slot-unique-mid) 38%, var(--slot-unique-low) 100%);
-}
-.icon-frame.frame-inventory > .entry-icon { width: 82%; height: 82%; object-fit: contain; image-rendering: pixelated; }
-/* Unique rarity mark: a small orange × of five pixel squares in the top-left corner. */
+/* Gear slot: the sprite alone on the plate, like an unmounted specimen. --px is the slot's own pixel at 103px. */
+.icon-frame.frame-inventory { background: none; }
+.icon-frame.frame-inventory.is-unique { --slot-border: var(--slot-unique-border); }
+.icon-frame.frame-inventory > .entry-icon { width: 88%; height: 88%; object-fit: contain; image-rendering: pixelated; }
+/* Unique rarity mark: vermilion crop marks at two opposite corners, framing the specimen. */
 .slot-mark {
-  --sq: max(1px, calc(var(--px) * 3));
-  position: absolute; left: calc(var(--px) * 9); top: calc(var(--px) * 9); z-index: 1;
-  width: var(--sq); height: var(--sq); background: var(--slot-unique-border);
-  box-shadow:
-    calc(var(--sq) * 2) 0 0 var(--slot-unique-border),
-    var(--sq) var(--sq) 0 var(--slot-unique-border),
-    0 calc(var(--sq) * 2) 0 var(--slot-unique-border),
-    calc(var(--sq) * 2) calc(var(--sq) * 2) 0 var(--slot-unique-border);
+  --arm: max(6px, calc(var(--px) * 14)); --line: max(1.5px, calc(var(--px) * 2.5)); --c: var(--slot-unique-border);
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--arm) var(--line) no-repeat,
+    linear-gradient(var(--c), var(--c)) top left / var(--line) var(--arm) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--arm) var(--line) no-repeat,
+    linear-gradient(var(--c), var(--c)) bottom right / var(--line) var(--arm) no-repeat;
 }
 /* Hotbar artifact slot (T_UI_ArtifactSlot_Default): interior spans x 34–186, y 22–174 of 220px. */
 .icon-frame.frame-artifact > .entry-icon { position: absolute; left: 15.5%; top: 10%; width: 69%; height: 69%; }
@@ -36,5 +22,21 @@
 .icon-frame.frame-enchantment { background: none; }
 .icon-frame.frame-enchantment::after { content: ""; position: absolute; inset: 0; background: var(--frame) center / 100% 100% no-repeat; image-rendering: pixelated; pointer-events: none; }
 .icon-frame.frame-enchantment > .entry-icon { position: absolute; left: 15.2%; top: 5%; width: 69.6%; height: 71.5%; image-rendering: pixelated; }
-.framed-placeholder { display: inline-flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1.5rem; }
-.placeholder-icon { display: inline-flex; align-items: center; justify-content: center; background: var(--surface-2); border-radius: var(--radius); color: var(--muted); font-size: 1.5rem; }
+.framed-placeholder { display: inline-flex; align-items: center; justify-content: center; color: var(--muted); font-family: var(--font-display); font-size: 1.5rem; }
+.placeholder-icon { display: inline-flex; align-items: center; justify-content: center; border: 1px dashed var(--rule-strong); color: var(--muted); font-size: 1.5rem; }
+
+/* Mounting plate shared by the cover and the specimen sheets: dot-grid board, number, printed scale bar. */
+.specimen-plate {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  background: var(--paper) var(--dots); border: 1px solid var(--rule-strong);
+  animation: unveil 900ms var(--ease-out) both;
+}
+.plate-no { position: absolute; top: 12px; left: 14px; font-size: var(--fs-mono-m); color: var(--muted); }
+/* Ticks every 16px, matching the backing board's dots. */
+.plate-scale {
+  position: absolute; left: 14px; right: 14px; bottom: 12px; height: 8px;
+  background:
+    repeating-linear-gradient(90deg, var(--ink) 0 1px, transparent 1px 16px) bottom / 100% 5px no-repeat,
+    linear-gradient(var(--ink), var(--ink)) bottom / 100% 1px no-repeat;
+  opacity: 0.55;
+}

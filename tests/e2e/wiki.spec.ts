@@ -128,14 +128,14 @@ const slotBorder = (el: Element) => getComputedStyle(el).getPropertyValue("--slo
 test("normal gear uses the plain inventory slot", async ({ page }) => {
   await page.goto("/zh/melee/sword/");
   const slot = page.locator(".entry-head .icon-frame.frame-inventory");
-  expect(await slot.evaluate(slotBorder)).toBe("#897a6d");
+  expect(await slot.evaluate(slotBorder)).toBe("#cfd2cc");
   await expect(slot.locator(".slot-star")).toHaveCount(0);
 });
 
-test("unique gear uses the orange slot with the corner rarity mark and no star", async ({ page }) => {
+test("unique gear uses the vermilion crop marks and no star", async ({ page }) => {
   await page.goto("/zh/melee/sword-unique1/");
   const slot = page.locator(".entry-head .icon-frame.frame-inventory.is-unique");
-  expect(await slot.evaluate(slotBorder)).toBe("#ff7e2f");
+  expect(await slot.evaluate(slotBorder)).toBe("#c4391f");
   await expect(slot.locator(".slot-mark")).toBeVisible();
   await expect(slot.locator(".slot-star")).toHaveCount(0);
 });
@@ -254,21 +254,20 @@ test("all internal links and images resolve", async ({ request }, testInfo) => {
   expect(broken).toEqual([]);
 });
 
-test("the game palette and self-hosted fonts are in use", async ({ page, request }) => {
+test("the specimen palette and self-hosted fonts are in use", async ({ page }) => {
   await page.goto("/zh/");
   const background = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-  expect(background).toBe("rgb(11, 26, 32)");
+  expect(background).toBe("rgb(243, 244, 241)");
   const fonts = await page.evaluate(async () => {
     await document.fonts.ready;
     // check() is also true for families the page never declared, so require a loaded face as well.
     const loaded = (family: string) => [...document.fonts].some((face) => face.family.replace(/"/g, "") === family && face.status === "loaded");
     return {
-      pixel: document.fonts.check("16px Cubic11", "劍") && loaded("Cubic11"),
-      label: document.fonts.check("16px Silkscreen", "A") && loaded("Silkscreen"),
+      display: document.fonts.check("700 16px 'Noto Serif TC'", "劍") && loaded("Noto Serif TC"),
+      body: document.fonts.check("16px 'Geist Variable'", "A") && loaded("Geist Variable"),
     };
   });
-  expect(fonts).toEqual({ pixel: true, label: true });
-  expect((await request.get("/licenses/Cubic-11-OFL.txt")).status()).toBe(200);
+  expect(fonts).toEqual({ display: true, body: true });
 });
 
 test("category tabs mark the current category", async ({ page }) => {
@@ -328,12 +327,13 @@ test("the language switch keeps the search query and anchor", async ({ page }) =
   await expect(page.getByTestId("lang-switch")).toHaveAttribute("href", "/en/effect/#critical-edge");
 });
 
-test("the home page is a title banner with a slot for every category", async ({ page }) => {
+test("the home page is a cover with a featured specimen and a row for every category", async ({ page }) => {
   await page.goto("/zh/");
   await expect(page.locator(".home-hero .kicker")).toHaveText("UNOFFICIAL FAN WIKI");
   await expect(page.locator(".home-title")).toContainText("Minecraft Dungeons II");
   await expect(page.locator(".category-grid li")).toHaveCount(7);
   await expect(page.locator(".category-grid .category-slot img.ui-icon")).toHaveCount(7);
+  await expect(page.locator(".hero-specimen .specimen-plate img.entry-icon")).toBeVisible();
   await page.locator(".home-search input").fill("劍");
   await page.locator(".home-search button").click();
   await expect(page).toHaveURL(/\/zh\/search\/\?q=/);
@@ -510,17 +510,17 @@ test("armor set pages use the same info box layout", async ({ page }) => {
   await expect(page.getByTestId("set-piece")).toHaveCount(4);
 });
 
-test("the effects table and search results use the game palette", async ({ page }) => {
+test("the effects table and search results use the specimen palette", async ({ page }) => {
   await page.goto("/zh/effect/");
   const head = await page.locator(".entry-table thead th").first().evaluate((el) => getComputedStyle(el).backgroundColor);
-  expect(head).toBe("rgb(28, 43, 49)");
+  expect(head).toBe("rgba(0, 0, 0, 0)");
   await page.goto("/zh/search/?q=sword");
   await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
   const primary = await page.locator("#search .pagefind-ui").evaluate((el) =>
     getComputedStyle(el).getPropertyValue("--pagefind-ui-primary").trim().toLowerCase(),
   );
-  // Interface teal; game orange is reserved for rarity and the current tab.
-  expect(primary).toBe("#8fd6e0");
+  // Vermilion marks the current place; it is the only accent.
+  expect(primary).toBe("#c4391f");
 });
 
 test("no purple from the old theme remains", async ({ page }) => {
@@ -628,16 +628,11 @@ test("the details sheet closes on an outside tap or when the filter hides its it
   await expect(page.locator(".filter-text")).toBeFocused();
 });
 
-test("the site uses the game's own icons and splash art", async ({ page, request }) => {
+test("the site uses the game's own icons", async ({ page, request }) => {
   await page.goto("/zh/");
   const icon = await page.locator('link[rel="icon"]').getAttribute("href");
   expect(icon).toBe("/icons/brand/favicon.png");
   expect((await request.get(icon ?? "")).status()).toBe(200);
   const touch = await page.locator('link[rel="apple-touch-icon"]').getAttribute("href");
   expect((await request.get(touch ?? "")).status()).toBe(200);
-  // The 2.7 MB splash is resized and re-encoded at build time, never shipped as the original PNG.
-  const backdrop = page.locator(".hero-backdrop img");
-  await expect(backdrop).toHaveAttribute("src", /\.webp$/);
-  expect(await backdrop.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
-  expect(await backdrop.getAttribute("alt")).toBe("");
 });
