@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { findEntry } from "../../../src/lib/data";
-import { fillPlaceholder, weaponEffectsOf, wikiPageUrl } from "../../../src/lib/weapon-effects";
+import { fillPlaceholder, tierRange, weaponEffectsOf, wikiPageUrl } from "../../../src/lib/weapon-effects";
 
 const PLACEHOLDER = '<span class="placeholder">{value}</span>';
 
@@ -13,6 +13,16 @@ describe("fillPlaceholder", () => {
     expect(fillPlaceholder("Hits explode!", "35%")).toBe("Hits explode!");
     const two = `${PLACEHOLDER} and ${PLACEHOLDER}`;
     expect(fillPlaceholder(two, "35%")).toBe(two);
+  });
+});
+
+describe("tierRange", () => {
+  it("spans tier I to tier III", () => {
+    expect(tierRange(["5%", "10%", "15%"])).toBe("5%~15%");
+  });
+
+  it("gives one value when every tier is the same", () => {
+    expect(tierRange(["2", "2", "2"])).toBe("2");
   });
 });
 

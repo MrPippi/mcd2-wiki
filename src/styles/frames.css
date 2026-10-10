@@ -1,4 +1,6 @@
 .entry-icon { object-fit: contain; }
+/* Game icons are pixel art; frameless ones (effects) are drawn at whole-number scales, so keep their pixels square. */
+img.entry-icon { image-rendering: pixelated; }
 .icon-frame { position: relative; display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; background: var(--frame) center / 100% 100% no-repeat; }
 .icon-frame > .entry-icon { width: 78%; height: 78%; }
 /* Gear slot: the sprite alone on the plate, like an unmounted specimen. --px is the slot's own pixel at 103px. */

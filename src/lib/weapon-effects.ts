@@ -23,6 +23,9 @@ export function fillPlaceholder(html: string, value: string): string {
   return matches.length === 1 ? html.replace(PLACEHOLDER, `<span class="value">${value}</span>`) : html;
 }
 
+/** Tier I to tier III as one range, e.g. "5%~15%"; a single value when the tiers do not differ. */
+export const tierRange = ([low, , high]: readonly [string, string, string]): string => (low === high ? low : `${low}~${high}`);
+
 /** The wiki's own URL form for a page title: spaces become underscores, everything else stays readable. */
 export const wikiPageUrl = (title: string): string => `${WIKI_ARTICLE}${encodeURI(title.replace(/ /g, "_"))}`;
 

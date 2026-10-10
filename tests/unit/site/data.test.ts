@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+import rawEntries from "../../../src/data/entries.json";
 import { allArmorSets, booksFor, entriesIn, findArmorSet, findEntry, publishedEntries } from "../../../src/lib/data";
 
 describe("site data", () => {
@@ -28,6 +29,12 @@ describe("site data", () => {
 
   it("keeps categories that never have icons", () => {
     expect(entriesIn("effect").length).toBeGreaterThan(0);
+  });
+
+  it("publishes every base effect whether or not the game has an icon for it", () => {
+    const effects = rawEntries.filter((entry) => entry.category === "effect" && entry.release === "base");
+    expect(entriesIn("effect")).toHaveLength(effects.length);
+    expect(entriesIn("effect").some((entry) => entry.icon !== undefined)).toBe(true);
   });
 
   it("gives every published enchantment at least one book", () => {

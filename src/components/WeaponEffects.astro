@@ -2,7 +2,8 @@
 import type { Entry, Localized } from "../../scripts/extract/schemas";
 import { t, type Lang } from "../lib/i18n";
 import { entryHref } from "../lib/url";
-import { fillPlaceholder, weaponEffects, weaponEffectsOf } from "../lib/weapon-effects";
+import { fillPlaceholder, tierRange, weaponEffects, weaponEffectsOf } from "../lib/weapon-effects";
+import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
 import LangText from "./LangText.astro";
 
@@ -12,15 +13,16 @@ interface Props {
 }
 
 const TIERS = ["I", "II", "III"] as const;
+// Effect icons are 64px pixel art: whole-number scales keep them sharp.
+const EFFECT_ICON = { row: 32, fixed: 64 } as const;
 
 const { lang, weapon } = Astro.props;
 const effects = weaponEffectsOf(weapon);
 const { source } = weaponEffects;
 const fixed = effects?.fixed;
+const withValue = (text: Localized, value: string): Localized => ({ zh: fillPlaceholder(text.zh, value), en: fillPlaceholder(text.en, value) });
 const fixedText: Localized | undefined =
-  fixed?.entry.description && fixed.value
-    ? { zh: fillPlaceholder(fixed.entry.description.zh, fixed.value), en: fillPlaceholder(fixed.entry.description.en, fixed.value) }
-    : fixed?.entry.description;
+  fixed?.entry.description && fixed.value ? withValue(fixed.entry.description, fixed.value) : fixed?.entry.description;
 const pageName = effects?.page.replace(/^Dungeons II:/, "");
 const [open, close] = lang === "zh" ? ["（", "）"] : [" (", ")"];
 ---
@@ -28,7 +30,8 @@ const [open, close] = lang === "zh" ? ["（", "）"] : [" (", ")"];
   <>
     {fixed && (
       <EntrySection title={t(lang, "uniqueEffect")} testid="unique-effect">
-        <div class="fixed-effect">
+        <div class:list={["fixed-effect", { "has-icon": fixed.entry.icon }]}>
+          {fixed.entry.icon && <EntryIcon icon={fixed.entry.icon} alt="" size={EFFECT_ICON.fixed} category={fixed.entry.category} variant={fixed.entry.variant} />}
           <a class="fixed-name" href={entryHref(lang, fixed.entry)}><LangText lang={lang} value={fixed.entry.name} /></a>
           {fixedText && <LangText as="p" class="fixed-desc" lang={lang} value={fixedText} html />}
           <p class="note" data-pagefind-ignore>{t(lang, fixed.kind === "effect" ? "fixedEffectNote" : "fixedEnchantmentNote")}</p>
@@ -49,9 +52,10 @@ const [open, close] = lang === "zh" ? ["（", "）"] : [" (", ")"];
             <tbody>
               {effects.compatible.map(({ effect, values }) => (
                 <tr>
-                  <th scope="row">
+                  <th scope="row" class:list={{ "has-icon": effect.icon }}>
+                    {effect.icon && <EntryIcon icon={effect.icon} alt="" size={EFFECT_ICON.row} />}
                     <a class="effect-name" href={entryHref(lang, effect)}><LangText lang={lang} value={effect.name} /></a>
-                    {effect.description && <LangText as="p" class="effect-desc" lang={lang} value={effect.description} html />}
+                    {effect.description && <LangText as="p" class="effect-desc" lang={lang} value={withValue(effect.description, tierRange(values))} html />}
                   </th>
                   {values.map((value, i) => <td class="tier-value" data-tier={TIERS[i]}>{value}</td>)}
                 </tr>

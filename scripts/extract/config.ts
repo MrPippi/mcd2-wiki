@@ -70,6 +70,8 @@ export interface IconSource {
   readonly fallbackToBase: boolean;
   /** File name pattern, when the icons are not named T_UI_*.png. */
   readonly pattern?: RegExp;
+  /** Icons are decoration only: entries without one are still published. */
+  readonly optional?: boolean;
 }
 
 const EQUIPMENT_ICONS: IconSource = { root: "Assets/Art/Characters/Player/Equipment", fallbackToBase: false };
@@ -78,6 +80,8 @@ const STATUS_ICONS: IconSource = { root: "Assets/UI/Icons/Statuses", fallbackToB
 const TALISMAN_ICONS: IconSource = { root: "Assets/Art/Characters/Player/Equipment/Talismans", fallbackToBase: false };
 const CAPE_ICONS: IconSource = { root: "Assets/Art/Characters/Player/Capes", fallbackToBase: false };
 const PET_ICONS: IconSource = { root: "Assets/Art/Characters/Friendlies/Pets", fallbackToBase: false };
+// Effect icons live in the OreUI plugin, outside Assets/; copy that folder into source-data with the same path.
+const EFFECT_ICONS: IconSource = { root: "Plugins/OreUI/Content/UI/Icons/Effects", fallbackToBase: false, optional: true };
 const SKIN_ICONS: IconSource = {
   root: "Assets/Art/Characters/Player/Skins",
   fallbackToBase: false,
@@ -96,6 +100,7 @@ export const ICON_SOURCES: Readonly<Partial<Record<Category, IconSource>>> = {
   cape: CAPE_ICONS,
   pet: PET_ICONS,
   skin: SKIN_ICONS,
+  effect: EFFECT_ICONS,
 };
 
 /**

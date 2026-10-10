@@ -24,8 +24,11 @@ export const extractedBrand: Brand = BrandSchema.parse(rawBrand);
 
 const entries: readonly Entry[] = z.array(EntrySchema).parse(rawEntries);
 
-/** Categories with an icon source must have an icon to be published; effects never have icons. */
-const hasRequiredIcon = (entry: Entry): boolean => ICON_SOURCES[entry.category] === undefined || entry.icon !== undefined;
+/** Categories with an icon source must have an icon to be published, unless their icons are optional (effects). */
+const hasRequiredIcon = (entry: Entry): boolean => {
+  const source = ICON_SOURCES[entry.category];
+  return source === undefined || source.optional === true || entry.icon !== undefined;
+};
 
 export const publishedEntries: readonly Entry[] = entries.filter(
   (entry) => entry.release === "base" && hasRequiredIcon(entry),

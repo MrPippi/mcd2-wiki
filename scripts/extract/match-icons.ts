@@ -1,7 +1,7 @@
 import path from "node:path";
 
 const DROP_TOKENS: ReadonlySet<string> = new Set([
-  "t", "ui", "icon", "png", "status", "enchantment", "buff", "talisman", "cosmetic", "skin",
+  "t", "ui", "icon", "png", "status", "enchantment", "effect", "buff", "talisman", "cosmetic", "skin",
 ]);
 /**
  * Talisman icons come in tiers 1–3, written as "Icon2" or glued to the last word ("Cooldown2").

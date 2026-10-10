@@ -687,6 +687,8 @@ test("weapon pages list the wiki's compatible effects with tier values and credi
   await expect(section.locator("tbody tr")).toHaveCount(9);
   await expect(first).toContainText("致命鋒刃");
   await expect(first.locator(".tier-value")).toHaveText(["10%", "20%", "30%"]);
+  await expect(first.locator(".effect-desc .primary .value")).toHaveText("10%~30%");
+  await expect(first.locator("img.entry-icon")).toHaveAttribute("src", "/icons/effect/critical-edge.png");
   await expect(first.locator("a[href='/zh/effect/#critical-edge']")).toBeVisible();
   const credit = page.getByTestId("effect-source");
   await expect(credit.locator("a[href='https://minecraft.wiki/w/Dungeons_II:Axe']")).toBeVisible();
@@ -700,6 +702,7 @@ test("unique weapons show their fixed effect with its value filled in", async ({
   await expect(fixed.locator(".fixed-desc .primary .value")).toHaveText("35%");
   await expect(fixed.locator(".fixed-desc .alt .value")).toHaveText("35%");
   await expect(fixed.locator("a[href='/zh/effect/#reconstruction']")).toBeVisible();
+  await expect(fixed.locator("img.entry-icon")).toBeVisible();
 });
 
 test("weapons the wiki has not covered yet say so instead of showing an empty table", async ({ page }) => {
@@ -708,4 +711,11 @@ test("weapons the wiki has not covered yet say so instead of showing an empty ta
   await expect(section).toContainText("Minecraft Wiki 尚未收錄");
   await expect(section.locator("table")).toHaveCount(0);
   await expect(page.getByTestId("effect-source").locator("a[href='https://minecraft.wiki/w/Dungeons_II:Bow']")).toBeVisible();
+});
+
+test("the effects table shows each effect's game icon where the game has one", async ({ page }) => {
+  await page.goto("/zh/effect/");
+  const row = page.locator("tr", { has: page.locator("#critical-edge") });
+  await expect(row.locator("img.entry-icon")).toHaveAttribute("src", "/icons/effect/critical-edge.png");
+  expect(await row.locator("img.entry-icon").evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
 });
