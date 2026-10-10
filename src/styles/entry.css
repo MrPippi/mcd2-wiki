@@ -14,10 +14,14 @@
 /* Rarity: the game's tag art carries the colour, so the words stay in ink. */
 .rarity { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
 .rarity-lead { color: var(--muted); font-size: 13px; }
-.rarity-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 12px; }
-.rarity-tag { display: inline-flex; align-items: center; gap: 5px; }
-.rarity-tag img { image-rendering: pixelated; flex-shrink: 0; }
-.rarity-unique { font-weight: 600; }
+.rarity-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 8px; }
+/* The game's tag art stretched around the name as a nine-slice frame, drawn at half size. Source edges are
+   10px (black, dark rim, highlight) on top and sides and 22px at the bottom, which adds the drop shadow. */
+.rarity-tag {
+  display: inline-flex; align-items: center; padding: 0 5px;
+  border-style: solid; border-width: 5px 5px 11px; border-image: var(--tag-art) 10 10 22 fill / 5px 5px 11px stretch;
+  image-rendering: pixelated; color: var(--ink); font-weight: 700; font-size: 14px; line-height: 1.5;
+}
 
 /* Display sizes are tuned for four-character Chinese names; English names scale with the column instead. */
 .entry-content { min-width: 0; container-type: inline-size; }

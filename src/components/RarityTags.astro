@@ -16,8 +16,6 @@ interface Props {
 }
 
 const TAG_ART: Readonly<Record<RarityTier, ImageMetadata>> = { common, rare, special, unique };
-// The 76x88 tag art drawn at a quarter size keeps whole device pixels on 1x and 2x screens.
-const TAG_SCALE = 4;
 
 const { lang, variant } = Astro.props;
 const tiers = rarityTiers(variant);
@@ -26,10 +24,7 @@ const tiers = rarityTiers(variant);
   {variant !== "unique" && <span class="rarity-lead">{t(lang, "possibleRarity")}</span>}
   <ul class="rarity-tags">
     {tiers.map((tier) => (
-      <li class={`rarity-tag rarity-${tier}`}>
-        <img src={TAG_ART[tier].src} alt="" width={TAG_ART[tier].width / TAG_SCALE} height={TAG_ART[tier].height / TAG_SCALE} decoding="async" />
-        {t(lang, RARITY_LABEL[tier])}
-      </li>
+      <li class={`rarity-tag rarity-${tier}`} style={`--tag-art:url("${TAG_ART[tier].src}")`}>{t(lang, RARITY_LABEL[tier])}</li>
     ))}
   </ul>
 </span>
