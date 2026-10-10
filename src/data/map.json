@@ -1,0 +1,701 @@
+{
+  "worlds": [
+    {
+      "key": "overworld",
+      "name": {
+        "zh": "主世界",
+        "en": "Overworld"
+      },
+      "frame": {
+        "minX": -599,
+        "maxX": 444,
+        "minY": -172,
+        "maxY": 1371,
+        "span": 1544,
+        "ratio": 0.965,
+        "imageSize": 8192
+      },
+      "zMax": 5,
+      "markers": [
+        {
+          "id": "DesertA1-Cliffs",
+          "kind": "minecart",
+          "px": 7636.5,
+          "py": 3394.6,
+          "name": {
+            "zh": "冰封高地",
+            "en": "Frozen Highlands"
+          }
+        },
+        {
+          "id": "DesertA1-Fortress",
+          "kind": "minecart",
+          "px": 7001.6,
+          "py": 4446.7,
+          "name": {
+            "zh": "冰封高地",
+            "en": "Frozen Highlands"
+          }
+        },
+        {
+          "id": "DesertA1-Fortress2",
+          "kind": "minecart",
+          "px": 6637.1,
+          "py": 3911.6,
+          "name": {
+            "zh": "冰封高地",
+            "en": "Frozen Highlands"
+          }
+        },
+        {
+          "id": "DesertA1-IceLagoon",
+          "kind": "minecart",
+          "px": 7531.5,
+          "py": 5097,
+          "name": {
+            "zh": "冰封高地",
+            "en": "Frozen Highlands"
+          }
+        },
+        {
+          "id": "DesertA1-IceShelf",
+          "kind": "minecart",
+          "px": 5865,
+          "py": 4851.2,
+          "name": {
+            "zh": "冰封高地",
+            "en": "Frozen Highlands"
+          }
+        },
+        {
+          "id": "DesertA1-MountainPass",
+          "kind": "minecart",
+          "px": 6121.5,
+          "py": 3166.7,
+          "name": {
+            "zh": "冰封高地",
+            "en": "Frozen Highlands"
+          }
+        },
+        {
+          "id": "ForestA1-DangerZone",
+          "kind": "minecart",
+          "px": 5137.9,
+          "py": 4359.7,
+          "name": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          }
+        },
+        {
+          "id": "ForestA1-NWPass",
+          "kind": "minecart",
+          "px": 4298.2,
+          "py": 3750.4,
+          "name": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          }
+        },
+        {
+          "id": "ForestA1-Outpost",
+          "kind": "minecart",
+          "px": 4009,
+          "py": 4454.4,
+          "name": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          }
+        },
+        {
+          "id": "ForestA1-SpiderCaveExit",
+          "kind": "minecart",
+          "px": 3673.6,
+          "py": 3763.2,
+          "name": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          }
+        },
+        {
+          "id": "PlainsA1-Barn",
+          "kind": "minecart",
+          "px": 2752,
+          "py": 3655.7,
+          "name": {
+            "zh": "蜂巢原野",
+            "en": "Honeycomb Fields"
+          }
+        },
+        {
+          "id": "PlainsA1-Border",
+          "kind": "minecart",
+          "px": 2859.5,
+          "py": 4252.2,
+          "name": {
+            "zh": "蜂巢原野",
+            "en": "Honeycomb Fields"
+          }
+        },
+        {
+          "id": "PlainsA2-Central",
+          "kind": "minecart",
+          "px": 4764.2,
+          "py": 7042.6,
+          "name": {
+            "zh": "多雨平原",
+            "en": "Rainy Plains"
+          }
+        },
+        {
+          "id": "PlainsA2-IllagerCamp",
+          "kind": "minecart",
+          "px": 4948.5,
+          "py": 7631.4,
+          "name": {
+            "zh": "多雨平原",
+            "en": "Rainy Plains"
+          }
+        },
+        {
+          "id": "PlainsA2-NorthWestBridge",
+          "kind": "minecart",
+          "px": 5501.4,
+          "py": 6233.6,
+          "name": {
+            "zh": "多雨平原",
+            "en": "Rainy Plains"
+          }
+        },
+        {
+          "id": "PlainsA2-SouthEastBridge",
+          "kind": "minecart",
+          "px": 4313.6,
+          "py": 6868.5,
+          "name": {
+            "zh": "多雨平原",
+            "en": "Rainy Plains"
+          }
+        },
+        {
+          "id": "PlainsA2-VillagerOasis",
+          "kind": "minecart",
+          "px": 4439,
+          "py": 5698.6,
+          "name": {
+            "zh": "多雨平原",
+            "en": "Rainy Plains"
+          }
+        },
+        {
+          "id": "Town",
+          "kind": "minecart",
+          "px": 570.7,
+          "py": 4433,
+          "name": {
+            "zh": "英雄港",
+            "en": "Brave Haven"
+          }
+        },
+        {
+          "id": "TownFountain",
+          "kind": "minecart",
+          "px": 349.2,
+          "py": 4425.2,
+          "name": {
+            "zh": "英雄港",
+            "en": "Brave Haven"
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1539361911",
+          "kind": "rift",
+          "px": 3120.6,
+          "py": 4293.1,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1770012913",
+          "kind": "rift",
+          "px": 3525.1,
+          "py": 3952.6,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1826487914",
+          "kind": "rift",
+          "px": 3502.1,
+          "py": 3479,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1882573915",
+          "kind": "rift",
+          "px": 4284.9,
+          "py": 4203.3,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1955382917",
+          "kind": "rift",
+          "px": 4052.5,
+          "py": 3944.8,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A75602_1988503918",
+          "kind": "rift",
+          "px": 4311,
+          "py": 4351.8,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A75602_2042183919",
+          "kind": "rift",
+          "px": 4986.9,
+          "py": 4597.6,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1209905116",
+          "kind": "rift",
+          "px": 4408,
+          "py": 3889.3,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1254420117",
+          "kind": "rift",
+          "px": 5342.7,
+          "py": 4822.8,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1542514118",
+          "kind": "rift",
+          "px": 5485.2,
+          "py": 4343.9,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "冰封高地",
+            "en": "Frozen Highlands"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1586013119",
+          "kind": "rift",
+          "px": 4374.2,
+          "py": 3348,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "TeleportPointActor_UAID_B025AA5A9237A85602_1618880120",
+          "kind": "rift",
+          "px": 4600.3,
+          "py": 3484,
+          "name": {
+            "zh": "裂隙",
+            "en": "Rift"
+          },
+          "area": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "note": {
+            "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+          }
+        },
+        {
+          "id": "Townportal_portal",
+          "kind": "portal",
+          "px": 432.6,
+          "py": 4416.3,
+          "name": {
+            "zh": "傳送雕像",
+            "en": "Teleport Statue"
+          },
+          "area": {
+            "zh": "英雄港",
+            "en": "Brave Haven"
+          },
+          "icon": "icons/map/t_ui_icon_town_portal.png"
+        },
+        {
+          "id": "TheMisguidedMerchantComplete",
+          "kind": "merchant",
+          "px": 498.7,
+          "py": 4367.4,
+          "name": {
+            "zh": "商人",
+            "en": "Merchant"
+          },
+          "note": {
+            "zh": "購買不同稀有度等級的物品。",
+            "en": "Purchase items of different rarity levels."
+          }
+        },
+        {
+          "id": "TheTownBlacksmithComplete",
+          "kind": "merchant",
+          "px": 357.9,
+          "py": 4282.8,
+          "name": {
+            "zh": "鐵匠",
+            "en": "Blacksmith"
+          },
+          "note": {
+            "zh": "提升物品的強度，並重擲其效果。",
+            "en": "Increase the power of your items and reroll effects on them."
+          }
+        },
+        {
+          "id": "TheTownEnchantsmithComplete",
+          "kind": "merchant",
+          "px": 510.9,
+          "py": 4491.4,
+          "name": {
+            "zh": "附魔匠",
+            "en": "Enchantsmith"
+          },
+          "note": {
+            "zh": "使用附魔書為物品附魔。",
+            "en": "Enchant your items using enchantment books."
+          }
+        },
+        {
+          "id": "area:sw.area.desert.a1",
+          "kind": "area",
+          "px": 6611.2,
+          "py": 4173.1,
+          "name": {
+            "zh": "冰封高地",
+            "en": "Frozen Highlands"
+          },
+          "icon": "icons/map/t_ui_icon_frozenhighlands.png"
+        },
+        {
+          "id": "area:sw.area.forest.a1",
+          "kind": "area",
+          "px": 4241.8,
+          "py": 4046.3,
+          "name": {
+            "zh": "咆哮森林",
+            "en": "Howling Woods"
+          },
+          "icon": "icons/map/t_ui_icon_howlingwoods.png"
+        },
+        {
+          "id": "area:sw.area.plains.a1",
+          "kind": "area",
+          "px": 2805.8,
+          "py": 3954,
+          "name": {
+            "zh": "蜂巢原野",
+            "en": "Honeycomb Fields"
+          },
+          "icon": "icons/map/t_ui_icon_honeycombfields.png"
+        },
+        {
+          "id": "area:sw.area.plains.a2",
+          "kind": "area",
+          "px": 4793.3,
+          "py": 6694.9,
+          "name": {
+            "zh": "多雨平原",
+            "en": "Rainy Plains"
+          },
+          "icon": "icons/map/t_ui_icon_rainyplains.png"
+        },
+        {
+          "id": "area:sw.area.town",
+          "kind": "area",
+          "px": 450.8,
+          "py": 4424.8,
+          "name": {
+            "zh": "英雄港",
+            "en": "Brave Haven"
+          },
+          "icon": "icons/map/t_ui_icon_bravehaven.png"
+        }
+      ]
+    },
+    {
+      "key": "sift",
+      "name": {
+        "zh": "隙浮",
+        "en": "The Sift"
+      },
+      "frame": {
+        "minX": -1093,
+        "maxX": -539,
+        "minY": 1552,
+        "maxY": 2894,
+        "span": 1344,
+        "ratio": 0.96,
+        "imageSize": 7168
+      },
+      "zMax": 5,
+      "markers": [
+        {
+          "id": "CarapaceA1-Border",
+          "kind": "minecart",
+          "px": 2316.8,
+          "py": 5481,
+          "name": {
+            "zh": "轟鳴蟲殼骸之地",
+            "en": "Humbler Huskland"
+          }
+        },
+        {
+          "id": "CarapaceA1-Centre",
+          "kind": "minecart",
+          "px": 3100.2,
+          "py": 5620.7,
+          "name": {
+            "zh": "轟鳴蟲殼骸之地",
+            "en": "Humbler Huskland"
+          }
+        },
+        {
+          "id": "CarapaceA1-North",
+          "kind": "minecart",
+          "px": 4533.8,
+          "py": 5286.4,
+          "name": {
+            "zh": "轟鳴蟲殼骸之地",
+            "en": "Humbler Huskland"
+          }
+        },
+        {
+          "id": "MeadowA1-BehindPortal",
+          "kind": "minecart",
+          "px": 834.6,
+          "py": 4971.5,
+          "name": {
+            "zh": "吟唱者草甸",
+            "en": "Singer's Meadow"
+          }
+        },
+        {
+          "id": "MeadowA1-SingersHaven",
+          "kind": "minecart",
+          "px": 1003.5,
+          "py": 5570.6,
+          "name": {
+            "zh": "吟唱者草甸",
+            "en": "Singer's Meadow"
+          }
+        },
+        {
+          "id": "MeadowA1-SouthEast",
+          "kind": "minecart",
+          "px": 358.4,
+          "py": 6697,
+          "name": {
+            "zh": "吟唱者草甸",
+            "en": "Singer's Meadow"
+          }
+        },
+        {
+          "id": "MeadowA1-SouthWest",
+          "kind": "minecart",
+          "px": 340.5,
+          "py": 4654.1,
+          "name": {
+            "zh": "吟唱者草甸",
+            "en": "Singer's Meadow"
+          }
+        },
+        {
+          "id": "MeadowA2-Fortress",
+          "kind": "minecart",
+          "px": 5990.4,
+          "py": 5557.8,
+          "name": {
+            "zh": "安眠丘陵",
+            "en": "Lullaby Hills"
+          }
+        },
+        {
+          "id": "MeadowA2-Hilltop",
+          "kind": "minecart",
+          "px": 5022.7,
+          "py": 6033.9,
+          "name": {
+            "zh": "安眠丘陵",
+            "en": "Lullaby Hills"
+          }
+        },
+        {
+          "id": "area:sw.area.carapace.a1",
+          "kind": "area",
+          "px": 3316.9,
+          "py": 5462.7,
+          "name": {
+            "zh": "轟鳴蟲殼骸之地",
+            "en": "Humbler Huskland"
+          },
+          "icon": "icons/map/t_ui_icon_humblerhuskland.png"
+        },
+        {
+          "id": "area:sw.area.meadow.a1",
+          "kind": "area",
+          "px": 634.3,
+          "py": 5473.3,
+          "name": {
+            "zh": "吟唱者草甸",
+            "en": "Singer's Meadow"
+          },
+          "icon": "icons/map/t_ui_icon_singersmeadow.png"
+        },
+        {
+          "id": "area:sw.area.meadow.a2",
+          "kind": "area",
+          "px": 5506.5,
+          "py": 5795.9,
+          "name": {
+            "zh": "安眠丘陵",
+            "en": "Lullaby Hills"
+          },
+          "icon": "icons/map/t_ui_icon_lullabyhills.png"
+        }
+      ]
+    },
+    {
+      "key": "camp",
+      "name": {
+        "zh": "營地",
+        "en": "Camp"
+      },
+      "frame": {
+        "minX": -2713,
+        "maxX": -2243,
+        "minY": -173,
+        "maxY": 109,
+        "span": 472,
+        "ratio": 0.7866666666666666,
+        "imageSize": 3072
+      },
+      "zMax": 4,
+      "markers": []
+    }
+  ]
+}
