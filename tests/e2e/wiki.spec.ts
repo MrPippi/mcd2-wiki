@@ -604,6 +604,16 @@ test("search excerpts leave out the info box and section labels", async ({ page 
   for (const label of ["DESCRIPTION", "RELATED", "稀有度", "相關條目"]) expect(text, label).not.toContain(label);
 });
 
+test("the entry count is a mono kicker line, not part of the heading", async ({ page }) => {
+  for (const [path, title, count] of [["/zh/melee/", "近戰武器", "58"], ["/zh/achievements/", "成就", "32"]]) {
+    await page.goto(path);
+    await expect(page.locator(".catalog-title"), path).toHaveText(title);
+    const kicker = page.locator(".catalog-head > .catalog-count");
+    await expect(kicker, path).toHaveText(count);
+    await expect(kicker, path).toHaveCSS("font-family", /Geist Mono/);
+  }
+});
+
 test("category tabs keep their names for screen readers on every screen size", async ({ page }) => {
   await page.goto("/zh/melee/");
   const tabs = page.locator(".category-tabs");

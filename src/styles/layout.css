@@ -33,8 +33,9 @@
 .header-menu summary:hover, .header-menu[open] summary { background: var(--plate); }
 .header-menu summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .header-menu ul {
-  position: absolute; z-index: 20; top: calc(100% + 4px); right: 0; margin: 0; padding: 4px 0; list-style: none;
-  width: max-content; min-width: 100%; max-width: calc(100vw - 2 * var(--gutter)); max-height: min(70vh, 480px); overflow-y: auto;
+  position: absolute; z-index: var(--z-menu); top: calc(100% + var(--space-1)); right: 0; margin: 0; padding: var(--space-1) 0; list-style: none;
+  width: max-content; min-width: 100%; max-width: calc(100vw - 2 * var(--gutter));
+  max-height: min(70vh, 480px); max-height: min(70dvh, 480px); overflow-y: auto;
   background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: var(--shadow-hard);
 }
 .header-menu li a {
@@ -104,7 +105,12 @@
 }
 
 @media (max-width: 1099px) {
-  .tab-list { display: flex; overflow-x: auto; scrollbar-width: none; }
+  /* The strip scrolls sideways with no scrollbar; soft edges show there is more beyond them. */
+  .tab-list {
+    display: flex; overflow-x: auto; scrollbar-width: none;
+    --edge: var(--space-4);
+    mask-image: linear-gradient(90deg, transparent, #000 var(--edge), #000 calc(100% - var(--edge)), transparent);
+  }
   .tab-list::-webkit-scrollbar { display: none; }
   .tab-list li { flex: 0 0 auto; }
 }

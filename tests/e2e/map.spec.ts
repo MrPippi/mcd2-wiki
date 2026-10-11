@@ -3,7 +3,7 @@ import { expect, test, type Page } from "@playwright/test";
 const filterPanel = (page: Page) => page.locator(".map-stage details.map-filters");
 const kindToggle = (page: Page, kind: string) => page.locator(`.map-filter[data-kind='${kind}']`);
 
-/** The marker filter folds away on narrow screens; open it before using its toggles. */
+/** The marker filter starts folded on every screen; open it before using its toggles. */
 async function openFilters(page: Page): Promise<void> {
   await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
   if ((await filterPanel(page).getAttribute("open")) === null) await filterPanel(page).locator("summary").click();
@@ -206,6 +206,17 @@ test("area labels are plain text with no icon", async ({ page }) => {
 });
 
 test.describe("marker filter on the map", () => {
+  test("starts folded on a desktop screen, still floating on the map", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/zh/map/");
+    await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+    await expect(filterPanel(page)).toBeVisible();
+    await expect(filterPanel(page)).not.toHaveAttribute("open", "");
+    await expect(kindToggle(page, "rift")).toBeHidden();
+    await filterPanel(page).locator("summary").click();
+    await expect(kindToggle(page, "rift")).toBeVisible();
+  });
+
   test("sits inside the map box and toggles a kind by colour", async ({ page }) => {
     await page.goto("/zh/map/");
     await openFilters(page);

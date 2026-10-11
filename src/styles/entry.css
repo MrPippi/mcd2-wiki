@@ -44,7 +44,7 @@
 .entry-content p, .book-source .book p { max-width: 62ch; }
 .description { font-size: 19px; line-height: 1.7; }
 .description .alt, .description-long .alt { display: block; margin-top: 10px; font-size: 15px; }
-.entry-section .section-title { font-size: 20px; margin-top: 40px; }
+.entry-section .section-title { font-size: 20px; margin: var(--space-6) 0 var(--space-3); }
 
 /* Weapon stats: big numbers in a ruled grid, then the facts, then the swing-by-swing combo. */
 .stat-grid {

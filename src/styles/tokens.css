@@ -38,6 +38,22 @@
   --font-body: "Geist Variable", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "Cascadia Mono", monospace;
 
+  /* Spacing steps; new and touched rules use these instead of raw pixels. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Body sizes below and above the 16px base. */
+  --fs-xs: 13px;
+  --fs-s: 14px;
+  --fs-m: 16px;
+  --fs-l: 19px;
+  --fs-xl: 22px;
   --fs-mono-s: 12px;
   --fs-mono-m: 13px;
   --fs-display-m: clamp(28px, 3vw, 36px);
@@ -49,7 +65,8 @@
   --dur-fast: 160ms;
   --dur: 320ms;
 
-  --z-sticky: 10;
+  /* Header menus and the item sheet share a layer; they never open together. */
+  --z-menu: 20;
   --z-sheet: 20;
   --z-tooltip: 30;
   --z-grain: 40;

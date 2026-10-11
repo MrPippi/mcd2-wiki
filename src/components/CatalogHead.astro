@@ -17,10 +17,10 @@ const { lang, category, count, showVariant } = Astro.props;
 const alt = compareLang(lang);
 ---
 <header class="catalog-head">
+  <p class="catalog-count kicker mono">{count}</p>
   <h1 class="catalog-title">
     <UiIcon src={categoryIcon(category)} />
     <span data-pagefind-meta="title">{categoryLabel(category, lang)}</span>
-    <span class="count">({count})</span>
   </h1>
   <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{categoryLabel(category, alt)}</p>
   <ListFilter lang={lang} showVariant={showVariant} />

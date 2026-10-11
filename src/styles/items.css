@@ -1,9 +1,9 @@
 /* Category page: a sticky index card on the left, the specimen sheet on the right. */
 .catalog { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; align-items: start; }
 .catalog-head { display: flex; flex-direction: column; gap: 4px; container-type: inline-size; }
+.catalog-count { margin: 0 0 var(--space-2); }
 .catalog-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: var(--fs-display-l); line-height: 1; }
 .catalog-title .ui-icon { width: 0.5em; height: 0.5em; align-self: center; }
-.catalog-title .count { font-size: 14px; letter-spacing: 0; }
 .catalog-title:lang(en) { font-size: clamp(32px, 12cqi, 72px); }
 .catalog-alt { margin: 6px 0 0; font-family: var(--font-mono); font-size: var(--fs-mono-m); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
 
@@ -61,7 +61,7 @@
 
 /* The body scrolls inside the sheet so the view button below it always stays on screen. */
 .item-sheet {
-  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-sheet); max-height: 60vh;
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: var(--z-sheet); max-height: 60vh; max-height: 60dvh;
   display: flex; flex-direction: column; align-items: flex-start;
   padding: 16px var(--gutter) 20px; border: 0; border-top: 1px solid var(--rule-strong);
   box-shadow: 0 -6px 0 var(--shadow-tint);
