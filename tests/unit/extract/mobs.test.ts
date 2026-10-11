@@ -158,6 +158,18 @@ describe("buildMobs", () => {
     expect(drafts.find((draft) => draft.mob.slug === "frog")?.mob.id).toBe("FrogVariant1");
   });
 
+  it("keeps the id slug when merged rows only extend the representative id (a Storm version), but not for unrelated ids", () => {
+    const L = makeLocales({ [ns(T3)]: { SW_Mob_Monstrosity_Copper_SW_TextEntry_Name: { en: "Copper Monstrosity" }, SW_Mob_Monstrosity_Copper_Storm_SW_TextEntry_Name: { en: "Copper Monstrosity" }, SW_Mob_Monstrosity_Moss_SW_TextEntry_Name: { en: "Moss Monstrosity" } } });
+    const rows = [
+      mobRow(T3, "MonstrosityCopper", "SW.Mob.Monstrosity.Copper", { key: "SW_Mob_Monstrosity_Copper_SW_TextEntry_Name" }),
+      mobRow(T3, "MonstrosityCopperStorm", "SW.Mob.Monstrosity.Copper.Storm", { key: "SW_Mob_Monstrosity_Copper_Storm_SW_TextEntry_Name" }),
+      mobRow(T3, "MonstrosityMoss", "SW.Mob.Monstrosity.Moss", { key: "SW_Mob_Monstrosity_Moss_SW_TextEntry_Name" }),
+    ];
+    const drafts = buildMobs(mobTables({ type3: rows }), L).drafts;
+    expect(drafts.map((draft) => draft.mob.slug).sort()).toEqual(["monstrosity-copper", "monstrosity-moss"]);
+    expect(drafts.find((draft) => draft.mob.slug === "monstrosity-copper")?.tags).toHaveLength(2);
+  });
+
   it("inherits a stat the row lacks from its nearest ancestor row, and never overrides the row's own value", () => {
     const parent = mobRow("DT_MobDefinition", "Monstrosity", "SW.Mob.Monstrosity", { unnamed: true, attrs: { Health: 2400, Poise: 500 } });
     const own = mobRow(T3, "Maw", "SW.Mob.Maw", { traits: ["SW.Mob.Monstrosity"], attrs: { Poise: 90 } });

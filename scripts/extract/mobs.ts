@@ -164,12 +164,23 @@ const nameSlugOf = (candidate: Candidate, locales: Locales): string => toSlug(en
 
 const GENERIC_SUFFIX = /-(type\d+|variant\d+)$/;
 
-/** True when the slug should follow the English name: several rows were merged, or the id ends in a generic suffix (Witch_Type3 is "Soul Corrupted Witch"). */
+/** True when the slug should follow the English name: several rows with unrelated ids were merged, or the id ends in a generic suffix (Witch_Type3 is "Soul Corrupted Witch"). */
 function nameLed(candidate: Candidate, locales: Locales): boolean {
   const idSlug = toSlug(candidate.id);
   const nameSlug = nameSlugOf(candidate, locales);
   if (nameSlug === "" || nameSlug === idSlug) return false;
-  return candidate.rows.length > 1 || GENERIC_SUFFIX.test(idSlug);
+  return GENERIC_SUFFIX.test(idSlug) || (candidate.rows.length > 1 && !sharesIdPrefix(candidate));
+}
+
+const rowId = (row: MobRow): string => {
+  const { ref } = nameRef(row);
+  return (ref ? mobIdFromKey(ref.key) : undefined) ?? row.Name;
+};
+
+/** Size or storm versions of one mob (Monstrosity_Copper + Monstrosity_Copper_Storm) keep the representative's id slug. */
+function sharesIdPrefix(candidate: Candidate): boolean {
+  const prefix = candidate.id.toLowerCase();
+  return candidate.rows.every((row) => rowId(row).toLowerCase().startsWith(prefix));
 }
 
 /** Slugs by mob id. Name-led mobs get the English-name slug unless another mob already owns it; id slugs are placed first and never move. */
