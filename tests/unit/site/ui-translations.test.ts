@@ -91,8 +91,8 @@ describe("UI translations", () => {
   });
 
   it("names the site per language", () => {
-    expect(UI_DICTS.zh.values.siteTitle).toBe("Minecraft Dungeons II 中文 Wiki");
-    expect(UI_DICTS["zh-hans"].values.siteTitle).toBe("Minecraft Dungeons II 中文 Wiki（简体）");
+    expect(UI_DICTS.zh.values.siteTitle).toBe("Minecraft Dungeons II Wiki");
+    expect(UI_DICTS["zh-hans"].values.siteTitle).toBe("Minecraft Dungeons II Wiki（简体）");
     for (const lang of LANGS.filter((code) => code !== "zh" && code !== "zh-hans")) {
       expect(UI_DICTS[lang].values.siteTitle, lang).toBe("Minecraft Dungeons II Wiki");
     }
