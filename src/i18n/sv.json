@@ -125,7 +125,14 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -283,5 +290,14 @@
   "conditionTask": "Slutför uppdragsmålet ”{name}”",
   "conditionBoss": "Besegra ”{name}”",
   "unlockRate": "Global upplåsningsandel",
-  "achievementsCredit": "Ikoner, namn, beskrivningar och globala upplåsningsandelar för prestationerna kommer från Steam (app 1912410); andelar per {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Ikoner, namn, beskrivningar och globala upplåsningsandelar för prestationerna kommer från Steam (app 1912410); andelar per {date}. © Mojang Studios / Microsoft",
+  "talismanLevels": "Värden per nivå",
+  "talismanLevel": "Nivå",
+  "xpToNextLevel": "XP till nästa nivå",
+  "maxLevel": "Maxnivå",
+  "secretTalisman": "Hemlig talisman",
+  "companionAttack": "Attackmultiplikator",
+  "companionDefence": "Försvarsmultiplikator",
+  "companionCooldown": "Nedkylningsmultiplikator",
+  "talismanLevelsNote": "Talismaner får XP medan de är utrustade och går upp i nivå. Värdena kommer från spelets datafiler; följeslagarnas multiplikatorer är de råa värdena i de filerna."
 }

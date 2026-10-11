@@ -121,7 +121,14 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -287,5 +294,14 @@
   "conditionTask": "Выполните цель задания «{name}»",
   "conditionBoss": "Победите босса «{name}»",
   "unlockRate": "Глобальный процент получения",
-  "achievementsCredit": "Значки, названия, описания и глобальный процент получения достижений взяты из Steam (приложение 1912410); данные на {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Значки, названия, описания и глобальный процент получения достижений взяты из Steam (приложение 1912410); данные на {date}. © Mojang Studios / Microsoft",
+  "talismanLevels": "Значения по уровням",
+  "talismanLevel": "Уровень",
+  "xpToNextLevel": "XP до следующего уровня",
+  "maxLevel": "Максимальный уровень",
+  "secretTalisman": "Тайный талисман",
+  "companionAttack": "Множитель атаки",
+  "companionDefence": "Множитель защиты",
+  "companionCooldown": "Множитель перезарядки",
+  "talismanLevelsNote": "Надетые талисманы получают XP и повышают уровень. Значения взяты из файлов данных игры; множители спутников — исходные значения из этих файлов."
 }

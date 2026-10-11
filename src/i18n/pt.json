@@ -125,7 +125,14 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -284,5 +291,14 @@
   "conditionTask": "Conclua o objetivo da missão “{name}”",
   "conditionBoss": "Derrote “{name}”",
   "unlockRate": "Taxa global de desbloqueio",
-  "achievementsCredit": "Ícones, nomes, descrições e taxas globais de desbloqueio das conquistas vêm da Steam (app 1912410); taxas de {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Ícones, nomes, descrições e taxas globais de desbloqueio das conquistas vêm da Steam (app 1912410); taxas de {date}. © Mojang Studios / Microsoft",
+  "talismanLevels": "Valores por nível",
+  "talismanLevel": "Nível",
+  "xpToNextLevel": "XP para o próximo nível",
+  "maxLevel": "Nível máximo",
+  "secretTalisman": "Talismã secreto",
+  "companionAttack": "Multiplicador de ataque",
+  "companionDefence": "Multiplicador de defesa",
+  "companionCooldown": "Multiplicador de recarga",
+  "talismanLevelsNote": "Os talismãs ganham XP enquanto estão equipados e sobem de nível. Os valores vêm dos arquivos de dados do jogo; os multiplicadores dos companheiros são os valores brutos desses arquivos."
 }

@@ -152,5 +152,14 @@
   "conditionTask": "完成任務目標「{name}」",
   "conditionBoss": "擊敗「{name}」",
   "unlockRate": "全球達成率",
-  "achievementsCredit": "成就圖示、名稱、說明與全球達成率取自 Steam（App 1912410），達成率資料日期：{date}。© Mojang Studios／Microsoft。"
+  "achievementsCredit": "成就圖示、名稱、說明與全球達成率取自 Steam（App 1912410），達成率資料日期：{date}。© Mojang Studios／Microsoft。",
+  "talismanLevels": "各等級數值",
+  "talismanLevel": "等級",
+  "xpToNextLevel": "升級所需經驗值",
+  "maxLevel": "最高等級",
+  "secretTalisman": "秘密護符",
+  "companionAttack": "攻擊倍率",
+  "companionDefence": "防禦倍率",
+  "companionCooldown": "冷卻倍率",
+  "talismanLevelsNote": "護符裝備時會累積經驗值並升級。數值取自遊戲資料檔；夥伴的倍率為資料檔中的原始數值。"
 }

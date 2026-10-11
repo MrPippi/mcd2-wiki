@@ -155,5 +155,14 @@
   "conditionTask": "Complete the quest objective “{name}”",
   "conditionBoss": "Defeat “{name}”",
   "unlockRate": "Global unlock rate",
-  "achievementsCredit": "Achievement icons, names, descriptions and global unlock rates come from Steam (app 1912410); rates as of {date}. © Mojang Studios / Microsoft."
+  "achievementsCredit": "Achievement icons, names, descriptions and global unlock rates come from Steam (app 1912410); rates as of {date}. © Mojang Studios / Microsoft.",
+  "talismanLevels": "Level values",
+  "talismanLevel": "Level",
+  "xpToNextLevel": "XP to next level",
+  "maxLevel": "Max Level",
+  "secretTalisman": "Secret Talisman",
+  "companionAttack": "Attack multiplier",
+  "companionDefence": "Defence multiplier",
+  "companionCooldown": "Cooldown multiplier",
+  "talismanLevelsNote": "Talismans gain XP while equipped and level up. Values come from the game's data files; companion multipliers are the raw values in those files."
 }

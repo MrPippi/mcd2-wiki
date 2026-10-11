@@ -1,0 +1,55 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { t, type Lang } from "../lib/i18n";
+import { companionCooldown, talismanLevelsView } from "../lib/talisman-view";
+import EntrySection from "./EntrySection.astro";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  talisman: Entry;
+}
+
+const { lang, talisman } = Astro.props;
+const rows = talismanLevelsView(lang, talisman);
+const cooldown = companionCooldown(lang, talisman);
+const hasText = rows?.some((row) => row.text) ?? false;
+const hasCompanion = rows?.some((row) => row.companion) ?? false;
+---
+{rows && (
+  <EntrySection title={t(lang, "talismanLevels")} testid="talisman-levels">
+    {cooldown && (
+      <dl class="stat-grid" data-pagefind-ignore>
+        <div>
+          <dt>{t(lang, "statLabelCooldownSeconds")}</dt>
+          <dd>{cooldown}</dd>
+        </div>
+      </dl>
+    )}
+    <table class="level-table" data-pagefind-ignore>
+      <thead>
+        <tr>
+          <th scope="col">{t(lang, "talismanLevel")}</th>
+          {hasText && <th scope="col">{t(lang, "description")}</th>}
+          {hasCompanion && <th scope="col">{t(lang, "companionAttack")}</th>}
+          {hasCompanion && <th scope="col">{t(lang, "companionDefence")}</th>}
+          {hasCompanion && <th scope="col">{t(lang, "companionCooldown")}</th>}
+          <th scope="col">{t(lang, "xpToNextLevel")}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            <th scope="row" class="level-label">{row.label}</th>
+            {hasText && <td>{row.text && <LangText as="p" class="effect-desc" lang={lang} value={row.text} html />}</td>}
+            {hasCompanion && <td class="num">{row.companion?.attack}</td>}
+            {hasCompanion && <td class="num">{row.companion?.defence}</td>}
+            {hasCompanion && <td class="num">{row.companion?.cooldown}</td>}
+            <td class="num">{row.xp}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="effect-source" data-pagefind-ignore>{t(lang, "talismanLevelsNote")}</p>
+  </EntrySection>
+)}

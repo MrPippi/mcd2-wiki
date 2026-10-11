@@ -125,7 +125,14 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -285,5 +292,14 @@
   "conditionTask": "Виконайте мету завдання «{name}»",
   "conditionBoss": "Переможіть боса «{name}»",
   "unlockRate": "Глобальний відсоток отримання",
-  "achievementsCredit": "Значки, назви, описи та глобальний відсоток отримання досягнень узято зі Steam (застосунок 1912410); дані станом на {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Значки, назви, описи та глобальний відсоток отримання досягнень узято зі Steam (застосунок 1912410); дані станом на {date}. © Mojang Studios / Microsoft",
+  "talismanLevels": "Значення за рівнями",
+  "talismanLevel": "Рівень",
+  "xpToNextLevel": "Досвід до наступного рівня",
+  "maxLevel": "Макс. рівень",
+  "secretTalisman": "Секретний талісман",
+  "companionAttack": "Множник атаки",
+  "companionDefence": "Множник захисту",
+  "companionCooldown": "Множник перезаряджання",
+  "talismanLevelsNote": "Екіпіровані талісмани отримують досвід і підвищують рівень. Значення взято з файлів даних гри; множники компаньйонів — це необроблені значення з цих файлів."
 }

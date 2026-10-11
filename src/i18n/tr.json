@@ -125,7 +125,14 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -283,5 +290,14 @@
   "conditionTask": "“{name}” görev hedefini tamamla",
   "conditionBoss": "“{name}” adlı boss’u yen",
   "unlockRate": "Küresel açılma oranı",
-  "achievementsCredit": "Başarım simgeleri, adları, açıklamaları ve küresel açılma oranları Steam'den (uygulama 1912410) alınmıştır; oranlar {date} tarihlidir. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Başarım simgeleri, adları, açıklamaları ve küresel açılma oranları Steam'den (uygulama 1912410) alınmıştır; oranlar {date} tarihlidir. © Mojang Studios / Microsoft",
+  "talismanLevels": "Seviyeye göre değerler",
+  "talismanLevel": "Seviye",
+  "xpToNextLevel": "Sonraki seviye için XP",
+  "maxLevel": "Maks. Seviye",
+  "secretTalisman": "Gizli Tılsım",
+  "companionAttack": "Saldırı çarpanı",
+  "companionDefence": "Savunma çarpanı",
+  "companionCooldown": "Bekleme süresi çarpanı",
+  "talismanLevelsNote": "Tılsımlar kuşanıldıkları sürece XP kazanır ve seviye atlar. Değerler oyunun veri dosyalarından alınmıştır; yoldaş çarpanları bu dosyalardaki ham değerlerdir."
 }
