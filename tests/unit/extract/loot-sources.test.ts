@@ -259,6 +259,12 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
     expect(["sword", "unique-sword", "sword-uniquex"].map((slug) => UNIQUE_SLUG.test(slug))).toEqual([false, false, false]);
   });
 
+  it("never sells the two totems without the artifact trait or the five quivers at the merchant", async () => {
+    const keys = ["totem-of-casting", "totem-of-regeneration", "firework-quiver", "flame-quiver", "frost-quiver", "lightning-quiver", "poison-quiver"];
+    const merchants = await Promise.all(keys.map(async (slug) => (await view(`artifact/${slug}`))?.merchants.length));
+    expect(merchants).toEqual([0, 0, 0, 0, 0, 0, 0]);
+  });
+
   it("finds sources for a couple of hundred items, never a merchant for a unique one, and fits the size limit", async () => {
     const { data } = await real();
     const keys = Object.keys(data.items);
