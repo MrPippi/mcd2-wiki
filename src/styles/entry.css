@@ -86,7 +86,7 @@ a.fixed-name:hover .primary { color: var(--accent); }
 .value { font-weight: 700; font-variant-numeric: tabular-nums; }
 .effect-table { width: 100%; border-collapse: collapse; margin-top: 12px; border-top: 1px solid var(--rule-strong); }
 .effect-table thead th {
-  font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.06em;
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.05em;
   text-transform: uppercase; color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule);
 }
 .effect-table th.tier, .effect-table td.tier-value { width: 4.5em; text-align: right; }

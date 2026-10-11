@@ -17,6 +17,10 @@ body::after {
 a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 0.22em; }
 a:hover { text-decoration-color: var(--accent); }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
+/* Negative tracking tightens Latin display type; CJK glyphs already fill their em box, so they keep zero. */
+:is(h1, h2, h3, .title-rest, .category-name, .brand-full, .brand-short):is(:lang(zh), :lang(ja), :lang(ko)) { letter-spacing: 0; }
+/* Japanese prose breaks at phrase boundaries and never before small kana or closing marks. */
+:is(h1, h2, h3, p):lang(ja) { line-break: strict; word-break: auto-phrase; }
 h1 { font-size: var(--fs-display-l); margin: 0; }
 p { text-wrap: pretty; }
 img { max-width: 100%; }
@@ -70,7 +74,7 @@ h1.lang-text .alt:lang(en) { text-transform: uppercase; }
 
 .panel { background: var(--paper); border: 1px solid var(--rule-strong); }
 .kicker, .caption-kicker {
-  font-family: var(--font-mono); font-size: var(--fs-mono-m); font-weight: 500; letter-spacing: 0.06em;
+  font-family: var(--font-mono); font-size: var(--fs-mono-m); font-weight: 500; letter-spacing: 0.05em;
   text-transform: uppercase; color: var(--muted); margin: 0;
 }
 .section-title {

@@ -14,7 +14,7 @@
   display: inline-block; margin-left: 0.3em; vertical-align: 0.9em; font-family: var(--font-mono); font-weight: 500;
   font-size: var(--fs-mono-m); letter-spacing: 0.04em; padding: 2px 6px; border: 1px solid var(--rule-strong);
 }
-.hero-lede { color: var(--text-2); max-width: 30em; margin: 0 0 32px; font-size: 17px; }
+.hero-lede { color: var(--text-2); max-width: 34em; margin: 0 0 32px; font-size: 17px; text-wrap: balance; }
 .home-search { display: flex; align-items: flex-end; gap: 12px; width: 100%; max-width: 460px; }
 .home-search input { flex: 1; min-width: 0; }
 .home-search button { background: var(--ink); color: var(--paper); border-color: var(--ink); padding: 8px 18px; }

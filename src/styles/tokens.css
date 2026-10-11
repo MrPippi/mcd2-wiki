@@ -34,8 +34,8 @@
   --font-body: "Geist Variable", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "Cascadia Mono", monospace;
 
-  --fs-mono-s: 11px;
-  --fs-mono-m: 12px;
+  --fs-mono-s: 12px;
+  --fs-mono-m: 13px;
   --fs-display-m: clamp(28px, 3vw, 36px);
   --fs-display-l: clamp(40px, 6vw, 72px);
   --fs-display-xl: clamp(48px, 9vw, 120px);
