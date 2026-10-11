@@ -219,6 +219,6 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
     expect(itemOf(find("evoker")?.mob.drops)).toEqual({ slot: "item", guaranteed: 1, rolls: 4, chancePerRoll: 0.25, pool: "area" });
     expect(itemOf(find("maw")?.mob.drops)).toEqual({ slot: "item", guaranteed: 1, rolls: 3, chancePerRoll: 0.15, pool: "none" });
     expect(itemOf(find("zombie")?.mob.soulCorrupted?.drops)).toEqual({ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.25, pool: "area" });
-    expect(issues).toEqual(["bee", "frog", "tuner"].map((detail) => ({ type: "mob-loot-unresolved", detail })));
+    expect(issues).toEqual([]);   // Bee, Frog and Tuner (no loot row) are not hostile and get no page
   });
 });

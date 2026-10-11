@@ -31,7 +31,7 @@ describe("mob page", () => {
   });
 
   it("leaves out the drops section for a mob without drops, but keeps the game-data note", async () => {
-    const html = await render(realMob("bee"));
+    const html = await render({ ...realMob("piggy-bank"), drops: [] });   // every real bestiary mob drops something
     expect(html).not.toContain('data-testid="mob-drops"');
     expect(count(html, 'data-testid="mob-drops-note"')).toBe(1);
   });

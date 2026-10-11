@@ -28,6 +28,7 @@ type Stat = Mob["stats"][number];
 const KEY_PATTERN = /^SW_Mob_(.+?)_SW_TextEntry_Name$/i;
 const ABSTRACT_NAME = /^(Default|Monstrosity$|Monstrosity_Storm$|StormiMoss$)/;
 const NO_LOOT = tagKey("SW.Trait.CannotDropLoot");
+const HOSTILE = tagKey("SW.Mob.Default.Hostile");
 const OVERWORLD = tagKey("SW.Mob.Default.Overworld");
 const WELLSPRING = tagKey("SW.Mob.Default.Wellspring");
 const SOUL_SUFFIX = /\.SoulStated$/i;
@@ -63,7 +64,29 @@ function sources(tables: MobTables): readonly (readonly [Kind, readonly MobRow[]
   return [["regular", tables.type1], ["miniboss", tables.type2], ["boss", tables.type3], ["variant", tables.variants]];
 }
 
-/** Named, loot-dropping rows. The name comes from the key in TypeTextData (never the row name); rows of one kind with the same English name are one mob. */
+/** Variant tags some Type1 mob lists in Variants.Replacements; other variant rows get no page (plan A3). */
+const listedVariants = (tables: MobTables): ReadonlySet<string> =>
+  new Set(tables.type1.flatMap((row) => (row.Variants?.Replacements ?? []).map((rep) => tagKey(rep.TypeTagToUseInstead.TagName))));
+
+/** Why a named row gets no page: a loot-less clone or a friendly creature (spec 1.2). */
+function skipReason(closure: readonly string[]): string | undefined {
+  const keys = closure.map(tagKey);
+  if (keys.includes(NO_LOOT)) return "CannotDropLoot";
+  return keys.includes(HOSTILE) ? undefined : "not hostile";
+}
+
+/** A variant with its own name gets a page only when a Type1 mob lists it; same-named variants were folded into their base already. */
+function dropUnlisted(kept: readonly Candidate[], tables: MobTables): { pages: Candidate[]; issues: Issue[] } {
+  const listed = listedVariants(tables);
+  const isListed = (candidate: Candidate): boolean => candidate.kind !== "variant" || tagsOf(candidate.rows).some((tag) => listed.has(tagKey(tag)));
+  const unlisted = kept.filter((candidate) => !isListed(candidate));
+  return {
+    pages: kept.filter(isListed),
+    issues: unlisted.flatMap((candidate) => candidate.rows.map((row) => issue("mob-skipped", `${row.Name}: variant no Type1 mob lists`))),
+  };
+}
+
+/** Named, hostile, loot-dropping rows. The name comes from the key in TypeTextData (never the row name); rows of one kind with the same English name are one mob. */
 function classifyRows(tables: MobTables, locales: Locales, rowsByKey: ReadonlyMap<string, MobRow>): { candidates: Candidate[]; issues: Issue[] } {
   const groups = new Map<string, Candidate>();
   const issues: Issue[] = [];
@@ -71,8 +94,9 @@ function classifyRows(tables: MobTables, locales: Locales, rowsByKey: ReadonlyMa
     for (const row of rows) {
       const { ref, present } = nameRef(row);
       if (!present || ABSTRACT_NAME.test(row.Name)) continue;
-      if (traitClosure(row, rowsByKey).some((tag) => tagKey(tag) === NO_LOOT)) {
-        issues.push(issue("mob-skipped", `${row.Name}: CannotDropLoot`));
+      const reason = skipReason(traitClosure(row, rowsByKey));
+      if (reason !== undefined) {
+        issues.push(issue("mob-skipped", `${row.Name}: ${reason}`));
         continue;
       }
       const english = ref ? localize(locales, ref.namespace, ref.key)?.en : undefined;
@@ -273,11 +297,13 @@ const byKindThenName = (a: MobDraft, b: MobDraft): number =>
 export function buildMobs(tables: MobTables, locales: Locales): MobsResult {
   const rowsByKey = rowsIndex(tables);
   const { candidates, issues } = classifyRows(tables, locales, rowsByKey);
-  const { kept, folded } = foldVariants(candidates, locales);
+  const folding = foldVariants(candidates, locales);
+  const { folded } = folding;
+  const { pages: kept, issues: unlisted } = dropUnlisted(folding.kept, tables);
   const slugs = assignSlugs(kept, locales);
   const foldedTags = new Map([...folded].map(([id, entries]) => [id, entries.flatMap((entry) => tagsOf(entry.rows))] as const));
   const soul = matchSoul(tables, kept, foldedTags);
   const ctx: Context = { locales, rowsByKey, slugs, kept, folded, soul: soul.matched };
   const drafts = kept.flatMap((candidate) => toDraft(candidate, ctx) ?? []).sort(byKindThenName);
-  return { drafts, tagIndex: indexTags(drafts, folded, slugs), issues: [...issues, ...soul.issues] };
+  return { drafts, tagIndex: indexTags(drafts, folded, slugs), issues: [...issues, ...unlisted, ...soul.issues] };
 }

@@ -42,9 +42,9 @@ test.describe("bestiary index", () => {
   test("credits the portraits and shows a frame for mobs without one", async ({ page }) => {
     await page.goto("/en/mobs/");
     await expect(page.locator(".mob-credit")).toHaveText("Portraits are renders of the game's models.");
-    const bee = page.locator("li", { hasText: "Bee" }).first();
-    await expect(bee.getByTestId("mob-portrait-placeholder")).toBeVisible();
-    await expect(bee.locator("a")).toHaveAccessibleName(/^Bee\s*蜜蜂$/);
+    const piggy = page.locator("li", { hasText: "Piggy Bank" }).first();
+    await expect(piggy.getByTestId("mob-portrait-placeholder")).toBeVisible();
+    await expect(piggy.locator("a")).toHaveAccessibleName(/^Piggy Bank\s*寶箱豬$/);
   });
 });
 
@@ -117,11 +117,12 @@ test.describe("mob page", () => {
     await page.goto("/en/mobs/husk/");
     await page.getByTestId("mob-variant-of").locator("a").click();
     await expect(page).toHaveURL(/\/en\/mobs\/zombie\/$/);
-    await page.goto("/en/mobs/bee/");
+    await page.goto("/en/mobs/soul-corrupted-witch/");
     await expect(page.getByTestId("mob-portrait-placeholder")).toHaveAttribute("aria-label", "No portrait yet");
     await expect(page.locator(".mob-plate .mob-portrait img")).toHaveCount(0);
-    await expect(page.getByTestId("mob-drops")).toHaveCount(0);
     await expect(page.getByTestId("mob-drops-note")).toBeVisible();
+    const friendly = await page.request.get("/en/mobs/bee/");
+    expect(friendly.status()).toBe(404);   // friendly creatures get no page (spec 1.2)
   });
 
   for (const lang of ["de", "ru"]) {

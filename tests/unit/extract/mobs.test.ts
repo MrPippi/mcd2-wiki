@@ -28,6 +28,7 @@ const locales = makeLocales({
   },
 });
 
+const H = "SW.Mob.Default.Hostile";
 const HOSTILE = mobRow("DT_MobDefinition", "DefaultHostile", "SW.Mob.Default.Hostile", { unnamed: true });
 const MELEE = mobRow("DT_MobDefinition", "MeleeAttackMob", "SW.Mob.Default.MeleeAttackMob", { unnamed: true, traits: ["SW.Mob.Default.Hostile"] });
 const ZOMBIE = mobRow(T1, "Zombie", "SW.Mob.Zombie", {
@@ -58,7 +59,7 @@ describe("buildMobs", () => {
 
   it("reads the name key from TypeTextData, not the row name: three Slime rows are one mob, and Sw_ keys still resolve", () => {
     const slimes = ["SlimeLarge", "SlimeMedium", "SlimeSmall"].map((name, i) =>
-      mobRow(T1, name, i === 0 ? "SW.Mob.Slime" : `SW.Mob.${name}`, { key: "SW_Mob_Slime_SW_TextEntry_Name", traits: ["SW.Mob.Type1"], attrs: { Health: 10 - i } }),
+      mobRow(T1, name, i === 0 ? "SW.Mob.Slime" : `SW.Mob.${name}`, { key: "SW_Mob_Slime_SW_TextEntry_Name", traits: ["SW.Mob.Type1", H], attrs: { Health: 10 - i } }),
     );
     const result = buildMobs(mobTables({ type1: slimes }), locales);
     expect(result.drafts.map((draft) => draft.mob.slug)).toEqual(["slime"]);
@@ -71,7 +72,7 @@ describe("buildMobs", () => {
 
   it("merges same-kind rows with different name keys but the same English name (the real Slime sizes)", () => {
     const sized = makeLocales({ [ns(T1)]: { SW_Mob_Slime_SW_TextEntry_Name: { en: "Slime" }, SW_Mob_SlimeSmall_SW_TextEntry_Name: { en: "Slime" } } });
-    const slimes = [mobRow(T1, "SlimeLarge", "SW.Mob.Slime", { key: "SW_Mob_Slime_SW_TextEntry_Name" }), mobRow(T1, "SlimeSmall", "SW.Mob.SlimeSmall", { key: "SW_Mob_SlimeSmall_SW_TextEntry_Name" })];
+    const slimes = [mobRow(T1, "SlimeLarge", "SW.Mob.Slime", { key: "SW_Mob_Slime_SW_TextEntry_Name", traits: [H] }), mobRow(T1, "SlimeSmall", "SW.Mob.SlimeSmall", { key: "SW_Mob_SlimeSmall_SW_TextEntry_Name", traits: [H] })];
     const result = buildMobs(mobTables({ type1: slimes }), sized);
     expect(result.drafts.map((draft) => draft.mob.slug)).toEqual(["slime"]);
     expect(result.drafts[0]?.tags).toEqual(["SW.Mob.Slime", "SW.Mob.SlimeSmall"]);
@@ -99,14 +100,14 @@ describe("buildMobs", () => {
   });
 
   it("gives a mob without a Soul Corrupted version no such section", () => {
-    const bee = mobRow(T1, "Bee", "SW.Mob.Bee", { traits: ["SW.Mob.Type1"], attrs: { Health: 4 } });
-    const drafts = buildMobs(mobTables({ type1: [bee] }), locales).drafts;
+    const slime = mobRow(T1, "Slime", "SW.Mob.Slime", { traits: ["SW.Mob.Type1", H], attrs: { Health: 4 } });
+    const drafts = buildMobs(mobTables({ type1: [slime] }), locales).drafts;
     expect(drafts[0]?.mob.soulCorrupted).toBeUndefined();
   });
 
   it("takes the kind from the table: Type2 is a mini-boss and Type3 a boss", () => {
-    const witch = mobRow(T2, "Witch", "SW.Mob.Witch", { traits: ["SW.Mob.Default.Type2"] });
-    const maw = mobRow(T3, "Maw", "SW.Mob.Maw", { traits: ["SW.Mob.Default.Type3"] });
+    const witch = mobRow(T2, "Witch", "SW.Mob.Witch", { traits: ["SW.Mob.Default.Type2", H] });
+    const maw = mobRow(T3, "Maw", "SW.Mob.Maw", { traits: ["SW.Mob.Default.Type3", H] });
     const kinds = buildMobs(mobTables({ type2: [witch], type3: [maw] }), locales).drafts.map((draft) => [draft.mob.slug, draft.mob.kind]);
     expect(kinds).toEqual([["maw", "boss"], ["witch", "miniboss"]]);
   });
@@ -119,8 +120,20 @@ describe("buildMobs", () => {
     expect(result.issues).toContainEqual({ type: "mob-skipped", detail: "Shade_Clone: CannotDropLoot" });
   });
 
+  it("skips friendly creatures and variants no Type1 mob lists, and reports why (spec 1.2, plan A3)", () => {
+    const bee = mobRow(T1, "Bee", "SW.Mob.Bee", { traits: ["SW.Mob.Type1", "SW.Mob.Default.Base"] });
+    const zombie = mobRow(T1, "Zombie", "SW.Mob.Zombie", { traits: ["SW.Mob.Default.MeleeAttackMob"] });   // lists no variants
+    const result = buildMobs(mobTables({ definitions: [HOSTILE, MELEE], type1: [bee, zombie], variants: [HUSK, ZOMBIE_V1] }), locales);
+    expect(result.drafts.map((draft) => draft.mob.slug)).toEqual(["zombie"]);
+    expect(result.issues).toEqual([
+      { type: "mob-skipped", detail: "Bee: not hostile" },
+      { type: "mob-skipped", detail: "Husk: variant no Type1 mob lists" },
+    ]);
+    expect(result.tagIndex.get("sw.mob.zombievariant1")).toBe("zombie");   // an unlisted same-named variant still folds in as an alias
+  });
+
   it("reports a mob with no English name and does not publish it", () => {
-    const ghost = mobRow(T1, "Ghost", "SW.Mob.Ghost", { traits: ["SW.Mob.Type1"] });
+    const ghost = mobRow(T1, "Ghost", "SW.Mob.Ghost", { traits: ["SW.Mob.Type1", H] });
     const result = buildMobs(mobTables({ type1: [ghost] }), locales);
     expect(result.drafts).toEqual([]);
     expect(result.issues.map((item) => item.type)).toContain("mob-unnamed");
@@ -135,34 +148,34 @@ describe("buildMobs", () => {
 
   it("slugs a merged group or a generic-suffix id from the English name", () => {
     const L = makeLocales({
-      [ns(VAR)]: {
-        SW_Mob_FrogVariant1_SW_TextEntry_Name: { en: "Frog" }, SW_Mob_FrogVariant2_SW_TextEntry_Name: { en: "Frog" },
-        SW_Mob_SingingBeanXS_SW_TextEntry_Name: { en: "Tuner" }, SW_Mob_SingingBeanM_SW_TextEntry_Name: { en: "Tuner" },
+      [ns(T1)]: {
+        SW_Mob_GoblinVariant1_SW_TextEntry_Name: { en: "Goblin" }, SW_Mob_GoblinVariant2_SW_TextEntry_Name: { en: "Goblin" },
+        SW_Mob_OgreXS_SW_TextEntry_Name: { en: "Brute" }, SW_Mob_OgreM_SW_TextEntry_Name: { en: "Brute" },
       },
       [ns(T2)]: { SW_Mob_Witch_SW_TextEntry_Name: { en: "Witch" } },
       [ns(T3)]: { SW_Mob_Witch_Type3_SW_TextEntry_Name: { en: "Soul Corrupted Witch" } },
     });
-    const variants = [
-      mobRow(VAR, "FrogCold", "SW.Mob.FrogVariant1", { key: "SW_Mob_FrogVariant1_SW_TextEntry_Name" }),
-      mobRow(VAR, "FrogWarm", "SW.Mob.FrogVariant2", { key: "SW_Mob_FrogVariant2_SW_TextEntry_Name" }),
-      mobRow(VAR, "SingingBean_XS", "SW.Mob.SingingBeanXS", { key: "SW_Mob_SingingBeanXS_SW_TextEntry_Name" }),
-      mobRow(VAR, "SingingBean_M", "SW.Mob.SingingBeanM", { key: "SW_Mob_SingingBeanM_SW_TextEntry_Name" }),
+    const regulars = [
+      mobRow(T1, "GoblinCold", "SW.Mob.GoblinVariant1", { key: "SW_Mob_GoblinVariant1_SW_TextEntry_Name", traits: [H] }),
+      mobRow(T1, "GoblinWarm", "SW.Mob.GoblinVariant2", { key: "SW_Mob_GoblinVariant2_SW_TextEntry_Name", traits: [H] }),
+      mobRow(T1, "Ogre_XS", "SW.Mob.OgreXS", { key: "SW_Mob_OgreXS_SW_TextEntry_Name", traits: [H] }),
+      mobRow(T1, "Ogre_M", "SW.Mob.OgreM", { key: "SW_Mob_OgreM_SW_TextEntry_Name", traits: [H] }),
     ];
     const tables = mobTables({
-      type2: [mobRow(T2, "Witch", "SW.Mob.Witch")],
-      type3: [mobRow(T3, "WitchT3", "SW.Mob.Witch.Type3", { key: "SW_Mob_Witch_Type3_SW_TextEntry_Name" })],
-      variants,
+      type1: regulars,
+      type2: [mobRow(T2, "Witch", "SW.Mob.Witch", { traits: [H] })],
+      type3: [mobRow(T3, "WitchT3", "SW.Mob.Witch.Type3", { key: "SW_Mob_Witch_Type3_SW_TextEntry_Name", traits: [H] })],
     });
     const drafts = buildMobs(tables, L).drafts;
-    expect(drafts.map((draft) => draft.mob.slug).sort()).toEqual(["frog", "soul-corrupted-witch", "tuner", "witch"]);
-    expect(drafts.find((draft) => draft.mob.slug === "frog")?.mob.id).toBe("FrogVariant1");
+    expect(drafts.map((draft) => draft.mob.slug).sort()).toEqual(["brute", "goblin", "soul-corrupted-witch", "witch"]);
+    expect(drafts.find((draft) => draft.mob.slug === "goblin")?.mob.id).toBe("GoblinVariant1");
   });
 
   it("falls back to the id slug when the English-name slug is already taken", () => {
     const L = makeLocales({ [ns(T2)]: { SW_Mob_Witch_SW_TextEntry_Name: { en: "Witch" } }, [ns(T3)]: { SW_Mob_Witch_Type3_SW_TextEntry_Name: { en: "Witch" } } });
     const tables = mobTables({
-      type2: [mobRow(T2, "Witch", "SW.Mob.Witch")],
-      type3: [mobRow(T3, "WitchT3", "SW.Mob.Witch.Type3", { key: "SW_Mob_Witch_Type3_SW_TextEntry_Name" })],
+      type2: [mobRow(T2, "Witch", "SW.Mob.Witch", { traits: [H] })],
+      type3: [mobRow(T3, "WitchT3", "SW.Mob.Witch.Type3", { key: "SW_Mob_Witch_Type3_SW_TextEntry_Name", traits: [H] })],
     });
     const slugs = buildMobs(tables, L).drafts.map((draft) => [draft.mob.kind, draft.mob.slug]);
     expect(slugs).toEqual([["boss", "witch-type3"], ["miniboss", "witch"]]);
@@ -171,9 +184,9 @@ describe("buildMobs", () => {
   it("keeps the id slug when merged rows only extend the representative id (a Storm version), but not for unrelated ids", () => {
     const L = makeLocales({ [ns(T3)]: { SW_Mob_Monstrosity_Copper_SW_TextEntry_Name: { en: "Copper Monstrosity" }, SW_Mob_Monstrosity_Copper_Storm_SW_TextEntry_Name: { en: "Copper Monstrosity" }, SW_Mob_Monstrosity_Moss_SW_TextEntry_Name: { en: "Moss Monstrosity" } } });
     const rows = [
-      mobRow(T3, "MonstrosityCopper", "SW.Mob.Monstrosity.Copper", { key: "SW_Mob_Monstrosity_Copper_SW_TextEntry_Name" }),
-      mobRow(T3, "MonstrosityCopperStorm", "SW.Mob.Monstrosity.Copper.Storm", { key: "SW_Mob_Monstrosity_Copper_Storm_SW_TextEntry_Name" }),
-      mobRow(T3, "MonstrosityMoss", "SW.Mob.Monstrosity.Moss", { key: "SW_Mob_Monstrosity_Moss_SW_TextEntry_Name" }),
+      mobRow(T3, "MonstrosityCopper", "SW.Mob.Monstrosity.Copper", { key: "SW_Mob_Monstrosity_Copper_SW_TextEntry_Name", traits: [H] }),
+      mobRow(T3, "MonstrosityCopperStorm", "SW.Mob.Monstrosity.Copper.Storm", { key: "SW_Mob_Monstrosity_Copper_Storm_SW_TextEntry_Name", traits: [H] }),
+      mobRow(T3, "MonstrosityMoss", "SW.Mob.Monstrosity.Moss", { key: "SW_Mob_Monstrosity_Moss_SW_TextEntry_Name", traits: [H] }),
     ];
     const drafts = buildMobs(mobTables({ type3: rows }), L).drafts;
     expect(drafts.map((draft) => draft.mob.slug).sort()).toEqual(["monstrosity-copper", "monstrosity-moss"]);
@@ -182,14 +195,14 @@ describe("buildMobs", () => {
 
   it("inherits a stat the row lacks from its nearest ancestor row, and never overrides the row's own value", () => {
     const parent = mobRow("DT_MobDefinition", "Monstrosity", "SW.Mob.Monstrosity", { unnamed: true, attrs: { Health: 2400, Poise: 500 } });
-    const own = mobRow(T3, "Maw", "SW.Mob.Maw", { traits: ["SW.Mob.Monstrosity"], attrs: { Poise: 90 } });
+    const own = mobRow(T3, "Maw", "SW.Mob.Maw", { traits: ["SW.Mob.Monstrosity", H], attrs: { Poise: 90 } });
     const maw = buildMobs(mobTables({ definitions: [parent], type3: [own] }), locales).drafts[0]?.mob;
     expect(maw?.stats).toEqual([{ key: "health", value: 2400 }, { key: "poise", value: 90 }]);
   });
 
   it("fails when two different mobs would share a slug", () => {
-    const a = mobRow(T1, "FooBar", "SW.Mob.FooBar", { key: "SW_Mob_FooBar_SW_TextEntry_Name" });
-    const b = mobRow(T1, "Foo_Bar", "SW.Mob.Foo_Bar", { key: "SW_Mob_Foo_Bar_SW_TextEntry_Name" });
+    const a = mobRow(T1, "FooBar", "SW.Mob.FooBar", { key: "SW_Mob_FooBar_SW_TextEntry_Name", traits: [H] });
+    const b = mobRow(T1, "Foo_Bar", "SW.Mob.Foo_Bar", { key: "SW_Mob_Foo_Bar_SW_TextEntry_Name", traits: [H] });
     const dupLocales = makeLocales({ [ns(T1)]: { SW_Mob_FooBar_SW_TextEntry_Name: { en: "Foo" }, SW_Mob_Foo_Bar_SW_TextEntry_Name: { en: "Bar" } } });
     expect(() => buildMobs(mobTables({ type1: [a, b] }), dupLocales)).toThrow(ExtractError);
   });
