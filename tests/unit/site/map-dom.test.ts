@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { popupTexts, resultText, shownKind } from "../../../src/lib/map/marker-dom";
+import { pinParts, popupTexts, resultText, shownKind } from "../../../src/lib/map/marker-dom";
 import type { PayloadMarker } from "../../../src/lib/map/payload";
 
 const marker = (kind: PayloadMarker["kind"], name: string, extra: Partial<PayloadMarker> = {}): PayloadMarker => ({
@@ -35,5 +35,16 @@ describe("resultText", () => {
   it("joins name, kind and area, skipping the kind when the name says it", () => {
     expect(resultText(marker("rift", "裂隙", { area: { zh: "咆哮森林" } }), "zh", "裂隙")).toBe("裂隙 · 咆哮森林");
     expect(resultText(marker("merchant", "鐵匠"), "zh", "商人")).toBe("鐵匠 · 商人");
+  });
+});
+
+describe("pinParts", () => {
+  it("gives area labels text only, never an icon", () => {
+    expect(pinParts(marker("area", "咆哮森林", { icon: "icons/map/forest.png" }), "zh")).toEqual({ className: "map-label", text: "咆哮森林" });
+  });
+
+  it("gives other markers their icon and no text", () => {
+    expect(pinParts(marker("rift", "裂隙", { icon: "icons/map/rift.png" }), "zh")).toEqual({ className: "map-pin", icon: "icons/map/rift.png" });
+    expect(pinParts(marker("minecart", "礦車站"), "zh")).toEqual({ className: "map-pin" });
   });
 });

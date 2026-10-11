@@ -1,5 +1,6 @@
 ---
 import { MARKER_KINDS, type MapData, type WorldMap } from "../../scripts/extract/map-schema";
+import { FILTER_KINDS } from "../lib/map/kinds";
 import { markerLabel, t, type Lang } from "../lib/i18n";
 import { compareLang } from "../lib/lang";
 import { countByKind } from "../lib/map/markers";
@@ -46,7 +47,7 @@ const payload = JSON.stringify({ worlds: worlds.map((world) => trimWorld(world, 
       <aside class="map-panel">
         <fieldset class="map-filters">
           <legend>{t(lang, "mapMarkers")}</legend>
-          {MARKER_KINDS.map((kind) => (
+          {FILTER_KINDS.map((kind) => (
             <label class="map-filter">
               <input type="checkbox" name="kind" value={kind} checked />
               {legend[kind] ? (

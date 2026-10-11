@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import type { MapMarker } from "../../../scripts/extract/map-schema";
 import type { Localized } from "../../../scripts/extract/schemas";
 import { loc } from "../../helpers/localized";
+import { FILTER_KINDS } from "../../../src/lib/map/kinds";
 import { countByKind, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "../../../src/lib/map/markers";
 
 const marker = (id: string, kind: MapMarker["kind"], zh: string, en: string, area?: [string, string], extra: Partial<Localized> = {}): MapMarker => ({
@@ -84,11 +85,16 @@ describe("hidden kinds", () => {
     expect(parseHiddenKinds('["bogus","rift",3]')).toEqual(new Set(["rift"]));
   });
 
+  it("never hides area names, which are not a filter, even if an older page saved them", () => {
+    expect(FILTER_KINDS).toEqual(["minecart", "rift", "portal", "merchant"]);
+    expect(parseHiddenKinds('["area","rift"]')).toEqual(new Set(["rift"]));
+  });
+
   it("toggles a kind into a new set", () => {
-    const hidden = new Set<MapMarker["kind"]>(["rift"]);
+    const hidden = new Set<(typeof FILTER_KINDS)[number]>(["rift"]);
     const shown = withKind(hidden, "rift", true);
     expect(shown).toEqual(new Set());
     expect(hidden).toEqual(new Set(["rift"]));
-    expect(withKind(shown, "area", false)).toEqual(new Set(["area"]));
+    expect(withKind(shown, "merchant", false)).toEqual(new Set(["merchant"]));
   });
 });

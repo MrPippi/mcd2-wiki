@@ -69,7 +69,6 @@ interface Context {
   readonly text: (namespace: string, key: string) => Localized | undefined;
   readonly loc: (text: string) => Localized | undefined;
   readonly areaName: (tag: string) => Localized | undefined;
-  readonly areaIcon: (tag: string) => string | undefined;
   /** Map texts read so far that show English in some language (spec §1.2.2: fallbacks must be visible). */
   readonly fallbackIssues: () => Issue[];
 }
@@ -108,11 +107,7 @@ function makeContext(tables: MapTables, locales: Locales): Context {
     const name = texts.find(([key]) => NAME_TEXT.test(key))?.[1].Text;
     return name ? loc(name) : undefined;
   };
-  const areaIcon = (tag: string) => {
-    const match = /\/AreaIcons\/([^./]+)\./.exec(areas.get(lower(tag))?.AreaIcon ?? "");
-    return match ? `${AREA_ICON_DIR}/${match[1]}.png` : undefined;
-  };
-  return { text, loc, areaName, areaIcon, fallbackIssues };
+  return { text, loc, areaName, fallbackIssues };
 }
 
 function worldFrames(tables: MapTables, ctx: Context): { frames: Frame[]; issues: Issue[] } {
@@ -219,16 +214,15 @@ function toMarker(candidate: Candidate, frame: WorldFrame, iconExists: (relative
   };
 }
 
-function areaLabels(points: readonly { candidate: Candidate; marker: MapMarker }[], ctx: Context, iconExists: (relative: string) => boolean): MapMarker[] {
+/** Area names as text labels (no icon: the site keeps them quieter than the pins). */
+function areaLabels(points: readonly { candidate: Candidate; marker: MapMarker }[], ctx: Context): MapMarker[] {
   const tags = [...new Set(points.flatMap(({ candidate }) => (candidate.areaTag ? [lower(candidate.areaTag)] : [])))];
   return tags.flatMap((tag) => {
     const name = ctx.areaName(tag);
     if (!name) return [];
     const members = points.filter(({ candidate }) => candidate.areaTag && lower(candidate.areaTag) === tag).map(({ marker }) => marker);
     const mean = (pick: (marker: MapMarker) => number) => round1(members.reduce((sum, marker) => sum + pick(marker), 0) / members.length);
-    const source = ctx.areaIcon(tag);
-    const icon = source && iconExists(source) ? publishedIcon(source) : undefined;
-    return [{ id: `area:${tag}`, kind: "area" as const, px: mean((m) => m.px), py: mean((m) => m.py), name, ...optional("icon", icon) }];
+    return [{ id: `area:${tag}`, kind: "area" as const, px: mean((m) => m.px), py: mean((m) => m.py), name }];
   });
 }
 
@@ -241,12 +235,12 @@ function buildWorld(frame: Frame, candidates: readonly Candidate[], ctx: Context
     name: frame.name,
     frame: frame.frame,
     zMax: zMaxFor(frame.frame.imageSize),
-    markers: [...points.map(({ marker }) => marker), ...areaLabels(points, ctx, iconExists)].sort(byKindThenId),
+    markers: [...points.map(({ marker }) => marker), ...areaLabels(points, ctx)].sort(byKindThenId),
   };
 }
 
-function iconsOf(candidates: readonly Candidate[], ctx: Context, iconExists: (relative: string) => boolean): MapIcon[] {
-  const sources = candidates.flatMap((candidate) => [candidate.iconSource, candidate.areaTag ? ctx.areaIcon(candidate.areaTag) : undefined]);
+function iconsOf(candidates: readonly Candidate[], iconExists: (relative: string) => boolean): MapIcon[] {
+  const sources = candidates.map((candidate) => candidate.iconSource);
   const present = [...new Set(sources.filter((source): source is string => source !== undefined && iconExists(source)))];
   return present.map((from) => ({ from, published: publishedIcon(from) }));
 }
@@ -268,7 +262,7 @@ export function buildMapData(tables: MapTables, locales: Locales, iconExists: (r
       worlds,
       legend: legendOf(iconExists),
     },
-    icons: iconsOf(placedCandidates, ctx, iconExists),
+    icons: iconsOf(placedCandidates, iconExists),
     issues: [
       ...frameIssues,
       ...gathered.issues,

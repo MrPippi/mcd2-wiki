@@ -17,16 +17,23 @@ function iconImage(path: string, className: string): HTMLImageElement {
   return image;
 }
 
+export interface PinParts {
+  readonly className: "map-pin" | "map-label";
+  readonly icon?: string;
+  readonly text?: string;
+}
+
+/** A pin is the kind's icon; an area is its name as plain text, with no icon, so it stays quieter than the pins. */
+export function pinParts(marker: PayloadMarker, lang: Lang): PinParts {
+  if (marker.kind === "area") return { className: "map-label", text: marker.name[lang] ?? "" };
+  return { className: "map-pin", ...(marker.icon ? { icon: marker.icon } : {}) };
+}
+
 export function pinElement(marker: PayloadMarker, lang: Lang): HTMLElement {
-  if (marker.kind !== "area") {
-    const pin = element("span", "map-pin");
-    if (marker.icon) pin.append(iconImage(marker.icon, "map-pin-icon"));
-    return pin;
-  }
-  const label = element("span", "map-label");
-  if (marker.icon) label.append(iconImage(marker.icon, "map-label-icon"));
-  label.append(element("span", "map-label-text", marker.name[lang] ?? ""));
-  return label;
+  const { className, icon, text } = pinParts(marker, lang);
+  const pin = element("span", className, text);
+  if (icon) pin.append(iconImage(icon, "map-pin-icon"));
+  return pin;
 }
 
 /** The kind label, unless the name already says it (a rift named 「裂隙」). Popups and search results share this rule. */

@@ -5,7 +5,7 @@ test("map page shows its title, world tabs and marker filters", async ({ page })
   await expect(page.locator("h1")).toHaveText("世界地圖");
   await expect(page.locator(".map-tabs a")).toHaveText([/主世界/, /隙浮/, /營地/]);
   await expect(page.locator(".map-tabs [aria-current='page']")).toHaveText(/主世界/);
-  await expect(page.locator("input[name='kind']")).toHaveCount(5);
+  await expect(page.locator("input[name='kind']")).toHaveCount(4);
   await expect(page.locator("[data-count='rift']")).toHaveText(/^[1-9]\d*$/);
 });
 
@@ -175,6 +175,20 @@ test("area labels do not capture clicks meant for the pin beneath", async ({ pag
   await page.goto("/zh/map/#4/432/4416");
   await expect(page.locator(".map-marker--area").first()).toBeAttached();
   await expect(page.locator(".map-marker--area.leaflet-interactive")).toHaveCount(0);
+});
+
+test("area names are not a marker filter", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await expect(page.locator(".map-filters")).not.toContainText("區域");
+  await expect(page.locator("input[name='kind'][value='area']")).toHaveCount(0);
+});
+
+test("area labels are plain text with no icon", async ({ page }) => {
+  await page.goto("/zh/map/#4/432/4416");
+  const label = page.locator(".map-marker--area .map-label").first();
+  await expect(label).toBeVisible();
+  await expect(label).toHaveText(/\S/);
+  await expect(page.locator(".map-marker--area img")).toHaveCount(0);
 });
 
 test.describe("zoom limits and popups", () => {
