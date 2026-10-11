@@ -45,7 +45,11 @@ export type LootRow = LootTables["area"][number];
 export type LootSlotValue = z.infer<typeof LootSlotSchema>;
 export type ItemTagRow = LootTables["melee"][number];
 
-export const ITEM_TABLE_CATEGORY: Readonly<Record<"melee" | "ranged" | "armor" | "artifact" | "enchantmentBook" | "talisman", Category>> = {
+/** The item DataTables, in the order the item index reads them. */
+export const ITEM_TABLE_KEYS = ["melee", "ranged", "armor", "artifact", "enchantmentBook", "talisman"] as const;
+export type ItemTableKey = (typeof ITEM_TABLE_KEYS)[number];
+
+export const ITEM_TABLE_CATEGORY: Readonly<Record<ItemTableKey, Category>> = {
   melee: "melee",
   ranged: "ranged",
   armor: "armor",
@@ -69,7 +73,7 @@ const FILES: Readonly<Record<Key, string>> = {
   enchantmentBook: "DT_ItemDefinitionEnchantmentBook",
   talisman: "DT_ItemDefinitionTalisman",
 };
-const ITEM_KEYS: readonly Key[] = ["melee", "ranged", "armor", "artifact", "enchantmentBook", "talisman"];
+const ITEM_KEYS: readonly Key[] = ITEM_TABLE_KEYS;
 
 const isTemplateRow = (row: unknown): boolean =>
   typeof row === "object" && row !== null && "Name" in row && /^Base[A-Z]/.test(String(row.Name));

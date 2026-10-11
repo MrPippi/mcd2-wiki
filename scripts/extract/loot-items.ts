@@ -1,6 +1,6 @@
 /** Indexes the item DataTable rows by loot tag: exact item tags, armor set tags (expanded to pieces) and trait tags. */
 import { entryIndex, locId } from "./game-rows";
-import { ITEM_TABLE_CATEGORY, type LootTables } from "./loot-tables";
+import { ITEM_TABLE_CATEGORY, ITEM_TABLE_KEYS, type LootTables } from "./loot-tables";
 import { tagKey } from "./mob-tags";
 import { ARMOR_PIECES, type Entry } from "./schemas";
 
@@ -26,7 +26,6 @@ export interface ItemIndex {
 }
 
 const SET_PREFIX = "sw.item.armorset.";
-const TABLES = Object.keys(ITEM_TABLE_CATEGORY) as (keyof typeof ITEM_TABLE_CATEGORY)[];
 
 const pieceRank = (ref: ItemRef): number => {
   const rank = ref.entry.armorPiece === undefined ? -1 : ARMOR_PIECES.indexOf(ref.entry.armorPiece);
@@ -35,7 +34,7 @@ const pieceRank = (ref: ItemRef): number => {
 
 function collectRefs(tables: LootTables, entries: readonly Entry[]): { refs: ItemRef[]; unresolvedRows: string[] } {
   const find = entryIndex(entries);
-  const rows = TABLES.flatMap((table) =>
+  const rows = ITEM_TABLE_KEYS.flatMap((table) =>
     tables[table].map((row) => {
       const category = ITEM_TABLE_CATEGORY[table];
       const entry = find(category, locId(row.TypeTextData) ?? row.Name);
