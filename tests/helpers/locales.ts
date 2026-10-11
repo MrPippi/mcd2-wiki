@@ -17,3 +17,15 @@ export function makeLocales(rows: Rows): Record<Lang, LocaleFile> {
     );
   return byLang(fileFor);
 }
+
+type SparseRows = Record<string, Record<string, Partial<Record<Lang, string>>>>;
+
+/** Like makeLocales, but a language left out has no text at all (so englishFallbacks can see it). */
+export function makeSparseLocales(rows: SparseRows): Record<Lang, LocaleFile> {
+  const fileFor = (lang: Lang): LocaleFile =>
+    Object.fromEntries(Object.entries(rows).map(([namespace, keys]) => [
+      namespace,
+      Object.fromEntries(Object.entries(keys).flatMap(([key, texts]) => { const text = texts[lang]; return text === undefined ? [] : [[key, text]]; })),
+    ]));
+  return byLang(fileFor);
+}

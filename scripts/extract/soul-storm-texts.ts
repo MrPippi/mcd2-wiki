@@ -1,0 +1,80 @@
+/** The game's own Soul Storm texts, rendered to HTML in every language. The tutorial's second paragraph is out of date, so only the first is published. */
+import { localizedFrom } from "../../src/lib/lang";
+import { LANGS, type Lang } from "./config";
+import { issue, type Issue } from "./issues";
+import { englishFallbacks, gameTexts } from "./loc-table";
+import { renderMarkup } from "./render-markup";
+import type { LocaleFile } from "./schemas";
+import { TEXT_IDS, type SoulStormData, type TextId } from "./soul-storm-schema";
+
+type Locales = Readonly<Record<Lang, LocaleFile>>;
+type Text = SoulStormData["texts"][TextId];
+
+interface TextKey {
+  readonly namespace: string;
+  readonly key: string;
+  readonly firstParagraph?: true;
+}
+
+const RELEASE = "Text/Release/";
+const AREA_MOD = "SW_AreaModification_SoulStorm_SW_TextEntry_Soulstorm_";
+const UI_TYPES = `${RELEASE}DT_UITypeDataDefinition.csv`;
+const ONBOARDING = `${RELEASE}OnboardingLabels.csv`;
+const PARAGRAPH_BREAK = /\r?\n[ \t]*\r?\n/;
+
+export const SOUL_STORM_TEXT_KEYS: Readonly<Record<TextId, TextKey>> = {
+  title: { namespace: ONBOARDING, key: "tutoriallog_soulstorms_title" },
+  overview1: { namespace: ONBOARDING, key: "panel_soulstorm_overview_description_1" },
+  overview2: { namespace: ONBOARDING, key: "panel_soulstorm_overview_description_2" },
+  tutorial: { namespace: ONBOARDING, key: "tutoriallog_soulstorms_description", firstParagraph: true },
+  objective: { namespace: UI_TYPES, key: `${AREA_MOD}Entered_Description` },
+  generatorHint: { namespace: UI_TYPES, key: `${AREA_MOD}Storminator_Hint` },
+  shieldHint: { namespace: UI_TYPES, key: `${AREA_MOD}Shieldinator_Hint` },
+  extraEffect: { namespace: `${RELEASE}LootItemPanelLabels.csv`, key: "SoulStormMessage" },
+  generatorName: { namespace: `${RELEASE}DT_SoulStormPropActorDefinition.csv`, key: "SW_PropActor_SoulStorm_Storminator_Base_SW_TextEntry_Name" },
+};
+
+/** The first of at least two paragraphs; a text with fewer than two has nothing we can vouch for. */
+export function firstParagraph(text: string): string | undefined {
+  const parts = text.split(PARAGRAPH_BREAK);
+  return parts.length < 2 ? undefined : parts[0].trim();
+}
+
+const EMPTY_TEXT: Text = { html: localizedFrom(() => ""), untranslated: [] };
+const label = (entry: TextKey): string => `${entry.namespace.slice(RELEASE.length)}/${entry.key}`;
+
+function render(texts: Partial<Record<Lang, string>>, english: string): Text {
+  return {
+    html: localizedFrom((lang) => renderMarkup(texts[lang] ?? english, lang).html),
+    untranslated: [],
+  };
+}
+
+function buildOne(locales: Locales, entry: TextKey): { text: Text; issues: Issue[] } {
+  const texts = gameTexts(locales, entry.namespace, entry.key);
+  const missing = { text: EMPTY_TEXT, issues: [issue("soul-storm-text-fallback", label(entry))] };
+  if (!texts?.en) return missing;
+  if (!entry.firstParagraph) {
+    return { text: { ...render(texts, texts.en), untranslated: englishFallbacks(locales, entry.namespace, entry.key) }, issues: [] };
+  }
+  const english = firstParagraph(texts.en);
+  if (english === undefined) return missing;
+  const firsts: Partial<Record<Lang, string>> = Object.fromEntries(LANGS.flatMap((lang) => {
+    const first = texts[lang] === undefined ? undefined : firstParagraph(texts[lang]);
+    return first === undefined ? [] : [[lang, first]];
+  }));
+  return { text: { ...render(firsts, english), untranslated: LANGS.filter((lang) => firsts[lang] === undefined) }, issues: [] };
+}
+
+export function buildSoulStormTexts(locales: Locales): { texts: SoulStormData["texts"]; issues: Issue[] } {
+  const one = (id: TextId) => buildOne(locales, SOUL_STORM_TEXT_KEYS[id]);
+  const built = {
+    title: one("title"), overview1: one("overview1"), overview2: one("overview2"), tutorial: one("tutorial"), objective: one("objective"),
+    generatorHint: one("generatorHint"), shieldHint: one("shieldHint"), extraEffect: one("extraEffect"), generatorName: one("generatorName"),
+  } satisfies Record<TextId, { text: Text; issues: Issue[] }>;
+  const texts = {
+    title: built.title.text, overview1: built.overview1.text, overview2: built.overview2.text, tutorial: built.tutorial.text, objective: built.objective.text,
+    generatorHint: built.generatorHint.text, shieldHint: built.shieldHint.text, extraEffect: built.extraEffect.text, generatorName: built.generatorName.text,
+  } satisfies SoulStormData["texts"];
+  return { texts, issues: TEXT_IDS.flatMap((id) => built[id].issues) };
+}
