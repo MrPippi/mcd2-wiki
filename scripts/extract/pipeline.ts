@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { copyFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import { extractAchievements } from "./achievements";
+import { extractBestiary } from "./bestiary";
 import { assembleEntry, assertUniqueSlugs } from "./assemble";
 import { dedupeByName } from "./dedupe";
 import { planAssets } from "./ui-assets";
@@ -47,12 +48,17 @@ export interface ExtractOptions {
   readonly sourceRoot: string;
   readonly outRoot: string;
   readonly overridesPath: string;
+  /** Hand-made mob portraits; defaults to mob-portrait-overrides next to the icon overrides. */
+  readonly mobPortraitOverrideDir?: string;
 }
 
 export interface ExtractSummary {
   readonly entries: number;
   readonly armorSets: number;
   readonly icons: number;
+  readonly mobs: number;
+  /** Every DataTable file name the extract read. */
+  readonly tablesRead: readonly string[];
   readonly issues: Issue[];
 }
 
@@ -163,6 +169,14 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   );
   // After copyIcons, which clears public/icons.
   const achievements = await extractAchievements(options.sourceRoot, options.outRoot, locales);
+  const bestiary = await extractBestiary({
+    sourceRoot: options.sourceRoot,
+    outRoot: options.outRoot,
+    locales,
+    entries: output.entries,
+    map: map.data,
+    overrideDir: options.mobPortraitOverrideDir ?? path.join(path.dirname(options.overridesPath), "mob-portrait-overrides"),
+  });
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
   const weapons = weaponTables
@@ -193,6 +207,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...map.issues,
     ...uiStrings.issues,
     ...achievements.issues,
+    ...bestiary.issues,
   ];
   const extraData = {
     "frames.json": frames.paths,
@@ -206,7 +221,9 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "map.json": MapDataSchema.parse(map.data),
     "ui-game-strings.json": uiStrings.strings,
     "achievements.json": achievements.data,
+    "mobs.json": bestiary.mobs,
+    "loot-sources.json": bestiary.sources,
   };
   await writeOutputs(options.outRoot, described, extraData, renderReport({ ...described, issues }));
-  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, issues };
+  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: bestiary.tablesRead, issues };
 }

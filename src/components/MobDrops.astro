@@ -1,0 +1,42 @@
+---
+import type { MobDrop } from "../../scripts/extract/mob-schema";
+import { lootSlotLabel, t, type Lang } from "../lib/i18n";
+import { dropPoolNote, dropSummary } from "../lib/mobs";
+
+interface Props {
+  lang: Lang;
+  drops: readonly MobDrop[];
+  /** h2 for the page's own drops, h3 inside the Soul Corrupted section. */
+  level?: 2 | 3;
+  /** Whether to print the "compiled from the game data" note; the page prints it once, even when the mob drops nothing. */
+  showNote?: boolean;
+  /** Test id of the section, so the Soul Corrupted drops can be told apart from the page's own. */
+  testid?: string;
+}
+
+const { lang, drops, level = 2, showNote = true, testid = "mob-drops" } = Astro.props;
+const Heading = level === 3 ? "h3" : "h2";
+---
+{drops.length > 0 && (
+  <section class="entry-section mob-drops" data-testid={testid}>
+    <Heading class="section-title" data-pagefind-ignore>{t(lang, "mobDrops")}</Heading>
+    <ul class="mob-drop-list">
+      {drops.map((drop) => {
+        const pool = dropPoolNote(drop, lang);
+        return (
+          <li class="mob-drop">
+            <span class="mob-drop-slot">{lootSlotLabel(drop.slot, lang)}</span>
+            <div class="mob-drop-body">
+              <ul class="mob-drop-rule">
+                {dropSummary(drop, lang).map((line) => <li>{line}</li>)}
+              </ul>
+              {pool && <p class="mob-drop-pool">{pool}</p>}
+            </div>
+          </li>
+        );
+      })}
+    </ul>
+    {showNote && <p class="note mob-drops-note" data-testid="mob-drops-note">{t(lang, "mobDropsNote")}</p>}
+  </section>
+)}
+{drops.length === 0 && showNote && <p class="note mob-drops-note" data-testid="mob-drops-note">{t(lang, "mobDropsNote")}</p>}

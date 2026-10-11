@@ -106,4 +106,41 @@ describe("UI translations", () => {
       }
     }
   });
+  it("keeps the bestiary placeholders in every language", () => {
+    const needs: Record<string, readonly string[]> = {
+      mobDropGuaranteed: ["{n}"],
+      mobDropRolls: ["{n}", "{chance}"],
+      sourceMerchantCategory: ["{category}"],
+      sourcePicksOf: ["{count}", "{of}"],
+    };
+    for (const lang of LANGS) {
+      for (const [key, placeholders] of Object.entries(needs)) {
+        const text = plainText(UI_DICTS[lang].values[key] ?? "");
+        for (const placeholder of placeholders) expect(text, `${lang}.${key}`).toContain(placeholder);
+      }
+    }
+  });
+
+  it("has every bestiary key in every language", () => {
+    const keys = [
+      "mobs", "mobsIntro", "mobKindBoss", "mobKindMiniboss", "mobKindRegular", "mobKindVariant", "mobStats", "mobBaseValues",
+      "mobSoulCorrupted", "mobAreas", "mobAreasNote", "mobDrops", "mobDropsNote", "mobDropGuaranteed", "mobDropRolls",
+      "mobDropPoolArea", "mobDropPoolOwn", "mobDropPoolNone", "mobVariants", "mobVariantOf", "mobPortraitCredit", "mobNoPortrait",
+      "mobWorldOverworld", "mobWorldWellspring",
+      "itemSources", "sourceAreas", "sourceChests", "sourceChestArea", "sourceChestFixed", "sourceQuests", "sourceGuaranteed",
+      "sourcePicksOf", "sourceMerchants", "sourceMerchantCategory", "sourceBookPools", "sourcesNote",
+      "statHealth", "statMovementSpeed", "statPoise", "statPoiseDelay", "statPoiseRecovery", "statSightRadius", "statMass",
+      "statSoulYield", "statMeleeAttackSpeed", "statRangedAttackSpeed", "statShield", "statKnockbackResistance",
+      "statResistBlast", "statResistMelee", "statResistRanged", "statResistFire", "statResistIce", "statResistLightning",
+      "statResistPoison", "statResistSoul", "statResistElemental", "statResistBase", "statResistTnt",
+      "lootSlotItem", "lootSlotSpecialGear", "lootSlotEnchantedBook", "lootSlotTalismans", "lootSlotEmeralds",
+      "lootSlotSpringStone", "lootSlotConsumable", "lootSlotTnt",
+    ];
+    for (const lang of LANGS) for (const key of keys) expect(UI_DICTS[lang].values[key], `${lang}.${key}`).toBeTypeOf("string");
+  });
+
+  it("names the bestiary in the menu language", () => {
+    expect(plainText(UI_DICTS.zh.values.mobs ?? "")).toBe("怪物圖鑑");
+    expect(plainText(UI_DICTS.en.values.mobs ?? "")).toBe("Bestiary");
+  });
 });

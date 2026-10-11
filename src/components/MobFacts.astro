@@ -1,0 +1,25 @@
+---
+import type { Mob } from "../../scripts/extract/mob-schema";
+import { mobKindLabel, t, type Lang } from "../lib/i18n";
+import { findMob, mobHref } from "../lib/mobs";
+
+interface Props {
+  lang: Lang;
+  mob: Mob;
+}
+
+const { lang, mob } = Astro.props;
+const parent = mob.variantOf ? findMob(mob.variantOf) : undefined;
+---
+<dl class="facts" data-pagefind-ignore>
+  <div>
+    <dt>{t(lang, "category")}</dt>
+    <dd><span class="mob-kind" data-kind={mob.kind}>{mobKindLabel(mob.kind, lang)}</span></dd>
+  </div>
+  {parent && (
+    <div data-testid="mob-variant-of">
+      <dt>{t(lang, "mobVariantOf")}</dt>
+      <dd><a href={mobHref(lang, parent.slug)}>{parent.name[lang]}</a></dd>
+    </div>
+  )}
+</dl>

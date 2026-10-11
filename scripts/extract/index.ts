@@ -13,7 +13,7 @@ async function main(): Promise<void> {
     overridesPath: path.join(projectRoot, "scripts", "extract", "icon-overrides.json"),
   });
   console.log(
-    `抽取完成：${summary.entries} 個條目、${summary.armorSets} 個護甲套裝、${summary.icons} 張圖示、${summary.issues.length} 個問題（詳見 extract-report.md）`,
+    `抽取完成：${summary.entries} 個條目、${summary.armorSets} 個護甲套裝、${summary.icons} 張圖示、${summary.mobs} 隻怪物、${summary.issues.length} 個問題（詳見 extract-report.md）`,
   );
 }
 

@@ -91,8 +91,8 @@ describe("achievementAnchor", () => {
 });
 
 describe("site menu", () => {
-  it("lists the map and the achievements", () => {
-    expect(SITE_MENU.map((item) => item.segment)).toEqual(["map", "achievements"]);
+  it("lists the map, the achievements and the bestiary", () => {
+    expect(SITE_MENU.map((item) => item.segment)).toEqual(["map", "achievements", "mobs"]);
   });
 
   it("knows which menu page is open, with or without a base path", () => {

@@ -36,6 +36,9 @@ export function validateOutput(entries: readonly Entry[], armorSets: readonly Ar
 }
 
 const toJson = (value: unknown): string => `${JSON.stringify(value, null, 2)}\n`;
+/** The bestiary files are written on one line each so they stay under the 200 KB data-file limit. */
+const COMPACT_FILES: ReadonlySet<string> = new Set(["mobs.json", "loot-sources.json"]);
+const serialize = (fileName: string, value: unknown): string => (COMPACT_FILES.has(fileName) ? `${JSON.stringify(value)}\n` : toJson(value));
 
 export async function writeOutputs(
   outRoot: string,
@@ -49,7 +52,7 @@ export async function writeOutputs(
   await writeFile(path.join(dataDir, "entries.json"), toJson(output.entries), "utf8");
   await writeFile(path.join(dataDir, "armor-sets.json"), toJson(output.armorSets), "utf8");
   for (const [fileName, value] of Object.entries(extraData)) {
-    await writeFile(path.join(dataDir, fileName), toJson(value), "utf8");
+    await writeFile(path.join(dataDir, fileName), serialize(fileName, value), "utf8");
   }
   await writeFile(path.join(outRoot, "extract-report.md"), report, "utf8");
 }

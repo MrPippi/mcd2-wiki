@@ -1,0 +1,30 @@
+---
+import type { Mob } from "../../scripts/extract/mob-schema";
+import { catalogLabel } from "../lib/catalog";
+import { t, type Lang } from "../lib/i18n";
+import { compareLang, htmlLang, searchNames } from "../lib/lang";
+import { mobHref } from "../lib/mobs";
+import MobPortrait from "./MobPortrait.astro";
+
+interface Props {
+  lang: Lang;
+  mob: Mob;
+  /** Position in the whole list; staggers the cascade-in animation and gives the specimen its number. */
+  index: number;
+}
+
+const { lang, mob, index } = Astro.props;
+const alt = compareLang(lang);
+const CARD_PORTRAIT_SIZE = 80;
+---
+<li class="mob-card" style={`--i:${index}`} data-names={searchNames(mob.name, lang)}>
+  <a class="mob-card-link" href={mobHref(lang, mob.slug)}>
+    <span class="card-no" aria-hidden="true">{catalogLabel(index + 1)}</span>
+    <MobPortrait lang={lang} mob={mob} size={CARD_PORTRAIT_SIZE} decorative />
+    <span class="mob-card-names">
+      <span class="primary mob-card-name">{mob.name[lang]}</span>
+      {mob.name[alt] !== mob.name[lang] && <span class="item-alt mob-card-alt" lang={htmlLang(alt)}>{mob.name[alt]}</span>}
+      {mob.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+    </span>
+  </a>
+</li>

@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { CATEGORIES } from "../../../scripts/extract/config";
 import { MARKER_KINDS } from "../../../scripts/extract/map-schema";
 import { LANGS } from "../../../scripts/extract/langs";
-import { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES, categoryLabel, markerLabel, pieceLabel, t } from "../../../src/lib/i18n";
+import { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES, categoryLabel, lootSlotLabel, markerLabel, mobKindLabel, pieceLabel, statLabel, t } from "../../../src/lib/i18n";
+import { LOOT_SLOT_KEYS, STAT_KEYS } from "../../../scripts/extract/mob-schema";
 import { machineKeys, tCount } from "../../../src/lib/ui-strings";
 import { UI_DICTS } from "../../../src/lib/ui-dicts";
 import zh from "../../../src/i18n/zh.json";
@@ -62,6 +63,18 @@ describe("i18n", () => {
     for (const kind of MARKER_KINDS) {
       expect(markerLabel(kind, "zh")).not.toBe("");
       expect(markerLabel(kind, "en")).not.toBe("");
+    }
+  });
+  it("labels stats, loot slots and mob kinds in the page language", () => {
+    expect(statLabel("health", "zh")).toBe("生命值");
+    expect(lootSlotLabel("springStone", "en")).toBe("Echo Shards");
+    expect(mobKindLabel("miniboss", "zh")).toBe("小頭目");
+  });
+
+  it("labels every stat and loot slot in every language", () => {
+    for (const lang of LANGS) {
+      for (const key of STAT_KEYS) expect(statLabel(key, lang), `${lang}.${key}`).not.toBe("");
+      for (const slot of LOOT_SLOT_KEYS) expect(lootSlotLabel(slot, lang), `${lang}.${slot}`).not.toBe("");
     }
   });
 });

@@ -1,6 +1,11 @@
-import { defineConfig } from "vitest/config";
+/// <reference types="vitest/config" />
+import { getViteConfig } from "astro/config";
 
-export default defineConfig({
+// Wrapped in Astro's Vite config so component tests can render .astro files with the container API.
+// BASE_PATH in the environment feeds astro.config.mjs `base`, but it does not reach these tests: here
+// import.meta.env.BASE_URL stays "/" (checked with BASE_PATH=/mcd2-wiki/), so unit and component tests always see
+// root-relative hrefs. Sub-path links are only exercised by a `BASE_PATH=... npm run build`, not by vitest.
+export default getViteConfig({
   test: {
     include: ["tests/unit/**/*.test.ts", "tests/integration/**/*.test.ts"],
     coverage: {

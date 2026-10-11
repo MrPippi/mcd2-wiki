@@ -291,7 +291,7 @@ test("searching an effect links to its table row", async ({ page }) => {
 test("all internal links and images resolve", async ({ request }, testInfo) => {
   test.skip(testInfo.project.name !== "chromium", "crawl once");
   test.setTimeout(300_000);
-  const queue = ["/zh/", "/en/", "/ja/", "/ru/", "/zh-hans/"];
+  const queue = ["/zh/", "/en/", "/ja/", "/ru/", "/zh-hans/", "/zh/mobs/"];
   const seen = new Set(queue);
   const broken: string[] = [];
   while (queue.length > 0) {
@@ -605,7 +605,7 @@ test("search excerpts leave out the info box and section labels", async ({ page 
 });
 
 test("the entry count is a mono kicker line, not part of the heading", async ({ page }) => {
-  for (const [path, title, count] of [["/zh/melee/", "近戰武器", "58"], ["/zh/achievements/", "成就", "32"]]) {
+  for (const [path, title, count] of [["/zh/melee/", "近戰武器", "58"], ["/zh/achievements/", "成就", "32"], ["/zh/mobs/", "怪物圖鑑", "61"]]) {
     await page.goto(path);
     await expect(page.locator(".catalog-title"), path).toHaveText(title);
     const kicker = page.locator(".catalog-head > .catalog-count");

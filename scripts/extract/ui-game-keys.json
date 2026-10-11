@@ -25,6 +25,16 @@
   "markerPortal": { "namespace": "Text/Release/SettingsLabels.csv", "key": "Input_TownPortal" },
   "markerMerchant": { "namespace": "Text/Release/VendorLabels.csv", "key": "vendor_village_merchant_titleshort" },
   "obtainedFromBook": { "namespace": "Text/Release/InventoryLabels.csv", "key": "enchantment_info_description" },
+  "mobWorldOverworld": { "namespace": "Text/Release/WorldMapLabels.csv", "key": "worldmap_dimension_overworld" },
+  "mobWorldWellspring": { "namespace": "Text/Release/WorldMapLabels.csv", "key": "worldmap_dimension_wellspring" },
+  "statHealth": { "namespace": "Text/Release/DT_AttributeDefinition.csv", "key": "SW_Attribute_Health_SW_TextEntry_Name" },
+  "lootSlotEnchantedBook": { "namespace": "Text/Release/InventoryLabels.csv", "key": "Inventory_EnchantmentBooks" },
+  "lootSlotTalismans": { "namespace": "Text/Release/InventoryLabels.csv", "key": "header_talismans" },
+  "lootSlotEmeralds": { "namespace": "Text/Release/InventoryLabels.csv", "key": "header_emeralds" },
+  "lootSlotSpringStone": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_springstones_title" },
+  "lootSlotConsumable": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_consumables_title" },
+  "lootSlotTnt": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_tnt_title" },
+  "sourceMerchants": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_merchants_title" },
   "maxLevel": { "namespace": "Text/Release/InventoryLabels.csv", "key": "talismans_maxLevel" },
   "secretTalisman": { "namespace": "Text/Release/DT_ItemCollectionsDefinition.csv", "key": "SW_Collectibles_SecretTalismans_SW_TextEntry_Name_Single" }
 }

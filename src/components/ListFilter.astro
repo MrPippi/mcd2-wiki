@@ -43,6 +43,10 @@ const VARIANTS = ["all", "normal", "unique"] as const;
       if (show) visible += 1;
     }
     if (noResults) noResults.hidden = visible > 0;
+    // A grouped list (the bestiary) hides a group's heading once every card in it is filtered out.
+    for (const group of document.querySelectorAll<HTMLElement>("[data-group]")) {
+      group.hidden = [...group.querySelectorAll<HTMLElement>("[data-names]")].every((item) => item.hidden);
+    }
   };
 
   input?.addEventListener("input", apply);

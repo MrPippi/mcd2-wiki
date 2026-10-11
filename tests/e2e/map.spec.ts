@@ -1,4 +1,5 @@
 import { expect, test, type Page } from "@playwright/test";
+import { horizontalOverflow } from "./helpers/overflow";
 
 const filterPanel = (page: Page) => page.locator(".map-stage details.map-filters");
 const kindToggle = (page: Page, kind: string) => page.locator(`.map-filter[data-kind='${kind}']`);
@@ -50,8 +51,7 @@ test("the map page has no horizontal scroll on a narrow phone", async ({ page })
   await page.setViewportSize({ width: 360, height: 740 });
   await page.goto("/zh/map/");
   await expect(page.locator("h1")).toBeVisible();
-  const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
-  expect(overflow).toBeLessThanOrEqual(0);
+  expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
 });
 
 test("the map loads tiles and markers", async ({ page }) => {
