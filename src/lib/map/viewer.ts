@@ -19,6 +19,8 @@ const FOCUS_LEVELS = 1;
 const PIN_SIZE: L.PointTuple = [16, 16];
 const ICON_PIN_SIZE: L.PointTuple = [28, 28];
 const POPUP_OPTIONS: L.PopupOptions = { minWidth: 200, maxWidth: 280 };
+/** From this width the marker filter starts open on the map; narrower screens get its button only. */
+const FILTERS_OPEN_QUERY = "(min-width: 760px)";
 
 interface Payload {
   readonly worlds: readonly PayloadWorld[];
@@ -138,8 +140,7 @@ function syncPanel(root: HTMLElement, world: PayloadWorld, hidden: ReadonlySet<F
   for (const kind of FILTER_KINDS) {
     const count = root.querySelector(`[data-count="${kind}"]`);
     if (count) count.textContent = String(counts[kind]);
-    const box = root.querySelector<HTMLInputElement>(`input[name="kind"][value="${kind}"]`);
-    if (box) box.checked = !hidden.has(kind);
+    root.querySelector(`.map-filter[data-kind="${kind}"]`)?.setAttribute("aria-pressed", String(!hidden.has(kind)));
   }
 }
 
@@ -157,11 +158,27 @@ function renderResults(root: HTMLElement, shown: Shown, labels: Payload["labels"
   }
 }
 
+/** Toggle buttons on the map: pressed shows the kind in colour, unpressed hides its pins and greys the button. */
 function bindFilters(root: HTMLElement, onChange: (kind: FilterKind, visible: boolean) => void): void {
-  for (const box of root.querySelectorAll<HTMLInputElement>("input[name='kind']")) {
-    const kind = FILTER_KINDS.find((each) => each === box.value);
-    if (kind) box.addEventListener("change", () => onChange(kind, box.checked));
+  for (const button of root.querySelectorAll<HTMLButtonElement>(".map-filter[data-kind]")) {
+    const kind = FILTER_KINDS.find((each) => each === button.dataset.kind);
+    if (kind) button.addEventListener("click", () => onChange(kind, button.getAttribute("aria-pressed") !== "true"));
   }
+}
+
+/** The filter floats over the map: open it on wide screens, and keep its clicks and wheel turns away from Leaflet. */
+function prepareFilterPanel(root: HTMLElement): void {
+  const panel = root.querySelector<HTMLDetailsElement>("[data-map-filters]");
+  if (!panel) return;
+  if (window.matchMedia(FILTERS_OPEN_QUERY).matches) panel.open = true;
+  L.DomEvent.disableClickPropagation(panel);
+  L.DomEvent.disableScrollPropagation(panel);
+}
+
+/** Leaflet measures its box once; re-measure whenever the layout resizes the canvas. */
+function trackCanvasSize(canvas: HTMLElement, getMap: () => L.Map): void {
+  if (typeof ResizeObserver === "undefined") return;
+  new ResizeObserver(() => getMap().invalidateSize({ pan: false })).observe(canvas);
 }
 
 function bindTabs(root: HTMLElement, payload: Payload, onSwitch: (next: PayloadWorld) => void): void {
@@ -232,6 +249,8 @@ export function mountWorldMap(root: HTMLElement): void {
   };
 
   bindFilters(root, setKind);
+  prepareFilterPanel(root);
+  trackCanvasSize(canvas, () => shown.map);
   bindTabs(root, payload, switchWorld);
   bindHash(() => shown);
   search?.addEventListener("input", () => renderResults(root, shown, payload.labels, search.value, focus));
