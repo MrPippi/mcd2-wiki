@@ -183,7 +183,16 @@
     "statResistSoul",
     "statResistElemental",
     "statResistBase",
-    "statResistTnt"
+    "statResistTnt",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -409,5 +418,16 @@
   "lootSlotSpringStone": "Yankı Parçaları",
   "lootSlotConsumable": "Sarf Malzemeleri",
   "lootSlotTnt": "TNT",
-  "sourceMerchants": "Tüccarlar"
+  "sourceMerchants": "Tüccarlar",
+  "talismanLevels": "Seviyeye göre değerler",
+  "talismanLevel": "Seviye",
+  "xpToNextLevel": "Sonraki seviye için XP",
+  "maxLevel": "Maks. Seviye",
+  "secretTalisman": "Gizli Tılsım",
+  "companionAttack": "Saldırı çarpanı",
+  "companionDefence": "Savunma çarpanı",
+  "companionCooldown": "Bekleme süresi çarpanı",
+  "talismanLevelsNote": "Tılsımlar kuşanıldıkları sürece XP kazanır ve seviye atlar. Değerler oyunun veri dosyalarından alınmıştır. Yoldaş çarpanları bu dosyalardaki ham değerlerdir: daha düşük bir savunma veya bekleme süresi çarpanı muhtemelen bir iyileştirmedir (daha az alınan hasar, daha kısa bekleme süresi), ancak kesin anlamı doğrulanmamıştır.",
+  "levelValue": "Değer",
+  "valuesNotInData": "Bu değerler oyunun veri dosyalarında yok (? olarak gösterilir)."
 }

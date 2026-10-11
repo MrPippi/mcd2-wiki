@@ -228,8 +228,8 @@ test("armor pieces are labelled with their slot icon", async ({ page }) => {
 
 test("talismans have their own pages", async ({ page }) => {
   await page.goto("/zh/talisman/");
-  // 24 talismans, less the 3 whose descriptions need values the game data cannot give (Firing Emeralds, Healthy Strike, Speed Increment).
-  await expect(page.locator(".entry-card")).toHaveCount(21);
+  // All 24 base talismans; the 3 whose values the game data lacks show them as unknown.
+  await expect(page.locator(".entry-card")).toHaveCount(24);
   await page.goto("/zh/talisman/ammo-capacity/");
   await expect(page.locator("h1 .primary")).toHaveText("黑橡木枝條");
   await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();
@@ -602,6 +602,34 @@ test("search excerpts leave out the info box and section labels", async ({ page 
   await expect(excerpts.first()).toBeVisible({ timeout: 15_000 });
   const text = (await excerpts.allTextContents()).join(" ");
   for (const label of ["DESCRIPTION", "RELATED", "稀有度", "相關條目"]) expect(text, label).not.toContain(label);
+});
+
+test("the entry count is a mono kicker line, not part of the heading", async ({ page }) => {
+  for (const [path, title, count] of [["/zh/melee/", "近戰武器", "58"], ["/zh/achievements/", "成就", "32"]]) {
+    await page.goto(path);
+    await expect(page.locator(".catalog-title"), path).toHaveText(title);
+    const kicker = page.locator(".catalog-head > .catalog-count");
+    await expect(kicker, path).toHaveText(count);
+    await expect(kicker, path).toHaveCSS("font-family", /Geist Mono/);
+  }
+});
+
+test("the scrolling tab strip fades only the edges that have more tabs beyond them", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const strip = page.locator(".tab-list");
+  const mask = () => strip.evaluate((el) => getComputedStyle(el).maskImage);
+  const leftFade = /^linear-gradient\(90deg, (transparent|rgba\(0, 0, 0, 0\))/;
+  await page.goto("/zh/melee/");
+  expect(await strip.evaluate((el) => el.scrollLeft)).toBe(0);
+  await expect(strip).toHaveAttribute("data-at-start", "");
+  await expect(strip).not.toHaveAttribute("data-at-end", "");
+  expect(await mask()).toContain("linear-gradient");
+  expect(await mask()).not.toMatch(leftFade);
+  await strip.evaluate((el) => el.scrollTo({ left: el.scrollWidth }));
+  await expect(strip).toHaveAttribute("data-at-end", "");
+  await expect(strip).not.toHaveAttribute("data-at-start", "");
+  expect(await mask()).toMatch(leftFade);
+  expect(await mask()).not.toMatch(/(transparent|rgba\(0, 0, 0, 0\))\)$/);
 });
 
 test("category tabs keep their names for screen readers on every screen size", async ({ page }) => {

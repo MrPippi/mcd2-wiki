@@ -183,7 +183,16 @@
     "statResistSoul",
     "statResistElemental",
     "statResistBase",
-    "statResistTnt"
+    "statResistTnt",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -409,5 +418,16 @@
   "lootSlotSpringStone": "Ekoskärvor",
   "lootSlotConsumable": "Livsmedel",
   "lootSlotTnt": "Dynamit",
-  "sourceMerchants": "Köpmän"
+  "sourceMerchants": "Köpmän",
+  "talismanLevels": "Värden per nivå",
+  "talismanLevel": "Nivå",
+  "xpToNextLevel": "XP till nästa nivå",
+  "maxLevel": "Maxnivå",
+  "secretTalisman": "Hemlig talisman",
+  "companionAttack": "Attackmultiplikator",
+  "companionDefence": "Försvarsmultiplikator",
+  "companionCooldown": "Nedkylningsmultiplikator",
+  "talismanLevelsNote": "Talismaner får XP medan de är utrustade och går upp i nivå. Värdena kommer från spelets datafiler. Följeslagarnas multiplikatorer är de råa värdena i de filerna: en lägre försvars- eller nedkylningsmultiplikator är troligen en förbättring (mindre skada tagen, kortare nedkylning), men den exakta innebörden är inte bekräftad.",
+  "levelValue": "Värde",
+  "valuesNotInData": "De här värdena finns inte i spelets datafiler (visas som ?)."
 }

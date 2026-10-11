@@ -180,7 +180,16 @@
     "statResistSoul",
     "statResistElemental",
     "statResistBase",
-    "statResistTnt"
+    "statResistTnt",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -408,5 +417,16 @@
   "lootSlotSpringStone": "残響のかけら",
   "lootSlotConsumable": "消耗品",
   "lootSlotTnt": "TNT",
-  "sourceMerchants": "商人"
+  "sourceMerchants": "商人",
+  "talismanLevels": "レベル別の数値",
+  "talismanLevel": "レベル",
+  "xpToNextLevel": "次のレベルまでの XP",
+  "maxLevel": "最大レベル",
+  "secretTalisman": "秘密のタリスマン",
+  "companionAttack": "攻撃倍率",
+  "companionDefence": "防御倍率",
+  "companionCooldown": "クールダウン倍率",
+  "talismanLevelsNote": "タリスマンは装備中に XP を獲得してレベルアップする。数値はゲームのデータファイルから取得している。仲間の倍率はデータファイルの値をそのまま表示しており、防御とクールダウンの倍率は低いほど強化（受けるダメージの減少、クールダウンの短縮）である可能性が高いが、正確な意味は未確認。",
+  "levelValue": "数値",
+  "valuesNotInData": "この数値はゲームのデータファイルにない（? で表示）。"
 }

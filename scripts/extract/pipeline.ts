@@ -28,7 +28,7 @@ import { buildWeaponData } from "./weapons";
 import { buildArtifactData } from "./artifacts";
 import { buildEffectData } from "./effects";
 import { buildEnchantmentData } from "./enchantments";
-import { ArtifactDataSchema, EnchantmentDataSchema } from "./gear-schema";
+import { ArtifactDataSchema, EnchantmentDataSchema, TalismanDataSchema } from "./gear-schema";
 import { loadIconReferences, referenceFor, referencePaths, type IconReferences } from "./icon-references";
 import { listIconFiles, loadOverrides } from "./icon-files";
 import { issue, type Issue } from "./issues";
@@ -40,6 +40,9 @@ import { loadLocales } from "./parse-locale";
 import { renderReport } from "./report";
 import uiGameKeys from "./ui-game-keys.json";
 import { buildUiGameStrings } from "./ui-game-strings";
+import { loadTalismanTables } from "./talisman-tables";
+import { buildTalismanData, withTalismanDescriptions } from "./talismans";
+import { applyEnglishOverrides } from "./text-overrides";
 
 export interface ExtractOptions {
   readonly sourceRoot: string;
@@ -182,6 +185,9 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const artifacts = weaponTables ? buildArtifactData(output.entries, weaponTables) : { data: {}, issues: [] };
   const enchantments = weaponTables ? buildEnchantmentData(output.entries, weaponTables) : { data: {}, issues: [] };
   const effectValues = weaponTables ? buildEffectData(output.entries, weaponTables) : {};
+  const talismanTables = await loadTalismanTables(options.sourceRoot);
+  const talismans = weaponTables && talismanTables ? buildTalismanData(output.entries, talismanTables, weaponTables.effects) : { data: {}, issues: [] };
+  const described = validateOutput(withTalismanDescriptions(applyEnglishOverrides(output.entries), talismans.data), output.armorSets);
   const uiStrings = buildUiGameStrings(locales, uiGameKeys);
   const issues = [
     ...catalog.issues,
@@ -197,6 +203,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...weapons.issues,
     ...artifacts.issues,
     ...enchantments.issues,
+    ...talismans.issues,
     ...map.issues,
     ...uiStrings.issues,
     ...achievements.issues,
@@ -210,12 +217,13 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "artifacts.json": ArtifactDataSchema.parse(artifacts.data),
     "enchantments.json": EnchantmentDataSchema.parse(enchantments.data),
     "effects.json": EnchantmentDataSchema.parse(effectValues),
+    "talismans.json": TalismanDataSchema.parse(talismans.data),
     "map.json": MapDataSchema.parse(map.data),
     "ui-game-strings.json": uiStrings.strings,
     "achievements.json": achievements.data,
     "mobs.json": bestiary.mobs,
     "loot-sources.json": bestiary.sources,
   };
-  await writeOutputs(options.outRoot, output, extraData, renderReport({ ...output, issues }));
-  return { entries: output.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: bestiary.tablesRead, issues };
+  await writeOutputs(options.outRoot, described, extraData, renderReport({ ...described, issues }));
+  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: bestiary.tablesRead, issues };
 }

@@ -183,7 +183,16 @@
     "statResistSoul",
     "statResistElemental",
     "statResistBase",
-    "statResistTnt"
+    "statResistTnt",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -410,5 +419,16 @@
   "lootSlotSpringStone": "Fragmentos de Eco",
   "lootSlotConsumable": "Consumíveis",
   "lootSlotTnt": "TNT",
-  "sourceMerchants": "Comerciantes"
+  "sourceMerchants": "Comerciantes",
+  "talismanLevels": "Valores por nível",
+  "talismanLevel": "Nível",
+  "xpToNextLevel": "XP para o próximo nível",
+  "maxLevel": "Nível máximo",
+  "secretTalisman": "Talismã secreto",
+  "companionAttack": "Multiplicador de ataque",
+  "companionDefence": "Multiplicador de defesa",
+  "companionCooldown": "Multiplicador de recarga",
+  "talismanLevelsNote": "Os talismãs ganham XP enquanto estão equipados e sobem de nível. Os valores vêm dos arquivos de dados do jogo. Os multiplicadores dos companheiros são os valores brutos desses arquivos: um multiplicador de defesa ou de recarga menor provavelmente é uma melhoria (menos dano sofrido, recarga mais curta), mas o significado exato não foi verificado.",
+  "levelValue": "Valor",
+  "valuesNotInData": "Esses valores não estão nos arquivos de dados do jogo (mostrados como ?)."
 }

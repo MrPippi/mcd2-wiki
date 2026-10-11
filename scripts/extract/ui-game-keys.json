@@ -34,5 +34,7 @@
   "lootSlotSpringStone": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_springstones_title" },
   "lootSlotConsumable": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_consumables_title" },
   "lootSlotTnt": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_tnt_title" },
-  "sourceMerchants": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_merchants_title" }
+  "sourceMerchants": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_merchants_title" },
+  "maxLevel": { "namespace": "Text/Release/InventoryLabels.csv", "key": "talismans_maxLevel" },
+  "secretTalisman": { "namespace": "Text/Release/DT_ItemCollectionsDefinition.csv", "key": "SW_Collectibles_SecretTalismans_SW_TextEntry_Name_Single" }
 }

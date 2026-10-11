@@ -179,7 +179,16 @@
     "statResistSoul",
     "statResistElemental",
     "statResistBase",
-    "statResistTnt"
+    "statResistTnt",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -413,5 +422,16 @@
   "lootSlotSpringStone": "Осколки эха",
   "lootSlotConsumable": "Расходники",
   "lootSlotTnt": "Динамит",
-  "sourceMerchants": "Торговцы"
+  "sourceMerchants": "Торговцы",
+  "talismanLevels": "Значения по уровням",
+  "talismanLevel": "Уровень",
+  "xpToNextLevel": "XP до следующего уровня",
+  "maxLevel": "Максимальный уровень",
+  "secretTalisman": "Тайный талисман",
+  "companionAttack": "Множитель атаки",
+  "companionDefence": "Множитель защиты",
+  "companionCooldown": "Множитель перезарядки",
+  "talismanLevelsNote": "Надетые талисманы получают XP и повышают уровень. Значения взяты из файлов данных игры. Множители спутников — исходные значения из этих файлов: меньший множитель защиты или перезарядки, вероятно, означает улучшение (меньше получаемого урона, короче перезарядка), но точный смысл не проверен.",
+  "levelValue": "Значение",
+  "valuesNotInData": "Этих значений нет в файлах данных игры (показаны как ?)."
 }

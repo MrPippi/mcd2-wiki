@@ -16,7 +16,7 @@ const items = SITE_MENU.map((item) => ({
 ---
 <details class="site-menu header-menu">
   <summary data-testid="site-menu" aria-label={t(lang, "siteMenu")}>
-    <span class="menu-icon" aria-hidden="true">☰</span>
+    <svg class="menu-icon" aria-hidden="true" viewBox="0 0 14 12" width="14" height="12"><path d="M0 1h14M0 6h14M0 11h14" /></svg>
   </summary>
   <ul aria-label={t(lang, "siteMenu")}>
     {items.map((item) => (

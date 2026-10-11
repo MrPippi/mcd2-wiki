@@ -646,5 +646,41 @@
     "sv": "Köpmän",
     "tr": "Tüccarlar",
     "uk": "Торговці"
+  },
+  "maxLevel": {
+    "zh": "最高等級",
+    "zh-hans": "最高等级",
+    "en": "Max Level",
+    "ja": "最大レベル",
+    "ko": "최대 레벨",
+    "de": "Höchstlevel",
+    "fr": "Niveau max.",
+    "es": "Nivel máximo",
+    "it": "Livello max",
+    "pt": "Nível máximo",
+    "ru": "Максимальный уровень",
+    "pl": "Maks. poziom",
+    "nl": "Max. niveau",
+    "sv": "Maxnivå",
+    "tr": "Maks. Seviye",
+    "uk": "Макс. рівень"
+  },
+  "secretTalisman": {
+    "zh": "秘密護符",
+    "zh-hans": "秘密护身符",
+    "en": "Secret Talisman",
+    "ja": "秘密のタリスマン",
+    "ko": "비밀 부적",
+    "de": "Geheimtalisman",
+    "fr": "Talisman secret",
+    "es": "Talismán secreto",
+    "it": "Talismano segreto",
+    "pt": "Talismã secreto",
+    "ru": "Тайный талисман",
+    "pl": "Sekretny talizman",
+    "nl": "Geheime talisman",
+    "sv": "Hemlig talisman",
+    "tr": "Gizli Tılsım",
+    "uk": "Секретний талісман"
   }
 }

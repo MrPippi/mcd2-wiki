@@ -9,16 +9,20 @@
   --text: #16181a;
   --text-2: #3d4246;
   --muted: #5f6569;
-  /* Vermilion means two things only: unique rarity and the current place (tab, focus). */
+  /* Vermilion means only: unique rarity, the current place (tab, page, target) and focus.
+     Hovers underline in it; they never recolour text. */
   --accent: #c4391f;
   --accent-soft: #f4ddd6;
   --on-accent: #fafaf8;
   --link: var(--text);
   --focus: var(--accent);
-  --danger: #a3241a;
-  --on-danger: #fafaf8;
   /* Off-black for pictograms and hard shadows, never pure #000. */
   --ink: #16181a;
+  /* Two shadow dialects, both hard-edged like a print offset: full ink for menus, a faint tint for floating notes. */
+  --shadow-tint: color-mix(in srgb, var(--ink) 10%, transparent);
+  --shadow-hard: 4px 4px 0 var(--ink);
+  --shadow-hard-s: 3px 3px 0 var(--ink);
+  --shadow-faint: 6px 6px 0 var(--shadow-tint);
   --radius: 0;
   --max: 1320px;
   --gutter: clamp(16px, 4vw, 48px);
@@ -34,8 +38,18 @@
   --font-body: "Geist Variable", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "Cascadia Mono", monospace;
 
-  --fs-mono-s: 11px;
-  --fs-mono-m: 12px;
+  /* Spacing steps; new and touched rules use these instead of raw pixels. */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  --fs-mono-s: 12px;
+  --fs-mono-m: 13px;
   --fs-display-m: clamp(28px, 3vw, 36px);
   --fs-display-l: clamp(40px, 6vw, 72px);
   --fs-display-xl: clamp(48px, 9vw, 120px);
@@ -45,7 +59,8 @@
   --dur-fast: 160ms;
   --dur: 320ms;
 
-  --z-sticky: 10;
+  /* Header menus and the item sheet share a layer; they never open together. */
+  --z-menu: 20;
   --z-sheet: 20;
   --z-tooltip: 30;
   --z-grain: 40;

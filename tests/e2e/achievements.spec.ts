@@ -24,6 +24,14 @@ test.describe("header menu", () => {
     await expect(page).toHaveURL(/\/zh\/achievements\/$/);
   });
 
+  test("draws its button as three bars rather than a font glyph", async ({ page }) => {
+    await page.goto("/zh/melee/");
+    const icon = page.getByTestId("site-menu").locator("svg.menu-icon");
+    await expect(icon).toHaveAttribute("aria-hidden", "true");
+    await expect(icon.locator("path, line, rect")).not.toHaveCount(0);
+    await expect(page.getByTestId("site-menu")).not.toContainText("☰");
+  });
+
   test("marks the current page and speaks the language of the page", async ({ page }) => {
     await page.goto("/ja/achievements/");
     await openSiteMenu(page);

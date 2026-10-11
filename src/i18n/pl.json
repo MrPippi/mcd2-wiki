@@ -182,7 +182,16 @@
     "statResistSoul",
     "statResistElemental",
     "statResistBase",
-    "statResistTnt"
+    "statResistTnt",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "normal"
@@ -413,5 +422,16 @@
   "lootSlotSpringStone": "Odłamki echa",
   "lootSlotConsumable": "Przedmioty użytkowe",
   "lootSlotTnt": "TNT",
-  "sourceMerchants": "Kupcy"
+  "sourceMerchants": "Kupcy",
+  "talismanLevels": "Wartości na poziomach",
+  "talismanLevel": "Poziom",
+  "xpToNextLevel": "PD do następnego poziomu",
+  "maxLevel": "Maks. poziom",
+  "secretTalisman": "Sekretny talizman",
+  "companionAttack": "Mnożnik ataku",
+  "companionDefence": "Mnożnik obrony",
+  "companionCooldown": "Mnożnik odnowienia",
+  "talismanLevelsNote": "Założone talizmany zdobywają PD i awansują na kolejne poziomy. Wartości pochodzą z plików danych gry. Mnożniki towarzyszy to surowe wartości z tych plików: niższy mnożnik obrony lub odnowienia to prawdopodobnie ulepszenie (mniej otrzymywanych obrażeń, krótsze odnowienie), ale dokładne znaczenie nie zostało potwierdzone.",
+  "levelValue": "Wartość",
+  "valuesNotInData": "Tych wartości nie ma w plikach danych gry (pokazane jako ?)."
 }

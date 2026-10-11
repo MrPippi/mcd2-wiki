@@ -14,13 +14,14 @@
 }
 #search .pagefind-ui__search-input { font-size: 20px; font-weight: 500; background: transparent; border-width: 0 0 1px; }
 #search .pagefind-ui__search-input:focus { outline: none; border-bottom-color: var(--accent); box-shadow: 0 1px 0 var(--accent); }
+#search .pagefind-ui__search-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 #search .pagefind-ui__search-clear { background: transparent; font-family: var(--font-mono); font-size: var(--fs-mono-m); }
 #search .pagefind-ui__message { font-family: var(--font-mono); font-size: var(--fs-mono-m); font-weight: 400; color: var(--muted); padding: 16px 0 8px; }
 #search .pagefind-ui__results { border-top: 1px solid var(--rule-strong); }
 #search .pagefind-ui__result { padding: 16px 0; border-top: 0; border-bottom: 1px solid var(--rule); gap: 20px; animation: fade-in var(--dur) var(--ease-out); }
 #search .pagefind-ui__result-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; }
 #search .pagefind-ui__result-link { color: var(--text); }
-#search .pagefind-ui__result-link:hover { color: var(--accent); text-decoration: none; }
+#search .pagefind-ui__result-link:hover { color: var(--text); text-decoration: underline 2px var(--accent); text-underline-offset: 0.2em; }
 #search .pagefind-ui__result-excerpt { color: var(--text-2); font-size: 14px; margin-top: 4px; }
 #search mark { background: var(--accent-soft); color: var(--text); box-shadow: inset 0 -1px 0 var(--accent); padding: 0 1px; }
 /* Result icons sit on a small mounting plate, like everywhere else on the site. */

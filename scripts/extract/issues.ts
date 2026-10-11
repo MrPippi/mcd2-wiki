@@ -49,7 +49,8 @@ export type IssueType =
   | "loot-quest-not-guaranteed"
   | "loot-chest-by-category"
   | "loot-slot-unnamed"
-  | "source-name-fallback";
+  | "source-name-fallback"
+  | "talisman-no-values";
 
 export interface Issue {
   readonly type: IssueType;

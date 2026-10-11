@@ -223,5 +223,16 @@
   "lootSlotSpringStone": "Echo Shards",
   "lootSlotConsumable": "Consumables",
   "lootSlotTnt": "TNT",
-  "sourceMerchants": "Merchants"
+  "sourceMerchants": "Merchants",
+  "talismanLevels": "Level values",
+  "talismanLevel": "Level",
+  "xpToNextLevel": "XP to next level",
+  "maxLevel": "Max Level",
+  "secretTalisman": "Secret Talisman",
+  "companionAttack": "Attack multiplier",
+  "companionDefence": "Defence multiplier",
+  "companionCooldown": "Cooldown multiplier",
+  "talismanLevelsNote": "Talismans gain XP while equipped and level up. Values come from the game's data files. Companion multipliers are the raw values in those files: a lower defence or cooldown multiplier is likely an improvement (less damage taken, a shorter cooldown), but the exact meaning is unverified.",
+  "levelValue": "Value",
+  "valuesNotInData": "These values are not in the game's data files (shown as ?)."
 }

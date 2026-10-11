@@ -220,5 +220,16 @@
   "lootSlotSpringStone": "回聲碎片",
   "lootSlotConsumable": "消耗品",
   "lootSlotTnt": "TNT",
-  "sourceMerchants": "商人"
+  "sourceMerchants": "商人",
+  "talismanLevels": "各等級數值",
+  "talismanLevel": "等級",
+  "xpToNextLevel": "升級所需經驗值",
+  "maxLevel": "最高等級",
+  "secretTalisman": "秘密護符",
+  "companionAttack": "攻擊倍率",
+  "companionDefence": "防禦倍率",
+  "companionCooldown": "冷卻倍率",
+  "talismanLevelsNote": "護符裝備時會累積經驗值並升級。數值取自遊戲資料檔。夥伴的倍率為資料檔中的原始數值：防禦與冷卻倍率較低可能代表較強（受到的傷害較少、冷卻較短），但確切意義尚未查證。",
+  "levelValue": "數值",
+  "valuesNotInData": "數值不在遊戲資料檔中（以 ? 表示）。"
 }

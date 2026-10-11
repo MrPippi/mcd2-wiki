@@ -43,7 +43,7 @@ const payload = JSON.stringify({ worlds: worlds.map((world) => trimWorld(world, 
           <img src={assetUrl(overviewTile(first.key))} alt={first.name[lang]} width="256" height="256" />
           <p>{t(lang, "mapNeedsJs")}</p>
         </div>
-        {/* On the map, top right; folds to its button on phones (the viewer opens it on wider screens). */}
+        {/* On the map, top right; starts folded to its button on every screen so it never hides markers. */}
         <details class="map-filters" data-map-filters>
           <summary>{t(lang, "mapMarkers")}</summary>
           <ul role="list">

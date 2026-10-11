@@ -180,7 +180,16 @@
     "statResistSoul",
     "statResistElemental",
     "statResistBase",
-    "statResistTnt"
+    "statResistTnt",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -408,5 +417,16 @@
   "lootSlotSpringStone": "回响碎片",
   "lootSlotConsumable": "消耗品",
   "lootSlotTnt": "TNT",
-  "sourceMerchants": "商人"
+  "sourceMerchants": "商人",
+  "talismanLevels": "各等级数值",
+  "talismanLevel": "等级",
+  "xpToNextLevel": "升级所需经验值",
+  "maxLevel": "最高等级",
+  "secretTalisman": "秘密护身符",
+  "companionAttack": "攻击倍率",
+  "companionDefence": "防御倍率",
+  "companionCooldown": "冷却倍率",
+  "talismanLevelsNote": "护身符装备时会累积经验值并升级。数值取自游戏数据文件。伙伴的倍率为数据文件中的原始数值：防御与冷却倍率较低可能代表更强（受到的伤害更少、冷却更短），但确切含义尚未核实。",
+  "levelValue": "数值",
+  "valuesNotInData": "数值不在游戏数据文件中（以 ? 表示）。"
 }

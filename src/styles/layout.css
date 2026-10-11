@@ -12,7 +12,7 @@
   padding: 1px 6px; background: var(--ink); color: var(--paper);
 }
 .brand-full, .brand-short { font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
-.brand:hover .brand-mark { background: var(--accent); }
+.brand:hover :is(.brand-full, .brand-short) { text-decoration: underline 2px var(--accent); text-underline-offset: 0.2em; }
 .brand-short, .label-short { display: none; }
 .header-search { justify-self: end; width: min(100%, 360px); }
 .header-search input { width: 100%; }
@@ -25,26 +25,32 @@
   list-style: none; font-size: 14px; background: transparent; color: var(--text); border: 1px solid var(--rule-strong);
   border-radius: var(--radius); padding: 6px 12px; cursor: pointer; line-height: 1.3; white-space: nowrap;
   display: inline-flex; align-items: center; gap: 6px; height: 100%; box-sizing: border-box;
+  transition: background-color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
+.header-menu summary:active { transform: translateY(1px); }
 .lang-code { display: none; text-transform: uppercase; }
 .header-menu summary::-webkit-details-marker { display: none; }
 .header-menu summary:hover, .header-menu[open] summary { background: var(--plate); }
 .header-menu summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 .header-menu ul {
-  position: absolute; z-index: 20; top: calc(100% + 4px); right: 0; margin: 0; padding: 4px 0; list-style: none;
-  width: max-content; min-width: 100%; max-width: calc(100vw - 2 * var(--gutter)); max-height: min(70vh, 480px); overflow-y: auto;
-  background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: 4px 4px 0 var(--ink);
+  position: absolute; z-index: var(--z-menu); top: calc(100% + var(--space-1)); right: 0; margin: 0; padding: var(--space-1) 0; list-style: none;
+  width: max-content; min-width: 100%; max-width: calc(100vw - 2 * var(--gutter));
+  max-height: min(70vh, 480px); max-height: min(70dvh, 480px); overflow-y: auto;
+  background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: var(--shadow-hard);
 }
 .header-menu li a {
   display: flex; align-items: center; gap: 8px; padding: 8px 14px; color: var(--text); text-decoration: none; font-size: 14px;
+  transition: background-color var(--dur-fast) var(--ease-out);
 }
+.header-menu li a:active { background: var(--rule); }
 .header-menu li a:hover { background: var(--plate); }
 .header-menu li a:focus-visible { outline-offset: -2px; }
 .lang-picker li a[aria-current="true"] { font-weight: 600; }
 .lang-picker li a[aria-current="true"]::before { content: "✓"; color: var(--accent); }
 .lang-picker li a:not([aria-current])::before { content: ""; display: inline-block; width: 1em; }
 /* Site menu: a hamburger with the pages outside the category index; the open page carries the accent rule. */
-.menu-icon { font-size: 16px; line-height: 1; }
+/* Three ink bars drawn as SVG, so the button looks the same whatever fonts the reader has. */
+.menu-icon { display: block; width: 14px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2; }
 .site-menu ul { min-width: 160px; }
 .site-menu li a { border-left: 3px solid transparent; padding-left: 11px; }
 .site-menu li a[aria-current="page"] { font-weight: 600; border-left-color: var(--accent); background: var(--plate); }
@@ -59,7 +65,7 @@
 }
 .tab-list li + li { border-left: 1px solid var(--rule); }
 .tab-list a {
-  position: relative; display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 8px;
+  position: relative; display: grid; grid-template-columns: auto auto 1fr auto; align-items: center; gap: 6px;
   padding: 10px 12px; color: var(--text); text-decoration: none; font-size: 14px; white-space: nowrap;
   transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
 }
@@ -99,7 +105,16 @@
 }
 
 @media (max-width: 1099px) {
-  .tab-list { display: flex; overflow-x: auto; scrollbar-width: none; }
+  /* The strip scrolls sideways with no scrollbar; soft edges show there is more beyond them.
+     Without scripts both edges fade; with them, an edge fades only while tabs lie past it. */
+  .tab-list {
+    display: flex; overflow-x: auto; scrollbar-width: none;
+    --edge: var(--space-4);
+    mask-image: linear-gradient(90deg, transparent, #000 var(--edge), #000 calc(100% - var(--edge)), transparent);
+  }
+  .tab-list[data-at-start] { mask-image: linear-gradient(90deg, #000 calc(100% - var(--edge)), transparent); }
+  .tab-list[data-at-end] { mask-image: linear-gradient(90deg, transparent, #000 var(--edge)); }
+  .tab-list[data-at-start][data-at-end] { mask-image: none; }
   .tab-list::-webkit-scrollbar { display: none; }
   .tab-list li { flex: 0 0 auto; }
 }
