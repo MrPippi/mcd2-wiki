@@ -239,7 +239,8 @@ describe("buildItemSources", () => {
   });
 });
 
-const hasSourceData = existsSync("source-data/DataTables/UFS/DT_LootSourceDefinition_Area.json");
+const UNIQUE_SLUG = /-unique\d*$/;
+const hasSourceData =existsSync("source-data/DataTables/UFS/DT_LootSourceDefinition_Area.json");
 describe.skipIf(!hasSourceData)("real source-data", () => {
   let cached: Promise<ReturnType<typeof buildItemSources>> | undefined;
   const real = () => {
@@ -253,12 +254,17 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
   };
   const view = async (key: string) => sourcesFor((await real()).data, key);
 
+  it("recognises unique slugs with and without a number", () => {
+    expect(["sword-unique", "sword-unique1", "sword-unique12"].map((slug) => UNIQUE_SLUG.test(slug))).toEqual([true, true, true]);
+    expect(["sword", "unique-sword", "sword-uniquex"].map((slug) => UNIQUE_SLUG.test(slug))).toEqual([false, false, false]);
+  });
+
   it("finds sources for a couple of hundred items, never a merchant for a unique one, and fits the size limit", async () => {
     const { data } = await real();
     const keys = Object.keys(data.items);
     expect(keys.length).toBeGreaterThan(200);
     expect(keys.length).toBeLessThan(320);
-    expect(Object.entries(data.items).filter(([key, item]) => item.merchants.length > 0 && /-uniqued*$/.test(key)).map(([key]) => key)).toEqual([]);
+    expect(Object.entries(data.items).filter(([key, item]) => item.merchants.length > 0 && UNIQUE_SLUG.test(key)).map(([key]) => key)).toEqual([]);
     expect(JSON.stringify(data).length).toBeLessThan(200_000);
   });
 
