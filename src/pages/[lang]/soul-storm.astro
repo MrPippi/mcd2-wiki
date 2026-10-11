@@ -38,7 +38,7 @@ const monstrosities = summonedMobs(data.monstrosities);
 const HEADER_ICON_SIZE = 72;
 ---
 <Base lang={lang} title={t(lang, "soulStorm")} description={t(lang, "soulStormIntro")}>
-  <div class="catalog soul-storm-page">
+  <div class="catalog soul-storm-page" data-pagefind-body>
     <header class="catalog-head soul-storm-head">
       {data.icons.header && <img class="soul-storm-head-icon" src={assetUrl(data.icons.header)} alt="" width={HEADER_ICON_SIZE} height={HEADER_ICON_SIZE} />}
       <h1 class="catalog-title">
@@ -47,7 +47,7 @@ const HEADER_ICON_SIZE = 72;
       {altTitle && altTitle.html !== title?.html && <p class="catalog-alt item-alt" lang={htmlLang(alt)} set:html={altTitle.html} />}
       {title?.untranslated && <span class="tag warn">{t(lang, "untranslated")}</span>}
     </header>
-    <div class="soul-storm-body" data-pagefind-body>
+    <div class="soul-storm-body">
       <section class="soul-storm-intro" data-testid="soul-storm-intro">
         {intro.map((text) => <p class="soul-storm-text" set:html={text.html} />)}
         {introUntranslated && <p class="soul-storm-marker"><span class="tag warn">{t(lang, "untranslated")}</span></p>}

@@ -2,7 +2,7 @@
 import type { Chest, SoulStormData } from "../../scripts/extract/soul-storm-schema";
 import { lootSlotLabel, t, type Lang, type UiKey } from "../lib/i18n";
 import { dropSummary } from "../lib/mobs";
-import { chestLabel, chestsOf, slotRows, textOf } from "../lib/soul-storm";
+import { chestLabel, chestsOf, rarityLine, slotRows, textOf } from "../lib/soul-storm";
 
 interface Props {
   lang: Lang;
@@ -12,11 +12,9 @@ interface Props {
 const { lang, data } = Astro.props;
 const GROUP_TITLE = { generator: "soulStormChestsGenerator", final: "soulStormChestsFinal" } as const satisfies Record<Chest["group"], UiKey>;
 const groups = (["generator", "final"] as const).map((group) => ({ group, chests: chestsOf(data, group) })).filter((entry) => entry.chests.length > 0);
-const lastGroup = groups.at(-1)?.group;
 const extra = textOf(data, "extraEffect", lang);
-const rarity = data.chestRarity
-  ? t(lang, "soulStormRarity").replace("{common}", String(data.chestRarity.common)).replace("{rare}", String(data.chestRarity.rare))
-  : undefined;
+// The rarity row's tag is the parent of both chest groups, so its sentence follows both of them.
+const rarity = rarityLine(data, lang);
 type Slot = Chest["slots"][number];
 const slotOf = (chest: Chest, key: Slot["slot"]): Slot | undefined => chest.slots.find((slot) => slot.slot === key);
 // Gear slots name no item list in the data: said once per row, never as a guess at the items.
@@ -33,7 +31,7 @@ const hasNoList = (chests: readonly Chest[], key: Slot["slot"]): boolean => ches
           <h3 class="soul-storm-subtitle">{t(lang, GROUP_TITLE[group])}</h3>
           <span class="tag soul-storm-unconfirmed" data-testid="soul-storm-unconfirmed">{t(lang, "soulStormTierUnconfirmed")}</span>
         </div>
-        <div class="soul-storm-scroll">
+        <div class="soul-storm-scroll" tabindex="0" role="region" aria-label={t(lang, GROUP_TITLE[group])}>
           <table class="soul-storm-table soul-storm-chest-table">
             <thead>
               <tr>
@@ -57,9 +55,9 @@ const hasNoList = (chests: readonly Chest[], key: Slot["slot"]): boolean => ches
             </tbody>
           </table>
         </div>
-        {group === lastGroup && rarity && <p class="note">{rarity}</p>}
       </div>
     ))}
+    {rarity && <p class="note soul-storm-rarity" data-testid="soul-storm-rarity">{rarity}</p>}
     {extra && (
       <p class="soul-storm-text soul-storm-extra">
         <span set:html={extra.html} />
