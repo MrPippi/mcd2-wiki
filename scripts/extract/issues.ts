@@ -30,7 +30,22 @@ export type IssueType =
   | "missing-achievement-icon"
   | "achievement-text-fallback"
   | "missing-achievement-condition"
-  | "missing-achievement-definitions";
+  | "missing-achievement-definitions"
+  | "missing-mob-tables"
+  | "missing-loot-tables"
+  | "mob-skipped"
+  | "mob-unnamed"
+  | "mob-area-prefix-unmapped"
+  | "mob-area-unnamed"
+  | "mob-loot-unresolved"
+  | "mob-portrait-unjoined"
+  | "mob-no-portrait"
+  | "missing-mob-portraits"
+  | "loot-tag-unmatched"
+  | "loot-tag-case"
+  | "loot-row-name"
+  | "loot-quest-not-guaranteed"
+  | "source-name-fallback";
 
 export interface Issue {
   readonly type: IssueType;
