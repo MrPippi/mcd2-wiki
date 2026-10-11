@@ -149,11 +149,14 @@ test.describe("menu and search", () => {
 
   test("site search finds a mob by its English name from a Japanese page", async ({ page }) => {
     await page.goto(`/ja/search/?q=${encodeURIComponent("Twisted Warden")}`);
-    // The Twisted Warden armor pieces share the name and can rank first; open the full list before looking for the mob.
-    await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
+    // The Twisted Warden armor pieces share the name and can rank first; keep opening more results until the mob shows.
+    const maw = page.locator('.pagefind-ui__results a[href*="/ja/mobs/maw/"]').first();
     const more = page.locator(".pagefind-ui__button");
-    if (await more.isVisible()) await more.click();
-    await expect(page.locator('.pagefind-ui__results a[href*="/ja/mobs/maw/"]').first()).toBeVisible({ timeout: 15_000 });
+    await expect.poll(async () => {
+      if (await maw.isVisible()) return true;
+      if (await more.isVisible()) await more.click();
+      return false;
+    }, { timeout: 15_000 }).toBe(true);
   });
 
   test("site search finds a mob by its name in the page language", async ({ page }) => {

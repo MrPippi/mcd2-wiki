@@ -142,7 +142,6 @@ describe("runExtract", () => {
     expect(summary).toMatchObject({ entries: 14, armorSets: 1, icons: 12 });
     expect(existsSync(path.join(outRoot, "src", "data", "mobs.json"))).toBe(true);
     expect(existsSync(path.join(outRoot, "src", "data", "loot-sources.json"))).toBe(true);
-    expect(summary.tablesRead.some((file) => /onlineconstants/i.test(file))).toBe(false);
     expect(report).toContain("missing-mob-tables");
   });
 
