@@ -1,0 +1,658 @@
+{
+  "verified": false,
+  "schedule": {
+    "anchorRaw": "2026.01.01-00.00.00",
+    "anchorUtc": "2026-01-01T00:00:00.000Z",
+    "anchorOffsetMinutes": 0,
+    "durationSeconds": 1200,
+    "cadenceSeconds": 2400,
+    "rotationOffset": 0
+  },
+  "rotation": [
+    {
+      "areaId": "SW.Area.Forest.A1",
+      "name": {
+        "zh": "咆哮森林",
+        "zh-hans": "咆哮树林",
+        "en": "Howling Woods",
+        "ja": "遠吠えの森",
+        "ko": "울부짖는 숲",
+        "de": "Heulwälder",
+        "fr": "Bois hurlant",
+        "es": "Bosques aullantes",
+        "it": "Boschi ululanti",
+        "pt": "Mata Uivante",
+        "ru": "Воющие чащи",
+        "pl": "Wyjąca Knieja",
+        "nl": "Huilende Woud",
+        "sv": "Ylande skogarna",
+        "tr": "Uluyan Orman",
+        "uk": "Ліс завивань"
+      },
+      "map": {
+        "world": "overworld",
+        "px": 4241.8,
+        "py": 4046.3
+      }
+    },
+    {
+      "areaId": "SW.Area.Meadow.A1",
+      "name": {
+        "zh": "吟唱者草甸",
+        "zh-hans": "吟唱者草甸",
+        "en": "Singer's Meadow",
+        "ja": "シンガーの草地",
+        "ko": "싱어의 초원",
+        "de": "Sängerwiese",
+        "fr": "Prairie du chanteur",
+        "es": "Prado del Cantor",
+        "it": "Prateria del cantore",
+        "pt": "Prado do Cantor",
+        "ru": "Певчий луг",
+        "pl": "Łąka Pieśniarza",
+        "nl": "Zangersweide",
+        "sv": "Sångarens äng",
+        "tr": "Şarkıcının Çayırı",
+        "uk": "Лука співака"
+      },
+      "map": {
+        "world": "sift",
+        "px": 634.3,
+        "py": 5473.3
+      }
+    },
+    {
+      "areaId": "SW.Area.Plains.A2",
+      "name": {
+        "zh": "多雨平原",
+        "zh-hans": "多雨平原",
+        "en": "Rainy Plains",
+        "ja": "雨降りの平原",
+        "ko": "비의 평원",
+        "de": "Regenebene",
+        "fr": "Plaines pluvieuses",
+        "es": "Llanura lluviosa",
+        "it": "Pianure piovose",
+        "pt": "Planícies Chuvosas",
+        "ru": "Дождливые равнины",
+        "pl": "Deszczowe Równiny",
+        "nl": "Regenachtige Vlakten",
+        "sv": "Regniga slätterna",
+        "tr": "Yağmurlu Ovalar",
+        "uk": "Дощові рівнини"
+      },
+      "map": {
+        "world": "overworld",
+        "px": 4793.3,
+        "py": 6694.9
+      }
+    },
+    {
+      "areaId": "SW.Area.Carapace.A1",
+      "name": {
+        "zh": "轟鳴蟲殼骸之地",
+        "zh-hans": "轰鸣虫壳地",
+        "en": "Humbler Huskland",
+        "ja": "ハンブラーハスクランド",
+        "ko": "험블러 외피지대",
+        "de": "Demütigerpanzerland",
+        "fr": "Terres desséchées des Fredonneurs",
+        "es": "Yermo de quitinones",
+        "it": "Cimitero dei solenni",
+        "pt": "Cemitério dos Humilhadores",
+        "ru": "Земли кадавров смиренников",
+        "pl": "Step Spokorniaczy",
+        "nl": "Humblerland der overblijfselen",
+        "sv": "Böjarnas skalmarker",
+        "tr": "Humbler Kalıntısı Diyarı",
+        "uk": "Земля оболонок покірника"
+      },
+      "map": {
+        "world": "sift",
+        "px": 3316.9,
+        "py": 5462.7
+      }
+    },
+    {
+      "areaId": "SW.Area.Meadow.A2",
+      "name": {
+        "zh": "安眠丘陵",
+        "zh-hans": "安眠丘陵",
+        "en": "Lullaby Hills",
+        "ja": "子守歌の丘",
+        "ko": "자장가 언덕",
+        "de": "Schlafliedhügel",
+        "fr": "Collines de la berceuse",
+        "es": "Colinas del arrullo",
+        "it": "Colline della ninnananna",
+        "pt": "Colinas de Ninar",
+        "ru": "Колыбельные холмы",
+        "pl": "Wzgórza Kołysanek",
+        "nl": "Wiegeliedheuvels",
+        "sv": "Vaggvisornas kullar",
+        "tr": "Ninni Tepeleri",
+        "uk": "Колискові пагорби"
+      },
+      "map": {
+        "world": "sift",
+        "px": 5506.5,
+        "py": 5795.9
+      }
+    },
+    {
+      "areaId": "SW.Area.Desert.A1",
+      "name": {
+        "zh": "冰封高地",
+        "zh-hans": "冰封高地",
+        "en": "Frozen Highlands",
+        "ja": "凍てつく高地",
+        "ko": "얼어붙은 고원",
+        "de": "Eishochland",
+        "fr": "Hautes-terres gelées",
+        "es": "Tierras altas heladas",
+        "it": "Alture gelate",
+        "pt": "Terras Altas Congeladas",
+        "ru": "Ледяные нагорья",
+        "pl": "Zmrożone Wyżyny",
+        "nl": "Bevroren Hooglanden",
+        "sv": "Frusna högländerna",
+        "tr": "Donmuş Dağlıklar",
+        "uk": "Крижане високогір’я"
+      },
+      "map": {
+        "world": "overworld",
+        "px": 6611.2,
+        "py": 4173.1
+      }
+    },
+    {
+      "areaId": "SW.Area.Plains.A1",
+      "name": {
+        "zh": "蜂巢原野",
+        "zh-hans": "蜜脾原野",
+        "en": "Honeycomb Fields",
+        "ja": "ハニカム畑",
+        "ko": "벌집 들판",
+        "de": "Honigwabenfelder",
+        "fr": "Champs de miel",
+        "es": "Campos de panales",
+        "it": "Campi del favo",
+        "pt": "Campos de Favos de Mel",
+        "ru": "Поля медовых сот",
+        "pl": "Miodowe Pola",
+        "nl": "Honingraatvelden",
+        "sv": "Bikupefälten",
+        "tr": "Bal Peteği Tarlaları",
+        "uk": "Стільникові поля"
+      },
+      "map": {
+        "world": "overworld",
+        "px": 2805.8,
+        "py": 3954
+      }
+    }
+  ],
+  "rotationUntranslated": [],
+  "texts": {
+    "title": {
+      "html": {
+        "zh": "靈魂風暴",
+        "zh-hans": "灵魂风暴",
+        "en": "Soul Storms",
+        "ja": "ソウルストーム",
+        "ko": "영혼 폭풍",
+        "de": "Seelensturm",
+        "fr": "Tempêtes d&#39;âmes",
+        "es": "Tormentas de almas",
+        "it": "Tempeste di anime",
+        "pt": "Tempestades da Alma",
+        "ru": "Буря душ",
+        "pl": "Burze dusz",
+        "nl": "Zielenstormen",
+        "sv": "Själsstormar",
+        "tr": "Ruh Fırtınaları",
+        "uk": "Шторми душ"
+      },
+      "untranslated": []
+    },
+    "overview1": {
+      "html": {
+        "zh": "壞村民高階議會正在啟動強大的產生器，引發災難性的<em class=\"emphasis\">靈魂風暴</em>。擊退不斷生成的怪物群，摧毀<em class=\"emphasis\">風暴產生器</em>，拯救世界並取得最好的裝備。",
+        "zh-hans": "灾厄村民最高委员会正在激活强大的生成器，引发灾难性的<em class=\"emphasis\">灵魂风暴</em>。迎战不断生成的生物群，摧毁<em class=\"emphasis\">风暴生成器</em>，从而拯救世界并获得顶级装备。",
+        "en": "The Illager High Council is activating powerful generators that are triggering cataclysmic <em class=\"emphasis\">Soul Storms</em>. Fight the hordes of spawning mobs and destroy the <em class=\"emphasis\">Storm Generators</em> to save the world and claim the best gear.",
+        "ja": "邪悪なる村人たちの最高評議会が、壊滅的なエネルギーを持つ<em class=\"emphasis\">ソウルストーム</em>を発生させる強力な装置を起動しているようです。迫り来るモブの大群と戦い、<em class=\"emphasis\">ストームジェネレーター</em>を破壊し、世界を救いながら最高の装備品を手に入れましょう。",
+        "ko": "우민 최고의회가 세계를 바꿔버릴 정도로 강력한 <em class=\"emphasis\">영혼 폭풍</em>을 일으키는 강력한 생성기를 가동하고 있습니다. 몰려오는 몹 무리와 싸우고 <em class=\"emphasis\">폭풍 생성기</em>를 파괴하여 세상을 구하고 최고의 장비를 획득하세요.",
+        "de": "Der Hohe Illager-Rat aktiviert mächtige Generatoren, die verheerende <em class=\"emphasis\">Seelenstürme</em> auslösen. Kämpfe gegen die Horden der erscheinenden Kreaturen und zerstöre die <em class=\"emphasis\">Sturmgeneratoren</em>, um die Welt zu retten und dir die beste Ausrüstung zu holen.",
+        "fr": "Le Haut Conseil des Illageois active de puissants générateurs qui déclenchent des <em class=\"emphasis\">tempêtes d&#39;âmes</em> cataclysmiques. Combattez les hordes de créatures qui apparaissent et détruisez les <em class=\"emphasis\">générateurs de tempête</em> pour sauver le monde et obtenir le meilleur équipement.",
+        "es": "El Alto consejo de maldeanos está activando unos potentes generadores que provocan <em class=\"emphasis\">tormentas de almas</em> catastróficas. Derrota a las hordas de criaturas que aparecen y destruye los <em class=\"emphasis\">generadores de tormentas</em> para salvar el mundo y conseguir el mejor equipo.",
+        "it": "Il Gran Consiglio degli abitori sta attivando dei potenti generatori in grado di scatenare catastrofiche <em class=\"emphasis\">tempeste di anime</em>. Affronta le orde di mob generati e distruggi i <em class=\"emphasis\">generatori di tempeste</em> per salvare il mondo e ottenere l&#39;equipaggiamento migliore.",
+        "pt": "O Alto Conselho dos Illagers está ativando geradores poderosos responsáveis por causar <em class=\"emphasis\">Tempestades de Almas</em> desastrosas. Enfrente as hordas de criaturas sendo geradas e destrua os <em class=\"emphasis\">Geradores de Tempestade</em> para salvar o mundo e obter o melhor equipamento.",
+        "ru": "Высший совет злодеян активирует мощные генераторы, вызывающие катастрофические <em class=\"emphasis\">бури душ</em>. Сражайтесь с ордами появляющихся мобов и уничтожайте <em class=\"emphasis\">генераторы бури</em>, чтобы спасти мир и получить лучшее снаряжение.",
+        "pl": "Wysoka Rada złosadników aktywuje potężne generatory, które wywołują katastrofalne w skutkach <em class=\"emphasis\">burze dusz</em>. Odeprzyj hordy pojawiających się mobów i zniszcz <em class=\"emphasis\">generatory burz</em>, aby uratować świat i zdobyć najlepsze wyposażenie.",
+        "nl": "De Hoge Raad van de Illagers activeert krachtige generatoren die catastrofale <em class=\"emphasis\">Zielenstormen</em> veroorzaken. Bestrijd de hordes spawnende mobs en vernietig de <em class=\"emphasis\">Stormgeneratoren</em> om de wereld te redden en de beste uitrusting te claimen.",
+        "sv": "Fybornas högsta råd sätter igång kraftiga generatorer som aktiverar katastrofala <em class=\"emphasis\">själsstormar</em>. Besegra horder av skapade varelser och förstör <em class=\"emphasis\">stormgeneratorer</em> för att rädda världen och skaffa den bästa utrustningen.",
+        "tr": "Illager Yüksek Konseyi, inanılmaz derecede tahrip edici <em class=\"emphasis\">Ruh Fırtınalarını</em> tetikleyen güçlü üreteçleri etkinleştiriyor. Dünyayı kurtarıp en iyi teçhizatları almak için dalga dalga doğan canlılarla savaş ve <em class=\"emphasis\">Fırtına Üreteçlerini</em> yok et.",
+        "uk": "Вища рада лиходіїв активує потужні генератори, що викликають катастрофічні <em class=\"emphasis\">шторми душ</em>. Здолайте орди мобів, які з’являються, і знищте <em class=\"emphasis\">штормогенератори</em>, щоб урятувати світ й отримати найкраще спорядження."
+      },
+      "untranslated": []
+    },
+    "overview2": {
+      "html": {
+        "zh": "你可以在地圖上找到目前靈魂風暴的位置。",
+        "zh-hans": "你可以在地图上找到当前灵魂风暴的位置。",
+        "en": "You can find the location of the ongoing Soul Storm on your map.",
+        "ja": "発生中のソウルストームの場所は、マップで確認することができます。",
+        "ko": "지도에서 진행 중인 영혼 폭풍의 위치를 찾을 수 있습니다.",
+        "de": "Den Ort des momentan tosenden Seelensturms kannst du auf deiner Karte finden.",
+        "fr": "Vous trouverez l&#39;emplacement de la tempête d&#39;âmes en cours sur votre carte.",
+        "es": "Puedes ver en el mapa dónde se está produciendo la tormenta de almas.",
+        "it": "Consulta la mappa per trovare la posizione della tempesta di anime in corso.",
+        "pt": "Confira no mapa o local de Tempestades de Almas em andamento.",
+        "ru": "На карте можно найти регион, где сейчас идет буря душ.",
+        "pl": "Na mapie znajdziesz położenie trwającej burzy dusz.",
+        "nl": "Je kunt de locatie van de huidige Zielenstorm op je kaart vinden.",
+        "sv": "På kartan hittar du platsen där själsstormen pågår.",
+        "tr": "Devam eden Ruh Fırtınasının konumunu haritanda görebilirsin.",
+        "uk": "Ви можете знайти місце, де відбувається шторм душ, на мапі."
+      },
+      "untranslated": []
+    },
+    "tutorial": {
+      "html": {
+        "zh": "靈魂風暴是節奏快速的戰鬥區域，其中敵對怪物的數量與重生率都會提高。平息靈魂風暴後，你將會獲得豐厚的獎勵。",
+        "zh-hans": "灵魂风暴是快节奏的战斗区域，其中敌对生物的数量和刷新速率均会增加。平息灵魂风暴后，你将获得丰厚奖励。",
+        "en": "Soul Storms are high paced combat areas that have increased quantity and re-spawn rate of hostile mobs. If you defeat a Soul Storm, you will be generously rewarded.",
+        "ja": "ソウルストームは、敵対的なモブの出現数と再スポーン率が上昇するペースの速い戦闘エリアです。ソウルストームを突破することができれば、豪華な報酬が手に入ります。",
+        "ko": "영혼 폭풍은 적대적 몹의 수와 재생성 속도가 증가하는, 빠른 템포의 전투 지역입니다. 영혼 폭풍에서 승리하면 풍성한 보상을 받습니다.",
+        "de": "Seelenstürme sind Kampfbereiche mit schnellem Tempo, in denen es mehr feindliche Kreaturen gibt und diese schneller wiederbelebt werden. Wenn du einen Seelensturm besiegst, wirst du großzügig belohnt.",
+        "fr": "Les tempêtes d&#39;âmes sont des zones de combat intenses où apparaissent davantage de créatures hostiles à un rythme plus élevé. Si vous terrassez une Tempête d&#39;âmes, vous recevrez une généreuse récompense.",
+        "es": "Las tormentas de almas son zonas de combate intenso donde hay más criaturas hostiles que renacen más rápido. Si derrotas una tormenta de almas, recibirás generosas recompensas.",
+        "it": "Le tempeste di anime sono aree di combattimento frenetiche, con una quantità elevata di mob ostili che si rigenera a velocità superiore. Se sgomini una tempesta di anime, riceverai ricompense generose.",
+        "pt": "Tempestades de Alma são áreas de combate de ritmo intenso, com maior quantidade e taxa de reaparecimento de inimigos hostis. Se você derrotar uma Tempestade de Alma, receberá recompensas enormes.",
+        "ru": "Буря душ — это зона интенсивных сражений с повышенным числом и скоростью появления враждебных мобов. За победу в буре душ положена щедрая награда.",
+        "pl": "Burze dusz to strefy intensywnych walk, w których wrogie moby pojawiają się częściej i w większej liczbie. Jeśli przezwyciężysz burzę dusz, otrzymasz hojną nagrodę.",
+        "nl": "Zielenstormen zijn gevechtsgebieden waarin er meer vijandige mobs sneller respawnen. Als je een zielenstorm verslaat, word je royaal beloond.",
+        "sv": "Själsstormar är stridsområden med högt tempo och ett ökat antal fientliga varelser med högre förnyelsefrekvens. Om du klarar en själsstorm blir du rikligt belönad.",
+        "tr": "Ruh Fırtınaları, düşman canlıların sayısının ve yeniden doğma hızının arttığı, yüksek tempolu savaş alanlarıdır. Ruh Fırtınasını püskürtürsen cömertçe ödüllendirilirsin.",
+        "uk": "Шторми душ — це зони інтенсивних боїв, де збільшено кількість ворожих мобів і швидкість їх відродження. За перемогу в штормі душ ви отримаєте щедрі нагороди."
+      },
+      "untranslated": []
+    },
+    "objective": {
+      "html": {
+        "zh": "摧毀 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 個風暴產生器，趁時間結束前平息靈魂風暴！",
+        "zh-hans": "在时间耗尽前摧毁 <span class=\"placeholder\" data-slot=\"0\">{数值}</span> 个风暴生成器，以平息灵魂风暴！",
+        "en": "Destroy <span class=\"placeholder\" data-slot=\"0\">{value}</span> Storm Generators to quell the Soul Storm before time runs out!",
+        "ja": "時間切れになる前に <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 基のストームジェネレーターを破壊し、ソウルストームを静めよう！",
+        "ko": "시간이 다 되기 전에 폭풍 생성기 <span class=\"placeholder\" data-slot=\"0\">{수치}</span>개를 파괴해 영혼 폭풍을 잠재우세요!",
+        "de": "Zerstöre <span class=\"placeholder\" data-slot=\"0\">{Wert}</span> Sturmgeneratoren, um den Seelensturm zu bezwingen, bevor die Zeit abläuft!",
+        "fr": "Détruisez <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> générateurs de tempête pour apaiser la tempête d&#39;âmes avant la fin du temps imparti !",
+        "es": "¡Destruye <span class=\"placeholder\" data-slot=\"0\">{valor}</span> generadores de tormentas para que la tormenta de almas amaine antes de que se acabe el tiempo!",
+        "it": "Distruggi <span class=\"placeholder\" data-slot=\"0\">{valore}</span> generatori di tempeste per domare la tempesta di anime entro lo scadere del tempo!",
+        "pt": "Destrua <span class=\"placeholder\" data-slot=\"0\">{valor}</span> Geradores de Tempestade para acalmar a Tempestade de Almas antes que o tempo acabe!",
+        "ru": "Уничтожьте генераторы бури (<span class=\"placeholder\" data-slot=\"0\">{значение}</span>) и усмирите бурю душ, пока не истекло время!",
+        "pl": "Zniszcz generatory burz <span class=\"placeholder\" data-slot=\"0\">{wartość}</span> razy, aby uciszyć burzę dusz przed upływem czasu!",
+        "nl": "Vernietig <span class=\"placeholder\" data-slot=\"0\">{waarde}</span> stormgeneratoren om de zielenstorm te bedwingen voordat de tijd om is!",
+        "sv": "Förstör <span class=\"placeholder\" data-slot=\"0\">{värde}</span> stormgeneratorer för att stoppa själsstormen innan tiden tar slut!",
+        "tr": "Ruh Fırtınasını süre dolmadan bastırmak için <span class=\"placeholder\" data-slot=\"0\">{değer}</span> Fırtına Üreteci yok et!",
+        "uk": "Знищте штормогенератори (<span class=\"placeholder\" data-slot=\"0\">{значення}</span>), щоб шторм душ ущух, доки не закінчився час!"
+      },
+      "untranslated": []
+    },
+    "generatorHint": {
+      "html": {
+        "zh": "這是風暴產生器。只要沒有護盾產生器提供防護，就會變得脆弱。摧毀後即可阻止生物猛攻！",
+        "zh-hans": "这是风暴生成器。没有护盾生成器保护时会非常脆弱。摧毁它即可阻止生物猛攻！",
+        "en": "This is a Storm Generator. When it is not shielded by a Shield Generator, it is vulnerable. Destroy it to stop the mob onslaught!",
+        "ja": "ストームジェネレーターはシールドジェネレーターによる防御がなければ無防備になる。破壊してモブの猛攻を止めよう！",
+        "ko": "폭풍 생성기입니다. 방패 생성기의 보호를 받지 않을 때는 취약해집니다. 생성기를 파괴해 몰려드는 몹을 막으세요!",
+        "de": "Das ist ein Sturmgenerator. Wenn er nicht durch einen Schildgenerator abgeschirmt wird, ist er verletzlich. Zerstöre ihn, um dem Angriff der Kreaturen ein Ende zu bereiten!",
+        "fr": "Ceci est un générateur de tempête. Lorsqu&#39;il n&#39;est pas protégé par un générateur de bouclier, il est vulnérable. Détruisez-le pour arrêter le déferlement de créatures !",
+        "es": "Esto es un generador de tormentas. Es vulnerable si no está protegido por un generador de escudos. ¡Destrúyelo para detener el ataque de las criaturas!",
+        "it": "Questo è un generatore di tempeste. In assenza di un generatore di scudi, il generatore di tempeste è vulnerabile. Distruggilo per frenare l&#39;assalto dei mob!",
+        "pt": "Isto é um Gerador de Tempestade. Ele fica vulnerável sem a proteção do Gerador de Escudo. Destrua-o para impedir o ataque as criaturas!",
+        "ru": "Это генератор бури. Он уязвим, если не защищен генератором щита. Уничтожьте его и остановите натиск мобов!",
+        "pl": "To generator burz. Jest narażony na ataki, kiedy nie chroni go generator tarczy. Zniszcz go, aby moby przestały się pojawiać!",
+        "nl": "Dit is een stormgenerator. Als hij niet wordt beschermd door een schildgenerator, is hij kwetsbaar. Vernietig hem om de aanval van de mobs te stoppen!",
+        "sv": "Det här är en stormgenerator. Den är sårbar när den inte skyddas av en sköldgenerator. Förstör den för att stoppa varelsernas anfall!",
+        "tr": "Bu bir Fırtına Üreteci. Bir Kalkan Üreteci tarafından korunmadığında savunmasızdır. Canlıların saldırısını durdurmak için onu yok et!",
+        "uk": "Це штормогенератор. Він уразливий, коли не захищений щитогенератором. Знищте його, щоб зупинити атаку мобів!"
+      },
+      "untranslated": []
+    },
+    "shieldHint": {
+      "html": {
+        "zh": "這是護盾產生器，能保護風暴產生器。摧毀它就能移除風暴產生器的護盾！",
+        "zh-hans": "这是护盾生成器，用来保护风暴生成器。摧毁它即可解除风暴生成器的护盾！",
+        "en": "This is a Shield Generator. It protects Storm Generators. Destroy it to remove the Storm Generator&#39;s shields!",
+        "ja": "シールドジェネレーターがストームジェネレーターを守っているようだ。破壊してストームジェネレーターのシールドを解除しよう！",
+        "ko": "방패 생성기입니다. 방패 생성기는 폭풍 생성기를 보호합니다. 파괴해 폭풍 생성기의 방패를 제거하세요!",
+        "de": "Das ist ein Schildgenerator. Er beschützt Sturmgeneratoren. Zerstöre ihn, um die Schilde des Sturmgenerators zu entfernen!",
+        "fr": "Ceci est un générateur de bouclier. Il protège les générateurs de tempête. Détruisez-le pour retirer les boucliers du générateur de tempête !",
+        "es": "Esto es un generador de escudos. Protege a los generadores de tormenta. ¡Destrúyelo para eliminar los escudos de los generadores de tormenta!",
+        "it": "Questo è un generatore di scudi e serve a proteggere i generatori di tempeste. Distruggilo per rimuovere gli scudi del generatore di tempeste!",
+        "pt": "Isto é um Gerador de Escudo. Sua função é proteger Geradores de Tempestade. Destrua-o para remover os escudos do Gerador de Tempestade!",
+        "ru": "Это генератор щита. Он защищает генераторы бури. Уничтожьте его, чтобы снять щиты с генератора бури!",
+        "pl": "To generator tarczy chroniący generatory burz. Zniszcz go, aby pozbawić generatory burz osłony!",
+        "nl": "Dit is een schildgenerator. Hij beschermt stormgeneratoren. Vernietig hem om de schilden van de stormgenerator uit te schakelen!",
+        "sv": "Det här är en sköldgenerator. Den skyddar stormgeneratorerna. Förstör den för att ta bort sköldarna på stormgeneratorn!",
+        "tr": "Bu bir Kalkan Üreteci. Fırtına Üreteçlerini korur. Fırtına Üretecinin kalkanlarını kaldırmak için onu yok et!",
+        "uk": "Це щитогенератор. Він захищає штормогенератори. Знищте його, щоб прибрати щити штормогенераторів!"
+      },
+      "untranslated": []
+    },
+    "extraEffect": {
+      "html": {
+        "zh": "在靈魂風暴中，物品掉落時有機率附帶額外效果！",
+        "zh-hans": "灵魂风暴中掉落的物品有几率附带额外效果！",
+        "en": "In Soul Storms, items have a chance to drop with an extra effect!",
+        "ja": "ソウルストームでは、追加のエフェクトが付与されているアイテムがドロップする場合があります！",
+        "ko": "영혼 폭풍 안에서는 추가 효과가 붙은 아이템이 드롭될 수 있습니다!",
+        "de": "Bei Seelenstürmen können Gegenstände mit einem Extra-Effekt erscheinen!",
+        "fr": "Dans les Tempêtes d&#39;âmes, les objets ont une chance d&#39;obtenir un effet supplémentaire !",
+        "es": "¡Durante las tormentas de almas, los objetos pueden aparecer con un efecto adicional!",
+        "it": "Durante le tempeste di anime, gli oggetti hanno una probabilità di essere rilasciati con un effetto extra!",
+        "pt": "Em Tempestade de Almas, podem ser concedidos itens com efeito extra!",
+        "ru": "Во время бури душ есть шанс, что добыча выпадет с дополнительным эффектом!",
+        "pl": "W burzach dusz upuszczone przedmioty mają szansę na uzyskanie dodatkowego efektu!",
+        "nl": "Tijdens zielenstormen kunnen er items vallen met een extra effect!",
+        "sv": "I själsstormar har föremål en chans att släppas med en extra effekt!",
+        "tr": "Ruh Fırtınalarında eşyaların ekstra bir etkiyle düşme şansı vardır!",
+        "uk": "Під час штормів душ предмети можуть випадати з додатковим ефектом!"
+      },
+      "untranslated": []
+    },
+    "generatorName": {
+      "html": {
+        "zh": "風暴產生器",
+        "zh-hans": "风暴生成器",
+        "en": "Storm Generator",
+        "ja": "ストームジェネレーター",
+        "ko": "폭풍 생성기",
+        "de": "Sturmgenerator",
+        "fr": "Générateur de tempête",
+        "es": "Generador de tormentas",
+        "it": "Generatore di tempeste",
+        "pt": "Gerador de Tempestade",
+        "ru": "Генератор бури",
+        "pl": "Generator burz",
+        "nl": "Stormgenerator",
+        "sv": "Stormgenerator",
+        "tr": "Fırtına Üreteci",
+        "uk": "Штормогенератор"
+      },
+      "untranslated": []
+    }
+  },
+  "unlock": {
+    "gameState": "SW.GameState.MainQuestComplete"
+  },
+  "generators": [
+    {
+      "tier": "easy",
+      "health": 800,
+      "healthByPlayers": [
+        1,
+        1.5,
+        2,
+        2.5
+      ],
+      "spawnWeight": 2,
+      "shield": null,
+      "finalSummon": {
+        "healthFraction": 0.2,
+        "mobs": [
+          "zombie",
+          "vindicator"
+        ]
+      }
+    },
+    {
+      "tier": "medium",
+      "health": 1000,
+      "healthByPlayers": [
+        1,
+        1.5,
+        2,
+        2.5
+      ],
+      "spawnWeight": 2,
+      "shield": {
+        "chance": 0.16,
+        "cooldownSeconds": 60
+      },
+      "finalSummon": {
+        "healthFraction": 0.4,
+        "mobs": [
+          "witch",
+          "enderman",
+          "warden",
+          "evoker",
+          "wellspring-miniboss",
+          "driftweaver"
+        ]
+      }
+    },
+    {
+      "tier": "hard",
+      "health": 1200,
+      "healthByPlayers": [
+        1,
+        1.5,
+        2,
+        2.5
+      ],
+      "spawnWeight": 1,
+      "shield": {
+        "chance": 0.4,
+        "cooldownSeconds": 45
+      },
+      "finalSummon": {
+        "healthFraction": 0.4,
+        "mobs": [
+          "monstrosity-copper",
+          "monstrosity-red-stone",
+          "monstrosity-sculk"
+        ]
+      }
+    }
+  ],
+  "resistances": [
+    {
+      "key": "resistSoul",
+      "value": 0.5
+    },
+    {
+      "key": "resistMelee",
+      "value": 0.8
+    },
+    {
+      "key": "knockbackResistance",
+      "value": 0
+    }
+  ],
+  "shieldHealth": 55,
+  "chests": [
+    {
+      "id": "StorminatorChestEasy",
+      "group": "generator",
+      "tier": "easy",
+      "slots": [
+        {
+          "slot": "item",
+          "guaranteed": 1,
+          "rolls": 0,
+          "chancePerRoll": 1,
+          "pool": "none"
+        },
+        {
+          "slot": "emeralds",
+          "guaranteed": 5,
+          "rolls": 10,
+          "chancePerRoll": 0.3,
+          "pool": "own"
+        },
+        {
+          "slot": "springStone",
+          "guaranteed": 1,
+          "rolls": 2,
+          "chancePerRoll": 0.33,
+          "pool": "own"
+        }
+      ]
+    },
+    {
+      "id": "StorminatorChestMedium",
+      "group": "generator",
+      "tier": "medium",
+      "slots": [
+        {
+          "slot": "item",
+          "guaranteed": 1,
+          "rolls": 0,
+          "chancePerRoll": 1,
+          "pool": "none"
+        },
+        {
+          "slot": "emeralds",
+          "guaranteed": 5,
+          "rolls": 10,
+          "chancePerRoll": 0.3,
+          "pool": "own"
+        },
+        {
+          "slot": "springStone",
+          "guaranteed": 1,
+          "rolls": 2,
+          "chancePerRoll": 0.33,
+          "pool": "own"
+        }
+      ]
+    },
+    {
+      "id": "StorminatorChestHard",
+      "group": "generator",
+      "tier": "hard",
+      "slots": [
+        {
+          "slot": "item",
+          "guaranteed": 2,
+          "rolls": 0,
+          "chancePerRoll": 1,
+          "pool": "none"
+        },
+        {
+          "slot": "emeralds",
+          "guaranteed": 5,
+          "rolls": 15,
+          "chancePerRoll": 0.3,
+          "pool": "own"
+        },
+        {
+          "slot": "springStone",
+          "guaranteed": 1,
+          "rolls": 3,
+          "chancePerRoll": 0.33,
+          "pool": "own"
+        }
+      ]
+    },
+    {
+      "id": "SoulStormRewardChestLow",
+      "group": "final",
+      "tier": "low",
+      "slots": [
+        {
+          "slot": "item",
+          "guaranteed": 2,
+          "rolls": 0,
+          "chancePerRoll": 1,
+          "pool": "none"
+        },
+        {
+          "slot": "emeralds",
+          "guaranteed": 5,
+          "rolls": 15,
+          "chancePerRoll": 0.3,
+          "pool": "own"
+        },
+        {
+          "slot": "springStone",
+          "guaranteed": 1,
+          "rolls": 3,
+          "chancePerRoll": 0.33,
+          "pool": "own"
+        }
+      ]
+    },
+    {
+      "id": "SoulStormRewardChestMedium",
+      "group": "final",
+      "tier": "medium",
+      "slots": [
+        {
+          "slot": "item",
+          "guaranteed": 3,
+          "rolls": 0,
+          "chancePerRoll": 1,
+          "pool": "none"
+        },
+        {
+          "slot": "emeralds",
+          "guaranteed": 5,
+          "rolls": 15,
+          "chancePerRoll": 0.3,
+          "pool": "own"
+        },
+        {
+          "slot": "springStone",
+          "guaranteed": 1,
+          "rolls": 3,
+          "chancePerRoll": 0.33,
+          "pool": "own"
+        }
+      ]
+    },
+    {
+      "id": "SoulStormRewardChestHigh",
+      "group": "final",
+      "tier": "high",
+      "slots": [
+        {
+          "slot": "item",
+          "guaranteed": 4,
+          "rolls": 0,
+          "chancePerRoll": 1,
+          "pool": "none"
+        },
+        {
+          "slot": "emeralds",
+          "guaranteed": 10,
+          "rolls": 15,
+          "chancePerRoll": 0.3,
+          "pool": "own"
+        },
+        {
+          "slot": "springStone",
+          "guaranteed": 4,
+          "rolls": 3,
+          "chancePerRoll": 0.33,
+          "pool": "own"
+        }
+      ]
+    }
+  ],
+  "chestRarity": {
+    "common": 0,
+    "rare": 0.01
+  },
+  "monstrosities": [
+    "monstrosity-copper",
+    "monstrosity-red-stone",
+    "monstrosity-sculk"
+  ],
+  "icons": {
+    "header": "icons/soul-storm/header.png",
+    "generator": "icons/soul-storm/generator.png"
+  }
+}
