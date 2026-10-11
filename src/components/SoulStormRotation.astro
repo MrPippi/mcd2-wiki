@@ -1,0 +1,20 @@
+---
+import type { SoulStormData } from "../../scripts/extract/soul-storm-schema";
+import { t, type Lang } from "../lib/i18n";
+import { mapLinkOf } from "../lib/mobs";
+
+interface Props {
+  lang: Lang;
+  data: SoulStormData;
+}
+
+const { lang, data } = Astro.props;
+const untranslated = data.rotationUntranslated.includes(lang);
+---
+{/* The rotation in table order; shown with or without JavaScript, each area linked to its spot on the map. */}
+<ol class="soul-storm-rotation" data-testid="soul-storm-rotation">
+  {data.rotation.map((area) => (
+    <li><a href={mapLinkOf(lang, area)}>{area.name[lang]}</a></li>
+  ))}
+</ol>
+{untranslated && <p class="soul-storm-marker"><span class="tag warn">{t(lang, "untranslated")}</span></p>}

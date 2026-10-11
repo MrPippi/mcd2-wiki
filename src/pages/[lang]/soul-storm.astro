@@ -1,0 +1,83 @@
+---
+import { LANGS } from "../../../scripts/extract/config";
+import type { SoulStormData } from "../../../scripts/extract/soul-storm-schema";
+import MobCard from "../../components/MobCard.astro";
+import SoulStormChests from "../../components/SoulStormChests.astro";
+import SoulStormClock from "../../components/SoulStormClock.astro";
+import SoulStormGenerators from "../../components/SoulStormGenerators.astro";
+import SoulStormRotation from "../../components/SoulStormRotation.astro";
+import Base from "../../layouts/Base.astro";
+import { t, type Lang } from "../../lib/i18n";
+import { compareLang, htmlLang } from "../../lib/lang";
+import { anyUntranslated, cadenceLine, clockPayload, hasSchedule, soulStormData, summonedMobs, textOf, unlockLine } from "../../lib/soul-storm";
+import { assetUrl } from "../../lib/url";
+import "../../styles/mobs.css";
+import "../../styles/soul-storm.css";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+  /** Injected by the component tests; the page itself always shows the extracted data. */
+  data?: SoulStormData;
+}
+
+const { lang } = Astro.props;
+const data = Astro.props.data ?? soulStormData;
+const alt = compareLang(lang);
+const title = textOf(data, "title", lang);
+const altTitle = textOf(data, "title", alt);
+const intro = (["overview1", "overview2", "tutorial"] as const).flatMap((id) => textOf(data, id, lang) ?? []);
+const introUntranslated = anyUntranslated(data, ["overview1", "overview2", "tutorial"], lang);
+const scheduled = hasSchedule(data);
+const payload = clockPayload(lang, data);
+const unlock = unlockLine(data, lang);
+const monstrosities = summonedMobs(data.monstrosities);
+const HEADER_ICON_SIZE = 72;
+---
+<Base lang={lang} title={t(lang, "soulStorm")} description={t(lang, "soulStormIntro")}>
+  <div class="catalog soul-storm-page" data-pagefind-body>
+    <header class="catalog-head soul-storm-head">
+      {data.icons.header && <img class="soul-storm-head-icon" src={assetUrl(data.icons.header)} alt="" width={HEADER_ICON_SIZE} height={HEADER_ICON_SIZE} />}
+      <h1 class="catalog-title">
+        {title ? <span data-pagefind-meta="title" set:html={title.html} /> : <span data-pagefind-meta="title">{t(lang, "soulStorm")}</span>}
+      </h1>
+      {altTitle && altTitle.html !== title?.html && <p class="catalog-alt item-alt" lang={htmlLang(alt)} set:html={altTitle.html} />}
+      {title?.untranslated && <span class="tag warn">{t(lang, "untranslated")}</span>}
+    </header>
+    <div class="soul-storm-body">
+      <section class="soul-storm-intro" data-testid="soul-storm-intro">
+        {intro.map((text) => <p class="soul-storm-text" set:html={text.html} />)}
+        {introUntranslated && <p class="soul-storm-marker"><span class="tag warn">{t(lang, "untranslated")}</span></p>}
+      </section>
+      <section class="entry-section soul-storm-schedule" data-testid="soul-storm-schedule">
+        <h2 class="section-title" data-pagefind-ignore>{t(lang, "soulStormSchedule")}</h2>
+        {scheduled && !data.verified && <p class="tag warn soul-storm-unverified" data-testid="soul-storm-unverified">{t(lang, "soulStormUnverified")}</p>}
+        {scheduled ? <p class="soul-storm-text" data-testid="soul-storm-cadence">{cadenceLine(data, lang)}</p> : <p class="soul-storm-text">{t(lang, "soulStormNoData")}</p>}
+        {scheduled && <noscript data-testid="soul-storm-noscript"><p class="note">{t(lang, "soulStormNoScript")}</p></noscript>}
+        {payload && <SoulStormClock lang={lang} payload={payload} />}
+        {scheduled && <SoulStormRotation lang={lang} data={data} />}
+      </section>
+      {scheduled && unlock && (
+        <section class="entry-section soul-storm-unlock" data-testid="soul-storm-unlock">
+          <h2 class="section-title" data-pagefind-ignore>{t(lang, "soulStormUnlock")}</h2>
+          <p class="soul-storm-text">{unlock}</p>
+        </section>
+      )}
+      {scheduled && <SoulStormGenerators lang={lang} data={data} />}
+      {scheduled && <SoulStormChests lang={lang} data={data} />}
+      {scheduled && monstrosities.length > 0 && (
+        <section class="entry-section soul-storm-monstrosities" data-testid="soul-storm-monstrosities">
+          <h2 class="section-title" data-pagefind-ignore>{t(lang, "soulStormMonstrosities")}</h2>
+          <p class="soul-storm-text">{t(lang, "soulStormMonstrositiesNote")}</p>
+          <ul class="mob-grid">
+            {monstrosities.map((mob, index) => <MobCard lang={lang} mob={mob} index={index} />)}
+          </ul>
+        </section>
+      )}
+      {scheduled && <p class="note soul-storm-note" data-testid="soul-storm-note">{t(lang, "mobDropsNote")}</p>}
+    </div>
+  </div>
+</Base>

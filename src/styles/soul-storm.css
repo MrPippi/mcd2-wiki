@@ -1,0 +1,73 @@
+/* Soul Storms: a category-style page (items.css .catalog) whose sheet carries the live clock, the rotation and the ruled tables. */
+.soul-storm-head-icon { display: block; width: 72px; height: 72px; margin: 0 0 var(--space-3); border: 1px solid var(--rule-strong); background: var(--plate); }
+.soul-storm-head .tag { align-self: flex-start; margin-top: var(--space-2); }
+.soul-storm-body { min-width: 0; overflow-wrap: anywhere; }
+.soul-storm-body > .entry-section:first-of-type .section-title,
+.soul-storm-intro + .entry-section .section-title { margin-top: var(--space-6); }
+
+.soul-storm-text { margin: 0 0 var(--space-3); max-width: 70ch; color: var(--text-2); }
+.soul-storm-intro .soul-storm-text:first-child { color: var(--text); font-size: 1.08rem; }
+.soul-storm-marker { margin: var(--space-2) 0 0; }
+.soul-storm-heading { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-3); }
+.soul-storm-heading .section-title { flex: 1 1 auto; min-width: 0; }
+.soul-storm-icon { display: block; width: 48px; height: 48px; flex-shrink: 0; margin-top: var(--space-6); }
+.soul-storm-subtitle { margin: var(--space-5) 0 var(--space-3); font-size: 17px; overflow-wrap: anywhere; }
+.soul-storm-heading .soul-storm-subtitle { margin-bottom: 0; }
+.soul-storm-heading + .soul-storm-scroll { margin-top: var(--space-3); }
+
+/* The one "estimated" warning: solid ink like every warning, set as a block under the section title. */
+.soul-storm-unverified { display: inline-flex; margin: 0 0 var(--space-3); padding: var(--space-1) var(--space-2); font-size: 0.9rem; white-space: normal; }
+
+/* Live clock */
+.soul-storm-clock { margin: var(--space-4) 0; padding: var(--space-4); border: 1px solid var(--rule-strong); background: var(--paper) var(--dots); }
+.soul-storm-clock[hidden] { display: none; }
+.soul-storm-now { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2) var(--space-4); }
+.soul-storm-status { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-display-m); line-height: 1.2; min-width: 0; }
+.soul-storm-countdown {
+  margin: 0; font-family: var(--font-mono); font-size: var(--fs-display-m); line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--accent);
+}
+.soul-storm-timezone { margin: var(--space-3) 0 0; }
+
+/* Tables scroll inside their own box; the page itself never scrolls sideways. */
+.soul-storm-scroll { overflow-x: auto; max-width: 100%; }
+/* Cells keep whole words (break-word does not shrink min-content), so narrow screens scroll the table instead of splitting numbers. */
+.soul-storm-table { overflow-wrap: break-word; width: 100%; border-collapse: collapse; border-top: 1px solid var(--rule-strong); font-variant-numeric: tabular-nums; }
+.soul-storm-table th, .soul-storm-table td { padding: var(--space-2) var(--space-2); border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.soul-storm-table thead th { font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.soul-storm-table tbody th { font-weight: 400; color: var(--text-2); min-width: 8em; }
+.soul-storm-table td { font-family: var(--font-mono); font-size: var(--fs-mono-m); }
+.soul-storm-upcoming td a { font-family: var(--font-body); }
+.soul-storm-cell-note, .soul-storm-line { display: block; }
+.soul-storm-cell-note { margin-top: var(--space-1); font-size: 0.85rem; color: var(--muted); }
+.soul-storm-chest-table td { min-width: 9em; }
+
+/* Rotation: numbered in table order, two columns when there is room. */
+.soul-storm-rotation {
+  margin: var(--space-4) 0 0; padding: 0; list-style: none; counter-reset: storm;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); border-top: 1px solid var(--rule-strong);
+}
+.soul-storm-rotation li { counter-increment: storm; display: flex; gap: var(--space-2); min-width: 0; padding: var(--space-2) var(--space-1); border-bottom: 1px solid var(--rule); }
+.soul-storm-rotation li::before { content: counter(storm); font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); min-width: 1.5em; }
+.soul-storm-rotation a { min-width: 0; }
+
+/* Generators */
+.soul-storm-summons { display: grid; gap: var(--space-3); margin: var(--space-4) 0; }
+.soul-storm-summon { display: grid; grid-template-columns: minmax(5em, auto) minmax(0, 1fr); gap: var(--space-3); }
+.soul-storm-summon dt { font-weight: 600; }
+.soul-storm-summon dd { margin: 0; color: var(--text-2); }
+.soul-storm-mob-links { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); margin: var(--space-1) 0 0; padding: 0; list-style: none; }
+.soul-storm-resistances { margin-bottom: var(--space-3); }
+
+/* Chests */
+.soul-storm-chest-group + .soul-storm-chest-group { margin-top: var(--space-5); }
+.soul-storm-chest-group > .note { margin: var(--space-2) 0 0; }
+.soul-storm-unconfirmed { white-space: normal; }
+.soul-storm-extra { margin-top: var(--space-5); }
+.soul-storm-extra .tag { margin-left: var(--space-2); }
+
+.soul-storm-monstrosities .mob-grid { margin-top: var(--space-3); }
+.soul-storm-note { margin: var(--space-6) 0 0; }
+
+@media (max-width: 560px) {
+  .soul-storm-summon { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
+}

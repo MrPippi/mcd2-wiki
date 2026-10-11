@@ -1,0 +1,102 @@
+---
+import type { SoulStormData } from "../../scripts/extract/soul-storm-schema";
+import { statLabel, t, type Lang } from "../lib/i18n";
+import { plainText } from "../lib/meta";
+import { formatChance, formatStat, mobHref } from "../lib/mobs";
+import {
+  anyUntranslated, formatMultipliers, generatorTierLabel, sharedMultipliers, spawnWeightText, summonedMobs, summonLine, textOf,
+} from "../lib/soul-storm";
+import { assetUrl } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+  data: SoulStormData;
+}
+
+const { lang, data } = Astro.props;
+const { generators } = data;
+const name = textOf(data, "generatorName", lang);
+// The official objective keeps its {0} slot as the shared .placeholder mark (base.css), like item pages.
+const hints = [textOf(data, "objective", lang), textOf(data, "generatorHint", lang), textOf(data, "shieldHint", lang)].flatMap((text) => text ?? []);
+const untranslated = anyUntranslated(data, ["generatorName", "objective", "generatorHint", "shieldHint"], lang);
+const shared = sharedMultipliers(generators);
+const shieldText = (shield: SoulStormData["generators"][number]["shield"]): string =>
+  shield
+    ? t(lang, "soulStormShieldRule").replace("{chance}", () => formatChance(shield.chance, lang)).replace("{seconds}", () => String(shield.cooldownSeconds))
+    : t(lang, "soulStormShieldNone");
+const multipliersLine = (values: readonly number[]): string => t(lang, "soulStormHealthByPlayers").replace("{list}", () => formatMultipliers(values));
+// A wave whose mobs are all unknown to the bestiary (reported by the extraction) has nothing to list.
+const summons = generators.map((generator) => ({ generator, mobs: summonedMobs(generator.finalSummon.mobs) })).filter((entry) => entry.mobs.length > 0);
+const tableLabel = name ? plainText(name.html) : t(lang, "soulStormTier");
+const ICON_SIZE = 48;
+---
+{generators.length > 0 && (
+  <section class="entry-section soul-storm-generators" data-testid="soul-storm-generators">
+    <div class="soul-storm-heading">
+      {data.icons.generator && <img class="soul-storm-icon" src={assetUrl(data.icons.generator)} alt="" width={ICON_SIZE} height={ICON_SIZE} loading="lazy" />}
+      <h2 class="section-title" data-pagefind-ignore>{name ? <Fragment set:html={name.html} /> : t(lang, "soulStormTier")}</h2>
+      {untranslated && <span class="tag warn">{t(lang, "untranslated")}</span>}
+    </div>
+    {hints.map((hint) => <p class="soul-storm-text" set:html={hint.html} />)}
+    <div class="soul-storm-scroll" tabindex="0" role="region" aria-label={tableLabel}>
+      <table class="soul-storm-table soul-storm-generator-table">
+        <thead>
+          <tr>
+            <th scope="col">{t(lang, "soulStormTier")}</th>
+            {generators.map((generator) => <th scope="col">{generatorTierLabel(generator.tier, lang)}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">{t(lang, "statHealth")}</th>
+            {generators.map((generator) => (
+              <td>
+                {generator.health}
+                {!shared && generator.healthByPlayers.length > 0 && <span class="soul-storm-cell-note">{multipliersLine(generator.healthByPlayers)}</span>}
+              </td>
+            ))}
+          </tr>
+          <tr>
+            <th scope="row">{t(lang, "soulStormSpawnWeight")}</th>
+            {generators.map((generator) => <td>{spawnWeightText(generator.spawnWeight)}</td>)}
+          </tr>
+          <tr>
+            <th scope="row">{t(lang, "soulStormShield")}</th>
+            {generators.map((generator) => <td>{shieldText(generator.shield)}</td>)}
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    {shared && <p class="note">{multipliersLine(shared)}</p>}
+    {summons.length > 0 && (
+      <dl class="soul-storm-summons">
+        {summons.map(({ generator, mobs }) => (
+          <div class="soul-storm-summon">
+            <dt>{generatorTierLabel(generator.tier, lang)}</dt>
+            <dd>
+              {summonLine(generator, lang)}
+              <ul class="soul-storm-mob-links">
+                {mobs.map((mob) => <li><a href={mobHref(lang, mob.slug)}>{mob.name[lang]}</a></li>)}
+              </ul>
+            </dd>
+          </div>
+        ))}
+      </dl>
+    )}
+    {data.resistances.length > 0 && (
+      <>
+        <p class="soul-storm-text">{t(lang, "soulStormResistances")}</p>
+        <table class="mob-stat-table soul-storm-resistances">
+          <tbody>
+            {data.resistances.map((stat) => (
+              <tr>
+                <th scope="row">{statLabel(stat.key, lang)}</th>
+                <td>{formatStat(stat.key, stat.value)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    )}
+  </section>
+)}

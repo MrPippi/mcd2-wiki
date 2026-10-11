@@ -1,28 +1,12 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { dirname, join, relative, resolve, sep } from "node:path";
 import { describe, expect, it } from "vitest";
+import { runtimeImports } from "../../helpers/imports";
 
 // Browser scripts must not pull in the UI dictionaries, the game strings or zod: every page would ship them.
 const ROOT = resolve(__dirname, "../../..");
 const posix = (path: string): string => path.split(sep).join("/");
 const FORBIDDEN = [/src\/lib\/ui-strings\.ts$/, /src\/lib\/ui-dicts\.ts$/, /src\/i18n\/.*\.json$/, /ui-game-strings\.json$/, /^zod$/];
-
-const IMPORT = /^\s*(import|export)\s+([^'";]*?)\s*from\s*["']([^"']+)["']|^\s*import\s*["']([^"']+)["']/gm;
-
-const isTypeOnly = (keyword: string, clause: string): boolean => {
-  if (/^type\b/.test(clause)) return true;
-  const braces = /^\{([^}]*)\}$/.exec(clause.trim());
-  if (!braces) return false;
-  const names = braces[1].split(",").map((part) => part.trim()).filter(Boolean);
-  return keyword === "import" ? names.length > 0 && names.every((name) => name.startsWith("type ")) : names.every((name) => name.startsWith("type "));
-};
-
-/** Specifiers a module loads at run time (type-only imports and re-exports are erased). */
-export const runtimeImports = (source: string): string[] =>
-  [...source.matchAll(IMPORT)].flatMap((match) => {
-    if (match[4]) return [match[4]];
-    return isTypeOnly(match[1], match[2]) ? [] : [match[3]];
-  });
 
 const resolveFile = (from: string, specifier: string): string => {
   if (!specifier.startsWith(".")) return specifier;
@@ -71,7 +55,7 @@ describe("browser scripts", () => {
 
   it("finds the site's client scripts", () => {
     expect(cases.map(({ file }) => posix(relative(ROOT, file)))).toEqual(
-      expect.arrayContaining(["src/components/CategoryTabs.astro", "src/components/ListFilter.astro", "src/components/WorldMap.astro"]),
+      expect.arrayContaining(["src/components/CategoryTabs.astro", "src/components/ListFilter.astro", "src/components/WorldMap.astro", "src/components/SoulStormClock.astro"]),
     );
   });
 
