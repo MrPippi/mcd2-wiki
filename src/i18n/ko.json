@@ -192,7 +192,10 @@
     "companionCooldown",
     "talismanLevelsNote",
     "levelValue",
-    "valuesNotInData"
+    "valuesNotInData",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -246,6 +249,7 @@
   "enchanting": "마법 부여와 효과",
   "unlock": "잠금 해제",
   "searchPlaceholder": "아이템, 마법 부여, 효과 검색…",
+  "searchUnavailable": "지금은 검색을 사용할 수 없습니다.",
   "categories": "카테고리",
   "fontCredit": "글꼴: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "보기",
@@ -371,6 +375,8 @@
   "mobVariantOf": "원본 몹",
   "mobPortraitCredit": "초상화는 게임 모델을 렌더링한 이미지입니다.",
   "mobNoPortrait": "아직 초상화 없음",
+  "mobNoImage": "이미지 없음",
+  "mobUnitsNote": "이동 속도와 시야 반경은 블록이나 초가 아닌 게임 엔진의 원시 값입니다.",
   "lootSlotItem": "장비",
   "lootSlotSpecialGear": "특수 장비",
   "itemSources": "획득 방법",

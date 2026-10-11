@@ -192,7 +192,10 @@
     "companionCooldown",
     "talismanLevelsNote",
     "levelValue",
-    "valuesNotInData"
+    "valuesNotInData",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -246,6 +249,7 @@
   "enchanting": "Чари та ефекти",
   "unlock": "Розблокування",
   "searchPlaceholder": "Пошук предметів, чарів, ефектів…",
+  "searchUnavailable": "Пошук зараз недоступний.",
   "categories": "Розділи",
   "fontCredit": "Шрифти: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Відкрити",
@@ -376,6 +380,8 @@
   "mobVariantOf": "Початковий моб",
   "mobPortraitCredit": "Портрети — рендери моделей із гри.",
   "mobNoPortrait": "Портрета ще немає",
+  "mobNoImage": "Немає зображення",
+  "mobUnitsNote": "Швидкість руху та радіус огляду подано в сирих одиницях рушія гри, а не в блоках чи секундах.",
   "lootSlotItem": "Спорядження",
   "lootSlotSpecialGear": "Особливе спорядження",
   "itemSources": "Як отримати",

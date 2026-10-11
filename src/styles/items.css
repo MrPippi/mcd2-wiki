@@ -28,7 +28,6 @@
   transition: background-color var(--dur-fast) var(--ease-out);
 }
 .card-no { position: absolute; top: 8px; left: 10px; font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); font-variant-numeric: tabular-nums; }
-.entry-card[data-variant="unique"] .card-no { color: var(--accent); }
 .card-art { display: flex; transition: transform var(--dur) var(--ease-spring); }
 .item-grid .entry-card a:hover, .item-grid .entry-card.is-active a, .item-grid .entry-card a:focus-visible { background: var(--paper) var(--dots); }
 .item-grid .entry-card a:hover .card-art, .item-grid .entry-card.is-active .card-art { transform: translateY(-4px) scale(1.06); }
@@ -39,11 +38,12 @@
 .item-name {
   font-family: var(--font-display); font-weight: 700; font-size: 15px; line-height: 1.35; min-height: 2.7em;
   display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
-  overflow-wrap: anywhere; hyphens: auto;
+  overflow-wrap: break-word; hyphens: auto;
 }
 .item-alt {
-  font-family: var(--font-mono); font-size: 11px; line-height: 1.3; letter-spacing: 0; color: var(--muted);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); line-height: 1.3; letter-spacing: 0; color: var(--muted);
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden;
+  overflow-wrap: break-word; hyphens: auto;
 }
 .item-name.is-unique, .tooltip-name.is-unique .primary { color: var(--accent); }
 
@@ -89,7 +89,7 @@
 .entry-table td { max-width: 65ch; color: var(--text-2); }
 .entry-table tbody th { width: 34%; }
 .row-name { margin: 0; font-size: 18px; overflow-wrap: anywhere; }
-.row-name .alt { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; }
+.row-name .alt { font-family: var(--font-mono); font-size: var(--fs-mono-s); text-transform: uppercase; letter-spacing: 0.04em; }
 .row-head { display: flex; gap: 10px; align-items: center; }
 .empty-cell { color: var(--muted); }
 
@@ -103,6 +103,9 @@
 }
 
 @media (max-width: 599px) {
+  /* Three cards a row leave ~105px for a name: one step down keeps long Latin words such as "Heartbreaker" whole. */
+  .item-name { font-size: 14px; letter-spacing: -0.01em; }
+  .item-name:is(:lang(zh), :lang(ja), :lang(ko)) { letter-spacing: 0; }
   .entry-table thead { display: none; }
   .entry-table, .entry-table tbody, .entry-table tr, .entry-table th, .entry-table td { display: block; width: auto; }
   .entry-table tbody tr { padding: 14px 0; border-bottom: 1px solid var(--rule); }

@@ -192,7 +192,10 @@
     "companionCooldown",
     "talismanLevelsNote",
     "levelValue",
-    "valuesNotInData"
+    "valuesNotInData",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -246,6 +249,7 @@
   "enchanting": "Incantesimi ed effetti",
   "unlock": "Sblocco",
   "searchPlaceholder": "Cerca oggetti, incantesimi, effetti…",
+  "searchUnavailable": "La ricerca non è al momento disponibile.",
   "categories": "Categorie",
   "fontCredit": "Caratteri: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Vedi",
@@ -375,6 +379,8 @@
   "mobVariantOf": "Variante di",
   "mobPortraitCredit": "I ritratti sono render dei modelli del gioco.",
   "mobNoPortrait": "Nessun ritratto per ora",
+  "mobNoImage": "Nessuna immagine",
+  "mobUnitsNote": "Velocità di movimento e raggio visivo sono i valori grezzi del motore di gioco, non blocchi o secondi.",
   "lootSlotItem": "Equipaggiamento",
   "lootSlotSpecialGear": "Equipaggiamento speciale",
   "itemSources": "Come ottenerlo",

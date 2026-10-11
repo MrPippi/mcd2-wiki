@@ -1,14 +1,19 @@
 /* Bestiary: the index is a category page split into kind groups; a mob page is a specimen sheet like an item page. */
 
-/* Portrait: the game's model render on the board, or an empty dashed mount with a faint silhouette. */
+/* Portrait: the game's model render on the board, or an empty dotted mount crossed corner to corner,
+   the catalogue's mark for a missing photograph, with a mono "no image" label. */
 .mob-portrait { display: inline-flex; flex-shrink: 0; width: var(--size, 128px); height: var(--size, 128px); }
 .mob-portrait img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .mob-portrait.is-empty {
-  border: 1px dashed var(--rule-strong);
+  position: relative; border: 1px solid var(--rule-strong);
   background:
-    radial-gradient(circle at 50% 34%, color-mix(in srgb, var(--ink) 13%, transparent) 0 13%, transparent 13.5%),
-    radial-gradient(ellipse 28% 24% at 50% 78%, color-mix(in srgb, var(--ink) 13%, transparent) 0 98%, transparent 100%),
-    var(--plate);
+    linear-gradient(to top right, transparent calc(50% - 0.5px), var(--rule) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    linear-gradient(to bottom right, transparent calc(50% - 0.5px), var(--rule) calc(50% - 0.5px) calc(50% + 0.5px), transparent calc(50% + 0.5px)),
+    var(--paper) var(--dots);
+}
+.mob-portrait-label {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 0 var(--space-1); background: var(--paper); white-space: nowrap;
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
 }
 
 /* Index */
@@ -36,14 +41,16 @@
 .mob-card-names { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; width: 100%; }
 .mob-card-name { font-family: var(--font-display); font-weight: 700; font-size: 15px; line-height: 1.35; overflow-wrap: anywhere; hyphens: auto; }
 .mob-card-alt {
-  max-width: 100%; font-family: var(--font-mono); font-size: 11px; line-height: 1.3; letter-spacing: 0; color: var(--muted);
+  max-width: 100%; font-family: var(--font-mono); font-size: var(--fs-mono-s); line-height: 1.3; letter-spacing: 0; color: var(--muted);
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .mob-card .tag { margin-top: var(--space-1); }
 .mob-credit { margin: 0; max-width: 72ch; font-size: 13px; color: var(--muted); }
 
 /* Mob page */
-.mob-plate.specimen-plate.entry-head { aspect-ratio: auto; min-height: 220px; }
+/* Square like an item plate (entry.css); the portrait fills most of it, scaled up crisp. */
+.mob-plate.specimen-plate.entry-head .mob-portrait { width: 84%; height: 84%; }
+.mob-plate.specimen-plate.entry-head .mob-portrait img { image-rendering: pixelated; }
 .mob-page .entry-kicker a { color: inherit; }
 .mob-title { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-2) var(--space-4); }
 .mob-title h1 { min-width: 0; overflow-wrap: anywhere; }
@@ -55,6 +62,7 @@
 .mob-stat-table th { text-align: left; font-weight: 400; color: var(--text-2); overflow-wrap: anywhere; }
 .mob-stat-table td { text-align: right; font-family: var(--font-mono); font-size: 15px; white-space: nowrap; padding-left: 16px; }
 .mob-stats .note, .mob-areas + .note, .mob-drops-note { margin: 10px 0 0; }
+.mob-stats .note + .note { margin-top: 4px; }
 
 .mob-areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); border-top: 1px solid var(--rule-strong); }
 .mob-areas li { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 10px var(--space-1); border-bottom: 1px solid var(--rule); }
@@ -66,7 +74,9 @@
 .mob-drop-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
 .mob-drop { display: grid; grid-template-columns: minmax(0, 10em) minmax(0, 1fr); gap: var(--space-1) var(--space-4); padding: var(--space-3) var(--space-1); border-bottom: 1px solid var(--rule); }
 .mob-drop-slot { font-weight: 600; overflow-wrap: anywhere; }
-.mob-drop-rule { list-style: none; margin: 0; padding: 0; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.mob-drop-rule { list-style: none; margin: 0; padding: 0; overflow-wrap: anywhere; }
+/* Drop numbers read like the stats table: mono, tabular. */
+.mob-drop-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .mob-drop-pool { margin: var(--space-1) 0 0; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
 
 /* Soul-corrupted stats are marked by a heavier ink rule, not a colour, so vermilion keeps its meaning. */

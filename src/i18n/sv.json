@@ -192,7 +192,10 @@
     "companionCooldown",
     "talismanLevelsNote",
     "levelValue",
-    "valuesNotInData"
+    "valuesNotInData",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -246,6 +249,7 @@
   "enchanting": "Förtrollningar och effekter",
   "unlock": "Upplåsning",
   "searchPlaceholder": "Sök föremål, förtrollningar, effekter…",
+  "searchUnavailable": "Sökningen är inte tillgänglig just nu.",
   "categories": "Kategorier",
   "fontCredit": "Typsnitt: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Visa",
@@ -374,6 +378,8 @@
   "mobVariantOf": "Variant av",
   "mobPortraitCredit": "Porträtten är renderingar av spelets modeller.",
   "mobNoPortrait": "Inget porträtt än",
+  "mobNoImage": "Ingen bild",
+  "mobUnitsNote": "Rörelsehastighet och synradie är spelets råa motorvärden, inte block eller sekunder.",
   "lootSlotItem": "Utrustning",
   "lootSlotSpecialGear": "Specialutrustning",
   "itemSources": "Så får du den",

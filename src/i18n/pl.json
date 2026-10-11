@@ -191,7 +191,10 @@
     "companionCooldown",
     "talismanLevelsNote",
     "levelValue",
-    "valuesNotInData"
+    "valuesNotInData",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "_english": [
     "normal"
@@ -248,6 +251,7 @@
   "enchanting": "Zaklęcia i efekty",
   "unlock": "Odblokowanie",
   "searchPlaceholder": "Szukaj przedmiotów, zaklęć, efektów…",
+  "searchUnavailable": "Wyszukiwanie jest teraz niedostępne.",
   "categories": "Kategorie",
   "fontCredit": "Kroje pisma: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Zobacz",
@@ -378,6 +382,8 @@
   "mobVariantOf": "Mob bazowy",
   "mobPortraitCredit": "Portrety to rendery modeli z gry.",
   "mobNoPortrait": "Brak portretu",
+  "mobNoImage": "Brak obrazu",
+  "mobUnitsNote": "Prędkość ruchu i promień widzenia to surowe wartości silnika gry, a nie bloki ani sekundy.",
   "lootSlotItem": "Wyposażenie",
   "lootSlotSpecialGear": "Wyposażenie specjalne",
   "itemSources": "Jak zdobyć",
