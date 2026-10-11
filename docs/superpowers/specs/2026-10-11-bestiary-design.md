@@ -6,7 +6,7 @@
 - 使用者的選擇：
   - 怪物頁與掉落並重，物品頁另加「取得方式」（C）。
   - 入口放在漢堡選單（A）。
-  - 先預留圖片欄位，之後再放圖（B）。
+  - 怪物頭像：遊戲模型的 3/4 視角渲染圖（`source-data/Renders/Mobs/`）由抽取程式轉成 webp；沒有渲染圖的怪物顯示預留框，可用手動覆蓋檔補上（B，已修訂）。
   - 掉落只列來源、不給百分比，任務獎勵標「必得」（B）。
   - 只收敵對怪物（A）。
 - 遵守既有規則：16 種語言、對照語言規則、「語言有問題一律退回英文並標未翻譯」（見 `2026-10-11-multilingual-design.md`）。
@@ -27,14 +27,13 @@
    - 掉落規則，以次數與每次機率描述。
 4. 物品頁的「取得方式」列出：區域掉落池、寶箱、任務獎勵（標「必得」）、商人、附魔書池。全部不顯示百分比。
 5. 漢堡選單新增「怪物圖鑑」，排在地圖、成就之後。
-6. 圖片：把 `public/mobs/<slug>.webp` 放進去就會自動顯示，沒有圖時顯示預留框。不需要改程式碼。
+6. 圖片：抽取程式把對得上的渲染圖轉成 `public/mobs/<slug>.webp`（與成就圖示同一套 sharp 流程），頁面自動顯示；沒有渲染圖的怪物顯示預留框。手動覆蓋檔 `scripts/extract/mob-portrait-overrides/<slug>.webp` 存在時優先於渲染圖。頁面註明頭像為遊戲模型渲染。
 7. 站內搜尋能用當前語言和英文找到怪物頁。
 8. `tsc` 0 錯誤；單元、整合、E2E 全過，覆蓋率四項都 ≥ 80%。
 
 ### 1.2 非目標
 
 - 掉落機率的百分比：多張掉落表怎麼疊加寫在遊戲程式裡，資料中沒有。
-- 怪物頭像：遊戲檔案裡沒有。
 - 友善生物、同伴、動物。
 - 怪物說明文字：遊戲裡只有名稱。
 - 依難度或多人人數縮放後的數值：只顯示基礎值。
@@ -168,6 +167,7 @@ interface Mob {
   untranslated: Lang[];
   stats: { key: StatKey; value: number }[];
   soulCorrupted?: { stats: { key: StatKey; value: number }[] };
+  portrait?: string;         // 已發布的頭像路徑 mobs/<slug>.webp；沒有則顯示預留框
   variants: string[];        // 變種的 slug
   variantOf?: string;        // 原怪物的 slug
   areas: { areaId: string; name: Localized; mapHref?: string }[];
@@ -199,7 +199,12 @@ interface ItemSources {
   - `MobDrops`：掉落規則。
   - `MobAreas`：出沒區域。
   - `ItemSources`：物品頁的「取得方式」，掛在現有物品頁的資訊區之後。
-- **圖片欄位**：建置時檢查 `public/mobs/<slug>.webp` 是否存在，存在就用 `<img>`，不存在就顯示預留框。不需要任何設定。
+- **頭像**：`source-data/Renders/Mobs/` 有 79 張 256×256 透明 PNG，檔名是藍圖名去掉 `BP_`（保留遊戲的拼字，如 `Scavanger_Ranged.png`）。
+  - 對應方式：**不用資料表列名**（只有 32/86 對得上），改用每列的 `CharacterReference`（`…/BP_Zombie.BP_Zombie_C`）取資產名、去掉 `BP_`。
+  - 靈魂腐化列沒有自己的渲染圖，沿用原怪物的頭像；抽象列沒有。
+  - 對不上任何怪物頁的渲染圖（召喚物、道具：`Evoker_FangTrap`、`Geomancer_*Pillar`、`*_Cube`、`RedStoneNode`、`MossFlower`、`Large_Moss_Flower`、`TargetDummy`）不發布，列進報告。`Geomancer_BombPillar.png` 是灰色無貼圖，同樣不發布。
+  - 轉檔：用 sharp 縮成 128×128 webp（`public/mobs/<slug>.webp`）。優先順序：手動覆蓋（`scripts/extract/mob-portrait-overrides/<slug>.webp`）> 渲染圖 > 預留框。`Mob.portrait` 有值才用 `<img>`。
+  - 頁面註明「頭像為遊戲模型渲染」。
 - **漢堡選單**：`src/lib/site-menu.ts` 新增「怪物圖鑑」。
 - **介面字串**：新增鍵要加到全部 16 個語言檔。
   - zh、en 人工撰寫；其他 14 種機器翻譯並列進 `_machine`。
@@ -238,7 +243,7 @@ interface ItemSources {
   - 一個頭目頁和一個一般怪頁：數值、掉落規則、出沒區域連到地圖。
   - 物品頁的「取得方式」連到正確來源，並有「必得」標示。
   - 漢堡選單出現「怪物圖鑑」，目前頁面有標示。
-  - 放入測試用圖片時顯示 `<img>`，沒有圖片時顯示預留框。
+  - 有渲染圖的怪物頁（Zombie）顯示 `<img>`，沒有渲染圖的怪物頁顯示預留框。
   - 站內搜尋用英文怪物名稱在 ja 頁面能找到。
   - 全站連結爬梳的起點加上 `/zh/mobs/`。
 
