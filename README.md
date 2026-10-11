@@ -20,6 +20,7 @@ A fan-made reference for **Minecraft Dungeons II**, built straight from the game
 | **Effects** | Every effect with its values at each level |
 | **Bestiary** | Health, toughness, resistances, soul yield and drops for each mob, including the Soul-corrupted versions, and the areas where they spawn |
 | **World map** | The Overworld, the Sift and the Camp, with minecart stations, rifts, teleport statues, merchants and area names |
+| **Soul Storms** | A live countdown to the current and next storm in your time zone, the area rotation, Storm Generator difficulty, health and shields, and what the reward chests drop. The times are worked out from the game data and are marked as estimates until confirmed in game |
 | **Achievements** | All Steam achievements with global unlock rates. Hidden ones stay hidden until you choose to reveal how to unlock them |
 
 Item pages also list where an item comes from: quest rewards, chests, merchants or enchantment book pools.
