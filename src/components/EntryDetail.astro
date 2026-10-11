@@ -9,6 +9,7 @@ import BookSource from "./BookSource.astro";
 import EnchantmentTiers from "./EnchantmentTiers.astro";
 import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
+import ItemSources from "./ItemSources.astro";
 import InfoBox from "./InfoBox.astro";
 import LangText from "./LangText.astro";
 import FixedOn from "./FixedOn.astro";
@@ -52,6 +53,7 @@ const related = relatedLinks(lang, entry);
       <WeaponEffects lang={lang} weapon={entry} />
       {(entry.category === "enchantment" || entry.category === "effect") && <FixedOn lang={lang} entry={entry} />}
       {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
+      <ItemSources lang={lang} entry={entry} />
       {related.length > 0 && (
         <EntrySection title={t(lang, "related")}>
           <ul class="related" data-pagefind-ignore>
