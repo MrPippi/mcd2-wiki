@@ -1,30 +1,39 @@
 import { expect, test, type Page } from "@playwright/test";
 
+const LEAD_MS = 60_000;
+const TICK_MS = 1000;
+
+/**
+ * Opens a page on a fake clock that starts a minute early, so a slow load never passes the target. Pausing one tick
+ * early moves the page's overdue ticker to that instant; the next tick then lands exactly on the target.
+ */
+async function openAt(page: Page, path: string, target: string): Promise<void> {
+  const targetMs = Date.parse(target);
+  await page.clock.install({ time: new Date(targetMs - LEAD_MS) });
+  await page.goto(path);
+  await page.clock.pauseAt(new Date(targetMs - TICK_MS));
+  await page.clock.runFor(TICK_MS);
+}
+
 const horizontalOverflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 
 test.describe("live schedule (UTC)", () => {
   test.use({ timezoneId: "UTC" });
 
   test("a running storm counts down to its end", async ({ page }) => {
-    await page.clock.install({ time: new Date("2026-10-10T23:59:59Z") });
-    await page.goto("/en/soul-storm/");
-    await page.clock.pauseAt(new Date("2026-10-11T00:00:00Z"));
-    await page.clock.runFor(1000); // one tick at T+delta: the countdown rounds up, so it reads exactly 20:00
+    await openAt(page, "/en/soul-storm/", "2026-10-11T00:00:00Z");
     const clock = page.getByTestId("soul-storm-clock");
     await expect(clock).toBeVisible();
     await expect(page.getByTestId("soul-storm-status")).toHaveText("Now: Humbler Huskland");
     await expect(page.getByTestId("soul-storm-countdown")).toHaveText(/(^|[^0-9])20:00([^0-9]|$)/);
-    await page.clock.runFor(1000);
+    await page.clock.runFor(TICK_MS);
     await expect(page.getByTestId("soul-storm-countdown")).toHaveText(/(^|[^0-9])19:59([^0-9]|$)/);
-    await page.clock.runFor(1000);
+    await page.clock.runFor(TICK_MS);
     await expect(page.getByTestId("soul-storm-countdown")).toHaveText(/(^|[^0-9])19:58([^0-9]|$)/);
   });
 
   test("between storms it names the next area and when it starts", async ({ page }) => {
-    await page.clock.install({ time: new Date("2026-10-11T00:24:59Z") });
-    await page.goto("/en/soul-storm/");
-    await page.clock.pauseAt(new Date("2026-10-11T00:25:00Z"));
-    await page.clock.runFor(1000);
+    await openAt(page, "/en/soul-storm/", "2026-10-11T00:25:00Z");
     await expect(page.getByTestId("soul-storm-status")).toHaveText("Next: Lullaby Hills");
     await expect(page.getByTestId("soul-storm-countdown")).toHaveText(/(^|[^0-9])15:00([^0-9]|$)/);
     await expect(page.getByTestId("soul-storm-upcoming").locator("tbody tr")).toHaveCount(7);
@@ -80,11 +89,13 @@ test.describe("static sections", () => {
     await expect(page.locator("body")).not.toContainText("Nearly as cool as Kira");
   });
 
-  test("does not overflow on a phone in a long language", async ({ page }) => {
-    await page.setViewportSize({ width: 412, height: 915 });
-    await page.goto("/de/soul-storm/");
-    expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
-  });
+  for (const lang of ["de", "ru"]) {
+    test(`does not overflow on a phone in a long language (${lang})`, async ({ page }) => {
+      await page.setViewportSize({ width: 412, height: 915 });
+      await page.goto(`/${lang}/soul-storm/`);
+      expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
+    });
+  }
 });
 
 test.describe("menu and search", () => {
