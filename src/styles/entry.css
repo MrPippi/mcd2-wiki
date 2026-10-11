@@ -168,11 +168,11 @@ a.fixed-name:hover .primary { text-decoration: underline 2px var(--accent); text
 }
 
 /* How to obtain: grouped lists of sources, each row a name with its tags. */
-.item-sources h3 { margin: 16px 0 6px; font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.item-sources h3 { margin: var(--space-4) 0 6px; font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
 .item-sources ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
-.item-sources li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; min-width: 0; padding: 10px 4px; border-bottom: 1px solid var(--rule); }
+.item-sources li { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) 10px; min-width: 0; padding: 10px var(--space-1); border-bottom: 1px solid var(--rule); }
 .item-sources li > a, .item-sources .source-name { font-family: var(--font-display); font-weight: 700; overflow-wrap: anywhere; min-width: 0; }
 .item-sources .item-alt { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); overflow-wrap: anywhere; min-width: 0; }
 .item-sources .tag { overflow-wrap: anywhere; min-width: 0; }
 .item-sources h3 .tag { text-transform: none; letter-spacing: normal; }
-.item-sources > .note { margin: 12px 0 0; }
+.item-sources > .note { margin: var(--space-3) 0 0; }

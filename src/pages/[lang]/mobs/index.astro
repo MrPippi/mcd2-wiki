@@ -25,9 +25,9 @@ const starts = groups.map((_, i) => groups.slice(0, i).reduce((sum, group) => su
 <Base lang={lang} title={t(lang, "mobs")} description={t(lang, "mobsIntro")}>
   <div class="catalog mobs-page">
     <header class="catalog-head mobs-head">
+      <p class="catalog-count kicker mono">{mobData.mobs.length}</p>
       <h1 class="catalog-title">
         <span data-pagefind-meta="title">{t(lang, "mobs")}</span>
-        <span class="count">({mobData.mobs.length})</span>
       </h1>
       {t(alt, "mobs") !== t(lang, "mobs") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "mobs")}</p>}
       <p class="mobs-intro">{t(lang, "mobsIntro")}</p>
