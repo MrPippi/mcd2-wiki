@@ -66,9 +66,19 @@ describe("UI translations", () => {
 
   it("translates the files instead of copying English", () => {
     for (const lang of TRANSLATED) {
-      for (const key of ["tagline", "notFoundBody", "obtainedFromBook", "disclaimer", "mapIntro"]) {
+      for (const key of ["tagline", "notFoundBody", "obtainedFromBook", "disclaimer", "mapIntro", "achievementsIntro", "achievementsCredit"]) {
         expect(UI_DICTS[lang].values[key], `${lang}.${key}`).not.toEqual(UI_DICTS.en.values[key]);
       }
+    }
+  });
+
+  it("credits Steam and keeps the date placeholder in the achievements credit", () => {
+    for (const lang of LANGS) {
+      const credit = plainText(UI_DICTS[lang].values.achievementsCredit ?? "");
+      expect(credit, lang).toContain("{date}");
+      expect(credit, lang).toContain("Steam");
+      expect(credit, lang).toContain("1912410");
+      expect(credit, lang).toMatch(/© Mojang Studios ?[/／] ?Microsoft/);
     }
   });
 

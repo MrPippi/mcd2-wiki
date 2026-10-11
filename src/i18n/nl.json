@@ -115,7 +115,13 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -263,5 +269,11 @@
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Naar de Nederlandse site",
-  "languageMenu": "Taal"
+  "languageMenu": "Taal",
+  "siteMenu": "Menu",
+  "achievements": "Prestaties",
+  "achievementsIntro": "Alle Steam-prestaties van Minecraft Dungeons II, gesorteerd op wereldwijd ontgrendelpercentage, van hoog naar laag.",
+  "hiddenAchievement": "Verborgen prestatie",
+  "unlockRate": "Wereldwijd ontgrendelpercentage",
+  "achievementsCredit": "Pictogrammen, namen, beschrijvingen en wereldwijde ontgrendelpercentages van de prestaties komen van Steam (app 1912410); percentages per {date}. © Mojang Studios / Microsoft"
 }

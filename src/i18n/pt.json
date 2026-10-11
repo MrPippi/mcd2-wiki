@@ -115,7 +115,13 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -264,5 +270,11 @@
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Ir para o site em português",
-  "languageMenu": "Idioma"
+  "languageMenu": "Idioma",
+  "siteMenu": "Menu",
+  "achievements": "Conquistas",
+  "achievementsIntro": "Todas as conquistas da Steam de Minecraft Dungeons II, ordenadas pela taxa global de desbloqueio, da maior para a menor.",
+  "hiddenAchievement": "Conquista oculta",
+  "unlockRate": "Taxa global de desbloqueio",
+  "achievementsCredit": "Ícones, nomes, descrições e taxas globais de desbloqueio das conquistas vêm da Steam (app 1912410); taxas de {date}. © Mojang Studios / Microsoft"
 }

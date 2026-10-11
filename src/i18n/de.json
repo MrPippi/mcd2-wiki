@@ -113,7 +113,13 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "_english": [
     "armorPiece",
@@ -265,5 +271,11 @@
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Zur deutschen Website",
-  "languageMenu": "Sprache"
+  "languageMenu": "Sprache",
+  "siteMenu": "Menü",
+  "achievements": "Erfolge",
+  "achievementsIntro": "Alle Steam-Erfolge von Minecraft Dungeons II, sortiert nach globaler Freischaltrate von der höchsten zur niedrigsten.",
+  "hiddenAchievement": "Verborgener Erfolg",
+  "unlockRate": "Globale Freischaltrate",
+  "achievementsCredit": "Symbole, Namen, Beschreibungen und globale Freischaltraten der Erfolge stammen von Steam (App 1912410); Raten mit Stand vom {date}. © Mojang Studios / Microsoft"
 }

@@ -115,7 +115,13 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -263,5 +269,11 @@
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Till den svenska webbplatsen",
-  "languageMenu": "Språk"
+  "languageMenu": "Språk",
+  "siteMenu": "Meny",
+  "achievements": "Prestationer",
+  "achievementsIntro": "Alla Steam-prestationer i Minecraft Dungeons II, sorterade efter global upplåsningsandel från högst till lägst.",
+  "hiddenAchievement": "Dold prestation",
+  "unlockRate": "Global upplåsningsandel",
+  "achievementsCredit": "Ikoner, namn, beskrivningar och globala upplåsningsandelar för prestationerna kommer från Steam (app 1912410); andelar per {date}. © Mojang Studios / Microsoft"
 }

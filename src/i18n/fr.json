@@ -115,7 +115,13 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -264,5 +270,11 @@
   "labelColon": " : ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Aller au site en français",
-  "languageMenu": "Langue"
+  "languageMenu": "Langue",
+  "siteMenu": "Menu",
+  "achievements": "Succès",
+  "achievementsIntro": "Tous les succès Steam de Minecraft Dungeons II, classés par taux de déblocage mondial, du plus élevé au plus bas.",
+  "hiddenAchievement": "Succès caché",
+  "unlockRate": "Taux de déblocage mondial",
+  "achievementsCredit": "Les icônes, noms, descriptions et taux de déblocage mondiaux des succès proviennent de Steam (app 1912410) ; taux au {date}. © Mojang Studios / Microsoft"
 }
