@@ -13,8 +13,9 @@ interface Props {
 const { lang, data } = Astro.props;
 const { generators } = data;
 const name = textOf(data, "generatorName", lang);
-const hints = [textOf(data, "generatorHint", lang), textOf(data, "shieldHint", lang)].flatMap((text) => text ?? []);
-const untranslated = anyUntranslated(data, ["generatorName", "generatorHint", "shieldHint"], lang);
+// The official objective keeps its {0} slot as the shared .placeholder mark (base.css), like item pages.
+const hints = [textOf(data, "objective", lang), textOf(data, "generatorHint", lang), textOf(data, "shieldHint", lang)].flatMap((text) => text ?? []);
+const untranslated = anyUntranslated(data, ["generatorName", "objective", "generatorHint", "shieldHint"], lang);
 const shared = sharedMultipliers(generators);
 const shieldText = (shield: SoulStormData["generators"][number]["shield"]): string =>
   shield

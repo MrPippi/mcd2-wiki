@@ -24,7 +24,7 @@
 .soul-storm-now { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2) var(--space-4); }
 .soul-storm-status { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: var(--fs-display-m); line-height: 1.2; min-width: 0; }
 .soul-storm-countdown {
-  margin: 0; font-family: var(--font-mono); font-size: 22px; font-variant-numeric: tabular-nums; color: var(--accent);
+  margin: 0; font-family: var(--font-mono); font-size: var(--fs-display-m); line-height: 1.2; font-variant-numeric: tabular-nums; color: var(--accent);
 }
 .soul-storm-timezone { margin: var(--space-3) 0 0; }
 
@@ -35,7 +35,7 @@
 .soul-storm-table th, .soul-storm-table td { padding: var(--space-2) var(--space-2); border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
 .soul-storm-table thead th { font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
 .soul-storm-table tbody th { font-weight: 400; color: var(--text-2); min-width: 8em; }
-.soul-storm-table td { font-family: var(--font-mono); font-size: 14px; }
+.soul-storm-table td { font-family: var(--font-mono); font-size: var(--fs-mono-m); }
 .soul-storm-upcoming td a { font-family: var(--font-body); }
 .soul-storm-cell-note, .soul-storm-line { display: block; }
 .soul-storm-cell-note { margin-top: var(--space-1); font-size: 0.85rem; color: var(--muted); }
@@ -70,5 +70,4 @@
 
 @media (max-width: 560px) {
   .soul-storm-summon { grid-template-columns: minmax(0, 1fr); gap: var(--space-1); }
-  .soul-storm-countdown { font-size: 18px; }
 }

@@ -39,6 +39,12 @@ describe("Soul Storm page", () => {
     const rotation = html.slice(html.indexOf('data-testid="soul-storm-rotation"'));
     expect(count(rotation.slice(0, rotation.indexOf("</ol>") + 400), "tag warn")).toBe(1);
   });
+  it("shows the official objective with its placeholder in the generator section", async () => {
+    const html = await render("en");
+    const generators = html.slice(html.indexOf('data-testid="soul-storm-generators"'));
+    expect(generators).toContain('data-slot="0"');
+    expect(generators).toContain("Storm Generators to quell");
+  });
   it("leaves out the unlock section when the data has none", async () => {
     expect(await render("en", { ...soulStormData, unlock: null })).not.toContain('data-testid="soul-storm-unlock"');
   });
