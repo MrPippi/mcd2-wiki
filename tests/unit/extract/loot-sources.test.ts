@@ -7,7 +7,9 @@ import { loadLootTables } from "../../../scripts/extract/loot-tables";
 import { buildAreaNamer } from "../../../scripts/extract/mob-areas";
 import { loadMobTables } from "../../../scripts/extract/mob-tables";
 import { loadLocales } from "../../../scripts/extract/parse-locale";
+import { ItemSourcesSchema, type ItemSourcesData } from "../../../scripts/extract/mob-schema";
 import { EntrySchema } from "../../../scripts/extract/schemas";
+import { sourcesFor } from "../../../src/lib/item-sources";
 import { makeEntry } from "../../helpers/entries";
 import { makeLocales, ns } from "../../helpers/locales";
 import { loc } from "../../helpers/localized";
@@ -66,21 +68,50 @@ const entries = [
 const locales = makeLocales({});
 const namer = (tag: string) => (tag === "SW.Area.Plains.A1" ? loc({ en: "Creeper Woods", zh: "苦力怕森林" }) : undefined);
 
-function run(overrides: Partial<typeof base> = {}, nameKeys = {}, localeFiles = locales) {
+function build(overrides: Partial<typeof base> = {}, nameKeys = {}, localeFiles = locales) {
   const tables = lootTables({ ...base, ...overrides });
   return buildItemSources({ tables, index: buildItemIndex(tables, entries), namer, locales: localeFiles, nameKeys });
 }
 
+/** Every item's resolved view (names joined), as the page sees it. */
+const resolvedAll = (data: ItemSourcesData) => Object.fromEntries(Object.keys(data.items).map((key) => [key, sourcesFor(data, key)]));
+
+function run(overrides: Partial<typeof base> = {}, nameKeys = {}, localeFiles = locales) {
+  const built = build(overrides, nameKeys, localeFiles);
+  return { raw: built.data, data: resolvedAll(built.data), issues: built.issues };
+}
+
+const ids = (list: readonly { id: string }[] | undefined) => (list ?? []).map((item) => item.id);
+
 describe("buildItemSources", () => {
   it("lists the area whose drop pool contains a weapon (PlainsA1 contains Sickles)", () => {
     const sickles = run().data["melee/sickles"];
-    expect(sickles?.areas).toEqual([{ areaId: "SW.Area.Plains.A1", name: expect.objectContaining({ en: "Creeper Woods", zh: "苦力怕森林" }) }]);
+    expect(sickles?.areas).toEqual([{ id: "area:SW.Area.Plains.A1", kind: "area", name: expect.objectContaining({ en: "Creeper Woods", zh: "苦力怕森林" }), untranslated: [] }]);
+  });
+
+  it("names each source once and lists ids on the item (normalised shape)", () => {
+    const { raw } = run();
+    expect(raw.items["melee/sickles"]).toEqual({
+      areas: ["area:SW.Area.Plains.A1"],
+      chests: [{ id: "chest:FancyChest", pool: "area" }],
+      quests: [],
+      merchants: [{ id: "merchant:VillageMerchant", category: "SW.Item.Property.MeleeWeapon" }],
+      bookPools: [],
+    });
+    expect(raw.sources["chest:FancyChest"]).toEqual({ kind: "chest", name: expect.objectContaining({ en: "Chest: Fancy Chest" }), untranslated: expect.arrayContaining(["ja"]) });
+    expect(ItemSourcesSchema.parse(raw)).toEqual(raw);
+  });
+
+  it("lists only sources some item uses", () => {
+    const { raw } = run();
+    const used = new Set(Object.values(raw.items).flatMap((item) => [...item.areas, ...item.bookPools, ...[...item.chests, ...item.quests, ...item.merchants].map((entry) => entry.id)]));
+    expect(Object.keys(raw.sources).sort()).toEqual([...used].sort());
   });
 
   it("expands an armor set tag so each piece has the area", () => {
     const { data } = run();
-    expect(data["armor/mystic-helmet"]?.areas.map((area) => area.areaId)).toEqual(["SW.Area.Plains.A1"]);
-    expect(data["armor/mystic-chest"]?.areas.map((area) => area.areaId)).toEqual(["SW.Area.Plains.A1"]);
+    expect(ids(data["armor/mystic-helmet"]?.areas)).toEqual(["area:SW.Area.Plains.A1"]);
+    expect(ids(data["armor/mystic-chest"]?.areas)).toEqual(["area:SW.Area.Plains.A1"]);
     expect(data["armor/mushroom-helmet"]?.areas).toEqual([]);
   });
 
@@ -88,22 +119,22 @@ describe("buildItemSources", () => {
     expect(run().data["melee/sword"]?.areas ?? []).toEqual([]);
   });
 
-  it("names an area without a game name in English words, marks it untranslated and reports it", () => {
+  it("names an area without a game name in English words, marks that source untranslated and reports it", () => {
     const area = [...base.area, lootRow("ForestA1", "SW.Area.Forest.A1.Inner", [slot("Item", 0, 0, 0, true, ["SW.Item.Sickles"])])];
     const { data, issues } = run({ area });
-    const forest = data["melee/sickles"]?.areas.find((item) => item.areaId === "SW.Area.Forest.A1");
+    const forest = data["melee/sickles"]?.areas.find((item) => item.id === "area:SW.Area.Forest.A1");
     expect(forest?.name.en).toBe("Forest A1");
     expect(forest?.name.ja).toBe("Forest A1");
-    expect(data["melee/sickles"]?.untranslated).toContain("zh");
+    expect(forest?.untranslated).toContain("zh");
     expect(issues).toContainEqual({ type: "source-name-fallback", detail: "SW.Area.Forest.A1" });
   });
 
-  it("marks quest rewards as guaranteed and says 2 of 4 for the mushroom set", () => {
+  it("lists guaranteed quest rewards and says 2 of 4 for the mushroom set", () => {
     const { data } = run();
     expect(data["armor/mushroom-chest"]?.quests).toEqual([
-      { id: "QuestArmourMushroomSet", name: expect.objectContaining({ en: "Quest reward: Armour Mushroom Set" }), guaranteed: true, picks: { count: 2, of: 4 } },
+      expect.objectContaining({ id: "quest:QuestArmourMushroomSet", name: expect.objectContaining({ en: "Quest reward: Armour Mushroom Set" }), picks: { count: 2, of: 4 } }),
     ]);
-    expect(data["melee/sword"]?.quests).toEqual([{ id: "QuestMeleeSword", name: expect.objectContaining({ en: "Quest reward: Melee Sword" }), guaranteed: true }]);
+    expect(data["melee/sword"]?.quests).toEqual([{ id: "quest:QuestMeleeSword", kind: "quest", name: expect.objectContaining({ en: "Quest reward: Melee Sword" }), untranslated: expect.any(Array) }]);
   });
 
   it("ignores a quest row that is not guaranteed, and reports it", () => {
@@ -114,13 +145,13 @@ describe("buildItemSources", () => {
 
   it("counts a quest with no fixed drop but a certain roll as guaranteed", () => {
     const quest = [lootRow("QuestCertainSickles", "SW.Quest.Loot.Melee.Sickles", [slot("SpecialGear", 0, 1, 1, false, ["SW.Item.Sickles"])])];
-    expect(run({ quest }).data["melee/sickles"]?.quests.map((item) => item.id)).toEqual(["QuestCertainSickles"]);
+    expect(ids(run({ quest }).data["melee/sickles"]?.quests)).toEqual(["quest:QuestCertainSickles"]);
   });
 
   it("separates chests that draw from the area pool from chests with fixed contents", () => {
     const { data } = run();
-    expect(data["melee/sickles"]?.chests).toEqual([{ id: "FancyChest", name: expect.objectContaining({ en: "Chest: Fancy Chest" }), pool: "area" }]);
-    expect(data["artifact/firework-quiver"]?.chests).toEqual([{ id: "CampWoodenChest", name: expect.objectContaining({ en: "Chest: Camp Wooden Chest" }), pool: "fixed" }]);
+    expect(data["melee/sickles"]?.chests).toEqual([expect.objectContaining({ id: "chest:FancyChest", name: expect.objectContaining({ en: "Chest: Fancy Chest" }), pool: "area" })]);
+    expect(data["artifact/firework-quiver"]?.chests).toEqual([expect.objectContaining({ id: "chest:CampWoodenChest", name: expect.objectContaining({ en: "Chest: Camp Wooden Chest" }), pool: "fixed" })]);
     expect(data["melee/sword"]?.chests ?? []).toEqual([]);   // Sword is in no area pool, so the fancy chest cannot give it
   });
 
@@ -131,17 +162,17 @@ describe("buildItemSources", () => {
     expect(issues).toContainEqual({ type: "loot-chest-by-category", detail: "KeyChest: SW.Item.Property.MeleeWeapon" });
   });
 
-  it("reports a chest whose only slot has no name instead of guessing what it gives", () => {
+  it("counts an unnamed slot's item list as the chest's fixed contents, and still reports the slot", () => {
     const lootActor = [lootRow("CampWoodenChest", "SW.LootActor.CampWoodenChest", [slot("", 1, 0, 1, true, ["SW.Item.Artifact.FireworkQuiver"])])];
-    const { data, issues } = run({ lootActor });
-    expect(data["artifact/firework-quiver"]).toBeUndefined();
+    const { raw, issues } = run({ lootActor });
+    expect(raw.items["artifact/firework-quiver"]?.chests).toEqual([{ id: "chest:CampWoodenChest", pool: "fixed" }]);
     expect(issues).toContainEqual({ type: "loot-slot-unnamed", detail: "CampWoodenChest" });
   });
 
   it("gives merchants by category only, keeps the category tag, and not for unique items", () => {
     const { data } = run();
     expect(data["melee/sword"]?.merchants).toEqual([
-      { id: "VillageMerchant", name: expect.objectContaining({ en: "Merchant: Village Merchant" }), byCategory: true, category: "SW.Item.Property.MeleeWeapon" },
+      expect.objectContaining({ id: "merchant:VillageMerchant", name: expect.objectContaining({ en: "Merchant: Village Merchant" }), category: "SW.Item.Property.MeleeWeapon" }),
     ]);
     expect(data["melee/sword-unique1"]?.merchants ?? []).toEqual([]);
     expect(data["armor/mushroom-chest"]?.merchants ?? []).toEqual([]);
@@ -152,38 +183,32 @@ describe("buildItemSources", () => {
     expect(run({ generic }).data["melee/sickles"]?.merchants).toEqual([]);
   });
 
-  it("uses the game's merchant title when the key is known", () => {
+  it("uses the game's merchant title when the key is known, with nothing untranslated", () => {
     const official = makeLocales({ [ns("VendorLabels")]: { vendor_village_merchant_title: { en: "Town Merchant", zh: "城鎮商人" } } });
     const keys = { VillageMerchant: { namespace: ns("VendorLabels"), key: "vendor_village_merchant_title" } };
     const merchant = run({}, keys, official).data["melee/sword"]?.merchants[0];
     expect(merchant?.name.zh).toBe("城鎮商人");
+    expect(merchant?.untranslated).toEqual([]);
   });
 
   it("puts books in their pools, drops the excluded quest books from the all-books pool, and still lists them as quest rewards", () => {
     const { data } = run();
-    expect(data["enchantment-book/arcane"]?.bookPools.map((pool) => pool.id)).toEqual(["AllEnchantmentBooks", "EnchantmentBooksCommon"]);
+    expect(ids(data["enchantment-book/arcane"]?.bookPools)).toEqual(["bookPool:AllEnchantmentBooks", "bookPool:EnchantmentBooksCommon"]);
     expect(data["enchantment-book/piercing"]?.bookPools ?? []).toEqual([]);
     expect(data["enchantment-book/radiance"]?.bookPools ?? []).toEqual([]);
-    expect(data["enchantment-book/piercing"]?.quests.map((quest) => quest.id)).toEqual(["EnchantsmithBookReward"]);
-    expect(data["enchantment-book/ricochet"]?.bookPools.map((pool) => pool.id)).toEqual(["AllEnchantmentBooks", "EnchantmentBooksCommon"]);
+    expect(ids(data["enchantment-book/piercing"]?.quests)).toEqual(["quest:EnchantsmithBookReward"]);
+    expect(ids(data["enchantment-book/ricochet"]?.bookPools)).toEqual(["bookPool:AllEnchantmentBooks", "bookPool:EnchantmentBooksCommon"]);
     expect(data["enchantment-book/arcane"]?.bookPools[1]?.name.en).toBe("Enchantment book pool: Common");
   });
 
-  it("marks names that fell back to English as untranslated, and leaves official area names alone", () => {
-    const sickles = run().data["melee/sickles"];
-    expect(sickles?.untranslated).toContain("ja");   // the chest's name is English words
-    expect(sickles?.untranslated).not.toContain("en");
-    const unique = run().data["melee/sword-unique1"];
-    expect(unique).toBeUndefined();   // no source at all -> no entry
-  });
-
-  it("leaves out untranslated when every name is the game's own", () => {
-    const official = makeLocales({ [ns("VendorLabels")]: { vendor_village_merchant_title: { en: "Town Merchant", zh: "城鎮商人" } } });
-    const keys = { VillageMerchant: { namespace: ns("VendorLabels"), key: "vendor_village_merchant_title" } };
-    const generic = [base.generic[0]!];
-    const sword = run({ generic, quest: [], lootActor: [] }, keys, official).data["melee/sword"];
-    expect(sword?.merchants).toHaveLength(1);
-    expect(sword && "untranslated" in sword).toBe(false);
+  it("keeps the untranslated languages on the source, never on the item, and leaves official area names alone", () => {
+    const { raw, data } = run();
+    expect(raw.sources["chest:FancyChest"]?.untranslated).toContain("ja");   // the chest's name is English words
+    expect(raw.sources["chest:FancyChest"]?.untranslated).not.toContain("en");
+    expect(raw.sources["area:SW.Area.Plains.A1"]?.untranslated).toEqual([]);
+    expect(Object.values(raw.items).some((item) => "untranslated" in item)).toBe(false);
+    expect(data["melee/sword-unique1"]).toBeUndefined();   // no source at all -> no entry
+    expect(sourcesFor(raw, "melee/sword-unique1")).toBeUndefined();
   });
 
   it("reports data problems: odd spellings, odd row names, tags that match no item", () => {
@@ -226,33 +251,40 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
     })();
     return cached;
   };
+  const view = async (key: string) => sourcesFor((await real()).data, key);
 
-  it("finds sources for a couple of hundred items, never a merchant for a unique one", async () => {
+  it("finds sources for a couple of hundred items, never a merchant for a unique one, and fits the size limit", async () => {
     const { data } = await real();
-    expect(Object.keys(data).length).toBeGreaterThan(200);
-    expect(Object.keys(data).length).toBeLessThan(320);
-    expect(Object.entries(data).filter(([key, sources]) => sources.merchants.length > 0 && key.endsWith("unique")).map(([key]) => key)).toEqual([]);
+    const keys = Object.keys(data.items);
+    expect(keys.length).toBeGreaterThan(200);
+    expect(keys.length).toBeLessThan(320);
+    expect(Object.entries(data.items).filter(([key, item]) => item.merchants.length > 0 && key.endsWith("unique")).map(([key]) => key)).toEqual([]);
+    expect(JSON.stringify(data).length).toBeLessThan(200_000);
   });
 
   it("gives Sickles its areas, the area chests, its quest and the town merchant's melee category", async () => {
-    const sickles = (await real()).data["melee/sickles"];
-    expect(sickles?.areas.map((area) => area.areaId)).toContain("SW.Area.Plains.A1");
-    expect(sickles?.chests.map((chest) => `${chest.id}:${chest.pool}`)).toEqual(["FancyChest:area", "WellspringChest:area"]);
-    expect(sickles?.quests.map((quest) => quest.id)).toEqual(["QuestMeleeSickles"]);
-    expect(sickles?.merchants).toEqual([expect.objectContaining({ id: "VillageMerchant", category: "SW.Item.Property.MeleeWeapon" })]);
+    const sickles = await view("melee/sickles");
+    expect(ids(sickles?.areas)).toContain("area:SW.Area.Plains.A1");
+    expect(sickles?.chests.map((chest) => `${chest.id}:${chest.pool}`)).toEqual(["chest:FancyChest:area", "chest:WellspringChest:area"]);
+    expect(ids(sickles?.quests)).toEqual(["quest:QuestMeleeSickles"]);
+    expect(sickles?.merchants).toEqual([expect.objectContaining({ id: "merchant:VillageMerchant", category: "SW.Item.Property.MeleeWeapon" })]);
     expect(sickles?.merchants[0]?.name.zh).toBe("城鎮商人");
   });
 
   it("says 2 of 4 for the mushroom chestplate's quest", async () => {
-    const quest = (await real()).data["armor/mushroom-chest"]?.quests.find((item) => item.id === "QuestArmourMushroomSet");
+    const quest = (await view("armor/mushroom-chest"))?.quests.find((item) => item.id === "quest:QuestArmourMushroomSet");
     expect(quest?.picks).toEqual({ count: 2, of: 4 });
   });
 
+  it("gives the Firework Quiver the camp chest's fixed contents", async () => {
+    const chests = (await view("artifact/firework-quiver"))?.chests ?? [];
+    expect(chests).toContainEqual(expect.objectContaining({ id: "chest:CampWoodenChest", pool: "fixed" }));
+  });
+
   it("keeps Piercing out of the all-books pool but lists the enchantsmith quest", async () => {
-    const { data } = await real();
-    expect(data["enchantment-book/piercing"]?.bookPools ?? []).toEqual([]);
-    expect(data["enchantment-book/piercing"]?.quests.map((quest) => quest.id)).toEqual(["QuestEnchantsmithBookReward"]);
-    expect(data["enchantment-book/ricochet"]?.bookPools.map((pool) => pool.id)).toEqual(["AllEnchantmentBooks", "EnchantmentBooksDeepDark"]);
+    expect((await view("enchantment-book/piercing"))?.bookPools ?? []).toEqual([]);
+    expect(ids((await view("enchantment-book/piercing"))?.quests)).toEqual(["quest:QuestEnchantsmithBookReward"]);
+    expect(ids((await view("enchantment-book/ricochet"))?.bookPools)).toEqual(["bookPool:AllEnchantmentBooks", "bookPool:EnchantmentBooksDeepDark"]);
   });
 
   it("reports the known data problems", async () => {

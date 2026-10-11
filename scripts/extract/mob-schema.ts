@@ -80,24 +80,28 @@ export type Mob = z.infer<typeof MobSchema>;
 export const MobDataSchema = z.object({ mobs: z.array(MobSchema) });
 export type MobData = z.infer<typeof MobDataSchema>;
 
+export const SOURCE_KINDS = ["area", "chest", "quest", "merchant", "bookPool"] as const;
+export type SourceKindName = (typeof SOURCE_KINDS)[number];
+
+/** A place an item can come from, named once (Ruling 25); its untranslated languages live here only (Ruling 27). */
+export const LootSourceSchema = z.object({ kind: z.enum(SOURCE_KINDS), name: LocalizedSchema, untranslated: z.array(z.enum(LANGS)) });
+export type LootSource = z.infer<typeof LootSourceSchema>;
+
+/** One item's sources, as ids into ItemSourcesData.sources. */
 export const ItemSourceSchema = z.object({
-  areas: z.array(z.object({ areaId: z.string(), name: LocalizedSchema })),
-  chests: z.array(z.object({ id: z.string(), name: LocalizedSchema, pool: z.enum(["area", "fixed"]) })),
-  quests: z.array(
-    z.object({
-      id: z.string(),
-      name: LocalizedSchema,
-      guaranteed: z.literal(true),
-      picks: z.object({ count: z.number(), of: z.number() }).optional(),
-    }),
-  ),
-  // category: the pool tag the item matched (e.g. SW.Item.Property.MeleeWeapon); the page label comes from it.
-  merchants: z.array(z.object({ id: z.string(), name: LocalizedSchema, byCategory: z.literal(true), category: z.string() })),
-  bookPools: z.array(z.object({ id: z.string(), name: LocalizedSchema })),
-  untranslated: z.array(z.enum(LANGS)).optional(),
+  areas: z.array(z.string()),
+  chests: z.array(z.object({ id: z.string(), pool: z.enum(["area", "fixed"]) })),
+  /** Only guaranteed quest rewards are listed; picks appears when the quest gives fewer items than it lists. */
+  quests: z.array(z.object({ id: z.string(), picks: z.object({ count: z.number(), of: z.number() }).optional() })),
+  /** category: the pool tag the item matched (e.g. SW.Item.Property.MeleeWeapon); the page label comes from it (Ruling 6). */
+  merchants: z.array(z.object({ id: z.string(), category: z.string() })),
+  bookPools: z.array(z.string()),
 });
 export type ItemSources = z.infer<typeof ItemSourceSchema>;
 
-/** Keyed by `${category}/${slug}`. */
-export const ItemSourcesSchema = z.record(z.string(), ItemSourceSchema);
+/** sources keyed by source id ("<kind>:<row id>", e.g. "chest:FancyChest"); items keyed by "<category>/<slug>". */
+export const ItemSourcesSchema = z.object({
+  sources: z.record(z.string(), LootSourceSchema),
+  items: z.record(z.string(), ItemSourceSchema),
+});
 export type ItemSourcesData = z.infer<typeof ItemSourcesSchema>;

@@ -1,14 +1,13 @@
 /** Reverse index "item -> where to get it": area pools, chests, guaranteed quest rewards, merchants by category, book pools. */
 import type { Lang } from "./config";
 import { issue, type Issue } from "./issues";
-import { LANGS } from "./langs";
 import type { ItemIndex, ItemRef } from "./loot-items";
 import { exclusionRowsOf, excludedTags, poolTags, rawSlots, resolvePool, rowPool } from "./loot-pools";
 import { reportLootTags } from "./loot-source-report";
 import { hasPoolTags, slotKeyOf, slotsOf } from "./loot-slots";
 import type { LootRow, LootSlotValue, LootTables } from "./loot-tables";
 import { areaPrefix, type AreaNamer } from "./mob-areas";
-import { ItemSourcesSchema, type ItemSources, type ItemSourcesData, type LootSlotKey } from "./mob-schema";
+import { ItemSourcesSchema, type ItemSources, type ItemSourcesData, type LootSlotKey, type LootSource, type SourceKindName } from "./mob-schema";
 import { tagKey } from "./mob-tags";
 import type { LocaleFile } from "./schemas";
 import { SOURCE_NAME_KEYS, sourceName, type NameKeys, type SourceKind, type SourceName } from "./source-names";
@@ -21,22 +20,20 @@ export interface SourcesInput {
   readonly nameKeys?: NameKeys;
 }
 
-type Area = ItemSources["areas"][number];
 type Chest = ItemSources["chests"][number];
 type Quest = ItemSources["quests"][number];
 type Merchant = ItemSources["merchants"][number];
-type BookPool = ItemSources["bookPools"][number];
 
-/** One source for one item, with the languages its name shows in English. */
+/** One source for one item. */
 interface Contrib<T> {
   readonly ref: ItemRef;
   readonly entry: T;
-  readonly untranslated: readonly Lang[];
 }
 
-interface Names {
-  readonly of: (kind: SourceKind, id: string) => SourceName;
-  readonly area: (areaId: string) => SourceName;
+/** Names each source once and hands out its id ("<kind>:<row id>"); fallback names are reported once per row id. */
+interface Registry {
+  readonly add: (kind: SourceKindName, id: string) => string;
+  readonly sources: () => Record<string, LootSource>;
   readonly issues: () => Issue[];
 }
 
@@ -44,7 +41,7 @@ interface Context {
   readonly tables: LootTables;
   readonly index: ItemIndex;
   readonly byTypeTag: ReadonlyMap<string, LootRow>;
-  readonly names: Names;
+  readonly names: Registry;
 }
 
 const STRIP: Readonly<Record<SourceKind, RegExp | undefined>> = { quest: /^Quest/, bookPool: /^EnchantmentBooks(?=[A-Z])/, chest: undefined, merchant: undefined };
@@ -56,42 +53,41 @@ const CHEST_SLOTS: readonly LootSlotKey[] = ["item", "specialGear", "talismans"]
 const QUEST_SLOTS: readonly LootSlotKey[] = ["specialGear", "item", "enchantedBook"];
 const BOOK_SLOTS: readonly LootSlotKey[] = ["enchantedBook", "item"];
 
-/** Memoised names; each id that fell back to English words is reported once. */
-function makeNames(input: SourcesInput): Names {
+const compareIds = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
+
+function makeRegistry(input: SourcesInput): Registry {
   const keys = input.nameKeys ?? SOURCE_NAME_KEYS;
-  const cache = new Map<string, SourceName>();
+  const named = new Map<string, LootSource>();
   const fallbacks: string[] = [];
-  const remember = (cacheKey: string, id: string, make: () => SourceName): SourceName => {
-    const known = cache.get(cacheKey);
-    if (known) return known;
-    const made = make();
-    cache.set(cacheKey, made);
-    if (!made.official) fallbacks.push(id);
-    return made;
+  const nameOf = (kind: SourceKindName, id: string): SourceName => {
+    if (kind !== "area") return sourceName(id, keys, input.locales, STRIP[kind], kind);
+    const name = input.namer(id);
+    return name ? { name, untranslated: [], official: true } : sourceName(id, {}, input.locales, AREA_STRIP);
   };
   return {
-    of: (kind, id) => remember(`${kind}:${id}`, id, () => sourceName(id, keys, input.locales, STRIP[kind], kind)),
-    area: (areaId) => remember(`area:${areaId}`, areaId, () => {
-      const name = input.namer(areaId);
-      return name ? { name, untranslated: [], official: true } : sourceName(areaId, {}, input.locales, AREA_STRIP);
-    }),
+    add: (kind, id) => {
+      const sourceId = `${kind}:${id}`;
+      if (!named.has(sourceId)) {
+        const made = nameOf(kind, id);
+        named.set(sourceId, { kind, name: made.name, untranslated: [...made.untranslated] });
+        if (!made.official) fallbacks.push(id);
+      }
+      return sourceId;
+    },
+    sources: () => Object.fromEntries([...named].sort(([a], [b]) => compareIds(a, b))),
     issues: () => fallbacks.map((id) => issue("source-name-fallback", id)),
   };
 }
 
-const contrib = <T>(refs: readonly ItemRef[], entry: T, name: SourceName): Contrib<T>[] =>
-  refs.map((ref) => ({ ref, entry, untranslated: name.untranslated }));
+const contrib = <T>(refs: readonly ItemRef[], entry: T): Contrib<T>[] => refs.map((ref) => ({ ref, entry }));
 
 /** Area rows (not the global SW.Area row): every item their Item pool gives. */
-function areaSources(ctx: Context): Contrib<Area>[] {
+function areaSources(ctx: Context): Contrib<string>[] {
   return ctx.tables.area
     .filter((row) => tagKey(row.TypeTag.TagName) !== GLOBAL_AREA)
     .flatMap((row) => {
       const refs = resolvePool(row, "item", ctx.byTypeTag, ctx.index).items.map((item) => item.ref);
-      if (refs.length === 0) return [];
-      const areaId = areaPrefix(row.TypeTag.TagName);
-      const name = ctx.names.area(areaId);
-      return contrib(refs, { areaId, name: name.name }, name);
+      return refs.length === 0 ? [] : contrib(refs, ctx.names.add("area", areaPrefix(row.TypeTag.TagName)));
     });
 }
 
@@ -102,29 +98,28 @@ function fixedChestSlot(ctx: Context, row: LootRow, slot: LootSlotValue): { item
   const categories = tags.filter((tag) => ctx.index.resolve(tag).length === 0 && ctx.index.withTrait(tag).length > 0);
   const issues = categories.length > 0 ? [issue("loot-chest-by-category", `${row.Name}: ${categories.join(", ")}`)] : [];
   if (refs.length === 0) return { items: [], issues };
-  const name = ctx.names.of("chest", row.Name);
-  return { items: contrib(refs, { id: row.Name, name: name.name, pool: "fixed" as const }, name), issues };
+  return { items: contrib(refs, { id: ctx.names.add("chest", row.Name), pool: "fixed" as const }), issues };
 }
 
-/** A slot whose name is no known loot slot but which lists items: what the game does with it is unclear, so it is only reported. */
-const hasUnnamedPool = (row: LootRow): boolean =>
-  Object.entries(row.LootDropDefinition.LootSlots ?? {}).some(([rawKey, slot]) => slotKeyOf(rawKey) === undefined && hasPoolTags(slot));
+/** Slots whose name is no known loot slot but which list items (CampWoodenChest): they count as fixed contents (Ruling 26). */
+const unnamedPoolSlots = (row: LootRow): LootSlotValue[] =>
+  Object.entries(row.LootDropDefinition.LootSlots ?? {}).flatMap(([rawKey, slot]) => (slotKeyOf(rawKey) === undefined && hasPoolTags(slot) ? [slot] : []));
 
 function chestSources(ctx: Context, inAreaPools: readonly ItemRef[]): { items: Contrib<Chest>[]; issues: Issue[] } {
   const fixed: Contrib<Chest>[] = [];
   const fromArea: Contrib<Chest>[] = [];
-  const issues: Issue[] = ctx.tables.lootActor.filter(hasUnnamedPool).map((row) => issue("loot-slot-unnamed", row.Name));
+  const issues: Issue[] = [];
   for (const row of ctx.tables.lootActor) {
-    for (const key of CHEST_SLOTS) {
-      const slot = slotsOf(row).get(key);
-      if (slot === undefined) continue;
+    const unnamed = unnamedPoolSlots(row);
+    if (unnamed.length > 0) issues.push(issue("loot-slot-unnamed", row.Name));
+    const named = CHEST_SLOTS.flatMap((key) => slotsOf(row).get(key) ?? []);
+    for (const slot of [...named, ...unnamed]) {
       if (hasPoolTags(slot)) {
         const found = fixedChestSlot(ctx, row, slot);
         fixed.push(...found.items);
         issues.push(...found.issues);
       } else if (slot.InheritParentDropTable && inAreaPools.length > 0) {
-        const name = ctx.names.of("chest", row.Name);
-        fromArea.push(...contrib(inAreaPools, { id: row.Name, name: name.name, pool: "area" as const }, name));
+        fromArea.push(...contrib(inAreaPools, { id: ctx.names.add("chest", row.Name), pool: "area" as const }));
       }
     }
   }
@@ -152,9 +147,8 @@ function questSources(ctx: Context): { items: Contrib<Quest>[]; issues: Issue[] 
       }
       const refs = resolvePool(row, key, ctx.byTypeTag, ctx.index).items.map((item) => item.ref);
       if (refs.length === 0) continue;
-      const name = ctx.names.of("quest", row.Name);
       const picks = count < refs.length ? { picks: { count, of: refs.length } } : {};
-      items.push(...contrib(refs, { id: row.Name, name: name.name, guaranteed: true as const, ...picks }, name));
+      items.push(...contrib(refs, { id: ctx.names.add("quest", row.Name), ...picks }));
     }
   }
   return { items, issues: [...notGuaranteed].map((name) => issue("loot-quest-not-guaranteed", name)) };
@@ -172,29 +166,23 @@ function merchantSources(ctx: Context): Contrib<Merchant>[] {
       return rowPool(row, "item", ctx.byTypeTag).flatMap((category) => {
         if (ctx.index.resolve(category).length > 0) return [];   // an exact item tag is not a category
         const refs = ctx.index.withTrait(category).filter(allowed);
-        if (refs.length === 0) return [];
-        const name = ctx.names.of("merchant", row.Name);
-        return contrib(refs, { id: row.Name, name: name.name, byCategory: true as const, category }, name);
+        return refs.length === 0 ? [] : contrib(refs, { id: ctx.names.add("merchant", row.Name), category });
       });
     });
 }
 
 /** Book pools: trait tags expand to every book, minus the books of the exclusion rows the pool names in its traits. */
-function bookSources(ctx: Context): Contrib<BookPool>[] {
+function bookSources(ctx: Context): Contrib<string>[] {
   return ctx.tables.generic
     .filter((row) => tagKey(row.TypeTag.TagName).startsWith(BOOK_POOL_PREFIX))
     .flatMap((row) => {
       const refs = BOOK_SLOTS.flatMap((key) => resolvePool(row, key, ctx.byTypeTag, ctx.index).items.map((item) => item.ref));
-      if (refs.length === 0) return [];
-      const name = ctx.names.of("bookPool", row.Name);
-      return contrib(refs, { id: row.Name, name: name.name }, name);
+      return refs.length === 0 ? [] : contrib(refs, ctx.names.add("bookPool", row.Name));
     });
 }
 
-const compareIds = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
-
 /** Item key -> its sources, each id once (the first one wins), sorted by id. */
-function grouped<T>(items: readonly Contrib<T>[], idOf: (entry: T) => string): ReadonlyMap<string, readonly T[]> {
+function grouped<T>(items: readonly Contrib<T>[], idOf: (entry: T) => string): ReadonlyMap<string, T[]> {
   const result = new Map<string, T[]>();
   const seen = new Set<string>();
   for (const item of items) {
@@ -207,38 +195,33 @@ function grouped<T>(items: readonly Contrib<T>[], idOf: (entry: T) => string): R
 }
 
 interface AllSources {
-  readonly areas: readonly Contrib<Area>[];
+  readonly areas: readonly Contrib<string>[];
   readonly chests: readonly Contrib<Chest>[];
   readonly quests: readonly Contrib<Quest>[];
   readonly merchants: readonly Contrib<Merchant>[];
-  readonly bookPools: readonly Contrib<BookPool>[];
+  readonly bookPools: readonly Contrib<string>[];
 }
 
-/** One ItemSources per item with any source; `untranslated` is the union over its names, left out when empty. */
-function assemble(all: AllSources): ItemSourcesData {
+/** One ItemSources per item with any source. */
+function assembleItems(all: AllSources): Record<string, ItemSources> {
+  const self = (id: string): string => id;
   const byId = (entry: { id: string }): string => entry.id;
   const lists = {
-    areas: grouped(all.areas, (entry) => entry.areaId),
+    areas: grouped(all.areas, self),
     chests: grouped(all.chests, byId),
     quests: grouped(all.quests, byId),
     merchants: grouped(all.merchants, byId),
-    bookPools: grouped(all.bookPools, byId),
+    bookPools: grouped(all.bookPools, self),
   };
   const every = [...all.areas, ...all.chests, ...all.quests, ...all.merchants, ...all.bookPools];
-  const english = new Map<string, Set<Lang>>();
-  for (const item of every) english.set(item.ref.key, new Set([...(english.get(item.ref.key) ?? []), ...item.untranslated]));
-  const keys = [...english.keys()].sort(compareIds);
-  return ItemSourcesSchema.parse(Object.fromEntries(keys.map((key) => {
-    const untranslated = LANGS.filter((lang) => english.get(key)?.has(lang));
-    return [key, {
-      areas: lists.areas.get(key) ?? [],
-      chests: lists.chests.get(key) ?? [],
-      quests: lists.quests.get(key) ?? [],
-      merchants: lists.merchants.get(key) ?? [],
-      bookPools: lists.bookPools.get(key) ?? [],
-      ...(untranslated.length > 0 ? { untranslated } : {}),
-    }];
-  })));
+  const keys = [...new Set(every.map((item) => item.ref.key))].sort(compareIds);
+  return Object.fromEntries(keys.map((key) => [key, {
+    areas: lists.areas.get(key) ?? [],
+    chests: lists.chests.get(key) ?? [],
+    quests: lists.quests.get(key) ?? [],
+    merchants: lists.merchants.get(key) ?? [],
+    bookPools: lists.bookPools.get(key) ?? [],
+  }]));
 }
 
 const lootRows = (tables: LootTables): LootRow[] => [...tables.area, ...tables.generic, ...tables.mob, ...tables.lootActor, ...tables.quest];
@@ -250,10 +233,11 @@ export function buildItemSources(input: SourcesInput): { data: ItemSourcesData; 
   const rows = lootRows(input.tables);
   const byTypeTag = new Map<string, LootRow>();
   for (const row of rows) if (!byTypeTag.has(tagKey(row.TypeTag.TagName))) byTypeTag.set(tagKey(row.TypeTag.TagName), row);
-  const ctx: Context = { tables: input.tables, index: input.index, byTypeTag, names: makeNames(input) };
+  const ctx: Context = { tables: input.tables, index: input.index, byTypeTag, names: makeRegistry(input) };
   const areas = areaSources(ctx);
   const chests = chestSources(ctx, uniqueRefs(areas));
   const quests = questSources(ctx);
-  const data = assemble({ areas, chests: chests.items, quests: quests.items, merchants: merchantSources(ctx), bookPools: bookSources(ctx) });
+  const items = assembleItems({ areas, chests: chests.items, quests: quests.items, merchants: merchantSources(ctx), bookPools: bookSources(ctx) });
+  const data = ItemSourcesSchema.parse({ sources: ctx.names.sources(), items });
   return { data, issues: [...reportLootTags(rows, input.index), ...quests.issues, ...chests.issues, ...ctx.names.issues()] };
 }
