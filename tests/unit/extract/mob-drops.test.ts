@@ -63,6 +63,25 @@ describe("resolveDrops", () => {
     expect(item(drops)).toEqual({ slot: "item", guaranteed: 1, rolls: 3, chancePerRoll: 0.5, pool: "none" });
   });
 
+  it("orders the tier rows Boss > MiniBoss > SoulStated > Hostile whatever order the closure lists them in", () => {
+    const real = ["SW.Mob.Default.Type2", "SW.Mob.Default.MeleeAttackMob", "SW.Mob.Default.Hostile", "SW.Mob.Default.Base", "SW.Trait.MiniBoss"];
+    expect(item(resolveDrops(["SW.Mob.Evoker"], real, rows))).toEqual({ slot: "item", guaranteed: 1, rolls: 4, chancePerRoll: 0.25, pool: "area" });
+    const soul = ["SW.Mob.Default.SoulStated", "SW.Mob.Default.Hostile", "SW.Trait.MiniBoss"];
+    expect(item(resolveDrops(["SW.Mob.Evoker.SoulStated"], soul, rows))?.rolls).toBe(4);
+  });
+
+  it("takes counts from the next row when a more specific slot is table-only, and keeps its list as 'own'", () => {
+    const tableOnly = lootTables({ mob: [
+      lootRow("Witch", "SW.Mob.Witch", [slot("Item", 0, 0, 0, false, ["SW.Item.Artifact.Fireworks"])]),
+      lootRow("Plain", "SW.Mob.Plain", [slot("Item", 0, 0, 0, false)]),
+      lootRow("Boss", "SW.Trait.Boss", [slot("Item", 1, 6, 0.5, true)]),
+      lootRow("GlobalHostileMobLoot", "SW.Mob.Default.Hostile", [slot("Item", 0, 1, 0.0125, false)]),
+    ] }).mob;
+    expect(item(resolveDrops(["SW.Mob.Witch"], ["SW.Trait.Boss", ...HOSTILE], tableOnly))).toEqual({ slot: "item", guaranteed: 1, rolls: 6, chancePerRoll: 0.5, pool: "own" });
+    expect(item(resolveDrops(["SW.Mob.Plain"], ["SW.Trait.Boss", ...HOSTILE], tableOnly))).toEqual({ slot: "item", guaranteed: 1, rolls: 6, chancePerRoll: 0.5, pool: "area" });
+    expect(item(resolveDrops(["SW.Mob.Plain"], HOSTILE, tableOnly))?.rolls).toBe(1);
+  });
+
   it("matches tags that differ only in case or the Sw. typo", () => {
     expect(item(resolveDrops(["Sw.Mob.Geomancer"], [], rows))?.pool).toBe("own");
   });

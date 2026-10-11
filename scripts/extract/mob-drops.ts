@@ -13,7 +13,8 @@ function candidateRows(tags: readonly string[], closure: readonly string[], rows
   const byKey = new Map<string, LootRow>();
   for (const row of rows) if (!byKey.has(tagKey(row.TypeTag.TagName))) byKey.set(tagKey(row.TypeTag.TagName), row);
   const closureKeys = closure.map(tagKey);
-  // The fixed tier tags are ordered last (step 3) even when the closure lists them early.
+  // The fixed tier tags are ordered last (step 3) even when the closure lists them early: the real closures list
+  // Hostile before MiniBoss. A Soul Corrupted miniboss therefore uses the MiniBoss row (1 + 4 @ 25%), not SoulStated.
   const ordered = [
     ...tags.map(tagKey),
     ...closureKeys.filter((key) => !FIXED_ORDER.includes(key)),
@@ -29,9 +30,13 @@ export function resolveDrops(tags: readonly string[], closure: readonly string[]
   if (candidates.length === 0) return undefined;
   const perRow = candidates.map(slotsOf);
   return LOOT_SLOT_KEYS.flatMap((key): MobDrop[] => {
-    const slot = perRow.map((slots) => slots.get(key)).find((value) => value !== undefined);
-    if (slot === undefined || (slot.NumberOfGuaranteedDrops === 0 && slot.NumberOfRandomRolls === 0)) return [];
-    const pool = hasPoolTags(slot) ? "own" : slot.InheritParentDropTable ? "area" : "none";
+    const defined = perRow.flatMap((slots) => slots.get(key) ?? []);
+    // A table-only row (0 guaranteed + 0 rolls) must not hide the counts of a lower row.
+    const at = defined.findIndex((value) => value.NumberOfGuaranteedDrops > 0 || value.NumberOfRandomRolls > 0);
+    const slot = defined[at];
+    if (slot === undefined) return [];
+    const ownList = defined.slice(0, at + 1).some(hasPoolTags);
+    const pool = ownList ? "own" : slot.InheritParentDropTable ? "area" : "none";
     return [{ slot: key, guaranteed: slot.NumberOfGuaranteedDrops, rolls: slot.NumberOfRandomRolls, chancePerRoll: slot.DropChancePerRoll, pool }];
   });
 }
