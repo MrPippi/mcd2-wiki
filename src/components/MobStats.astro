@@ -1,0 +1,31 @@
+---
+import type { Mob } from "../../scripts/extract/mob-schema";
+import { statLabel, t, type Lang } from "../lib/i18n";
+import { formatStat } from "../lib/mobs";
+
+interface Props {
+  lang: Lang;
+  stats: Mob["stats"];
+  /** h2 for the page's own stats, h3 inside the Soul Corrupted section. */
+  level?: 2 | 3;
+}
+
+const { lang, stats, level = 2 } = Astro.props;
+const Heading = level === 3 ? "h3" : "h2";
+---
+{stats.length > 0 && (
+  <section class="entry-section mob-stats" data-testid="mob-stats">
+    <Heading class="section-title" data-pagefind-ignore>{t(lang, "mobStats")}</Heading>
+    <table class="mob-stat-table">
+      <tbody>
+        {stats.map((stat) => (
+          <tr>
+            <th scope="row">{statLabel(stat.key, lang)}</th>
+            <td>{formatStat(stat.key, stat.value)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="note">{t(lang, "mobBaseValues")}</p>
+  </section>
+)}

@@ -1,0 +1,29 @@
+---
+import type { MobArea } from "../../scripts/extract/mob-schema";
+import { t, type Lang } from "../lib/i18n";
+import { compareLang, htmlLang } from "../lib/lang";
+import { mapLinkOf, uniqueAreas } from "../lib/mobs";
+import EntrySection from "./EntrySection.astro";
+
+interface Props {
+  lang: Lang;
+  areas: readonly MobArea[];
+}
+
+const { lang, areas } = Astro.props;
+const shown = uniqueAreas(areas, lang);
+const alt = compareLang(lang);
+---
+{shown.length > 0 && (
+  <EntrySection title={t(lang, "mobAreas")} testid="mob-areas">
+    <ul class="mob-areas">
+      {shown.map((area) => (
+        <li class:list={{ "has-marker": area.map !== undefined }}>
+          <a href={mapLinkOf(lang, area)}>{area.name[lang]}</a>
+          {area.name[alt] !== area.name[lang] && <span class="item-alt" lang={htmlLang(alt)}>{area.name[alt]}</span>}
+        </li>
+      ))}
+    </ul>
+    <p class="note">{t(lang, "mobAreasNote")}</p>
+  </EntrySection>
+)}

@@ -1,0 +1,93 @@
+/* Bestiary: the index is a category page split into kind groups; a mob page is a specimen sheet like an item page. */
+
+/* Portrait: the game's model render on the board, or an empty dashed mount with a faint silhouette. */
+.mob-portrait { display: inline-flex; flex-shrink: 0; width: var(--size, 128px); height: var(--size, 128px); }
+.mob-portrait img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.mob-portrait.is-empty {
+  border: 1px dashed var(--rule-strong);
+  background:
+    radial-gradient(circle at 50% 34%, color-mix(in srgb, var(--ink) 13%, transparent) 0 13%, transparent 13.5%),
+    radial-gradient(ellipse 28% 24% at 50% 78%, color-mix(in srgb, var(--ink) 13%, transparent) 0 98%, transparent 100%),
+    var(--plate);
+}
+
+/* Index */
+.mobs-intro { margin: 12px 0 0; max-width: 60ch; color: var(--text-2); }
+.mob-groups { display: grid; gap: 40px; min-width: 0; }
+.mob-group .section-title { margin: 0 0 16px; font-size: 22px; justify-content: flex-start; }
+.mob-grid {
+  list-style: none; margin: 0; padding: 0; display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 136px), 1fr));
+  border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);
+}
+.mob-card {
+  min-width: 0; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  animation: rise-in 420ms var(--ease-out) both; animation-delay: calc(min(var(--i, 0), 30) * 18ms);
+}
+.mob-card-link {
+  position: relative; height: 100%; display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 30px 10px 14px; color: var(--text); text-decoration: none; text-align: center;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.mob-card-link .mob-portrait { transition: transform var(--dur) var(--ease-spring); }
+.mob-card-link:hover, .mob-card-link:focus-visible { background: var(--paper) var(--dots); }
+.mob-card-link:hover .mob-portrait { transform: translateY(-4px) scale(1.06); }
+.mob-card-link:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.mob-card-names { display: flex; flex-direction: column; align-items: center; gap: 2px; min-width: 0; width: 100%; }
+.mob-card-name { font-family: var(--font-display); font-weight: 700; font-size: 15px; line-height: 1.35; overflow-wrap: anywhere; hyphens: auto; }
+.mob-card-alt {
+  max-width: 100%; font-family: var(--font-mono); font-size: 10.5px; line-height: 1.3; letter-spacing: 0.02em; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mob-card .tag { margin-top: 4px; }
+.mob-credit { margin: 0; max-width: 72ch; font-size: 13px; color: var(--muted); }
+
+/* Mob page */
+.mob-plate.specimen-plate.entry-head { aspect-ratio: auto; min-height: 220px; }
+.mob-page .entry-kicker a { color: inherit; }
+.mob-title { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px 16px; }
+.mob-title h1 { min-width: 0; overflow-wrap: anywhere; }
+.mob-title .tag { margin-top: 0.6em; }
+.mob-kind { font-weight: 600; }
+
+.mob-stat-table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--rule-strong); font-variant-numeric: tabular-nums; }
+.mob-stat-table th, .mob-stat-table td { padding: 9px 4px; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+.mob-stat-table th { text-align: left; font-weight: 400; color: var(--text-2); overflow-wrap: anywhere; }
+.mob-stat-table td { text-align: right; font-family: var(--font-mono); font-size: 15px; white-space: nowrap; padding-left: 16px; }
+.mob-stats .note, .mob-areas + .note, .mob-drops-note { margin: 10px 0 0; }
+
+.mob-areas { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); border-top: 1px solid var(--rule-strong); }
+.mob-areas li { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 10px 4px; border-bottom: 1px solid var(--rule); }
+.mob-areas a { font-family: var(--font-display); font-weight: 700; overflow-wrap: anywhere; }
+/* Areas the map marks get a pin; the rest open the map without a position. */
+.mob-areas li.has-marker a::before { content: "◉ "; color: var(--accent); font-family: var(--font-body); }
+.mob-areas .item-alt { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); overflow-wrap: anywhere; }
+
+.mob-drop-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+.mob-drop { display: grid; grid-template-columns: minmax(0, 10em) minmax(0, 1fr); gap: 4px 16px; padding: 12px 4px; border-bottom: 1px solid var(--rule); }
+.mob-drop-slot { font-weight: 600; overflow-wrap: anywhere; }
+.mob-drop-rule { list-style: none; margin: 0; padding: 0; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.mob-drop-pool { margin: 4px 0 0; font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
+
+.mob-soul > .section-title { color: var(--accent); }
+.mob-soul .section-title:is(h3) { font-size: 17px; margin: 20px 0 10px; padding-top: 0; border-top: 0; }
+
+.mob-variants { list-style: none; margin: 0; padding: 0; display: grid; }
+.mob-variants li + li { border-top: 1px solid var(--rule); }
+.mob-variants a { display: flex; align-items: center; gap: 14px; padding: 8px 0; color: var(--text); text-decoration: none; }
+.mob-variants .primary { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+.mob-variants a:hover .primary { color: var(--accent); }
+.mob-page .mob-credit { margin-top: 40px; }
+
+@media (max-width: 599px) {
+  .mob-drop { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (min-width: 600px) {
+  .mob-grid { grid-template-columns: repeat(auto-fill, minmax(156px, 1fr)); }
+}
+
+@media (min-width: 1000px) {
+  .mobs-page > .mob-groups, .mobs-page > .no-results, .mobs-page > .mob-credit { grid-column: 2; }
+  .mobs-intro { font-size: 14px; }
+}

@@ -1,0 +1,49 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import ListFilter from "../../../components/ListFilter.astro";
+import MobCard from "../../../components/MobCard.astro";
+import Base from "../../../layouts/Base.astro";
+import { mobKindLabel, t, type Lang } from "../../../lib/i18n";
+import { compareLang, htmlLang } from "../../../lib/lang";
+import { mobData, mobGroups } from "../../../lib/mobs";
+import "../../../styles/mobs.css";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alt = compareLang(lang);
+const groups = mobGroups(mobData.mobs);
+// Card numbers run on across the groups, like one printed catalogue.
+const starts = groups.map((_, i) => groups.slice(0, i).reduce((sum, group) => sum + group.mobs.length, 0));
+---
+<Base lang={lang} title={t(lang, "mobs")} description={t(lang, "mobsIntro")}>
+  <div class="catalog mobs-page">
+    <header class="catalog-head mobs-head">
+      <h1 class="catalog-title">
+        <span data-pagefind-meta="title">{t(lang, "mobs")}</span>
+        <span class="count">({mobData.mobs.length})</span>
+      </h1>
+      {t(alt, "mobs") !== t(lang, "mobs") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "mobs")}</p>}
+      <p class="mobs-intro">{t(lang, "mobsIntro")}</p>
+      <ListFilter lang={lang} showVariant={false} />
+    </header>
+    <p class="no-results" hidden>{t(lang, "noResults")}</p>
+    <div class="mob-groups">
+      {groups.map((group, g) => (
+        <section class="mob-group" data-group={group.kind}>
+          <h2 class="section-title"><span class="mob-group-name">{mobKindLabel(group.kind, lang)}</span> <span class="count">({group.mobs.length})</span></h2>
+          <ul class="mob-grid">
+            {group.mobs.map((mob, i) => <MobCard lang={lang} mob={mob} index={starts[g] + i} />)}
+          </ul>
+        </section>
+      ))}
+    </div>
+    <p class="mob-credit">{t(lang, "mobPortraitCredit")}</p>
+  </div>
+</Base>

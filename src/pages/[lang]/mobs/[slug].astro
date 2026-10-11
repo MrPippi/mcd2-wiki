@@ -1,0 +1,76 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import type { Mob } from "../../../../scripts/extract/mob-schema";
+import EntrySection from "../../../components/EntrySection.astro";
+import LangText from "../../../components/LangText.astro";
+import MobAreas from "../../../components/MobAreas.astro";
+import MobDrops from "../../../components/MobDrops.astro";
+import MobFacts from "../../../components/MobFacts.astro";
+import MobPortrait from "../../../components/MobPortrait.astro";
+import MobStats from "../../../components/MobStats.astro";
+import Base from "../../../layouts/Base.astro";
+import { mobKindLabel, t, type Lang, type UiKey } from "../../../lib/i18n";
+import { findMob, mobData, mobHref } from "../../../lib/mobs";
+import { href } from "../../../lib/url";
+import "../../../styles/mobs.css";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => mobData.mobs.map((mob) => ({ params: { lang, slug: mob.slug }, props: { lang, mob } })));
+}
+
+interface Props {
+  lang: Lang;
+  mob: Mob;
+}
+
+const { lang, mob } = Astro.props;
+const variants = mob.variants.flatMap((slug) => findMob(slug) ?? []);
+const PLATE_PORTRAIT_SIZE = 128;
+const WORLD_KEY = { overworld: "mobWorldOverworld", wellspring: "mobWorldWellspring" } as const satisfies Record<NonNullable<Mob["world"]>, UiKey>;
+---
+<Base lang={lang} title={mob.name[lang]} description={t(lang, "mobsIntro")}>
+  <article class="entry-detail mob-page" data-pagefind-body>
+    <div class="entry-layout">
+      <aside class="info-box mob-info">
+        <div class="entry-head specimen-plate mob-plate">
+          <MobPortrait lang={lang} mob={mob} size={PLATE_PORTRAIT_SIZE} loading="eager" />
+        </div>
+        <MobFacts lang={lang} mob={mob} />
+      </aside>
+      <div class="entry-content">
+        <p class="kicker entry-kicker" data-pagefind-ignore>
+          <a href={href(lang, "mobs")}>{t(lang, "mobs")}</a> / {mobKindLabel(mob.kind, lang)}{mob.world && ` · ${t(lang, WORLD_KEY[mob.world])}`}
+        </p>
+        <div class="mob-title">
+          <LangText as="h1" lang={lang} value={mob.name} searchTitle />
+          {mob.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+        </div>
+        <MobStats lang={lang} stats={mob.stats} />
+        <MobAreas lang={lang} areas={mob.areas} />
+        <MobDrops lang={lang} drops={mob.drops} />
+        {mob.soulCorrupted && (
+          <section class="entry-section mob-soul" data-testid="mob-soul-corrupted">
+            <h2 class="section-title" data-pagefind-ignore>{t(lang, "mobSoulCorrupted")}</h2>
+            <MobStats lang={lang} stats={mob.soulCorrupted.stats} level={3} />
+            <MobDrops lang={lang} drops={mob.soulCorrupted.drops} level={3} showNote={false} />
+          </section>
+        )}
+        {variants.length > 0 && (
+          <EntrySection title={t(lang, "mobVariants")} testid="mob-variants">
+            <ul class="mob-variants">
+              {variants.map((variant) => (
+                <li>
+                  <a href={mobHref(lang, variant.slug)}>
+                    <MobPortrait lang={lang} mob={variant} size={48} decorative />
+                    <LangText lang={lang} value={variant.name} />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </EntrySection>
+        )}
+        {mob.portrait && <p class="mob-credit">{t(lang, "mobPortraitCredit")}</p>}
+      </div>
+    </div>
+  </article>
+</Base>

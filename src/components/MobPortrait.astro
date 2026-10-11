@@ -1,0 +1,31 @@
+---
+import type { Mob } from "../../scripts/extract/mob-schema";
+import { t, type Lang } from "../lib/i18n";
+import { assetUrl } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+  mob: Mob;
+  /** Rendered side in CSS pixels; the published webp is 128px. */
+  size: number;
+  loading?: "lazy" | "eager";
+  /** Inside a link that already names the mob: the picture is decoration and stays silent. */
+  decorative?: boolean;
+}
+
+const { lang, mob, size, loading = "lazy", decorative = false } = Astro.props;
+---
+{mob.portrait ? (
+  <span class="mob-portrait" style={`--size:${size}px`}>
+    <img src={assetUrl(mob.portrait)} alt={decorative ? "" : mob.name[lang]} width={size} height={size} loading={loading} decoding="async" />
+  </span>
+) : (
+  <span
+    class="mob-portrait is-empty"
+    style={`--size:${size}px`}
+    data-testid="mob-portrait-placeholder"
+    role={decorative ? undefined : "img"}
+    aria-label={decorative ? undefined : t(lang, "mobNoPortrait")}
+    aria-hidden={decorative ? "true" : undefined}
+  ></span>
+)}
