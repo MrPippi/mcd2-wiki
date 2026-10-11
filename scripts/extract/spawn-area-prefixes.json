@@ -20,5 +20,8 @@
   "DesertA1": "SW.Area.Desert.A1",
   "DesertA1FortressInt": "SW.Area.Desert.A1",
   "GimmickStress": null,
-  "CaretakerBlock": null
+  "CaretakerBlock": null,
+  "Meadow": "SW.Area.Meadow.T1",
+  "Deep": "SW.Area.DeepDark.T1",
+  "FrostbiteBossWave": "SW.Area.Desert.A1"
 }

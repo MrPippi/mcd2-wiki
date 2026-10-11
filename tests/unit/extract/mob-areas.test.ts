@@ -1,5 +1,8 @@
 import { existsSync, readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { loadMobTables } from "../../../scripts/extract/mob-tables";
+import { buildMobs } from "../../../scripts/extract/mobs";
+import { loadLocales } from "../../../scripts/extract/parse-locale";
 import { MapDataSchema } from "../../../scripts/extract/map-schema";
 import { areaMarkers, areaPrefix, buildAreaNamer, buildMobAreas, SPAWN_AREA_PREFIXES, type AreaMarker } from "../../../scripts/extract/mob-areas";
 import { byLang } from "../../../src/lib/lang";
@@ -121,5 +124,19 @@ describe("spawn-area-prefixes.json", () => {
     for (const [prefix, target] of Object.entries(SPAWN_AREA_PREFIXES)) {
       if (target !== null) expect(known.has(areaPrefix(target).toLowerCase()), `${prefix} -> ${target}`).toBe(true);
     }
+  });
+});
+
+describe.skipIf(!hasSourceData)("real source-data", () => {
+  it("places the frostbite boss and the sculk monstrosity, and leaves only two prefixes unmapped", async () => {
+    const [locales, tables] = await Promise.all([loadLocales("source-data"), loadMobTables("source-data")]);
+    if (!tables) throw new Error("mob tables missing");
+    const { tagIndex } = buildMobs(tables, locales);
+    const map = MapDataSchema.parse(JSON.parse(readFileSync("src/data/map.json", "utf8")));
+    const { areasBySlug, issues } = buildMobAreas({ tables, tagIndex, namer: buildAreaNamer(tables.areas, locales), prefixes: SPAWN_AREA_PREFIXES, markers: areaMarkers(map) });
+    const ids = (slug: string) => (areasBySlug.get(slug) ?? []).map((area) => area.areaId);
+    expect(ids("frostbite-desert-boss")).toContain("SW.Area.Desert.A1");
+    expect(ids("monstrosity-sculk")).toContain("SW.Area.Meadow.T1");
+    expect(issues.filter((item) => item.type === "mob-area-prefix-unmapped").map((item) => item.detail.split(" ")[0]).sort()).toEqual(["DeepDarkT2", "RedStoneMonstrosity"]);
   });
 });
