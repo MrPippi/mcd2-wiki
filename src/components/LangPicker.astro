@@ -1,0 +1,28 @@
+---
+import { ALL_LANGS, LANG_META } from "../../scripts/extract/langs";
+import { t, type Lang } from "../lib/i18n";
+import { htmlLang, langMenuLabel } from "../lib/lang";
+import { href, swapLangPath } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+  /** Links every language to its home page instead of the same page (the 404 page has no counterpart). */
+  toHome?: boolean;
+}
+
+const { lang, toHome = false } = Astro.props;
+const targetHref = (code: Lang): string =>
+  toHome ? href(code) : swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, code);
+---
+<details class="lang-picker" data-home={toHome ? "true" : "false"}>
+  <summary data-testid="lang-switch" aria-label={langMenuLabel(lang, t(lang, "languageMenu"))}>
+    <span class="lang-current">{LANG_META[lang].nativeName}</span><span class="lang-code" aria-hidden="true">{lang}</span> <span aria-hidden="true">▾</span>
+  </summary>
+  <ul aria-label={t(lang, "languageMenu")}>
+    {ALL_LANGS.map((code) => (
+      <li>
+        <a href={targetHref(code)} hreflang={htmlLang(code)} lang={htmlLang(code)} data-lang={code} aria-current={code === lang ? "true" : undefined}>{LANG_META[code].nativeName}</a>
+      </li>
+    ))}
+  </ul>
+</details>

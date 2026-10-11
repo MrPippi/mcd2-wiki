@@ -3,7 +3,9 @@ import { buildMapData } from "../../../scripts/extract/map";
 import type { MapMarker } from "../../../scripts/extract/map-schema";
 import { toBlocks, toImagePixel } from "../../../src/lib/map/transform";
 import { MAP_LOCALES, MAP_TABLES } from "../../helpers/map-tables";
+import { loc } from "../../helpers/localized";
 
+const WORLD_LABELS = "Text/Release/WorldMapLabels.csv";
 const everyIcon = () => true;
 const noIcon = () => false;
 const run = (tables = MAP_TABLES, iconExists: (source: string) => boolean = everyIcon) => buildMapData(tables, MAP_LOCALES, iconExists);
@@ -64,8 +66,8 @@ describe("buildMapData", () => {
       kind: "portal",
       px: 432.6,
       py: 4416.3,
-      name: { zh: "傳送雕像", en: "Teleport Statue" },
-      area: { zh: "英雄港", en: "Brave Haven" },
+      name: loc({ zh: "傳送雕像", en: "Teleport Statue" }),
+      area: loc({ zh: "英雄港", en: "Brave Haven" }),
       icon: "icons/map/t_ui_icon_town_portal.png",
     });
   });
@@ -82,8 +84,8 @@ describe("buildMapData", () => {
       kind: "merchant",
       px: 357.9,
       py: 4282.8,
-      name: { zh: "鐵匠", en: "Blacksmith" },
-      note: { zh: "強化裝備。", en: "Upgrade your gear." },
+      name: loc({ zh: "鐵匠", en: "Blacksmith" }),
+      note: loc({ zh: "強化裝備。", en: "Upgrade your gear." }),
       icon: "icons/map/t_ui_icon_blacksmith.png",
     });
   });
@@ -128,6 +130,17 @@ describe("buildMapData", () => {
     expect(byId("overworld", "ForestA1-Outpost")).toMatchObject({ kind: "minecart", name: { zh: "咆哮森林", en: "Howling Woods" } });
     expect(byId("overworld", "ForestA1-Outpost")?.area).toBeUndefined();
     expect(markersOf("sift").find((m) => m.id === "CarapaceA1-North")).toMatchObject({ kind: "minecart" });
+  });
+
+  it("reports map text that falls back to English, once per text", () => {
+    const blankRift = (lang: "ja" | "de", text: string) => ({ ...MAP_LOCALES[lang], [WORLD_LABELS]: { ...MAP_LOCALES[lang][WORLD_LABELS], worldmap_tooltip_title_rift: text } });
+    const locales = { ...MAP_LOCALES, ja: blankRift("ja", ""), de: blankRift("de", "") };
+    const { data, issues } = buildMapData(MAP_TABLES, locales, everyIcon);
+    const rift = data.worlds.flatMap((w) => w.markers).find((m) => m.kind === "rift");
+    expect(rift?.name.ja).toBe("Rift");
+    const fallbacks = issues.filter((i) => i.type === "map-text-fallback");
+    expect(fallbacks).toEqual([{ type: "map-text-fallback", detail: `${WORLD_LABELS} worldmap_tooltip_title_rift: ja, de` }]);
+    expect(run().issues.filter((i) => i.type === "map-text-fallback")).toEqual([]);
   });
 
   it("reports and skips stations that cannot be placed or named", () => {

@@ -1,17 +1,16 @@
 ---
-import { HTML_LANG, otherLang, t, type Lang } from "../lib/i18n";
-import { href, swapLangPath } from "../lib/url";
+import { t, type Lang } from "../lib/i18n";
+import LangPicker from "./LangPicker.astro";
+import { href } from "../lib/url";
 
 interface Props {
   lang: Lang;
-  /** Overrides the language switch target for pages without a same-path counterpart. */
-  switchHref?: string;
+  /** Links the language menu to each language's home page (for pages without a same-path counterpart, like the 404). */
+  langMenuToHome?: boolean;
 }
 
-const { lang, switchHref: override } = Astro.props;
-const alt = otherLang(lang);
+const { lang, langMenuToHome = false } = Astro.props;
 const onMap = /\/map\/$/.test(Astro.url.pathname);
-const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, alt);
 ---
 <header class="site-header">
   <a class="brand" href={href(lang)}>
@@ -27,9 +26,7 @@ const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.
     <button type="button" class="compare-toggle" aria-pressed="true" data-testid="compare-toggle">
       <span class="label-long">{t(lang, "compare")}</span><span class="label-short">{t(lang, "compareShort")}</span>
     </button>
-    <a class="lang-switch button" href={switchHref} hreflang={HTML_LANG[alt]} data-testid="lang-switch">
-      <span class="label-long">{t(lang, "switchLang")}</span><span class="label-short">{t(lang, "switchLangShort")}</span>
-    </a>
+    <LangPicker lang={lang} toHome={langMenuToHome} />
   </div>
 </header>
 <script>
@@ -51,13 +48,38 @@ const switchHref = override ?? swapLangPath(Astro.url.pathname, import.meta.env.
     syncCompare();
   });
 
-  const langLink = document.querySelector<HTMLAnchorElement>("[data-testid='lang-switch']");
-  const langBase = langLink?.getAttribute("href") ?? "";
-  const syncLang = () => langLink?.setAttribute("href", withCurrentLocation(langBase, location.search, location.hash));
-  syncLang();
-  window.addEventListener("hashchange", syncLang);
-  // The map page rewrites its query and hash with history.replaceState, which fires no event of its own.
-  window.addEventListener("mcd2:locationchange", syncLang);
+  // Every language link keeps the current page's query and anchor, also when the map page rewrites them.
+  const langLinks = [...document.querySelectorAll<HTMLAnchorElement>(".lang-picker a")];
+  const picker = document.querySelector<HTMLDetailsElement>(".lang-picker");
+  const bases = langLinks.map((link) => link.getAttribute("href") ?? "");
+  const syncLang = () =>
+    langLinks.forEach((link, index) => link.setAttribute("href", withCurrentLocation(bases[index] ?? "", location.search, location.hash)));
+  if (picker && picker.dataset.home !== "true") {
+    syncLang();
+    window.addEventListener("hashchange", syncLang);
+    // The map page rewrites its query and hash with history.replaceState, which fires no event of its own.
+    window.addEventListener("mcd2:locationchange", syncLang);
+  }
+  for (const link of langLinks) {
+    link.addEventListener("click", () => {
+      try {
+        localStorage.setItem("mcd2-lang", link.dataset.lang ?? "");
+      } catch {
+        // Storage unavailable: the choice applies to this navigation only.
+      }
+    });
+  }
+  const closePicker = () => {
+    if (picker) picker.open = false;
+  };
+  picker?.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape" || !picker.open) return;
+    closePicker();
+    picker.querySelector("summary")?.focus();
+  });
+  document.addEventListener("click", (event) => {
+    if (picker?.open && event.target instanceof Node && !picker.contains(event.target)) closePicker();
+  });
 
   // Narrow screens fold the header search behind a button (see layout.css).
   const searchToggle = document.querySelector<HTMLButtonElement>(".search-toggle");

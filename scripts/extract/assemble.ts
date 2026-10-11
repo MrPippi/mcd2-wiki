@@ -1,3 +1,5 @@
+import { byLang, localizedFrom, mapLocalized } from "../../src/lib/lang";
+import { LANGS } from "./config";
 import type { RawEntry } from "./group-entries";
 import { ExtractError, issue, type Issue } from "./issues";
 import { armorPieceOf, toSlug, variantOf } from "./keys";
@@ -10,11 +12,10 @@ interface Rendered {
 }
 
 function renderLocalized(value: Localized, where: string): Rendered {
-  const zh = renderMarkup(value.zh, "zh");
-  const en = renderMarkup(value.en, "en");
-  const warnings = [...new Set([...zh.warnings, ...en.warnings])];
+  const rendered = byLang((lang) => renderMarkup(value[lang], lang));
+  const warnings = [...new Set(LANGS.flatMap((lang) => rendered[lang].warnings))];
   return {
-    value: { zh: zh.html, en: en.html },
+    value: localizedFrom((lang) => rendered[lang].html),
     issues: warnings.map((warning) => issue("markup-warning", `${where}: ${warning}`)),
   };
 }
@@ -31,7 +32,7 @@ export function assembleEntry(raw: RawEntry, icon?: string): { entry: Entry; iss
     category: raw.category,
     variant: variantOf(raw.id),
     release: raw.release,
-    name: { zh: stripMarkup(raw.name.zh), en: stripMarkup(raw.name.en) },
+    name: mapLocalized(raw.name, stripMarkup),
     ...(description ? { description: description.value } : {}),
     ...(descriptionLong ? { descriptionLong: descriptionLong.value } : {}),
     ...(unlock ? { unlock: unlock.value } : {}),

@@ -6,7 +6,7 @@ import { href } from "../lib/url";
 // One 404 serves both languages: Chinese first, with the English line under it.
 const lang = "zh";
 ---
-<Base lang={lang} title={t(lang, "notFoundTitle")} langSwitchHref={href("en")}>
+<Base lang={lang} title={t(lang, "notFoundTitle")} noAlternates>
   <section class="not-found">
     <div class="not-found-copy">
       <p class="kicker">ERROR 404 · SLOT EMPTY</p>
@@ -16,18 +16,30 @@ const lang = "zh";
       </h1>
       <p>{t("zh", "notFoundBody")}</p>
       <p class="note" lang="en">{t("en", "notFoundBody")}</p>
-      <form class="home-search" action={href("zh", "search")} method="get" role="search">
+      <form class="home-search" data-lang-form action={href("zh", "search")} method="get" role="search">
         <input type="search" name="q" placeholder={t("zh", "searchPlaceholder")} aria-label={t("zh", "search")} />
         <button type="submit">{t("zh", "search")}</button>
       </form>
       <p class="not-found-links">
-        <a href={href("zh")}>{t("zh", "backHome")} ›</a>
+        <a href={href("zh")} data-lang-home>{t("zh", "backHome")} ›</a>
         <a href={href("en")} lang="en">{t("en", "backHome")} ›</a>
       </p>
     </div>
     <div class="not-found-slot" aria-hidden="true"><span>?</span></div>
   </section>
 </Base>
+<script>
+  import { ALL_LANGS } from "../../scripts/extract/langs";
+
+  // A missing page keeps the language of the URL it was asked for: /ja/nope/ goes home to /ja/.
+  const base = document.documentElement.dataset.base ?? "/";
+  const first = location.pathname.startsWith(base) ? location.pathname.slice(base.length).split("/")[0] : "";
+  const code = ALL_LANGS.find((lang) => lang === first);
+  if (code) {
+    document.querySelector<HTMLAnchorElement>("[data-lang-home]")?.setAttribute("href", `${base}${code}/`);
+    document.querySelector<HTMLFormElement>("[data-lang-form]")?.setAttribute("action", `${base}${code}/search/`);
+  }
+</script>
 <style>
   .not-found {
     display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; padding: 16px 0;

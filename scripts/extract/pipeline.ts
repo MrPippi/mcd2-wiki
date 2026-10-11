@@ -36,6 +36,8 @@ import { buildIconIndex, matchIcon, type IconIndex, type IconOverrides } from ".
 import { copyIcons, iconWebPath, sortEntries, validateOutput, writeOutputs } from "./output";
 import { loadLocales } from "./parse-locale";
 import { renderReport } from "./report";
+import uiGameKeys from "./ui-game-keys.json";
+import { buildUiGameStrings } from "./ui-game-strings";
 
 export interface ExtractOptions {
   readonly sourceRoot: string;
@@ -163,6 +165,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const artifacts = weaponTables ? buildArtifactData(output.entries, weaponTables) : { data: {}, issues: [] };
   const enchantments = weaponTables ? buildEnchantmentData(output.entries, weaponTables) : { data: {}, issues: [] };
   const effectValues = weaponTables ? buildEffectData(output.entries, weaponTables) : {};
+  const uiStrings = buildUiGameStrings(locales, uiGameKeys);
   const issues = [
     ...catalog.issues,
     ...frames.issues,
@@ -178,6 +181,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...artifacts.issues,
     ...enchantments.issues,
     ...map.issues,
+    ...uiStrings.issues,
   ];
   const extraData = {
     "frames.json": frames.paths,
@@ -188,6 +192,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "enchantments.json": EnchantmentDataSchema.parse(enchantments.data),
     "effects.json": EnchantmentDataSchema.parse(effectValues),
     "map.json": MapDataSchema.parse(map.data),
+    "ui-game-strings.json": uiStrings.strings,
   };
   await writeOutputs(options.outRoot, output, extraData, renderReport({ ...output, issues }));
   return { entries: output.entries.length, armorSets: output.armorSets.length, icons: copies.length, issues };

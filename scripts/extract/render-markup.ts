@@ -1,8 +1,10 @@
+import { fileValue, plainText } from "../../src/lib/ui-dicts";
 import type { Lang } from "./config";
 
-const PLACEHOLDER_LABEL: Readonly<Record<Lang, string>> = { zh: "{數值}", en: "{value}" };
+/** The label shown in place of a value that is filled in later, from the language file (wrapped in braces). */
+const placeholderLabel = (lang: Lang): string => plainText(fileValue(lang, "placeholderLabel") ?? "{}");
 const HEX_COLOR = /^#([0-9A-Fa-f]{6})(?:[0-9A-Fa-f]{2})?$/;
-const TOKEN = /<([A-Za-z]+)((?:\s+[A-Za-z]+="[^"]*")*)\s*>|<\/>|\{(\w+)\}|\r?\n/g;
+const TOKEN = /<([A-Za-z]+)((?:\s+[A-Za-z]+="[^"]*")*)\s*>|<\/>|\{(\d+)\}\|plural\(([^)]*)\)|\{(\w+)\}|\r?\n/g;
 const ATTRIBUTE = /([A-Za-z]+)="([^"]*)"/g;
 const ANY_TAG = /<[A-Za-z]+(?:\s+[A-Za-z]+="[^"]*")*\s*>|<\/>/g;
 
@@ -12,6 +14,17 @@ const CLOSE: Readonly<Record<Frame, string>> = { em: "</em>", span: "</span>", n
 const HTML_ESCAPES: Readonly<Record<string, string>> = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
 
 export const escapeHtml = (text: string): string => text.replace(/[&<>"']/g, (char) => HTML_ESCAPES[char]);
+
+/** Parses the game's `one=a,few=b` plural list into a form -> text map. */
+function parsePluralForms(body: string): Record<string, string> {
+  return Object.fromEntries(
+    body
+      .split(",")
+      .map((pair) => pair.split("=").map((part) => part.trim()))
+      .filter((pair) => pair.length === 2 && pair[0] !== "")
+      .map(([form, text]) => [form, text]),
+  );
+}
 
 export interface RenderResult {
   readonly html: string;
@@ -41,7 +54,7 @@ export function renderMarkup(text: string, lang: Lang): RenderResult {
   let html = "";
   let last = 0;
   for (const match of text.matchAll(TOKEN)) {
-    const [token, tagName, rawAttributes, placeholder] = match;
+    const [token, tagName, rawAttributes, pluralSlot, pluralBody, placeholder] = match;
     html += escapeHtml(text.slice(last, match.index));
     last = match.index + token.length;
     if (tagName !== undefined) {
@@ -52,8 +65,11 @@ export function renderMarkup(text: string, lang: Lang): RenderResult {
     } else if (token === "</>") {
       const frame = stack.pop();
       html += frame ? CLOSE[frame] : "&lt;/&gt;";
+    } else if (pluralSlot !== undefined) {
+      const forms = escapeHtml(JSON.stringify(parsePluralForms(pluralBody ?? "")));
+      html += `<span class="plural" data-slot="${pluralSlot}" data-forms="${forms}"></span>`;
     } else if (placeholder !== undefined) {
-      html += `<span class="placeholder">${PLACEHOLDER_LABEL[lang]}</span>`;
+      html += `<span class="placeholder" data-slot="${placeholder}">${placeholderLabel(lang)}</span>`;
     } else {
       html += "<br>";
     }

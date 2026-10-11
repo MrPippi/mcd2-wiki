@@ -2,14 +2,54 @@ import { describe, expect, it } from "vitest";
 import { findBaseEntry, findEntry, publishedEntries } from "../../../src/lib/data";
 import { artifactStatsView, describedEntry, enchantmentTiers, fillPlaceholders } from "../../../src/lib/gear-values";
 
-const PLACEHOLDER = '<span class="placeholder">{value}</span>';
+const SLOT = (n: number) => `<span class="placeholder" data-slot="${n}">{value}</span>`;
+const RU_SECONDS = { one: "секунду", few: "секунды", many: "секунд", other: "секунды (other)" };
+const plural = (n: number, forms: Record<string, string>) =>
+  `<span class="plural" data-slot="${n}" data-forms="${JSON.stringify(forms).replace(/"/g, "&quot;")}"></span>`;
 
 describe("fillPlaceholders", () => {
   it("fills placeholders in order and leaves extra ones alone", () => {
-    expect(fillPlaceholders(`${PLACEHOLDER} and ${PLACEHOLDER}`, ["20%", "125%"])).toBe(
+    expect(fillPlaceholders(`${SLOT(0)} and ${SLOT(1)}`, ["20%", "125%"], "en")).toBe(
       '<span class="value">20%</span> and <span class="value">125%</span>',
     );
-    expect(fillPlaceholders(`${PLACEHOLDER} and ${PLACEHOLDER}`, ["20%"])).toBe(`<span class="value">20%</span> and ${PLACEHOLDER}`);
+    expect(fillPlaceholders(`${SLOT(0)} and ${SLOT(1)}`, ["20%"], "en")).toBe(`<span class="value">20%</span> and ${SLOT(1)}`);
+  });
+});
+
+describe("fillPlaceholders by slot", () => {
+  it("fills placeholders by slot, not by order of appearance", () => {
+    const html = '移動超過 <span class="placeholder" data-slot="1">{數值}</span> 秒後，提高 <span class="placeholder" data-slot="0">{數值}</span>。';
+    expect(fillPlaceholders(html, ["20%", "3"], "zh")).toBe('移動超過 <span class="value">3</span> 秒後，提高 <span class="value">20%</span>。');
+  });
+
+  it("picks the plural form for the value by the page language's rules", () => {
+    const html = `${SLOT(0)} ${plural(0, RU_SECONDS)}`;
+    expect(fillPlaceholders(html, ["5"], "ru")).toBe('<span class="value">5</span> <span class="plural">секунд</span>');
+    expect(fillPlaceholders(html, ["1"], "ru")).toBe('<span class="value">1</span> <span class="plural">секунду</span>');
+    expect(fillPlaceholders(html, ["3"], "ru")).toBe('<span class="value">3</span> <span class="plural">секунды</span>');
+  });
+
+  it("agrees with the last number of a range or a unit value", () => {
+    const form = (value: string) => fillPlaceholders(plural(0, RU_SECONDS), [value], "ru");
+    expect(form("1~3")).toBe('<span class="plural">секунды</span>');
+    expect(form("5~21")).toBe('<span class="plural">секунду</span>');
+    expect(form("20%")).toBe('<span class="plural">секунд</span>');
+    expect(form("+2~11")).toBe('<span class="plural">секунд</span>');
+    expect(form("1.5")).toBe('<span class="plural">секунды (other)</span>');
+  });
+
+  it("takes the other form for a value that is not a number", () => {
+    expect(fillPlaceholders(plural(0, RU_SECONDS), ["—"], "ru")).toBe('<span class="plural">секунды (other)</span>');
+  });
+
+  it("falls back to other, then the first form, when the language's category is missing", () => {
+    expect(fillPlaceholders(plural(0, { one: "секунду", other: "секунды" }), ["5"], "ru")).toBe('<span class="plural">секунды</span>');
+    expect(fillPlaceholders(plural(0, { one: "секунду" }), ["5"], "ru")).toBe('<span class="plural">секунду</span>');
+  });
+
+  it("leaves a plural slot with no value unchanged", () => {
+    const html = plural(1, RU_SECONDS);
+    expect(fillPlaceholders(html, ["5"], "ru")).toBe(html);
   });
 });
 

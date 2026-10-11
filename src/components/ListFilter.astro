@@ -25,6 +25,8 @@ const VARIANTS = ["all", "normal", "unique"] as const;
   )}
 </div>
 <script>
+  import { foldForSearch } from "../lib/lang";
+
   const filter = document.querySelector<HTMLElement>(".list-filter");
   const input = filter?.querySelector<HTMLInputElement>(".filter-text");
   const buttons = [...(filter?.querySelectorAll<HTMLButtonElement>("button[data-variant]") ?? [])];
@@ -33,7 +35,7 @@ const VARIANTS = ["all", "normal", "unique"] as const;
   let variant = "all";
 
   const apply = () => {
-    const text = input?.value.trim().toLowerCase() ?? "";
+    const text = foldForSearch(input?.value.trim() ?? "", document.documentElement.lang);
     let visible = 0;
     for (const item of items) {
       const show = (variant === "all" || item.dataset.variant === variant) && (item.dataset.names ?? "").includes(text);

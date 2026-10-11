@@ -1,7 +1,9 @@
 ---
 import { MARKER_KINDS, type MapData, type WorldMap } from "../../scripts/extract/map-schema";
-import { MARKER_LABEL, t, type Lang } from "../lib/i18n";
+import { markerLabel, t, type Lang } from "../lib/i18n";
+import { compareLang } from "../lib/lang";
 import { countByKind } from "../lib/map/markers";
+import { trimWorld } from "../lib/map/payload";
 import { overviewTile } from "../lib/map/tiles";
 import { assetUrl } from "../lib/url";
 
@@ -14,9 +16,11 @@ interface Props {
 const { lang, worlds, legend } = Astro.props;
 const [first] = worlds;
 const counts = first ? countByKind(first.markers) : undefined;
-const labels = Object.fromEntries(MARKER_KINDS.map((kind) => [kind, MARKER_LABEL[kind][lang]]));
+const labels = Object.fromEntries(MARKER_KINDS.map((kind) => [kind, markerLabel(kind, lang)]));
+// Only the page language and its comparison language go to the browser (spec §2.6).
+const shownLangs = [lang, compareLang(lang)];
 // Escape "<" so no game text can close the script element early.
-const payload = JSON.stringify({ worlds, labels }).replace(/</g, "\\u003c");
+const payload = JSON.stringify({ worlds: worlds.map((world) => trimWorld(world, shownLangs)), labels }).replace(/</g, "\\u003c");
 ---
 {first ? (
   <div class="world-map" data-lang={lang} data-world={first.key}>
@@ -50,7 +54,7 @@ const payload = JSON.stringify({ worlds, labels }).replace(/</g, "\\u003c");
               ) : (
                 <span class={`map-swatch map-swatch--${kind}`} aria-hidden="true" />
               )}
-              <span class="map-filter-label">{MARKER_LABEL[kind][lang]}</span>
+              <span class="map-filter-label">{markerLabel(kind, lang)}</span>
               <span class="map-count mono" data-count={kind}>{counts?.[kind] ?? 0}</span>
             </label>
           ))}

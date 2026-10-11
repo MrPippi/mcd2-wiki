@@ -1,9 +1,14 @@
 import type { Entry, Localized } from "../../scripts/extract/schemas";
 import { ArtifactDataSchema, EnchantmentDataSchema, type ArtifactData, type EnchantmentData } from "../../scripts/extract/gear-schema";
+import { z } from "zod";
 import rawArtifacts from "../data/artifacts.json";
 import rawEffects from "../data/effects.json";
 import rawEnchantments from "../data/enchantments.json";
+import { LANGS } from "../../scripts/extract/langs";
 import type { Lang } from "./i18n";
+import { htmlLang, mapLocalized } from "./lang";
+import { t, type UiKey } from "./ui-strings";
+import { blocksText, roundText, secondsText } from "./units";
 
 /** Artifact numbers and enchantment description values read from the game's DataTables by `npm run extract`. */
 export const artifactData: ArtifactData = ArtifactDataSchema.parse(rawArtifacts);
@@ -11,22 +16,39 @@ export const enchantmentData: EnchantmentData = EnchantmentDataSchema.parse(rawE
 /** Effect description values per tier (one template per tier, the same wherever the effect rolls). */
 export const effectData: EnchantmentData = EnchantmentDataSchema.parse(rawEffects);
 
-const PLACEHOLDER = /<span class="placeholder">\{[^}]*\}<\/span>/g;
+const SLOT = /<span class="(placeholder|plural)" data-slot="([^"]*)"(?: data-forms="([^"]*)")?>(?:\{[^}]*\})?<\/span>/g;
 const TIER_LABELS = ["I", "II", "III"] as const;
+const FormsSchema = z.record(z.string(), z.string());
 
-/** Game text with its placeholders filled in order; placeholders beyond the given values stay as they are. */
-export function fillPlaceholders(html: string, values: readonly string[]): string {
-  let next = 0;
-  return html.replace(PLACEHOLDER, (placeholder) => {
-    const value = values[next++];
-    return value === undefined ? placeholder : `<span class="value">${value}</span>`;
+const unescapeQuotes = (text: string): string => text.replace(/&quot;/g, '"');
+
+const NUMBER_RUN = /\d+(?:\.\d+)?/g;
+
+/** The number a plural agrees with: the last one in the value ("1~3" → 3, "20%" → 20), as nouns agree with the nearest numeral. */
+const lastNumber = (value: string): number | undefined => {
+  const runs = value.match(NUMBER_RUN);
+  return runs ? Number(runs[runs.length - 1]) : undefined;
+};
+
+/** The plural form of `forms` (a JSON map) for a value; a value with no number takes "other". */
+function pluralForm(forms: string, value: string, lang: Lang): string {
+  const parsed = FormsSchema.safeParse(JSON.parse(unescapeQuotes(forms)));
+  const map = parsed.success ? parsed.data : {};
+  const number = lastNumber(value);
+  const category = number === undefined ? "other" : new Intl.PluralRules(htmlLang(lang)).select(number);
+  return map[category] ?? map.other ?? Object.values(map)[0] ?? "";
+}
+
+/** Game text with its placeholders filled by slot number (and plural forms chosen for the value); slots with no value stay as they are. */
+export function fillPlaceholders(html: string, values: readonly string[], lang: Lang): string {
+  return html.replace(SLOT, (match, kind: string, slot: string, forms: string | undefined) => {
+    const value = /^\d+$/.test(slot) ? values[Number(slot)] : undefined;
+    if (value === undefined) return match;
+    return kind === "plural" ? `<span class="plural">${pluralForm(forms ?? "{}", value, lang)}</span>` : `<span class="value">${value}</span>`;
   });
 }
 
-const fill = (text: Localized, values: readonly string[]): Localized => ({
-  zh: fillPlaceholders(text.zh, values),
-  en: fillPlaceholders(text.en, values),
-});
+const fill = (text: Localized, values: readonly string[]): Localized => mapLocalized(text, (html, lang) => fillPlaceholders(html, values, lang));
 
 /** Each slot from tier I to tier III, e.g. "20%~50%"; one value when the tiers do not differ. */
 const ranges = (tiers: readonly (readonly string[])[]): string[] =>
@@ -55,11 +77,11 @@ export function describedLong(entry: Entry): Localized | undefined {
   return entry.descriptionLong && tiers ? fill(entry.descriptionLong, ranges(tiers)) : entry.descriptionLong;
 }
 
-const UNFILLED = /class="placeholder"/;
+const UNFILLED = /class="placeholder" data-slot="/;
 
 /** Whether every value in the entry's texts could be filled from the game data. */
 export const isFullyDescribed = (entry: Entry): boolean =>
-  !UNFILLED.test(`${describedEntry(entry)?.zh ?? ""}${describedEntry(entry)?.en ?? ""}${describedLong(entry)?.zh ?? ""}${describedLong(entry)?.en ?? ""}`);
+  !UNFILLED.test([describedEntry(entry), describedLong(entry)].flatMap((text) => LANGS.map((lang) => text?.[lang] ?? "")).join(""));
 
 /** An enchantment's description filled at each tier (I–III), for a tier table; undefined without game values. */
 export function enchantmentTiers(entry: Entry): { label: string; text: Localized }[] | undefined {
@@ -69,26 +91,22 @@ export function enchantmentTiers(entry: Entry): { label: string; text: Localized
   return TIER_LABELS.map((label, i) => ({ label, text: fill(description, tiers[i] ?? []) }));
 }
 
-const LABEL = {
-  cooldownSeconds: { zh: "冷卻時間", en: "Cooldown" },
-  soulCost: { zh: "靈魂消耗", en: "Soul cost" },
-  lifetimeSeconds: { zh: "持續時間", en: "Duration" },
-  range: { zh: "範圍", en: "Range" },
-} as const satisfies Record<string, Localized>;
-
-const round = (value: number): string => String(Math.round(value * 100) / 100);
+const ROW_KEY = {
+  cooldownSeconds: "statLabelCooldownSeconds",
+  soulCost: "statLabelSoulCost",
+  lifetimeSeconds: "statLabelLifetimeSeconds",
+  range: "statLabelAreaRange",
+} as const satisfies Record<string, UiKey>;
 
 /** An artifact's numbers ready to print; undefined when the game data has none for it. */
 export function artifactStatsView(lang: Lang, artifact: Entry): { label: string; value: string }[] | undefined {
   const data = artifact.category === "artifact" ? artifactData[artifact.slug] : undefined;
   if (!data) return undefined;
-  const seconds = (value: number) => (lang === "zh" ? `${round(value)} 秒` : `${round(value)} sec`);
-  const blocks = (value: number) => (lang === "zh" ? `${round(value)} 格` : `${round(value)} ${value === 1 ? "block" : "blocks"}`);
   const rows: ({ label: string; value: string } | undefined)[] = [
-    data.cooldownSeconds !== undefined ? { label: LABEL.cooldownSeconds[lang], value: seconds(data.cooldownSeconds) } : undefined,
-    data.soulCost !== undefined ? { label: LABEL.soulCost[lang], value: round(data.soulCost) } : undefined,
-    data.lifetimeSeconds !== undefined ? { label: LABEL.lifetimeSeconds[lang], value: seconds(data.lifetimeSeconds) } : undefined,
-    data.range !== undefined ? { label: LABEL.range[lang], value: blocks(data.range) } : undefined,
+    data.cooldownSeconds !== undefined ? { label: t(lang, ROW_KEY.cooldownSeconds), value: secondsText(lang, data.cooldownSeconds) } : undefined,
+    data.soulCost !== undefined ? { label: t(lang, ROW_KEY.soulCost), value: roundText(data.soulCost) } : undefined,
+    data.lifetimeSeconds !== undefined ? { label: t(lang, ROW_KEY.lifetimeSeconds), value: secondsText(lang, data.lifetimeSeconds) } : undefined,
+    data.range !== undefined ? { label: t(lang, ROW_KEY.range), value: blocksText(lang, data.range) } : undefined,
   ];
   return rows.filter((row): row is { label: string; value: string } => row !== undefined);
 }

@@ -2,7 +2,8 @@
 import type { Category } from "../../scripts/extract/config";
 import type { Entry, Localized } from "../../scripts/extract/schemas";
 import { catalogLabel } from "../lib/catalog";
-import { HTML_LANG, otherLang, type Lang } from "../lib/i18n";
+import type { Lang } from "../lib/i18n";
+import { compareLang, htmlLang, searchNames } from "../lib/lang";
 import EntryIcon from "./EntryIcon.astro";
 import TooltipPanel from "./TooltipPanel.astro";
 
@@ -21,15 +22,15 @@ interface Props {
 
 const { lang, href, name, icon, category, variant, kicker, description, index = 0 } = Astro.props;
 const unique = variant === "unique";
-const alt = otherLang(lang);
+const alt = compareLang(lang);
 ---
-<li class="entry-card" style={`--i:${index}`} data-variant={variant} data-names={`${name.zh} ${name.en}`.toLowerCase()}>
+<li class="entry-card" style={`--i:${index}`} data-variant={variant} data-names={searchNames(name, lang)}>
   <a class="item-link" href={href}>
     <span class="card-no" aria-hidden="true">{catalogLabel(index + 1)}</span>
     <span class="card-art"><EntryIcon icon={icon} alt={name[lang]} size={72} category={category} variant={variant} /></span>
     <span class="card-names">
       <span class:list={["primary", "item-name", { "is-unique": unique }]}>{name[lang]}</span>
-      {name[alt] !== name[lang] && <span class="item-alt" lang={HTML_LANG[alt]}>{name[alt]}</span>}
+      {name[alt] !== name[lang] && <span class="item-alt" lang={htmlLang(alt)}>{name[alt]}</span>}
     </span>
   </a>
   <template class="item-tip">

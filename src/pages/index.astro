@@ -1,16 +1,46 @@
 ---
+import { ALL_LANGS, LANG_META } from "../../scripts/extract/langs";
+import { t } from "../lib/ui-strings";
+
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
-const target = `${base}zh/`;
+const fallback = `${base}zh/`;
 ---
 <!doctype html>
-<html lang="zh-TW">
+<html lang="zh-TW" data-base={base}>
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
-    <link rel="canonical" href={target} />
-    <title>Minecraft Dungeons II 中文 Wiki</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <noscript><meta http-equiv="refresh" content={`0; url=${fallback}`} /></noscript>
+    <link rel="canonical" href={fallback} />
+    <title>{t("zh", "rootRedirectTitle")}</title>
   </head>
   <body>
-    <a href={target}>前往繁體中文版</a>
+    <noscript>
+      <ul>
+        {ALL_LANGS.map((code) => (
+          <li><a href={`${base}${code}/`} hreflang={LANG_META[code].htmlLang} lang={LANG_META[code].htmlLang}>{LANG_META[code].nativeName}</a></li>
+        ))}
+      </ul>
+    </noscript>
+    <script>
+      import { detectLang } from "../lib/lang-detect";
+
+      // The stored choice wins, then the browser's languages; with storage or the language list unavailable, Traditional Chinese.
+      const base = document.documentElement.dataset.base ?? "/";
+      let stored: string | null = null;
+      let browser: string[] = [];
+      try {
+        stored = localStorage.getItem("mcd2-lang");
+      } catch {
+        // Blocked storage: fall through to the browser's languages.
+      }
+      try {
+        browser = [...navigator.languages];
+      } catch {
+        // No language list: the default applies.
+      }
+      const code = detectLang(stored, browser);
+      location.replace(`${base}${code}/${location.search}${location.hash}`);
+    </script>
   </body>
 </html>

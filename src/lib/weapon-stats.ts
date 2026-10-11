@@ -1,49 +1,48 @@
-import type { Entry, Localized } from "../../scripts/extract/schemas";
+import type { Entry } from "../../scripts/extract/schemas";
 import type { Weapon } from "../../scripts/extract/weapon-schema";
 import type { Lang } from "./i18n";
+import { t, tCount, type UiKey } from "./ui-strings";
+import { blocksText, roundText, secondsText } from "./units";
 import { weaponData } from "./weapon-effects";
 
 /** Stat names. The game has official Chinese only for 彈藥 and 擊退; the rest are this site's own wording. */
 const LABEL = {
-  fullCombo: { zh: "整套連擊", en: "Full combo" },
-  swings: { zh: "連擊段數", en: "Swings" },
-  topHit: { zh: "最高單擊", en: "Top hit" },
-  reach: { zh: "攻擊距離", en: "Reach" },
-  shotDamage: { zh: "每發傷害", en: "Shot damage" },
-  chargedShot: { zh: "蓄力射擊", en: "Charged shot" },
-  shotsPerSecond: { zh: "每秒射擊數", en: "Shots per second" },
-  ammo: { zh: "彈藥", en: "Ammo" },
-  range: { zh: "射程", en: "Range" },
-  archetypes: { zh: "定位", en: "Archetype" },
-  weight: { zh: "重量", en: "Weight" },
-  charge: { zh: "蓄力時間", en: "Charge" },
-  ammoRecharge: { zh: "彈藥回復", en: "Ammo recharge" },
-  jumpShot: { zh: "跳躍射擊", en: "Jump shot" },
-  stagger: { zh: "硬直", en: "Stagger" },
-  knockback: { zh: "擊退", en: "Knockback" },
-} as const satisfies Record<string, Localized>;
+  fullCombo: "statLabelFullCombo",
+  swings: "statLabelSwings",
+  topHit: "statLabelTopHit",
+  reach: "statLabelReach",
+  shotDamage: "statLabelShotDamage",
+  chargedShot: "statLabelChargedShot",
+  shotsPerSecond: "statLabelShotsPerSecond",
+  ammo: "statLabelAmmo",
+  range: "statLabelRange",
+  archetypes: "statLabelArchetypes",
+  weight: "statLabelWeight",
+  charge: "statLabelCharge",
+  ammoRecharge: "statLabelAmmoRecharge",
+  jumpShot: "statLabelJumpShot",
+  stagger: "statLabelStagger",
+  knockback: "statLabelKnockback",
+} as const satisfies Record<string, UiKey>;
 
-const ARCHETYPE: Readonly<Record<Weapon["archetypes"][number], Localized>> = {
-  Fighter: { zh: "戰士", en: "Fighter" },
-  Mage: { zh: "法師", en: "Mage" },
-  Ranger: { zh: "遊俠", en: "Ranger" },
-  Summoner: { zh: "召喚師", en: "Summoner" },
-  Support: { zh: "輔助", en: "Support" },
-  Tank: { zh: "坦克", en: "Tank" },
-  Trickster: { zh: "詭術師", en: "Trickster" },
+const ARCHETYPE: Readonly<Record<Weapon["archetypes"][number], UiKey>> = {
+  Fighter: "archetypeFighter",
+  Mage: "archetypeMage",
+  Ranger: "archetypeRanger",
+  Summoner: "archetypeSummoner",
+  Support: "archetypeSupport",
+  Tank: "archetypeTank",
+  Trickster: "archetypeTrickster",
 };
 
-const WEIGHT: Readonly<Record<NonNullable<Weapon["weight"]>, Localized>> = {
-  Light: { zh: "輕型", en: "Light" },
-  Medium: { zh: "中型", en: "Medium" },
-  Heavy: { zh: "重型", en: "Heavy" },
+const WEIGHT: Readonly<Record<NonNullable<Weapon["weight"]>, UiKey>> = {
+  Light: "weightLight",
+  Medium: "weightMedium",
+  Heavy: "weightHeavy",
 };
 
 /** Combo table heads; distances carry their unit in the head so the cells stay narrow on phones. */
-const COMBO_COLUMNS: Readonly<Record<Lang, readonly string[]>> = {
-  zh: ["招式", "傷害", "命中", "硬直", "距離（格）", "擊退"],
-  en: ["Swing", "Damage", "Hits", "Stagger", "Reach (blocks)", "Knockback"],
-};
+const COMBO_HEADS = ["comboHead1", "comboHead2", "comboHead3", "comboHead4", "comboHead5", "comboHead6"] as const satisfies readonly UiKey[];
 
 export interface StatRow {
   readonly label: string;
@@ -56,10 +55,10 @@ export interface WeaponStatsView {
   readonly combo?: { readonly columns: readonly string[]; readonly rows: readonly (readonly string[])[] };
 }
 
-const round = (value: number, digits = 2): string => String(Math.round(value * 10 ** digits) / 10 ** digits);
-const blocks = (lang: Lang, value: number): string => (lang === "zh" ? `${round(value)} 格` : `${round(value)} ${value === 1 ? "block" : "blocks"}`);
-const seconds = (lang: Lang, value: number): string => (lang === "zh" ? `${round(value)} 秒` : `${round(value)} sec`);
-const row = (lang: Lang, key: keyof typeof LABEL, value: string): StatRow => ({ label: LABEL[key][lang], value });
+const round = roundText;
+const blocks = blocksText;
+const seconds = secondsText;
+const row = (lang: Lang, key: keyof typeof LABEL, value: string): StatRow => ({ label: t(lang, LABEL[key]), value });
 
 function meleeView(lang: Lang, melee: NonNullable<Weapon["melee"]>): Pick<WeaponStatsView, "tiles" | "combo"> {
   const { swings, jump } = melee;
@@ -70,15 +69,15 @@ function meleeView(lang: Lang, melee: NonNullable<Weapon["melee"]>): Pick<Weapon
     row(lang, "reach", blocks(lang, Math.max(...swings.map((swing) => swing.reach)))),
   ];
   const swingRows = swings.map((swing, i) => [
-    lang === "zh" ? `第 ${i + 1} 擊` : `Swing ${i + 1}`,
+    tCount(lang, "swingN", i + 1),
     round(swing.damage),
     String(swing.hits),
     round(swing.stagger),
     round(swing.reach),
     round(swing.knockback),
   ]);
-  const jumpRow = jump ? [[lang === "zh" ? "跳躍攻擊" : "Jump attack", round(jump.damage), "-", round(jump.stagger), round(jump.reach), round(jump.knockback)]] : [];
-  return { tiles, combo: { columns: COMBO_COLUMNS[lang], rows: [...swingRows, ...jumpRow] } };
+  const jumpRow = jump ? [[t(lang, "jumpAttack"), round(jump.damage), "-", round(jump.stagger), round(jump.reach), round(jump.knockback)]] : [];
+  return { tiles, combo: { columns: COMBO_HEADS.map((key) => t(lang, key)), rows: [...swingRows, ...jumpRow] } };
 }
 
 function rangedView(lang: Lang, ranged: NonNullable<Weapon["ranged"]>): Pick<WeaponStatsView, "tiles" | "facts"> {
@@ -108,10 +107,10 @@ export function weaponStatsView(lang: Lang, weapon: Entry): WeaponStatsView | un
   if (weapon.category !== "melee" && weapon.category !== "ranged") return undefined;
   const data = weaponData.weapons[weapon.slug];
   if (!data) return undefined;
-  const listSeparator = lang === "zh" ? "、" : " + ";
+  const listSeparator = t(lang, "listSeparator");
   const identity = [
-    ...(data.archetypes.length > 0 ? [row(lang, "archetypes", data.archetypes.map((name) => ARCHETYPE[name][lang]).join(listSeparator))] : []),
-    ...(data.weight ? [row(lang, "weight", WEIGHT[data.weight][lang])] : []),
+    ...(data.archetypes.length > 0 ? [row(lang, "archetypes", data.archetypes.map((name) => t(lang, ARCHETYPE[name])).join(listSeparator))] : []),
+    ...(data.weight ? [row(lang, "weight", t(lang, WEIGHT[data.weight]))] : []),
   ];
   if (data.melee) {
     const melee = meleeView(lang, data.melee);

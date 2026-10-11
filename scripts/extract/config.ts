@@ -1,9 +1,6 @@
 import path from "node:path";
 
-export const LANGS = ["zh", "en"] as const;
-export type Lang = (typeof LANGS)[number];
-
-export const CULTURE: Readonly<Record<Lang, string>> = { zh: "zh-Hant", en: "en" };
+export * from "./langs";
 
 export const CATEGORIES = [
   "melee",

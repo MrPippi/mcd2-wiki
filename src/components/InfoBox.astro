@@ -2,7 +2,7 @@
 import type { Entry } from "../../scripts/extract/schemas";
 import { catalogLabel, entryNumber } from "../lib/catalog";
 import { findArmorSet } from "../lib/data";
-import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../lib/i18n";
+import { categoryLabel, pieceLabel, t, type Lang } from "../lib/i18n";
 import { categoryIcon, pieceIcon } from "../lib/ui-icons";
 import { href } from "../lib/url";
 import EntryIcon from "./EntryIcon.astro";
@@ -23,14 +23,14 @@ const PLATE_ICON_SIZE = 200;
 ---
 <aside class="info-box" data-testid="info-box">
   <div class="entry-head specimen-plate">
-    {number !== undefined && <span class="plate-no mono" aria-hidden="true" data-pagefind-ignore>No. {catalogLabel(number)}</span>}
+    {number !== undefined && <span class="plate-no mono" aria-hidden="true" data-pagefind-ignore>{t(lang, "catalogNo")} {catalogLabel(number)}</span>}
     <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={PLATE_ICON_SIZE} category={entry.category} variant={entry.variant} loading="eager" searchImage />
     <span class="plate-scale" aria-hidden="true"></span>
   </div>
   <dl class="facts" data-pagefind-ignore>
     <div>
       <dt data-pagefind-ignore>{t(lang, "category")}</dt>
-      <dd><a href={href(lang, listCategory)}><UiIcon src={categoryIcon(entry.category)} />{CATEGORY_LABEL[entry.category][lang]}</a></dd>
+      <dd><a href={href(lang, listCategory)}><UiIcon src={categoryIcon(entry.category)} />{categoryLabel(entry.category, lang)}</a></dd>
     </div>
     <div>
       <dt data-pagefind-ignore><RarityTerm lang={lang} variant={entry.variant} /></dt>
@@ -39,7 +39,7 @@ const PLATE_ICON_SIZE = 200;
     {entry.armorPiece && (
       <div>
         <dt data-pagefind-ignore>{t(lang, "armorPiece")}</dt>
-        <dd><UiIcon src={pieceIcon(entry.armorPiece)} />{PIECE_LABEL[entry.armorPiece][lang]}</dd>
+        <dd><UiIcon src={pieceIcon(entry.armorPiece)} />{pieceLabel(entry.armorPiece, lang)}</dd>
       </div>
     )}
     {set && (

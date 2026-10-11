@@ -6,7 +6,7 @@ import CatalogHead from "../../../components/CatalogHead.astro";
 import ItemCard from "../../../components/ItemCard.astro";
 import Base from "../../../layouts/Base.astro";
 import { allArmorSets, findEntry } from "../../../lib/data";
-import { CATEGORY_LABEL, PIECE_LABEL, t, type Lang } from "../../../lib/i18n";
+import { categoryLabel, pieceLabel, t, type Lang } from "../../../lib/i18n";
 import { setKicker } from "../../../lib/kicker";
 import { href } from "../../../lib/url";
 
@@ -24,7 +24,7 @@ const cards = allArmorSets.map((set) => {
   return { set, pieces, icon: pieces[0]?.entry.icon };
 });
 ---
-<Base lang={lang} title={CATEGORY_LABEL.armor[lang]} current="armor">
+<Base lang={lang} title={categoryLabel("armor", lang)} current="armor">
   <div class="catalog">
   <CatalogHead lang={lang} category="armor" count={cards.length} showVariant={true} />
   <p class="no-results" hidden>{t(lang, "noResults")}</p>
@@ -41,7 +41,7 @@ const cards = allArmorSets.map((set) => {
         kicker={setKicker(set.variant)}
       >
         <ul class="tooltip-pieces">
-          {pieces.map(({ piece, entry }) => <li>{PIECE_LABEL[piece][lang]}：{entry.name[lang]}</li>)}
+          {pieces.map(({ piece, entry }) => <li>{pieceLabel(piece, lang)}{t(lang, "labelColon")}{entry.name[lang]}</li>)}
         </ul>
       </ItemCard>
     ))}

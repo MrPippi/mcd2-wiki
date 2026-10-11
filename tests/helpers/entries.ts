@@ -1,6 +1,7 @@
 import type { Category } from "../../scripts/extract/config";
 import { armorPieceOf, toSlug, variantOf } from "../../scripts/extract/keys";
 import type { Entry } from "../../scripts/extract/schemas";
+import { loc } from "./localized";
 
 export function makeEntry(id: string, category: Category, extra: Partial<Entry> = {}): Entry {
   const armorPiece = category === "armor" ? armorPieceOf(id) : undefined;
@@ -10,7 +11,7 @@ export function makeEntry(id: string, category: Category, extra: Partial<Entry> 
     category,
     variant: variantOf(id),
     release: "base",
-    name: { zh: id, en: id },
+    name: loc({ zh: id, en: id }),
     ...(armorPiece ? { armorPiece } : {}),
     links: {},
     ...extra,

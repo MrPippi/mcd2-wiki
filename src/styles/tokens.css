@@ -30,7 +30,7 @@
   --slot-border: var(--rule);
   --slot-unique-border: var(--accent);
 
-  --font-display: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+  --font-display: "Noto Serif", "Noto Serif TC", "Songti TC", "PMingLiU", serif;
   --font-body: "Geist Variable", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, "Cascadia Mono", monospace;
 
@@ -50,4 +50,23 @@
   --z-tooltip: 30;
   --z-grain: 40;
   --z-skip: 50;
+}
+
+/* Display and body fonts follow the page language (<html lang> = LANG_META.htmlLang).
+   :lang(zh-TW) and :lang(zh-CN) are separate rules; Geist covers Latin and Cyrillic,
+   so only CJK languages swap the body fallbacks. */
+:root:lang(zh-TW) {
+  --font-display: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
+}
+:root:lang(zh-CN) {
+  --font-display: "Noto Serif SC", "Songti SC", "SimSun", serif;
+  --font-body: "Geist Variable", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+}
+:root:lang(ja) {
+  --font-display: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --font-body: "Geist Variable", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+}
+:root:lang(ko) {
+  --font-display: "Noto Serif KR", "Apple Myungjo", "Batang", serif;
+  --font-body: "Geist Variable", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
 }

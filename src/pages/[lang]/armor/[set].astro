@@ -10,7 +10,7 @@ import UiIcon from "../../../components/UiIcon.astro";
 import Base from "../../../layouts/Base.astro";
 import { catalogLabel, setNumber } from "../../../lib/catalog";
 import { allArmorSets, findEntry } from "../../../lib/data";
-import { PIECE_LABEL, t, type Lang } from "../../../lib/i18n";
+import { pieceLabel, t, type Lang } from "../../../lib/i18n";
 import { setKicker } from "../../../lib/kicker";
 import { pieceIcon } from "../../../lib/ui-icons";
 import { entryHref } from "../../../lib/url";
@@ -33,7 +33,7 @@ const number = setNumber(set);
     <div class="entry-layout">
       <aside class="info-box" data-testid="info-box">
         <div class="set-preview specimen-plate">
-          {number !== undefined && <span class="plate-no mono" aria-hidden="true" data-pagefind-ignore>No. {catalogLabel(number)}</span>}
+          {number !== undefined && <span class="plate-no mono" aria-hidden="true" data-pagefind-ignore>{t(lang, "catalogNo")} {catalogLabel(number)}</span>}
           {pieces.map(({ entry }, index) => (
             <EntryIcon icon={entry.icon} alt={entry.name[lang]} size={96} category={entry.category} variant={entry.variant} loading="eager" searchImage={index === 0} />
           ))}
@@ -47,6 +47,12 @@ const number = setNumber(set);
             <dt data-pagefind-ignore>{t(lang, "pieces")}</dt>
             <dd>{pieces.length}</dd>
           </div>
+          {set.untranslated?.includes(lang) && (
+            <div>
+              <dt data-pagefind-ignore>{t(lang, "translation")}</dt>
+              <dd><span class="tag warn">{t(lang, "untranslated")}</span></dd>
+            </div>
+          )}
         </dl>
       </aside>
       <div class="entry-content">
@@ -59,7 +65,7 @@ const number = setNumber(set);
                 <a href={entryHref(lang, entry)}>
                   <EntryIcon icon={entry.icon} alt={entry.name[lang]} category={entry.category} variant={entry.variant} />
                   <span>
-                    <span class="piece-label"><UiIcon src={pieceIcon(piece)} />{PIECE_LABEL[piece][lang]}</span>{" "}
+                    <span class="piece-label"><UiIcon src={pieceIcon(piece)} />{pieceLabel(piece, lang)}</span>{" "}
                     <LangText lang={lang} value={entry.name} />
                   </span>
                 </a>

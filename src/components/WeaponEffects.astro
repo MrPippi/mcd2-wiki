@@ -1,6 +1,8 @@
 ---
 import type { Entry, Localized } from "../../scripts/extract/schemas";
+import { LANGS } from "../../scripts/extract/config";
 import { t, type Lang } from "../lib/i18n";
+import { mapLocalized } from "../lib/lang";
 import { entryHref } from "../lib/url";
 import { fillPlaceholders } from "../lib/gear-values";
 import { tierRange, weaponEffectsOf } from "../lib/weapon-effects";
@@ -21,13 +23,10 @@ const { lang, weapon } = Astro.props;
 const effects = weaponEffectsOf(weapon);
 // A fixed bonus whose text still has a value the game data cannot fill is left out, like hidden entries.
 const fixedFull = effects?.fixed;
-const withValues = (text: Localized, values: readonly string[]): Localized => ({
-  zh: fillPlaceholders(text.zh, values),
-  en: fillPlaceholders(text.en, values),
-});
+const withValues = (text: Localized, values: readonly string[]): Localized => mapLocalized(text, (html, l) => fillPlaceholders(html, values, l));
 const fixedText: Localized | undefined =
   fixedFull?.entry.description && fixedFull.values ? withValues(fixedFull.entry.description, fixedFull.values) : fixedFull?.entry.description;
-const fixed = fixedText && /class="placeholder"/.test(`${fixedText.zh}${fixedText.en}`) ? undefined : fixedFull;
+const fixed = fixedText && /class="placeholder" data-slot="/.test(LANGS.map((l) => fixedText[l]).join("")) ? undefined : fixedFull;
 ---
 {effects && (
   <>

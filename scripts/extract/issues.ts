@@ -8,6 +8,7 @@ export type IssueType =
   | "weapon-unmatched"
   | "missing-datatables"
   | "untranslated"
+  | "untranslated-namespace"
   | "markup-warning"
   | "missing-icon-root"
   | "missing-icon"
@@ -22,7 +23,9 @@ export type IssueType =
   | "missing-map-tables"
   | "map-marker-outside"
   | "map-missing-name"
-  | "map-unmatched-tag";
+  | "map-unmatched-tag"
+  | "map-text-fallback"
+  | "missing-ui-game-string";
 
 export interface Issue {
   readonly type: IssueType;

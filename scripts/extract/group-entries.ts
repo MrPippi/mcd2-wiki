@@ -1,4 +1,5 @@
-import { CATEGORIES, type Category, type Lang, type Release, type TableSource } from "./config";
+import { CATEGORIES, LANGS, type Category, type Lang, type Release, type TableSource } from "./config";
+import { byLang, localizedFrom } from "../../src/lib/lang";
 import { issue, type Issue } from "./issues";
 import { parseKey } from "./keys";
 import type { LocaleFile, Localized } from "./schemas";
@@ -36,32 +37,32 @@ const PLACEHOLDER_ONLY = /^\s*(?:\{\w+\}\s*)+$/;
 /** Untranslated developer stubs such as "Ammo Capacity Talisman Description". */
 const DEVELOPER_STUB = /^[\w\s]+ Description$/;
 
-const isMissing = (value: string | undefined, key: string): boolean =>
-  value === undefined || value.trim() === "" || value === key;
+/** A real translation: not absent, blank, or the key echoed back. */
+const isPresent = (value: string | undefined, key: string): value is string =>
+  value !== undefined && value.trim() !== "" && value !== key;
 
-const isPlaceholderOnly = (text: Localized): boolean =>
-  (PLACEHOLDER_ONLY.test(text.en) && PLACEHOLDER_ONLY.test(text.zh)) || DEVELOPER_STUB.test(text.en.trim());
+/** Only the English text decides: English that is just placeholders (or a developer stub) means there is nothing to show. */
+const isPlaceholderOnly = (text: Localized): boolean => PLACEHOLDER_ONLY.test(text.en) || DEVELOPER_STUB.test(text.en.trim());
 
-export function resolveText(
-  key: string,
-  en: string | undefined,
-  zh: string | undefined,
-): { text?: Localized; untranslated: Lang[] } {
-  const enMissing = isMissing(en, key);
-  const zhMissing = isMissing(zh, key);
-  if (enMissing && zhMissing) return { untranslated: [] };
-  const enText = (enMissing ? zh : en) as string;
-  const zhText = (zhMissing ? en : zh) as string;
-  const untranslated: Lang[] = [...(zhMissing ? (["zh"] as const) : []), ...(enMissing ? (["en"] as const) : [])];
-  return { text: { zh: zhText, en: enText }, untranslated };
+/** Text in every language: no English means no text; any other missing language takes the English and is flagged. */
+export function resolveText(key: string, texts: Partial<Record<Lang, string>>): { text?: Localized; untranslated: Lang[] } {
+  const en = texts.en;
+  if (!isPresent(en, key)) return { untranslated: [] };
+  const textFor = (lang: Lang): string => {
+    const value = texts[lang];
+    return isPresent(value, key) ? value : en;
+  };
+  return { text: localizedFrom(textFor), untranslated: LANGS.filter((lang) => !isPresent(texts[lang], key)) };
 }
 
-function readCell(table: TableSource, key: string, en: string, zh: string | undefined): { cell?: Cell; issues: Issue[] } {
+type Texts = Partial<Record<Lang, string>>;
+
+function readCell(table: TableSource, key: string, texts: Texts): { cell?: Cell; issues: Issue[] } {
   const parsed = parseKey(key);
   if (!parsed) return { issues: [issue("skipped-key", `${table.namespace} › ${key}`)] };
   const field = FIELD_MAP[parsed.field.toLowerCase()];
   if (!field) return { issues: [issue("ignored-field", `${parsed.id}.${parsed.field}`)] };
-  const { text, untranslated } = resolveText(key, en, zh);
+  const { text, untranslated } = resolveText(key, texts);
   if (!text) return { issues: [issue("missing-text", `${table.namespace} › ${key}`)] };
   if (field !== "name" && isPlaceholderOnly(text)) {
     return { issues: [issue("placeholder-only", `${parsed.id}.${parsed.field}`)] };
@@ -73,11 +74,14 @@ function readCell(table: TableSource, key: string, en: string, zh: string | unde
 function readTable(table: TableSource, locales: Record<Lang, LocaleFile>): { cells: Cell[]; issues: Issue[] } {
   const enTable = locales.en[table.namespace];
   if (!enTable) return { cells: [], issues: [issue("missing-namespace", table.namespace)] };
-  const zhTable = locales.zh[table.namespace] ?? {};
-  const results = Object.entries(enTable).map(([key, en]) => readCell(table, key, en, zhTable[key]));
+  const lacking = LANGS.filter((lang) => locales[lang][table.namespace] === undefined);
+  const results = Object.keys(enTable).map((key) => readCell(table, key, byLang((lang) => locales[lang][table.namespace]?.[key])));
   return {
     cells: results.flatMap((result) => (result.cell ? [result.cell] : [])),
-    issues: results.flatMap((result) => result.issues),
+    issues: [
+      ...lacking.map((lang) => issue("untranslated-namespace", `${lang}: ${table.namespace}`)),
+      ...results.flatMap((result) => result.issues),
+    ],
   };
 }
 

@@ -4,7 +4,8 @@ import { CATEGORIES, LANGS } from "./config";
 export const LocaleFileSchema = z.record(z.string(), z.record(z.string(), z.string()));
 export type LocaleFile = z.infer<typeof LocaleFileSchema>;
 
-export const LocalizedSchema = z.object({ zh: z.string(), en: z.string() });
+/** Text in every site language (all required, so a missed language is a type error). */
+export const LocalizedSchema = z.record(z.enum(LANGS), z.string());
 export type Localized = z.infer<typeof LocalizedSchema>;
 
 export const ARMOR_PIECES = ["helmet", "chest", "leggings", "boots"] as const;
@@ -25,6 +26,7 @@ export const EntrySchema = z.object({
   unlock: LocalizedSchema.optional(),
   icon: z.string().optional(),
   armorPiece: z.enum(ARMOR_PIECES).optional(),
+  /** Languages in which at least one text field of this entry is missing and shows the English text instead. */
   untranslated: z.array(z.enum(LANGS)).optional(),
   links: z.object({
     variants: z.array(SlugSchema).optional(),
@@ -40,6 +42,8 @@ export const ArmorSetSchema = z.object({
   slug: SlugSchema,
   variant: VariantSchema,
   name: LocalizedSchema,
+  /** Languages whose set name is the English name because the pieces' names in that language share no usable prefix. */
+  untranslated: z.array(z.enum(LANGS)).optional(),
   pieces: z.object({
     helmet: SlugSchema.optional(),
     chest: SlugSchema.optional(),

@@ -2,11 +2,13 @@
 import type { Category } from "../../scripts/extract/config";
 import { catalogLabel, categoryCount, entryNumber } from "../lib/catalog";
 import { entriesIn, publishedEntries } from "../lib/data";
-import { CATEGORY_LABEL, HTML_LANG, otherLang, t, type Lang } from "../lib/i18n";
+import { categoryLabel, t, type Lang } from "../lib/i18n";
+import { compareLang, htmlLang } from "../lib/lang";
 import { itemKicker } from "../lib/kicker";
 import { mapData, markerTotal } from "../lib/map/data";
 import { overviewTile } from "../lib/map/tiles";
 import { pickShowcase } from "../lib/showcase";
+import { splitSiteTitle } from "../lib/site-title";
 import { TAB_ORDER } from "../lib/tabs";
 import { categoryIcon, uiIcon } from "../lib/ui-icons";
 import { assetUrl, entryHref, href } from "../lib/url";
@@ -19,13 +21,11 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const alt = otherLang(lang);
-// The game name gets a line of its own, and "II" never wraps away from "Dungeons".
-const GAME_NAME = "Minecraft Dungeons II";
+const alt = compareLang(lang);
 const siteTitle = t(lang, "siteTitle");
-const titleRest = siteTitle.startsWith(GAME_NAME) ? siteTitle.slice(GAME_NAME.length).trim() : undefined;
-// A trailing "(zh-TW)" is a qualifier, not part of the name: set it small instead of at display size.
-const [, titleWord = titleRest, titleTag] = titleRest?.match(/^(.*?)\s*(\(.+\))$/) ?? [];
+// The game name gets a line of its own, and "II" never wraps away from "Dungeons".
+// A trailing qualifier such as "（简体）" is set small instead of at display size.
+const titleParts = splitSiteTitle(siteTitle);
 const FEATURED_SIZE = 240;
 const SIDE_SPECIMENS = 4;
 const PREVIEW_SPRITES = 6;
@@ -40,10 +40,10 @@ const previewOf = (category: Category) => entriesIn(category).filter((entry) => 
   <div class="hero-copy">
     <p class="kicker">UNOFFICIAL FAN WIKI</p>
     <h1 class="home-title">
-      {titleRest === undefined ? siteTitle : (
+      {titleParts === undefined ? siteTitle : (
         <>
-          <span class="title-game">{GAME_NAME.replace(" II", " II")}</span>{" "}
-          <span class="title-rest">{titleWord}{titleTag && <span class="title-tag">{titleTag}</span>}</span>
+          <span class="title-game">{titleParts.game.replace(" II", " II")}</span>{" "}
+          <span class="title-rest">{titleParts.word}{titleParts.tag && <span class="title-tag">{titleParts.tag}</span>}</span>
         </>
       )}
     </h1>
@@ -56,7 +56,7 @@ const previewOf = (category: Category) => entriesIn(category).filter((entry) => 
   {featured && (
     <figure class="hero-specimen">
       <a class="specimen-plate" href={entryHref(lang, featured)}>
-        <span class="plate-no mono">{featuredNumber !== undefined ? `No. ${catalogLabel(featuredNumber)}` : ""}</span>
+        <span class="plate-no mono">{featuredNumber !== undefined ? `${t(lang, "catalogNo")} ${catalogLabel(featuredNumber)}` : ""}</span>
         <span class="plate-art">
           <EntryIcon icon={featured.icon} alt={featured.name[lang]} size={FEATURED_SIZE} category={featured.category} variant={featured.variant} loading="eager" />
         </span>
@@ -86,8 +86,8 @@ const previewOf = (category: Category) => entriesIn(category).filter((entry) => 
         <a href={href(lang, category)}>
           <span class="category-index mono" aria-hidden="true">{catalogLabel(index + 1).slice(1)}</span>
           <span class="category-slot"><UiIcon src={categoryIcon(category)} /></span>
-          <span class="category-name">{CATEGORY_LABEL[category][lang]}</span>
-          <span class="category-alt item-alt" lang={HTML_LANG[alt]}>{CATEGORY_LABEL[category][alt]}</span>
+          <span class="category-name">{categoryLabel(category, lang)}</span>
+          <span class="category-alt item-alt" lang={htmlLang(alt)}>{categoryLabel(category, alt)}</span>
           <span class="category-preview" aria-hidden="true">
             {previewOf(category).map((entry) => (
               <EntryIcon icon={entry.icon} alt="" size={PREVIEW_SIZE} category={entry.category} variant={entry.variant} />
@@ -103,7 +103,7 @@ const previewOf = (category: Category) => entriesIn(category).filter((entry) => 
           <span class="category-index mono" aria-hidden="true">{catalogLabel(TAB_ORDER.length + 1).slice(1)}</span>
           <span class="category-slot"><UiIcon src={uiIcon("map")} /></span>
           <span class="category-name">{t(lang, "worldMap")}</span>
-          <span class="category-alt item-alt" lang={HTML_LANG[alt]}>{t(alt, "worldMap")}</span>
+          <span class="category-alt item-alt" lang={htmlLang(alt)}>{t(alt, "worldMap")}</span>
           <span class="category-preview" aria-hidden="true">
             <img class="map-preview" src={assetUrl(overviewTile(firstWorld.key))} alt="" width="32" height="32" loading="lazy" />
           </span>

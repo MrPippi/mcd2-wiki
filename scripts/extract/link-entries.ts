@@ -1,7 +1,11 @@
-import type { Lang } from "./config";
+import { byLang, localizedFrom } from "../../src/lib/lang";
+import { LANGS, LANG_META, type Lang } from "./config";
 import { issue, type Issue } from "./issues";
 import { baseId, toSlug } from "./keys";
+import { collectTails, setNameFor, type NamesByLang, type SetTails } from "./set-names";
 import { ARMOR_PIECES, type ArmorSet, type Entry } from "./schemas";
+
+export { commonPrefix, setNameFor } from "./set-names";
 
 export interface LinkResult {
   readonly entries: Entry[];
@@ -20,29 +24,6 @@ const BOOK_PREFIX = /^EnchantmentBook_/;
 const PIECE_PATTERN = /(Helmet|Chest|Leggings|Boots)/;
 const entryKey = (entry: Entry): string => `${entry.category}:${entry.id}`;
 const normalizeName = (name: string): string => name.trim().toLowerCase();
-
-export function commonPrefix(values: readonly string[]): string {
-  if (values.length === 0) return "";
-  return values.reduce((prefix, value) => {
-    let i = 0;
-    while (i < prefix.length && i < value.length && prefix[i] === value[i]) i += 1;
-    return prefix.slice(0, i);
-  });
-}
-
-function trimToWordBoundary(prefix: string, names: readonly string[]): string {
-  const atBoundary =
-    /\s$/.test(prefix) || names.every((name) => name.length === prefix.length || /\s/.test(name.charAt(prefix.length)));
-  return atBoundary ? prefix : prefix.slice(0, prefix.lastIndexOf(" ") + 1);
-}
-
-export function setNameFor(lang: Lang, names: readonly string[]): string | undefined {
-  if (names.length < 2) return undefined;
-  const prefix = commonPrefix(names);
-  const cut = lang === "en" ? trimToWordBoundary(prefix, names) : prefix.replace(/之$/, "");
-  const trimmed = cut.trim();
-  return [...trimmed].length >= 2 ? trimmed : undefined;
-}
 
 function variantLinks(published: readonly Entry[]): Map<string, string[]> {
   const groups = new Map<string, Entry[]>();
@@ -86,19 +67,48 @@ function setIdentity(entry: Entry): { id: string; slug: string } | undefined {
     : { id: setBase, slug: toSlug(setBase) };
 }
 
-function toArmorSet(draft: SetDraft): { set: ArmorSet; issues: Issue[] } {
+/** A piece's name in `lang`, or undefined when that is only the English name standing in for a missing translation. */
+function ownName(member: Entry, lang: Lang): string | undefined {
+  const standsInForEnglish = lang !== "en" && member.untranslated?.includes(lang) && member.name[lang] === member.name.en;
+  return standsInForEnglish ? undefined : member.name[lang];
+}
+
+/** The pieces' own names in each language; a language is left out when any piece only has the English stand-in. */
+function namesByLang(members: readonly Entry[]): NamesByLang {
+  return Object.fromEntries(
+    LANGS.flatMap((lang) => {
+      const names = members.map((member) => ownName(member, lang));
+      return names.every((name): name is string => name !== undefined) ? [[lang, names]] : [];
+    }),
+  );
+}
+
+function toArmorSet(draft: SetDraft, tails: SetTails): { set: ArmorSet; issues: Issue[] } {
   const fallback = draft.variant === "unique" ? `${draft.id.replace(/_Unique$/, "")} (Unique)` : draft.id;
-  const zh = setNameFor("zh", draft.members.map((member) => member.name.zh));
-  const en = setNameFor("en", draft.members.map((member) => member.name.en));
+  const owned = namesByLang(draft.members);
+  const prefixed = byLang((lang) => {
+    const names = owned[lang];
+    return names && setNameFor(lang, names, tails[lang]);
+  });
+  const english = prefixed.en ?? fallback;
+  const untranslated = LANGS.filter((lang) => lang !== "en" && prefixed[lang] === undefined);
   const pieces = Object.fromEntries(
     ARMOR_PIECES.flatMap((piece) => {
       const member = draft.members.find((candidate) => candidate.armorPiece === piece);
       return member ? [[piece, member.slug]] : [];
     }),
   ) as ArmorSet["pieces"];
+  const name = localizedFrom((lang) => prefixed[lang] ?? (lang === "zh" ? fallback : english));
   return {
-    set: { id: draft.id, slug: draft.slug, variant: draft.variant, name: { zh: zh ?? fallback, en: en ?? fallback }, pieces },
-    issues: zh && en ? [] : [issue("armor-set-name-fallback", draft.id)],
+    set: {
+      id: draft.id,
+      slug: draft.slug,
+      variant: draft.variant,
+      name,
+      pieces,
+      ...(untranslated.length > 0 ? { untranslated } : {}),
+    },
+    issues: prefixed.zh && prefixed.en ? [] : [issue("armor-set-name-fallback", draft.id)],
   };
 }
 
@@ -110,7 +120,8 @@ function buildArmorSets(published: readonly Entry[]) {
     const previous = drafts.get(identity.slug);
     drafts.set(identity.slug, { ...identity, variant: entry.variant, members: [...(previous?.members ?? []), entry] });
   }
-  const built = [...drafts.values()].map(toArmorSet);
+  const tails = collectTails([...drafts.values()].map((draft) => namesByLang(draft.members)));
+  const built = [...drafts.values()].map((draft) => toArmorSet(draft, tails));
   return {
     sets: built.map((result) => result.set).sort((a, b) => a.slug.localeCompare(b.slug, "en")),
     pieceToSet: new Map([...drafts.values()].flatMap((draft) => draft.members.map((member) => [member.id, draft.slug] as const))),

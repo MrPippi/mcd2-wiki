@@ -10,11 +10,17 @@ describe("relatedLinks", () => {
     expect(relatedLinks("zh", sword!)).toContainEqual({
       labelKey: "relatedVariant",
       href: "/zh/melee/sword-unique1/",
-      name: { zh: "燃燒之刃", en: "The Burning Blade" },
+      name: findEntry("melee", "sword-unique1")?.name,
       icon: "icons/melee/sword-unique1.png",
       category: "melee",
       variant: "unique",
     });
+  });
+
+  it("names the variant in every language", () => {
+    const link = relatedLinks("ja", findEntry("melee", "sword")!).find((l) => l.labelKey === "relatedVariant");
+    expect(link?.href).toBe("/ja/melee/sword-unique1/");
+    expect(link?.name).toMatchObject({ zh: "燃燒之刃", en: "The Burning Blade" });
   });
 
   it("links an armor piece to its set", () => {

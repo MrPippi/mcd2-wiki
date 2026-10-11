@@ -1,14 +1,16 @@
 import { describe, expect, it } from "vitest";
 import type { MapMarker } from "../../../scripts/extract/map-schema";
+import type { Localized } from "../../../scripts/extract/schemas";
+import { loc } from "../../helpers/localized";
 import { countByKind, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "../../../src/lib/map/markers";
 
-const marker = (id: string, kind: MapMarker["kind"], zh: string, en: string, area?: [string, string]): MapMarker => ({
+const marker = (id: string, kind: MapMarker["kind"], zh: string, en: string, area?: [string, string], extra: Partial<Localized> = {}): MapMarker => ({
   id,
   kind,
   px: 0,
   py: 0,
-  name: { zh, en },
-  ...(area ? { area: { zh: area[0], en: area[1] } } : {}),
+  name: loc({ zh, en, ...extra }),
+  ...(area ? { area: loc({ zh: area[0], en: area[1] }) } : {}),
 });
 
 const MARKERS: readonly MapMarker[] = [
@@ -20,23 +22,41 @@ const MARKERS: readonly MapMarker[] = [
 
 describe("searchMarkers", () => {
   it("matches names in either language, ignoring case and surrounding spaces", () => {
-    expect(searchMarkers(MARKERS, "鐵匠").map((m) => m.id)).toEqual(["smith"]);
-    expect(searchMarkers(MARKERS, "  blackSMITH ").map((m) => m.id)).toEqual(["smith"]);
+    expect(searchMarkers(MARKERS, "鐵匠", "zh").map((m) => m.id)).toEqual(["smith"]);
+    expect(searchMarkers(MARKERS, "  blackSMITH ", "zh").map((m) => m.id)).toEqual(["smith"]);
   });
 
   it("matches the area a marker sits in", () => {
-    expect(searchMarkers(MARKERS, "  BRAVE haven ").map((m) => m.id)).toEqual(["portal"]);
-    expect(searchMarkers(MARKERS, "咆哮").map((m) => m.id)).toEqual(["rift1"]);
+    expect(searchMarkers(MARKERS, "  BRAVE haven ", "en").map((m) => m.id)).toEqual(["portal"]);
+    expect(searchMarkers(MARKERS, "咆哮", "en").map((m) => m.id)).toEqual(["rift1"]);
+  });
+
+  it("searches the page language and its comparison language only, cased by the page language", () => {
+    const istanbul = [marker("ist", "merchant", "君士坦丁堡", "Constantinople", undefined, { tr: "İSTANBUL", ja: "イスタンブール" })];
+    expect(searchMarkers(istanbul, "istanbul", "tr").map((m) => m.id)).toEqual(["ist"]);
+    expect(searchMarkers(istanbul, "İstanbul", "tr").map((m) => m.id)).toEqual(["ist"]);
+    expect(searchMarkers(istanbul, "イスタンブール", "ja").map((m) => m.id)).toEqual(["ist"]);
+    expect(searchMarkers(istanbul, "CONSTANTINOPLE", "ja").map((m) => m.id)).toEqual(["ist"]);
+    expect(searchMarkers(istanbul, "イスタンブール", "de")).toEqual([]);
+    expect(searchMarkers(istanbul, "君士坦丁堡", "ja")).toEqual([]);
+  });
+
+  it("folds Turkish I so dotted, dotless and English names all match on a Turkish page", () => {
+    const iron = [marker("iron", "merchant", "鐵匠", "Iron Smith", undefined, { tr: "Işıltılı Demirci" })];
+    expect(searchMarkers(iron, "iron", "tr").map((m) => m.id)).toEqual(["iron"]);
+    expect(searchMarkers(iron, "IRON", "tr").map((m) => m.id)).toEqual(["iron"]);
+    expect(searchMarkers(iron, "Işıltılı", "tr").map((m) => m.id)).toEqual(["iron"]);
+    expect(searchMarkers(iron, "ışıltılı", "tr").map((m) => m.id)).toEqual(["iron"]);
   });
 
   it("returns nothing for an empty query and respects the limit", () => {
-    expect(searchMarkers(MARKERS, "   ")).toEqual([]);
-    expect(searchMarkers(MARKERS, "a", 2)).toHaveLength(2);
+    expect(searchMarkers(MARKERS, "   ", "zh")).toEqual([]);
+    expect(searchMarkers(MARKERS, "a", "en", 2)).toHaveLength(2);
   });
 
   it("leaves the input untouched", () => {
     const copy = structuredClone(MARKERS);
-    searchMarkers(MARKERS, "rift");
+    searchMarkers(MARKERS, "rift", "en");
     expect(MARKERS).toEqual(copy);
   });
 });

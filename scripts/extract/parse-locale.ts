@@ -1,4 +1,5 @@
-import { CULTURE, LANGS, PATHS, type Lang } from "./config";
+import { LANGS, LANG_META, PATHS, type Lang } from "./config";
+import { byLang } from "../../src/lib/lang";
 import { ExtractError, formatZodIssue } from "./issues";
 import { readJsonFile } from "./read-json";
 import { LocaleFileSchema, type LocaleFile } from "./schemas";
@@ -13,9 +14,9 @@ export async function loadLocaleFile(filePath: string): Promise<LocaleFile> {
   return parsed.data;
 }
 
+/** Every language's locale file; a missing file fails the extract and names the file. */
 export async function loadLocales(sourceRoot: string): Promise<Record<Lang, LocaleFile>> {
-  const [zh, en] = await Promise.all(
-    LANGS.map((lang) => loadLocaleFile(PATHS.localeFile(sourceRoot, CULTURE[lang]))),
-  );
-  return { zh, en };
+  const files = await Promise.all(LANGS.map((lang) => loadLocaleFile(PATHS.localeFile(sourceRoot, LANG_META[lang].culture))));
+  const byIndex = new Map(LANGS.map((lang, i) => [lang, files[i]]));
+  return byLang((lang) => byIndex.get(lang) ?? {});
 }

@@ -1,5 +1,5 @@
 /** DOM for map pins, popups and search results, built with textContent so game text is never parsed as HTML. */
-import type { MapMarker } from "../../../scripts/extract/map-schema";
+import type { PayloadMarker } from "./payload";
 import type { Lang } from "../i18n";
 import { assetUrl } from "../url";
 
@@ -17,7 +17,7 @@ function iconImage(path: string, className: string): HTMLImageElement {
   return image;
 }
 
-export function pinElement(marker: MapMarker, lang: Lang): HTMLElement {
+export function pinElement(marker: PayloadMarker, lang: Lang): HTMLElement {
   if (marker.kind !== "area") {
     const pin = element("span", "map-pin");
     if (marker.icon) pin.append(iconImage(marker.icon, "map-pin-icon"));
@@ -25,19 +25,19 @@ export function pinElement(marker: MapMarker, lang: Lang): HTMLElement {
   }
   const label = element("span", "map-label");
   if (marker.icon) label.append(iconImage(marker.icon, "map-label-icon"));
-  label.append(element("span", "map-label-text", marker.name[lang]));
+  label.append(element("span", "map-label-text", marker.name[lang] ?? ""));
   return label;
 }
 
-export function popupElement(marker: MapMarker, lang: Lang, kindLabel: string): HTMLElement {
+export function popupElement(marker: PayloadMarker, lang: Lang, kindLabel: string): HTMLElement {
   const popup = element("div", "map-popup");
-  popup.append(element("p", "map-popup-kind mono", kindLabel), element("p", "map-popup-name", marker.name[lang]));
-  if (marker.area) popup.append(element("p", "map-popup-area", marker.area[lang]));
-  if (marker.note) popup.append(element("p", "map-popup-note", marker.note[lang]));
+  popup.append(element("p", "map-popup-kind mono", kindLabel), element("p", "map-popup-name", marker.name[lang] ?? ""));
+  if (marker.area?.[lang]) popup.append(element("p", "map-popup-area", marker.area[lang]));
+  if (marker.note?.[lang]) popup.append(element("p", "map-popup-note", marker.note[lang]));
   return popup;
 }
 
-export function resultElement(marker: MapMarker, lang: Lang, kindLabel: string): HTMLLIElement {
+export function resultElement(marker: PayloadMarker, lang: Lang, kindLabel: string): HTMLLIElement {
   const item = element("li", "");
   const kind = kindLabel === marker.name[lang] ? undefined : kindLabel;
   const button = element("button", "map-result", [marker.name[lang], kind, marker.area?.[lang]].filter(Boolean).join(" · "));

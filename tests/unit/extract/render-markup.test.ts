@@ -52,8 +52,8 @@ describe("renderMarkup", () => {
   });
 
   it("renders placeholders per language", () => {
-    expect(renderMarkup("提高 {0}", "zh").html).toBe('提高 <span class="placeholder">{數值}</span>');
-    expect(renderMarkup("deal {damage}", "en").html).toBe('deal <span class="placeholder">{value}</span>');
+    expect(renderMarkup("提高 {0}", "zh").html).toBe('提高 <span class="placeholder" data-slot="0">{數值}</span>');
+    expect(renderMarkup("deal {damage}", "en").html).toBe('deal <span class="placeholder" data-slot="damage">{value}</span>');
   });
 
   it("turns newlines into line breaks", () => {
@@ -64,5 +64,21 @@ describe("renderMarkup", () => {
 describe("stripMarkup", () => {
   it("removes tags and collapses whitespace", () => {
     expect(stripMarkup("<emphasis>Sage</>   Belt ")).toBe("Sage Belt");
+  });
+});
+
+describe("placeholder slots", () => {
+  it("keeps each placeholder's slot number", () => {
+    expect(renderMarkup("移動超過 {1} 秒後，移動速度提高 {0}。", "zh").html).toBe(
+      '移動超過 <span class="placeholder" data-slot="1">{數值}</span> 秒後，移動速度提高 <span class="placeholder" data-slot="0">{數值}</span>。',
+    );
+  });
+
+  it("turns the game's plural syntax into a plural slot", () => {
+    const { html, warnings } = renderMarkup("дольше {1} {1}|plural(one=секунды,few=секунд,many=секунд,other=секунды).", "en");
+    expect(warnings).toEqual([]);
+    expect(html).toContain('<span class="placeholder" data-slot="1">');
+    expect(html).toContain('<span class="plural" data-slot="1" data-forms="{&quot;one&quot;:&quot;секунды&quot;,&quot;few&quot;:&quot;секунд&quot;,&quot;many&quot;:&quot;секунд&quot;,&quot;other&quot;:&quot;секунды&quot;}"></span>');
+    expect(html).not.toContain("|plural(");
   });
 });

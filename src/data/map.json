@@ -4,7 +4,21 @@
       "key": "overworld",
       "name": {
         "zh": "主世界",
-        "en": "Overworld"
+        "zh-hans": "主世界",
+        "en": "Overworld",
+        "ja": "オーバーワールド",
+        "ko": "오버월드",
+        "de": "Oberwelt",
+        "fr": "Surface",
+        "es": "Mundo superior",
+        "it": "Sopramondo",
+        "pt": "Superfície",
+        "ru": "Обычный мир",
+        "pl": "Nadziemie",
+        "nl": "Bovenwereld",
+        "sv": "Övervärlden",
+        "tr": "Yerüstü",
+        "uk": "Верхній світ"
       },
       "frame": {
         "minX": -599,
@@ -24,7 +38,21 @@
           "py": 3394.6,
           "name": {
             "zh": "冰封高地",
-            "en": "Frozen Highlands"
+            "zh-hans": "冰封高地",
+            "en": "Frozen Highlands",
+            "ja": "凍てつく高地",
+            "ko": "얼어붙은 고원",
+            "de": "Eishochland",
+            "fr": "Hautes-terres gelées",
+            "es": "Tierras altas heladas",
+            "it": "Alture gelate",
+            "pt": "Terras Altas Congeladas",
+            "ru": "Ледяные нагорья",
+            "pl": "Zmrożone Wyżyny",
+            "nl": "Bevroren Hooglanden",
+            "sv": "Frusna högländerna",
+            "tr": "Donmuş Dağlıklar",
+            "uk": "Крижане високогір’я"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -35,7 +63,21 @@
           "py": 4446.7,
           "name": {
             "zh": "冰封高地",
-            "en": "Frozen Highlands"
+            "zh-hans": "冰封高地",
+            "en": "Frozen Highlands",
+            "ja": "凍てつく高地",
+            "ko": "얼어붙은 고원",
+            "de": "Eishochland",
+            "fr": "Hautes-terres gelées",
+            "es": "Tierras altas heladas",
+            "it": "Alture gelate",
+            "pt": "Terras Altas Congeladas",
+            "ru": "Ледяные нагорья",
+            "pl": "Zmrożone Wyżyny",
+            "nl": "Bevroren Hooglanden",
+            "sv": "Frusna högländerna",
+            "tr": "Donmuş Dağlıklar",
+            "uk": "Крижане високогір’я"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -46,7 +88,21 @@
           "py": 3911.6,
           "name": {
             "zh": "冰封高地",
-            "en": "Frozen Highlands"
+            "zh-hans": "冰封高地",
+            "en": "Frozen Highlands",
+            "ja": "凍てつく高地",
+            "ko": "얼어붙은 고원",
+            "de": "Eishochland",
+            "fr": "Hautes-terres gelées",
+            "es": "Tierras altas heladas",
+            "it": "Alture gelate",
+            "pt": "Terras Altas Congeladas",
+            "ru": "Ледяные нагорья",
+            "pl": "Zmrożone Wyżyny",
+            "nl": "Bevroren Hooglanden",
+            "sv": "Frusna högländerna",
+            "tr": "Donmuş Dağlıklar",
+            "uk": "Крижане високогір’я"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -57,7 +113,21 @@
           "py": 5097,
           "name": {
             "zh": "冰封高地",
-            "en": "Frozen Highlands"
+            "zh-hans": "冰封高地",
+            "en": "Frozen Highlands",
+            "ja": "凍てつく高地",
+            "ko": "얼어붙은 고원",
+            "de": "Eishochland",
+            "fr": "Hautes-terres gelées",
+            "es": "Tierras altas heladas",
+            "it": "Alture gelate",
+            "pt": "Terras Altas Congeladas",
+            "ru": "Ледяные нагорья",
+            "pl": "Zmrożone Wyżyny",
+            "nl": "Bevroren Hooglanden",
+            "sv": "Frusna högländerna",
+            "tr": "Donmuş Dağlıklar",
+            "uk": "Крижане високогір’я"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -68,7 +138,21 @@
           "py": 4851.2,
           "name": {
             "zh": "冰封高地",
-            "en": "Frozen Highlands"
+            "zh-hans": "冰封高地",
+            "en": "Frozen Highlands",
+            "ja": "凍てつく高地",
+            "ko": "얼어붙은 고원",
+            "de": "Eishochland",
+            "fr": "Hautes-terres gelées",
+            "es": "Tierras altas heladas",
+            "it": "Alture gelate",
+            "pt": "Terras Altas Congeladas",
+            "ru": "Ледяные нагорья",
+            "pl": "Zmrożone Wyżyny",
+            "nl": "Bevroren Hooglanden",
+            "sv": "Frusna högländerna",
+            "tr": "Donmuş Dağlıklar",
+            "uk": "Крижане високогір’я"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -79,7 +163,21 @@
           "py": 3166.7,
           "name": {
             "zh": "冰封高地",
-            "en": "Frozen Highlands"
+            "zh-hans": "冰封高地",
+            "en": "Frozen Highlands",
+            "ja": "凍てつく高地",
+            "ko": "얼어붙은 고원",
+            "de": "Eishochland",
+            "fr": "Hautes-terres gelées",
+            "es": "Tierras altas heladas",
+            "it": "Alture gelate",
+            "pt": "Terras Altas Congeladas",
+            "ru": "Ледяные нагорья",
+            "pl": "Zmrożone Wyżyny",
+            "nl": "Bevroren Hooglanden",
+            "sv": "Frusna högländerna",
+            "tr": "Donmuş Dağlıklar",
+            "uk": "Крижане високогір’я"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -90,7 +188,21 @@
           "py": 4359.7,
           "name": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -101,7 +213,21 @@
           "py": 3750.4,
           "name": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -112,7 +238,21 @@
           "py": 4454.4,
           "name": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -123,7 +263,21 @@
           "py": 3763.2,
           "name": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -134,7 +288,21 @@
           "py": 3655.7,
           "name": {
             "zh": "蜂巢原野",
-            "en": "Honeycomb Fields"
+            "zh-hans": "蜜脾原野",
+            "en": "Honeycomb Fields",
+            "ja": "ハニカム畑",
+            "ko": "벌집 들판",
+            "de": "Honigwabenfelder",
+            "fr": "Champs de miel",
+            "es": "Campos de panales",
+            "it": "Campi del favo",
+            "pt": "Campos de Favos de Mel",
+            "ru": "Поля медовых сот",
+            "pl": "Miodowe Pola",
+            "nl": "Honingraatvelden",
+            "sv": "Bikupefälten",
+            "tr": "Bal Peteği Tarlaları",
+            "uk": "Стільникові поля"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -145,7 +313,21 @@
           "py": 4252.2,
           "name": {
             "zh": "蜂巢原野",
-            "en": "Honeycomb Fields"
+            "zh-hans": "蜜脾原野",
+            "en": "Honeycomb Fields",
+            "ja": "ハニカム畑",
+            "ko": "벌집 들판",
+            "de": "Honigwabenfelder",
+            "fr": "Champs de miel",
+            "es": "Campos de panales",
+            "it": "Campi del favo",
+            "pt": "Campos de Favos de Mel",
+            "ru": "Поля медовых сот",
+            "pl": "Miodowe Pola",
+            "nl": "Honingraatvelden",
+            "sv": "Bikupefälten",
+            "tr": "Bal Peteği Tarlaları",
+            "uk": "Стільникові поля"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -156,7 +338,21 @@
           "py": 7042.6,
           "name": {
             "zh": "多雨平原",
-            "en": "Rainy Plains"
+            "zh-hans": "多雨平原",
+            "en": "Rainy Plains",
+            "ja": "雨降りの平原",
+            "ko": "비의 평원",
+            "de": "Regenebene",
+            "fr": "Plaines pluvieuses",
+            "es": "Llanura lluviosa",
+            "it": "Pianure piovose",
+            "pt": "Planícies Chuvosas",
+            "ru": "Дождливые равнины",
+            "pl": "Deszczowe Równiny",
+            "nl": "Regenachtige Vlakten",
+            "sv": "Regniga slätterna",
+            "tr": "Yağmurlu Ovalar",
+            "uk": "Дощові рівнини"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -167,7 +363,21 @@
           "py": 7631.4,
           "name": {
             "zh": "多雨平原",
-            "en": "Rainy Plains"
+            "zh-hans": "多雨平原",
+            "en": "Rainy Plains",
+            "ja": "雨降りの平原",
+            "ko": "비의 평원",
+            "de": "Regenebene",
+            "fr": "Plaines pluvieuses",
+            "es": "Llanura lluviosa",
+            "it": "Pianure piovose",
+            "pt": "Planícies Chuvosas",
+            "ru": "Дождливые равнины",
+            "pl": "Deszczowe Równiny",
+            "nl": "Regenachtige Vlakten",
+            "sv": "Regniga slätterna",
+            "tr": "Yağmurlu Ovalar",
+            "uk": "Дощові рівнини"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -178,7 +388,21 @@
           "py": 6233.6,
           "name": {
             "zh": "多雨平原",
-            "en": "Rainy Plains"
+            "zh-hans": "多雨平原",
+            "en": "Rainy Plains",
+            "ja": "雨降りの平原",
+            "ko": "비의 평원",
+            "de": "Regenebene",
+            "fr": "Plaines pluvieuses",
+            "es": "Llanura lluviosa",
+            "it": "Pianure piovose",
+            "pt": "Planícies Chuvosas",
+            "ru": "Дождливые равнины",
+            "pl": "Deszczowe Równiny",
+            "nl": "Regenachtige Vlakten",
+            "sv": "Regniga slätterna",
+            "tr": "Yağmurlu Ovalar",
+            "uk": "Дощові рівнини"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -189,7 +413,21 @@
           "py": 6868.5,
           "name": {
             "zh": "多雨平原",
-            "en": "Rainy Plains"
+            "zh-hans": "多雨平原",
+            "en": "Rainy Plains",
+            "ja": "雨降りの平原",
+            "ko": "비의 평원",
+            "de": "Regenebene",
+            "fr": "Plaines pluvieuses",
+            "es": "Llanura lluviosa",
+            "it": "Pianure piovose",
+            "pt": "Planícies Chuvosas",
+            "ru": "Дождливые равнины",
+            "pl": "Deszczowe Równiny",
+            "nl": "Regenachtige Vlakten",
+            "sv": "Regniga slätterna",
+            "tr": "Yağmurlu Ovalar",
+            "uk": "Дощові рівнини"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -200,7 +438,21 @@
           "py": 5698.6,
           "name": {
             "zh": "多雨平原",
-            "en": "Rainy Plains"
+            "zh-hans": "多雨平原",
+            "en": "Rainy Plains",
+            "ja": "雨降りの平原",
+            "ko": "비의 평원",
+            "de": "Regenebene",
+            "fr": "Plaines pluvieuses",
+            "es": "Llanura lluviosa",
+            "it": "Pianure piovose",
+            "pt": "Planícies Chuvosas",
+            "ru": "Дождливые равнины",
+            "pl": "Deszczowe Równiny",
+            "nl": "Regenachtige Vlakten",
+            "sv": "Regniga slätterna",
+            "tr": "Yağmurlu Ovalar",
+            "uk": "Дощові рівнини"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -211,7 +463,21 @@
           "py": 4433,
           "name": {
             "zh": "英雄港",
-            "en": "Brave Haven"
+            "zh-hans": "勇者港湾",
+            "en": "Brave Haven",
+            "ja": "ブレイブヘイブン",
+            "ko": "용사의 안식처",
+            "de": "Tapferkeitshafen",
+            "fr": "Havre des Braves",
+            "es": "Refugio de los valientes",
+            "it": "Rifugio dei valorosi",
+            "pt": "Refúgio dos Corajosos",
+            "ru": "Пристанище бравых",
+            "pl": "Siedlisko Śmiałków",
+            "nl": "Dapperenhaven",
+            "sv": "Djärvhamn",
+            "tr": "Yiğitler Sığınağı",
+            "uk": "Прихисток відважних"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -222,7 +488,21 @@
           "py": 4425.2,
           "name": {
             "zh": "英雄港",
-            "en": "Brave Haven"
+            "zh-hans": "勇者港湾",
+            "en": "Brave Haven",
+            "ja": "ブレイブヘイブン",
+            "ko": "용사의 안식처",
+            "de": "Tapferkeitshafen",
+            "fr": "Havre des Braves",
+            "es": "Refugio de los valientes",
+            "it": "Rifugio dei valorosi",
+            "pt": "Refúgio dos Corajosos",
+            "ru": "Пристанище бравых",
+            "pl": "Siedlisko Śmiałków",
+            "nl": "Dapperenhaven",
+            "sv": "Djärvhamn",
+            "tr": "Yiğitler Sığınağı",
+            "uk": "Прихисток відважних"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -233,15 +513,57 @@
           "py": 4293.1,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -252,15 +574,57 @@
           "py": 3952.6,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -271,15 +635,57 @@
           "py": 3479,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -290,15 +696,57 @@
           "py": 4203.3,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -309,15 +757,57 @@
           "py": 3944.8,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -328,15 +818,57 @@
           "py": 4351.8,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -347,15 +879,57 @@
           "py": 4597.6,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -366,15 +940,57 @@
           "py": 3889.3,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -385,15 +1001,57 @@
           "py": 4822.8,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -404,15 +1062,57 @@
           "py": 4343.9,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "冰封高地",
-            "en": "Frozen Highlands"
+            "zh-hans": "冰封高地",
+            "en": "Frozen Highlands",
+            "ja": "凍てつく高地",
+            "ko": "얼어붙은 고원",
+            "de": "Eishochland",
+            "fr": "Hautes-terres gelées",
+            "es": "Tierras altas heladas",
+            "it": "Alture gelate",
+            "pt": "Terras Altas Congeladas",
+            "ru": "Ледяные нагорья",
+            "pl": "Zmrożone Wyżyny",
+            "nl": "Bevroren Hooglanden",
+            "sv": "Frusna högländerna",
+            "tr": "Donmuş Dağlıklar",
+            "uk": "Крижане високогір’я"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -423,15 +1123,57 @@
           "py": 3348,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -442,15 +1184,57 @@
           "py": 3484,
           "name": {
             "zh": "裂隙",
-            "en": "Rift"
+            "zh-hans": "裂隙",
+            "en": "Rift",
+            "ja": "亀裂",
+            "ko": "균열",
+            "de": "Riss",
+            "fr": "Faille",
+            "es": "Grieta",
+            "it": "Varco",
+            "pt": "Fenda",
+            "ru": "Разлом",
+            "pl": "Szczelina",
+            "nl": "Scheur",
+            "sv": "Reva",
+            "tr": "Yarık",
+            "uk": "Розлом"
           },
           "area": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "note": {
             "zh": "進入以尋找附魔書、回聲碎片及其他戰利品。",
-            "en": "Enter to find Enchantment Books, Echo Shards and other loot."
+            "zh-hans": "进入以寻找附魔书、回响碎片和其他战利品。",
+            "en": "Enter to find Enchantment Books, Echo Shards and other loot.",
+            "ja": "潜入し、エンチャントの本や残響のかけらなどの戦利品を見つけ出しましょう。",
+            "ko": "마법 부여 책, 에코 조각, 기타 전리품을 찾기 위해 입장합니다.",
+            "de": "Geh hinein, um Verzauberungsbücher, Echoscherben und andere Beute zu finden.",
+            "fr": "Entrez pour trouver des livres d'enchantement, des éclats d'écho et d'autres butins.",
+            "es": "Entra para encontrar libros encantados, fragmentos resonantes y otros botines.",
+            "it": "Entra per trovare libri degli incantesimi, schegge di eco e altro bottino.",
+            "pt": "Entre para encontrar Livros de Encantamentos, Fragmentos de Eco e outros saques.",
+            "ru": "Внутри вы сможете найти книги зачарований, осколки эха и другую добычу.",
+            "pl": "Wejdź, aby odnaleźć księgi zaklinania, odłamki echa i inny łup.",
+            "nl": "Ga naar binnen om betoveringsboeken, echoscherven en andere buit te vinden.",
+            "sv": "Gå in för att hitta förtrollningsböcker, ekoskärvor och annat byte.",
+            "tr": "Büyü Kitapları, Yankı Parçaları ve başka ganimetler bulmak için gir.",
+            "uk": "Увійдіть, щоб знайти книги чарів, ехові уламки й іншу здобич."
           },
           "icon": "icons/map/t_ui_icon_rift.png"
         },
@@ -461,11 +1245,39 @@
           "py": 4416.3,
           "name": {
             "zh": "傳送雕像",
-            "en": "Teleport Statue"
+            "zh-hans": "传送雕像",
+            "en": "Teleport Statue",
+            "ja": "テレポート像",
+            "ko": "순간이동 조각상",
+            "de": "Teleportierungsstatue",
+            "fr": "Statue de téléportation",
+            "es": "Estatua de teletransporte",
+            "it": "Statua di teletrasporto",
+            "pt": "Estátua de Teletransporte",
+            "ru": "Статуя телепортации",
+            "pl": "Posąg teleportujący",
+            "nl": "Teleportatiestandbeeld",
+            "sv": "Teleportera till staty",
+            "tr": "Işınlanma Heykeli",
+            "uk": "Статуя для телепортування"
           },
           "area": {
             "zh": "英雄港",
-            "en": "Brave Haven"
+            "zh-hans": "勇者港湾",
+            "en": "Brave Haven",
+            "ja": "ブレイブヘイブン",
+            "ko": "용사의 안식처",
+            "de": "Tapferkeitshafen",
+            "fr": "Havre des Braves",
+            "es": "Refugio de los valientes",
+            "it": "Rifugio dei valorosi",
+            "pt": "Refúgio dos Corajosos",
+            "ru": "Пристанище бравых",
+            "pl": "Siedlisko Śmiałków",
+            "nl": "Dapperenhaven",
+            "sv": "Djärvhamn",
+            "tr": "Yiğitler Sığınağı",
+            "uk": "Прихисток відважних"
           },
           "icon": "icons/map/t_ui_icon_town_portal.png"
         },
@@ -476,11 +1288,39 @@
           "py": 4367.4,
           "name": {
             "zh": "商人",
-            "en": "Merchant"
+            "zh-hans": "商人",
+            "en": "Merchant",
+            "ja": "商人",
+            "ko": "상인",
+            "de": "Händler",
+            "fr": "Commerçant",
+            "es": "Comerciante",
+            "it": "Mercante",
+            "pt": "Mercador",
+            "ru": "Торговец",
+            "pl": "Kupiec",
+            "nl": "Handelaar",
+            "sv": "Köpman",
+            "tr": "Tüccar",
+            "uk": "Торговець"
           },
           "note": {
             "zh": "購買不同稀有度等級的物品。",
-            "en": "Purchase items of different rarity levels."
+            "zh-hans": "购买不同稀有度等级的物品。",
+            "en": "Purchase items of different rarity levels.",
+            "ja": "さまざまなレアリティレベルのアイテムを購入できます。",
+            "ko": "다양한 희귀도 레벨의 아이템을 구매하세요.",
+            "de": "Kaufe Gegenstände verschiedener Seltenheitsgrade.",
+            "fr": "Achetez des objets de différents niveaux de rareté.",
+            "es": "Compra objetos de diferentes niveles de rareza.",
+            "it": "Acquista oggetti di vari livelli di rarità.",
+            "pt": "Compre itens de equipamento de diferentes níveis de raridade.",
+            "ru": "Продает предметы различной редкости.",
+            "pl": "Kupuj przedmioty o różnych poziomach rzadkości.",
+            "nl": "Koop items van verschillende zeldzaamheidsniveaus.",
+            "sv": "Köp föremål på olika sällsynthetsnivåer.",
+            "tr": "Farklı nadirlik seviyelerinde eşya satın al.",
+            "uk": "Продає предмети різного рівня рідкості."
           },
           "icon": "icons/map/t_ui_icon_villagemerchant.png"
         },
@@ -491,11 +1331,39 @@
           "py": 4282.8,
           "name": {
             "zh": "鐵匠",
-            "en": "Blacksmith"
+            "zh-hans": "铁匠",
+            "en": "Blacksmith",
+            "ja": "鍛冶屋",
+            "ko": "대장장이",
+            "de": "Schmied",
+            "fr": "Forgeron",
+            "es": "Herrero",
+            "it": "Fabbro",
+            "pt": "Ferreiro",
+            "ru": "Кузнец",
+            "pl": "Kowal",
+            "nl": "Smid",
+            "sv": "Smed",
+            "tr": "Demirci",
+            "uk": "Коваль"
           },
           "note": {
             "zh": "提升物品的強度，並重擲其效果。",
-            "en": "Increase the power of your items and reroll effects on them."
+            "zh-hans": "提升物品的战力并重新抽取其效果。",
+            "en": "Increase the power of your items and reroll effects on them.",
+            "ja": "アイテムのパワーを上げたり、エフェクトの再抽選を行ったりすることができます。",
+            "ko": "아이템의 힘을 증가시키고 효과를 다시 뽑습니다.",
+            "de": "Erhöhe die Stärke deiner Gegenstände und würfle ihre Effekte neu aus.",
+            "fr": "Augmente la puissance de vos objets et réattribue leurs effets.",
+            "es": "Aumenta la potencia de tus objetos y cambia sus efectos.",
+            "it": "Aumenta la potenza dei tuoi oggetti e riassegna i loro effetti.",
+            "pt": "Aumente o poder dos seus itens e reconfigure os efeitos nele.",
+            "ru": "Может повысить мощь предметов и поменять эффекты на них.",
+            "pl": "Zwiększ moc przedmiotów i przerzucaj ich efekty.",
+            "nl": "Verhoog de kracht van je items en herconfigureer de effecten voor items.",
+            "sv": "Öka kraften på föremålen och byt effekterna på dem.",
+            "tr": "Eşyalarının gücünü artır ve üzerlerindeki etkileri yeniden belirle.",
+            "uk": "Підвищує силу ваших предметів і перепризначає ефекти для них."
           },
           "icon": "icons/map/t_ui_icon_blacksmith.png"
         },
@@ -506,11 +1374,39 @@
           "py": 4491.4,
           "name": {
             "zh": "附魔匠",
-            "en": "Enchantsmith"
+            "zh-hans": "附魔匠",
+            "en": "Enchantsmith",
+            "ja": "エンチャントスミス",
+            "ko": "마법 부여사",
+            "de": "Zauberschmied",
+            "fr": "Enchanteur",
+            "es": "Forjaembrujos",
+            "it": "Fabbro incantatore",
+            "pt": "Magífice",
+            "ru": "Чарокузнец",
+            "pl": "Zaklinacz",
+            "nl": "Betoveringensmid",
+            "sv": "Förtrollningssmed",
+            "tr": "Büyü Ustası",
+            "uk": "Коваль-чарівник"
           },
           "note": {
             "zh": "使用附魔書為物品附魔。",
-            "en": "Enchant your items using enchantment books."
+            "zh-hans": "使用附魔书为物品附魔。",
+            "en": "Enchant your items using enchantment books.",
+            "ja": "エンチャントの本を使用してアイテムにエンチャントを付与しましょう。",
+            "ko": "마법 부여 책을 사용해 아이템에 마법을 부여하세요.",
+            "de": "Verzaubere deine Gegenstände mit Verzauberungsbüchern.",
+            "fr": "Enchantez vos objets à l'aide de livres d'enchantement.",
+            "es": "Usa los libros encantados para encantar tus objetos.",
+            "it": "Incanta i tuoi oggetti usando i libri degli incantesimi.",
+            "pt": "Encante seus itens com livros de encantamentos.",
+            "ru": "Зачаровывает предметы с помощью книг зачарования.",
+            "pl": "Zaklinaj przedmioty za pomocą ksiąg zaklinania.",
+            "nl": "Betover je items met betoveringenboeken.",
+            "sv": "Förtrolla dina föremål med förtrollningsböcker.",
+            "tr": "Büyü kitaplarını kullanarak eşyalarını büyüle.",
+            "uk": "Зачаровуйте предмети, використовуючи книги чарів."
           },
           "icon": "icons/map/t_ui_icon_enchantsmith.png"
         },
@@ -521,7 +1417,21 @@
           "py": 4173.1,
           "name": {
             "zh": "冰封高地",
-            "en": "Frozen Highlands"
+            "zh-hans": "冰封高地",
+            "en": "Frozen Highlands",
+            "ja": "凍てつく高地",
+            "ko": "얼어붙은 고원",
+            "de": "Eishochland",
+            "fr": "Hautes-terres gelées",
+            "es": "Tierras altas heladas",
+            "it": "Alture gelate",
+            "pt": "Terras Altas Congeladas",
+            "ru": "Ледяные нагорья",
+            "pl": "Zmrożone Wyżyny",
+            "nl": "Bevroren Hooglanden",
+            "sv": "Frusna högländerna",
+            "tr": "Donmuş Dağlıklar",
+            "uk": "Крижане високогір’я"
           },
           "icon": "icons/map/t_ui_icon_frozenhighlands.png"
         },
@@ -532,7 +1442,21 @@
           "py": 4046.3,
           "name": {
             "zh": "咆哮森林",
-            "en": "Howling Woods"
+            "zh-hans": "咆哮树林",
+            "en": "Howling Woods",
+            "ja": "遠吠えの森",
+            "ko": "울부짖는 숲",
+            "de": "Heulwälder",
+            "fr": "Bois hurlant",
+            "es": "Bosques aullantes",
+            "it": "Boschi ululanti",
+            "pt": "Mata Uivante",
+            "ru": "Воющие чащи",
+            "pl": "Wyjąca Knieja",
+            "nl": "Huilende Woud",
+            "sv": "Ylande skogarna",
+            "tr": "Uluyan Orman",
+            "uk": "Ліс завивань"
           },
           "icon": "icons/map/t_ui_icon_howlingwoods.png"
         },
@@ -543,7 +1467,21 @@
           "py": 3954,
           "name": {
             "zh": "蜂巢原野",
-            "en": "Honeycomb Fields"
+            "zh-hans": "蜜脾原野",
+            "en": "Honeycomb Fields",
+            "ja": "ハニカム畑",
+            "ko": "벌집 들판",
+            "de": "Honigwabenfelder",
+            "fr": "Champs de miel",
+            "es": "Campos de panales",
+            "it": "Campi del favo",
+            "pt": "Campos de Favos de Mel",
+            "ru": "Поля медовых сот",
+            "pl": "Miodowe Pola",
+            "nl": "Honingraatvelden",
+            "sv": "Bikupefälten",
+            "tr": "Bal Peteği Tarlaları",
+            "uk": "Стільникові поля"
           },
           "icon": "icons/map/t_ui_icon_honeycombfields.png"
         },
@@ -554,7 +1492,21 @@
           "py": 6694.9,
           "name": {
             "zh": "多雨平原",
-            "en": "Rainy Plains"
+            "zh-hans": "多雨平原",
+            "en": "Rainy Plains",
+            "ja": "雨降りの平原",
+            "ko": "비의 평원",
+            "de": "Regenebene",
+            "fr": "Plaines pluvieuses",
+            "es": "Llanura lluviosa",
+            "it": "Pianure piovose",
+            "pt": "Planícies Chuvosas",
+            "ru": "Дождливые равнины",
+            "pl": "Deszczowe Równiny",
+            "nl": "Regenachtige Vlakten",
+            "sv": "Regniga slätterna",
+            "tr": "Yağmurlu Ovalar",
+            "uk": "Дощові рівнини"
           },
           "icon": "icons/map/t_ui_icon_rainyplains.png"
         },
@@ -565,7 +1517,21 @@
           "py": 4424.8,
           "name": {
             "zh": "英雄港",
-            "en": "Brave Haven"
+            "zh-hans": "勇者港湾",
+            "en": "Brave Haven",
+            "ja": "ブレイブヘイブン",
+            "ko": "용사의 안식처",
+            "de": "Tapferkeitshafen",
+            "fr": "Havre des Braves",
+            "es": "Refugio de los valientes",
+            "it": "Rifugio dei valorosi",
+            "pt": "Refúgio dos Corajosos",
+            "ru": "Пристанище бравых",
+            "pl": "Siedlisko Śmiałków",
+            "nl": "Dapperenhaven",
+            "sv": "Djärvhamn",
+            "tr": "Yiğitler Sığınağı",
+            "uk": "Прихисток відважних"
           },
           "icon": "icons/map/t_ui_icon_bravehaven.png"
         }
@@ -575,7 +1541,21 @@
       "key": "sift",
       "name": {
         "zh": "隙浮",
-        "en": "The Sift"
+        "zh-hans": "汐浮",
+        "en": "The Sift",
+        "ja": "シフト",
+        "ko": "시프트",
+        "de": "Sift",
+        "fr": "Le Sift",
+        "es": "El Sift",
+        "it": "Il Sift",
+        "pt": "O Sift",
+        "ru": "Сифт",
+        "pl": "Sift",
+        "nl": "De Sift",
+        "sv": "Sift",
+        "tr": "Sift",
+        "uk": "Сифт"
       },
       "frame": {
         "minX": -1093,
@@ -595,7 +1575,21 @@
           "py": 5481,
           "name": {
             "zh": "轟鳴蟲殼骸之地",
-            "en": "Humbler Huskland"
+            "zh-hans": "轰鸣虫壳地",
+            "en": "Humbler Huskland",
+            "ja": "ハンブラーハスクランド",
+            "ko": "험블러 외피지대",
+            "de": "Demütigerpanzerland",
+            "fr": "Terres desséchées des Fredonneurs",
+            "es": "Yermo de quitinones",
+            "it": "Cimitero dei solenni",
+            "pt": "Cemitério dos Humilhadores",
+            "ru": "Земли кадавров смиренников",
+            "pl": "Step Spokorniaczy",
+            "nl": "Humblerland der overblijfselen",
+            "sv": "Böjarnas skalmarker",
+            "tr": "Humbler Kalıntısı Diyarı",
+            "uk": "Земля оболонок покірника"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -606,7 +1600,21 @@
           "py": 5620.7,
           "name": {
             "zh": "轟鳴蟲殼骸之地",
-            "en": "Humbler Huskland"
+            "zh-hans": "轰鸣虫壳地",
+            "en": "Humbler Huskland",
+            "ja": "ハンブラーハスクランド",
+            "ko": "험블러 외피지대",
+            "de": "Demütigerpanzerland",
+            "fr": "Terres desséchées des Fredonneurs",
+            "es": "Yermo de quitinones",
+            "it": "Cimitero dei solenni",
+            "pt": "Cemitério dos Humilhadores",
+            "ru": "Земли кадавров смиренников",
+            "pl": "Step Spokorniaczy",
+            "nl": "Humblerland der overblijfselen",
+            "sv": "Böjarnas skalmarker",
+            "tr": "Humbler Kalıntısı Diyarı",
+            "uk": "Земля оболонок покірника"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -617,7 +1625,21 @@
           "py": 5286.4,
           "name": {
             "zh": "轟鳴蟲殼骸之地",
-            "en": "Humbler Huskland"
+            "zh-hans": "轰鸣虫壳地",
+            "en": "Humbler Huskland",
+            "ja": "ハンブラーハスクランド",
+            "ko": "험블러 외피지대",
+            "de": "Demütigerpanzerland",
+            "fr": "Terres desséchées des Fredonneurs",
+            "es": "Yermo de quitinones",
+            "it": "Cimitero dei solenni",
+            "pt": "Cemitério dos Humilhadores",
+            "ru": "Земли кадавров смиренников",
+            "pl": "Step Spokorniaczy",
+            "nl": "Humblerland der overblijfselen",
+            "sv": "Böjarnas skalmarker",
+            "tr": "Humbler Kalıntısı Diyarı",
+            "uk": "Земля оболонок покірника"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -628,7 +1650,21 @@
           "py": 4971.5,
           "name": {
             "zh": "吟唱者草甸",
-            "en": "Singer's Meadow"
+            "zh-hans": "吟唱者草甸",
+            "en": "Singer's Meadow",
+            "ja": "シンガーの草地",
+            "ko": "싱어의 초원",
+            "de": "Sängerwiese",
+            "fr": "Prairie du chanteur",
+            "es": "Prado del Cantor",
+            "it": "Prateria del cantore",
+            "pt": "Prado do Cantor",
+            "ru": "Певчий луг",
+            "pl": "Łąka Pieśniarza",
+            "nl": "Zangersweide",
+            "sv": "Sångarens äng",
+            "tr": "Şarkıcının Çayırı",
+            "uk": "Лука співака"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -639,7 +1675,21 @@
           "py": 5570.6,
           "name": {
             "zh": "吟唱者草甸",
-            "en": "Singer's Meadow"
+            "zh-hans": "吟唱者草甸",
+            "en": "Singer's Meadow",
+            "ja": "シンガーの草地",
+            "ko": "싱어의 초원",
+            "de": "Sängerwiese",
+            "fr": "Prairie du chanteur",
+            "es": "Prado del Cantor",
+            "it": "Prateria del cantore",
+            "pt": "Prado do Cantor",
+            "ru": "Певчий луг",
+            "pl": "Łąka Pieśniarza",
+            "nl": "Zangersweide",
+            "sv": "Sångarens äng",
+            "tr": "Şarkıcının Çayırı",
+            "uk": "Лука співака"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -650,7 +1700,21 @@
           "py": 6697,
           "name": {
             "zh": "吟唱者草甸",
-            "en": "Singer's Meadow"
+            "zh-hans": "吟唱者草甸",
+            "en": "Singer's Meadow",
+            "ja": "シンガーの草地",
+            "ko": "싱어의 초원",
+            "de": "Sängerwiese",
+            "fr": "Prairie du chanteur",
+            "es": "Prado del Cantor",
+            "it": "Prateria del cantore",
+            "pt": "Prado do Cantor",
+            "ru": "Певчий луг",
+            "pl": "Łąka Pieśniarza",
+            "nl": "Zangersweide",
+            "sv": "Sångarens äng",
+            "tr": "Şarkıcının Çayırı",
+            "uk": "Лука співака"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -661,7 +1725,21 @@
           "py": 4654.1,
           "name": {
             "zh": "吟唱者草甸",
-            "en": "Singer's Meadow"
+            "zh-hans": "吟唱者草甸",
+            "en": "Singer's Meadow",
+            "ja": "シンガーの草地",
+            "ko": "싱어의 초원",
+            "de": "Sängerwiese",
+            "fr": "Prairie du chanteur",
+            "es": "Prado del Cantor",
+            "it": "Prateria del cantore",
+            "pt": "Prado do Cantor",
+            "ru": "Певчий луг",
+            "pl": "Łąka Pieśniarza",
+            "nl": "Zangersweide",
+            "sv": "Sångarens äng",
+            "tr": "Şarkıcının Çayırı",
+            "uk": "Лука співака"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -672,7 +1750,21 @@
           "py": 5557.8,
           "name": {
             "zh": "安眠丘陵",
-            "en": "Lullaby Hills"
+            "zh-hans": "安眠丘陵",
+            "en": "Lullaby Hills",
+            "ja": "子守歌の丘",
+            "ko": "자장가 언덕",
+            "de": "Schlafliedhügel",
+            "fr": "Collines de la berceuse",
+            "es": "Colinas del arrullo",
+            "it": "Colline della ninnananna",
+            "pt": "Colinas de Ninar",
+            "ru": "Колыбельные холмы",
+            "pl": "Wzgórza Kołysanek",
+            "nl": "Wiegeliedheuvels",
+            "sv": "Vaggvisornas kullar",
+            "tr": "Ninni Tepeleri",
+            "uk": "Колискові пагорби"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -683,7 +1775,21 @@
           "py": 6033.9,
           "name": {
             "zh": "安眠丘陵",
-            "en": "Lullaby Hills"
+            "zh-hans": "安眠丘陵",
+            "en": "Lullaby Hills",
+            "ja": "子守歌の丘",
+            "ko": "자장가 언덕",
+            "de": "Schlafliedhügel",
+            "fr": "Collines de la berceuse",
+            "es": "Colinas del arrullo",
+            "it": "Colline della ninnananna",
+            "pt": "Colinas de Ninar",
+            "ru": "Колыбельные холмы",
+            "pl": "Wzgórza Kołysanek",
+            "nl": "Wiegeliedheuvels",
+            "sv": "Vaggvisornas kullar",
+            "tr": "Ninni Tepeleri",
+            "uk": "Колискові пагорби"
           },
           "icon": "icons/map/t_ui_icon_minecart.png"
         },
@@ -694,7 +1800,21 @@
           "py": 5462.7,
           "name": {
             "zh": "轟鳴蟲殼骸之地",
-            "en": "Humbler Huskland"
+            "zh-hans": "轰鸣虫壳地",
+            "en": "Humbler Huskland",
+            "ja": "ハンブラーハスクランド",
+            "ko": "험블러 외피지대",
+            "de": "Demütigerpanzerland",
+            "fr": "Terres desséchées des Fredonneurs",
+            "es": "Yermo de quitinones",
+            "it": "Cimitero dei solenni",
+            "pt": "Cemitério dos Humilhadores",
+            "ru": "Земли кадавров смиренников",
+            "pl": "Step Spokorniaczy",
+            "nl": "Humblerland der overblijfselen",
+            "sv": "Böjarnas skalmarker",
+            "tr": "Humbler Kalıntısı Diyarı",
+            "uk": "Земля оболонок покірника"
           },
           "icon": "icons/map/t_ui_icon_humblerhuskland.png"
         },
@@ -705,7 +1825,21 @@
           "py": 5473.3,
           "name": {
             "zh": "吟唱者草甸",
-            "en": "Singer's Meadow"
+            "zh-hans": "吟唱者草甸",
+            "en": "Singer's Meadow",
+            "ja": "シンガーの草地",
+            "ko": "싱어의 초원",
+            "de": "Sängerwiese",
+            "fr": "Prairie du chanteur",
+            "es": "Prado del Cantor",
+            "it": "Prateria del cantore",
+            "pt": "Prado do Cantor",
+            "ru": "Певчий луг",
+            "pl": "Łąka Pieśniarza",
+            "nl": "Zangersweide",
+            "sv": "Sångarens äng",
+            "tr": "Şarkıcının Çayırı",
+            "uk": "Лука співака"
           },
           "icon": "icons/map/t_ui_icon_singersmeadow.png"
         },
@@ -716,7 +1850,21 @@
           "py": 5795.9,
           "name": {
             "zh": "安眠丘陵",
-            "en": "Lullaby Hills"
+            "zh-hans": "安眠丘陵",
+            "en": "Lullaby Hills",
+            "ja": "子守歌の丘",
+            "ko": "자장가 언덕",
+            "de": "Schlafliedhügel",
+            "fr": "Collines de la berceuse",
+            "es": "Colinas del arrullo",
+            "it": "Colline della ninnananna",
+            "pt": "Colinas de Ninar",
+            "ru": "Колыбельные холмы",
+            "pl": "Wzgórza Kołysanek",
+            "nl": "Wiegeliedheuvels",
+            "sv": "Vaggvisornas kullar",
+            "tr": "Ninni Tepeleri",
+            "uk": "Колискові пагорби"
           },
           "icon": "icons/map/t_ui_icon_lullabyhills.png"
         }
@@ -726,7 +1874,21 @@
       "key": "camp",
       "name": {
         "zh": "營地",
-        "en": "Camp"
+        "zh-hans": "营地",
+        "en": "Camp",
+        "ja": "キャンプ",
+        "ko": "캠프",
+        "de": "Lager",
+        "fr": "Camp",
+        "es": "Campamento",
+        "it": "Accampamento",
+        "pt": "Acampamento",
+        "ru": "Лагерь",
+        "pl": "Obóz",
+        "nl": "Kamp",
+        "sv": "Läger",
+        "tr": "Kamp",
+        "uk": "Табір"
       },
       "frame": {
         "minX": -2713,
