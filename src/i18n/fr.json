@@ -125,7 +125,16 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -284,5 +293,16 @@
   "conditionTask": "Accomplir l’objectif de quête « {name} »",
   "conditionBoss": "Vaincre « {name} »",
   "unlockRate": "Taux de déblocage mondial",
-  "achievementsCredit": "Les icônes, noms, descriptions et taux de déblocage mondiaux des succès proviennent de Steam (app 1912410) ; taux au {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Les icônes, noms, descriptions et taux de déblocage mondiaux des succès proviennent de Steam (app 1912410) ; taux au {date}. © Mojang Studios / Microsoft",
+  "talismanLevels": "Valeurs par niveau",
+  "talismanLevel": "Niveau",
+  "xpToNextLevel": "EXP pour le niveau suivant",
+  "maxLevel": "Niveau max.",
+  "secretTalisman": "Talisman secret",
+  "companionAttack": "Multiplicateur d'attaque",
+  "companionDefence": "Multiplicateur de défense",
+  "companionCooldown": "Multiplicateur de recharge",
+  "talismanLevelsNote": "Les talismans gagnent de l'EXP lorsqu'ils sont équipés et montent de niveau. Les valeurs proviennent des fichiers de données du jeu. Les multiplicateurs des compagnons sont les valeurs brutes de ces fichiers : un multiplicateur de défense ou de recharge plus bas est probablement une amélioration (moins de dégâts subis, recharge plus courte), mais leur sens exact n'est pas vérifié.",
+  "levelValue": "Valeur",
+  "valuesNotInData": "Ces valeurs ne figurent pas dans les fichiers de données du jeu (affichées comme ?)."
 }

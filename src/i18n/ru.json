@@ -121,7 +121,16 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -287,5 +296,16 @@
   "conditionTask": "Выполните цель задания «{name}»",
   "conditionBoss": "Победите босса «{name}»",
   "unlockRate": "Глобальный процент получения",
-  "achievementsCredit": "Значки, названия, описания и глобальный процент получения достижений взяты из Steam (приложение 1912410); данные на {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Значки, названия, описания и глобальный процент получения достижений взяты из Steam (приложение 1912410); данные на {date}. © Mojang Studios / Microsoft",
+  "talismanLevels": "Значения по уровням",
+  "talismanLevel": "Уровень",
+  "xpToNextLevel": "XP до следующего уровня",
+  "maxLevel": "Максимальный уровень",
+  "secretTalisman": "Тайный талисман",
+  "companionAttack": "Множитель атаки",
+  "companionDefence": "Множитель защиты",
+  "companionCooldown": "Множитель перезарядки",
+  "talismanLevelsNote": "Надетые талисманы получают XP и повышают уровень. Значения взяты из файлов данных игры. Множители спутников — исходные значения из этих файлов: меньший множитель защиты или перезарядки, вероятно, означает улучшение (меньше получаемого урона, короче перезарядка), но точный смысл не проверен.",
+  "levelValue": "Значение",
+  "valuesNotInData": "Этих значений нет в файлах данных игры (показаны как ?)."
 }

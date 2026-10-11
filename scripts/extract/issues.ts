@@ -30,7 +30,8 @@ export type IssueType =
   | "missing-achievement-icon"
   | "achievement-text-fallback"
   | "missing-achievement-condition"
-  | "missing-achievement-definitions";
+  | "missing-achievement-definitions"
+  | "talisman-no-values";
 
 export interface Issue {
   readonly type: IssueType;

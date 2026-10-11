@@ -123,7 +123,16 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "armorPiece",
@@ -285,5 +294,16 @@
   "conditionTask": "Schließe das Questziel „{name}“ ab",
   "conditionBoss": "Besiege „{name}“",
   "unlockRate": "Globale Freischaltrate",
-  "achievementsCredit": "Symbole, Namen, Beschreibungen und globale Freischaltraten der Erfolge stammen von Steam (App 1912410); Raten mit Stand vom {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Symbole, Namen, Beschreibungen und globale Freischaltraten der Erfolge stammen von Steam (App 1912410); Raten mit Stand vom {date}. © Mojang Studios / Microsoft",
+  "talismanLevels": "Werte je Level",
+  "talismanLevel": "Level",
+  "xpToNextLevel": "EP bis zum nächsten Level",
+  "maxLevel": "Höchstlevel",
+  "secretTalisman": "Geheimtalisman",
+  "companionAttack": "Angriffsmultiplikator",
+  "companionDefence": "Verteidigungsmultiplikator",
+  "companionCooldown": "Abklingzeitmultiplikator",
+  "talismanLevelsNote": "Talismane sammeln EP, solange sie ausgerüstet sind, und steigen im Level auf. Die Werte stammen aus den Datendateien des Spiels. Die Begleiter-Multiplikatoren sind die Rohwerte aus diesen Dateien: Ein niedrigerer Verteidigungs- oder Abklingzeitmultiplikator ist wahrscheinlich eine Verbesserung (weniger erlittener Schaden, kürzere Abklingzeit), die genaue Bedeutung ist aber nicht bestätigt.",
+  "levelValue": "Wert",
+  "valuesNotInData": "Diese Werte stehen nicht in den Datendateien des Spiels (als ? angezeigt)."
 }

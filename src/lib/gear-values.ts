@@ -6,6 +6,7 @@ import rawEffects from "../data/effects.json";
 import rawEnchantments from "../data/enchantments.json";
 import { LANGS } from "../../scripts/extract/langs";
 import type { Lang } from "./i18n";
+import { talismanTiers } from "./talisman-data";
 import { htmlLang, mapLocalized } from "./lang";
 import { t, type UiKey } from "./ui-strings";
 import { blocksText, roundText, secondsText } from "./units";
@@ -57,10 +58,11 @@ const ranges = (tiers: readonly (readonly string[])[]): string[] =>
     return low === high ? low : `${low}~${high}`;
   });
 
-/** The tier values that fill an entry's texts: its own, or for a book, its enchantment's. */
+/** The tier values that fill an entry's texts: its own (a talisman's per level), or for a book, its enchantment's. */
 function tiersOf(entry: Entry): readonly (readonly string[])[] | undefined {
   if (entry.category === "effect") return effectData[entry.slug]?.tiers;
   if (entry.category === "enchantment") return enchantmentData[entry.slug]?.tiers;
+  if (entry.category === "talisman") return talismanTiers(entry.slug);
   if (entry.category === "enchantment-book" && entry.links.enchantment) return enchantmentData[entry.links.enchantment]?.tiers;
   return undefined;
 }

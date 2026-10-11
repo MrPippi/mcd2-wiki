@@ -4,6 +4,7 @@ import { describedEntry, describedLong } from "../lib/gear-values";
 import { t, type Lang } from "../lib/i18n";
 import { itemKicker } from "../lib/kicker";
 import { relatedLinks } from "../lib/related";
+import { hasUnknownValues, isSecretTalisman } from "../lib/talisman-view";
 import ArtifactStats from "./ArtifactStats.astro";
 import BookSource from "./BookSource.astro";
 import EnchantmentTiers from "./EnchantmentTiers.astro";
@@ -11,6 +12,7 @@ import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
 import InfoBox from "./InfoBox.astro";
 import LangText from "./LangText.astro";
+import TalismanLevels from "./TalismanLevels.astro";
 import FixedOn from "./FixedOn.astro";
 import WeaponEffects from "./WeaponEffects.astro";
 import WeaponStats from "./WeaponStats.astro";
@@ -31,9 +33,13 @@ const related = relatedLinks(lang, entry);
     <div class="entry-content">
       <p class="kicker entry-kicker" data-pagefind-ignore>{itemKicker(entry.category, entry.variant)}</p>
       <LangText as="h1" lang={lang} value={entry.name} searchTitle class={entry.variant === "unique" ? "is-unique" : undefined} />
+      {isSecretTalisman(entry) && (
+        <p class="secret-badge"><span class="tag" data-testid="secret-talisman">{t(lang, "secretTalisman")}</span></p>
+      )}
       {description && (
         <EntrySection title={t(lang, "description")}>
           <LangText as="p" class="description" lang={lang} value={description} html />
+          {hasUnknownValues(entry) && <p class="note" data-testid="values-unknown" data-pagefind-ignore>{t(lang, "valuesNotInData")}</p>}
         </EntrySection>
       )}
       {descriptionLong && (
@@ -48,6 +54,7 @@ const related = relatedLinks(lang, entry);
       )}
       {entry.category === "enchantment" && <EnchantmentTiers lang={lang} enchantment={entry} />}
       {entry.category === "artifact" && <ArtifactStats lang={lang} artifact={entry} />}
+      {entry.category === "talisman" && <TalismanLevels lang={lang} talisman={entry} />}
       <WeaponStats lang={lang} weapon={entry} />
       <WeaponEffects lang={lang} weapon={entry} />
       {(entry.category === "enchantment" || entry.category === "effect") && <FixedOn lang={lang} entry={entry} />}

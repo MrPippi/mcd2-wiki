@@ -124,7 +124,16 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "normal"
@@ -287,5 +296,16 @@
   "conditionTask": "Wykonaj cel zadania „{name}”",
   "conditionBoss": "Pokonaj bossa „{name}”",
   "unlockRate": "Globalny odsetek odblokowań",
-  "achievementsCredit": "Ikony, nazwy, opisy i globalne odsetki odblokowań osiągnięć pochodzą ze Steam (aplikacja 1912410); dane z dnia {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Ikony, nazwy, opisy i globalne odsetki odblokowań osiągnięć pochodzą ze Steam (aplikacja 1912410); dane z dnia {date}. © Mojang Studios / Microsoft",
+  "talismanLevels": "Wartości na poziomach",
+  "talismanLevel": "Poziom",
+  "xpToNextLevel": "PD do następnego poziomu",
+  "maxLevel": "Maks. poziom",
+  "secretTalisman": "Sekretny talizman",
+  "companionAttack": "Mnożnik ataku",
+  "companionDefence": "Mnożnik obrony",
+  "companionCooldown": "Mnożnik odnowienia",
+  "talismanLevelsNote": "Założone talizmany zdobywają PD i awansują na kolejne poziomy. Wartości pochodzą z plików danych gry. Mnożniki towarzyszy to surowe wartości z tych plików: niższy mnożnik obrony lub odnowienia to prawdopodobnie ulepszenie (mniej otrzymywanych obrażeń, krótsze odnowienie), ale dokładne znaczenie nie zostało potwierdzone.",
+  "levelValue": "Wartość",
+  "valuesNotInData": "Tych wartości nie ma w plikach danych gry (pokazane jako ?)."
 }

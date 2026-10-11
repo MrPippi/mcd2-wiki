@@ -24,5 +24,7 @@
   "markerRift": { "namespace": "Text/Release/WorldMapLabels.csv", "key": "worldmap_tooltip_title_rift" },
   "markerPortal": { "namespace": "Text/Release/SettingsLabels.csv", "key": "Input_TownPortal" },
   "markerMerchant": { "namespace": "Text/Release/VendorLabels.csv", "key": "vendor_village_merchant_titleshort" },
-  "obtainedFromBook": { "namespace": "Text/Release/InventoryLabels.csv", "key": "enchantment_info_description" }
+  "obtainedFromBook": { "namespace": "Text/Release/InventoryLabels.csv", "key": "enchantment_info_description" },
+  "maxLevel": { "namespace": "Text/Release/InventoryLabels.csv", "key": "talismans_maxLevel" },
+  "secretTalisman": { "namespace": "Text/Release/DT_ItemCollectionsDefinition.csv", "key": "SW_Collectibles_SecretTalismans_SW_TextEntry_Name_Single" }
 }

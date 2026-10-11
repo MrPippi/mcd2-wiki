@@ -125,7 +125,16 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -280,5 +289,16 @@
   "conditionTask": "퀘스트 목표 '{name}' 완료",
   "conditionBoss": "'{name}' 처치",
   "unlockRate": "전체 달성률",
-  "achievementsCredit": "도전 과제 아이콘, 이름, 설명과 전체 달성률은 Steam(앱 1912410)에서 가져왔습니다. 달성률은 {date} 기준입니다. © Mojang Studios / Microsoft"
+  "achievementsCredit": "도전 과제 아이콘, 이름, 설명과 전체 달성률은 Steam(앱 1912410)에서 가져왔습니다. 달성률은 {date} 기준입니다. © Mojang Studios / Microsoft",
+  "talismanLevels": "레벨별 수치",
+  "talismanLevel": "레벨",
+  "xpToNextLevel": "다음 레벨까지 필요한 XP",
+  "maxLevel": "최대 레벨",
+  "secretTalisman": "비밀 부적",
+  "companionAttack": "공격 배율",
+  "companionDefence": "방어 배율",
+  "companionCooldown": "재사용 대기시간 배율",
+  "talismanLevelsNote": "부적은 장착하는 동안 XP를 얻어 레벨이 오릅니다. 수치는 게임 데이터 파일에서 가져왔습니다. 동료 배율은 데이터 파일의 원래 값이며, 방어 및 재사용 대기시간 배율이 낮을수록 강화(받는 피해 감소, 재사용 대기시간 단축)일 가능성이 높지만 정확한 의미는 확인되지 않았습니다.",
+  "levelValue": "수치",
+  "valuesNotInData": "이 수치는 게임 데이터 파일에 없습니다(? 로 표시)."
 }

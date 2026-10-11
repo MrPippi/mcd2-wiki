@@ -122,7 +122,16 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "talismanLevels",
+    "talismanLevel",
+    "xpToNextLevel",
+    "companionAttack",
+    "companionDefence",
+    "companionCooldown",
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -282,5 +291,16 @@
   "conditionTask": "クエスト目標「{name}」を達成する",
   "conditionBoss": "「{name}」を倒す",
   "unlockRate": "全体の達成率",
-  "achievementsCredit": "実績のアイコン・名称・説明・全体の達成率は Steam（App 1912410）から取得しています。達成率は {date} 時点のものです。© Mojang Studios / Microsoft"
+  "achievementsCredit": "実績のアイコン・名称・説明・全体の達成率は Steam（App 1912410）から取得しています。達成率は {date} 時点のものです。© Mojang Studios / Microsoft",
+  "talismanLevels": "レベル別の数値",
+  "talismanLevel": "レベル",
+  "xpToNextLevel": "次のレベルまでの XP",
+  "maxLevel": "最大レベル",
+  "secretTalisman": "秘密のタリスマン",
+  "companionAttack": "攻撃倍率",
+  "companionDefence": "防御倍率",
+  "companionCooldown": "クールダウン倍率",
+  "talismanLevelsNote": "タリスマンは装備中に XP を獲得してレベルアップする。数値はゲームのデータファイルから取得している。仲間の倍率はデータファイルの値をそのまま表示しており、防御とクールダウンの倍率は低いほど強化（受けるダメージの減少、クールダウンの短縮）である可能性が高いが、正確な意味は未確認。",
+  "levelValue": "数値",
+  "valuesNotInData": "この数値はゲームのデータファイルにない（? で表示）。"
 }

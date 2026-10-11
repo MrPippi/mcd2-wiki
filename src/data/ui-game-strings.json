@@ -466,5 +466,41 @@
     "sv": "Förtrollningsböcker kan användas för att förtrolla dina föremål med speciella krafter och förmågor. För att använda förtrollningsböckerna måste du resa till Djärvhamn och prata med förtrollningssmeden. Förtrollningsböcker kan användas ett obegränsat antal gånger.",
     "tr": "Büyü kitapları, eşyalarını özel güçler ve yeteneklerle büyülemek için kullanılabilir. Büyü kitaplarını kullanmak için Yiğitler Sığınağı'na gidip Büyü Ustası ile konuşmalısın. Büyü kitapları sınırsız kez kullanılabilir.",
     "uk": "Книги чарів можна використовувати, щоб зачарувати ваші предмети, надавши їм особливі сили й здібності. Щоб скористатися книгами чарів, потрібно піти до Прихистку відважних і поговорити з ковалем-чарівником. Книги чарів можна використовувати необмежену кількість разів."
+  },
+  "maxLevel": {
+    "zh": "最高等級",
+    "zh-hans": "最高等级",
+    "en": "Max Level",
+    "ja": "最大レベル",
+    "ko": "최대 레벨",
+    "de": "Höchstlevel",
+    "fr": "Niveau max.",
+    "es": "Nivel máximo",
+    "it": "Livello max",
+    "pt": "Nível máximo",
+    "ru": "Максимальный уровень",
+    "pl": "Maks. poziom",
+    "nl": "Max. niveau",
+    "sv": "Maxnivå",
+    "tr": "Maks. Seviye",
+    "uk": "Макс. рівень"
+  },
+  "secretTalisman": {
+    "zh": "秘密護符",
+    "zh-hans": "秘密护身符",
+    "en": "Secret Talisman",
+    "ja": "秘密のタリスマン",
+    "ko": "비밀 부적",
+    "de": "Geheimtalisman",
+    "fr": "Talisman secret",
+    "es": "Talismán secreto",
+    "it": "Talismano segreto",
+    "pt": "Talismã secreto",
+    "ru": "Тайный талисман",
+    "pl": "Sekretny talizman",
+    "nl": "Geheime talisman",
+    "sv": "Hemlig talisman",
+    "tr": "Gizli Tılsım",
+    "uk": "Секретний талісман"
   }
 }

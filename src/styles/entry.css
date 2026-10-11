@@ -108,6 +108,21 @@ a.fixed-name:hover .primary { color: var(--accent); }
 .effect-source { margin: 12px 0 0; font-size: 12px; color: var(--muted); }
 .effect-source a { color: var(--muted); }
 
+/* Talisman levels: the level, its text or companion multipliers, then the XP to the next level. */
+.level-table { width: 100%; border-collapse: collapse; margin-top: 12px; border-top: 1px solid var(--rule-strong); }
+.level-table thead th {
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.06em;
+  color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: bottom;
+}
+.level-table tbody th, .level-table td { padding: 10px; border-bottom: 1px solid var(--rule); vertical-align: top; text-align: left; font-weight: 400; }
+.level-table .level-label, .level-table .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.level-table .level-label { width: 3em; color: var(--muted); }
+.level-table thead th:first-child { white-space: nowrap; }
+.level-table .level-value { font-weight: 700; }
+/* A value the game computes in code and the data files do not have. */
+.unknown-value { display: inline-block; min-width: 1.4em; padding: 0 4px; border: 1px dashed var(--rule-strong); color: var(--muted); font-family: var(--font-mono); font-size: 0.88em; text-align: center; }
+.secret-badge { margin: 0 0 8px; }
+
 .related { list-style: none; padding: 0; margin: 0; display: grid; }
 .related li { display: grid; grid-template-columns: 7em 1fr; align-items: center; gap: 12px; padding: 10px 0; }
 .related li + li { border-top: 1px solid var(--rule); }

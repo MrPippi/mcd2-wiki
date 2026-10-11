@@ -9,7 +9,8 @@ const UNITS_PER_BLOCK = 100;
 export const TIERS = ["I", "II", "III"] as const;
 /** Every piece of gear carries this tag in game, though the DataTables leave it out of the item traits. */
 export const GEAR_TAG = "SW.Item.Property.Gear";
-const LOC_ID = /"SW_(?:Item|Effect|Enchantment)_(.+?)_SW_TextEntry_(?:Name|Description)"/;
+// Case-insensitive: a few keys start with "sw_" (sw_Item_Talisman_Llama_SW_TextEntry_Name).
+const LOC_ID = /"SW_(?:Item|Effect|Enchantment)_(.+?)_SW_TextEntry_(?:Name|Description)"/i;
 
 export const blocks = (units: number): number => Math.round((units / UNITS_PER_BLOCK) * 100) / 100;
 
