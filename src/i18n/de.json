@@ -190,7 +190,10 @@
     "companionCooldown",
     "talismanLevelsNote",
     "levelValue",
-    "valuesNotInData"
+    "valuesNotInData",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "_english": [
     "armorPiece",
@@ -248,6 +251,7 @@
   "enchanting": "Verzauberungen & Effekte",
   "unlock": "Freischalten",
   "searchPlaceholder": "Gegenstände, Verzauberungen, Effekte suchen …",
+  "searchUnavailable": "Die Suche ist gerade nicht verfügbar.",
   "categories": "Kategorien",
   "fontCredit": "Schrift: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Ansehen",
@@ -376,6 +380,8 @@
   "mobVariantOf": "Variante von",
   "mobPortraitCredit": "Porträts sind Renderings der Spielmodelle.",
   "mobNoPortrait": "Noch kein Porträt",
+  "mobNoImage": "Kein Bild",
+  "mobUnitsNote": "Bewegungsgeschwindigkeit und Sichtradius sind die rohen Engine-Werte des Spiels, keine Blöcke oder Sekunden.",
   "lootSlotItem": "Ausrüstung",
   "lootSlotSpecialGear": "Spezialausrüstung",
   "itemSources": "So erhältst du es",

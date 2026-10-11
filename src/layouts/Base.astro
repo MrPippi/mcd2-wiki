@@ -18,6 +18,7 @@ import { ALL_LANGS, LANG_META, type Category } from "../../scripts/extract/confi
 import CategoryTabs from "../components/CategoryTabs.astro";
 import SiteHeader from "../components/SiteHeader.astro";
 import { t, type Lang } from "../lib/i18n";
+import { splitSiteTitle } from "../lib/site-title";
 import { htmlLang } from "../lib/lang";
 import { extractedBrand } from "../lib/data";
 import { metaDescription } from "../lib/meta";
@@ -36,7 +37,9 @@ interface Props {
 
 
 const { lang, title, current, description = "", noAlternates = false } = Astro.props;
-const fullTitle = `${title} | ${t(lang, "siteTitle")}`;
+const siteTitle = t(lang, "siteTitle");
+const footerTitle = splitSiteTitle(siteTitle);
+const fullTitle = `${title} | ${siteTitle}`;
 const summary = metaDescription(description, 160, t(lang, "tagline"));
 // Game icons from the extract step; the hand-drawn SVG covers a checkout without extracted art.
 const favicon = extractedBrand.favicon
@@ -95,7 +98,7 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
     <main class="site-main" id="main" tabindex="-1"><slot /></main>
     <footer class="site-footer">
       <div class="footer-inner">
-        <p class="footer-mark">{t(lang, "siteTitle")}</p>
+        <p class="footer-mark">{footerTitle === undefined ? siteTitle : (<><span class="mark-game">{footerTitle.game}</span>{" "}<span class="mark-rest">{footerTitle.word}</span>{footerTitle.tag && <>{" "}<span class="mark-tag">{footerTitle.tag}</span></>}</>)}</p>
         <div class="footer-meta">
           <p>{t(lang, "disclaimer")}</p>
           <p>{t(lang, "source")}</p>

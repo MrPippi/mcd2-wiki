@@ -3,6 +3,7 @@ import type { Mob, MobArea } from "../../../scripts/extract/mob-schema";
 import {
   dropPoolNote,
   dropSummary,
+  splitNumbers,
   findMob,
   formatChance,
   formatStat,
@@ -117,5 +118,12 @@ describe("mobDescription", () => {
     const maw = mob("maw", "boss", "Twisted Warden");
     expect(mobDescription(maw, "en")).toBe("Twisted Warden · Boss · Bestiary · Minecraft Dungeons II");
     expect(mobDescription({ ...maw, name: loc({ en: "Twisted Warden", zh: "扭曲監守者" }) }, "zh")).toBe("扭曲監守者 · 頭目 · 怪物圖鑑 · Minecraft Dungeons II");
+  });
+});
+
+describe("splitNumbers", () => {
+  it("separates counts and percentages from the words around them", () => {
+    expect(splitNumbers("Random rolls: 6, 12.5% each")).toEqual(["Random rolls: ", "6", ", ", "12.5%", " each"]);
+    expect(splitNumbers("隨機次數：1，每次 1.25%")).toEqual(["隨機次數：", "1", "，每次 ", "1.25%", ""]);
   });
 });

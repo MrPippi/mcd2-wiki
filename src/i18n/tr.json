@@ -192,7 +192,10 @@
     "companionCooldown",
     "talismanLevelsNote",
     "levelValue",
-    "valuesNotInData"
+    "valuesNotInData",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -246,6 +249,7 @@
   "enchanting": "Büyüler ve etkiler",
   "unlock": "Kilit açma",
   "searchPlaceholder": "Eşya, büyü, etki ara…",
+  "searchUnavailable": "Arama şu anda kullanılamıyor.",
   "categories": "Kategoriler",
   "fontCredit": "Yazı tipleri: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Görüntüle",
@@ -374,6 +378,8 @@
   "mobVariantOf": "Ana yaratık",
   "mobPortraitCredit": "Portreler, oyun modellerinden oluşturulmuş görsellerdir.",
   "mobNoPortrait": "Henüz portre yok",
+  "mobNoImage": "Görsel yok",
+  "mobUnitsNote": "Hareket hızı ve görüş yarıçapı, blok veya saniye değil, oyun motorunun ham değerleridir.",
   "lootSlotItem": "Ekipman",
   "lootSlotSpecialGear": "Özel ekipman",
   "itemSources": "Nasıl elde edilir",

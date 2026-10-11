@@ -1,7 +1,7 @@
 ---
 import type { Mob } from "../../scripts/extract/mob-schema";
 import { statLabel, t, type Lang } from "../lib/i18n";
-import { formatStat } from "../lib/mobs";
+import { RAW_UNIT_STATS, formatStat } from "../lib/mobs";
 
 interface Props {
   lang: Lang;
@@ -29,5 +29,6 @@ const Heading = level === 3 ? "h3" : "h2";
       </tbody>
     </table>
     <p class="note">{t(lang, "mobBaseValues")}</p>
+    {stats.some((stat) => RAW_UNIT_STATS.has(stat.key)) && <p class="note">{t(lang, "mobUnitsNote")}</p>}
   </section>
 )}
