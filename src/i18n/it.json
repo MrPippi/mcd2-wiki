@@ -125,7 +125,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -284,5 +288,9 @@
   "conditionTask": "Completa l’obiettivo della missione «{name}»",
   "conditionBoss": "Sconfiggi «{name}»",
   "unlockRate": "Percentuale globale di sblocco",
-  "achievementsCredit": "Icone, nomi, descrizioni e percentuali globali di sblocco degli obiettivi provengono da Steam (app 1912410); percentuali aggiornate al {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Icone, nomi, descrizioni e percentuali globali di sblocco degli obiettivi provengono da Steam (app 1912410); percentuali aggiornate al {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Mercante: {name}",
+  "sourceNameChest": "Baule: {name}",
+  "sourceNameQuest": "Ricompensa della missione: {name}",
+  "sourceNameBookPool": "Pool di libri degli incantesimi: {name}"
 }

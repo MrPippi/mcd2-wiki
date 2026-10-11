@@ -125,7 +125,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -285,5 +289,9 @@
   "conditionTask": "Виконайте мету завдання «{name}»",
   "conditionBoss": "Переможіть боса «{name}»",
   "unlockRate": "Глобальний відсоток отримання",
-  "achievementsCredit": "Значки, назви, описи та глобальний відсоток отримання досягнень узято зі Steam (застосунок 1912410); дані станом на {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Значки, назви, описи та глобальний відсоток отримання досягнень узято зі Steam (застосунок 1912410); дані станом на {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Торговець: {name}",
+  "sourceNameChest": "Скриня: {name}",
+  "sourceNameQuest": "Нагорода за завдання: {name}",
+  "sourceNameBookPool": "Набір книг чарів: {name}"
 }

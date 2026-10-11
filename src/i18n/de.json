@@ -123,7 +123,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "_english": [
     "armorPiece",
@@ -285,5 +289,9 @@
   "conditionTask": "Schließe das Questziel „{name}“ ab",
   "conditionBoss": "Besiege „{name}“",
   "unlockRate": "Globale Freischaltrate",
-  "achievementsCredit": "Symbole, Namen, Beschreibungen und globale Freischaltraten der Erfolge stammen von Steam (App 1912410); Raten mit Stand vom {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Symbole, Namen, Beschreibungen und globale Freischaltraten der Erfolge stammen von Steam (App 1912410); Raten mit Stand vom {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Händler: {name}",
+  "sourceNameChest": "Truhe: {name}",
+  "sourceNameQuest": "Questbelohnung: {name}",
+  "sourceNameBookPool": "Verzauberungsbuch-Pool: {name}"
 }

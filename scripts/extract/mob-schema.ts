@@ -91,7 +91,8 @@ export const ItemSourceSchema = z.object({
       picks: z.object({ count: z.number(), of: z.number() }).optional(),
     }),
   ),
-  merchants: z.array(z.object({ id: z.string(), name: LocalizedSchema, byCategory: z.literal(true) })),
+  // category: the pool tag the item matched (e.g. SW.Item.Property.MeleeWeapon); the page label comes from it.
+  merchants: z.array(z.object({ id: z.string(), name: LocalizedSchema, byCategory: z.literal(true), category: z.string() })),
   bookPools: z.array(z.object({ id: z.string(), name: LocalizedSchema })),
   untranslated: z.array(z.enum(LANGS)).optional(),
 });

@@ -152,5 +152,9 @@
   "conditionTask": "完成任務目標「{name}」",
   "conditionBoss": "擊敗「{name}」",
   "unlockRate": "全球達成率",
-  "achievementsCredit": "成就圖示、名稱、說明與全球達成率取自 Steam（App 1912410），達成率資料日期：{date}。© Mojang Studios／Microsoft。"
+  "achievementsCredit": "成就圖示、名稱、說明與全球達成率取自 Steam（App 1912410），達成率資料日期：{date}。© Mojang Studios／Microsoft。",
+  "sourceNameMerchant": "商人：{name}",
+  "sourceNameChest": "寶箱：{name}",
+  "sourceNameQuest": "任務獎勵：{name}",
+  "sourceNameBookPool": "附魔書池：{name}"
 }

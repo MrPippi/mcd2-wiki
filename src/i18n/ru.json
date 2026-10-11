@@ -121,7 +121,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -287,5 +291,9 @@
   "conditionTask": "Выполните цель задания «{name}»",
   "conditionBoss": "Победите босса «{name}»",
   "unlockRate": "Глобальный процент получения",
-  "achievementsCredit": "Значки, названия, описания и глобальный процент получения достижений взяты из Steam (приложение 1912410); данные на {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Значки, названия, описания и глобальный процент получения достижений взяты из Steam (приложение 1912410); данные на {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Торговец: {name}",
+  "sourceNameChest": "Сундук: {name}",
+  "sourceNameQuest": "Награда за задание: {name}",
+  "sourceNameBookPool": "Набор книг зачарований: {name}"
 }

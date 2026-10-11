@@ -45,6 +45,8 @@ export type IssueType =
   | "loot-tag-case"
   | "loot-row-name"
   | "loot-quest-not-guaranteed"
+  | "loot-chest-by-category"
+  | "loot-slot-unnamed"
   | "source-name-fallback";
 
 export interface Issue {

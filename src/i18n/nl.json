@@ -125,7 +125,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -283,5 +287,9 @@
   "conditionTask": "Voltooi het missiedoel ‘{name}’",
   "conditionBoss": "Versla ‘{name}’",
   "unlockRate": "Wereldwijd ontgrendelpercentage",
-  "achievementsCredit": "Pictogrammen, namen, beschrijvingen en wereldwijde ontgrendelpercentages van de prestaties komen van Steam (app 1912410); percentages per {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Pictogrammen, namen, beschrijvingen en wereldwijde ontgrendelpercentages van de prestaties komen van Steam (app 1912410); percentages per {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Handelaar: {name}",
+  "sourceNameChest": "Kist: {name}",
+  "sourceNameQuest": "Questbeloning: {name}",
+  "sourceNameBookPool": "Pool van betoveringenboeken: {name}"
 }

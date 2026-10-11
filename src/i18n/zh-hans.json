@@ -122,7 +122,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -282,5 +286,9 @@
   "conditionTask": "完成任务目标“{name}”",
   "conditionBoss": "击败“{name}”",
   "unlockRate": "全球达成率",
-  "achievementsCredit": "成就图标、名称、说明与全球达成率取自 Steam（App 1912410），达成率数据日期：{date}。© Mojang Studios / Microsoft。"
+  "achievementsCredit": "成就图标、名称、说明与全球达成率取自 Steam（App 1912410），达成率数据日期：{date}。© Mojang Studios / Microsoft。",
+  "sourceNameMerchant": "商人：{name}",
+  "sourceNameChest": "宝箱：{name}",
+  "sourceNameQuest": "任务奖励：{name}",
+  "sourceNameBookPool": "附魔书池：{name}"
 }

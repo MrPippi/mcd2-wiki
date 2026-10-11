@@ -43,7 +43,7 @@ export const poolTags = (slot: LootSlotValue, exclusionRows: readonly LootRow[] 
   poolEntries(slot, exclusionRows).map((entry) => entry.tag);
 
 /** The exclusion rows a row names in its own Traits.GameplayTags (e.g. AllEnchantmentBooks -> EnchantmentBooksExcludeQuestBooks). */
-const exclusionRowsOf = (row: LootRow, byTypeTag: ReadonlyMap<string, LootRow>): LootRow[] =>
+export const exclusionRowsOf = (row: LootRow, byTypeTag: ReadonlyMap<string, LootRow>): LootRow[] =>
   (row.Traits?.GameplayTags ?? []).flatMap((tag) => byTypeTag.get(tagKey(tag.TagName)) ?? []);
 
 /** The effective pool tags of one slot of a row; [] when the row has no such slot. */

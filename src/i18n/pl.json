@@ -124,7 +124,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "_english": [
     "normal"
@@ -287,5 +291,9 @@
   "conditionTask": "Wykonaj cel zadania „{name}”",
   "conditionBoss": "Pokonaj bossa „{name}”",
   "unlockRate": "Globalny odsetek odblokowań",
-  "achievementsCredit": "Ikony, nazwy, opisy i globalne odsetki odblokowań osiągnięć pochodzą ze Steam (aplikacja 1912410); dane z dnia {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Ikony, nazwy, opisy i globalne odsetki odblokowań osiągnięć pochodzą ze Steam (aplikacja 1912410); dane z dnia {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Kupiec: {name}",
+  "sourceNameChest": "Skrzynia: {name}",
+  "sourceNameQuest": "Nagroda za zadanie: {name}",
+  "sourceNameBookPool": "Pula ksiąg zaklinania: {name}"
 }

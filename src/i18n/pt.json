@@ -125,7 +125,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -284,5 +288,9 @@
   "conditionTask": "Conclua o objetivo da missão “{name}”",
   "conditionBoss": "Derrote “{name}”",
   "unlockRate": "Taxa global de desbloqueio",
-  "achievementsCredit": "Ícones, nomes, descrições e taxas globais de desbloqueio das conquistas vêm da Steam (app 1912410); taxas de {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Ícones, nomes, descrições e taxas globais de desbloqueio das conquistas vêm da Steam (app 1912410); taxas de {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Mercador: {name}",
+  "sourceNameChest": "Baú: {name}",
+  "sourceNameQuest": "Recompensa de missão: {name}",
+  "sourceNameBookPool": "Conjunto de livros de encantamentos: {name}"
 }

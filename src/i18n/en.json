@@ -155,5 +155,9 @@
   "conditionTask": "Complete the quest objective “{name}”",
   "conditionBoss": "Defeat “{name}”",
   "unlockRate": "Global unlock rate",
-  "achievementsCredit": "Achievement icons, names, descriptions and global unlock rates come from Steam (app 1912410); rates as of {date}. © Mojang Studios / Microsoft."
+  "achievementsCredit": "Achievement icons, names, descriptions and global unlock rates come from Steam (app 1912410); rates as of {date}. © Mojang Studios / Microsoft.",
+  "sourceNameMerchant": "Merchant: {name}",
+  "sourceNameChest": "Chest: {name}",
+  "sourceNameQuest": "Quest reward: {name}",
+  "sourceNameBookPool": "Enchantment book pool: {name}"
 }

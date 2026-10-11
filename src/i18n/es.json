@@ -125,7 +125,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -284,5 +288,9 @@
   "conditionTask": "Completa el objetivo de misión «{name}»",
   "conditionBoss": "Derrota a «{name}»",
   "unlockRate": "Porcentaje global de desbloqueo",
-  "achievementsCredit": "Los iconos, nombres, descripciones y porcentajes globales de desbloqueo de los logros proceden de Steam (app 1912410); porcentajes a fecha de {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Los iconos, nombres, descripciones y porcentajes globales de desbloqueo de los logros proceden de Steam (app 1912410); porcentajes a fecha de {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Comerciante: {name}",
+  "sourceNameChest": "Cofre: {name}",
+  "sourceNameQuest": "Recompensa de misión: {name}",
+  "sourceNameBookPool": "Reserva de libros encantados: {name}"
 }

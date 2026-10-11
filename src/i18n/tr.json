@@ -125,7 +125,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -283,5 +287,9 @@
   "conditionTask": "“{name}” görev hedefini tamamla",
   "conditionBoss": "“{name}” adlı boss’u yen",
   "unlockRate": "Küresel açılma oranı",
-  "achievementsCredit": "Başarım simgeleri, adları, açıklamaları ve küresel açılma oranları Steam'den (uygulama 1912410) alınmıştır; oranlar {date} tarihlidir. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Başarım simgeleri, adları, açıklamaları ve küresel açılma oranları Steam'den (uygulama 1912410) alınmıştır; oranlar {date} tarihlidir. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Tüccar: {name}",
+  "sourceNameChest": "Sandık: {name}",
+  "sourceNameQuest": "Görev ödülü: {name}",
+  "sourceNameBookPool": "Büyü kitabı havuzu: {name}"
 }

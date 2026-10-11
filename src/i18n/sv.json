@@ -125,7 +125,11 @@
     "conditionTask",
     "conditionBoss",
     "unlockRate",
-    "achievementsCredit"
+    "achievementsCredit",
+    "sourceNameMerchant",
+    "sourceNameChest",
+    "sourceNameQuest",
+    "sourceNameBookPool"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -283,5 +287,9 @@
   "conditionTask": "Slutför uppdragsmålet ”{name}”",
   "conditionBoss": "Besegra ”{name}”",
   "unlockRate": "Global upplåsningsandel",
-  "achievementsCredit": "Ikoner, namn, beskrivningar och globala upplåsningsandelar för prestationerna kommer från Steam (app 1912410); andelar per {date}. © Mojang Studios / Microsoft"
+  "achievementsCredit": "Ikoner, namn, beskrivningar och globala upplåsningsandelar för prestationerna kommer från Steam (app 1912410); andelar per {date}. © Mojang Studios / Microsoft",
+  "sourceNameMerchant": "Köpman: {name}",
+  "sourceNameChest": "Kista: {name}",
+  "sourceNameQuest": "Uppdragsbelöning: {name}",
+  "sourceNameBookPool": "Pool av förtrollningsböcker: {name}"
 }
