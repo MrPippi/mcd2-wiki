@@ -1,0 +1,127 @@
+---
+import { t, type Lang } from "../lib/i18n";
+import { clockJson } from "../lib/soul-storm";
+import type { ClockPayload } from "../lib/soul-storm-schedule";
+
+interface Props {
+  lang: Lang;
+  payload: ClockPayload;
+}
+
+const { lang, payload } = Astro.props;
+---
+{/* Starts hidden: without JavaScript the static cadence line and rotation list stand in for it (spec D5). */}
+<div class="soul-storm-clock" data-testid="soul-storm-clock" data-soul-storm-clock hidden>
+  <div class="soul-storm-now">
+    <p class="soul-storm-status" data-testid="soul-storm-status" data-status aria-live="polite"></p>
+    <p class="soul-storm-countdown" data-testid="soul-storm-countdown" data-countdown></p>
+  </div>
+  <h3 class="soul-storm-subtitle">{t(lang, "soulStormUpcoming")}</h3>
+  <div class="soul-storm-scroll">
+    <table class="soul-storm-table soul-storm-upcoming" data-testid="soul-storm-upcoming">
+      <thead>
+        <tr>
+          <th scope="col">{t(lang, "soulStormColStart")}</th>
+          <th scope="col">{t(lang, "soulStormColArea")}</th>
+        </tr>
+      </thead>
+      <tbody data-upcoming></tbody>
+    </table>
+  </div>
+  <p class="note soul-storm-timezone" data-testid="soul-storm-timezone" data-timezone></p>
+  <script type="application/json" data-soul-storm-json set:html={clockJson(payload)}></script>
+</div>
+
+<script>
+  // Only the dependency-free schedule module: every string arrives in the page's JSON payload.
+  import {
+    formatCountdown,
+    formatWindowTime,
+    parseClockPayload,
+    stormState,
+    upcomingWindows,
+    type ClockPayload,
+  } from "../lib/soul-storm-schedule";
+
+  const TICK_MS = 1000;
+
+  interface ClockParts {
+    readonly status: HTMLElement;
+    readonly countdown: HTMLElement;
+    readonly rows: HTMLElement;
+    readonly zone: HTMLElement;
+  }
+
+  function readPayload(root: HTMLElement): ClockPayload | undefined {
+    const source = root.querySelector("[data-soul-storm-json]")?.textContent ?? "";
+    try {
+      return parseClockPayload(JSON.parse(source));
+    } catch {
+      return undefined; // not JSON: reported by the caller like any other bad payload
+    }
+  }
+
+  function partsOf(root: HTMLElement): ClockParts | undefined {
+    const status = root.querySelector<HTMLElement>("[data-status]");
+    const countdown = root.querySelector<HTMLElement>("[data-countdown]");
+    const rows = root.querySelector<HTMLElement>("[data-upcoming]");
+    const zone = root.querySelector<HTMLElement>("[data-timezone]");
+    return status && countdown && rows && zone ? { status, countdown, rows, zone } : undefined;
+  }
+
+  function windowRow(payload: ClockPayload, startMs: number, areaIndex: number, locale: string): HTMLTableRowElement {
+    const row = document.createElement("tr");
+    const when = document.createElement("td");
+    const time = document.createElement("time");
+    time.dateTime = new Date(startMs).toISOString();
+    time.textContent = formatWindowTime(startMs, locale);
+    when.append(time);
+    const where = document.createElement("td");
+    const link = document.createElement("a");
+    const area = payload.areas[areaIndex];
+    link.href = area.href;
+    link.textContent = area.name;
+    where.append(link);
+    row.append(when, where);
+    return row;
+  }
+
+  /** Rebuilds the table only when the storm it starts with changes. */
+  function renderTable(parts: ClockParts, payload: ClockPayload, nowMs: number, windowIndex: number): void {
+    const key = String(windowIndex);
+    if (parts.rows.dataset.window === key) return;
+    const locale = document.documentElement.lang;
+    const rows = upcomingWindows(payload, nowMs, payload.upcoming).map((w) => windowRow(payload, w.startMs, w.areaIndex, locale));
+    parts.rows.replaceChildren(...rows);
+    parts.rows.dataset.window = key;
+  }
+
+  function render(parts: ClockParts, payload: ClockPayload, nowMs: number): void {
+    const state = stormState(payload, nowMs);
+    const area = payload.areas[state.window.areaIndex].name;
+    const status = (state.active ? payload.labels.now : payload.labels.next).replace("{area}", area);
+    // The live region only hears about a new state, never the ticking seconds.
+    if (parts.status.textContent !== status) parts.status.textContent = status;
+    parts.countdown.textContent = (state.active ? payload.labels.endsIn : payload.labels.startsIn).replace(
+      "{time}",
+      formatCountdown(state.msLeft),
+    );
+    renderTable(parts, payload, nowMs, state.window.index);
+  }
+
+  function mount(root: HTMLElement): void {
+    const payload = readPayload(root);
+    const parts = partsOf(root);
+    if (!payload || !parts) {
+      console.error("soul storm clock: bad payload");
+      return;
+    }
+    parts.zone.textContent = payload.labels.timeZone.replace("{zone}", Intl.DateTimeFormat().resolvedOptions().timeZone);
+    render(parts, payload, Date.now());
+    root.hidden = false;
+    window.setInterval(() => render(parts, payload, Date.now()), TICK_MS);
+  }
+
+  const root = document.querySelector<HTMLElement>("[data-soul-storm-clock]");
+  if (root) mount(root);
+</script>
