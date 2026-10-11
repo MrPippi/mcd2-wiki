@@ -98,7 +98,7 @@ describe("buildItemSources", () => {
       merchants: [{ id: "merchant:VillageMerchant", category: "SW.Item.Property.MeleeWeapon" }],
       bookPools: [],
     });
-    expect(raw.sources["chest:FancyChest"]).toEqual({ kind: "chest", name: expect.objectContaining({ en: "Chest: Fancy Chest" }), untranslated: expect.arrayContaining(["ja"]) });
+    expect(raw.sources["chest:FancyChest"]).toEqual({ kind: "chest", name: expect.objectContaining({ en: "Fancy Chest" }), untranslated: expect.arrayContaining(["ja"]) });
     expect(ItemSourcesSchema.parse(raw)).toEqual(raw);
   });
 
@@ -132,9 +132,9 @@ describe("buildItemSources", () => {
   it("lists guaranteed quest rewards and says 2 of 4 for the mushroom set", () => {
     const { data } = run();
     expect(data["armor/mushroom-chest"]?.quests).toEqual([
-      expect.objectContaining({ id: "quest:QuestArmourMushroomSet", name: expect.objectContaining({ en: "Quest reward: Armour Mushroom Set" }), picks: { count: 2, of: 4 } }),
+      expect.objectContaining({ id: "quest:QuestArmourMushroomSet", name: expect.objectContaining({ en: "Quest reward", zh: "任務獎勵" }), picks: { count: 2, of: 4 } }),
     ]);
-    expect(data["melee/sword"]?.quests).toEqual([{ id: "quest:QuestMeleeSword", kind: "quest", name: expect.objectContaining({ en: "Quest reward: Melee Sword" }), untranslated: expect.any(Array) }]);
+    expect(data["melee/sword"]?.quests).toEqual([{ id: "quest:QuestMeleeSword", kind: "quest", name: expect.objectContaining({ en: "Quest reward" }), untranslated: [] }]);
   });
 
   it("ignores a quest row that is not guaranteed, and reports it", () => {
@@ -150,8 +150,8 @@ describe("buildItemSources", () => {
 
   it("separates chests that draw from the area pool from chests with fixed contents", () => {
     const { data } = run();
-    expect(data["melee/sickles"]?.chests).toEqual([expect.objectContaining({ id: "chest:FancyChest", name: expect.objectContaining({ en: "Chest: Fancy Chest" }), pool: "area" })]);
-    expect(data["artifact/firework-quiver"]?.chests).toEqual([expect.objectContaining({ id: "chest:CampWoodenChest", name: expect.objectContaining({ en: "Chest: Camp Wooden Chest" }), pool: "fixed" })]);
+    expect(data["melee/sickles"]?.chests).toEqual([expect.objectContaining({ id: "chest:FancyChest", name: expect.objectContaining({ en: "Fancy Chest" }), pool: "area" })]);
+    expect(data["artifact/firework-quiver"]?.chests).toEqual([expect.objectContaining({ id: "chest:CampWoodenChest", name: expect.objectContaining({ en: "Camp Wooden Chest" }), pool: "fixed" })]);
     expect(data["melee/sword"]?.chests ?? []).toEqual([]);   // Sword is in no area pool, so the fancy chest cannot give it
   });
 
@@ -172,7 +172,7 @@ describe("buildItemSources", () => {
   it("gives merchants by category only, keeps the category tag, and not for unique items", () => {
     const { data } = run();
     expect(data["melee/sword"]?.merchants).toEqual([
-      expect.objectContaining({ id: "merchant:VillageMerchant", name: expect.objectContaining({ en: "Merchant: Village Merchant" }), category: "SW.Item.Property.MeleeWeapon" }),
+      expect.objectContaining({ id: "merchant:VillageMerchant", name: expect.objectContaining({ en: "Village Merchant" }), category: "SW.Item.Property.MeleeWeapon" }),
     ]);
     expect(data["melee/sword-unique1"]?.merchants ?? []).toEqual([]);
     expect(data["armor/mushroom-chest"]?.merchants ?? []).toEqual([]);
@@ -198,7 +198,7 @@ describe("buildItemSources", () => {
     expect(data["enchantment-book/radiance"]?.bookPools ?? []).toEqual([]);
     expect(ids(data["enchantment-book/piercing"]?.quests)).toEqual(["quest:EnchantsmithBookReward"]);
     expect(ids(data["enchantment-book/ricochet"]?.bookPools)).toEqual(["bookPool:AllEnchantmentBooks", "bookPool:EnchantmentBooksCommon"]);
-    expect(data["enchantment-book/arcane"]?.bookPools[1]?.name.en).toBe("Enchantment book pool: Common");
+    expect(data["enchantment-book/arcane"]?.bookPools[1]?.name.en).toBe("Common");
   });
 
   it("keeps the untranslated languages on the source, never on the item, and leaves official area names alone", () => {

@@ -36,6 +36,24 @@ describe("item sources block", () => {
     expect(areas).toContain("item-alt");
   });
 
+  it("shows a quest reward by its label and 必得 or N of M, never the internal row id", async () => {
+    const quests = group(await render("zh", "armor", "mushroom-chest"), "quests");
+    expect(quests).toContain("任務獎勵");
+    expect(quests).toContain('data-testid="picks"');
+    expect(quests).not.toMatch(/Armour|Quest[A-Z]/);
+    expect(quests).not.toContain("tag warn");
+  });
+
+  it("names a chest without repeating the kind the heading already gives", async () => {
+    const chests = group(await render("zh", "artifact", "firework-quiver"), "chests");
+    expect(chests).toContain("Camp Wooden Chest");
+    expect(chests).not.toContain("寶箱：");
+  });
+
+  it("shows no Chinese fallback line on an English page", async () => {
+    expect(group(await render("en", "artifact", "firework-quiver"), "chests")).not.toContain("item-alt");
+  });
+
   it("marks nothing on an English page", async () => {
     expect(await render("en", "artifact", "firework-quiver")).not.toContain("tag warn");
   });

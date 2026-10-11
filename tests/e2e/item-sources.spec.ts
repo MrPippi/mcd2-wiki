@@ -17,6 +17,8 @@ test.describe("how to obtain", () => {
     await page.goto("/en/armor/piece/mushroom-chest/");
     const block = page.getByTestId("item-sources");
     await expect(block.locator("[data-source-kind='quests'] [data-testid='picks']")).toHaveText("2 of 4");
+    await expect(block.locator("[data-source-kind='quests'] .source-name")).toHaveText("Quest reward");   // not the internal row id
+    await expect(block.locator("[data-source-kind='quests'] .item-alt")).toHaveCount(0);
     await expect(block.locator("[data-source-kind='merchants'] [data-testid='merchant-category']")).toContainText("Armor");
     expect(await block.innerText()).not.toContain("%");
   });
@@ -42,9 +44,11 @@ test.describe("how to obtain", () => {
     await expect(page.getByTestId("book-source")).toBeVisible();
   });
 
-  test("an English page shows no untranslated marker", async ({ page }) => {
+  test("an English page shows no untranslated marker and no Chinese fallback line", async ({ page }) => {
     await page.goto("/en/melee/sickles/");
     await expect(page.getByTestId("item-sources").locator(".tag.warn")).toHaveCount(0);
+    await expect(page.getByTestId("item-sources").locator("[data-source-kind='chests'] .item-alt")).toHaveCount(0);
+    await expect(page.getByTestId("item-sources").locator("[data-source-kind='chests'] .source-name").first()).not.toContainText("Chest:");
   });
 
   test("has no block for an item the game data gives no source", async ({ page }) => {

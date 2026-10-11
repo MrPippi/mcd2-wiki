@@ -10,15 +10,11 @@ import type { LocaleFile, Localized } from "./schemas";
 import keyData from "./source-name-keys.json";
 
 export type NameKeys = Readonly<Record<string, LocRef>>;
-/** The kinds of source that have a site label to wrap a fallback name in. */
+/** The kinds of named source besides areas. */
 export type SourceKind = "merchant" | "chest" | "quest" | "bookPool";
 
-const KIND_KEYS: Readonly<Record<SourceKind, string>> = {
-  merchant: "sourceNameMerchant",
-  chest: "sourceNameChest",
-  quest: "sourceNameQuest",
-  bookPool: "sourceNameBookPool",
-};
+/** A quest with no game name is shown by this site label alone: its row id (QuestArtifactsCA10_BR_B) is not a name. */
+const QUEST_LABEL_KEY = "sourceQuestReward";
 const NON_ENGLISH: readonly Lang[] = LANGS.filter((lang) => lang !== "en");
 
 export const SOURCE_NAME_KEYS: NameKeys = z.record(z.string(), z.object({ namespace: z.string(), key: z.string() })).parse(keyData);
@@ -42,21 +38,22 @@ export interface SourceName {
   readonly official: boolean;
 }
 
-function kindLabel(kind: SourceKind, lang: Lang, words: string): string {
-  const value = UI_DICTS[lang].values[KIND_KEYS[kind]];
-  if (value === undefined) throw new ExtractError(`src/i18n/${lang}.json 缺少介面字串 ${KIND_KEYS[kind]}`);
-  return plainText(value).replace("{name}", words);
+function questLabel(lang: Lang): string {
+  const value = UI_DICTS[lang].values[QUEST_LABEL_KEY];
+  if (value === undefined) throw new ExtractError(`src/i18n/${lang}.json 缺少介面字串 ${QUEST_LABEL_KEY}`);
+  return plainText(value);
 }
 
 /**
- * The game's text when `keys[id]` points at an English locale string; otherwise the id as English words, wrapped in the
- * site's label for `kind` when one is given, with every language but English marked untranslated.
+ * The game's text when `keys[id]` points at an English locale string. Otherwise a quest gets the site's translated
+ * "Quest reward" label, and any other source the id as English words (no kind prefix: the group heading gives the
+ * kind) with every language but English marked untranslated.
  */
 export function sourceName(id: string, keys: NameKeys, locales: Readonly<Record<Lang, LocaleFile>>, stripPrefix?: RegExp, kind?: SourceKind): SourceName {
   const ref = Object.hasOwn(keys, id) ? keys[id] : undefined;
   const official = ref ? localize(locales, ref.namespace, ref.key) : undefined;
   if (ref && official) return { name: official, untranslated: englishFallbacks(locales, ref.namespace, ref.key), official: true };
+  if (kind === "quest") return { name: localizedFrom(questLabel), untranslated: [], official: false };
   const words = humanizeId(id, stripPrefix);
-  const name = localizedFrom((lang) => (kind ? kindLabel(kind, lang, words) : words));
-  return { name, untranslated: NON_ENGLISH, official: false };
+  return { name: localizedFrom(() => words), untranslated: NON_ENGLISH, official: false };
 }

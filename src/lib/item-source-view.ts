@@ -33,9 +33,12 @@ export const nameIsUntranslated = (source: ResolvedSource, lang: Lang): boolean 
 export const groupIsUntranslated = (sources: readonly ResolvedSource[], lang: Lang): boolean =>
   sources.length > 0 && sources.every((source) => nameIsUntranslated(source, lang));
 
-/** Whether to print the comparison-language name: only when it differs and the page name is not itself an English fallback. */
+/**
+ * Whether to print the comparison-language name: only when it differs and neither name is an English fallback
+ * (an English page must not show the Chinese fallback of an untranslated name).
+ */
 export const showsAltName = (source: ResolvedSource, lang: Lang): boolean =>
-  !nameIsUntranslated(source, lang) && source.name[compareLang(lang)] !== source.name[lang];
+  !nameIsUntranslated(source, lang) && !source.untranslated.includes(compareLang(lang)) && source.name[compareLang(lang)] !== source.name[lang];
 
 export const hasAnySource = (sources: ResolvedItemSources): boolean =>
   sources.areas.length + sources.chests.length + sources.quests.length + sources.merchants.length + sources.bookPools.length > 0;

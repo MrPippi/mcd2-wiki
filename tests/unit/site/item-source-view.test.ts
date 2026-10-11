@@ -59,6 +59,11 @@ describe("showsAltName", () => {
     expect(showsAltName(named("寶箱：X", ["zh"]), "zh")).toBe(false);
     expect(showsAltName(named("Chest: X"), "zh")).toBe(false);
   });
+
+  it("hides the comparison name when that language itself fell back to English", () => {
+    expect(showsAltName(named("寶箱：X", ["zh"]), "en")).toBe(false);
+    expect(showsAltName(named("寶箱 X"), "en")).toBe(true);
+  });
 });
 
 describe("hasAnySource / mergeSources", () => {

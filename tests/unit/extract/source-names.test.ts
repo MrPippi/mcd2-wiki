@@ -43,14 +43,20 @@ describe("sourceName", () => {
     expect(name.official).toBe(false);
   });
 
-  it("puts the fallback words into the site's label for the kind of source", () => {
-    const quest = sourceName("QuestArmourMushroomSet", {}, locales, /^Quest/, "quest");
-    expect(quest.name.en).toBe("Quest reward: Armour Mushroom Set");
-    expect(quest.name.zh).toBe("任務獎勵：Armour Mushroom Set");
-    expect(quest.untranslated).toHaveLength(15);
-    expect(sourceName("FancyChest", {}, locales, undefined, "chest").name.zh).toBe("寶箱：Fancy Chest");
-    expect(sourceName("VillageMerchant", {}, locales, undefined, "merchant").name.en).toBe("Merchant: Village Merchant");
-    expect(sourceName("EnchantmentBooksCommon", {}, locales, /^EnchantmentBooks/, "bookPool").name.zh).toBe("附魔書池：Common");
+  it("names a quest without a game name by the site's translated label only, never by its internal row id", () => {
+    const quest = sourceName("QuestArtifactsCA10_BR_B", {}, locales, /^Quest/, "quest");
+    expect(quest.name.en).toBe("Quest reward");
+    expect(quest.name.zh).toBe("任務獎勵");
+    expect(quest.untranslated).toEqual([]);
+    expect(quest.official).toBe(false);
+  });
+
+  it("gives chests, merchants and book pools their English words with no kind prefix (the group heading says the kind)", () => {
+    const chest = sourceName("FancyChest", {}, locales, undefined, "chest");
+    expect(chest.name.zh).toBe("Fancy Chest");
+    expect(chest.untranslated).toHaveLength(15);
+    expect(sourceName("VillageMerchant", {}, locales, undefined, "merchant").name.en).toBe("Village Merchant");
+    expect(sourceName("EnchantmentBooksCommon", {}, locales, /^EnchantmentBooks/, "bookPool").name.zh).toBe("Common");
   });
 
   it("uses the game's text over the kind label when a key is known", () => {
