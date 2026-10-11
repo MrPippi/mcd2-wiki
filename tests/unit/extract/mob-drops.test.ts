@@ -4,7 +4,7 @@ import { loadLootTables } from "../../../scripts/extract/loot-tables";
 import { loadMobTables } from "../../../scripts/extract/mob-tables";
 import { buildMobs } from "../../../scripts/extract/mobs";
 import { loadLocales } from "../../../scripts/extract/parse-locale";
-import { hasPoolTags, slotKeyOf, slotsOf } from "../../../scripts/extract/loot-slots";
+import { hasOwnPool, hasPoolTags, slotKeyOf, slotsOf } from "../../../scripts/extract/loot-slots";
 import { attachDrops, resolveDrops } from "../../../scripts/extract/mob-drops";
 import type { MobDraft } from "../../../scripts/extract/mobs";
 import type { Mob } from "../../../scripts/extract/mob-schema";
@@ -94,6 +94,76 @@ describe("resolveDrops", () => {
   it("leaves out slots that give nothing", () => {
     const empty = lootTables({ mob: [lootRow("GlobalHostileMobLoot", "SW.Mob.Default.Hostile", [slot("Item", 0, 0, 0, true)])] }).mob;
     expect(resolveDrops(["SW.Mob.Zombie"], HOSTILE, empty)).toEqual([]);
+  });
+});
+
+// The real slot shapes: exclusion-only rows (Multiply 0) and a weight boost (Multiply 2) are modifiers, not lists.
+const realShapes = lootTables({
+  mob: [
+    lootRow("GlobalHostileMobLoot", "SW.Mob.Default.Hostile", [
+      slot("Emeralds", 0, 5, 0.025, false, [["SW.Item.Currency.Emerald", 5, "Set"], ["SW.Item.Currency.EmeraldBlock", 1, "Set"]]),
+      slot("TNT", 0, 1, 0.0125, false, ["SW.Item.Consumable.Throwable.TNT"]),
+      slot("Consumable", 0, 1, 0.0125, false, ["SW.Item.Consumable.Food", ["SW.Item.ExceptFromDefaultLootTables", 0, "Multiply"]]),
+      slot("Item", 0, 1, 0.0125, false),
+    ]),
+    lootRow("SoulStated", "SW.Mob.Default.SoulStated", [slot("Item", 0, 1, 0.25, true)]),
+    lootRow("Geomancer", "SW.Mob.Geomancer", [slot("Item", 0, 0, 0, true, [["SW.Item.Property.Artifact", 2, "Multiply"]])]),
+    lootRow("LargeSlime", "SW.Mob.Slime", [
+      slot("Item", 0, 0, 0, true, [["SW.Item.Property.Gear", 0, "Multiply"], ["SW.Item.Property.EnchantmentBook", 0, "Multiply"]]),
+      slot("Emeralds", 0, 0, 0, true, [["SW.Item.Currency.Emerald", 0, "Multiply"]]),
+      slot("SpringStone", 0, 0, 0, false, [["SW.Item.Currency.SpringStone", 0, "Multiply"]]),
+      slot("TNT", 0, 0, 0, false, [["SW.Item.Consumable.Throwable.TNT", 0, "Multiply"]]),
+    ]),
+    lootRow("Vex", "SW.Mob.Vex", [
+      slot("Item", 0, 0, 0, true, [["SW.Item.Property.Gear", 0, "Multiply"], ["SW.Item.Property.EnchantmentBook", 0, "Multiply"]]),
+      slot("Emeralds", 0, 0, 0, true, [["SW.Item.Currency.Emerald", 0, "Multiply"]]),
+    ]),
+    lootRow("Odd", "SW.Mob.Odd", [slot("Item", 0, 0, 0, true, [["SW.Item.Property.Food", 0, "Multiply"]])]),
+    lootRow("WitchType3", "SW.Mob.Witch.Type3", [slot("Item", 0, 0, 0, false)]),
+  ],
+}).mob;
+
+describe("resolveDrops with modifier and exclusion slots (real shapes)", () => {
+  const slots = (drops: ReturnType<typeof resolveDrops>) => drops?.map((drop) => drop.slot);
+
+  it("suppresses the slime's item, emerald and TNT drops; only the consumable roll stays", () => {
+    const drops = resolveDrops(["SW.Mob.Slime"], ["SW.Mob.Type1", ...HOSTILE], realShapes);
+    expect(drops).toEqual([{ slot: "consumable", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125, pool: "own" }]);
+  });
+
+  it("suppresses the vex's item and emerald drops but keeps TNT and consumable", () => {
+    expect(slots(resolveDrops(["SW.Mob.Vex"], ["SW.Mob.Type1", ...HOSTILE], realShapes))).toEqual(["consumable", "tnt"]);
+  });
+
+  it("also suppresses the Soul Corrupted roll a lower tier row would give", () => {
+    const soul = resolveDrops(["SW.Mob.Vex.SoulStated"], ["SW.Mob.Vex", "SW.Mob.Default.SoulStated", ...HOSTILE], realShapes);
+    expect(item(soul)).toBeUndefined();
+  });
+
+  it("treats the geomancer's artifact weight boost as a modifier: the item slot falls through and is not 'own'", () => {
+    const drops = resolveDrops(["SW.Mob.Geomancer"], ["SW.Mob.Type1", ...HOSTILE], realShapes);
+    expect(item(drops)).toEqual({ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125, pool: "none" });
+    const soul = resolveDrops(["SW.Mob.Geomancer.SoulStated"], ["SW.Mob.Geomancer", "SW.Mob.Default.SoulStated", ...HOSTILE], realShapes);
+    expect(item(soul)).toEqual({ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.25, pool: "area" });
+  });
+
+  it("lets an exclusion that does not cover the slot's content fall through as a modifier", () => {
+    expect(item(resolveDrops(["SW.Mob.Odd"], HOSTILE, realShapes))).toEqual({ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125, pool: "none" });
+  });
+
+  it("lets a genuinely empty 0+0 slot fall through", () => {
+    expect(item(resolveDrops(["SW.Mob.Witch.Type3"], HOSTILE, realShapes))).toEqual({ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125, pool: "none" });
+  });
+});
+
+describe("hasOwnPool", () => {
+  it("is true only for a Set entry with weight above 0", () => {
+    const row = realShapes.find((candidate) => candidate.Name === "GlobalHostileMobLoot");
+    const geomancer = realShapes.find((candidate) => candidate.Name === "Geomancer");
+    const consumable = row && slotsOf(row).get("consumable");
+    const boost = geomancer && slotsOf(geomancer).get("item");
+    expect(consumable && hasOwnPool(consumable)).toBe(true);
+    expect(boost && hasOwnPool(boost)).toBe(false);
   });
 });
 

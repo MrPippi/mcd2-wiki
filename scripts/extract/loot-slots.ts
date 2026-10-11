@@ -35,3 +35,14 @@ export function slotsOf(row: LootRow): ReadonlyMap<LootSlotKey, LootSlotValue> {
 
 /** True when the slot names its own item pool (DropTable.Tags has at least one entry). */
 export const hasPoolTags = (slot: LootSlotValue): boolean => (slot.DropTable.Tags?.length ?? 0) > 0;
+
+/** True when the slot adds items of its own: at least one Set entry with a weight above 0. Multiply entries only modify. */
+export const hasOwnPool = (slot: LootSlotValue): boolean =>
+  (slot.DropTable.Tags ?? []).some((entry) => entry.Operation === "Set" && entry.Weight > 0);
+
+/** The Multiply-0 tags of a slot that has nothing but exclusions; [] for any other slot. */
+export function exclusionOnlyTags(slot: LootSlotValue): string[] {
+  const entries = slot.DropTable.Tags ?? [];
+  const excludesOnly = entries.length > 0 && entries.every((entry) => entry.Operation === "Multiply" && entry.Weight === 0);
+  return excludesOnly ? entries.map((entry) => entry.TypeTag.TagName) : [];
+}
