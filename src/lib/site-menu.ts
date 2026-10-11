@@ -11,6 +11,7 @@ export interface MenuItem {
 export const SITE_MENU: readonly MenuItem[] = [
   { key: "map", segment: "map" },
   { key: "achievements", segment: "achievements" },
+  { key: "mobs", segment: "mobs" },
 ];
 
 /** Whether `pathname` is the menu page `segment` in some language (/<base>/<lang>/<segment>/). */

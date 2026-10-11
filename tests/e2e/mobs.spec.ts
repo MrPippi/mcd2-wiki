@@ -4,6 +4,19 @@ import { horizontalOverflow } from "./helpers/overflow";
 const dropRow = (page: Page, label: string) => page.getByTestId("mob-drops").locator(".mob-drop", { has: page.locator(".mob-drop-slot", { hasText: label }) });
 
 test.describe("bestiary index", () => {
+  for (const lang of ["zh", "ja", "ru"] as const) {
+    test(`/${lang}/mobs/ finds a mob by its English name and fits the window`, async ({ page }) => {
+      await page.goto(`/${lang}/mobs/`);
+      await expect(page.locator(".mob-group").first()).toHaveAttribute("data-group", "boss");
+      const total = await page.locator("[data-names]").count();
+      expect(total).toBeGreaterThan(40);
+      await page.locator(".filter-text").fill("zombie");
+      await expect(page.locator("[data-names]:visible").first()).toBeVisible();
+      expect(await page.locator("[data-names]:visible").count()).toBeLessThan(total);
+      expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
+    });
+  }
+
   test("groups mobs by kind and links each card to its page", async ({ page }) => {
     await page.goto("/zh/mobs/");
     await expect(page.locator("h1 [data-pagefind-meta='title']")).toHaveText("怪物圖鑑");
@@ -36,6 +49,20 @@ test.describe("bestiary index", () => {
 });
 
 test.describe("mob page", () => {
+  test("loads the portrait render and describes the mob in its meta description", async ({ page }) => {
+    await page.goto("/en/mobs/zombie/");
+    const portrait = page.locator(".mob-plate .mob-portrait img");
+    await expect(portrait).toBeVisible();
+    expect(await portrait.evaluate((img: HTMLImageElement) => img.naturalWidth)).toBeGreaterThan(0);
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", "Zombie · Mob · Bestiary · Minecraft Dungeons II");
+  });
+
+  test("an area link opens the map on the area", async ({ page }) => {
+    await page.goto("/zh/mobs/zombie/");
+    await page.getByTestId("mob-areas").locator("a[href*='world=']").first().click();
+    await expect(page).toHaveURL(/\/zh\/map\/\?world=\w+#\d+\/\d+\/\d+/);
+  });
+
   test("shows names, portrait, stats, areas and drops for a regular mob", async ({ page }) => {
     await page.goto("/zh/mobs/zombie/");
     await expect(page.locator("article[data-pagefind-body]")).toHaveCount(1);
@@ -43,7 +70,7 @@ test.describe("mob page", () => {
     await expect(page.locator("h1 .alt")).toHaveText("Zombie");
     await expect(page.locator(".mob-plate .mob-portrait img")).toHaveAttribute("alt", "殭屍");
     await expect(page.locator(".mob-plate .mob-portrait img")).toHaveAttribute("src", "/mobs/zombie.webp");
-    const stats = page.getByTestId("mob-stats").first();
+    const stats = page.getByTestId("mob-stats");
     await expect(stats.locator("tr", { hasText: "生命值" }).locator("td")).toHaveText("8");
     await expect(stats.locator("tr", { hasText: "爆炸抗性倍率" }).locator("td")).toHaveText("×1.5");
     const frozen = page.getByTestId("mob-areas").locator("a", { hasText: "冰封高地" });
@@ -61,7 +88,9 @@ test.describe("mob page", () => {
     await page.goto("/en/mobs/zombie/");
     const soul = page.getByTestId("mob-soul-corrupted");
     await expect(soul.locator("h2")).toHaveText("Soul Corrupted");
-    await expect(soul.getByTestId("mob-stats").locator("tr", { hasText: "Health" }).locator("td")).toHaveText("200");
+    await expect(soul.getByTestId("mob-stats-soul").locator("tr", { hasText: "Health" }).locator("td")).toHaveText("200");
+    await expect(soul.getByTestId("mob-drops-soul")).toBeVisible();
+    await expect(soul.getByTestId("mob-stats")).toHaveCount(0);
     await expect(soul.locator(".mob-drop", { hasText: "Gear" })).toContainText("Random rolls: 1, 25% each");
     await page.goto("/en/mobs/monstrosity-moss/");
     await expect(page.getByTestId("mob-soul-corrupted")).toHaveCount(0);
@@ -91,6 +120,7 @@ test.describe("mob page", () => {
     await page.goto("/en/mobs/bee/");
     await expect(page.getByTestId("mob-portrait-placeholder")).toHaveAttribute("aria-label", "No portrait yet");
     await expect(page.locator(".mob-plate .mob-portrait img")).toHaveCount(0);
+    await expect(page.getByTestId("mob-drops")).toHaveCount(0);
     await expect(page.getByTestId("mob-drops-note")).toBeVisible();
   });
 
@@ -104,4 +134,29 @@ test.describe("mob page", () => {
       }
     });
   }
+});
+
+test.describe("menu and search", () => {
+  test("the hamburger menu lists the bestiary after the map and the achievements and marks it on its page", async ({ page }) => {
+    await page.goto("/zh/mobs/");
+    await page.getByTestId("site-menu").click();
+    const links = page.locator(".site-menu a");
+    await expect(links).toHaveText(["地圖", "成就", "怪物圖鑑"]);
+    await expect(links.nth(2)).toHaveAttribute("href", "/zh/mobs/");
+    await expect(page.locator(".site-menu [aria-current='page']")).toHaveText("怪物圖鑑");
+  });
+
+  test("site search finds a mob by its English name from a Japanese page", async ({ page }) => {
+    await page.goto(`/ja/search/?q=${encodeURIComponent("Twisted Warden")}`);
+    // The Twisted Warden armor pieces share the name and can rank first; open the full list before looking for the mob.
+    await expect(page.locator(".pagefind-ui__result").first()).toBeVisible({ timeout: 15_000 });
+    const more = page.locator(".pagefind-ui__button");
+    if (await more.isVisible()) await more.click();
+    await expect(page.locator('.pagefind-ui__results a[href*="/ja/mobs/maw/"]').first()).toBeVisible({ timeout: 15_000 });
+  });
+
+  test("site search finds a mob by its name in the page language", async ({ page }) => {
+    await page.goto(`/zh/search/?q=${encodeURIComponent("殭屍")}`);
+    await expect(page.locator('.pagefind-ui__results a[href*="/zh/mobs/zombie/"]').first()).toBeVisible({ timeout: 15_000 });
+  });
 });
