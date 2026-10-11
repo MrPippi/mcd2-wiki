@@ -19,8 +19,6 @@ const FOCUS_LEVELS = 1;
 const PIN_SIZE: L.PointTuple = [16, 16];
 const ICON_PIN_SIZE: L.PointTuple = [28, 28];
 const POPUP_OPTIONS: L.PopupOptions = { minWidth: 200, maxWidth: 280 };
-/** From this width the marker filter starts open on the map; narrower screens get its button only. */
-const FILTERS_OPEN_QUERY = "(min-width: 760px)";
 
 interface Payload {
   readonly worlds: readonly PayloadWorld[];
@@ -166,11 +164,10 @@ function bindFilters(root: HTMLElement, onChange: (kind: FilterKind, visible: bo
   }
 }
 
-/** The filter floats over the map: open it on wide screens, and keep its clicks and wheel turns away from Leaflet. */
+/** The filter floats over the map, folded to its button so it never covers markers until asked; keep its clicks and wheel turns away from Leaflet. */
 function prepareFilterPanel(root: HTMLElement): void {
   const panel = root.querySelector<HTMLDetailsElement>("[data-map-filters]");
   if (!panel) return;
-  if (window.matchMedia(FILTERS_OPEN_QUERY).matches) panel.open = true;
   L.DomEvent.disableClickPropagation(panel);
   L.DomEvent.disableScrollPropagation(panel);
 }

@@ -24,9 +24,9 @@ const credit = t(lang, "achievementsCredit").replace("{date}", formatRetrieved(a
 <Base lang={lang} title={t(lang, "achievements")} description={t(lang, "achievementsIntro")}>
   <div class="catalog achievements-page">
     <header class="catalog-head achievements-head">
+      <p class="catalog-count kicker mono">{achievements.length}</p>
       <h1 class="catalog-title">
         <span data-pagefind-meta="title">{t(lang, "achievements")}</span>
-        <span class="count">({achievements.length})</span>
       </h1>
       {t(alt, "achievements") !== t(lang, "achievements") && (
         <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "achievements")}</p>
