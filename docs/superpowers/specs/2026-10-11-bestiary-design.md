@@ -166,23 +166,26 @@ interface Mob {
   name: Localized;
   untranslated: Lang[];
   stats: { key: StatKey; value: number }[];
-  soulCorrupted?: { stats: { key: StatKey; value: number }[] };
+  soulCorrupted?: { stats: { key: StatKey; value: number }[]; drops: MobDrop[] };
   portrait?: string;         // 已發布的頭像路徑 mobs/<slug>.webp；沒有則顯示預留框
   variants: string[];        // 變種的 slug
   variantOf?: string;        // 原怪物的 slug
-  areas: { areaId: string; name: Localized; mapHref?: string }[];
-  drops: { slot: LootSlotKey; guaranteed: number; rolls: number; chancePerRoll: number; pool: "area" | "own" | "none" }[];
+  areas: { areaId: string; name: Localized; map?: { world: "overworld" | "sift" | "camp"; px: number; py: number } }[];
+  drops: MobDrop[];          // { slot, guaranteed, rolls, chancePerRoll, pool: "area" | "own" | "none" }
 }
 
+// 正規化：來源名稱只存一次（名稱會在每個物品重複，不正規化會超過 200KB）。
 interface ItemSources {
-  // 以物品頁的 category/slug 為鍵
-  [entryKey: string]: {
-    areas: { areaId: string; name: Localized }[];
-    chests: { id: string; name: Localized; pool: "area" | "fixed" }[];
-    quests: { id: string; name: Localized; guaranteed: true }[];
-    merchants: { id: string; name: Localized; byCategory: true }[];
-    bookPools: { id: string; name: Localized }[];
-  };
+  // 來源表，鍵為 "<kind>:<id>"，kind 為 area | chest | quest | merchant | bookPool
+  sources: Record<string, { kind: SourceKind; name: Localized; untranslated: Lang[] }>;
+  // 以物品頁的 category/slug 為鍵；各欄位為 sources 的 id
+  items: Record<string, {
+    areas: string[];
+    chests: { id: string; pool: "area" | "fixed" }[];
+    quests: { id: string; picks?: { count: number; of: number } }[];   // picks：任務從 of 件中給 count 件
+    merchants: { id: string; category: string }[];                     // category：商品池的類別標籤
+    bookPools: string[];
+  }>;
 }
 ```
 

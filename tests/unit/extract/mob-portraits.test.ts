@@ -140,8 +140,5 @@ describe.skipIf(!existsSync(REAL_RENDERS))("real source-data", () => {
     const unjoined = issues.filter((item) => item.type === "mob-portrait-unjoined").map((item) => item.detail);
     expect(unjoined).toEqual(expect.arrayContaining(["Evoker_FangTrap.png", "Geomancer_WallPillar.png", "RedStoneNode.png", "TargetDummy.png"]));
     expect(plans.map((plan) => path.basename(plan.from))).not.toContain("Geomancer_BombPillar.png");
-    console.info(`MAP ${plans.map((plan) => `${plan.slug} -> ${path.basename(plan.from)}`).join(" | ")}`);
-    console.info(`none=${issues.filter((item) => item.type === "mob-no-portrait").map((item) => item.detail)} unjoined=${unjoined}`);
-    console.info(`portraits: with=${plans.length} without=${issues.filter((item) => item.type === "mob-no-portrait").length} unjoined=${unjoined.length} mobs=${drafts.length}`);
   });
 });

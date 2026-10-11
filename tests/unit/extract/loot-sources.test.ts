@@ -258,7 +258,7 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
     const keys = Object.keys(data.items);
     expect(keys.length).toBeGreaterThan(200);
     expect(keys.length).toBeLessThan(320);
-    expect(Object.entries(data.items).filter(([key, item]) => item.merchants.length > 0 && key.endsWith("unique")).map(([key]) => key)).toEqual([]);
+    expect(Object.entries(data.items).filter(([key, item]) => item.merchants.length > 0 && /-uniqued*$/.test(key)).map(([key]) => key)).toEqual([]);
     expect(JSON.stringify(data).length).toBeLessThan(200_000);
   });
 

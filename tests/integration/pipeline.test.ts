@@ -140,6 +140,10 @@ describe("runExtract", () => {
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-icon (1)\n\n- armor:DiscipleChest");
     expect(summary).toMatchObject({ entries: 14, armorSets: 1, icons: 12 });
+    expect(existsSync(path.join(outRoot, "src", "data", "mobs.json"))).toBe(true);
+    expect(existsSync(path.join(outRoot, "src", "data", "loot-sources.json"))).toBe(true);
+    expect(summary.tablesRead.some((file) => /onlineconstants/i.test(file))).toBe(false);
+    expect(report).toContain("missing-mob-tables");
   });
 
   it("takes an icon the DataTables' IconReference names, even when no file name matches", async () => {
