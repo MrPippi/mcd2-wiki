@@ -120,6 +120,10 @@
     "achievements",
     "achievementsIntro",
     "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
     "unlockRate",
     "achievementsCredit"
   ],
@@ -275,6 +279,10 @@
   "achievements": "Succès",
   "achievementsIntro": "Tous les succès Steam de Minecraft Dungeons II, classés par taux de déblocage mondial, du plus élevé au plus bas.",
   "hiddenAchievement": "Succès caché",
+  "revealCondition": "Afficher la condition de déblocage",
+  "conditionQuest": "Terminer la quête « {name} »",
+  "conditionTask": "Accomplir l’objectif de quête « {name} »",
+  "conditionBoss": "Vaincre « {name} »",
   "unlockRate": "Taux de déblocage mondial",
   "achievementsCredit": "Les icônes, noms, descriptions et taux de déblocage mondiaux des succès proviennent de Steam (app 1912410) ; taux au {date}. © Mojang Studios / Microsoft"
 }

@@ -120,6 +120,10 @@
     "achievements",
     "achievementsIntro",
     "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
     "unlockRate",
     "achievementsCredit"
   ],
@@ -271,6 +275,10 @@
   "achievements": "도전 과제",
   "achievementsIntro": "Minecraft Dungeons II의 모든 Steam 도전 과제를 전체 달성률이 높은 순서로 정렬했습니다.",
   "hiddenAchievement": "숨겨진 도전 과제",
+  "revealCondition": "달성 조건 보기",
+  "conditionQuest": "퀘스트 '{name}' 완료",
+  "conditionTask": "퀘스트 목표 '{name}' 완료",
+  "conditionBoss": "'{name}' 처치",
   "unlockRate": "전체 달성률",
   "achievementsCredit": "도전 과제 아이콘, 이름, 설명과 전체 달성률은 Steam(앱 1912410)에서 가져왔습니다. 달성률은 {date} 기준입니다. © Mojang Studios / Microsoft"
 }

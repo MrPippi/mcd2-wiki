@@ -117,6 +117,10 @@
     "achievements",
     "achievementsIntro",
     "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
     "unlockRate",
     "achievementsCredit"
   ],
@@ -273,6 +277,10 @@
   "achievements": "実績",
   "achievementsIntro": "Minecraft Dungeons II のすべての Steam 実績を、全体の達成率が高い順に並べています。",
   "hiddenAchievement": "隠し実績",
+  "revealCondition": "解除条件を表示",
+  "conditionQuest": "クエスト「{name}」をクリアする",
+  "conditionTask": "クエスト目標「{name}」を達成する",
+  "conditionBoss": "「{name}」を倒す",
   "unlockRate": "全体の達成率",
   "achievementsCredit": "実績のアイコン・名称・説明・全体の達成率は Steam（App 1912410）から取得しています。達成率は {date} 時点のものです。© Mojang Studios / Microsoft"
 }

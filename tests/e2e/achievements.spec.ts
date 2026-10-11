@@ -104,13 +104,14 @@ test.describe("achievements page", () => {
     await expect(page.locator(".achievement-hidden")).toHaveCount(19);
     await expect(page.locator(".achievement-hidden").first()).toHaveText("隱藏成就");
     await expect(page.locator(".achievement-card .tag.warn")).toHaveCount(0);
+    await expect(page.locator(".achievements-head .tag.warn")).toHaveCount(0);
     await expect(page.locator(".achievements-credit")).toContainText("1912410");
     await expect(page.locator(".achievements-credit")).toContainText("© Mojang Studios");
   });
 
   test("shows a described achievement with its description", async ({ page }) => {
     await page.goto("/zh/achievements/");
-    const card = page.locator("#equip-a-unique-item");
+    const card = page.locator(".achievement-card", { has: page.locator("#ach-equip-a-unique-item") });
     await expect(card.locator(".achievement-desc .primary")).toHaveText("裝備一件獨特物品");
     await expect(card.locator(".achievement-desc .alt")).toHaveText("Equip a unique item");
   });
@@ -129,8 +130,9 @@ test.describe("achievements page", () => {
     await expect(page).toHaveTitle(/^実績 \| /);
     await expect(page.locator("h1")).toContainText("実績");
     await expect(page.locator(".achievement-card").first().locator(".achievement-name .primary")).toHaveText("Home is Where Your Stuff Is");
-    await expect(page.locator(".achievement-card .tag.warn")).toHaveCount(32);
-    await expect(page.locator(".achievement-card .tag.warn").first()).toHaveText("未翻訳");
+    await expect(page.locator(".achievements-head .tag.warn")).toHaveCount(1);
+    await expect(page.locator(".achievements-head .tag.warn")).toHaveText("未翻訳");
+    await expect(page.locator(".achievement-card .tag.warn")).toHaveCount(0);
     await expect(page.locator(".achievement-hidden").first()).toHaveText("隠し実績");
   });
 
@@ -138,6 +140,7 @@ test.describe("achievements page", () => {
     await page.goto("/en/achievements/");
     await expect(page.locator(".achievement-card").first().locator(".achievement-name .alt")).toHaveText("家當在哪裡，家就在哪裡");
     await expect(page.locator(".achievement-card .tag.warn")).toHaveCount(0);
+    await expect(page.locator(".achievements-head .tag.warn")).toHaveCount(0);
   });
 
   test("writes the rate the way the language writes percentages", async ({ page }) => {
@@ -160,5 +163,75 @@ test.describe("achievements page", () => {
     await page.goto("/ru/achievements/");
     await expect(page.locator("h1")).toBeVisible();
     expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
+  });
+});
+
+const firstCondition = (page: Page) => page.locator(".achievement-card").first().locator("details.achievement-condition");
+
+test.describe("hidden achievement conditions", () => {
+  test("stay hidden until revealed, then name the quest in both languages", async ({ page }) => {
+    await page.goto("/zh/achievements/");
+    await expect(page.locator("details.achievement-condition")).toHaveCount(19);
+    const reveal = firstCondition(page);
+    await expect(reveal).not.toHaveAttribute("open", "");
+    await expect(reveal.locator("summary")).toHaveText("顯示解鎖條件");
+    await expect(reveal.locator(".condition-text .primary")).toBeHidden();
+    await reveal.locator("summary").click();
+    await expect(reveal).toHaveAttribute("open", "");
+    await expect(reveal.locator(".condition-text .primary")).toHaveText("完成任務「逃離烏賊海岸」");
+    await expect(reveal.locator(".condition-text .alt")).toHaveText("Complete the quest “Escape from Squid Coast”");
+  });
+
+  test("names quest objectives and bosses", async ({ page }) => {
+    await page.goto("/zh/achievements/");
+    const card = (id: string) => page.locator(".achievement-card", { has: page.locator(`#ach-${id}`) });
+    const objective = card("complete-enter-the-new-dimension-quest").locator("details.achievement-condition");
+    await objective.locator("summary").click();
+    await expect(objective.locator(".condition-text .primary")).toHaveText("完成任務目標「進入裂隙」");
+    const boss = card("defeat-a-monarch").locator("details.achievement-condition");
+    await boss.locator("summary").click();
+    await expect(boss.locator(".condition-text .primary")).toHaveText("擊敗「君主」");
+  });
+
+  test("use the game's own quest names in other languages", async ({ page }) => {
+    await page.goto("/ja/achievements/");
+    const reveal = firstCondition(page);
+    await reveal.locator("summary").click();
+    await expect(reveal.locator(".condition-text .primary")).toHaveText("クエスト「イカ海岸から脱出する」をクリアする");
+    await expect(reveal.locator(".tag.warn")).toHaveCount(0);
+  });
+
+  test.describe("without JavaScript", () => {
+    test.use({ javaScriptEnabled: false });
+
+    test("open as a details element", async ({ page }) => {
+      await page.goto("/zh/achievements/");
+      const reveal = firstCondition(page);
+      await expect(reveal.locator(".condition-text .primary")).toBeHidden();
+      await reveal.locator("summary").click();
+      await expect(reveal.locator(".condition-text .primary")).toHaveText("完成任務「逃離烏賊海岸」");
+    });
+  });
+});
+
+test.describe("achievement search", () => {
+  test("finds an achievement by its name and links to its card", async ({ page }) => {
+    await page.goto(`/zh/search/?q=${encodeURIComponent("家當在哪裡")}`);
+    const link = page.locator('.pagefind-ui__results a[href*="/zh/achievements/"]').first();
+    await expect(link).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('.pagefind-ui__results a[href*="/zh/achievements/#ach-complete-arrive-in-brave-haven-quest"]').first()).toBeVisible();
+  });
+
+  test("finds an achievement by its compare-language name and description", async ({ page }) => {
+    for (const term of ["Stuff", "裝備一件獨特物品"]) {
+      await page.goto(`/zh/search/?q=${encodeURIComponent(term)}`);
+      await expect(page.locator('.pagefind-ui__results a[href*="/zh/achievements/"]').first(), term).toBeVisible({ timeout: 15_000 });
+    }
+  });
+
+  test("keeps hidden unlock conditions out of the index", async ({ page }) => {
+    await page.goto("/en/search/?q=Souldown");
+    await expect(page.locator(".pagefind-ui__message")).toBeVisible({ timeout: 15_000 });
+    await expect(page.locator('.pagefind-ui__results a[href*="/achievements/"]')).toHaveCount(0);
   });
 });

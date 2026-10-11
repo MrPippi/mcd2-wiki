@@ -119,6 +119,10 @@
     "achievements",
     "achievementsIntro",
     "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
     "unlockRate",
     "achievementsCredit"
   ],
@@ -278,6 +282,10 @@
   "achievements": "Osiągnięcia",
   "achievementsIntro": "Wszystkie osiągnięcia Steam w Minecraft Dungeons II, uporządkowane według globalnego odsetka odblokowań, od najwyższego do najniższego.",
   "hiddenAchievement": "Ukryte osiągnięcie",
+  "revealCondition": "Pokaż warunek odblokowania",
+  "conditionQuest": "Ukończ zadanie „{name}”",
+  "conditionTask": "Wykonaj cel zadania „{name}”",
+  "conditionBoss": "Pokonaj bossa „{name}”",
   "unlockRate": "Globalny odsetek odblokowań",
   "achievementsCredit": "Ikony, nazwy, opisy i globalne odsetki odblokowań osiągnięć pochodzą ze Steam (aplikacja 1912410); dane z dnia {date}. © Mojang Studios / Microsoft"
 }

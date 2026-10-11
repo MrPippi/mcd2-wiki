@@ -120,6 +120,10 @@
     "achievements",
     "achievementsIntro",
     "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
     "unlockRate",
     "achievementsCredit"
   ],
@@ -274,6 +278,10 @@
   "achievements": "Prestationer",
   "achievementsIntro": "Alla Steam-prestationer i Minecraft Dungeons II, sorterade efter global upplåsningsandel från högst till lägst.",
   "hiddenAchievement": "Dold prestation",
+  "revealCondition": "Visa upplåsningsvillkoret",
+  "conditionQuest": "Slutför uppdraget ”{name}”",
+  "conditionTask": "Slutför uppdragsmålet ”{name}”",
+  "conditionBoss": "Besegra ”{name}”",
   "unlockRate": "Global upplåsningsandel",
   "achievementsCredit": "Ikoner, namn, beskrivningar och globala upplåsningsandelar för prestationerna kommer från Steam (app 1912410); andelar per {date}. © Mojang Studios / Microsoft"
 }

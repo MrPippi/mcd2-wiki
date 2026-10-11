@@ -82,6 +82,14 @@ describe("UI translations", () => {
     }
   });
 
+  it("keeps the name placeholder in every unlock-condition sentence", () => {
+    for (const lang of LANGS) {
+      for (const key of ["conditionQuest", "conditionTask", "conditionBoss"]) {
+        expect(plainText(UI_DICTS[lang].values[key] ?? ""), `${lang}.${key}`).toContain("{name}");
+      }
+    }
+  });
+
   it("names the site per language", () => {
     expect(UI_DICTS.zh.values.siteTitle).toBe("Minecraft Dungeons II 中文 Wiki");
     expect(UI_DICTS["zh-hans"].values.siteTitle).toBe("Minecraft Dungeons II 中文 Wiki（简体）");

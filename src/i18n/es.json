@@ -120,6 +120,10 @@
     "achievements",
     "achievementsIntro",
     "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
     "unlockRate",
     "achievementsCredit"
   ],
@@ -275,6 +279,10 @@
   "achievements": "Logros",
   "achievementsIntro": "Todos los logros de Steam de Minecraft Dungeons II, ordenados por porcentaje global de desbloqueo, de mayor a menor.",
   "hiddenAchievement": "Logro oculto",
+  "revealCondition": "Mostrar la condición de desbloqueo",
+  "conditionQuest": "Completa la misión «{name}»",
+  "conditionTask": "Completa el objetivo de misión «{name}»",
+  "conditionBoss": "Derrota a «{name}»",
   "unlockRate": "Porcentaje global de desbloqueo",
   "achievementsCredit": "Los iconos, nombres, descripciones y porcentajes globales de desbloqueo de los logros proceden de Steam (app 1912410); porcentajes a fecha de {date}. © Mojang Studios / Microsoft"
 }

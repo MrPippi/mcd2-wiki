@@ -120,6 +120,10 @@
     "achievements",
     "achievementsIntro",
     "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
     "unlockRate",
     "achievementsCredit"
   ],
@@ -275,6 +279,10 @@
   "achievements": "Conquistas",
   "achievementsIntro": "Todas as conquistas da Steam de Minecraft Dungeons II, ordenadas pela taxa global de desbloqueio, da maior para a menor.",
   "hiddenAchievement": "Conquista oculta",
+  "revealCondition": "Mostrar a condição de desbloqueio",
+  "conditionQuest": "Conclua a missão “{name}”",
+  "conditionTask": "Conclua o objetivo da missão “{name}”",
+  "conditionBoss": "Derrote “{name}”",
   "unlockRate": "Taxa global de desbloqueio",
   "achievementsCredit": "Ícones, nomes, descrições e taxas globais de desbloqueio das conquistas vêm da Steam (app 1912410); taxas de {date}. © Mojang Studios / Microsoft"
 }
