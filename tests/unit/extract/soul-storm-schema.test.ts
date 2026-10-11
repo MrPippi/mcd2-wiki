@@ -4,9 +4,10 @@ import { describe, expect, it } from "vitest";
 import { EMPTY_SOUL_STORM, SoulStormDataSchema, SoulStormStatusSchema } from "../../../scripts/extract/soul-storm-schema";
 
 describe("Soul Storm schema", () => {
-  it("ships unverified, with no offsets", () => {
-    const status = SoulStormStatusSchema.parse(JSON.parse(readFileSync(path.resolve(__dirname, "../../../scripts/extract/soul-storm-status.json"), "utf8")));
-    expect(status).toEqual({ verified: false, anchorOffsetMinutes: 0, rotationOffset: 0 });
+  // Only the shape: verifying in game or setting an offset (the documented procedure) changes the values.
+  it("keeps a status file that parses", () => {
+    const raw: unknown = JSON.parse(readFileSync(path.resolve(__dirname, "../../../scripts/extract/soul-storm-status.json"), "utf8"));
+    expect(SoulStormStatusSchema.safeParse(raw).success).toBe(true);
   });
 
   it("rejects a status that is not a plain boolean switch", () => {
