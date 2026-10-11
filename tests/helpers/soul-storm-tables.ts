@@ -70,8 +70,14 @@ export const REAL_GENERATORS = () => [
 ];
 
 const slotKey = '(TagName="SW.SpawnSlot.Mob.Special")';
-export const spawnRow = (Name: string, typeTag: string, tags: readonly (readonly [string, number])[]) => ({
-  Name, TypeTag: tag(typeTag), SpawnDefinition: { SpawnSlot: { [slotKey]: { SpawnTable: { Tags: tags.map(([name, weight]) => tagWeight(name, weight)) } } } },
+/** A one-slot spawn row; `picks` is the slot's [MinPickTypes, MaxPickTypes], or null for a row without them. */
+export const spawnRow = (Name: string, typeTag: string, tags: readonly (readonly [string, number])[], picks: readonly [number, number] | null = [1, 1]) => ({
+  Name,
+  TypeTag: tag(typeTag),
+  SpawnDefinition: { SpawnSlot: { [slotKey]: {
+    SpawnTable: { Tags: tags.map(([name, weight]) => tagWeight(name, weight)) },
+    ...(picks === null ? {} : { MaxPickTypes: picks[1], MinPickTypes: picks[0] }),
+  } } },
 });
 export const REAL_SPAWNS = () => [
   {
@@ -80,7 +86,7 @@ export const REAL_SPAWNS = () => [
       tagWeight("SW.PropActor.SoulStorm.Storminator.Easy", 2), tagWeight("SW.PropActor.SoulStorm.Storminator.Medium", 2), tagWeight("SW.PropActor.SoulStorm.Storminator.Hard", 1),
     ] } }] } } },
   },
-  spawnRow("StorminatorWaveSoulstated", "SW.SpawnDefinition.Storminator.Wave.SoulstatedUndead", [["SW.Mob.Zombie.SoulStated", 1], ["SW.Mob.Vindicator.SoulStated", 1]]),
+  spawnRow("StorminatorWaveSoulstated", "SW.SpawnDefinition.Storminator.Wave.SoulstatedUndead", [["SW.Mob.Zombie.SoulStated", 1], ["SW.Mob.Vindicator.SoulStated", 1]], [1, 2]),
   spawnRow("Type2", "SW.SpawnDefinition.Storminator.Wave.Type2", ["Witch", "Enderman", "Warden", "Evoker", "WellspringMiniboss", "Driftweaver"].map((mob) => [`SW.Mob.${mob}`, 1] as const)),
   spawnRow("Type3", "SW.SpawnDefinition.Storminator.Wave.Type3", [["SW.SpawnDefinition.Storminator.Wave.CopperMonstrosity", 1], ["SW.SpawnDefinition.Storminator.Wave.RedStoneMonstrosity", 1], ["SW.SpawnDefinition.Storminator.Wave.SculkMonstrosity", 1]]),
   spawnRow("CopperMonstrosity", "SW.SpawnDefinition.Storminator.Wave.CopperMonstrosity", [["SW.Mob.Monstrosity.Copper.Storm", 1]]),

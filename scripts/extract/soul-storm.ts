@@ -65,20 +65,23 @@ function buildFull(tables: SoulStormTables, input: SoulStormInput, status: SoulS
   const rotation = buildRotation(firstRow(tables.rotation, "DT_SoulStormScheduleAreaRotation"), input.links.areas, input.locales, areaMarkers(input.map));
   const generators = buildGenerators(tables, input.links.tagIndex);
   const hard = generators.generators.find((generator) => generator.tier === "hard");
+  const unlock = unlockOf(tables.gameBalance);
+  const chests = buildChests(tables.lootActor);
+  const rarity = chestRarity(tables.rarityChance);
   return {
     data: {
       schedule: buildSchedule(firstRow(tables.schedule, "DT_SoulStormTimeSchedule"), status),
       rotation: rotation.rotation,
       rotationUntranslated: rotation.untranslated,
-      unlock: unlockOf(tables.gameBalance),
+      unlock: unlock.unlock,
       generators: generators.generators,
       resistances: generators.resistances,
       shieldHealth: generators.shieldHealth,
-      chests: buildChests(tables.lootActor),
-      chestRarity: chestRarity(tables.rarityChance),
+      chests: chests.chests,
+      chestRarity: rarity.rarity,
       monstrosities: hard?.finalSummon.mobs ?? [],
     },
-    issues: [...rotation.issues, ...generators.issues],
+    issues: [...rotation.issues, ...generators.issues, ...unlock.issues, ...chests.issues, ...rarity.issues],
   };
 }
 

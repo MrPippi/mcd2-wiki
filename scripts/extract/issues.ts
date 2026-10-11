@@ -54,6 +54,9 @@ export type IssueType =
   | "missing-soul-storm-tables"
   | "soul-storm-area-unnamed"
   | "soul-storm-mob-unlinked"
+  | "soul-storm-row-missing"
+  | "soul-storm-row-skipped"
+  | "soul-storm-value-missing"
   | "soul-storm-text-fallback";
 
 export interface Issue {

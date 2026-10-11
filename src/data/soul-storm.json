@@ -404,7 +404,9 @@
         "mobs": [
           "zombie",
           "vindicator"
-        ]
+        ],
+        "minPick": 1,
+        "maxPick": 2
       }
     },
     {
@@ -430,7 +432,9 @@
           "evoker",
           "wellspring-miniboss",
           "driftweaver"
-        ]
+        ],
+        "minPick": 1,
+        "maxPick": 1
       }
     },
     {
@@ -453,7 +457,9 @@
           "monstrosity-copper",
           "monstrosity-red-stone",
           "monstrosity-sculk"
-        ]
+        ],
+        "minPick": 1,
+        "maxPick": 1
       }
     }
   ],

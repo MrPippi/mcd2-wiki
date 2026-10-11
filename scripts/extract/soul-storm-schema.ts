@@ -23,10 +23,18 @@ const TextSchema = z.object({ html: LocalizedSchema, untranslated: z.array(LangS
 const GeneratorSchema = z.object({
   tier: z.enum(GENERATOR_TIERS),
   health: z.number(),
+  /** Health multiplier by player count; empty when the data has none. */
   healthByPlayers: z.array(z.number()),
-  spawnWeight: z.number(),
+  /** Relative spawn weight; null when the spawn definition does not list this tier. */
+  spawnWeight: z.number().nullable(),
   shield: z.object({ chance: z.number(), cooldownSeconds: z.number() }).nullable(),
-  finalSummon: z.object({ healthFraction: z.number(), mobs: z.array(z.string()) }),
+  /** The final wave: the mobs it draws from and how many of them one wave picks (0–0 when no wave row exists). */
+  finalSummon: z.object({
+    healthFraction: z.number(),
+    mobs: z.array(z.string()),
+    minPick: z.number().int().nonnegative(),
+    maxPick: z.number().int().nonnegative(),
+  }),
 });
 
 const ChestSchema = z.object({

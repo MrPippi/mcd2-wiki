@@ -74,4 +74,10 @@ describe("buildRotation", () => {
     expect(result.rotation[0].name.zh).toBe("Plains A9");
     expect(result.untranslated).toHaveLength(15);
   });
+
+  it("reports a rotation row that lists no area", () => {
+    const result = buildRotation(rotationRow([]), areas, loc, markers);
+    expect(result.rotation).toEqual([]);
+    expect(result.issues).toEqual([{ type: "soul-storm-value-missing", detail: "DT_SoulStormScheduleAreaRotation 1: AreaTags" }]);
+  });
 });

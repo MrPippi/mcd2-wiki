@@ -70,6 +70,9 @@ const PropRow = z.looseObject({
 const SpawnSlot = z.looseObject({
   SpawnTable: TagWeights.optional(),
   Conditions: z.array(z.looseObject({ DropTable: TagWeights.optional() })).optional(),
+  /** How many of the listed types one spawn picks (both ends inclusive). */
+  MinPickTypes: z.number().int().nonnegative().optional(),
+  MaxPickTypes: z.number().int().nonnegative().optional(),
 });
 const SpawnRow = z.looseObject({
   Name: z.string(),

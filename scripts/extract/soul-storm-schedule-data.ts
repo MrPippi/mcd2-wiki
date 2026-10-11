@@ -83,9 +83,11 @@ export function buildRotation(row: RotationRow, areas: readonly AreaRow[], local
   for (const area of areas) if (!rows.has(tagKey(area.TypeTag.TagName))) rows.set(tagKey(area.TypeTag.TagName), area);
   const named = row.AreaTags.map(({ TagName }) => nameArea(TagName, rows, locales, markers));
   const missing = new Set(named.flatMap((entry) => entry.fallbacks));
+  // No area means no schedule on the page: said in the report, never left silent.
+  const empty = named.length === 0 ? [issue("soul-storm-value-missing", `DT_SoulStormScheduleAreaRotation ${row.Name}: AreaTags`)] : [];
   return {
     rotation: named.map((entry) => entry.area),
     untranslated: LANGS.filter((lang) => missing.has(lang)),
-    issues: named.flatMap((entry) => (entry.issue ? [entry.issue] : [])),
+    issues: [...empty, ...named.flatMap((entry) => (entry.issue ? [entry.issue] : []))],
   };
 }
