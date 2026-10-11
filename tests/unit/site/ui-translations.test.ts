@@ -143,4 +143,33 @@ describe("UI translations", () => {
     expect(plainText(UI_DICTS.zh.values.mobs ?? "")).toBe("怪物圖鑑");
     expect(plainText(UI_DICTS.en.values.mobs ?? "")).toBe("Bestiary");
   });
+
+  it("keeps the Soul Storm placeholders in every language", () => {
+    const needs: Record<string, readonly string[]> = {
+      soulStormNow: ["{area}"], soulStormNext: ["{area}"], soulStormEndsIn: ["{time}"], soulStormStartsIn: ["{time}"],
+      soulStormTimeZone: ["{zone}"], soulStormCadence: ["{cadence}", "{duration}"], soulStormHealthByPlayers: ["{list}"],
+      soulStormShieldRule: ["{chance}", "{seconds}"], soulStormFinalSummon: ["{percent}"], soulStormRarity: ["{common}", "{rare}"],
+    };
+    for (const lang of LANGS) {
+      for (const [key, placeholders] of Object.entries(needs)) {
+        const text = plainText(UI_DICTS[lang].values[key] ?? "");
+        for (const placeholder of placeholders) expect(text, `${lang}.${key}`).toContain(placeholder);
+      }
+    }
+  });
+
+  it("has every Soul Storm key in every language and names it in the menu language", () => {
+    const keys = Object.keys(UI_DICTS.zh.values).filter((key) => key.startsWith("soulStorm"));
+    expect(keys).toHaveLength(38);
+    for (const lang of LANGS) for (const key of keys) expect(UI_DICTS[lang].values[key], `${lang}.${key}`).toBeTypeOf("string");
+    expect(plainText(UI_DICTS.zh.values.soulStorm ?? "")).toBe("靈魂風暴");
+    expect(plainText(UI_DICTS.en.values.soulStorm ?? "")).toBe("Soul Storms");
+  });
+
+  it("translates the Soul Storm warning instead of copying English", () => {
+    for (const lang of TRANSLATED) {
+      if (UI_DICTS[lang].english.includes("soulStormUnverified")) continue;
+      expect(UI_DICTS[lang].values.soulStormUnverified, lang).not.toEqual(UI_DICTS.en.values.soulStormUnverified);
+    }
+  });
 });
