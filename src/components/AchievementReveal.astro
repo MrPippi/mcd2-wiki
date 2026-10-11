@@ -17,7 +17,7 @@ const other = conditionSentence(condition, alt);
 const fellBack = condition.untranslated?.includes(lang) ?? false;
 ---
 <details class="achievement-condition" data-pagefind-ignore>
-  <summary>{t(lang, "revealCondition")}</summary>
+  <summary><span class="condition-reveal">{t(lang, "revealCondition")}</span></summary>
   <p class="condition-text lang-text">
     <span class="primary">{own}</span>
     {other !== own && <span class="alt" lang={htmlLang(alt)}>{other}</span>}
