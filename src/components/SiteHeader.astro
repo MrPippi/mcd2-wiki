@@ -1,6 +1,7 @@
 ---
 import { t, type Lang } from "../lib/i18n";
 import LangPicker from "./LangPicker.astro";
+import SiteMenu from "./SiteMenu.astro";
 import { href } from "../lib/url";
 
 interface Props {
@@ -10,7 +11,6 @@ interface Props {
 }
 
 const { lang, langMenuToHome = false } = Astro.props;
-const onMap = /\/map\/$/.test(Astro.url.pathname);
 ---
 <header class="site-header">
   <a class="brand" href={href(lang)}>
@@ -22,11 +22,11 @@ const onMap = /\/map\/$/.test(Astro.url.pathname);
     <input type="search" name="q" placeholder={t(lang, "searchPlaceholder")} aria-label={t(lang, "search")} />
   </form>
   <div class="site-tools">
-    <a class="map-link button" href={href(lang, "map")} data-testid="map-link" aria-current={onMap ? "page" : undefined}>{t(lang, "map")}</a>
     <button type="button" class="compare-toggle" aria-pressed="true" data-testid="compare-toggle">
       <span class="label-long">{t(lang, "compare")}</span><span class="label-short">{t(lang, "compareShort")}</span>
     </button>
     <LangPicker lang={lang} toHome={langMenuToHome} />
+    <SiteMenu lang={lang} />
   </div>
 </header>
 <script>
@@ -69,16 +69,23 @@ const onMap = /\/map\/$/.test(Astro.url.pathname);
       }
     });
   }
-  const closePicker = () => {
-    if (picker) picker.open = false;
-  };
-  picker?.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape" || !picker.open) return;
-    closePicker();
-    picker.querySelector("summary")?.focus();
-  });
+  // The language menu and the site menu: Esc or an outside click closes them, and opening one closes the other.
+  const headerMenus = [...document.querySelectorAll<HTMLDetailsElement>(".site-header details.header-menu")];
+  for (const menu of headerMenus) {
+    menu.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape" || !menu.open) return;
+      menu.open = false;
+      menu.querySelector("summary")?.focus();
+    });
+    menu.addEventListener("toggle", () => {
+      if (!menu.open) return;
+      for (const other of headerMenus) if (other !== menu) other.open = false;
+    });
+  }
   document.addEventListener("click", (event) => {
-    if (picker?.open && event.target instanceof Node && !picker.contains(event.target)) closePicker();
+    if (!(event.target instanceof Node)) return;
+    const target = event.target;
+    for (const menu of headerMenus) if (menu.open && !menu.contains(target)) menu.open = false;
   });
 
   // Narrow screens fold the header search behind a button (see layout.css).

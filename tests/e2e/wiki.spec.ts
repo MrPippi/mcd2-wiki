@@ -389,8 +389,8 @@ test("the home page is a cover with a featured specimen and a row for every cate
   await page.goto("/zh/");
   await expect(page.locator(".home-hero .kicker")).toHaveText("UNOFFICIAL FAN WIKI");
   await expect(page.locator(".home-title")).toContainText("Minecraft Dungeons II");
-  await expect(page.locator(".category-grid li")).toHaveCount(8);
-  await expect(page.locator(".category-grid .category-slot img.ui-icon")).toHaveCount(8);
+  await expect(page.locator(".category-grid li")).toHaveCount(7);
+  await expect(page.locator(".category-grid .category-slot img.ui-icon")).toHaveCount(7);
   await expect(page.locator(".hero-specimen .specimen-plate img.entry-icon")).toBeVisible();
   await page.locator(".home-search input").fill("劍");
   await page.locator(".home-search button").click();

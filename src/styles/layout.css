@@ -19,30 +19,35 @@
 .search-toggle { display: none; }
 .site-tools { display: flex; gap: 6px; }
 
-/* Language menu: a details disclosure, so it opens and links work without scripts. */
-.lang-picker { position: relative; }
-.lang-picker summary {
+/* Header menus (language, site menu): details disclosures, so they open and their links work without scripts. */
+.header-menu { position: relative; }
+.header-menu summary {
   list-style: none; font-size: 14px; background: transparent; color: var(--text); border: 1px solid var(--rule-strong);
   border-radius: var(--radius); padding: 6px 12px; cursor: pointer; line-height: 1.3; white-space: nowrap;
   display: inline-flex; align-items: center; gap: 6px; height: 100%; box-sizing: border-box;
 }
 .lang-code { display: none; text-transform: uppercase; }
-.lang-picker summary::-webkit-details-marker { display: none; }
-.lang-picker summary:hover, .lang-picker[open] summary { background: var(--plate); }
-.lang-picker summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
-.lang-picker ul {
+.header-menu summary::-webkit-details-marker { display: none; }
+.header-menu summary:hover, .header-menu[open] summary { background: var(--plate); }
+.header-menu summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.header-menu ul {
   position: absolute; z-index: 20; top: calc(100% + 4px); right: 0; margin: 0; padding: 4px 0; list-style: none;
   width: max-content; min-width: 100%; max-width: calc(100vw - 2 * var(--gutter)); max-height: min(70vh, 480px); overflow-y: auto;
   background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: 4px 4px 0 var(--ink);
 }
-.lang-picker li a {
+.header-menu li a {
   display: flex; align-items: center; gap: 8px; padding: 8px 14px; color: var(--text); text-decoration: none; font-size: 14px;
 }
-.lang-picker li a:hover { background: var(--plate); }
+.header-menu li a:hover { background: var(--plate); }
+.header-menu li a:focus-visible { outline-offset: -2px; }
 .lang-picker li a[aria-current="true"] { font-weight: 600; }
 .lang-picker li a[aria-current="true"]::before { content: "✓"; color: var(--accent); }
 .lang-picker li a:not([aria-current])::before { content: ""; display: inline-block; width: 1em; }
-.lang-picker li a:focus-visible { outline-offset: -2px; }
+/* Site menu: a hamburger with the pages outside the category index; the open page carries the accent rule. */
+.menu-icon { font-size: 16px; line-height: 1; }
+.site-menu ul { min-width: 160px; }
+.site-menu li a { border-left: 3px solid transparent; padding-left: 11px; }
+.site-menu li a[aria-current="page"] { font-weight: 600; border-left-color: var(--accent); background: var(--plate); }
 
 /* The category index: numbered like a catalogue's section tabs. */
 .category-tabs {
@@ -106,11 +111,14 @@
   .brand-short, .label-short { display: inline; }
   .brand-short { overflow: hidden; text-overflow: ellipsis; font-size: 17px; }
   .brand-mark { display: none; }
-  .site-tools button, .site-tools .button, .search-toggle, .lang-picker summary { min-height: 40px; }
+  .site-tools button, .site-tools .button, .search-toggle, .header-menu summary { min-height: 40px; }
   /* Narrow headers show the language code instead of its full name. */
   .lang-current { display: none; }
   .lang-code { display: inline; }
-  .lang-picker summary { padding-left: 8px; padding-right: 8px; }
+  .header-menu summary { padding-left: 8px; padding-right: 8px; }
+  /* Both menus drop from the header's right edge, so neither covers the page heading. */
+  .site-tools { position: relative; }
+  .header-menu { position: static; }
   .header-search { grid-column: 1 / -1; order: 3; width: 100%; justify-self: stretch; }
   /* With scripts the search folds into the button; without them it stays open. */
   .js .search-toggle { display: inline-flex; }

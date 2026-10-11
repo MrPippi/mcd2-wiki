@@ -17,12 +17,10 @@ test("the rift filter swatch is the game's icon", async ({ page }) => {
   await expect(swatch).toHaveAttribute("src", /t_ui_icon_rift\.png$/);
 });
 
-test("the header and the home page link to the map", async ({ page }) => {
-  await page.goto("/zh/");
-  await page.locator(".category-grid a", { hasText: "世界地圖" }).click();
-  await expect(page).toHaveURL(/\/zh\/map\/(#.*)?$/);
+test("the header menu links to the map", async ({ page }) => {
   await page.goto("/zh/melee/");
-  await page.getByTestId("map-link").click();
+  await page.getByTestId("site-menu").click();
+  await page.locator(".site-menu a", { hasText: "地圖" }).click();
   await expect(page).toHaveURL(/\/zh\/map\/(#.*)?$/);
 });
 

@@ -1,0 +1,28 @@
+---
+import { t, type Lang } from "../lib/i18n";
+import { SITE_MENU, isMenuPage } from "../lib/site-menu";
+import { href } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const items = SITE_MENU.map((item) => ({
+  label: t(lang, item.key),
+  href: href(lang, item.segment),
+  current: isMenuPage(Astro.url.pathname, import.meta.env.BASE_URL, item.segment),
+}));
+---
+<details class="site-menu header-menu">
+  <summary data-testid="site-menu" aria-label={t(lang, "siteMenu")}>
+    <span class="menu-icon" aria-hidden="true">☰</span>
+  </summary>
+  <ul aria-label={t(lang, "siteMenu")}>
+    {items.map((item) => (
+      <li>
+        <a href={item.href} aria-current={item.current ? "page" : undefined}>{item.label}</a>
+      </li>
+    ))}
+  </ul>
+</details>
