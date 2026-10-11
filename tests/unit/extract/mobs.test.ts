@@ -133,6 +133,38 @@ describe("buildMobs", () => {
     expect(zombie?.untranslated).toEqual(["de"]);
   });
 
+  it("slugs a merged group or an id/name mismatch from the English name, and falls back to the id slug on a clash", () => {
+    const L = makeLocales({
+      [ns(VAR)]: {
+        SW_Mob_FrogVariant1_SW_TextEntry_Name: { en: "Frog" }, SW_Mob_FrogVariant2_SW_TextEntry_Name: { en: "Frog" },
+        SW_Mob_SingingBeanXS_SW_TextEntry_Name: { en: "Tuner" }, SW_Mob_SingingBeanM_SW_TextEntry_Name: { en: "Tuner" },
+      },
+      [ns(T2)]: { SW_Mob_Witch_SW_TextEntry_Name: { en: "Witch" } },
+      [ns(T3)]: { SW_Mob_Witch_Type3_SW_TextEntry_Name: { en: "Soul Corrupted Witch" }, SW_Mob_Witch_Clash_SW_TextEntry_Name: { en: "Witch" } },
+    });
+    const variants = [
+      mobRow(VAR, "FrogCold", "SW.Mob.FrogVariant1", { key: "SW_Mob_FrogVariant1_SW_TextEntry_Name" }),
+      mobRow(VAR, "FrogWarm", "SW.Mob.FrogVariant2", { key: "SW_Mob_FrogVariant2_SW_TextEntry_Name" }),
+      mobRow(VAR, "SingingBean_XS", "SW.Mob.SingingBeanXS", { key: "SW_Mob_SingingBeanXS_SW_TextEntry_Name" }),
+      mobRow(VAR, "SingingBean_M", "SW.Mob.SingingBeanM", { key: "SW_Mob_SingingBeanM_SW_TextEntry_Name" }),
+    ];
+    const tables = mobTables({
+      type2: [mobRow(T2, "Witch", "SW.Mob.Witch")],
+      type3: [mobRow(T3, "WitchT3", "SW.Mob.Witch.Type3", { key: "SW_Mob_Witch_Type3_SW_TextEntry_Name" }), mobRow(T3, "WitchClash", "SW.Mob.Witch.Clash", { key: "SW_Mob_Witch_Clash_SW_TextEntry_Name" })],
+      variants,
+    });
+    const drafts = buildMobs(tables, L).drafts;
+    expect(drafts.map((draft) => draft.mob.slug).sort()).toEqual(["frog", "soul-corrupted-witch", "tuner", "witch", "witch-clash"]);
+    expect(drafts.find((draft) => draft.mob.slug === "frog")?.mob.id).toBe("FrogVariant1");
+  });
+
+  it("inherits a stat the row lacks from its nearest ancestor row, and never overrides the row's own value", () => {
+    const parent = mobRow("DT_MobDefinition", "Monstrosity", "SW.Mob.Monstrosity", { unnamed: true, attrs: { Health: 2400, Poise: 500 } });
+    const own = mobRow(T3, "Maw", "SW.Mob.Maw", { traits: ["SW.Mob.Monstrosity"], attrs: { Poise: 90 } });
+    const maw = buildMobs(mobTables({ definitions: [parent], type3: [own] }), locales).drafts[0]?.mob;
+    expect(maw?.stats).toEqual([{ key: "health", value: 2400 }, { key: "poise", value: 90 }]);
+  });
+
   it("fails when two different mobs would share a slug", () => {
     const a = mobRow(T1, "FooBar", "SW.Mob.FooBar", { key: "SW_Mob_FooBar_SW_TextEntry_Name" });
     const b = mobRow(T1, "Foo_Bar", "SW.Mob.Foo_Bar", { key: "SW_Mob_Foo_Bar_SW_TextEntry_Name" });
