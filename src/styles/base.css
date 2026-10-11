@@ -85,10 +85,11 @@ h1.lang-text .alt:lang(en) { text-transform: uppercase; }
 
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 4px 0; }
 .tag { display: inline-flex; align-items: center; gap: 4px; border: 1px solid var(--rule-strong); padding: 0 8px; font-size: 0.8rem; }
-.tag.warn { background: var(--danger); border-color: var(--danger); color: var(--on-danger); }
+/* A warning is set in solid ink, not a second red, so vermilion keeps its meaning. */
+.tag.warn { background: var(--ink); border-color: var(--ink); color: var(--paper); }
 .count { color: var(--muted); font-family: var(--font-mono); font-size: var(--fs-mono-m); font-weight: 400; font-variant-numeric: tabular-nums; }
 .note { color: var(--muted); font-size: 0.9rem; }
-.emphasis { color: var(--accent); font-style: normal; font-weight: 600; }
+.emphasis { color: var(--text); font-style: normal; font-weight: 600; }
 .placeholder { color: var(--text); background: var(--plate); padding: 0 3px; font-family: var(--font-mono); font-size: 0.88em; }
 
 @keyframes rise-in {

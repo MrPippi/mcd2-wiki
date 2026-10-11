@@ -12,7 +12,7 @@
   padding: 1px 6px; background: var(--ink); color: var(--paper);
 }
 .brand-full, .brand-short { font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
-.brand:hover .brand-mark { background: var(--accent); }
+.brand:hover :is(.brand-full, .brand-short) { text-decoration: underline 2px var(--accent); text-underline-offset: 0.2em; }
 .brand-short, .label-short { display: none; }
 .header-search { justify-self: end; width: min(100%, 360px); }
 .header-search input { width: 100%; }
@@ -33,7 +33,7 @@
 .header-menu ul {
   position: absolute; z-index: 20; top: calc(100% + 4px); right: 0; margin: 0; padding: 4px 0; list-style: none;
   width: max-content; min-width: 100%; max-width: calc(100vw - 2 * var(--gutter)); max-height: min(70vh, 480px); overflow-y: auto;
-  background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: 4px 4px 0 var(--ink);
+  background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: var(--shadow-hard);
 }
 .header-menu li a {
   display: flex; align-items: center; gap: 8px; padding: 8px 14px; color: var(--text); text-decoration: none; font-size: 14px;

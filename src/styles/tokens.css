@@ -9,16 +9,20 @@
   --text: #16181a;
   --text-2: #3d4246;
   --muted: #5f6569;
-  /* Vermilion means two things only: unique rarity and the current place (tab, focus). */
+  /* Vermilion means only: unique rarity, the current place (tab, page, target) and focus.
+     Hovers underline in it; they never recolour text. */
   --accent: #c4391f;
   --accent-soft: #f4ddd6;
   --on-accent: #fafaf8;
   --link: var(--text);
   --focus: var(--accent);
-  --danger: #a3241a;
-  --on-danger: #fafaf8;
   /* Off-black for pictograms and hard shadows, never pure #000. */
   --ink: #16181a;
+  /* Two shadow dialects, both hard-edged like a print offset: full ink for menus, a faint tint for floating notes. */
+  --shadow-tint: color-mix(in srgb, var(--ink) 10%, transparent);
+  --shadow-hard: 4px 4px 0 var(--ink);
+  --shadow-hard-s: 3px 3px 0 var(--ink);
+  --shadow-faint: 6px 6px 0 var(--shadow-tint);
   --radius: 0;
   --max: 1320px;
   --gutter: clamp(16px, 4vw, 48px);
