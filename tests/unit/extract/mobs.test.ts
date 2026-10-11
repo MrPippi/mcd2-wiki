@@ -133,14 +133,14 @@ describe("buildMobs", () => {
     expect(zombie?.untranslated).toEqual(["de"]);
   });
 
-  it("slugs a merged group or an id/name mismatch from the English name, and falls back to the id slug on a clash", () => {
+  it("slugs a merged group or a generic-suffix id from the English name", () => {
     const L = makeLocales({
       [ns(VAR)]: {
         SW_Mob_FrogVariant1_SW_TextEntry_Name: { en: "Frog" }, SW_Mob_FrogVariant2_SW_TextEntry_Name: { en: "Frog" },
         SW_Mob_SingingBeanXS_SW_TextEntry_Name: { en: "Tuner" }, SW_Mob_SingingBeanM_SW_TextEntry_Name: { en: "Tuner" },
       },
       [ns(T2)]: { SW_Mob_Witch_SW_TextEntry_Name: { en: "Witch" } },
-      [ns(T3)]: { SW_Mob_Witch_Type3_SW_TextEntry_Name: { en: "Soul Corrupted Witch" }, SW_Mob_Witch_Clash_SW_TextEntry_Name: { en: "Witch" } },
+      [ns(T3)]: { SW_Mob_Witch_Type3_SW_TextEntry_Name: { en: "Soul Corrupted Witch" } },
     });
     const variants = [
       mobRow(VAR, "FrogCold", "SW.Mob.FrogVariant1", { key: "SW_Mob_FrogVariant1_SW_TextEntry_Name" }),
@@ -150,12 +150,22 @@ describe("buildMobs", () => {
     ];
     const tables = mobTables({
       type2: [mobRow(T2, "Witch", "SW.Mob.Witch")],
-      type3: [mobRow(T3, "WitchT3", "SW.Mob.Witch.Type3", { key: "SW_Mob_Witch_Type3_SW_TextEntry_Name" }), mobRow(T3, "WitchClash", "SW.Mob.Witch.Clash", { key: "SW_Mob_Witch_Clash_SW_TextEntry_Name" })],
+      type3: [mobRow(T3, "WitchT3", "SW.Mob.Witch.Type3", { key: "SW_Mob_Witch_Type3_SW_TextEntry_Name" })],
       variants,
     });
     const drafts = buildMobs(tables, L).drafts;
-    expect(drafts.map((draft) => draft.mob.slug).sort()).toEqual(["frog", "soul-corrupted-witch", "tuner", "witch", "witch-clash"]);
+    expect(drafts.map((draft) => draft.mob.slug).sort()).toEqual(["frog", "soul-corrupted-witch", "tuner", "witch"]);
     expect(drafts.find((draft) => draft.mob.slug === "frog")?.mob.id).toBe("FrogVariant1");
+  });
+
+  it("falls back to the id slug when the English-name slug is already taken", () => {
+    const L = makeLocales({ [ns(T2)]: { SW_Mob_Witch_SW_TextEntry_Name: { en: "Witch" } }, [ns(T3)]: { SW_Mob_Witch_Type3_SW_TextEntry_Name: { en: "Witch" } } });
+    const tables = mobTables({
+      type2: [mobRow(T2, "Witch", "SW.Mob.Witch")],
+      type3: [mobRow(T3, "WitchT3", "SW.Mob.Witch.Type3", { key: "SW_Mob_Witch_Type3_SW_TextEntry_Name" })],
+    });
+    const slugs = buildMobs(tables, L).drafts.map((draft) => [draft.mob.kind, draft.mob.slug]);
+    expect(slugs).toEqual([["boss", "witch-type3"], ["miniboss", "witch"]]);
   });
 
   it("keeps the id slug when merged rows only extend the representative id (a Storm version), but not for unrelated ids", () => {

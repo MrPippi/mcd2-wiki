@@ -164,7 +164,7 @@ const nameSlugOf = (candidate: Candidate, locales: Locales): string => toSlug(en
 
 const GENERIC_SUFFIX = /-(type\d+|variant\d+)$/;
 
-/** True when the slug should follow the English name: several rows with unrelated ids were merged, or the id ends in a generic suffix (Witch_Type3 is "Soul Corrupted Witch"). */
+/** True when the slug should follow the English name: the id ends in a generic suffix (Witch_Type3 is "Soul Corrupted Witch"), or several rows were merged whose ids do not simply extend the representative id. */
 function nameLed(candidate: Candidate, locales: Locales): boolean {
   const idSlug = toSlug(candidate.id);
   const nameSlug = nameSlugOf(candidate, locales);
