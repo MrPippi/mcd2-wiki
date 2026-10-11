@@ -3,7 +3,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { PayloadMarker, PayloadWorld } from "./payload";
 import type { Lang } from "../i18n";
-import { MARKER_KINDS, type MarkerKind } from "./kinds";
+import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "./kinds";
 import { pinElement, popupElement, resultElement } from "./marker-dom";
 import { countByKind, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "./markers";
 import { tileUrlTemplate } from "./tiles";
@@ -19,6 +19,8 @@ const FOCUS_LEVELS = 1;
 const PIN_SIZE: L.PointTuple = [16, 16];
 const ICON_PIN_SIZE: L.PointTuple = [28, 28];
 const POPUP_OPTIONS: L.PopupOptions = { minWidth: 200, maxWidth: 280 };
+/** From this width the marker filter starts open on the map; narrower screens get its button only. */
+const FILTERS_OPEN_QUERY = "(min-width: 760px)";
 
 interface Payload {
   readonly worlds: readonly PayloadWorld[];
@@ -35,7 +37,7 @@ interface Shown {
 /** A pixel on the full-size render as a LatLng: CRS.Simple maps one unit to 2^z pixels. */
 const toLatLng = (world: PayloadWorld, px: number, py: number): L.LatLng => L.latLng(-py / 2 ** world.zMax, px / 2 ** world.zMax);
 
-function readHidden(): Set<MarkerKind> {
+function readHidden(): Set<FilterKind> {
   try {
     return parseHiddenKinds(localStorage.getItem(STORAGE_KEY));
   } catch {
@@ -43,7 +45,7 @@ function readHidden(): Set<MarkerKind> {
   }
 }
 
-function writeHidden(hidden: ReadonlySet<MarkerKind>): void {
+function writeHidden(hidden: ReadonlySet<FilterKind>): void {
   try {
     localStorage.setItem(STORAGE_KEY, serializeHiddenKinds(hidden));
   } catch {
@@ -62,12 +64,15 @@ function replaceLocation(search: string, hash: string): void {
   window.dispatchEvent(new Event("mcd2:locationchange"));
 }
 
+/** Area names are not a filter: they always show (when zoomed in far enough). */
+const isHidden = (hidden: ReadonlySet<FilterKind>, kind: MarkerKind): boolean => kind !== "area" && hidden.has(kind);
+
 function pinSize(marker: PayloadWorld["markers"][number]): L.PointTuple {
   if (marker.kind === "area") return [0, 0];
   return marker.icon ? ICON_PIN_SIZE : PIN_SIZE;
 }
 
-function addPins(map: L.Map, world: PayloadWorld, lang: Lang, labels: Payload["labels"], hidden: ReadonlySet<MarkerKind>) {
+function addPins(map: L.Map, world: PayloadWorld, lang: Lang, labels: Payload["labels"], hidden: ReadonlySet<FilterKind>) {
   const layers = new Map(MARKER_KINDS.map((kind) => [kind, L.layerGroup()] as const));
   const pins = new Map<string, L.Marker>();
   for (const marker of world.markers) {
@@ -83,7 +88,7 @@ function addPins(map: L.Map, world: PayloadWorld, lang: Lang, labels: Payload["l
     layers.get(marker.kind)?.addLayer(pin);
     pins.set(marker.id, pin);
   }
-  for (const [kind, layer] of layers) if (!hidden.has(kind)) layer.addTo(map);
+  for (const [kind, layer] of layers) if (!isHidden(hidden, kind)) layer.addTo(map);
   return { layers, pins };
 }
 
@@ -109,7 +114,7 @@ function trackView(root: HTMLElement, map: L.Map, world: PayloadWorld): void {
   update();
 }
 
-function showWorld(root: HTMLElement, canvas: HTMLElement, world: PayloadWorld, payload: Payload, hidden: ReadonlySet<MarkerKind>, useHash: boolean): Shown {
+function showWorld(root: HTMLElement, canvas: HTMLElement, world: PayloadWorld, payload: Payload, hidden: ReadonlySet<FilterKind>, useHash: boolean): Shown {
   const lang = root.dataset.lang as Lang;
   const size = world.frame.imageSize;
   const bounds = L.latLngBounds(toLatLng(world, 0, size), toLatLng(world, size, 0));
@@ -126,17 +131,16 @@ function showWorld(root: HTMLElement, canvas: HTMLElement, world: PayloadWorld, 
   return { world, map, layers, pins };
 }
 
-function syncPanel(root: HTMLElement, world: PayloadWorld, hidden: ReadonlySet<MarkerKind>): void {
+function syncPanel(root: HTMLElement, world: PayloadWorld, hidden: ReadonlySet<FilterKind>): void {
   const counts = countByKind(world.markers);
   for (const link of root.querySelectorAll<HTMLAnchorElement>(".map-tabs a[data-world]")) {
     if (link.dataset.world === world.key) link.setAttribute("aria-current", "page");
     else link.removeAttribute("aria-current");
   }
-  for (const kind of MARKER_KINDS) {
+  for (const kind of FILTER_KINDS) {
     const count = root.querySelector(`[data-count="${kind}"]`);
     if (count) count.textContent = String(counts[kind]);
-    const box = root.querySelector<HTMLInputElement>(`input[name="kind"][value="${kind}"]`);
-    if (box) box.checked = !hidden.has(kind);
+    root.querySelector(`.map-filter[data-kind="${kind}"]`)?.setAttribute("aria-pressed", String(!hidden.has(kind)));
   }
 }
 
@@ -154,10 +158,27 @@ function renderResults(root: HTMLElement, shown: Shown, labels: Payload["labels"
   }
 }
 
-function bindFilters(root: HTMLElement, onChange: (kind: MarkerKind, visible: boolean) => void): void {
-  for (const box of root.querySelectorAll<HTMLInputElement>("input[name='kind']")) {
-    box.addEventListener("change", () => onChange(box.value as MarkerKind, box.checked));
+/** Toggle buttons on the map: pressed shows the kind in colour, unpressed hides its pins and greys the button. */
+function bindFilters(root: HTMLElement, onChange: (kind: FilterKind, visible: boolean) => void): void {
+  for (const button of root.querySelectorAll<HTMLButtonElement>(".map-filter[data-kind]")) {
+    const kind = FILTER_KINDS.find((each) => each === button.dataset.kind);
+    if (kind) button.addEventListener("click", () => onChange(kind, button.getAttribute("aria-pressed") !== "true"));
   }
+}
+
+/** The filter floats over the map: open it on wide screens, and keep its clicks and wheel turns away from Leaflet. */
+function prepareFilterPanel(root: HTMLElement): void {
+  const panel = root.querySelector<HTMLDetailsElement>("[data-map-filters]");
+  if (!panel) return;
+  if (window.matchMedia(FILTERS_OPEN_QUERY).matches) panel.open = true;
+  L.DomEvent.disableClickPropagation(panel);
+  L.DomEvent.disableScrollPropagation(panel);
+}
+
+/** Leaflet measures its box once; re-measure whenever the layout resizes the canvas. */
+function trackCanvasSize(canvas: HTMLElement, getMap: () => L.Map): void {
+  if (typeof ResizeObserver === "undefined") return;
+  new ResizeObserver(() => getMap().invalidateSize({ pan: false })).observe(canvas);
 }
 
 function bindTabs(root: HTMLElement, payload: Payload, onSwitch: (next: PayloadWorld) => void): void {
@@ -201,7 +222,7 @@ export function mountWorldMap(root: HTMLElement): void {
   syncPanel(root, shown.world, hidden);
   root.dataset.ready = "true";
 
-  const setKind = (kind: MarkerKind, visible: boolean) => {
+  const setKind = (kind: FilterKind, visible: boolean) => {
     hidden = withKind(hidden, kind, visible);
     writeHidden(hidden);
     const layer = shown.layers.get(kind);
@@ -211,7 +232,7 @@ export function mountWorldMap(root: HTMLElement): void {
   };
 
   const focus = (marker: PayloadMarker) => {
-    if (hidden.has(marker.kind)) setKind(marker.kind, true);
+    if (marker.kind !== "area" && hidden.has(marker.kind)) setKind(marker.kind, true);
     const zoom = Math.max(shown.map.getZoom(), shown.world.zMax - FOCUS_LEVELS);
     shown.map.setView(toLatLng(shown.world, marker.px, marker.py), zoom);
     shown.pins.get(marker.id)?.openPopup();
@@ -228,6 +249,8 @@ export function mountWorldMap(root: HTMLElement): void {
   };
 
   bindFilters(root, setKind);
+  prepareFilterPanel(root);
+  trackCanvasSize(canvas, () => shown.map);
   bindTabs(root, payload, switchWorld);
   bindHash(() => shown);
   search?.addEventListener("input", () => renderResults(root, shown, payload.labels, search.value, focus));

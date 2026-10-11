@@ -112,7 +112,17 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -262,5 +272,15 @@
   "labelColon": "：",
   "rootRedirectTitle": "Minecraft Dungeons II 中文 Wiki（简体）",
   "goToLanguage": "前往简体中文版",
-  "languageMenu": "语言"
+  "languageMenu": "语言",
+  "siteMenu": "菜单",
+  "achievements": "成就",
+  "achievementsIntro": "Minecraft Dungeons II 的全部 Steam 成就，按全球达成率从高到低排列。",
+  "hiddenAchievement": "隐藏成就",
+  "revealCondition": "显示解锁条件",
+  "conditionQuest": "完成任务“{name}”",
+  "conditionTask": "完成任务目标“{name}”",
+  "conditionBoss": "击败“{name}”",
+  "unlockRate": "全球达成率",
+  "achievementsCredit": "成就图标、名称、说明与全球达成率取自 Steam（App 1912410），达成率数据日期：{date}。© Mojang Studios / Microsoft。"
 }

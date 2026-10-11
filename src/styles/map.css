@@ -11,20 +11,49 @@
 .map-tabs a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
 
 .map-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
-.map-stage { position: relative; height: min(75vh, 860px); min-height: 360px; background: var(--plate); background-image: var(--dots); border: 1px solid var(--rule); overflow: hidden; }
+/* The map takes the full content width; the marker filter floats on it, so nothing shares its row. */
+.map-stage { position: relative; isolation: isolate; height: min(85vh, 960px); min-height: 420px; background: var(--plate); background-image: var(--dots); border: 1px solid var(--rule); overflow: hidden; }
 .map-canvas { position: absolute; inset: 0; }
 .map-fallback { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 12px; padding: 16px; text-align: center; color: var(--text-2); }
 .map-fallback img { width: min(256px, 70vw); height: auto; }
 .world-map[data-ready="true"] .map-fallback { display: none; }
 
-.map-panel { display: grid; gap: 24px; align-content: start; min-width: 0; }
-.map-filters { border: 0; padding: 0; margin: 0; display: grid; }
-.map-filters legend, .map-search label {
+/* Below the map: search on the left, the source note beside it on wide screens. */
+.map-panel { display: grid; gap: 16px 32px; align-items: start; min-width: 0; }
+.map-search label {
   padding: 0; margin-bottom: 8px; font-family: var(--font-mono); font-size: var(--fs-mono-s);
   text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted);
 }
-.map-filter { display: grid; grid-template-columns: auto 20px minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--rule); cursor: pointer; }
-.map-filter input { accent-color: var(--accent); margin: 0; }
+
+/* Marker filter: a card in the map's top-right corner. Colour = shown, greyscale = hidden. */
+.map-filters {
+  position: absolute; top: 10px; right: 10px; z-index: 800; max-width: calc(100% - 70px);
+  background: var(--paper); border: 1px solid var(--rule-strong); box-shadow: 0 2px 10px rgb(0 0 0 / 0.18);
+}
+.world-map:not([data-ready="true"]) .map-filters { display: none; }
+.map-filters summary {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 36px; padding: 6px 12px;
+  cursor: pointer; list-style: none; font-family: var(--font-mono); font-size: var(--fs-mono-s);
+  text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-2);
+}
+.map-filters summary::-webkit-details-marker { display: none; }
+.map-filters summary::after { content: "▾"; transition: transform var(--dur-fast) var(--ease-out); }
+.map-filters[open] summary::after { transform: rotate(180deg); }
+.map-filters summary:focus-visible, .map-filter:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.map-filters ul { list-style: none; margin: 0; padding: 0 0 4px; border-top: 1px solid var(--rule); }
+.map-filter {
+  display: grid; grid-template-columns: 20px minmax(0, 1fr) auto; align-items: center; gap: 10px;
+  width: 100%; min-width: 180px; padding: 7px 12px; border: 0; background: none; font: inherit; color: var(--text);
+  text-align: left; cursor: pointer; transition: opacity var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+/* Colour, not a dark fill, says "on": override the site's pressed-button style. */
+.map-filter[aria-pressed], .map-filter[aria-pressed]:hover { background: none; color: var(--text); }
+.map-filter[aria-pressed]:hover { background: var(--plate); }
+.map-filter .map-swatch-icon, .map-filter .map-swatch { transition: filter var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out); }
+.map-filter[aria-pressed="false"], .map-filter[aria-pressed="false"]:hover { color: var(--muted); }
+.map-filter[aria-pressed="false"] .map-filter-label { opacity: 0.6; }
+.map-filter[aria-pressed="false"] .map-swatch-icon,
+.map-filter[aria-pressed="false"] .map-swatch { filter: grayscale(1); opacity: 0.45; }
 .map-count { color: var(--muted); font-size: var(--fs-mono-m); }
 .map-search { display: grid; gap: 6px; }
 .map-search input { width: 100%; }
@@ -42,7 +71,6 @@
 .map-swatch--rift, .map-marker--rift .map-pin { background: var(--ink); transform: rotate(45deg) scale(0.85); }
 .map-swatch--portal, .map-marker--portal .map-pin { background: var(--paper); border-radius: 50%; box-shadow: 0 0 0 2px var(--accent); }
 .map-swatch--merchant, .map-marker--merchant .map-pin { background: var(--accent); border-radius: 50%; }
-.map-swatch--area { background: none; border: 0; box-shadow: none; border-bottom: 2px solid var(--ink); height: 10px; }
 
 .world-map .leaflet-container { background: transparent; font: inherit; }
 .world-map .leaflet-tile { image-rendering: pixelated; }
@@ -51,12 +79,13 @@
 .map-swatch-icon { width: 20px; height: 20px; image-rendering: pixelated; }
 .map-pin:has(.map-pin-icon) { background: none; border: 0; box-shadow: none; border-radius: 0; transform: none; }
 .map-pin-icon { display: block; width: 28px; height: 28px; image-rendering: pixelated; }
+/* Area names: quiet text under the pins, no icon or box; a thin dark halo keeps them legible on any tile. */
 .map-label {
-  position: absolute; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;
-  font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--ink);
-  text-shadow: 0 0 3px var(--paper), 0 0 6px var(--paper), 0 0 10px var(--paper);
+  position: absolute; transform: translate(-50%, -50%); white-space: nowrap; pointer-events: none;
+  font-family: var(--font-display); font-weight: 600; font-size: 12px; letter-spacing: 0.04em;
+  color: rgb(255 255 255 / 0.82);
+  text-shadow: 0 0 2px rgb(0 0 0 / 0.85), 0 1px 3px rgb(0 0 0 / 0.6);
 }
-.map-label-icon { width: 20px; height: 20px; }
 .world-map[data-labels="off"] .map-marker--area { display: none; }
 .world-map .leaflet-popup-content-wrapper, .world-map .leaflet-popup-tip { border-radius: var(--radius); box-shadow: 0 0 0 1px var(--rule-strong); }
 .world-map .leaflet-popup-content { margin: 12px 16px; }
@@ -67,5 +96,10 @@
 .map-popup-note { margin-top: 6px !important; color: var(--text-2); }
 
 @media (min-width: 760px) {
-  .map-body { grid-template-columns: minmax(0, 1fr) 280px; }
+  .map-panel { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); }
+  .map-note { padding-top: 26px; }
+}
+
+@media (max-width: 759px) {
+  .map-stage { height: 82vh; min-height: 480px; }
 }

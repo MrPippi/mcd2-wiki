@@ -162,7 +162,9 @@ describe("buildMapData", () => {
     expect(forest?.px).toBeCloseTo((points[0].px + points[1].px) / 2, 1);
     expect(forest?.py).toBeCloseTo((points[0].py + points[1].py) / 2, 1);
     expect(forest?.icon).toBeUndefined();
-    expect(byId("overworld", "area:sw.area.town")).toMatchObject({ px: 432.6, py: 4416.3, icon: "icons/map/t_ui_icon_bravehaven.png" });
+    expect(byId("overworld", "area:sw.area.town")).toMatchObject({ px: 432.6, py: 4416.3 });
+    // Area names are quiet text labels: no area carries an icon.
+    expect(markersOf("overworld").filter((m) => m.kind === "area" && m.icon !== undefined)).toEqual([]);
     expect(markersOf("overworld").find((m) => m.id === "area:sw.area.unknown")).toBeUndefined();
   });
 
@@ -171,7 +173,6 @@ describe("buildMapData", () => {
       { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/Icons/T_UI_Icon_Minecart.png", published: "icons/map/t_ui_icon_minecart.png" },
       { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/WorldMap/Icons/T_UI_Icon_Rift.png", published: "icons/map/t_ui_icon_rift.png" },
       { from: "Assets/UI/Icons/Location/AreaIcons/T_UI_Icon_Town_Portal.png", published: "icons/map/t_ui_icon_town_portal.png" },
-      { from: "Assets/UI/Icons/Location/AreaIcons/T_UI_Icon_BraveHaven.png", published: "icons/map/t_ui_icon_bravehaven.png" },
       { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/WorldMap/Icons/T_UI_Icon_Blacksmith.png", published: "icons/map/t_ui_icon_blacksmith.png" },
     ]);
   });

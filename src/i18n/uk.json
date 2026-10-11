@@ -115,7 +115,17 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -265,5 +275,15 @@
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Перейти до української версії",
-  "languageMenu": "Мова"
+  "languageMenu": "Мова",
+  "siteMenu": "Меню",
+  "achievements": "Досягнення",
+  "achievementsIntro": "Усі досягнення Minecraft Dungeons II у Steam, упорядковані за глобальним відсотком отримання — від найчастіших до найрідкісніших.",
+  "hiddenAchievement": "Приховане досягнення",
+  "revealCondition": "Показати умову отримання",
+  "conditionQuest": "Завершіть завдання «{name}»",
+  "conditionTask": "Виконайте мету завдання «{name}»",
+  "conditionBoss": "Переможіть боса «{name}»",
+  "unlockRate": "Глобальний відсоток отримання",
+  "achievementsCredit": "Значки, назви, описи та глобальний відсоток отримання досягнень узято зі Steam (застосунок 1912410); дані станом на {date}. © Mojang Studios / Microsoft"
 }

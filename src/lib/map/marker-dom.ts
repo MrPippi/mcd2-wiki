@@ -17,30 +17,59 @@ function iconImage(path: string, className: string): HTMLImageElement {
   return image;
 }
 
-export function pinElement(marker: PayloadMarker, lang: Lang): HTMLElement {
-  if (marker.kind !== "area") {
-    const pin = element("span", "map-pin");
-    if (marker.icon) pin.append(iconImage(marker.icon, "map-pin-icon"));
-    return pin;
-  }
-  const label = element("span", "map-label");
-  if (marker.icon) label.append(iconImage(marker.icon, "map-label-icon"));
-  label.append(element("span", "map-label-text", marker.name[lang] ?? ""));
-  return label;
+export interface PinParts {
+  readonly className: "map-pin" | "map-label";
+  readonly icon?: string;
+  readonly text?: string;
 }
 
+/** A pin is the kind's icon; an area is its name as plain text, with no icon, so it stays quieter than the pins. */
+export function pinParts(marker: PayloadMarker, lang: Lang): PinParts {
+  if (marker.kind === "area") return { className: "map-label", text: marker.name[lang] ?? "" };
+  return { className: "map-pin", ...(marker.icon ? { icon: marker.icon } : {}) };
+}
+
+export function pinElement(marker: PayloadMarker, lang: Lang): HTMLElement {
+  const { className, icon, text } = pinParts(marker, lang);
+  const pin = element("span", className, text);
+  if (icon) pin.append(iconImage(icon, "map-pin-icon"));
+  return pin;
+}
+
+/** The kind label, unless the name already says it (a rift named 「裂隙」). Popups and search results share this rule. */
+export const shownKind = (name: string | undefined, kindLabel: string): string | undefined => (kindLabel === name ? undefined : kindLabel);
+
+export interface PopupTexts {
+  readonly kind?: string;
+  readonly name: string;
+  readonly area?: string;
+  readonly note?: string;
+}
+
+export function popupTexts(marker: PayloadMarker, lang: Lang, kindLabel: string): PopupTexts {
+  const name = marker.name[lang] ?? "";
+  const kind = shownKind(name, kindLabel);
+  const area = marker.area?.[lang];
+  const note = marker.note?.[lang];
+  return { ...(kind ? { kind } : {}), name, ...(area ? { area } : {}), ...(note ? { note } : {}) };
+}
+
+export const resultText = (marker: PayloadMarker, lang: Lang, kindLabel: string): string =>
+  [marker.name[lang], shownKind(marker.name[lang], kindLabel), marker.area?.[lang]].filter(Boolean).join(" · ");
+
 export function popupElement(marker: PayloadMarker, lang: Lang, kindLabel: string): HTMLElement {
+  const { kind, name, area, note } = popupTexts(marker, lang, kindLabel);
   const popup = element("div", "map-popup");
-  popup.append(element("p", "map-popup-kind mono", kindLabel), element("p", "map-popup-name", marker.name[lang] ?? ""));
-  if (marker.area?.[lang]) popup.append(element("p", "map-popup-area", marker.area[lang]));
-  if (marker.note?.[lang]) popup.append(element("p", "map-popup-note", marker.note[lang]));
+  if (kind) popup.append(element("p", "map-popup-kind mono", kind));
+  popup.append(element("p", "map-popup-name", name));
+  if (area) popup.append(element("p", "map-popup-area", area));
+  if (note) popup.append(element("p", "map-popup-note", note));
   return popup;
 }
 
 export function resultElement(marker: PayloadMarker, lang: Lang, kindLabel: string): HTMLLIElement {
   const item = element("li", "");
-  const kind = kindLabel === marker.name[lang] ? undefined : kindLabel;
-  const button = element("button", "map-result", [marker.name[lang], kind, marker.area?.[lang]].filter(Boolean).join(" · "));
+  const button = element("button", "map-result", resultText(marker, lang, kindLabel));
   button.type = "button";
   button.dataset.markerId = marker.id;
   item.append(button);

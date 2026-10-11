@@ -145,5 +145,15 @@
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Go to the English site",
-  "languageMenu": "Language"
+  "languageMenu": "Language",
+  "siteMenu": "Menu",
+  "achievements": "Achievements",
+  "achievementsIntro": "Every Steam achievement in Minecraft Dungeons II, ordered by global unlock rate from highest to lowest.",
+  "hiddenAchievement": "Hidden achievement",
+  "revealCondition": "Show the unlock condition",
+  "conditionQuest": "Complete the quest “{name}”",
+  "conditionTask": "Complete the quest objective “{name}”",
+  "conditionBoss": "Defeat “{name}”",
+  "unlockRate": "Global unlock rate",
+  "achievementsCredit": "Achievement icons, names, descriptions and global unlock rates come from Steam (app 1912410); rates as of {date}. © Mojang Studios / Microsoft."
 }

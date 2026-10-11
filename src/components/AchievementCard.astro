@@ -1,0 +1,47 @@
+---
+import type { Achievement } from "../../scripts/extract/achievement-schema";
+import { achievementAnchor, formatPercent } from "../lib/achievements";
+import { catalogLabel } from "../lib/catalog";
+import { t, type Lang } from "../lib/i18n";
+import { assetUrl } from "../lib/url";
+import AchievementReveal from "./AchievementReveal.astro";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  achievement: Achievement;
+  /** 0-based place in the list; staggers the cascade-in and gives the rank. */
+  index: number;
+  /** Mark this card's English stand-in text (only when the rest of the page has its own language). */
+  markUntranslated: boolean;
+}
+
+const ICON_SIZE = 64;
+const { lang, achievement, index, markUntranslated } = Astro.props;
+const { slug, icon, globalPercent, hidden, name, description, condition } = achievement;
+---
+<li class="achievement-card" style={`--i:${index}; --rate:${globalPercent}%`} data-rate={globalPercent} data-hidden={hidden ? "true" : undefined}>
+  <span class="achievement-rank" aria-hidden="true">{catalogLabel(index + 1)}</span>
+  <span class="achievement-art">
+    {icon ? (
+      <img class="achievement-icon" src={assetUrl(icon)} alt="" width={ICON_SIZE} height={ICON_SIZE} loading="lazy" decoding="async" />
+    ) : (
+      <span class="achievement-icon is-empty" aria-hidden="true"></span>
+    )}
+  </span>
+  <div class="achievement-body">
+    <LangText lang={lang} value={name} as="h2" class="achievement-name" id={achievementAnchor(slug)} />
+    {description ? (
+      <LangText lang={lang} value={description} as="p" class="achievement-desc" />
+    ) : (
+      <span class="achievement-hidden" data-pagefind-ignore>{t(lang, "hiddenAchievement")}</span>
+    )}
+    {hidden && condition && <AchievementReveal lang={lang} condition={condition} />}
+    <p class="achievement-rate">
+      <span class="achievement-rate-label">{t(lang, "unlockRate")}</span>
+      <span class="achievement-rate-value">{formatPercent(globalPercent, lang)}</span>
+      <span class="achievement-rate-bar" aria-hidden="true"></span>
+    </p>
+    {markUntranslated && <span class="tag warn">{t(lang, "untranslated")}</span>}
+  </div>
+</li>

@@ -1,5 +1,6 @@
 ---
 import { MARKER_KINDS, type MapData, type WorldMap } from "../../scripts/extract/map-schema";
+import { FILTER_KINDS } from "../lib/map/kinds";
 import { markerLabel, t, type Lang } from "../lib/i18n";
 import { compareLang } from "../lib/lang";
 import { countByKind } from "../lib/map/markers";
@@ -42,23 +43,27 @@ const payload = JSON.stringify({ worlds: worlds.map((world) => trimWorld(world, 
           <img src={assetUrl(overviewTile(first.key))} alt={first.name[lang]} width="256" height="256" />
           <p>{t(lang, "mapNeedsJs")}</p>
         </div>
+        {/* On the map, top right; folds to its button on phones (the viewer opens it on wider screens). */}
+        <details class="map-filters" data-map-filters>
+          <summary>{t(lang, "mapMarkers")}</summary>
+          <ul role="list">
+            {FILTER_KINDS.map((kind) => (
+              <li>
+                <button type="button" class="map-filter" data-kind={kind} aria-pressed="true">
+                  {legend[kind] ? (
+                    <img class="map-swatch-icon" src={assetUrl(legend[kind])} alt="" width="20" height="20" />
+                  ) : (
+                    <span class={`map-swatch map-swatch--${kind}`} aria-hidden="true" />
+                  )}
+                  <span class="map-filter-label">{markerLabel(kind, lang)}</span>
+                  <span class="map-count mono" data-count={kind}>{counts?.[kind] ?? 0}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </details>
       </div>
-      <aside class="map-panel">
-        <fieldset class="map-filters">
-          <legend>{t(lang, "mapMarkers")}</legend>
-          {MARKER_KINDS.map((kind) => (
-            <label class="map-filter">
-              <input type="checkbox" name="kind" value={kind} checked />
-              {legend[kind] ? (
-                <img class="map-swatch-icon" src={assetUrl(legend[kind])} alt="" width="20" height="20" />
-              ) : (
-                <span class={`map-swatch map-swatch--${kind}`} aria-hidden="true" />
-              )}
-              <span class="map-filter-label">{markerLabel(kind, lang)}</span>
-              <span class="map-count mono" data-count={kind}>{counts?.[kind] ?? 0}</span>
-            </label>
-          ))}
-        </fieldset>
+      <div class="map-panel">
         <div class="map-search">
           <label for="map-search">{t(lang, "mapSearch")}</label>
           <input id="map-search" type="search" data-testid="map-search" placeholder={t(lang, "mapSearchPlaceholder")} autocomplete="off" />
@@ -66,7 +71,7 @@ const payload = JSON.stringify({ worlds: worlds.map((world) => trimWorld(world, 
           <p class="map-empty" data-testid="map-empty" hidden>{t(lang, "mapNoResults")}</p>
         </div>
         <p class="map-note">{t(lang, "mapSource")}</p>
-      </aside>
+      </div>
     </div>
     <script type="application/json" data-map-json set:html={payload}></script>
   </div>

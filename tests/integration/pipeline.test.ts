@@ -2,6 +2,7 @@ import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
+import sharp from "sharp";
 import { beforeEach, describe, expect, it } from "vitest";
 import { ALL_LANGS, LANG_META } from "../../scripts/extract/config";
 import { ExtractError } from "../../scripts/extract/issues";
@@ -251,5 +252,27 @@ describe("runExtract", () => {
     const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
     expect(report).toContain("### missing-map-tables (1)");
     expect(report).toContain("- DataTables/UFS/DT_WorldRegionMapData.json");
+  });
+  it("writes an empty achievement list and reports it when the Steam data is missing", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(await readJson<{ achievements: unknown[] }>("src/data/achievements.json")).toMatchObject({ achievements: [] });
+    const report = await readFile(path.join(outRoot, "extract-report.md"), "utf8");
+    expect(report).toContain("### missing-achievements (1)\n\n- Steam/Achievements/achievements.json");
+  });
+
+  it("writes the Steam achievements in 16 languages with webp icons that survive the icon rebuild", async () => {
+    const row = { id: "EQUIP_A_UNIQUE_ITEM", icon: "https://example.invalid/a.jpg", file: "EQUIP_A_UNIQUE_ITEM.jpg", globalPercent: 76.9 };
+    const text = { name: { en: "One-of-a-Kind", zh: "獨一無二" }, description: { en: "Equip a unique item", zh: "裝備一件獨特物品" } };
+    await put(sourceRoot, "Steam/Achievements/achievements.json", JSON.stringify({ source: "Steam", retrieved: "2026-10-11", achievements: [{ ...row, ...text }] }));
+    const jpg = await sharp({ create: { width: 256, height: 256, channels: 3, background: "#36c" } }).jpeg().toBuffer();
+    await writeFile(path.join(sourceRoot, "Steam", "Achievements", "EQUIP_A_UNIQUE_ITEM.jpg"), jpg);
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    const data = await readJson<{ achievements: { name: Record<string, string>; icon?: string; untranslated?: string[] }[] }>("src/data/achievements.json");
+    expect(data.achievements).toHaveLength(1);
+    expect(Object.keys(data.achievements[0]?.name ?? {})).toHaveLength(16);
+    expect(data.achievements[0]).toMatchObject({ name: { zh: "獨一無二", ko: "One-of-a-Kind" }, icon: "icons/achievements/equip-a-unique-item.webp" });
+    expect(data.achievements[0]?.untranslated).toHaveLength(14);
+    expect(existsSync(path.join(outRoot, "public", "icons", "achievements", "equip-a-unique-item.webp"))).toBe(true);
+    expect(existsSync(path.join(outRoot, "public", "icons", "melee", "sword.png"))).toBe(true);
   });
 });

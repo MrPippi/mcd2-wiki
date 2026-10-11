@@ -115,7 +115,17 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -263,5 +273,15 @@
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Türkçe siteye git",
-  "languageMenu": "Dil"
+  "languageMenu": "Dil",
+  "siteMenu": "Menü",
+  "achievements": "Başarımlar",
+  "achievementsIntro": "Minecraft Dungeons II'nin tüm Steam başarımları, küresel açılma oranına göre yüksekten düşüğe sıralanmıştır.",
+  "hiddenAchievement": "Gizli başarım",
+  "revealCondition": "Kilit açma koşulunu göster",
+  "conditionQuest": "“{name}” görevini tamamla",
+  "conditionTask": "“{name}” görev hedefini tamamla",
+  "conditionBoss": "“{name}” adlı boss’u yen",
+  "unlockRate": "Küresel açılma oranı",
+  "achievementsCredit": "Başarım simgeleri, adları, açıklamaları ve küresel açılma oranları Steam'den (uygulama 1912410) alınmıştır; oranlar {date} tarihlidir. © Mojang Studios / Microsoft"
 }

@@ -1,0 +1,26 @@
+---
+import type { AchievementCondition } from "../../scripts/extract/achievement-schema";
+import { conditionSentence } from "../lib/achievements";
+import { t, type Lang } from "../lib/i18n";
+import { compareLang, htmlLang } from "../lib/lang";
+
+interface Props {
+  lang: Lang;
+  condition: AchievementCondition;
+}
+
+/* A spoiler: collapsed until the reader asks, and kept out of the search index. Works without JavaScript. */
+const { lang, condition } = Astro.props;
+const alt = compareLang(lang);
+const own = conditionSentence(condition, lang);
+const other = conditionSentence(condition, alt);
+const fellBack = condition.untranslated?.includes(lang) ?? false;
+---
+<details class="achievement-condition" data-pagefind-ignore>
+  <summary><span class="condition-reveal">{t(lang, "revealCondition")}</span></summary>
+  <p class="condition-text lang-text">
+    <span class="primary">{own}</span>
+    {other !== own && <span class="alt" lang={htmlLang(alt)}>{other}</span>}
+  </p>
+  {fellBack && <span class="tag warn">{t(lang, "untranslated")}</span>}
+</details>

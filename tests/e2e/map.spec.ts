@@ -1,28 +1,38 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
+
+const filterPanel = (page: Page) => page.locator(".map-stage details.map-filters");
+const kindToggle = (page: Page, kind: string) => page.locator(`.map-filter[data-kind='${kind}']`);
+
+/** The marker filter folds away on narrow screens; open it before using its toggles. */
+async function openFilters(page: Page): Promise<void> {
+  await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+  if ((await filterPanel(page).getAttribute("open")) === null) await filterPanel(page).locator("summary").click();
+  await expect(filterPanel(page)).toHaveAttribute("open", "");
+}
+
+const mapBox = (page: Page) => page.locator(".map-stage").boundingBox();
 
 test("map page shows its title, world tabs and marker filters", async ({ page }) => {
   await page.goto("/zh/map/");
   await expect(page.locator("h1")).toHaveText("世界地圖");
   await expect(page.locator(".map-tabs a")).toHaveText([/主世界/, /隙浮/, /營地/]);
   await expect(page.locator(".map-tabs [aria-current='page']")).toHaveText(/主世界/);
-  await expect(page.locator("input[name='kind']")).toHaveCount(5);
+  await expect(page.locator(".map-filter")).toHaveCount(4);
   await expect(page.locator("[data-count='rift']")).toHaveText(/^[1-9]\d*$/);
 });
 
 test("the rift filter swatch is the game's icon", async ({ page }) => {
   await page.goto("/zh/map/");
-  const swatch = page.locator(".map-filter", { has: page.locator("input[value='rift']") }).locator(".map-swatch-icon");
+  const swatch = kindToggle(page, "rift").locator(".map-swatch-icon");
   await expect(swatch).toHaveCount(1);
   await expect(swatch).toHaveJSProperty("tagName", "IMG");
   await expect(swatch).toHaveAttribute("src", /t_ui_icon_rift\.png$/);
 });
 
-test("the header and the home page link to the map", async ({ page }) => {
-  await page.goto("/zh/");
-  await page.locator(".category-grid a", { hasText: "世界地圖" }).click();
-  await expect(page).toHaveURL(/\/zh\/map\/(#.*)?$/);
+test("the header menu links to the map", async ({ page }) => {
   await page.goto("/zh/melee/");
-  await page.getByTestId("map-link").click();
+  await page.getByTestId("site-menu").click();
+  await page.locator(".site-menu a", { hasText: "地圖" }).click();
   await expect(page).toHaveURL(/\/zh\/map\/(#.*)?$/);
 });
 
@@ -91,10 +101,12 @@ test("switching worlds does not reuse the previous world's view", async ({ page 
 test("hiding a marker kind removes it and survives a reload", async ({ page }) => {
   await page.goto("/zh/map/");
   await expect(page.locator(".map-marker--rift").first()).toBeAttached();
-  await page.locator("input[name='kind'][value='rift']").uncheck();
+  await openFilters(page);
+  await kindToggle(page, "rift").click();
   await expect(page.locator(".map-marker--rift")).toHaveCount(0);
   await page.reload();
-  await expect(page.locator("input[name='kind'][value='rift']")).not.toBeChecked();
+  await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+  await expect(kindToggle(page, "rift")).toHaveAttribute("aria-pressed", "false");
   await expect(page.locator(".map-marker--minecart").first()).toBeAttached();
   await expect(page.locator(".map-marker--rift")).toHaveCount(0);
 });
@@ -113,6 +125,16 @@ test("a rift result does not repeat its kind label", async ({ page }) => {
   const first = page.getByTestId("map-results").locator("button").first();
   await expect(first).toBeVisible();
   await expect(first).not.toContainText("裂隙 · 裂隙");
+});
+
+test("a rift popup names the rift once", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await page.getByTestId("map-search").fill("裂隙");
+  await page.getByTestId("map-results").locator("button").first().click();
+  const popup = page.locator(".leaflet-popup-content .map-popup");
+  await expect(popup.locator(".map-popup-name")).toHaveText("裂隙");
+  await expect(popup.locator(".map-popup-kind")).toHaveCount(0);
+  expect((await popup.innerText()).split("裂隙").length - 1).toBe(1);
 });
 
 test("the Russian map renders markers and its search finds Russian and English names", async ({ page }) => {
@@ -167,6 +189,86 @@ test("area labels do not capture clicks meant for the pin beneath", async ({ pag
   await page.goto("/zh/map/#4/432/4416");
   await expect(page.locator(".map-marker--area").first()).toBeAttached();
   await expect(page.locator(".map-marker--area.leaflet-interactive")).toHaveCount(0);
+});
+
+test("area names are not a marker filter", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await expect(page.locator(".map-filters")).not.toContainText("區域");
+  await expect(kindToggle(page, "area")).toHaveCount(0);
+});
+
+test("area labels are plain text with no icon", async ({ page }) => {
+  await page.goto("/zh/map/#4/432/4416");
+  const label = page.locator(".map-marker--area .map-label").first();
+  await expect(label).toBeVisible();
+  await expect(label).toHaveText(/\S/);
+  await expect(page.locator(".map-marker--area img")).toHaveCount(0);
+});
+
+test.describe("marker filter on the map", () => {
+  test("sits inside the map box and toggles a kind by colour", async ({ page }) => {
+    await page.goto("/zh/map/");
+    await openFilters(page);
+    await expect(page.locator(".map-panel .map-filters")).toHaveCount(0);
+    const stage = await mapBox(page);
+    const panel = await filterPanel(page).boundingBox();
+    expect(stage && panel).toBeTruthy();
+    expect(panel!.x).toBeGreaterThanOrEqual(stage!.x);
+    expect(panel!.x + panel!.width).toBeLessThanOrEqual(stage!.x + stage!.width + 0.5);
+    expect(panel!.y + panel!.height).toBeLessThanOrEqual(stage!.y + stage!.height + 0.5);
+    const rift = kindToggle(page, "rift");
+    await expect(rift).toHaveAttribute("aria-pressed", "true");
+    await expect(rift).toContainText("裂隙");
+    await expect(rift.locator(".map-count")).toHaveText(/^[1-9]\d*$/);
+    expect(await rift.locator(".map-swatch-icon").evaluate((el) => getComputedStyle(el).filter)).not.toContain("grayscale");
+    await rift.click();
+    await expect(rift).toHaveAttribute("aria-pressed", "false");
+    await expect.poll(() => rift.locator(".map-swatch-icon").evaluate((el) => getComputedStyle(el).filter)).toContain("grayscale");
+    await expect(page.locator(".map-marker--rift")).toHaveCount(0);
+    await expect(page.locator(".map-marker--minecart").first()).toBeAttached();
+    await rift.press("Enter");
+    await expect(rift).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator(".map-marker--rift").first()).toBeAttached();
+  });
+
+  test("does not zoom the map when scrolling over it", async ({ page }) => {
+    await page.goto("/zh/map/#3/4096/4096");
+    await openFilters(page);
+    await expect(page.locator(".world-map")).toHaveAttribute("data-zoom", "3");
+    await kindToggle(page, "rift").hover();
+    await page.mouse.wheel(0, -400);
+    await page.waitForTimeout(400);
+    await expect(page.locator(".world-map")).toHaveAttribute("data-zoom", "3");
+  });
+
+  test("leaves a large map on a desktop screen", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 800 });
+    await page.goto("/zh/map/");
+    await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+    const box = await mapBox(page);
+    expect(box!.width).toBeGreaterThanOrEqual(1150);
+    expect(box!.height).toBeGreaterThanOrEqual(640);
+    const leaflet = await page.locator(".leaflet-container").boundingBox();
+    expect(Math.abs(leaflet!.width - box!.width)).toBeLessThanOrEqual(2);
+    expect(Math.abs(leaflet!.height - box!.height)).toBeLessThanOrEqual(2);
+  });
+
+  test("folds away on a phone and opens from its button", async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 740 });
+    await page.goto("/zh/map/");
+    await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+    const box = await mapBox(page);
+    expect(box!.width).toBeGreaterThanOrEqual(320);
+    expect(box!.height).toBeGreaterThanOrEqual(600);
+    await expect(filterPanel(page)).not.toHaveAttribute("open", "");
+    await expect(kindToggle(page, "rift")).toBeHidden();
+    await filterPanel(page).locator("summary").click();
+    await expect(kindToggle(page, "rift")).toBeVisible();
+    await kindToggle(page, "merchant").click();
+    await expect(page.locator(".map-marker--merchant")).toHaveCount(0);
+    await filterPanel(page).locator("summary").click();
+    await expect(kindToggle(page, "rift")).toBeHidden();
+  });
 });
 
 test.describe("zoom limits and popups", () => {

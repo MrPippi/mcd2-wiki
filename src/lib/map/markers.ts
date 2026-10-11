@@ -1,7 +1,7 @@
 import type { Lang } from "../i18n";
 import { compareLang, searchFold } from "../lang";
 import type { PayloadMarker } from "./payload";
-import { MARKER_KINDS, type MarkerKind } from "./kinds";
+import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "./kinds";
 
 const DEFAULT_LIMIT = 20;
 
@@ -24,23 +24,22 @@ export const countByKind = (markers: readonly PayloadMarker[]): Record<MarkerKin
     number
   >;
 
-const isKind = (value: unknown): value is MarkerKind =>
-  typeof value === "string" && (MARKER_KINDS as readonly string[]).includes(value);
+const isFilterKind = (value: unknown): value is FilterKind => FILTER_KINDS.some((kind) => kind === value);
 
-/** Hidden kinds saved in storage; anything unreadable means nothing is hidden. */
-export function parseHiddenKinds(raw: string | null): Set<MarkerKind> {
+/** Hidden kinds saved in storage; anything unreadable means nothing is hidden, and area names are never hidden. */
+export function parseHiddenKinds(raw: string | null): Set<FilterKind> {
   if (!raw) return new Set();
   try {
     const value: unknown = JSON.parse(raw);
-    return Array.isArray(value) ? new Set(value.filter(isKind)) : new Set();
+    return Array.isArray(value) ? new Set(value.filter(isFilterKind)) : new Set();
   } catch {
     return new Set();
   }
 }
 
-export const serializeHiddenKinds = (hidden: ReadonlySet<MarkerKind>): string =>
-  JSON.stringify(MARKER_KINDS.filter((kind) => hidden.has(kind)));
+export const serializeHiddenKinds = (hidden: ReadonlySet<FilterKind>): string =>
+  JSON.stringify(FILTER_KINDS.filter((kind) => hidden.has(kind)));
 
-export function withKind(hidden: ReadonlySet<MarkerKind>, kind: MarkerKind, visible: boolean): Set<MarkerKind> {
+export function withKind(hidden: ReadonlySet<FilterKind>, kind: FilterKind, visible: boolean): Set<FilterKind> {
   return new Set([...hidden].filter((other) => other !== kind).concat(visible ? [] : [kind]));
 }

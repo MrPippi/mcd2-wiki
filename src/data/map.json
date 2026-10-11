@@ -1432,8 +1432,7 @@
             "sv": "Frusna högländerna",
             "tr": "Donmuş Dağlıklar",
             "uk": "Крижане високогір’я"
-          },
-          "icon": "icons/map/t_ui_icon_frozenhighlands.png"
+          }
         },
         {
           "id": "area:sw.area.forest.a1",
@@ -1457,8 +1456,7 @@
             "sv": "Ylande skogarna",
             "tr": "Uluyan Orman",
             "uk": "Ліс завивань"
-          },
-          "icon": "icons/map/t_ui_icon_howlingwoods.png"
+          }
         },
         {
           "id": "area:sw.area.plains.a1",
@@ -1482,8 +1480,7 @@
             "sv": "Bikupefälten",
             "tr": "Bal Peteği Tarlaları",
             "uk": "Стільникові поля"
-          },
-          "icon": "icons/map/t_ui_icon_honeycombfields.png"
+          }
         },
         {
           "id": "area:sw.area.plains.a2",
@@ -1507,8 +1504,7 @@
             "sv": "Regniga slätterna",
             "tr": "Yağmurlu Ovalar",
             "uk": "Дощові рівнини"
-          },
-          "icon": "icons/map/t_ui_icon_rainyplains.png"
+          }
         },
         {
           "id": "area:sw.area.town",
@@ -1532,8 +1528,7 @@
             "sv": "Djärvhamn",
             "tr": "Yiğitler Sığınağı",
             "uk": "Прихисток відважних"
-          },
-          "icon": "icons/map/t_ui_icon_bravehaven.png"
+          }
         }
       ]
     },
@@ -1815,8 +1810,7 @@
             "sv": "Böjarnas skalmarker",
             "tr": "Humbler Kalıntısı Diyarı",
             "uk": "Земля оболонок покірника"
-          },
-          "icon": "icons/map/t_ui_icon_humblerhuskland.png"
+          }
         },
         {
           "id": "area:sw.area.meadow.a1",
@@ -1840,8 +1834,7 @@
             "sv": "Sångarens äng",
             "tr": "Şarkıcının Çayırı",
             "uk": "Лука співака"
-          },
-          "icon": "icons/map/t_ui_icon_singersmeadow.png"
+          }
         },
         {
           "id": "area:sw.area.meadow.a2",
@@ -1865,8 +1858,7 @@
             "sv": "Vaggvisornas kullar",
             "tr": "Ninni Tepeleri",
             "uk": "Колискові пагорби"
-          },
-          "icon": "icons/map/t_ui_icon_lullabyhills.png"
+          }
         }
       ]
     },

@@ -23,7 +23,6 @@ const AreaRow = z.object({
   Name: z.string(),
   TypeTag: Tag,
   TypeTextData: z.object({ Texts: z.record(z.string(), z.object({ Text: z.string() })) }).optional(),
-  AreaIcon: z.string().optional(),
 });
 
 export const MapTablesSchema = z.object({

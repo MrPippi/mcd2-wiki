@@ -111,7 +111,17 @@
     "catalogNo",
     "labelColon",
     "goToLanguage",
-    "languageMenu"
+    "languageMenu",
+    "siteMenu",
+    "achievements",
+    "achievementsIntro",
+    "hiddenAchievement",
+    "revealCondition",
+    "conditionQuest",
+    "conditionTask",
+    "conditionBoss",
+    "unlockRate",
+    "achievementsCredit"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -267,5 +277,15 @@
   "labelColon": ": ",
   "rootRedirectTitle": "Minecraft Dungeons II Wiki",
   "goToLanguage": "Перейти на русскую версию",
-  "languageMenu": "Язык"
+  "languageMenu": "Язык",
+  "siteMenu": "Меню",
+  "achievements": "Достижения",
+  "achievementsIntro": "Все достижения Minecraft Dungeons II в Steam, упорядоченные по глобальному проценту получения — от самых частых к самым редким.",
+  "hiddenAchievement": "Скрытое достижение",
+  "revealCondition": "Показать условие получения",
+  "conditionQuest": "Завершите задание «{name}»",
+  "conditionTask": "Выполните цель задания «{name}»",
+  "conditionBoss": "Победите босса «{name}»",
+  "unlockRate": "Глобальный процент получения",
+  "achievementsCredit": "Значки, названия, описания и глобальный процент получения достижений взяты из Steam (приложение 1912410); данные на {date}. © Mojang Studios / Microsoft"
 }
