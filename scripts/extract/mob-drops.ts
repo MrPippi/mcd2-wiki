@@ -76,3 +76,13 @@ export function attachDrops(drafts: readonly MobDraft[], mobRows: readonly LootR
   });
   return { drafts: result, issues };
 }
+
+type TaggedDraft = Pick<MobDraft, "tags" | "closure" | "soul">;
+
+/** Mob loot rows that no mob's tags, traits or Soul Corrupted traits reach: reported for information, nothing is lost. */
+export function unusedMobRows(drafts: readonly TaggedDraft[], mobRows: readonly LootRow[]): Issue[] {
+  const reached = new Set(drafts.flatMap((draft) => [...draft.tags, ...draft.closure, ...(draft.soul?.tags ?? []), ...(draft.soul?.closure ?? [])]).map(tagKey));
+  return mobRows
+    .filter((row) => !reached.has(tagKey(row.TypeTag.TagName)))
+    .map((row) => issue("mob-loot-row-unused", `${row.Name} (${row.TypeTag.TagName})`));
+}

@@ -6,7 +6,7 @@ import { buildItemIndex } from "./loot-items";
 import { buildItemSources } from "./loot-sources";
 import { loadLootTables, type LootTables } from "./loot-tables";
 import { areaMarkers, buildAreaNamer, buildMobAreas, SPAWN_AREA_PREFIXES } from "./mob-areas";
-import { attachDrops } from "./mob-drops";
+import { attachDrops, unusedMobRows } from "./mob-drops";
 import { listPortraitFiles, planPortraits, publishPortraits, withPortraits } from "./mob-portraits";
 import { ItemSourcesSchema, MobDataSchema, type ItemSourcesData, type MobData } from "./mob-schema";
 import { loadMobTables, type MobTables } from "./mob-tables";
@@ -68,7 +68,7 @@ async function composeFrom(input: BestiaryInput, tables: MobTables, loot: LootTa
   const dropped = attachDrops(built.drafts, loot?.mob ?? []);
   return {
     mobs: MobDataSchema.parse({ mobs: dropped.drafts.map((draft) => draft.mob) }),
-    issues: [...built.issues, ...(loot ? dropped.issues : [])],
+    issues: [...built.issues, ...(loot ? [...dropped.issues, ...unusedMobRows(built.drafts, loot.mob)] : [])],
   };
 }
 

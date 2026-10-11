@@ -38,6 +38,7 @@ export type IssueType =
   | "mob-area-prefix-unmapped"
   | "mob-area-unnamed"
   | "mob-loot-unresolved"
+  | "mob-loot-row-unused"
   | "mob-portrait-unjoined"
   | "mob-no-portrait"
   | "missing-mob-portraits"

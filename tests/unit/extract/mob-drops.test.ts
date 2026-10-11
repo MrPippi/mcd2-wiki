@@ -5,7 +5,7 @@ import { loadMobTables } from "../../../scripts/extract/mob-tables";
 import { buildMobs } from "../../../scripts/extract/mobs";
 import { loadLocales } from "../../../scripts/extract/parse-locale";
 import { hasOwnPool, hasPoolTags, slotKeyOf, slotsOf } from "../../../scripts/extract/loot-slots";
-import { attachDrops, resolveDrops } from "../../../scripts/extract/mob-drops";
+import { attachDrops, resolveDrops, unusedMobRows } from "../../../scripts/extract/mob-drops";
 import type { MobDraft } from "../../../scripts/extract/mobs";
 import type { Mob } from "../../../scripts/extract/mob-schema";
 import { loc } from "../../helpers/localized";
@@ -186,6 +186,15 @@ describe("slotKeyOf", () => {
   });
 });
 
+describe("unusedMobRows", () => {
+  it("reports, for information, mob loot rows that no mob's tags, traits or Soul Corrupted traits reach", () => {
+    const orphan = lootRow("Orphan", "SW.LootSource.PiggyBank.OnHit", [slot("Item", 1, 0, 1, false)]);
+    const table = lootTables({ mob: [lootRow("SoulStated", "SW.Mob.Default.SoulStated", []), lootRow("Zombie", "Sw.Mob.Zombie", []), orphan] }).mob;
+    const zombie = { tags: ["SW.Mob.Zombie"], closure: ["SW.Mob.Type1"], soul: { tags: ["SW.Mob.Zombie.SoulStated"], closure: ["SW.Mob.Default.SoulStated"] } };
+    expect(unusedMobRows([zombie], table)).toEqual([{ type: "mob-loot-row-unused", detail: "Orphan (SW.LootSource.PiggyBank.OnHit)" }]);
+  });
+});
+
 describe("attachDrops", () => {
   const mob: Mob = { slug: "zombie", id: "Zombie", kind: "regular", world: "overworld", name: loc({ en: "Zombie" }), untranslated: [], stats: [], soulCorrupted: { stats: [], drops: [] }, variants: [], areas: [], drops: [] };
   const draft: MobDraft = { mob, tags: ["SW.Mob.Zombie"], closure: ["SW.Mob.Type1", ...HOSTILE], soul: { tags: ["SW.Mob.Zombie.SoulStated"], closure: ["SW.Mob.Zombie", "SW.Mob.Default.SoulStated", ...HOSTILE] }, references: [] };
@@ -211,7 +220,8 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
     const [locales, tables, loot] = await Promise.all([loadLocales("source-data"), loadMobTables("source-data"), loadLootTables("source-data")]);
     if (!tables || !loot) throw new Error("tables missing");
     const { drafts } = buildMobs(tables, locales);
-    const { drafts: attached, issues } = attachDrops(drafts, loot.mob);
+    const { drafts: attached, issues: dropIssues } = attachDrops(drafts, loot.mob);
+    const issues = [...dropIssues, ...unusedMobRows(drafts, loot.mob)];
     const find = (slug: string) => attached.find((draft) => draft.mob.slug === slug);
     const itemOf = (drops: readonly { slot: string }[] | undefined) => drops?.find((drop) => drop.slot === "item");
     expect(itemOf(find("zombie")?.mob.drops)).toEqual({ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125, pool: "none" });
@@ -219,6 +229,7 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
     expect(itemOf(find("evoker")?.mob.drops)).toEqual({ slot: "item", guaranteed: 1, rolls: 4, chancePerRoll: 0.25, pool: "area" });
     expect(itemOf(find("maw")?.mob.drops)).toEqual({ slot: "item", guaranteed: 1, rolls: 3, chancePerRoll: 0.15, pool: "none" });
     expect(itemOf(find("zombie")?.mob.soulCorrupted?.drops)).toEqual({ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.25, pool: "area" });
-    expect(issues).toEqual([]);   // Bee, Frog and Tuner (no loot row) are not hostile and get no page
+    expect(issues.filter((item) => item.type === "mob-loot-unresolved")).toEqual([]);   // Bee, Frog and Tuner (no loot row) are not hostile and get no page
+    expect(issues.filter((item) => item.type === "mob-loot-row-unused").map((item) => item.detail.split(" ")[0])).toEqual(["PiggyBankOnHit", "DeepDarkIllagerBackpack", "StorminatorBase"]);
   });
 });
