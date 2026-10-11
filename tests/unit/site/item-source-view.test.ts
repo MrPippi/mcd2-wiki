@@ -6,7 +6,9 @@ import {
   hasAnySource,
   merchantCategoryLabel,
   mergeSources,
+  groupIsUntranslated,
   nameIsUntranslated,
+  showsAltName,
 } from "../../../src/lib/item-source-view";
 import { categoryLabel } from "../../../src/lib/i18n";
 import { href } from "../../../src/lib/url";
@@ -38,6 +40,24 @@ describe("nameIsUntranslated", () => {
     expect(nameIsUntranslated(source, "de")).toBe(true);
     expect(nameIsUntranslated(source, "ja")).toBe(false);
     expect(nameIsUntranslated(source, "en")).toBe(false);
+  });
+});
+
+describe("groupIsUntranslated", () => {
+  it("is true only when every source in a non-empty group fell back to English for the language", () => {
+    expect(groupIsUntranslated([src("a", ["zh"]), src("b", ["zh", "de"])], "zh")).toBe(true);
+    expect(groupIsUntranslated([src("a", ["zh"]), src("b")], "zh")).toBe(false);
+    expect(groupIsUntranslated([src("a", ["en"])], "en")).toBe(false);
+    expect(groupIsUntranslated([], "zh")).toBe(false);
+  });
+});
+
+describe("showsAltName", () => {
+  const named = (zh: string, untranslated: ResolvedSource["untranslated"] = []): ResolvedSource => ({ ...src("x", untranslated), name: loc({ en: "Chest: X", zh }) });
+  it("shows the comparison name only when it differs and the page name is a real translation", () => {
+    expect(showsAltName(named("寶箱 X"), "zh")).toBe(true);
+    expect(showsAltName(named("寶箱：X", ["zh"]), "zh")).toBe(false);
+    expect(showsAltName(named("Chest: X"), "zh")).toBe(false);
   });
 });
 

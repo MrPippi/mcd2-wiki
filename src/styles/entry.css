@@ -159,4 +159,5 @@ a.fixed-name:hover .primary { color: var(--accent); }
 .item-sources li > a, .item-sources .source-name { font-family: var(--font-display); font-weight: 700; overflow-wrap: anywhere; min-width: 0; }
 .item-sources .item-alt { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); overflow-wrap: anywhere; min-width: 0; }
 .item-sources .tag { overflow-wrap: anywhere; min-width: 0; }
+.item-sources h3 .tag { text-transform: none; letter-spacing: normal; }
 .item-sources > .note { margin: 12px 0 0; }

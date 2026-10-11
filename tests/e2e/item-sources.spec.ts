@@ -27,6 +27,11 @@ test.describe("how to obtain", () => {
     await expect(block.getByTestId("chest-fixed")).toHaveCount(1);
     await expect(block.getByTestId("chest-area").first()).toBeVisible();
     await expect(block.locator(".tag.warn").first()).toHaveText("未翻譯");
+    const chests = block.locator("[data-source-kind='chests']");
+    await expect(chests.locator("h3 .tag.warn")).toHaveText("未翻譯");
+    await expect(chests.locator("li .tag.warn")).toHaveCount(0);
+    await expect(chests.locator(".item-alt")).toHaveCount(0);
+    await expect(block.locator("[data-source-kind='areas'] .tag.warn")).toHaveCount(0);
     await expect(page.locator("main h1 ~ .tag.warn, .entry-title .tag.warn")).toHaveCount(0);
     expect(await block.innerText()).not.toContain("%");
   });

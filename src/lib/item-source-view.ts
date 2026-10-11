@@ -6,7 +6,7 @@ import type { Entry } from "../../scripts/extract/schemas";
 import rawSources from "../data/loot-sources.json";
 import { booksFor } from "./data";
 import { categoryLabel } from "./i18n";
-import type { Lang } from "./lang";
+import { compareLang, type Lang } from "./lang";
 import { sourcesFor, type ResolvedItemSources, type ResolvedSource } from "./item-sources";
 import { mapLinkOf, mobData } from "./mobs";
 
@@ -28,6 +28,14 @@ export function merchantCategoryLabel(tag: string, lang: Lang): string {
 
 /** Whether this source's name fell back to English for `lang` (English itself is never marked). */
 export const nameIsUntranslated = (source: ResolvedSource, lang: Lang): boolean => lang !== "en" && source.untranslated.includes(lang);
+
+/** Whether every source of a group fell back to English for `lang`: the group heading is then marked once instead of each row. */
+export const groupIsUntranslated = (sources: readonly ResolvedSource[], lang: Lang): boolean =>
+  sources.length > 0 && sources.every((source) => nameIsUntranslated(source, lang));
+
+/** Whether to print the comparison-language name: only when it differs and the page name is not itself an English fallback. */
+export const showsAltName = (source: ResolvedSource, lang: Lang): boolean =>
+  !nameIsUntranslated(source, lang) && source.name[compareLang(lang)] !== source.name[lang];
 
 export const hasAnySource = (sources: ResolvedItemSources): boolean =>
   sources.areas.length + sources.chests.length + sources.quests.length + sources.merchants.length + sources.bookPools.length > 0;

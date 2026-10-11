@@ -1,7 +1,7 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
 import { t, type Lang } from "../lib/i18n";
-import { areaHref, entrySources, merchantCategoryLabel, nameIsUntranslated } from "../lib/item-source-view";
+import { areaHref, entrySources, groupIsUntranslated, merchantCategoryLabel, nameIsUntranslated, showsAltName } from "../lib/item-source-view";
 import type { ResolvedSource } from "../lib/item-sources";
 import { compareLang, htmlLang } from "../lib/lang";
 import EntrySection from "./EntrySection.astro";
@@ -15,20 +15,23 @@ const { lang, entry } = Astro.props;
 const sources = entrySources(entry);
 const alt = compareLang(lang);
 const picksText = (picks: { count: number; of: number }) => t(lang, "sourcePicksOf").replace("{count}", String(picks.count)).replace("{of}", String(picks.of));
-const showAlt = (source: ResolvedSource) => source.name[alt] !== source.name[lang];
+const showAlt = (source: ResolvedSource) => showsAltName(source, lang);
+// When a whole group fell back to English, one marker on its heading says so instead of one per row.
+const groupTag = (group: readonly ResolvedSource[]) => groupIsUntranslated(group, lang);
+const rowTag = (source: ResolvedSource, group: readonly ResolvedSource[]) => !groupTag(group) && nameIsUntranslated(source, lang);
 ---
 {sources && (
   <EntrySection title={t(lang, "itemSources")} testid="item-sources">
     <div class="item-sources" data-pagefind-ignore>
       {sources.areas.length > 0 && (
         <div class="source-group" data-source-kind="areas">
-          <h3>{t(lang, "sourceAreas")}</h3>
+          <h3>{t(lang, "sourceAreas")} {groupTag(sources.areas) && <span class="tag warn">{t(lang, "untranslated")}</span>}</h3>
           <ul>
             {sources.areas.map((source) => (
               <li>
                 <a href={areaHref(lang, source.id, source.name)}>{source.name[lang]}</a>
                 {showAlt(source) && <span class="item-alt" lang={htmlLang(alt)}>{source.name[alt]}</span>}
-                {nameIsUntranslated(source, lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+                {rowTag(source, sources.areas) && <span class="tag warn">{t(lang, "untranslated")}</span>}
               </li>
             ))}
           </ul>
@@ -36,7 +39,7 @@ const showAlt = (source: ResolvedSource) => source.name[alt] !== source.name[lan
       )}
       {sources.chests.length > 0 && (
         <div class="source-group" data-source-kind="chests">
-          <h3>{t(lang, "sourceChests")}</h3>
+          <h3>{t(lang, "sourceChests")} {groupTag(sources.chests) && <span class="tag warn">{t(lang, "untranslated")}</span>}</h3>
           <ul>
             {sources.chests.map((source) => (
               <li>
@@ -45,7 +48,7 @@ const showAlt = (source: ResolvedSource) => source.name[alt] !== source.name[lan
                 <span class="tag" data-testid={source.pool === "fixed" ? "chest-fixed" : "chest-area"}>
                   {t(lang, source.pool === "fixed" ? "sourceChestFixed" : "sourceChestArea")}
                 </span>
-                {nameIsUntranslated(source, lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+                {rowTag(source, sources.chests) && <span class="tag warn">{t(lang, "untranslated")}</span>}
               </li>
             ))}
           </ul>
@@ -53,7 +56,7 @@ const showAlt = (source: ResolvedSource) => source.name[alt] !== source.name[lan
       )}
       {sources.quests.length > 0 && (
         <div class="source-group" data-source-kind="quests">
-          <h3>{t(lang, "sourceQuests")}</h3>
+          <h3>{t(lang, "sourceQuests")} {groupTag(sources.quests) && <span class="tag warn">{t(lang, "untranslated")}</span>}</h3>
           <ul>
             {sources.quests.map((source) => (
               <li>
@@ -62,7 +65,7 @@ const showAlt = (source: ResolvedSource) => source.name[alt] !== source.name[lan
                 {source.picks
                   ? <span class="tag" data-testid="picks">{picksText(source.picks)}</span>
                   : <span class="tag" data-testid="guaranteed">{t(lang, "sourceGuaranteed")}</span>}
-                {nameIsUntranslated(source, lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+                {rowTag(source, sources.quests) && <span class="tag warn">{t(lang, "untranslated")}</span>}
               </li>
             ))}
           </ul>
@@ -70,14 +73,14 @@ const showAlt = (source: ResolvedSource) => source.name[alt] !== source.name[lan
       )}
       {sources.merchants.length > 0 && (
         <div class="source-group" data-source-kind="merchants">
-          <h3>{t(lang, "sourceMerchants")}</h3>
+          <h3>{t(lang, "sourceMerchants")} {groupTag(sources.merchants) && <span class="tag warn">{t(lang, "untranslated")}</span>}</h3>
           <ul>
             {sources.merchants.map((source) => (
               <li>
                 <span class="source-name">{source.name[lang]}</span>
                 {showAlt(source) && <span class="item-alt" lang={htmlLang(alt)}>{source.name[alt]}</span>}
                 <span class="tag" data-testid="merchant-category">{t(lang, "sourceMerchantCategory").replace("{category}", merchantCategoryLabel(source.category, lang))}</span>
-                {nameIsUntranslated(source, lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+                {rowTag(source, sources.merchants) && <span class="tag warn">{t(lang, "untranslated")}</span>}
               </li>
             ))}
           </ul>
@@ -85,13 +88,13 @@ const showAlt = (source: ResolvedSource) => source.name[alt] !== source.name[lan
       )}
       {sources.bookPools.length > 0 && (
         <div class="source-group" data-source-kind="book-pools">
-          <h3>{t(lang, "sourceBookPools")}</h3>
+          <h3>{t(lang, "sourceBookPools")} {groupTag(sources.bookPools) && <span class="tag warn">{t(lang, "untranslated")}</span>}</h3>
           <ul>
             {sources.bookPools.map((source) => (
               <li>
                 <span class="source-name">{source.name[lang]}</span>
                 {showAlt(source) && <span class="item-alt" lang={htmlLang(alt)}>{source.name[alt]}</span>}
-                {nameIsUntranslated(source, lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+                {rowTag(source, sources.bookPools) && <span class="tag warn">{t(lang, "untranslated")}</span>}
               </li>
             ))}
           </ul>
