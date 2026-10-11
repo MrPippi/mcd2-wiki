@@ -9,6 +9,14 @@ const GAME_KEYS = new Set(Object.keys(gameKeys));
 /** Keys whose value is fixed rather than translated: the site title set by the spec. */
 const FIXED_KEYS = new Set(["siteTitle", "rootRedirectTitle"]);
 const COMPARE_KEYS = ["tagline", "source", "compare"] as const;
+/** Keys with a known language problem (wrong game term, wrong number, vague wording): they show English instead. */
+const ENGLISH_FALLBACK: Readonly<Partial<Record<Lang, readonly string[]>>> = {
+  "zh-hans": ["compatibleEffectsIntro", "fixedEffectNote", "fixedEnchantmentNote"],
+  ja: ["compatibleEffectsIntro", "fixedEffectNote", "fixedEnchantmentNote"],
+  ru: ["compatibleEffectsIntro", "fixedEffectNote", "fixedEnchantmentNote", "normal"],
+  pl: ["normal"],
+  de: ["armorPiece", "fixedOn"],
+};
 
 describe("UI translations", () => {
   it("gives every plural unit each form its language needs", () => {
@@ -41,8 +49,18 @@ describe("UI translations", () => {
 
   it("marks exactly the translated keys as machine translated in the other languages", () => {
     for (const lang of TRANSLATED) {
-      const expected = Object.keys(UI_DICTS[lang].values).filter((key) => !GAME_KEYS.has(key) && !FIXED_KEYS.has(key)).sort();
+      const english = new Set(UI_DICTS[lang].english);
+      const expected = Object.keys(UI_DICTS[lang].values)
+        .filter((key) => !GAME_KEYS.has(key) && !FIXED_KEYS.has(key) && !english.has(key))
+        .sort();
       expect([...UI_DICTS[lang].machine].sort(), lang).toEqual(expected);
+    }
+  });
+
+  it("shows English for the keys with a known language problem", () => {
+    for (const lang of LANGS) {
+      expect([...UI_DICTS[lang].english].sort(), lang).toEqual([...(ENGLISH_FALLBACK[lang] ?? [])].sort());
+      for (const key of UI_DICTS[lang].english) expect(UI_DICTS[lang].values[key], `${lang}.${key}`).toEqual(UI_DICTS.en.values[key]);
     }
   });
 

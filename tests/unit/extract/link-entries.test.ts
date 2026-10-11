@@ -178,6 +178,12 @@ describe("setNameFor — per writing system", () => {
     expect(setNameFor("ru", ["Монарх шлем", "Монарх латы"], new Set(["шлем", "латы"]))).toBe("Монарх");
   });
 
+  it("rejects a German prefix that ends in an inflection", () => {
+    const known = new Set(["helm", "robe"]);
+    expect(setNameFor("de", ["Nomadenhelm", "Nomadenrobe"], known)).toBeUndefined();
+    expect(setNameFor("de", ["Pilzhelm", "Pilzrobe"], known)).toBe("Pilz");
+  });
+
   it("allows a German compound prefix of 4+ letters followed by letters", () => {
     const known = new Set(["helm", "robe", "maske", "umhang"]);
     expect(setNameFor("de", names("de"), known)).toBe("Anhänger");

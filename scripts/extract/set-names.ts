@@ -12,11 +12,13 @@ const TAIL_PADDING = /^[\s-]+|[\s-]+$/gu;
 const KATAKANA = /[゠-ヿ]/u;
 /**
  * A last word ending like this is an adjective or a genitive, not a set name, so the set takes the English name.
- * ru: -ые -ый -ий -ой -ая -яя -ое -ее -ие; uk: -ий -ій -а -е -і (as the controller ruled; feminine -а nouns fall back too).
+ * ru: -ые -ый -ий -ой -ая -яя -ое -ее -ие; uk: -ий -ій -а -е -і (as the controller ruled; feminine -а nouns fall back too);
+ * de: -en (an inflected noun such as "Nomaden", not the set's own name).
  */
 const ADJECTIVE_ENDINGS: Readonly<Partial<Record<Lang, readonly string[]>>> = {
   ru: ["ые", "ый", "ий", "ой", "ая", "яя", "ое", "ее", "ие", "і"],
   uk: ["ий", "ій", "а", "е", "і"],
+  de: ["en"],
 };
 
 /** For each language, the piece tails that occur in at least MIN_TAIL_SETS different sets. */

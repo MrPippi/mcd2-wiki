@@ -7,7 +7,7 @@ import { machineKeys, tCount } from "../../../src/lib/ui-strings";
 import { UI_DICTS } from "../../../src/lib/ui-dicts";
 import zh from "../../../src/i18n/zh.json";
 
-const keysOf = (file: Record<string, unknown>): string[] => Object.keys(file).filter((key) => key !== "_machine").sort();
+const keysOf = (file: Record<string, unknown>): string[] => Object.keys(file).filter((key) => key !== "_machine" && key !== "_english").sort();
 
 describe("i18n", () => {
   it("translates UI keys", () => {

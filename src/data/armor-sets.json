@@ -926,7 +926,7 @@
       "en": "Scamp",
       "ja": "小悪党",
       "ko": "장난꾸러기",
-      "de": "Schlingel",
+      "de": "Scamp",
       "fr": "Scamp",
       "es": "Scamp",
       "it": "Scamp",
@@ -939,6 +939,7 @@
       "uk": "Scamp"
     },
     "untranslated": [
+      "de",
       "fr",
       "es",
       "it",
@@ -1340,7 +1341,7 @@
       "en": "Nomad",
       "ja": "放浪",
       "ko": "유목민",
-      "de": "Nomaden",
+      "de": "Nomad",
       "fr": "Nomad",
       "es": "Nomad",
       "it": "Nomad",
@@ -1353,6 +1354,7 @@
       "uk": "Nomad"
     },
     "untranslated": [
+      "de",
       "fr",
       "es",
       "it",

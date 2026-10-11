@@ -30,19 +30,25 @@ export type PluralForms = z.infer<typeof PluralFormsSchema>;
 export const UiValueSchema = z.union([z.string(), PluralFormsSchema]);
 export type UiValue = z.infer<typeof UiValueSchema>;
 
-/** A language file: strings (or plural forms) by key, plus an optional list of machine-translated keys. */
-export const UiFileSchema = z.object({ _machine: z.array(z.string()).optional() }).catchall(UiValueSchema);
+/**
+ * A language file: strings (or plural forms) by key, plus optional key lists: `_machine` (machine-translated) and
+ * `_english` (a known language problem, so the key shows the English text instead).
+ */
+export const UiFileSchema = z
+  .object({ _machine: z.array(z.string()).optional(), _english: z.array(z.string()).optional() })
+  .catchall(UiValueSchema);
 
 export interface UiDict {
   readonly values: Readonly<Record<string, UiValue>>;
   readonly machine: readonly string[];
+  readonly english: readonly string[];
 }
 
 function parseFile(lang: Lang, raw: unknown): UiDict {
   const parsed = UiFileSchema.safeParse(raw);
   if (!parsed.success) throw new Error(`src/i18n/${lang}.json: ${parsed.error.issues[0]?.message ?? "invalid"}`);
-  const { _machine, ...values } = parsed.data;
-  return { values, machine: _machine ?? [] };
+  const { _machine, _english, ...values } = parsed.data;
+  return { values, machine: _machine ?? [], english: _english ?? [] };
 }
 
 const RAW_FILES: Readonly<Record<Lang, unknown>> = { zh, "zh-hans": zhHans, en, ja, ko, de, fr, es, it, pt, ru, pl, nl, sv, tr, uk };
