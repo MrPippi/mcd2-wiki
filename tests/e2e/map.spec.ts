@@ -113,6 +113,16 @@ test("a rift result does not repeat its kind label", async ({ page }) => {
   await expect(first).not.toContainText("裂隙 · 裂隙");
 });
 
+test("a rift popup names the rift once", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await page.getByTestId("map-search").fill("裂隙");
+  await page.getByTestId("map-results").locator("button").first().click();
+  const popup = page.locator(".leaflet-popup-content .map-popup");
+  await expect(popup.locator(".map-popup-name")).toHaveText("裂隙");
+  await expect(popup.locator(".map-popup-kind")).toHaveCount(0);
+  expect((await popup.innerText()).split("裂隙").length - 1).toBe(1);
+});
+
 test("the Russian map renders markers and its search finds Russian and English names", async ({ page }) => {
   await page.goto("/ru/map/");
   await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
