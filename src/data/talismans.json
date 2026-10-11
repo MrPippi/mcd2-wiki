@@ -1,0 +1,535 @@
+{
+  "ammo-capacity": {
+    "effect": "ammo-capacity",
+    "levels": [
+      {
+        "values": [
+          "20%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "40%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "60%"
+        ]
+      }
+    ]
+  },
+  "brawling": {
+    "effect": "sharpness",
+    "levels": [
+      {
+        "values": [
+          "10%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "20%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "35%"
+        ]
+      }
+    ]
+  },
+  "drop-chance": {
+    "effect": "drop-chance",
+    "levels": [
+      {
+        "values": [
+          "1%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "2%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "4%"
+        ]
+      }
+    ]
+  },
+  "double-drop": {
+    "effect": "looting",
+    "secret": true,
+    "levels": [
+      {
+        "values": [
+          "2%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "4%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "7%"
+        ]
+      }
+    ]
+  },
+  "experience-increase": {
+    "effect": "experience-increase",
+    "levels": [
+      {
+        "values": [
+          "4%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "6%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "10%"
+        ]
+      }
+    ]
+  },
+  "emerald-increase": {
+    "effect": "emeralds-increase",
+    "secret": true,
+    "levels": [
+      {
+        "values": [
+          "10%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "20%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "25%"
+        ]
+      }
+    ]
+  },
+  "potion-cooldown": {
+    "effect": "potion-cooldown",
+    "secret": true,
+    "levels": [
+      {
+        "values": [
+          "10%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "15%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "25%"
+        ]
+      }
+    ]
+  },
+  "healing": {
+    "effect": "regeneration",
+    "levels": [
+      {
+        "values": [
+          "2%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "6%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "10%"
+        ]
+      }
+    ]
+  },
+  "health-boost": {
+    "effect": "health-boost",
+    "levels": [
+      {
+        "values": [
+          "20%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "25%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "35%"
+        ]
+      }
+    ]
+  },
+  "healthy-strike": {
+    "levels": [
+      {
+        "xpToNextLevel": 18480
+      },
+      {
+        "xpToNextLevel": 73920
+      },
+      {}
+    ]
+  },
+  "iron-golem": {
+    "cooldownSeconds": 30,
+    "levels": [
+      {
+        "xpToNextLevel": 18480,
+        "companion": {
+          "attack": 1,
+          "defence": 1,
+          "cooldown": 1
+        }
+      },
+      {
+        "xpToNextLevel": 73920,
+        "companion": {
+          "attack": 1.2,
+          "defence": 0.75,
+          "cooldown": 0.8
+        }
+      },
+      {
+        "companion": {
+          "attack": 1.5,
+          "defence": 0.45,
+          "cooldown": 0.75
+        }
+      }
+    ]
+  },
+  "llama": {
+    "cooldownSeconds": 30,
+    "levels": [
+      {
+        "xpToNextLevel": 18480,
+        "companion": {
+          "attack": 1,
+          "defence": 1,
+          "cooldown": 1
+        }
+      },
+      {
+        "xpToNextLevel": 73920,
+        "companion": {
+          "attack": 1.2,
+          "defence": 0.8,
+          "cooldown": 0.8
+        }
+      },
+      {
+        "companion": {
+          "attack": 1.5,
+          "defence": 0.5,
+          "cooldown": 0.75
+        }
+      }
+    ]
+  },
+  "plummeting": {
+    "effect": "plummeting",
+    "secret": true,
+    "levels": [
+      {
+        "values": [
+          "10%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "20%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "35%"
+        ]
+      }
+    ]
+  },
+  "ranged-buff": {
+    "effect": "power",
+    "secret": true,
+    "levels": [
+      {
+        "values": [
+          "10%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "15%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "25%"
+        ]
+      }
+    ]
+  },
+  "soul-capacity": {
+    "effect": "soul-max",
+    "secret": true,
+    "levels": [
+      {
+        "values": [
+          "15%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "20%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "35%"
+        ]
+      }
+    ]
+  },
+  "soul-gather": {
+    "effect": "soul-gather",
+    "levels": [
+      {
+        "values": [
+          "40%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "80%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "140%"
+        ]
+      }
+    ]
+  },
+  "speed-increment": {
+    "secret": true,
+    "levels": [
+      {
+        "xpToNextLevel": 18480
+      },
+      {
+        "xpToNextLevel": 73920
+      },
+      {}
+    ]
+  },
+  "wolf": {
+    "cooldownSeconds": 30,
+    "levels": [
+      {
+        "xpToNextLevel": 18480,
+        "companion": {
+          "attack": 1,
+          "defence": 1,
+          "cooldown": 1
+        }
+      },
+      {
+        "xpToNextLevel": 73920,
+        "companion": {
+          "attack": 1.2,
+          "defence": 0.8,
+          "cooldown": 0.8
+        }
+      },
+      {
+        "companion": {
+          "attack": 1.65,
+          "defence": 0.5,
+          "cooldown": 0.75
+        }
+      }
+    ]
+  },
+  "rolling-cooldown": {
+    "effect": "roll-cooldown",
+    "levels": [
+      {
+        "values": [
+          "20%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "25%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "45%"
+        ]
+      }
+    ]
+  },
+  "artifact-cooldown": {
+    "effect": "cooldown",
+    "levels": [
+      {
+        "values": [
+          "4%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "8%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "14%"
+        ]
+      }
+    ]
+  },
+  "status-buff": {
+    "effect": "status-buff",
+    "levels": [
+      {
+        "values": [
+          "10%"
+        ],
+        "xpToNextLevel": 18480
+      },
+      {
+        "values": [
+          "15%"
+        ],
+        "xpToNextLevel": 73920
+      },
+      {
+        "values": [
+          "25%"
+        ]
+      }
+    ]
+  },
+  "prickle": {
+    "cooldownSeconds": 30,
+    "levels": [
+      {
+        "xpToNextLevel": 18480,
+        "companion": {
+          "attack": 1,
+          "defence": 1,
+          "cooldown": 1
+        }
+      },
+      {
+        "xpToNextLevel": 73920,
+        "companion": {
+          "attack": 1.2,
+          "defence": 0.8,
+          "cooldown": 0.8
+        }
+      },
+      {
+        "companion": {
+          "attack": 1.5,
+          "defence": 0.5,
+          "cooldown": 0.75
+        }
+      }
+    ]
+  },
+  "wobble": {
+    "cooldownSeconds": 30,
+    "levels": [
+      {
+        "xpToNextLevel": 18480,
+        "companion": {
+          "attack": 1,
+          "defence": 1,
+          "cooldown": 1
+        }
+      },
+      {
+        "xpToNextLevel": 73920,
+        "companion": {
+          "attack": 2,
+          "defence": 0.8,
+          "cooldown": 0.8
+        }
+      },
+      {
+        "companion": {
+          "attack": 3,
+          "defence": 0.5,
+          "cooldown": 0.75
+        }
+      }
+    ]
+  },
+  "firing-emeralds": {
+    "secret": true,
+    "levels": [
+      {
+        "xpToNextLevel": 18480
+      },
+      {
+        "xpToNextLevel": 73920
+      },
+      {}
+    ]
+  }
+}

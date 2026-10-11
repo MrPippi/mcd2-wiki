@@ -15403,6 +15403,24 @@
       "tr": "Koyu Meşe Dalı",
       "uk": "Гілка темного дуба"
     },
+    "description": {
+      "zh": "可多攜帶 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 支箭矢。",
+      "zh-hans": "箭矢携带量增加 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Carry <span class=\"placeholder\" data-slot=\"0\">{value}</span> more ammo.",
+      "ja": "矢を <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 本多く持つことができる。",
+      "ko": "탄약을 <span class=\"placeholder\" data-slot=\"0\">{수치}</span>개 더 소지합니다.",
+      "de": "Trage <span class=\"placeholder\" data-slot=\"0\">{Wert}</span> mehr Munition.",
+      "fr": "Permet de porter <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> munitions supplémentaires.",
+      "es": "Te permite llevar <span class=\"placeholder\" data-slot=\"0\">{valor}</span> municiones más.",
+      "it": "Trasporta il <span class=\"placeholder\" data-slot=\"0\">{valore}</span> di munizioni aggiuntive.",
+      "pt": "Leve <span class=\"placeholder\" data-slot=\"0\">{valor}</span> a mais de munição.",
+      "ru": "Позволяет носить на <span class=\"placeholder\" data-slot=\"0\">{значение}</span> ед. боеприпасов больше.",
+      "pl": "Pozwala nosić o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span> amunicji więcej.",
+      "nl": "Neem <span class=\"placeholder\" data-slot=\"0\">{waarde}</span> extra munitie mee.",
+      "sv": "Bär <span class=\"placeholder\" data-slot=\"0\">{värde}</span> mer ammunition.",
+      "tr": "<span class=\"placeholder\" data-slot=\"0\">{değer}</span> daha fazla mühimmat taşır.",
+      "uk": "Можна збільшити кількість набоїв на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
+    },
     "icon": "icons/talisman/ammo-capacity.png",
     "links": {}
   },
@@ -15429,6 +15447,24 @@
       "sv": "Effektivitetens essens",
       "tr": "Verimlilik Özü",
       "uk": "Есенція ефективності"
+    },
+    "description": {
+      "zh": "神器的冷卻時間縮短 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "法器冷却时间缩短 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Reduces artifact cooldown time by <span class=\"placeholder\" data-slot=\"0\">{value}</span>.",
+      "ja": "アーティファクトのクールダウン時間が <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 短縮される。",
+      "ko": "유물 쿨타임이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 감소합니다.",
+      "de": "Verringert die Artefakt-Abklingzeit um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>.",
+      "fr": "Réduit le temps de recharge des artéfacts de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span>.",
+      "es": "Reduce un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> el tiempo de enfriamiento del artefacto.",
+      "it": "Riduce il tempo di ricarica degli artefatti del <span class=\"placeholder\" data-slot=\"0\">{valore}</span>.",
+      "pt": "Reduz o tempo de recarga do artefato em <span class=\"placeholder\" data-slot=\"0\">{valor}</span>.",
+      "ru": "Сокращает время перезарядки артефактов на <span class=\"placeholder\" data-slot=\"0\">{значение}</span>.",
+      "pl": "Skraca czas odnowienia artefaktów o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Vermindert de afkoeltijd voor artefacten met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Minskar artefaktens nedkylningstid med <span class=\"placeholder\" data-slot=\"0\">{värde}</span>.",
+      "tr": "Eser bekleme süresini <span class=\"placeholder\" data-slot=\"0\">{değer}</span> azaltır.",
+      "uk": "Зменшує час відновлення артефакту на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
     },
     "icon": "icons/talisman/artifact-cooldown.png",
     "links": {}
@@ -15457,6 +15493,24 @@
       "tr": "Demir Yumruk",
       "uk": "Залізний кулак"
     },
+    "description": {
+      "zh": "近戰攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "近战攻击造成的伤害提高 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Melee attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage.",
+      "ja": "近接攻撃によるダメージが <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 増加する。",
+      "ko": "근접 공격이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span>의 추가 피해를 가합니다.",
+      "de": "Nahkampfangriffe richten <span class=\"placeholder\" data-slot=\"0\">{Wert}</span> mehr Schaden an.",
+      "fr": "Les attaques au corps-à-corps infligent <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> de dégâts supplémentaires.",
+      "es": "Los ataques cuerpo a cuerpo infligen un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> más de daño.",
+      "it": "Gli attacchi corpo a corpo infliggono il <span class=\"placeholder\" data-slot=\"0\">{valore}</span> di danni aggiuntivi.",
+      "pt": "Ataques corpo a corpo causam <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de dano extra.",
+      "ru": "Атаки ближнего боя наносят на <span class=\"placeholder\" data-slot=\"0\">{значение}</span> больше урона.",
+      "pl": "Ataki wręcz zadają o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span> więcej obrażeń.",
+      "nl": "Mêlee-aanvallen richten <span class=\"placeholder\" data-slot=\"0\">{waarde}</span> meer schade aan.",
+      "sv": "Närstridsattacker gör <span class=\"placeholder\" data-slot=\"0\">{värde}</span> mer skada.",
+      "tr": "Yakın dövüş saldırıları <span class=\"placeholder\" data-slot=\"0\">{değer}</span> daha fazla hasar verir.",
+      "uk": "Атаки ближнього бою завдають на <span class=\"placeholder\" data-slot=\"0\">{значення}</span> більше шкоди."
+    },
     "icon": "icons/talisman/brawling.png",
     "links": {}
   },
@@ -15483,6 +15537,24 @@
       "sv": "Turklöver",
       "tr": "Şanslı Yonca",
       "uk": "Щаслива конюшина"
+    },
+    "description": {
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率掉落額外的戰利品。",
+      "zh-hans": "有 <span class=\"placeholder\" data-slot=\"0\">{数值}</span> 的几率掉落额外的战利品。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to get additional loot drops.",
+      "ja": "<span class=\"placeholder\" data-slot=\"0\">{数値}</span> の確率で戦利品が追加でドロップする。",
+      "ko": "<span class=\"placeholder\" data-slot=\"0\">{수치}</span>의 확률로 추가 전리품을 획득합니다.",
+      "de": "Gewährt eine Chance von <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>, zusätzliche Beute zu erhalten.",
+      "fr": "Confère <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> de chances d&#39;obtenir du butin supplémentaire.",
+      "es": "Otorga una probabilidad del <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de recibir botines adicionales.",
+      "it": "Conferisce <span class=\"placeholder\" data-slot=\"0\">{valore}</span> di probabilità di ottenere bottino aggiuntivo.",
+      "pt": "Concede <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de chance de obter espólios adicionais.",
+      "ru": "Шанс <span class=\"placeholder\" data-slot=\"0\">{значение}</span> выпадения дополнительной добычи.",
+      "pl": "Zapewnia <span class=\"placeholder\" data-slot=\"0\">{wartość}</span> szans na otrzymanie dodatkowego łupu.",
+      "nl": "Geeft een kans van <span class=\"placeholder\" data-slot=\"0\">{waarde}</span> om extra buit te laten vallen.",
+      "sv": "Ger <span class=\"placeholder\" data-slot=\"0\">{värde}</span> chans att få ytterligare släppta byten.",
+      "tr": "<span class=\"placeholder\" data-slot=\"0\">{değer}</span> ek ganimet düşme şansı verir.",
+      "uk": "Надає <span class=\"placeholder\" data-slot=\"0\">{значення}</span> шанс отримати додаткову здобич."
     },
     "icon": "icons/talisman/double-drop.png",
     "links": {}
@@ -15511,6 +15583,24 @@
       "tr": "Talancı Tılsımı",
       "uk": "Талісман здобичника"
     },
+    "description": {
+      "zh": "擊敗敵人時掉落戰利品的機率提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "击败敌人时掉落战利品的几率提高 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> increased chance for defeated enemies to drop loot.",
+      "ja": "倒した敵が戦利品をドロップする確率が <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 上昇する。",
+      "ko": "처치된 적이 전리품을 떨굴 확률이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 증가합니다.",
+      "de": "Besiegte Feinde lassen mit einer um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span> erhöhten Wahrscheinlichkeit Beute fallen.",
+      "fr": "Augmente de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> les chances que les ennemis vaincus lâchent du butin.",
+      "es": "Aumenta un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> la probabilidad de que los enemigos derrotados suelten un botín.",
+      "it": "Aumenta la probabilità che i nemici sconfitti rilascino bottino (<span class=\"placeholder\" data-slot=\"0\">{valore}</span>).",
+      "pt": "Concede mais <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de chance de os inimigos deixarem espólios.",
+      "ru": "На <span class=\"placeholder\" data-slot=\"0\">{значение}</span> повышает шанс, что из поверженных врагов выпадет добыча.",
+      "pl": "Zwiększa szanse na upuszczenie łupów przez pokonanych przeciwników o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Verhoogt de kans dat verslagen vijanden buit laten vallen met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Ger <span class=\"placeholder\" data-slot=\"0\">{värde}</span> större chans att besegrade fiender släpper bytet.",
+      "tr": "Yenilen düşmanların ganimet düşürme şansını <span class=\"placeholder\" data-slot=\"0\">{değer}</span> artırır.",
+      "uk": "Збільшує на <span class=\"placeholder\" data-slot=\"0\">{значення}</span> шанс, що з переможених ворогів випаде здобич."
+    },
     "icon": "icons/talisman/drop-chance.png",
     "links": {}
   },
@@ -15538,6 +15628,24 @@
       "tr": "Talih Zümrüdü",
       "uk": "Смарагд удачі"
     },
+    "description": {
+      "zh": "有 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 的機率獲得額外的綠寶石。",
+      "zh-hans": "有 <span class=\"placeholder\" data-slot=\"0\">{数值}</span> 的几率获得额外的绿宝石。",
+      "en": "Grants a <span class=\"placeholder\" data-slot=\"0\">{value}</span> chance to receive additional emeralds.",
+      "ja": "<span class=\"placeholder\" data-slot=\"0\">{数値}</span> の確率でエメラルドを追加で入手できる。",
+      "ko": "<span class=\"placeholder\" data-slot=\"0\">{수치}</span> 확률로 추가 에메랄드를 받습니다.",
+      "de": "Gewährt eine Chance von <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>, zusätzliche Smaragde zu erhalten.",
+      "fr": "Confère <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> de chances d&#39;obtenir des émeraudes supplémentaires.",
+      "es": "Otorga una probabilidad del <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de recibir esmeraldas adicionales.",
+      "it": "Conferisce <span class=\"placeholder\" data-slot=\"0\">{valore}</span> di probabilità di ricevere smeraldi aggiuntivi.",
+      "pt": "Concede <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de chance de receber esmeraldas adicionais.",
+      "ru": "Шанс <span class=\"placeholder\" data-slot=\"0\">{значение}</span> получить дополнительные изумруды.",
+      "pl": "Zapewnia <span class=\"placeholder\" data-slot=\"0\">{wartość}</span> szans na otrzymanie dodatkowych szmaragdów.",
+      "nl": "Geeft een kans van <span class=\"placeholder\" data-slot=\"0\">{waarde}</span> om extra smaragden te krijgen.",
+      "sv": "Ger <span class=\"placeholder\" data-slot=\"0\">{värde}</span> chans att få fler smaragder.",
+      "tr": "<span class=\"placeholder\" data-slot=\"0\">{değer}</span> ek zümrüt alma şansı verir.",
+      "uk": "Надає <span class=\"placeholder\" data-slot=\"0\">{значення}</span> шанс отримати додаткові смарагди."
+    },
     "icon": "icons/talisman/emerald-increase.png",
     "links": {}
   },
@@ -15564,6 +15672,24 @@
       "sv": "Erfarenhetens öga",
       "tr": "Deneyim Gözü",
       "uk": "Око досвіду"
+    },
+    "description": {
+      "zh": "獲得的經驗值提升 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "获得的经验值提高 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Increases experience gained by <span class=\"placeholder\" data-slot=\"0\">{value}</span>.",
+      "ja": "獲得する経験値が <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 増加する。",
+      "ko": "획득하는 경험치가 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 증가합니다.",
+      "de": "Erhöht die erhaltene Erfahrung um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>.",
+      "fr": "Augmente l&#39;expérience gagnée de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span>.",
+      "es": "Aumenta un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> la experiencia obtenida.",
+      "it": "Aumenta l&#39;esperienza che ottieni (<span class=\"placeholder\" data-slot=\"0\">{valore}</span>).",
+      "pt": "Aumenta a experiência recebida em <span class=\"placeholder\" data-slot=\"0\">{valor}</span>.",
+      "ru": "Увеличивает получаемый опыт на <span class=\"placeholder\" data-slot=\"0\">{значение}</span>.",
+      "pl": "Zwiększa otrzymywane doświadczenie o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Verhoogt verworven ervaring met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Ökar erfarenheten med <span class=\"placeholder\" data-slot=\"0\">{värde}</span>.",
+      "tr": "Kazanılan deneyimi <span class=\"placeholder\" data-slot=\"0\">{değer}</span> artırır.",
+      "uk": "Збільшує отриманий досвід на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
     },
     "icon": "icons/talisman/experience-increase.png",
     "links": {}
@@ -15637,6 +15763,24 @@
       "tr": "Şifalı Kalp",
       "uk": "Цілюще серце"
     },
+    "description": {
+      "zh": "脫離戰鬥 5 秒後，每秒恢復 <span class=\"placeholder\" data-slot=\"0\">{數值}</span> 生命值。",
+      "zh-hans": "脱离战斗 5 秒后，每秒恢复 <span class=\"placeholder\" data-slot=\"0\">{数值}</span> 生命值。",
+      "en": "Restores health by <span class=\"placeholder\" data-slot=\"0\">{value}</span> per second after 5 seconds out of combat.",
+      "ja": "戦闘を離脱して 5 秒が経過した後から体力を毎秒 <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 回復する。",
+      "ko": "전투에서 벗어난 지 5초 후 초당 <span class=\"placeholder\" data-slot=\"0\">{수치}</span>의 체력을 회복합니다.",
+      "de": "Erhöht Gesundheit um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span> pro Sekunde nach 5 Sekunden außerhalb des Kampfes.",
+      "fr": "Restaure <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> de santé par seconde après 5 secondes hors combat.",
+      "es": "Restaura la salud en <span class=\"placeholder\" data-slot=\"0\">{valor}</span> por segundo después de estar 5 segundos fuera de combate.",
+      "it": "Ripristina il <span class=\"placeholder\" data-slot=\"0\">{valore}</span> di salute al secondo dopo 5 secondi senza combattere.",
+      "pt": "Restaura <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de vida a cada segundo após 5 segundos fora de combate.",
+      "ru": "Восстанавливает здоровье на <span class=\"placeholder\" data-slot=\"0\">{значение}</span> в секунду через 5 секунд вне боя.",
+      "pl": "Po 5 sekundach bez walki odnawia zdrowie o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span> na sekundę.",
+      "nl": "Herstelt levenspunten met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span> per seconde na 5 seconden niet te hebben gevochten.",
+      "sv": "Återställer hälsa med <span class=\"placeholder\" data-slot=\"0\">{värde}</span> per sekund efter 5 sekunder utanför strid.",
+      "tr": "Çatışma dışında 5 saniye geçtikten sonra sağlığı saniyede <span class=\"placeholder\" data-slot=\"0\">{değer}</span> yeniler.",
+      "uk": "Відновлює здоров’я на <span class=\"placeholder\" data-slot=\"0\">{значення}</span> щосекунди через 5 секунд після бою."
+    },
     "icon": "icons/talisman/healing.png",
     "links": {}
   },
@@ -15663,6 +15807,24 @@
       "sv": "Sigill av bivax",
       "tr": "Bal Mumu Mührü",
       "uk": "Сигіл із воску"
+    },
+    "description": {
+      "zh": "提高玩家的最高生命值 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "玩家的最大生命值提高 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Increases the player&#39;s maximum health by <span class=\"placeholder\" data-slot=\"0\">{value}</span>.",
+      "ja": "プレイヤーの体力の最大値が <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 増加する。",
+      "ko": "플레이어의 최대 체력이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 증가합니다.",
+      "de": "Erhöht die maximale Gesundheit des Spielers um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>.",
+      "fr": "Augmente la santé maximale du joueur de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span>.",
+      "es": "Aumenta un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> la salud máxima del jugador.",
+      "it": "Aumenta del <span class=\"placeholder\" data-slot=\"0\">{valore}</span> la salute massima del giocatore.",
+      "pt": "Aumenta a vida máxima do jogador em <span class=\"placeholder\" data-slot=\"0\">{valor}</span>.",
+      "ru": "Увеличивает максимальное здоровья игрока на <span class=\"placeholder\" data-slot=\"0\">{значение}</span>.",
+      "pl": "Zwiększa maks. zdrowie o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Verhoogt het maximale aantal levenspunten van de speler met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Ökar spelarens maximala hälsa med <span class=\"placeholder\" data-slot=\"0\">{värde}</span>.",
+      "tr": "Oyuncunun maksimum sağlığını <span class=\"placeholder\" data-slot=\"0\">{değer}</span> artırır.",
+      "uk": "Підвищує максимальне здоров’я гравця на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
     },
     "icon": "icons/talisman/health-boost.png",
     "links": {}
@@ -15878,6 +16040,24 @@
       "tr": "Oselo Patisi",
       "uk": "Лапа оцелота"
     },
+    "description": {
+      "zh": "跳躍近戰攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "跳跃近战攻击造成的伤害提高 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Jumping melee attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage.",
+      "ja": "ジャンプ中の近接攻撃のダメージが <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 増加する。",
+      "ko": "점프 근접 공격이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span>의 추가 피해를 가합니다.",
+      "de": "Sprungnahkampfangriffe richten <span class=\"placeholder\" data-slot=\"0\">{Wert}</span> mehr Schaden an.",
+      "fr": "Les attaques au corps-à-corps en saut infligent <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> de dégâts supplémentaires.",
+      "es": "Los ataques cuerpo a cuerpo con salto infligen un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> más de daño.",
+      "it": "Gli attacchi corpo a corpo in salto infliggono il <span class=\"placeholder\" data-slot=\"0\">{valore}</span> di danni aggiuntivi.",
+      "pt": "Ataques corpo a corpo com salto causam <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de dano adicional.",
+      "ru": "Атаки ближнего боя в прыжке наносят на <span class=\"placeholder\" data-slot=\"0\">{значение}</span> больше урона.",
+      "pl": "Ataki wręcz z wyskoku zadają o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span> więcej obrażeń.",
+      "nl": "Mêlee-aanvallen met een sprong richten <span class=\"placeholder\" data-slot=\"0\">{waarde}</span> meer schade aan.",
+      "sv": "Hoppande närstridsattacker gör <span class=\"placeholder\" data-slot=\"0\">{värde}</span> mer skada.",
+      "tr": "Zıplayarak yapılan yakın dövüş saldırıları <span class=\"placeholder\" data-slot=\"0\">{değer}</span> daha fazla hasar verir.",
+      "uk": "Атаки ближнього бою в стрибку завдають на <span class=\"placeholder\" data-slot=\"0\">{значення}</span> більше шкоди."
+    },
     "icon": "icons/talisman/plummeting.png",
     "links": {}
   },
@@ -15904,6 +16084,24 @@
       "sv": "Glödstensflaska",
       "tr": "Işık Taşı Matarası",
       "uk": "Світлокам’яна пляшка"
+    },
+    "description": {
+      "zh": "藥水的冷卻時間縮短 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "药水冷却时间缩短 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Reduces potion cooldown time by <span class=\"placeholder\" data-slot=\"0\">{value}</span>.",
+      "ja": "ポーションのクールダウン時間が <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 短縮される。",
+      "ko": "포션 쿨타임이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 감소합니다.",
+      "de": "Verringert die Trank-Abklingzeit um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>.",
+      "fr": "Réduit le temps de recharge des potions de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span>.",
+      "es": "Reduce un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> el tiempo de enfriamiento de la poción.",
+      "it": "Riduce il tempo di ricarica delle pozioni del <span class=\"placeholder\" data-slot=\"0\">{valore}</span>.",
+      "pt": "Reduz o tempo de recarga da poção em <span class=\"placeholder\" data-slot=\"0\">{valor}</span>.",
+      "ru": "Сокращает время перезарядки зелий на <span class=\"placeholder\" data-slot=\"0\">{значение}</span>.",
+      "pl": "Skraca czas odnowienia mikstury o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Vermindert de afkoeltijd voor drankjes met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Minskar brygdens nedkylningstid med <span class=\"placeholder\" data-slot=\"0\">{värde}</span>.",
+      "tr": "İksir bekleme süresini <span class=\"placeholder\" data-slot=\"0\">{değer}</span> azaltır.",
+      "uk": "Зменшує час відновлення зілля на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
     },
     "icon": "icons/talisman/potion-cooldown.png",
     "links": {}
@@ -15977,6 +16175,24 @@
       "tr": "Ametist Mercek",
       "uk": "Аметистова лінза"
     },
+    "description": {
+      "zh": "遠程攻擊造成的傷害提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "远程攻击造成的伤害提高 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Ranged attacks deal <span class=\"placeholder\" data-slot=\"0\">{value}</span> more damage.",
+      "ja": "遠距離攻撃によるダメージが <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 増加する。",
+      "ko": "원거리 공격이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span>의 추가 피해를 가합니다.",
+      "de": "Fernkampfangriffe richten <span class=\"placeholder\" data-slot=\"0\">{Wert}</span> mehr Schaden an.",
+      "fr": "Les attaques à distance infligent <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> de dégâts supplémentaires.",
+      "es": "Los ataques a distancia infligen un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> más de daño.",
+      "it": "Gli attacchi a distanza infliggono il <span class=\"placeholder\" data-slot=\"0\">{valore}</span> di danni aggiuntivi.",
+      "pt": "Ataques de longo alcance causam <span class=\"placeholder\" data-slot=\"0\">{valor}</span> de dano extra.",
+      "ru": "Дальние атаки наносят на <span class=\"placeholder\" data-slot=\"0\">{значение}</span> больше урона.",
+      "pl": "Ataki dystansowe zadają o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span> więcej obrażeń.",
+      "nl": "Aanvallen op afstand richten <span class=\"placeholder\" data-slot=\"0\">{waarde}</span> meer schade aan.",
+      "sv": "Distansattacker ger <span class=\"placeholder\" data-slot=\"0\">{värde}</span> mer skada.",
+      "tr": "Menzilli saldırılar <span class=\"placeholder\" data-slot=\"0\">{değer}</span> daha fazla hasar verir.",
+      "uk": "Атаки дальнього бою завдають на <span class=\"placeholder\" data-slot=\"0\">{значення}</span> більше шкоди."
+    },
     "icon": "icons/talisman/ranged-buff.png",
     "links": {}
   },
@@ -16003,6 +16219,24 @@
       "sv": "Bältdjursamulett",
       "tr": "Armadillo Muskası",
       "uk": "Амулет броненосця"
+    },
+    "description": {
+      "zh": "翻滾的冷卻時間縮短 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "翻滚的冷却时间缩短 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Reduces rolling cooldown time by <span class=\"placeholder\" data-slot=\"0\">{value}</span>.",
+      "ja": "ロールのクールダウン時間が <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 短縮される。",
+      "ko": "구르기 쿨타임이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 감소합니다.",
+      "de": "Verringert die Rollen-Abklingzeit um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>.",
+      "fr": "Réduit le temps de recharge de la roulade de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span>.",
+      "es": "Reduce un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> el tiempo de enfriamiento para rodar.",
+      "it": "Riduce del <span class=\"placeholder\" data-slot=\"0\">{valore}</span> il tempo di ricarica della capriola.",
+      "pt": "Reduz o tempo de recarga da rolagem em <span class=\"placeholder\" data-slot=\"0\">{valor}</span>.",
+      "ru": "Сокращает время перезарядки кувырка на <span class=\"placeholder\" data-slot=\"0\">{значение}</span>.",
+      "pl": "Skraca czas odnowienia przetoczenia o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Vermindert de afkoeltijd voor het rollen met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Minskar nedkylningstid för rullning med <span class=\"placeholder\" data-slot=\"0\">{värde}</span>.",
+      "tr": "Yuvarlanma bekleme süresini <span class=\"placeholder\" data-slot=\"0\">{değer}</span> azaltır.",
+      "uk": "Зменшує час відновлення перекидів на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
     },
     "icon": "icons/talisman/rolling-cooldown.png",
     "links": {}
@@ -16031,6 +16265,24 @@
       "tr": "Ruh Yongası",
       "uk": "Фрагмент душі"
     },
+    "description": {
+      "zh": "靈魂容量提高 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "灵魂容量提高 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Increases Soul capacity by <span class=\"placeholder\" data-slot=\"0\">{value}</span>.",
+      "ja": "ソウルの最大量が <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 増加する。",
+      "ko": "영혼 용량이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 증가합니다.",
+      "de": "Erhöht die Seelenkapazität um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>.",
+      "fr": "Augmente la capacité d&#39;âmes de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span>.",
+      "es": "Aumenta un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> la capacidad de las almas.",
+      "it": "Aumenta del <span class=\"placeholder\" data-slot=\"0\">{valore}</span> la capacità di anime.",
+      "pt": "Aumenta a capacidade de Almas em <span class=\"placeholder\" data-slot=\"0\">{valor}</span>.",
+      "ru": "Увеличивает вместимость душ на <span class=\"placeholder\" data-slot=\"0\">{значение}</span>.",
+      "pl": "Zwiększa maks. liczbę dusz o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Verhoogt capaciteit voor zielen met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Ökar själskapaciteten med <span class=\"placeholder\" data-slot=\"0\">{värde}</span>.",
+      "tr": "Ruh kapasitesini <span class=\"placeholder\" data-slot=\"0\">{değer}</span> artırır.",
+      "uk": "Збільшує місткість сховища душ на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
+    },
     "icon": "icons/talisman/soul-capacity.png",
     "links": {}
   },
@@ -16057,6 +16309,24 @@
       "sv": "Förvrängd tand",
       "tr": "Çarpık Diş",
       "uk": "Спотворений зуб"
+    },
+    "description": {
+      "zh": "獲得的靈魂增加 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "获得的灵魂增加 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Increases souls gained by <span class=\"placeholder\" data-slot=\"0\">{value}</span>.",
+      "ja": "獲得するソウルが <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 増加する。",
+      "ko": "획득하는 영혼 수가 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 증가합니다.",
+      "de": "Erhöht die erhaltenen Seelen um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>.",
+      "fr": "Augmente les âmes obtenues de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span>.",
+      "es": "Aumenta un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> las almas obtenidas.",
+      "it": "Aumenta del <span class=\"placeholder\" data-slot=\"0\">{valore}</span> le anime ottenute.",
+      "pt": "Aumenta as almas recebidas em <span class=\"placeholder\" data-slot=\"0\">{valor}</span>.",
+      "ru": "Увеличивает количество получаемых душ на <span class=\"placeholder\" data-slot=\"0\">{значение}</span>.",
+      "pl": "Zwiększa liczbę gromadzonych dusz o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Verhoogt verworven zielen met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Ökar antalet själar du får med <span class=\"placeholder\" data-slot=\"0\">{värde}</span>.",
+      "tr": "Elde edilen ruh sayısını <span class=\"placeholder\" data-slot=\"0\">{değer}</span> artırır.",
+      "uk": "Збільшує кількість отриманих душ на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
     },
     "icon": "icons/talisman/soul-gather.png",
     "links": {}
@@ -16129,6 +16399,24 @@
       "sv": "Sculkmärke",
       "tr": "Sculk Nişanı",
       "uk": "Скалковий значок"
+    },
+    "description": {
+      "zh": "施加在自己身上的正面狀態持續時間延長 <span class=\"placeholder\" data-slot=\"0\">{數值}</span>。",
+      "zh-hans": "使施加于自身的正面状态持续时间延长 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
+      "en": "Increases duration of positive statuses applied to you by <span class=\"placeholder\" data-slot=\"0\">{value}</span>.",
+      "ja": "自分に付与されている良い状態効果の持続時間が <span class=\"placeholder\" data-slot=\"0\">{数値}</span> 延長される。",
+      "ko": "자신에게 적용된 긍정적 상태의 지속 시간이 <span class=\"placeholder\" data-slot=\"0\">{수치}</span> 증가합니다.",
+      "de": "Erhöht die Dauer positiver Statuseffekte bei dir um <span class=\"placeholder\" data-slot=\"0\">{Wert}</span>.",
+      "fr": "Augmente de <span class=\"placeholder\" data-slot=\"0\">{valeur}</span> la durée des effets positifs qui vous sont appliqués.",
+      "es": "Aumenta un <span class=\"placeholder\" data-slot=\"0\">{valor}</span> la duración de los estados positivos que tienes aplicados.",
+      "it": "Aumenta del <span class=\"placeholder\" data-slot=\"0\">{valore}</span> la durata degli stati positivi applicati al tuo personaggio.",
+      "pt": "Aumenta a duração dos estados positivos aplicados a você em <span class=\"placeholder\" data-slot=\"0\">{valor}</span>.",
+      "ru": "Увеличивает длительность наложенных на вас положительных статусов на <span class=\"placeholder\" data-slot=\"0\">{значение}</span>.",
+      "pl": "Wydłuża czas trwania nałożonych na ciebie pozytywnych efektów statusu o <span class=\"placeholder\" data-slot=\"0\">{wartość}</span>.",
+      "nl": "Verhoogt de duur van positieve statussen voor jou met <span class=\"placeholder\" data-slot=\"0\">{waarde}</span>.",
+      "sv": "Ökar varaktigheten för positiva statusar som tillämpas på dig med <span class=\"placeholder\" data-slot=\"0\">{värde}</span>.",
+      "tr": "Sana uygulanan olumlu durumların süresini <span class=\"placeholder\" data-slot=\"0\">{değer}</span> artırır.",
+      "uk": "Збільшує тривалість дії позитивних станів, застосованих до вас, на <span class=\"placeholder\" data-slot=\"0\">{значення}</span>."
     },
     "icon": "icons/talisman/status-buff.png",
     "links": {}
