@@ -50,7 +50,11 @@ export type IssueType =
   | "loot-chest-by-category"
   | "loot-slot-unnamed"
   | "source-name-fallback"
-  | "talisman-no-values";
+  | "talisman-no-values"
+  | "missing-soul-storm-tables"
+  | "soul-storm-area-unnamed"
+  | "soul-storm-mob-unlinked"
+  | "soul-storm-text-fallback";
 
 export interface Issue {
   readonly type: IssueType;
