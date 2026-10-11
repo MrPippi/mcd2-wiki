@@ -14,7 +14,8 @@ const ENGLISH_FALLBACK: Readonly<Partial<Record<Lang, readonly string[]>>> = {
   "zh-hans": ["compatibleEffectsIntro", "fixedEffectNote", "fixedEnchantmentNote"],
   ja: ["compatibleEffectsIntro", "fixedEffectNote", "fixedEnchantmentNote"],
   ru: ["compatibleEffectsIntro", "fixedEffectNote", "fixedEnchantmentNote", "normal"],
-  pl: ["normal"],
+  pl: ["normal", "soulStormShieldRule"],
+  sv: ["soulStormCadence"],
   de: ["armorPiece", "fixedOn"],
 };
 
@@ -148,7 +149,7 @@ describe("UI translations", () => {
     const needs: Record<string, readonly string[]> = {
       soulStormNow: ["{area}"], soulStormNext: ["{area}"], soulStormEndsIn: ["{time}"], soulStormStartsIn: ["{time}"],
       soulStormTimeZone: ["{zone}"], soulStormCadence: ["{cadence}", "{duration}"], soulStormHealthByPlayers: ["{list}"],
-      soulStormShieldRule: ["{chance}", "{seconds}"], soulStormFinalSummon: ["{percent}"], soulStormRarity: ["{common}", "{rare}"],
+      soulStormShieldRule: ["{chance}", "{seconds}"], soulStormFinalSummon: ["{percent}", "{count}"], soulStormRarity: ["{common}", "{rare}"],
     };
     for (const lang of LANGS) {
       for (const [key, placeholders] of Object.entries(needs)) {

@@ -493,7 +493,7 @@
   "soulStormShield": "Kalkan Üreteci",
   "soulStormShieldRule": "{chance} olasılıkla çağırır, {seconds} sn bekleme süresi",
   "soulStormShieldNone": "Çağırmaz",
-  "soulStormFinalSummon": "Sağlık {percent} olduğunda şunlardan birini çağırır",
+  "soulStormFinalSummon": "Sağlık {percent} olduğunda aşağıdakilerden {count} tanesini çağırır",
   "soulStormResistances": "Üç zorluk seviyesinin dirençleri aynıdır:",
   "soulStormChests": "Ödül sandıkları",
   "soulStormChestsGenerator": "Yok edilen bir Fırtına Üretecinden",

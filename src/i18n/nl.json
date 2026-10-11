@@ -493,7 +493,7 @@
   "soulStormShield": "Schildgenerator",
   "soulStormShieldRule": "{chance} kans, {seconds} s afkoeltijd",
   "soulStormShieldNone": "Geen",
-  "soulStormFinalSummon": "Bij {percent} gezondheid roept hij een van deze op",
+  "soulStormFinalSummon": "Bij {percent} gezondheid roept hij {count} van deze op",
   "soulStormResistances": "Alle drie de moeilijkheidsgraden hebben dezelfde weerstanden:",
   "soulStormChests": "Beloningskisten",
   "soulStormChestsGenerator": "Van een vernietigde stormgenerator",

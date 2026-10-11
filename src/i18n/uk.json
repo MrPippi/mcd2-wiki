@@ -495,7 +495,7 @@
   "soulStormShield": "Щитогенератор",
   "soulStormShieldRule": "Шанс {chance}, перезарядка {seconds} с",
   "soulStormShieldNone": "Немає",
-  "soulStormFinalSummon": "При {percent} здоров’я прикликає одного з",
+  "soulStormFinalSummon": "При {percent} здоров’я прикликає {count} з наступних",
   "soulStormResistances": "У всіх трьох рівнів складності однакові стійкості:",
   "soulStormChests": "Скрині з нагородами",
   "soulStormChestsGenerator": "За знищений штормогенератор",

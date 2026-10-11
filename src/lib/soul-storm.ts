@@ -3,7 +3,8 @@ import type { Mob } from "../../scripts/extract/mob-schema";
 import { SoulStormDataSchema, type Chest, type Generator, type SoulStormData, type TextId } from "../../scripts/extract/soul-storm-schema";
 import rawSoulStorm from "../data/soul-storm.json";
 import { t, type Lang, type UiKey } from "./i18n";
-import { findMob, mapLinkOf } from "./mobs";
+import { htmlLang } from "./lang";
+import { findMob, formatChance, mapLinkOf } from "./mobs";
 import type { ClockPayload, StormSchedule } from "./soul-storm-schedule";
 
 /** Soul Storm data from `npm run extract`, validated at build time. */
@@ -78,10 +79,10 @@ export const chestLabel = (chest: Chest, lang: Lang): string => t(lang, CHEST_KE
 
 export const formatMultipliers = (values: readonly number[]): string => values.join(" / ");
 
-/** The health multipliers when every difficulty shares them, so the page says them once. */
+/** The health multipliers when every difficulty shares them, so the page says them once; undefined when they differ or there are none. */
 export function sharedMultipliers(generators: readonly Generator[]): readonly number[] | undefined {
   const [first] = generators;
-  if (!first) return undefined;
+  if (!first || first.healthByPlayers.length === 0) return undefined;
   const key = formatMultipliers(first.healthByPlayers);
   return generators.every((generator) => formatMultipliers(generator.healthByPlayers) === key) ? first.healthByPlayers : undefined;
 }
@@ -105,3 +106,24 @@ export const chestsOf = (data: SoulStormData, group: Chest["group"]): Chest[] =>
 export const slotRows = (chests: readonly Chest[]): Chest["slots"][number]["slot"][] => [
   ...new Set(chests.flatMap((chest) => chest.slots.map((slot) => slot.slot))),
 ];
+
+/** A spawn weight, or a dash when the data has none. */
+export const spawnWeightText = (weight: number | null): string => (weight === null ? "—" : String(weight));
+
+/** How many mobs one final wave picks: "1", or a range with an en dash ("1–2"). */
+export const pickCount = ({ minPick, maxPick }: Pick<Generator["finalSummon"], "minPick" | "maxPick">): string =>
+  minPick === maxPick ? String(minPick) : `${minPick}–${maxPick}`;
+
+/** The final-summon sentence that introduces the list of mobs (replacer functions: no "$" patterns in the values). */
+export const summonLine = (generator: Generator, lang: Lang): string =>
+  t(lang, "soulStormFinalSummon")
+    .replace("{percent}", () => formatChance(generator.finalSummon.healthFraction, lang))
+    .replace("{count}", () => pickCount(generator.finalSummon));
+
+/** The chest rarity sentence with numbers written the page language's way; undefined when the data has none. */
+export function rarityLine(data: SoulStormData, lang: Lang): string | undefined {
+  if (!data.chestRarity) return undefined;
+  const number = new Intl.NumberFormat(htmlLang(lang), { maximumFractionDigits: 6 });
+  const { common, rare } = data.chestRarity;
+  return t(lang, "soulStormRarity").replace("{common}", () => number.format(common)).replace("{rare}", () => number.format(rare));
+}

@@ -494,7 +494,7 @@
   "soulStormShield": "Generatore di scudi",
   "soulStormShieldRule": "{chance} di probabilità, {seconds} s di ricarica",
   "soulStormShieldNone": "Nessuno",
-  "soulStormFinalSummon": "A {percent} di salute, evoca uno tra",
+  "soulStormFinalSummon": "A {percent} di salute, evoca {count} tra questi",
   "soulStormResistances": "Le tre difficoltà hanno le stesse resistenze:",
   "soulStormChests": "Forzieri ricompensa",
   "soulStormChestsGenerator": "Da un generatore di tempeste distrutto",

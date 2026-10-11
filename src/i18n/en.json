@@ -261,7 +261,7 @@
   "soulStormShield": "Shield Generator",
   "soulStormShieldRule": "{chance} chance, {seconds} s cooldown",
   "soulStormShieldNone": "None",
-  "soulStormFinalSummon": "At {percent} health, summons one of",
+  "soulStormFinalSummon": "At {percent} health, summons {count} of",
   "soulStormResistances": "All three difficulties share these resistances:",
   "soulStormChests": "Reward chests",
   "soulStormChestsGenerator": "From a destroyed Storm Generator",

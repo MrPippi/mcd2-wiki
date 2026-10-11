@@ -215,7 +215,6 @@
     "soulStormHealthByPlayers",
     "soulStormSpawnWeight",
     "soulStormShield",
-    "soulStormShieldRule",
     "soulStormShieldNone",
     "soulStormFinalSummon",
     "soulStormResistances",
@@ -231,7 +230,8 @@
     "soulStormMonstrositiesNote"
   ],
   "_english": [
-    "normal"
+    "normal",
+    "soulStormShieldRule"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -495,9 +495,9 @@
   "soulStormHealthByPlayers": "Zdrowie przy 1–4 graczach: ×{list}",
   "soulStormSpawnWeight": "Waga pojawiania się",
   "soulStormShield": "Generator tarczy",
-  "soulStormShieldRule": "{chance} szans, odnowienie {seconds} s",
+  "soulStormShieldRule": "{chance} chance, {seconds} s cooldown",
   "soulStormShieldNone": "Brak",
-  "soulStormFinalSummon": "Przy {percent} zdrowia przyzywa jednego z",
+  "soulStormFinalSummon": "Przy {percent} zdrowia przyzywa {count} z poniższych",
   "soulStormResistances": "Wszystkie trzy poziomy trudności mają takie same odporności:",
   "soulStormChests": "Skrzynie z nagrodami",
   "soulStormChestsGenerator": "Po zniszczeniu generatora burz",

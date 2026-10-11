@@ -492,7 +492,7 @@
   "soulStormShield": "シールドジェネレーター",
   "soulStormShieldRule": "{chance}の確率で召喚、クールダウン{seconds}秒",
   "soulStormShieldNone": "召喚なし",
-  "soulStormFinalSummon": "体力が{percent}になると、次のいずれかを召喚",
+  "soulStormFinalSummon": "体力が{percent}になると、次の中から{count}体を召喚",
   "soulStormResistances": "3つの難易度すべてで耐性は同じです：",
   "soulStormChests": "報酬チェスト",
   "soulStormChestsGenerator": "ストームジェネレーターを破壊したとき",

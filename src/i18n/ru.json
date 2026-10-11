@@ -497,7 +497,7 @@
   "soulStormShield": "Генератор щита",
   "soulStormShieldRule": "Шанс {chance}, перезарядка {seconds} с",
   "soulStormShieldNone": "Нет",
-  "soulStormFinalSummon": "При {percent} здоровья призывает одного из",
+  "soulStormFinalSummon": "При {percent} здоровья призывает {count} из следующих",
   "soulStormResistances": "У всех трёх уровней сложности одинаковые сопротивления:",
   "soulStormChests": "Сундуки с наградами",
   "soulStormChestsGenerator": "За уничтоженный генератор бури",

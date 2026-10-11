@@ -258,7 +258,7 @@
   "soulStormShield": "護盾產生器",
   "soulStormShieldRule": "{chance} 機率召喚，冷卻 {seconds} 秒",
   "soulStormShieldNone": "不召喚",
-  "soulStormFinalSummon": "生命降到 {percent} 時召喚其中之一",
+  "soulStormFinalSummon": "生命降到 {percent} 時，從以下召喚 {count} 隻",
   "soulStormResistances": "三種難度的抗性相同：",
   "soulStormChests": "獎勵寶箱",
   "soulStormChestsGenerator": "摧毀風暴產生器後",

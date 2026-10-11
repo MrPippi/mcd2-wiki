@@ -494,7 +494,7 @@
   "soulStormShield": "Generador de escudos",
   "soulStormShieldRule": "{chance} de probabilidad, {seconds} s de reutilización",
   "soulStormShieldNone": "Ninguno",
-  "soulStormFinalSummon": "Con el {percent} de salud, invoca uno de estos",
+  "soulStormFinalSummon": "Con el {percent} de salud, invoca {count} de estos",
   "soulStormResistances": "Las tres dificultades comparten estas resistencias:",
   "soulStormChests": "Cofres de recompensa",
   "soulStormChestsGenerator": "De un generador de tormenta destruido",

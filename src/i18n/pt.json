@@ -494,7 +494,7 @@
   "soulStormShield": "Gerador de Escudo",
   "soulStormShieldRule": "{chance} de chance, {seconds} s de recarga",
   "soulStormShieldNone": "Nenhum",
-  "soulStormFinalSummon": "Com {percent} de vida, invoca um destes",
+  "soulStormFinalSummon": "Com {percent} de vida, invoca {count} destes",
   "soulStormResistances": "As três dificuldades têm as mesmas resistências:",
   "soulStormChests": "Baús de recompensa",
   "soulStormChestsGenerator": "De um Gerador de Tempestade destruído",

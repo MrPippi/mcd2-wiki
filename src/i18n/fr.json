@@ -494,7 +494,7 @@
   "soulStormShield": "Générateur de bouclier",
   "soulStormShieldRule": "{chance} de chances, {seconds} s de recharge",
   "soulStormShieldNone": "Aucun",
-  "soulStormFinalSummon": "À {percent} de santé, invoque l'un des suivants",
+  "soulStormFinalSummon": "À {percent} de santé, invoque {count} des suivants",
   "soulStormResistances": "Les trois difficultés ont les mêmes résistances :",
   "soulStormChests": "Coffres de récompense",
   "soulStormChestsGenerator": "Après la destruction d'un générateur de tempête",

@@ -204,7 +204,6 @@
     "soulStormColStart",
     "soulStormColArea",
     "soulStormTimeZone",
-    "soulStormCadence",
     "soulStormNoScript",
     "soulStormNoData",
     "soulStormUnlock",
@@ -230,6 +229,9 @@
     "soulStormRarity",
     "soulStormMonstrosities",
     "soulStormMonstrositiesNote"
+  ],
+  "_english": [
+    "soulStormCadence"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -479,7 +481,7 @@
   "soulStormColStart": "Start",
   "soulStormColArea": "Område",
   "soulStormTimeZone": "Tiderna visas i din tidszon: {zone}",
-  "soulStormCadence": "En storm startar var {cadence}:e minut och varar i {duration} minuter; områdena turas om i ordningen nedan.",
+  "soulStormCadence": "A storm starts every {cadence} minutes and lasts {duration} minutes; the areas take turns in the order below.",
   "soulStormNoScript": "Aktivera JavaScript för att se nedräkningen.",
   "soulStormNoData": "Det finns inga schemadata ännu.",
   "soulStormUnlock": "Lås upp",
@@ -493,7 +495,7 @@
   "soulStormShield": "Sköldgenerator",
   "soulStormShieldRule": "{chance} chans, {seconds} s nedkylning",
   "soulStormShieldNone": "Ingen",
-  "soulStormFinalSummon": "Vid {percent} hälsa frammanar den en av",
+  "soulStormFinalSummon": "Vid {percent} hälsa frammanar den {count} av följande",
   "soulStormResistances": "Alla tre svårighetsgrader har samma motstånd:",
   "soulStormChests": "Belöningskistor",
   "soulStormChestsGenerator": "Från en förstörd stormgenerator",

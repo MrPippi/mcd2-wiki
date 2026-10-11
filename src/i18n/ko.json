@@ -490,7 +490,7 @@
   "soulStormShield": "방패 생성기",
   "soulStormShieldRule": "{chance} 확률로 소환, 재사용 대기시간 {seconds}초",
   "soulStormShieldNone": "소환 안 함",
-  "soulStormFinalSummon": "체력이 {percent}가 되면 다음 중 하나를 소환",
+  "soulStormFinalSummon": "체력이 {percent}가 되면 다음 중 {count}마리를 소환",
   "soulStormResistances": "세 난이도 모두 저항이 같습니다:",
   "soulStormChests": "보상 상자",
   "soulStormChestsGenerator": "폭풍 생성기를 파괴하면",

@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { chestLabel, clockPayload, formatMultipliers, scheduleOf, soulStormData, summonedMobs } from "../../../src/lib/soul-storm";
+import {
+  chestLabel, clockPayload, formatMultipliers, pickCount, rarityLine, scheduleOf, sharedMultipliers, soulStormData, spawnWeightText, summonedMobs, summonLine,
+} from "../../../src/lib/soul-storm";
 import { parseClockPayload, stormState } from "../../../src/lib/soul-storm-schedule";
 import { SITE_MENU } from "../../../src/lib/site-menu";
 
@@ -26,6 +28,25 @@ describe("Soul Storm site data", () => {
   it("formats the player multipliers and finds the summoned mobs", () => {
     expect(formatMultipliers([1, 1.5, 2, 2.5])).toBe("1 / 1.5 / 2 / 2.5");
     expect(summonedMobs(soulStormData.monstrosities).map((mob) => mob.slug)).toEqual(["monstrosity-copper", "monstrosity-red-stone", "monstrosity-sculk"]);
+  });
+  it("says how many mobs one final wave summons", () => {
+    expect(pickCount({ minPick: 1, maxPick: 2 })).toBe("1–2");
+    expect(pickCount({ minPick: 1, maxPick: 1 })).toBe("1");
+    const [easy, medium] = soulStormData.generators;
+    expect(summonLine(easy, "en")).toBe("At 20% health, summons 1–2 of");
+    expect(summonLine(easy, "zh")).toBe("生命降到 20% 時，從以下召喚 1–2 隻");
+    expect(summonLine(medium, "en")).toBe("At 40% health, summons 1 of");
+  });
+  it("shows a dash for a missing spawn weight and no multipliers when there are none", () => {
+    expect(spawnWeightText(null)).toBe("—");
+    expect(spawnWeightText(2)).toBe("2");
+    const bare = soulStormData.generators.map((generator) => ({ ...generator, healthByPlayers: [] }));
+    expect(sharedMultipliers(bare)).toBeUndefined();
+  });
+  it("writes the chest rarity numbers the way the page language does", () => {
+    expect(rarityLine(soulStormData, "en")).toBe("Per the game data, storm chests weight rarities: Common ×0, Rare ×0.01");
+    expect(rarityLine(soulStormData, "de")).toContain("×0,01");
+    expect(rarityLine({ ...soulStormData, chestRarity: null }, "en")).toBeUndefined();
   });
   it("lists the page in the menu after the bestiary", () => {
     expect(SITE_MENU.map((item) => item.segment)).toEqual(["map", "achievements", "mobs", "soul-storm"]);

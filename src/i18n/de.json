@@ -495,7 +495,7 @@
   "soulStormShield": "Schildgenerator",
   "soulStormShieldRule": "{chance} Chance, {seconds} s Abklingzeit",
   "soulStormShieldNone": "Keiner",
-  "soulStormFinalSummon": "Bei {percent} Gesundheit wird einer der folgenden beschworen",
+  "soulStormFinalSummon": "Bei {percent} Gesundheit beschwört er {count} der folgenden",
   "soulStormResistances": "Alle drei Schwierigkeitsgrade haben dieselben Resistenzen:",
   "soulStormChests": "Belohnungstruhen",
   "soulStormChestsGenerator": "Von einem zerstörten Sturmgenerator",
