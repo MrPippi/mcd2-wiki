@@ -49,14 +49,21 @@ interface Resolved {
 function resolveOne(draft: MobDraft, renders: Map<string, string>, overrides: Map<string, string>, input: PortraitInput): Resolved {
   const slug = draft.mob.slug;
   const published = `mobs/${slug}.webp`;
+  const render = firstRender(draft, renders);
   const override = overrides.get(lower(slug));
-  if (override) return { plan: { slug, from: path.join(input.overrideDir, override), source: "override", published } };
+  if (override) return { plan: { slug, from: path.join(input.overrideDir, override), source: "override", published }, usedRender: render };
+  if (render) return { plan: { slug, from: path.join(input.renderDir, render), source: "render", published }, usedRender: render };
+  return {};
+}
+
+/** The render this mob would use if no override existed: the first non-denied reference that has a file. */
+function firstRender(draft: MobDraft, renders: Map<string, string>): string | undefined {
   for (const reference of draft.references) {
     const name = renderAssetName(reference);
     const file = name && !isDenied(name) ? renders.get(lower(name)) : undefined;
-    if (file) return { plan: { slug, from: path.join(input.renderDir, file), source: "render", published }, usedRender: file };
+    if (file) return file;
   }
-  return {};
+  return undefined;
 }
 
 export function planPortraits(drafts: readonly MobDraft[], input: PortraitInput): { plans: PortraitPlan[]; issues: Issue[] } {
@@ -70,14 +77,6 @@ export function planPortraits(drafts: readonly MobDraft[], input: PortraitInput)
     if (plan) plans.push(plan);
     else issues.push(issue("mob-no-portrait", draft.mob.slug));
     if (usedRender) used.add(usedRender);
-  }
-  // A render the mob skipped because an override won is still that mob's render, so count every reference as joined.
-  for (const draft of drafts) {
-    for (const reference of draft.references) {
-      const name = renderAssetName(reference);
-      const file = name ? renders.get(lower(name)) : undefined;
-      if (file) used.add(file);
-    }
   }
   for (const file of input.renders) {
     if (lower(path.extname(file)) === ".png" && !used.has(file)) issues.push(issue("mob-portrait-unjoined", file));

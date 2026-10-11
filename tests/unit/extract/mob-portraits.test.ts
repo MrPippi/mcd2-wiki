@@ -62,12 +62,22 @@ describe("planPortraits", () => {
   it("never publishes the grey Geomancer_BombPillar render even when a mob points at it", () => {
     const { plans, issues } = planPortraits([draft("geomancer-bomb-pillar", ref("Geomancer_BombPillar"))], input(["Geomancer_BombPillar.png"]));
     expect(plans).toEqual([]);
-    expect(issues.map((item) => item.type)).toEqual(["mob-no-portrait"]);
+    expect(issues).toEqual([{ type: "mob-no-portrait", detail: "geomancer-bomb-pillar" }, { type: "mob-portrait-unjoined", detail: "Geomancer_BombPillar.png" }]);
   });
 
   it("prefers a hand-made override over the render", () => {
     const { plans } = planPortraits([draft("zombie", ref("Zombie"))], input(["Zombie.png"], ["zombie.webp"]));
     expect(plans).toEqual([{ slug: "zombie", from: path.join("/o", "zombie.webp"), source: "override", published: "mobs/zombie.webp" }]);
+  });
+
+  it("reports a referenced render the mob did not choose", () => {
+    const { issues } = planPortraits([draft("slime", ref("Slime"), ref("Slime_Alias"))], input(["Slime.png", "Slime_Alias.png"]));
+    expect(issues).toEqual([{ type: "mob-portrait-unjoined", detail: "Slime_Alias.png" }]);
+  });
+
+  it("does not report the render of a mob whose override won", () => {
+    const { issues } = planPortraits([draft("zombie", ref("Zombie"))], input(["Zombie.png"], ["zombie.webp"]));
+    expect(issues).toEqual([]);
   });
 
   it("uses an override for a mob that has no render at all", () => {
