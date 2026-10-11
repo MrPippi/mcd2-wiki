@@ -25,7 +25,10 @@ export type IssueType =
   | "map-missing-name"
   | "map-unmatched-tag"
   | "map-text-fallback"
-  | "missing-ui-game-string";
+  | "missing-ui-game-string"
+  | "missing-achievements"
+  | "missing-achievement-icon"
+  | "achievement-text-fallback";
 
 export interface Issue {
   readonly type: IssueType;

@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { copyFile, mkdir } from "node:fs/promises";
 import path from "node:path";
+import { extractAchievements } from "./achievements";
 import { assembleEntry, assertUniqueSlugs } from "./assemble";
 import { dedupeByName } from "./dedupe";
 import { planAssets } from "./ui-assets";
@@ -157,6 +158,8 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     [...copies, ...frames.copies, ...uiIcons.copies, ...brand.copies, ...mapIcons],
     path.join(options.outRoot, "public", "icons"),
   );
+  // After copyIcons, which clears public/icons.
+  const achievements = await extractAchievements(options.sourceRoot, options.outRoot);
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
   const weapons = weaponTables
@@ -182,6 +185,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...enchantments.issues,
     ...map.issues,
     ...uiStrings.issues,
+    ...achievements.issues,
   ];
   const extraData = {
     "frames.json": frames.paths,
@@ -193,6 +197,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "effects.json": EnchantmentDataSchema.parse(effectValues),
     "map.json": MapDataSchema.parse(map.data),
     "ui-game-strings.json": uiStrings.strings,
+    "achievements.json": achievements.data,
   };
   await writeOutputs(options.outRoot, output, extraData, renderReport({ ...output, issues }));
   return { entries: output.entries.length, armorSets: output.armorSets.length, icons: copies.length, issues };
