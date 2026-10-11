@@ -682,5 +682,23 @@
     "sv": "Hemlig talisman",
     "tr": "Gizli Tılsım",
     "uk": "Секретний талісман"
+  },
+  "soulStorm": {
+    "zh": "靈魂風暴",
+    "zh-hans": "灵魂风暴",
+    "en": "Soul Storms",
+    "ja": "ソウルストーム",
+    "ko": "영혼 폭풍",
+    "de": "Seelensturm",
+    "fr": "Tempêtes d'âmes",
+    "es": "Tormentas de almas",
+    "it": "Tempeste di anime",
+    "pt": "Tempestades da Alma",
+    "ru": "Буря душ",
+    "pl": "Burze dusz",
+    "nl": "Zielenstormen",
+    "sv": "Själsstormar",
+    "tr": "Ruh Fırtınaları",
+    "uk": "Шторми душ"
   }
 }
