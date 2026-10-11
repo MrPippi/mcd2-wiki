@@ -48,12 +48,6 @@
   --space-7: 48px;
   --space-8: 64px;
 
-  /* Body sizes below and above the 16px base. */
-  --fs-xs: 13px;
-  --fs-s: 14px;
-  --fs-m: 16px;
-  --fs-l: 19px;
-  --fs-xl: 22px;
   --fs-mono-s: 12px;
   --fs-mono-m: 13px;
   --fs-display-m: clamp(28px, 3vw, 36px);
