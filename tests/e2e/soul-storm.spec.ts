@@ -6,21 +6,27 @@ test.describe("live schedule (UTC)", () => {
   test.use({ timezoneId: "UTC" });
 
   test("a running storm counts down to its end", async ({ page }) => {
-    await page.clock.install({ time: new Date("2026-10-11T00:00:00Z") });
+    await page.clock.install({ time: new Date("2026-10-10T23:59:59Z") });
     await page.goto("/en/soul-storm/");
+    await page.clock.pauseAt(new Date("2026-10-11T00:00:00Z"));
+    await page.clock.runFor(1000); // one tick at T+delta: the countdown rounds up, so it reads exactly 20:00
     const clock = page.getByTestId("soul-storm-clock");
     await expect(clock).toBeVisible();
     await expect(page.getByTestId("soul-storm-status")).toHaveText("Now: Humbler Huskland");
-    await expect(page.getByTestId("soul-storm-countdown")).toContainText("20:00");
+    await expect(page.getByTestId("soul-storm-countdown")).toHaveText(/(^|[^0-9])20:00([^0-9]|$)/);
     await page.clock.runFor(1000);
-    await expect(page.getByTestId("soul-storm-countdown")).toContainText("19:59");
+    await expect(page.getByTestId("soul-storm-countdown")).toHaveText(/(^|[^0-9])19:59([^0-9]|$)/);
+    await page.clock.runFor(1000);
+    await expect(page.getByTestId("soul-storm-countdown")).toHaveText(/(^|[^0-9])19:58([^0-9]|$)/);
   });
 
   test("between storms it names the next area and when it starts", async ({ page }) => {
-    await page.clock.install({ time: new Date("2026-10-11T00:25:00Z") });
+    await page.clock.install({ time: new Date("2026-10-11T00:24:59Z") });
     await page.goto("/en/soul-storm/");
+    await page.clock.pauseAt(new Date("2026-10-11T00:25:00Z"));
+    await page.clock.runFor(1000);
     await expect(page.getByTestId("soul-storm-status")).toHaveText("Next: Lullaby Hills");
-    await expect(page.getByTestId("soul-storm-countdown")).toContainText("15:00");
+    await expect(page.getByTestId("soul-storm-countdown")).toHaveText(/(^|[^0-9])15:00([^0-9]|$)/);
     await expect(page.getByTestId("soul-storm-upcoming").locator("tbody tr")).toHaveCount(7);
   });
 
@@ -75,6 +81,7 @@ test.describe("static sections", () => {
   });
 
   test("does not overflow on a phone in a long language", async ({ page }) => {
+    await page.setViewportSize({ width: 412, height: 915 });
     await page.goto("/de/soul-storm/");
     expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
   });
