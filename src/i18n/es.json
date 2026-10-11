@@ -132,7 +132,9 @@
     "companionAttack",
     "companionDefence",
     "companionCooldown",
-    "talismanLevelsNote"
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -300,5 +302,7 @@
   "companionAttack": "Multiplicador de ataque",
   "companionDefence": "Multiplicador de defensa",
   "companionCooldown": "Multiplicador de reutilización",
-  "talismanLevelsNote": "Los talismanes ganan XP mientras están equipados y suben de nivel. Los valores provienen de los archivos de datos del juego; los multiplicadores de los compañeros son los valores sin procesar de esos archivos."
+  "talismanLevelsNote": "Los talismanes ganan XP mientras están equipados y suben de nivel. Los valores provienen de los archivos de datos del juego. Los multiplicadores de los compañeros son los valores sin procesar de esos archivos: un multiplicador de defensa o de reutilización más bajo probablemente sea una mejora (menos daño recibido, menor tiempo de reutilización), pero su significado exacto no está verificado.",
+  "levelValue": "Valor",
+  "valuesNotInData": "Estos valores no están en los archivos de datos del juego (se muestran como ?)."
 }

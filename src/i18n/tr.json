@@ -132,7 +132,9 @@
     "companionAttack",
     "companionDefence",
     "companionCooldown",
-    "talismanLevelsNote"
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -299,5 +301,7 @@
   "companionAttack": "Saldırı çarpanı",
   "companionDefence": "Savunma çarpanı",
   "companionCooldown": "Bekleme süresi çarpanı",
-  "talismanLevelsNote": "Tılsımlar kuşanıldıkları sürece XP kazanır ve seviye atlar. Değerler oyunun veri dosyalarından alınmıştır; yoldaş çarpanları bu dosyalardaki ham değerlerdir."
+  "talismanLevelsNote": "Tılsımlar kuşanıldıkları sürece XP kazanır ve seviye atlar. Değerler oyunun veri dosyalarından alınmıştır. Yoldaş çarpanları bu dosyalardaki ham değerlerdir: daha düşük bir savunma veya bekleme süresi çarpanı muhtemelen bir iyileştirmedir (daha az alınan hasar, daha kısa bekleme süresi), ancak kesin anlamı doğrulanmamıştır.",
+  "levelValue": "Değer",
+  "valuesNotInData": "Bu değerler oyunun veri dosyalarında yok (? olarak gösterilir)."
 }

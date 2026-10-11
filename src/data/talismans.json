@@ -201,6 +201,7 @@
     ]
   },
   "healthy-strike": {
+    "valuesUnknown": true,
     "levels": [
       {
         "xpToNextLevel": 18480
@@ -359,6 +360,7 @@
     ]
   },
   "speed-increment": {
+    "valuesUnknown": true,
     "secret": true,
     "levels": [
       {
@@ -521,6 +523,7 @@
     ]
   },
   "firing-emeralds": {
+    "valuesUnknown": true,
     "secret": true,
     "levels": [
       {

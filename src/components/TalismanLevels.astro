@@ -3,7 +3,6 @@ import type { Entry } from "../../scripts/extract/schemas";
 import { t, type Lang } from "../lib/i18n";
 import { companionCooldown, talismanLevelsView } from "../lib/talisman-view";
 import EntrySection from "./EntrySection.astro";
-import LangText from "./LangText.astro";
 
 interface Props {
   lang: Lang;
@@ -13,7 +12,7 @@ interface Props {
 const { lang, talisman } = Astro.props;
 const rows = talismanLevelsView(lang, talisman);
 const cooldown = companionCooldown(lang, talisman);
-const hasText = rows?.some((row) => row.text) ?? false;
+const hasValue = rows?.some((row) => row.value) ?? false;
 const hasCompanion = rows?.some((row) => row.companion) ?? false;
 ---
 {rows && (
@@ -30,7 +29,7 @@ const hasCompanion = rows?.some((row) => row.companion) ?? false;
       <thead>
         <tr>
           <th scope="col">{t(lang, "talismanLevel")}</th>
-          {hasText && <th scope="col">{t(lang, "description")}</th>}
+          {hasValue && <th scope="col">{t(lang, "levelValue")}</th>}
           {hasCompanion && <th scope="col">{t(lang, "companionAttack")}</th>}
           {hasCompanion && <th scope="col">{t(lang, "companionDefence")}</th>}
           {hasCompanion && <th scope="col">{t(lang, "companionCooldown")}</th>}
@@ -41,7 +40,7 @@ const hasCompanion = rows?.some((row) => row.companion) ?? false;
         {rows.map((row) => (
           <tr>
             <th scope="row" class="level-label">{row.label}</th>
-            {hasText && <td>{row.text && <LangText as="p" class="effect-desc" lang={lang} value={row.text} html />}</td>}
+            {hasValue && <td class="num level-value" data-testid="level-value">{row.value}</td>}
             {hasCompanion && <td class="num">{row.companion?.attack}</td>}
             {hasCompanion && <td class="num">{row.companion?.defence}</td>}
             {hasCompanion && <td class="num">{row.companion?.cooldown}</td>}

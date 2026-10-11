@@ -43,7 +43,7 @@ describe("buildTalismanData", () => {
   });
 
   it("keeps a talisman's own text and leaves values out when the game computes them in code", () => {
-    expect(data["healthy-strike"]).toEqual({ levels: [{ xpToNextLevel: 18480 }, { xpToNextLevel: 73920 }, {}] });
+    expect(data["healthy-strike"]).toEqual({ valuesUnknown: true, levels: [{ xpToNextLevel: 18480 }, { xpToNextLevel: 73920 }, {}] });
   });
 
   it("leaves values out for a template without a fixed value, and reports it", () => {
@@ -69,6 +69,15 @@ describe("withTalismanDescriptions", () => {
     expect(find("talisman", "ammo-capacity")?.description).toEqual(QUIVER_TEXT);
     expect(find("talisman", "ammo-capacity")?.untranslated).toEqual(["ja"]);
     expect(find("talisman", "potion-cooldown")?.untranslated).toBeUndefined();
+  });
+
+  it("shows a text whose values the data lacks in English, with unknown markers, untranslated in every other language", () => {
+    const strike = find("talisman", "healthy-strike");
+    const english = 'Grants a <span class="unknown-value">?</span> damage increase.';
+    expect(strike?.description?.en).toBe(english);
+    expect(strike?.description?.zh).toBe(english);
+    expect(strike?.untranslated).toHaveLength(15);
+    expect(strike?.untranslated).not.toContain("en");
   });
 
   it("leaves other entries alone and does not change its input", () => {

@@ -13,8 +13,8 @@ for (const { lang, text, secret, maxLevel } of PAGES) {
     await expect(description.locator(".value")).toHaveText("10%~25%");
     const levels = page.getByTestId("talisman-levels");
     await expect(levels.locator("tbody tr")).toHaveCount(3);
-    await expect(levels.locator("tbody tr").first().locator(".primary .value")).toHaveText("10%");
-    await expect(levels.locator("tbody tr").nth(2).locator(".primary .value")).toHaveText("25%");
+    await expect(levels.getByTestId("level-value")).toHaveText(["10%", "15%", "25%"]);
+    await expect(levels.locator(".lang-text")).toHaveCount(0);
     await expect(levels.locator("tbody tr").first()).toContainText("18480");
     await expect(levels.locator("tbody tr").nth(2)).toContainText(maxLevel);
     await expect(page.getByTestId("secret-talisman")).toHaveText(secret);
@@ -30,12 +30,31 @@ test("a companion talisman shows its cooldown and per-level multipliers", async 
   await expect(page.getByTestId("secret-talisman")).toHaveCount(0);
 });
 
+test("a talisman whose translation misreads a percentage shows the English sentence, marked untranslated", async ({ page }) => {
+  await page.goto("/zh/talisman/ammo-capacity/");
+  await expect(page.locator(".description .primary")).toHaveText("Carry 20%~60% more ammo.");
+  await expect(page.getByTestId("info-box").locator(".tag.warn")).toHaveText("未翻譯");
+  await page.goto("/zh/effect/");
+  await expect(page.locator("tr", { has: page.locator("#ammo-capacity") })).toContainText("more ammo");
+});
+
+test("talismans whose values are not in the game data show unknown markers and a note", async ({ page }) => {
+  await page.goto("/zh/talisman/speed-increment/");
+  const description = page.locator(".description .primary");
+  await expect(description).toContainText("Increases movement speed by");
+  await expect(description.locator(".unknown-value")).toHaveText(["?", "?"]);
+  await expect(page.getByTestId("values-unknown")).toContainText("數值不在遊戲資料檔中");
+  await expect(page.getByTestId("info-box").locator(".tag.warn")).toHaveText("未翻譯");
+  await expect(page.getByTestId("secret-talisman")).toHaveText("秘密護符");
+  await expect(page.locator(".placeholder")).toHaveCount(0);
+});
+
 test("every talisman page has a description and no unfilled placeholder", async ({ page }) => {
   await page.goto("/zh/talisman/");
   const hrefs = await page.locator("a[href]").evaluateAll((links) =>
     [...new Set(links.map((link) => link.getAttribute("href") ?? "").filter((href) => /\/zh\/talisman\/[a-z0-9-]+\/$/.test(href)))],
   );
-  expect(hrefs.length).toBeGreaterThanOrEqual(21);
+  expect(hrefs).toHaveLength(24);
   for (const href of hrefs) {
     await page.goto(href);
     await expect(page.locator(".description .primary"), href).toBeVisible();

@@ -32,6 +32,8 @@ export const TalismanDataSchema = z.record(
   z.object({
     /** The effect whose description the talisman shows (its own description is a developer stub). */
     effect: SlugSchema.optional(),
+    /** Its own description has values the game computes in code; the site shows them as unknown. */
+    valuesUnknown: z.boolean().optional(),
     /** One of the game's SecretTalismans collection. */
     secret: z.boolean().optional(),
     /** A companion's base cooldown in seconds. */

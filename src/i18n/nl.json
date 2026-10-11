@@ -132,7 +132,9 @@
     "companionAttack",
     "companionDefence",
     "companionCooldown",
-    "talismanLevelsNote"
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -299,5 +301,7 @@
   "companionAttack": "Aanvalsvermenigvuldiger",
   "companionDefence": "Verdedigingsvermenigvuldiger",
   "companionCooldown": "Afkoelvermenigvuldiger",
-  "talismanLevelsNote": "Talismannen krijgen XP zolang ze zijn uitgerust en stijgen in niveau. De waarden komen uit de gegevensbestanden van het spel; de vermenigvuldigers van metgezellen zijn de ruwe waarden uit die bestanden."
+  "talismanLevelsNote": "Talismannen krijgen XP zolang ze zijn uitgerust en stijgen in niveau. De waarden komen uit de gegevensbestanden van het spel. De vermenigvuldigers van metgezellen zijn de ruwe waarden uit die bestanden: een lagere verdedigings- of afkoelvermenigvuldiger is waarschijnlijk een verbetering (minder schade ontvangen, kortere afkoeling), maar de precieze betekenis is niet geverifieerd.",
+  "levelValue": "Waarde",
+  "valuesNotInData": "Deze waarden staan niet in de gegevensbestanden van het spel (weergegeven als ?)."
 }

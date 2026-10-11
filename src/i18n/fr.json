@@ -132,7 +132,9 @@
     "companionAttack",
     "companionDefence",
     "companionCooldown",
-    "talismanLevelsNote"
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -300,5 +302,7 @@
   "companionAttack": "Multiplicateur d'attaque",
   "companionDefence": "Multiplicateur de défense",
   "companionCooldown": "Multiplicateur de recharge",
-  "talismanLevelsNote": "Les talismans gagnent de l'EXP lorsqu'ils sont équipés et montent de niveau. Les valeurs proviennent des fichiers de données du jeu ; les multiplicateurs des compagnons sont les valeurs brutes de ces fichiers."
+  "talismanLevelsNote": "Les talismans gagnent de l'EXP lorsqu'ils sont équipés et montent de niveau. Les valeurs proviennent des fichiers de données du jeu. Les multiplicateurs des compagnons sont les valeurs brutes de ces fichiers : un multiplicateur de défense ou de recharge plus bas est probablement une amélioration (moins de dégâts subis, recharge plus courte), mais leur sens exact n'est pas vérifié.",
+  "levelValue": "Valeur",
+  "valuesNotInData": "Ces valeurs ne figurent pas dans les fichiers de données du jeu (affichées comme ?)."
 }

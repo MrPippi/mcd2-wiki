@@ -4,7 +4,7 @@ import { describedEntry, describedLong } from "../lib/gear-values";
 import { t, type Lang } from "../lib/i18n";
 import { itemKicker } from "../lib/kicker";
 import { relatedLinks } from "../lib/related";
-import { isSecretTalisman } from "../lib/talisman-view";
+import { hasUnknownValues, isSecretTalisman } from "../lib/talisman-view";
 import ArtifactStats from "./ArtifactStats.astro";
 import BookSource from "./BookSource.astro";
 import EnchantmentTiers from "./EnchantmentTiers.astro";
@@ -39,6 +39,7 @@ const related = relatedLinks(lang, entry);
       {description && (
         <EntrySection title={t(lang, "description")}>
           <LangText as="p" class="description" lang={lang} value={description} html />
+          {hasUnknownValues(entry) && <p class="note" data-testid="values-unknown" data-pagefind-ignore>{t(lang, "valuesNotInData")}</p>}
         </EntrySection>
       )}
       {descriptionLong && (

@@ -131,7 +131,9 @@
     "companionAttack",
     "companionDefence",
     "companionCooldown",
-    "talismanLevelsNote"
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "normal"
@@ -303,5 +305,7 @@
   "companionAttack": "Mnożnik ataku",
   "companionDefence": "Mnożnik obrony",
   "companionCooldown": "Mnożnik odnowienia",
-  "talismanLevelsNote": "Założone talizmany zdobywają PD i awansują na kolejne poziomy. Wartości pochodzą z plików danych gry; mnożniki towarzyszy to surowe wartości z tych plików."
+  "talismanLevelsNote": "Założone talizmany zdobywają PD i awansują na kolejne poziomy. Wartości pochodzą z plików danych gry. Mnożniki towarzyszy to surowe wartości z tych plików: niższy mnożnik obrony lub odnowienia to prawdopodobnie ulepszenie (mniej otrzymywanych obrażeń, krótsze odnowienie), ale dokładne znaczenie nie zostało potwierdzone.",
+  "levelValue": "Wartość",
+  "valuesNotInData": "Tych wartości nie ma w plikach danych gry (pokazane jako ?)."
 }

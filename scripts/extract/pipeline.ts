@@ -41,6 +41,7 @@ import uiGameKeys from "./ui-game-keys.json";
 import { buildUiGameStrings } from "./ui-game-strings";
 import { loadTalismanTables } from "./talisman-tables";
 import { buildTalismanData, withTalismanDescriptions } from "./talismans";
+import { applyEnglishOverrides } from "./text-overrides";
 
 export interface ExtractOptions {
   readonly sourceRoot: string;
@@ -172,7 +173,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const effectValues = weaponTables ? buildEffectData(output.entries, weaponTables) : {};
   const talismanTables = await loadTalismanTables(options.sourceRoot);
   const talismans = weaponTables && talismanTables ? buildTalismanData(output.entries, talismanTables, weaponTables.effects) : { data: {}, issues: [] };
-  const described = validateOutput(withTalismanDescriptions(output.entries, talismans.data), output.armorSets);
+  const described = validateOutput(withTalismanDescriptions(applyEnglishOverrides(output.entries), talismans.data), output.armorSets);
   const uiStrings = buildUiGameStrings(locales, uiGameKeys);
   const issues = [
     ...catalog.issues,

@@ -118,7 +118,9 @@ a.fixed-name:hover .primary { color: var(--accent); }
 .level-table .level-label, .level-table .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .level-table .level-label { width: 3em; color: var(--muted); }
 .level-table thead th:first-child { white-space: nowrap; }
-.level-table .effect-desc { margin: 0; font-size: 15px; color: var(--text); }
+.level-table .level-value { font-weight: 700; }
+/* A value the game computes in code and the data files do not have. */
+.unknown-value { display: inline-block; min-width: 1.4em; padding: 0 4px; border: 1px dashed var(--rule-strong); color: var(--muted); font-family: var(--font-mono); font-size: 0.88em; text-align: center; }
 .secret-badge { margin: 0 0 8px; }
 
 .related { list-style: none; padding: 0; margin: 0; display: grid; }

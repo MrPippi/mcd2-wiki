@@ -129,7 +129,9 @@
     "companionAttack",
     "companionDefence",
     "companionCooldown",
-    "talismanLevelsNote"
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -298,5 +300,7 @@
   "companionAttack": "攻撃倍率",
   "companionDefence": "防御倍率",
   "companionCooldown": "クールダウン倍率",
-  "talismanLevelsNote": "タリスマンは装備中に XP を獲得してレベルアップする。数値はゲームのデータファイルから取得しており、仲間の倍率はデータファイルの値をそのまま表示している。"
+  "talismanLevelsNote": "タリスマンは装備中に XP を獲得してレベルアップする。数値はゲームのデータファイルから取得している。仲間の倍率はデータファイルの値をそのまま表示しており、防御とクールダウンの倍率は低いほど強化（受けるダメージの減少、クールダウンの短縮）である可能性が高いが、正確な意味は未確認。",
+  "levelValue": "数値",
+  "valuesNotInData": "この数値はゲームのデータファイルにない（? で表示）。"
 }

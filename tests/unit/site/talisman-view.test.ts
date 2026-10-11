@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { entriesIn, findEntry } from "../../../src/lib/data";
 import { describedEntry } from "../../../src/lib/gear-values";
-import { companionCooldown, isSecretTalisman, talismanLevelsView } from "../../../src/lib/talisman-view";
+import { companionCooldown, hasUnknownValues, isSecretTalisman, talismanLevelsView } from "../../../src/lib/talisman-view";
 
 const talisman = (slug: string) => {
   const entry = findEntry("talisman", slug);
@@ -12,13 +12,31 @@ const talisman = (slug: string) => {
 describe("talisman descriptions", () => {
   it("shows the effect's description with the level 1–3 range filled in", () => {
     expect(describedEntry(talisman("ammo-capacity"))?.en).toBe('Carry <span class="value">20%~60%</span> more ammo.');
-    expect(describedEntry(talisman("ammo-capacity"))?.zh).toContain('<span class="value">20%~60%</span>');
+    expect(describedEntry(talisman("potion-cooldown"))?.zh).toContain('<span class="value">10%~25%</span>');
     expect(describedEntry(talisman("potion-cooldown"))?.ja).toContain('<span class="value">10%~25%</span>');
   });
 
-  it("publishes every talisman whose texts the data can fill, and none with an unfilled value", () => {
+  it("shows the Quiver sentence in English where the translation puts a percentage on a count word", () => {
+    const ammo = talisman("ammo-capacity");
+    expect(describedEntry(ammo)?.zh).toBe('Carry <span class="value">20%~60%</span> more ammo.');
+    expect(ammo.untranslated).toEqual(expect.arrayContaining(["zh", "ja", "ko", "ru", "fr", "es"]));
+    expect(ammo.untranslated).not.toContain("de");
+  });
+
+  it("publishes talismans whose values are not in the data, in English with unknown markers", () => {
+    for (const slug of ["healthy-strike", "speed-increment", "firing-emeralds"]) {
+      const entry = talisman(slug);
+      expect(entry.description?.zh, slug).toBe(entry.description?.en);
+      expect(entry.description?.en, slug).toContain('<span class="unknown-value">?</span>');
+      expect(entry.untranslated, slug).toContain("ja");
+      expect(hasUnknownValues(entry), slug).toBe(true);
+    }
+    expect(hasUnknownValues(talisman("ammo-capacity"))).toBe(false);
+  });
+
+  it("publishes every base talisman, and none with an unfilled value", () => {
     const published = entriesIn("talisman");
-    expect(published.length).toBeGreaterThanOrEqual(21);
+    expect(published.length).toBe(24);
     for (const entry of published) {
       expect(entry.description, entry.slug).toBeDefined();
       expect(describedEntry(entry)?.en ?? "", entry.slug).not.toContain('class="placeholder"');
@@ -27,14 +45,10 @@ describe("talisman descriptions", () => {
 });
 
 describe("talismanLevelsView", () => {
-  it("lists each level's description and the XP it takes to reach the next", () => {
+  it("lists each level's value and the XP it takes to reach the next", () => {
     const rows = talismanLevelsView("zh", talisman("ammo-capacity"));
     expect(rows?.map((row) => row.label)).toEqual(["1", "2", "3"]);
-    expect(rows?.map((row) => row.text?.en)).toEqual([
-      'Carry <span class="value">20%</span> more ammo.',
-      'Carry <span class="value">40%</span> more ammo.',
-      'Carry <span class="value">60%</span> more ammo.',
-    ]);
+    expect(rows?.map((row) => row.value)).toEqual(["20%", "40%", "60%"]);
     expect(rows?.map((row) => row.xp)).toEqual(["18480", "73920", "最高等級"]);
   });
 
@@ -45,7 +59,7 @@ describe("talismanLevelsView", () => {
       { attack: "×1.2", defence: "×0.8", cooldown: "×0.8" },
       { attack: "×1.65", defence: "×0.5", cooldown: "×0.75" },
     ]);
-    expect(rows?.[0]?.text).toBeUndefined();
+    expect(rows?.[0]?.value).toBeUndefined();
     expect(companionCooldown("en", talisman("wolf"))).toBe("30 sec");
     expect(companionCooldown("en", talisman("ammo-capacity"))).toBeUndefined();
   });

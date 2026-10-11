@@ -132,7 +132,9 @@
     "companionAttack",
     "companionDefence",
     "companionCooldown",
-    "talismanLevelsNote"
+    "talismanLevelsNote",
+    "levelValue",
+    "valuesNotInData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -296,5 +298,7 @@
   "companionAttack": "공격 배율",
   "companionDefence": "방어 배율",
   "companionCooldown": "재사용 대기시간 배율",
-  "talismanLevelsNote": "부적은 장착하는 동안 XP를 얻어 레벨이 오릅니다. 수치는 게임 데이터 파일에서 가져왔으며, 동료 배율은 데이터 파일의 원래 값입니다."
+  "talismanLevelsNote": "부적은 장착하는 동안 XP를 얻어 레벨이 오릅니다. 수치는 게임 데이터 파일에서 가져왔습니다. 동료 배율은 데이터 파일의 원래 값이며, 방어 및 재사용 대기시간 배율이 낮을수록 강화(받는 피해 감소, 재사용 대기시간 단축)일 가능성이 높지만 정확한 의미는 확인되지 않았습니다.",
+  "levelValue": "수치",
+  "valuesNotInData": "이 수치는 게임 데이터 파일에 없습니다(? 로 표시)."
 }

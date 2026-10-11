@@ -228,8 +228,8 @@ test("armor pieces are labelled with their slot icon", async ({ page }) => {
 
 test("talismans have their own pages", async ({ page }) => {
   await page.goto("/zh/talisman/");
-  // 24 talismans, less the 3 whose descriptions need values the game data cannot give (Firing Emeralds, Healthy Strike, Speed Increment).
-  await expect(page.locator(".entry-card")).toHaveCount(21);
+  // All 24 base talismans; the 3 whose values the game data lacks show them as unknown.
+  await expect(page.locator(".entry-card")).toHaveCount(24);
   await page.goto("/zh/talisman/ammo-capacity/");
   await expect(page.locator("h1 .primary")).toHaveText("黑橡木枝條");
   await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();

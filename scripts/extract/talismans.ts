@@ -9,7 +9,9 @@ import { descriptionOf, entryIndex, formatMagnitude, locId, toFormat } from "./g
 import type { GameTables } from "./game-tables";
 import type { TalismanData, TalismanLevel } from "./gear-schema";
 import { issue, type Issue } from "./issues";
-import type { Entry } from "./schemas";
+import { localizedFrom } from "../../src/lib/lang";
+import { LANGS } from "./config";
+import type { Entry, Localized } from "./schemas";
 import type { TalismanItemRow, TalismanPropertyRow, TalismanTables } from "./talisman-tables";
 import type { EffectFormat } from "./weapon-schema";
 
@@ -17,8 +19,12 @@ const MAGNITUDE_GETTER = "SW.TextEntry.DataGetter.GetEffectMagnitude";
 const SECRET_COLLECTION = "SecretTalismans";
 const COOLDOWN_KEY = "SW.KeyValue.CooldownDuration";
 const COMPANION_LEVELS = ["LevelOne", "LevelTwo", "LevelThree"] as const;
+const PLACEHOLDER = /<span class="(?:placeholder|plural)" data-slot="[^"]*"(?: data-forms="[^"]*")?>(?:\{[^}]*\})?<\/span>/g;
+const UNKNOWN_VALUE = '<span class="unknown-value">?</span>';
 
 type EffectRow = GameTables["effects"][number];
+
+const hasPlaceholder = (html: string): boolean => new RegExp(PLACEHOLDER.source).test(html);
 type Find = ReturnType<typeof entryIndex>;
 
 /** Gameplay tags are case-insensitive in game, and the tables mix "SW." and "sw.". */
@@ -105,13 +111,15 @@ function buildOne(entry: Entry, property: TalismanPropertyRow, item: TalismanIte
     };
   });
   const secret = secretTags(tables).some((tag) => sameTag(tag, property.TypeTag.TagName));
+  const known = effectEntry !== undefined || companion !== undefined;
+  const valuesUnknown = !known && entry.description !== undefined && hasPlaceholder(entry.description.en);
   const data = {
+    ...(valuesUnknown ? { valuesUnknown: true } : {}),
     ...(effectEntry ? { effect: effectEntry.slug } : {}),
     ...(secret ? { secret: true } : {}),
     ...(companion?.cooldownSeconds !== undefined ? { cooldownSeconds: companion.cooldownSeconds } : {}),
     levels: built,
   };
-  const known = effectEntry !== undefined || companion !== undefined;
   return { slug: entry.slug, data, issues: known ? [] : [issue("talisman-no-values", entry.id)] };
 }
 
@@ -126,14 +134,33 @@ export function buildTalismanData(entries: readonly Entry[], tables: TalismanTab
   return { data: Object.fromEntries(built.map(({ slug, data }) => [slug, data])), issues: built.flatMap((one) => one.issues) };
 }
 
-/** Entries with each stub-described talisman given its effect's description (and that effect's untranslated languages). */
+/** The English text with each value shown as unknown, for every language (the values cannot be filled in any). */
+const unknownValues = (text: Localized): Localized => {
+  const english = text.en.replace(PLACEHOLDER, UNKNOWN_VALUE);
+  return localizedFrom(() => english);
+};
+
+const mergeUntranslated = (entry: Entry, langs: readonly Entry["untranslated"][]): Entry["untranslated"] => {
+  const merged = [...new Set([...(entry.untranslated ?? []), ...langs.flatMap((list) => list ?? [])])];
+  return merged.length > 0 ? merged : undefined;
+};
+
+/**
+ * Entries with each stub-described talisman given its effect's description (and that effect's untranslated languages),
+ * and each talisman whose values the data lacks shown in English with unknown markers, untranslated elsewhere.
+ */
 export function withTalismanDescriptions(entries: readonly Entry[], data: TalismanData): Entry[] {
   const effects = new Map(entries.filter((entry) => entry.category === "effect").map((entry) => [entry.slug, entry]));
+  const nonEnglish = LANGS.filter((lang) => lang !== "en");
   return entries.map((entry) => {
+    if (entry.category === "talisman" && entry.description && data[entry.slug]?.valuesUnknown) {
+      const untranslated = mergeUntranslated(entry, [nonEnglish]);
+      return { ...entry, description: unknownValues(entry.description), ...(untranslated ? { untranslated } : {}) };
+    }
     const effectSlug = entry.category === "talisman" && !entry.description ? data[entry.slug]?.effect : undefined;
     const effect = effectSlug ? effects.get(effectSlug) : undefined;
     if (!effect?.description) return entry;
-    const untranslated = [...new Set([...(entry.untranslated ?? []), ...(effect.untranslated ?? [])])];
-    return { ...entry, description: effect.description, ...(untranslated.length > 0 ? { untranslated } : {}) };
+    const untranslated = mergeUntranslated(entry, [effect.untranslated]);
+    return { ...entry, description: effect.description, ...(untranslated ? { untranslated } : {}) };
   });
 }
