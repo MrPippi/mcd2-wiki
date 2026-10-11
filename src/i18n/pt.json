@@ -229,7 +229,10 @@
     "soulStormTierUnconfirmed",
     "soulStormRarity",
     "soulStormMonstrosities",
-    "soulStormMonstrositiesNote"
+    "soulStormMonstrositiesNote",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -283,6 +286,7 @@
   "enchanting": "Encantamentos e efeitos",
   "unlock": "Desbloqueio",
   "searchPlaceholder": "Buscar itens, encantamentos, efeitos…",
+  "searchUnavailable": "A pesquisa está indisponível no momento.",
   "categories": "Categorias",
   "fontCredit": "Fontes: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Ver",
@@ -412,6 +416,8 @@
   "mobVariantOf": "Variante de",
   "mobPortraitCredit": "Os retratos são renderizações dos modelos do jogo.",
   "mobNoPortrait": "Ainda sem retrato",
+  "mobNoImage": "Sem imagem",
+  "mobUnitsNote": "A velocidade de movimento e o raio de visão são os valores brutos do motor do jogo, não blocos nem segundos.",
   "lootSlotItem": "Equipamento",
   "lootSlotSpecialGear": "Equipamento especial",
   "itemSources": "Como obter",

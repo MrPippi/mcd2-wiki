@@ -1,7 +1,7 @@
 ---
 import type { MobDrop } from "../../scripts/extract/mob-schema";
 import { lootSlotLabel, t, type Lang } from "../lib/i18n";
-import { dropPoolNote, dropSummary } from "../lib/mobs";
+import { dropPoolNote, dropSummary, splitNumbers } from "../lib/mobs";
 
 interface Props {
   lang: Lang;
@@ -28,7 +28,7 @@ const Heading = level === 3 ? "h3" : "h2";
             <span class="mob-drop-slot">{lootSlotLabel(drop.slot, lang)}</span>
             <div class="mob-drop-body">
               <ul class="mob-drop-rule">
-                {dropSummary(drop, lang).map((line) => <li>{line}</li>)}
+                {dropSummary(drop, lang).map((line) => <li>{splitNumbers(line).map((part, i) => (i % 2 === 1 ? <span class="mob-drop-num">{part}</span> : part))}</li>)}
               </ul>
               {pool && <p class="mob-drop-pool">{pool}</p>}
             </div>

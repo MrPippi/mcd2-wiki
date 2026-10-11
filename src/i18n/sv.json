@@ -228,10 +228,10 @@
     "soulStormTierUnconfirmed",
     "soulStormRarity",
     "soulStormMonstrosities",
-    "soulStormMonstrositiesNote"
-  ],
-  "_english": [
-    "soulStormCadence"
+    "soulStormMonstrositiesNote",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -285,6 +285,7 @@
   "enchanting": "Förtrollningar och effekter",
   "unlock": "Upplåsning",
   "searchPlaceholder": "Sök föremål, förtrollningar, effekter…",
+  "searchUnavailable": "Sökningen är inte tillgänglig just nu.",
   "categories": "Kategorier",
   "fontCredit": "Typsnitt: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Visa",
@@ -413,6 +414,8 @@
   "mobVariantOf": "Variant av",
   "mobPortraitCredit": "Porträtten är renderingar av spelets modeller.",
   "mobNoPortrait": "Inget porträtt än",
+  "mobNoImage": "Ingen bild",
+  "mobUnitsNote": "Rörelsehastighet och synradie är spelets råa motorvärden, inte block eller sekunder.",
   "lootSlotItem": "Utrustning",
   "lootSlotSpecialGear": "Specialutrustning",
   "itemSources": "Så får du den",
@@ -469,6 +472,9 @@
   "talismanLevelsNote": "Talismaner får XP medan de är utrustade och går upp i nivå. Värdena kommer från spelets datafiler. Följeslagarnas multiplikatorer är de råa värdena i de filerna: en lägre försvars- eller nedkylningsmultiplikator är troligen en förbättring (mindre skada tagen, kortare nedkylning), men den exakta innebörden är inte bekräftad.",
   "levelValue": "Värde",
   "valuesNotInData": "De här värdena finns inte i spelets datafiler (visas som ?).",
+  "_english": [
+    "soulStormCadence"
+  ],
   "soulStorm": "Själsstormar",
   "soulStormIntro": "Det levande schemat för själsstormarna, områdesrotationen, stormgeneratorer och belöningskistor.",
   "soulStormSchedule": "Schema och områdesrotation",

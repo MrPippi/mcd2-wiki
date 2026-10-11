@@ -19,13 +19,13 @@
 .map-fallback img { width: min(256px, 70vw); height: auto; }
 .world-map[data-ready="true"] .map-fallback { display: none; }
 
-/* Below the map: search on the left, the source note beside it on wide screens. */
-.map-panel { display: grid; gap: 16px 32px; align-items: start; min-width: 0; }
+/* Below the map: stacked on small screens; on wide ones the search block is the left column and the source note sits right-aligned on the input's row. */
+.map-panel { display: grid; gap: 8px; min-width: 0; }
+.map-search { display: contents; }
 .map-search label {
-  padding: 0; margin-bottom: 8px; font-family: var(--font-mono); font-size: var(--fs-mono-s);
+  padding: 0; font-family: var(--font-mono); font-size: var(--fs-mono-s);
   text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted);
 }
-
 /* Marker filter: a card in the map's top-right corner. Colour = shown, greyscale = hidden. */
 .map-filters {
   position: absolute; top: 10px; right: 10px; z-index: var(--z-map-ui); max-width: calc(100% - 70px);
@@ -56,7 +56,6 @@
 .map-filter[aria-pressed="false"] .map-swatch-icon,
 .map-filter[aria-pressed="false"] .map-swatch { filter: grayscale(1); opacity: 0.45; }
 .map-count { color: var(--muted); font-size: var(--fs-mono-m); }
-.map-search { display: grid; gap: 6px; }
 .map-search input { width: 100%; }
 .map-results { list-style: none; margin: 0; padding: 0; max-height: 280px; overflow-y: auto; }
 .map-result {
@@ -97,8 +96,11 @@
 .map-popup-note { margin-top: 6px !important; color: var(--text-2); }
 
 @media (min-width: 760px) {
-  .map-panel { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); }
-  .map-note { padding-top: 26px; }
+  .map-panel { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); column-gap: 32px; }
+  .map-search label { grid-column: 1; grid-row: 1; }
+  .map-search input { grid-column: 1; grid-row: 2; }
+  .map-note { grid-column: 2; grid-row: 2; align-self: center; justify-self: end; text-align: right; }
+  .map-results, .map-empty { grid-column: 1 / -1; grid-row: 3; }
 }
 
 @media (max-width: 759px) {

@@ -226,7 +226,10 @@
     "soulStormTierUnconfirmed",
     "soulStormRarity",
     "soulStormMonstrosities",
-    "soulStormMonstrositiesNote"
+    "soulStormMonstrositiesNote",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -285,6 +288,7 @@
   "enchanting": "エンチャントと効果",
   "unlock": "アンロック",
   "searchPlaceholder": "アイテム、エンチャント、効果を検索…",
+  "searchUnavailable": "現在、検索は利用できません。",
   "categories": "カテゴリ",
   "fontCredit": "書体：Noto Serif (TC/SC/JP/KR)、Geist（SIL OFL 1.1）",
   "view": "表示",
@@ -410,6 +414,8 @@
   "mobVariantOf": "亜種の元",
   "mobPortraitCredit": "画像はゲームのモデルをレンダリングしたものです。",
   "mobNoPortrait": "画像はまだありません",
+  "mobNoImage": "画像なし",
+  "mobUnitsNote": "移動速度と視認半径は、ブロックや秒ではなく、ゲームエンジンの生の値です。",
   "lootSlotItem": "装備",
   "lootSlotSpecialGear": "特殊装備",
   "itemSources": "入手方法",

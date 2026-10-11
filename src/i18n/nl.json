@@ -229,7 +229,10 @@
     "soulStormTierUnconfirmed",
     "soulStormRarity",
     "soulStormMonstrosities",
-    "soulStormMonstrositiesNote"
+    "soulStormMonstrositiesNote",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -283,6 +286,7 @@
   "enchanting": "Betoveringen en effecten",
   "unlock": "Ontgrendelen",
   "searchPlaceholder": "Zoek voorwerpen, betoveringen, effecten…",
+  "searchUnavailable": "Zoeken is op dit moment niet beschikbaar.",
   "categories": "Categorieën",
   "fontCredit": "Lettertypen: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Bekijken",
@@ -411,6 +415,8 @@
   "mobVariantOf": "Variant van",
   "mobPortraitCredit": "Portretten zijn renders van de modellen uit het spel.",
   "mobNoPortrait": "Nog geen portret",
+  "mobNoImage": "Geen afbeelding",
+  "mobUnitsNote": "Bewegingssnelheid en zichtstraal zijn de ruwe enginewaarden van het spel, geen blokken of seconden.",
   "lootSlotItem": "Uitrusting",
   "lootSlotSpecialGear": "Speciale uitrusting",
   "itemSources": "Hoe te verkrijgen",

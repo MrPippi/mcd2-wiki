@@ -74,6 +74,9 @@ const round2 = (value: number): string => String(Math.round(value * 100) / 100);
 /** A stat value: multipliers as ×1.5, everything else as a number with at most two decimals. */
 export const formatStat = (key: StatKey, value: number): string => (isMultiplier(key) ? `×${round2(value)}` : round2(value));
 
+/** Stats the game gives in raw engine units (no block or second unit is confirmed), so the page notes it instead of guessing one. */
+export const RAW_UNIT_STATS: ReadonlySet<StatKey> = new Set(["movementSpeed", "sightRadius"]);
+
 /** A 0–1 chance as a percentage with at most two decimals, written the way the language writes it. */
 export const formatChance = (chance: number, lang: Lang): string =>
   new Intl.NumberFormat(htmlLang(lang), { style: "percent", maximumFractionDigits: 2 }).format(chance);
@@ -87,6 +90,11 @@ export function dropSummary(drop: MobDrop, lang: Lang): string[] {
       : [];
   return [...guaranteed, ...rolls];
 }
+
+const NUMBER_PATTERN = /(\d+(?:[.,]\d+)?(?:[   ]?%)?)/;
+
+/** A drop sentence cut into runs; the odd-indexed ones are numbers (counts, percentages) that the page sets in mono. */
+export const splitNumbers = (line: string): string[] => line.split(NUMBER_PATTERN);
 
 /** Slots whose label does not say what drops (gear, books, talismans): they get a note on where the items come from. */
 const POOLED_SLOTS: ReadonlySet<LootSlotKey> = new Set(["item", "specialGear", "enchantedBook", "talismans"]);

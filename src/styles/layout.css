@@ -96,6 +96,8 @@
 }
 .footer-inner p { margin: 0; max-width: 60ch; }
 .footer-mark { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--text); }
+/* The title may break only between its segments, never inside the game name or a CJK word. */
+.mark-game, .mark-rest, .mark-tag { white-space: nowrap; }
 .footer-license { font-family: var(--font-mono); font-size: var(--fs-mono-m); }
 .footer-license a { color: var(--muted); }
 

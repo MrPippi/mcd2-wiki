@@ -226,7 +226,10 @@
     "soulStormTierUnconfirmed",
     "soulStormRarity",
     "soulStormMonstrosities",
-    "soulStormMonstrositiesNote"
+    "soulStormMonstrositiesNote",
+    "searchUnavailable",
+    "mobNoImage",
+    "mobUnitsNote"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -285,6 +288,7 @@
   "enchanting": "附魔与效果",
   "unlock": "解锁",
   "searchPlaceholder": "搜索物品、附魔、效果…",
+  "searchUnavailable": "搜索暂时无法使用。",
   "categories": "分类",
   "fontCredit": "字体：Noto Serif (TC/SC/JP/KR)、Geist（SIL OFL 1.1）",
   "view": "查看",
@@ -410,6 +414,8 @@
   "mobVariantOf": "变种来源",
   "mobPortraitCredit": "头像为游戏模型渲染。",
   "mobNoPortrait": "暂无头像",
+  "mobNoImage": "无图片",
+  "mobUnitsNote": "移动速度与视野半径为游戏引擎的原始数值，并非格数或秒数。",
   "lootSlotItem": "装备",
   "lootSlotSpecialGear": "特殊装备",
   "itemSources": "获取方式",

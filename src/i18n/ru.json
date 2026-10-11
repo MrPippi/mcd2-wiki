@@ -225,7 +225,10 @@
     "soulStormTierUnconfirmed",
     "soulStormRarity",
     "soulStormMonstrosities",
-    "soulStormMonstrositiesNote"
+    "soulStormMonstrositiesNote",
+    "mobNoImage",
+    "mobUnitsNote",
+    "searchUnavailable"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -285,6 +288,7 @@
   "enchanting": "Зачарования и эффекты",
   "unlock": "Разблокировка",
   "searchPlaceholder": "Поиск предметов, зачарований, эффектов…",
+  "searchUnavailable": "Поиск сейчас недоступен.",
   "categories": "Разделы",
   "fontCredit": "Шрифты: Noto Serif (TC/SC/JP/KR), Geist (SIL OFL 1.1)",
   "view": "Открыть",
@@ -415,6 +419,8 @@
   "mobVariantOf": "Исходный моб",
   "mobPortraitCredit": "Портреты — рендеры моделей из игры.",
   "mobNoPortrait": "Портрета пока нет",
+  "mobNoImage": "Нет изображения",
+  "mobUnitsNote": "Скорость движения и радиус обзора даны в необработанных единицах движка игры, а не в блоках или секундах.",
   "lootSlotItem": "Снаряжение",
   "lootSlotSpecialGear": "Особое снаряжение",
   "itemSources": "Как получить",

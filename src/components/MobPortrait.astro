@@ -13,6 +13,9 @@ interface Props {
   decorative?: boolean;
 }
 
+/** Below this side the plate is too small to carry its "no image" label. */
+const EMPTY_LABEL_MIN_SIZE = 72;
+
 const { lang, mob, size, loading = "lazy", decorative = false } = Astro.props;
 ---
 {mob.portrait ? (
@@ -27,5 +30,7 @@ const { lang, mob, size, loading = "lazy", decorative = false } = Astro.props;
     role={decorative ? undefined : "img"}
     aria-label={decorative ? undefined : t(lang, "mobNoPortrait")}
     aria-hidden={decorative ? "true" : undefined}
-  ></span>
+  >
+    {size >= EMPTY_LABEL_MIN_SIZE && <span class="mob-portrait-label" aria-hidden="true">{t(lang, "mobNoImage")}</span>}
+  </span>
 )}

@@ -34,3 +34,19 @@
 }
 #search .pagefind-ui__button { font-family: var(--font-body); color: var(--text); background: transparent; }
 #search .pagefind-ui__button:hover { background: var(--ink); color: var(--paper); }
+
+/* Plain form that works without scripts; Pagefind replaces it, and it stays (with a note) if Pagefind cannot start. */
+.search-form { display: flex; align-items: flex-end; gap: var(--space-3); width: 100%; }
+.search-form input { flex: 1; min-width: 0; font-size: 20px; font-weight: 500; }
+.search-form button { background: var(--ink); color: var(--paper); border-color: var(--ink); padding: 8px 18px; }
+.search-form button:hover { background: var(--text-2); border-color: var(--text-2); }
+/* Ruled placeholder rows sized like results, only while scripts are loading Pagefind. */
+.search-skeleton { display: none; list-style: none; margin: var(--space-4) 0 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+.js .search-fallback[data-state="loading"] .search-skeleton { display: block; }
+.search-skeleton-row { display: flex; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--rule); }
+.search-skeleton-thumb, .search-skeleton-lines { background: var(--plate); animation: skeleton-pulse 1.4s ease-in-out infinite; }
+.search-skeleton-thumb { width: 64px; height: 64px; flex-shrink: 0; }
+.search-skeleton-lines { flex: 1; height: 64px; max-width: 60%; }
+@keyframes skeleton-pulse { 50% { opacity: 0.45; } }
+.search-error { display: none; margin: var(--space-4) 0 0; font-family: var(--font-mono); font-size: var(--fs-mono-m); color: var(--muted); }
+.search-fallback[data-state="error"] .search-error { display: block; }
