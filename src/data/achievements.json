@@ -26,6 +26,27 @@
         "tr": "Home is Where Your Stuff Is",
         "uk": "Home is Where Your Stuff Is"
       },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "逃離烏賊海岸",
+          "zh-hans": "逃离鱿鱼海岸",
+          "en": "Escape from Squid Coast",
+          "ja": "イカ海岸から脱出する",
+          "ko": "오징어 해안에서의 탈출",
+          "de": "Fliehe von der Tintenfischküste",
+          "fr": "S'échapper de la Côte du Poulpe",
+          "es": "Huida de la Costa Calamar",
+          "it": "Fuggi da Costa calamaro",
+          "pt": "Fuga da Costa da Lula",
+          "ru": "Побег с Побережья спрутов",
+          "pl": "Ucieczka z Wybrzeża Kałamarnic",
+          "nl": "Ontsnapping uit Inktvissenkust",
+          "sv": "Flykten från Bläckfiskkusten",
+          "tr": "Mürekkep Balığı Kıyısı'ndan Kaçış",
+          "uk": "Утеча з Узбережжя кальмарів"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -66,6 +87,27 @@
         "sv": "Brave the Unknown",
         "tr": "Brave the Unknown",
         "uk": "Brave the Unknown"
+      },
+      "condition": {
+        "type": "task",
+        "name": {
+          "zh": "進入裂隙",
+          "zh-hans": "进入裂隙",
+          "en": "Enter the rift",
+          "ja": "亀裂に入る",
+          "ko": "균열로 들어가세요",
+          "de": "Geh durch den Riss",
+          "fr": "Entrer dans la faille",
+          "es": "Entra en la grieta",
+          "it": "Entra nel varco",
+          "pt": "Entre na fenda",
+          "ru": "Войти в разлом",
+          "pl": "Wejdź do szczeliny",
+          "nl": "Ga door de scheur",
+          "sv": "Gå in i revan",
+          "tr": "Yarığa gir",
+          "uk": "Увійти в розлом"
+        }
       },
       "untranslated": [
         "zh-hans",
@@ -226,6 +268,27 @@
         "tr": "Blowout",
         "uk": "Blowout"
       },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "苦力怕蠟燭陰謀",
+          "zh-hans": "苦力怕蜡烛阴谋",
+          "en": "The Creeper Candle Conspiracy",
+          "ja": "クリーパーキャンドルの陰謀",
+          "ko": "크리퍼 양초 음모",
+          "de": "Die Creeper-Kerzen-Verschwörung",
+          "fr": "La conspiration de la bougie de Creeper",
+          "es": "La conspiración de las velas de creeper",
+          "it": "Il complotto con le candele del creeper",
+          "pt": "A Conspiração Vela do Creeper",
+          "ru": "Заговор криперских свечей",
+          "pl": "Spisek z creeperowymi świecami",
+          "nl": "De creeperkaars-samenzwering",
+          "sv": "Creeper-ljusets konspiration",
+          "tr": "Creeper Mum Komplosu",
+          "uk": "Змова навколо свічок кріпера"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -266,6 +329,27 @@
         "sv": "Craftier than Witchcraft",
         "tr": "Craftier than Witchcraft",
         "uk": "Craftier than Witchcraft"
+      },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "森林中的腐化",
+          "zh-hans": "林中腐化",
+          "en": "Corruption in the Woods",
+          "ja": "森に広がる異変",
+          "ko": "숲속의 오염",
+          "de": "Korruption im Wald",
+          "fr": "Corruption dans les bois",
+          "es": "Corrupción en los Bosques",
+          "it": "Corruzione nei boschi",
+          "pt": "Corrupção na Mata",
+          "ru": "Скверна в чащах",
+          "pl": "Splugawienie w kniei",
+          "nl": "Verdorvenheid in het woud",
+          "sv": "Förvriden i skogarna",
+          "tr": "Ormandaki Yozlaşma",
+          "uk": "Спотворення в лісах"
+        }
       },
       "untranslated": [
         "zh-hans",
@@ -366,6 +450,27 @@
         "sv": "Twisted Madness",
         "tr": "Twisted Madness",
         "uk": "Twisted Madness"
+      },
+      "condition": {
+        "type": "task",
+        "name": {
+          "zh": "擊敗扭曲伏守者",
+          "zh-hans": "击败扭曲监守者",
+          "en": "Defeat the Twisted Warden",
+          "ja": "ツイステッド・ウォーデンを倒す",
+          "ko": "뒤틀린 워든을 처치하세요",
+          "de": "Besiege den Verdrehten Wärter",
+          "fr": "Vaincre le Warden corrompu",
+          "es": "Derrota al warden perverso",
+          "it": "Sconfiggi il sorvegliante contorto",
+          "pt": "Derrotar o Defensor Perverso",
+          "ru": "Победить искаженного хранителя",
+          "pl": "Pokonaj pokręconego nadzorcę",
+          "nl": "Versla de getikte opzichter",
+          "sv": "Besegra den förvrängda vakten",
+          "tr": "Çarpık Muhafızı yen",
+          "uk": "Здолати спотвореного боронителя"
+        }
       },
       "untranslated": [
         "zh-hans",
@@ -526,6 +631,27 @@
         "tr": "Copper Stopper",
         "uk": "Copper Stopper"
       },
+      "condition": {
+        "type": "task",
+        "name": {
+          "zh": "擊敗銅巨獸",
+          "zh-hans": "击败铜巨兽",
+          "en": "Defeat the Copper Monstrosity",
+          "ja": "銅の怪物を倒す",
+          "ko": "구리 괴물을 처치하세요",
+          "de": "Besiege das Kupferungetüm",
+          "fr": "Vaincre la Monstruosité de cuivre",
+          "es": "Derrota a la monstruosidad de cobre",
+          "it": "Sconfiggi la mostruosità di rame",
+          "pt": "Derrote a Monstruosidade de Cobre",
+          "ru": "Победить медное чудовище",
+          "pl": "Pokonaj miedziane monstrum",
+          "nl": "Versla het koperen monster",
+          "sv": "Besegra kopparmonstret",
+          "tr": "Bakır Canavarı yen",
+          "uk": "Здолати мідного монстра"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -625,6 +751,27 @@
         "sv": "Past Their Prime",
         "tr": "Past Their Prime",
         "uk": "Past Their Prime"
+      },
+      "condition": {
+        "type": "task",
+        "name": {
+          "zh": "擊敗至高附魔師",
+          "zh-hans": "击败首席附魔师",
+          "en": "Defeat the Prime Enchanter",
+          "ja": "プライム・エンチャンターを倒す",
+          "ko": "프라임 마법 부여사를 처치하세요",
+          "de": "Besiege den Obersten Zauberer",
+          "fr": "Vaincre l'Enchanteur Primordial",
+          "es": "Derrota al Hechicero supremo",
+          "it": "Sconfiggi l'incantatore supremo",
+          "pt": "Derrote o Encantador Supremo",
+          "ru": "Победить главного чародея",
+          "pl": "Pokonaj głównego zaklinacza",
+          "nl": "Versla de Aartsbezweerder",
+          "sv": "Besegra huvudförtrollaren",
+          "tr": "Baş Büyücüyü yen",
+          "uk": "Здолати головного чарівника"
+        }
       },
       "untranslated": [
         "zh-hans",
@@ -726,6 +873,27 @@
         "tr": "Spider Slayer",
         "uk": "Spider Slayer"
       },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "神職人員學徒",
+          "zh-hans": "牧师学徒",
+          "en": "The Cleric’s Apprentice",
+          "ja": "聖職者の見習い",
+          "ko": "견습 성직자",
+          "de": "Klerikerlehrling",
+          "fr": "L'apprenti du Prêtre",
+          "es": "El aprendiz del clérigo",
+          "it": "L'apprendista del chierico",
+          "pt": "A Aprendiz do Clérigo",
+          "ru": "Ученик священника",
+          "pl": "Uczeń kapłana",
+          "nl": "De Geestelijkeleering",
+          "sv": "Prästlärlingen",
+          "tr": "Rahip Yardımcısı",
+          "uk": "Учень церковника"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -826,6 +994,27 @@
         "tr": "Note Block Virtuoso",
         "uk": "Note Block Virtuoso"
       },
+      "condition": {
+        "type": "task",
+        "name": {
+          "zh": "啟動傳送門",
+          "zh-hans": "激活传送门",
+          "en": "Activate the portal",
+          "ja": "ポータルを起動する",
+          "ko": "관문을 작동하세요",
+          "de": "Aktiviere das Portal",
+          "fr": "Activer le portail",
+          "es": "Activa el portal",
+          "it": "Attiva il portale",
+          "pt": "Ative o portal",
+          "ru": "Активировать портал",
+          "pl": "Aktywuj portal",
+          "nl": "Activeer het portaal",
+          "sv": "Aktivera portalen",
+          "tr": "Portalı etkinleştir",
+          "uk": "Активувати портал"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -866,6 +1055,27 @@
         "sv": "Scrapping over Scraps",
         "tr": "Scrapping over Scraps",
         "uk": "Scrapping over Scraps"
+      },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "回收你的巨獸",
+          "zh-hans": "回收巨兽",
+          "en": "Recycling Your Monstrosity",
+          "ja": "怪物リサイクル",
+          "ko": "괴물 재활용하기",
+          "de": "Ungetüm-Recycling",
+          "fr": "Recycler votre monstruosité",
+          "es": "Dale una segunda vida a tu monstruosidad",
+          "it": "Riciclare la mostruosità",
+          "pt": "Reciclando sua Monstruosidade",
+          "ru": "Вторая жизнь чудовища",
+          "pl": "Recykling monstrum",
+          "nl": "Je monster recyclen",
+          "sv": "Återvinn ditt monster",
+          "tr": "Canavarını Geri Dönüştür",
+          "uk": "Переробка монстра"
+        }
       },
       "untranslated": [
         "zh-hans",
@@ -908,6 +1118,27 @@
         "tr": "Friend of the Sift",
         "uk": "Friend of the Sift"
       },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "失落的和聲",
+          "zh-hans": "消失的和声",
+          "en": "Lost Harmonies",
+          "ja": "失われたハーモニー",
+          "ko": "사라진 화음",
+          "de": "Verschwundene Harmonien",
+          "fr": "Harmonies perdues",
+          "es": "Armonías perdidas",
+          "it": "Armonie perdute",
+          "pt": "Harmonias Perdidas",
+          "ru": "Утраченные гармонии",
+          "pl": "Zamilkła harmonia",
+          "nl": "Verloren harmonieën",
+          "sv": "Försvunna harmonier",
+          "tr": "Kayıp Armoniler",
+          "uk": "Утрачена гармонія"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -948,6 +1179,27 @@
         "sv": "Carapace Explorer",
         "tr": "Carapace Explorer",
         "uk": "Carapace Explorer"
+      },
+      "condition": {
+        "type": "task",
+        "name": {
+          "zh": "抵達回聲巢穴",
+          "zh-hans": "抵达回响巢穴",
+          "en": "Reach the Echo Den",
+          "ja": "残響のねぐらにたどり着く",
+          "ko": "메아리 소굴까지 가세요",
+          "de": "Erreiche die Echohöhle",
+          "fr": "Atteindre la Tanière de l'écho",
+          "es": "Llega a la Guarida de eco",
+          "it": "Raggiungi la Tana dell'eco",
+          "pt": "Chegue ao Covil do Eco",
+          "ru": "Добраться до Эхо-логова",
+          "pl": "Dotrzyj do Jamy Echa",
+          "nl": "Bereik het Echohol",
+          "sv": "Ta dig till ekokammaren",
+          "tr": "Yankı İni'ne ulaş",
+          "uk": "Дійти до Ехо-лігва"
+        }
       },
       "untranslated": [
         "zh-hans",
@@ -990,6 +1242,27 @@
         "tr": "Regicide",
         "uk": "Regicide"
       },
+      "condition": {
+        "type": "boss",
+        "name": {
+          "zh": "君主",
+          "zh-hans": "君主",
+          "en": "Monarch",
+          "ja": "モナーク",
+          "ko": "모나크",
+          "de": "Monarch",
+          "fr": "Monarque",
+          "es": "Monarca",
+          "it": "Monarca",
+          "pt": "Monarca",
+          "ru": "Монарх",
+          "pl": "Monarcha",
+          "nl": "Monarch",
+          "sv": "Monark",
+          "tr": "Hükümdar",
+          "uk": "Монарх"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -1030,6 +1303,27 @@
         "sv": "Code Cracker",
         "tr": "Code Cracker",
         "uk": "Code Cracker"
+      },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "壞村民情報",
+          "zh-hans": "灾厄村民情报",
+          "en": "Illager Intelligence",
+          "ja": "邪悪な村人の機密情報",
+          "ko": "지성을 갖춘 우민",
+          "de": "Illager-Spionage",
+          "fr": "Intelligence des Illageois",
+          "es": "Inteligencia de los maldeanos",
+          "it": "Abitori eruditi",
+          "pt": "Inteligência dos Illagers",
+          "ru": "Разведданные по злодеянам",
+          "pl": "Wywiad złosadników",
+          "nl": "Illager-informatie",
+          "sv": "Fybointelligens",
+          "tr": "Illager İstihbaratı",
+          "uk": "Розвіддані про лиходіїв"
+        }
       },
       "untranslated": [
         "zh-hans",
@@ -1072,6 +1366,27 @@
         "tr": "Monstrous Crescendo",
         "uk": "Monstrous Crescendo"
       },
+      "condition": {
+        "type": "task",
+        "name": {
+          "zh": "擊敗魔物巨構",
+          "zh-hans": "击败巨构奇物",
+          "en": "Defeat the Monstrous Opus",
+          "ja": "モンストラス・オーパスを倒す",
+          "ko": "걸작 괴수를 처치하세요",
+          "de": "Besiege das Monströse Opus",
+          "fr": "Vaincre l'Opus monstrueux",
+          "es": "Derrota al Opus monstruoso",
+          "it": "Sconfiggi la creatura colossale",
+          "pt": "Derrote a Obra Monstruosa",
+          "ru": "Победить чудовищного опуса",
+          "pl": "Pokonaj monstrualne opus",
+          "nl": "Versla het Monsterlijke opus",
+          "sv": "Besegra monstruöst opus",
+          "tr": "Canavarca Yapıtı yen",
+          "uk": "Здолати монструозного опуса"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -1112,6 +1427,27 @@
         "sv": "Defender of Dimensions",
         "tr": "Defender of Dimensions",
         "uk": "Defender of Dimensions"
+      },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "最終魂戰",
+          "zh-hans": "最终魂战",
+          "en": "The Final Souldown",
+          "ja": "魂の最終決戦",
+          "ko": "영혼의 결전",
+          "de": "Letzte Seelenprobe",
+          "fr": "La confrontation finale",
+          "es": "El enfrentamiento final",
+          "it": "L'anima definitiva",
+          "pt": "Derrocada Final",
+          "ru": "Душе покоя нет",
+          "pl": "Duszne starcie",
+          "nl": "De beslissende zielenstrijd",
+          "sv": "Det sista själsslaget",
+          "tr": "Son Ruh Hesaplaşması",
+          "uk": "Останній відлік душ"
+        }
       },
       "untranslated": [
         "zh-hans",
@@ -1272,6 +1608,27 @@
         "tr": "Wobble Watcher",
         "uk": "Wobble Watcher"
       },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "晃墩墩大奔走",
+          "zh-hans": "晃墩墩快跑",
+          "en": "Wobble Run",
+          "ja": "ウォブルを追え",
+          "ko": "말랑덩어리 달리기",
+          "de": "Wabblerlauf",
+          "fr": "Course de gelée",
+          "es": "Carrera con tambalines",
+          "it": "Caccia ai wobble",
+          "pt": "Partida do Gelatinoso",
+          "ru": "Забег шатунов",
+          "pl": "Ucieczka chybotków",
+          "nl": "Wiebelend op wandel",
+          "sv": "Skakisrusning",
+          "tr": "Titreşik Koşusu",
+          "uk": "Забіг із хитунами"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -1372,6 +1729,27 @@
         "tr": "Guardian of the Golems",
         "uk": "Guardian of the Golems"
       },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "掃蕩營地",
+          "zh-hans": "攻破营地",
+          "en": "Breaking Camps",
+          "ja": "キャンプを打ち砕け",
+          "ko": "캠프 파괴",
+          "de": "Lageraufbruch",
+          "fr": "Lever le camp",
+          "es": "Asalto a los campamentos",
+          "it": "Sgombrare gli accampamenti",
+          "pt": "Desmontar os Acampamentos",
+          "ru": "Разгром лагерей",
+          "pl": "Zamykanie obozów",
+          "nl": "Kampen opbreken",
+          "sv": "Ta ner lägren",
+          "tr": "Kampların Yıkılışı",
+          "uk": "Розгром таборів"
+        }
+      },
       "untranslated": [
         "zh-hans",
         "ja",
@@ -1471,6 +1849,27 @@
         "sv": "Choir Conductor",
         "tr": "Choir Conductor",
         "uk": "Choir Conductor"
+      },
+      "condition": {
+        "type": "quest",
+        "name": {
+          "zh": "安眠丘陵的孤影",
+          "zh-hans": "安眠丘陵的孤寂",
+          "en": "Lonesome in Lullaby Hills",
+          "ja": "子守歌の丘のロンリネス",
+          "ko": "자장가 언덕에서의 고독",
+          "de": "Einsam auf den Schlafliedhügeln",
+          "fr": "Solitaire dans les Collines de la berceuse",
+          "es": "Soledad en las Colinas del arrullo",
+          "it": "Solitudine sulle Colline della ninnananna",
+          "pt": "Isolado na Colina do Ninar",
+          "ru": "Одиночество в Колыбельных холмах",
+          "pl": "Samotność na Wzgórzach Kołysanek",
+          "nl": "Eenzaam in Wiegeliedheuvels",
+          "sv": "Ensam i Vaggvisornas kullar",
+          "tr": "Ninni Tepeleri'nde Tek Başına",
+          "uk": "Самотність на Колискових пагорбах"
+        }
       },
       "untranslated": [
         "zh-hans",

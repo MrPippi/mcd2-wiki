@@ -8,8 +8,10 @@ import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import { localizedFrom } from "../../src/lib/lang";
+import { ACHIEVEMENT_DEFINITIONS_FILE, buildConditions, loadAchievementDefinitions } from "./achievement-conditions";
 import {
   AchievementDataSchema,
+  type AchievementCondition,
   SteamAchievementsSchema,
   type Achievement,
   type AchievementData,
@@ -19,7 +21,7 @@ import {
 import { LANGS, type Lang } from "./langs";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { readJsonFile } from "./read-json";
-import type { Localized } from "./schemas";
+import type { LocaleFile, Localized } from "./schemas";
 
 export type { SteamAchievements };
 
@@ -61,7 +63,7 @@ function localizeSteam(text: { readonly en: string; readonly zh: string }): { va
   };
 }
 
-function toAchievement(row: SteamAchievement, hasIcon: boolean): Achievement {
+function toAchievement(row: SteamAchievement, hasIcon: boolean, condition: AchievementCondition | undefined): Achievement {
   const hidden = row.description.en.trim() === "";
   const name = localizeSteam(row.name);
   const description = hidden ? undefined : localizeSteam(row.description);
@@ -74,6 +76,7 @@ function toAchievement(row: SteamAchievement, hasIcon: boolean): Achievement {
     hidden,
     name: name.value,
     ...(description ? { description: description.value } : {}),
+    ...(hidden && condition ? { condition } : {}),
     ...(missing.size > 0 ? { untranslated: LANGS.filter((lang) => missing.has(lang)) } : {}),
   };
 }
@@ -81,10 +84,17 @@ function toAchievement(row: SteamAchievement, hasIcon: boolean): Achievement {
 const byRateThenId = (a: SteamAchievement, b: SteamAchievement): number =>
   b.globalPercent - a.globalPercent || a.id.localeCompare(b.id, "en");
 
-/** Site data for the achievements page, highest unlock rate first. `iconExists` checks a file name in the Steam folder. */
-export function buildAchievements(steam: SteamAchievements, iconExists: (file: string) => boolean): AchievementsResult {
+/**
+ * Site data for the achievements page, highest unlock rate first. `iconExists` checks a file name in the Steam folder;
+ * `conditions` (by Steam id) name what unlocks the hidden ones.
+ */
+export function buildAchievements(
+  steam: SteamAchievements,
+  iconExists: (file: string) => boolean,
+  conditions: ReadonlyMap<string, AchievementCondition> = new Map(),
+): AchievementsResult {
   const rows = [...steam.achievements].sort(byRateThenId);
-  const achievements = rows.map((row) => toAchievement(row, iconExists(row.file)));
+  const achievements = rows.map((row) => toAchievement(row, iconExists(row.file), conditions.get(row.id)));
   return {
     data: { source: steam.source, retrieved: steam.retrieved, achievements },
     icons: rows
@@ -109,15 +119,29 @@ async function publishIcons(folder: string, outRoot: string, icons: readonly Ach
   }
 }
 
+/** Hidden achievements' unlock conditions from the game's table; a missing table is reported and the page goes without. */
+async function hiddenConditions(sourceRoot: string, steam: SteamAchievements, locales: Readonly<Record<Lang, LocaleFile>>) {
+  const rows = await loadAchievementDefinitions(sourceRoot);
+  if (!rows) return { conditions: new Map<string, AchievementCondition>(), issues: [issue("missing-achievement-definitions", ACHIEVEMENT_DEFINITIONS_FILE)] };
+  const hidden = steam.achievements.filter((row) => row.description.en.trim() === "").map((row) => row.id);
+  return buildConditions(rows, locales, hidden);
+}
+
 /** Reads the Steam achievements, publishes their icons and returns the page data; without the folder the list is empty. */
-export async function extractAchievements(sourceRoot: string, outRoot: string): Promise<AchievementsResult> {
+export async function extractAchievements(
+  sourceRoot: string,
+  outRoot: string,
+  locales: Readonly<Record<Lang, LocaleFile>>,
+): Promise<AchievementsResult> {
   const folder = path.join(sourceRoot, ...ACHIEVEMENTS_DIR.split("/"));
   const filePath = path.join(folder, ACHIEVEMENTS_FILE);
   const raw = await readJsonFile(filePath, "Steam 成就檔");
   if (raw === undefined) {
     return { data: { source: "", retrieved: "", achievements: [] }, icons: [], issues: [issue("missing-achievements", `${ACHIEVEMENTS_DIR}/${ACHIEVEMENTS_FILE}`)] };
   }
-  const result = buildAchievements(parseSteamAchievements(raw, filePath), (file) => existsSync(path.join(folder, file)));
+  const steam = parseSteamAchievements(raw, filePath);
+  const conditions = await hiddenConditions(sourceRoot, steam, locales);
+  const result = buildAchievements(steam, (file) => existsSync(path.join(folder, file)), conditions.conditions);
   await publishIcons(folder, outRoot, result.icons);
-  return { ...result, data: AchievementDataSchema.parse(result.data) };
+  return { ...result, data: AchievementDataSchema.parse(result.data), issues: [...result.issues, ...conditions.issues] };
 }

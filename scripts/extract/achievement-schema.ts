@@ -29,6 +29,16 @@ export const SteamAchievementsSchema = z.object({
 });
 export type SteamAchievements = z.infer<typeof SteamAchievementsSchema>;
 
+/** What unlocks a hidden achievement, named with the game's own text. */
+export const AchievementConditionSchema = z.object({
+  /** quest: complete the quest; task: complete one quest objective; boss: defeat the boss. */
+  type: z.enum(["quest", "task", "boss"]),
+  name: LocalizedSchema,
+  /** Languages that show the English name because the game has none in that language. */
+  untranslated: z.array(z.enum(LANGS)).optional(),
+});
+export type AchievementCondition = z.infer<typeof AchievementConditionSchema>;
+
 export const AchievementSchema = z.object({
   id: z.string().min(1),
   slug: SlugSchema,
@@ -40,6 +50,8 @@ export const AchievementSchema = z.object({
   hidden: z.boolean(),
   name: LocalizedSchema,
   description: LocalizedSchema.optional(),
+  /** Hidden achievements only: what unlocks it (a spoiler the page reveals on request). */
+  condition: AchievementConditionSchema.optional(),
   /** Languages that show the English text because Steam has none in that language. */
   untranslated: z.array(z.enum(LANGS)).optional(),
 });

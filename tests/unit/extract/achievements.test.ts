@@ -16,6 +16,8 @@ import {
 import { AchievementDataSchema } from "../../../scripts/extract/achievement-schema";
 import { LANGS } from "../../../scripts/extract/config";
 import { ExtractError } from "../../../scripts/extract/issues";
+import { localizedFrom } from "../../../src/lib/lang";
+import { makeLocales } from "../../helpers/locales";
 
 const steamRow = (id: string, globalPercent: number, en: [string, string], zh: [string, string]) => ({
   id,
@@ -35,6 +37,10 @@ const STEAM: SteamAchievements = {
     steamRow("COLLECT_ALL_ENCHANTMENT_BOOKS", 1.2, ["Bookworm", "Collect every book"], ["", ""]),
   ],
 };
+
+const LOCALES = makeLocales({
+  "Text/Release/QuestTrackerLabels.csv": { CA00: { en: "Escape from Squid Coast", zh: "逃離烏賊海岸" } },
+});
 
 const OTHER_LANGS = LANGS.filter((lang) => lang !== "zh" && lang !== "en");
 
@@ -117,6 +123,18 @@ describe("buildAchievements", () => {
     expect(fallback.map((item) => item.detail)).toContainEqual(expect.stringMatching(/^EQUIP_A_UNIQUE_ITEM: zh-hans, ja, /));
   });
 
+  it("attaches the unlock condition to hidden achievements only", () => {
+    const quest = { type: "quest" as const, name: localizedFrom((lang) => (lang === "zh" ? "逃離烏賊海岸" : "Escape from Squid Coast")) };
+    const conditions = new Map([
+      ["COMPLETE_ARRIVE_IN_BRAVE_HAVEN_QUEST", quest],
+      ["EQUIP_A_UNIQUE_ITEM", quest],
+    ]);
+    const withConditions = buildAchievements(STEAM, () => true, conditions).data.achievements;
+    expect(withConditions.find((item) => item.id === "COMPLETE_ARRIVE_IN_BRAVE_HAVEN_QUEST")?.condition).toEqual(quest);
+    expect(withConditions.find((item) => item.id === "EQUIP_A_UNIQUE_ITEM")?.condition).toBeUndefined();
+    expect(byId("COMPLETE_ARRIVE_IN_BRAVE_HAVEN_QUEST")?.condition).toBeUndefined();
+  });
+
   it("produces data the site schema accepts and keeps the source and date", () => {
     expect(AchievementDataSchema.parse(result.data).retrieved).toBe("2026-10-11");
     expect(result.data.source).toBe("Steam app 1912410");
@@ -133,7 +151,7 @@ describe("extractAchievements", () => {
   });
 
   it("returns an empty list and reports the missing folder when there is no Steam data", async () => {
-    const result = await extractAchievements(sourceRoot, outRoot);
+    const result = await extractAchievements(sourceRoot, outRoot, LOCALES);
     expect(result.data.achievements).toEqual([]);
     expect(result.issues).toEqual([{ type: "missing-achievements", detail: `${ACHIEVEMENTS_DIR}/achievements.json` }]);
   });
@@ -144,7 +162,7 @@ describe("extractAchievements", () => {
     await writeFile(path.join(dir, "achievements.json"), JSON.stringify({ ...STEAM, achievements: [STEAM.achievements[0]] }), "utf8");
     const jpg = await sharp({ create: { width: 256, height: 256, channels: 3, background: "#c33" } }).jpeg().toBuffer();
     await writeFile(path.join(dir, "EQUIP_A_UNIQUE_ITEM.jpg"), jpg);
-    const result = await extractAchievements(sourceRoot, outRoot);
+    const result = await extractAchievements(sourceRoot, outRoot, LOCALES);
     const webp = path.join(outRoot, "public", "icons", "achievements", "equip-a-unique-item.webp");
     expect(existsSync(webp)).toBe(true);
     const meta = await sharp(webp).metadata();
@@ -152,10 +170,40 @@ describe("extractAchievements", () => {
     expect(result.data.achievements[0]?.icon).toBe("icons/achievements/equip-a-unique-item.webp");
   });
 
+  it("names the unlock condition of hidden achievements from the game's achievement table", async () => {
+    const dir = path.join(sourceRoot, ...ACHIEVEMENTS_DIR.split("/"));
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, "achievements.json"), JSON.stringify(STEAM), "utf8");
+    const table = path.join(sourceRoot, "DataTables", "UFS", "DT_AchievementDefinition.json");
+    await mkdir(path.dirname(table), { recursive: true });
+    const row = {
+      AchievementId: "COMPLETE_ARRIVE_IN_BRAVE_HAVEN_QUEST",
+      Condition: {
+        InstancedStructScriptStruct: "/Script/Achievements.ConditionDefinitionQuest",
+        QuestState: { bUseQuestState: true, QuestName: "CA00", TaskName: "None" },
+      },
+    };
+    await writeFile(table, JSON.stringify([row]), "utf8");
+    const result = await extractAchievements(sourceRoot, outRoot, LOCALES);
+    const home = result.data.achievements.find((item) => item.id === "COMPLETE_ARRIVE_IN_BRAVE_HAVEN_QUEST");
+    expect(home?.condition?.type).toBe("quest");
+    expect(home?.condition?.name.zh).toBe("逃離烏賊海岸");
+  });
+
+  it("reports a missing achievement table and still lists the achievements", async () => {
+    const dir = path.join(sourceRoot, ...ACHIEVEMENTS_DIR.split("/"));
+    await mkdir(dir, { recursive: true });
+    await writeFile(path.join(dir, "achievements.json"), JSON.stringify(STEAM), "utf8");
+    const result = await extractAchievements(sourceRoot, outRoot, LOCALES);
+    expect(result.data.achievements).toHaveLength(3);
+    expect(result.data.achievements.every((item) => item.condition === undefined)).toBe(true);
+    expect(result.issues).toContainEqual({ type: "missing-achievement-definitions", detail: "DataTables/UFS/DT_AchievementDefinition.json" });
+  });
+
   it("fails loudly with the path when the Steam file is not JSON", async () => {
     const dir = path.join(sourceRoot, ...ACHIEVEMENTS_DIR.split("/"));
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, "achievements.json"), "{nope", "utf8");
-    await expect(extractAchievements(sourceRoot, outRoot)).rejects.toThrow(/achievements\.json/);
+    await expect(extractAchievements(sourceRoot, outRoot, LOCALES)).rejects.toThrow(/achievements\.json/);
   });
 });

@@ -28,7 +28,9 @@ export type IssueType =
   | "missing-ui-game-string"
   | "missing-achievements"
   | "missing-achievement-icon"
-  | "achievement-text-fallback";
+  | "achievement-text-fallback"
+  | "missing-achievement-condition"
+  | "missing-achievement-definitions";
 
 export interface Issue {
   readonly type: IssueType;

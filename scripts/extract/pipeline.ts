@@ -159,7 +159,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     path.join(options.outRoot, "public", "icons"),
   );
   // After copyIcons, which clears public/icons.
-  const achievements = await extractAchievements(options.sourceRoot, options.outRoot);
+  const achievements = await extractAchievements(options.sourceRoot, options.outRoot, locales);
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
   const weapons = weaponTables
