@@ -299,13 +299,16 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
     expect(ids((await view("enchantment-book/ricochet"))?.bookPools)).toEqual(["bookPool:AllEnchantmentBooks", "bookPool:EnchantmentBooksDeepDark"]);
   });
 
+  it("lists Wonderful Wheat's guaranteed quest", async () => {
+    expect(ids((await view("talisman/llama"))?.quests)).toEqual(["quest:QuestTalismanLlama"]);
+  });
+
   it("reports the known data problems", async () => {
     const { issues } = await real();
-    expect(issues).toContainEqual({ type: "loot-tag-unmatched", detail: "sw.Item.Talisman.Llama" });
     expect(issues).toContainEqual({ type: "loot-row-name", detail: "QuestMeleeDaggerUnique_)1" });
     expect(issues).toContainEqual({ type: "loot-tag-case", detail: "SW.Item.Currency.SpringStone | SW.Item.Currency.Springstone" });
     expect(issues).toContainEqual({ type: "loot-slot-unnamed", detail: "CampWoodenChest" });
-    expect(issues.filter((item) => item.type === "loot-tag-unmatched").map((item) => item.detail).sort()).toEqual(["SW.Item.Property.Consumable", "SW.Item.Property.Gear", "sw.Item.Talisman.Llama"]);
+    expect(issues.filter((item) => item.type === "loot-tag-unmatched").map((item) => item.detail).sort()).toEqual(["SW.Item.Property.Consumable", "SW.Item.Property.Gear"]);   // sw.Item.Talisman.Llama now resolves to Wonderful Wheat
     expect(issues.filter((item) => item.type === "loot-quest-not-guaranteed")).toEqual([]);
   });
 });

@@ -57,6 +57,14 @@ describe("buildItemIndex", () => {
     expect(index.knownTag("SW.Item.ArmorSet.Mushroom")).toBe(true);
   });
 
+  it("finds a row whose name key starts with sw_ in lower case, and lists rows with no site entry", () => {
+    const talismans = lootTables({ talisman: [itemRow("DT_ItemDefinitionTalisman", "LlamaTalisman", "sw.Item.Talisman.Llama", [], "sw_Item_Talisman_Llama_SW_TextEntry_Name")] });
+    const llama = buildItemIndex(talismans, [makeEntry("Talisman_Llama", "talisman")]);
+    expect(llama.resolve("SW.Item.Talisman.Llama").map((ref) => ref.key)).toEqual(["talisman/llama"]);
+    expect(llama.unresolvedRows).toEqual([]);
+    expect(index.unresolvedRows).toEqual(["melee:Hidden"]);
+  });
+
   it("counts parent tags as traits, so a category only listed in ParentTags still matches", () => {
     const base = itemRow(ARMOR, "ScampHelmet", "SW.Item.ScampHelmet", ["SW.Item.ArmorSet.Scamp"]);
     const parented = lootTables({
@@ -84,6 +92,11 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
     expect(unique).toHaveLength(4);
     expect(unique.every((key) => key.endsWith("-unique"))).toBe(true);
     expect(real.resolve("SW.Item.Sickles")).toHaveLength(1);
+  });
+
+  it("resolves Wonderful Wheat, whose row key is spelled sw_Item_Talisman_Llama", async () => {
+    const real = await load();
+    expect(real.resolve("sw.Item.Talisman.Llama").map((ref) => ref.key)).toEqual(["talisman/llama"]);
   });
 
   it("finds the merchant categories by trait, including armor that only lists Property.Armor as a parent", async () => {

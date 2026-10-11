@@ -45,7 +45,7 @@ beforeEach(async () => {
     lootRow("GlobalHostileMobLoot", "SW.Mob.Default.Hostile", [slot("Item", 0, 1, 0.0125, false)]),
   ]);
   await putJson(T("DT_LootSourceDefinition_Area"), [lootRow("PlainsA1", "SW.Area.Plains.A1", [slot("Item", 0, 0, 0, true, ["SW.Item.Sickles"])])]);
-  await putJson(T("DT_ItemDefinitionMelee"), [itemRow("DT_ItemDefinitionMelee", "Sickles", "SW.Item.Sickles")]);
+  await putJson(T("DT_ItemDefinitionMelee"), [itemRow("DT_ItemDefinitionMelee", "Sickles", "SW.Item.Sickles"), itemRow("DT_ItemDefinitionMelee", "TestBlade", "SW.Item.TestBlade")]);
   for (const name of ["DT_MobDefinition", "DT_MobType2Definition", "DT_MobSoulStatedDefinition", "DT_MobVariantDefinition", "DT_LootSourceDefinition", "DT_LootSourceDefinition_LootActor", "DT_LootSourceDefinition_Quest", "DT_ItemDefinitionRanged", "DT_ItemDefinitionArmor", "DT_ItemDefinitionArtifact", "DT_ItemDefinitionEnchantmentBook", "DT_ItemDefinitionTalisman"]) await putJson(T(name), []);
   const renders = path.join(sourceRoot, "Renders", "Mobs");
   await mkdir(renders, { recursive: true });
@@ -74,6 +74,12 @@ describe("extractBestiary", () => {
     const { issues } = await run();
     expect(issues).toContainEqual({ type: "mob-portrait-unjoined", detail: "Evoker_FangTrap.png" });
     expect(issues).toContainEqual({ type: "mob-no-portrait", detail: "bee" });
+  });
+
+  it("reports item rows that match no site entry", async () => {
+    const { issues } = await run();
+    expect(issues).toContainEqual({ type: "loot-item-unmatched", detail: "melee:TestBlade" });
+    expect(issues.filter((item) => item.type === "loot-item-unmatched")).toHaveLength(1);
   });
 
   it("never reads the telemetry constants and never writes any of their values", async () => {

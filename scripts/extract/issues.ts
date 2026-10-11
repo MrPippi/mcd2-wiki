@@ -42,6 +42,7 @@ export type IssueType =
   | "mob-no-portrait"
   | "missing-mob-portraits"
   | "loot-tag-unmatched"
+  | "loot-item-unmatched"
   | "loot-tag-case"
   | "loot-row-name"
   | "loot-quest-not-guaranteed"

@@ -74,13 +74,15 @@ async function composeFrom(input: BestiaryInput, tables: MobTables, loot: LootTa
 
 function buildSources(input: BestiaryInput, tables: MobTables | undefined, loot: LootTables | undefined): { sources: ItemSourcesData; issues: Issue[] } {
   if (!loot) return { sources: EMPTY_SOURCES, issues: [issue("missing-loot-tables", "DT_LootSourceDefinition_Area.json")] };
+  const index = buildItemIndex(loot, input.entries);
   const built = buildItemSources({
     tables: loot,
-    index: buildItemIndex(loot, input.entries),
+    index,
     namer: buildAreaNamer(tables?.areas ?? [], input.locales),
     locales: input.locales,
   });
-  return { sources: ItemSourcesSchema.parse(built.data), issues: built.issues };
+  const unmatched = index.unresolvedRows.map((row) => issue("loot-item-unmatched", row));
+  return { sources: ItemSourcesSchema.parse(built.data), issues: [...built.issues, ...unmatched] };
 }
 
 export async function extractBestiary(input: BestiaryInput): Promise<BestiaryResult> {

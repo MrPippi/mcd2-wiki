@@ -21,6 +21,8 @@ export interface ItemIndex {
   readonly withTrait: (traitTag: string) => readonly ItemRef[];
   /** True for an item tag or an armor set tag. */
   readonly knownTag: (tag: string) => boolean;
+  /** "<table>:<row name>" of item rows that match no site entry, for the report. */
+  readonly unresolvedRows: readonly string[];
 }
 
 const SET_PREFIX = "sw.item.armorset.";
@@ -31,21 +33,22 @@ const pieceRank = (ref: ItemRef): number => {
   return rank === -1 ? ARMOR_PIECES.length : rank;
 };
 
-function collectRefs(tables: LootTables, entries: readonly Entry[]): ItemRef[] {
+function collectRefs(tables: LootTables, entries: readonly Entry[]): { refs: ItemRef[]; unresolvedRows: string[] } {
   const find = entryIndex(entries);
-  return TABLES.flatMap((table) =>
-    tables[table].flatMap((row): ItemRef[] => {
+  const rows = TABLES.flatMap((table) =>
+    tables[table].map((row) => {
       const category = ITEM_TABLE_CATEGORY[table];
       const entry = find(category, locId(row.TypeTextData) ?? row.Name);
-      if (entry === undefined) return [];
       const names = [...(row.Traits?.GameplayTags ?? []), ...(row.Traits?.ParentTags ?? [])].map((tag) => tagKey(tag.TagName));
-      return [{ key: `${category}/${entry.slug}`, entry, tag: row.TypeTag.TagName, traits: new Set(names) }];
+      const ref: ItemRef | undefined = entry && { key: `${category}/${entry.slug}`, entry, tag: row.TypeTag.TagName, traits: new Set(names) };
+      return { ref, row: `${category}:${row.Name}` };
     }),
   );
+  return { refs: rows.flatMap(({ ref }) => ref ?? []), unresolvedRows: rows.flatMap(({ ref, row }) => (ref ? [] : [row])) };
 }
 
 export function buildItemIndex(tables: LootTables, entries: readonly Entry[]): ItemIndex {
-  const refs = collectRefs(tables, entries);
+  const { refs, unresolvedRows } = collectRefs(tables, entries);
   const byTag = new Map<string, ItemRef>();
   const bySet = new Map<string, ItemRef[]>();
   for (const ref of refs) {
@@ -64,5 +67,6 @@ export function buildItemIndex(tables: LootTables, entries: readonly Entry[]): I
     },
     withTrait: (traitTag) => refs.filter((ref) => ref.traits.has(tagKey(traitTag))),
     knownTag: (tag) => byTag.has(tagKey(tag)) || sets.has(tagKey(tag)),
+    unresolvedRows,
   };
 }
