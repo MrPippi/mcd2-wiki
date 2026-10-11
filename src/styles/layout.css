@@ -105,12 +105,16 @@
 }
 
 @media (max-width: 1099px) {
-  /* The strip scrolls sideways with no scrollbar; soft edges show there is more beyond them. */
+  /* The strip scrolls sideways with no scrollbar; soft edges show there is more beyond them.
+     Without scripts both edges fade; with them, an edge fades only while tabs lie past it. */
   .tab-list {
     display: flex; overflow-x: auto; scrollbar-width: none;
     --edge: var(--space-4);
     mask-image: linear-gradient(90deg, transparent, #000 var(--edge), #000 calc(100% - var(--edge)), transparent);
   }
+  .tab-list[data-at-start] { mask-image: linear-gradient(90deg, #000 calc(100% - var(--edge)), transparent); }
+  .tab-list[data-at-end] { mask-image: linear-gradient(90deg, transparent, #000 var(--edge)); }
+  .tab-list[data-at-start][data-at-end] { mask-image: none; }
   .tab-list::-webkit-scrollbar { display: none; }
   .tab-list li { flex: 0 0 auto; }
 }
