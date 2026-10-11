@@ -7,6 +7,7 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { ALL_LANGS, LANG_META } from "../../scripts/extract/config";
 import { ExtractError } from "../../scripts/extract/issues";
 import { runExtract } from "../../scripts/extract/pipeline";
+import { SOUL_STORM_ICON_SOURCES } from "../../scripts/extract/soul-storm";
 import type { ArmorSet, Entry } from "../../scripts/extract/schemas";
 import { makeLocales, ns } from "../helpers/locales";
 
@@ -90,6 +91,9 @@ beforeEach(async () => {
   await put(sourceRoot, `${ICON_ROOT}/Armor/Disciple_Armor/T_UI_Helmet_Disciple_Icon.png`, "png:helmet");
   await put(sourceRoot, QUIVER, "png:quiver");
   await writeFile(overridesPath, JSON.stringify({ Artifact_FrostQuiver: QUIVER }), "utf8");
+  await writeFile(path.join(sourceRoot, "soul-storm-status.json"), JSON.stringify({ verified: false, anchorOffsetMinutes: 0, rotationOffset: 0 }), "utf8");
+  await put(sourceRoot, SOUL_STORM_ICON_SOURCES.header, "png:soul-storm-header");
+  await put(sourceRoot, SOUL_STORM_ICON_SOURCES.generator, "png:soul-storm-generator");
 });
 
 const readJson = async <T,>(relative: string): Promise<T> =>

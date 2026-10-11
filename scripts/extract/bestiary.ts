@@ -9,7 +9,7 @@ import { areaMarkers, buildAreaNamer, buildMobAreas, SPAWN_AREA_PREFIXES } from 
 import { attachDrops, unusedMobRows } from "./mob-drops";
 import { listPortraitFiles, planPortraits, publishPortraits, withPortraits } from "./mob-portraits";
 import { ItemSourcesSchema, MobDataSchema, type ItemSourcesData, type MobData } from "./mob-schema";
-import { loadMobTables, type MobTables } from "./mob-tables";
+import { loadMobTables, type AreaRow, type MobTables } from "./mob-tables";
 import { buildMobs, type MobDraft } from "./mobs";
 import type { MapData } from "./map-schema";
 import type { LocaleFile, Entry } from "./schemas";
@@ -23,11 +23,17 @@ export interface BestiaryInput {
   /** Hand-made portraits that win over the game renders. */
   readonly overrideDir: string;
 }
+/** What other pages need to link into the bestiary: the mob tag → slug index and the area rows. Not serialized. */
+export interface BestiaryLinks {
+  readonly tagIndex: ReadonlyMap<string, string>;
+  readonly areas: readonly AreaRow[];
+}
 export interface BestiaryResult {
   readonly mobs: MobData;
   readonly sources: ItemSourcesData;
   readonly issues: Issue[];
   readonly tablesRead: readonly string[];
+  readonly links: BestiaryLinks;
 }
 
 const RENDERS_DIR = ["Renders", "Mobs"];
@@ -36,9 +42,10 @@ const EMPTY_SOURCES: ItemSourcesData = { sources: {}, items: {} };
 interface MobsPart {
   readonly mobs: MobData;
   readonly issues: Issue[];
+  readonly links: BestiaryLinks;
 }
 
-async function loadAndBuildMobs(input: BestiaryInput, tables: MobTables): Promise<{ drafts: MobDraft[]; issues: Issue[] }> {
+async function loadAndBuildMobs(input: BestiaryInput, tables: MobTables): Promise<{ drafts: MobDraft[]; issues: Issue[]; tagIndex: ReadonlyMap<string, string> }> {
   const built = buildMobs(tables, input.locales);
   const areas = buildMobAreas({
     tables,
@@ -56,11 +63,12 @@ async function loadAndBuildMobs(input: BestiaryInput, tables: MobTables): Promis
   return {
     drafts: withPortraits(withAreas, portraits.plans),
     issues: [...built.issues, ...areas.issues, ...(renders === null ? missing : portraits.issues)],
+    tagIndex: built.tagIndex,
   };
 }
 
 function composeMobs(input: BestiaryInput, tables: MobTables | undefined, loot: LootTables | undefined): Promise<MobsPart> {
-  return tables ? composeFrom(input, tables, loot) : Promise.resolve({ mobs: { mobs: [] }, issues: [issue("missing-mob-tables", "DT_MobType1Definition.json")] });
+  return tables ? composeFrom(input, tables, loot) : Promise.resolve({ mobs: { mobs: [] }, issues: [issue("missing-mob-tables", "DT_MobType1Definition.json")], links: { tagIndex: new Map(), areas: [] } });
 }
 
 async function composeFrom(input: BestiaryInput, tables: MobTables, loot: LootTables | undefined): Promise<MobsPart> {
@@ -69,6 +77,7 @@ async function composeFrom(input: BestiaryInput, tables: MobTables, loot: LootTa
   return {
     mobs: MobDataSchema.parse({ mobs: dropped.drafts.map((draft) => draft.mob) }),
     issues: [...built.issues, ...(loot ? [...dropped.issues, ...unusedMobRows(built.drafts, loot.mob)] : [])],
+    links: { tagIndex: built.tagIndex, areas: tables.areas },
   };
 }
 
@@ -94,5 +103,5 @@ export async function extractBestiary(input: BestiaryInput): Promise<BestiaryRes
   const loot = await loadLootTables(input.sourceRoot, onRead);
   const mobs = await composeMobs(input, tables, loot);
   const sources = buildSources(input, tables, loot);
-  return { mobs: mobs.mobs, sources: sources.sources, issues: [...mobs.issues, ...sources.issues], tablesRead: [...tablesRead] };
+  return { mobs: mobs.mobs, sources: sources.sources, issues: [...mobs.issues, ...sources.issues], tablesRead: [...tablesRead], links: mobs.links };
 }

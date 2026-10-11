@@ -43,6 +43,7 @@ import { buildUiGameStrings } from "./ui-game-strings";
 import { loadTalismanTables } from "./talisman-tables";
 import { buildTalismanData, withTalismanDescriptions } from "./talismans";
 import { applyEnglishOverrides } from "./text-overrides";
+import { extractSoulStorm, SOUL_STORM_ICON_SOURCES } from "./soul-storm";
 
 export interface ExtractOptions {
   readonly sourceRoot: string;
@@ -50,6 +51,8 @@ export interface ExtractOptions {
   readonly overridesPath: string;
   /** Hand-made mob portraits; defaults to mob-portrait-overrides next to the icon overrides. */
   readonly mobPortraitOverrideDir?: string;
+  /** The hand-kept Soul Storm status file; defaults to soul-storm-status.json next to the icon overrides. */
+  readonly soulStormStatusPath?: string;
 }
 
 export interface ExtractSummary {
@@ -158,13 +161,14 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
   const frames = planAssets(options.sourceRoot, options.outRoot, FRAME_SOURCES, "frames", "missing-frame");
   const uiIcons = planAssets(options.sourceRoot, options.outRoot, UI_ICON_SOURCES, "ui", "missing-ui-icon");
   const brand = planAssets(options.sourceRoot, options.outRoot, BRAND_SOURCES, "brand", "missing-brand");
+  const soulStormIcons = planAssets(options.sourceRoot, options.outRoot, SOUL_STORM_ICON_SOURCES, "soul-storm", "missing-ui-icon");
   const map = await extractMap(options.sourceRoot, locales);
   const mapIcons = map.icons.map((icon) => ({
     from: path.join(options.sourceRoot, ...icon.from.split("/")),
     to: path.join(options.outRoot, "public", ...icon.published.split("/")),
   }));
   await copyIcons(
-    [...copies, ...frames.copies, ...uiIcons.copies, ...brand.copies, ...mapIcons],
+    [...copies, ...frames.copies, ...uiIcons.copies, ...brand.copies, ...soulStormIcons.copies, ...mapIcons],
     path.join(options.outRoot, "public", "icons"),
   );
   // After copyIcons, which clears public/icons.
@@ -176,6 +180,14 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     entries: output.entries,
     map: map.data,
     overrideDir: options.mobPortraitOverrideDir ?? path.join(path.dirname(options.overridesPath), "mob-portrait-overrides"),
+  });
+  const soulStorm = await extractSoulStorm({
+    sourceRoot: options.sourceRoot,
+    locales,
+    map: map.data,
+    links: bestiary.links,
+    icons: soulStormIcons.paths,
+    statusPath: options.soulStormStatusPath ?? path.join(path.dirname(options.overridesPath), "soul-storm-status.json"),
   });
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
@@ -194,6 +206,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...frames.issues,
     ...uiIcons.issues,
     ...brand.issues,
+    ...soulStormIcons.issues,
     ...splashIssues,
     ...grouped.issues,
     ...plans.filter((plan) => kept.has(`${plan.raw.category}:${plan.raw.id}`)).flatMap((plan) => plan.issues),
@@ -208,6 +221,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...uiStrings.issues,
     ...achievements.issues,
     ...bestiary.issues,
+    ...soulStorm.issues,
   ];
   const extraData = {
     "frames.json": frames.paths,
@@ -223,7 +237,8 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "achievements.json": achievements.data,
     "mobs.json": bestiary.mobs,
     "loot-sources.json": bestiary.sources,
+    "soul-storm.json": soulStorm.data,
   };
   await writeOutputs(options.outRoot, described, extraData, renderReport({ ...described, issues }));
-  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: bestiary.tablesRead, issues };
+  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead], issues };
 }
