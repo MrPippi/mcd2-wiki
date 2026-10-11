@@ -8,6 +8,7 @@ import {
   formatStat,
   mapLinkOf,
   mobData,
+  mobDescription,
   mobGroups,
   uniqueAreas,
 } from "../../../src/lib/mobs";
@@ -108,5 +109,13 @@ describe("mob data", () => {
     expect(findMob("zombie")?.name.en).toBe("Zombie");
     expect(findMob("zombie")?.stats[0]).toEqual({ key: "health", value: 8 });
     expect(findMob("no-such-mob")).toBeUndefined();
+  });
+});
+
+describe("mobDescription", () => {
+  it("names the mob, its kind, the bestiary and the game in the page language", () => {
+    const maw = mob("maw", "boss", "Twisted Warden");
+    expect(mobDescription(maw, "en")).toBe("Twisted Warden · Boss · Bestiary · Minecraft Dungeons II");
+    expect(mobDescription({ ...maw, name: loc({ en: "Twisted Warden", zh: "扭曲監守者" }) }, "zh")).toBe("扭曲監守者 · 頭目 · 怪物圖鑑 · Minecraft Dungeons II");
   });
 });

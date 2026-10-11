@@ -10,7 +10,9 @@ import {
 } from "../../scripts/extract/mob-schema";
 import rawMobs from "../data/mobs.json";
 import { htmlLang, type Lang } from "./lang";
+import { mobKindLabel } from "./i18n";
 import { formatView, worldSearch } from "./map/view-state";
+import { GAME_NAME } from "./site-title";
 import { t, type UiKey } from "./ui-strings";
 import { href } from "./url";
 
@@ -32,6 +34,10 @@ export const mobGroups = (mobs: readonly Mob[]): MobGroup[] =>
   MOB_KIND_ORDER.map((kind) => ({ kind, mobs: mobs.filter((mob) => mob.kind === kind).sort(byEnglishName) })).filter(
     (group) => group.mobs.length > 0,
   );
+
+/** A mob page's meta description: its name, its kind, the bestiary and the game, in the page language. */
+export const mobDescription = (mob: Mob, lang: Lang): string =>
+  [mob.name[lang], mobKindLabel(mob.kind, lang), t(lang, "mobs"), GAME_NAME].join(" · ");
 
 const MOBS_BY_SLUG: ReadonlyMap<string, Mob> = new Map(mobData.mobs.map((mob) => [mob.slug, mob]));
 

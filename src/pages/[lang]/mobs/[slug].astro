@@ -10,7 +10,7 @@ import MobPortrait from "../../../components/MobPortrait.astro";
 import MobStats from "../../../components/MobStats.astro";
 import Base from "../../../layouts/Base.astro";
 import { mobKindLabel, t, type Lang, type UiKey } from "../../../lib/i18n";
-import { findMob, mobData, mobHref } from "../../../lib/mobs";
+import { findMob, mobData, mobDescription, mobHref } from "../../../lib/mobs";
 import { href } from "../../../lib/url";
 import "../../../styles/mobs.css";
 
@@ -28,7 +28,7 @@ const variants = mob.variants.flatMap((slug) => findMob(slug) ?? []);
 const PLATE_PORTRAIT_SIZE = 128;
 const WORLD_KEY = { overworld: "mobWorldOverworld", wellspring: "mobWorldWellspring" } as const satisfies Record<NonNullable<Mob["world"]>, UiKey>;
 ---
-<Base lang={lang} title={mob.name[lang]} description={t(lang, "mobsIntro")}>
+<Base lang={lang} title={mob.name[lang]} description={mobDescription(mob, lang)}>
   <article class="entry-detail mob-page" data-pagefind-body>
     <div class="entry-layout">
       <aside class="info-box mob-info">
@@ -51,8 +51,8 @@ const WORLD_KEY = { overworld: "mobWorldOverworld", wellspring: "mobWorldWellspr
         {mob.soulCorrupted && (
           <section class="entry-section mob-soul" data-testid="mob-soul-corrupted">
             <h2 class="section-title" data-pagefind-ignore>{t(lang, "mobSoulCorrupted")}</h2>
-            <MobStats lang={lang} stats={mob.soulCorrupted.stats} level={3} />
-            <MobDrops lang={lang} drops={mob.soulCorrupted.drops} level={3} showNote={false} />
+            <MobStats lang={lang} stats={mob.soulCorrupted.stats} level={3} testid="mob-stats-soul" />
+            <MobDrops lang={lang} drops={mob.soulCorrupted.drops} level={3} showNote={false} testid="mob-drops-soul" />
           </section>
         )}
         {variants.length > 0 && (

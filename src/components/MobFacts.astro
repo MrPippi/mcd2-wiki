@@ -22,10 +22,4 @@ const parent = mob.variantOf ? findMob(mob.variantOf) : undefined;
       <dd><a href={mobHref(lang, parent.slug)}>{parent.name[lang]}</a></dd>
     </div>
   )}
-  {mob.untranslated.includes(lang) && (
-    <div>
-      <dt>{t(lang, "translation")}</dt>
-      <dd><span class="tag warn">{t(lang, "untranslated")}</span></dd>
-    </div>
-  )}
 </dl>

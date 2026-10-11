@@ -8,13 +8,15 @@ interface Props {
   stats: Mob["stats"];
   /** h2 for the page's own stats, h3 inside the Soul Corrupted section. */
   level?: 2 | 3;
+  /** Test id of the section, so the Soul Corrupted stats can be told apart from the page's own. */
+  testid?: string;
 }
 
-const { lang, stats, level = 2 } = Astro.props;
+const { lang, stats, level = 2, testid = "mob-stats" } = Astro.props;
 const Heading = level === 3 ? "h3" : "h2";
 ---
 {stats.length > 0 && (
-  <section class="entry-section mob-stats" data-testid="mob-stats">
+  <section class="entry-section mob-stats" data-testid={testid}>
     <Heading class="section-title" data-pagefind-ignore>{t(lang, "mobStats")}</Heading>
     <table class="mob-stat-table">
       <tbody>
