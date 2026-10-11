@@ -5,7 +5,7 @@ import { ItemSourcesSchema, type MobArea } from "../../scripts/extract/mob-schem
 import type { Entry } from "../../scripts/extract/schemas";
 import rawSources from "../data/loot-sources.json";
 import { booksFor } from "./data";
-import { categoryLabel } from "./i18n";
+import { categoryLabel, t } from "./i18n";
 import { compareLang, type Lang } from "./lang";
 import { sourcesFor, type ResolvedItemSources, type ResolvedSource } from "./item-sources";
 import { mapLinkOf, mobData } from "./mobs";
@@ -38,7 +38,13 @@ export const groupIsUntranslated = (sources: readonly ResolvedSource[], lang: La
  * (an English page must not show the Chinese fallback of an untranslated name).
  */
 export const showsAltName = (source: ResolvedSource, lang: Lang): boolean =>
-  !nameIsUntranslated(source, lang) && !source.untranslated.includes(compareLang(lang)) && source.name[compareLang(lang)] !== source.name[lang];
+  !isQuestLabel(source, lang) &&
+  !nameIsUntranslated(source, lang) &&
+  !source.untranslated.includes(compareLang(lang)) &&
+  source.name[compareLang(lang)] !== source.name[lang];
+
+/** A quest with no game name is shown by the site's "Quest reward" label, which is not a name worth a second language. */
+const isQuestLabel = (source: ResolvedSource, lang: Lang): boolean => source.kind === "quest" && source.name[lang] === t(lang, "sourceQuestReward");
 
 export const hasAnySource = (sources: ResolvedItemSources): boolean =>
   sources.areas.length + sources.chests.length + sources.quests.length + sources.merchants.length + sources.bookPools.length > 0;

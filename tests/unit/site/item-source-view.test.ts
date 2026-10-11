@@ -60,6 +60,13 @@ describe("showsAltName", () => {
     expect(showsAltName(named("Chest: X"), "zh")).toBe(false);
   });
 
+  it("never adds a comparison line to the site's own 'Quest reward' label", () => {
+    const label: ResolvedSource = { id: "quest:QuestX", kind: "quest", name: loc({ en: "Quest reward", zh: "任務獎勵" }), untranslated: [] };
+    expect(showsAltName(label, "en")).toBe(false);
+    expect(showsAltName(label, "zh")).toBe(false);
+    expect(showsAltName({ ...label, name: loc({ en: "The Lost Map", zh: "失落的地圖" }) }, "en")).toBe(true);
+  });
+
   it("hides the comparison name when that language itself fell back to English", () => {
     expect(showsAltName(named("寶箱：X", ["zh"]), "en")).toBe(false);
     expect(showsAltName(named("寶箱 X"), "en")).toBe(true);
