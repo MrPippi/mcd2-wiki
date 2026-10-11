@@ -14,6 +14,7 @@
 }
 #search .pagefind-ui__search-input { font-size: 20px; font-weight: 500; background: transparent; border-width: 0 0 1px; }
 #search .pagefind-ui__search-input:focus { outline: none; border-bottom-color: var(--accent); box-shadow: 0 1px 0 var(--accent); }
+#search .pagefind-ui__search-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 #search .pagefind-ui__search-clear { background: transparent; font-family: var(--font-mono); font-size: var(--fs-mono-m); }
 #search .pagefind-ui__message { font-family: var(--font-mono); font-size: var(--fs-mono-m); font-weight: 400; color: var(--muted); padding: 16px 0 8px; }
 #search .pagefind-ui__results { border-top: 1px solid var(--rule-strong); }

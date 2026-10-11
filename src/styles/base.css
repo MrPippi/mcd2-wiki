@@ -18,7 +18,7 @@ a { color: var(--link); text-decoration-thickness: 1px; text-underline-offset: 0
 a:hover { text-decoration-color: var(--accent); }
 h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; text-wrap: balance; overflow-wrap: break-word; hyphens: auto; }
 /* Negative tracking tightens Latin display type; CJK glyphs already fill their em box, so they keep zero. */
-:is(h1, h2, h3, .title-rest, .category-name, .brand-full, .brand-short):is(:lang(zh), :lang(ja), :lang(ko)) { letter-spacing: 0; }
+:is(h1, h2, h3, .title-rest, .category-name, .brand-full):is(:lang(zh), :lang(ja), :lang(ko)) { letter-spacing: 0; }
 /* Japanese prose breaks at phrase boundaries and never before small kana or closing marks. */
 :is(h1, h2, h3, p):lang(ja) { line-break: strict; word-break: auto-phrase; }
 h1 { font-size: var(--fs-display-l); margin: 0; }
@@ -46,6 +46,9 @@ button, .button {
 button:hover, .button:hover { background: var(--plate); }
 button:active, .button:active { transform: translateY(1px); }
 button[aria-pressed="true"], button[aria-pressed="true"]:hover { background: var(--ink); color: var(--paper); }
+/* The header's compare toggle is on by default on every page, so its on-state is a rule under the label, not a fill. */
+.site-tools button[aria-pressed="true"] { background: transparent; color: var(--text); box-shadow: inset 0 -2px 0 var(--ink); }
+.site-tools button[aria-pressed="true"]:hover { background: var(--plate); }
 input[type="search"] {
   font: inherit; font-size: 15px; padding: 8px 0; background: transparent; color: var(--text);
   border: 0; border-bottom: 1px solid var(--rule-strong); border-radius: var(--radius);
@@ -59,6 +62,8 @@ input[type="search"]::-webkit-search-cancel-button {
 }
 input[type="search"]:focus { outline: none; border-bottom-color: var(--accent); box-shadow: 0 1px 0 var(--accent); }
 button:focus-visible, a:focus-visible, .button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+/* The underline alone is too faint a focus mark (WCAG 2.2 focus appearance); add the site's outline. */
+input[type="search"]:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 
 .lang-text { display: inline-flex; flex-direction: column; }
 .lang-text .alt { color: var(--muted); font-size: 0.8em; font-weight: 400; font-family: var(--font-body); letter-spacing: 0; }
