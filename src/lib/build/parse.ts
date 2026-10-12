@@ -7,7 +7,7 @@ export interface BuildOption {
   /** Folded names in the page and comparison languages, matched against the folded query. */
   readonly search: string;
   readonly icon?: string;
-  readonly href?: string;
+  readonly href: string;
   readonly unique?: true;
 }
 
@@ -58,7 +58,7 @@ const isOption = (value: unknown): value is BuildOption =>
   isText(value.name) &&
   typeof value.search === "string" &&
   optionalText(value.icon) &&
-  optionalText(value.href) &&
+  isText(value.href) &&
   (value.unique === undefined || value.unique === true);
 
 const isSet = (value: unknown): value is BuildSet =>

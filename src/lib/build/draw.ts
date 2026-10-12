@@ -47,7 +47,7 @@ function drawFrame(ctx: CanvasRenderingContext2D, theme: CardTheme, title: strin
   ctx.textBaseline = "alphabetic";
   ctx.fillStyle = theme.muted;
   ctx.font = `600 20px ${theme.body}`;
-  ctx.fillText(siteTitle, CARD_PADDING, CARD_PADDING + 8);
+  ctx.fillText(fitText(siteTitle, CARD_WIDTH - CARD_PADDING * 2, (text) => ctx.measureText(text).width), CARD_PADDING, CARD_PADDING + 8);
   ctx.fillStyle = theme.ink;
   ctx.font = `700 40px ${theme.display}`;
   ctx.fillText(fitText(title, CARD_WIDTH - CARD_PADDING * 2, (text) => ctx.measureText(text).width), CARD_PADDING, CARD_PADDING + 56);

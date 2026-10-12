@@ -18,8 +18,8 @@ const ENTRIES: Entry[] = [
   entry("hunter-chest", "armor", { armorPiece: "chest" }),
   entry("hunter-leggings", "armor", { armorPiece: "leggings" }),
   entry("hunter-boots", "armor", { armorPiece: "boots" }),
+  entry("beacon", "artifact", { icon: undefined }),
   entry("red-cape", "cape"),
-  entry("pig", "pet", { icon: undefined }),
 ];
 const set = (slug: string, pieces: ArmorSet["pieces"]): ArmorSet => ({ id: slug, slug, variant: "normal", name: names(slug), pieces }) as ArmorSet;
 
@@ -40,10 +40,13 @@ describe("poolOptions", () => {
     ]);
   });
 
-  it("links armor to its piece page and leaves cape and pet unlinked", () => {
+  it("links armor to its piece page and leaves out a missing icon", () => {
     expect(poolOptions("helmet", "en", ENTRIES)[0].href).toBe("/en/armor/piece/hunter-helmet/");
-    expect(poolOptions("cape", "en", ENTRIES)[0]).not.toHaveProperty("href");
-    expect(poolOptions("pet", "en", ENTRIES)[0]).toEqual({ slug: "pig", name: "pig", search: "pig pig（中）" });
+    expect(poolOptions("artifact", "en", ENTRIES)).toEqual([{ slug: "beacon", name: "beacon", search: "beacon beacon（中）", href: "/en/artifact/beacon/" }]);
+  });
+
+  it("offers no cosmetics", () => {
+    for (const pool of POOL_KEYS) expect(poolOptions(pool, "en", ENTRIES).map((option) => option.slug), pool).not.toContain("red-cape");
   });
 });
 
@@ -65,6 +68,8 @@ describe("slotLabel", () => {
     expect(label("talisman1")).toMatch(/ 1$/);
     expect(label("melee")).not.toMatch(/\d/);
     expect(label("boots")).not.toMatch(/\d/);
+    expect(label("artifact1")).toBe("Artifact 1");
+    expect(label("talisman2")).toBe("Talisman 2");
   });
 });
 
@@ -98,9 +103,9 @@ describe("parseBuildPayload", () => {
   it.each([
     ["not an object", () => 3],
     ["no pools", () => ({ ...good(), pools: undefined })],
-    ["a missing pool", () => ({ ...good(), pools: { ...good().pools, pet: undefined } })],
-    ["an option without a name", () => ({ ...good(), pools: { ...good().pools, pet: [{ slug: "pig", search: "" }] } })],
-    ["an option with a bad flag", () => ({ ...good(), pools: { ...good().pools, pet: [{ slug: "pig", name: "Pig", search: "", unique: false }] } })],
+    ["a missing pool", () => ({ ...good(), pools: { ...good().pools, talisman: undefined } })],
+    ["an option without a name", () => ({ ...good(), pools: { ...good().pools, talisman: [{ slug: "pig", search: "", href: "/x/" }] } })],
+    ["an option with a bad flag", () => ({ ...good(), pools: { ...good().pools, talisman: [{ slug: "pig", name: "Pig", search: "", href: "/x/", unique: false }] } })],
     ["a set missing a piece", () => ({ ...good(), sets: [{ slug: "s", name: "S", search: "", pieces: { helmet: "a" } }] })],
     ["a missing slot label", () => ({ ...good(), labels: { ...good().labels, slots: {} } })],
     ["a dropped label without {n}", () => ({ ...good(), labels: { ...good().labels, dropped: "gone" } })],

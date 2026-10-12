@@ -236,10 +236,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -258,8 +254,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "_english": [
     "armorPiece",
@@ -547,10 +542,6 @@
   "buildNoScript": "Der Build-Planer benötigt JavaScript.",
   "buildLoadFailed": "Der Build-Planer konnte nicht geladen werden.",
   "buildGroupWeapons": "Waffen",
-  "buildGroupArmor": "Rüstung",
-  "buildGroupArtifacts": "Artefakte",
-  "buildGroupTalismans": "Talismane",
-  "buildGroupCosmetic": "Kosmetik",
   "buildChoose": "Auswählen …",
   "buildClear": "Leeren",
   "buildClearAll": "Build leeren",
@@ -565,10 +556,9 @@
   "buildCopyFailed": "Kopieren fehlgeschlagen. Kopiere stattdessen die Adresse unten.",
   "buildDownload": "Bild herunterladen",
   "buildDownloadFailed": "Das Bild konnte nicht erstellt werden.",
-  "buildDropped": "Ausgelassene Gegenstände (nicht mehr im Spiel): {n}",
+  "buildDropped": "Nicht platzierbare Gegenstände (nicht mehr im Spiel oder doppelt): {n}",
   "buildUnsupported": "Dieser Link stammt aus einer anderen Version des Planers und wurde daher leer geöffnet.",
   "buildSlotArtifact": "Artefakt",
   "buildSlotTalisman": "Talisman",
-  "buildSlotCape": "Umhang",
-  "buildSlotPet": "Haustier"
+  "buildLink": "Build-Link"
 }

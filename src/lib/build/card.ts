@@ -12,9 +12,9 @@ export const CARD_ICON = 72;
 /** Gap between an icon and its text. */
 export const CARD_GAP = 14;
 
-/** One row per kind of gear, weapons sharing theirs with the cosmetics. */
+/** One row per kind of gear. */
 export const CARD_ROWS: readonly (readonly SlotKey[])[] = [
-  ["melee", "ranged", "cape", "pet"],
+  ["melee", "ranged"],
   ["helmet", "chest", "leggings", "boots"],
   ["artifact1", "artifact2", "artifact3", "artifact4"],
   ["talisman1", "talisman2", "talisman3"],

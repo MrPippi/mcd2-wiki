@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { runtimeImports } from "../../helpers/imports";
-import { BUILD_VERSION, decodeBuild, encodeBuild, type Pools } from "../../../src/lib/build/code";
+import { BUILD_VERSION, buildSearch, decodeBuild, encodeBuild, type Pools } from "../../../src/lib/build/code";
 import { BUILD_SLOTS, POOL_KEYS, slotsIn } from "../../../src/lib/build/slots";
 
 const pool = (...slugs: string[]): ReadonlySet<string> => new Set(slugs);
@@ -15,15 +15,13 @@ const POOLS: Pools = {
   boots: pool("hunter-boots"),
   artifact: pool("horn", "totem", "wind", "flask", "net"),
   talisman: pool("golem", "ammo", "wolf", "speed"),
-  cape: pool("red-cape"),
-  pet: pool("pig"),
 };
 
 describe("BUILD_SLOTS", () => {
-  it("lists the fifteen equipment slots in display order", () => {
+  it("lists the thirteen equipment slots in display order", () => {
     expect(BUILD_SLOTS.map((slot) => slot.key)).toEqual([
       "melee", "ranged", "helmet", "chest", "leggings", "boots",
-      "artifact1", "artifact2", "artifact3", "artifact4", "talisman1", "talisman2", "talisman3", "cape", "pet",
+      "artifact1", "artifact2", "artifact3", "artifact4", "talisman1", "talisman2", "talisman3",
     ]);
   });
 
@@ -44,12 +42,16 @@ describe("encodeBuild", () => {
   });
 
   it("writes the version and only the filled slots", () => {
-    expect(encodeBuild({ melee: "sword", pet: "pig" })).toBe(`v=${BUILD_VERSION}&m=sword&pet=pig`);
+    expect(encodeBuild({ melee: "sword", boots: "hunter-boots" })).toBe(`v=${BUILD_VERSION}&m=sword&b=hunter-boots`);
   });
 
   it("keeps the position of empty artifact slots and drops trailing empties", () => {
-    expect(encodeBuild({ artifact1: "horn", artifact3: "wind" })).toBe("v=1&a=horn%2C%2Cwind");
-    expect(encodeBuild({ talisman2: "ammo" })).toBe("v=1&t=%2Cammo");
+    expect(encodeBuild({ artifact1: "horn", artifact3: "wind" })).toBe("v=1&a=horn,,wind");
+    expect(encodeBuild({ talisman2: "ammo" })).toBe("v=1&t=,ammo");
+  });
+
+  it("escapes characters a slug should never have", () => {
+    expect(encodeBuild({ melee: "a&b=c" })).toBe("v=1&m=a%26b%3Dc");
   });
 });
 
@@ -58,7 +60,6 @@ describe("decodeBuild", () => {
     const build = {
       melee: "sword", ranged: "bow", helmet: "hunter-helmet", chest: "hunter-chest", leggings: "hunter-leggings", boots: "hunter-boots",
       artifact1: "horn", artifact2: "totem", artifact3: "wind", artifact4: "flask", talisman1: "golem", talisman2: "ammo", talisman3: "wolf",
-      cape: "red-cape", pet: "pig",
     };
     expect(decodeBuild(`?${encodeBuild(build)}`, POOLS)).toEqual({ build, dropped: 0, unsupported: false });
   });
@@ -78,7 +79,7 @@ describe("decodeBuild", () => {
   });
 
   it("drops slugs the slot does not offer", () => {
-    expect(decodeBuild("?v=1&m=bow&r=bow&pet=dragon", POOLS)).toEqual({ build: { ranged: "bow" }, dropped: 2, unsupported: false });
+    expect(decodeBuild("?v=1&m=bow&r=bow&h=dragon", POOLS)).toEqual({ build: { ranged: "bow" }, dropped: 2, unsupported: false });
   });
 
   it("keeps positions and drops repeats and extras in list slots", () => {
@@ -87,6 +88,20 @@ describe("decodeBuild", () => {
       dropped: 3,
       unsupported: false,
     });
+  });
+});
+
+describe("buildSearch", () => {
+  it("keeps unrelated parameters and replaces the old build", () => {
+    expect(buildSearch("?utm_source=x&v=1&m=axe&a=horn", { ranged: "bow" })).toBe("?utm_source=x&v=1&r=bow");
+  });
+
+  it("is empty when nothing is left", () => {
+    expect(buildSearch("?v=1&m=axe", {})).toBe("");
+  });
+
+  it("keeps only the unrelated parameters for an empty build", () => {
+    expect(buildSearch("?v=9&m=axe&ref=discord", {})).toBe("?ref=discord");
   });
 });
 

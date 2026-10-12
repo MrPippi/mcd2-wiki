@@ -234,10 +234,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -256,8 +252,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -549,10 +544,6 @@
   "buildNoScript": "Для планировщика сборок нужен JavaScript.",
   "buildLoadFailed": "Не удалось загрузить планировщик сборок.",
   "buildGroupWeapons": "Оружие",
-  "buildGroupArmor": "Броня",
-  "buildGroupArtifacts": "Артефакты",
-  "buildGroupTalismans": "Талисманы",
-  "buildGroupCosmetic": "Внешний вид",
   "buildChoose": "Выбрать…",
   "buildClear": "Убрать",
   "buildClearAll": "Очистить сборку",
@@ -567,10 +558,9 @@
   "buildCopyFailed": "Не удалось скопировать. Скопируйте адрес ниже.",
   "buildDownload": "Скачать изображение",
   "buildDownloadFailed": "Не удалось создать изображение.",
-  "buildDropped": "Пропущено предметов (их больше нет в игре): {n}",
+  "buildDropped": "Не удалось разместить предметов (их нет в игре или они повторяются): {n}",
   "buildUnsupported": "Ссылка создана в другой версии планировщика, поэтому сборка открыта пустой.",
   "buildSlotArtifact": "Артефакт",
   "buildSlotTalisman": "Талисман",
-  "buildSlotCape": "Плащ",
-  "buildSlotPet": "Питомец"
+  "buildLink": "Ссылка на сборку"
 }

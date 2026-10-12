@@ -235,10 +235,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -257,8 +253,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -544,10 +539,6 @@
   "buildNoScript": "ビルドプランナーには JavaScript が必要です。",
   "buildLoadFailed": "ビルドプランナーを読み込めませんでした。",
   "buildGroupWeapons": "武器",
-  "buildGroupArmor": "防具",
-  "buildGroupArtifacts": "アーティファクト",
-  "buildGroupTalismans": "タリスマン",
-  "buildGroupCosmetic": "見た目",
   "buildChoose": "選択…",
   "buildClear": "クリア",
   "buildClearAll": "ビルドをクリア",
@@ -562,10 +553,9 @@
   "buildCopyFailed": "コピーできませんでした。下のアドレスをコピーしてください。",
   "buildDownload": "画像をダウンロード",
   "buildDownloadFailed": "画像を作成できませんでした。",
-  "buildDropped": "ゲームに存在しないため省いたアイテム：{n}",
+  "buildDropped": "配置できなかったアイテム（ゲームに存在しないか重複）：{n}",
   "buildUnsupported": "このリンクは別バージョンのプランナーのものなので、空のビルドで開きました。",
   "buildSlotArtifact": "アーティファクト",
   "buildSlotTalisman": "タリスマン",
-  "buildSlotCape": "マント",
-  "buildSlotPet": "ペット"
+  "buildLink": "ビルドのリンク"
 }

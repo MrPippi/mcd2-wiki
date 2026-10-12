@@ -6,14 +6,11 @@ import { categoryLabel, pieceLabel, t, type Lang, type UiKey } from "../i18n";
 import { searchNames } from "../lang";
 import { assetUrl, entryHref } from "../url";
 import type { BuildLabels, BuildOption, BuildPayload, BuildSet } from "./parse";
-import { BUILD_SLOTS, POOL_KEYS, type BuildSlot, type PoolKey } from "./slots";
+import { BUILD_SLOTS, byPool, type BuildSlot, type PoolKey } from "./slots";
 
 const ARMOR_POOLS = ["helmet", "chest", "leggings", "boots"] as const satisfies readonly (PoolKey & ArmorPiece)[];
 type ArmorPool = (typeof ARMOR_POOLS)[number];
 const isArmorPool = (pool: PoolKey): pool is ArmorPool => (ARMOR_POOLS as readonly PoolKey[]).includes(pool);
-
-/** Cape and pet have no pages of their own. */
-const LINKED: ReadonlySet<Category> = new Set(["melee", "ranged", "armor", "artifact", "talisman"]);
 
 const POOL_CATEGORY: Readonly<Record<PoolKey, Category>> = {
   melee: "melee",
@@ -24,8 +21,6 @@ const POOL_CATEGORY: Readonly<Record<PoolKey, Category>> = {
   boots: "armor",
   artifact: "artifact",
   talisman: "talisman",
-  cape: "cape",
-  pet: "pet",
 };
 
 export const inPool = (entry: Entry, pool: PoolKey): boolean =>
@@ -36,7 +31,7 @@ const optionOf = (entry: Entry, lang: Lang): BuildOption => ({
   name: entry.name[lang],
   search: searchNames(entry.name, lang),
   ...(entry.icon ? { icon: assetUrl(entry.icon) } : {}),
-  ...(LINKED.has(entry.category) ? { href: entryHref(lang, entry) } : {}),
+  href: entryHref(lang, entry),
   ...(entry.variant === "unique" ? { unique: true } : {}),
 });
 
@@ -54,7 +49,7 @@ export function wholeSets(lang: Lang, sets: readonly ArmorSet[] = allArmorSets, 
 }
 
 /** Singular names for the slots whose category label is a plural list name. */
-const SINGULAR: Partial<Record<PoolKey, UiKey>> = { artifact: "buildSlotArtifact", talisman: "buildSlotTalisman", cape: "buildSlotCape", pet: "buildSlotPet" };
+const SINGULAR: Partial<Record<PoolKey, UiKey>> = { artifact: "buildSlotArtifact", talisman: "buildSlotTalisman" };
 
 /** Slot names: the piece, a singular item name or the weapon category, numbered where the game has several of a kind. */
 export function slotLabel(slot: BuildSlot, lang: Lang): string {
@@ -82,7 +77,7 @@ const labelsFor = (lang: Lang): BuildLabels => ({
 });
 
 export const buildPayload = (lang: Lang): BuildPayload => ({
-  pools: Object.fromEntries(POOL_KEYS.map((pool) => [pool, poolOptions(pool, lang)])) as unknown as BuildPayload["pools"],
+  pools: byPool((pool) => poolOptions(pool, lang)),
   sets: wholeSets(lang),
   labels: labelsFor(lang),
 });

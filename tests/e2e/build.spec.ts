@@ -30,22 +30,63 @@ test.describe("build planner", () => {
   });
 
   test("a shared link opens the same build", async ({ page }) => {
-    await page.goto("/en/build/?v=1&m=axe&r=bow&a=blizzard-staff,,corrupted-beacon&t=brawling&cape=hero&pet=blub");
+    await page.goto("/en/build/?v=1&m=axe&r=bow&a=blizzard-staff,,corrupted-beacon&t=brawling");
     await expect(slot(page, "melee")).toContainText("Axe");
     await expect(slot(page, "ranged")).toContainText("Bow");
     await expect(slot(page, "artifact1")).toContainText("Winter Staff");
     await expect(slot(page, "artifact2")).toContainText("Choose…");
     await expect(slot(page, "artifact3")).toContainText("Corrupted Beacon");
     await expect(slot(page, "talisman1")).toContainText("Fist of Iron");
-    await expect(slot(page, "cape")).toContainText("Hero Cape");
-    await expect(slot(page, "cape").locator("[data-link]")).toBeHidden();
     await expect(page.getByTestId("build-notice")).toBeHidden();
   });
 
   test("says how many items of a link no longer exist", async ({ page }) => {
-    await page.goto("/en/build/?v=1&m=axe&r=not-a-bow&pet=dragon");
+    await page.goto("/en/build/?v=1&m=axe&r=not-a-bow&h=dragon");
     await expect(slot(page, "melee")).toContainText("Axe");
-    await expect(page.getByTestId("build-notice")).toHaveText("Items left out (no longer in the game): 2");
+    await expect(page.getByTestId("build-notice")).toHaveText("Items that could not be placed (gone from the game or repeated): 2");
+  });
+
+  test("drops unreadable items from the address and clears the notice on the next change", async ({ page }) => {
+    await page.goto("/en/build/?ref=discord&v=1&m=axe&h=dragon");
+    await expect(page).toHaveURL(/\/en\/build\/\?ref=discord&v=1&m=axe$/);
+    await expect(page.getByTestId("build-notice")).toBeVisible();
+    await pick(page, "ranged", "Bow");
+    await expect(page.getByTestId("build-notice")).toBeHidden();
+    await expect(page).toHaveURL(/\/en\/build\/\?ref=discord&v=1&m=axe&r=bow$/);
+  });
+
+  test("keeps the list commas readable in the address", async ({ page }) => {
+    await page.goto("/en/build/");
+    await pick(page, "artifact3", "Winter Staff");
+    await expect(page).toHaveURL(/\/en\/build\/\?v=1&a=,,blizzard-staff$/);
+  });
+
+  test("a click inside the picker keeps it open; the backdrop closes it", async ({ page }) => {
+    await page.goto("/en/build/");
+    await slot(page, "melee").locator("[data-pick]").click();
+    const dialog = page.getByTestId("build-dialog");
+    await page.getByTestId("build-filter").fill("Axe");
+    const box = (await dialog.boundingBox())!;
+    await page.mouse.click(box.x + 4, box.y + box.height - 4); // inside the dialog, below the results
+    await expect(dialog).toBeVisible();
+    await expect(page.getByTestId("build-filter")).toHaveValue("Axe");
+    const viewport = page.viewportSize()!;
+    test.skip(box.width >= viewport.width - 8, "the picker fills the screen on phones: no backdrop to click");
+    await page.mouse.click(4, viewport.height - 4);
+    await expect(dialog).toBeHidden();
+  });
+
+  test("clearing a slot keeps keyboard focus on that slot", async ({ page }) => {
+    await page.goto("/en/build/?v=1&m=axe");
+    await slot(page, "melee").locator("[data-clear]").focus();
+    await page.keyboard.press("Enter");
+    await expect(slot(page, "melee").locator("[data-pick]")).toBeFocused();
+  });
+
+  test("picking returns focus to the slot", async ({ page }) => {
+    await page.goto("/en/build/");
+    await pick(page, "ranged", "Bow");
+    await expect(slot(page, "ranged").locator("[data-pick]")).toBeFocused();
   });
 
   test("opens a link from another version empty", async ({ page }) => {
@@ -120,7 +161,7 @@ test.describe("build planner", () => {
   });
 
   test("downloads the build as a 1200×630 PNG", async ({ page }) => {
-    await page.goto("/en/build/?v=1&m=axe&r=bow&pet=blub");
+    await page.goto("/en/build/?v=1&m=axe&r=bow");
     const [download] = await Promise.all([page.waitForEvent("download"), page.getByTestId("build-download").click()]);
     expect(download.suggestedFilename()).toBe("mcd2-build.png");
     const bytes = await readFile((await download.path())!);
@@ -137,7 +178,7 @@ test.describe("build planner", () => {
   for (const lang of ["zh", "de", "ru"]) {
     test(`does not scroll sideways at 412px (${lang})`, async ({ page }) => {
       await page.setViewportSize({ width: 412, height: 915 });
-      await page.goto(`/${lang}/build/?v=1&m=axe-unique1&r=bow-unique1&a=blizzard-staff,carapace-ocarina,conductive-bracelet,corrupted-beacon&t=ammo-capacity,artifact-cooldown,brawling&cape=corrupted-creeper&pet=slime-supreme`);
+      await page.goto(`/${lang}/build/?v=1&m=axe-unique1&r=bow-unique1&a=blizzard-staff,carapace-ocarina,conductive-bracelet,corrupted-beacon&t=ammo-capacity,artifact-cooldown,brawling`);
       await expect(page.getByTestId("build-planner")).toBeVisible();
       expect(await horizontalOverflow(page)).toBe(0);
       await slot(page, "melee").locator("[data-pick]").click();

@@ -237,10 +237,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -259,8 +255,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -547,10 +542,6 @@
   "buildNoScript": "Byggplaneraren kräver JavaScript.",
   "buildLoadFailed": "Byggplaneraren kunde inte laddas.",
   "buildGroupWeapons": "Vapen",
-  "buildGroupArmor": "Rustning",
-  "buildGroupArtifacts": "Artefakter",
-  "buildGroupTalismans": "Talismaner",
-  "buildGroupCosmetic": "Utseende",
   "buildChoose": "Välj…",
   "buildClear": "Rensa",
   "buildClearAll": "Rensa bygget",
@@ -565,10 +556,9 @@
   "buildCopyFailed": "Det gick inte att kopiera. Kopiera adressen nedan i stället.",
   "buildDownload": "Ladda ned bild",
   "buildDownloadFailed": "Det gick inte att skapa bilden.",
-  "buildDropped": "Utelämnade föremål (finns inte längre i spelet): {n}",
+  "buildDropped": "Föremål som inte kunde placeras (finns inte längre i spelet eller upprepas): {n}",
   "buildUnsupported": "Länken kommer från en annan version av planeraren, så bygget öppnades tomt.",
   "buildSlotArtifact": "Artefakt",
   "buildSlotTalisman": "Talisman",
-  "buildSlotCape": "Mantel",
-  "buildSlotPet": "Husdjur"
+  "buildLink": "Länk till bygget"
 }

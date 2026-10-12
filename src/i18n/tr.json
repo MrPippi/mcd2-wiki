@@ -238,10 +238,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -260,8 +256,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -545,10 +540,6 @@
   "buildNoScript": "Yapı planlayıcı JavaScript gerektirir.",
   "buildLoadFailed": "Yapı planlayıcı yüklenemedi.",
   "buildGroupWeapons": "Silahlar",
-  "buildGroupArmor": "Zırh",
-  "buildGroupArtifacts": "Eserler",
-  "buildGroupTalismans": "Tılsımlar",
-  "buildGroupCosmetic": "Görünüm",
   "buildChoose": "Seç…",
   "buildClear": "Temizle",
   "buildClearAll": "Yapıyı temizle",
@@ -563,10 +554,9 @@
   "buildCopyFailed": "Kopyalanamadı. Bunun yerine aşağıdaki adresi kopyala.",
   "buildDownload": "Görseli indir",
   "buildDownloadFailed": "Görsel oluşturulamadı.",
-  "buildDropped": "Dışarıda bırakılan eşyalar (artık oyunda yok): {n}",
+  "buildDropped": "Yerleştirilemeyen eşyalar (artık oyunda yok ya da tekrarlanıyor): {n}",
   "buildUnsupported": "Bu bağlantı planlayıcının başka bir sürümünden geldiği için boş açıldı.",
   "buildSlotArtifact": "Eser",
   "buildSlotTalisman": "Tılsım",
-  "buildSlotCape": "Pelerin",
-  "buildSlotPet": "Evcil hayvan"
+  "buildLink": "Yapı bağlantısı"
 }

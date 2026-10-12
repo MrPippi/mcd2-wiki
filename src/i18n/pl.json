@@ -236,10 +236,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -258,8 +254,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "_english": [
     "normal",
@@ -549,10 +544,6 @@
   "buildNoScript": "Planer buildów wymaga JavaScriptu.",
   "buildLoadFailed": "Nie udało się wczytać planera buildów.",
   "buildGroupWeapons": "Broń",
-  "buildGroupArmor": "Zbroja",
-  "buildGroupArtifacts": "Artefakty",
-  "buildGroupTalismans": "Talizmany",
-  "buildGroupCosmetic": "Wygląd",
   "buildChoose": "Wybierz…",
   "buildClear": "Wyczyść",
   "buildClearAll": "Wyczyść build",
@@ -567,10 +558,9 @@
   "buildCopyFailed": "Nie udało się skopiować. Skopiuj adres poniżej.",
   "buildDownload": "Pobierz obraz",
   "buildDownloadFailed": "Nie udało się utworzyć obrazu.",
-  "buildDropped": "Pominięte przedmioty (już nie ma ich w grze): {n}",
+  "buildDropped": "Przedmioty, których nie dało się umieścić (nie ma ich w grze lub się powtarzają): {n}",
   "buildUnsupported": "Ten link pochodzi z innej wersji planera, więc otwarto pusty build.",
   "buildSlotArtifact": "Artefakt",
   "buildSlotTalisman": "Talizman",
-  "buildSlotCape": "Peleryna",
-  "buildSlotPet": "Zwierzak"
+  "buildLink": "Link do buildu"
 }

@@ -1,10 +1,10 @@
 /** The equipment slots of the build page: what each holds, how it is grouped, and its URL parameter. Loaded by the browser, so no imports. */
 
-export const POOL_KEYS = ["melee", "ranged", "helmet", "chest", "leggings", "boots", "artifact", "talisman", "cape", "pet"] as const;
+export const POOL_KEYS = ["melee", "ranged", "helmet", "chest", "leggings", "boots", "artifact", "talisman"] as const;
 /** Which list of items a slot picks from. */
 export type PoolKey = (typeof POOL_KEYS)[number];
 
-export const SLOT_GROUPS = ["weapons", "armor", "artifacts", "talismans", "cosmetic"] as const;
+export const SLOT_GROUPS = ["weapons", "armor", "artifacts", "talismans"] as const;
 export type SlotGroup = (typeof SLOT_GROUPS)[number];
 
 export interface BuildSlot {
@@ -18,7 +18,7 @@ export interface BuildSlot {
 
 export const SLOT_KEYS = [
   "melee", "ranged", "helmet", "chest", "leggings", "boots",
-  "artifact1", "artifact2", "artifact3", "artifact4", "talisman1", "talisman2", "talisman3", "cape", "pet",
+  "artifact1", "artifact2", "artifact3", "artifact4", "talisman1", "talisman2", "talisman3",
 ] as const;
 export type SlotKey = (typeof SLOT_KEYS)[number];
 
@@ -42,8 +42,10 @@ export const BUILD_SLOTS: readonly BuildSlot[] = [
   listed("talisman1", "talisman", "talismans", "t", 0),
   listed("talisman2", "talisman", "talismans", "t", 1),
   listed("talisman3", "talisman", "talismans", "t", 2),
-  single("cape", "cosmetic", "cape"),
-  single("pet", "cosmetic", "pet"),
 ];
 
 export const slotsIn = (group: SlotGroup): BuildSlot[] => BUILD_SLOTS.filter((slot) => slot.group === group);
+
+/** A value per pool, like `byLang` for languages. */
+export const byPool = <T>(fn: (pool: PoolKey) => T): Record<PoolKey, T> =>
+  Object.fromEntries(POOL_KEYS.map((pool) => [pool, fn(pool)])) as Record<PoolKey, T>;

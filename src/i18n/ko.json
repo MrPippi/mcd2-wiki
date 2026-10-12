@@ -238,10 +238,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -260,8 +256,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -542,10 +537,6 @@
   "buildNoScript": "빌드 플래너를 사용하려면 JavaScript가 필요합니다.",
   "buildLoadFailed": "빌드 플래너를 불러오지 못했습니다.",
   "buildGroupWeapons": "무기",
-  "buildGroupArmor": "방어구",
-  "buildGroupArtifacts": "유물",
-  "buildGroupTalismans": "부적",
-  "buildGroupCosmetic": "외형",
   "buildChoose": "선택…",
   "buildClear": "지우기",
   "buildClearAll": "빌드 지우기",
@@ -560,10 +551,9 @@
   "buildCopyFailed": "복사하지 못했습니다. 아래 주소를 직접 복사하세요.",
   "buildDownload": "이미지 다운로드",
   "buildDownloadFailed": "이미지를 만들지 못했습니다.",
-  "buildDropped": "게임에 더 이상 없어 제외한 아이템: {n}",
+  "buildDropped": "배치할 수 없는 아이템(게임에 없거나 중복): {n}",
   "buildUnsupported": "다른 버전의 플래너에서 만든 링크라서 빈 빌드로 열었습니다.",
   "buildSlotArtifact": "유물",
   "buildSlotTalisman": "부적",
-  "buildSlotCape": "망토",
-  "buildSlotPet": "펫"
+  "buildLink": "빌드 링크"
 }

@@ -281,10 +281,6 @@
   "buildNoScript": "The build planner needs JavaScript.",
   "buildLoadFailed": "The build planner could not load.",
   "buildGroupWeapons": "Weapons",
-  "buildGroupArmor": "Armor",
-  "buildGroupArtifacts": "Artifacts",
-  "buildGroupTalismans": "Talismans",
-  "buildGroupCosmetic": "Cosmetics",
   "buildChoose": "Choose…",
   "buildClear": "Clear",
   "buildClearAll": "Clear build",
@@ -299,10 +295,9 @@
   "buildCopyFailed": "Could not copy. Copy the address below instead.",
   "buildDownload": "Download image",
   "buildDownloadFailed": "Could not create the image.",
-  "buildDropped": "Items left out (no longer in the game): {n}",
+  "buildDropped": "Items that could not be placed (gone from the game or repeated): {n}",
   "buildUnsupported": "This link comes from another version of the planner, so it opened empty.",
   "buildSlotArtifact": "Artifact",
   "buildSlotTalisman": "Talisman",
-  "buildSlotCape": "Cape",
-  "buildSlotPet": "Pet"
+  "buildLink": "Build link"
 }

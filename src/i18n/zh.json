@@ -278,10 +278,6 @@
   "buildNoScript": "配裝工具需要 JavaScript。",
   "buildLoadFailed": "配裝工具載入失敗。",
   "buildGroupWeapons": "武器",
-  "buildGroupArmor": "護甲",
-  "buildGroupArtifacts": "神器",
-  "buildGroupTalismans": "護符",
-  "buildGroupCosmetic": "外觀",
   "buildChoose": "選擇…",
   "buildClear": "清除",
   "buildClearAll": "清空配裝",
@@ -296,10 +292,9 @@
   "buildCopyFailed": "無法自動複製，請改為複製下方網址。",
   "buildDownload": "下載圖片",
   "buildDownloadFailed": "無法產生圖片。",
-  "buildDropped": "已略過遊戲中不存在的物品：{n} 件",
+  "buildDropped": "有 {n} 件物品無法放入（已不存在或重複），已略過",
   "buildUnsupported": "這個連結來自其他版本的配裝工具，因此開啟為空白配裝。",
   "buildSlotArtifact": "神器",
   "buildSlotTalisman": "護符",
-  "buildSlotCape": "披風",
-  "buildSlotPet": "寵物"
+  "buildLink": "配裝連結"
 }

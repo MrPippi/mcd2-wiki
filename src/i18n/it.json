@@ -238,10 +238,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -260,8 +256,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -546,10 +541,6 @@
   "buildNoScript": "Il pianificatore di build richiede JavaScript.",
   "buildLoadFailed": "Impossibile caricare il pianificatore di build.",
   "buildGroupWeapons": "Armi",
-  "buildGroupArmor": "Armatura",
-  "buildGroupArtifacts": "Artefatti",
-  "buildGroupTalismans": "Talismani",
-  "buildGroupCosmetic": "Estetica",
   "buildChoose": "Scegli…",
   "buildClear": "Rimuovi",
   "buildClearAll": "Svuota build",
@@ -564,10 +555,9 @@
   "buildCopyFailed": "Impossibile copiare. Copia l’indirizzo qui sotto.",
   "buildDownload": "Scarica immagine",
   "buildDownloadFailed": "Impossibile creare l’immagine.",
-  "buildDropped": "Oggetti esclusi (non più nel gioco): {n}",
+  "buildDropped": "Oggetti non collocabili (non più nel gioco o ripetuti): {n}",
   "buildUnsupported": "Questo link proviene da un’altra versione del pianificatore, quindi si è aperto vuoto.",
   "buildSlotArtifact": "Artefatto",
   "buildSlotTalisman": "Talismano",
-  "buildSlotCape": "Mantello",
-  "buildSlotPet": "Animale"
+  "buildLink": "Link della build"
 }

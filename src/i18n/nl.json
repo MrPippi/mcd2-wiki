@@ -238,10 +238,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -260,8 +256,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -545,10 +540,6 @@
   "buildNoScript": "De buildplanner heeft JavaScript nodig.",
   "buildLoadFailed": "De buildplanner kon niet worden geladen.",
   "buildGroupWeapons": "Wapens",
-  "buildGroupArmor": "Harnas",
-  "buildGroupArtifacts": "Artefacten",
-  "buildGroupTalismans": "Talismannen",
-  "buildGroupCosmetic": "Uiterlijk",
   "buildChoose": "Kiezen…",
   "buildClear": "Wissen",
   "buildClearAll": "Build wissen",
@@ -563,10 +554,9 @@
   "buildCopyFailed": "Kopiëren mislukt. Kopieer het adres hieronder.",
   "buildDownload": "Afbeelding downloaden",
   "buildDownloadFailed": "De afbeelding kon niet worden gemaakt.",
-  "buildDropped": "Weggelaten voorwerpen (niet meer in het spel): {n}",
+  "buildDropped": "Voorwerpen die niet geplaatst konden worden (niet meer in het spel of dubbel): {n}",
   "buildUnsupported": "Deze link komt uit een andere versie van de planner en is daarom leeg geopend.",
   "buildSlotArtifact": "Artefact",
   "buildSlotTalisman": "Talisman",
-  "buildSlotCape": "Cape",
-  "buildSlotPet": "Huisdier"
+  "buildLink": "Buildlink"
 }

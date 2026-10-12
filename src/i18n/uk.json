@@ -238,10 +238,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -260,8 +256,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -547,10 +542,6 @@
   "buildNoScript": "Для планувальника збірок потрібен JavaScript.",
   "buildLoadFailed": "Не вдалося завантажити планувальник збірок.",
   "buildGroupWeapons": "Зброя",
-  "buildGroupArmor": "Броня",
-  "buildGroupArtifacts": "Артефакти",
-  "buildGroupTalismans": "Талісмани",
-  "buildGroupCosmetic": "Зовнішній вигляд",
   "buildChoose": "Вибрати…",
   "buildClear": "Прибрати",
   "buildClearAll": "Очистити збірку",
@@ -565,10 +556,9 @@
   "buildCopyFailed": "Не вдалося скопіювати. Скопіюйте адресу нижче.",
   "buildDownload": "Завантажити зображення",
   "buildDownloadFailed": "Не вдалося створити зображення.",
-  "buildDropped": "Пропущено предметів (їх більше немає в грі): {n}",
+  "buildDropped": "Не вдалося розмістити предметів (їх немає в грі або вони повторюються): {n}",
   "buildUnsupported": "Посилання створено в іншій версії планувальника, тому збірку відкрито порожньою.",
   "buildSlotArtifact": "Артефакт",
   "buildSlotTalisman": "Талісман",
-  "buildSlotCape": "Плащ",
-  "buildSlotPet": "Улюбленець"
+  "buildLink": "Посилання на збірку"
 }

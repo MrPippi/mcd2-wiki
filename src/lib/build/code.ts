@@ -19,16 +19,25 @@ export interface DecodedBuild {
 const PARAMS: readonly string[] = [...new Set(BUILD_SLOTS.map((slot) => slot.param))];
 const slotsFor = (param: string) => BUILD_SLOTS.filter((slot) => slot.param === param).sort((a, b) => a.index - b.index);
 
-/** The query string (without "?") for a build; empty when no slot is filled. */
+/**
+ * The query string (without "?") for a build; empty when no slot is filled. Written by hand rather than with
+ * URLSearchParams so the list commas stay readable in shared links (each slug is still escaped).
+ */
 export function encodeBuild(build: Build): string {
-  const params = new URLSearchParams();
-  for (const param of PARAMS) {
+  const parts = PARAMS.flatMap((param) => {
     const values = slotsFor(param).map((slot) => build[slot.key] ?? "");
     while (values.length > 0 && values[values.length - 1] === "") values.pop();
-    if (values.length > 0) params.set(param, values.join(LIST_SEPARATOR));
-  }
-  if ([...params.keys()].length === 0) return "";
-  return `${VERSION_PARAM}=${BUILD_VERSION}&${params.toString()}`;
+    return values.length > 0 ? [`${param}=${values.map(encodeURIComponent).join(LIST_SEPARATOR)}`] : [];
+  });
+  return parts.length === 0 ? "" : [`${VERSION_PARAM}=${BUILD_VERSION}`, ...parts].join("&");
+}
+
+/** `search` with its build replaced by `build` and other parameters kept: "?…", or empty. */
+export function buildSearch(search: string, build: Build): string {
+  const others = new URLSearchParams(search);
+  for (const param of [VERSION_PARAM, ...PARAMS]) others.delete(param);
+  const query = [others.toString(), encodeBuild(build)].filter(Boolean).join("&");
+  return query ? `?${query}` : "";
 }
 
 /** Reads a build from `location.search`, keeping only what each slot offers. */

@@ -235,10 +235,6 @@
     "buildNoScript",
     "buildLoadFailed",
     "buildGroupWeapons",
-    "buildGroupArmor",
-    "buildGroupArtifacts",
-    "buildGroupTalismans",
-    "buildGroupCosmetic",
     "buildChoose",
     "buildClear",
     "buildClearAll",
@@ -257,8 +253,7 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildSlotCape",
-    "buildSlotPet"
+    "buildLink"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -544,10 +539,6 @@
   "buildNoScript": "配装工具需要 JavaScript。",
   "buildLoadFailed": "配装工具加载失败。",
   "buildGroupWeapons": "武器",
-  "buildGroupArmor": "盔甲",
-  "buildGroupArtifacts": "法器",
-  "buildGroupTalismans": "护符",
-  "buildGroupCosmetic": "外观",
   "buildChoose": "选择…",
   "buildClear": "清除",
   "buildClearAll": "清空配装",
@@ -562,10 +553,9 @@
   "buildCopyFailed": "无法自动复制，请改为复制下方网址。",
   "buildDownload": "下载图片",
   "buildDownloadFailed": "无法生成图片。",
-  "buildDropped": "已略过游戏中不存在的物品：{n} 件",
+  "buildDropped": "有 {n} 件物品无法放入（已不存在或重复），已略过",
   "buildUnsupported": "这个链接来自其他版本的配装工具，因此打开为空白配装。",
   "buildSlotArtifact": "法器",
-  "buildSlotTalisman": "护符",
-  "buildSlotCape": "披风",
-  "buildSlotPet": "宠物"
+  "buildSlotTalisman": "护身符",
+  "buildLink": "配装链接"
 }

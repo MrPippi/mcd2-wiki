@@ -1,5 +1,5 @@
 ---
-import { t, type Lang, type UiKey } from "../lib/i18n";
+import { categoryLabel, t, type Lang } from "../lib/i18n";
 import { payloadJson, slotLabel } from "../lib/build/payload";
 import type { BuildPayload } from "../lib/build/parse";
 import { SLOT_GROUPS, slotsIn, type SlotGroup } from "../lib/build/slots";
@@ -10,13 +10,9 @@ interface Props {
 }
 
 const { lang, payload } = Astro.props;
-const GROUP_KEY: Record<SlotGroup, UiKey> = {
-  weapons: "buildGroupWeapons",
-  armor: "buildGroupArmor",
-  artifacts: "buildGroupArtifacts",
-  talismans: "buildGroupTalismans",
-  cosmetic: "buildGroupCosmetic",
-};
+/** Group titles: the game's own category names, plus one word for both weapon kinds. */
+const groupTitle = (group: SlotGroup): string =>
+  group === "weapons" ? t(lang, "buildGroupWeapons") : categoryLabel(group === "armor" ? "armor" : group === "artifacts" ? "artifact" : "talisman", lang);
 ---
 {/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
 <div class="build" data-testid="build-planner" data-build hidden>
@@ -25,7 +21,7 @@ const GROUP_KEY: Record<SlotGroup, UiKey> = {
     {SLOT_GROUPS.map((group) => (
       <section class="build-group" data-group={group}>
         <div class="build-group-head">
-          <h2 class="section-title">{t(lang, GROUP_KEY[group])}</h2>
+          <h2 class="section-title">{groupTitle(group)}</h2>
           {group === "armor" && payload.sets.length > 0 && (
             <button type="button" class="build-set-button" data-testid="build-whole-set" data-open-sets aria-haspopup="dialog">{t(lang, "buildWholeSet")}</button>
           )}
@@ -56,9 +52,11 @@ const GROUP_KEY: Record<SlotGroup, UiKey> = {
       <button type="button" data-testid="build-reset" data-reset>{t(lang, "buildClearAll")}</button>
     </div>
     <p class="note build-status" data-testid="build-status" data-status role="status" aria-live="polite"></p>
-    <input class="build-url" type="text" data-testid="build-url" data-url readonly aria-label={t(lang, "buildCopyLink")} hidden />
+    <input class="build-url" type="text" data-testid="build-url" data-url readonly aria-label={t(lang, "buildLink")} hidden />
   </section>
   <dialog class="build-dialog" data-testid="build-dialog" data-dialog aria-labelledby="build-dialog-title">
+    {/* Fills the dialog, so a click whose target is the dialog itself can only be on the backdrop. */}
+    <div class="build-dialog-body">
     <div class="build-dialog-head">
       <h2 class="build-dialog-title" id="build-dialog-title" data-dialog-title></h2>
       <button type="button" class="build-close" data-close>{t(lang, "buildClose")}</button>
@@ -66,6 +64,7 @@ const GROUP_KEY: Record<SlotGroup, UiKey> = {
     <input type="search" class="build-filter" data-testid="build-filter" data-filter placeholder={t(lang, "buildSearch")} aria-label={t(lang, "buildSearch")} />
     <ul class="build-options" data-testid="build-options" data-options></ul>
     <p class="note" data-empty hidden>{t(lang, "buildNoResults")}</p>
+    </div>
   </dialog>
   <script type="application/json" data-build-json set:html={payloadJson(payload)}></script>
 </div>
