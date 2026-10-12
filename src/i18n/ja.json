@@ -260,7 +260,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -571,5 +575,9 @@
   "buildAddEnchant": "エンチャントを追加",
   "buildRemoveEnchant": "エンチャントを外す",
   "buildTier": "ティア",
-  "buildBuiltIn": "固有：{name}"
+  "buildBuiltIn": "固有：{name}",
+  "buildEffect": "効果",
+  "buildAddEffect": "効果を追加",
+  "buildRemoveEffect": "効果を外す",
+  "buildEffectLimit": "1つにつき再抽選できる効果は最大 {n} 個"
 }

@@ -262,7 +262,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -574,5 +578,9 @@
   "buildAddEnchant": "Lägg till förtrollning",
   "buildRemoveEnchant": "Ta bort förtrollning",
   "buildTier": "Nivå",
-  "buildBuiltIn": "Inbyggd: {name}"
+  "buildBuiltIn": "Inbyggd: {name}",
+  "buildEffect": "Effekt",
+  "buildAddEffect": "Lägg till effekt",
+  "buildRemoveEffect": "Ta bort effekt",
+  "buildEffectLimit": "Högst {n} omslumpbara effekter per föremål"
 }

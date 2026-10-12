@@ -303,5 +303,9 @@
   "buildAddEnchant": "加入附魔",
   "buildRemoveEnchant": "移除附魔",
   "buildTier": "等級",
-  "buildBuiltIn": "內建：{name}"
+  "buildBuiltIn": "內建：{name}",
+  "buildEffect": "效果",
+  "buildAddEffect": "加入效果",
+  "buildRemoveEffect": "移除效果",
+  "buildEffectLimit": "每件最多 {n} 個可重抽效果"
 }

@@ -263,7 +263,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -569,5 +573,9 @@
   "buildAddEnchant": "마법 부여 추가",
   "buildRemoveEnchant": "마법 부여 제거",
   "buildTier": "등급",
-  "buildBuiltIn": "고유: {name}"
+  "buildBuiltIn": "고유: {name}",
+  "buildEffect": "효과",
+  "buildAddEffect": "효과 추가",
+  "buildRemoveEffect": "효과 제거",
+  "buildEffectLimit": "아이템당 재설정 가능한 효과 최대 {n}개"
 }

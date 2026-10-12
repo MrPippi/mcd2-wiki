@@ -259,7 +259,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -576,5 +580,9 @@
   "buildAddEnchant": "Добавить зачарование",
   "buildRemoveEnchant": "Убрать зачарование",
   "buildTier": "Уровень",
-  "buildBuiltIn": "Встроено: {name}"
+  "buildBuiltIn": "Встроено: {name}",
+  "buildEffect": "Эффект",
+  "buildAddEffect": "Добавить эффект",
+  "buildRemoveEffect": "Убрать эффект",
+  "buildEffectLimit": "Не более {n} перебрасываемых эффектов на предмет"
 }

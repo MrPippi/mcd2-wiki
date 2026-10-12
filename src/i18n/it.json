@@ -263,7 +263,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -573,5 +577,9 @@
   "buildAddEnchant": "Aggiungi incantesimo",
   "buildRemoveEnchant": "Rimuovi incantesimo",
   "buildTier": "Livello",
-  "buildBuiltIn": "Integrato: {name}"
+  "buildBuiltIn": "Integrato: {name}",
+  "buildEffect": "Effetto",
+  "buildAddEffect": "Aggiungi effetto",
+  "buildRemoveEffect": "Rimuovi effetto",
+  "buildEffectLimit": "Fino a {n} effetti ripescabili per oggetto"
 }

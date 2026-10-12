@@ -3,7 +3,8 @@ import { categoryLabel, t, type Lang } from "../lib/i18n";
 import { payloadJson, slotLabel } from "../lib/build/payload";
 import type { BuildPayload } from "../lib/build/parse";
 import { ROMAN } from "../lib/build/card";
-import { ENCHANT_SLOT_KEYS, ENCHANT_TIERS, SLOT_GROUPS, slotsIn, type SlotGroup, type SlotKey } from "../lib/build/slots";
+import { MAX_EFFECTS } from "../lib/build/code";
+import { EFFECT_SLOT_KEYS, ENCHANT_SLOT_KEYS, ENCHANT_TIERS, SLOT_GROUPS, slotsIn, type SlotGroup, type SlotKey } from "../lib/build/slots";
 
 interface Props {
   lang: Lang;
@@ -12,6 +13,7 @@ interface Props {
 
 const { lang, payload } = Astro.props;
 const isEnchantable = (key: SlotKey): boolean => (ENCHANT_SLOT_KEYS as readonly SlotKey[]).includes(key);
+const hasEffects = (key: SlotKey): boolean => (EFFECT_SLOT_KEYS as readonly SlotKey[]).includes(key);
 /** Group titles: the game's own category names, plus one word for both weapon kinds. */
 const groupTitle = (group: SlotGroup): string =>
   group === "weapons" ? t(lang, "buildGroupWeapons") : categoryLabel(group === "armor" ? "armor" : group === "artifacts" ? "artifact" : "talisman", lang);
@@ -19,6 +21,7 @@ const groupTitle = (group: SlotGroup): string =>
 {/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
 <div class="build" data-testid="build-planner" data-build hidden>
   <p class="build-notice tag warn" data-testid="build-notice" data-notice role="status" hidden></p>
+  <p class="note build-effect-note" data-testid="build-effect-note">{t(lang, "buildEffectLimit").replace("{n}", () => String(MAX_EFFECTS))}</p>
   <div class="build-groups">
     {SLOT_GROUPS.map((group) => (
       <section class="build-group" data-group={group}>
@@ -43,6 +46,14 @@ const groupTitle = (group: SlotGroup): string =>
                 <button type="button" class="build-clear" data-clear aria-label={`${t(lang, "buildClear")}: ${slotLabel(slot, lang)}`} hidden>×</button>
               </div>
               <p class="note build-fixed" data-testid={`build-fixed-${slot.key}`} data-fixed hidden></p>
+              {hasEffects(slot.key) && (
+                <div class="build-effects" data-testid={`build-effects-${slot.key}`} data-effects hidden>
+                  <ul class="build-effect-list" data-effect-list aria-label={`${slotLabel(slot, lang)}: ${t(lang, "buildEffect")}`}></ul>
+                  <button type="button" class="build-add-effect" data-add-effect aria-haspopup="dialog">
+                    <span class="sr-only">{`${slotLabel(slot, lang)}, `}</span>{t(lang, "buildAddEffect")}
+                  </button>
+                </div>
+              )}
               {isEnchantable(slot.key) && (
                 <div class="build-enchant" data-testid={`build-enchant-${slot.key}`} data-enchant hidden>
                   <button type="button" class="build-enchant-pick" data-enchant-pick aria-haspopup="dialog">

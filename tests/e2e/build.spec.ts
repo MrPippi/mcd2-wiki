@@ -114,6 +114,67 @@ test.describe("build planner", () => {
     await expect(page.getByTestId("build-notice")).toContainText(": 1");
   });
 
+  test.describe("effects", () => {
+    const effectArea = (page: Page, key: string) => page.getByTestId(`build-effects-${key}`);
+    const addEffect = async (page: Page, key: string, name: string) => {
+      await effectArea(page, key).locator("[data-add-effect]").click();
+      await page.getByTestId("build-filter").fill(name);
+      await page.getByTestId("build-dialog").getByRole("button", { name, exact: true }).click();
+    };
+
+    test("states the limit, and talismans take no effects", async ({ page }) => {
+      await page.goto("/en/build/?v=1&t=brawling");
+      await expect(page.getByTestId("build-effect-note")).toHaveText("Up to 3 rerollable effects per item");
+      await expect(page.getByTestId("build-effects-talisman1")).toHaveCount(0);
+    });
+
+    test("adds effects with levels and writes them to the address", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe");
+      await addEffect(page, "melee", "Critical Edge");
+      await expect(effectArea(page, "melee")).toContainText("Critical Edge");
+      await expect(page).toHaveURL(/&m=axe&x=critical-edge:1$/);
+      await effectArea(page, "melee").locator("[data-effect-tier='critical-edge']").selectOption("3");
+      await addEffect(page, "melee", "Looter");
+      await expect(page).toHaveURL(/&m=axe&x=critical-edge:3~looting:1$/);
+    });
+
+    test("offers only the item's effects and hides the add button at three", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe&x=critical-edge:1~critical-hit:1");
+      await effectArea(page, "melee").locator("[data-add-effect]").click();
+      const options = page.getByTestId("build-options");
+      await expect(options.getByRole("button", { name: /Critical Edge/ })).toBeDisabled();
+      await expect(options.getByRole("button", { name: "Impact", exact: true })).toHaveCount(0);
+      await page.getByTestId("build-filter").fill("Knockback");
+      await options.getByRole("button", { name: "Knockback", exact: true }).click();
+      await expect(effectArea(page, "melee").locator("[data-add-effect]")).toBeHidden();
+    });
+
+    test("restores armor and artifact effects from a link", async ({ page }) => {
+      await page.goto("/en/build/?v=1&h=cave-crawler-helmet&a=blizzard-staff&x=,,roll-cooldown:2,,,,cooldown:3");
+      await expect(effectArea(page, "helmet")).toContainText("Acrobat");
+      await expect(effectArea(page, "helmet").locator("[data-effect-tier='roll-cooldown']")).toHaveValue("2");
+      await expect(effectArea(page, "artifact1")).toContainText("Cooldown");
+    });
+
+    test("a unique item shows its built-in effect and takes two more", async ({ page }) => {
+      await page.goto("/en/build/?v=1&h=undaunted-helmet-unique");
+      await expect(page.getByTestId("build-fixed-helmet")).toContainText("Knockback");
+      await page.goto("/en/build/?v=1&m=axe-unique1&x=critical-edge:1~critical-hit:1~knockback:1");
+      await expect(effectArea(page, "melee").locator(".build-effect")).toHaveCount(2);
+      await expect(page.getByTestId("build-notice")).toContainText(": 1");
+    });
+
+    test("removing an effect keeps the others; swapping the item drops effects it cannot roll", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe&x=critical-edge:1~looting:2");
+      await effectArea(page, "melee").locator("[data-effect-remove='critical-edge']").click();
+      await expect(page).toHaveURL(/&m=axe&x=looting:2$/);
+      await expect(effectArea(page, "melee").locator("[data-add-effect]")).toBeFocused();
+      await page.goto("/en/build/?v=1&m=axe&x=beast-boss:2~looting:1");
+      await pick(page, "melee", "War Hammer");
+      await expect(page).toHaveURL(/&m=war-hammer&x=looting:1$/);
+    });
+  });
+
   test.describe("enchantments", () => {
     const enchantRow = (page: Page, key: string) => page.getByTestId(`build-enchant-${key}`);
 

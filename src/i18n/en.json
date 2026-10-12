@@ -306,5 +306,9 @@
   "buildAddEnchant": "Add enchantment",
   "buildRemoveEnchant": "Remove enchantment",
   "buildTier": "Level",
-  "buildBuiltIn": "Built in: {name}"
+  "buildBuiltIn": "Built in: {name}",
+  "buildEffect": "Effect",
+  "buildAddEffect": "Add effect",
+  "buildRemoveEffect": "Remove effect",
+  "buildEffectLimit": "Up to {n} rerollable effects per item"
 }

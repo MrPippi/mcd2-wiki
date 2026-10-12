@@ -263,7 +263,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -572,5 +576,9 @@
   "buildAddEnchant": "Betovering toevoegen",
   "buildRemoveEnchant": "Betovering verwijderen",
   "buildTier": "Niveau",
-  "buildBuiltIn": "Ingebouwd: {name}"
+  "buildBuiltIn": "Ingebouwd: {name}",
+  "buildEffect": "Effect",
+  "buildAddEffect": "Effect toevoegen",
+  "buildRemoveEffect": "Effect verwijderen",
+  "buildEffectLimit": "Maximaal {n} herrolbare effecten per voorwerp"
 }

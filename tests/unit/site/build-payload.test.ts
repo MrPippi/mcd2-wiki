@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { LANGS } from "../../../scripts/extract/config";
 import type { ArmorSet, Entry } from "../../../scripts/extract/schemas";
-import { buildPayload, enchantOptions, inPool, payloadJson, poolOptions, slotLabel, wholeSets } from "../../../src/lib/build/payload";
+import { buildPayload, effectOptions, enchantOptions, inPool, payloadJson, poolOptions, slotLabel, wholeSets } from "../../../src/lib/build/payload";
 import { parseBuildPayload } from "../../../src/lib/build/parse";
 import { BUILD_SLOTS, POOL_KEYS } from "../../../src/lib/build/slots";
 import { publishedEntries } from "../../../src/lib/data";
@@ -21,6 +21,7 @@ const ENTRIES: Entry[] = [
   entry("beacon", "artifact", { icon: undefined }),
   entry("red-cape", "cape"),
 ];
+const NO_GEAR = { weapons: {}, artifacts: {}, armor: {} };
 const set = (slug: string, pieces: ArmorSet["pieces"]): ArmorSet => ({ id: slug, slug, variant: "normal", name: names(slug), pieces }) as ArmorSet;
 
 describe("inPool", () => {
@@ -34,7 +35,7 @@ describe("inPool", () => {
 
 describe("poolOptions", () => {
   it("names, links and marks each option in the page language", () => {
-    expect(poolOptions("melee", "zh", ENTRIES, {})).toEqual([
+    expect(poolOptions("melee", "zh", ENTRIES, NO_GEAR)).toEqual([
       { slug: "sword", name: "sword（中）", search: expect.stringContaining("sword"), icon: "/icons/melee/sword.png", href: "/zh/melee/sword/" },
       { slug: "sword-unique1", name: "sword-unique1（中）", search: expect.any(String), icon: "/icons/melee/sword-unique1.png", href: "/zh/melee/sword-unique1/", unique: true },
     ]);
@@ -87,7 +88,8 @@ describe("buildPayload", () => {
   });
 
   it("stays small enough to inline", () => {
-    for (const lang of LANGS) expect(payloadJson(buildPayload(lang)).length, lang).toBeLessThan(80_000);
+    // Items, enchantments and the effect list (each item points into it by index); about 90 KB raw, far less gzipped.
+    for (const lang of LANGS) expect(payloadJson(buildPayload(lang)).length, lang).toBeLessThan(120_000);
   });
 
   it("escapes < so the JSON cannot close its script tag", () => {
@@ -154,12 +156,49 @@ describe("enchantOptions", () => {
 describe("fixed bonuses", () => {
   it("names the bonus a unique weapon always carries", () => {
     const weapons = { "sword-unique1": { fixed: { kind: "effect", slug: "fire-focus", value: 1 } } } as never;
-    const option = poolOptions("melee", "en", ENTRIES, weapons).find((found) => found.slug === "sword-unique1");
+    const option = poolOptions("melee", "en", ENTRIES, { ...NO_GEAR, weapons }).find((found) => found.slug === "sword-unique1");
     expect(option?.fixed?.href).toBe("/en/effect/#fire-focus");
   });
 
   it("leaves it out when the bonus has no released entry", () => {
     const weapons = { "sword-unique1": { fixed: { kind: "effect", slug: "not-a-real-effect", value: 1 } } } as never;
-    expect(poolOptions("melee", "en", ENTRIES, weapons).find((found) => found.slug === "sword-unique1")).not.toHaveProperty("fixed");
+    expect(poolOptions("melee", "en", ENTRIES, { ...NO_GEAR, weapons }).find((found) => found.slug === "sword-unique1")).not.toHaveProperty("fixed");
+  });
+});
+
+describe("effects", () => {
+  const index = new Map([["protection", 0], ["looting", 1]]);
+  const gear = {
+    ...NO_GEAR,
+    armor: {
+      "hunter-helmet": { compatible: [{ effect: "looting", tiers: [1, 2, 3] as [number, number, number] }, { effect: "gone", tiers: [1, 2, 3] as [number, number, number] }], fixed: { effect: "fire-focus", value: 1 } },
+    },
+  };
+
+  it("points each item at the effects it can roll, skipping ones the list lacks", () => {
+    expect(poolOptions("helmet", "en", ENTRIES, gear, index)[0]?.effects).toEqual([1]);
+    expect(poolOptions("melee", "en", ENTRIES, gear, index)[0]).not.toHaveProperty("effects");
+  });
+
+  it("names a unique armor piece's built-in effect", () => {
+    expect(poolOptions("helmet", "en", ENTRIES, gear, index)[0]?.fixed?.href).toBe("/en/effect/#fire-focus");
+  });
+
+  it("lists released effects only", () => {
+    expect(effectOptions("en", [entry("protection", "effect"), entry("sword", "melee")]).map((option) => option.slug)).toEqual(["protection"]);
+  });
+
+  it("gives the real payload effects for weapons, armor and artifacts but not talismans", () => {
+    const payload = buildPayload("en");
+    for (const pool of ["melee", "ranged", "helmet", "boots", "artifact"] as const) {
+      expect(payload.pools[pool].some((option) => (option.effects ?? []).length > 0), pool).toBe(true);
+    }
+    expect(payload.pools.talisman.some((option) => option.effects)).toBe(false);
+  });
+
+  it("rejects an item pointing past the effect list", () => {
+    const good = JSON.parse(payloadJson(buildPayload("en")));
+    const bad = { ...good, pools: { ...good.pools, melee: [{ ...good.pools.melee[0], effects: [good.effects.length] }] } };
+    expect(parseBuildPayload(bad)).toBeUndefined();
   });
 });

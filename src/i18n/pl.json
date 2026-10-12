@@ -261,7 +261,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "_english": [
     "normal",
@@ -576,5 +580,9 @@
   "buildAddEnchant": "Dodaj zaklęcie",
   "buildRemoveEnchant": "Usuń zaklęcie",
   "buildTier": "Poziom",
-  "buildBuiltIn": "Wbudowane: {name}"
+  "buildBuiltIn": "Wbudowane: {name}",
+  "buildEffect": "Efekt",
+  "buildAddEffect": "Dodaj efekt",
+  "buildRemoveEffect": "Usuń efekt",
+  "buildEffectLimit": "Maks. {n} losowane efekty na przedmiot"
 }

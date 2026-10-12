@@ -171,7 +171,7 @@ describe("runExtract", () => {
     await put(sourceRoot, "DataTables/UFS/DT_ItemDefinitionMelee.json", JSON.stringify([{ Name: "Sword", IconReference: "/Game/Spicewood/Art/Nowhere/Missing.Missing" }]));
     await Promise.all(
       ["DT_ItemDefinitionRanged", "DT_MeleePropertyDefinition", "DT_RangedPropertyDefinition", "DT_ProjectileDefinition", "DT_EffectTemplateDefinition",
-        "DT_EffectTemplateGroupDefinition", "DT_EffectTemplateGroupDropTableDefinition", "DT_EffectDefinition", "DT_EnchantmentDefinition", "DT_ItemDefinitionArtifact"]
+        "DT_EffectTemplateGroupDefinition", "DT_EffectTemplateGroupDropTableDefinition", "DT_EffectDefinition", "DT_EnchantmentDefinition", "DT_ItemDefinitionArtifact", "DT_ItemDefinitionArmor"]
         .map((name) => put(sourceRoot, `DataTables/UFS/${name}.json`, "[]")),
     );
     await runExtract({ sourceRoot, outRoot, overridesPath });

@@ -261,7 +261,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "_english": [
     "armorPiece",
@@ -574,5 +578,9 @@
   "buildAddEnchant": "Verzauberung hinzufügen",
   "buildRemoveEnchant": "Verzauberung entfernen",
   "buildTier": "Stufe",
-  "buildBuiltIn": "Eingebaut: {name}"
+  "buildBuiltIn": "Eingebaut: {name}",
+  "buildEffect": "Effekt",
+  "buildAddEffect": "Effekt hinzufügen",
+  "buildRemoveEffect": "Effekt entfernen",
+  "buildEffectLimit": "Bis zu {n} neu würfelbare Effekte pro Gegenstand"
 }

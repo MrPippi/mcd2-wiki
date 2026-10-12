@@ -9,8 +9,19 @@ export interface BuildOption {
   readonly icon?: string;
   readonly href: string;
   readonly unique?: true;
-  /** The effect or enchantment a unique weapon always carries. */
+  /** The effect or enchantment a unique item always carries. */
   readonly fixed?: { readonly name: string; readonly href: string };
+  /** Positions in the payload's effect list of the effects this item can roll. */
+  readonly effects?: readonly number[];
+}
+
+/** An effect, in the payload's shared list that items point into. */
+export interface EffectOption {
+  readonly slug: string;
+  readonly name: string;
+  readonly search: string;
+  readonly icon?: string;
+  readonly href: string;
 }
 
 /** An enchantment a player can put on gear, and the slots it fits. */
@@ -49,6 +60,9 @@ export interface BuildLabels {
   readonly gameVersion: string;
   /** Has `{old}` and `{current}` placeholders. */
   readonly oldVersion: string;
+  readonly effect: string;
+  readonly addEffect: string;
+  readonly removeEffect: string;
   readonly enchant: string;
   readonly addEnchant: string;
   readonly removeEnchant: string;
@@ -64,12 +78,13 @@ export interface BuildPayload {
   readonly gameVersion: string;
   readonly pools: Readonly<Record<PoolKey, readonly BuildOption[]>>;
   readonly sets: readonly BuildSet[];
+  readonly effects: readonly EffectOption[];
   readonly enchantments: readonly EnchantOption[];
   readonly labels: BuildLabels;
 }
 
 const LABEL_KEYS = [
-  "choose", "clear", "search", "noResults", "wholeSet", "equipped", "close", "copied", "copyFailed", "downloadFailed", "dropped", "unsupported", "gameVersion", "oldVersion", "enchant", "addEnchant", "removeEnchant", "tier", "builtIn", "cardTitle", "siteTitle",
+  "choose", "clear", "search", "noResults", "wholeSet", "equipped", "close", "copied", "copyFailed", "downloadFailed", "dropped", "unsupported", "gameVersion", "oldVersion", "effect", "addEffect", "removeEffect", "enchant", "addEnchant", "removeEnchant", "tier", "builtIn", "cardTitle", "siteTitle",
 ] as const satisfies readonly Exclude<keyof BuildLabels, "slots">[];
 const PIECES = ["helmet", "chest", "leggings", "boots"] as const;
 
@@ -85,7 +100,11 @@ const isOption = (value: unknown): value is BuildOption =>
   optionalText(value.icon) &&
   isText(value.href) &&
   (value.unique === undefined || value.unique === true) &&
-  (value.fixed === undefined || (isRecord(value.fixed) && isText(value.fixed.name) && isText(value.fixed.href)));
+  (value.fixed === undefined || (isRecord(value.fixed) && isText(value.fixed.name) && isText(value.fixed.href))) &&
+  (value.effects === undefined || (Array.isArray(value.effects) && value.effects.every((index) => Number.isInteger(index) && index >= 0)));
+
+const isEffectOption = (value: unknown): value is EffectOption =>
+  isRecord(value) && isText(value.slug) && isText(value.name) && typeof value.search === "string" && optionalText(value.icon) && isText(value.href);
 
 const isEnchantOption = (value: unknown): value is EnchantOption =>
   isRecord(value) &&
@@ -118,5 +137,9 @@ export function parseBuildPayload(value: unknown): BuildPayload | undefined {
   if (!POOL_KEYS.every((pool) => Array.isArray(pools[pool]) && (pools[pool] as unknown[]).every(isOption))) return undefined;
   if (!value.sets.every(isSet)) return undefined;
   if (!Array.isArray(value.enchantments) || !value.enchantments.every(isEnchantOption)) return undefined;
+  if (!Array.isArray(value.effects) || !value.effects.every(isEffectOption)) return undefined;
+  const effectCount = value.effects.length;
+  const pointsInside = (option: BuildOption): boolean => (option.effects ?? []).every((index) => index < effectCount);
+  if (!POOL_KEYS.every((pool) => (pools[pool] as BuildOption[]).every(pointsInside))) return undefined;
   return value as unknown as BuildPayload;
 }

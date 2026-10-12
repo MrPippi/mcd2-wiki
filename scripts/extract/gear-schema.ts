@@ -25,6 +25,16 @@ export const ArtifactDataSchema = z.record(
 );
 export type ArtifactData = z.infer<typeof ArtifactDataSchema>;
 
+/** Effects an armor piece can roll (tier I/II/III values), and a unique piece's built-in effect. */
+export const ArmorEffectDataSchema = z.record(
+  SlugSchema,
+  z.object({
+    compatible: z.array(z.object({ effect: SlugSchema, tiers: z.tuple([z.number(), z.number(), z.number()]) })),
+    fixed: z.object({ effect: SlugSchema, value: z.number() }).optional(),
+  }),
+);
+export type ArmorEffectData = z.infer<typeof ArmorEffectDataSchema>;
+
 /** A talisman level: its description values (when the game data has them), companion multipliers, and XP to level up. */
 const TalismanLevelSchema = z.object({
   values: z.array(z.string()).optional(),

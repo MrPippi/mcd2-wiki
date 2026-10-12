@@ -260,7 +260,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -571,5 +575,9 @@
   "buildAddEnchant": "添加附魔",
   "buildRemoveEnchant": "移除附魔",
   "buildTier": "等级",
-  "buildBuiltIn": "内置：{name}"
+  "buildBuiltIn": "内置：{name}",
+  "buildEffect": "效果",
+  "buildAddEffect": "添加效果",
+  "buildRemoveEffect": "移除效果",
+  "buildEffectLimit": "每件最多 {n} 个可重抽效果"
 }

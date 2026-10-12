@@ -63,3 +63,15 @@ export interface EnchantPick {
 
 /** The enchantment on each enchanted slot. */
 export type Enchants = Readonly<Partial<Record<EnchantSlotKey, EnchantPick>>>;
+
+/** Slots whose item rolls effects, in the order of the `x` URL parameter. */
+export const EFFECT_SLOT_KEYS = [
+  "melee", "ranged", "helmet", "chest", "leggings", "boots", "artifact1", "artifact2", "artifact3",
+] as const satisfies readonly SlotKey[];
+export type EffectSlotKey = (typeof EFFECT_SLOT_KEYS)[number];
+
+/** An effect and its tier, like an enchantment. */
+export type EffectPick = EnchantPick;
+
+/** The effects on each slot's item, in pick order. */
+export type Effects = Readonly<Partial<Record<EffectSlotKey, readonly EffectPick[]>>>;

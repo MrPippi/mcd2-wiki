@@ -263,7 +263,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -572,5 +576,9 @@
   "buildAddEnchant": "Büyü ekle",
   "buildRemoveEnchant": "Büyüyü kaldır",
   "buildTier": "Seviye",
-  "buildBuiltIn": "Yerleşik: {name}"
+  "buildBuiltIn": "Yerleşik: {name}",
+  "buildEffect": "Etki",
+  "buildAddEffect": "Etki ekle",
+  "buildRemoveEffect": "Etkiyi kaldır",
+  "buildEffectLimit": "Eşya başına en fazla {n} yeniden atılabilir etki"
 }

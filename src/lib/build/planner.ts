@@ -3,13 +3,17 @@ import { foldForSearch } from "../lang";
 import { ROMAN } from "./card";
 import { buildSearch, decodeBuild, type DecodedBuild, type EnchantPools, type Pools } from "./code";
 import { drawCard, type CardTheme } from "./draw";
+import { capFor, effectRulesOf, effectsLine, isEffectSlot, keptEffects, renderEffects, rollable } from "./effects-ui";
 import { parseBuildPayload, type BuildOption, type BuildPayload, type EnchantOption } from "./parse";
 import {
   BUILD_SLOTS,
   byPool,
+  EFFECT_SLOT_KEYS,
   ENCHANT_SLOT_KEYS,
   ENCHANT_TIERS,
   type Build,
+  type Effects,
+  type EffectSlotKey,
   type BuildSlot,
   type Enchants,
   type EnchantSlotKey,
@@ -55,6 +59,7 @@ interface Planner {
   readonly slots: ReadonlyMap<SlotKey, HTMLElement>;
   build: Build;
   enchants: Enchants;
+  effects: Effects;
   choices: readonly Choice[];
 }
 
@@ -196,13 +201,14 @@ function render(planner: Planner): void {
   for (const slot of BUILD_SLOTS) {
     const element = planner.slots.get(slot.key)!;
     renderSlot(element, optionFor(planner.payload, slot, planner.build[slot.key]), planner.payload);
+    if (isEffectSlot(slot.key)) renderEffects(element, planner.payload, slot.key, planner.build[slot.key], planner.effects[slot.key] ?? []);
     if (isEnchantSlot(slot.key)) renderEnchant(element, planner.build[slot.key] !== undefined, planner.enchants[slot.key], planner.payload);
   }
 }
 
 /** Writes the build into the address (other parameters kept) and tells the language links. */
 function syncUrl(planner: Planner): void {
-  const search = buildSearch(location.search, planner.build, { gameVersion: planner.payload.gameVersion, enchants: planner.enchants });
+  const search = buildSearch(location.search, planner.build, { gameVersion: planner.payload.gameVersion, enchants: planner.enchants, effects: planner.effects });
   history.replaceState(history.state, "", `${location.pathname}${search}${location.hash}`);
   window.dispatchEvent(new Event(LOCATION_EVENT));
 }
@@ -211,9 +217,10 @@ function syncUrl(planner: Planner): void {
 const keptEnchants = (build: Build, enchants: Enchants): Enchants =>
   Object.fromEntries(Object.entries(enchants).filter(([key]) => build[key as EnchantSlotKey] !== undefined)) as Enchants;
 
-function update(planner: Planner, next: Build, enchants: Enchants = planner.enchants): void {
+function update(planner: Planner, next: Build, enchants: Enchants = planner.enchants, effects: Effects = planner.effects): void {
   planner.build = next;
   planner.enchants = keptEnchants(next, enchants);
+  planner.effects = keptEffects(planner.payload, next, effects);
   render(planner);
   syncUrl(planner);
   showNotice(planner, "");
@@ -308,6 +315,47 @@ function wireEnchant(planner: Planner, key: EnchantSlotKey, element: HTMLElement
   });
 }
 
+function effectChoices(planner: Planner, key: EffectSlotKey): Choice[] {
+  const picked = new Set((planner.effects[key] ?? []).map((pick) => pick.slug));
+  return rollable(planner.payload, key, planner.build[key]).map((option) => ({
+    key: option.slug,
+    name: option.name,
+    search: option.search,
+    icon: option.icon,
+    disabled: picked.has(option.slug),
+    pick: () => {
+      planner.parts.dialog.close();
+      update(planner, planner.build, planner.enchants, { ...planner.effects, [key]: [...(planner.effects[key] ?? []), { slug: option.slug, tier: ENCHANT_TIERS[0] }] });
+      const slot = planner.slots.get(key);
+      const added = slot?.querySelector<HTMLElement>(`[data-effect-tier="${option.slug}"]`);
+      (added ?? slot?.querySelector<HTMLElement>("[data-add-effect]"))?.focus();
+    },
+  }));
+}
+
+/** Level changes and removals on a slot's effect list (rows are rebuilt on every render, so events are delegated). */
+function wireEffects(planner: Planner, key: EffectSlotKey, element: HTMLElement): void {
+  const add = element.querySelector<HTMLElement>("[data-add-effect]");
+  const label = element.querySelector(".build-slot-label")?.textContent ?? key;
+  add?.addEventListener("click", () => openDialog(planner, `${planner.payload.labels.effect}: ${label}`, effectChoices(planner, key)));
+  const list = element.querySelector<HTMLElement>("[data-effect-list]");
+  list?.addEventListener("change", (event) => {
+    const select = event.target instanceof HTMLSelectElement ? event.target : undefined;
+    const tier = ENCHANT_TIERS.find((value) => String(value) === select?.value);
+    if (!select?.dataset.effectTier || !tier) return;
+    const picks = (planner.effects[key] ?? []).map((pick) => (pick.slug === select.dataset.effectTier ? { ...pick, tier } : pick));
+    update(planner, planner.build, planner.enchants, { ...planner.effects, [key]: picks });
+    element.querySelector<HTMLElement>(`[data-effect-tier="${select.dataset.effectTier}"]`)?.focus();
+  });
+  list?.addEventListener("click", (event) => {
+    const button = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-effect-remove]") : null;
+    if (!button?.dataset.effectRemove) return;
+    const picks = (planner.effects[key] ?? []).filter((pick) => pick.slug !== button.dataset.effectRemove);
+    update(planner, planner.build, planner.enchants, { ...planner.effects, [key]: picks });
+    add?.focus(); // the row and its button are gone
+  });
+}
+
 function wireSlots(planner: Planner): void {
   for (const slot of BUILD_SLOTS) {
     const element = planner.slots.get(slot.key)!;
@@ -318,6 +366,7 @@ function wireSlots(planner: Planner): void {
       update(planner, without(planner.build, slot.key));
       pick?.focus(); // the clear button just hid itself
     });
+    if (isEffectSlot(slot.key)) wireEffects(planner, slot.key, element);
     if (isEnchantSlot(slot.key)) wireEnchant(planner, slot.key, element);
   }
   planner.root.querySelector("[data-open-sets]")?.addEventListener("click", () => openDialog(planner, planner.payload.labels.wholeSet, setChoices(planner)));
@@ -336,7 +385,7 @@ function wireDialog(planner: Planner): void {
 }
 
 function wireShare(planner: Planner): void {
-  planner.root.querySelector("[data-reset]")?.addEventListener("click", () => update(planner, {}, {}));
+  planner.root.querySelector("[data-reset]")?.addEventListener("click", () => update(planner, {}, {}, {}));
   planner.root.querySelector("[data-copy]")?.addEventListener("click", () => void copyLink(planner));
   planner.root.querySelector("[data-download]")?.addEventListener("click", () => void download(planner));
 }
@@ -358,8 +407,8 @@ export function mountPlanner(root: HTMLElement): boolean {
   const parts = partsOf(root);
   const slots = slotsOf(root);
   if (!payload || !parts || !slots) return false;
-  const decoded = decodeBuild(location.search, poolsOf(payload), enchantPoolsOf(payload));
-  const planner: Planner = { root, payload, parts, slots, build: decoded.build, enchants: decoded.enchants, choices: [] };
+  const decoded = decodeBuild(location.search, poolsOf(payload), enchantPoolsOf(payload), effectRulesOf(payload));
+  const planner: Planner = { root, payload, parts, slots, build: decoded.build, enchants: decoded.enchants, effects: decoded.effects, choices: [] };
   wireSlots(planner);
   wireDialog(planner);
   wireShare(planner);
@@ -417,6 +466,12 @@ async function download(planner: Planner): Promise<void> {
         return option ? [[slot.key, option]] : [];
       }),
     );
+    const rolled = Object.fromEntries(
+      EFFECT_SLOT_KEYS.flatMap((key) => {
+        const line = effectsLine(payload, planner.effects[key] ?? []);
+        return line ? [[key, line]] : [];
+      }),
+    );
     const enchanted = Object.fromEntries(
       ENCHANT_SLOT_KEYS.flatMap((key) => {
         const pick = enchants[key];
@@ -426,7 +481,7 @@ async function download(planner: Planner): Promise<void> {
     );
     const address = `${location.origin}${location.pathname}`;
     const version = payload.labels.gameVersion.replace("{version}", () => payload.gameVersion);
-    const blob = await drawCard({ title: payload.labels.cardTitle, labels: payload.labels, picked, enchanted, address, version, theme: themeOf() });
+    const blob = await drawCard({ title: payload.labels.cardTitle, labels: payload.labels, picked, enchanted, rolled, address, version, theme: themeOf() });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = FILE_NAME;

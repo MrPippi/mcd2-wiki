@@ -263,7 +263,11 @@
     "buildAddEnchant",
     "buildRemoveEnchant",
     "buildTier",
-    "buildBuiltIn"
+    "buildBuiltIn",
+    "buildEffect",
+    "buildAddEffect",
+    "buildRemoveEffect",
+    "buildEffectLimit"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -574,5 +578,9 @@
   "buildAddEnchant": "Додати чари",
   "buildRemoveEnchant": "Прибрати чари",
   "buildTier": "Рівень",
-  "buildBuiltIn": "Вбудовано: {name}"
+  "buildBuiltIn": "Вбудовано: {name}",
+  "buildEffect": "Ефект",
+  "buildAddEffect": "Додати ефект",
+  "buildRemoveEffect": "Прибрати ефект",
+  "buildEffectLimit": "Не більше {n} ефектів, що перекидаються, на предмет"
 }

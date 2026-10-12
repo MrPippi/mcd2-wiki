@@ -208,6 +208,13 @@ export const TABLES: GameTables = {
     },
     enchantTier("ShadowStrike", "I", []),
   ],
+  armor: [
+    { ...item("HunterHelmet", ["SW.Item.Property.Armor.Helmet", "SW.Item.Property.LightArmor"]), TypeTextData: { Texts: { '(TagName="SW.TextEntry.Name")': loc("DT_ItemDefinitionArmor", "SW_Item_HunterHelmet_SW_TextEntry_Name") } } },
+    {
+      ...item("HunterHelmet_Unique", ["SW.Item.Property.Armor.Helmet"], ["SW.EffectTemplate.Reconstruction.Unique"]),
+      TypeTextData: { Texts: { '(TagName="SW.TextEntry.Name")': loc("DT_ItemDefinitionArmor", "SW_Item_HunterHelmet_Unique_SW_TextEntry_Name") } },
+    },
+  ],
   artifacts: [
     {
       Name: "TotemOfShielding",

@@ -1,7 +1,7 @@
 /** Draws the build image on a canvas (browser only; the layout comes from card.ts). */
 import { CARD_GAP, CARD_HEIGHT, CARD_ICON, CARD_PADDING, CARD_WIDTH, cardCells, fitText } from "./card";
 import type { BuildLabels, BuildOption } from "./parse";
-import type { EnchantSlotKey, SlotKey } from "./slots";
+import type { EffectSlotKey, EnchantSlotKey, SlotKey } from "./slots";
 
 export interface CardInput {
   readonly title: string;
@@ -10,6 +10,8 @@ export interface CardInput {
   readonly picked: Readonly<Partial<Record<SlotKey, BuildOption>>>;
   /** "Name III" for each enchanted slot. */
   readonly enchanted: Readonly<Partial<Record<EnchantSlotKey, string>>>;
+  /** "Sharpness III · Looting I" for each slot with effects. */
+  readonly rolled: Readonly<Partial<Record<EffectSlotKey, string>>>;
   /** The page address printed at the bottom left. */
   readonly address: string;
   /** The game version line printed at the bottom right. */
@@ -94,6 +96,12 @@ function drawCells(ctx: CanvasRenderingContext2D, input: CardInput, icons: Reado
       ctx.fillStyle = theme.accent;
       ctx.font = `600 15px ${theme.body}`;
       ctx.fillText(fitText(enchant, cell.textWidth, measure), textX, iconY + 66);
+    }
+    const effects = input.rolled[cell.slot as EffectSlotKey];
+    if (effects) {
+      ctx.fillStyle = theme.muted;
+      ctx.font = `13px ${theme.body}`;
+      ctx.fillText(fitText(effects, cell.textWidth, measure), textX, iconY + (enchant ? 86 : 66));
     }
   }
 }

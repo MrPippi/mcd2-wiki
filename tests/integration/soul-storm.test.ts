@@ -17,7 +17,7 @@ const SECRET = "0123456789abcdef0123456789abcdef";   // fake telemetry key
 const WEAPON_TABLES = [
   "DT_ItemDefinitionMelee", "DT_ItemDefinitionRanged", "DT_MeleePropertyDefinition", "DT_RangedPropertyDefinition", "DT_ProjectileDefinition",
   "DT_EffectTemplateDefinition", "DT_EffectTemplateGroupDefinition", "DT_EffectTemplateGroupDropTableDefinition", "DT_EffectDefinition",
-  "DT_EnchantmentDefinition", "DT_ItemDefinitionArtifact",
+  "DT_EnchantmentDefinition", "DT_ItemDefinitionArtifact", "DT_ItemDefinitionArmor",
 ];
 let sourceRoot: string;
 let outRoot: string;
