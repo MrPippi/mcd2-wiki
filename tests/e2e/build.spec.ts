@@ -1,0 +1,157 @@
+import { readFile } from "node:fs/promises";
+import { expect, test, type Page } from "@playwright/test";
+
+const horizontalOverflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+const slot = (page: Page, key: string) => page.getByTestId(`build-slot-${key}`);
+
+async function pick(page: Page, key: string, name: string): Promise<void> {
+  await slot(page, key).locator("[data-pick]").click();
+  const dialog = page.getByTestId("build-dialog");
+  await expect(dialog).toBeVisible();
+  await page.getByTestId("build-filter").fill(name);
+  await dialog.getByRole("button", { name, exact: true }).click();
+  await expect(dialog).toBeHidden();
+}
+
+test.describe("build planner", () => {
+  test("shows the planner and hides the failure note", async ({ page }) => {
+    await page.goto("/en/build/");
+    await expect(page.getByTestId("build-planner")).toBeVisible();
+    await expect(page.getByTestId("build-failed")).toBeHidden();
+    await expect(slot(page, "melee")).toContainText("Choose…");
+  });
+
+  test("picking an item fills the slot, links its page and writes the URL", async ({ page }) => {
+    await page.goto("/en/build/");
+    await pick(page, "melee", "Axe");
+    await expect(slot(page, "melee")).toContainText("Axe");
+    await expect(slot(page, "melee").locator("[data-link]")).toHaveAttribute("href", "/en/melee/axe/");
+    await expect(page).toHaveURL(/\/en\/build\/\?v=1&m=axe$/);
+  });
+
+  test("a shared link opens the same build", async ({ page }) => {
+    await page.goto("/en/build/?v=1&m=axe&r=bow&a=blizzard-staff,,corrupted-beacon&t=brawling&cape=hero&pet=blub");
+    await expect(slot(page, "melee")).toContainText("Axe");
+    await expect(slot(page, "ranged")).toContainText("Bow");
+    await expect(slot(page, "artifact1")).toContainText("Winter Staff");
+    await expect(slot(page, "artifact2")).toContainText("Choose…");
+    await expect(slot(page, "artifact3")).toContainText("Corrupted Beacon");
+    await expect(slot(page, "talisman1")).toContainText("Fist of Iron");
+    await expect(slot(page, "cape")).toContainText("Hero Cape");
+    await expect(slot(page, "cape").locator("[data-link]")).toBeHidden();
+    await expect(page.getByTestId("build-notice")).toBeHidden();
+  });
+
+  test("says how many items of a link no longer exist", async ({ page }) => {
+    await page.goto("/en/build/?v=1&m=axe&r=not-a-bow&pet=dragon");
+    await expect(slot(page, "melee")).toContainText("Axe");
+    await expect(page.getByTestId("build-notice")).toHaveText("Items left out (no longer in the game): 2");
+  });
+
+  test("opens a link from another version empty", async ({ page }) => {
+    await page.goto("/en/build/?v=9&m=axe");
+    await expect(slot(page, "melee")).toContainText("Choose…");
+    await expect(page.getByTestId("build-notice")).toContainText("another version");
+  });
+
+  test("a whole armor set fills all four pieces", async ({ page }) => {
+    await page.goto("/en/build/");
+    await page.getByTestId("build-whole-set").click();
+    const first = page.getByTestId("build-options").locator("button").first();
+    await first.click();
+    for (const key of ["helmet", "chest", "leggings", "boots"]) await expect(slot(page, key)).toHaveAttribute("data-filled", "true");
+    await expect(page).toHaveURL(/[?&]h=.+&c=.+&l=.+&b=/);
+  });
+
+  test("an artifact in one slot cannot be picked again in another", async ({ page }) => {
+    await page.goto("/en/build/?v=1&a=blizzard-staff");
+    await slot(page, "artifact2").locator("[data-pick]").click();
+    await page.getByTestId("build-filter").fill("Winter Staff");
+    await expect(page.getByTestId("build-options").getByRole("button", { name: /Winter Staff/ })).toBeDisabled();
+  });
+
+  test("the search finds an item by its comparison-language name", async ({ page }) => {
+    await page.goto("/zh/build/");
+    await slot(page, "melee").locator("[data-pick]").click();
+    await page.getByTestId("build-filter").fill("axe");
+    await expect(page.getByTestId("build-options").locator("button").first()).toBeVisible();
+    await page.getByTestId("build-filter").fill("zzzz-nothing");
+    await expect(page.getByTestId("build-options").locator("button")).toHaveCount(0);
+    await expect(page.getByTestId("build-dialog").locator("[data-empty]")).toBeVisible();
+    // The first Escape clears the search box (the browser's own behaviour), the next closes the dialog.
+    await page.getByTestId("build-filter").fill("");
+    await page.keyboard.press("Escape");
+    await expect(page.getByTestId("build-dialog")).toBeHidden();
+  });
+
+  test("clearing a slot and the whole build updates the URL", async ({ page }) => {
+    await page.goto("/en/build/?v=1&m=axe&r=bow");
+    await slot(page, "melee").locator("[data-clear]").click();
+    await expect(page).toHaveURL(/\/en\/build\/\?v=1&r=bow$/);
+    await page.getByTestId("build-reset").click();
+    await expect(page).toHaveURL(/\/en\/build\/$/);
+    await expect(slot(page, "ranged")).toContainText("Choose…");
+  });
+
+  test("the language links keep the build", async ({ page }) => {
+    await page.goto("/en/build/");
+    await pick(page, "melee", "Axe");
+    const ja = page.locator('a[data-lang="ja"]').first();
+    await expect(ja).toHaveAttribute("href", /\/ja\/build\/\?v=1&m=axe$/);
+  });
+
+  test("copies the link", async ({ page, context, browserName }) => {
+    test.skip(browserName !== "chromium", "clipboard permissions are Chromium-only");
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await page.goto("/en/build/?v=1&m=axe");
+    await page.getByTestId("build-copy").click();
+    await expect(page.getByTestId("build-status")).toHaveText("Link copied.");
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toMatch(/\/en\/build\/\?v=1&m=axe$/);
+  });
+
+  test("falls back to a selectable address when copying fails", async ({ page }) => {
+    await page.addInitScript(() => {
+      Object.defineProperty(navigator, "clipboard", { value: { writeText: () => Promise.reject(new Error("denied")) } });
+    });
+    await page.goto("/en/build/?v=1&m=axe");
+    await page.getByTestId("build-copy").click();
+    await expect(page.getByTestId("build-url")).toBeVisible();
+    await expect(page.getByTestId("build-url")).toHaveValue(/\/en\/build\/\?v=1&m=axe$/);
+  });
+
+  test("downloads the build as a 1200×630 PNG", async ({ page }) => {
+    await page.goto("/en/build/?v=1&m=axe&r=bow&pet=blub");
+    const [download] = await Promise.all([page.waitForEvent("download"), page.getByTestId("build-download").click()]);
+    expect(download.suggestedFilename()).toBe("mcd2-build.png");
+    const bytes = await readFile((await download.path())!);
+    expect([...bytes.subarray(0, 8)]).toEqual([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
+    expect(bytes.readUInt32BE(16)).toBe(1200);
+    expect(bytes.readUInt32BE(20)).toBe(630);
+  });
+
+  test("the site menu links the planner", async ({ page }) => {
+    await page.goto("/en/");
+    await expect(page.locator('a[href="/en/build/"]').first()).toBeAttached();
+  });
+
+  for (const lang of ["zh", "de", "ru"]) {
+    test(`does not scroll sideways at 412px (${lang})`, async ({ page }) => {
+      await page.setViewportSize({ width: 412, height: 915 });
+      await page.goto(`/${lang}/build/?v=1&m=axe-unique1&r=bow-unique1&a=blizzard-staff,carapace-ocarina,conductive-bracelet,corrupted-beacon&t=ammo-capacity,artifact-cooldown,brawling&cape=corrupted-creeper&pet=slime-supreme`);
+      await expect(page.getByTestId("build-planner")).toBeVisible();
+      expect(await horizontalOverflow(page)).toBe(0);
+      await slot(page, "melee").locator("[data-pick]").click();
+      expect(await horizontalOverflow(page)).toBe(0);
+    });
+  }
+});
+
+test.describe("without JavaScript", () => {
+  test.use({ javaScriptEnabled: false });
+
+  test("explains the planner needs JavaScript", async ({ page }) => {
+    await page.goto("/en/build/");
+    await expect(page.getByTestId("build-noscript")).toBeVisible();
+    await expect(page.getByTestId("build-planner")).toBeHidden();
+  });
+});

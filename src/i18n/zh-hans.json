@@ -254,7 +254,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -559,5 +563,9 @@
   "buildDownload": "下载图片",
   "buildDownloadFailed": "无法生成图片。",
   "buildDropped": "已略过游戏中不存在的物品：{n} 件",
-  "buildUnsupported": "这个链接来自其他版本的配装工具，因此打开为空白配装。"
+  "buildUnsupported": "这个链接来自其他版本的配装工具，因此打开为空白配装。",
+  "buildSlotArtifact": "法器",
+  "buildSlotTalisman": "护符",
+  "buildSlotCape": "披风",
+  "buildSlotPet": "宠物"
 }

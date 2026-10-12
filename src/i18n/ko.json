@@ -257,7 +257,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -557,5 +561,9 @@
   "buildDownload": "이미지 다운로드",
   "buildDownloadFailed": "이미지를 만들지 못했습니다.",
   "buildDropped": "게임에 더 이상 없어 제외한 아이템: {n}",
-  "buildUnsupported": "다른 버전의 플래너에서 만든 링크라서 빈 빌드로 열었습니다."
+  "buildUnsupported": "다른 버전의 플래너에서 만든 링크라서 빈 빌드로 열었습니다.",
+  "buildSlotArtifact": "유물",
+  "buildSlotTalisman": "부적",
+  "buildSlotCape": "망토",
+  "buildSlotPet": "펫"
 }

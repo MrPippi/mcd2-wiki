@@ -256,7 +256,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -562,5 +566,9 @@
   "buildDownload": "Ladda ned bild",
   "buildDownloadFailed": "Det gick inte att skapa bilden.",
   "buildDropped": "Utelämnade föremål (finns inte längre i spelet): {n}",
-  "buildUnsupported": "Länken kommer från en annan version av planeraren, så bygget öppnades tomt."
+  "buildUnsupported": "Länken kommer från en annan version av planeraren, så bygget öppnades tomt.",
+  "buildSlotArtifact": "Artefakt",
+  "buildSlotTalisman": "Talisman",
+  "buildSlotCape": "Mantel",
+  "buildSlotPet": "Husdjur"
 }

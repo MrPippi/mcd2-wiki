@@ -254,7 +254,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -559,5 +563,9 @@
   "buildDownload": "画像をダウンロード",
   "buildDownloadFailed": "画像を作成できませんでした。",
   "buildDropped": "ゲームに存在しないため省いたアイテム：{n}",
-  "buildUnsupported": "このリンクは別バージョンのプランナーのものなので、空のビルドで開きました。"
+  "buildUnsupported": "このリンクは別バージョンのプランナーのものなので、空のビルドで開きました。",
+  "buildSlotArtifact": "アーティファクト",
+  "buildSlotTalisman": "タリスマン",
+  "buildSlotCape": "マント",
+  "buildSlotPet": "ペット"
 }

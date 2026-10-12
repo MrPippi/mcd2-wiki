@@ -255,7 +255,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "_english": [
     "normal",
@@ -564,5 +568,9 @@
   "buildDownload": "Pobierz obraz",
   "buildDownloadFailed": "Nie udało się utworzyć obrazu.",
   "buildDropped": "Pominięte przedmioty (już nie ma ich w grze): {n}",
-  "buildUnsupported": "Ten link pochodzi z innej wersji planera, więc otwarto pusty build."
+  "buildUnsupported": "Ten link pochodzi z innej wersji planera, więc otwarto pusty build.",
+  "buildSlotArtifact": "Artefakt",
+  "buildSlotTalisman": "Talizman",
+  "buildSlotCape": "Peleryna",
+  "buildSlotPet": "Zwierzak"
 }

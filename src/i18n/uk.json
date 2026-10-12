@@ -257,7 +257,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -562,5 +566,9 @@
   "buildDownload": "Завантажити зображення",
   "buildDownloadFailed": "Не вдалося створити зображення.",
   "buildDropped": "Пропущено предметів (їх більше немає в грі): {n}",
-  "buildUnsupported": "Посилання створено в іншій версії планувальника, тому збірку відкрито порожньою."
+  "buildUnsupported": "Посилання створено в іншій версії планувальника, тому збірку відкрито порожньою.",
+  "buildSlotArtifact": "Артефакт",
+  "buildSlotTalisman": "Талісман",
+  "buildSlotCape": "Плащ",
+  "buildSlotPet": "Улюбленець"
 }

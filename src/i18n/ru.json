@@ -253,7 +253,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -564,5 +568,9 @@
   "buildDownload": "Скачать изображение",
   "buildDownloadFailed": "Не удалось создать изображение.",
   "buildDropped": "Пропущено предметов (их больше нет в игре): {n}",
-  "buildUnsupported": "Ссылка создана в другой версии планировщика, поэтому сборка открыта пустой."
+  "buildUnsupported": "Ссылка создана в другой версии планировщика, поэтому сборка открыта пустой.",
+  "buildSlotArtifact": "Артефакт",
+  "buildSlotTalisman": "Талисман",
+  "buildSlotCape": "Плащ",
+  "buildSlotPet": "Питомец"
 }

@@ -255,7 +255,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "_english": [
     "armorPiece",
@@ -562,5 +566,9 @@
   "buildDownload": "Bild herunterladen",
   "buildDownloadFailed": "Das Bild konnte nicht erstellt werden.",
   "buildDropped": "Ausgelassene Gegenstände (nicht mehr im Spiel): {n}",
-  "buildUnsupported": "Dieser Link stammt aus einer anderen Version des Planers und wurde daher leer geöffnet."
+  "buildUnsupported": "Dieser Link stammt aus einer anderen Version des Planers und wurde daher leer geöffnet.",
+  "buildSlotArtifact": "Artefakt",
+  "buildSlotTalisman": "Talisman",
+  "buildSlotCape": "Umhang",
+  "buildSlotPet": "Haustier"
 }

@@ -12,7 +12,7 @@
 .build-slots { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
 .build-slot { display: flex; align-items: center; gap: var(--space-2); border-bottom: 1px solid var(--rule); }
 .build-pick {
-  flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: var(--space-3);
+  flex: 1 1 auto; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: var(--space-3); font-size: 1rem;
   padding: var(--space-2) var(--space-1); border: 0; background: none; text-align: start; color: var(--text);
 }
 .build-pick:hover { background: var(--plate); }
@@ -53,7 +53,7 @@
   display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
 }
 .build-dialog [data-empty] { margin: 0 var(--space-4) var(--space-4); }
-.build-option { display: flex; align-items: center; gap: var(--space-2); width: 100%; padding: var(--space-1); text-align: start; }
+.build-option { display: flex; align-items: center; justify-content: flex-start; gap: var(--space-2); width: 100%; padding: var(--space-1); text-align: start; }
 .build-option:disabled { opacity: 0.55; cursor: not-allowed; }
 .build-option-name { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
 .build-option-tag { font-size: 0.8rem; color: var(--muted); }

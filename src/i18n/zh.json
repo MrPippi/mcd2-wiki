@@ -297,5 +297,9 @@
   "buildDownload": "下載圖片",
   "buildDownloadFailed": "無法產生圖片。",
   "buildDropped": "已略過遊戲中不存在的物品：{n} 件",
-  "buildUnsupported": "這個連結來自其他版本的配裝工具，因此開啟為空白配裝。"
+  "buildUnsupported": "這個連結來自其他版本的配裝工具，因此開啟為空白配裝。",
+  "buildSlotArtifact": "神器",
+  "buildSlotTalisman": "護符",
+  "buildSlotCape": "披風",
+  "buildSlotPet": "寵物"
 }

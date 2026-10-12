@@ -257,7 +257,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -561,5 +565,9 @@
   "buildDownload": "Télécharger l’image",
   "buildDownloadFailed": "Impossible de créer l’image.",
   "buildDropped": "Objets ignorés (absents du jeu) : {n}",
-  "buildUnsupported": "Ce lien provient d’une autre version du planificateur ; il s’ouvre donc vide."
+  "buildUnsupported": "Ce lien provient d’une autre version du planificateur ; il s’ouvre donc vide.",
+  "buildSlotArtifact": "Artefact",
+  "buildSlotTalisman": "Talisman",
+  "buildSlotCape": "Cape",
+  "buildSlotPet": "Familier"
 }

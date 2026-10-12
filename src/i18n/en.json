@@ -300,5 +300,9 @@
   "buildDownload": "Download image",
   "buildDownloadFailed": "Could not create the image.",
   "buildDropped": "Items left out (no longer in the game): {n}",
-  "buildUnsupported": "This link comes from another version of the planner, so it opened empty."
+  "buildUnsupported": "This link comes from another version of the planner, so it opened empty.",
+  "buildSlotArtifact": "Artifact",
+  "buildSlotTalisman": "Talisman",
+  "buildSlotCape": "Cape",
+  "buildSlotPet": "Pet"
 }

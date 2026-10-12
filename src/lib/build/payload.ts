@@ -2,7 +2,7 @@
 import type { Category } from "../../../scripts/extract/config";
 import type { ArmorSet, ArmorPiece, Entry } from "../../../scripts/extract/schemas";
 import { allArmorSets, publishedEntries } from "../data";
-import { categoryLabel, pieceLabel, t, type Lang } from "../i18n";
+import { categoryLabel, pieceLabel, t, type Lang, type UiKey } from "../i18n";
 import { searchNames } from "../lang";
 import { assetUrl, entryHref } from "../url";
 import type { BuildLabels, BuildOption, BuildPayload, BuildSet } from "./parse";
@@ -53,9 +53,13 @@ export function wholeSets(lang: Lang, sets: readonly ArmorSet[] = allArmorSets, 
   });
 }
 
-/** Slot names: the category or piece, numbered where the game has several of a kind. */
+/** Singular names for the slots whose category label is a plural list name. */
+const SINGULAR: Partial<Record<PoolKey, UiKey>> = { artifact: "buildSlotArtifact", talisman: "buildSlotTalisman", cape: "buildSlotCape", pet: "buildSlotPet" };
+
+/** Slot names: the piece, a singular item name or the weapon category, numbered where the game has several of a kind. */
 export function slotLabel(slot: BuildSlot, lang: Lang): string {
-  const base = isArmorPool(slot.pool) ? pieceLabel(slot.pool, lang) : categoryLabel(POOL_CATEGORY[slot.pool], lang);
+  const singular = SINGULAR[slot.pool];
+  const base = isArmorPool(slot.pool) ? pieceLabel(slot.pool, lang) : singular ? t(lang, singular) : categoryLabel(POOL_CATEGORY[slot.pool], lang);
   return slot.pool === "artifact" || slot.pool === "talisman" ? `${base} ${slot.index + 1}` : base;
 }
 

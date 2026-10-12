@@ -257,7 +257,11 @@
     "buildDownload",
     "buildDownloadFailed",
     "buildDropped",
-    "buildUnsupported"
+    "buildUnsupported",
+    "buildSlotArtifact",
+    "buildSlotTalisman",
+    "buildSlotCape",
+    "buildSlotPet"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -560,5 +564,9 @@
   "buildDownload": "Görseli indir",
   "buildDownloadFailed": "Görsel oluşturulamadı.",
   "buildDropped": "Dışarıda bırakılan eşyalar (artık oyunda yok): {n}",
-  "buildUnsupported": "Bu bağlantı planlayıcının başka bir sürümünden geldiği için boş açıldı."
+  "buildUnsupported": "Bu bağlantı planlayıcının başka bir sürümünden geldiği için boş açıldı.",
+  "buildSlotArtifact": "Eser",
+  "buildSlotTalisman": "Tılsım",
+  "buildSlotCape": "Pelerin",
+  "buildSlotPet": "Evcil hayvan"
 }
