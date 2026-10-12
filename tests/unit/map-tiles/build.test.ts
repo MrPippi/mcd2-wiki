@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { mkdir, mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import sharp from "sharp";
@@ -59,6 +59,27 @@ describe("buildWorldTiles", () => {
   it("skips a world whose sources have not changed", async () => {
     await buildWorldTiles(WORLD, options);
     expect(await buildWorldTiles(WORLD, options)).toEqual({ world: "test", tiles: 0, bytes: 0, skipped: true });
+  });
+
+  it("makes the baked void ground transparent and leaves the rest opaque", async () => {
+    await sharp({ create: { width: 1024, height: 1024, channels: 4, background: { r: 153, g: 146, b: 132, alpha: 1 } } })
+      .png()
+      .toFile(path.join(options.sourceDir, "Test", "Test_01_01.png"));
+    await buildWorldTiles(WORLD, options);
+    const alpha = async (key: string): Promise<number> => {
+      const { data, info } = await sharp(await readFile(path.join(options.outDir, "test", ...key.split("/")) + ".webp")).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+      return data[(Math.floor(info.height / 2) * info.width + Math.floor(info.width / 2)) * info.channels + 3];
+    };
+    expect(await alpha("3/6/6")).toBe(0);
+    expect(await alpha("3/1/1")).toBe(255);
+  });
+
+  it("rebuilds a world whose manifest predates the void mask", async () => {
+    await buildWorldTiles(WORLD, options);
+    const manifestPath = path.join(options.outDir, "test", "manifest.json");
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as Record<string, unknown>;
+    await writeFile(manifestPath, JSON.stringify({ ...manifest, voidMask: undefined }));
+    expect((await buildWorldTiles(WORLD, options)).skipped).toBe(false);
   });
 
   it("fails and names the missing sources", async () => {
