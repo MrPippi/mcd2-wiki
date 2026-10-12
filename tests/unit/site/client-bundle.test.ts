@@ -55,7 +55,7 @@ describe("browser scripts", () => {
 
   it("finds the site's client scripts", () => {
     expect(cases.map(({ file }) => posix(relative(ROOT, file)))).toEqual(
-      expect.arrayContaining(["src/components/CategoryTabs.astro", "src/components/ListFilter.astro", "src/components/WorldMap.astro", "src/components/SoulStormClock.astro"]),
+      expect.arrayContaining(["src/components/CategoryTabs.astro", "src/components/ListFilter.astro", "src/components/WorldMap.astro", "src/components/SoulStormClock.astro", "src/components/BuildPlanner.astro"]),
     );
   });
 

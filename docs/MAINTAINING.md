@@ -7,6 +7,7 @@
 1. 將遊戲解包檔放在 `source-data/`（不進 git）。
 2. `npm run extract` → 更新 `src/data/*.json`、`public/icons/`，並產生 `extract-report.md`。
 3. 檢查報告；缺圖示時編輯 `scripts/extract/icon-overrides.json` 後重跑。
+   - 遊戲版本不在解包檔裡，要手動把 `scripts/extract/game-version.json` 的 `version` 改成新版本（可從安裝目錄的 `MicrosoftGame.config` 的 `Version` 讀到），同時更新兩份 README 開頭的版本號。配裝頁會把版本寫進分享連結，打開舊版本的連結時會提示。
    圖示依序取自：`icon-overrides.json` → 資料表每列的 `IconReference`（`/Game/Spicewood/X` 對應 `Assets/X.png`；其他 `/<外掛>/X` 先找 `Plugins/<外掛>/Content/X.png`、再找 `Assets/X.png`）→ 依檔名比對。神器、護符、披風、寵物的資料列名稱與條目 id 對不上，仍靠檔名比對與覆寫清單。
    部分圖示在遊戲外掛裡，不在 `Assets/` 下：把解包的 `Plugins/OreUI/Content/` 與 `Plugins/SpicewoodUI/Content/` 以相同路徑放進 `source-data/`。效果沒有圖示時照常發布，只是不顯示圖。缺少 `SpicewoodUI` 時，世界地圖的標記圖示會全部被略過，且 `extract-report.md` 不會有任何提示，務必放入。
 4. 遊戲地圖有變動時跑 `npm run tiles`（見下方「世界地圖」）。

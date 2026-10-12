@@ -1,0 +1,110 @@
+---
+import { categoryLabel, t, type Lang } from "../lib/i18n";
+import { payloadJson, slotLabel } from "../lib/build/payload";
+import type { BuildPayload } from "../lib/build/parse";
+import { ROMAN } from "../lib/build/card";
+import { MAX_EFFECTS } from "../lib/build/code";
+import { EFFECT_SLOT_KEYS, ENCHANT_SLOT_KEYS, ENCHANT_TIERS, SLOT_GROUPS, slotsIn, type SlotGroup, type SlotKey } from "../lib/build/slots";
+
+interface Props {
+  lang: Lang;
+  payload: BuildPayload;
+}
+
+const { lang, payload } = Astro.props;
+const isEnchantable = (key: SlotKey): boolean => (ENCHANT_SLOT_KEYS as readonly SlotKey[]).includes(key);
+const hasEffects = (key: SlotKey): boolean => (EFFECT_SLOT_KEYS as readonly SlotKey[]).includes(key);
+/** Group titles: the game's own category names, plus one word for both weapon kinds. */
+const groupTitle = (group: SlotGroup): string =>
+  group === "weapons" ? t(lang, "buildGroupWeapons") : categoryLabel(group === "armor" ? "armor" : group === "artifacts" ? "artifact" : "talisman", lang);
+---
+{/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
+<div class="build" data-testid="build-planner" data-build hidden>
+  <p class="build-notice tag warn" data-testid="build-notice" data-notice role="status" hidden></p>
+  <p class="note build-effect-note" data-testid="build-effect-note">{t(lang, "buildEffectLimit").replace("{n}", () => String(MAX_EFFECTS))}</p>
+  <div class="build-groups">
+    {SLOT_GROUPS.map((group) => (
+      <section class="build-group" data-group={group}>
+        <div class="build-group-head">
+          <h2 class="section-title">{groupTitle(group)}</h2>
+          {group === "armor" && payload.sets.length > 0 && (
+            <button type="button" class="build-set-button" data-testid="build-whole-set" data-open-sets aria-haspopup="dialog">{t(lang, "buildWholeSet")}</button>
+          )}
+        </div>
+        <ul class="build-slots">
+          {slotsIn(group).map((slot) => (
+            <li class="build-slot" data-testid={`build-slot-${slot.key}`} data-slot={slot.key}>
+              <div class="build-slot-main">
+                <button type="button" class="build-pick" data-pick aria-haspopup="dialog">
+                  <span class="build-icon" data-icon aria-hidden="true"></span>
+                  <span class="build-slot-text">
+                    <span class="build-slot-label">{slotLabel(slot, lang)}</span>
+                    <span class="build-slot-name" data-name>{t(lang, "buildChoose")}</span>
+                  </span>
+                </button>
+                <a class="build-item-link" data-link hidden><span class="sr-only" data-link-name></span><span aria-hidden="true">↗</span></a>
+                <button type="button" class="build-clear" data-clear aria-label={`${t(lang, "buildClear")}: ${slotLabel(slot, lang)}`} hidden>×</button>
+              </div>
+              <p class="note build-fixed" data-testid={`build-fixed-${slot.key}`} data-fixed hidden></p>
+              {hasEffects(slot.key) && (
+                <div class="build-effects" data-testid={`build-effects-${slot.key}`} data-effects hidden>
+                  <ul class="build-effect-list" role="list" data-effect-list aria-label={`${slotLabel(slot, lang)}: ${t(lang, "buildEffect")}`}></ul>
+                  <button type="button" class="build-add-effect" data-add-effect aria-haspopup="dialog">
+                    <span class="sr-only">{`${slotLabel(slot, lang)}, `}</span>{t(lang, "buildAddEffect")}
+                  </button>
+                </div>
+              )}
+              {isEnchantable(slot.key) && (
+                <div class="build-enchant" data-testid={`build-enchant-${slot.key}`} data-enchant hidden>
+                  <button type="button" class="build-enchant-pick" data-enchant-pick aria-haspopup="dialog">
+                    <span class="sr-only">{`${slotLabel(slot, lang)}, ${t(lang, "buildEnchant")}: `}</span>
+                    <span class="build-icon build-icon-small" data-enchant-icon aria-hidden="true"></span>
+                    <span class="build-enchant-name" data-enchant-name>{t(lang, "buildAddEnchant")}</span>
+                  </button>
+                  <select class="build-tier" data-tier aria-label={`${t(lang, "buildTier")}: ${slotLabel(slot, lang)}`} hidden>
+                    {ENCHANT_TIERS.map((tier) => <option value={tier}>{ROMAN[tier]}</option>)}
+                  </select>
+                  <button type="button" class="build-clear" data-enchant-clear aria-label={`${t(lang, "buildRemoveEnchant")}: ${slotLabel(slot, lang)}`} hidden>×</button>
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </div>
+  <section class="build-share" aria-labelledby="build-share-title">
+    <h2 class="section-title" id="build-share-title">{t(lang, "buildShare")}</h2>
+    <div class="build-actions">
+      <button type="button" data-testid="build-copy" data-copy>{t(lang, "buildCopyLink")}</button>
+      <button type="button" data-testid="build-download" data-download>{t(lang, "buildDownload")}</button>
+      <button type="button" data-testid="build-reset" data-reset>{t(lang, "buildClearAll")}</button>
+    </div>
+    <p class="note build-status" data-testid="build-status" data-status role="status" aria-live="polite"></p>
+    <input class="build-url" type="text" data-testid="build-url" data-url readonly aria-label={t(lang, "buildLink")} hidden />
+  </section>
+  <dialog class="build-dialog" data-testid="build-dialog" data-dialog aria-labelledby="build-dialog-title">
+    {/* Fills the dialog, so a click whose target is the dialog itself can only be on the backdrop. */}
+    <div class="build-dialog-body">
+    <div class="build-dialog-head">
+      <h2 class="build-dialog-title" id="build-dialog-title" data-dialog-title></h2>
+      <button type="button" class="build-close" data-close>{t(lang, "buildClose")}</button>
+    </div>
+    <input type="search" class="build-filter" data-testid="build-filter" data-filter placeholder={t(lang, "buildSearch")} aria-label={t(lang, "buildSearch")} />
+    <ul class="build-options" data-testid="build-options" data-options></ul>
+    <p class="note" data-empty hidden>{t(lang, "buildNoResults")}</p>
+    </div>
+  </dialog>
+  <script type="application/json" data-build-json set:html={payloadJson(payload)}></script>
+</div>
+<p class="note build-failed" data-testid="build-failed" data-build-failed hidden>{t(lang, "buildLoadFailed")}</p>
+
+<script>
+  import { mountPlanner } from "../lib/build/planner";
+
+  const root = document.querySelector<HTMLElement>("[data-build]");
+  if (root && !mountPlanner(root)) {
+    console.error("build planner: bad payload or markup");
+    document.querySelector<HTMLElement>("[data-build-failed]")?.removeAttribute("hidden");
+  }
+</script>

@@ -10,6 +10,9 @@
       [
         "50%"
       ]
+    ],
+    "slots": [
+      "melee"
     ]
   },
   "poison-fog": {
@@ -23,6 +26,9 @@
       [
         "30%"
       ]
+    ],
+    "slots": [
+      "melee"
     ]
   },
   "multi-roll": {
@@ -36,6 +42,12 @@
       [
         "3"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "shockwave": {
@@ -52,6 +64,9 @@
         "50%",
         "175%"
       ]
+    ],
+    "slots": [
+      "melee"
     ]
   },
   "frost-crescent": {
@@ -65,6 +80,9 @@
       [
         "20%"
       ]
+    ],
+    "slots": [
+      "melee"
     ]
   },
   "channeling": {
@@ -78,6 +96,9 @@
       [
         "90%"
       ]
+    ],
+    "slots": [
+      "melee"
     ]
   },
   "tempo-theft": {
@@ -91,6 +112,10 @@
       [
         "50%"
       ]
+    ],
+    "slots": [
+      "melee",
+      "ranged"
     ]
   },
   "radiance": {
@@ -104,6 +129,10 @@
       [
         "50%"
       ]
+    ],
+    "slots": [
+      "melee",
+      "ranged"
     ]
   },
   "blowback": {
@@ -120,6 +149,9 @@
         "5%",
         "200%"
       ]
+    ],
+    "slots": [
+      "melee"
     ]
   },
   "shadow-strike": {
@@ -133,6 +165,10 @@
       [
         "35%"
       ]
+    ],
+    "slots": [
+      "melee",
+      "ranged"
     ]
   },
   "clawing-shadow-unique": {
@@ -153,6 +189,10 @@
       [
         "100%"
       ]
+    ],
+    "slots": [
+      "melee",
+      "ranged"
     ]
   },
   "swirling-unique": {
@@ -173,6 +213,12 @@
       [
         "6"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "potion-barrier": {
@@ -186,6 +232,12 @@
       [
         "6"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "unstoppable": {
@@ -199,6 +251,12 @@
       [
         "130%"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "borealis": {
@@ -212,6 +270,10 @@
       [
         "4"
       ]
+    ],
+    "slots": [
+      "melee",
+      "ranged"
     ]
   },
   "arcane": {
@@ -225,6 +287,12 @@
       [
         "9"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "thundering": {
@@ -241,6 +309,10 @@
         "50%",
         "50%"
       ]
+    ],
+    "slots": [
+      "melee",
+      "ranged"
     ]
   },
   "lingering-power": {
@@ -254,6 +326,12 @@
       [
         "40%"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "dynamo": {
@@ -267,6 +345,12 @@
       [
         "40%"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "health-synergy": {
@@ -280,6 +364,12 @@
       [
         "35%"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "spring-loaded": {
@@ -293,6 +383,12 @@
       [
         "6"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "expanded-quiver": {
@@ -306,6 +402,12 @@
       [
         "4"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "critical-quiver": {
@@ -319,6 +421,12 @@
       [
         "5"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "soul-infused-potion": {
@@ -332,6 +440,12 @@
       [
         "60"
       ]
+    ],
+    "slots": [
+      "helmet",
+      "chest",
+      "leggings",
+      "boots"
     ]
   },
   "multi-potion": {
@@ -345,6 +459,9 @@
       [
         "3"
       ]
+    ],
+    "slots": [
+      "chest"
     ]
   },
   "mauler-dive": {
@@ -372,6 +489,9 @@
       [
         "5"
       ]
+    ],
+    "slots": [
+      "ranged"
     ]
   },
   "ricochet": {
@@ -385,6 +505,9 @@
       [
         "3"
       ]
+    ],
+    "slots": [
+      "ranged"
     ]
   },
   "chain-reaction": {
@@ -401,6 +524,9 @@
         "40%",
         "8"
       ]
+    ],
+    "slots": [
+      "ranged"
     ]
   }
 }

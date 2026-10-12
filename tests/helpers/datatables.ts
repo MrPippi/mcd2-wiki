@@ -166,6 +166,7 @@ export const TABLES: GameTables = {
       Traits: tags("SW.Enchantment"),
       TypeTextData: abilityText("FireAspect", "DamageMultiplier"),
       Abilities: [ability("GA_ElementalBlast", { DamageMultiplier: 0.35, MaxRange: 550 })],
+      EnchantmentData: { RelevantSlots: { GameplayTags: [{ TagName: "SW.ItemSlot.Equipment.MeleeWeapon" }] } },
     },
     enchantTier("FireAspect", "I", []),
     enchantTier("FireAspect", "II", [override("DamageMultiplier", 0.45), add("MaxRange", 50)]),
@@ -178,8 +179,16 @@ export const TABLES: GameTables = {
       TypeTag: { TagName: "SW.Enchantment.Ricochet" },
       Traits: tags("SW.Enchantment"),
       TypeTextData: magnitudeText("Ricochet"),
+      EnchantmentData: {
+        RelevantSlots: {
+          GameplayTags: ["Armor.Helmet", "Armor.Chest", "Armor.Leggings", "Armor.Boots", "RangedWeapon", "Backpack"].map((slot) => ({ TagName: `SW.ItemSlot.Equipment.${slot}` })),
+        },
+      },
     },
     ...(["I", "II", "III"] as const).map((tier, i) => ({ ...enchantTier("Ricochet", tier, []), TemplateData: { FixedEffectValue: [0.1, 0.16, 0.22][i] } })),
+    // GuardingStrike: like the real row, it names no gear slot.
+    { Name: "GuardingStrike", TypeTag: { TagName: "SW.Enchantment.GuardingStrike" }, Traits: tags("SW.Enchantment"), TypeTextData: magnitudeText("GuardingStrike") },
+    ...(["I", "II", "III"] as const).map((tier, i) => ({ ...enchantTier("GuardingStrike", tier, []), TemplateData: { FixedEffectValue: [0.1, 0.2, 0.3][i] } })),
     // GravityPulse.Unique: its own entry, texts and ability.
     {
       Name: "GravityPulse.Unique",
@@ -198,6 +207,15 @@ export const TABLES: GameTables = {
       Abilities: [{ Ability: "/Script/SpicewoodGAS.GA_Shadow", SpecificKeyValues: [{ TypeTag: { TagName: "SW.KeyValue.ActivationChance" }, Int: 8 }] }],
     },
     enchantTier("ShadowStrike", "I", []),
+  ],
+  armor: [
+    // A row the site has no entry for (an unreleased piece): skipped.
+    { ...item("NoEntryBoots", ["SW.Item.Property.Armor.Boots"]), TypeTextData: { Texts: { '(TagName="SW.TextEntry.Name")': loc("DT_ItemDefinitionArmor", "SW_Item_NoEntryBoots_SW_TextEntry_Name") } } },
+    { ...item("HunterHelmet", ["SW.Item.Property.Armor.Helmet", "SW.Item.Property.LightArmor"]), TypeTextData: { Texts: { '(TagName="SW.TextEntry.Name")': loc("DT_ItemDefinitionArmor", "SW_Item_HunterHelmet_SW_TextEntry_Name") } } },
+    {
+      ...item("HunterHelmet_Unique", ["SW.Item.Property.Armor.Helmet"], ["SW.EffectTemplate.Reconstruction.Unique"]),
+      TypeTextData: { Texts: { '(TagName="SW.TextEntry.Name")': loc("DT_ItemDefinitionArmor", "SW_Item_HunterHelmet_Unique_SW_TextEntry_Name") } },
+    },
   ],
   artifacts: [
     {

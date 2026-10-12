@@ -19,6 +19,7 @@ export type IssueType =
   | "missing-brand"
   | "duplicate-entry"
   | "unlinked-enchantment"
+  | "enchantment-no-slots"
   | "armor-set-name-fallback"
   | "missing-map-tables"
   | "map-marker-outside"

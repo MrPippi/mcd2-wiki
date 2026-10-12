@@ -2,7 +2,14 @@ import { z } from "zod";
 import { SlugSchema } from "./schemas";
 
 /** Printed description values per enchantment: three tiers (I–III), or one set for a unique with its own entry. */
-export const EnchantmentDataSchema = z.record(SlugSchema, z.object({ tiers: z.array(z.array(z.string())).min(1) }));
+/** Gear slots an enchantment can go on, in build-page order. */
+export const ENCHANT_SLOTS = ["melee", "ranged", "helmet", "chest", "leggings", "boots"] as const;
+export type EnchantSlot = (typeof ENCHANT_SLOTS)[number];
+
+export const EnchantmentDataSchema = z.record(
+  SlugSchema,
+  z.object({ tiers: z.array(z.array(z.string())).min(1), slots: z.array(z.enum(ENCHANT_SLOTS)).min(1).optional() }),
+);
 export type EnchantmentData = z.infer<typeof EnchantmentDataSchema>;
 
 /** Artifact numbers from DT_ItemDefinitionArtifact. Seconds and blocks. */
@@ -17,6 +24,16 @@ export const ArtifactDataSchema = z.record(
   }),
 );
 export type ArtifactData = z.infer<typeof ArtifactDataSchema>;
+
+/** Effects an armor piece can roll (tier I/II/III values), and a unique piece's built-in effect. */
+export const ArmorEffectDataSchema = z.record(
+  SlugSchema,
+  z.object({
+    compatible: z.array(z.object({ effect: SlugSchema, tiers: z.tuple([z.number(), z.number(), z.number()]) })),
+    fixed: z.object({ effect: SlugSchema, value: z.number() }).optional(),
+  }),
+);
+export type ArmorEffectData = z.infer<typeof ArmorEffectDataSchema>;
 
 /** A talisman level: its description values (when the game data has them), companion multipliers, and XP to level up. */
 const TalismanLevelSchema = z.object({

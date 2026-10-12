@@ -1,6 +1,14 @@
 import type { Entry, Localized } from "../../scripts/extract/schemas";
-import { ArtifactDataSchema, EnchantmentDataSchema, type ArtifactData, type EnchantmentData } from "../../scripts/extract/gear-schema";
+import {
+  ArmorEffectDataSchema,
+  ArtifactDataSchema,
+  EnchantmentDataSchema,
+  type ArmorEffectData,
+  type ArtifactData,
+  type EnchantmentData,
+} from "../../scripts/extract/gear-schema";
 import { z } from "zod";
+import rawArmorEffects from "../data/armor-effects.json";
 import rawArtifacts from "../data/artifacts.json";
 import rawEffects from "../data/effects.json";
 import rawEnchantments from "../data/enchantments.json";
@@ -13,6 +21,8 @@ import { blocksText, roundText, secondsText } from "./units";
 
 /** Artifact numbers and enchantment description values read from the game's DataTables by `npm run extract`. */
 export const artifactData: ArtifactData = ArtifactDataSchema.parse(rawArtifacts);
+/** Effects each armor piece can roll, and unique pieces' built-in effects. */
+export const armorEffectData: ArmorEffectData = ArmorEffectDataSchema.parse(rawArmorEffects);
 export const enchantmentData: EnchantmentData = EnchantmentDataSchema.parse(rawEnchantments);
 /** Effect description values per tier (one template per tier, the same wherever the effect rolls). */
 export const effectData: EnchantmentData = EnchantmentDataSchema.parse(rawEffects);

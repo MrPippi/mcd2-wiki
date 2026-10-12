@@ -25,10 +25,11 @@ import { groupEntries, type RawEntry } from "./group-entries";
 import { WeaponDataSchema, type WeaponData } from "./weapon-schema";
 import { DATATABLES_DIR, loadGameTables } from "./game-tables";
 import { buildWeaponData } from "./weapons";
+import { buildArmorEffects } from "./armor-effects";
 import { buildArtifactData } from "./artifacts";
 import { buildEffectData } from "./effects";
 import { buildEnchantmentData } from "./enchantments";
-import { ArtifactDataSchema, EnchantmentDataSchema, TalismanDataSchema } from "./gear-schema";
+import { ArmorEffectDataSchema, ArtifactDataSchema, EnchantmentDataSchema, TalismanDataSchema } from "./gear-schema";
 import { loadIconReferences, referenceFor, referencePaths, type IconReferences } from "./icon-references";
 import { listIconFiles, loadOverrides } from "./icon-files";
 import { issue, type Issue } from "./issues";
@@ -195,6 +196,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ? buildWeaponData(output.entries, weaponTables)
     : { data: { weapons: {}, effectFormats: {} } satisfies WeaponData, issues: [issue("missing-datatables", DATATABLES_DIR)] };
   const artifacts = weaponTables ? buildArtifactData(output.entries, weaponTables) : { data: {}, issues: [] };
+  const armorEffects = weaponTables ? buildArmorEffects(output.entries, weaponTables) : { data: {}, issues: [] };
   const enchantments = weaponTables ? buildEnchantmentData(output.entries, weaponTables) : { data: {}, issues: [] };
   const effectValues = weaponTables ? buildEffectData(output.entries, weaponTables) : {};
   const talismanTables = await loadTalismanTables(options.sourceRoot);
@@ -215,6 +217,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...linked.issues,
     ...weapons.issues,
     ...artifacts.issues,
+    ...armorEffects.issues,
     ...enchantments.issues,
     ...talismans.issues,
     ...map.issues,
@@ -229,6 +232,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "brand.json": brand.paths,
     "weapons.json": WeaponDataSchema.parse(weapons.data),
     "artifacts.json": ArtifactDataSchema.parse(artifacts.data),
+    "armor-effects.json": ArmorEffectDataSchema.parse(armorEffects.data),
     "enchantments.json": EnchantmentDataSchema.parse(enchantments.data),
     "effects.json": EnchantmentDataSchema.parse(effectValues),
     "talismans.json": TalismanDataSchema.parse(talismans.data),

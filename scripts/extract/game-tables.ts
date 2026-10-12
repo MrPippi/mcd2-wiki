@@ -84,6 +84,8 @@ const EnchantmentRow = z.object({
   Traits: Tags,
   TypeTextData: TextData,
   TemplateData: z.object({ FixedEffectValue: z.number().optional() }).optional(),
+  /** The gear slots the enchantment can go on. */
+  EnchantmentData: z.object({ RelevantSlots: z.object({ GameplayTags: z.array(Tag).optional() }).optional() }).optional(),
   Abilities: z.array(Ability).optional(),
   AbilitySpecialization: z
     .object({
@@ -110,6 +112,7 @@ export const GameTablesSchema = z.object({
   effects: z.array(NamedRow),
   enchantments: z.array(EnchantmentRow),
   artifacts: z.array(ItemRow),
+  armor: z.array(ItemRow),
 });
 export type GameTables = z.infer<typeof GameTablesSchema>;
 export type TextDataValue = z.infer<typeof TextData>;
@@ -130,6 +133,7 @@ const FILES: Readonly<Record<keyof GameTables, readonly string[]>> = {
   effects: ["DT_EffectDefinition"],
   enchantments: ["DT_EnchantmentDefinition"],
   artifacts: ["DT_ItemDefinitionArtifact"],
+  armor: ["DT_ItemDefinitionArmor"],
 };
 
 /** Reads the weapon tables; undefined when source-data has no DataTables folder (weapon data is then left out). */
