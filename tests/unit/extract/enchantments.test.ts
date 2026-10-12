@@ -17,6 +17,7 @@ const entry = (category: Entry["category"], slug: string, id: string, variant: E
 const ENTRIES: readonly Entry[] = [
   entry("enchantment", "fire-aspect", "FireAspect"),
   entry("enchantment", "ricochet", "Ricochet"),
+  entry("enchantment", "guarding-strike", "GuardingStrike"),
   entry("enchantment", "gravity-pulse-unique", "GravityPulse_Unique", "unique"),
 ];
 
@@ -57,14 +58,25 @@ describe("enchantmentValues", () => {
 });
 
 describe("buildEnchantmentData", () => {
-  const { data } = buildEnchantmentData(ENTRIES, TABLES);
+  const { data, issues } = buildEnchantmentData(ENTRIES, TABLES);
 
   it("gives each enchantment its printed values at tiers I, II and III", () => {
-    expect(data["fire-aspect"]).toEqual({ tiers: [["35%"], ["45%"], ["55%"]] });
-    expect(data.ricochet).toEqual({ tiers: [["10%"], ["16%"], ["22%"]] });
+    expect(data["fire-aspect"]?.tiers).toEqual([["35%"], ["45%"], ["55%"]]);
+    expect(data.ricochet?.tiers).toEqual([["10%"], ["16%"], ["22%"]]);
+  });
+
+  it("lists the gear slots an enchantment fits, ignoring slots the build page does not have", () => {
+    expect(data["fire-aspect"]?.slots).toEqual(["melee"]);
+    expect(data.ricochet?.slots).toEqual(["ranged", "helmet", "chest", "leggings", "boots"]);
+  });
+
+  it("reports a base enchantment that names no slot", () => {
+    expect(data["guarding-strike"]?.slots).toBeUndefined();
+    expect(issues).toContainEqual({ type: "enchantment-no-slots", detail: expect.stringContaining("GuardingStrike") });
   });
 
   it("gives a unique enchantment with its own entry a single set of values", () => {
     expect(data["gravity-pulse-unique"]).toEqual({ tiers: [["7"]] });
+    expect(issues.map((found) => found.detail).join()).not.toContain("GravityPulse");
   });
 });

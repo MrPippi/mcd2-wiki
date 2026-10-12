@@ -255,7 +255,12 @@
     "buildSlotTalisman",
     "buildLink",
     "buildGameVersion",
-    "buildOldVersion"
+    "buildOldVersion",
+    "buildEnchant",
+    "buildAddEnchant",
+    "buildRemoveEnchant",
+    "buildTier",
+    "buildBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -561,5 +566,10 @@
   "buildSlotTalisman": "护身符",
   "buildLink": "配装链接",
   "buildGameVersion": "游戏版本 {version}",
-  "buildOldVersion": "这套配装创建于游戏版本 {old}，当前数据为 {current}，部分物品可能已变动。"
+  "buildOldVersion": "这套配装创建于游戏版本 {old}，当前数据为 {current}，部分物品可能已变动。",
+  "buildEnchant": "附魔",
+  "buildAddEnchant": "添加附魔",
+  "buildRemoveEnchant": "移除附魔",
+  "buildTier": "等级",
+  "buildBuiltIn": "内置：{name}"
 }

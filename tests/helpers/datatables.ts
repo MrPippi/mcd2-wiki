@@ -166,6 +166,7 @@ export const TABLES: GameTables = {
       Traits: tags("SW.Enchantment"),
       TypeTextData: abilityText("FireAspect", "DamageMultiplier"),
       Abilities: [ability("GA_ElementalBlast", { DamageMultiplier: 0.35, MaxRange: 550 })],
+      EnchantmentData: { RelevantSlots: { GameplayTags: [{ TagName: "SW.ItemSlot.Equipment.MeleeWeapon" }] } },
     },
     enchantTier("FireAspect", "I", []),
     enchantTier("FireAspect", "II", [override("DamageMultiplier", 0.45), add("MaxRange", 50)]),
@@ -178,8 +179,16 @@ export const TABLES: GameTables = {
       TypeTag: { TagName: "SW.Enchantment.Ricochet" },
       Traits: tags("SW.Enchantment"),
       TypeTextData: magnitudeText("Ricochet"),
+      EnchantmentData: {
+        RelevantSlots: {
+          GameplayTags: ["Armor.Helmet", "Armor.Chest", "Armor.Leggings", "Armor.Boots", "RangedWeapon", "Backpack"].map((slot) => ({ TagName: `SW.ItemSlot.Equipment.${slot}` })),
+        },
+      },
     },
     ...(["I", "II", "III"] as const).map((tier, i) => ({ ...enchantTier("Ricochet", tier, []), TemplateData: { FixedEffectValue: [0.1, 0.16, 0.22][i] } })),
+    // GuardingStrike: like the real row, it names no gear slot.
+    { Name: "GuardingStrike", TypeTag: { TagName: "SW.Enchantment.GuardingStrike" }, Traits: tags("SW.Enchantment"), TypeTextData: magnitudeText("GuardingStrike") },
+    ...(["I", "II", "III"] as const).map((tier, i) => ({ ...enchantTier("GuardingStrike", tier, []), TemplateData: { FixedEffectValue: [0.1, 0.2, 0.3][i] } })),
     // GravityPulse.Unique: its own entry, texts and ability.
     {
       Name: "GravityPulse.Unique",

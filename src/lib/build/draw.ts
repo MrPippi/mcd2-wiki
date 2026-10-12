@@ -1,13 +1,15 @@
 /** Draws the build image on a canvas (browser only; the layout comes from card.ts). */
 import { CARD_GAP, CARD_HEIGHT, CARD_ICON, CARD_PADDING, CARD_WIDTH, cardCells, fitText } from "./card";
 import type { BuildLabels, BuildOption } from "./parse";
-import type { SlotKey } from "./slots";
+import type { EnchantSlotKey, SlotKey } from "./slots";
 
 export interface CardInput {
   readonly title: string;
   readonly labels: BuildLabels;
   /** The picked option in each filled slot. */
   readonly picked: Readonly<Partial<Record<SlotKey, BuildOption>>>;
+  /** "Name III" for each enchanted slot. */
+  readonly enchanted: Readonly<Partial<Record<EnchantSlotKey, string>>>;
   /** The page address printed at the bottom left. */
   readonly address: string;
   /** The game version line printed at the bottom right. */
@@ -83,10 +85,16 @@ function drawCells(ctx: CanvasRenderingContext2D, input: CardInput, icons: Reado
     const measure = (text: string) => ctx.measureText(text).width;
     ctx.fillStyle = theme.muted;
     ctx.font = `15px ${theme.body}`;
-    ctx.fillText(fitText(input.labels.slots[cell.slot], cell.textWidth, measure), textX, iconY + 26);
+    ctx.fillText(fitText(input.labels.slots[cell.slot], cell.textWidth, measure), textX, iconY + 20);
     ctx.fillStyle = option ? theme.ink : theme.muted;
     ctx.font = `${option ? 700 : 400} 19px ${theme.body}`;
-    ctx.fillText(fitText(option?.name ?? "—", cell.textWidth, measure), textX, iconY + 54);
+    ctx.fillText(fitText(option?.name ?? "—", cell.textWidth, measure), textX, iconY + 44);
+    const enchant = input.enchanted[cell.slot as EnchantSlotKey];
+    if (enchant) {
+      ctx.fillStyle = theme.accent;
+      ctx.font = `600 15px ${theme.body}`;
+      ctx.fillText(fitText(enchant, cell.textWidth, measure), textX, iconY + 66);
+    }
   }
 }
 

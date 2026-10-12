@@ -1,5 +1,5 @@
 /** The build page's JSON payload and its check in the browser (no zod: it would ship with the page). */
-import { POOL_KEYS, SLOT_KEYS, type PoolKey, type SlotKey } from "./slots";
+import { ENCHANT_SLOT_KEYS, POOL_KEYS, SLOT_KEYS, type EnchantSlotKey, type PoolKey, type SlotKey } from "./slots";
 
 export interface BuildOption {
   readonly slug: string;
@@ -9,6 +9,18 @@ export interface BuildOption {
   readonly icon?: string;
   readonly href: string;
   readonly unique?: true;
+  /** The effect or enchantment a unique weapon always carries. */
+  readonly fixed?: { readonly name: string; readonly href: string };
+}
+
+/** An enchantment a player can put on gear, and the slots it fits. */
+export interface EnchantOption {
+  readonly slug: string;
+  readonly name: string;
+  readonly search: string;
+  readonly icon?: string;
+  readonly href: string;
+  readonly slots: readonly EnchantSlotKey[];
 }
 
 export interface BuildSet {
@@ -37,6 +49,12 @@ export interface BuildLabels {
   readonly gameVersion: string;
   /** Has `{old}` and `{current}` placeholders. */
   readonly oldVersion: string;
+  readonly enchant: string;
+  readonly addEnchant: string;
+  readonly removeEnchant: string;
+  readonly tier: string;
+  /** Has a `{name}` placeholder. */
+  readonly builtIn: string;
   readonly cardTitle: string;
   readonly siteTitle: string;
 }
@@ -46,11 +64,12 @@ export interface BuildPayload {
   readonly gameVersion: string;
   readonly pools: Readonly<Record<PoolKey, readonly BuildOption[]>>;
   readonly sets: readonly BuildSet[];
+  readonly enchantments: readonly EnchantOption[];
   readonly labels: BuildLabels;
 }
 
 const LABEL_KEYS = [
-  "choose", "clear", "search", "noResults", "wholeSet", "equipped", "close", "copied", "copyFailed", "downloadFailed", "dropped", "unsupported", "gameVersion", "oldVersion", "cardTitle", "siteTitle",
+  "choose", "clear", "search", "noResults", "wholeSet", "equipped", "close", "copied", "copyFailed", "downloadFailed", "dropped", "unsupported", "gameVersion", "oldVersion", "enchant", "addEnchant", "removeEnchant", "tier", "builtIn", "cardTitle", "siteTitle",
 ] as const satisfies readonly Exclude<keyof BuildLabels, "slots">[];
 const PIECES = ["helmet", "chest", "leggings", "boots"] as const;
 
@@ -65,7 +84,19 @@ const isOption = (value: unknown): value is BuildOption =>
   typeof value.search === "string" &&
   optionalText(value.icon) &&
   isText(value.href) &&
-  (value.unique === undefined || value.unique === true);
+  (value.unique === undefined || value.unique === true) &&
+  (value.fixed === undefined || (isRecord(value.fixed) && isText(value.fixed.name) && isText(value.fixed.href)));
+
+const isEnchantOption = (value: unknown): value is EnchantOption =>
+  isRecord(value) &&
+  isText(value.slug) &&
+  isText(value.name) &&
+  typeof value.search === "string" &&
+  optionalText(value.icon) &&
+  isText(value.href) &&
+  Array.isArray(value.slots) &&
+  value.slots.length > 0 &&
+  value.slots.every((slot) => (ENCHANT_SLOT_KEYS as readonly unknown[]).includes(slot));
 
 const isSet = (value: unknown): value is BuildSet =>
   isRecord(value) && isText(value.slug) && isText(value.name) && typeof value.search === "string" && isRecord(value.pieces) && PIECES.every((piece) => isText((value.pieces as Record<string, unknown>)[piece]));
@@ -77,7 +108,8 @@ const isLabels = (value: unknown): value is BuildLabels =>
   LABEL_KEYS.every((key) => isText(value[key])) &&
   (value.dropped as string).includes("{n}") &&
   (value.gameVersion as string).includes("{version}") &&
-  ["{old}", "{current}"].every((placeholder) => (value.oldVersion as string).includes(placeholder));
+  ["{old}", "{current}"].every((placeholder) => (value.oldVersion as string).includes(placeholder)) &&
+  (value.builtIn as string).includes("{name}");
 
 /** The payload when it has the expected shape, else undefined. */
 export function parseBuildPayload(value: unknown): BuildPayload | undefined {
@@ -85,5 +117,6 @@ export function parseBuildPayload(value: unknown): BuildPayload | undefined {
   const pools = value.pools;
   if (!POOL_KEYS.every((pool) => Array.isArray(pools[pool]) && (pools[pool] as unknown[]).every(isOption))) return undefined;
   if (!value.sets.every(isSet)) return undefined;
+  if (!Array.isArray(value.enchantments) || !value.enchantments.every(isEnchantOption)) return undefined;
   return value as unknown as BuildPayload;
 }

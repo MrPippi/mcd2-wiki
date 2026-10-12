@@ -298,5 +298,10 @@
   "buildSlotTalisman": "護符",
   "buildLink": "配裝連結",
   "buildGameVersion": "遊戲版本 {version}",
-  "buildOldVersion": "這套配裝建立於遊戲版本 {old}，目前資料為 {current}，部分物品可能已變動。"
+  "buildOldVersion": "這套配裝建立於遊戲版本 {old}，目前資料為 {current}，部分物品可能已變動。",
+  "buildEnchant": "附魔",
+  "buildAddEnchant": "加入附魔",
+  "buildRemoveEnchant": "移除附魔",
+  "buildTier": "等級",
+  "buildBuiltIn": "內建：{name}"
 }

@@ -5,9 +5,9 @@
  */
 import { descriptionOf, entryIndex, formatMagnitude, locId, tagNames, TIERS, toFormat } from "./game-rows";
 import type { AbilityValue, EnchantmentRowValue, GameTables } from "./game-tables";
-import type { Issue } from "./issues";
+import { issue, type Issue } from "./issues";
 import type { Entry } from "./schemas";
-import type { EnchantmentData } from "./gear-schema";
+import { ENCHANT_SLOTS, type EnchantmentData, type EnchantSlot } from "./gear-schema";
 
 const ABILITY_GETTER = "SW.TextEntry.DataGetter.GetAbilityKeyValues";
 const MAGNITUDE_GETTER = "SW.TextEntry.DataGetter.GetEffectMagnitude";
@@ -92,10 +92,33 @@ export function enchantmentValues(row: Row, rows: readonly Row[]): string[] | un
 }
 
 /** Printed values for each enchantment entry: tiers I–III for a family, or one set for a unique with its own entry. */
+const SLOT_TAG = "SW.ItemSlot.Equipment.";
+/** Game slot tags by build-page slot; slots the page does not have (backpack, artifacts) are left out. */
+const SLOT_OF_TAG: Readonly<Record<string, EnchantSlot>> = {
+  MeleeWeapon: "melee",
+  RangedWeapon: "ranged",
+  "Armor.Helmet": "helmet",
+  "Armor.Chest": "chest",
+  "Armor.Leggings": "leggings",
+  "Armor.Boots": "boots",
+};
+
+/** The build-page slots a row's RelevantSlots name, in page order. */
+export function enchantSlots(row: Row): EnchantSlot[] {
+  const named = new Set(
+    (row.EnchantmentData?.RelevantSlots?.GameplayTags ?? []).flatMap((tag) => {
+      const slot = tag.TagName.startsWith(SLOT_TAG) ? SLOT_OF_TAG[tag.TagName.slice(SLOT_TAG.length)] : undefined;
+      return slot ? [slot] : [];
+    }),
+  );
+  return ENCHANT_SLOTS.filter((slot) => named.has(slot));
+}
+
 export function buildEnchantmentData(entries: readonly Entry[], tables: GameTables): { data: EnchantmentData; issues: Issue[] } {
   const find = entryIndex(entries);
   const rows = tables.enchantments;
   const byName = new Map(rows.map((row) => [row.Name, row]));
+  const issues: Issue[] = [];
   const data = rows.flatMap((row) => {
     const entry = find("enchantment", locId(row.TypeTextData));
     if (!entry) return [];
@@ -107,7 +130,10 @@ export function buildEnchantmentData(entries: readonly Entry[], tables: GameTabl
           return tierRow ? enchantmentValues(tierRow, rows) : undefined;
         });
     if (!tiers.every((values): values is string[] => values !== undefined)) return [];
-    return [[entry.slug, { tiers }] as const];
+    if (isTierRow) return [[entry.slug, { tiers }] as const];
+    const slots = enchantSlots(row);
+    if (slots.length === 0) issues.push(issue("enchantment-no-slots", `${row.Name}（${entry.slug}）沒有可用部位，配裝頁不會列出`));
+    return [[entry.slug, slots.length > 0 ? { tiers, slots } : { tiers }] as const];
   });
-  return { data: Object.fromEntries(data), issues: [] };
+  return { data: Object.fromEntries(data), issues };
 }

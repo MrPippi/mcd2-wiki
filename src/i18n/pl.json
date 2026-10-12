@@ -256,7 +256,12 @@
     "buildSlotTalisman",
     "buildLink",
     "buildGameVersion",
-    "buildOldVersion"
+    "buildOldVersion",
+    "buildEnchant",
+    "buildAddEnchant",
+    "buildRemoveEnchant",
+    "buildTier",
+    "buildBuiltIn"
   ],
   "_english": [
     "normal",
@@ -566,5 +571,10 @@
   "buildSlotTalisman": "Talizman",
   "buildLink": "Link do buildu",
   "buildGameVersion": "Wersja gry {version}",
-  "buildOldVersion": "Ten build utworzono dla wersji gry {old}; dane są teraz z wersji {current}, więc niektóre przedmioty mogły się zmienić."
+  "buildOldVersion": "Ten build utworzono dla wersji gry {old}; dane są teraz z wersji {current}, więc niektóre przedmioty mogły się zmienić.",
+  "buildEnchant": "Zaklęcie",
+  "buildAddEnchant": "Dodaj zaklęcie",
+  "buildRemoveEnchant": "Usuń zaklęcie",
+  "buildTier": "Poziom",
+  "buildBuiltIn": "Wbudowane: {name}"
 }

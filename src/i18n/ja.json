@@ -255,7 +255,12 @@
     "buildSlotTalisman",
     "buildLink",
     "buildGameVersion",
-    "buildOldVersion"
+    "buildOldVersion",
+    "buildEnchant",
+    "buildAddEnchant",
+    "buildRemoveEnchant",
+    "buildTier",
+    "buildBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -561,5 +566,10 @@
   "buildSlotTalisman": "タリスマン",
   "buildLink": "ビルドのリンク",
   "buildGameVersion": "ゲームバージョン {version}",
-  "buildOldVersion": "このビルドはゲームバージョン {old} で作成されました。現在のデータは {current} のため、一部のアイテムが変わっている可能性があります。"
+  "buildOldVersion": "このビルドはゲームバージョン {old} で作成されました。現在のデータは {current} のため、一部のアイテムが変わっている可能性があります。",
+  "buildEnchant": "エンチャント",
+  "buildAddEnchant": "エンチャントを追加",
+  "buildRemoveEnchant": "エンチャントを外す",
+  "buildTier": "レベル",
+  "buildBuiltIn": "固有：{name}"
 }

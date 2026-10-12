@@ -254,7 +254,12 @@
     "buildSlotTalisman",
     "buildLink",
     "buildGameVersion",
-    "buildOldVersion"
+    "buildOldVersion",
+    "buildEnchant",
+    "buildAddEnchant",
+    "buildRemoveEnchant",
+    "buildTier",
+    "buildBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -566,5 +571,10 @@
   "buildSlotTalisman": "Талисман",
   "buildLink": "Ссылка на сборку",
   "buildGameVersion": "Версия игры {version}",
-  "buildOldVersion": "Эта сборка создана для версии игры {old}; сейчас данные соответствуют {current}, поэтому некоторые предметы могли измениться."
+  "buildOldVersion": "Эта сборка создана для версии игры {old}; сейчас данные соответствуют {current}, поэтому некоторые предметы могли измениться.",
+  "buildEnchant": "Зачарование",
+  "buildAddEnchant": "Добавить зачарование",
+  "buildRemoveEnchant": "Убрать зачарование",
+  "buildTier": "Уровень",
+  "buildBuiltIn": "Встроено: {name}"
 }

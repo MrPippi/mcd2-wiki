@@ -107,6 +107,85 @@ test.describe("build planner", () => {
     await expect(page.getByTestId("build-notice")).toBeHidden();
   });
 
+  test("has three artifact slots and drops a fourth from a link", async ({ page }) => {
+    await page.goto("/en/build/?v=1&a=blizzard-staff,carapace-ocarina,corrupted-beacon,conductive-bracelet");
+    await expect(page.locator("[data-slot^='artifact']")).toHaveCount(3);
+    await expect(slot(page, "artifact3")).toContainText("Corrupted Beacon");
+    await expect(page.getByTestId("build-notice")).toContainText(": 1");
+  });
+
+  test.describe("enchantments", () => {
+    const enchantRow = (page: Page, key: string) => page.getByTestId(`build-enchant-${key}`);
+
+    test("an empty slot offers no enchantment; a filled one does", async ({ page }) => {
+      await page.goto("/en/build/");
+      await expect(enchantRow(page, "melee")).toBeHidden();
+      await pick(page, "melee", "Axe");
+      await expect(enchantRow(page, "melee")).toBeVisible();
+      await expect(enchantRow(page, "melee")).toContainText("Add enchantment");
+    });
+
+    test("artifacts and talismans take no enchantment", async ({ page }) => {
+      await page.goto("/en/build/?v=1&a=blizzard-staff&t=brawling");
+      await expect(page.getByTestId("build-enchant-artifact1")).toHaveCount(0);
+      await expect(page.getByTestId("build-enchant-talisman1")).toHaveCount(0);
+    });
+
+    test("picking an enchantment and its level writes slug:level to the address", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe");
+      await enchantRow(page, "melee").locator("[data-enchant-pick]").click();
+      await page.getByTestId("build-filter").fill("Fire Aspect");
+      await page.getByTestId("build-dialog").getByRole("button", { name: "Fire Aspect", exact: true }).click();
+      await expect(enchantRow(page, "melee")).toContainText("Fire Aspect");
+      await expect(page).toHaveURL(/&m=axe&e=fire-aspect:1$/);
+      await expect(enchantRow(page, "melee").locator("[data-enchant-pick]")).toBeFocused();
+      await enchantRow(page, "melee").locator("[data-tier]").selectOption("3");
+      await expect(page).toHaveURL(/&m=axe&e=fire-aspect:3$/);
+    });
+
+    test("only offers enchantments that fit the slot", async ({ page }) => {
+      await page.goto("/en/build/?v=1&r=bow&c=cave-crawler-chest");
+      await enchantRow(page, "ranged").locator("[data-enchant-pick]").click();
+      const options = page.getByTestId("build-options");
+      await expect(options.getByRole("button", { name: "Ricochet", exact: true })).toBeVisible();
+      await expect(options.getByRole("button", { name: "Fire Aspect", exact: true })).toHaveCount(0);
+      await page.getByTestId("build-dialog").locator("[data-close]").click();
+      await enchantRow(page, "chest").locator("[data-enchant-pick]").click();
+      await expect(options.getByRole("button", { name: "Bottomless Brew", exact: true })).toBeVisible();
+    });
+
+    test("a shared link restores enchantments, and clearing the item removes its enchantment", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe&h=cave-crawler-helmet&e=fire-aspect:2,,multi-roll:3");
+      await expect(enchantRow(page, "melee")).toContainText("Fire Aspect");
+      await expect(enchantRow(page, "melee").locator("[data-tier]")).toHaveValue("2");
+      await expect(enchantRow(page, "helmet")).toContainText("Somersault");
+      await slot(page, "melee").locator("[data-clear]").click();
+      await expect(enchantRow(page, "melee")).toBeHidden();
+      await expect(page).toHaveURL(/&h=cave-crawler-helmet&e=,,multi-roll:3$/);
+    });
+
+    test("removing an enchantment keeps the item", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe&e=fire-aspect:2");
+      await enchantRow(page, "melee").locator("[data-enchant-clear]").click();
+      await expect(enchantRow(page, "melee")).toContainText("Add enchantment");
+      await expect(enchantRow(page, "melee").locator("[data-enchant-pick]")).toBeFocused();
+      await expect(page).toHaveURL(/&m=axe$/);
+    });
+
+    test("an enchantment that does not fit its slot is dropped from a link", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe&e=ricochet:1");
+      await expect(enchantRow(page, "melee")).toContainText("Add enchantment");
+      await expect(page.getByTestId("build-notice")).toContainText(": 1");
+    });
+
+    test("a unique weapon shows the bonus it always carries", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=sword-unique1");
+      await expect(page.getByTestId("build-fixed-melee")).toHaveText("Built in: Pyromancer");
+      await page.goto("/en/build/?v=1&m=axe");
+      await expect(page.getByTestId("build-fixed-melee")).toBeHidden();
+    });
+  });
+
   test("opens a link from another version empty", async ({ page }) => {
     await page.goto("/en/build/?v=9&m=axe");
     await expect(slot(page, "melee")).toContainText("Choose…");
@@ -196,7 +275,7 @@ test.describe("build planner", () => {
   for (const lang of ["zh", "de", "ru"]) {
     test(`does not scroll sideways at 412px (${lang})`, async ({ page }) => {
       await page.setViewportSize({ width: 412, height: 915 });
-      await page.goto(`/${lang}/build/?v=1&m=axe-unique1&r=bow-unique1&a=blizzard-staff,carapace-ocarina,conductive-bracelet,corrupted-beacon&t=ammo-capacity,artifact-cooldown,brawling`);
+      await page.goto(`/${lang}/build/?v=1&m=axe-unique1&r=bow-unique1&a=blizzard-staff,carapace-ocarina,corrupted-beacon&t=ammo-capacity,artifact-cooldown,brawling`);
       await expect(page.getByTestId("build-planner")).toBeVisible();
       expect(await horizontalOverflow(page)).toBe(0);
       await slot(page, "melee").locator("[data-pick]").click();

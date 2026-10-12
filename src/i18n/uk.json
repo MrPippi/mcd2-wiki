@@ -258,7 +258,12 @@
     "buildSlotTalisman",
     "buildLink",
     "buildGameVersion",
-    "buildOldVersion"
+    "buildOldVersion",
+    "buildEnchant",
+    "buildAddEnchant",
+    "buildRemoveEnchant",
+    "buildTier",
+    "buildBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -564,5 +569,10 @@
   "buildSlotTalisman": "Талісман",
   "buildLink": "Посилання на збірку",
   "buildGameVersion": "Версія гри {version}",
-  "buildOldVersion": "Цю збірку створено для версії гри {old}; зараз дані відповідають {current}, тож деякі предмети могли змінитися."
+  "buildOldVersion": "Цю збірку створено для версії гри {old}; зараз дані відповідають {current}, тож деякі предмети могли змінитися.",
+  "buildEnchant": "Чари",
+  "buildAddEnchant": "Додати чари",
+  "buildRemoveEnchant": "Прибрати чари",
+  "buildTier": "Рівень",
+  "buildBuiltIn": "Вбудовано: {name}"
 }

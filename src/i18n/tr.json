@@ -258,7 +258,12 @@
     "buildSlotTalisman",
     "buildLink",
     "buildGameVersion",
-    "buildOldVersion"
+    "buildOldVersion",
+    "buildEnchant",
+    "buildAddEnchant",
+    "buildRemoveEnchant",
+    "buildTier",
+    "buildBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -562,5 +567,10 @@
   "buildSlotTalisman": "Tılsım",
   "buildLink": "Yapı bağlantısı",
   "buildGameVersion": "Oyun sürümü {version}",
-  "buildOldVersion": "Bu yapı {old} oyun sürümü için oluşturuldu; veriler artık {current} sürümüne ait, bu yüzden bazı eşyalar değişmiş olabilir."
+  "buildOldVersion": "Bu yapı {old} oyun sürümü için oluşturuldu; veriler artık {current} sürümüne ait, bu yüzden bazı eşyalar değişmiş olabilir.",
+  "buildEnchant": "Büyü",
+  "buildAddEnchant": "Büyü ekle",
+  "buildRemoveEnchant": "Büyüyü kaldır",
+  "buildTier": "Seviye",
+  "buildBuiltIn": "Yerleşik: {name}"
 }

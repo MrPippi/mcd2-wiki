@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { LANGS } from "../../../scripts/extract/config";
 import type { ArmorSet, Entry } from "../../../scripts/extract/schemas";
-import { buildPayload, inPool, payloadJson, poolOptions, slotLabel, wholeSets } from "../../../src/lib/build/payload";
+import { buildPayload, enchantOptions, inPool, payloadJson, poolOptions, slotLabel, wholeSets } from "../../../src/lib/build/payload";
 import { parseBuildPayload } from "../../../src/lib/build/parse";
 import { BUILD_SLOTS, POOL_KEYS } from "../../../src/lib/build/slots";
 import { publishedEntries } from "../../../src/lib/data";
@@ -34,7 +34,7 @@ describe("inPool", () => {
 
 describe("poolOptions", () => {
   it("names, links and marks each option in the page language", () => {
-    expect(poolOptions("melee", "zh", ENTRIES)).toEqual([
+    expect(poolOptions("melee", "zh", ENTRIES, {})).toEqual([
       { slug: "sword", name: "sword（中）", search: expect.stringContaining("sword"), icon: "/icons/melee/sword.png", href: "/zh/melee/sword/" },
       { slug: "sword-unique1", name: "sword-unique1（中）", search: expect.any(String), icon: "/icons/melee/sword-unique1.png", href: "/zh/melee/sword-unique1/", unique: true },
     ]);
@@ -110,9 +110,56 @@ describe("parseBuildPayload", () => {
     ["a missing slot label", () => ({ ...good(), labels: { ...good().labels, slots: {} } })],
     ["a dropped label without {n}", () => ({ ...good(), labels: { ...good().labels, dropped: "gone" } })],
     ["no game version", () => ({ ...good(), gameVersion: "" })],
+    ["no enchantment list", () => ({ ...good(), enchantments: undefined })],
+    ["an enchantment with no slot", () => ({ ...good(), enchantments: [{ slug: "x", name: "X", search: "", href: "/x/", slots: [] }] })],
+    ["an enchantment with an unknown slot", () => ({ ...good(), enchantments: [{ slug: "x", name: "X", search: "", href: "/x/", slots: ["cape"] }] })],
+    ["a built-in label without {name}", () => ({ ...good(), labels: { ...good().labels, builtIn: "Built in" } })],
+    ["a fixed bonus without a link", () => ({ ...good(), pools: { ...good().pools, melee: [{ slug: "s", name: "S", search: "", href: "/s/", fixed: { name: "F" } }] } })],
     ["a version label without {version}", () => ({ ...good(), labels: { ...good().labels, gameVersion: "Version" } })],
     ["an old-version label without {current}", () => ({ ...good(), labels: { ...good().labels, oldVersion: "Made for {old}" } })],
   ])("rejects %s", (_name, make) => {
     expect(parseBuildPayload(make())).toBeUndefined();
+  });
+});
+
+describe("enchantOptions", () => {
+  const enchantments = [
+    entry("fire-aspect", "enchantment"),
+    entry("multi-roll", "enchantment"),
+    entry("mauler-dive", "enchantment"),
+    entry("swirling-unique", "enchantment", { variant: "unique" }),
+  ];
+  const data = {
+    "fire-aspect": { tiers: [["1"]], slots: ["melee" as const] },
+    "multi-roll": { tiers: [["1"]], slots: ["helmet" as const, "chest" as const, "leggings" as const, "boots" as const] },
+    "mauler-dive": { tiers: [["1"]] },
+    "swirling-unique": { tiers: [["1"]], slots: ["melee" as const] },
+  };
+
+  it("offers released, non-unique enchantments that name a slot, with those slots", () => {
+    expect(enchantOptions("en", enchantments, data)).toEqual([
+      { slug: "fire-aspect", name: "fire-aspect", search: expect.any(String), icon: "/icons/enchantment/fire-aspect.png", href: "/en/enchantment/fire-aspect/", slots: ["melee"] },
+      { slug: "multi-roll", name: "multi-roll", search: expect.any(String), icon: "/icons/enchantment/multi-roll.png", href: "/en/enchantment/multi-roll/", slots: ["helmet", "chest", "leggings", "boots"] },
+    ]);
+  });
+
+  it("covers every enchantable slot with the real data", () => {
+    const options = enchantOptions("en");
+    for (const slot of ["melee", "ranged", "helmet", "chest", "leggings", "boots"] as const) {
+      expect(options.filter((option) => option.slots.includes(slot)).length, slot).toBeGreaterThan(0);
+    }
+  });
+});
+
+describe("fixed bonuses", () => {
+  it("names the bonus a unique weapon always carries", () => {
+    const weapons = { "sword-unique1": { fixed: { kind: "effect", slug: "fire-focus", value: 1 } } } as never;
+    const option = poolOptions("melee", "en", ENTRIES, weapons).find((found) => found.slug === "sword-unique1");
+    expect(option?.fixed?.href).toBe("/en/effect/#fire-focus");
+  });
+
+  it("leaves it out when the bonus has no released entry", () => {
+    const weapons = { "sword-unique1": { fixed: { kind: "effect", slug: "not-a-real-effect", value: 1 } } } as never;
+    expect(poolOptions("melee", "en", ENTRIES, weapons).find((found) => found.slug === "sword-unique1")).not.toHaveProperty("fixed");
   });
 });

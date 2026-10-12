@@ -258,7 +258,12 @@
     "buildSlotTalisman",
     "buildLink",
     "buildGameVersion",
-    "buildOldVersion"
+    "buildOldVersion",
+    "buildEnchant",
+    "buildAddEnchant",
+    "buildRemoveEnchant",
+    "buildTier",
+    "buildBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -563,5 +568,10 @@
   "buildSlotTalisman": "Talismán",
   "buildLink": "Enlace del build",
   "buildGameVersion": "Versión del juego {version}",
-  "buildOldVersion": "Este build se creó para la versión {old} del juego; los datos ahora son de la {current}, así que algunos objetos pueden haber cambiado."
+  "buildOldVersion": "Este build se creó para la versión {old} del juego; los datos ahora son de la {current}, así que algunos objetos pueden haber cambiado.",
+  "buildEnchant": "Encantamiento",
+  "buildAddEnchant": "Añadir encantamiento",
+  "buildRemoveEnchant": "Quitar encantamiento",
+  "buildTier": "Nivel",
+  "buildBuiltIn": "Incorporado: {name}"
 }

@@ -1,5 +1,5 @@
 /** Layout of the shareable build image; the drawing itself happens on a canvas in the page script. */
-import type { SlotKey } from "./slots";
+import type { EnchantTier, SlotKey } from "./slots";
 
 export const CARD_WIDTH = 1200;
 export const CARD_HEIGHT = 630;
@@ -16,7 +16,7 @@ export const CARD_GAP = 14;
 export const CARD_ROWS: readonly (readonly SlotKey[])[] = [
   ["melee", "ranged"],
   ["helmet", "chest", "leggings", "boots"],
-  ["artifact1", "artifact2", "artifact3", "artifact4"],
+  ["artifact1", "artifact2", "artifact3"],
   ["talisman1", "talisman2", "talisman3"],
 ];
 const COLUMNS = Math.max(...CARD_ROWS.map((row) => row.length));
@@ -61,3 +61,6 @@ export function fitText(text: string, maxWidth: number, measure: (text: string) 
   }
   return chars.slice(0, low).join("").trimEnd() + ELLIPSIS;
 }
+
+/** Enchantment levels as the game writes them. */
+export const ROMAN: Readonly<Record<EnchantTier, string>> = { 1: "I", 2: "II", 3: "III" };

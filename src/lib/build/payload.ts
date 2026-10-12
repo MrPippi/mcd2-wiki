@@ -1,12 +1,16 @@
 /** Server side of the build page: the item lists and texts its browser script needs, in one language. */
 import type { Category } from "../../../scripts/extract/config";
 import type { ArmorSet, ArmorPiece, Entry } from "../../../scripts/extract/schemas";
-import { allArmorSets, publishedEntries } from "../data";
+import type { EnchantmentData } from "../../../scripts/extract/gear-schema";
+import type { WeaponData } from "../../../scripts/extract/weapon-schema";
+import { allArmorSets, findBaseEntry, publishedEntries } from "../data";
+import { enchantmentData } from "../gear-values";
+import { weaponData } from "../weapon-effects";
 import { GAME_VERSION } from "../game-version";
 import { categoryLabel, pieceLabel, t, type Lang, type UiKey } from "../i18n";
 import { searchNames } from "../lang";
 import { assetUrl, entryHref } from "../url";
-import type { BuildLabels, BuildOption, BuildPayload, BuildSet } from "./parse";
+import type { BuildLabels, BuildOption, BuildPayload, BuildSet, EnchantOption } from "./parse";
 import { BUILD_SLOTS, byPool, type BuildSlot, type PoolKey } from "./slots";
 
 const ARMOR_POOLS = ["helmet", "chest", "leggings", "boots"] as const satisfies readonly (PoolKey & ArmorPiece)[];
@@ -27,17 +31,43 @@ const POOL_CATEGORY: Readonly<Record<PoolKey, Category>> = {
 export const inPool = (entry: Entry, pool: PoolKey): boolean =>
   entry.category === POOL_CATEGORY[pool] && (!isArmorPool(pool) || entry.armorPiece === pool);
 
-const optionOf = (entry: Entry, lang: Lang): BuildOption => ({
+/** The effect or enchantment a unique weapon always carries, when it has a released entry. */
+function fixedBonus(entry: Entry, lang: Lang, weapons: WeaponData["weapons"]): { fixed?: BuildOption["fixed"] } {
+  const fixed = weapons[entry.slug]?.fixed;
+  const bonus = fixed ? findBaseEntry(fixed.kind, fixed.slug) : undefined;
+  return bonus ? { fixed: { name: bonus.name[lang], href: entryHref(lang, bonus) } } : {};
+}
+
+const optionOf = (entry: Entry, lang: Lang, weapons: WeaponData["weapons"]): BuildOption => ({
   slug: entry.slug,
   name: entry.name[lang],
   search: searchNames(entry.name, lang),
   ...(entry.icon ? { icon: assetUrl(entry.icon) } : {}),
   href: entryHref(lang, entry),
   ...(entry.variant === "unique" ? { unique: true } : {}),
+  ...fixedBonus(entry, lang, weapons),
 });
 
-export const poolOptions = (pool: PoolKey, lang: Lang, entries: readonly Entry[] = publishedEntries): BuildOption[] =>
-  entries.filter((entry) => inPool(entry, pool)).map((entry) => optionOf(entry, lang));
+export const poolOptions = (pool: PoolKey, lang: Lang, entries: readonly Entry[] = publishedEntries, weapons: WeaponData["weapons"] = weaponData.weapons): BuildOption[] =>
+  entries.filter((entry) => inPool(entry, pool)).map((entry) => optionOf(entry, lang, weapons));
+
+/** Enchantments a player can put on gear: released, not a unique weapon's own, and naming at least one slot. */
+export function enchantOptions(lang: Lang, entries: readonly Entry[] = publishedEntries, data: EnchantmentData = enchantmentData): EnchantOption[] {
+  return entries.flatMap((entry) => {
+    const slots = entry.category === "enchantment" && entry.variant === "normal" ? data[entry.slug]?.slots : undefined;
+    if (!slots) return [];
+    return [
+      {
+        slug: entry.slug,
+        name: entry.name[lang],
+        search: searchNames(entry.name, lang),
+        ...(entry.icon ? { icon: assetUrl(entry.icon) } : {}),
+        href: entryHref(lang, entry),
+        slots,
+      },
+    ];
+  });
+}
 
 /** Sets whose four pieces can all be picked; others would fill the armor slots only in part. */
 export function wholeSets(lang: Lang, sets: readonly ArmorSet[] = allArmorSets, entries: readonly Entry[] = publishedEntries): BuildSet[] {
@@ -75,6 +105,11 @@ const labelsFor = (lang: Lang): BuildLabels => ({
   unsupported: t(lang, "buildUnsupported"),
   gameVersion: t(lang, "buildGameVersion"),
   oldVersion: t(lang, "buildOldVersion"),
+  enchant: t(lang, "buildEnchant"),
+  addEnchant: t(lang, "buildAddEnchant"),
+  removeEnchant: t(lang, "buildRemoveEnchant"),
+  tier: t(lang, "buildTier"),
+  builtIn: t(lang, "buildBuiltIn"),
   cardTitle: t(lang, "build"),
   siteTitle: t(lang, "siteTitle"),
 });
@@ -83,6 +118,7 @@ export const buildPayload = (lang: Lang): BuildPayload => ({
   gameVersion: GAME_VERSION,
   pools: byPool((pool) => poolOptions(pool, lang)),
   sets: wholeSets(lang),
+  enchantments: enchantOptions(lang),
   labels: labelsFor(lang),
 });
 

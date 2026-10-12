@@ -257,7 +257,12 @@
     "buildSlotTalisman",
     "buildLink",
     "buildGameVersion",
-    "buildOldVersion"
+    "buildOldVersion",
+    "buildEnchant",
+    "buildAddEnchant",
+    "buildRemoveEnchant",
+    "buildTier",
+    "buildBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -564,5 +569,10 @@
   "buildSlotTalisman": "Talisman",
   "buildLink": "Länk till bygget",
   "buildGameVersion": "Spelversion {version}",
-  "buildOldVersion": "Det här bygget gjordes för spelversion {old}; datan är nu från {current}, så vissa föremål kan ha ändrats."
+  "buildOldVersion": "Det här bygget gjordes för spelversion {old}; datan är nu från {current}, så vissa föremål kan ha ändrats.",
+  "buildEnchant": "Förtrollning",
+  "buildAddEnchant": "Lägg till förtrollning",
+  "buildRemoveEnchant": "Ta bort förtrollning",
+  "buildTier": "Nivå",
+  "buildBuiltIn": "Inbyggd: {name}"
 }

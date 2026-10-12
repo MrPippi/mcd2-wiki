@@ -18,7 +18,7 @@ export interface BuildSlot {
 
 export const SLOT_KEYS = [
   "melee", "ranged", "helmet", "chest", "leggings", "boots",
-  "artifact1", "artifact2", "artifact3", "artifact4", "talisman1", "talisman2", "talisman3",
+  "artifact1", "artifact2", "artifact3", "talisman1", "talisman2", "talisman3",
 ] as const;
 export type SlotKey = (typeof SLOT_KEYS)[number];
 
@@ -38,7 +38,6 @@ export const BUILD_SLOTS: readonly BuildSlot[] = [
   listed("artifact1", "artifact", "artifacts", "a", 0),
   listed("artifact2", "artifact", "artifacts", "a", 1),
   listed("artifact3", "artifact", "artifacts", "a", 2),
-  listed("artifact4", "artifact", "artifacts", "a", 3),
   listed("talisman1", "talisman", "talismans", "t", 0),
   listed("talisman2", "talisman", "talismans", "t", 1),
   listed("talisman3", "talisman", "talismans", "t", 2),
@@ -49,3 +48,18 @@ export const slotsIn = (group: SlotGroup): BuildSlot[] => BUILD_SLOTS.filter((sl
 /** A value per pool, like `byLang` for languages. */
 export const byPool = <T>(fn: (pool: PoolKey) => T): Record<PoolKey, T> =>
   Object.fromEntries(POOL_KEYS.map((pool) => [pool, fn(pool)])) as Record<PoolKey, T>;
+
+/** Slots that take one enchantment, in the order of the `e` URL parameter. */
+export const ENCHANT_SLOT_KEYS = ["melee", "ranged", "helmet", "chest", "leggings", "boots"] as const satisfies readonly SlotKey[];
+export type EnchantSlotKey = (typeof ENCHANT_SLOT_KEYS)[number];
+
+export const ENCHANT_TIERS = [1, 2, 3] as const;
+export type EnchantTier = (typeof ENCHANT_TIERS)[number];
+
+export interface EnchantPick {
+  readonly slug: string;
+  readonly tier: EnchantTier;
+}
+
+/** The enchantment on each enchanted slot. */
+export type Enchants = Readonly<Partial<Record<EnchantSlotKey, EnchantPick>>>;

@@ -84,6 +84,8 @@ const EnchantmentRow = z.object({
   Traits: Tags,
   TypeTextData: TextData,
   TemplateData: z.object({ FixedEffectValue: z.number().optional() }).optional(),
+  /** The gear slots the enchantment can go on. */
+  EnchantmentData: z.object({ RelevantSlots: z.object({ GameplayTags: z.array(Tag).optional() }).optional() }).optional(),
   Abilities: z.array(Ability).optional(),
   AbilitySpecialization: z
     .object({

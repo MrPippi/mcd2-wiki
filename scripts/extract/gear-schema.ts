@@ -2,7 +2,14 @@ import { z } from "zod";
 import { SlugSchema } from "./schemas";
 
 /** Printed description values per enchantment: three tiers (I–III), or one set for a unique with its own entry. */
-export const EnchantmentDataSchema = z.record(SlugSchema, z.object({ tiers: z.array(z.array(z.string())).min(1) }));
+/** Gear slots an enchantment can go on, in build-page order. */
+export const ENCHANT_SLOTS = ["melee", "ranged", "helmet", "chest", "leggings", "boots"] as const;
+export type EnchantSlot = (typeof ENCHANT_SLOTS)[number];
+
+export const EnchantmentDataSchema = z.record(
+  SlugSchema,
+  z.object({ tiers: z.array(z.array(z.string())).min(1), slots: z.array(z.enum(ENCHANT_SLOTS)).min(1).optional() }),
+);
 export type EnchantmentData = z.infer<typeof EnchantmentDataSchema>;
 
 /** Artifact numbers from DT_ItemDefinitionArtifact. Seconds and blocks. */

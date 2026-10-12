@@ -2,7 +2,8 @@
 import { categoryLabel, t, type Lang } from "../lib/i18n";
 import { payloadJson, slotLabel } from "../lib/build/payload";
 import type { BuildPayload } from "../lib/build/parse";
-import { SLOT_GROUPS, slotsIn, type SlotGroup } from "../lib/build/slots";
+import { ROMAN } from "../lib/build/card";
+import { ENCHANT_SLOT_KEYS, ENCHANT_TIERS, SLOT_GROUPS, slotsIn, type SlotGroup, type SlotKey } from "../lib/build/slots";
 
 interface Props {
   lang: Lang;
@@ -10,6 +11,7 @@ interface Props {
 }
 
 const { lang, payload } = Astro.props;
+const isEnchantable = (key: SlotKey): boolean => (ENCHANT_SLOT_KEYS as readonly SlotKey[]).includes(key);
 /** Group titles: the game's own category names, plus one word for both weapon kinds. */
 const groupTitle = (group: SlotGroup): string =>
   group === "weapons" ? t(lang, "buildGroupWeapons") : categoryLabel(group === "armor" ? "armor" : group === "artifacts" ? "artifact" : "talisman", lang);
@@ -29,15 +31,30 @@ const groupTitle = (group: SlotGroup): string =>
         <ul class="build-slots">
           {slotsIn(group).map((slot) => (
             <li class="build-slot" data-testid={`build-slot-${slot.key}`} data-slot={slot.key}>
-              <button type="button" class="build-pick" data-pick aria-haspopup="dialog">
-                <span class="build-icon" data-icon aria-hidden="true"></span>
-                <span class="build-slot-text">
-                  <span class="build-slot-label">{slotLabel(slot, lang)}</span>
-                  <span class="build-slot-name" data-name>{t(lang, "buildChoose")}</span>
-                </span>
-              </button>
-              <a class="build-item-link" data-link hidden><span class="sr-only" data-link-name></span><span aria-hidden="true">↗</span></a>
-              <button type="button" class="build-clear" data-clear aria-label={`${t(lang, "buildClear")}: ${slotLabel(slot, lang)}`} hidden>×</button>
+              <div class="build-slot-main">
+                <button type="button" class="build-pick" data-pick aria-haspopup="dialog">
+                  <span class="build-icon" data-icon aria-hidden="true"></span>
+                  <span class="build-slot-text">
+                    <span class="build-slot-label">{slotLabel(slot, lang)}</span>
+                    <span class="build-slot-name" data-name>{t(lang, "buildChoose")}</span>
+                  </span>
+                </button>
+                <a class="build-item-link" data-link hidden><span class="sr-only" data-link-name></span><span aria-hidden="true">↗</span></a>
+                <button type="button" class="build-clear" data-clear aria-label={`${t(lang, "buildClear")}: ${slotLabel(slot, lang)}`} hidden>×</button>
+              </div>
+              <p class="note build-fixed" data-testid={`build-fixed-${slot.key}`} data-fixed hidden></p>
+              {isEnchantable(slot.key) && (
+                <div class="build-enchant" data-testid={`build-enchant-${slot.key}`} data-enchant hidden>
+                  <button type="button" class="build-enchant-pick" data-enchant-pick aria-haspopup="dialog" aria-label={`${t(lang, "buildEnchant")}: ${slotLabel(slot, lang)}`}>
+                    <span class="build-icon build-icon-small" data-enchant-icon aria-hidden="true"></span>
+                    <span class="build-enchant-name" data-enchant-name>{t(lang, "buildAddEnchant")}</span>
+                  </button>
+                  <select class="build-tier" data-tier aria-label={`${t(lang, "buildTier")}: ${slotLabel(slot, lang)}`} hidden>
+                    {ENCHANT_TIERS.map((tier) => <option value={tier}>{ROMAN[tier]}</option>)}
+                  </select>
+                  <button type="button" class="build-clear" data-enchant-clear aria-label={`${t(lang, "buildRemoveEnchant")}: ${slotLabel(slot, lang)}`} hidden>×</button>
+                </div>
+              )}
             </li>
           ))}
         </ul>
