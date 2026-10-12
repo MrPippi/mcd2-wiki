@@ -1,0 +1,65 @@
+/* Build planner: ruled groups of equipment slots, a share row, and the picker dialog. */
+.build-intro { margin: var(--space-3) 0 0; max-width: 60ch; color: var(--text-2); text-wrap: balance; }
+.build[hidden], .build-failed[hidden] { display: none; }
+.build { min-width: 0; }
+.build-notice { margin: var(--space-4) 0 0; padding: var(--space-1) var(--space-2); white-space: normal; }
+
+.build-groups { display: grid; gap: 0 var(--space-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.build-group-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2); }
+.build-group .section-title, .build-share .section-title { font-size: 20px; margin: var(--space-6) 0 var(--space-3); }
+.build-set-button { font-size: 0.9rem; }
+
+.build-slots { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }
+.build-slot { display: flex; align-items: center; gap: var(--space-2); border-bottom: 1px solid var(--rule); }
+.build-pick {
+  flex: 1 1 auto; min-width: 0; display: flex; align-items: center; gap: var(--space-3);
+  padding: var(--space-2) var(--space-1); border: 0; background: none; text-align: start; color: var(--text);
+}
+.build-pick:hover { background: var(--plate); }
+.build-icon {
+  flex-shrink: 0; display: grid; place-items: center; width: 56px; height: 56px;
+  border: 2px solid var(--slot-border); background: var(--plate);
+}
+.build-slot[data-unique="true"] .build-icon, .build-option[data-unique="true"] .build-icon { --slot-border: var(--slot-unique-border); }
+.build-icon img { display: block; width: 48px; height: 48px; object-fit: contain; }
+.build-slot-text { display: flex; flex-direction: column; min-width: 0; }
+.build-slot-label { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); }
+.build-slot-name { overflow-wrap: anywhere; }
+.build-slot[data-filled="false"] .build-slot-name { color: var(--muted); }
+.build-slot[data-filled="true"] .build-slot-name { font-weight: 700; }
+.build-item-link, .build-clear {
+  flex-shrink: 0; display: inline-grid; place-items: center; min-width: 40px; min-height: 40px; padding: 0;
+}
+.build-item-link { text-decoration: none; }
+.build-item-link[hidden], .build-clear[hidden] { display: none; }
+
+.build-actions { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.build-status { min-height: 1.4em; margin: var(--space-2) 0 0; }
+.build-url { width: 100%; margin-top: var(--space-2); padding: var(--space-2); border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); font: inherit; }
+.build-url[hidden] { display: none; }
+
+/* Picker */
+.build-dialog {
+  width: min(720px, calc(100vw - 2 * var(--space-4))); max-height: min(80vh, 760px); max-height: min(80svh, 760px);
+  padding: 0; border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); box-shadow: var(--shadow-hard);
+}
+.build-dialog[open] { display: flex; flex-direction: column; }
+.build-dialog::backdrop { background: rgb(0 0 0 / 0.45); }
+.build-dialog-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--rule); }
+.build-dialog-title { margin: 0; font-size: 20px; overflow-wrap: anywhere; }
+.build-filter { margin: var(--space-3) var(--space-4) 0; width: auto; }
+.build-options {
+  list-style: none; margin: 0; padding: var(--space-3) var(--space-4) var(--space-4); overflow-y: auto;
+  display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+}
+.build-dialog [data-empty] { margin: 0 var(--space-4) var(--space-4); }
+.build-option { display: flex; align-items: center; gap: var(--space-2); width: 100%; padding: var(--space-1); text-align: start; }
+.build-option:disabled { opacity: 0.55; cursor: not-allowed; }
+.build-option-name { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.build-option-tag { font-size: 0.8rem; color: var(--muted); }
+
+@media (max-width: 599px) {
+  .build-dialog { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border: 0; }
+  .build-icon { width: 48px; height: 48px; }
+  .build-icon img { width: 40px; height: 40px; }
+}

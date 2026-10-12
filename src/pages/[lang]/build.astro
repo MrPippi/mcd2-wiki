@@ -1,0 +1,31 @@
+---
+import { LANGS } from "../../../scripts/extract/config";
+import BuildPlanner from "../../components/BuildPlanner.astro";
+import Base from "../../layouts/Base.astro";
+import { buildPayload } from "../../lib/build/payload";
+import { t, type Lang } from "../../lib/i18n";
+import { compareLang, htmlLang } from "../../lib/lang";
+import "../../styles/build.css";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alt = compareLang(lang);
+---
+<Base lang={lang} title={t(lang, "build")} description={t(lang, "buildIntro")}>
+  <div class="catalog build-page" data-pagefind-body>
+    <header class="catalog-head build-head">
+      <h1 class="catalog-title"><span data-pagefind-meta="title">{t(lang, "build")}</span></h1>
+      {t(alt, "build") !== t(lang, "build") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "build")}</p>}
+      <p class="build-intro">{t(lang, "buildIntro")}</p>
+    </header>
+    <noscript><p class="note" data-testid="build-noscript">{t(lang, "buildNoScript")}</p></noscript>
+    <BuildPlanner lang={lang} payload={buildPayload(lang)} />
+  </div>
+</Base>
