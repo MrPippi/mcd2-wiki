@@ -256,7 +256,9 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildLink"
+    "buildLink",
+    "buildGameVersion",
+    "buildOldVersion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -558,5 +560,7 @@
   "buildUnsupported": "Bu bağlantı planlayıcının başka bir sürümünden geldiği için boş açıldı.",
   "buildSlotArtifact": "Eser",
   "buildSlotTalisman": "Tılsım",
-  "buildLink": "Yapı bağlantısı"
+  "buildLink": "Yapı bağlantısı",
+  "buildGameVersion": "Oyun sürümü {version}",
+  "buildOldVersion": "Bu yapı {old} oyun sürümü için oluşturuldu; veriler artık {current} sürümüne ait, bu yüzden bazı eşyalar değişmiş olabilir."
 }

@@ -256,7 +256,9 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildLink"
+    "buildLink",
+    "buildGameVersion",
+    "buildOldVersion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -560,5 +562,7 @@
   "buildUnsupported": "Посилання створено в іншій версії планувальника, тому збірку відкрито порожньою.",
   "buildSlotArtifact": "Артефакт",
   "buildSlotTalisman": "Талісман",
-  "buildLink": "Посилання на збірку"
+  "buildLink": "Посилання на збірку",
+  "buildGameVersion": "Версія гри {version}",
+  "buildOldVersion": "Цю збірку створено для версії гри {old}; зараз дані відповідають {current}, тож деякі предмети могли змінитися."
 }

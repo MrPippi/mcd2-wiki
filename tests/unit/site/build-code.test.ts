@@ -105,6 +105,31 @@ describe("buildSearch", () => {
   });
 });
 
+describe("game version", () => {
+  it("writes the game version after the format version", () => {
+    expect(encodeBuild({ melee: "sword" }, "1.1.2.0")).toBe("v=1&gv=1.1.2.0&m=sword");
+  });
+
+  it("leaves it out of an empty build", () => {
+    expect(encodeBuild({}, "1.1.2.0")).toBe("");
+    expect(buildSearch("?ref=x", {}, "1.1.2.0")).toBe("?ref=x");
+  });
+
+  it("reads it back with the build", () => {
+    expect(decodeBuild("?v=1&gv=1.1.2.0&m=sword", POOLS)).toEqual({ build: { melee: "sword" }, dropped: 0, unsupported: false, gameVersion: "1.1.2.0" });
+  });
+
+  it("ignores a version that is not a plain version string", () => {
+    for (const bad of ["", "1.1<script>", "x".repeat(40), "1 2"]) {
+      expect(decodeBuild(`?v=1&gv=${encodeURIComponent(bad)}&m=sword`, POOLS).gameVersion, bad).toBeUndefined();
+    }
+  });
+
+  it("replaces an old game version in the address", () => {
+    expect(buildSearch("?v=1&gv=1.0.0.0&m=axe", { ranged: "bow" }, "1.1.2.0")).toBe("?v=1&gv=1.1.2.0&r=bow");
+  });
+});
+
 describe("module boundaries", () => {
   it("loads nothing but the slot table at run time", () => {
     const dir = path.resolve(__dirname, "../../../src/lib/build");

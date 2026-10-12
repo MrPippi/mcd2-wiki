@@ -88,3 +88,9 @@
 ## 9. 驗收
 
 tsc 0 錯誤、vitest 全過、覆蓋率 ≥ 80%、Playwright chromium + mobile 全過、子路徑建置（`BASE_PATH=/mcd2-wiki/`）圖示與連結正確、截圖檢查、開 PR 不合併。
+
+## 10. 遊戲版本（2026-10-12 追加）
+
+- 版本號手動維護於 `scripts/extract/game-version.json`（解包檔沒有版本；目前 1.1.2.0，取自安裝目錄 `MicrosoftGame.config`）。
+- 分享連結多一個 `gv=<版本>`；打開版本不同的連結時提示「這套配裝建立於遊戲版本 X，目前資料為 Y」，下一次修改後改寫成目前版本。
+- 配裝頁標出目前版本；PNG 右下角印出版本；兩份 README 開頭註明版本。

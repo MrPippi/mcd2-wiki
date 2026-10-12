@@ -2,7 +2,7 @@
 
 **English** · [繁體中文](README.zh-TW.md)
 
-A fan-made reference for **Minecraft Dungeons II**, built straight from the game's own data and text, in 16 languages.
+A fan-made reference for **Minecraft Dungeons II**, built straight from the game's own data and text, in 16 languages. The data matches **game version 1.1.2.0**.
 
 **[Open the wiki →](https://mrpippi.github.io/mcd2-wiki/)**
 

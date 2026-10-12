@@ -33,18 +33,24 @@ export interface BuildLabels {
   /** Has an `{n}` placeholder. */
   readonly dropped: string;
   readonly unsupported: string;
+  /** Has a `{version}` placeholder. */
+  readonly gameVersion: string;
+  /** Has `{old}` and `{current}` placeholders. */
+  readonly oldVersion: string;
   readonly cardTitle: string;
   readonly siteTitle: string;
 }
 
 export interface BuildPayload {
+  /** The game version the item lists match. */
+  readonly gameVersion: string;
   readonly pools: Readonly<Record<PoolKey, readonly BuildOption[]>>;
   readonly sets: readonly BuildSet[];
   readonly labels: BuildLabels;
 }
 
 const LABEL_KEYS = [
-  "choose", "clear", "search", "noResults", "wholeSet", "equipped", "close", "copied", "copyFailed", "downloadFailed", "dropped", "unsupported", "cardTitle", "siteTitle",
+  "choose", "clear", "search", "noResults", "wholeSet", "equipped", "close", "copied", "copyFailed", "downloadFailed", "dropped", "unsupported", "gameVersion", "oldVersion", "cardTitle", "siteTitle",
 ] as const satisfies readonly Exclude<keyof BuildLabels, "slots">[];
 const PIECES = ["helmet", "chest", "leggings", "boots"] as const;
 
@@ -69,11 +75,13 @@ const isLabels = (value: unknown): value is BuildLabels =>
   isRecord(value.slots) &&
   SLOT_KEYS.every((key) => isText((value.slots as Record<string, unknown>)[key])) &&
   LABEL_KEYS.every((key) => isText(value[key])) &&
-  (value.dropped as string).includes("{n}");
+  (value.dropped as string).includes("{n}") &&
+  (value.gameVersion as string).includes("{version}") &&
+  ["{old}", "{current}"].every((placeholder) => (value.oldVersion as string).includes(placeholder));
 
 /** The payload when it has the expected shape, else undefined. */
 export function parseBuildPayload(value: unknown): BuildPayload | undefined {
-  if (!isRecord(value) || !isRecord(value.pools) || !Array.isArray(value.sets) || !isLabels(value.labels)) return undefined;
+  if (!isRecord(value) || !isText(value.gameVersion) || !isRecord(value.pools) || !Array.isArray(value.sets) || !isLabels(value.labels)) return undefined;
   const pools = value.pools;
   if (!POOL_KEYS.every((pool) => Array.isArray(pools[pool]) && (pools[pool] as unknown[]).every(isOption))) return undefined;
   if (!value.sets.every(isSet)) return undefined;

@@ -256,7 +256,9 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildLink"
+    "buildLink",
+    "buildGameVersion",
+    "buildOldVersion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -555,5 +557,7 @@
   "buildUnsupported": "다른 버전의 플래너에서 만든 링크라서 빈 빌드로 열었습니다.",
   "buildSlotArtifact": "유물",
   "buildSlotTalisman": "부적",
-  "buildLink": "빌드 링크"
+  "buildLink": "빌드 링크",
+  "buildGameVersion": "게임 버전 {version}",
+  "buildOldVersion": "이 빌드는 게임 버전 {old}에서 만들어졌습니다. 현재 데이터는 {current}이므로 일부 아이템이 바뀌었을 수 있습니다."
 }

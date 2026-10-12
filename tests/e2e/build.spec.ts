@@ -26,7 +26,7 @@ test.describe("build planner", () => {
     await pick(page, "melee", "Axe");
     await expect(slot(page, "melee")).toContainText("Axe");
     await expect(slot(page, "melee").locator("[data-link]")).toHaveAttribute("href", "/en/melee/axe/");
-    await expect(page).toHaveURL(/\/en\/build\/\?v=1&m=axe$/);
+    await expect(page).toHaveURL(/\/en\/build\/\?v=1&gv=[^&]+&m=axe$/);
   });
 
   test("a shared link opens the same build", async ({ page }) => {
@@ -48,17 +48,17 @@ test.describe("build planner", () => {
 
   test("drops unreadable items from the address and clears the notice on the next change", async ({ page }) => {
     await page.goto("/en/build/?ref=discord&v=1&m=axe&h=dragon");
-    await expect(page).toHaveURL(/\/en\/build\/\?ref=discord&v=1&m=axe$/);
+    await expect(page).toHaveURL(/\/en\/build\/\?ref=discord&v=1&gv=[^&]+&m=axe$/);
     await expect(page.getByTestId("build-notice")).toBeVisible();
     await pick(page, "ranged", "Bow");
     await expect(page.getByTestId("build-notice")).toBeHidden();
-    await expect(page).toHaveURL(/\/en\/build\/\?ref=discord&v=1&m=axe&r=bow$/);
+    await expect(page).toHaveURL(/\/en\/build\/\?ref=discord&v=1&gv=[^&]+&m=axe&r=bow$/);
   });
 
   test("keeps the list commas readable in the address", async ({ page }) => {
     await page.goto("/en/build/");
     await pick(page, "artifact3", "Winter Staff");
-    await expect(page).toHaveURL(/\/en\/build\/\?v=1&a=,,blizzard-staff$/);
+    await expect(page).toHaveURL(/\/en\/build\/\?v=1&gv=[^&]+&a=,,blizzard-staff$/);
   });
 
   test("a click inside the picker keeps it open; the backdrop closes it", async ({ page }) => {
@@ -87,6 +87,24 @@ test.describe("build planner", () => {
     await page.goto("/en/build/");
     await pick(page, "ranged", "Bow");
     await expect(slot(page, "ranged").locator("[data-pick]")).toBeFocused();
+  });
+
+  test("shows the game version and warns about a build made for another one", async ({ page }) => {
+    const { version } = JSON.parse(await readFile("scripts/extract/game-version.json", "utf8")) as { version: string };
+    await page.goto("/en/build/?v=1&gv=0.9.0.0&m=axe");
+    await expect(page.getByTestId("build-game-version")).toHaveText(`Game version ${version}`);
+    await expect(page.getByTestId("build-notice")).toContainText(`game version 0.9.0.0; the data is now ${version}`);
+    await expect(slot(page, "melee")).toContainText("Axe");
+    await pick(page, "ranged", "Bow");
+    await expect(page.getByTestId("build-notice")).toBeHidden();
+    expect(new URL(page.url()).searchParams.get("gv")).toBe(version);
+  });
+
+  test("a link for the current game version shows no notice", async ({ page }) => {
+    const { version } = JSON.parse(await readFile("scripts/extract/game-version.json", "utf8")) as { version: string };
+    await page.goto(`/en/build/?v=1&gv=${version}&m=axe`);
+    await expect(slot(page, "melee")).toContainText("Axe");
+    await expect(page.getByTestId("build-notice")).toBeHidden();
   });
 
   test("opens a link from another version empty", async ({ page }) => {
@@ -128,7 +146,7 @@ test.describe("build planner", () => {
   test("clearing a slot and the whole build updates the URL", async ({ page }) => {
     await page.goto("/en/build/?v=1&m=axe&r=bow");
     await slot(page, "melee").locator("[data-clear]").click();
-    await expect(page).toHaveURL(/\/en\/build\/\?v=1&r=bow$/);
+    await expect(page).toHaveURL(/\/en\/build\/\?v=1&gv=[^&]+&r=bow$/);
     await page.getByTestId("build-reset").click();
     await expect(page).toHaveURL(/\/en\/build\/$/);
     await expect(slot(page, "ranged")).toContainText("Choose…");
@@ -138,7 +156,7 @@ test.describe("build planner", () => {
     await page.goto("/en/build/");
     await pick(page, "melee", "Axe");
     const ja = page.locator('a[data-lang="ja"]').first();
-    await expect(ja).toHaveAttribute("href", /\/ja\/build\/\?v=1&m=axe$/);
+    await expect(ja).toHaveAttribute("href", /\/ja\/build\/\?v=1&gv=[^&]+&m=axe$/);
   });
 
   test("copies the link", async ({ page, context, browserName }) => {

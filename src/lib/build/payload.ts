@@ -2,6 +2,7 @@
 import type { Category } from "../../../scripts/extract/config";
 import type { ArmorSet, ArmorPiece, Entry } from "../../../scripts/extract/schemas";
 import { allArmorSets, publishedEntries } from "../data";
+import { GAME_VERSION } from "../game-version";
 import { categoryLabel, pieceLabel, t, type Lang, type UiKey } from "../i18n";
 import { searchNames } from "../lang";
 import { assetUrl, entryHref } from "../url";
@@ -72,11 +73,14 @@ const labelsFor = (lang: Lang): BuildLabels => ({
   downloadFailed: t(lang, "buildDownloadFailed"),
   dropped: t(lang, "buildDropped"),
   unsupported: t(lang, "buildUnsupported"),
+  gameVersion: t(lang, "buildGameVersion"),
+  oldVersion: t(lang, "buildOldVersion"),
   cardTitle: t(lang, "build"),
   siteTitle: t(lang, "siteTitle"),
 });
 
 export const buildPayload = (lang: Lang): BuildPayload => ({
+  gameVersion: GAME_VERSION,
   pools: byPool((pool) => poolOptions(pool, lang)),
   sets: wholeSets(lang),
   labels: labelsFor(lang),

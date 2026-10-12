@@ -109,6 +109,9 @@ describe("parseBuildPayload", () => {
     ["a set missing a piece", () => ({ ...good(), sets: [{ slug: "s", name: "S", search: "", pieces: { helmet: "a" } }] })],
     ["a missing slot label", () => ({ ...good(), labels: { ...good().labels, slots: {} } })],
     ["a dropped label without {n}", () => ({ ...good(), labels: { ...good().labels, dropped: "gone" } })],
+    ["no game version", () => ({ ...good(), gameVersion: "" })],
+    ["a version label without {version}", () => ({ ...good(), labels: { ...good().labels, gameVersion: "Version" } })],
+    ["an old-version label without {current}", () => ({ ...good(), labels: { ...good().labels, oldVersion: "Made for {old}" } })],
   ])("rejects %s", (_name, make) => {
     expect(parseBuildPayload(make())).toBeUndefined();
   });

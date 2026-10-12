@@ -2,7 +2,7 @@
 
 [English](README.md) · **繁體中文**
 
-玩家自製的 **Minecraft Dungeons II** 資料站。內容直接取自遊戲本身的資料與文字，提供 16 種語言。
+玩家自製的 **Minecraft Dungeons II** 資料站。內容直接取自遊戲本身的資料與文字，提供 16 種語言。資料對應**遊戲版本 1.1.2.0**。
 
 **[進入 Wiki →](https://mrpippi.github.io/mcd2-wiki/zh/)**
 

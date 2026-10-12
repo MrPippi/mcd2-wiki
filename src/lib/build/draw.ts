@@ -8,8 +8,10 @@ export interface CardInput {
   readonly labels: BuildLabels;
   /** The picked option in each filled slot. */
   readonly picked: Readonly<Partial<Record<SlotKey, BuildOption>>>;
-  /** The page address printed at the bottom. */
+  /** The page address printed at the bottom left. */
   readonly address: string;
+  /** The game version line printed at the bottom right. */
+  readonly version: string;
   /** Colours and fonts read from the page, so the image matches the site theme. */
   readonly theme: CardTheme;
 }
@@ -39,7 +41,9 @@ async function loadIcons(picked: CardInput["picked"]): Promise<Map<string, HTMLI
   return new Map(loaded.flatMap(([src, image]) => (image ? [[src, image] as [string, HTMLImageElement]] : [])));
 }
 
-function drawFrame(ctx: CanvasRenderingContext2D, theme: CardTheme, title: string, siteTitle: string, address: string): void {
+function drawFrame(ctx: CanvasRenderingContext2D, input: CardInput): void {
+  const { theme, title, address, version } = input;
+  const siteTitle = input.labels.siteTitle;
   ctx.fillStyle = theme.paper;
   ctx.fillRect(0, 0, CARD_WIDTH, CARD_HEIGHT);
   ctx.fillStyle = theme.accent;
@@ -53,7 +57,13 @@ function drawFrame(ctx: CanvasRenderingContext2D, theme: CardTheme, title: strin
   ctx.fillText(fitText(title, CARD_WIDTH - CARD_PADDING * 2, (text) => ctx.measureText(text).width), CARD_PADDING, CARD_PADDING + 56);
   ctx.fillStyle = theme.muted;
   ctx.font = `16px ${theme.body}`;
-  ctx.fillText(fitText(address, CARD_WIDTH - CARD_PADDING * 2, (text) => ctx.measureText(text).width), CARD_PADDING, CARD_HEIGHT - CARD_PADDING / 2 - 4);
+  const footerY = CARD_HEIGHT - CARD_PADDING / 2 - 4;
+  const half = (CARD_WIDTH - CARD_PADDING * 2) / 2 - CARD_GAP;
+  const measure = (text: string) => ctx.measureText(text).width;
+  ctx.fillText(fitText(address, half, measure), CARD_PADDING, footerY);
+  ctx.textAlign = "right";
+  ctx.fillText(fitText(version, half, measure), CARD_WIDTH - CARD_PADDING, footerY);
+  ctx.textAlign = "left";
 }
 
 function drawCells(ctx: CanvasRenderingContext2D, input: CardInput, icons: ReadonlyMap<string, HTMLImageElement>): void {
@@ -89,7 +99,7 @@ export async function drawCard(input: CardInput): Promise<Blob> {
   if (!ctx) throw new Error("canvas 2d context unavailable");
   await document.fonts.ready;
   const icons = await loadIcons(input.picked);
-  drawFrame(ctx, input.theme, input.title, input.labels.siteTitle, input.address);
+  drawFrame(ctx, input);
   drawCells(ctx, input, icons);
   return new Promise((resolve, reject) => canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error("canvas.toBlob returned null"))), "image/png"));
 }

@@ -253,7 +253,9 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildLink"
+    "buildLink",
+    "buildGameVersion",
+    "buildOldVersion"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -557,5 +559,7 @@
   "buildUnsupported": "这个链接来自其他版本的配装工具，因此打开为空白配装。",
   "buildSlotArtifact": "法器",
   "buildSlotTalisman": "护身符",
-  "buildLink": "配装链接"
+  "buildLink": "配装链接",
+  "buildGameVersion": "游戏版本 {version}",
+  "buildOldVersion": "这套配装创建于游戏版本 {old}，当前数据为 {current}，部分物品可能已变动。"
 }

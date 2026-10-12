@@ -1,6 +1,6 @@
 /** The build page in the browser: slots, the picker dialog, the URL and the share buttons. */
 import { foldForSearch } from "../lang";
-import { buildSearch, decodeBuild, type Pools } from "./code";
+import { buildSearch, decodeBuild, type DecodedBuild, type Pools } from "./code";
 import { drawCard, type CardTheme } from "./draw";
 import { parseBuildPayload, type BuildOption, type BuildPayload } from "./parse";
 import { BUILD_SLOTS, byPool, type Build, type BuildSlot, type SlotKey } from "./slots";
@@ -147,7 +147,7 @@ function render(planner: Planner): void {
 
 /** Writes the build into the address (other parameters kept) and tells the language links. */
 function syncUrl(planner: Planner): void {
-  history.replaceState(history.state, "", `${location.pathname}${buildSearch(location.search, planner.build)}${location.hash}`);
+  history.replaceState(history.state, "", `${location.pathname}${buildSearch(location.search, planner.build, planner.payload.gameVersion)}${location.hash}`);
   window.dispatchEvent(new Event(LOCATION_EVENT));
 }
 
@@ -244,6 +244,17 @@ function wireShare(planner: Planner): void {
   planner.root.querySelector("[data-download]")?.addEventListener("click", () => void download(planner));
 }
 
+/** What the reader should know about the build the address opened. */
+function loadNotices(payload: BuildPayload, decoded: DecodedBuild): string[] {
+  const { labels } = payload;
+  if (decoded.unsupported) return [labels.unsupported];
+  const old = decoded.gameVersion !== undefined && decoded.gameVersion !== payload.gameVersion;
+  return [
+    ...(old ? [labels.oldVersion.replace("{old}", () => decoded.gameVersion ?? "").replace("{current}", () => payload.gameVersion)] : []),
+    ...(decoded.dropped > 0 ? [labels.dropped.replace("{n}", () => String(decoded.dropped))] : []),
+  ];
+}
+
 /** Wires up the planner; false when the payload or markup is not what the page should have rendered. */
 export function mountPlanner(root: HTMLElement): boolean {
   const payload = readPayload(root);
@@ -259,8 +270,7 @@ export function mountPlanner(root: HTMLElement): boolean {
   // Drop what could not be read from the address, so the language links do not carry it on.
   if (decoded.unsupported || decoded.dropped > 0) syncUrl(planner);
   root.hidden = false;
-  if (decoded.unsupported) showNotice(planner, payload.labels.unsupported);
-  else if (decoded.dropped > 0) showNotice(planner, payload.labels.dropped.replace("{n}", () => String(decoded.dropped)));
+  showNotice(planner, loadNotices(payload, decoded).join(" "));
   return true;
 }
 
@@ -311,7 +321,8 @@ async function download(planner: Planner): Promise<void> {
       }),
     );
     const address = `${location.origin}${location.pathname}`;
-    const blob = await drawCard({ title: payload.labels.cardTitle, labels: payload.labels, picked, address, theme: themeOf() });
+    const version = payload.labels.gameVersion.replace("{version}", () => payload.gameVersion);
+    const blob = await drawCard({ title: payload.labels.cardTitle, labels: payload.labels, picked, address, version, theme: themeOf() });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = FILE_NAME;

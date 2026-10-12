@@ -3,6 +3,7 @@ import { beforeAll, describe, expect, it } from "vitest";
 import BuildPage from "../../../src/pages/[lang]/build.astro";
 import { SLOT_KEYS } from "../../../src/lib/build/slots";
 import { parseBuildPayload } from "../../../src/lib/build/parse";
+import { GAME_VERSION } from "../../../src/lib/game-version";
 
 let container: AstroContainer;
 beforeAll(async () => {
@@ -36,6 +37,11 @@ describe("build page", () => {
     const html = await render("zh");
     expect(html).toContain("配裝");
     expect(html).toContain("Build Planner");
+  });
+
+  it("states the game version the data matches", async () => {
+    expect(await render("zh")).toContain(`遊戲版本 ${GAME_VERSION}`);
+    expect((payloadOf(await render("en")) as { gameVersion: string }).gameVersion).toBe(GAME_VERSION);
   });
 
   it("offers the whole-set picker", async () => {

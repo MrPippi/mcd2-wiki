@@ -253,7 +253,9 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildLink"
+    "buildLink",
+    "buildGameVersion",
+    "buildOldVersion"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -557,5 +559,7 @@
   "buildUnsupported": "このリンクは別バージョンのプランナーのものなので、空のビルドで開きました。",
   "buildSlotArtifact": "アーティファクト",
   "buildSlotTalisman": "タリスマン",
-  "buildLink": "ビルドのリンク"
+  "buildLink": "ビルドのリンク",
+  "buildGameVersion": "ゲームバージョン {version}",
+  "buildOldVersion": "このビルドはゲームバージョン {old} で作成されました。現在のデータは {current} のため、一部のアイテムが変わっている可能性があります。"
 }

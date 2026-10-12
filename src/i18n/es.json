@@ -256,7 +256,9 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildLink"
+    "buildLink",
+    "buildGameVersion",
+    "buildOldVersion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -559,5 +561,7 @@
   "buildUnsupported": "Este enlace es de otra versión del planificador, así que se abrió vacío.",
   "buildSlotArtifact": "Artefacto",
   "buildSlotTalisman": "Talismán",
-  "buildLink": "Enlace del build"
+  "buildLink": "Enlace del build",
+  "buildGameVersion": "Versión del juego {version}",
+  "buildOldVersion": "Este build se creó para la versión {old} del juego; los datos ahora son de la {current}, así que algunos objetos pueden haber cambiado."
 }

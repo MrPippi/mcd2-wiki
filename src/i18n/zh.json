@@ -296,5 +296,7 @@
   "buildUnsupported": "這個連結來自其他版本的配裝工具，因此開啟為空白配裝。",
   "buildSlotArtifact": "神器",
   "buildSlotTalisman": "護符",
-  "buildLink": "配裝連結"
+  "buildLink": "配裝連結",
+  "buildGameVersion": "遊戲版本 {version}",
+  "buildOldVersion": "這套配裝建立於遊戲版本 {old}，目前資料為 {current}，部分物品可能已變動。"
 }

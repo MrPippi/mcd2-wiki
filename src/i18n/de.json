@@ -254,7 +254,9 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildLink"
+    "buildLink",
+    "buildGameVersion",
+    "buildOldVersion"
   ],
   "_english": [
     "armorPiece",
@@ -560,5 +562,7 @@
   "buildUnsupported": "Dieser Link stammt aus einer anderen Version des Planers und wurde daher leer geöffnet.",
   "buildSlotArtifact": "Artefakt",
   "buildSlotTalisman": "Talisman",
-  "buildLink": "Build-Link"
+  "buildLink": "Build-Link",
+  "buildGameVersion": "Spielversion {version}",
+  "buildOldVersion": "Dieser Build wurde für Spielversion {old} erstellt; die Daten sind jetzt auf {current}, daher können sich einige Gegenstände geändert haben."
 }

@@ -254,7 +254,9 @@
     "buildUnsupported",
     "buildSlotArtifact",
     "buildSlotTalisman",
-    "buildLink"
+    "buildLink",
+    "buildGameVersion",
+    "buildOldVersion"
   ],
   "_english": [
     "normal",
@@ -562,5 +564,7 @@
   "buildUnsupported": "Ten link pochodzi z innej wersji planera, więc otwarto pusty build.",
   "buildSlotArtifact": "Artefakt",
   "buildSlotTalisman": "Talizman",
-  "buildLink": "Link do buildu"
+  "buildLink": "Link do buildu",
+  "buildGameVersion": "Wersja gry {version}",
+  "buildOldVersion": "Ten build utworzono dla wersji gry {old}; dane są teraz z wersji {current}, więc niektóre przedmioty mogły się zmienić."
 }
