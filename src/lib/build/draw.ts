@@ -87,21 +87,21 @@ function drawCells(ctx: CanvasRenderingContext2D, input: CardInput, icons: Reado
     const measure = (text: string) => ctx.measureText(text).width;
     ctx.fillStyle = theme.muted;
     ctx.font = `15px ${theme.body}`;
-    ctx.fillText(fitText(input.labels.slots[cell.slot], cell.textWidth, measure), textX, iconY + 20);
+    ctx.fillText(fitText(input.labels.slots[cell.slot], cell.textWidth, measure), textX, iconY + 16);
     ctx.fillStyle = option ? theme.ink : theme.muted;
     ctx.font = `${option ? 700 : 400} 19px ${theme.body}`;
-    ctx.fillText(fitText(option?.name ?? "—", cell.textWidth, measure), textX, iconY + 44);
+    ctx.fillText(fitText(option?.name ?? "—", cell.textWidth, measure), textX, iconY + 40);
     const enchant = input.enchanted[cell.slot as EnchantSlotKey];
     if (enchant) {
       ctx.fillStyle = theme.accent;
       ctx.font = `600 15px ${theme.body}`;
-      ctx.fillText(fitText(enchant, cell.textWidth, measure), textX, iconY + 66);
+      ctx.fillText(fitText(enchant, cell.textWidth, measure), textX, iconY + 60);
     }
     const effects = input.rolled[cell.slot as EffectSlotKey];
     if (effects) {
       ctx.fillStyle = theme.muted;
       ctx.font = `13px ${theme.body}`;
-      ctx.fillText(fitText(effects, cell.textWidth, measure), textX, iconY + (enchant ? 86 : 66));
+      ctx.fillText(fitText(effects, cell.textWidth, measure), textX, iconY + (enchant ? 78 : 60));
     }
   }
 }

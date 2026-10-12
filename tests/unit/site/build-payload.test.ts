@@ -158,6 +158,7 @@ describe("fixed bonuses", () => {
     const weapons = { "sword-unique1": { fixed: { kind: "effect", slug: "fire-focus", value: 1 } } } as never;
     const option = poolOptions("melee", "en", ENTRIES, { ...NO_GEAR, weapons }).find((found) => found.slug === "sword-unique1");
     expect(option?.fixed?.href).toBe("/en/effect/#fire-focus");
+    expect(option?.fixed?.effect).toBe(true);
   });
 
   it("leaves it out when the bonus has no released entry", () => {
@@ -178,6 +179,11 @@ describe("effects", () => {
   it("points each item at the effects it can roll, skipping ones the list lacks", () => {
     expect(poolOptions("helmet", "en", ENTRIES, gear, index)[0]?.effects).toEqual([1]);
     expect(poolOptions("melee", "en", ENTRIES, gear, index)[0]).not.toHaveProperty("effects");
+  });
+
+  it("never offers an item its own built-in effect again", () => {
+    const own = { ...gear, armor: { "hunter-helmet": { compatible: [{ effect: "looting", tiers: [1, 2, 3] as [number, number, number] }], fixed: { effect: "looting", value: 1 } } } };
+    expect(poolOptions("helmet", "en", ENTRIES, own, index)[0]).not.toHaveProperty("effects");
   });
 
   it("names a unique armor piece's built-in effect", () => {

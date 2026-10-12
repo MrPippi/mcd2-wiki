@@ -27,10 +27,13 @@ const ENCHANT_PARAM = "e";
 const EFFECT_PARAM = "x";
 const EFFECT_SEPARATOR = "~";
 const TIER_SEPARATOR = ":";
-/** Rerollable effects on one item: a Special item's two plus the Soul Storm reward's one (DT_RarityDefinition). */
-export const MAX_EFFECTS = 3;
-/** A unique item rolls one less, beside its built-in effect. */
-export const effectCap = (unique: boolean): number => (unique ? MAX_EFFECTS - 1 : MAX_EFFECTS);
+/**
+ * Effects on one item, counting a unique item's built-in effect (user decision 2026-10-13). The data allows more
+ * (a Special item's two plus a Soul Storm reward's one, beside any built-in one).
+ */
+export const MAX_EFFECTS = 2;
+/** Effects a player can still add: a built-in effect takes one of the places. */
+export const effectCap = (builtIn: boolean): number => (builtIn ? MAX_EFFECTS - 1 : MAX_EFFECTS);
 const LIST_SEPARATOR = ",";
 
 /** The slugs each pool offers. */
@@ -38,10 +41,10 @@ export type Pools = Readonly<Record<PoolKey, ReadonlySet<string>>>;
 /** The enchantment slugs each enchantable slot takes. */
 export type EnchantPools = Readonly<Record<EnchantSlotKey, ReadonlySet<string>>>;
 
-/** What a slot's item can roll, and whether it is unique (one fewer rerollable effect). */
+/** What a slot's item can roll, and whether it carries a built-in effect. */
 export interface EffectRules {
   readonly allowed: (slot: EffectSlotKey, item: string) => ReadonlySet<string>;
-  readonly unique: (slot: EffectSlotKey, item: string) => boolean;
+  readonly builtIn: (slot: EffectSlotKey, item: string) => boolean;
 }
 
 export interface DecodedBuild {
@@ -65,7 +68,7 @@ export interface EncodeOptions {
 const PARAMS: readonly string[] = [...new Set(BUILD_SLOTS.map((slot) => slot.param))];
 const ALL_PARAMS: readonly string[] = [VERSION_PARAM, GAME_VERSION_PARAM, ...PARAMS, ENCHANT_PARAM, EFFECT_PARAM];
 const NO_ENCHANT_POOLS = Object.fromEntries(ENCHANT_SLOT_KEYS.map((key): [EnchantSlotKey, ReadonlySet<string>] => [key, new Set<string>()])) as Record<EnchantSlotKey, ReadonlySet<string>>;
-const NO_EFFECT_RULES: EffectRules = { allowed: () => new Set<string>(), unique: () => false };
+const NO_EFFECT_RULES: EffectRules = { allowed: () => new Set<string>(), builtIn: () => false };
 const slotsFor = (param: string) => BUILD_SLOTS.filter((slot) => slot.param === param).sort((a, b) => a.index - b.index);
 
 /** `param=a,b,,c` with trailing empties dropped and each value escaped; nothing when every value is empty. */
@@ -155,10 +158,10 @@ function decodeEnchants(params: URLSearchParams, build: Build, pools: EnchantPoo
   return { enchants, dropped };
 }
 
-/** One slot's effects: rollable by its item, no repeats, at most the item's cap; the rest counted as dropped. */
+/** One slot's effects: rollable by its item, no repeats, within its cap; the rest counted as dropped. */
 function slotEffects(value: string, key: EffectSlotKey, item: string, rules: EffectRules): { picks: EffectPick[]; dropped: number } {
+  const cap = effectCap(rules.builtIn(key, item));
   const allowed = rules.allowed(key, item);
-  const cap = effectCap(rules.unique(key, item));
   return value.split(EFFECT_SEPARATOR).reduce<{ picks: EffectPick[]; dropped: number }>(
     (found, part) => {
       const pick = pickOf(part);

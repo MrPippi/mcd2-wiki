@@ -581,5 +581,5 @@
   "buildEffect": "Efeito",
   "buildAddEffect": "Adicionar efeito",
   "buildRemoveEffect": "Remover efeito",
-  "buildEffectLimit": "Até {n} efeitos rerroláveis por item"
+  "buildEffectLimit": "Até {n} efeitos por item, incluindo o efeito embutido dos itens únicos"
 }

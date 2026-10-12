@@ -580,5 +580,5 @@
   "buildEffect": "Effect",
   "buildAddEffect": "Effect toevoegen",
   "buildRemoveEffect": "Effect verwijderen",
-  "buildEffectLimit": "Maximaal {n} herrolbare effecten per voorwerp"
+  "buildEffectLimit": "Maximaal {n} effecten per voorwerp, inclusief het ingebouwde effect van unieke voorwerpen"
 }

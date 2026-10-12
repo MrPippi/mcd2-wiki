@@ -48,7 +48,7 @@ const groupTitle = (group: SlotGroup): string =>
               <p class="note build-fixed" data-testid={`build-fixed-${slot.key}`} data-fixed hidden></p>
               {hasEffects(slot.key) && (
                 <div class="build-effects" data-testid={`build-effects-${slot.key}`} data-effects hidden>
-                  <ul class="build-effect-list" data-effect-list aria-label={`${slotLabel(slot, lang)}: ${t(lang, "buildEffect")}`}></ul>
+                  <ul class="build-effect-list" role="list" data-effect-list aria-label={`${slotLabel(slot, lang)}: ${t(lang, "buildEffect")}`}></ul>
                   <button type="button" class="build-add-effect" data-add-effect aria-haspopup="dialog">
                     <span class="sr-only">{`${slotLabel(slot, lang)}, `}</span>{t(lang, "buildAddEffect")}
                   </button>

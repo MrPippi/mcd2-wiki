@@ -10,7 +10,8 @@ export interface BuildOption {
   readonly href: string;
   readonly unique?: true;
   /** The effect or enchantment a unique item always carries. */
-  readonly fixed?: { readonly name: string; readonly href: string };
+  /** `effect` when the built-in bonus is an effect, which takes one of the item's effect places. */
+  readonly fixed?: { readonly name: string; readonly href: string; readonly effect?: true };
   /** Positions in the payload's effect list of the effects this item can roll. */
   readonly effects?: readonly number[];
 }
@@ -100,7 +101,7 @@ const isOption = (value: unknown): value is BuildOption =>
   optionalText(value.icon) &&
   isText(value.href) &&
   (value.unique === undefined || value.unique === true) &&
-  (value.fixed === undefined || (isRecord(value.fixed) && isText(value.fixed.name) && isText(value.fixed.href))) &&
+  (value.fixed === undefined || (isRecord(value.fixed) && isText(value.fixed.name) && isText(value.fixed.href) && (value.fixed.effect === undefined || value.fixed.effect === true))) &&
   (value.effects === undefined || (Array.isArray(value.effects) && value.effects.every((index) => Number.isInteger(index) && index >= 0)));
 
 const isEffectOption = (value: unknown): value is EffectOption =>

@@ -34,12 +34,18 @@ export const inPool = (entry: Entry, pool: PoolKey): boolean =>
 function fixedBonus(entry: Entry, lang: Lang, gear: GearSources): { fixed?: BuildOption["fixed"] } {
   const fixed = fixedOf(entry, gear);
   const bonus = fixed ? findBaseEntry(fixed.kind, fixed.slug) : undefined;
-  return bonus ? { fixed: { name: bonus.name[lang], href: entryHref(lang, bonus) } } : {};
+  if (!bonus) return {};
+  return { fixed: { name: bonus.name[lang], href: entryHref(lang, bonus), ...(fixed?.kind === "effect" ? { effect: true as const } : {}) } };
 }
 
-/** Positions in the payload's effect list of the effects this item can roll (only those the list has). */
+/**
+ * Positions in the payload's effect list of the effects this item can roll (only those the list has), without its
+ * built-in effect: an item never carries the same effect twice.
+ */
 function effectIndexes(entry: Entry, gear: GearSources, effectIndex: ReadonlyMap<string, number>): { effects?: number[] } {
-  const indexes = compatibleOf(entry, gear).flatMap((slug) => effectIndex.get(slug) ?? []);
+  const fixed = fixedOf(entry, gear);
+  const builtIn = fixed?.kind === "effect" ? fixed.slug : undefined;
+  const indexes = compatibleOf(entry, gear).flatMap((slug) => (slug === builtIn ? [] : (effectIndex.get(slug) ?? [])));
   return indexes.length > 0 ? { effects: indexes } : {};
 }
 

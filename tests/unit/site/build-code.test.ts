@@ -187,8 +187,8 @@ describe("enchantments", () => {
 });
 
 describe("effects", () => {
-  const ALLOWED: Record<string, readonly string[]> = { sword: ["sharpness", "looting", "critical-edge", "swiftness"], bow: ["power"], horn: ["cooldown"], "hunter-helmet": ["protection"] };
-  const RULES: EffectRules = { allowed: (_slot, item) => new Set(ALLOWED[item] ?? []), unique: (_slot, item) => item === "sword-unique" };
+  const ALLOWED: Record<string, readonly string[]> = { "sword-unique": ["sharpness", "looting"], sword: ["sharpness", "looting", "critical-edge", "swiftness"], bow: ["power"], horn: ["cooldown"], "hunter-helmet": ["protection"] };
+  const RULES: EffectRules = { allowed: (_slot, item) => new Set(ALLOWED[item] ?? []), builtIn: (_slot, item) => item === "sword-unique" };
   const POOLS_U: Pools = { ...POOLS, melee: pool("sword", "axe", "sword-unique") };
   const decode = (search: string) => decodeBuild(search, POOLS_U, undefined, RULES);
 
@@ -217,17 +217,17 @@ describe("effects", () => {
     });
   });
 
-  it("keeps at most three effects, and two beside a unique item's built-in one", () => {
-    const four = "sharpness:1~looting:1~critical-edge:1~swiftness:1";
-    expect(decode(`?v=1&m=sword&x=${four}`).effects.melee).toHaveLength(MAX_EFFECTS);
-    expect(decode(`?v=1&m=sword&x=${four}`).dropped).toBe(1);
-    const UNIQUE_RULES: EffectRules = { allowed: () => new Set(ALLOWED.sword), unique: () => true };
-    expect(decodeBuild(`?v=1&m=sword-unique&x=${four}`, POOLS_U, undefined, UNIQUE_RULES).effects.melee).toHaveLength(MAX_EFFECTS - 1);
+  it("counts a built-in effect toward the cap", () => {
+    expect(effectCap(false)).toBe(2);
+    expect(effectCap(true)).toBe(1);
+    expect(decode("?v=1&m=sword-unique&x=sharpness:1~looting:1")).toMatchObject({ effects: { melee: [{ slug: "sharpness", tier: 1 }] }, dropped: 1 });
   });
 
-  it("caps a list with effectCap", () => {
-    expect(effectCap(false)).toBe(3);
-    expect(effectCap(true)).toBe(2);
+  it("keeps at most two effects on an item", () => {
+    const four = "sharpness:1~looting:1~critical-edge:1~swiftness:1";
+    expect(MAX_EFFECTS).toBe(2);
+    expect(decode(`?v=1&m=sword&x=${four}`).effects.melee).toEqual([{ slug: "sharpness", tier: 1 }, { slug: "looting", tier: 1 }]);
+    expect(decode(`?v=1&m=sword&x=${four}`).dropped).toBe(2);
   });
 });
 

@@ -577,5 +577,5 @@
   "buildEffect": "효과",
   "buildAddEffect": "효과 추가",
   "buildRemoveEffect": "효과 제거",
-  "buildEffectLimit": "아이템당 재설정 가능한 효과 최대 {n}개"
+  "buildEffectLimit": "아이템당 효과 최대 {n}개(고유 아이템의 고유 효과 포함)"
 }

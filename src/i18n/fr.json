@@ -581,5 +581,5 @@
   "buildEffect": "Effet",
   "buildAddEffect": "Ajouter un effet",
   "buildRemoveEffect": "Retirer l’effet",
-  "buildEffectLimit": "Jusqu’à {n} effets relançables par objet"
+  "buildEffectLimit": "Jusqu’à {n} effets par objet, effet intégré des objets uniques compris"
 }

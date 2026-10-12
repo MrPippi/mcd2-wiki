@@ -582,5 +582,5 @@
   "buildEffect": "Effekt",
   "buildAddEffect": "Effekt hinzufügen",
   "buildRemoveEffect": "Effekt entfernen",
-  "buildEffectLimit": "Bis zu {n} neu würfelbare Effekte pro Gegenstand"
+  "buildEffectLimit": "Bis zu {n} Effekte pro Gegenstand, einschließlich des eingebauten Effekts einzigartiger Gegenstände"
 }

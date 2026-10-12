@@ -584,5 +584,5 @@
   "buildEffect": "Efekt",
   "buildAddEffect": "Dodaj efekt",
   "buildRemoveEffect": "Usuń efekt",
-  "buildEffectLimit": "Maks. {n} losowane efekty na przedmiot"
+  "buildEffectLimit": "Maks. {n} efekty na przedmiot, wliczając wbudowany efekt przedmiotów unikatowych"
 }

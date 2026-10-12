@@ -3,7 +3,7 @@ import { foldForSearch } from "../lang";
 import { ROMAN } from "./card";
 import { buildSearch, decodeBuild, type DecodedBuild, type EnchantPools, type Pools } from "./code";
 import { drawCard, type CardTheme } from "./draw";
-import { capFor, effectRulesOf, effectsLine, isEffectSlot, keptEffects, renderEffects, rollable } from "./effects-ui";
+import { effectRulesOf, effectsLine, isEffectSlot, keptEffects, renderEffects, rollable } from "./effects-ui";
 import { parseBuildPayload, type BuildOption, type BuildPayload, type EnchantOption } from "./parse";
 import {
   BUILD_SLOTS,
@@ -223,7 +223,10 @@ function update(planner: Planner, next: Build, enchants: Enchants = planner.ench
   planner.effects = keptEffects(planner.payload, next, effects);
   render(planner);
   syncUrl(planner);
-  showNotice(planner, "");
+  // Effects the new item cannot roll, or past its cap, fall away: say how many instead of dropping them silently.
+  const count = (all: Effects) => Object.values(all).reduce((sum, picks) => sum + (picks?.length ?? 0), 0);
+  const lost = count(effects) - count(planner.effects);
+  showNotice(planner, lost > 0 ? planner.payload.labels.dropped.replace("{n}", () => String(lost)) : "");
   planner.parts.url.hidden = true;
   planner.parts.status.textContent = "";
 }

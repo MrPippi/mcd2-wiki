@@ -582,5 +582,5 @@
   "buildEffect": "Effekt",
   "buildAddEffect": "Lägg till effekt",
   "buildRemoveEffect": "Ta bort effekt",
-  "buildEffectLimit": "Högst {n} omslumpbara effekter per föremål"
+  "buildEffectLimit": "Högst {n} effekter per föremål, inklusive unika föremåls inbyggda effekt"
 }

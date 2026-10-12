@@ -579,5 +579,5 @@
   "buildEffect": "効果",
   "buildAddEffect": "効果を追加",
   "buildRemoveEffect": "効果を外す",
-  "buildEffectLimit": "1つにつき再抽選できる効果は最大 {n} 個"
+  "buildEffectLimit": "1つにつき効果は最大 {n} 個（ユニーク装備の固有効果を含む）"
 }

@@ -209,6 +209,8 @@ export const TABLES: GameTables = {
     enchantTier("ShadowStrike", "I", []),
   ],
   armor: [
+    // A row the site has no entry for (an unreleased piece): skipped.
+    { ...item("NoEntryBoots", ["SW.Item.Property.Armor.Boots"]), TypeTextData: { Texts: { '(TagName="SW.TextEntry.Name")': loc("DT_ItemDefinitionArmor", "SW_Item_NoEntryBoots_SW_TextEntry_Name") } } },
     { ...item("HunterHelmet", ["SW.Item.Property.Armor.Helmet", "SW.Item.Property.LightArmor"]), TypeTextData: { Texts: { '(TagName="SW.TextEntry.Name")': loc("DT_ItemDefinitionArmor", "SW_Item_HunterHelmet_SW_TextEntry_Name") } } },
     {
       ...item("HunterHelmet_Unique", ["SW.Item.Property.Armor.Helmet"], ["SW.EffectTemplate.Reconstruction.Unique"]),

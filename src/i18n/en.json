@@ -310,5 +310,5 @@
   "buildEffect": "Effect",
   "buildAddEffect": "Add effect",
   "buildRemoveEffect": "Remove effect",
-  "buildEffectLimit": "Up to {n} rerollable effects per item"
+  "buildEffectLimit": "Up to {n} effects per item, counting a unique item's built-in effect"
 }

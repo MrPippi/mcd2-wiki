@@ -307,5 +307,5 @@
   "buildEffect": "效果",
   "buildAddEffect": "加入效果",
   "buildRemoveEffect": "移除效果",
-  "buildEffectLimit": "每件最多 {n} 個可重抽效果"
+  "buildEffectLimit": "每件最多 {n} 個效果（含獨特裝備的內建效果）"
 }

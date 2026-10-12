@@ -19,13 +19,14 @@ export function rollable(payload: BuildPayload, key: EffectSlotKey, item: string
   return (option?.effects ?? []).flatMap((index) => payload.effects[index] ?? []);
 }
 
+/** Places left for picked effects on the item in `key`. */
 export const capFor = (payload: BuildPayload, key: EffectSlotKey, item: string | undefined): number =>
-  effectCap(item !== undefined && itemOption(payload, key, item)?.unique === true);
+  effectCap(item !== undefined && itemOption(payload, key, item)?.fixed?.effect === true);
 
 export function effectRulesOf(payload: BuildPayload): EffectRules {
   return {
     allowed: (key, item) => new Set(rollable(payload, key, item).map((effect) => effect.slug)),
-    unique: (key, item) => itemOption(payload, key, item)?.unique === true,
+    builtIn: (key, item) => itemOption(payload, key, item)?.fixed?.effect === true,
   };
 }
 

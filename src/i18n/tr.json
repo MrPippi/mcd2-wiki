@@ -580,5 +580,5 @@
   "buildEffect": "Etki",
   "buildAddEffect": "Etki ekle",
   "buildRemoveEffect": "Etkiyi kaldır",
-  "buildEffectLimit": "Eşya başına en fazla {n} yeniden atılabilir etki"
+  "buildEffectLimit": "Eşya başına en fazla {n} etki (benzersiz eşyaların yerleşik etkisi dahil)"
 }
