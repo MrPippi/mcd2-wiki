@@ -164,6 +164,20 @@ test.describe("build planner", () => {
       await expect(page).toHaveURL(/&h=cave-crawler-helmet&e=,,multi-roll:3$/);
     });
 
+    test("swapping the item keeps the enchantment; the picker marks the current one", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe&e=fire-aspect:2");
+      await pick(page, "melee", "Battlestaff");
+      await expect(enchantRow(page, "melee")).toContainText("Fire Aspect");
+      await expect(page).toHaveURL(/&m=battlestaff&e=fire-aspect:2$/);
+      await enchantRow(page, "melee").locator("[data-enchant-pick]").click();
+      await expect(page.getByTestId("build-options").locator("[aria-current='true']")).toContainText("Fire Aspect");
+    });
+
+    test("the enchantment button names its slot and its current enchantment", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe&e=fire-aspect:2");
+      await expect(enchantRow(page, "melee").locator("[data-enchant-pick]")).toHaveAccessibleName(/Melee.*Enchantment.*Fire Aspect/);
+    });
+
     test("removing an enchantment keeps the item", async ({ page }) => {
       await page.goto("/en/build/?v=1&m=axe&e=fire-aspect:2");
       await enchantRow(page, "melee").locator("[data-enchant-clear]").click();

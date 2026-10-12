@@ -568,6 +568,6 @@
   "buildEnchant": "마법 부여",
   "buildAddEnchant": "마법 부여 추가",
   "buildRemoveEnchant": "마법 부여 제거",
-  "buildTier": "레벨",
-  "buildBuiltIn": "기본 내장: {name}"
+  "buildTier": "등급",
+  "buildBuiltIn": "고유: {name}"
 }

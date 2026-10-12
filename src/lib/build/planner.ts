@@ -42,6 +42,8 @@ interface Choice {
   readonly icon?: string;
   readonly unique?: true;
   readonly disabled: boolean;
+  /** Already in the slot being picked for: marked, still selectable. */
+  readonly current?: boolean;
   readonly pick: () => void;
 }
 
@@ -147,7 +149,8 @@ function choiceRow(choice: Choice, equipped: string): HTMLLIElement {
   name.className = "build-option-name";
   name.textContent = choice.name;
   button.append(art, name);
-  if (choice.disabled) {
+  if (choice.current) button.setAttribute("aria-current", "true");
+  if (choice.disabled || choice.current) {
     const tag = document.createElement("span");
     tag.className = "build-option-tag";
     tag.textContent = equipped;
@@ -254,6 +257,7 @@ function slotChoices(planner: Planner, slot: BuildSlot): Choice[] {
     icon: option.icon,
     unique: option.unique,
     disabled: taken.has(option.slug),
+    current: build[slot.key] === option.slug,
     pick: () => choose(planner, { ...planner.build, [slot.key]: option.slug }, slot.key),
   }));
 }
@@ -277,6 +281,7 @@ function enchantChoices(planner: Planner, key: EnchantSlotKey): Choice[] {
     search: option.search,
     icon: option.icon,
     disabled: false,
+    current: planner.enchants[key]?.slug === option.slug,
     pick: () => {
       planner.parts.dialog.close();
       const tier = planner.enchants[key]?.tier ?? ENCHANT_TIERS[0];

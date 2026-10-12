@@ -113,8 +113,9 @@ function decodeEnchants(params: URLSearchParams, build: Build, pools: EnchantPoo
   (params.get(ENCHANT_PARAM) ?? "").split(LIST_SEPARATOR).forEach((value, index) => {
     if (value === "") return;
     const key = ENCHANT_SLOT_KEYS[index];
-    const [slug = "", tierText] = value.split(TIER_SEPARATOR);
-    const tier = tierOf(tierText);
+    const parts = value.split(TIER_SEPARATOR);
+    const [slug = "", tierText] = parts;
+    const tier = parts.length === 2 ? tierOf(tierText) : undefined;
     if (!key || build[key] === undefined || !pools[key].has(slug) || tier === undefined) {
       dropped += 1;
       return;

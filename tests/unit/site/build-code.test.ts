@@ -171,6 +171,14 @@ describe("enchantments", () => {
     expect(decode("?v=1&m=dragon&e=fire-aspect:1")).toEqual({ build: {}, enchants: {}, dropped: 2, unsupported: false });
   });
 
+  it("leaves out an enchantment whose slot is empty", () => {
+    expect(encodeBuild({ melee: "sword" }, { enchants: { melee: { slug: "sharp", tier: 1 }, ranged: { slug: "ricochet", tier: 2 } } })).toBe("v=1&m=sword&e=sharp:1");
+  });
+
+  it("drops an enchantment with more than one level part", () => {
+    expect(decode("?v=1&m=sword&e=sharp:1:2")).toMatchObject({ enchants: {}, dropped: 1 });
+  });
+
   it("removes the enchantments from the address with the build", () => {
     expect(buildSearch("?ref=x&v=1&m=sword&e=sharp:1", {})).toBe("?ref=x");
   });

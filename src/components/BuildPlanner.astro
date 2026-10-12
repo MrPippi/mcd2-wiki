@@ -45,7 +45,8 @@ const groupTitle = (group: SlotGroup): string =>
               <p class="note build-fixed" data-testid={`build-fixed-${slot.key}`} data-fixed hidden></p>
               {isEnchantable(slot.key) && (
                 <div class="build-enchant" data-testid={`build-enchant-${slot.key}`} data-enchant hidden>
-                  <button type="button" class="build-enchant-pick" data-enchant-pick aria-haspopup="dialog" aria-label={`${t(lang, "buildEnchant")}: ${slotLabel(slot, lang)}`}>
+                  <button type="button" class="build-enchant-pick" data-enchant-pick aria-haspopup="dialog">
+                    <span class="sr-only">{`${slotLabel(slot, lang)}, ${t(lang, "buildEnchant")}: `}</span>
                     <span class="build-icon build-icon-small" data-enchant-icon aria-hidden="true"></span>
                     <span class="build-enchant-name" data-enchant-name>{t(lang, "buildAddEnchant")}</span>
                   </button>

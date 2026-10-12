@@ -570,6 +570,6 @@
   "buildEnchant": "エンチャント",
   "buildAddEnchant": "エンチャントを追加",
   "buildRemoveEnchant": "エンチャントを外す",
-  "buildTier": "レベル",
+  "buildTier": "ティア",
   "buildBuiltIn": "固有：{name}"
 }
