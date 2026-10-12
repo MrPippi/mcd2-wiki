@@ -3,8 +3,9 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
-import { TILE, imageSizeOf, zMaxFor } from "../../src/lib/map/worlds";
+import { SOURCE_TILE, TILE, imageSizeOf, zMaxFor } from "../../src/lib/map/worlds";
 import { childrenOf, levelTiles, sourceCut, sourceName, tileKey, type TileId } from "./pyramid";
+import { clearVoid, dilate, voidMask, type VoidCut } from "./void-mask";
 
 export interface TileWorld {
   readonly key: string;
@@ -43,6 +44,14 @@ interface SourceStamp {
 type Level = ReadonlyMap<string, Buffer>;
 
 const TRANSPARENT = { r: 0, g: 0, b: 0, alpha: 0 };
+/** Render pixels per void-mask cell. */
+const MASK_SCALE = 4;
+/** Smallest void region (in mask cells, 256×256 render pixels) cleared; smaller tan patches are content. */
+const VOID_MIN_AREA = 4096;
+/** Bumped when the void clearing changes, so unchanged sources still rebuild. */
+const VOID_MASK_VERSION = 1;
+
+type WorldVoid = Omit<VoidCut, "left" | "top">;
 
 async function stampSources(world: TileWorld, sourceDir: string): Promise<SourceStamp[]> {
   const names = Array.from({ length: world.grid * world.grid }, (_, i) => sourceName(world.region, Math.floor(i / world.grid), i % world.grid));
@@ -58,15 +67,33 @@ async function stampSources(world: TileWorld, sourceDir: string): Promise<Source
 
 async function sameSources(manifestPath: string, stamps: readonly SourceStamp[]): Promise<boolean> {
   try {
-    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as { sources?: unknown };
-    return JSON.stringify(manifest.sources) === JSON.stringify(stamps);
+    const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as { sources?: unknown; voidMask?: unknown };
+    return manifest.voidMask === VOID_MASK_VERSION && JSON.stringify(manifest.sources) === JSON.stringify(stamps);
   } catch {
     return false;
   }
 }
 
-async function cutSource(file: string, tiles: readonly TileId[], quality: number): Promise<[string, Buffer][]> {
-  const { data, info } = await sharp(file).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+/** The void mask of a whole world, read from its sources shrunk by MASK_SCALE. */
+async function worldVoid(world: TileWorld, sourceDir: string): Promise<WorldVoid> {
+  const cell = SOURCE_TILE / MASK_SCALE;
+  const width = world.grid * cell;
+  const parts = [];
+  for (let row = 0; row < world.grid; row += 1) {
+    for (let col = 0; col < world.grid; col += 1) {
+      const input = await sharp(path.join(sourceDir, world.region, sourceName(world.region, row, col))).resize(cell, cell).removeAlpha().png().toBuffer();
+      parts.push({ input, left: col * cell, top: row * cell });
+    }
+  }
+  const rgb = await sharp({ create: { width, height: width, channels: 3, background: { r: 0, g: 0, b: 0 } } }).composite(parts).removeAlpha().raw().toBuffer();
+  const core = voidMask(new Uint8Array(rgb), width, width, VOID_MIN_AREA);
+  return { core, fringe: dilate(core, width, width), width, scale: MASK_SCALE };
+}
+
+async function cutSource(file: string, tiles: readonly TileId[], quality: number, cut: VoidCut): Promise<[string, Buffer][]> {
+  const raw = await sharp(file).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const info = raw.info;
+  const data = clearVoid(new Uint8Array(raw.data), info.width, info.height, cut);
   return Promise.all(
     tiles.map(async (tile): Promise<[string, Buffer]> => {
       const { left, top } = sourceCut(tile);
@@ -77,6 +104,7 @@ async function cutSource(file: string, tiles: readonly TileId[], quality: number
 }
 
 async function topLevel(world: TileWorld, options: TileOptions, imageSize: number, zMax: number): Promise<Level> {
+  const mask = await worldVoid(world, options.sourceDir);
   const nameOf = (tile: TileId): string => {
     const cut = sourceCut(tile);
     return sourceName(world.region, cut.row, cut.col);
@@ -86,7 +114,9 @@ async function topLevel(world: TileWorld, options: TileOptions, imageSize: numbe
   const parts: [string, Buffer][][] = [];
   for (const name of names) {
     const own = tiles.filter((tile) => nameOf(tile) === name);
-    parts.push(await cutSource(path.join(options.sourceDir, world.region, name), own, options.quality));
+    const { row, col } = sourceCut(own[0]);
+    const cut = { ...mask, left: col * SOURCE_TILE, top: row * SOURCE_TILE };
+    parts.push(await cutSource(path.join(options.sourceDir, world.region, name), own, options.quality, cut));
   }
   return new Map(parts.flat());
 }
@@ -133,6 +163,6 @@ export async function buildWorldTiles(world: TileWorld, options: TileOptions): P
   const levels = await buildLevels(world, options, imageSize, zMax);
   await rm(worldDir, { recursive: true, force: true });
   const written = await writeLevels(worldDir, levels);
-  await writeFile(manifestPath, `${JSON.stringify({ imageSize, zMax, sources: stamps }, null, 2)}\n`, "utf8");
+  await writeFile(manifestPath, `${JSON.stringify({ imageSize, zMax, voidMask: VOID_MASK_VERSION, sources: stamps }, null, 2)}\n`, "utf8");
   return { world: world.key, tiles: written.count, bytes: written.bytes, skipped: false };
 }

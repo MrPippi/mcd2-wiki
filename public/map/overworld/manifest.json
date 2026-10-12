@@ -1,6 +1,7 @@
 {
   "imageSize": 8192,
   "zMax": 5,
+  "voidMask": 1,
   "sources": [
     {
       "name": "Overworld_00_00.png",
