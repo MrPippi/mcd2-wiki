@@ -8,7 +8,6 @@ import { questSlug, sectionOf, sizeOf } from "./quest-graph";
 import { dedupeObjectives, goalArenaTags, goalMobTags, labelledGoals } from "./quest-objectives";
 import { emeraldsOf, rewardsOf, type RewardContext } from "./quest-rewards";
 import type { Quest, RawQuest } from "./quest-schema";
-import type { ArenaRow, WaveRow } from "./quest-tables";
 import { descriptionIsCompletedText, hasLabel, QUEST_COMPLETED, QUEST_DESCRIPTIONS, QUEST_LABELS, questHtml, questText } from "./quest-texts";
 import type { LocaleFile } from "./schemas";
 
@@ -22,8 +21,8 @@ export interface DraftContext {
   /** Mob tag key → bestiary slug. */
   readonly tagIndex: ReadonlyMap<string, string>;
   readonly mobs: MobData;
-  /** Arena setup tag → the mob tags of its spawn waves. */
-  readonly arenaMobs: (arenaTag: string) => readonly string[];
+  /** Arena setup tag and the quest's area tag → the mob tags of its spawn waves there. */
+  readonly arenaMobs: (arenaTag: string, areaTag: string) => readonly string[];
 }
 
 /** A quest page before prerequisites and unlocks are turned into slugs. */
@@ -39,22 +38,6 @@ export function skipReason(quest: RawQuest, locales: Locales): string | undefine
   const description = locales.en[QUEST_DESCRIPTIONS]?.[quest.id];
   if (description !== undefined && description.trim() === "ERROR") return "description is ERROR";
   return undefined;
-}
-
-/** Arena setup tag → mob tags, through the arena's spawn-wave definition. */
-export function arenaMobIndex(arenas: readonly ArenaRow[], waves: readonly WaveRow[]): (arenaTag: string) => readonly string[] {
-  const waveMobs = new Map<string, string[]>();
-  for (const wave of waves) {
-    if (!wave.TypeTag || waveMobs.has(tagKey(wave.TypeTag.TagName))) continue;
-    const mobs = (wave.SpawnWaveDefinition?.Waves ?? []).flatMap((step) => (step.Waves ?? []).map((spawn) => spawn.MobType.TagName));
-    waveMobs.set(tagKey(wave.TypeTag.TagName), [...new Set(mobs)]);
-  }
-  const byArena = new Map<string, readonly string[]>();
-  for (const arena of arenas) {
-    const wave = arena.ArenaFightsDefinition?.SpawnWaveDefinition?.TagName;
-    if (!byArena.has(tagKey(arena.TypeTag.TagName))) byArena.set(tagKey(arena.TypeTag.TagName), wave ? (waveMobs.get(tagKey(wave)) ?? []) : []);
-  }
-  return (arenaTag) => byArena.get(tagKey(arenaTag)) ?? [];
 }
 
 function regionOf(tag: string, ctx: DraftContext, id: string): { region: MobArea | null; issues: Issue[] } {
@@ -79,7 +62,7 @@ function objectivesOf(quest: RawQuest, locales: Locales): Quest["objectives"] {
  * page (no slug, or a slug with no mob entry) come back as unlinked, so the caller reports them.
  */
 export function mobsOf(quest: RawQuest, ctx: DraftContext): { slugs: string[]; unlinked: string[] } {
-  const tags = [...new Set([...goalMobTags(quest.goals), ...goalArenaTags(quest.goals).flatMap(ctx.arenaMobs)])];
+  const tags = [...new Set([...goalMobTags(quest.goals), ...goalArenaTags(quest.goals).flatMap((arena) => ctx.arenaMobs(arena, quest.RewardData.areaRewardScalingTag.tagName))])];
   const bySlug = new Map(ctx.mobs.mobs.map((mob) => [mob.slug, mob]));
   const slugOf = (tag: string): string | undefined => ctx.tagIndex.get(tagKey(tag));
   const unlinked = tags.filter((tag) => {

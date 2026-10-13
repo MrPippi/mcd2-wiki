@@ -46,12 +46,13 @@ describe("parseLibraries", () => {
 });
 
 describe("loadQuestTables", () => {
-  it("reads the four tables through the reader and reports what it read", async () => {
+  it("reads the five tables through the reader and reports what it read", async () => {
     const root = await sourceWith({
       DT_QuestLibraries: [libraryRow("Core_Quests", [CA00])],
       DT_LootSourceDefinition_Quest: SIZE_ROWS,
       DT_ArenaFightDefinition: [{ TypeTag: { TagName: "SW.ArenaSetup.X" }, ArenaFightsDefinition: { SpawnWaveDefinition: { TagName: "SW.ArenaWave.X" } } }],
       DT_SpawnWaveDefinition: [{ TypeTag: { TagName: "SW.ArenaWave.X" }, SpawnWaveDefinition: { Waves: [{ Waves: [{ MobType: { TagName: "SW.Mob.Maw" } }] }] } }],
+      DT_SpawnDefinition: [],
     });
     const read: string[] = [];
     const loaded = await loadQuestTables(root, (file) => read.push(file));
@@ -68,7 +69,7 @@ describe("loadQuestTables", () => {
   it("keeps going without the optional tables and names them", async () => {
     const loaded = await loadQuestTables(await sourceWith({ DT_QuestLibraries: [libraryRow("Core_Quests", [CA00])] }));
     expect(loaded.tables?.arenas).toEqual([]);
-    expect(loaded.issues.map((one) => one.detail)).toEqual(["DT_LootSourceDefinition_Quest.json", "DT_ArenaFightDefinition.json", "DT_SpawnWaveDefinition.json"]);
+    expect(loaded.issues.map((one) => one.detail)).toEqual(["DT_LootSourceDefinition_Quest.json", "DT_ArenaFightDefinition.json", "DT_SpawnWaveDefinition.json", "DT_SpawnDefinition.json"]);
   });
   it("fails with the file name when a table row does not match", async () => {
     const root = await sourceWith({ DT_QuestLibraries: [{ Name: "Core_Quests", RawQuestData: 42 }] });

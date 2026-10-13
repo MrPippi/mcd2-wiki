@@ -17,6 +17,7 @@ export const QUEST_TABLE_FILES = {
   loot: "DT_LootSourceDefinition_Quest",
   arenas: "DT_ArenaFightDefinition",
   waves: "DT_SpawnWaveDefinition",
+  spawns: "DT_SpawnDefinition",
 } as const;
 
 const Tag = z.looseObject({ TagName: z.string() });
@@ -27,7 +28,39 @@ const ArenaRowSchema = z.looseObject({
 const WaveRowSchema = z.looseObject({
   TypeTag: Tag.optional(),
   SpawnWaveDefinition: z
-    .looseObject({ Waves: z.array(z.looseObject({ Waves: z.array(z.looseObject({ MobType: Tag })).optional() })).optional() })
+    .looseObject({
+      Waves: z
+        .array(z.looseObject({ Waves: z.array(z.looseObject({ MobType: Tag })).optional(), SpawndefinitionOverride: Tag.optional() }))
+        .optional(),
+    })
+    .optional(),
+});
+
+const WeightedTags = z.looseObject({ Tags: z.array(z.looseObject({ TypeTag: Tag, Weight: z.number(), Operation: z.string() })).optional() });
+const SpawnConditionSchema = z.looseObject({
+  Condition: z
+    .looseObject({
+      Condition: z.string().optional(),
+      InstanceData: z.array(z.looseObject({ AreaTag: Tag.optional(), AreaTags: z.array(Tag).optional() })).optional(),
+    })
+    .optional(),
+  DropTable: WeightedTags.optional(),
+});
+const SpawnRowSchema = z.looseObject({
+  TypeTag: Tag,
+  SpawnDefinition: z
+    .looseObject({
+      SpawnSlot: z
+        .record(
+          z.string(),
+          z.looseObject({
+            SpawnTable: WeightedTags.optional(),
+            AdditionalSpawnTables: z.record(z.string(), WeightedTags).optional(),
+            Conditions: z.array(SpawnConditionSchema).optional(),
+          }),
+        )
+        .optional(),
+    })
     .optional(),
 });
 
@@ -36,10 +69,12 @@ const TablesSchema = z.object({
   loot: LootTablesSchema.shape.quest,
   arenas: z.array(ArenaRowSchema),
   waves: z.array(WaveRowSchema),
+  spawns: z.array(SpawnRowSchema),
 });
 type RawTables = z.infer<typeof TablesSchema>;
 export type ArenaRow = RawTables["arenas"][number];
 export type WaveRow = RawTables["waves"][number];
+export type SpawnRow = RawTables["spawns"][number];
 
 /** A quest with the library row it came from. */
 export interface LibraryQuest {
@@ -52,10 +87,12 @@ export interface QuestTables {
   readonly loot: readonly LootRow[];
   readonly arenas: readonly ArenaRow[];
   readonly waves: readonly WaveRow[];
+  /** DT_SpawnDefinition: what a wave step's SpawndefinitionOverride spawns. */
+  readonly spawns: readonly SpawnRow[];
 }
 
 type Key = keyof typeof QUEST_TABLE_FILES;
-const KEYS = ["libraries", "loot", "arenas", "waves"] as const satisfies readonly Key[];
+const KEYS = ["libraries", "loot", "arenas", "waves", "spawns"] as const satisfies readonly Key[];
 
 function parseJson(text: string): unknown {
   try {
@@ -106,10 +143,10 @@ export async function loadQuestTables(sourceRoot: string, onRead?: (file: string
   if (!present("libraries")) return { issues: [issue("missing-quest-tables", `${QUEST_TABLE_FILES.libraries}.json`)] };
   const missing = KEYS.filter((key) => !present(key));
   const rows = await Promise.all(KEYS.map((key) => (present(key) ? readDataTable(dir, QUEST_TABLE_FILES[key], onRead) : Promise.resolve([]))));
-  const raw = parseTables({ libraries: rows[0], loot: rows[1], arenas: rows[2], waves: rows[3] });
+  const raw = parseTables({ libraries: rows[0], loot: rows[1], arenas: rows[2], waves: rows[3], spawns: rows[4] });
   const libraries = parseLibraries(raw.libraries);
   return {
-    tables: { quests: libraries.quests, loot: raw.loot, arenas: raw.arenas, waves: raw.waves },
+    tables: { quests: libraries.quests, loot: raw.loot, arenas: raw.arenas, waves: raw.waves, spawns: raw.spawns },
     issues: [...missing.map((key) => issue("missing-quest-tables", `${QUEST_TABLE_FILES[key]}.json`)), ...libraries.issues],
   };
 }
