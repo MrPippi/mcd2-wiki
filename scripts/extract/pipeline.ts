@@ -45,6 +45,7 @@ import { loadTalismanTables } from "./talisman-tables";
 import { buildTalismanData, withTalismanDescriptions } from "./talismans";
 import { applyEnglishOverrides } from "./text-overrides";
 import { extractSoulStorm, SOUL_STORM_ICON_SOURCES } from "./soul-storm";
+import { extractGuides } from "./guides";
 
 export interface ExtractOptions {
   readonly sourceRoot: string;
@@ -54,6 +55,8 @@ export interface ExtractOptions {
   readonly mobPortraitOverrideDir?: string;
   /** The hand-kept Soul Storm status file; defaults to soul-storm-status.json next to the icon overrides. */
   readonly soulStormStatusPath?: string;
+  /** The hand-kept guides status file; defaults to guides-status.json next to the icon overrides. */
+  readonly guidesStatusPath?: string;
 }
 
 export interface ExtractSummary {
@@ -190,6 +193,12 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     icons: soulStormIcons.paths,
     statusPath: options.soulStormStatusPath ?? path.join(path.dirname(options.overridesPath), "soul-storm-status.json"),
   });
+  const guides = await extractGuides({
+    sourceRoot: options.sourceRoot,
+    locales,
+    entries: output.entries,
+    statusPath: options.guidesStatusPath ?? path.join(path.dirname(options.overridesPath), "guides-status.json"),
+  });
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
   const weapons = weaponTables
@@ -225,6 +234,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...achievements.issues,
     ...bestiary.issues,
     ...soulStorm.issues,
+    ...guides.issues,
   ];
   const extraData = {
     "frames.json": frames.paths,
@@ -242,7 +252,8 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "mobs.json": bestiary.mobs,
     "loot-sources.json": bestiary.sources,
     "soul-storm.json": soulStorm.data,
+    "guides.json": guides.data,
   };
   await writeOutputs(options.outRoot, described, extraData, renderReport({ ...described, issues }));
-  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead], issues };
+  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead, ...guides.tablesRead], issues };
 }

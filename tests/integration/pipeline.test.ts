@@ -92,6 +92,7 @@ beforeEach(async () => {
   await put(sourceRoot, QUIVER, "png:quiver");
   await writeFile(overridesPath, JSON.stringify({ Artifact_FrostQuiver: QUIVER }), "utf8");
   await writeFile(path.join(sourceRoot, "soul-storm-status.json"), JSON.stringify({ verified: false, anchorOffsetMinutes: 0, rotationOffset: 0 }), "utf8");
+  await writeFile(path.join(sourceRoot, "guides-status.json"), JSON.stringify({ enchantCostPerLevel: false, rarityOdds: false }), "utf8");
   await put(sourceRoot, SOUL_STORM_ICON_SOURCES.header, "png:soul-storm-header");
   await put(sourceRoot, SOUL_STORM_ICON_SOURCES.generator, "png:soul-storm-generator");
 });

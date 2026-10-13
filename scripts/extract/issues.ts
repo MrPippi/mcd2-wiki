@@ -58,7 +58,13 @@ export type IssueType =
   | "soul-storm-row-missing"
   | "soul-storm-row-skipped"
   | "soul-storm-value-missing"
-  | "soul-storm-text-fallback";
+  | "soul-storm-text-fallback"
+  | "missing-guides-tables"
+  | "guides-value-missing"
+  | "guides-text-fallback"
+  | "guides-stage-unnamed"
+  | "guides-talisman-unlinked"
+  | "guides-quest-unnamed";
 
 export interface Issue {
   readonly type: IssueType;
