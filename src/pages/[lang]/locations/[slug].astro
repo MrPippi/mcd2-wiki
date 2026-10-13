@@ -43,7 +43,7 @@ const LOOT_ICON_SIZE = 40;
       <a href={href(lang, "locations")}>{t(lang, "locations")}</a>
     </p>
     <div class="location-title">
-      <LocationIcon location={location} size={PLATE_ICON_SIZE} loading="eager" />
+      {location.icon && <LocationIcon location={location} size={PLATE_ICON_SIZE} loading="eager" />}
       <LangText as="h1" lang={lang} value={location.name} searchTitle />
       {location.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
     </div>

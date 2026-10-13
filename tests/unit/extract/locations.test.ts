@@ -217,7 +217,7 @@ describe("loadLocationTables / extractLocations", () => {
     );
     const out = await mkdtemp(path.join(tmpdir(), "mcd2-locations-out-"));
     const result = await extractLocations(input(root, out));
-    expect(result.tablesRead).toEqual(["DT_AreaDefinition.json", "DT_ProgressionDefinition.json"]);
+    expect([...result.tablesRead].sort()).toEqual(["DT_AreaDefinition.json", "DT_ProgressionDefinition.json"]);   // read in parallel
     expect(result.data.locations.find((one) => one.slug === "howling-woods")?.levels).toEqual([6]);
     expect(existsSync(path.join(out, "public", "icons", "locations", "howling-woods.png"))).toBe(true);
   });

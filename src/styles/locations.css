@@ -14,6 +14,8 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
   border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);
 }
+/* Boss cards carry a fact table, so they need more width than a name card. */
+.boss-grid { grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); }
 .location-card, .boss-card {
   min-width: 0; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
   animation: rise-in 420ms var(--ease-out) both; animation-delay: calc(min(var(--i, 0), 30) * 18ms);
@@ -76,4 +78,4 @@
 .boss-facts dd { margin: 0; min-width: 0; overflow-wrap: anywhere; }
 .boss-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
 .boss-links a { font-weight: 600; }
-.boss-level { margin-left: var(--space-2); font-size: 13px; color: var(--text-2); white-space: nowrap; }
+.boss-level { display: block; font-size: 13px; color: var(--text-2); }

@@ -47,6 +47,7 @@ const questRows: { key: UiKey; quests: readonly Quest[]; testid: string }[] = [
             {boss.locations.map((location) => (
               <li>
                 <a href={locationHref(lang, location.slug)}>{location.name[lang]}</a>
+                {location.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
                 {location.levels.length > 0 && <span class="boss-level">{t(lang, "locationLevel")} <span class="mono">{formatLevels(location.levels)}</span></span>}
               </li>
             ))}

@@ -129,6 +129,21 @@ describe("bosses page", () => {
     expect(card).not.toContain('data-testid="boss-core-quests"');
   });
 
+  it("marks a region name or a quest title that shows English", async () => {
+    const [first] = bossList();
+    const maw = first?.bosses[0];
+    if (!first || !maw) throw new Error("no bosses");
+    const marked = {
+      ...maw,
+      locations: maw.locations.map((one) => ({ ...one, untranslated: ["ja" as const] })),
+      coreQuests: maw.coreQuests.map((quest) => ({ ...quest, title: { ...quest.title, untranslated: ["ja" as const] } })),
+    };
+    const html = await renderBosses("ja", [{ kind: "boss", bosses: [marked] }]);
+    const regions = html.slice(html.indexOf('data-testid="boss-regions"'), html.indexOf('data-testid="boss-core-quests"'));
+    expect(count(regions, "tag warn")).toBe(1);
+    expect(count(html, "tag warn")).toBe(2);
+  });
+
   it("never skips a heading level", async () => {
     const levels = headings(await renderBosses());
     expect(levels[0]).toBe(1);
