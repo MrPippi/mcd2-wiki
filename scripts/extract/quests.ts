@@ -5,7 +5,8 @@ import { issue, type Issue } from "./issues";
 import type { MapData } from "./map-schema";
 import { areaMarkers, buildAreaNamer } from "./mob-areas";
 import type { ItemSourcesData, MobData } from "./mob-schema";
-import { arenaMobIndex, draftQuest, skipReason, type DraftContext, type QuestDraft } from "./quest-draft";
+import { arenaMobIndex } from "./quest-arenas";
+import { draftQuest, skipReason, type DraftContext, type QuestDraft } from "./quest-draft";
 import { byProgress, chainOrder, progressOf, questSlug, unlocksOf } from "./quest-graph";
 import { itemsBySource, questSourceId, rewardRowNames, rowsByTag } from "./quest-rewards";
 import { EMPTY_QUESTS, QuestDataSchema, type Quest, type QuestData, type RawQuest } from "./quest-schema";
@@ -78,22 +79,24 @@ export function rewardSourcesOf(all: readonly RawQuest[], keptIds: ReadonlySet<s
   );
 }
 
-function contextFor(tables: QuestTables, input: QuestsInput): DraftContext {
+function contextFor(tables: QuestTables, input: QuestsInput): { ctx: DraftContext; issues: Issue[] } {
   const namer = buildAreaNamer(input.links.areas, input.locales);
-  return {
+  const arenas = arenaMobIndex(tables.arenas, tables.waves, tables.spawns);
+  const ctx: DraftContext = {
     locales: input.locales,
     rewards: { rowsByTag: rowsByTag(tables.loot), items: itemsBySource(input.sources), namer },
     namer,
     markers: areaMarkers(input.map),
     tagIndex: input.links.tagIndex,
     mobs: input.mobs,
-    arenaMobs: arenaMobIndex(tables.arenas, tables.waves),
+    arenaMobs: arenas.mobsOf,
   };
+  return { ctx, issues: arenas.issues };
 }
 
 /** The quest data from parsed tables; every left-out quest and every gap is an issue. */
 export function buildQuestData(tables: QuestTables, input: QuestsInput): { data: QuestData; issues: Issue[] } {
-  const ctx = contextFor(tables, input);
+  const { ctx, issues: arenaIssues } = contextFor(tables, input);
   const all = tables.quests.map((one) => one.quest);
   const reasons = all.map((quest) => ({ quest, reason: skipReason(quest, input.locales) }));
   const keptRaw = reasons.flatMap(({ quest, reason }) => (reason === undefined ? [quest] : []));
@@ -111,6 +114,7 @@ export function buildQuestData(tables: QuestTables, input: QuestsInput): { data:
   const issues = [
     ...reasons.flatMap(({ quest, reason }) => (reason === undefined ? [] : [issue("quest-skipped", `${quest.id}: ${reason}`)])),
     ...drafted.flatMap(({ built, links }) => [...built.issues, ...links.issues]),
+    ...arenaIssues,
   ];
   return { data, issues };
 }

@@ -457,6 +457,10 @@
         }
       },
       "mobs": [
+        "baby-zombie",
+        "pillager",
+        "skeleton",
+        "vanguard",
         "vindicator",
         "zombie"
       ]
@@ -1059,7 +1063,12 @@
         }
       },
       "mobs": [
+        "evoker",
+        "enchanter",
+        "geomancer",
         "pillager",
+        "ravager",
+        "royal-guard",
         "vindicator",
         "zombie"
       ]
@@ -1975,10 +1984,18 @@
         }
       },
       "mobs": [
+        "evoker",
+        "enchanter",
+        "geomancer",
         "wild-sentinel",
+        "pillager",
         "groobler-sentinel",
+        "ravager",
+        "royal-guard",
         "baby-sentinel",
-        "floaty-sentinel"
+        "crested-sentinel",
+        "floaty-sentinel",
+        "vindicator"
       ]
     },
     {
@@ -3102,9 +3119,20 @@
         }
       },
       "mobs": [
+        "soul-corrupted-witch",
+        "baby-zombie",
+        "chicken-jockey",
         "enchanter",
         "pillager",
-        "vindicator"
+        "skeleton",
+        "slime",
+        "spider",
+        "spider-jockey",
+        "vanguard",
+        "vindicator",
+        "zombie",
+        "skeleton-mossy",
+        "zombie-mossy"
       ]
     },
     {
@@ -4056,8 +4084,10 @@
       },
       "mobs": [
         "creeper",
+        "enchanter",
         "geomancer",
         "pillager",
+        "ravager",
         "royal-guard",
         "spider-jockey",
         "vindicator",
@@ -4856,7 +4886,14 @@
         }
       },
       "mobs": [
-        "monstrosity-copper"
+        "monstrosity-copper",
+        "evoker",
+        "enchanter",
+        "geomancer",
+        "pillager",
+        "ravager",
+        "royal-guard",
+        "vindicator"
       ]
     },
     {
@@ -5694,7 +5731,14 @@
         }
       },
       "mobs": [
-        "frostbite-desert-boss"
+        "frostbite-desert-boss",
+        "evoker",
+        "enchanter",
+        "geomancer",
+        "pillager",
+        "ravager",
+        "royal-guard",
+        "vindicator"
       ]
     },
     {
@@ -6307,6 +6351,7 @@
         }
       },
       "mobs": [
+        "evoker",
         "enchanter",
         "geomancer",
         "pillager",
@@ -7224,8 +7269,13 @@
       },
       "mobs": [
         "shade",
+        "evoker",
+        "enchanter",
+        "geomancer",
         "scavenger-grappler",
         "pillager",
+        "ravager",
+        "royal-guard",
         "scavenger-ranged",
         "scavenger-melee",
         "scavenger-trapper",
@@ -8132,8 +8182,11 @@
         "soul-construct",
         "monstrosity-red-stone",
         "supreme-evoker",
+        "evoker",
+        "enchanter",
         "geomancer",
         "pillager",
+        "ravager",
         "royal-guard",
         "vindicator"
       ]
@@ -9334,7 +9387,12 @@
         }
       },
       "mobs": [
+        "evoker",
+        "enchanter",
+        "geomancer",
         "pillager",
+        "ravager",
+        "royal-guard",
         "vindicator"
       ]
     },
@@ -11161,8 +11219,12 @@
         }
       },
       "mobs": [
+        "evoker",
+        "enchanter",
         "geomancer",
         "pillager",
+        "ravager",
+        "royal-guard",
         "vindicator"
       ]
     },
@@ -12740,8 +12802,11 @@
         }
       },
       "mobs": [
+        "driftweaver",
         "wild-sentinel",
         "pillager",
+        "groobler-sentinel",
+        "baby-sentinel",
         "crested-sentinel",
         "floaty-sentinel",
         "vindicator"
@@ -15254,7 +15319,19 @@
           "chancePerRoll": 0.25
         }
       },
-      "mobs": []
+      "mobs": [
+        "soul-corrupted-witch",
+        "baby-zombie",
+        "chicken-jockey",
+        "skeleton",
+        "slime",
+        "spider",
+        "spider-jockey",
+        "vanguard",
+        "zombie",
+        "skeleton-mossy",
+        "zombie-mossy"
+      ]
     },
     {
       "slug": "ca03-br",

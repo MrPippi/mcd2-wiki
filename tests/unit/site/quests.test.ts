@@ -67,6 +67,10 @@ describe("quests.json", () => {
     }
   });
 
+  it("finds the Soul Corrupted Witch through the witch arena's spawn-definition override", () => {
+    for (const slug of ["ca02-b", "ca02-b-br"]) expect(findQuest(slug)?.mobs, slug).toContain("soul-corrupted-witch");
+  });
+
   it("shows English where a language's description is its own completed text (PLa1_S04_A zh)", () => {
     const description = findQuest("pla1-s04-a")?.description;
     expect(description?.untranslated).toContain("zh");

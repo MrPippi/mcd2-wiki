@@ -63,7 +63,7 @@ const LOCALES = makeLocales({
 const mob = (slug: string, kind: Mob["kind"], name: string): Mob => ({
   slug, id: slug, kind, world: null, name: localizedFrom(() => name), untranslated: [], stats: [], variants: [], areas: [], drops: [],
 });
-const MOBS: MobData = { mobs: [mob("pillager", "regular", "Pillager"), mob("maw", "boss", "Maw")] };
+const MOBS: MobData = { mobs: [mob("pillager", "regular", "Pillager"), mob("maw", "boss", "Maw"), mob("witch", "miniboss", "Witch")] };
 const noSources = { areas: [], chests: [], merchants: [], bookPools: [] };
 const SOURCES: ItemSourcesData = {
   sources: {},
@@ -82,7 +82,15 @@ const TABLES: QuestTables = {
     lootRow("QuestTalismanWolf", "SW.Quest.Loot.Talisman.Wolf", [{ slot: "Talismans", guaranteed: 1, items: ["SW.Item.Talisman.Wolf"] }]),
   ],
   arenas: [{ TypeTag: { TagName: "SW.ArenaSetup.Boss" }, ArenaFightsDefinition: { SpawnWaveDefinition: { TagName: "SW.ArenaWave.Boss" } } }],
-  waves: [{ TypeTag: { TagName: "SW.ArenaWave.Boss" }, SpawnWaveDefinition: { Waves: [{ Waves: [{ MobType: { TagName: "SW.Mob.Maw" } }] }] } }],
+  waves: [{
+    TypeTag: { TagName: "SW.ArenaWave.Boss" },
+    SpawnWaveDefinition: { Waves: [{ Waves: [{ MobType: { TagName: "SW.Mob.Maw" } }] }, { SpawndefinitionOverride: { TagName: "SW.SpawnDefinition.Quest.Witch" } }] },
+  }],
+  spawns: [{
+    Name: "Witch",
+    TypeTag: { TagName: "SW.SpawnDefinition.Quest.Witch" },
+    SpawnDefinition: { SpawnSlot: { '(TagName="SW.SpawnSlot.Mob")': { SpawnTable: { Tags: [{ TypeTag: { TagName: "SW.Mob.Witch.Type3" }, Weight: 1, Operation: "Set" }] } } } },
+  }],
 };
 const AREAS = [areaRow("Forest", FOREST, [], "Forest"), areaRow("Plains", PLAINS, [], "Plains"), areaRow("Default", "SW.Area", [], "Plains")] as unknown as AreaRow[];
 const MAP = { worlds: [{ key: "overworld", markers: [{ kind: "area", id: "area:sw.area.forest.a1", px: 10, py: 20 }] }], legend: {} } as unknown as MapData;
@@ -91,7 +99,7 @@ const input = (sourceRoot = ""): QuestsInput => ({
   sourceRoot,
   locales: LOCALES,
   sources: SOURCES,
-  links: { tagIndex: new Map([["sw.mob.pillager", "pillager"], ["sw.mob.maw", "maw"], ["sw.mob.wraith", "wraith"]]), areas: AREAS },
+  links: { tagIndex: new Map([["sw.mob.pillager", "pillager"], ["sw.mob.maw", "maw"], ["sw.mob.wraith", "wraith"], ["sw.mob.witch.type3", "witch"]]), areas: AREAS },
   mobs: MOBS,
   map: MAP,
 });
@@ -145,7 +153,7 @@ describe("buildQuestData", () => {
   });
 
   it("names related mobs from kill targets and arena waves, bosses first, and reports tags with no slug or no mob page", () => {
-    expect(quest("ca01")?.mobs).toEqual(["maw", "pillager"]);
+    expect(quest("ca01")?.mobs).toEqual(["maw", "witch", "pillager"]);   // the witch only through the wave's spawn-definition override
     expect(built.issues).toContainEqual({ type: "quest-mob-unlinked", detail: "CA01: SW.Mob.Ghost, SW.Mob.Wraith" });
   });
 
@@ -179,11 +187,12 @@ describe("extractQuests", () => {
       DT_LootSourceDefinition_Quest: TABLES.loot,
       DT_ArenaFightDefinition: TABLES.arenas,
       DT_SpawnWaveDefinition: TABLES.waves,
+      DT_SpawnDefinition: TABLES.spawns,
     };
     for (const [name, rows] of Object.entries(tables)) await writeFile(path.join(dir, `${name}.json`), JSON.stringify(rows), "utf8");
     const result = await extractQuests(input(root));
     expect(result.data).toEqual(built.data);
-    expect(result.tablesRead).toHaveLength(4);
+    expect(result.tablesRead).toHaveLength(5);
   });
 });
 
