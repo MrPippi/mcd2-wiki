@@ -60,7 +60,7 @@
 /* Secret talismans */
 .guide-talismans { margin-top: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 160px), 1fr)); }
 .guide-talisman { display: flex; flex-direction: column; }
-.guide-talisman .item-link { flex: 1 0 auto; }
+.guide-talismans .guide-talisman .item-link { height: auto; flex: 1 0 auto; }
 .guide-talisman-sources { display: flex; flex-direction: column; align-items: center; gap: var(--space-1); padding: 0 var(--space-2) var(--space-3); text-align: center; }
 .guide-chip { border: 1px solid var(--rule-strong); padding: 0 var(--space-2); font-size: 0.8rem; }
 .guide-talisman-quests { margin: 0; font-size: 0.8rem; color: var(--text-2); }
