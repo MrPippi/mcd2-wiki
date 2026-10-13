@@ -69,7 +69,16 @@ export type IssueType =
   | "quest-reward-unmatched"
   | "quest-reward-empty"
   | "quest-area-unnamed"
-  | "quest-mob-unlinked";
+  | "quest-mob-unlinked"
+  | "missing-location-tables"
+  | "location-excluded"
+  | "location-unassigned"
+  | "location-unnamed"
+  | "location-region-missing"
+  | "location-text-fallback"
+  | "location-no-level"
+  | "location-no-icon"
+  | "location-area-unowned";
 
 export interface Issue {
   readonly type: IssueType;

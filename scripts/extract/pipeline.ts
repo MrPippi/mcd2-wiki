@@ -46,6 +46,7 @@ import { buildTalismanData, withTalismanDescriptions } from "./talismans";
 import { applyEnglishOverrides } from "./text-overrides";
 import { extractSoulStorm, SOUL_STORM_ICON_SOURCES } from "./soul-storm";
 import { extractQuests } from "./quests";
+import { extractLocations } from "./locations";
 
 export interface ExtractOptions {
   readonly sourceRoot: string;
@@ -199,6 +200,16 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     mobs: bestiary.mobs,
     map: map.data,
   });
+  // After copyIcons too: it publishes the area icons.
+  const locations = await extractLocations({
+    sourceRoot: options.sourceRoot,
+    outRoot: options.outRoot,
+    locales,
+    map: map.data,
+    mobs: bestiary.mobs,
+    quests: quests.data,
+    sources: bestiary.sources,
+  });
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
   const weapons = weaponTables
@@ -235,6 +246,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...bestiary.issues,
     ...soulStorm.issues,
     ...quests.issues,
+    ...locations.issues,
   ];
   const extraData = {
     "frames.json": frames.paths,
@@ -253,7 +265,8 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "loot-sources.json": bestiary.sources,
     "soul-storm.json": soulStorm.data,
     "quests.json": quests.data,
+    "locations.json": locations.data,
   };
   await writeOutputs(options.outRoot, described, extraData, renderReport({ ...described, issues }));
-  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead, ...quests.tablesRead], issues };
+  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead, ...quests.tablesRead, ...locations.tablesRead], issues };
 }

@@ -1,0 +1,29 @@
+{
+  "regions": [
+    { "slug": "brave-haven", "areas": ["SW.Area.Town"] },
+    { "slug": "squid-coast", "areas": ["SW.Area.Camp.A1"] },
+    { "slug": "honeycomb-fields", "areas": ["SW.Area.Plains.A1"] },
+    { "slug": "howling-woods", "areas": ["SW.Area.Forest.A1"] },
+    { "slug": "the-deep-dark", "areas": ["SW.Area.DeepDark.A1", "SW.Area.DeepDark.A2"], "members": ["SW.Area.DeepDark"] },
+    { "slug": "rainy-plains", "areas": ["SW.Area.Plains.A2"] },
+    { "slug": "frozen-highlands", "areas": ["SW.Area.Desert.A1"] },
+    { "slug": "singers-meadow", "areas": ["SW.Area.Meadow.A1"], "members": ["SW.Area.Meadow.R0", "SW.Area.Meadow.R1"] },
+    { "slug": "humbler-huskland", "areas": ["SW.Area.Carapace.A1"], "members": ["SW.Area.SiftThreeConnection"] },
+    { "slug": "lullaby-hills", "areas": ["SW.Area.Meadow.A2"] },
+    { "slug": "the-sift", "areas": ["SW.Area.Meadow.T1"], "members": ["SW.Area.Meadow.Boss"] },
+    { "slug": "ravines", "areas": ["SW.Area.Ravines"] },
+    { "slug": "lush-caves", "areas": ["SW.Area.Lush.Boss"] },
+    { "slug": "deadleaf-forest", "areas": ["SW.Area.Forest.A2"] },
+    { "slug": "cinder-crags", "areas": ["SW.Area.Peaks.A1"] }
+  ],
+  "excluded": {
+    "SW.Area": "the game's default area row",
+    "SW.Area.Overworld": "the overworld container, no name",
+    "SW.Area.Wellspring": "the Wellspring container, no name",
+    "SW.Area.Init": "the start-up placeholder",
+    "SW.Area.Test.*": "test and gym levels",
+    "SW.Area.Ravines.AreaLink.CA_MA2": "its name is the row id, not player text",
+    "SW.Area.Peaks.A1.AreaLink": "a link zone between Honeycomb Fields and Cinder Crags: its tag names one region, its parent trait the other",
+    "SW.Area.Mines.Interior.*": "the data ties it to no region"
+  }
+}

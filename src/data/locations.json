@@ -1,0 +1,1456 @@
+{
+  "locations": [
+    {
+      "slug": "brave-haven",
+      "areaId": "SW.Area.Town",
+      "name": {
+        "zh": "英雄港",
+        "zh-hans": "勇者港湾",
+        "en": "Brave Haven",
+        "ja": "ブレイブヘイブン",
+        "ko": "용사의 안식처",
+        "de": "Tapferkeitshafen",
+        "fr": "Havre des Braves",
+        "es": "Refugio de los valientes",
+        "it": "Rifugio dei valorosi",
+        "pt": "Refúgio dos Corajosos",
+        "ru": "Пристанище бравых",
+        "pl": "Siedlisko Śmiałków",
+        "nl": "Dapperenhaven",
+        "sv": "Djärvhamn",
+        "tr": "Yiğitler Sığınağı",
+        "uk": "Прихисток відважних"
+      },
+      "untranslated": [],
+      "map": {
+        "world": "overworld",
+        "px": 450.8,
+        "py": 4424.8
+      },
+      "icon": "icons/locations/brave-haven.png",
+      "levels": [
+        1
+      ],
+      "subLocations": [],
+      "mobs": [],
+      "quests": [],
+      "lootSources": [
+        "area:SW.Area.Town"
+      ]
+    },
+    {
+      "slug": "squid-coast",
+      "areaId": "SW.Area.Camp.A1",
+      "name": {
+        "zh": "烏賊海岸",
+        "zh-hans": "鱿鱼海岸",
+        "en": "Squid Coast",
+        "ja": "イカ海岸",
+        "ko": "오징어 해안",
+        "de": "Tintenfischküste",
+        "fr": "Côte du Poulpe",
+        "es": "Costa Calamar",
+        "it": "Costa calamaro",
+        "pt": "Costa da Lula",
+        "ru": "Побережье спрутов",
+        "pl": "Wybrzeże Kałamarnic",
+        "nl": "Inktvissenkust",
+        "sv": "Bläckfiskkusten",
+        "tr": "Mürekkep Balığı Kıyısı",
+        "uk": "Узбережжя кальмарів"
+      },
+      "untranslated": [],
+      "icon": "icons/locations/squid-coast.png",
+      "levels": [],
+      "subLocations": [],
+      "mobs": [
+        "skeleton",
+        "zombie"
+      ],
+      "quests": [
+        "ca00"
+      ],
+      "lootSources": []
+    },
+    {
+      "slug": "honeycomb-fields",
+      "areaId": "SW.Area.Plains.A1",
+      "name": {
+        "zh": "蜂巢原野",
+        "zh-hans": "蜜脾原野",
+        "en": "Honeycomb Fields",
+        "ja": "ハニカム畑",
+        "ko": "벌집 들판",
+        "de": "Honigwabenfelder",
+        "fr": "Champs de miel",
+        "es": "Campos de panales",
+        "it": "Campi del favo",
+        "pt": "Campos de Favos de Mel",
+        "ru": "Поля медовых сот",
+        "pl": "Miodowe Pola",
+        "nl": "Honingraatvelden",
+        "sv": "Bikupefälten",
+        "tr": "Bal Peteği Tarlaları",
+        "uk": "Стільникові поля"
+      },
+      "untranslated": [],
+      "map": {
+        "world": "overworld",
+        "px": 2805.8,
+        "py": 3954
+      },
+      "icon": "icons/locations/honeycomb-fields.png",
+      "levels": [
+        2
+      ],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "蜂巢原野",
+            "zh-hans": "蜜脾原野",
+            "en": "Honeycomb Fields",
+            "ja": "ハニカム畑",
+            "ko": "벌집 들판",
+            "de": "Honigwabenfelder",
+            "fr": "Champs de miel",
+            "es": "Campos de panales",
+            "it": "Campi del favo",
+            "pt": "Campos de Favos de Mel",
+            "ru": "Поля медовых сот",
+            "pl": "Miodowe Pola",
+            "nl": "Honingraatvelden",
+            "sv": "Bikupefälten",
+            "tr": "Bal Peteği Tarlaları",
+            "uk": "Стільникові поля"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Plains.A1.ScoutPoint"
+          ]
+        },
+        {
+          "name": {
+            "zh": "蜂巢穀倉",
+            "zh-hans": "蜜脾谷仓",
+            "en": "Honeycomb Barn",
+            "ja": "ハニカムの納屋",
+            "ko": "벌집 헛간",
+            "de": "Honigwabenscheune",
+            "fr": "Grange des rayons de miel",
+            "es": "Campos de panales",
+            "it": "Fienile del favo",
+            "pt": "Celeiro de Favos de Mel",
+            "ru": "Амбар медовых сот",
+            "pl": "Miodowe Pola – stodoła",
+            "nl": "Honingraatschuur",
+            "sv": "Bikupeladan",
+            "tr": "Bal Peteği Ambarı",
+            "uk": "Стільниковий сарай"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "Sw.Area.Plains.A1.SpookyBarnBasement"
+          ]
+        }
+      ],
+      "mobs": [
+        "enderman",
+        "geomancer",
+        "pillager",
+        "skeleton",
+        "vindicator",
+        "zombie"
+      ],
+      "quests": [
+        "ca01",
+        "ca01-b",
+        "pla1-s04-a",
+        "pla1-s08-a"
+      ],
+      "lootSources": [
+        "area:SW.Area.Plains.A1"
+      ]
+    },
+    {
+      "slug": "howling-woods",
+      "areaId": "SW.Area.Forest.A1",
+      "name": {
+        "zh": "咆哮森林",
+        "zh-hans": "咆哮树林",
+        "en": "Howling Woods",
+        "ja": "遠吠えの森",
+        "ko": "울부짖는 숲",
+        "de": "Heulwälder",
+        "fr": "Bois hurlant",
+        "es": "Bosques aullantes",
+        "it": "Boschi ululanti",
+        "pt": "Mata Uivante",
+        "ru": "Воющие чащи",
+        "pl": "Wyjąca Knieja",
+        "nl": "Huilende Woud",
+        "sv": "Ylande skogarna",
+        "tr": "Uluyan Orman",
+        "uk": "Ліс завивань"
+      },
+      "untranslated": [],
+      "map": {
+        "world": "overworld",
+        "px": 4241.8,
+        "py": 4046.3
+      },
+      "icon": "icons/locations/howling-woods.png",
+      "levels": [
+        6
+      ],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "許願井",
+            "zh-hans": "许愿井",
+            "en": "Wishing Well",
+            "ja": "願いの井戸",
+            "ko": "소원 우물",
+            "de": "Wunschbrunnen",
+            "fr": "Puits à souhaits",
+            "es": "Pozo de los deseos",
+            "it": "Pozzo dei desideri",
+            "pt": "Poço dos Desejos",
+            "ru": "Колодец желаний",
+            "pl": "Studnia życzeń",
+            "nl": "Wensput",
+            "sv": "Önskebrunnen",
+            "tr": "Dilek Kuyusu",
+            "uk": "Колодязь бажань"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Forest.A1.Underwell"
+          ]
+        },
+        {
+          "name": {
+            "zh": "女巫小屋",
+            "zh-hans": "女巫小屋",
+            "en": "Witch's Hut",
+            "ja": "ウィッチの小屋",
+            "ko": "마녀의 오두막",
+            "de": "Hexenhütte",
+            "fr": "Hutte de la Sorcière",
+            "es": "Cabaña de la bruja",
+            "it": "Capanno della strega",
+            "pt": "Cabana da Bruxa",
+            "ru": "Хижина ведьмы",
+            "pl": "Chata wiedźmy",
+            "nl": "Heksenhut",
+            "sv": "Häxans stuga",
+            "tr": "Cadı Kulübesi",
+            "uk": "Хижка відьми"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Forest.A1.WitchInt"
+          ]
+        },
+        {
+          "name": {
+            "zh": "蜘蛛洞穴",
+            "zh-hans": "蜘蛛洞穴",
+            "en": "Spider Caves",
+            "ja": "クモの洞窟",
+            "ko": "거미 동굴",
+            "de": "Spinnenhöhlen",
+            "fr": "Grottes des araignées",
+            "es": "Cuevas de arañas",
+            "it": "Caverne dei ragni",
+            "pt": "Caverna das Aranhas",
+            "ru": "Паучьи пещеры",
+            "pl": "Pajęcze jaskinie",
+            "nl": "Spinnengrotten",
+            "sv": "Spindelgrottor / Spindelgrottorna",
+            "tr": "Örümcek Mağaraları",
+            "uk": "Павучі печери"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Forest.A1.SpiderCaves",
+            "SW.Area.Forest.A1.SpiderCaves.1",
+            "SW.Area.Forest.A1.SpiderCaves.2",
+            "SW.Area.Forest.A1.SpiderCaves.3"
+          ]
+        }
+      ],
+      "mobs": [
+        "evoker",
+        "cave-spider",
+        "creeper",
+        "enchanter",
+        "deep-dark-illager",
+        "geomancer",
+        "pillager",
+        "royal-guard",
+        "skeleton",
+        "slime",
+        "spider",
+        "spider-jockey",
+        "vindicator",
+        "zombie",
+        "zombie-mossy"
+      ],
+      "quests": [
+        "ca02",
+        "ca02-c",
+        "ca02-b",
+        "ca03",
+        "ca04",
+        "foa1-s08-a",
+        "foa1-s10-a",
+        "ca02-b-br",
+        "ca03-br"
+      ],
+      "lootSources": [
+        "area:SW.Area.Forest.A1"
+      ]
+    },
+    {
+      "slug": "the-deep-dark",
+      "areaId": "SW.Area.DeepDark.A1",
+      "name": {
+        "zh": "深淵",
+        "zh-hans": "深暗之域",
+        "en": "The Deep Dark",
+        "ja": "ディープダーク",
+        "ko": "깊은 어둠",
+        "de": "Tiefe Dunkelheit",
+        "fr": "Les Abîmes",
+        "es": "Oscuridad profunda",
+        "it": "L'Abisso oscuro",
+        "pt": "Profundezas Escuras",
+        "ru": "Тёмные подземелья",
+        "pl": "Mroczna Otchłań",
+        "nl": "De Diepe Duisternis",
+        "sv": "Djupa mörkret",
+        "tr": "Derin Karanlık",
+        "uk": "Темні глибини"
+      },
+      "untranslated": [],
+      "levels": [
+        14,
+        45
+      ],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "地下城",
+            "zh-hans": "地牢",
+            "en": "Dungeon",
+            "ja": "ダンジョン",
+            "ko": "던전",
+            "de": "Verlies",
+            "fr": "Donjon",
+            "es": "Mazmorra",
+            "it": "Segrete",
+            "pt": "Masmorra",
+            "ru": "Подземелье",
+            "pl": "Podziemia",
+            "nl": "Kerker",
+            "sv": "Grotta",
+            "tr": "Zindan",
+            "uk": "Підземелля"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.DeepDark.T1",
+            "SW.Area.DeepDark.Dungeons.1",
+            "SW.Area.DeepDark.Dungeons.2",
+            "SW.Area.DeepDark.Dungeons.3",
+            "SW.Area.DeepDark.Dungeons.4",
+            "SW.Area.DeepDark.Dungeons.5",
+            "SW.Area.DeepDark.Dungeons.6",
+            "SW.Area.DeepDark.Dungeons.7",
+            "SW.Area.DeepDark.Dungeons.8",
+            "SW.Area.DeepDark.Dungeons.9",
+            "SW.Area.DeepDark.Dungeons.10",
+            "SW.Area.DeepDark.Dungeons.11",
+            "SW.Area.DeepDark.Dungeons.12",
+            "SW.Area.DeepDark.Dungeons.13",
+            "SW.Area.DeepDark.Dungeons.14",
+            "SW.Area.DeepDark.Dungeons.15",
+            "SW.Area.DeepDark.Dungeons.16",
+            "SW.Area.DeepDark.Tutorial",
+            "SW.Area.DeepDark.Boss",
+            "SW.Area.DeepDark.Boss.1",
+            "SW.Area.DeepDark.Boss.2",
+            "SW.Area.DeepDark.Boss.3",
+            "SW.Area.DeepDark.Boss.4"
+          ]
+        },
+        {
+          "name": {
+            "zh": "深淵",
+            "zh-hans": "深暗之域",
+            "en": "The Deep Dark",
+            "ja": "ディープダーク",
+            "ko": "깊은 어둠",
+            "de": "Tiefe Dunkelheit",
+            "fr": "Les Abîmes",
+            "es": "Oscuridad profunda",
+            "it": "L'Abisso oscuro",
+            "pt": "Profundezas Escuras",
+            "ru": "Тёмные подземелья",
+            "pl": "Mroczna Otchłań",
+            "nl": "De Diepe Duisternis",
+            "sv": "Djupa mörkret",
+            "tr": "Derin Karanlık",
+            "uk": "Темні глибини"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.DeepDark.A2.PortalEntry"
+          ]
+        }
+      ],
+      "mobs": [
+        "soul-construct",
+        "monstrosity-red-stone",
+        "supreme-evoker",
+        "maw",
+        "warden",
+        "creeper",
+        "deep-dark-illager",
+        "geomancer",
+        "pillager",
+        "skeleton",
+        "spider",
+        "vindicator",
+        "zombie"
+      ],
+      "quests": [
+        "ca06"
+      ],
+      "lootSources": [
+        "area:SW.Area.DeepDark.A1"
+      ]
+    },
+    {
+      "slug": "rainy-plains",
+      "areaId": "SW.Area.Plains.A2",
+      "name": {
+        "zh": "多雨平原",
+        "zh-hans": "多雨平原",
+        "en": "Rainy Plains",
+        "ja": "雨降りの平原",
+        "ko": "비의 평원",
+        "de": "Regenebene",
+        "fr": "Plaines pluvieuses",
+        "es": "Llanura lluviosa",
+        "it": "Pianure piovose",
+        "pt": "Planícies Chuvosas",
+        "ru": "Дождливые равнины",
+        "pl": "Deszczowe Równiny",
+        "nl": "Regenachtige Vlakten",
+        "sv": "Regniga slätterna",
+        "tr": "Yağmurlu Ovalar",
+        "uk": "Дощові рівнини"
+      },
+      "untranslated": [],
+      "map": {
+        "world": "overworld",
+        "px": 4793.3,
+        "py": 6694.9
+      },
+      "icon": "icons/locations/rainy-plains.png",
+      "levels": [
+        21
+      ],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "紅色高塔",
+            "zh-hans": "红色塔楼",
+            "en": "Red Tower",
+            "ja": "レッドタワー",
+            "ko": "빨간색 탑",
+            "de": "Roter Turm",
+            "fr": "Tour rouge",
+            "es": "Torre roja",
+            "it": "Torre rossa",
+            "pt": "Torre Vermelha",
+            "ru": "Красная башня",
+            "pl": "Czerwona wieża",
+            "nl": "Rode toren",
+            "sv": "Rött torn",
+            "tr": "Kızıl Kule",
+            "uk": "Червона вежа"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Plains.A2.StorageTower"
+          ]
+        },
+        {
+          "name": {
+            "zh": "橘色高塔",
+            "zh-hans": "橙色塔楼",
+            "en": "Orange Tower",
+            "ja": "オレンジタワー",
+            "ko": "주황색 탑",
+            "de": "Oranger Turm",
+            "fr": "Tour orange",
+            "es": "Torre naranja",
+            "it": "Torre arancione",
+            "pt": "Torre Laranja",
+            "ru": "Оранжевая башня",
+            "pl": "Pomarańczowa wieża",
+            "nl": "Oranje toren",
+            "sv": "Orange torn",
+            "tr": "Turuncu Kule",
+            "uk": "Помаранчева вежа"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Plains.A2.CampTower"
+          ]
+        },
+        {
+          "name": {
+            "zh": "白色高塔",
+            "zh-hans": "白色塔楼",
+            "en": "White Tower",
+            "ja": "ホワイトタワー",
+            "ko": "하얀색 탑",
+            "de": "Weißer Turm",
+            "fr": "Tour blanche",
+            "es": "Torre blanca",
+            "it": "Torre bianca",
+            "pt": "Torre Branca",
+            "ru": "Белая башня",
+            "pl": "Biała wieża",
+            "nl": "Witte toren",
+            "sv": "Vitt torn",
+            "tr": "Beyaz Kule",
+            "uk": "Біла вежа"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Plains.A2.RavagerTower"
+          ]
+        },
+        {
+          "name": {
+            "zh": "至尊喚魔者之塔",
+            "zh-hans": "至尊唤魔者塔楼",
+            "en": "The Supreme Evoker's Tower",
+            "ja": "スプリーム・エヴォーカーの塔",
+            "ko": "최고 소환사의 탑",
+            "de": "Turm des Obermagiers",
+            "fr": "La tour de l'Évocateur suprême",
+            "es": "Torre del Sumo Evocador",
+            "it": "Torre dell'evocatore supremo",
+            "pt": "A Torre do Evocador Supremo",
+            "ru": "Башня верховного заклинателя",
+            "pl": "Wieża najwyższego przywoływacza",
+            "nl": "De toren van de Opperoproeper",
+            "sv": "Högsta besvärjarens torn",
+            "tr": "Yüce Uyandırıcının Kulesi",
+            "uk": "Вежа верховного заклинача"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Plains.A2.BossTower",
+            "SW.Area.Plains.A2.BossArena",
+            "SW.Area.Plains.A2.NoteblockRoom"
+          ]
+        }
+      ],
+      "mobs": [
+        "monstrosity-copper",
+        "creeper",
+        "enchanter",
+        "geomancer",
+        "pillager",
+        "ravager",
+        "skeleton",
+        "spider-jockey",
+        "vanguard",
+        "vindicator",
+        "zombie"
+      ],
+      "quests": [
+        "ca07",
+        "pla2-s15-a",
+        "pla2-s16-a",
+        "pla2-s17-a",
+        "ca07-br"
+      ],
+      "lootSources": [
+        "area:SW.Area.Plains.A2"
+      ]
+    },
+    {
+      "slug": "frozen-highlands",
+      "areaId": "SW.Area.Desert.A1",
+      "name": {
+        "zh": "冰封高地",
+        "zh-hans": "冰封高地",
+        "en": "Frozen Highlands",
+        "ja": "凍てつく高地",
+        "ko": "얼어붙은 고원",
+        "de": "Eishochland",
+        "fr": "Hautes-terres gelées",
+        "es": "Tierras altas heladas",
+        "it": "Alture gelate",
+        "pt": "Terras Altas Congeladas",
+        "ru": "Ледяные нагорья",
+        "pl": "Zmrożone Wyżyny",
+        "nl": "Bevroren Hooglanden",
+        "sv": "Frusna högländerna",
+        "tr": "Donmuş Dağlıklar",
+        "uk": "Крижане високогір’я"
+      },
+      "untranslated": [],
+      "map": {
+        "world": "overworld",
+        "px": 6611.2,
+        "py": 4173.1
+      },
+      "icon": "icons/locations/frozen-highlands.png",
+      "levels": [
+        26
+      ],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "冰洞",
+            "zh-hans": "冰洞",
+            "en": "Ice Cave",
+            "ja": "氷の洞窟",
+            "ko": "얼음 동굴",
+            "de": "Eishöhle",
+            "fr": "Grotte de glace",
+            "es": "Cueva de hielo",
+            "it": "Caverna di ghiaccio",
+            "pt": "Caverna de Gelo",
+            "ru": "Ледяная пещера",
+            "pl": "Lodowa jaskinia",
+            "nl": "IJsgrot",
+            "sv": "Isgrotta",
+            "tr": "Buz Mağarası",
+            "uk": "Крижана печера"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.IceCaves.1",
+            "SW.Area.Desert.A1.IceCaves.2"
+          ]
+        },
+        {
+          "name": {
+            "zh": "附魔師圖書館",
+            "zh-hans": "附魔师图书馆",
+            "en": "Enchanter's Library",
+            "ja": "エンチャンターの図書館",
+            "ko": "마법 부여사의 도서관",
+            "de": "Bibliothek des Zauberers",
+            "fr": "Bibliothèque de l'Enchanteur",
+            "es": "Biblioteca del hechicero",
+            "it": "Biblioteca dell'incantatore",
+            "pt": "Biblioteca do Encantador",
+            "ru": "Библиотека чародея",
+            "pl": "Biblioteka zaklinacza",
+            "nl": "Bibliotheek van de Betoveraar",
+            "sv": "Förtrollarens bibliotek",
+            "tr": "Büyücünün Kütüphanesi",
+            "uk": "Бібліотека чарівника"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.TinyTower1"
+          ]
+        },
+        {
+          "name": {
+            "zh": "喚魔者圖書館",
+            "zh-hans": "唤魔者图书馆",
+            "en": "Evoker's Library",
+            "ja": "エヴォーカーの図書館",
+            "ko": "소환사의 도서관",
+            "de": "Bibliothek des Magiers",
+            "fr": "Bibliothèque de l'Évocateur",
+            "es": "Biblioteca del evocador",
+            "it": "Biblioteca dell'evocatore",
+            "pt": "Biblioteca do Evocador",
+            "ru": "Библиотека заклинателя",
+            "pl": "Biblioteka przywoływacza",
+            "nl": "Bibliotheek van de Oproeper",
+            "sv": "Besvärjarens bibliotek",
+            "tr": "Uyandırıcının Kütüphanesi",
+            "uk": "Бібліотека заклинача"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.TinyTower2"
+          ]
+        },
+        {
+          "name": {
+            "zh": "幻術師圖書館",
+            "zh-hans": "幻术师图书馆",
+            "en": "Illusioner's Library",
+            "ja": "イリュージョナーの図書館",
+            "ko": "환술사의 도서관",
+            "de": "Bibliothek des Illusionisten",
+            "fr": "Bibliothèque de l'Illusionniste",
+            "es": "Biblioteca del ilusionista",
+            "it": "Biblioteca dell'illusionista",
+            "pt": "Biblioteca do Ilusionista",
+            "ru": "Библиотека иллюзиониста",
+            "pl": "Biblioteka iluzjonera",
+            "nl": "Bibliotheek van de Illusionist",
+            "sv": "Illusionistens bibliotek",
+            "tr": "İllüzyonistin Kütüphanesi",
+            "uk": "Бібліотека ілюзіонина"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.TinyTower3"
+          ]
+        },
+        {
+          "name": {
+            "zh": "圖書館雙塔",
+            "zh-hans": "图书馆塔楼",
+            "en": "Library Towers",
+            "ja": "図書館の塔",
+            "ko": "도서관 탑",
+            "de": "Bibliothekstürme",
+            "fr": "Tours de la bibliothèque",
+            "es": "Torres de la biblioteca",
+            "it": "Torri della biblioteca",
+            "pt": "Torres da Biblioteca",
+            "ru": "Библиотечные башни",
+            "pl": "Wieże zaklinacza",
+            "nl": "Bibliotheektorens",
+            "sv": "Bibliotekstorn",
+            "tr": "Kütüphane Kuleleri",
+            "uk": "Бібліотечні вежі"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.TwoEndTower"
+          ]
+        },
+        {
+          "name": {
+            "zh": "冰封要塞",
+            "zh-hans": "冰封要塞",
+            "en": "Frozen Fortress",
+            "ja": "凍てつく要塞",
+            "ko": "얼어붙은 요새",
+            "de": "Frostfestung",
+            "fr": "Forteresse gelée",
+            "es": "Fortaleza helada",
+            "it": "Fortezza congelata",
+            "pt": "Fortaleza Congelada",
+            "ru": "Ледяная крепость",
+            "pl": "Zamarznięta forteca",
+            "nl": "Bevroren Fort / Bevroren fort",
+            "sv": "Frusna fortet",
+            "tr": "Donmuş Kale",
+            "uk": "Крижана фортеця"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.FortressInt",
+            "SW.Area.Desert.A1.SecretIntsSM.FortTrap_Int",
+            "SW.Area.Desert.A1.FortHalls",
+            "SW.Area.Desert.A1.Tower"
+          ]
+        },
+        {
+          "name": {
+            "zh": "漁夫小屋",
+            "zh-hans": "钓鱼小屋",
+            "en": "Fishing Hut",
+            "ja": "漁師小屋",
+            "ko": "낚시 오두막",
+            "de": "Fischerhütte",
+            "fr": "Cabane de pêche",
+            "es": "Cabaña de pescadores",
+            "it": "Capanno dei pescatori",
+            "pt": "Cabana de Pesca",
+            "ru": "Рыбацкая хижина",
+            "pl": "Rybacka chata",
+            "nl": "Vissershut",
+            "sv": "Fiskestuga",
+            "tr": "Balıkçı Kulübesi",
+            "uk": "Рибальська хижка"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.Basement"
+          ]
+        },
+        {
+          "name": {
+            "zh": "冰洞",
+            "zh-hans": "冰洞",
+            "en": "Ice Caves",
+            "ja": "氷の洞窟",
+            "ko": "얼음 동굴",
+            "de": "Eishöhlen",
+            "fr": "Grottes de glace",
+            "es": "Cuevas de hielo",
+            "it": "Caverne di ghiaccio",
+            "pt": "Cavernas de Gelo",
+            "ru": "Ледяные пещеры",
+            "pl": "Lodowe jaskinie",
+            "nl": "IJsgrotten",
+            "sv": "Isgrottorna",
+            "tr": "Buz Mağaraları",
+            "uk": "Крижані печери"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.SecretIntsSM.Iceberg_Int",
+            "SW.Area.Desert.A1.SecretIntsSM.IcedCavern1_Int",
+            "SW.Area.Desert.A1.SecretIntsSM.IcedCavern2_Int",
+            "SW.Area.Desert.A1.SecretIntsSM.IcedCavern3_Int"
+          ]
+        },
+        {
+          "name": {
+            "zh": "沉船",
+            "zh-hans": "沉船",
+            "en": "Shipwreck",
+            "ja": "難破船",
+            "ko": "난파선",
+            "de": "Schiffswrack",
+            "fr": "Épave",
+            "es": "Naufragio",
+            "it": "Relitto",
+            "pt": "Naufrágio",
+            "ru": "Остов корабля",
+            "pl": "Wrak statku",
+            "nl": "Scheepswrak",
+            "sv": "Skeppsvrak",
+            "tr": "Gemi Enkazı",
+            "uk": "Уламки корабля"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Desert.A1.ShipInt"
+          ]
+        }
+      ],
+      "mobs": [
+        "monstrosity-sculk",
+        "frostbite-desert-boss",
+        "warden",
+        "witch",
+        "baby-zombie",
+        "cave-spider",
+        "creeper",
+        "enchanter",
+        "geomancer",
+        "pillager",
+        "ravager",
+        "royal-guard",
+        "skeleton",
+        "slime",
+        "spider",
+        "vanguard",
+        "vindicator",
+        "zombie",
+        "zombie-frozen",
+        "husk",
+        "skeleton-stray"
+      ],
+      "quests": [
+        "ca05",
+        "dea1-s12-a",
+        "dea1-s13-a",
+        "dea1-s14-a",
+        "ca05-br"
+      ],
+      "lootSources": [
+        "area:SW.Area.Desert.A1"
+      ]
+    },
+    {
+      "slug": "singers-meadow",
+      "areaId": "SW.Area.Meadow.A1",
+      "name": {
+        "zh": "吟唱者草甸",
+        "zh-hans": "吟唱者草甸",
+        "en": "Singer's Meadow",
+        "ja": "シンガーの草地",
+        "ko": "싱어의 초원",
+        "de": "Sängerwiese",
+        "fr": "Prairie du chanteur",
+        "es": "Prado del Cantor",
+        "it": "Prateria del cantore",
+        "pt": "Prado do Cantor",
+        "ru": "Певчий луг",
+        "pl": "Łąka Pieśniarza",
+        "nl": "Zangersweide",
+        "sv": "Sångarens äng",
+        "tr": "Şarkıcının Çayırı",
+        "uk": "Лука співака"
+      },
+      "untranslated": [],
+      "map": {
+        "world": "sift",
+        "px": 634.3,
+        "py": 5473.3
+      },
+      "icon": "icons/locations/singers-meadow.png",
+      "levels": [
+        33
+      ],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "吟唱者草甸",
+            "zh-hans": "吟唱者草甸",
+            "en": "Singer's Meadow",
+            "ja": "シンガーの草地",
+            "ko": "싱어의 초원",
+            "de": "Sängerwiese",
+            "fr": "Prairie du Chanteur",
+            "es": "Prado del cantor",
+            "it": "Prateria del cantore",
+            "pt": "Prado do Cantor",
+            "ru": "Певчий луг",
+            "pl": "Łąka Pieśniarza",
+            "nl": "Zangersweide",
+            "sv": "Sångarens äng",
+            "tr": "Şarkıcının Çayırı / Şarkıcı Çayırı",
+            "uk": "Лука співака"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Meadow.R1",
+            "SW.Area.Meadow.R0"
+          ]
+        }
+      ],
+      "mobs": [
+        "monstrosity-sculk",
+        "driftweaver",
+        "enchanter",
+        "pufflet",
+        "geomancer",
+        "wild-sentinel",
+        "pillager",
+        "groobler-sentinel",
+        "ravager",
+        "royal-guard",
+        "baby-sentinel",
+        "crested-sentinel",
+        "floaty-sentinel",
+        "vindicator"
+      ],
+      "quests": [
+        "ca08",
+        "ca08-b",
+        "mea1-s05-a",
+        "mea1-s06-a",
+        "ca09-br"
+      ],
+      "lootSources": [
+        "area:SW.Area.Meadow.A1"
+      ]
+    },
+    {
+      "slug": "humbler-huskland",
+      "areaId": "SW.Area.Carapace.A1",
+      "name": {
+        "zh": "轟鳴蟲殼骸之地",
+        "zh-hans": "轰鸣虫壳地",
+        "en": "Humbler Huskland",
+        "ja": "ハンブラーハスクランド",
+        "ko": "험블러 외피지대",
+        "de": "Demütigerpanzerland",
+        "fr": "Terres desséchées des Fredonneurs",
+        "es": "Yermo de quitinones",
+        "it": "Cimitero dei solenni",
+        "pt": "Cemitério dos Humilhadores",
+        "ru": "Земли кадавров смиренников",
+        "pl": "Step Spokorniaczy",
+        "nl": "Humblerland der overblijfselen",
+        "sv": "Böjarnas skalmarker",
+        "tr": "Humbler Kalıntısı Diyarı",
+        "uk": "Земля оболонок покірника"
+      },
+      "untranslated": [],
+      "map": {
+        "world": "sift",
+        "px": 3316.9,
+        "py": 5462.7
+      },
+      "icon": "icons/locations/humbler-huskland.png",
+      "levels": [
+        36
+      ],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "轟鳴蟲殼骸",
+            "zh-hans": "轰鸣虫尸壳",
+            "en": "Humbler Husk",
+            "ja": "ハンブラーの殻",
+            "ko": "험블러 외피",
+            "de": "Demütigerpanzer",
+            "fr": "Carapace de Fredonneur",
+            "es": "Despojo de quitinón",
+            "it": "Guscio del solenne",
+            "pt": "Casco de Humilhador",
+            "ru": "Кадавр смиренника",
+            "pl": "Skorupa spokorniacza",
+            "nl": "Humbler overblijfsel",
+            "sv": "Böjarskal",
+            "tr": "Humbler Kalıntısı",
+            "uk": "Оболонка покірника"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Carapace.A1.CarapaceInterior"
+          ]
+        },
+        {
+          "name": {
+            "zh": "轟鳴蟲殼骸之地",
+            "zh-hans": "轰鸣虫壳地",
+            "en": "Humbler Huskland",
+            "ja": "ハンブラーハスクランド",
+            "ko": "험블러 외피지대",
+            "de": "Demütigerpanzerland",
+            "fr": "Terres desséchées des Fredonneurs",
+            "es": "Yelmo de despojos de los quitinones",
+            "it": "Cimitero dei solenni",
+            "pt": "Cemitério dos Humilhadores",
+            "ru": "Земли кадавров смиренников",
+            "pl": "Step Spokorniaczy",
+            "nl": "Humbler Mummieland",
+            "sv": "Böjarnas skalmarker",
+            "tr": "Humbler Zombi Kurusu Diyarı",
+            "uk": "Земля оболонок покірника"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.SiftThreeConnection"
+          ]
+        }
+      ],
+      "mobs": [
+        "monstrosity-copper",
+        "enderman",
+        "evoker",
+        "driftweaver",
+        "baby-zombie",
+        "creeper",
+        "enchanter",
+        "geomancer",
+        "pillager",
+        "ravager",
+        "royal-guard",
+        "vindicator"
+      ],
+      "quests": [
+        "ca09",
+        "ca10",
+        "caa1-s02-a",
+        "caa1-s03-a"
+      ],
+      "lootSources": [
+        "area:SW.Area.Carapace.A1"
+      ]
+    },
+    {
+      "slug": "lullaby-hills",
+      "areaId": "SW.Area.Meadow.A2",
+      "name": {
+        "zh": "安眠丘陵",
+        "zh-hans": "安眠丘陵",
+        "en": "Lullaby Hills",
+        "ja": "子守歌の丘",
+        "ko": "자장가 언덕",
+        "de": "Schlafliedhügel",
+        "fr": "Collines de la berceuse",
+        "es": "Colinas del arrullo",
+        "it": "Colline della ninnananna",
+        "pt": "Colinas de Ninar",
+        "ru": "Колыбельные холмы",
+        "pl": "Wzgórza Kołysanek",
+        "nl": "Wiegeliedheuvels",
+        "sv": "Vaggvisornas kullar",
+        "tr": "Ninni Tepeleri",
+        "uk": "Колискові пагорби"
+      },
+      "untranslated": [],
+      "map": {
+        "world": "sift",
+        "px": 5506.5,
+        "py": 5795.9
+      },
+      "icon": "icons/locations/lullaby-hills.png",
+      "levels": [
+        42
+      ],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "壞村民要塞",
+            "zh-hans": "灾厄村民要塞",
+            "en": "Illager Stronghold",
+            "ja": "邪悪な村人の要塞",
+            "ko": "우민 성채",
+            "de": "Illager-Festung",
+            "fr": "Forteresse des Illageois",
+            "es": "Fortaleza de los maldeanos",
+            "it": "Roccaforte degli abitori",
+            "pt": "Fortaleza dos Illagers",
+            "ru": "Крепость злодеян",
+            "pl": "Twierdza złosadników",
+            "nl": "Illagersbolwerk / Bolwerk van de orpelingen",
+            "sv": "Fybornas fäste",
+            "tr": "Illager Kalesi",
+            "uk": "Цитадель лиходіїв"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Meadow.A2.FortressInt",
+            "SW.Area.Meadow.A2.MeadowFortress"
+          ]
+        }
+      ],
+      "mobs": [
+        "monstrosity-red-stone",
+        "evoker",
+        "enchanter",
+        "geomancer",
+        "pillager",
+        "ravager",
+        "royal-guard",
+        "vindicator"
+      ],
+      "quests": [
+        "mea2-s02-a",
+        "mea2-s03-a",
+        "ca10-br",
+        "ca10-br-b"
+      ],
+      "lootSources": [
+        "area:SW.Area.Meadow.A2"
+      ]
+    },
+    {
+      "slug": "the-sift",
+      "areaId": "SW.Area.Meadow.T1",
+      "name": {
+        "zh": "隙浮",
+        "zh-hans": "汐浮",
+        "en": "The Sift",
+        "ja": "シフト",
+        "ko": "시프트",
+        "de": "Sift",
+        "fr": "Le Sift",
+        "es": "El Sift",
+        "it": "Il Sift",
+        "pt": "O Sift",
+        "ru": "Сифт",
+        "pl": "Sift",
+        "nl": "De Sift",
+        "sv": "Sift",
+        "tr": "Sift",
+        "uk": "Сифт"
+      },
+      "untranslated": [],
+      "icon": "icons/locations/the-sift.png",
+      "levels": [],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "隙浮",
+            "zh-hans": "汐浮",
+            "en": "The Sift",
+            "ja": "シフト",
+            "ko": "시프트",
+            "de": "Sift",
+            "fr": "Le Sift",
+            "es": "El Sift",
+            "it": "Il Sift",
+            "pt": "O Sift",
+            "ru": "Сифт",
+            "pl": "Sift",
+            "nl": "De Sift",
+            "sv": "Sift",
+            "tr": "Sift",
+            "uk": "Сифт"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Meadow.T1.Med",
+            "SW.Area.Meadow.T1.Rift.1",
+            "SW.Area.Meadow.T1.Rift.2",
+            "SW.Area.Meadow.T1.Rift.3",
+            "SW.Area.Meadow.T1.Rift.4",
+            "SW.Area.Meadow.T1.Rift.5",
+            "SW.Area.Meadow.T1.Rift.6",
+            "SW.Area.Meadow.T1.Rift.7",
+            "SW.Area.Meadow.T1.Rift.8",
+            "SW.Area.Meadow.T1.Rift.9",
+            "SW.Area.Meadow.T1.Rift.10",
+            "SW.Area.Meadow.T1.Rift.11",
+            "SW.Area.Meadow.T1.Rift.12",
+            "SW.Area.Meadow.T1.Rift.13",
+            "SW.Area.Meadow.T1.Rift.14",
+            "SW.Area.Meadow.T1.Rift.15",
+            "SW.Area.Meadow.T1.Rift.16",
+            "SW.Area.Meadow.T1.Rift.17",
+            "SW.Area.Meadow.T1.Rift.18",
+            "SW.Area.Meadow.Boss",
+            "SW.Area.Meadow.Boss.1",
+            "SW.Area.Meadow.Boss.2",
+            "SW.Area.Meadow.Boss.3",
+            "SW.Area.Meadow.Boss.4"
+          ]
+        }
+      ],
+      "mobs": [
+        "monstrosity-sculk",
+        "driftweaver",
+        "wild-sentinel",
+        "groobler-sentinel",
+        "scavenger-ranged",
+        "baby-sentinel",
+        "crested-sentinel",
+        "floaty-sentinel",
+        "scavenger-melee"
+      ],
+      "quests": [],
+      "lootSources": []
+    },
+    {
+      "slug": "ravines",
+      "areaId": "SW.Area.Ravines",
+      "name": {
+        "zh": "裂谷",
+        "zh-hans": "峡谷",
+        "en": "Ravines",
+        "ja": "渓谷",
+        "ko": "협곡",
+        "de": "Schluchten",
+        "fr": "Ravins",
+        "es": "Barrancos",
+        "it": "Gole",
+        "pt": "Ravinas",
+        "ru": "Овраги",
+        "pl": "Wąwozy",
+        "nl": "Ravijnen",
+        "sv": "Raviner",
+        "tr": "Yarıklar",
+        "uk": "Яри"
+      },
+      "untranslated": [],
+      "levels": [],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "裂谷",
+            "zh-hans": "峡谷",
+            "en": "Ravines",
+            "ja": "渓谷",
+            "ko": "협곡",
+            "de": "Schluchten",
+            "fr": "Ravins",
+            "es": "Barrancos",
+            "it": "Gole",
+            "pt": "Ravinas",
+            "ru": "Овраги",
+            "pl": "Wąwozy",
+            "nl": "Ravijnen",
+            "sv": "Raviner",
+            "tr": "Yarıklar",
+            "uk": "Яри"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Ravines.Boss",
+            "SW.Area.Ravines.Boss.1",
+            "SW.Area.Ravines.Boss.2",
+            "SW.Area.Ravines.Boss.3",
+            "SW.Area.Ravines.Boss.4",
+            "SW.Area.Ravines.T1.Dungeon.1",
+            "SW.Area.Ravines.T1.Dungeon.2",
+            "SW.Area.Ravines.T1.Dungeon.3",
+            "SW.Area.Ravines.T1.Dungeon.4",
+            "SW.Area.Ravines.T1.Dungeon.5",
+            "SW.Area.Ravines.T1.Dungeon.6",
+            "SW.Area.Ravines.T1.Dungeon.7",
+            "SW.Area.Ravines.T1.Dungeon.8",
+            "SW.Area.Ravines.T1.Dungeon.9",
+            "SW.Area.Ravines.T1.Dungeon.10",
+            "SW.Area.Ravines.T1.Dungeon.11",
+            "SW.Area.Ravines.T1.Dungeon.12"
+          ]
+        }
+      ],
+      "mobs": [
+        "shade"
+      ],
+      "quests": [],
+      "lootSources": [
+        "area:SW.Area.Ravines"
+      ]
+    },
+    {
+      "slug": "lush-caves",
+      "areaId": "SW.Area.Lush.Boss",
+      "name": {
+        "zh": "蒼鬱洞窟",
+        "zh-hans": "繁茂洞穴",
+        "en": "Lush Caves",
+        "ja": "繁茂した洞窟",
+        "ko": "무성한 동굴",
+        "de": "Üppige Höhlen",
+        "fr": "Grottes luxuriantes",
+        "es": "Cuevas frondosas",
+        "it": "Caverne rigogliose",
+        "pt": "Cavernas Verdejantes",
+        "ru": "Заросшие пещеры",
+        "pl": "Bujne jaskinie",
+        "nl": "Weelderige grotten",
+        "sv": "Frodiga grottor",
+        "tr": "Yemyeşil Mağaralar",
+        "uk": "Зарослі печери"
+      },
+      "untranslated": [],
+      "icon": "icons/locations/lush-caves.png",
+      "levels": [],
+      "subLocations": [],
+      "mobs": [
+        "monstrosity-moss"
+      ],
+      "quests": [],
+      "lootSources": []
+    },
+    {
+      "slug": "deadleaf-forest",
+      "areaId": "SW.Area.Forest.A2",
+      "name": {
+        "zh": "死葉森林",
+        "zh-hans": "枯叶森林",
+        "en": "Deadleaf Forest",
+        "ja": "枯れ葉の森",
+        "ko": "가랑잎 숲",
+        "de": "Totlaubwald",
+        "fr": "Forêt des feuilles mortes",
+        "es": "Bosque marchito",
+        "it": "Foresta delle foglie morte",
+        "pt": "Floresta Folhamorta",
+        "ru": "Лес мертвой листвы",
+        "pl": "Sucholistny Bór",
+        "nl": "Dodebladerenbos",
+        "sv": "Dödalövsskogen",
+        "tr": "Ölü Yaprak Ormanı",
+        "uk": "Мертволистий ліс"
+      },
+      "untranslated": [],
+      "icon": "icons/locations/deadleaf-forest.png",
+      "levels": [],
+      "subLocations": [
+        {
+          "name": {
+            "zh": "泥黯莊園",
+            "zh-hans": "泥暗庄园",
+            "en": "Mudgloom Manor",
+            "ja": "泥暗の館",
+            "ko": "머드글룸 저택",
+            "de": "Düstersumpf-Anwesen",
+            "fr": "Manoir de la fange lugubre",
+            "es": "Mansión lodóbrega",
+            "it": "Maniero del fango cupo",
+            "pt": "Mansão de Brilhalama",
+            "ru": "Усадьба мрачной трясины",
+            "pl": "Ponura posiadłość",
+            "nl": "Landgoed Modderduister",
+            "sv": "Lerdunkla herrgården",
+            "tr": "Çamurlu Kasvet Malikânesi",
+            "uk": "Маєток болотомороку"
+          },
+          "untranslated": [],
+          "areaIds": [
+            "SW.Area.Forest.A2.WoodlandMansionInt"
+          ]
+        }
+      ],
+      "mobs": [
+        "skeleton",
+        "zombie"
+      ],
+      "quests": [],
+      "lootSources": []
+    },
+    {
+      "slug": "cinder-crags",
+      "areaId": "SW.Area.Peaks.A1",
+      "name": {
+        "zh": "燼岩嶺",
+        "zh-hans": "余烬峭壁",
+        "en": "Cinder Crags",
+        "ja": "灰燼の岩場",
+        "ko": "잉걸불 낭떠러지",
+        "de": "Zunderklippen",
+        "fr": "Falaises de cendres",
+        "es": "Peñascos de ceniza",
+        "it": "Rupi di cenere",
+        "pt": "Penhascos das Cinzas",
+        "ru": "Зольные утесы",
+        "pl": "Spopielone Skały",
+        "nl": "Lavarotsen",
+        "sv": "Askklipporna",
+        "tr": "Kül Kayalıkları",
+        "uk": "Попільні скелі"
+      },
+      "untranslated": [],
+      "icon": "icons/locations/cinder-crags.png",
+      "levels": [],
+      "subLocations": [],
+      "mobs": [
+        "geomancer",
+        "pillager",
+        "skeleton",
+        "vindicator",
+        "zombie"
+      ],
+      "quests": [],
+      "lootSources": [
+        "area:SW.Area.Peaks.A1"
+      ]
+    }
+  ],
+  "areas": {
+    "SW.Area.Carapace.A1": "humbler-huskland",
+    "SW.Area.Plains.A2": "rainy-plains",
+    "SW.Area.Ravines": "ravines",
+    "SW.Area.DeepDark.A2": "the-deep-dark",
+    "SW.Area.Lush.Boss": "lush-caves",
+    "SW.Area.DeepDark.Boss": "the-deep-dark",
+    "SW.Area.Meadow.A2": "lullaby-hills",
+    "SW.Area.Desert.A1": "frozen-highlands",
+    "SW.Area.Meadow.A1": "singers-meadow",
+    "SW.Area.Meadow.T1": "the-sift",
+    "SW.Area.DeepDark.T1": "the-deep-dark",
+    "SW.Area.Plains.A1": "honeycomb-fields",
+    "SW.Area.Forest.A1": "howling-woods",
+    "SW.Area.Peaks.A1": "cinder-crags",
+    "SW.Area.Meadow.R1": "singers-meadow",
+    "SW.Area.Forest.A2": "deadleaf-forest",
+    "SW.Area.DeepDark.Tutorial": "the-deep-dark",
+    "SW.Area.Camp.A1": "squid-coast",
+    "SW.Area.DeepDark.A1": "the-deep-dark",
+    "SW.Area.Desert.A1.FortressInt": "frozen-highlands",
+    "SW.Area.Town": "brave-haven"
+  }
+}
