@@ -36,6 +36,8 @@ export const AchievementConditionSchema = z.object({
   name: LocalizedSchema,
   /** Languages that show the English name because the game has none in that language. */
   untranslated: z.array(z.enum(LANGS)).optional(),
+  /** quest and task: the quest's id (CA02_B), which names its quest page. */
+  quest: z.string().optional(),
 });
 export type AchievementCondition = z.infer<typeof AchievementConditionSchema>;
 

@@ -17,7 +17,9 @@ test.describe("how to obtain", () => {
     await page.goto("/en/armor/piece/mushroom-chest/");
     const block = page.getByTestId("item-sources");
     await expect(block.locator("[data-source-kind='quests'] [data-testid='picks']")).toHaveText("2 of 4");
-    await expect(block.locator("[data-source-kind='quests'] .source-name")).toHaveText("Quest reward");   // not the internal row id
+    await expect(block.getByTestId("source-reward-of")).toHaveText("Reward of The Cleric’s Apprentice");   // the quest, not the internal row id
+    await block.getByTestId("source-reward-of").getByRole("link").click();
+    await expect(page).toHaveURL(/\/en\/quests\/foa1-s10-a\/$/);
     await expect(block.locator("[data-source-kind='quests'] .item-alt")).toHaveCount(0);
     await expect(block.locator("[data-source-kind='merchants'] [data-testid='merchant-category']")).toContainText("Armor");
     expect(await block.innerText()).not.toContain("%");

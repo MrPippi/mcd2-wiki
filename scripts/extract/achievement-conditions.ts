@@ -36,6 +36,7 @@ interface TextKey {
   readonly type: AchievementCondition["type"];
   readonly namespace: string;
   readonly key: string;
+  readonly quest?: string;
 }
 
 export interface ConditionsResult {
@@ -68,8 +69,8 @@ function textKey(row: AchievementDefinition, locales: Locales): TextKey | undefi
   const { InstancedStructScriptStruct: struct, QuestState: quest, BossTags: boss } = row.Condition;
   if (struct.endsWith(`.${QUEST_STRUCT}`) && quest) {
     return quest.bUseQuestState
-      ? { type: "quest", namespace: QUEST_LABELS, key: quest.QuestName }
-      : { type: "task", namespace: QUEST_LABELS, key: quest.TaskName };
+      ? { type: "quest", namespace: QUEST_LABELS, key: quest.QuestName, quest: quest.QuestName }
+      : { type: "task", namespace: QUEST_LABELS, key: quest.TaskName, quest: quest.QuestName };
   }
   const tag = boss?.GameplayTags[0]?.TagName;
   return struct.endsWith(`.${BOSS_STRUCT}`) && tag ? bossKey(tag, locales) : undefined;
@@ -82,7 +83,7 @@ function conditionFor(row: AchievementDefinition, locales: Locales): Achievement
   const name = localize(locales, where.namespace, where.key);
   if (!name) return issue("missing-achievement-condition", `${id}: ${where.namespace.replace("Text/Release/", "")} ${where.key}`);
   const untranslated = englishFallbacks(locales, where.namespace, where.key);
-  return { type: where.type, name, ...(untranslated.length > 0 ? { untranslated } : {}) };
+  return { type: where.type, name, ...(untranslated.length > 0 ? { untranslated } : {}), ...(where.quest ? { quest: where.quest } : {}) };
 }
 
 /** The condition of each listed achievement that has one the game names; the rest are reported. */

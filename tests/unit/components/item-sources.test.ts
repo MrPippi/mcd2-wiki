@@ -36,9 +36,9 @@ describe("item sources block", () => {
     expect(areas).toContain("item-alt");
   });
 
-  it("shows a quest reward by its label and 必得 or N of M, never the internal row id", async () => {
+  it("shows a quest reward by its quest, linked, and 必得 or N of M, never the internal row id", async () => {
     const quests = group(await render("zh", "armor", "mushroom-chest"), "quests");
-    expect(quests).toContain("任務獎勵");
+    expect(quests).toMatch(/<a href="\/zh\/quests\/foa1-s10-a\/">[^<]+<\/a>的獎勵/);
     expect(quests).toContain('data-testid="picks"');
     expect(quests).not.toMatch(/Armour|Quest[A-Z]/);
     expect(quests).not.toContain("tag warn");

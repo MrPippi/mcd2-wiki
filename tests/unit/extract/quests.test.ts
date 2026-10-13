@@ -1,4 +1,4 @@
-import { mkdtemp } from "node:fs/promises";
+import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
@@ -12,7 +12,7 @@ import { buildQuestData, extractQuests, type QuestsInput } from "../../../script
 import { localizedFrom } from "../../../src/lib/lang";
 import { makeLocales, ns } from "../../helpers/locales";
 import { areaRow } from "../../helpers/mob-tables";
-import { group, lootEntry, lootRow, rawQuest, SIZE_ROWS, task } from "../../helpers/quest-tables";
+import { group, libraryRow, lootEntry, lootRow, rawQuest, SIZE_ROWS, task } from "../../helpers/quest-tables";
 
 const FOREST = "SW.Area.Forest.A1";
 const PLAINS = "SW.Area.Plains.A1";
@@ -167,5 +167,37 @@ describe("extractQuests", () => {
     expect(result.data).toEqual({ quests: [], rewardSources: {} });
     expect(result.issues).toEqual([{ type: "missing-quest-tables", detail: "DT_QuestLibraries.json" }]);
     expect(result.tablesRead).toEqual([]);
+  });
+
+  it("reads the tables from source-data and builds the same data", async () => {
+    const root = await mkdtemp(path.join(tmpdir(), "mcd2-quests-full-"));
+    const dir = path.join(root, "DataTables", "UFS");
+    await mkdir(dir, { recursive: true });
+    const tables = {
+      DT_QuestLibraries: [libraryRow("Test", QUESTS)],
+      DT_LootSourceDefinition_Quest: TABLES.loot,
+      DT_ArenaFightDefinition: TABLES.arenas,
+      DT_SpawnWaveDefinition: TABLES.waves,
+    };
+    for (const [name, rows] of Object.entries(tables)) await writeFile(path.join(dir, `${name}.json`), JSON.stringify(rows), "utf8");
+    const result = await extractQuests(input(root));
+    expect(result.data).toEqual(built.data);
+    expect(result.tablesRead).toHaveLength(4);
+  });
+});
+
+describe("quest gaps", () => {
+  const odd = rawQuest({ id: "CA00", type: "CoreQuest", size: "SW.QuestSize.Huge", area: "SW.Area.Nowhere" });
+  const result = buildQuestData({ ...TABLES, quests: [{ library: "Test", quest: odd }] }, input());
+
+  it("shows an unknown size as small and reports it", () => {
+    expect(result.data.quests[0]?.size).toBe("small");
+    expect(result.data.quests[0]?.rewards.emeralds).toBeNull();
+    expect(result.issues).toContainEqual({ type: "quest-text-missing", detail: "CA00: size SW.QuestSize.Huge (shown as small)" });
+  });
+
+  it("drops a region the game gives no name and reports it", () => {
+    expect(result.data.quests[0]?.region).toBeNull();
+    expect(result.issues).toContainEqual({ type: "quest-area-unnamed", detail: "CA00: SW.Area.Nowhere" });
   });
 });

@@ -80,17 +80,20 @@ describe("buildConditions", () => {
     expect(quest?.name.en).toBe("Escape from Squid Coast");
     expect(quest?.name.ja).toBe("イカの海岸から脱出");
     expect(quest?.untranslated).toBeUndefined();
+    expect(quest?.quest).toBe("CA00");
   });
 
   it("names the quest objective when the condition uses a task", () => {
     const task = result.conditions.get("COMPLETE_ENTER_THE_NEW_DIMENSION_QUEST");
     expect(task?.type).toBe("task");
+    expect(task?.quest).toBe("CA01");
     expect(task?.name.zh).toBe("進入裂隙");
   });
 
   it("names the boss from the mob name table", () => {
     const boss = result.conditions.get("DEFEAT_A_MONARCH");
     expect(boss?.type).toBe("boss");
+    expect(boss?.quest).toBeUndefined();
     expect(boss?.name.zh).toBe("君主");
     expect(boss?.name.de).toBe("Monarch");
   });

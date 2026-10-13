@@ -1,0 +1,89 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import type { Quest } from "../../../../scripts/extract/quest-schema";
+import EntrySection from "../../../components/EntrySection.astro";
+import LangText from "../../../components/LangText.astro";
+import MobCard from "../../../components/MobCard.astro";
+import QuestLinks from "../../../components/QuestLinks.astro";
+import QuestRewards from "../../../components/QuestRewards.astro";
+import Base from "../../../layouts/Base.astro";
+import { t, type Lang } from "../../../lib/i18n";
+import { mapLinkOf } from "../../../lib/mobs";
+import { countMark, SIZE_KEY, TYPE_KEY } from "../../../lib/quest-view";
+import { questData, questDescription, questMobs, questsOf, sectionLabel } from "../../../lib/quests";
+import { href } from "../../../lib/url";
+import "../../../styles/mobs.css";
+import "../../../styles/quests.css";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => questData.quests.map((quest) => ({ params: { lang, slug: quest.slug }, props: { lang, quest } })));
+}
+
+interface Props {
+  lang: Lang;
+  quest: Quest;
+}
+
+const { lang, quest } = Astro.props;
+const untranslated = (texts: { untranslated: readonly Lang[] } | null) => texts?.untranslated.includes(lang) ?? false;
+const mobs = questMobs(quest);
+const objectivesUntranslated = quest.objectives.some((objective) => objective.untranslated.includes(lang));
+---
+<Base lang={lang} title={quest.title.text[lang]} description={questDescription(quest, lang)}>
+  <article class="entry-detail quest-page" data-pagefind-body>
+    <p class="kicker entry-kicker" data-pagefind-ignore>
+      <a href={href(lang, "quests")}>{t(lang, "quests")}</a> / {sectionLabel(quest, lang)}
+    </p>
+    <div class="quest-title">
+      <LangText as="h1" lang={lang} value={quest.title.text} searchTitle />
+      <span class="tag quest-type" data-testid="quest-type">{t(lang, TYPE_KEY[quest.type])}</span>
+      {untranslated(quest.title) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+    </div>
+    <dl class="quest-facts" data-testid="quest-facts" data-pagefind-ignore>
+      {quest.region && (
+        <div><dt>{t(lang, "questRegion")}</dt><dd><a href={mapLinkOf(lang, quest.region)} data-testid="quest-region-link">{quest.region.name[lang]}</a></dd></div>
+      )}
+      <div><dt>{t(lang, "questSize")}</dt><dd>{t(lang, SIZE_KEY[quest.size])}</dd></div>
+      {quest.replayable && <div><dt>{t(lang, "questReplayable")}</dt><dd>✓</dd></div>}
+    </dl>
+    {quest.description && (
+      <div class="quest-description" data-testid="quest-description">
+        <p set:html={quest.description.html[lang]} />
+        {untranslated(quest.description) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+      </div>
+    )}
+    {(quest.prerequisites.length > 0 || quest.unlocks.length > 0) && (
+      <div class="quest-chain">
+        <QuestLinks lang={lang} title={t(lang, "questPrerequisites")} quests={questsOf(quest.prerequisites)} testid="quest-prerequisites" />
+        <QuestLinks lang={lang} title={t(lang, "questUnlocks")} quests={questsOf(quest.unlocks)} testid="quest-unlocks" />
+      </div>
+    )}
+    {quest.objectives.length > 0 && (
+      <EntrySection title={t(lang, "questObjectives")} testid="quest-objectives">
+        <ol class="quest-objectives">
+          {quest.objectives.map((objective) => (
+            <li>
+              <span>{objective.text[lang]}</span>
+              {objective.count > 1 && <span class="quest-count mono">{countMark(objective.count)}</span>}
+            </li>
+          ))}
+        </ol>
+        {objectivesUntranslated && <span class="tag warn">{t(lang, "untranslated")}</span>}
+      </EntrySection>
+    )}
+    <QuestRewards lang={lang} quest={quest} />
+    {quest.completed && (
+      <EntrySection title={t(lang, "questCompleted")} testid="quest-completed">
+        <p class="quest-completed" set:html={quest.completed.html[lang]} />
+        {untranslated(quest.completed) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+      </EntrySection>
+    )}
+    {mobs.length > 0 && (
+      <EntrySection title={t(lang, "questRelatedMobs")} testid="quest-mobs">
+        <ul class="mob-grid">
+          {mobs.map((mob, index) => <MobCard lang={lang} mob={mob} index={index} />)}
+        </ul>
+      </EntrySection>
+    )}
+  </article>
+</Base>

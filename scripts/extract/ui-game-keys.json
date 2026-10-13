@@ -37,5 +37,12 @@
   "sourceMerchants": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_merchants_title" },
   "maxLevel": { "namespace": "Text/Release/InventoryLabels.csv", "key": "talismans_maxLevel" },
   "secretTalisman": { "namespace": "Text/Release/DT_ItemCollectionsDefinition.csv", "key": "SW_Collectibles_SecretTalismans_SW_TextEntry_Name_Single" },
-  "soulStorm": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_soulstorms_title" }
+  "soulStorm": { "namespace": "Text/Release/OnboardingLabels.csv", "key": "tutoriallog_soulstorms_title" },
+  "quests": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestJournal_Header_All" },
+  "questsCore": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestJournal_Header_Core" },
+  "questsSide": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestJournal_Header_Side" },
+  "questTypeCore": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestType_CoreQuest" },
+  "questTypeSide": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestType_SideQuest" },
+  "questObjectives": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestDetail_Objectives" },
+  "questRewards": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestDetail_Rewards" }
 }
