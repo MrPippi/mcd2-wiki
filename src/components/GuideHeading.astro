@@ -1,0 +1,21 @@
+---
+// A section heading taken from the game's own text (a vendor's or a currency's name), with the "untranslated" tag when it fell back to English.
+import { t, type Lang } from "../lib/i18n";
+import type { ShownText } from "../lib/guides";
+
+interface Props {
+  lang: Lang;
+  text: ShownText | undefined;
+  level?: "h2" | "h3";
+  class?: string;
+}
+
+const { lang, text, level = "h2", class: className = "section-title" } = Astro.props;
+const Tag = level;
+---
+{text && (
+  <Tag class={className}>
+    <span set:html={text.html} />
+    {text.untranslated && <span class="tag warn guide-untranslated">{t(lang, "untranslated")}</span>}
+  </Tag>
+)}

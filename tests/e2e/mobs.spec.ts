@@ -142,7 +142,7 @@ test.describe("menu and search", () => {
     await page.goto("/zh/mobs/");
     await page.getByTestId("site-menu").click();
     const links = page.locator(".site-menu a");
-    await expect(links).toHaveText(["地圖", "成就", "怪物圖鑑", "靈魂風暴", "配裝", "武器比較"]);
+    await expect(links).toHaveText(["地圖", "成就", "怪物圖鑑", "靈魂風暴", "配裝", "武器比較", "攻略"]);
     await expect(links.nth(2)).toHaveAttribute("href", "/zh/mobs/");
     await expect(page.locator(".site-menu [aria-current='page']")).toHaveText("怪物圖鑑");
   });

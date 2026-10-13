@@ -1,0 +1,42 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import Base from "../../../layouts/Base.astro";
+import { catalogLabel } from "../../../lib/catalog";
+import { GUIDES } from "../../../lib/guides";
+import { t, type Lang } from "../../../lib/i18n";
+import { compareLang, htmlLang } from "../../../lib/lang";
+import { href } from "../../../lib/url";
+import "../../../styles/guides.css";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alt = compareLang(lang);
+---
+<Base lang={lang} title={t(lang, "guides")} description={t(lang, "guidesIntro")}>
+  <div class="catalog guide-page guides-hub" data-pagefind-body>
+    <header class="catalog-head guide-head">
+      <p class="catalog-count kicker mono">{GUIDES.length}</p>
+      <h1 class="catalog-title"><span data-pagefind-meta="title">{t(lang, "guides")}</span></h1>
+      {t(alt, "guides") !== t(lang, "guides") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "guides")}</p>}
+      <p class="guide-lede">{t(lang, "guidesIntro")}</p>
+    </header>
+    <ol class="guide-cards">
+      {GUIDES.map((guide, index) => (
+        <li class="guide-card" style={`--i:${index}`} data-testid="guide-card">
+          <a class="guide-card-link" href={href(lang, "guides", guide.slug)}>
+            <span class="card-no" aria-hidden="true">{catalogLabel(index + 1)}</span>
+            <span class="guide-card-title">{t(lang, guide.title)}</span>
+            <span class="guide-card-summary">{t(lang, guide.summary)}</span>
+          </a>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Base>
