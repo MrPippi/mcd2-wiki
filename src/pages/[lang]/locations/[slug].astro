@@ -1,0 +1,115 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import type { Location } from "../../../../scripts/extract/location-schema";
+import EntryIcon from "../../../components/EntryIcon.astro";
+import EntrySection from "../../../components/EntrySection.astro";
+import LangText from "../../../components/LangText.astro";
+import LocationIcon from "../../../components/LocationIcon.astro";
+import MobCard from "../../../components/MobCard.astro";
+import QuestCard from "../../../components/QuestCard.astro";
+import Base from "../../../layouts/Base.astro";
+import { mobKindLabel, t, type Lang } from "../../../lib/i18n";
+import { compareLang, htmlLang } from "../../../lib/lang";
+import { formatLevels, sharesRegionName } from "../../../lib/location-view";
+import { locationData, locationDescription, locationLoot, locationMobGroups, locationQuests } from "../../../lib/locations";
+import { mapLinkOf } from "../../../lib/mobs";
+import { rewardHref } from "../../../lib/quests";
+import { href } from "../../../lib/url";
+import "../../../styles/mobs.css";
+import "../../../styles/quests.css";
+import "../../../styles/locations.css";
+
+export function getStaticPaths() {
+  return LANGS.flatMap((lang) => locationData.locations.map((location) => ({ params: { lang, slug: location.slug }, props: { lang, location } })));
+}
+
+interface Props {
+  lang: Lang;
+  location: Location;
+}
+
+const { lang, location } = Astro.props;
+const alt = compareLang(lang);
+const groups = locationMobGroups(location);
+const starts = groups.map((_, i) => groups.slice(0, i).reduce((sum, group) => sum + group.mobs.length, 0));
+const quests = locationQuests(location);
+const loot = locationLoot(location);
+const PLATE_ICON_SIZE = 84;
+const LOOT_ICON_SIZE = 40;
+---
+<Base lang={lang} title={location.name[lang]} description={locationDescription(location, lang)}>
+  <article class="entry-detail location-page" data-pagefind-body>
+    <p class="kicker entry-kicker" data-pagefind-ignore>
+      <a href={href(lang, "locations")}>{t(lang, "locations")}</a>
+    </p>
+    <div class="location-title">
+      <LocationIcon location={location} size={PLATE_ICON_SIZE} loading="eager" />
+      <LangText as="h1" lang={lang} value={location.name} searchTitle />
+      {location.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+    </div>
+    {(location.levels.length > 0 || location.map) && (
+      <dl class="quest-facts location-facts" data-testid="location-facts" data-pagefind-ignore>
+        {location.levels.length > 0 && (
+          <div><dt>{t(lang, "locationLevel")}</dt><dd><span class="mono" data-testid="location-level">{formatLevels(location.levels)}</span> <span class="note">{t(lang, "locationLevelNote")}</span></dd></div>
+        )}
+        {location.map && (
+          <div><dt>{t(lang, "map")}</dt><dd><a href={mapLinkOf(lang, location)} data-testid="location-map-link">{t(lang, "locationOpenMap")}</a></dd></div>
+        )}
+      </dl>
+    )}
+    {location.subLocations.length > 0 && (
+      <EntrySection title={t(lang, "locationPlaces")} testid="location-places">
+        <ul class="location-places">
+          {location.subLocations.map((place) => (
+            <li data-testid="location-place">
+              <span class="location-place-name">{place.name[lang]}</span>
+              {place.areaIds.length > 1 && <span class="quest-count mono" data-testid="place-count">×{place.areaIds.length}</span>}
+              {place.name[alt] !== place.name[lang] && <span class="item-alt" lang={htmlLang(alt)}>{place.name[alt]}</span>}
+              {sharesRegionName(place, location) && <span class="tag">{t(lang, "locationSameName")}</span>}
+              {place.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+            </li>
+          ))}
+        </ul>
+      </EntrySection>
+    )}
+    {groups.length > 0 && (
+      <EntrySection title={t(lang, "locationMobs")} testid="location-mobs">
+        {groups.map((group, g) => (
+          <div class="location-mob-group" data-group={group.kind}>
+            <h3 class="location-subhead">{mobKindLabel(group.kind, lang)} <span class="count">({group.mobs.length})</span></h3>
+            <ul class="mob-grid">
+              {group.mobs.map((mob, i) => <MobCard lang={lang} mob={mob} index={starts[g] + i} />)}
+            </ul>
+          </div>
+        ))}
+        <p class="note">{t(lang, "mobAreasNote")}</p>
+      </EntrySection>
+    )}
+    {quests.length > 0 && (
+      <EntrySection title={t(lang, "locationQuests")} testid="location-quests">
+        <ol class="quest-grid">
+          {quests.map((quest, index) => <QuestCard lang={lang} quest={quest} index={index} />)}
+        </ol>
+      </EntrySection>
+    )}
+    {loot.length > 0 && (
+      <EntrySection title={t(lang, "locationLoot")} testid="location-loot">
+        <ul class="location-loot">
+          {loot.map((entry) => {
+            const target = rewardHref(lang, entry);
+            const Tag = target ? "a" : "span";
+            return (
+              <li>
+                <Tag class="quest-reward-item" href={target} data-testid="location-loot-item">
+                  <EntryIcon icon={entry.icon} alt="" size={LOOT_ICON_SIZE} category={entry.category} variant={entry.variant} />
+                  <span>{entry.name[lang]}</span>
+                </Tag>
+              </li>
+            );
+          })}
+        </ul>
+        <p class="note">{t(lang, "locationLootNote")}</p>
+      </EntrySection>
+    )}
+  </article>
+</Base>

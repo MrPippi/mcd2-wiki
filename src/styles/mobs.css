@@ -68,7 +68,9 @@
 .mob-areas li { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding: 10px var(--space-1); border-bottom: 1px solid var(--rule); }
 .mob-areas a { font-family: var(--font-display); font-weight: 700; overflow-wrap: anywhere; }
 /* Areas the map marks get a pin in ink (vermilion stays for unique, current place and focus); the rest open the map without a position. */
-.mob-areas li.has-marker a::before { content: "◉ "; color: var(--ink); font-family: var(--font-body); }
+.mob-areas li.has-marker a:last-of-type::before { content: "◉ "; color: var(--ink); font-family: var(--font-body); }
+/* With a location page, the name opens it and this small link opens the map. */
+.mob-areas a.mob-area-map { font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 400; }
 .mob-areas .item-alt { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); overflow-wrap: anywhere; }
 
 .mob-drop-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }

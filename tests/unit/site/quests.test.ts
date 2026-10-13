@@ -81,6 +81,8 @@ describe("quests.json", () => {
   });
 
   it("puts the quest list in the menu after the weapon comparison", () => {
-    expect(SITE_MENU.at(-1)).toEqual({ key: "quests", segment: "quests" });
+    const at = SITE_MENU.findIndex((item) => item.segment === "quests");
+    expect(SITE_MENU[at - 1]).toEqual({ key: "weaponCompare", segment: "compare" });
+    expect(SITE_MENU[at]).toEqual({ key: "quests", segment: "quests" });
   });
 });
