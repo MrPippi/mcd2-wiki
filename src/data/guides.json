@@ -656,27 +656,6 @@
     ]
   },
   "secretTalismans": {
-    "name": {
-      "html": {
-        "zh": "秘密護符",
-        "zh-hans": "秘密护身符",
-        "en": "Secret Talismans",
-        "ja": "秘密のタリスマン",
-        "ko": "비밀 부적",
-        "de": "Geheimtalismane",
-        "fr": "Talismans secrets",
-        "es": "Talismanes secretos",
-        "it": "Talismani segreti",
-        "pt": "Talismãs secretos",
-        "ru": "Тайные талисманы",
-        "pl": "Sekretne talizmany",
-        "nl": "Geheime talismannen",
-        "sv": "Hemliga talismaner",
-        "tr": "Gizli Tılsımlar",
-        "uk": "Секретні талісмани"
-      },
-      "untranslated": []
-    },
     "completion": {
       "html": {
         "zh": "你已收集到所有秘密護符！",

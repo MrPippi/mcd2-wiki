@@ -54,23 +54,26 @@ export function buildCaps(tables: GuideTables): { caps: GuidesData["caps"]; issu
   return { caps: { emeralds, echoShards, level }, issues: [] };
 }
 
-function vendorOf(id: Vendor, costs: Readonly<Record<string, { LevelToCostMap: Record<string, number> }>>): VendorData | undefined {
+function vendorOf(id: Vendor, costs: Readonly<Record<string, { LevelToCostMap: Record<string, number> }>>): { vendor?: VendorData; issues: Issue[] } {
   const entry = Object.entries(costs).find(([key]) => mapKeyTag(key) === VENDOR_TAGS[id]);
-  if (!entry) return undefined;
-  const levels = Object.entries(entry[1].LevelToCostMap)
-    .map(([level, cost]) => ({ level: Number(level), cost }))
-    .filter(({ level }) => Number.isInteger(level) && level >= 2)
-    .sort((a, b) => a.level - b.level);
-  return { id, levels };
+  if (!entry) return { issues: [issue("guides-value-missing", `GA_UpgradeMerchant UpgradeCosts: ${VENDOR_TAGS[id]}`)] };
+  const all = Object.entries(entry[1].LevelToCostMap).map(([key, cost]) => ({ key, level: Number(key), cost }));
+  const valid = (level: number): boolean => Number.isInteger(level) && level >= 2;
+  const levels = all.filter(({ level }) => valid(level)).map(({ level, cost }) => ({ level, cost })).sort((a, b) => a.level - b.level);
+  const dropped = all.filter(({ level }) => !valid(level)).map(({ key }) => key);
+  return {
+    vendor: { id, levels },
+    issues: dropped.length > 0 ? [issue("guides-value-missing", `GA_UpgradeMerchant ${VENDOR_TAGS[id]}: level keys skipped (${dropped.join(", ")})`)] : [],
+  };
 }
 
 /** The three town vendors in a fixed order; a vendor the upgrade map lacks is left out and reported. */
 export function buildVendors(tables: GuideTables): { vendors: VendorData[]; issues: Issue[] } {
   const costs = abilityData(defaultPlayer(tables), UPGRADE_ABILITY).find((data) => data.UpgradeCosts)?.UpgradeCosts ?? {};
-  const built = (Object.keys(VENDOR_TAGS) as Vendor[]).map((id) => ({ id, vendor: vendorOf(id, costs) }));
+  const built = (Object.keys(VENDOR_TAGS) as Vendor[]).map((id) => vendorOf(id, costs));
   return {
     vendors: built.flatMap(({ vendor }) => (vendor ? [vendor] : [])),
-    issues: built.filter(({ vendor }) => !vendor).map(({ id }) => issue("guides-value-missing", `GA_UpgradeMerchant UpgradeCosts: ${VENDOR_TAGS[id]}`)),
+    issues: built.flatMap((one) => one.issues),
   };
 }
 

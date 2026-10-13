@@ -15,8 +15,11 @@ import type { LootRow } from "./loot-tables";
 const COLLECTION = "SecretTalismans";
 const CHEST_PREFIX = "sw.lootactor.talismanschest.";
 const QUEST_NAMES = "Text/Release/QuestTrackerLabels.csv";
+/**
+ * The collection texts the page quotes. Description.Completion.Additional is skipped: its English has a typo ("openend")
+ * and its first sentence repeats Completion.Short, so only its second sentence ("Find out what adventures await inside!") is lost.
+ */
 const TEXT_ENTRIES = {
-  name: "SW.TextEntry.Name",
   completion: "SW.TextEntry.Description.Completion",
   door: "SW.TextEntry.Description.Completion.Short",
 } as const;
@@ -96,7 +99,7 @@ export interface SecretInput {
 export function buildSecretTalismans(input: SecretInput): { secretTalismans: GuidesData["secretTalismans"]; issues: Issue[] } {
   const collection = input.tables.collections.find((row) => row.Name === COLLECTION);
   if (!collection) {
-    return { secretTalismans: { name: null, completion: null, door: null, talismans: [] }, issues: [issue("guides-value-missing", `DT_ItemCollectionsDefinition: ${COLLECTION}`)] };
+    return { secretTalismans: { completion: null, door: null, talismans: [] }, issues: [issue("guides-value-missing", `DT_ItemCollectionsDefinition: ${COLLECTION}`)] };
   }
   const rewards = questRewards(input.tables);
   const built = (collection.CollectionDefinition?.ItemsInCollection?.GameplayTags ?? []).map((tag) => talismanOf(input, rewards.rewards, tag.TagName));
@@ -104,7 +107,6 @@ export function buildSecretTalismans(input: SecretInput): { secretTalismans: Gui
   const text = (key: keyof typeof TEXT_ENTRIES) => texts.find(([id]) => id === key)?.[1].text ?? null;
   return {
     secretTalismans: {
-      name: text("name"),
       completion: text("completion"),
       door: text("door"),
       talismans: built.flatMap((one) => (one.talisman ? [one.talisman] : [])),

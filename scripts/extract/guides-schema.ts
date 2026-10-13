@@ -87,7 +87,6 @@ export const GuidesDataSchema = z.object({
     drops: z.array(z.object({ source: z.enum(DROP_SOURCES), weights: z.array(DropWeightSchema) })),
   }),
   secretTalismans: z.object({
-    name: TextSchema.nullable(),
     completion: TextSchema.nullable(),
     door: TextSchema.nullable(),
     talismans: z.array(SecretTalismanSchema),

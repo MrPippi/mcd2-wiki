@@ -2,6 +2,7 @@
 import { LANGS } from "../../../../scripts/extract/config";
 import type { GuidesData } from "../../../../scripts/extract/guides-schema";
 import GuideHeading from "../../../components/GuideHeading.astro";
+import GuideMarker from "../../../components/GuideMarker.astro";
 import GuidePage from "../../../components/GuidePage.astro";
 import GuideText from "../../../components/GuideText.astro";
 import GuideUnconfirmed from "../../../components/GuideUnconfirmed.astro";
@@ -33,6 +34,7 @@ const upgrades = (enchantsmith?.levels ?? []).flatMap((level) => unlockText(data
   {data.enchanting.costs.length > 0 && (
     <section class="entry-section guide-section" data-testid="guide-enchant-costs">
       <h2 class="section-title">{t(lang, "guideEnchantCosts")}</h2>
+      <GuideMarker lang={lang} texts={[points, shards]} />
       <GuideUnconfirmed lang={lang} message="guideEnchantScalingUnconfirmed" verified={data.verified.enchantCostPerLevel} />
       <div class="guide-scroll" tabindex="0" role="region" aria-label={t(lang, "guideEnchantCosts")}>
         <table class="guide-table">
@@ -68,6 +70,7 @@ const upgrades = (enchantsmith?.levels ?? []).flatMap((level) => unlockText(data
     <GuideHeading lang={lang} text={textOf(data, "enchantsmithName", lang)} />
     <GuideText lang={lang} text={textOf(data, "enchantsmithTutorial", lang)} />
     <h3 class="guide-subtitle">{t(lang, "guideUpgradeEnchantments")}</h3>
+    <GuideMarker lang={lang} texts={upgrades} />
     {data.enchanting.maxLevel > 0 && <p class="guide-text" data-testid="guide-max-level">{t(lang, "guideMaxEnchantLevel").replace("{level}", () => roman(data.enchanting.maxLevel))}</p>}
     {upgrades.length > 0 && (
       <ul class="guide-facts">

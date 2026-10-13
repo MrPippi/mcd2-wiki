@@ -41,8 +41,9 @@ export function buildEnchantCosts(tables: GuideTables): { costs: EnchantCost[]; 
   return { costs, issues: missing.map((rarity) => issue("guides-value-missing", `GA_ItemEnchant EnchantCostMap: ${RARITY_TAGS[rarity]}`)) };
 }
 
-/** The highest level suffix any enchantment row carries (3 for .III); 0 when none does. */
-export function maxEnchantmentLevel(tables: GuideTables): number {
+/** The highest level suffix any enchantment row carries (3 for .III); 0, reported, when none does. */
+export function maxEnchantmentLevel(tables: GuideTables): { maxLevel: number; issues: Issue[] } {
   const levels = tables.enchantments.map((row) => LEVELS.indexOf(row.TypeTag.TagName.split(".").at(-1) as (typeof LEVELS)[number]) + 1);
-  return Math.max(0, ...levels);
+  const maxLevel = Math.max(0, ...levels);
+  return { maxLevel, issues: maxLevel === 0 ? [issue("guides-value-missing", "DT_EnchantmentDefinition: no row has a level suffix (.I/.II/.III)")] : [] };
 }

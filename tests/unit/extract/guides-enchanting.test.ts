@@ -41,9 +41,11 @@ describe("buildEnchantCosts", () => {
 
 describe("maxEnchantmentLevel", () => {
   it("is the highest level suffix any enchantment carries", () => {
-    expect(maxEnchantmentLevel(guideTables())).toBe(3);
+    expect(maxEnchantmentLevel(guideTables())).toEqual({ maxLevel: 3, issues: [] });
   });
-  it("is 0 when no enchantment has a level", () => {
-    expect(maxEnchantmentLevel(guideTables({ enchantments: [] }))).toBe(0);
+  it("is 0, reported, when no enchantment has a level", () => {
+    const { maxLevel, issues } = maxEnchantmentLevel(guideTables({ enchantments: [{ Name: "Burning", TypeTag: { TagName: "SW.Enchantment.Burning" } }] }));
+    expect(maxLevel).toBe(0);
+    expect(issues[0]?.type).toBe("guides-value-missing");
   });
 });

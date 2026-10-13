@@ -49,7 +49,6 @@ describe("buildSecretTalismans", () => {
 
   it("quotes the collection's own texts", () => {
     const { secretTalismans } = buildSecretTalismans({ tables: guideTables(), locales, entries });
-    expect(secretTalismans.name?.html.zh).toBe("秘密護符");
     expect(secretTalismans.completion?.html.en).toBe("You have collected all the secret Talismans!");
     expect(secretTalismans.door?.untranslated).toContain("zh");
   });
@@ -60,9 +59,23 @@ describe("buildSecretTalismans", () => {
     expect(secretTalismans.talismans.every((talisman) => !talisman.chest)).toBe(true);
   });
 
+  it("counts only a talisman chest whose guaranteed slot drops just that talisman", () => {
+    const tag = (TagName: string) => ({ TagName });
+    const drop = (name: string) => ({ TypeTag: tag(`SW.Item.Talisman.${name}`), Weight: 1, Operation: "Set" });
+    const slot = (guaranteed: number, names: string[]) => ({ NumberOfGuaranteedDrops: guaranteed, NumberOfRandomRolls: 0, DropChancePerRoll: 0, InheritParentDropTable: true, DropTable: { Tags: names.map(drop) } });
+    const chest = (name: string, lootSlot: ReturnType<typeof slot>) => ({ Name: name, TypeTag: tag(`SW.LootActor.TalismansChest.${name}`), LootDropDefinition: { LootSlots: { '(TagName="SW.LootSlot.Talismans")': lootSlot } } });
+    const lootActor = [
+      chest("DoubleDrop", slot(0, ["DoubleDrop"])),               // not guaranteed
+      chest("RangedBuff", slot(1, ["RangedBuff", "DoubleDrop"])), // shares its slot with another talisman
+      { Name: "Empty", TypeTag: tag("SW.LootActor.TalismansChest.Empty"), LootDropDefinition: {} },
+    ];
+    const { secretTalismans } = buildSecretTalismans({ tables: guideTables({ lootActor }), locales, entries });
+    expect(secretTalismans.talismans.map((talisman) => talisman.chest)).toEqual([false, false]);
+  });
+
   it("is empty and reported without the collection", () => {
     const { secretTalismans, issues } = buildSecretTalismans({ tables: guideTables({ collections: [] }), locales, entries });
-    expect(secretTalismans).toEqual({ name: null, completion: null, door: null, talismans: [] });
+    expect(secretTalismans).toEqual({ completion: null, door: null, talismans: [] });
     expect(issues[0]?.type).toBe("guides-value-missing");
   });
 });

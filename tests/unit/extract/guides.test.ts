@@ -62,6 +62,13 @@ describe("extractGuides", () => {
     expect(data.merchant).toBeNull();
   });
 
+  it("stops with the field named when a built value breaks the output schema", async () => {
+    const rows = REAL_GUIDE_ROWS();
+    const player = JSON.parse(JSON.stringify(rows.player).replace('"2":10', '"2":-10')) as unknown[];
+    await putTable(GUIDE_TABLE_FILES.player, player);
+    await expect(extractGuides(input())).rejects.toThrow(/guides\.json[\s\S]*vendors/);
+  });
+
   it("stops on a table whose fields changed, naming it", async () => {
     await putTable(GUIDE_TABLE_FILES.progression, [{ Name: "Town", TypeTag: { TagName: "SW.Progression.Town.FirstVisit" } }]);
     await expect(extractGuides(input())).rejects.toThrow(/DT_ProgressionDefinition/);

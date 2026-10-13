@@ -70,7 +70,8 @@ describe("guides formatting", () => {
     expect(roman(3)).toBe("III");
     expect(roman(9)).toBe("9");
     expect(rarityName("special", "zh")).toBe("特殊");
-    expect(gearName("helmet", "en")).toBeTruthy();
+    expect(gearName("helmet", "en")).toBe("Helmet");
+    expect(gearName("melee", "zh")).toBe("近戰武器");
   });
 });
 

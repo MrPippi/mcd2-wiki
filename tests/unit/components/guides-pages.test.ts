@@ -131,6 +131,61 @@ describe("progression guide", () => {
     const html = await render(ProgressionPage, "ja", { ...guidesData, stages });
     const section = html.slice(html.indexOf('data-testid="guide-stages"'));
     expect(count(section, "tag warn")).toBe(1);
+    expect(section).toContain('data-testid="guide-section-untranslated"');
+  });
+});
+
+describe("untranslated markers on game text inside site sentences and tables", () => {
+  const MARKER = 'data-testid="guide-section-untranslated"';
+  const withFallback = (ids: readonly (keyof GuidesData["texts"])[]): GuidesData => ({
+    ...guidesData,
+    texts: { ...guidesData.texts, ...Object.fromEntries(ids.map((id) => [id, { ...guidesData.texts[id], untranslated: ["ja" as const] }])) },
+  });
+  const section = (html: string, testId: string): string => {
+    const start = html.indexOf(`data-testid="${testId}"`);
+    return html.slice(start, html.indexOf("</section>", start));
+  };
+
+  it("are absent while every text has its own translation", async () => {
+    for (const page of ALL_PAGES) expect(await render(page, "ja")).not.toContain(MARKER);
+  });
+
+  it("mark the vendor section once when an unlock text fell back to English", async () => {
+    const html = await render(VendorsPage, "ja", withFallback(["merchantLevel2"]));
+    expect(count(section(html, "guide-vendors"), MARKER)).toBe(1);
+    expect(section(html, "guide-merchant")).not.toContain(MARKER);
+  });
+
+  it("mark every section that names the currency when its name fell back to English", async () => {
+    const data = withFallback(["echoShards"]);
+    const vendors = await render(VendorsPage, "ja", data);
+    expect(count(section(vendors, "guide-vendors"), MARKER)).toBe(1);
+    expect(count(section(vendors, "guide-merchant"), MARKER)).toBe(1);
+    expect(count(section(await render(EnchantingPage, "ja", data), "guide-enchant-costs"), MARKER)).toBe(1);
+    expect(count(section(await render(ProgressionPage, "ja", data), "guide-caps"), MARKER)).toBe(1);
+  });
+
+  it("mark the Dutch enchanting cost table, whose headers show the English points name", async () => {
+    expect(count(section(await render(EnchantingPage, "nl"), "guide-enchant-costs"), MARKER)).toBe(1);
+  });
+
+  it("mark Enchantsmith level texts and quest names", async () => {
+    const enchanting = await render(EnchantingPage, "ja", withFallback(["enchantsmithLevel3"]));
+    expect(count(section(enchanting, "guide-enchantsmith"), MARKER)).toBe(1);
+    const talismans = guidesData.secretTalismans.talismans.map((talisman) => ({
+      ...talisman, quests: talisman.quests.map((quest) => (quest.name ? { ...quest, name: { ...quest.name, untranslated: ["ja" as const] } } : quest)),
+    }));
+    const secret = await render(SecretPage, "ja", { ...guidesData, secretTalismans: { ...guidesData.secretTalismans, talismans } });
+    expect(count(section(secret, "guide-secret-talismans"), MARKER)).toBe(1);
+  });
+});
+
+describe("secret talismans intro", () => {
+  it("says each sits in its own chest only while every one has a chest", async () => {
+    expect(await render(SecretPage, "en")).toContain('data-testid="guide-secret-intro"');
+    const [first, ...rest] = guidesData.secretTalismans.talismans;
+    const data = { ...guidesData, secretTalismans: { ...guidesData.secretTalismans, talismans: [{ ...first, chest: false }, ...rest] } };
+    expect(await render(SecretPage, "en", data)).not.toContain('data-testid="guide-secret-intro"');
   });
 });
 
@@ -139,7 +194,9 @@ describe("every guide", () => {
     for (const page of ALL_PAGES) {
       const html = await render(page, "ru");
       expect(html).toContain('href="/ru/guides/"');
-      for (const tag of html.match(/<div[^>]*class="guide-scroll"[^>]*>/g) ?? []) {
+      const scrolls = html.match(/<div[^>]*class="guide-scroll"[^>]*>/g) ?? [];
+      if (page !== SecretPage) expect(scrolls.length).toBeGreaterThan(0);   // the talisman page has cards, no tables
+      for (const tag of scrolls) {
         expect(tag).toContain('tabindex="0"');
         expect(tag).toMatch(/aria-label="[^"]+"/);
       }

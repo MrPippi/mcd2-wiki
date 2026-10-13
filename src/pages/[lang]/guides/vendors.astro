@@ -2,6 +2,7 @@
 import { LANGS } from "../../../../scripts/extract/config";
 import type { GuidesData } from "../../../../scripts/extract/guides-schema";
 import GuideHeading from "../../../components/GuideHeading.astro";
+import GuideMarker from "../../../components/GuideMarker.astro";
 import GuidePage from "../../../components/GuidePage.astro";
 import GuideText from "../../../components/GuideText.astro";
 import { fill, formatNumber, gearName, guideBySlug, guidesData, plainText, rarityName, textOf, unlockText, VENDOR_TEXTS, type GuideLink } from "../../../lib/guides";
@@ -24,9 +25,11 @@ const echoShards = textOf(data, "echoShards", lang);
 const emeralds = textOf(data, "emeralds", lang);
 const currency = (text: typeof echoShards) => ({ html: text?.html ?? "" });
 const merchant = data.merchant;
+const unlocks = data.vendors.flatMap((vendor) => vendor.levels.map((level) => unlockText(data, vendor.id, level.level, lang)));
 ---
 <GuidePage lang={lang} guide={guide}>
   <section class="entry-section guide-section" data-testid="guide-vendors">
+    <GuideMarker lang={lang} texts={[echoShards, ...unlocks]} />
     {echoShards && <p class="guide-text" set:html={fill(t(lang, "guideCostsIn"), { currency: currency(echoShards) })} />}
     <div class="guide-vendor-grid">
       {data.vendors.map((vendor) => {
@@ -36,7 +39,7 @@ const merchant = data.merchant;
           <article class="guide-vendor" data-testid="guide-vendor">
             <GuideHeading lang={lang} text={name} class="guide-subtitle" />
             <GuideText lang={lang} text={textOf(data, texts.intro, lang)} />
-            <div class="guide-scroll" tabindex="0" role="region" aria-label={name ? plainText(name.html) : vendor.id}>
+            <div class="guide-scroll" tabindex="0" role="region" aria-label={name ? plainText(name.html) : t(lang, "guideVendors")}>
               <table class="guide-table">
                 <thead><tr><th scope="col">{t(lang, "guideColLevel")}</th><th scope="col">{t(lang, "guideColCost")}</th><th scope="col">{t(lang, "guideColUnlocks")}</th></tr></thead>
                 <tbody>
@@ -62,6 +65,7 @@ const merchant = data.merchant;
   {merchant && (
     <section class="entry-section guide-section" data-testid="guide-merchant">
       <h2 class="section-title">{t(lang, "guideMerchantStock")}</h2>
+      <GuideMarker lang={lang} texts={[echoShards, emeralds]} />
       <GuideText lang={lang} text={textOf(data, "merchantTutorial", lang)} />
       <ul class="guide-facts">
         <li>{t(lang, "guideSlotsPerRarity").replace("{n}", () => formatNumber(merchant.slotsPerRarity, lang))}</li>

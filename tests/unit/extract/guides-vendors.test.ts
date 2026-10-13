@@ -20,14 +20,18 @@ describe("buildVendors", () => {
     expect(issues).toEqual([]);
   });
 
-  it("leaves out a vendor the upgrade map lacks, reports it, and ignores levels that are not 2 or higher", () => {
+  it("leaves out a vendor the upgrade map lacks and skips, reporting them, level keys that are not 2 or higher", () => {
     const player = playerRow();
     const upgrade = player.Abilities[2].InstanceData[0] as { UpgradeCosts: Record<string, { LevelToCostMap: Record<string, number> }> };
     const costs = { '(TagName="SW.NPC.VillageMerchant")': { LevelToCostMap: { "3": 15, "1": 0, "x": 5, "2": 10 } } };
     const tables = guideTables({ player: [{ ...player, Abilities: [{ ...player.Abilities[2], InstanceData: [{ ...upgrade, UpgradeCosts: costs }] }] }] });
     const { vendors, issues } = buildVendors(tables);
     expect(vendors).toEqual([{ id: "merchant", levels: [{ level: 2, cost: 10 }, { level: 3, cost: 15 }] }]);
-    expect(issues.map((item) => item.detail)).toEqual(["GA_UpgradeMerchant UpgradeCosts: SW.NPC.OldBlacksmith", "GA_UpgradeMerchant UpgradeCosts: SW.NPC.Enchantsmith"]);
+    expect(issues.map((item) => item.detail)).toEqual([
+      "GA_UpgradeMerchant SW.NPC.VillageMerchant: level keys skipped (1, x)",
+      "GA_UpgradeMerchant UpgradeCosts: SW.NPC.OldBlacksmith",
+      "GA_UpgradeMerchant UpgradeCosts: SW.NPC.Enchantsmith",
+    ]);
   });
 
   it("has no vendors without DefaultPlayer", () => {

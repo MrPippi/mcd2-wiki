@@ -45,19 +45,22 @@ function buildData(tables: GuideTables, input: GuidesInput, status: GuidesStatus
   const drops = buildDropWeights(tables);
   const secret = buildSecretTalismans({ tables, locales: input.locales, entries: input.entries });
   const stages = buildStages(tables, input.locales);
+  const maxLevel = maxEnchantmentLevel(tables);
   const data = {
     verified: status,
     texts: texts.texts,
     caps: caps.caps,
     vendors: vendors.vendors,
     merchant: merchant.merchant,
-    enchanting: { costs: enchanting.costs, maxLevel: maxEnchantmentLevel(tables) },
+    enchanting: { costs: enchanting.costs, maxLevel: maxLevel.maxLevel },
     rarity: { tiers: tiers.tiers, drops: drops.drops },
     secretTalismans: secret.secretTalismans,
     stages: stages.stages,
   };
-  const issues = [texts, caps, vendors, merchant, enchanting, tiers, drops, secret, stages].flatMap((part) => part.issues);
-  return { data: GuidesDataSchema.parse(data), issues };
+  const issues = [texts, caps, vendors, merchant, enchanting, maxLevel, tiers, drops, secret, stages].flatMap((part) => part.issues);
+  const parsed = GuidesDataSchema.safeParse(data);
+  if (!parsed.success) throw new ExtractError(`攻略資料 guides.json 不符合格式：${parsed.error.issues.slice(0, 3).map(formatZodIssue).join("；")}`);
+  return { data: parsed.data, issues };
 }
 
 export async function extractGuides(input: GuidesInput): Promise<GuidesResult> {
