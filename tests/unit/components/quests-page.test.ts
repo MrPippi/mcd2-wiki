@@ -76,7 +76,7 @@ describe("quest page", () => {
     const objectives = section(html, "quest-objectives");
     expect(objectives).toContain("Collect planks for the beehives");
     expect(objectives).toContain("×3");
-    expect(count(objectives, "Find a spot to build beehives")).toBe(1);
+    expect(count(objectives, "Find a spot to build beehives")).toBeGreaterThan(1);   // a step that comes back stays
   });
 
   it("splits rewards into first and every completion, links items and shows emeralds by size", async () => {
@@ -95,6 +95,19 @@ describe("quest page", () => {
     const html = await renderQuest(realQuest("dea1-s12-a"));
     expect(html).not.toContain("/enchantment/soul-fire-aspect/");
     expect(section(html, "quest-rewards-every")).toMatch(/<span class="quest-reward-item"[^>]*data-testid="quest-reward-item"/);
+  });
+
+  it("says 'On completion' for a quest that cannot be replayed and 'Every completion' plus a replayable tag for one that can", async () => {
+    const once = await renderQuest(realQuest("ca04"));
+    expect(section(once, "quest-rewards-every")).toContain("On completion");
+    expect(once).not.toContain('data-testid="quest-replayable"');
+    const again = await renderQuest(realQuest("ca10-br"));
+    expect(section(again, "quest-rewards-every")).toContain("Every completion");
+    expect(again).toMatch(/data-testid="quest-replayable">Replayable</);
+  });
+
+  it("puts prerequisites under an h2, never straight from h1 to h3", async () => {
+    expect(section(await renderQuest(realQuest("ca02")), "quest-prerequisites")).toMatch(/^[^<]*>\s*<h2>/);
   });
 
   it("shows the description, completed text, region link and related mobs", async () => {

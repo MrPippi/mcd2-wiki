@@ -76,10 +76,20 @@ describe("rewardsOf", () => {
       { type: "quest-reward-empty", detail: "Q every: QuestTalismanEmpty" },
     ]);
   });
-  it("gives one reward per row an entry names, and shows a repeated reward once", () => {
+  it("gives one reward per row an entry names", () => {
     const entry = lootEntry("SW.Area.Forest.A1", "SW.Quest.Loot.AreaDropModifier", "SW.Quest.Loot.Melee.Axe");
-    const built = rewardsOf([entry, entry], CTX, "CA08_B every");
-    expect(built.rewards.map((reward) => reward.kind)).toEqual(["areaDrop", "items"]);
+    expect(rewardsOf([entry], CTX, "CA08_B every").rewards.map((reward) => reward.kind)).toEqual(["areaDrop", "items"]);
+  });
+  it("counts two identical area-drop entries as two items (CA09_BR, CA10_BR first completion)", () => {
+    const entry = lootEntry("SW.Quest.Loot.AreaDropModifier", "SW.Area.Forest.A1", "SW.RarityChance.Quest.Special");
+    expect(rewardsOf([entry, entry], CTX, "CA09_BR first").rewards).toEqual([{ kind: "areaDrop", area: { name: FOREST }, count: 2, rarity: "special" }]);
+  });
+  it("keeps area drops of another rarity apart, and repeated item entries as separate lines", () => {
+    const special = lootEntry("SW.Quest.Loot.AreaDropModifier", "SW.Area.Forest.A1", "SW.RarityChance.Quest.Special");
+    const plain = lootEntry("SW.Quest.Loot.AreaDropModifier", "SW.Area.Forest.A1");
+    const axe = lootEntry("SW.Quest.Loot.Melee.Axe");
+    const rewards = rewardsOf([special, plain, axe, axe], CTX, "X first").rewards;
+    expect(rewards.map((reward) => (reward.kind === "areaDrop" ? reward.count : reward.source))).toEqual([1, 1, "quest:QuestMeleeAxe", "quest:QuestMeleeAxe"]);
   });
 });
 

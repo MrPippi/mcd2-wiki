@@ -294,7 +294,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -629,7 +630,7 @@
   "questTypeSide": "支线任务",
   "questObjectives": "任务目标",
   "questRewards": "奖励",
-  "questsIntro": "游戏中的所有任务：目标、前置任务与奖励，文字取自游戏本身。",
+  "questsIntro": "游戏中的主线与支线任务、回响傀儡任务与头目重战：目标、前置任务与奖励，文字取自游戏本身。",
   "questsEchoGolem": "回响傀儡任务",
   "questsBossReplays": "头目重战",
   "questRegion": "地区",
@@ -646,5 +647,6 @@
   "questEveryCompletion": "每次完成",
   "questAreaDrop": "{area} 的随机物品",
   "questRelatedMobs": "相关怪物",
-  "sourceRewardOf": "{quest}的奖励"
+  "sourceRewardOf": "{quest}的奖励",
+  "questOnCompletion": "完成时"
 }

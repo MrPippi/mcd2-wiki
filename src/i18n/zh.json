@@ -327,7 +327,7 @@
   "questTypeSide": "支線任務",
   "questObjectives": "目標",
   "questRewards": "獎勵",
-  "questsIntro": "遊戲中的所有任務：目標、前置任務與獎勵，文字取自遊戲本身。",
+  "questsIntro": "遊戲中的主線與支線任務、回聲魔像任務與頭目重戰：目標、前置任務與獎勵，文字取自遊戲本身。",
   "questsEchoGolem": "回聲魔像任務",
   "questsBossReplays": "頭目重戰",
   "questRegion": "地區",
@@ -344,5 +344,6 @@
   "questEveryCompletion": "每次完成",
   "questAreaDrop": "{area} 的隨機物品",
   "questRelatedMobs": "相關怪物",
-  "sourceRewardOf": "{quest}的獎勵"
+  "sourceRewardOf": "{quest}的獎勵",
+  "questOnCompletion": "完成時"
 }

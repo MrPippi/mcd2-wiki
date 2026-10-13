@@ -295,7 +295,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "_english": [
     "armorPiece",
@@ -632,7 +633,7 @@
   "questTypeSide": "Nebenquest",
   "questObjectives": "Ziele",
   "questRewards": "Belohnungen",
-  "questsIntro": "Alle Quests des Spiels mit Zielen, Voraussetzungen und Belohnungen, in den Worten des Spiels.",
+  "questsIntro": "Haupt- und Nebenquests, Echogolem-Quests und Boss-Wiederholungen mit Zielen, Voraussetzungen und Belohnungen, in den Worten des Spiels.",
   "questsEchoGolem": "Echogolem-Quests",
   "questsBossReplays": "Boss-Wiederholungen",
   "questRegion": "Region",
@@ -649,5 +650,6 @@
   "questEveryCompletion": "Jeder Abschluss",
   "questAreaDrop": "Zufälliger Gegenstand aus {area}",
   "questRelatedMobs": "Gegner",
-  "sourceRewardOf": "Belohnung von {quest}"
+  "sourceRewardOf": "Belohnung von {quest}",
+  "questOnCompletion": "Bei Abschluss"
 }

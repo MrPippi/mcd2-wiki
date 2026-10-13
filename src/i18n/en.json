@@ -330,7 +330,7 @@
   "questTypeSide": "Side Quest",
   "questObjectives": "Objectives",
   "questRewards": "Rewards",
-  "questsIntro": "Every quest in the game with its objectives, prerequisites and rewards, in the game's own words.",
+  "questsIntro": "The game's core and side quests, Echo Golem quests and boss replays, with objectives, prerequisites and rewards in the game's own words.",
   "questsEchoGolem": "Echo Golem quests",
   "questsBossReplays": "Boss replays",
   "questRegion": "Region",
@@ -347,5 +347,6 @@
   "questEveryCompletion": "Every completion",
   "questAreaDrop": "Random item from {area}",
   "questRelatedMobs": "Monsters",
-  "sourceRewardOf": "Reward of {quest}"
+  "sourceRewardOf": "Reward of {quest}",
+  "questOnCompletion": "On completion"
 }

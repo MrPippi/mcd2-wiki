@@ -17,7 +17,7 @@ interface Props {
 const { lang, quest, index, step } = Astro.props;
 const alt = compareLang(lang);
 const title = quest.title.text;
-const meta = [quest.region?.name[lang], t(lang, SIZE_KEY[quest.size])].filter((part): part is string => part !== undefined);
+const meta = [quest.region?.name[lang], quest.size === null ? undefined : t(lang, SIZE_KEY[quest.size])].filter((part): part is string => part !== undefined);
 ---
 <li class="quest-card" style={`--i:${index}`} data-testid="quest-card">
   <a class="quest-card-link" href={questHref(lang, quest.slug)}>

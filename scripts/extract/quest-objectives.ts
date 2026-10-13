@@ -38,13 +38,11 @@ export const goalArenaTags = (goal: RawGoal | undefined): string[] => [
   ...new Set(allGoals(goal).flatMap((node) => (node.arena_tag ? [node.arena_tag] : []))),
 ];
 
-/** Objectives with the same text and count shown once, keeping the first; `textOf` gives the text they compare by. */
+/**
+ * Runs of the same objective (same text and count, one right after another) shown once. A step that comes back later
+ * in the quest is a real step and stays. `textOf` gives the text they compare by.
+ */
 export function dedupeObjectives<T extends GoalObjective>(objectives: readonly T[], textOf: (objective: T) => string): T[] {
-  const seen = new Set<string>();
-  return objectives.filter((objective) => {
-    const mark = `${textOf(objective)}\u0000${objective.count}`;
-    if (seen.has(mark)) return false;
-    seen.add(mark);
-    return true;
-  });
+  const same = (a: T, b: T): boolean => textOf(a) === textOf(b) && a.count === b.count;
+  return objectives.filter((objective, index) => index === 0 || !same(objective, objectives[index - 1]));
 }

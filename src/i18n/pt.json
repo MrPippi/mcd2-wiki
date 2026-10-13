@@ -297,7 +297,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -631,7 +632,7 @@
   "questTypeSide": "Missão secundária",
   "questObjectives": "Objetivos",
   "questRewards": "Recompensas",
-  "questsIntro": "Todas as missões do jogo com objetivos, pré-requisitos e recompensas, com os textos do próprio jogo.",
+  "questsIntro": "As missões principais e secundárias, as missões do Golem do Eco e as revanches de chefes, com objetivos, pré-requisitos e recompensas, com os textos do próprio jogo.",
   "questsEchoGolem": "Missões do Golem do Eco",
   "questsBossReplays": "Revanches de chefes",
   "questRegion": "Região",
@@ -648,5 +649,6 @@
   "questEveryCompletion": "Toda conclusão",
   "questAreaDrop": "Item aleatório de {area}",
   "questRelatedMobs": "Monstros",
-  "sourceRewardOf": "Recompensa de {quest}"
+  "sourceRewardOf": "Recompensa de {quest}",
+  "questOnCompletion": "Ao concluir"
 }

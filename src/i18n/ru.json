@@ -293,7 +293,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -634,7 +635,7 @@
   "questTypeSide": "Побочный квест",
   "questObjectives": "Задачи",
   "questRewards": "Награды",
-  "questsIntro": "Все квесты игры: задачи, условия и награды — словами самой игры.",
+  "questsIntro": "Основные и побочные квесты, квесты эхо-голема и повторные бои с боссами: задачи, условия и награды — словами самой игры.",
   "questsEchoGolem": "Квесты эхо-голема",
   "questsBossReplays": "Повторные бои с боссами",
   "questRegion": "Регион",
@@ -651,5 +652,6 @@
   "questEveryCompletion": "Каждое выполнение",
   "questAreaDrop": "Случайный предмет из области «{area}»",
   "questRelatedMobs": "Монстры",
-  "sourceRewardOf": "Награда за квест {quest}"
+  "sourceRewardOf": "Награда за квест {quest}",
+  "questOnCompletion": "При выполнении"
 }

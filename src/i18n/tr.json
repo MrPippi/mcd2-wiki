@@ -297,7 +297,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -630,7 +631,7 @@
   "questTypeSide": "Yan Görev",
   "questObjectives": "Hedefler",
   "questRewards": "Ödüller",
-  "questsIntro": "Oyundaki tüm görevler; hedefleri, ön koşulları ve ödülleriyle, oyunun kendi metinleriyle.",
+  "questsIntro": "Oyunun ana ve yan görevleri, Yankı Golemi görevleri ve boss tekrarları; hedefleri, ön koşulları ve ödülleriyle, oyunun kendi metinleriyle.",
   "questsEchoGolem": "Yankı Golemi görevleri",
   "questsBossReplays": "Boss tekrarları",
   "questRegion": "Bölge",
@@ -647,5 +648,6 @@
   "questEveryCompletion": "Her tamamlama",
   "questAreaDrop": "{area} bölgesinden rastgele eşya",
   "questRelatedMobs": "Canavarlar",
-  "sourceRewardOf": "{quest} ödülü"
+  "sourceRewardOf": "{quest} ödülü",
+  "questOnCompletion": "Tamamlandığında"
 }

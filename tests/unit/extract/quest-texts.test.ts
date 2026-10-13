@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { hasLabel, QUEST_DESCRIPTIONS, QUEST_LABELS, questHtml, questText } from "../../../scripts/extract/quest-texts";
+import { descriptionIsCompletedText, hasLabel, QUEST_COMPLETED, QUEST_DESCRIPTIONS, QUEST_LABELS, questHtml, questText } from "../../../scripts/extract/quest-texts";
 import { LANGS } from "../../../scripts/extract/langs";
 import { makeSparseLocales } from "../../helpers/locales";
 
@@ -42,5 +42,32 @@ describe("hasLabel", () => {
     expect(hasLabel(LOCALES, "CA02")).toBe(true);
     expect(hasLabel(LOCALES, "TOa1_S01_A")).toBe(false);
     expect(hasLabel(LOCALES, "CA04_BR")).toBe(false);
+  });
+});
+
+describe("descriptionIsCompletedText", () => {
+  const locales = makeSparseLocales({
+    [QUEST_DESCRIPTIONS]: {
+      BEES: { en: "Help the Beekeeper build hives.", zh: "你已經做好了新的蜂箱。", ja: "巣箱を作ってほしい。" },
+      SAME: { en: "Same text.", zh: "同樣的文字。" },
+    },
+    [QUEST_COMPLETED]: {
+      BEES: { en: "You built the hives.", zh: "你已經做好了 新的蜂箱。\r\n", ja: "巣箱を作った。" },
+      SAME: { en: "Same text.", zh: "同樣的文字。" },
+    },
+  });
+
+  it("shows English for a language whose description is its own completed text, and lists it", () => {
+    const found = questHtml(locales, QUEST_DESCRIPTIONS, "BEES", descriptionIsCompletedText(locales, "BEES"));
+    expect(found?.html.zh).toBe("Help the Beekeeper build hives.");
+    expect(found?.html.ja).toBe("巣箱を作ってほしい。");
+    expect(found?.untranslated).toContain("zh");
+    expect(found?.untranslated).not.toContain("ja");
+  });
+
+  it("keeps the text when English uses the same words for both", () => {
+    const found = questHtml(locales, QUEST_DESCRIPTIONS, "SAME", descriptionIsCompletedText(locales, "SAME"));
+    expect(found?.html.zh).toBe("同樣的文字。");
+    expect(found?.untranslated).not.toContain("zh");
   });
 });

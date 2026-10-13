@@ -35,12 +35,16 @@ interface Kept {
   readonly prerequisites: readonly string[];
 }
 
-/** Prerequisites limited to published quests; one that is no quest at all is reported, one left out is dropped quietly. */
+/** Prerequisites limited to published quests; one that is no quest at all, or a quest left out, is dropped and reported. */
 function linkPrerequisites(raw: RawQuest, keptIds: ReadonlySet<string>, allIds: ReadonlySet<string>): { ids: string[]; issues: Issue[] } {
   const unknown = raw.prerequisites.filter((id) => !allIds.has(id));
+  const skipped = raw.prerequisites.filter((id) => allIds.has(id) && !keptIds.has(id));
   return {
     ids: raw.prerequisites.filter((id) => keptIds.has(id)),
-    issues: unknown.map((id) => issue("quest-prerequisite-unknown", `${raw.id} → ${id}`)),
+    issues: [
+      ...unknown.map((id) => issue("quest-prerequisite-unknown", `${raw.id} → ${id}`)),
+      ...skipped.map((id) => issue("quest-prerequisite-skipped", `${raw.id} → ${id}`)),
+    ],
   };
 }
 

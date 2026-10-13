@@ -28,7 +28,7 @@ const QUESTS = [
     every: [lootEntry("SW.Quest.Loot.AreaDropModifier", PLAINS)],
     goals: group("CA01_Sequence01", [
       task("CA01_E01"),
-      task("CA01_K01", { kill_count: 5, kill_target_types: ["SW.Mob.Pillager", "SW.Mob.Ghost"] }),
+      task("CA01_K01", { kill_count: 5, kill_target_types: ["SW.Mob.Pillager", "SW.Mob.Ghost", "SW.Mob.Wraith"] }),
       task("CA01_K02", { kill_count: 5, kill_target_types: ["SW.Mob.Pillager"] }),
       task("CA01_AS01", { arena_tag: "SW.ArenaSetup.Boss" }),
     ]),
@@ -36,7 +36,7 @@ const QUESTS = [
   rawQuest({ id: "CA00", type: "CoreQuest", area: PLAINS, state: "Active" }),
   rawQuest({ id: "S_FOREST", prerequisites: ["CA01"], area: FOREST }),
   rawQuest({ id: "S_PLAINS", prerequisites: ["CA00"], area: PLAINS, every: [lootEntry("SW.Quest.Loot.Armour.PhantomSet")] }),
-  rawQuest({ id: "S_PLAINS_2", prerequisites: ["S_PLAINS", "GHOST"], area: PLAINS }),
+  rawQuest({ id: "S_PLAINS_2", prerequisites: ["S_PLAINS", "GHOST", "DEV_S01"], area: PLAINS }),
   rawQuest({ id: "CT_S01_A", prerequisites: ["CA00"], area: "SW.Area", replayable: true }),
   rawQuest({ id: "CA01_BR", prerequisites: ["CA01"], area: PLAINS, first: [lootEntry("SW.Quest.Loot.Talisman.Wolf")] }),
   rawQuest({ id: "CA04_BR", prerequisites: ["CA01"], first: [lootEntry("SW.Quest.Loot.Talisman.Wolf")] }),
@@ -91,7 +91,7 @@ const input = (sourceRoot = ""): QuestsInput => ({
   sourceRoot,
   locales: LOCALES,
   sources: SOURCES,
-  links: { tagIndex: new Map([["sw.mob.pillager", "pillager"], ["sw.mob.maw", "maw"]]), areas: AREAS },
+  links: { tagIndex: new Map([["sw.mob.pillager", "pillager"], ["sw.mob.maw", "maw"], ["sw.mob.wraith", "wraith"]]), areas: AREAS },
   mobs: MOBS,
   map: MAP,
 });
@@ -124,6 +124,7 @@ describe("buildQuestData", () => {
     expect(quest("ca00")?.unlocks).toEqual(["ca01", "s-plains", "ct-s01-a"]);
     expect(quest("s-plains-2")?.prerequisites).toEqual(["s-plains"]);
     expect(built.issues).toContainEqual({ type: "quest-prerequisite-unknown", detail: "S_PLAINS_2 → GHOST" });
+    expect(built.issues).toContainEqual({ type: "quest-prerequisite-skipped", detail: "S_PLAINS_2 → DEV_S01" });
   });
 
   it("flattens labelled objectives, deduplicated, with counts", () => {
@@ -143,9 +144,9 @@ describe("buildQuestData", () => {
     expect(rewards?.emeralds).toEqual({ guaranteed: 8, rolls: 8, chancePerRoll: 0.25 });
   });
 
-  it("names related mobs from kill targets and arena waves, bosses first, and reports tags with no page", () => {
+  it("names related mobs from kill targets and arena waves, bosses first, and reports tags with no slug or no mob page", () => {
     expect(quest("ca01")?.mobs).toEqual(["maw", "pillager"]);
-    expect(built.issues).toContainEqual({ type: "quest-mob-unlinked", detail: "CA01: SW.Mob.Ghost" });
+    expect(built.issues).toContainEqual({ type: "quest-mob-unlinked", detail: "CA01: SW.Mob.Ghost, SW.Mob.Wraith" });
   });
 
   it("keeps the texts and reports a missing one", () => {
@@ -190,10 +191,10 @@ describe("quest gaps", () => {
   const odd = rawQuest({ id: "CA00", type: "CoreQuest", size: "SW.QuestSize.Huge", area: "SW.Area.Nowhere" });
   const result = buildQuestData({ ...TABLES, quests: [{ library: "Test", quest: odd }] }, input());
 
-  it("shows an unknown size as small and reports it", () => {
-    expect(result.data.quests[0]?.size).toBe("small");
+  it("gives an unknown size no value and reports it", () => {
+    expect(result.data.quests[0]?.size).toBeNull();
     expect(result.data.quests[0]?.rewards.emeralds).toBeNull();
-    expect(result.issues).toContainEqual({ type: "quest-text-missing", detail: "CA00: size SW.QuestSize.Huge (shown as small)" });
+    expect(result.issues).toContainEqual({ type: "quest-size-unknown", detail: "CA00: SW.QuestSize.Huge" });
   });
 
   it("drops a region the game gives no name and reports it", () => {

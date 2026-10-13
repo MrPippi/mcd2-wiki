@@ -47,10 +47,15 @@ describe("labelledGoals", () => {
 });
 
 describe("dedupeObjectives", () => {
-  it("keeps the first of the objectives with the same text and count", () => {
-    const text: Record<string, string> = { a: "Defeat the monsters", b: "Find a spot", c: "Defeat the monsters", d: "Defeat the monsters" };
-    const objectives = [{ key: "a", count: 3 }, { key: "b", count: 1 }, { key: "c", count: 3 }, { key: "d", count: 6 }];
-    expect(dedupeObjectives(objectives, (objective) => text[objective.key])).toEqual([{ key: "a", count: 3 }, { key: "b", count: 1 }, { key: "d", count: 6 }]);
+  it("collapses a run of the same objective with the same count", () => {
+    const text: Record<string, string> = { a: "Rescue the foragers", b: "Rescue the foragers", c: "Rescue the foragers", d: "Wait" };
+    const objectives = [{ key: "a", count: 1 }, { key: "b", count: 1 }, { key: "c", count: 2 }, { key: "d", count: 1 }];
+    expect(dedupeObjectives(objectives, (objective) => text[objective.key])).toEqual([{ key: "a", count: 1 }, { key: "c", count: 2 }, { key: "d", count: 1 }]);
+  });
+  it("keeps a step that comes back later in the quest", () => {
+    const text: Record<string, string> = { a: "Speak to the Blacksmith", b: "Recover the axes", c: "Speak to the Blacksmith" };
+    const objectives = [{ key: "a", count: 1 }, { key: "b", count: 2 }, { key: "c", count: 1 }];
+    expect(dedupeObjectives(objectives, (objective) => text[objective.key])).toEqual(objectives);
   });
 });
 

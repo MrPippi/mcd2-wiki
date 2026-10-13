@@ -297,7 +297,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -631,7 +632,7 @@
   "questTypeSide": "Misión secundaria",
   "questObjectives": "Objetivos",
   "questRewards": "Recompensas",
-  "questsIntro": "Todas las misiones del juego con sus objetivos, requisitos y recompensas, con los textos del propio juego.",
+  "questsIntro": "Las misiones principales y secundarias, las misiones del gólem eco y las repeticiones de jefes, con objetivos, requisitos y recompensas, con los textos del propio juego.",
   "questsEchoGolem": "Misiones del gólem eco",
   "questsBossReplays": "Repeticiones de jefes",
   "questRegion": "Región",
@@ -648,5 +649,6 @@
   "questEveryCompletion": "Cada vez",
   "questAreaDrop": "Objeto aleatorio de {area}",
   "questRelatedMobs": "Monstruos",
-  "sourceRewardOf": "Recompensa de {quest}"
+  "sourceRewardOf": "Recompensa de {quest}",
+  "questOnCompletion": "Por completarla"
 }

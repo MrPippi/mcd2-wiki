@@ -9,7 +9,7 @@ import { dedupeObjectives, goalArenaTags, goalMobTags, labelledGoals } from "./q
 import { emeraldsOf, rewardsOf, type RewardContext } from "./quest-rewards";
 import type { Quest, RawQuest } from "./quest-schema";
 import type { ArenaRow, WaveRow } from "./quest-tables";
-import { hasLabel, QUEST_COMPLETED, QUEST_DESCRIPTIONS, QUEST_LABELS, questHtml, questText } from "./quest-texts";
+import { descriptionIsCompletedText, hasLabel, QUEST_COMPLETED, QUEST_DESCRIPTIONS, QUEST_LABELS, questHtml, questText } from "./quest-texts";
 import type { LocaleFile } from "./schemas";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
@@ -74,12 +74,19 @@ function objectivesOf(quest: RawQuest, locales: Locales): Quest["objectives"] {
   return dedupeObjectives(texts, (objective) => objective.text.en).map(({ text, untranslated, count }) => ({ text, untranslated, count }));
 }
 
-/** Bestiary slugs of the mobs the tasks and arenas name: bosses first, then by English name. Tags with no page are returned too. */
+/**
+ * Bestiary slugs of the mobs the tasks and arenas name: bosses first, then by English name. Tags with no bestiary
+ * page (no slug, or a slug with no mob entry) come back as unlinked, so the caller reports them.
+ */
 export function mobsOf(quest: RawQuest, ctx: DraftContext): { slugs: string[]; unlinked: string[] } {
   const tags = [...new Set([...goalMobTags(quest.goals), ...goalArenaTags(quest.goals).flatMap(ctx.arenaMobs)])];
-  const unlinked = tags.filter((tag) => !ctx.tagIndex.has(tagKey(tag)));
-  const slugs = [...new Set(tags.flatMap((tag) => ctx.tagIndex.get(tagKey(tag)) ?? []))];
   const bySlug = new Map(ctx.mobs.mobs.map((mob) => [mob.slug, mob]));
+  const slugOf = (tag: string): string | undefined => ctx.tagIndex.get(tagKey(tag));
+  const unlinked = tags.filter((tag) => {
+    const slug = slugOf(tag);
+    return slug === undefined || !bySlug.has(slug);
+  });
+  const slugs = [...new Set(tags.flatMap((tag) => slugOf(tag) ?? []))];
   const rank = (slug: string): number => KIND_ORDER.indexOf(bySlug.get(slug)?.kind ?? "variant");
   const name = (slug: string): string => bySlug.get(slug)?.name.en ?? slug;
   const sorted = slugs.filter((slug) => bySlug.has(slug)).sort((a, b) => rank(a) - rank(b) || name(a).localeCompare(name(b), "en"));
@@ -90,7 +97,7 @@ export function mobsOf(quest: RawQuest, ctx: DraftContext): { slugs: string[]; u
 export function draftQuest(quest: RawQuest, ctx: DraftContext): { draft: QuestDraft; issues: Issue[] } {
   const title = questText(ctx.locales, QUEST_LABELS, quest.id);
   if (!title) throw new Error(`quest ${quest.id} has no title; skipReason keeps such quests out`);
-  const description = questHtml(ctx.locales, QUEST_DESCRIPTIONS, quest.id) ?? null;
+  const description = questHtml(ctx.locales, QUEST_DESCRIPTIONS, quest.id, descriptionIsCompletedText(ctx.locales, quest.id)) ?? null;
   const completed = questHtml(ctx.locales, QUEST_COMPLETED, quest.id) ?? null;
   const region = regionOf(quest.RewardData.areaRewardScalingTag.tagName, ctx, quest.id);
   const first = rewardsOf(quest.RewardData.firstCompletionLootSourceData, ctx.rewards, `${quest.id} first`);
@@ -102,7 +109,7 @@ export function draftQuest(quest: RawQuest, ctx: DraftContext): { draft: QuestDr
     id: quest.id,
     section: sectionOf(quest),
     type: quest.quest_type === "CoreQuest" ? "core" : "side",
-    size: size ?? "small",
+    size: size ?? null,
     replayable: quest.is_replayable,
     title,
     description,
@@ -115,7 +122,7 @@ export function draftQuest(quest: RawQuest, ctx: DraftContext): { draft: QuestDr
   const issues = [
     ...(description ? [] : [issue("quest-text-missing", `${quest.id}: QuestDescriptions`)]),
     ...(completed ? [] : [issue("quest-text-missing", `${quest.id}: QuestDescriptionsCompleted`)]),
-    ...(size ? [] : [issue("quest-text-missing", `${quest.id}: size ${quest.RewardData.questSize.tagName} (shown as small)`)]),
+    ...(size ? [] : [issue("quest-size-unknown", `${quest.id}: ${quest.RewardData.questSize.tagName}`)]),
     ...region.issues,
     ...first.issues,
     ...every.issues,

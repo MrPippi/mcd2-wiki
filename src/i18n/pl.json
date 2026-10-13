@@ -295,7 +295,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "_english": [
     "normal",
@@ -634,7 +635,7 @@
   "questTypeSide": "Misja poboczna",
   "questObjectives": "Cele",
   "questRewards": "Nagrody",
-  "questsIntro": "Wszystkie misje w grze z celami, wymaganiami i nagrodami, w brzmieniu z gry.",
+  "questsIntro": "Misje główne i poboczne, misje golema echa oraz powtórki walk z bossami — z celami, wymaganiami i nagrodami w brzmieniu z gry.",
   "questsEchoGolem": "Misje golema echa",
   "questsBossReplays": "Powtórki walk z bossami",
   "questRegion": "Region",
@@ -651,5 +652,6 @@
   "questEveryCompletion": "Każde ukończenie",
   "questAreaDrop": "Losowy przedmiot z obszaru {area}",
   "questRelatedMobs": "Potwory",
-  "sourceRewardOf": "Nagroda za misję {quest}"
+  "sourceRewardOf": "Nagroda za misję {quest}",
+  "questOnCompletion": "Za ukończenie"
 }

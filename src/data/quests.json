@@ -274,6 +274,50 @@
         },
         {
           "text": {
+            "zh": "和村民交談",
+            "zh-hans": "与村民对话",
+            "en": "Speak to the Villager",
+            "ja": "村人に話しかける",
+            "ko": "주민과 대화하세요",
+            "de": "Sprich mit dem Dorfbewohner",
+            "fr": "Parler au Villageois",
+            "es": "Habla con el aldeano",
+            "it": "Parla con l'abitante",
+            "pt": "Fale com o Aldeão",
+            "ru": "Поговорить с селянином",
+            "pl": "Porozmawiaj z osadnikiem",
+            "nl": "Praat met de dorpeling",
+            "sv": "Prata med bybon",
+            "tr": "Köylüyle konuş",
+            "uk": "Поговорити із селянином"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "開啟大門",
+            "zh-hans": "打开大门",
+            "en": "Open the gate",
+            "ja": "門を開く",
+            "ko": "문을 여세요",
+            "de": "Öffne das Tor",
+            "fr": "Ouvrir la porte",
+            "es": "Abre la puerta principal",
+            "it": "Apri il cancello",
+            "pt": "Abra o portão",
+            "ru": "Открыть ворота",
+            "pl": "Otwórz bramę",
+            "nl": "Open de poort",
+            "sv": "Öppna porten",
+            "tr": "Kapıyı aç",
+            "uk": "Відкрити ворота"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "清出通往碼頭的路",
             "zh-hans": "清理通往码头的路",
             "en": "Clear the way to the docks",
@@ -312,6 +356,50 @@
             "sv": "Besegra bakhållet",
             "tr": "Pusuyu püskürt",
             "uk": "Відбити засідку"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "清出通往碼頭的路",
+            "zh-hans": "清理通往码头的路",
+            "en": "Clear the way to the docks",
+            "ja": "波止場までの道を切り開く",
+            "ko": "부두로 가는 길을 정리하세요",
+            "de": "Mach den Weg zu den Docks frei",
+            "fr": "Dégager le chemin vers les quais",
+            "es": "Despeja el camino hacia el muelle",
+            "it": "Libera la strada che conduce al molo",
+            "pt": "Limpe o caminho até as docas",
+            "ru": "Расчистить путь к пристани",
+            "pl": "Utoruj drogę do doku",
+            "nl": "Maak de weg naar de steigers vrij",
+            "sv": "Rensa vägen till hamnarna",
+            "tr": "İskeleye giden yolu aç",
+            "uk": "Очистити шлях до доків"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和村民交談",
+            "zh-hans": "与村民对话",
+            "en": "Speak to the Villager",
+            "ja": "村人に話しかける",
+            "ko": "주민과 대화하세요",
+            "de": "Sprich mit dem Dorfbewohner",
+            "fr": "Parler au Villageois",
+            "es": "Habla con el aldeano",
+            "it": "Parla con l'abitante",
+            "pt": "Fale com o Aldeão",
+            "ru": "Поговорить с селянином",
+            "pl": "Porozmawiaj z osadnikiem",
+            "nl": "Praat met de dorpeling",
+            "sv": "Prata med bybon",
+            "tr": "Köylüyle konuş",
+            "uk": "Поговорити із селянином"
           },
           "untranslated": [],
           "count": 1
@@ -590,6 +678,28 @@
         },
         {
           "text": {
+            "zh": "和村民交談",
+            "zh-hans": "与村民对话",
+            "en": "Speak to the Villager",
+            "ja": "村人に話しかける",
+            "ko": "주민과 대화하세요",
+            "de": "Sprich mit dem Dorfbewohner",
+            "fr": "Parler au Villageois",
+            "es": "Habla con el aldeano",
+            "it": "Parla con l'abitante",
+            "pt": "Fale com o Aldeão",
+            "ru": "Поговорить с селянином",
+            "pl": "Porozmawiaj z osadnikiem",
+            "nl": "Praat met de dorpeling",
+            "sv": "Prata med bybon",
+            "tr": "Köylüyle konuş",
+            "uk": "Поговорити із селянином"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "找到蜂巢農場",
             "zh-hans": "找到蜜脾农场",
             "en": "Find Honeycomb Farm",
@@ -722,6 +832,28 @@
         },
         {
           "text": {
+            "zh": "和農夫交談",
+            "zh-hans": "与农夫对话",
+            "en": "Speak to the Farmer",
+            "ja": "農夫に話しかける",
+            "ko": "농부와 대화하세요",
+            "de": "Sprich mit dem Bauern",
+            "fr": "Parler au Fermier",
+            "es": "Habla con el agricultor",
+            "it": "Parla con l'agricoltore",
+            "pt": "Fale com o Fazendeiro",
+            "ru": "Поговорить с фермером",
+            "pl": "Porozmawiaj z rolnikiem",
+            "nl": "Praat met de boer",
+            "sv": "Prata med bonden",
+            "tr": "Çiftçiyle konuş",
+            "uk": "Поговорити з фермером"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "調查壞村民的動向",
             "zh-hans": "调查灾厄村民的动向",
             "en": "Investigate the illager activity",
@@ -738,6 +870,28 @@
             "sv": "Undersök fyboaktiviteten",
             "tr": "Illager aktivitesini araştır",
             "uk": "Дізнатися, що роблять лиходії"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "擊敗壞村民",
+            "zh-hans": "击败灾厄村民",
+            "en": "Defeat the illagers",
+            "ja": "邪悪な村人たちを倒す",
+            "ko": "우민을 처치하세요",
+            "de": "Besiege die Illager",
+            "fr": "Vaincre les Illageois",
+            "es": "Derrota a los maldeanos",
+            "it": "Sconfiggi gli abitori",
+            "pt": "Derrote os illagers",
+            "ru": "Победить злодеян",
+            "pl": "Pokonaj złosadników",
+            "nl": "Versla de illagers",
+            "sv": "Besegra fyborna",
+            "tr": "Illager'ları yen",
+            "uk": "Здолати лиходіїв"
           },
           "untranslated": [],
           "count": 1
@@ -788,6 +942,28 @@
         },
         {
           "text": {
+            "zh": "擊敗壞村民",
+            "zh-hans": "击败灾厄村民",
+            "en": "Defeat the illagers",
+            "ja": "邪悪な村人たちを倒す",
+            "ko": "우민을 처치하세요",
+            "de": "Besiege die Illager",
+            "fr": "Vaincre les Illageois",
+            "es": "Derrota a los maldeanos",
+            "it": "Sconfiggi gli abitori",
+            "pt": "Derrote os illagers",
+            "ru": "Победить злодеян",
+            "pl": "Pokonaj złosadników",
+            "nl": "Versla de illagers",
+            "sv": "Besegra fyborna",
+            "tr": "Illager'ları yen",
+            "uk": "Здолати лиходіїв"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "返回主世界",
             "zh-hans": "返回主世界",
             "en": "Return to the Overworld",
@@ -804,6 +980,28 @@
             "sv": "Återvänd till Övervärlden",
             "tr": "Yerüstü'ne geri dön",
             "uk": "Повернутися до Верхнього світу"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和農夫交談",
+            "zh-hans": "与农夫对话",
+            "en": "Speak to the Farmer",
+            "ja": "農夫に話しかける",
+            "ko": "농부와 대화하세요",
+            "de": "Sprich mit dem Bauern",
+            "fr": "Parler au Fermier",
+            "es": "Habla con el agricultor",
+            "it": "Parla con l'agricoltore",
+            "pt": "Fale com o Fazendeiro",
+            "ru": "Поговорить с фермером",
+            "pl": "Porozmawiaj z rolnikiem",
+            "nl": "Praat met de boer",
+            "sv": "Prata med bonden",
+            "tr": "Çiftçiyle konuş",
+            "uk": "Поговорити з фермером"
           },
           "untranslated": [],
           "count": 1
@@ -1103,6 +1301,28 @@
         },
         {
           "text": {
+            "zh": "和商人交談",
+            "zh-hans": "与商人对话",
+            "en": "Speak to the Merchant",
+            "ja": "商人に話しかける",
+            "ko": "상인과 대화하세요",
+            "de": "Sprich mit dem Händler",
+            "fr": "Parler au Commerçant",
+            "es": "Habla con el comerciante",
+            "it": "Parla con il mercante",
+            "pt": "Fale com o Mercador",
+            "ru": "Поговорить с торговцем",
+            "pl": "Porozmawiaj z kupcem",
+            "nl": "Praat met de Handelaar",
+            "sv": "Prata med köpmannen",
+            "tr": "Tüccarla konuş",
+            "uk": "Поговорити з торговцем"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "前往英雄港",
             "zh-hans": "前往勇者港湾",
             "en": "Travel to Brave Haven",
@@ -1141,6 +1361,28 @@
             "sv": "Hitta köpmannens bod",
             "tr": "Tüccarın tezgâhını bul",
             "uk": "Знайти ятку торговця"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和商人交談",
+            "zh-hans": "与商人对话",
+            "en": "Speak to the Merchant",
+            "ja": "商人に話しかける",
+            "ko": "상인과 대화하세요",
+            "de": "Sprich mit dem Händler",
+            "fr": "Parler au Commerçant",
+            "es": "Habla con el comerciante",
+            "it": "Parla con il mercante",
+            "pt": "Fale com o Mercador",
+            "ru": "Поговорить с торговцем",
+            "pl": "Porozmawiaj z kupcem",
+            "nl": "Praat met de handelaar",
+            "sv": "Prata med köpmannen",
+            "tr": "Tüccarla konuş",
+            "uk": "Поговорити з торговцем"
           },
           "untranslated": [],
           "count": 1
@@ -1594,6 +1836,28 @@
         },
         {
           "text": {
+            "zh": "擊敗狂暴的隙浮特",
+            "zh-hans": "击败狂暴的汐浮特",
+            "en": "Defeat the rabid sifters",
+            "ja": "凶暴なシフターたちを倒す",
+            "ko": "폭력적인 시프터를 처치하세요",
+            "de": "Besiege die fanatischen Sifter",
+            "fr": "Vaincre les Sifteurs enragés",
+            "es": "Derrota a los sifters rabiosos",
+            "it": "Sconfiggi i sifter rabbiosi",
+            "pt": "Derrote os sifters raivosos",
+            "ru": "Победить бешеных сифтеров",
+            "pl": "Pokonaj rozjuszone siftery",
+            "nl": "Versla de wilde sifters",
+            "sv": "Besegra ursinniga sifters",
+            "tr": "Kudurmuş sifter'ları yen",
+            "uk": "Здолати скажених сифтерів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "查看那隻生物的情況",
             "zh-hans": "查看生物的情况",
             "en": "Check on the creature",
@@ -1977,6 +2241,28 @@
         },
         {
           "text": {
+            "zh": "尋找遠古鍊金術之書",
+            "zh-hans": "寻找远古炼金术之书",
+            "en": "Search for the Book of Ancient Alchemy",
+            "ja": "古代錬金術の本を探す",
+            "ko": "고대 연금술의 책을 찾으세요",
+            "de": "Suche das Buch über Alte Alchemie",
+            "fr": "Rechercher le livre d'Alchimie ancienne",
+            "es": "Busca el Libro de la alquimia antigua",
+            "it": "Cerca il libro dell'antica alchimia",
+            "pt": "Procure o Livro de Alquimia Ancestral",
+            "ru": "Отыскать книгу «Древняя алхимия»",
+            "pl": "Poszukaj księgi pradawnej alchemii",
+            "nl": "Zoek het boek van Oude alchemie",
+            "sv": "Sök efter boken om forntida alkemi",
+            "tr": "Kadim Simya Kitabını ara",
+            "uk": "Знайти книгу про стародавню алхімію"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "調查空的講台",
             "zh-hans": "调查空讲台",
             "en": "Investigate the empty lectern",
@@ -2175,6 +2461,28 @@
         },
         {
           "text": {
+            "zh": "尋找遠古鍊金術之書",
+            "zh-hans": "寻找远古炼金术之书",
+            "en": "Search for the Book of Ancient Alchemy",
+            "ja": "古代錬金術の本を探す",
+            "ko": "고대 연금술의 책을 찾으세요",
+            "de": "Suche das Buch über Alte Alchemie",
+            "fr": "Rechercher le livre d'Alchimie ancienne",
+            "es": "Busca el Libro de la alquimia antigua",
+            "it": "Cerca il libro dell'antica alchimia",
+            "pt": "Procure o Livro de Alquimia Ancestral",
+            "ru": "Отыскать книгу «Древняя алхимия»",
+            "pl": "Poszukaj księgi pradawnej alchemii",
+            "nl": "Zoek het boek van Oude alchemie",
+            "sv": "Sök efter boken om forntida alkemi",
+            "tr": "Kadim Simya Kitabını ara",
+            "uk": "Знайти книгу про стародавню алхімію"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "收集遠古鍊金術之書",
             "zh-hans": "收集远古炼金术之书",
             "en": "Collect the Book of Ancient Alchemy",
@@ -2235,6 +2543,50 @@
             "sv": "Lämna grottan",
             "tr": "Zindandan çık",
             "uk": "Вийти з підземелля"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "回去找附魔匠",
+            "zh-hans": "回到附魔匠身边",
+            "en": "Return to the Enchantsmith",
+            "ja": "エンチャントスミスのところに戻る",
+            "ko": "마법 부여사에게 돌아가세요",
+            "de": "Kehre zum Zauberschmied zurück",
+            "fr": "Retourner auprès de l'Enchanteur",
+            "es": "Vuelve con el forjaembrujos",
+            "it": "Torna dal fabbro incantatore",
+            "pt": "Volte ao Magífice",
+            "ru": "Вернуться к чарокузнецу",
+            "pl": "Wróć do zaklinacza",
+            "nl": "Keer terug naar de betoveringensmid",
+            "sv": "Återvänd till förtrollningssmeden",
+            "tr": "Büyü Ustasının yanına dön",
+            "uk": "Повернутися до коваля-чарівника"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和附魔匠交談",
+            "zh-hans": "与附魔匠对话",
+            "en": "Speak to the Enchantsmith",
+            "ja": "エンチャントスミスに話しかける",
+            "ko": "마법 부여사와 대화하세요",
+            "de": "Sprich mit dem Zauberschmied",
+            "fr": "Parler à l'Enchanteur",
+            "es": "Habla con el forjaembrujos",
+            "it": "Parla con il fabbro incantatore",
+            "pt": "Fale com o Magífice",
+            "ru": "Поговорить с чарокузнецом",
+            "pl": "Porozmawiaj z zaklinaczem",
+            "nl": "Praat met de betoveringssmid",
+            "sv": "Prata med förtrollningssmeden",
+            "tr": "Büyü Ustasıyla konuş",
+            "uk": "Поговорити з ковалем-чарівником"
           },
           "untranslated": [],
           "count": 1
@@ -2678,6 +3030,28 @@
             "sv": "Vänta på samlaren",
             "tr": "Toplayıcıyı bekle",
             "uk": "Зачекати на збирача"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和採集者交談",
+            "zh-hans": "与觅食者对话",
+            "en": "Speak to the Forager",
+            "ja": "採集家に話しかける",
+            "ko": "채집가와 대화하세요",
+            "de": "Sprich mit dem Sammler",
+            "fr": "Parler au Fourrageur",
+            "es": "Habla con el recolector",
+            "it": "Parola con il procacciatore",
+            "pt": "Fale com o Coletor",
+            "ru": "Поговорить с грибником",
+            "pl": "Porozmawiaj ze zbieraczem",
+            "nl": "Praat met de verzamelaar",
+            "sv": "Prata med samlaren",
+            "tr": "Toplayıcıyla konuş",
+            "uk": "Поговорити зі збирачем"
           },
           "untranslated": [],
           "count": 1
@@ -3418,6 +3792,28 @@
         },
         {
           "text": {
+            "zh": "和鐵匠交談",
+            "zh-hans": "与铁匠对话",
+            "en": "Speak to the Blacksmith",
+            "ja": "鍛冶屋に話しかける",
+            "ko": "대장장이와 대화하세요",
+            "de": "Sprich mit dem Schmied",
+            "fr": "Parler au Forgeron",
+            "es": "Habla con el herrero",
+            "it": "Parla con il fabbro",
+            "pt": "Fale com o Ferreiro",
+            "ru": "Поговорить с кузнецом",
+            "pl": "Porozmawiaj z kowalem",
+            "nl": "Praat met de smid",
+            "sv": "Prata med smeden",
+            "tr": "Demirciyle konuş",
+            "uk": "Поговорити з ковалем"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "把斧頭交給樵夫們",
             "zh-hans": "把斧头交给樵夫",
             "en": "Give the axes to the woodcutters",
@@ -3462,6 +3858,28 @@
         },
         {
           "text": {
+            "zh": "和鐵匠交談",
+            "zh-hans": "与铁匠对话",
+            "en": "Speak to the Blacksmith",
+            "ja": "鍛冶屋に話しかける",
+            "ko": "대장장이와 대화하세요",
+            "de": "Sprich mit dem Schmied",
+            "fr": "Parler au Forgeron",
+            "es": "Habla con el herrero",
+            "it": "Parla con il fabbro",
+            "pt": "Fale com o Ferreiro",
+            "ru": "Поговорить с кузнецом",
+            "pl": "Porozmawiaj z kowalem",
+            "nl": "Praat met de smid",
+            "sv": "Prata med smeden",
+            "tr": "Demirciyle konuş",
+            "uk": "Поговорити з ковалем"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "帶領鐵匠前往樵夫哨站",
             "zh-hans": "带领铁匠前往樵夫哨站",
             "en": "Lead the Blacksmith to Woodcutter's Outpost",
@@ -3484,6 +3902,50 @@
         },
         {
           "text": {
+            "zh": "和鐵匠交談",
+            "zh-hans": "与铁匠对话",
+            "en": "Speak to the Blacksmith",
+            "ja": "鍛冶屋に話しかける",
+            "ko": "대장장이와 대화하세요",
+            "de": "Sprich mit dem Schmied",
+            "fr": "Parler au Forgeron",
+            "es": "Habla con el herrero",
+            "it": "Parla con il fabbro",
+            "pt": "Fale com o Ferreiro",
+            "ru": "Поговорить с кузнецом",
+            "pl": "Porozmawiaj z kowalem",
+            "nl": "Praat met de smid",
+            "sv": "Prata med smeden",
+            "tr": "Demirciyle konuş",
+            "uk": "Поговорити з ковалем"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "返回英雄港",
+            "zh-hans": "返回勇者港湾",
+            "en": "Return to Brave Haven",
+            "ja": "ブレイブヘイブンに戻る",
+            "ko": "용사의 안식처로 돌아가세요",
+            "de": "Kehre nach Tapferkeitshafen zurück",
+            "fr": "Retourner au Havre des Braves",
+            "es": "Vuelve al Refugio de los valientes",
+            "it": "Torna al Rifugio dei valorosi",
+            "pt": "Volte ao Refúgio dos Corajosos",
+            "ru": "Вернуться в Пристанище бравых",
+            "pl": "Wróć do Siedliska Śmiałków",
+            "nl": "Keer terug naar Dapperenhaven",
+            "sv": "Återvänd till Djärvhamn",
+            "tr": "Yiğitler Sığınağı'na geri dön",
+            "uk": "Повернутися в Прихисток відважних"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "找到鐵匠的攤位",
             "zh-hans": "找到铁匠的摊位",
             "en": "Find the Blacksmith's stall",
@@ -3500,6 +3962,28 @@
             "sv": "Hitta smedens verkstad",
             "tr": "Demircinin tezgâhını bul",
             "uk": "Знайти ятку коваля"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和鐵匠交談",
+            "zh-hans": "与铁匠对话",
+            "en": "Speak to the Blacksmith",
+            "ja": "鍛冶屋に話しかける",
+            "ko": "대장장이와 대화하세요",
+            "de": "Sprich mit dem Schmied",
+            "fr": "Parler au Forgeron",
+            "es": "Habla con el herrero",
+            "it": "Parla con il fabbro",
+            "pt": "Fale com o Ferreiro",
+            "ru": "Поговорить с кузнецом",
+            "pl": "Porozmawiaj z kowalem",
+            "nl": "Praat met de smid",
+            "sv": "Prata med smeden",
+            "tr": "Demirciyle konuş",
+            "uk": "Поговорити з ковалем"
           },
           "untranslated": [],
           "count": 1
@@ -3911,6 +4395,28 @@
         },
         {
           "text": {
+            "zh": "放置靈漿核心",
+            "zh-hans": "放置灵液核心",
+            "en": "Place the ichor core",
+            "ja": "霊血のコアをはめ込む",
+            "ko": "이코르 코어를 놓으세요",
+            "de": "Platziere den Ichorkern",
+            "fr": "Placer le noyau d'ichor",
+            "es": "Coloca el núcleo de icor",
+            "it": "Inserisci il nucleo di icore",
+            "pt": "Coloque o núcleo de icor",
+            "ru": "Установить ихорное ядро",
+            "pl": "Umieść ichorowy rdzeń",
+            "nl": "Plaats de ichorkern",
+            "sv": "Placera ikorskorpa",
+            "tr": "İkor çekirdeğini yerleştir",
+            "uk": "Розмістити іхорове ядро"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "找到橘色高塔的靈漿核心",
             "zh-hans": "找到橙色塔楼的灵液核心",
             "en": "Find the Orange Tower's ichor core",
@@ -3955,6 +4461,28 @@
         },
         {
           "text": {
+            "zh": "放置靈漿核心",
+            "zh-hans": "放置灵液核心",
+            "en": "Place the ichor core",
+            "ja": "霊血のコアをはめ込む",
+            "ko": "이코르 코어를 놓으세요",
+            "de": "Platziere den Ichorkern",
+            "fr": "Placer le noyau d'ichor",
+            "es": "Coloca el núcleo de icor",
+            "it": "Inserisci il nucleo di icore",
+            "pt": "Coloque o núcleo de icor",
+            "ru": "Установить ихорное ядро",
+            "pl": "Umieść ichorowy rdzeń",
+            "nl": "Plaats de ichorkern",
+            "sv": "Placera ikorskorpa",
+            "tr": "İkor çekirdeğini yerleştir",
+            "uk": "Розмістити іхорове ядро"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "找到紅色高塔的靈漿核心",
             "zh-hans": "找到红色塔楼的灵液核心",
             "en": "Find the Red Tower's ichor core",
@@ -3993,6 +4521,28 @@
             "sv": "Hitta bron till högsta besvärjarens torn",
             "tr": "Yüce Uyandırıcının Kulesine giden köprüyü bul",
             "uk": "Знайти міст до вежі верховного заклинача"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "放置靈漿核心",
+            "zh-hans": "放置灵液核心",
+            "en": "Place the ichor core",
+            "ja": "霊血のコアをはめ込む",
+            "ko": "이코르 코어를 놓으세요",
+            "de": "Platziere den Ichorkern",
+            "fr": "Placer le noyau d'ichor",
+            "es": "Coloca el núcleo de icor",
+            "it": "Inserisci il nucleo di icore",
+            "pt": "Coloque o núcleo de icor",
+            "ru": "Установить ихорное ядро",
+            "pl": "Umieść ichorowy rdzeń",
+            "nl": "Plaats de ichorkern",
+            "sv": "Placera ikorskorpa",
+            "tr": "İkor çekirdeğini yerleştir",
+            "uk": "Розмістити іхорове ядро"
           },
           "untranslated": [],
           "count": 1
@@ -4235,6 +4785,28 @@
             "sv": "Återvänd till byn i Pöldammen",
             "tr": "Birikinti Göleti Köyü'ne geri dön",
             "uk": "Повернутися до села Калюжний Став"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和村民交談",
+            "zh-hans": "与村民对话",
+            "en": "Speak to the Villager",
+            "ja": "村人に話しかける",
+            "ko": "주민과 대화하세요",
+            "de": "Sprich mit dem Dorfbewohner",
+            "fr": "Parler au Villageois",
+            "es": "Habla con el aldeano",
+            "it": "Parla con l'abitante",
+            "pt": "Fale com o Aldeão",
+            "ru": "Поговорить с селянином",
+            "pl": "Porozmawiaj z osadnikiem",
+            "nl": "Praat met de dorpeling",
+            "sv": "Prata med bybon",
+            "tr": "Köylüyle konuş",
+            "uk": "Поговорити із селянином"
           },
           "untranslated": [],
           "count": 1
@@ -4617,6 +5189,50 @@
         },
         {
           "text": {
+            "zh": "搜尋沉船，蒐集材料",
+            "zh-hans": "搜索沉船，寻找材料",
+            "en": "Search the shipwreck for materials",
+            "ja": "難破船で材料を探す",
+            "ko": "난파선에서 재료를 찾으세요",
+            "de": "Suche im Schiffswrack nach Materialien",
+            "fr": "Rechercher des matériaux dans l'épave",
+            "es": "Busca materiales en el naufragio",
+            "it": "Perlustra il relitto alla ricerca di materiali",
+            "pt": "Vasculhe os materiais no naufrágio",
+            "ru": "Поискать в остове корабля материалы",
+            "pl": "Poszukaj materiałów na wraku",
+            "nl": "Doorzoek het scheepswrak voor materialen",
+            "sv": "Sök efter material i skeppsvraket",
+            "tr": "Gemi enkazında malzeme ara",
+            "uk": "Обшукати уламки корабля на наявність матеріалів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "找到材料",
+            "zh-hans": "找到材料",
+            "en": "Find the materials",
+            "ja": "材料を見つける",
+            "ko": "재료를 찾으세요",
+            "de": "Finde die Materialien",
+            "fr": "Chercher des matériaux",
+            "es": "Busca los materiales",
+            "it": "Trova i materiali",
+            "pt": "Encontre os materiais",
+            "ru": "Найти материалы",
+            "pl": "Znajdź materiały",
+            "nl": "Zoek de materialen",
+            "sv": "Hitta materialen",
+            "tr": "Malzemeleri bul",
+            "uk": "Знайти матеріали"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "回去找村民",
             "zh-hans": "回到村民身边",
             "en": "Return to the Villager",
@@ -4683,6 +5299,28 @@
         },
         {
           "text": {
+            "zh": "和村民交談",
+            "zh-hans": "与村民对话",
+            "en": "Speak to the Villager",
+            "ja": "村人に話しかける",
+            "ko": "주민과 대화하세요",
+            "de": "Sprich mit dem Dorfbewohner",
+            "fr": "Parler au Villageois",
+            "es": "Habla con el aldeano",
+            "it": "Parla con l'abitante",
+            "pt": "Fale com o Aldeão",
+            "ru": "Поговорить с селянином",
+            "pl": "Porozmawiaj z osadnikiem",
+            "nl": "Praat met de dorpeling",
+            "sv": "Prata med bybon",
+            "tr": "Köylüyle konuş",
+            "uk": "Поговорити із селянином"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "搜查漁夫小屋",
             "zh-hans": "搜查钓鱼小屋",
             "en": "Search the fishing huts",
@@ -4721,6 +5359,28 @@
             "sv": "Träffa överlevarna på fortet",
             "tr": "Sağ kalanlarla kalede buluş",
             "uk": "Зустрітися з уцілілими у фортеці"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和村民交談",
+            "zh-hans": "与村民对话",
+            "en": "Speak to the Villager",
+            "ja": "村人に話しかける",
+            "ko": "주민과 대화하세요",
+            "de": "Sprich mit dem Dorfbewohner",
+            "fr": "Parler au Villageois",
+            "es": "Habla con el aldeano",
+            "it": "Parla con l'abitante",
+            "pt": "Fale com o Aldeão",
+            "ru": "Поговорить с селянином",
+            "pl": "Porozmawiaj z osadnikiem",
+            "nl": "Praat met de dorpeling",
+            "sv": "Prata med bybon",
+            "tr": "Köylüyle konuş",
+            "uk": "Поговорити із селянином"
           },
           "untranslated": [],
           "count": 1
@@ -4815,6 +5475,28 @@
         },
         {
           "text": {
+            "zh": "穿越要塞",
+            "zh-hans": "穿越要塞",
+            "en": "Navigate the fortress",
+            "ja": "要塞を進む",
+            "ko": "요새를 탐험하세요",
+            "de": "Geh durch die Festung",
+            "fr": "Se frayer un chemin dans la forteresse",
+            "es": "Explora la fortaleza",
+            "it": "Esplora la fortezza",
+            "pt": "Navegue pela fortaleza",
+            "ru": "Пройти через крепость",
+            "pl": "Zbadaj fortecę",
+            "nl": "Navigeer door het bos",
+            "sv": "Navigera igenom fortet",
+            "tr": "Kalede ilerle",
+            "uk": "Пройти фортецею"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "找到要塞入口",
             "zh-hans": "找到要塞入口",
             "en": "Find the fortress entrance",
@@ -4897,6 +5579,28 @@
             "sv": "Hämta notblocket",
             "tr": "Nota blokunu al",
             "uk": "Забрати нотний блок"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "找到要塞入口",
+            "zh-hans": "找到要塞入口",
+            "en": "Find the fortress entrance",
+            "ja": "要塞の入口を見つける",
+            "ko": "요새 입구를 찾으세요",
+            "de": "Finde den Festungseingang",
+            "fr": "Trouver l'entrée de la forteresse",
+            "es": "Encuentra la entrada a la fortaleza",
+            "it": "Trova l'entrata della fortezza",
+            "pt": "Encontre a entrada da fortaleza",
+            "ru": "Найти вход в крепость",
+            "pl": "Znajdź wejście do fortecy",
+            "nl": "Zoek de ingang van het fort",
+            "sv": "Hitta ingången till fortet",
+            "tr": "Kalenin girişini bul",
+            "uk": "Знайти вхід у фортецю"
           },
           "untranslated": [],
           "count": 1
@@ -6196,6 +6900,28 @@
         },
         {
           "text": {
+            "zh": "和回聲魔像交談",
+            "zh-hans": "与回响傀儡对话",
+            "en": "Speak to the Echo Golem",
+            "ja": "エコーゴーレムに話しかける",
+            "ko": "에코 골렘과 대화하세요",
+            "de": "Sprich mit dem Echogolem",
+            "fr": "Parler au golem d'écho",
+            "es": "Habla con el gólem eco",
+            "it": "Parla con il golem dell'eco",
+            "pt": "Fale com o Golem do Eco",
+            "ru": "Поговорить с эхо-големом",
+            "pl": "Porozmawiaj z golemem echa",
+            "nl": "Praat met de echogolem",
+            "sv": "Prata med ekogolemen",
+            "tr": "Yankı Golemiyle konuş",
+            "uk": "Поговорити з ехо-големом"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "找到靈漿核心",
             "zh-hans": "找到灵液核心",
             "en": "Find the ichor cores",
@@ -6306,6 +7032,28 @@
         },
         {
           "text": {
+            "zh": "找到靈漿核心",
+            "zh-hans": "找到灵液核心",
+            "en": "Find the ichor cores",
+            "ja": "霊血のコアを見つける",
+            "ko": "이코르 코어를 찾으세요",
+            "de": "Finde die Ichorkerne",
+            "fr": "Trouver les noyaux d'ichor",
+            "es": "Encuentra los núcleos de icor",
+            "it": "Trova i nuclei di icore",
+            "pt": "Encontre os núcleos de icor",
+            "ru": "Найти ихорные ядра",
+            "pl": "Znajdź ichorowe rdzenie",
+            "nl": "Vind de ichorkernen",
+            "sv": "Hitta ikorskorpa",
+            "tr": "İkor çekirdeklerini bul",
+            "uk": "Знайти іхорові ядра"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "收集靈漿核心",
             "zh-hans": "收集灵液核心",
             "en": "Collect the ichor cores",
@@ -6388,6 +7136,28 @@
             "sv": "Hitta golemens kompis",
             "tr": "Golemin arkadaşını bul",
             "uk": "Знайти друга голема"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和回聲魔像交談",
+            "zh-hans": "与回响傀儡对话",
+            "en": "Speak to the Echo Golem",
+            "ja": "エコーゴーレムに話しかける",
+            "ko": "에코 골렘과 대화하세요",
+            "de": "Sprich mit dem Echogolem",
+            "fr": "Parler au golem d'écho",
+            "es": "Habla con el gólem eco",
+            "it": "Parla con il golem dell'eco",
+            "pt": "Fale com o Golem do Eco",
+            "ru": "Поговорить с эхо-големом",
+            "pl": "Porozmawiaj z golemem echa",
+            "nl": "Praat met de echogolem",
+            "sv": "Prata med ekogolemen",
+            "tr": "Yankı Golemiyle konuş",
+            "uk": "Поговорити з ехо-големом"
           },
           "untranslated": [],
           "count": 1
@@ -6899,6 +7669,28 @@
         },
         {
           "text": {
+            "zh": "找到穿越峽谷的方法",
+            "zh-hans": "设法穿越峡谷",
+            "en": "Find a way across the chasm",
+            "ja": "裂け目を渡る方法を見つける",
+            "ko": "협곡을 건너갈 방법을 찾으세요",
+            "de": "Finde einen Weg zum Überqueren der Schlucht",
+            "fr": "Chercher un moyen de traverser le gouffre",
+            "es": "Encuentra una forma de cruzar el abismo",
+            "it": "Trova un modo per superare il baratro",
+            "pt": "Contorne o abismo",
+            "ru": "Найти путь через пропасть",
+            "pl": "Znajdź przejście przez szczelinę",
+            "nl": "Zoek een weg door de kloof",
+            "sv": "Hitta en väg över avgrunden",
+            "tr": "Uçurumu geçmenin bir yolunu bul",
+            "uk": "Знайти дорогу через прірву"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "擊敗紅石巨獸",
             "zh-hans": "击败红石巨兽",
             "en": "Defeat the Redstone Monstrosity",
@@ -7047,6 +7839,28 @@
             "sv": "Överlev bakhållet",
             "tr": "Pusudan sağ çık",
             "uk": "Вижити під час засідки"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "掃蕩城牆",
+            "zh-hans": "肃清城墙",
+            "en": "Clear the ramparts",
+            "ja": "城壁の敵を一掃する",
+            "ko": "성곽의 적을 모두 처치하세요",
+            "de": "Besiege die Gegner auf den Schutzwällen",
+            "fr": "Libérer les remparts",
+            "es": "Derrota a todos los enemigos en las murallas",
+            "it": "Libera i bastioni dai nemici",
+            "pt": "Limpe as muralhas",
+            "ru": "Зачистить крепостные стены",
+            "pl": "Oczyść mury obronne",
+            "nl": "Maak de verdedigingswallen vrij",
+            "sv": "Röj skyddsvallarna",
+            "tr": "Surları temizle",
+            "uk": "Очистити мури"
           },
           "untranslated": [],
           "count": 1
@@ -7354,7 +8168,7 @@
       },
       "description": {
         "html": {
-          "zh": "<em class=\"emphasis\">伏聆從壞村民的裂隙蔓延開來，</em>正在毒害附近的花朵。<br><br>養蜂人原本擔心可憐的<em class=\"emphasis\">蜜蜂會生病</em>，但現在<em class=\"emphasis\">你已經做好了新的蜂箱</em>，養蜂人和那些嗡嗡作響的夥伴們便能繼續釀出香甜的蜂蜜，並將健康的花粉散播到蜂巢原野的草地上。",
+          "zh": "The patches of sculk that have spread from the illager rifts are poisoning the flowers nearby and risk making the poor bees sick. <br><br>The Beekeeper wants your help to <em class=\"emphasis\">build beehives</em> and save the bees of Honeycomb Fields.",
           "zh-hans": "从灾厄村民裂隙中蔓延出的幽匿斑块正在毒害附近的花朵，可怜的蜜蜂也可能因此生病。<br><br>养蜂人希望你能帮忙<em class=\"emphasis\">建造蜂箱</em>，拯救蜜脾原野的蜜蜂。",
           "en": "The patches of sculk that have spread from the illager rifts are poisoning the flowers nearby and risk making the poor bees sick. <br><br>The Beekeeper wants your help to <em class=\"emphasis\">build beehives</em> and save the bees of Honeycomb Fields.",
           "ja": "邪悪な村人が生み出した亀裂から広がるスカルクのせいで近くの花々にも毒が回ってしまい、ミツバチたちも病気になりかねない。<br><br>養蜂家は、ハニカム畑のミツバチを救うために<em class=\"emphasis\">養蜂箱を作って</em>ほしいようだ。",
@@ -7371,7 +8185,9 @@
           "tr": "Illager yarıklarından yayılan sculk parçaları, yakındaki çiçekleri zehirliyor ve zavallı arıları hasta etme riski taşıyor. <br><br>Arıcı, <em class=\"emphasis\">arı kovanları yapmanı</em> ve Petek Tarlalarının arılarını kurtarmanı istiyor.",
           "uk": "Плями скалку, що поширилися з розломів лиходіїв, отруюють навколишні квіти й можуть нашкодити бджолам. <br><br>Пасічник хоче, щоб ви допомогли <em class=\"emphasis\">побудувати вулики</em> та врятувати бджіл на Стільникових полях."
         },
-        "untranslated": []
+        "untranslated": [
+          "zh"
+        ]
       },
       "completed": {
         "html": {
@@ -7559,6 +8375,28 @@
         },
         {
           "text": {
+            "zh": "找個地方搭建蜂箱",
+            "zh-hans": "找个地方建造蜂箱",
+            "en": "Find a spot to build beehives",
+            "ja": "養蜂箱を作る場所を探す",
+            "ko": "벌통을 지을 장소를 찾으세요",
+            "de": "Finde einen Ort für den Bau der Bienenstöcke",
+            "fr": "Trouver un endroit pour construire des ruches",
+            "es": "Busca un lugar donde instalar las colmenas",
+            "it": "Trova un'area in cui costruire le arnie",
+            "pt": "Encontre um espaço e construa as colmeias",
+            "ru": "Найти место для ульев",
+            "pl": "Znajdź miejsce na ule",
+            "nl": "Zoek een plaats om bijenkorven te bouwen",
+            "sv": "Hitta en plats för att bygga bikupor",
+            "tr": "Arı kovanı kurmak için bir yer bul",
+            "uk": "Знайти місце для будівництва вуликів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "擊敗怪物",
             "zh-hans": "击败怪物",
             "en": "Defeat the monsters",
@@ -7603,6 +8441,94 @@
         },
         {
           "text": {
+            "zh": "找個地方搭建蜂箱",
+            "zh-hans": "找个地方建造蜂箱",
+            "en": "Find a spot to build beehives",
+            "ja": "養蜂箱を作る場所を探す",
+            "ko": "벌통을 지을 장소를 찾으세요",
+            "de": "Finde einen Ort für den Bau der Bienenstöcke",
+            "fr": "Trouver un endroit pour construire des ruches",
+            "es": "Busca un lugar donde instalar las colmenas",
+            "it": "Trova un'area in cui costruire le arnie",
+            "pt": "Encontre um espaço e construa as colmeias",
+            "ru": "Найти место для ульев",
+            "pl": "Znajdź miejsce na ule",
+            "nl": "Zoek een plaats om bijenkorven te bouwen",
+            "sv": "Hitta en plats för att bygga bikupor",
+            "tr": "Arı kovanı kurmak için bir yer bul",
+            "uk": "Знайти місце для будівництва вуликів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "擊敗怪物",
+            "zh-hans": "击败怪物",
+            "en": "Defeat the monsters",
+            "ja": "モンスターを倒す",
+            "ko": "몬스터를 처치하세요",
+            "de": "Besiege die Monster",
+            "fr": "Vaincre les monstres",
+            "es": "Derrota a los monstruos",
+            "it": "Sconfiggi i mostri",
+            "pt": "Derrote os monstros",
+            "ru": "Победить монстров",
+            "pl": "Pokonaj potwory",
+            "nl": "Versla de monsters",
+            "sv": "Besegra monstren",
+            "tr": "Canavarları yen",
+            "uk": "Здолати монстрів"
+          },
+          "untranslated": [],
+          "count": 4
+        },
+        {
+          "text": {
+            "zh": "勘察此區域",
+            "zh-hans": "勘察该区域",
+            "en": "Assess the area",
+            "ja": "周辺を評価する",
+            "ko": "지역을 평가하세요",
+            "de": "Evaluiere das Gebiet",
+            "fr": "Évaluer la zone",
+            "es": "Evalúa la zona",
+            "it": "Valuta l'area",
+            "pt": "Acesse a área",
+            "ru": "Осмотреть местность",
+            "pl": "Rozejrzyj się po okolicy",
+            "nl": "Controleer het gebied",
+            "sv": "Utvärdera området",
+            "tr": "Bölgeyi incele",
+            "uk": "Отримати доступ до області"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "找個地方搭建蜂箱",
+            "zh-hans": "找个地方建造蜂箱",
+            "en": "Find a spot to build beehives",
+            "ja": "養蜂箱を作る場所を探す",
+            "ko": "벌통을 지을 장소를 찾으세요",
+            "de": "Finde einen Ort für den Bau der Bienenstöcke",
+            "fr": "Trouver un endroit pour construire des ruches",
+            "es": "Busca un lugar donde instalar las colmenas",
+            "it": "Trova un'area in cui costruire le arnie",
+            "pt": "Encontre um espaço e construa as colmeias",
+            "ru": "Найти место для ульев",
+            "pl": "Znajdź miejsce na ule",
+            "nl": "Zoek een plaats om bijenkorven te bouwen",
+            "sv": "Hitta en plats för att bygga bikupor",
+            "tr": "Arı kovanı kurmak için bir yer bul",
+            "uk": "Знайти місце для будівництва вуликів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "擊敗怪物",
             "zh-hans": "击败生物",
             "en": "Defeat the mobs",
@@ -7625,6 +8551,28 @@
         },
         {
           "text": {
+            "zh": "勘察此區域",
+            "zh-hans": "勘察该区域",
+            "en": "Assess the area",
+            "ja": "周辺を評価する",
+            "ko": "지역을 평가하세요",
+            "de": "Evaluiere das Gebiet",
+            "fr": "Évaluer la zone",
+            "es": "Evalúa la zona",
+            "it": "Valuta l'area",
+            "pt": "Acesse a área",
+            "ru": "Осмотреть местность",
+            "pl": "Rozejrzyj się po okolicy",
+            "nl": "Controleer het gebied",
+            "sv": "Utvärdera området",
+            "tr": "Bölgeyi incele",
+            "uk": "Отримати доступ до області"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "搭建蜂箱",
             "zh-hans": "建造蜂箱",
             "en": "Build the beehives",
@@ -7644,6 +8592,28 @@
           },
           "untranslated": [],
           "count": 3
+        },
+        {
+          "text": {
+            "zh": "和養蜂人交談",
+            "zh-hans": "与养蜂人对话",
+            "en": "Speak to the Beekeeper",
+            "ja": "養蜂家に話しかける",
+            "ko": "양봉가와 대화하세요",
+            "de": "Sprich mit dem Imker",
+            "fr": "Parler à l'Apiculteur",
+            "es": "Habla con el apicultor",
+            "it": "Parla con l'apicoltore",
+            "pt": "Fale com o Apicultor",
+            "ru": "Поговорить с пчеловодом",
+            "pl": "Porozmawiaj z pszczelarzem",
+            "nl": "Praat met de imker",
+            "sv": "Prata med biodlaren",
+            "tr": "Arıcıyla konuş",
+            "uk": "Поговорити з пасічником"
+          },
+          "untranslated": [],
+          "count": 1
         }
       ],
       "rewards": {
@@ -8126,6 +9096,50 @@
         },
         {
           "text": {
+            "zh": "擊敗壞村民",
+            "zh-hans": "击败灾厄村民",
+            "en": "Defeat the illagers",
+            "ja": "邪悪な村人たちを倒す",
+            "ko": "우민을 처치하세요",
+            "de": "Besiege die Illager",
+            "fr": "Vaincre les Illageois",
+            "es": "Derrota a los maldeanos",
+            "it": "Sconfiggi gli abitori",
+            "pt": "Derrote os illagers",
+            "ru": "Победить злодеян",
+            "pl": "Pokonaj złosadników",
+            "nl": "Versla de illagers",
+            "sv": "Besegra fyborna",
+            "tr": "Illager'ları yen",
+            "uk": "Здолати лиходіїв"
+          },
+          "untranslated": [],
+          "count": 6
+        },
+        {
+          "text": {
+            "zh": "拆除苦力怕蠟燭",
+            "zh-hans": "拆除苦力怕蜡烛",
+            "en": "Defuse the Creeper Candle",
+            "ja": "クリーパーキャンドルを解除する",
+            "ko": "크리퍼 양초를 끄세요",
+            "de": "Entschärfe die Creeper-Kerze",
+            "fr": "Désamorcer la bougie de Creeper",
+            "es": "Apaga la vela de creeper",
+            "it": "Disinnesca la candela del creeper",
+            "pt": "Desarme a Vela de Creeper",
+            "ru": "Обезвредить криперскую свечу",
+            "pl": "Rozbrój creeperową świecę",
+            "nl": "Ontmantel de creeperkaars",
+            "sv": "Desarmera creeper-ljuset",
+            "tr": "Creeper Mumunu etkisiz hâle getir",
+            "uk": "Знешкодити свічку кріпера"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "找到第三根苦力怕蠟燭",
             "zh-hans": "找到第三根苦力怕蜡烛",
             "en": "Find the third Creeper Candle",
@@ -8142,6 +9156,50 @@
             "sv": "Hitta det tredje creeper-ljuset",
             "tr": "Üçüncü Creeper Mumunu bul",
             "uk": "Знайти третю свічку кріпера"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "擊敗壞村民",
+            "zh-hans": "击败灾厄村民",
+            "en": "Defeat the illagers",
+            "ja": "邪悪な村人たちを倒す",
+            "ko": "우민을 처치하세요",
+            "de": "Besiege die Illager",
+            "fr": "Vaincre les Illageois",
+            "es": "Derrota a los maldeanos",
+            "it": "Sconfiggi gli abitori",
+            "pt": "Derrote os illagers",
+            "ru": "Победить злодеян",
+            "pl": "Pokonaj złosadników",
+            "nl": "Versla de illagers",
+            "sv": "Besegra fyborna",
+            "tr": "Illager'ları yen",
+            "uk": "Здолати лиходіїв"
+          },
+          "untranslated": [],
+          "count": 6
+        },
+        {
+          "text": {
+            "zh": "拆除苦力怕蠟燭",
+            "zh-hans": "拆除苦力怕蜡烛",
+            "en": "Defuse the Creeper Candle",
+            "ja": "クリーパーキャンドルを解除する",
+            "ko": "크리퍼 양초를 끄세요",
+            "de": "Entschärfe die Creeper-Kerze",
+            "fr": "Désamorcer la bougie de Creeper",
+            "es": "Apaga la vela de creeper",
+            "it": "Disinnesca la candela del creeper",
+            "pt": "Desarme a Vela de Creeper",
+            "ru": "Обезвредить криперскую свечу",
+            "pl": "Rozbrój creeperową świecę",
+            "nl": "Ontmantel de creeperkaars",
+            "sv": "Desarmera creeper-ljuset",
+            "tr": "Creeper Mumunu etkisiz hâle getir",
+            "uk": "Знешкодити свічку кріпера"
           },
           "untranslated": [],
           "count": 1
@@ -8192,6 +9250,28 @@
         },
         {
           "text": {
+            "zh": "擊退壞村民伏擊",
+            "zh-hans": "击退灾厄村民伏击",
+            "en": "Defeat the illager ambush",
+            "ja": "邪悪な村人の待ち伏せ攻撃を突破する",
+            "ko": "우민 습격을 물리치세요",
+            "de": "Vereitele den Illager-Hinterhalt",
+            "fr": "Résister à l'embuscade des Illageois",
+            "es": "Supera la emboscada de los maldeanos",
+            "it": "Sventa l'imboscata degli abitori",
+            "pt": "Derrote a emboscada dos illagers",
+            "ru": "Отразить засаду злодеян",
+            "pl": "Udaremnij zasadzkę złosadników",
+            "nl": "Versla de hinderlaag van de illagers",
+            "sv": "Besegra fybornas bakhåll",
+            "tr": "Illager pususunu püskürt",
+            "uk": "Здолати лиходіїв, що влаштували засідку"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "回去找製燭人",
             "zh-hans": "回到蜡烛匠身边",
             "en": "Return to the Candlemaker",
@@ -8208,6 +9288,28 @@
             "sv": "Återvänd till ljusmakaren",
             "tr": "Mumcunun yanına dön",
             "uk": "Повернутися до свічкаря"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和製燭人交談",
+            "zh-hans": "与蜡烛匠对话",
+            "en": "Speak to the Candlemaker",
+            "ja": "ろうそく職人に話しかける",
+            "ko": "양초 제작자와 대화하세요",
+            "de": "Sprich mit dem Kerzenmacher",
+            "fr": "Parler au Fabricant de bougies",
+            "es": "Habla con el candelero",
+            "it": "Parla con il candelaio",
+            "pt": "Fale com o Fabricante de Velas",
+            "ru": "Поговорить со свечником",
+            "pl": "Porozmawiaj z woskarzem",
+            "nl": "Praat met de kaarsenmaker",
+            "sv": "Prata med ljusmakaren",
+            "tr": "Mumcuyla konuş",
+            "uk": "Поговорити зі свічкарем"
           },
           "untranslated": [],
           "count": 1
@@ -8471,6 +9573,50 @@
         },
         {
           "text": {
+            "zh": "跟著狼",
+            "zh-hans": "跟随狼",
+            "en": "Follow the wolf",
+            "ja": "オオカミについていく",
+            "ko": "늑대를 따라가세요",
+            "de": "Folge dem Wolf",
+            "fr": "Suivre le loup",
+            "es": "Sigue al lobo",
+            "it": "Segui il lupo",
+            "pt": "Siga o lobo",
+            "ru": "Пойти за волком",
+            "pl": "Podążaj za wilkiem",
+            "nl": "Volg de wolf",
+            "sv": "Följ vargen",
+            "tr": "Kurdu takip et",
+            "uk": "Піти за вовком"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "跟狼談談",
+            "zh-hans": "与狼对话",
+            "en": "Talk to the wolf",
+            "ja": "オオカミに話しかける",
+            "ko": "늑대와 대화하세요",
+            "de": "Sprich mit dem Wolf",
+            "fr": "Parler au loup",
+            "es": "Habla con el lobo",
+            "it": "Parla con il lupo",
+            "pt": "Fale com o lobo",
+            "ru": "Поговорить с волком",
+            "pl": "Zwróć się do wilka",
+            "nl": "Praat met de wolf",
+            "sv": "Prata med vargen",
+            "tr": "Kurtla konuş",
+            "uk": "Поговорити з вовком"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "爬到井底",
             "zh-hans": "下到井中",
             "en": "Climb down the well",
@@ -8493,6 +9639,28 @@
         },
         {
           "text": {
+            "zh": "擊敗壞村民盜獵者",
+            "zh-hans": "击败灾厄村民偷猎者",
+            "en": "Defeat the illager poachers",
+            "ja": "邪悪な村人の密猟者たちを倒す",
+            "ko": "우민 밀렵꾼을 처치하세요",
+            "de": "Besiege die Illager-Wilderer",
+            "fr": "Vaincre les braconniers illageois",
+            "es": "Derrota a los maldeanos cazadores furtivos",
+            "it": "Sconfiggi gli abitori bracconieri",
+            "pt": "Derrote os caçadores illagers",
+            "ru": "Победить злодеян-браконьеров",
+            "pl": "Pokonaj kłusujących złosadników",
+            "nl": "Versla de illagerstropers",
+            "sv": "Besegra fybotjuvjägarna",
+            "tr": "Illager kaçak avcılarını yen",
+            "uk": "Здолати лиходіїв-браконьєрів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "救出狼群",
             "zh-hans": "解救狼",
             "en": "Free the wolves",
@@ -8509,6 +9677,28 @@
             "sv": "Befria vargarna",
             "tr": "Kurtları özgür bırak",
             "uk": "Звільнити вовків"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "回去找寵物狼",
+            "zh-hans": "回到宠物狼身边",
+            "en": "Return to the pet wolf",
+            "ja": "ペットのオオカミのところに戻る",
+            "ko": "반려 늑대에게 돌아가세요",
+            "de": "Kehre zum Haustierwolf zurück",
+            "fr": "Retourner auprès du loup de compagnie",
+            "es": "Regresa con el lobo mascota",
+            "it": "Torna dal cucciolo di lupo",
+            "pt": "Devolva o lobo de estimação",
+            "ru": "Вернуться к ручному волку",
+            "pl": "Wróć do oswojonego wilka",
+            "nl": "Keer terug naar de huisdierwolf",
+            "sv": "Återvänd till husdjursvargen",
+            "tr": "Evcil kurdun yanına dön",
+            "uk": "Повернутися до прирученого вовка"
           },
           "untranslated": [],
           "count": 1
@@ -8992,6 +10182,28 @@
         },
         {
           "text": {
+            "zh": "追擊壞村民車隊",
+            "zh-hans": "追击灾厄村民车队",
+            "en": "Pursue the illager convoy",
+            "ja": "邪悪な村人の輸送隊を追跡する",
+            "ko": "우민 수송대를 추격하세요",
+            "de": "Verfolge den Illager-Konvoi",
+            "fr": "Poursuivre le convoi des Illageois",
+            "es": "Persigue al convoy de maldeanos",
+            "it": "Segui il convoglio degli abitori",
+            "pt": "Persiga o comboio de illagers",
+            "ru": "Преследовать обоз злодеян",
+            "pl": "Ścigaj konwój złosadników",
+            "nl": "Ga achter het konvooi van de illagers aan",
+            "sv": "Förfölj fybokonvojen",
+            "tr": "Illager konvoyunun peşine düş",
+            "uk": "Піти за конвоєм лиходіїв"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "擊敗壞村民",
             "zh-hans": "击败灾厄村民",
             "en": "Defeat the illagers",
@@ -9008,6 +10220,94 @@
             "sv": "Besegra fyborna",
             "tr": "Illager'ları yen",
             "uk": "Здолати лиходіїв"
+          },
+          "untranslated": [],
+          "count": 5
+        },
+        {
+          "text": {
+            "zh": "搜查儲銅桶",
+            "zh-hans": "搜查装铜的木桶",
+            "en": "Search the copper barrel",
+            "ja": "銅の樽を調べる",
+            "ko": "구리 통을 수색하세요",
+            "de": "Durchsuche das Kupferfass",
+            "fr": "Chercher le tonneau de cuivre",
+            "es": "Examina el barril de cobre",
+            "it": "Esamina il barile del rame",
+            "pt": "Procure dentro do barril de cobre",
+            "ru": "Обыскать бочку с медью",
+            "pl": "Przeszukaj beczkę z miedzią",
+            "nl": "Doorzoek het vat met koper",
+            "sv": "Leta i koppartunnan",
+            "tr": "Bakır fıçıyı incele",
+            "uk": "Обшукати мідну діжку"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "追擊壞村民車隊",
+            "zh-hans": "追击灾厄村民车队",
+            "en": "Pursue the illager convoy",
+            "ja": "邪悪な村人の輸送隊を追跡する",
+            "ko": "우민 수송대를 추격하세요",
+            "de": "Verfolge den Illager-Konvoi",
+            "fr": "Poursuivre le convoi des Illageois",
+            "es": "Persigue al convoy de maldeanos",
+            "it": "Segui il convoglio degli abitori",
+            "pt": "Persiga o comboio de illagers",
+            "ru": "Преследовать обоз злодеян",
+            "pl": "Ścigaj konwój złosadników",
+            "nl": "Ga achter het konvooi van de illagers aan",
+            "sv": "Förfölj fybokonvojen",
+            "tr": "Illager konvoyunun peşine düş",
+            "uk": "Піти за конвоєм лиходіїв"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "擊敗壞村民",
+            "zh-hans": "击败灾厄村民",
+            "en": "Defeat the illagers",
+            "ja": "邪悪な村人たちを倒す",
+            "ko": "우민을 처치하세요",
+            "de": "Besiege die Illager",
+            "fr": "Vaincre les Illageois",
+            "es": "Derrota a los maldeanos",
+            "it": "Sconfiggi gli abitori",
+            "pt": "Derrote os illagers",
+            "ru": "Победить злодеян",
+            "pl": "Pokonaj złosadników",
+            "nl": "Versla de illagers",
+            "sv": "Besegra fyborna",
+            "tr": "Illager'ları yen",
+            "uk": "Здолати лиходіїв"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "搜查儲銅桶",
+            "zh-hans": "搜查装铜的木桶",
+            "en": "Search the copper barrel",
+            "ja": "銅の樽を調べる",
+            "ko": "구리 통을 수색하세요",
+            "de": "Durchsuche das Kupferfass",
+            "fr": "Chercher le tonneau de cuivre",
+            "es": "Examina el barril de cobre",
+            "it": "Esamina il barile del rame",
+            "pt": "Procure o barril de cobre",
+            "ru": "Обыскать бочку с медью",
+            "pl": "Przeszukaj beczkę z miedzią",
+            "nl": "Doorzoek het vat met koper",
+            "sv": "Leta i koppartunnan",
+            "tr": "Bakır fıçıyı incele",
+            "uk": "Обшукати мідну діжку"
           },
           "untranslated": [],
           "count": 1
@@ -9270,6 +10570,28 @@
         },
         {
           "text": {
+            "zh": "找一些漂亮的花",
+            "zh-hans": "找一些漂亮花朵",
+            "en": "Find some pretty flowers",
+            "ja": "きれいな花を見つける",
+            "ko": "예쁜 꽃을 찾으세요",
+            "de": "Finde schöne Blumen",
+            "fr": "Trouver de jolies fleurs",
+            "es": "Encuentra flores bonitas",
+            "it": "Trova dei fiori graziosi",
+            "pt": "Encontre flores belas",
+            "ru": "Найти красивые цветы",
+            "pl": "Znajdź ładne kwiatki",
+            "nl": "Vind een paar mooie bloemen",
+            "sv": "Hitta några vackra blommor",
+            "tr": "Güzel çiçekler bul",
+            "uk": "Знайти гарні квіти"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "擊敗劫毀獸",
             "zh-hans": "击败劫掠兽",
             "en": "Defeat the ravagers",
@@ -9314,6 +10636,28 @@
         },
         {
           "text": {
+            "zh": "找一些漂亮的花",
+            "zh-hans": "找一些漂亮花朵",
+            "en": "Find some pretty flowers",
+            "ja": "きれいな花を見つける",
+            "ko": "예쁜 꽃을 찾으세요",
+            "de": "Finde schöne Blumen",
+            "fr": "Trouver de jolies fleurs",
+            "es": "Encuentra flores bonitas",
+            "it": "Trova dei fiori graziosi",
+            "pt": "Encontre flores belas",
+            "ru": "Найти красивые цветы",
+            "pl": "Znajdź ładne kwiatki",
+            "nl": "Vind een paar mooie bloemen",
+            "sv": "Hitta några vackra blommor",
+            "tr": "Güzel çiçekler bul",
+            "uk": "Знайти гарні квіти"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "擊敗劫毀獸",
             "zh-hans": "击败劫掠兽",
             "en": "Defeat the ravagers",
@@ -9333,6 +10677,28 @@
           },
           "untranslated": [],
           "count": 8
+        },
+        {
+          "text": {
+            "zh": "摘些漂亮的花",
+            "zh-hans": "摘一些漂亮花朵",
+            "en": "Pick some pretty flowers",
+            "ja": "きれいな花を摘む",
+            "ko": "예쁜 꽃을 따세요",
+            "de": "Pflücke schöne Blumen",
+            "fr": "Ramasser de jolies fleurs",
+            "es": "Recoge flores bonitas",
+            "it": "Cogli dei fiori graziosi",
+            "pt": "Colha flores belas",
+            "ru": "Набрать красивых цветов",
+            "pl": "Zerwij ładne kwiatki",
+            "nl": "Pluk een paar mooie bloemen",
+            "sv": "Plocka några vackra blommor",
+            "tr": "Güzel çiçekler topla",
+            "uk": "Зірвати гарні квіти"
+          },
+          "untranslated": [],
+          "count": 3
         },
         {
           "text": {
@@ -9418,6 +10784,28 @@
             "sv": "Led insamlaren hem",
             "tr": "Toplayıcıyı eve götür",
             "uk": "Провести збирача додому"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和收集者交談",
+            "zh-hans": "与采集者对话",
+            "en": "Speak to the Gatherer",
+            "ja": "採集係に話しかける",
+            "ko": "채집가와 대화하세요",
+            "de": "Sprich mit dem Sammler",
+            "fr": "Parler au Cueilleur",
+            "es": "Habla con el recolector",
+            "it": "Parla con il raccoglitore",
+            "pt": "Fale com o Coletor",
+            "ru": "Поговорить с собирательницей",
+            "pl": "Porozmawiaj ze zbieraczem",
+            "nl": "Praat met de verzamelaar",
+            "sv": "Prata med samlaren",
+            "tr": "Toplayıcıyla konuş",
+            "uk": "Поговорити зі збирачем"
           },
           "untranslated": [],
           "count": 1
@@ -9678,6 +11066,28 @@
           },
           "untranslated": [],
           "count": 7
+        },
+        {
+          "text": {
+            "zh": "追蹤靈魂腐化的壞村民",
+            "zh-hans": "追踪灵魂腐化灾厄村民",
+            "en": "Track the soul corrupted illagers",
+            "ja": "ソウルに冒された邪悪な村人たちを追いかける",
+            "ko": "영혼 오염 우민을 추적하세요",
+            "de": "Spüre die seelenverdorbenen Illager auf",
+            "fr": "Suivre les Illageois corrompus par les âmes",
+            "es": "Rastrea a los maldeanos corrompidos por almas",
+            "it": "Rintraccia gli abitori corrotti dalle anime",
+            "pt": "Rastreie os illagers corrompidos por almas",
+            "ru": "Выследить душескверных злодеян",
+            "pl": "Śledź splugawionych złosadników",
+            "nl": "Spoor de zielsverdorven illagers op",
+            "sv": "Spåra de själsförvridna fyborna",
+            "tr": "Ruhu yozlaşmış illager'ların izini sür",
+            "uk": "Вистежити спотворених душами лиходіїв"
+          },
+          "untranslated": [],
+          "count": 1
         },
         {
           "text": {
@@ -10495,6 +11905,28 @@
             "sv": "Återvänd till gruvarbetarna",
             "tr": "Madencilerin yanına dön",
             "uk": "Повернутися до шахтарів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和礦工交談",
+            "zh-hans": "与矿工对话",
+            "en": "Speak to the Miner",
+            "ja": "鉱夫に話しかける",
+            "ko": "광부와 대화하세요",
+            "de": "Sprich mit dem Bergarbeiter",
+            "fr": "Parler au Mineur",
+            "es": "Habla con el minero",
+            "it": "Parla con il minatore",
+            "pt": "Fale com o Minerador",
+            "ru": "Поговорить с шахтером",
+            "pl": "Porozmawiaj z górnikiem",
+            "nl": "Praat met de mijnwerker",
+            "sv": "Prata med gruvarbetaren",
+            "tr": "Madenciyle konuş",
+            "uk": "Поговорити із шахтарем"
           },
           "untranslated": [],
           "count": 1
@@ -11528,6 +12960,116 @@
         },
         {
           "text": {
+            "zh": "搜尋躲藏的晃墩墩",
+            "zh-hans": "寻找躲藏的晃墩墩",
+            "en": "Search for the hiding wobble",
+            "ja": "隠れているウォブルを探す",
+            "ko": "숨은 말랑덩어리를 찾으세요",
+            "de": "Suche den Wabbler, der sich versteckt hat",
+            "fr": "Chercher la gelée cachée",
+            "es": "Busca al tambalín escondido",
+            "it": "Cerca il wobble nascosto",
+            "pt": "Procure o gelatinoso escondido",
+            "ru": "Отыскать спрятавшегося шатуна",
+            "pl": "Poszukaj ukrywającego się chybotka",
+            "nl": "Zoek naar de verstopte wiebelaar",
+            "sv": "Sök efter skakisen som gömmer sig",
+            "tr": "Saklanan titreşiği ara",
+            "uk": "Пошукати хитуна, що сховався"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "找到晃墩墩",
+            "zh-hans": "找到晃墩墩",
+            "en": "Find the wobbles",
+            "ja": "ウォブルたちを見つける",
+            "ko": "말랑덩어리를 찾으세요",
+            "de": "Finde die Wabbler",
+            "fr": "Trouver les gelées",
+            "es": "Encuentra a los tambalines",
+            "it": "Trova i wobble",
+            "pt": "Encontre os gelatinosos",
+            "ru": "Найти шатунов",
+            "pl": "Znajdź chybotki",
+            "nl": "Vind de wiebelaars",
+            "sv": "Hitta skakisarna",
+            "tr": "Titreşikleri bul",
+            "uk": "Знайти хитунів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "搜尋躲藏的晃墩墩",
+            "zh-hans": "寻找躲藏的晃墩墩",
+            "en": "Search for the hiding wobble",
+            "ja": "隠れているウォブルを探す",
+            "ko": "숨은 말랑덩어리를 찾으세요",
+            "de": "Suche den Wabbler, der sich versteckt hat",
+            "fr": "Chercher la gelée cachée",
+            "es": "Busca al tambalín escondido",
+            "it": "Cerca il wobble nascosto",
+            "pt": "Procure o gelatinoso escondido",
+            "ru": "Отыскать спрятавшегося шатуна",
+            "pl": "Poszukaj ukrywającego się chybotka",
+            "nl": "Zoek naar de verstopte wiebelaar",
+            "sv": "Sök efter skakisen som gömmer sig",
+            "tr": "Saklanan titreşiği ara",
+            "uk": "Пошукати хитуна, що сховався"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "找到晃墩墩",
+            "zh-hans": "找到晃墩墩",
+            "en": "Find the wobbles",
+            "ja": "ウォブルたちを見つける",
+            "ko": "말랑덩어리를 찾으세요",
+            "de": "Finde die Wabbler",
+            "fr": "Trouver les gelées",
+            "es": "Encuentra a los tambalines",
+            "it": "Trova i wobble",
+            "pt": "Encontre os gelatinosos",
+            "ru": "Найти шатунов",
+            "pl": "Znajdź chybotki",
+            "nl": "Vind de wiebelaars",
+            "sv": "Hitta skakisarna",
+            "tr": "Titreşikleri bul",
+            "uk": "Знайти хитунів"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "搜尋躲藏的晃墩墩",
+            "zh-hans": "寻找躲藏的晃墩墩",
+            "en": "Search for the hiding wobble",
+            "ja": "隠れているウォブルを探す",
+            "ko": "숨은 말랑덩어리를 찾으세요",
+            "de": "Suche den Wabbler, der sich versteckt hat",
+            "fr": "Chercher la gelée cachée",
+            "es": "Busca al tambalín escondido",
+            "it": "Cerca il wobble nascosto",
+            "pt": "Procure o gelatinoso escondido",
+            "ru": "Отыскать спрятавшегося шатуна",
+            "pl": "Poszukaj ukrywającego się chybotka",
+            "nl": "Zoek naar de verstopte wiebelaar",
+            "sv": "Sök efter skakisen som gömmer sig",
+            "tr": "Saklanan titreşiği ara",
+            "uk": "Пошукати хитуна, що сховався"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
             "zh": "回去找回聲魔像",
             "zh-hans": "回到回响傀儡身边",
             "en": "Return to the Echo Golem",
@@ -11544,6 +13086,28 @@
             "sv": "Återvänd till ekogolem",
             "tr": "Yankı Goleminin yanına dön",
             "uk": "Повернутися до ехо-голема"
+          },
+          "untranslated": [],
+          "count": 1
+        },
+        {
+          "text": {
+            "zh": "和回聲魔像交談",
+            "zh-hans": "与回响傀儡对话",
+            "en": "Speak to the Echo Golem",
+            "ja": "エコーゴーレムに話しかける",
+            "ko": "에코 골렘과 대화하세요",
+            "de": "Sprich mit dem Echogolem",
+            "fr": "Parler au golem d'écho",
+            "es": "Habla con el gólem eco",
+            "it": "Parla con il golem dell'eco",
+            "pt": "Fale com o Golem do Eco",
+            "ru": "Поговорить с эхо-големом",
+            "pl": "Porozmawiaj z golemem echa",
+            "nl": "Praat met de echogolem",
+            "sv": "Prata med ekogolem",
+            "tr": "Yankı Golemiyle konuş",
+            "uk": "Поговорити з ехо-големом"
           },
           "untranslated": [],
           "count": 1
@@ -11591,6 +13155,28 @@
           },
           "untranslated": [],
           "count": 8
+        },
+        {
+          "text": {
+            "zh": "和回聲魔像交談",
+            "zh-hans": "与回响傀儡对话",
+            "en": "Speak to the Echo Golem",
+            "ja": "エコーゴーレムに話しかける",
+            "ko": "에코 골렘과 대화하세요",
+            "de": "Sprich mit dem Echogolem",
+            "fr": "Parler au golem d'écho",
+            "es": "Habla con el gólem eco",
+            "it": "Parla con il golem dell'eco",
+            "pt": "Fale com o Golem do Eco",
+            "ru": "Поговорить с эхо-големом",
+            "pl": "Porozmawiaj z golemem echa",
+            "nl": "Praat met de echogolem",
+            "sv": "Prata med ekogolem",
+            "tr": "Yankı Golemiyle konuş",
+            "uk": "Поговорити з ехо-големом"
+          },
+          "untranslated": [],
+          "count": 1
         }
       ],
       "rewards": {
@@ -11782,6 +13368,28 @@
           },
           "untranslated": [],
           "count": 1
+        },
+        {
+          "text": {
+            "zh": "收集靈漿硬殼",
+            "zh-hans": "收集灵液硬壳",
+            "en": "Collect ichor crust",
+            "ja": "霊血クラストを回収する",
+            "ko": "이코르 껍질을 수집하세요",
+            "de": "Sammle Ichorkruste",
+            "fr": "Collecter de l'écorce d'ichor",
+            "es": "Recoge la corteza de icor",
+            "it": "Raccogli la crosta di icore",
+            "pt": "Colete crosta de icor",
+            "ru": "Собрать ихорную корку",
+            "pl": "Zbierz skorupę ichoru",
+            "nl": "Haal ichorkorst op",
+            "sv": "Samla in ikorskorpa",
+            "tr": "İkor kabuğunu al",
+            "uk": "Зібрати шкірку іхору"
+          },
+          "untranslated": [],
+          "count": 3
         },
         {
           "text": {
@@ -12320,6 +13928,28 @@
           },
           "untranslated": [],
           "count": 3
+        },
+        {
+          "text": {
+            "zh": "回去找回聲魔像",
+            "zh-hans": "回到回响傀儡身边",
+            "en": "Return to the Echo Golem",
+            "ja": "エコーゴーレムのところに戻る",
+            "ko": "에코 골렘에게 돌아가세요",
+            "de": "Kehre zum Echogolem zurück",
+            "fr": "Retourner auprès du golem d'écho",
+            "es": "Regresa con el gólem eco",
+            "it": "Torna dal golem dell'eco",
+            "pt": "Volte para o Golem do Eco",
+            "ru": "Вернуться к эхо-голему",
+            "pl": "Wróć do golema echa",
+            "nl": "Keer terug naar de echogolem",
+            "sv": "Återvänd till ekogolem",
+            "tr": "Yankı Goleminin yanına dön",
+            "uk": "Повернутися до ехо-голема"
+          },
+          "untranslated": [],
+          "count": 1
         },
         {
           "text": {
@@ -14415,7 +16045,7 @@
                 "uk": "Лука співака"
               }
             },
-            "count": 1,
+            "count": 2,
             "rarity": "special"
           }
         ],
@@ -14706,7 +16336,7 @@
                 "uk": "Колискові пагорби"
               }
             },
-            "count": 1,
+            "count": 2,
             "rarity": "special"
           }
         ],
@@ -14936,7 +16566,7 @@
                 "uk": "Колискові пагорби"
               }
             },
-            "count": 1,
+            "count": 2,
             "rarity": "special"
           }
         ],

@@ -176,7 +176,7 @@ describe("UI translations", () => {
 
   it("has every quest key in every language, with its placeholders", () => {
     const keys = Object.keys(UI_DICTS.zh.values).filter((key) => key.startsWith("quest"));
-    expect(keys).toHaveLength(24);
+    expect(keys).toHaveLength(25);
     for (const lang of LANGS) {
       for (const key of [...keys, "sourceRewardOf"]) expect(UI_DICTS[lang].values[key], `${lang}.${key}`).toBeTypeOf("string");
       expect(plainText(UI_DICTS[lang].values.questAreaDrop ?? ""), lang).toContain("{area}");

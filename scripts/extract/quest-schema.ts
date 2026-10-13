@@ -99,7 +99,8 @@ export const QuestSchema = z.object({
   id: z.string(),
   section: z.enum(QUEST_SECTIONS),
   type: z.enum(["core", "side"]),
-  size: z.enum(QUEST_SIZES),
+  /** null when the game's size tag is one the site does not know (reported). */
+  size: z.enum(QUEST_SIZES).nullable(),
   replayable: z.boolean(),
   title: TextSchema,
   description: HtmlSchema.nullable(),

@@ -297,7 +297,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -631,7 +632,7 @@
   "questTypeSide": "Quête secondaire",
   "questObjectives": "Objectifs",
   "questRewards": "Récompenses",
-  "questsIntro": "Toutes les quêtes du jeu avec leurs objectifs, prérequis et récompenses, avec les textes du jeu.",
+  "questsIntro": "Les quêtes principales et secondaires, les quêtes du golem d'écho et les boss à rejouer, avec objectifs, prérequis et récompenses, avec les textes du jeu.",
   "questsEchoGolem": "Quêtes du golem d'écho",
   "questsBossReplays": "Boss à rejouer",
   "questRegion": "Région",
@@ -648,5 +649,6 @@
   "questEveryCompletion": "Chaque réussite",
   "questAreaDrop": "Objet aléatoire de {area}",
   "questRelatedMobs": "Monstres",
-  "sourceRewardOf": "Récompense de {quest}"
+  "sourceRewardOf": "Récompense de {quest}",
+  "questOnCompletion": "À la fin de la quête"
 }

@@ -296,7 +296,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -632,7 +633,7 @@
   "questTypeSide": "Sidouppdrag",
   "questObjectives": "Mål",
   "questRewards": "Belöningar",
-  "questsIntro": "Alla uppdrag i spelet med mål, krav och belöningar, med spelets egna texter.",
+  "questsIntro": "Kärn- och siduppdrag, ekogolemuppdrag och bossrepriser med mål, krav och belöningar, med spelets egna texter.",
   "questsEchoGolem": "Ekogolemuppdrag",
   "questsBossReplays": "Bossrepriser",
   "questRegion": "Region",
@@ -649,5 +650,6 @@
   "questEveryCompletion": "Varje gång",
   "questAreaDrop": "Slumpmässigt föremål från {area}",
   "questRelatedMobs": "Monster",
-  "sourceRewardOf": "Belöning för {quest}"
+  "sourceRewardOf": "Belöning för {quest}",
+  "questOnCompletion": "När uppdraget slutförs"
 }

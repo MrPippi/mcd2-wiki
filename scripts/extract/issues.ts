@@ -64,6 +64,8 @@ export type IssueType =
   | "quest-skipped"
   | "quest-text-missing"
   | "quest-prerequisite-unknown"
+  | "quest-prerequisite-skipped"
+  | "quest-size-unknown"
   | "quest-reward-unmatched"
   | "quest-reward-empty"
   | "quest-area-unnamed"

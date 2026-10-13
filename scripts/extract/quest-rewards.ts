@@ -103,12 +103,23 @@ function entryRewards(entry: RawLootEntry, ctx: RewardContext, where: string): B
   return { rewards: built.flatMap((one) => one.rewards), issues: built.flatMap((one) => one.issues) };
 }
 
-/** A reward list in data order; the same reward twice in one list is shown once. */
+const sameAreaDrop = (a: QuestReward, b: QuestReward): boolean =>
+  a.kind === "areaDrop" && b.kind === "areaDrop" && a.rarity === b.rarity && JSON.stringify(a.area) === JSON.stringify(b.area);
+
+/** Area drops of one area and rarity add up (each entry is its own roll); every other reward keeps its own line. */
+function mergeAreaDrops(rewards: readonly QuestReward[]): QuestReward[] {
+  return rewards.reduce<QuestReward[]>((merged, reward) => {
+    const at = merged.findIndex((other) => sameAreaDrop(other, reward));
+    const earlier = merged[at];
+    if (at === -1 || earlier?.kind !== "areaDrop" || reward.kind !== "areaDrop") return [...merged, reward];
+    return merged.map((one, index) => (index === at ? { ...earlier, count: earlier.count + reward.count } : one));
+  }, []);
+}
+
+/** A reward list in data order. Two entries that give the same thing are two rolls, never one. */
 export function rewardsOf(entries: readonly RawLootEntry[], ctx: RewardContext, where: string): Built {
   const built = entries.map((entry) => entryRewards(entry, ctx, where));
-  const all = built.flatMap((one) => one.rewards);
-  const unique = all.filter((reward, index) => all.findIndex((other) => JSON.stringify(other) === JSON.stringify(reward)) === index);
-  return { rewards: unique, issues: built.flatMap((one) => one.issues) };
+  return { rewards: mergeAreaDrops(built.flatMap((one) => one.rewards)), issues: built.flatMap((one) => one.issues) };
 }
 
 /** The emerald bundle of a quest size (its QuestSize row's emerald slot); null when the size has no such row. */

@@ -37,14 +37,14 @@ const objectivesUntranslated = quest.objectives.some((objective) => objective.un
     <div class="quest-title">
       <LangText as="h1" lang={lang} value={quest.title.text} searchTitle />
       <span class="tag quest-type" data-testid="quest-type">{t(lang, TYPE_KEY[quest.type])}</span>
+      {quest.replayable && <span class="tag quest-type" data-testid="quest-replayable">{t(lang, "questReplayable")}</span>}
       {untranslated(quest.title) && <span class="tag warn">{t(lang, "untranslated")}</span>}
     </div>
     <dl class="quest-facts" data-testid="quest-facts" data-pagefind-ignore>
       {quest.region && (
         <div><dt>{t(lang, "questRegion")}</dt><dd><a href={mapLinkOf(lang, quest.region)} data-testid="quest-region-link">{quest.region.name[lang]}</a></dd></div>
       )}
-      <div><dt>{t(lang, "questSize")}</dt><dd>{t(lang, SIZE_KEY[quest.size])}</dd></div>
-      {quest.replayable && <div><dt>{t(lang, "questReplayable")}</dt><dd>✓</dd></div>}
+      {quest.size && <div><dt>{t(lang, "questSize")}</dt><dd>{t(lang, SIZE_KEY[quest.size])}</dd></div>}
     </dl>
     {quest.description && (
       <div class="quest-description" data-testid="quest-description">

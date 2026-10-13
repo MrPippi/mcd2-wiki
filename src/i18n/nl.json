@@ -297,7 +297,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -630,7 +631,7 @@
   "questTypeSide": "Zijmissie",
   "questObjectives": "Doelen",
   "questRewards": "Beloningen",
-  "questsIntro": "Alle missies uit de game met doelen, vereisten en beloningen, in de woorden van de game.",
+  "questsIntro": "Hoofd- en zijmissies, Echogolem-missies en herhaalde baasgevechten, met doelen, vereisten en beloningen in de woorden van de game.",
   "questsEchoGolem": "Echogolem-missies",
   "questsBossReplays": "Baasgevechten herhalen",
   "questRegion": "Regio",
@@ -647,5 +648,6 @@
   "questEveryCompletion": "Elke voltooiing",
   "questAreaDrop": "Willekeurig voorwerp uit {area}",
   "questRelatedMobs": "Monsters",
-  "sourceRewardOf": "Beloning van {quest}"
+  "sourceRewardOf": "Beloning van {quest}",
+  "questOnCompletion": "Bij voltooiing"
 }

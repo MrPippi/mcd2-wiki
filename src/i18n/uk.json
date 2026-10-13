@@ -297,7 +297,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -632,7 +633,7 @@
   "questTypeSide": "Додаткове завдання",
   "questObjectives": "Цілі",
   "questRewards": "Нагороди",
-  "questsIntro": "Усі завдання гри з цілями, передумовами та нагородами — словами самої гри.",
+  "questsIntro": "Основні й додаткові завдання, завдання ехо-голема та повторні бої з босами: цілі, передумови й нагороди — словами самої гри.",
   "questsEchoGolem": "Завдання ехо-голема",
   "questsBossReplays": "Повторні бої з босами",
   "questRegion": "Регіон",
@@ -649,5 +650,6 @@
   "questEveryCompletion": "Кожне виконання",
   "questAreaDrop": "Випадковий предмет з області «{area}»",
   "questRelatedMobs": "Монстри",
-  "sourceRewardOf": "Нагорода за завдання {quest}"
+  "sourceRewardOf": "Нагорода за завдання {quest}",
+  "questOnCompletion": "За виконання"
 }

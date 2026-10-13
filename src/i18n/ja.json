@@ -294,7 +294,8 @@
     "questEveryCompletion",
     "questAreaDrop",
     "questRelatedMobs",
-    "sourceRewardOf"
+    "sourceRewardOf",
+    "questOnCompletion"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -629,7 +630,7 @@
   "questTypeSide": "サイドクエスト",
   "questObjectives": "目標",
   "questRewards": "報酬",
-  "questsIntro": "ゲーム内のすべてのクエストの目標、前提条件、報酬を、ゲーム自身のテキストで掲載しています。",
+  "questsIntro": "ゲームのコアクエストとサイドクエスト、エコーゴーレムのクエスト、ボス再戦の目標・前提条件・報酬を、ゲーム自身のテキストで掲載しています。",
   "questsEchoGolem": "エコーゴーレムのクエスト",
   "questsBossReplays": "ボス再戦",
   "questRegion": "地域",
@@ -646,5 +647,6 @@
   "questEveryCompletion": "毎回のクリア",
   "questAreaDrop": "{area}のランダムなアイテム",
   "questRelatedMobs": "関連するモンスター",
-  "sourceRewardOf": "{quest}の報酬"
+  "sourceRewardOf": "{quest}の報酬",
+  "questOnCompletion": "クリア時"
 }
