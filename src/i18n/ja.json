@@ -264,7 +264,19 @@
     "buildEffect",
     "buildAddEffect",
     "buildRemoveEffect",
-    "buildEffectLimit"
+    "buildEffectLimit",
+    "weaponCompare",
+    "weaponCompareIntro",
+    "weaponCompareNoScript",
+    "weaponCompareLoadFailed",
+    "weaponComparePick",
+    "weaponCompareColumn",
+    "weaponCompareStat",
+    "weaponCompareEffects",
+    "weaponCompareBest",
+    "weaponCompareEmpty",
+    "weaponCompareDropped",
+    "weaponCompareBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -579,5 +591,17 @@
   "buildEffect": "効果",
   "buildAddEffect": "効果を追加",
   "buildRemoveEffect": "効果を外す",
-  "buildEffectLimit": "1つにつき効果は最大 {n} 個（ユニーク装備の固有効果を含む）"
+  "buildEffectLimit": "1つにつき効果は最大 {n} 個（ユニーク装備の固有効果を含む）",
+  "weaponCompare": "武器比較",
+  "weaponCompareIntro": "最大3つの武器を並べて、ダメージ・連射速度・射程・よろめき・付与されうる効果を比較できます。",
+  "weaponCompareNoScript": "武器比較には JavaScript が必要です。",
+  "weaponCompareLoadFailed": "武器比較を読み込めませんでした。",
+  "weaponComparePick": "武器を選択…",
+  "weaponCompareColumn": "武器 {n}",
+  "weaponCompareStat": "項目",
+  "weaponCompareEffects": "付与されうる効果",
+  "weaponCompareBest": "最良",
+  "weaponCompareEmpty": "武器を選ぶと比較が始まります。",
+  "weaponCompareDropped": "省いた武器（存在しないか重複）：{n}",
+  "weaponCompareBuiltIn": "固有"
 }

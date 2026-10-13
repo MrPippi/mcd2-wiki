@@ -92,7 +92,7 @@ describe("achievementAnchor", () => {
 
 describe("site menu", () => {
   it("lists the map, the achievements, the bestiary, the Soul Storms and the build planner", () => {
-    expect(SITE_MENU.map((item) => item.segment)).toEqual(["map", "achievements", "mobs", "soul-storm", "build"]);
+    expect(SITE_MENU.map((item) => item.segment)).toEqual(["map", "achievements", "mobs", "soul-storm", "build", "compare"]);
   });
 
   it("knows which menu page is open, with or without a base path", () => {

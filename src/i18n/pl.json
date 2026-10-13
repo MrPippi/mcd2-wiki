@@ -265,7 +265,19 @@
     "buildEffect",
     "buildAddEffect",
     "buildRemoveEffect",
-    "buildEffectLimit"
+    "buildEffectLimit",
+    "weaponCompare",
+    "weaponCompareIntro",
+    "weaponCompareNoScript",
+    "weaponCompareLoadFailed",
+    "weaponComparePick",
+    "weaponCompareColumn",
+    "weaponCompareStat",
+    "weaponCompareEffects",
+    "weaponCompareBest",
+    "weaponCompareEmpty",
+    "weaponCompareDropped",
+    "weaponCompareBuiltIn"
   ],
   "_english": [
     "normal",
@@ -584,5 +596,17 @@
   "buildEffect": "Efekt",
   "buildAddEffect": "Dodaj efekt",
   "buildRemoveEffect": "Usuń efekt",
-  "buildEffectLimit": "Maks. {n} efekty na przedmiot, wliczając wbudowany efekt przedmiotów unikatowych"
+  "buildEffectLimit": "Maks. {n} efekty na przedmiot, wliczając wbudowany efekt przedmiotów unikatowych",
+  "weaponCompare": "Porównanie broni",
+  "weaponCompareIntro": "Porównaj do trzech broni obok siebie: obrażenia, szybkostrzelność, zasięg, ogłuszenie i możliwe efekty.",
+  "weaponCompareNoScript": "Porównanie broni wymaga JavaScriptu.",
+  "weaponCompareLoadFailed": "Nie udało się wczytać porównania broni.",
+  "weaponComparePick": "Wybierz broń…",
+  "weaponCompareColumn": "Broń {n}",
+  "weaponCompareStat": "Parametr",
+  "weaponCompareEffects": "Możliwe efekty",
+  "weaponCompareBest": "Najlepsze",
+  "weaponCompareEmpty": "Wybierz broń, aby rozpocząć porównanie.",
+  "weaponCompareDropped": "Pominięte bronie (nie ma ich w grze lub się powtarzają): {n}",
+  "weaponCompareBuiltIn": "Wbudowane"
 }

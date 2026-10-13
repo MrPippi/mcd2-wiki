@@ -14,6 +14,7 @@ export const SITE_MENU: readonly MenuItem[] = [
   { key: "mobs", segment: "mobs" },
   { key: "soulStorm", segment: "soul-storm" },
   { key: "build", segment: "build" },
+  { key: "weaponCompare", segment: "compare" },
 ];
 
 /** Whether `pathname` is the menu page `segment` in some language (/<base>/<lang>/<segment>/). */

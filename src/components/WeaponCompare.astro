@@ -1,0 +1,61 @@
+---
+import { comparePayloadJson } from "../lib/compare/payload";
+import { MAX_WEAPONS } from "../lib/compare/code";
+import type { ComparePayload } from "../lib/compare/parse";
+import { t, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang: Lang;
+  payload: ComparePayload;
+}
+
+const { lang, payload } = Astro.props;
+const columns = Array.from({ length: MAX_WEAPONS }, (_, index) => index);
+const groups = [
+  { label: payload.labels.melee, weapons: payload.weapons.filter((weapon) => weapon.kind === "melee") },
+  { label: payload.labels.ranged, weapons: payload.weapons.filter((weapon) => weapon.kind === "ranged") },
+];
+---
+{/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
+<div class="compare" data-testid="weapon-compare" data-weapon-compare hidden>
+  <p class="compare-notice tag warn" data-testid="compare-notice" data-notice role="status" hidden></p>
+  <div class="compare-picks">
+    {columns.map((index) => (
+      <label class="compare-pick">
+        <span class="compare-pick-label">{payload.labels.column.replace("{n}", () => String(index + 1))}</span>
+        <select data-testid={`compare-pick-${index + 1}`} data-pick={index}>
+          <option value="">{payload.labels.pick}</option>
+          {groups.map((group) => (
+            <optgroup label={group.label}>
+              {group.weapons.map((weapon) => <option value={weapon.slug}>{weapon.name}</option>)}
+            </optgroup>
+          ))}
+        </select>
+      </label>
+    ))}
+  </div>
+  <p class="note compare-empty" data-testid="compare-empty" data-empty>{payload.labels.empty}</p>
+  <div class="compare-scroll" tabindex="0" role="region" aria-label={t(lang, "weaponCompare")}>
+    <table class="compare-table" data-testid="compare-table" data-table hidden>
+      <thead data-head></thead>
+      <tbody data-body></tbody>
+    </table>
+  </div>
+  <div class="compare-actions">
+    <button type="button" data-testid="compare-copy" data-copy>{t(lang, "buildCopyLink")}</button>
+    <p class="note compare-status" data-testid="compare-status" data-status role="status" aria-live="polite"></p>
+  </div>
+  <input class="compare-url" type="text" data-testid="compare-url" data-url readonly aria-label={t(lang, "buildLink")} hidden />
+  <script type="application/json" data-weapon-compare-json set:html={comparePayloadJson(payload)}></script>
+</div>
+<p class="note" data-testid="compare-failed" data-weapon-compare-failed hidden>{t(lang, "weaponCompareLoadFailed")}</p>
+
+<script>
+  import { mountCompare } from "../lib/compare/ui";
+
+  const root = document.querySelector<HTMLElement>("[data-weapon-compare]");
+  if (root && !mountCompare(root)) {
+    console.error("weapon compare: bad payload or markup");
+    document.querySelector<HTMLElement>("[data-weapon-compare-failed]")?.removeAttribute("hidden");
+  }
+</script>
