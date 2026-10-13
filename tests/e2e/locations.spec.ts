@@ -28,8 +28,12 @@ test.describe("locations", () => {
 
   test("a mob's area opens its location page", async ({ page }) => {
     await page.goto("/zh/mobs/zombie/");
-    await page.getByTestId("mob-areas").getByRole("link", { name: "冰封高地" }).click();
+    await page.getByTestId("mob-areas").getByRole("link", { name: "冰封高地", exact: true }).click();
     await expect(page).toHaveURL(/\/zh\/locations\/frozen-highlands\/$/);
+    await page.goBack();
+    // Each map link is named after its area, so a screen reader's link list tells them apart.
+    await page.getByTestId("mob-areas").getByRole("link", { name: "地圖: 冰封高地" }).click();
+    await expect(page).toHaveURL(/\/zh\/map\/\?world=overworld#4\/6611\/4173/);
   });
 
   test("the menu lists locations and bosses after the quests", async ({ page }) => {
@@ -51,7 +55,7 @@ test.describe("bosses", () => {
     await expect(page.getByTestId("boss-group-boss").getByTestId("boss-card")).toHaveCount(10);
     await expect(page.getByTestId("boss-group-miniboss").getByTestId("boss-card")).toHaveCount(6);
     const maw = page.locator("[data-testid='boss-card'][data-slug='maw']");
-    await expect(page.getByTestId("boss-card").first()).toHaveAttribute("data-slug", "maw");
+    await expect(page.getByTestId("boss-card").first()).toHaveAttribute("data-slug", "soul-corrupted-witch");
 
     await maw.getByTestId("boss-mob-link").click();
     await expect(page).toHaveURL(/\/en\/mobs\/maw\/$/);

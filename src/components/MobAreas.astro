@@ -25,7 +25,7 @@ const alt = compareLang(lang);
           <li class:list={{ "has-marker": area.map !== undefined }}>
             <a href={location ? locationHref(lang, location.slug) : mapLinkOf(lang, area)}>{area.name[lang]}</a>
             {area.name[alt] !== area.name[lang] && <span class="item-alt" lang={htmlLang(alt)}>{area.name[alt]}</span>}
-            {location && <a class="mob-area-map" href={mapLinkOf(lang, area)}>{t(lang, "map")}</a>}
+            {location && <a class="mob-area-map" href={mapLinkOf(lang, area)} aria-label={`${t(lang, "map")}: ${area.name[lang]}`}>{t(lang, "map")}</a>}
           </li>
         );
       })}

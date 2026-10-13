@@ -121,17 +121,18 @@ describe("bosses page", () => {
     expect(copper).toMatch(/data-testid="boss-health">2400</);
   });
 
-  it("shows no region or quest rows for a boss the data places nowhere", async () => {
+  it("shows no region row for a boss the data places in no area, but still its quests", async () => {
     const html = await renderBosses();
-    const witch = html.slice(html.indexOf('data-slug="soul-corrupted-witch"'));
-    const card = witch.slice(0, witch.indexOf('data-testid="boss-group-miniboss"'));   // the last boss card
+    const start = html.indexOf('data-slug="soul-corrupted-witch"');
+    const card = html.slice(start, html.indexOf('data-testid="boss-card"', start));   // the first card, up to the next
     expect(card).not.toContain('data-testid="boss-regions"');
-    expect(card).not.toContain('data-testid="boss-core-quests"');
+    expect(card).toContain('href="/en/quests/ca02-b/"');
+    expect(card).toContain('href="/en/quests/ca02-b-br/"');
   });
 
   it("marks a region name or a quest title that shows English", async () => {
     const [first] = bossList();
-    const maw = first?.bosses[0];
+    const maw = first?.bosses.find((boss) => boss.mob.slug === "maw");
     if (!first || !maw) throw new Error("no bosses");
     const marked = {
       ...maw,
@@ -158,6 +159,7 @@ describe("links back to locations", () => {
     const html = await container.renderToString(MobAreas, { props: { lang: "zh", areas: mob.areas } });
     expect(html).toMatch(/<a href="\/zh\/locations\/frozen-highlands\/">冰封高地<\/a>/);
     expect(html).toMatch(/class="mob-area-map" href="\/zh\/map\/\?world=overworld#4\/6611\/4173"/);
+    expect(html).toContain('aria-label="地圖: 冰封高地"');
   });
 
   it("opens the location page from a quest's region", async () => {

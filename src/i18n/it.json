@@ -683,6 +683,6 @@
   "locationCountBosses": "Boss",
   "bosses": "Boss",
   "bossesIntro": "I boss e i miniboss del gioco in ordine di storia, con salute, regione e missioni in cui compaiono. Il gioco non ha descrizioni dei boss.",
-  "bossesOrder": "Ordine: in base alla prima missione principale in cui compare ciascuno; gli altri in base al livello del giocatore della loro regione, poi per nome.",
+  "bossesOrder": "Ordine: in base alla prima missione principale in cui compare ciascuno; gli altri in base al livello del giocatore più basso tra le loro regioni, poi per nome.",
   "bossReplay": "Boss da rigiocare"
 }

@@ -684,6 +684,6 @@
   "locationCountBosses": "Bossar",
   "bosses": "Bossar",
   "bossesIntro": "Spelets bossar och minibossar i berättelseordning, med hälsa, region och de uppdrag de förekommer i. Spelet självt har inga bossbeskrivningar.",
-  "bossesOrder": "Ordning: efter det första kärnuppdrag som var och en förekommer i; resten efter spelarnivån i deras region, sedan efter namn.",
+  "bossesOrder": "Ordning: efter det första kärnuppdrag som var och en förekommer i; resten efter den lägsta spelarnivån bland deras regioner, sedan efter namn.",
   "bossReplay": "Bossrepris"
 }

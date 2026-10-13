@@ -2,8 +2,8 @@
  * The bosses page's list, derived from mobs.json, quests.json and locations.json. Pure; type-only imports.
  *
  * Story order: a boss a core quest features sorts by that quest's place in the core chain (and its place in the
- * quest's mob list); one with no core quest sorts after those, by the lowest player level of its first area's region;
- * one with neither goes last. Ties go by English name. Bosses come first, then mini-bosses, each ordered this way.
+ * quest's mob list); one with no core quest sorts after those, by the lowest player level among the regions of its
+ * areas; one with neither goes last. Ties go by English name. Bosses come first, then mini-bosses, each ordered this way.
  */
 import type { Location } from "../../scripts/extract/location-schema";
 import type { Mob } from "../../scripts/extract/mob-schema";
@@ -34,8 +34,8 @@ const NO_LEVEL = Number.MAX_SAFE_INTEGER;
 function sortKey(view: BossView, core: readonly Quest[]): SortKey {
   const quest = view.coreQuests[0];
   if (quest) return [0, core.indexOf(quest), quest.mobs.indexOf(view.mob.slug)];
-  const level = view.locations[0]?.levels[0];
-  return level === undefined ? [2, NO_LEVEL, 0] : [1, level, 0];
+  const levels = view.locations.flatMap((location) => location.levels);
+  return levels.length === 0 ? [2, NO_LEVEL, 0] : [1, Math.min(...levels), 0];
 }
 
 const compareKeys = (a: SortKey, b: SortKey): number => a[0] - b[0] || a[1] - b[1] || a[2] - b[2];

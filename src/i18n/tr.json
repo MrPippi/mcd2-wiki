@@ -682,6 +682,6 @@
   "locationCountBosses": "Bosslar",
   "bosses": "Bosslar",
   "bossesIntro": "Oyunun boss ve mini bossları hikâye sırasına göre; can, bölge ve yer aldıkları görevlerle birlikte. Oyunun kendisinde boss açıklaması yoktur.",
-  "bossesOrder": "Sıralama: her birinin yer aldığı ilk ana göreve göre; diğerleri bölgelerinin oyuncu seviyesine, sonra ada göre.",
+  "bossesOrder": "Sıralama: her birinin yer aldığı ilk ana göreve göre; diğerleri bölgelerindeki en düşük oyuncu seviyesine, sonra ada göre.",
   "bossReplay": "Boss tekrarı"
 }

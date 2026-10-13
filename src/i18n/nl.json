@@ -682,6 +682,6 @@
   "locationCountBosses": "Bazen",
   "bosses": "Bazen",
   "bossesIntro": "De bazen en mini-bazen van het spel in verhaalvolgorde, met gezondheid, regio en de missies waarin ze voorkomen. Het spel zelf heeft geen beschrijvingen van bazen.",
-  "bossesOrder": "Volgorde: naar de eerste hoofdmissie waarin elk voorkomt; de rest naar het spelersniveau van hun regio, daarna op naam.",
+  "bossesOrder": "Volgorde: naar de eerste hoofdmissie waarin elk voorkomt; de rest naar het laagste spelersniveau van hun regio's, daarna op naam.",
   "bossReplay": "Baasgevecht herhalen"
 }

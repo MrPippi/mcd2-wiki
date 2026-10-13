@@ -683,6 +683,6 @@
   "locationCountBosses": "Chefes",
   "bosses": "Chefes",
   "bossesIntro": "Os chefes e minichefes do jogo na ordem da história, com vida, região e as missões em que aparecem. O próprio jogo não tem descrições de chefes.",
-  "bossesOrder": "Ordem: pela primeira missão principal em que cada um aparece; os demais pelo nível do jogador da região, depois pelo nome.",
+  "bossesOrder": "Ordem: pela primeira missão principal em que cada um aparece; os demais pelo menor nível do jogador entre suas regiões, depois pelo nome.",
   "bossReplay": "Revanche de chefe"
 }

@@ -684,6 +684,6 @@
   "locationCountBosses": "Bosse",
   "bosses": "Bosse",
   "bossesIntro": "Die Bosse und Mini-Bosse des Spiels in Story-Reihenfolge, mit Gesundheit, Region und den Quests, in denen sie vorkommen. Das Spiel selbst hat keine Boss-Beschreibungen.",
-  "bossesOrder": "Reihenfolge: nach der ersten Hauptquest, in der sie vorkommen; die übrigen nach der Spielerstufe ihrer Region, dann nach Name.",
+  "bossesOrder": "Reihenfolge: nach der ersten Hauptquest, in der sie vorkommen; die übrigen nach der niedrigsten Spielerstufe ihrer Regionen, dann nach Name.",
   "bossReplay": "Boss-Wiederholung"
 }

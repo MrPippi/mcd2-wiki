@@ -2,6 +2,10 @@
  * Builds src/data/locations.json: one location per region of the hand-kept list (location-regions.json), with its
  * name, area icon, progression level, map marker and folded sub-locations, and the mobs, quests and area loot pools
  * that mobs.json, quests.json and loot-sources.json place there. Every row left out and every gap is an issue.
+ *
+ * Note on the region list (JSON has no comments): SW.Area.Lush.Boss carries the parent trait SW.Area.DeepDark.Dungeons,
+ * yet it is listed as its own region (Lush Caves), as the brief's region list asks. This is the one exception to
+ * following parent traits; SW.Area.Peaks.A1.AreaLink, whose tag and parent trait disagree, is left out instead.
  */
 import { existsSync } from "node:fs";
 import { copyFile, mkdir } from "node:fs/promises";

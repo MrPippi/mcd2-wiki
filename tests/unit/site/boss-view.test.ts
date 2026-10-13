@@ -47,8 +47,16 @@ describe("bossGroups", () => {
     expect(groups.map((group) => group.kind)).toEqual(["boss", "miniboss"]);
   });
 
-  it("orders by the core chain, then by the quest's mob order, then by region level, then by name", () => {
+  it("orders by the core chain, then by the quest's mob order, then by the lowest region level, then by name", () => {
     expect(groups[0]?.bosses.map((boss) => boss.mob.slug)).toEqual(["maw", "copper", "construct", "redstone", "frost", "moss", "witch-t3"]);
+  });
+
+  it("keys a boss without a core quest on the lowest level among its regions, not its first area", () => {
+    // "late" lists the level-26 region first but also lies in the level-6 one, so it sorts before "mid" (level 20).
+    const extra = [location("plains", [20])];
+    const lookup = (areaId: string) => (areaId === "Plains" ? extra[0] : locationOf(areaId));
+    const ordered = bossGroups([mob("late", "boss", ["Desert", "Forest"]), mob("mid", "boss", ["Plains"])], [], lookup);
+    expect(ordered[0]?.bosses.map((boss) => boss.mob.slug)).toEqual(["late", "mid"]);
     expect(groups[1]?.bosses.map((boss) => boss.mob.slug)).toEqual(["warden", "enderman"]);
   });
 

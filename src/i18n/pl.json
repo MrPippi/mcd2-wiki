@@ -686,6 +686,6 @@
   "locationCountBosses": "Bossowie",
   "bosses": "Bossowie",
   "bossesIntro": "Bossowie i minibossowie gry w kolejności fabuły, z zdrowiem, regionem i misjami, w których występują. Sama gra nie ma opisów bossów.",
-  "bossesOrder": "Kolejność: według pierwszej misji głównej, w której występuje każdy z nich; pozostali według poziomu gracza ich regionu, potem według nazwy.",
+  "bossesOrder": "Kolejność: według pierwszej misji głównej, w której występuje każdy z nich; pozostali według najniższego poziomu gracza spośród ich regionów, potem według nazwy.",
   "bossReplay": "Powtórka walki z bossem"
 }

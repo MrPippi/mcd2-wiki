@@ -683,6 +683,6 @@
   "locationCountBosses": "Boss",
   "bosses": "Boss",
   "bossesIntro": "Les boss et mini-boss du jeu dans l'ordre de l'histoire, avec leur santé, leur région et les quêtes où ils apparaissent. Le jeu lui-même n'a pas de description de boss.",
-  "bossesOrder": "Ordre : selon la première quête principale où chacun apparaît ; les autres selon le niveau du joueur de leur région, puis par nom.",
+  "bossesOrder": "Ordre : selon la première quête principale où chacun apparaît ; les autres selon le plus bas niveau du joueur de leurs régions, puis par nom.",
   "bossReplay": "Boss à rejouer"
 }

@@ -683,6 +683,6 @@
   "locationCountBosses": "Jefes",
   "bosses": "Jefes",
   "bossesIntro": "Los jefes y minijefes del juego en orden de la historia, con su salud, su región y las misiones en las que aparecen. El juego no tiene descripciones de jefes.",
-  "bossesOrder": "Orden: según la primera misión principal en la que aparece cada uno; el resto según el nivel del jugador de su región y luego por nombre.",
+  "bossesOrder": "Orden: según la primera misión principal en la que aparece cada uno; el resto según el nivel del jugador más bajo de sus regiones y luego por nombre.",
   "bossReplay": "Repetición de jefe"
 }

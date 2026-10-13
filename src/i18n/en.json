@@ -364,6 +364,6 @@
   "locationCountBosses": "Bosses",
   "bosses": "Bosses",
   "bossesIntro": "The game's bosses and mini-bosses in story order, with health, region and the quests that feature them. The game itself has no boss descriptions.",
-  "bossesOrder": "Order: by the first core quest that features each one; the rest by the player level of their region, then by name.",
+  "bossesOrder": "Order: by the first core quest that features each one; the rest by the lowest player level among their regions, then by name.",
   "bossReplay": "Boss replay"
 }

@@ -102,9 +102,15 @@ describe("bossList", () => {
   it("lists the 10 bosses in story order, then the 6 mini-bosses", () => {
     expect(groups.map((group) => [group.kind, group.bosses.length])).toEqual([["boss", 10], ["miniboss", 6]]);
     expect(groups[0]?.bosses.map((boss) => boss.mob.slug)).toEqual([
-      "maw", "monstrosity-copper", "frostbite-desert-boss", "monstrosity-sculk", "shade",
-      "soul-construct", "monstrosity-red-stone", "supreme-evoker", "monstrosity-moss", "soul-corrupted-witch",
+      "soul-corrupted-witch", "maw", "monstrosity-copper", "frostbite-desert-boss", "monstrosity-sculk", "shade",
+      "soul-construct", "monstrosity-red-stone", "supreme-evoker", "monstrosity-moss",
     ]);
+  });
+
+  it("places the Soul Corrupted Witch through CA02_B and its replay", () => {
+    const witch = groups[0]?.bosses[0];
+    expect(witch?.coreQuests.map((quest) => quest.slug)).toEqual(["ca02-b"]);
+    expect(witch?.replayQuests.map((quest) => quest.slug)).toEqual(["ca02-b-br"]);
   });
 
   it("names each boss's core quest and replay", () => {
