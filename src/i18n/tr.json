@@ -603,6 +603,6 @@
   "weaponCompareEffects": "Olası etkiler",
   "weaponCompareBest": "En iyi",
   "weaponCompareEmpty": "Karşılaştırmaya başlamak için silah seç.",
-  "weaponCompareDropped": "Dışarıda bırakılan silahlar (artık oyunda yok ya da tekrarlanıyor): {n}",
+  "weaponCompareDropped": "Dışarıda bırakılan silahlar (bilinmeyen, tekrarlanan ya da 3'ten fazla): {n}",
   "weaponCompareBuiltIn": "Yerleşik"
 }

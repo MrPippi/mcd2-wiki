@@ -607,6 +607,6 @@
   "weaponCompareEffects": "Możliwe efekty",
   "weaponCompareBest": "Najlepsze",
   "weaponCompareEmpty": "Wybierz broń, aby rozpocząć porównanie.",
-  "weaponCompareDropped": "Pominięte bronie (nie ma ich w grze lub się powtarzają): {n}",
+  "weaponCompareDropped": "Pominięte bronie (nieznane, powtórzone lub ponad 3): {n}",
   "weaponCompareBuiltIn": "Wbudowane"
 }

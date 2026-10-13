@@ -602,6 +602,6 @@
   "weaponCompareEffects": "付与されうる効果",
   "weaponCompareBest": "最良",
   "weaponCompareEmpty": "武器を選ぶと比較が始まります。",
-  "weaponCompareDropped": "省いた武器（存在しないか重複）：{n}",
+  "weaponCompareDropped": "表示できなかった武器（存在しない・重複・4つ目以降）：{n}",
   "weaponCompareBuiltIn": "固有"
 }

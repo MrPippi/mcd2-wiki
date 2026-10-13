@@ -22,6 +22,7 @@ A fan-made reference for **Minecraft Dungeons II**, built straight from the game
 | **World map** | The Overworld, the Sift and the Camp, with minecart stations, rifts, teleport statues, merchants and area names |
 | **Soul Storms** | A live countdown to the current and next storm in your time zone, the area rotation, Storm Generator difficulty, health and shields, and what the reward chests drop. The times are worked out from the game data and are marked as estimates until confirmed in game |
 | **Build Planner** | Pick your weapons, armor, artifacts and talismans, then share the build as a link (it opens the same build) or download it as an image for social media |
+| **Weapon Compare** | Up to three weapons side by side: combo damage, fire rate, reach, stagger, built-in bonus and the effects each can roll, with the best value marked; share it as a link |
 | **Achievements** | All Steam achievements with global unlock rates. Hidden ones stay hidden until you choose to reveal how to unlock them |
 
 Item pages also list where an item comes from: quest rewards, chests, merchants or enchantment book pools.

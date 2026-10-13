@@ -35,8 +35,8 @@ const groups = [
     ))}
   </div>
   <p class="note compare-empty" data-testid="compare-empty" data-empty>{payload.labels.empty}</p>
-  <div class="compare-scroll" tabindex="0" role="region" aria-label={t(lang, "weaponCompare")}>
-    <table class="compare-table" data-testid="compare-table" data-table hidden>
+  <div class="compare-scroll" tabindex="0" role="region" aria-label={t(lang, "weaponCompare")} data-scroll hidden>
+    <table class="compare-table" data-testid="compare-table" data-table>
       <thead data-head></thead>
       <tbody data-body></tbody>
     </table>

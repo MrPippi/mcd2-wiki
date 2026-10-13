@@ -51,6 +51,17 @@ describe("compareCells", () => {
   });
 });
 
+describe("charging ranged weapons", () => {
+  const CHARGING: Weapon = { ...RANGED, ranged: { ...RANGED.ranged!, projectiles: 2, chargeSeconds: 1.5, chargedMultiplier: 3 } };
+
+  it("shows the charged shot like the plain shot and ranks the charge time", () => {
+    const cells = compareCells("en", CHARGING);
+    expect(cells.shotDamage).toEqual({ text: "10 ×2", value: 20 });
+    expect(cells.chargedShot).toEqual({ text: "30 ×2", value: 60 });
+    expect(cells.charge?.value).toBe(1.5);
+  });
+});
+
 describe("comparePayload", () => {
   it("passes its own check in every language", () => {
     for (const lang of LANGS) expect(parseComparePayload(JSON.parse(comparePayloadJson(comparePayload(lang)))), lang).toBeDefined();

@@ -8,7 +8,7 @@ const ICON_SIZE = 40;
 
 interface Parts {
   readonly selects: readonly HTMLSelectElement[];
-  readonly table: HTMLTableElement;
+  readonly scroll: HTMLElement;
   readonly head: HTMLElement;
   readonly body: HTMLElement;
   readonly empty: HTMLElement;
@@ -29,7 +29,7 @@ function partsOf(root: HTMLElement): Parts | undefined {
   const one = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector) ?? undefined;
   const selects = [...root.querySelectorAll<HTMLSelectElement>("[data-pick]")];
   const parts = {
-    table: one<HTMLTableElement>("[data-table]"),
+    scroll: one("[data-scroll]"),
     head: one("[data-head]"),
     body: one("[data-body]"),
     empty: one("[data-empty]"),
@@ -113,7 +113,7 @@ function listRow(label: string, values: readonly (readonly string[])[]): HTMLTab
 function render(parts: Parts, payload: ComparePayload, slugs: readonly string[]): void {
   const weapons = slugs.flatMap((slug) => payload.weapons.find((weapon) => weapon.slug === slug) ?? []);
   parts.empty.hidden = weapons.length > 0;
-  parts.table.hidden = weapons.length === 0;
+  parts.scroll.hidden = weapons.length === 0;
   const headRow = document.createElement("tr");
   const corner = cell("th", payload.labels.stat);
   corner.scope = "col";
@@ -168,6 +168,8 @@ export function mountCompare(root: HTMLElement): boolean {
   for (const select of parts.selects) {
     select.addEventListener("change", () => {
       const slugs = selected(parts);
+      // Pack the picks to the left without repeats, so the pickers always match the table and the address.
+      parts.selects.forEach((other, index) => (other.value = slugs[index] ?? ""));
       syncUrl(slugs);
       render(parts, payload, slugs);
       parts.notice.hidden = true;
@@ -178,8 +180,8 @@ export function mountCompare(root: HTMLElement): boolean {
   root.querySelector("[data-copy]")?.addEventListener("click", () => void copyLink(parts, payload));
   root.hidden = false;
   if (decoded.dropped > 0) {
-    parts.notice.textContent = payload.labels.dropped.replace("{n}", () => String(decoded.dropped));
     parts.notice.hidden = false;
+    announce(parts.notice, payload.labels.dropped.replace("{n}", () => String(decoded.dropped)));
   }
   return true;
 }

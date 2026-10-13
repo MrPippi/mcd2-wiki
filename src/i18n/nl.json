@@ -603,6 +603,6 @@
   "weaponCompareEffects": "Mogelijke effecten",
   "weaponCompareBest": "Beste",
   "weaponCompareEmpty": "Kies wapens om te beginnen met vergelijken.",
-  "weaponCompareDropped": "Weggelaten wapens (niet meer in het spel of dubbel): {n}",
+  "weaponCompareDropped": "Weggelaten wapens (onbekend, dubbel of meer dan 3): {n}",
   "weaponCompareBuiltIn": "Ingebouwd"
 }

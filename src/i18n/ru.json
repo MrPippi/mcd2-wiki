@@ -607,6 +607,6 @@
   "weaponCompareEffects": "Возможные эффекты",
   "weaponCompareBest": "Лучшее",
   "weaponCompareEmpty": "Выберите оружие, чтобы начать сравнение.",
-  "weaponCompareDropped": "Пропущено оружия (нет в игре или повтор): {n}",
+  "weaponCompareDropped": "Пропущено оружия (неизвестное, повтор или больше 3): {n}",
   "weaponCompareBuiltIn": "Встроено"
 }

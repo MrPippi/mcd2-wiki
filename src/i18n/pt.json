@@ -604,6 +604,6 @@
   "weaponCompareEffects": "Efeitos possíveis",
   "weaponCompareBest": "Melhor",
   "weaponCompareEmpty": "Escolha armas para começar a comparar.",
-  "weaponCompareDropped": "Armas deixadas de fora (fora do jogo ou repetidas): {n}",
+  "weaponCompareDropped": "Armas deixadas de fora (desconhecidas, repetidas ou mais de 3): {n}",
   "weaponCompareBuiltIn": "Embutido"
 }

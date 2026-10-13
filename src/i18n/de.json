@@ -601,10 +601,10 @@
   "weaponCompareLoadFailed": "Der Waffenvergleich konnte nicht geladen werden.",
   "weaponComparePick": "Waffe wählen …",
   "weaponCompareColumn": "Waffe {n}",
-  "weaponCompareStat": "Wert",
+  "weaponCompareStat": "Eigenschaft",
   "weaponCompareEffects": "Mögliche Effekte",
   "weaponCompareBest": "Bester Wert",
   "weaponCompareEmpty": "Wähle Waffen aus, um den Vergleich zu starten.",
-  "weaponCompareDropped": "Ausgelassene Waffen (nicht mehr im Spiel oder doppelt): {n}",
+  "weaponCompareDropped": "Ausgelassene Waffen (unbekannt, doppelt oder mehr als 3): {n}",
   "weaponCompareBuiltIn": "Eingebaut"
 }

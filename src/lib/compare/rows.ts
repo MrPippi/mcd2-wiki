@@ -78,11 +78,12 @@ function meleeCells(lang: Lang, melee: NonNullable<Weapon["melee"]>): Partial<Re
 
 function rangedCells(lang: Lang, ranged: NonNullable<Weapon["ranged"]>): Partial<Record<CompareKey, CompareCell>> {
   const perShot = ranged.damage * ranged.projectiles;
+  const shotText = (damage: number): string => (ranged.projectiles > 1 ? `${roundText(damage)} ×${ranged.projectiles}` : roundText(damage));
   const charges = ranged.chargeSeconds > 0; // a charge time of 0 means the weapon cannot charge
   const shots = 1 / ranged.attackRateSeconds;
   return {
-    shotDamage: number(perShot, ranged.projectiles > 1 ? `${roundText(ranged.damage)} ×${ranged.projectiles}` : roundText(ranged.damage)),
-    ...(charges ? { chargedShot: number(perShot * ranged.chargedMultiplier, roundText(ranged.damage * ranged.chargedMultiplier)) } : {}),
+    shotDamage: number(perShot, shotText(ranged.damage)),
+    ...(charges ? { chargedShot: number(perShot * ranged.chargedMultiplier, shotText(ranged.damage * ranged.chargedMultiplier)) } : {}),
     shotsPerSecond: number(shots, roundText(shots)),
     ammo: number(ranged.ammo, String(ranged.ammo)),
     range: number(ranged.range, blocksText(lang, ranged.range)),

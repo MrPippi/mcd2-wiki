@@ -601,10 +601,10 @@
   "weaponCompareLoadFailed": "Vapenjämförelsen kunde inte laddas.",
   "weaponComparePick": "Välj vapen…",
   "weaponCompareColumn": "Vapen {n}",
-  "weaponCompareStat": "Värde",
+  "weaponCompareStat": "Egenskap",
   "weaponCompareEffects": "Möjliga effekter",
   "weaponCompareBest": "Bäst",
   "weaponCompareEmpty": "Välj vapen för att börja jämföra.",
-  "weaponCompareDropped": "Utelämnade vapen (finns inte längre i spelet eller upprepas): {n}",
+  "weaponCompareDropped": "Utelämnade vapen (okända, upprepade eller fler än 3): {n}",
   "weaponCompareBuiltIn": "Inbyggd"
 }

@@ -22,6 +22,16 @@ test.describe("weapon compare", () => {
     await expect(table(page).locator("tbody th", { hasText: "Full combo" })).toHaveCount(1);
   });
 
+  test("packs picks to the left and drops a repeated pick", async ({ page }) => {
+    await page.goto("/en/compare/");
+    await page.getByTestId("compare-pick-3").selectOption("axe");
+    await expect(page.getByTestId("compare-pick-1")).toHaveValue("axe");
+    await expect(page.getByTestId("compare-pick-3")).toHaveValue("");
+    await page.getByTestId("compare-pick-2").selectOption("axe");
+    await expect(page.getByTestId("compare-pick-2")).toHaveValue("");
+    await expect(page).toHaveURL(/\/en\/compare\/\?w=axe$/);
+  });
+
   test("highlights the best value in a ranked row", async ({ page }) => {
     await page.goto("/en/compare/?w=axe,battlestaff");
     const row = table(page).locator("tbody tr", { has: page.locator("th", { hasText: "Full combo" }) });
@@ -46,7 +56,7 @@ test.describe("weapon compare", () => {
   test("drops unknown and repeated weapons from a link and says so", async ({ page }) => {
     await page.goto("/en/compare/?w=axe,dragon,axe");
     await expect(page).toHaveURL(/\/en\/compare\/\?w=axe$/);
-    await expect(page.getByTestId("compare-notice")).toHaveText("Weapons left out (gone from the game or repeated): 2");
+    await expect(page.getByTestId("compare-notice")).toHaveText("Weapons left out (unknown, repeated or more than 3): 2");
   });
 
   test("the language links keep the comparison", async ({ page }) => {

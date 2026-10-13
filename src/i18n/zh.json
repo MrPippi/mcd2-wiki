@@ -318,6 +318,6 @@
   "weaponCompareEffects": "可出現的效果",
   "weaponCompareBest": "最佳",
   "weaponCompareEmpty": "選擇武器開始比較。",
-  "weaponCompareDropped": "已略過不存在或重複的武器：{n} 把",
+  "weaponCompareDropped": "已略過無法顯示的武器（不存在、重複或超過 3 把）：{n} 把",
   "weaponCompareBuiltIn": "內建"
 }
