@@ -1,7 +1,7 @@
 ---
 import type { Quest } from "../../scripts/extract/quest-schema";
 import { t, type Lang } from "../lib/i18n";
-import { compareLang, htmlLang, searchNames } from "../lib/lang";
+import { compareLang, htmlLang } from "../lib/lang";
 import { SIZE_KEY } from "../lib/quest-view";
 import { questHref } from "../lib/quests";
 
@@ -19,7 +19,7 @@ const alt = compareLang(lang);
 const title = quest.title.text;
 const meta = [quest.region?.name[lang], t(lang, SIZE_KEY[quest.size])].filter((part): part is string => part !== undefined);
 ---
-<li class="quest-card" style={`--i:${index}`} data-names={searchNames(title, lang)} data-testid="quest-card">
+<li class="quest-card" style={`--i:${index}`} data-testid="quest-card">
   <a class="quest-card-link" href={questHref(lang, quest.slug)}>
     {step !== undefined && <span class="quest-step mono" aria-hidden="true">{String(step).padStart(2, "0")}</span>}
     <span class="quest-card-names">
