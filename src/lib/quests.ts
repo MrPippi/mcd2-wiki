@@ -10,7 +10,7 @@ import { rewardQuestSlugs, SECTION_KEY, splitItemKey, TYPE_KEY } from "./quest-v
 import { GAME_NAME } from "./site-title";
 import { t } from "./ui-strings";
 import type { Lang } from "./lang";
-import { href } from "./url";
+import { entryHref, href } from "./url";
 
 export const questData: QuestData = QuestDataSchema.parse(rawQuests);
 
@@ -32,6 +32,16 @@ export const rewardEntries = (keys: readonly string[]): Entry[] =>
     const parts = splitItemKey(key);
     return (parts && findEntry(parts.category as Category, parts.slug)) || [];
   });
+
+/**
+ * The page a reward item links to, or undefined when it has none: a book opens its enchantment's page, which is not
+ * published for every book (Soul Fire Aspect has no known values).
+ */
+export function rewardHref(lang: Lang, entry: Entry): string | undefined {
+  if (entry.category !== "enchantment-book") return entryHref(lang, entry);
+  const enchantment = entry.links.enchantment;
+  return enchantment !== undefined && findEntry("enchantment", enchantment) ? entryHref(lang, entry) : undefined;
+}
 
 export const questMobs = (quest: Quest): Mob[] => quest.mobs.flatMap((slug) => findMob(slug) ?? []);
 

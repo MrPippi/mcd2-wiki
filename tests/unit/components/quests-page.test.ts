@@ -91,6 +91,12 @@ describe("quest page", () => {
     expect(section(html, "quest-emeralds")).toContain("Guaranteed: <span class=\"mob-drop-num\">8</span>");
   });
 
+  it("names a reward book without linking an enchantment page the site does not publish", async () => {
+    const html = await renderQuest(realQuest("dea1-s12-a"));
+    expect(html).not.toContain("/enchantment/soul-fire-aspect/");
+    expect(section(html, "quest-rewards-every")).toMatch(/<span class="quest-reward-item"[^>]*data-testid="quest-reward-item"/);
+  });
+
   it("shows the description, completed text, region link and related mobs", async () => {
     const html = await renderQuest(realQuest("ca03"), "zh");
     expect(html).toContain('data-testid="quest-description"');

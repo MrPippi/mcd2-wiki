@@ -3,8 +3,7 @@ import type { Emeralds, Quest, QuestReward } from "../../scripts/extract/quest-s
 import { lootSlotLabel, t, type Lang, type UiKey } from "../lib/i18n";
 import { dropSummary, splitNumbers } from "../lib/mobs";
 import { countMark, RARITY_KEY } from "../lib/quest-view";
-import { rewardEntries } from "../lib/quests";
-import { entryHref } from "../lib/url";
+import { rewardEntries, rewardHref } from "../lib/quests";
 import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
 
@@ -40,14 +39,18 @@ const emeraldLines = (emeralds: Emeralds) => dropSummary({ slot: "emeralds", poo
               reward.kind === "items" ? (
                 <li class="quest-reward" data-reward="items">
                   <ul class="quest-reward-items">
-                    {rewardEntries(reward.items).map((entry) => (
-                      <li>
-                        <a href={entryHref(lang, entry)} data-testid="quest-reward-item">
-                          <EntryIcon icon={entry.icon} alt="" size={ICON_SIZE} category={entry.category} variant={entry.variant} />
-                          <span>{entry.name[lang]}</span>
-                        </a>
-                      </li>
-                    ))}
+                    {rewardEntries(reward.items).map((entry) => {
+                      const target = rewardHref(lang, entry);
+                      const Tag = target ? "a" : "span";
+                      return (
+                        <li>
+                          <Tag class="quest-reward-item" href={target} data-testid="quest-reward-item">
+                            <EntryIcon icon={entry.icon} alt="" size={ICON_SIZE} category={entry.category} variant={entry.variant} />
+                            <span>{entry.name[lang]}</span>
+                          </Tag>
+                        </li>
+                      );
+                    })}
                   </ul>
                   <span class="quest-reward-tags">
                     {reward.picks
