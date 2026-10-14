@@ -310,5 +310,17 @@
   "buildEffect": "Effect",
   "buildAddEffect": "Add effect",
   "buildRemoveEffect": "Remove effect",
-  "buildEffectLimit": "Up to {n} effects per item, counting a unique item's built-in effect"
+  "buildEffectLimit": "Up to {n} effects per item, counting a unique item's built-in effect",
+  "weaponCompare": "Weapon Compare",
+  "weaponCompareIntro": "Put up to three weapons side by side: damage, fire rate, reach, stagger and the effects they can roll.",
+  "weaponCompareNoScript": "Weapon compare needs JavaScript.",
+  "weaponCompareLoadFailed": "Weapon compare could not load.",
+  "weaponComparePick": "Choose a weapon…",
+  "weaponCompareColumn": "Weapon {n}",
+  "weaponCompareStat": "Stat",
+  "weaponCompareEffects": "Effects it can roll",
+  "weaponCompareBest": "Best",
+  "weaponCompareEmpty": "Choose weapons to start comparing.",
+  "weaponCompareDropped": "Weapons left out (unknown, repeated or more than 3): {n}",
+  "weaponCompareBuiltIn": "Built in"
 }

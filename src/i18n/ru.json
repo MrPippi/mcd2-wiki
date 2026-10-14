@@ -263,7 +263,19 @@
     "buildEffect",
     "buildAddEffect",
     "buildRemoveEffect",
-    "buildEffectLimit"
+    "buildEffectLimit",
+    "weaponCompare",
+    "weaponCompareIntro",
+    "weaponCompareNoScript",
+    "weaponCompareLoadFailed",
+    "weaponComparePick",
+    "weaponCompareColumn",
+    "weaponCompareStat",
+    "weaponCompareEffects",
+    "weaponCompareBest",
+    "weaponCompareEmpty",
+    "weaponCompareDropped",
+    "weaponCompareBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -584,5 +596,17 @@
   "buildEffect": "Эффект",
   "buildAddEffect": "Добавить эффект",
   "buildRemoveEffect": "Убрать эффект",
-  "buildEffectLimit": "Не более {n} эффектов на предмет, включая встроенный эффект уникальных предметов"
+  "buildEffectLimit": "Не более {n} эффектов на предмет, включая встроенный эффект уникальных предметов",
+  "weaponCompare": "Сравнение оружия",
+  "weaponCompareIntro": "Сравните до трёх видов оружия: урон, скорострельность, дальность, оглушение и возможные эффекты.",
+  "weaponCompareNoScript": "Для сравнения оружия нужен JavaScript.",
+  "weaponCompareLoadFailed": "Не удалось загрузить сравнение оружия.",
+  "weaponComparePick": "Выбрать оружие…",
+  "weaponCompareColumn": "Оружие {n}",
+  "weaponCompareStat": "Параметр",
+  "weaponCompareEffects": "Возможные эффекты",
+  "weaponCompareBest": "Лучшее",
+  "weaponCompareEmpty": "Выберите оружие, чтобы начать сравнение.",
+  "weaponCompareDropped": "Пропущено оружия (неизвестное, повтор или больше 3): {n}",
+  "weaponCompareBuiltIn": "Встроено"
 }

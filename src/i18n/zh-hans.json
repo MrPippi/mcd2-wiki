@@ -264,7 +264,19 @@
     "buildEffect",
     "buildAddEffect",
     "buildRemoveEffect",
-    "buildEffectLimit"
+    "buildEffectLimit",
+    "weaponCompare",
+    "weaponCompareIntro",
+    "weaponCompareNoScript",
+    "weaponCompareLoadFailed",
+    "weaponComparePick",
+    "weaponCompareColumn",
+    "weaponCompareStat",
+    "weaponCompareEffects",
+    "weaponCompareBest",
+    "weaponCompareEmpty",
+    "weaponCompareDropped",
+    "weaponCompareBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -579,5 +591,17 @@
   "buildEffect": "效果",
   "buildAddEffect": "添加效果",
   "buildRemoveEffect": "移除效果",
-  "buildEffectLimit": "每件最多 {n} 个效果（含独特装备的内置效果）"
+  "buildEffectLimit": "每件最多 {n} 个效果（含独特装备的内置效果）",
+  "weaponCompare": "武器比较",
+  "weaponCompareIntro": "最多三把武器并排比较伤害、射速、距离、硬直与可出现的效果。",
+  "weaponCompareNoScript": "武器比较需要 JavaScript。",
+  "weaponCompareLoadFailed": "武器比较加载失败。",
+  "weaponComparePick": "选择武器…",
+  "weaponCompareColumn": "武器 {n}",
+  "weaponCompareStat": "项目",
+  "weaponCompareEffects": "可出现的效果",
+  "weaponCompareBest": "最佳",
+  "weaponCompareEmpty": "选择武器开始比较。",
+  "weaponCompareDropped": "已略过无法显示的武器（不存在、重复或超过 3 把）：{n} 把",
+  "weaponCompareBuiltIn": "内置"
 }

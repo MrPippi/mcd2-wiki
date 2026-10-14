@@ -307,5 +307,17 @@
   "buildEffect": "效果",
   "buildAddEffect": "加入效果",
   "buildRemoveEffect": "移除效果",
-  "buildEffectLimit": "每件最多 {n} 個效果（含獨特裝備的內建效果）"
+  "buildEffectLimit": "每件最多 {n} 個效果（含獨特裝備的內建效果）",
+  "weaponCompare": "武器比較",
+  "weaponCompareIntro": "最多三把武器並排比較傷害、射速、距離、硬直與可出現的效果。",
+  "weaponCompareNoScript": "武器比較需要 JavaScript。",
+  "weaponCompareLoadFailed": "武器比較載入失敗。",
+  "weaponComparePick": "選擇武器…",
+  "weaponCompareColumn": "武器 {n}",
+  "weaponCompareStat": "項目",
+  "weaponCompareEffects": "可出現的效果",
+  "weaponCompareBest": "最佳",
+  "weaponCompareEmpty": "選擇武器開始比較。",
+  "weaponCompareDropped": "已略過無法顯示的武器（不存在、重複或超過 3 把）：{n} 把",
+  "weaponCompareBuiltIn": "內建"
 }

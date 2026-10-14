@@ -265,7 +265,19 @@
     "buildEffect",
     "buildAddEffect",
     "buildRemoveEffect",
-    "buildEffectLimit"
+    "buildEffectLimit",
+    "weaponCompare",
+    "weaponCompareIntro",
+    "weaponCompareNoScript",
+    "weaponCompareLoadFailed",
+    "weaponComparePick",
+    "weaponCompareColumn",
+    "weaponCompareStat",
+    "weaponCompareEffects",
+    "weaponCompareBest",
+    "weaponCompareEmpty",
+    "weaponCompareDropped",
+    "weaponCompareBuiltIn"
   ],
   "_english": [
     "armorPiece",
@@ -582,5 +594,17 @@
   "buildEffect": "Effekt",
   "buildAddEffect": "Effekt hinzufügen",
   "buildRemoveEffect": "Effekt entfernen",
-  "buildEffectLimit": "Bis zu {n} Effekte pro Gegenstand, einschließlich des eingebauten Effekts einzigartiger Gegenstände"
+  "buildEffectLimit": "Bis zu {n} Effekte pro Gegenstand, einschließlich des eingebauten Effekts einzigartiger Gegenstände",
+  "weaponCompare": "Waffenvergleich",
+  "weaponCompareIntro": "Vergleiche bis zu drei Waffen nebeneinander: Schaden, Feuerrate, Reichweite, Taumeln und mögliche Effekte.",
+  "weaponCompareNoScript": "Der Waffenvergleich benötigt JavaScript.",
+  "weaponCompareLoadFailed": "Der Waffenvergleich konnte nicht geladen werden.",
+  "weaponComparePick": "Waffe wählen …",
+  "weaponCompareColumn": "Waffe {n}",
+  "weaponCompareStat": "Eigenschaft",
+  "weaponCompareEffects": "Mögliche Effekte",
+  "weaponCompareBest": "Bester Wert",
+  "weaponCompareEmpty": "Wähle Waffen aus, um den Vergleich zu starten.",
+  "weaponCompareDropped": "Ausgelassene Waffen (unbekannt, doppelt oder mehr als 3): {n}",
+  "weaponCompareBuiltIn": "Eingebaut"
 }
