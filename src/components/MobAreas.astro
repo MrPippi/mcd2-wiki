@@ -2,6 +2,7 @@
 import type { MobArea } from "../../scripts/extract/mob-schema";
 import { t, type Lang } from "../lib/i18n";
 import { compareLang, htmlLang } from "../lib/lang";
+import { locationHref, locationOf } from "../lib/locations";
 import { mapLinkOf, uniqueAreas } from "../lib/mobs";
 import EntrySection from "./EntrySection.astro";
 
@@ -17,12 +18,17 @@ const alt = compareLang(lang);
 {shown.length > 0 && (
   <EntrySection title={t(lang, "mobAreas")} testid="mob-areas">
     <ul class="mob-areas">
-      {shown.map((area) => (
-        <li class:list={{ "has-marker": area.map !== undefined }}>
-          <a href={mapLinkOf(lang, area)}>{area.name[lang]}</a>
-          {area.name[alt] !== area.name[lang] && <span class="item-alt" lang={htmlLang(alt)}>{area.name[alt]}</span>}
-        </li>
-      ))}
+      {shown.map((area) => {
+        // The name opens the area's location page when one is published, and the map otherwise.
+        const location = locationOf(area.areaId);
+        return (
+          <li class:list={{ "has-marker": area.map !== undefined }}>
+            <a href={location ? locationHref(lang, location.slug) : mapLinkOf(lang, area)}>{area.name[lang]}</a>
+            {area.name[alt] !== area.name[lang] && <span class="item-alt" lang={htmlLang(alt)}>{area.name[alt]}</span>}
+            {location && <a class="mob-area-map" href={mapLinkOf(lang, area)} aria-label={`${t(lang, "map")}: ${area.name[lang]}`}>{t(lang, "map")}</a>}
+          </li>
+        );
+      })}
     </ul>
     <p class="note">{t(lang, "mobAreasNote")}</p>
   </EntrySection>

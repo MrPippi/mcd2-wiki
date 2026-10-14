@@ -25,6 +25,8 @@ A fan-made reference for **Minecraft Dungeons II**, built straight from the game
 | **Weapon Compare** | Up to three weapons side by side: combo damage, fire rate, reach, stagger, built-in bonus and the effects each can roll, with the best value marked; share it as a link |
 | **Guides** | Game mechanics from the game's own data: vendor upgrade costs and unlocks, enchanting costs, rarity effects and drop weights, secret talismans, currency caps and recommended level by story stage; anything the data cannot explain is marked unconfirmed |
 | **Quests** | Every core quest in story order, side quests by region, Echo Golem quests and boss replays, each with its objectives, prerequisites, the quests it unlocks, first-completion and repeat rewards, emeralds by quest size, and the mobs you fight. Item pages name the quest a reward comes from |
+| **Locations** | One page per region with its area icon and the player level the game sets for it (where the game has them), a link to its spot on the map where the map marks it, the places inside it, the monsters found there by kind, its quests and its area loot. Mob and quest pages link to the region |
+| **Bosses** | The 10 bosses and 6 mini-bosses in story order, with health, region, and the core quest and boss replay each one appears in, where the game data names them |
 | **Achievements** | All Steam achievements with global unlock rates. Hidden ones stay hidden until you choose to reveal how to unlock them |
 
 Item pages also list where an item comes from: quest rewards, chests, merchants or enchantment book pools.

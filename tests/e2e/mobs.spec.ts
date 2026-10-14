@@ -73,9 +73,13 @@ test.describe("mob page", () => {
     const stats = page.getByTestId("mob-stats");
     await expect(stats.locator("tr", { hasText: "生命值" }).locator("td")).toHaveText("8");
     await expect(stats.locator("tr", { hasText: "爆炸抗性倍率" }).locator("td")).toHaveText("×1.5");
-    const frozen = page.getByTestId("mob-areas").locator("a", { hasText: "冰封高地" });
-    await expect(frozen).toHaveAttribute("href", "/zh/map/?world=overworld#4/6611/4173");
-    await expect(page.getByTestId("mob-areas").locator("a", { hasText: "地下城" })).toHaveAttribute("href", "/zh/map/");
+    // An area name opens its location page; the small map link next to it opens the map (on the marker when there is one).
+    const frozen = page.getByTestId("mob-areas").locator("li", { hasText: "冰封高地" });
+    await expect(frozen.locator("a").first()).toHaveAttribute("href", "/zh/locations/frozen-highlands/");
+    await expect(frozen.locator("a.mob-area-map")).toHaveAttribute("href", "/zh/map/?world=overworld#4/6611/4173");
+    const dungeon = page.getByTestId("mob-areas").locator("li", { hasText: "地下城" });
+    await expect(dungeon.locator("a").first()).toHaveAttribute("href", "/zh/locations/the-deep-dark/");
+    await expect(dungeon.locator("a.mob-area-map")).toHaveAttribute("href", "/zh/map/");
     const gear = dropRow(page, "裝備").first();
     await expect(gear).toContainText("隨機次數：1，每次 1.25%");
     await expect(gear).toContainText("資料中沒有物品清單。");
@@ -142,7 +146,7 @@ test.describe("menu and search", () => {
     await page.goto("/zh/mobs/");
     await page.getByTestId("site-menu").click();
     const links = page.locator(".site-menu a");
-    await expect(links).toHaveText(["地圖", "成就", "怪物圖鑑", "靈魂風暴", "配裝", "武器比較", "攻略", "任務"]);
+    await expect(links).toHaveText(["地圖", "成就", "怪物圖鑑", "靈魂風暴", "配裝", "武器比較", "攻略", "任務", "地點", "頭目"]);
     await expect(links.nth(2)).toHaveAttribute("href", "/zh/mobs/");
     await expect(page.locator(".site-menu [aria-current='page']")).toHaveText("怪物圖鑑");
   });

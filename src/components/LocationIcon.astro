@@ -1,0 +1,21 @@
+---
+import type { Location } from "../../scripts/extract/location-schema";
+import { assetUrl } from "../lib/url";
+
+interface Props {
+  location: Location;
+  size: number;
+  loading?: "lazy" | "eager";
+}
+
+/* The game's area icon, or an empty dotted mount of the same size when the game has none (no stand-in art). */
+const { location, size, loading = "lazy" } = Astro.props;
+const box = `--size:${size}px`;
+---
+{location.icon ? (
+  <span class="location-icon" style={box}>
+    <img src={assetUrl(location.icon)} alt="" width={size} height={size} loading={loading} decoding="async" />
+  </span>
+) : (
+  <span class="location-icon is-empty" style={box} aria-hidden="true"></span>
+)}

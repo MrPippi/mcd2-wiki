@@ -1,0 +1,74 @@
+---
+import type { Quest } from "../../scripts/extract/quest-schema";
+import { healthOf, type BossView } from "../lib/boss-view";
+import { t, type Lang, type UiKey } from "../lib/i18n";
+import { compareLang, htmlLang } from "../lib/lang";
+import { formatLevels } from "../lib/location-view";
+import { locationHref } from "../lib/locations";
+import { formatStat, mobHref } from "../lib/mobs";
+import { questHref } from "../lib/quests";
+import MobPortrait from "./MobPortrait.astro";
+
+interface Props {
+  lang: Lang;
+  boss: BossView;
+  /** Position in the whole list; staggers the cascade-in animation. */
+  index: number;
+}
+
+const { lang, boss, index } = Astro.props;
+const { mob } = boss;
+const alt = compareLang(lang);
+const health = healthOf(mob);
+const CARD_PORTRAIT_SIZE = 96;
+const questRows: { key: UiKey; quests: readonly Quest[]; testid: string }[] = [
+  { key: "questTypeCore", quests: boss.coreQuests, testid: "boss-core-quests" },
+  { key: "bossReplay", quests: boss.replayQuests, testid: "boss-replay-quests" },
+];
+---
+<li class="boss-card" style={`--i:${index}`} data-testid="boss-card" data-slug={mob.slug}>
+  <a class="boss-card-link" href={mobHref(lang, mob.slug)} data-testid="boss-mob-link">
+    <MobPortrait lang={lang} mob={mob} size={CARD_PORTRAIT_SIZE} decorative />
+    <span class="boss-card-names">
+      <span class="primary boss-card-name">{mob.name[lang]}</span>
+      {mob.name[alt] !== mob.name[lang] && <span class="item-alt boss-card-alt" lang={htmlLang(alt)}>{mob.name[alt]}</span>}
+    </span>
+  </a>
+  {mob.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+  <dl class="boss-facts">
+    {health !== undefined && (
+      <div><dt>{t(lang, "statHealth")}</dt><dd class="mono" data-testid="boss-health">{formatStat("health", health)}</dd></div>
+    )}
+    {boss.locations.length > 0 && (
+      <div>
+        <dt>{t(lang, "questRegion")}</dt>
+        <dd data-testid="boss-regions">
+          <ul class="boss-links">
+            {boss.locations.map((location) => (
+              <li>
+                <a href={locationHref(lang, location.slug)}>{location.name[lang]}</a>
+                {location.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+                {location.levels.length > 0 && <span class="boss-level">{t(lang, "locationLevel")} <span class="mono">{formatLevels(location.levels)}</span></span>}
+              </li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+    )}
+    {questRows.filter((row) => row.quests.length > 0).map((row) => (
+      <div>
+        <dt>{t(lang, row.key)}</dt>
+        <dd data-testid={row.testid}>
+          <ul class="boss-links">
+            {row.quests.map((quest) => (
+              <li>
+                <a href={questHref(lang, quest.slug)}>{quest.title.text[lang]}</a>
+                {quest.title.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+              </li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+    ))}
+  </dl>
+</li>

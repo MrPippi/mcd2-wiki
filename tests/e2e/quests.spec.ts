@@ -34,10 +34,10 @@ test.describe("quests", () => {
     await expect(page.locator("h1")).toHaveText("任務");
   });
 
-  test("a quest page links its mobs and its region on the map", async ({ page }) => {
+  test("a quest page links its mobs and its region's location page", async ({ page }) => {
     await page.goto("/zh/quests/ca03/");
     await expect(page.getByTestId("quest-mobs").locator("a[href='/zh/mobs/maw/']")).toBeVisible();
-    await expect(page.getByTestId("quest-region-link")).toHaveAttribute("href", /\/zh\/map\//);
+    await expect(page.getByTestId("quest-region-link")).toHaveAttribute("href", "/zh/locations/howling-woods/");
   });
 
   for (const lang of ["zh", "de", "ru"]) {

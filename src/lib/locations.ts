@@ -1,0 +1,49 @@
+/** The location and boss pages' data from `npm run extract`, validated at build time, and the lookups they link with. Server-side only. */
+import type { Category } from "../../scripts/extract/config";
+import { LocationDataSchema, type Location, type LocationData } from "../../scripts/extract/location-schema";
+import { ItemSourcesSchema, type Mob } from "../../scripts/extract/mob-schema";
+import type { Entry } from "../../scripts/extract/schemas";
+import rawLocations from "../data/locations.json";
+import rawSources from "../data/loot-sources.json";
+import { bossGroups, type BossGroup } from "./boss-view";
+import { findEntry } from "./data";
+import type { Lang } from "./lang";
+import { locationCounts, locationOfArea, lootKeys, type LocationCounts } from "./location-view";
+import { findMob, mobData, mobGroups, type MobGroup } from "./mobs";
+import { questData, questsOf } from "./quests";
+import type { Quest } from "../../scripts/extract/quest-schema";
+import { GAME_NAME } from "./site-title";
+import { t } from "./ui-strings";
+import { href } from "./url";
+
+export const locationData: LocationData = LocationDataSchema.parse(rawLocations);
+const lootItems = ItemSourcesSchema.parse(rawSources).items;
+
+const LOCATIONS_BY_SLUG: ReadonlyMap<string, Location> = new Map(locationData.locations.map((location) => [location.slug, location]));
+
+export const findLocation = (slug: string): Location | undefined => LOCATIONS_BY_SLUG.get(slug);
+
+export const locationHref = (lang: Lang, slug: string): string => href(lang, "locations", slug);
+
+/** The published location an area id belongs to, if any. */
+export const locationOf = (areaId: string): Location | undefined => locationOfArea(locationData, areaId);
+
+export const countsOf = (location: Location): LocationCounts => locationCounts(location, findMob);
+
+/** The location's mobs grouped by kind, like the bestiary. */
+export const locationMobGroups = (location: Location): MobGroup[] => mobGroups(location.mobs.flatMap((slug) => findMob(slug) ?? []));
+
+export const locationQuests = (location: Location): Quest[] => questsOf(location.quests);
+
+/** The published item entries of the location's area drop pools, in loot-sources order. */
+export const locationLoot = (location: Location): Entry[] =>
+  lootKeys(location, lootItems).flatMap((key) => {
+    const [category, slug] = key.split("/");
+    return (category && slug && findEntry(category as Category, slug)) || [];
+  });
+
+/** A location page's meta description: its name, the locations page and the game, in the page language. */
+export const locationDescription = (location: Location, lang: Lang): string => [location.name[lang], t(lang, "locations"), GAME_NAME].join(" · ");
+
+/** The bosses page's groups, in story order (see boss-view.ts). */
+export const bossList = (mobs: readonly Mob[] = mobData.mobs): BossGroup[] => bossGroups(mobs, questData.quests, locationOf);

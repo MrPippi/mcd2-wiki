@@ -17,6 +17,8 @@ export const SITE_MENU: readonly MenuItem[] = [
   { key: "weaponCompare", segment: "compare" },
   { key: "guides", segment: "guides" },
   { key: "quests", segment: "quests" },
+  { key: "locations", segment: "locations" },
+  { key: "bosses", segment: "bosses" },
 ];
 
 /** Whether `pathname` is the menu page `segment` in some language (/<base>/<lang>/<segment>/). */

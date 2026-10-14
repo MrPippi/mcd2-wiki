@@ -1,5 +1,6 @@
 ---
 import { LANGS } from "../../../../scripts/extract/config";
+import type { MobArea } from "../../../../scripts/extract/mob-schema";
 import type { Quest } from "../../../../scripts/extract/quest-schema";
 import EntrySection from "../../../components/EntrySection.astro";
 import LangText from "../../../components/LangText.astro";
@@ -8,6 +9,7 @@ import QuestLinks from "../../../components/QuestLinks.astro";
 import QuestRewards from "../../../components/QuestRewards.astro";
 import Base from "../../../layouts/Base.astro";
 import { t, type Lang } from "../../../lib/i18n";
+import { locationHref, locationOf } from "../../../lib/locations";
 import { mapLinkOf } from "../../../lib/mobs";
 import { countMark, SIZE_KEY, TYPE_KEY } from "../../../lib/quest-view";
 import { questData, questDescription, questMobs, questsOf, sectionLabel } from "../../../lib/quests";
@@ -27,6 +29,11 @@ interface Props {
 const { lang, quest } = Astro.props;
 const untranslated = (texts: { untranslated: readonly Lang[] } | null) => texts?.untranslated.includes(lang) ?? false;
 const mobs = questMobs(quest);
+// The region opens its location page when one is published, and the map otherwise.
+const regionHref = (region: MobArea): string => {
+  const location = locationOf(region.areaId);
+  return location ? locationHref(lang, location.slug) : mapLinkOf(lang, region);
+};
 const objectivesUntranslated = quest.objectives.some((objective) => objective.untranslated.includes(lang));
 ---
 <Base lang={lang} title={quest.title.text[lang]} description={questDescription(quest, lang)}>
@@ -42,7 +49,7 @@ const objectivesUntranslated = quest.objectives.some((objective) => objective.un
     </div>
     <dl class="quest-facts" data-testid="quest-facts" data-pagefind-ignore>
       {quest.region && (
-        <div><dt>{t(lang, "questRegion")}</dt><dd><a href={mapLinkOf(lang, quest.region)} data-testid="quest-region-link">{quest.region.name[lang]}</a></dd></div>
+        <div><dt>{t(lang, "questRegion")}</dt><dd><a href={regionHref(quest.region)} data-testid="quest-region-link">{quest.region.name[lang]}</a></dd></div>
       )}
       {quest.size && <div><dt>{t(lang, "questSize")}</dt><dd>{t(lang, SIZE_KEY[quest.size])}</dd></div>}
     </dl>
