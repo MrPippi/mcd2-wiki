@@ -23,6 +23,7 @@ A fan-made reference for **Minecraft Dungeons II**, built straight from the game
 | **Soul Storms** | A live countdown to the current and next storm in your time zone, the area rotation, Storm Generator difficulty, health and shields, and what the reward chests drop. The times are worked out from the game data and are marked as estimates until confirmed in game |
 | **Build Planner** | Pick your weapons, armor, artifacts and talismans, then share the build as a link (it opens the same build) or download it as an image for social media |
 | **Weapon Compare** | Up to three weapons side by side: combo damage, fire rate, reach, stagger, built-in bonus and the effects each can roll, with the best value marked; share it as a link |
+| **Guides** | Game mechanics from the game's own data: vendor upgrade costs and unlocks, enchanting costs, rarity effects and drop weights, secret talismans, currency caps and recommended level by story stage; anything the data cannot explain is marked unconfirmed |
 | **Quests** | Every core quest in story order, side quests by region, Echo Golem quests and boss replays, each with its objectives, prerequisites, the quests it unlocks, first-completion and repeat rewards, emeralds by quest size, and the mobs you fight. Item pages name the quest a reward comes from |
 | **Achievements** | All Steam achievements with global unlock rates. Hidden ones stay hidden until you choose to reveal how to unlock them |
 

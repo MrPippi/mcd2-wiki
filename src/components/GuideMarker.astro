@@ -1,0 +1,14 @@
+---
+// One "untranslated" tag for a section whose tables or lists put game text (names, unlock lines) inside site sentences:
+// shown when any of those texts fell back to English.
+import { t, type Lang } from "../lib/i18n";
+import { anyUntranslated, type ShownText } from "../lib/guides";
+
+interface Props {
+  lang: Lang;
+  texts: readonly (ShownText | undefined)[];
+}
+
+const { lang, texts } = Astro.props;
+---
+{anyUntranslated(texts) && <p class="guide-marker" data-testid="guide-section-untranslated"><span class="tag warn">{t(lang, "untranslated")}</span></p>}

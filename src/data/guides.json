@@ -1,0 +1,1025 @@
+{
+  "verified": {
+    "enchantCostPerLevel": false,
+    "rarityOdds": false
+  },
+  "texts": {
+    "echoShards": {
+      "html": {
+        "zh": "回聲碎片",
+        "zh-hans": "回响碎片",
+        "en": "Echo Shards",
+        "ja": "残響のかけら",
+        "ko": "에코 조각",
+        "de": "Echoscherben",
+        "fr": "Éclats d&#39;écho",
+        "es": "Fragmentos resonantes",
+        "it": "Schegge di eco",
+        "pt": "Fragmentos de Eco",
+        "ru": "Осколки эха",
+        "pl": "Odłamki echa",
+        "nl": "Echoscherven",
+        "sv": "Ekoskärvor",
+        "tr": "Yankı Parçaları",
+        "uk": "Ехові уламки"
+      },
+      "untranslated": []
+    },
+    "emeralds": {
+      "html": {
+        "zh": "綠寶石",
+        "zh-hans": "绿宝石",
+        "en": "Emeralds",
+        "ja": "エメラルド",
+        "ko": "에메랄드",
+        "de": "Smaragde",
+        "fr": "Émeraudes",
+        "es": "Esmeraldas",
+        "it": "Smeraldi",
+        "pt": "Esmeraldas",
+        "ru": "Изумруды",
+        "pl": "Szmaragdy",
+        "nl": "Smaragden",
+        "sv": "Smaragder",
+        "tr": "Zümrütler",
+        "uk": "Смарагди"
+      },
+      "untranslated": []
+    },
+    "enchantmentPoints": {
+      "html": {
+        "zh": "附魔點數",
+        "zh-hans": "附魔点数",
+        "en": "Enchantment points",
+        "ja": "エンチャントポイント",
+        "ko": "마법 부여 포인트",
+        "de": "Verzauberungspunkte",
+        "fr": "Points d&#39;enchantement",
+        "es": "Puntos de encantamiento",
+        "it": "Punti incantesimo",
+        "pt": "Pontos de Encantamento",
+        "ru": "Очки зачарования",
+        "pl": "Punkty zaklęć",
+        "nl": "Enchantment points",
+        "sv": "Förtrollningspoäng",
+        "tr": "Büyü Puanları",
+        "uk": "Очки чарів"
+      },
+      "untranslated": [
+        "nl"
+      ]
+    },
+    "merchantName": {
+      "html": {
+        "zh": "城鎮商人",
+        "zh-hans": "城镇商人",
+        "en": "Town Merchant",
+        "ja": "街の商人",
+        "ko": "마을 상인",
+        "de": "Stadthändler",
+        "fr": "Commerçant du village",
+        "es": "Comerciante local",
+        "it": "Mercante cittadino",
+        "pt": "Mercador da Cidade",
+        "ru": "Городской торговец",
+        "pl": "Miejski kupiec",
+        "nl": "Dorpshandelaar",
+        "sv": "Stadens köpman",
+        "tr": "Kasaba Tüccarı",
+        "uk": "Міський торговець"
+      },
+      "untranslated": []
+    },
+    "blacksmithName": {
+      "html": {
+        "zh": "鐵匠",
+        "zh-hans": "铁匠",
+        "en": "Blacksmith",
+        "ja": "鍛冶屋",
+        "ko": "대장장이",
+        "de": "Schmied",
+        "fr": "Forgeron",
+        "es": "Herrero",
+        "it": "Fabbro",
+        "pt": "Ferreiro",
+        "ru": "Кузнец",
+        "pl": "Kowal",
+        "nl": "Smid",
+        "sv": "Smed",
+        "tr": "Demirci",
+        "uk": "Коваль"
+      },
+      "untranslated": []
+    },
+    "enchantsmithName": {
+      "html": {
+        "zh": "附魔匠",
+        "zh-hans": "附魔匠",
+        "en": "Enchantsmith",
+        "ja": "エンチャントスミス",
+        "ko": "마법 부여사",
+        "de": "Zauberschmied",
+        "fr": "Enchanteur",
+        "es": "Forjaembrujos",
+        "it": "Fabbro incantatore",
+        "pt": "Magífice",
+        "ru": "Чарокузнец",
+        "pl": "Zaklinacz",
+        "nl": "Betoveringensmid",
+        "sv": "Förtrollningssmed",
+        "tr": "Büyü Ustası",
+        "uk": "Коваль-чарівник"
+      },
+      "untranslated": []
+    },
+    "merchantIntro": {
+      "html": {
+        "zh": "使用<em class=\"emphasis\">綠寶石</em>來購買物品",
+        "zh-hans": "使用<em class=\"emphasis\">绿宝石</em>购买物品",
+        "en": "Use <em class=\"emphasis\">emeralds</em> to purchase items",
+        "ja": "<em class=\"emphasis\">エメラルド</em>を使ってアイテムを購入します",
+        "ko": "<em class=\"emphasis\">에메랄드</em>를 사용해 아이템을 구매하세요",
+        "de": "Benutze <em class=\"emphasis\">Smaragde</em>, um Gegenstände zu kaufen",
+        "fr": "Utilisez des <em class=\"emphasis\">émeraudes</em> pour acheter des objets",
+        "es": "Usa <em class=\"emphasis\">esmeraldas</em> para comprar objetos",
+        "it": "Usa gli <em class=\"emphasis\">smeraldi</em> per acquistare oggetti",
+        "pt": "Use <em class=\"emphasis\">esmeraldas</em> para comprar itens",
+        "ru": "Используйте <em class=\"emphasis\">изумруды</em>, чтобы покупать предметы",
+        "pl": "Użyj <em class=\"emphasis\">szmaragdów</em>, aby kupić przedmioty",
+        "nl": "Gebruik <em class=\"emphasis\">smaragden</em> om items te kopen",
+        "sv": "Använd <em class=\"emphasis\">smaragder</em> för att köpa föremål",
+        "tr": "Eşya satın almak için <em class=\"emphasis\">zümrüt</em> kullan",
+        "uk": "Використовуйте <em class=\"emphasis\">смарагди</em>, щоб придбати предмети"
+      },
+      "untranslated": []
+    },
+    "blacksmithIntro": {
+      "html": {
+        "zh": "使用<em class=\"emphasis\">綠寶石</em>來升級物品",
+        "zh-hans": "使用<em class=\"emphasis\">绿宝石</em>升级物品",
+        "en": "Use <em class=\"emphasis\">Emeralds</em> to upgrade items",
+        "ja": "<em class=\"emphasis\">エメラルド</em>でアイテムを強化します",
+        "ko": "<em class=\"emphasis\">에메랄드</em>를 사용해 아이템을 업그레이드하세요",
+        "de": "Benutze <em class=\"emphasis\">Smaragde</em> zum Verbessern von Gegenständen",
+        "fr": "Utilisez des <em class=\"emphasis\">émeraudes</em> pour améliorer vos objets",
+        "es": "Usa <em class=\"emphasis\">esmeraldas</em> para mejorar objetos",
+        "it": "Usa gli <em class=\"emphasis\">smeraldi</em> per potenziare gli oggetti",
+        "pt": "Use <em class=\"emphasis\">Esmeraldas</em> para aprimorar itens",
+        "ru": "Используйте <em class=\"emphasis\">изумруды</em>, чтобы улучшать предметы",
+        "pl": "Użyj <em class=\"emphasis\">szmaragdów</em>, aby ulepszyć przedmioty",
+        "nl": "Gebruik <em class=\"emphasis\">smaragden</em> om items te upgraden",
+        "sv": "Använd <em class=\"emphasis\">smaragder</em> för att uppgradera föremål",
+        "tr": "Eşya yükseltmek için <em class=\"emphasis\">Zümrüt</em> kullan",
+        "uk": "Використовуйте <em class=\"emphasis\">смарагди</em>, щоб покращувати предмети"
+      },
+      "untranslated": []
+    },
+    "enchantsmithIntro": {
+      "html": {
+        "zh": "使用<em class=\"emphasis\">回聲碎片</em>和<em class=\"emphasis\">附魔點數</em>，透過<em class=\"emphasis\">附魔書</em>來為物品附魔",
+        "zh-hans": "给物品附魔需要使用<em class=\"emphasis\">附魔书</em>，并花费<em class=\"emphasis\">回响碎片</em>和<em class=\"emphasis\">附魔点数</em>",
+        "en": "Use <em class=\"emphasis\">Echo Shards</em> and <em class=\"emphasis\">Enchantment Points</em> to enchant items with <em class=\"emphasis\">Enchantment Books</em>",
+        "ja": "<em class=\"emphasis\">残響のかけら</em>と<em class=\"emphasis\">エンチャントポイント</em>を消費して<em class=\"emphasis\">エンチャントの本</em>からアイテムにエンチャントを付与します",
+        "ko": "<em class=\"emphasis\">에코 조각</em>과 <em class=\"emphasis\">마법 부여 포인트</em>를 사용해 <em class=\"emphasis\">마법 부여 책</em>으로 아이템에 마법을 부여하세요",
+        "de": "Benutze <em class=\"emphasis\">Echoscherben</em> und <em class=\"emphasis\">Verzauberungspunkte</em>, um deine Gegenstände mit <em class=\"emphasis\">Verzauberungsbüchern</em> zu verzaubern",
+        "fr": "Utilisez des <em class=\"emphasis\">éclats d&#39;écho</em> et des <em class=\"emphasis\">points d&#39;enchantement</em> pour enchanter vos objets avec des <em class=\"emphasis\">livres d&#39;enchantement</em>",
+        "es": "Usa <em class=\"emphasis\">fragmentos resonantes</em> y <em class=\"emphasis\">puntos de encantamiento</em> para encantar objetos con <em class=\"emphasis\">libros encantados</em>",
+        "it": "Usa le <em class=\"emphasis\">schegge di eco</em> e i <em class=\"emphasis\">punti incantesimo</em> per incantare gli oggetti con i <em class=\"emphasis\">libri degli incantesimi</em>",
+        "pt": "Use <em class=\"emphasis\">Fragmentos de Eco</em> e <em class=\"emphasis\">Pontos de Encantamento</em> para encantar itens com <em class=\"emphasis\">Livros de Encantamentos</em>",
+        "ru": "Используйте <em class=\"emphasis\">осколки эха</em> и <em class=\"emphasis\">очки зачарования</em>, чтобы зачаровать предметы с помощью <em class=\"emphasis\">книг зачарований</em>",
+        "pl": "Wydając <em class=\"emphasis\">odłamki echa</em> i <em class=\"emphasis\">punkty zaklęć</em>, możesz zaklinać przedmioty przy użyciu <em class=\"emphasis\">ksiąg zaklinania</em>",
+        "nl": "Gebruik <em class=\"emphasis\">echoscherven</em> en <em class=\"emphasis\">betoveringspunten</em> om items te betoveren met <em class=\"emphasis\">betoveringsboeken</em>",
+        "sv": "Använd <em class=\"emphasis\">ekoskärvor</em> och <em class=\"emphasis\">förtrollningspoäng</em> för att förtrolla föremål med <em class=\"emphasis\">förtrollningsböcker</em>",
+        "tr": "Eşyaları <em class=\"emphasis\">Büyü Kitaplarıyla</em> büyülemek için <em class=\"emphasis\">Yankı Parçası</em> ve <em class=\"emphasis\">Büyü Puanı</em> kullan",
+        "uk": "Використовуйте <em class=\"emphasis\">ехові уламки</em> й <em class=\"emphasis\">очки чарів</em>, щоб зачаровувати предмети за допомогою <em class=\"emphasis\">книг чарів</em>"
+      },
+      "untranslated": []
+    },
+    "merchantLevel2": {
+      "html": {
+        "zh": "你將可購買稀有物品",
+        "zh-hans": "将能购买稀有物品",
+        "en": "You&#39;ll unlock rare item purchases",
+        "ja": "レアなアイテムの購入がアンロックされます",
+        "ko": "희귀 아이템 구매를 잠금 해제합니다",
+        "de": "Du schaltest den Kauf seltener Gegenstände frei",
+        "fr": "Vous débloquerez l&#39;achat d&#39;objets rares",
+        "es": "Desbloquearás la posibilidad de comprar objetos raros",
+        "it": "Sbloccherai l&#39;acquisto di oggetti rari",
+        "pt": "Você vai desbloquear compras de itens raros",
+        "ru": "Вы сможете покупать редкие предметы",
+        "pl": "Odblokujesz możliwość zakupu rzadkich przedmiotów",
+        "nl": "Je ontgrendelt zeldzame item-aankopen",
+        "sv": "Du låser upp köp av sällsynta föremål",
+        "tr": "Nadir eşya satın alımlarının kilidini açacaksın",
+        "uk": "Розблокується придбання рідкісних предметів"
+      },
+      "untranslated": []
+    },
+    "merchantLevel3": {
+      "html": {
+        "zh": "你將可購買特殊物品",
+        "zh-hans": "将能购买特殊物品",
+        "en": "You&#39;ll unlock special item purchases",
+        "ja": "スペシャルなアイテムの購入がアンロックされます",
+        "ko": "특별 아이템 구매를 잠금 해제합니다",
+        "de": "Du schaltest den Kauf besonderer Gegenstände frei",
+        "fr": "Vous débloquerez l&#39;achat d&#39;objets spéciaux",
+        "es": "Desbloquearás la posibilidad de comprar objetos especiales",
+        "it": "Sbloccherai l&#39;acquisto di oggetti speciali",
+        "pt": "Você vai desbloquear compras de itens especiais",
+        "ru": "Вы сможете покупать особые предметы",
+        "pl": "Odblokujesz możliwość zakupu specjalnych przedmiotów",
+        "nl": "Je ontgrendelt speciale item-aankopen",
+        "sv": "Du låser upp köp av specialföremål",
+        "tr": "Özel eşya satın alımlarının kilidini açacaksın",
+        "uk": "Розблокується придбання спеціальних предметів"
+      },
+      "untranslated": []
+    },
+    "blacksmithLevel2": {
+      "html": {
+        "zh": "你可以重擲特殊物品的效果",
+        "zh-hans": "可以重新抽取特殊物品的效果",
+        "en": "You can re-roll effects on special items",
+        "ja": "スペシャルなアイテムのエフェクトを再抽選することができます",
+        "ko": "특별 아이템에 대한 효과를 다시 뽑을 수 있습니다",
+        "de": "Du kannst die Effekte besonderer Gegenstände neu auswürfeln",
+        "fr": "Vous pouvez réattribuer les effets des objets spéciaux",
+        "es": "Puedes cambiar los efectos de los objetos especiales",
+        "it": "Puoi riassegnare gli effetti su oggetti speciali",
+        "pt": "Você pode reconfigurar os efeitos em itens especiais",
+        "ru": "Вы можете поменять эффекты на особых предметах",
+        "pl": "Możesz przerzucać efekty specjalnych przedmiotów",
+        "nl": "Je kunt effecten voor speciale items herconfigureren",
+        "sv": "Du kan byta effekter på specialföremål",
+        "tr": "Özel eşyalardaki etkileri yeniden belirleyebilirsin",
+        "uk": "Можна перепризначити ефекти спеціальним предметам"
+      },
+      "untranslated": []
+    },
+    "blacksmithLevel3": {
+      "html": {
+        "zh": "你可以重擲獨特物品的效果",
+        "zh-hans": "可以重新抽取独特物品的效果",
+        "en": "You can re-roll effects on unique items",
+        "ja": "ユニークなアイテムのエフェクトを再抽選することができます",
+        "ko": "고유한 아이템에 대한 효과를 다시 뽑을 수 있습니다",
+        "de": "Du kannst die Effekte einzigartiger Gegenstände neu auswürfeln",
+        "fr": "Vous pouvez réattribuer les effets des objets uniques",
+        "es": "Puedes cambiar los efectos de los objetos únicos",
+        "it": "Puoi riassegnare gli effetti su oggetti unici",
+        "pt": "Você pode reconfigurar os efeitos em itens únicos",
+        "ru": "Вы можете поменять эффекты на уникальных предметах",
+        "pl": "Możesz przerzucać efekty unikalnych przedmiotów",
+        "nl": "Je kunt effecten voor unieke items herconfigureren",
+        "sv": "Du kan byta effekter på unika föremål",
+        "tr": "Benzersiz eşyalardaki etkileri yeniden belirleyebilirsin",
+        "uk": "Можна перепризначити ефекти унікальним предметам"
+      },
+      "untranslated": []
+    },
+    "enchantsmithLevel2": {
+      "html": {
+        "zh": "你將能把附魔升級至等級 II",
+        "zh-hans": "将能够升至 II 级附魔",
+        "en": "You&#39;ll unlock upgrading enchantments to level II",
+        "ja": "エンチャントをレベル II まで強化できるようになります",
+        "ko": "마법 부여 2레벨 업그레이드가 잠금 해제됩니다",
+        "de": "Du schaltest die Verbesserung von Verzauberungen auf Level II frei",
+        "fr": "Vous débloquerez l&#39;amélioration des enchantements jusqu&#39;au niveau II",
+        "es": "Desbloquearás la mejora de los encantamientos al nivel II",
+        "it": "Sbloccherai il potenziamento degli incantesimi al livello II",
+        "pt": "Você desbloqueará a possibilidade de melhorar encantamentos para o nível II",
+        "ru": "Вы сможете улучшать зачарования до уровня II",
+        "pl": "Odblokujesz ulepszenie zaklęć do poziomu II",
+        "nl": "Je ontgrendelt het upgraden van betoveringen tot niveau II",
+        "sv": "Du låser upp uppgradering av förtrollningar till nivå II",
+        "tr": "Büyüleri II. seviyeye yükseltme kilidini açacaksın",
+        "uk": "Ви розблокуєте поліпшення чарів до рівня II"
+      },
+      "untranslated": []
+    },
+    "enchantsmithLevel3": {
+      "html": {
+        "zh": "你將能把附魔升級至等級 III",
+        "zh-hans": "将能够升至 III 级附魔",
+        "en": "You&#39;ll unlock upgrading enchantments to level III",
+        "ja": "エンチャントをレベル III まで強化できるようになります",
+        "ko": "마법 부여 3레벨 업그레이드가 잠금 해제됩니다",
+        "de": "Du schaltest die Verbesserung von Verzauberungen auf Level III frei",
+        "fr": "Vous débloquerez l&#39;amélioration des enchantements jusqu&#39;au niveau III",
+        "es": "Desbloquearás la mejora de los encantamientos al nivel III",
+        "it": "Sbloccherai il potenziamento degli incantesimi al livello III",
+        "pt": "Você desbloqueará a possibilidade de melhorar encantamentos para o nível III",
+        "ru": "Вы сможете улучшать зачарования до уровня III",
+        "pl": "Odblokujesz ulepszenie zaklęć do poziomu III",
+        "nl": "Je ontgrendelt het upgraden van betoveringen tot niveau III",
+        "sv": "Du låser upp uppgradering av förtrollningar till nivå III",
+        "tr": "Büyüleri III. seviyeye yükseltme kilidini açacaksın",
+        "uk": "Ви розблокуєте поліпшення чарів до рівня III"
+      },
+      "untranslated": []
+    },
+    "merchantTutorial": {
+      "html": {
+        "zh": "你可以用綠寶石向城鎮商人購買新物品。商品每 30 分鐘會更新一次，但你也可以花少量回聲碎片，請他們立刻補貨。<br><br>城鎮商人的等級越高，販售的商品就越好：<br>等級 1：普通物品<br>等級 2：稀有物品<br>等級 3：特殊物品",
+        "zh-hans": "你可以花费绿宝石从城镇商人那里购买新物品。库存每隔 30 分钟刷新一次，不过也可以花费少量回响碎片让商人立即刷新库存。<br><br>城镇商人升级后会出售更好的装备：<br>1 级：普通物品<br>2 级：稀有物品<br>3 级：特殊物品",
+        "en": "You can buy new items with emeralds from the Town Merchant. Stock is refreshed every 30 minutes, but for a small fee of Echo Shards, you can ask them to refresh their stock right away. <br><br>By leveling up the Town Merchant, they offer better gear for sale: <br>Level 1: Common items <br>Level 2: Rare items <br>Level 3: Special items",
+        "ja": "街の商人の店では、エメラルドを使って新しいアイテムを購入することができます。在庫は 30 分ごとに更新されますが、残響のかけらを少し支払うことで、すぐに更新してもらうこともできます。<br><br>街の商人をレベルアップさせると、より良い装備が販売されるようになります。<br>レベル 1: 普通のアイテム<br>レベル 2: レアなアイテム<br>レベル 3: スペシャルなアイテム",
+        "ko": "마을 상인에게서 에메랄드를 사용해 새로운 아이템을 구매할 수 있습니다. 30분마다 재고가 갱신되지만, 소량의 에코 조각을 지불해 바로 재고를 갱신할 수도 있습니다. <br><br>마을 상인의 레벨을 올리면 더 좋은 장비를 제공합니다. <br>1레벨: 일반 아이템 <br>2레벨: 희귀 아이템 <br>3레벨: 특별 아이템",
+        "de": "Beim Stadthändler kannst du mit Smaragden neue Gegenstände kaufen. Die Waren werden alle 30 Minuten aktualisiert, aber gegen eine kleine Echoscherbengebühr kannst du den Händler auch jederzeit darum bitten, sein Angebot sofort zu aktualisieren. <br><br>Wenn du das Level des Stadthändlers erhöhst, bietet er dir bessere Dinge an: <br>Level 1: gewöhnliche Gegenstände <br>Level 2: seltene Gegenstände <br>Level 3: besondere Gegenstände",
+        "fr": "Vous pouvez acheter de nouveaux objets avec des émeraudes auprès du Commerçant du village. Son stock est renouvelé toutes les 30 minutes, mais vous pouvez lui demander de le renouveler immédiatement contre une petite quantité d&#39;éclats d&#39;écho. <br><br>En améliorant le Commerçant du village, vous lui permettez de proposer de meilleurs équipements à la vente : <br>Niveau 1 : objets communs <br>Niveau 2 : objets rares <br>Niveau 3 : objets spéciaux",
+        "es": "Puedes comprar objetos nuevos al comerciante local a cambio de esmeraldas. El comerciante repone sus existencias cada 30 minutos, pero por un pequeño pago en fragmentos resonantes puedes pedirle que lo haga de inmediato. <br><br>A medida que sube de nivel, el comerciante venderá artículos mejores. <br>Nivel 1: objetos comunes <br>Nivel 2: objetos raros <br>Nivel 3: objetos especiales",
+        "it": "Puoi acquistare nuovi oggetti spendendo smeraldi dal mercante cittadino. La sua merce si rinnova ogni 30 minuti ma, pagando una piccola quota in schegge di eco, puoi chiedergli di rinnovarla immediatamente. <br><br>Fai salire di livello il mercante cittadino per migliorare la sua offerta: <br>Livello 1: oggetti comuni <br>Livello 2: oggetti rari <br>Livello 3: oggetti speciali",
+        "pt": "Você pode usar esmeraldas para comprar itens novos do Mercador da Cidade. O estoque dele é renovado a cada 30 minutos. Mas, por uma pequena taxa de Fragmentos de Eco, você pode pedir renovação imediata. <br><br>Ao subir de nível o Mercador da Cidade, ele oferece equipamentos melhores: <br>Nível 1: itens Comuns <br>Nível 2: itens Raros <br>Nível 3: itens Especiais.",
+        "ru": "У городского торговца можно купить новые предметы за изумруды. Ассортимент обновляется каждые 30 минут, но за небольшую плату в виде осколков эха его можно обновить мгновенно.<br><br>Если повысить уровень городского торговца, он предложит снаряжение получше:<br>Уровень 1: обычные предметы.<br>Уровень 2: редкие предметы.<br>Уровень 3: особые предметы.",
+        "pl": "U miejskiego kupca kupisz nowe przedmioty w zamian za szmaragdy. Jego asortyment odświeża się co 30 minut, ale za garstkę odłamków echa możesz poprosić o natychmiastowe odświeżenie. <br><br>Gdy podniesiesz poziom kupca, w jego ofercie znajdzie się lepszy towar: <br>poziom 1: zwykłe przedmioty <br>poziom 2: rzadkie przedmioty <br>poziom 3: specjalne przedmioty",
+        "nl": "Je kunt bij de dorpshandelaar nieuwe items kopen met smaragden. De voorraad wordt elke 30 minuten vernieuwd, maar voor een klein aantal echoscherven kun je hem vragen om zijn voorraad meteen te vernieuwen. <br><br>Als je het niveau van de dorpshandelaar verhoogt, biedt deze betere items te koop aan: <br>Level 1: gewone items <br>Level 2: zeldzame items <br>Level 3: speciale items",
+        "sv": "Du kan köpa nya föremål med smaragder från stadens köpman. Lagret fylls på var 30:e minut, men mot en liten avgift ekoskärvor kan du be att lagret ska fyllas på direkt. <br><br>Om du höjer nivån på stadens köpman kan den sälja bättre utrustning till dig: <br>Nivå 1: Vanliga föremål <br>Nivå 2: Sällsynta föremål <br>Nivå 3: Specialföremål",
+        "tr": "Kasaba Tüccarından zümrüt karşılığında yeni eşyalar satın alabilirsin. Stoklar 30 dakikada bir yenilenir ancak cüzi miktarda Yankı Parçası karşılığında stoklarını hemen yenilemesini isteyebilirsin. <br><br>Kasaba Tüccarının seviyesini yükselttiğinde daha iyi teçhizat sunar: <br>1. seviye: Yaygın eşyalar <br>2. seviye: Nadir eşyalar <br>3. seviye: Özel eşyalar",
+        "uk": "Нові предмети можна купити за смарагди в міського торговця. Він оновлює товар кожні 30 хвилин, але за невелику плату в ехових уламках можна попросити його зробити це відразу.<br><br>Після підвищення рівня міського торговця він продає краще спорядження:<br>рівень 1: звичайні предмети;<br>рівень 2: рідкісні;<br>Рівень 3: спеціальні."
+      },
+      "untranslated": []
+    },
+    "enchantsmithTutorial": {
+      "html": {
+        "zh": "在附魔匠處，你可以使用收集到的附魔書為物品附魔並強化物品。<br><br>使用回聲碎片提升附魔匠等級後，你也可以花費回聲碎片和附魔點數來升級物品上的附魔。<br><br>同一本附魔書可以用在多件物品上，而且解除物品附魔時，附魔點數會退還。",
+        "zh-hans": "你可以在附魔匠处使用收集到的附魔书为物品附魔，对其进行改进。<br><br>使用回响碎片提升附魔匠等级后，还可以用回响碎片和附魔点数来升级物品上的附魔。<br><br>同一本附魔书可用于多个物品，为物品祛魔后，相应的附魔点数将会返还。",
+        "en": "At the Enchantsmith, you can enchant and improve items using the enchantment books you&#39;ve collected.<br><br>By leveling up the Enchantsmith with Echo Shards, you can also upgrade the enchantments on your items in exchange for Echo Shards and Enchantment Points.<br><br>You can use the same enchantment book on multiple items, and if you disenchant an item your enchantment points will be refunded.",
+        "ja": "エンチャントスミスの店では、集めたエンチャントの本を使用してアイテムにエンチャントを付与したり、強化したりすることができます。<br><br>エンチャントスミスの店を残響のかけらでレベルアップさせると、残響のかけらとエンチャントポイントを消費してアイテムのエンチャントをさらに強化できるようになります。<br><br>エンチャントの本は一つのものを複数のアイテムに対して使用することができ、アイテムのエンチャントを解除すると使用したエンチャントポイントは返還されます。",
+        "ko": "마법 부여사에게서 수집한 마법 부여 책을 사용해 아이템에 마법을 부여하고 강화할 수 있습니다.<br><br>에코 조각으로 마법 부여사의 레벨을 올리면 에코 조각과 마법 부여 포인트를 사용해 아이템의 마법 부여를 업그레이드할 수 있습니다.<br><br>동일한 마법 부여 책을 여러 아이템에 사용할 수 있으며, 아이템의 마법 부여를 해제하면 마법 부여 포인트가 반환됩니다.",
+        "de": "Beim Zauberschmied kannst du mit den gesammelten Verzauberungsbüchern Gegenstände verzaubern und verbessern.<br><br>Wenn du das Level des Zauberschmieds mit Echoscherben erhöhst, kannst du auch die Verzauberung deiner Gegenstände im Tausch gegen Echoscherben und Verzauberungspunkte verbessern.<br><br>Du kannst dasselbe Verzauberungsbuch bei mehreren Gegenständen benutzen. Wenn du einen Gegenstand wieder entzauberst, bekommst du die Verzauberungspunkte zurückerstattet.",
+        "fr": "Chez l&#39;Enchanteur, vous pouvez enchanter et améliorer des objets à l&#39;aide des livres d&#39;enchantement que vous avez collectés.<br><br>En faisant progresser l&#39;Enchanteur avec des éclats d&#39;écho, vous pouvez aussi améliorer les enchantements de vos objets en échange d&#39;éclats d&#39;écho et de points d&#39;enchantement.<br><br>Vous pouvez utiliser le même livre d&#39;enchantement sur plusieurs objets, et si vous désenchantez un objet, vos points d&#39;enchantement sont remboursés.",
+        "es": "Con el forjaembrujos puedes encantar y mejorar objetos usando los libros encantados que hayas reunido.<br><br>Al subir de nivel al forjaembrujos con fragmentos resonantes, también puedes mejorar los encantamientos de tus objetos a cambio de fragmentos resonantes y puntos de encantamiento.<br><br>Puedes usar el mismo libro encantado para varios objetos. Si desencantas un objeto, recuperarás los puntos de encantamiento.",
+        "it": "Dal fabbro incantatore puoi incantare e migliorare gli oggetti con i libri degli incantesimi ottenuti.<br><br>Facendo salire di livello il fabbro incantatore con le schegge di eco, potrai inoltre potenziare gli incantesimi sui tuoi oggetti spendendo punti incantesimo e schegge di eco.<br><br>Puoi usare lo stesso libro degli incantesimi su più oggetti e, se decidi di disincantarne uno, i punti incantesimo ti verranno restituiti.",
+        "pt": "No Magífice, você pode encantar e melhorar itens com Livros de Encantamentos coletados.<br><br> Ao aumentar o nível do Magífice com Fragmentos de Eco, você também pode melhorar os encantamentos dos seus itens em troca de Pontos de Encantamento e Fragmentos de Eco.<br><br>É possível usar o mesmo Livro de Encantamentos em vários itens. Se você remover o encantamento de um item, os Pontos de Encantamento serão devolvidos.",
+        "ru": "У чарокузнеца можно зачаровывать и улучшать предметы с помощью собранных книг зачарований.<br><br>Повышая уровень чарокузнеца с помощью осколков эха, вы также можете улучшать зачарования на предметах в обмен на осколки эха и очки зачарования.<br><br>Одну и ту же книгу зачарований можно использовать для нескольких предметов. При снятии чар очки зачарования возвращаются.",
+        "pl": "U zaklinacza możesz zaklinać i ulepszać przedmioty przy użyciu zebranych ksiąg zaklinania. <br><br>Po podniesieniu poziomu zaklinacza za pomocą odłamków echa możesz też ulepszać zaklęcia na swoich przedmiotach w zamian za odłamki i punkty zaklęć. <br><br>Możesz używać tej samej księgi zaklinania na kilku przedmiotach, a jeśli zdejmiesz zaklęcie z przedmiotu, otrzymasz zwrot punktów zaklęć.",
+        "nl": "Bij de betoveringssmid kun je items betoveren en verbeteren met de betoveringsboeken die je hebt verzameld.<br><br>Door de betoveringssmid te upgraden met echoscherven, kun je ook de betoveringen op je items verbeteren in ruil voor echoscherven en betoveringspunten.<br><br>Je kunt hetzelfde betoveringsboek op meerdere items gebruiken. Als je de betovering op een item verbreekt, worden je betoveringspunten teruggezet.",
+        "sv": "Hos förtrollningssmeden kan du förtrolla och förbättra föremål genom att använda förtrollningsböckerna som du samlat in.<br><br>Om du höjer nivån på förtrollningssmeden med ekoskärvor kan du även uppgradera förtrollningarna på dina föremål i utbyte mot ekoskärvor och förtrollningspoäng.<br><br>Du kan använda samma förtrollningsbok på flera föremål och om du tar bort förtrollningen från ett föremål återbetalas dina förtrollningspoäng.",
+        "tr": "Büyü Ustasında, topladığın büyü kitaplarını kullanarak eşyalarını büyüleyebilir ve iyileştirebilirsin.<br><br>Yankı Parçaları ile Büyü Ustasının seviyesini yükselterek Yankı Parçaları ve Büyü Puanı karşılığında eşyalarının üzerindeki büyüleri de yükseltebilirsin.<br><br>Aynı büyü kitabını birden fazla eşya üzerinde kullanabilirsin ve eşyanın üzerindeki büyüyü kaldırdığında büyü puanların iade edilir.",
+        "uk": "У коваля-чарівника можна зачарувати й покращити предмети, використавши зібрані книги чарів.<br><br>Підвищуючи рівень коваля-чарівника за допомогою ехових уламків, ви також можете покращити чари на своїх предметах в обмін на ехові уламки й очки чарів.<br><br>Ви можете використовувати ту саму книгу чарів для декількох предметів. Якщо ви знімете чари з предмета, ваші очки чарів повернуться."
+      },
+      "untranslated": []
+    },
+    "enchantmentPointsTutorial": {
+      "html": {
+        "zh": "附魔點數可用來在附魔匠處為你的物品附魔。<br><br>每次升級時，你都會獲得一點附魔點數；如果解除物品附魔或分解物品，已使用的附魔點數會退還。",
+        "zh-hans": "在附魔匠处为物品附魔时需要使用附魔点数。<br><br>每次升级会获得一个附魔点数，物品被祛魔或拆解后，使用的附魔点数将会返还。",
+        "en": "Enchantment points are used to enchant your items at the Enchantsmith. <br><br>You earn one enchantment point each time you level up, and any used enchantment point will be refunded if the item is disenchanted or salvaged.",
+        "ja": "エンチャントポイントは、エンチャントスミスの店でアイテムにエンチャントを付与する際に使用します。<br><br>レベルが上がるたびに 1 エンチャントポイントを獲得し、アイテムのエンチャントを解除したりサルベージを行ったりすると使用したエンチャントポイントが帰ってきます。",
+        "ko": "마법 부여 포인트는 마법 부여사가 아이템에 마법을 부여하는 데 사용됩니다. <br><br>레벨 상승 시 마법 부여 포인트 1개를 획득하며, 사용한 마법 부여 포인트는 아이템의 마법 부여를 해제하거나 분해하면 반환됩니다.",
+        "de": "Mit Verzauberungspunkten kannst du beim Zauberschmied deine Gegenstände verzaubern. <br><br>Bei jedem Levelaufstieg erhältst du einen Verzauberungspunkt und alle bereits genutzten Verzauberungspunkte werden rückerstattet, wenn der Gegenstand entzaubert oder zerlegt wird.",
+        "fr": "Les points d&#39;enchantement servent à enchanter vos objets chez l&#39;Enchanteur. <br><br>Vous gagnez un point d&#39;enchantement chaque fois que vous gagnez un niveau, et tout point d&#39;enchantement utilisé sera remboursé si l&#39;objet est désenchanté ou recyclé.",
+        "es": "Los puntos de encantamiento se usan para encantar objetos en la morada del forjaembrujos. <br><br>Ganas un punto de encantamiento cada vez que subes de nivel. Los puntos de encantamiento usados se recuperan si el objeto se desencanta o se desmonta.",
+        "it": "I punti incantesimo servono a incantare gli oggetti dal fabbro incantatore.<br><br>Ottieni un punto incantesimo ogni volta che sali di livello. Quando disincanti o smantelli un oggetto, ti vengono restituiti eventuali punti incantesimo usati.",
+        "pt": "Pontos de Encantamento servem para encantar itens no Magífice. <br><br>Você recebe um Ponto de Encantamento ao subir de nível. Se o item tiver seu encantamento removido ou for recuperado, o Ponto de Encantamento será devolvido.",
+        "ru": "Очки зачарования используются для зачаровывания предметов у чарокузнеца.<br><br>Вы получаете одно очко зачарования за каждый новый уровень. Потраченные очки возвращаются, если снять чары с предмета или разобрать его.",
+        "pl": "Punkty zaklęć służą do zaklinania przedmiotów u zaklinacza. <br><br>Z każdym nowym poziomem zyskujesz punkt zaklęć, a już wykorzystane punkty zostają zwrócone, gdy zdejmiesz zaklęcie z przedmiotu lub go rozbijesz.",
+        "nl": "Betoveringspunten gebruik je om je voorwerpen te betoveren bij de betoveringssmid. <br><br>Telkens als je een niveau hoger komt, verdien je één betoveringspunt. Als het voorwerp wordt teruggewonnen of de betovering wordt opgeheven, krijg een gebruikt betoveringspunt weer terug.",
+        "sv": "Förtrollningspoäng används för att förtrolla dina föremål hos förtrollningssmeden. <br><br>Du får en förtrollningspoäng varje gång du höjer din nivå. Alla förtrollningspoäng som används återbetalas om föremålet förtrollas eller återvinns.",
+        "tr": "Büyü puanları, Büyü Ustasında eşyalarını büyülemek için kullanılır. <br><br>Her seviye atladığında bir büyü puanı kazanırsın ve kullandığın tüm büyü puanları, eşyanın büyüsünü kaldırdığında ya da eşya hurdaya ayrıldığında iade edilir.",
+        "uk": "Очки чарів використовуються для зачаровування предметів у коваля-чарівника.<br><br>Ви отримуєте одне очко чарів щоразу, коли підвищуєте рівень. Використані очки чарів повертаються, якщо предмет перероблено або з нього знято чари."
+      },
+      "untranslated": []
+    },
+    "echoShardsTutorial": {
+      "html": {
+        "zh": "完成地下城與裂隙、擊敗頭目，以及參與靈魂風暴，都能夠獲得回聲碎片。<br><br>回聲碎片可用來提升英雄港商人的等級，擴充他們的功能，也是在物品上附魔的必要材料。<br><br>由於碎片很重，你最多只能攜帶 100 枚回聲碎片。",
+        "zh-hans": "完成地牢和裂隙、击败头目以及参与灵魂风暴都能获得回响碎片。<br><br>回响碎片可用于提升勇者港湾中的商贩等级，进而扩展其功能，同时也是物品附魔的必需材料。<br><br>回响碎片很重，你最多只能携带 100 个。",
+        "en": "You can obtain Echo Shards by completing Dungeons and Rifts, defeating Bosses and participating in Soul Storms. <br><br>Echo Shards can be used to level up Vendors in Brave Haven in order to expand their functionality and are needed to enchant items. <br><br>Since they are so heavy, you can carry a maximum of 100 Echo Shards.",
+        "ja": "残響のかけらは、ダンジョンや亀裂のクリア、ボスの撃破、ソウルストームへの参加によって入手することができます。<br><br>残響のかけらはブレイブヘイブンの商人や職人たちをレベルアップさせて機能を拡張したり、アイテムにエンチャントを付与したりする際に必要となります。<br><br>かなりの重量があるため、最大で 100 個までしか持ち歩けません。",
+        "ko": "에코 조각은 던전과 균열을 완료하거나, 보스를 처치하거나, 영혼 폭풍에 참여해 획득할 수 있습니다. <br><br>에코 조각은 용사의 안식처에 있는 상인의 레벨을 올려 그 기능을 확장하거나, 아이템에 마법을 부여할 때 필요합니다.<br><br>에코 조각은 매우 무겁기 때문에, 최대 100개만 소지할 수 있습니다.",
+        "de": "Du kannst Echoscherben erhalten, indem du Verliese und Risse abschließt, Bosse besiegst und an Seelenstürmen teilnimmst. <br><br>Mit Echoscherben können Händler in Tapferkeitshafen verbessert werden, um ihre Funktionalität zu erweitern. Außerdem brauchst du Echoscherben zum Verzaubern von Gegenständen.<br><br>Da sie so schwer sind, kannst du höchstens 100 Echoscherben tragen.",
+        "fr": "Vous pouvez obtenir des éclats d&#39;écho en terminant des donjons et des failles, en terrassant des boss et en participant à des Tempêtes d&#39;âmes. <br><br>Les éclats d&#39;écho permettent d&#39;améliorer les marchands au Havre des Braves afin d&#39;augmenter leurs fonctionnalités et sont nécessaires pour enchanter les objets.<br><br>Vu leur poids, vous ne pouvez en transporter qu&#39;un maximum de 100.",
+        "es": "Puedes conseguir fragmentos resonantes explorando mazmorras y grietas, derrotando a jefes y participando en tormentas de almas. <br><br>Puedes usarlos para subir de nivel a los vendedores del Refugio de los valientes y ampliar sus funciones, así como para encantar objetos. <br><br>Como los fragmentos resonantes pesan mucho, solo puedes llevar un máximo de 100.",
+        "it": "Puoi ottenere schegge di eco completando segrete e varchi, sconfiggendo i boss e partecipando alle tempeste di anime. <br><br>Le schegge di eco servono a far salire di livello i mercanti nel Rifugio dei valorosi per espanderne le funzioni e sono necessarie per incantare gli oggetti. <br><br>Dato il loro peso elevato, puoi trasportare un massimo di 100 schegge di eco.",
+        "pt": "Você pode obter Fragmentos de Eco ao concluir Masmorras e Fendas, derrotar Chefes e participar de Tempestades da Alma. <br><br>Os Fragmentos de Eco podem ser usados para subir o nível dos Vendedores no Refúgio dos Corajosos, expandindo suas funcionalidades, e também são necessários para encantar itens.<br><br>Como são muito pesados, você pode carregar no máximo 100 Fragmentos de Eco.",
+        "ru": "Осколки эха можно получить за прохождение подземелий и разломов, победу над боссами и участие в бурях душ.<br><br>Осколки эха нужны, чтобы зачаровывать предметы и повышать уровень торговцев в Пристанище бравых, что позволяет улучшить их ассортимент и услуги.<br><br>Осколки эха очень тяжелые, поэтому с собой можно носить не более 100 штук.",
+        "pl": "Odłamki echa możesz otrzymać za przechodzenie podziemi i szczelin, pokonywanie bossów oraz udział w burzach dusz. <br><br>Mogą one posłużyć do podnoszenia poziomu handlarzy w Siedlisku Śmiałków, co rozszerza ich usługi, a także do zaklinania przedmiotów. <br><br>Są niezmiernie ciężkie, możesz więc nosić przy sobie tylko 100 odłamków echa.",
+        "nl": "Je kunt echoscherven verkrijgen door kerkers en scheuren te voltooien, bazen te verslaan en deel te nemen aan zielenstormen. <br><br>Echoscherven kunnen worden gebruikt om het niveau van verkopers in Dapperenhaven te verhogen om hun functionaliteit uit te breiden. Ze zijn ook nodig om items te betoveren.<br><br>Omdat ze zo zwaar zijn, kun je maar 100 echoscherven dragen.",
+        "sv": "Du kan få ekoskärvor genom att slutföra monstergrottor och revor, besegra bossar och delta i själsstormar. <br><br>Ekoskärvorna kan användas för att höja nivån på försäljarna i Djärvhamn och utöka deras funktioner. Du behöver dem också för att förtrolla föremål. <br><br>Eftersom de är så tunga kan du som mest bära 100 ekoskärvor.",
+        "tr": "Yankı Parçalarını Zindanları ve Yarıkları tamamlayarak, Boss&#39;ları yenerek ve Ruh Fırtınalarına katılarak elde edebilirsin. <br><br>Yankı Parçaları, Yiğitler Sığınağı&#39;ndaki Satıcıların işlevlerini genişletmek için seviyelerini yükseltmede kullanılır ve eşyaları büyülemek için gereklidir. <br><br>Çok ağır oldukları için en fazla 100 Yankı Parçası taşıyabilirsin.",
+        "uk": "Ехові уламки можна отримати, проходячи підземелля і розломи, перемагаючи босів і беручи участь у штормах душ.<br><br>Їх можна використати, щоб підвищити рівень продавців у Прихистку відважних і розширити їхній функціонал, а також щоб зачарувати предмети.<br><br>Оскільки ехові уламки важкі, у вас може бути максимум 100 штук."
+      },
+      "untranslated": []
+    },
+    "levelingTitle": {
+      "html": {
+        "zh": "升級",
+        "zh-hans": "等级提升",
+        "en": "Leveling up",
+        "ja": "レベルアップ",
+        "ko": "레벨 상승",
+        "de": "Levelaufstieg",
+        "fr": "Monter de niveau",
+        "es": "Subida de nivel",
+        "it": "Salire di livello",
+        "pt": "Novo nível",
+        "ru": "Повышение уровня",
+        "pl": "Podnoszenie poziomu",
+        "nl": "Niveau verhogen",
+        "sv": "Höjer din nivå",
+        "tr": "Seviye Atlama",
+        "uk": "Підвищення рівня"
+      },
+      "untranslated": []
+    },
+    "levelingTutorial": {
+      "html": {
+        "zh": "擊敗生物和完成任務可以獲得經驗值。<br><br>取得更多經驗值後，你就會升級並變得更強大，但小心，怪物也會跟著變強！<br><br>每次升級時，你都會獲得 1 點附魔點數，並提高找到稀有且更強力物品的機率。<br><br>達到等級 5 時，會解鎖第二個神器欄位。<br><br>達到等級 10 時，會解鎖第三個神器欄位。",
+        "zh-hans": "击败怪物和完成任务可获得经验值。<br><br>随着经验值的增加，你会不断升级并变得更加强大。但请注意，生物也会随之变强！ <br><br>每次升级，你都将获得 1 个附魔点数，也更容易找到稀有且更强力的物品。<br><br>升至 5 级时，将解锁第二个法器栏位。<br><br>升至 10 级时，将解锁第三个法器栏位。",
+        "en": "You gain XP by defeating mobs and completing quests. <br><br>As you gain more XP, you level up and become more powerful - but beware, so do mobs! <br><br>Every level up, you&#39;re rewarded with 1 Enchantment Point and your chance of finding rare and more powerful items increases. <br><br>At level 5, a second artifact slot is unlocked. <br><br>At level 10, a third artifact slot is unlocked.",
+        "ja": "モブを倒したりクエストをクリアしたりすることで、経験値を獲得することができます。<br><br>経験値を獲得することでレベルが上がり、より強くなっていきますが、モブも同様に強くなっていくので注意しましょう。<br><br>レベルアップするたびに 1 エンチャントポイントが手に入り、より強力なレアアイテムを発見する確率が上昇します。<br><br>レベル 5 に到達すると、2 つ目のアーティファクトスロットがアンロックされます。<br><br>レベル 10 では、3 つ目のアーティファクトスロットがアンロックされます。",
+        "ko": "몹을 처치하고 퀘스트를 완료하면 XP를 획득합니다. <br><br>더 많은 XP를 획득하면 레벨이 상승하고 더욱 강해집니다. 하지만 주의하세요, 몹들도 마찬가지입니다! <br><br>레벨이 상승할 때마다 마법 부여 포인트 1개를 보상으로 받으며, 희귀하고 더 강력한 아이템을 발견할 확률이 증가합니다. <br><br>5레벨에는 두 번째 유물 슬롯이 잠금 해제됩니다.<br><br>10레벨에는 세 번째 유물 슬롯이 잠금 해제됩니다.",
+        "de": "Du sammelst Erfahrungspunkte, wenn du Kreaturen besiegst und Quests abschließt. <br><br>Wenn du genug Erfahrungspunkte gesammelt hast, wird dein Level erhöht und du wirst stärker. Aber pass auf, genauso ist es auch mit den Kreaturen! <br><br>Bei jedem Levelaufstieg wirst du mit 1 Verzauberungspunkt belohnt und deine Chance, seltene und mächtigere Gegenstände zu finden, steigt. <br><br>Auf Level 5 wird ein zweiter Artefakt-Slot freigeschaltet. <br><br>Auf Level 10 wird ein dritter Artefakt-Slot freigeschaltet.",
+        "fr": "Vous gagnez de l&#39;EXP en battant des créatures et en terminant des quêtes. <br><br>Plus vous gagnez d&#39;EXP, plus vous montez de niveau et devenez puissant, mais attention : les créatures aussi ! <br><br>À chaque niveau gagné, vous recevez 1 point d&#39;enchantement et vos chances de trouver des objets rares et plus puissants augmentent. <br><br>Au niveau 5, un deuxième emplacement d&#39;artefact est débloqué. <br><br>Au niveau 10, un troisième emplacement d&#39;artefact est débloqué.",
+        "es": "Ganas experiencia al derrotar a criaturas y completar misiones. <br><br>Cuando acumulas suficiente experiencia, tu personaje sube de nivel y te vuelves más fuerte, pero ten cuidado: esto también se aplica a las criaturas. <br><br>Cada vez que subes de nivel, obtienes 1 punto de encantamiento y aumentas tus posibilidades de encontrar objetos raros y más poderosos. <br><br>En el nivel 5 desbloqueas la segunda ranura para artefactos. <br><br>Y en el nivel 10, la tercera.",
+        "it": "Sconfiggi mob e completa missioni per ottenere PE. <br><br>Quando ottieni un certo numero di PE, salirai di livello e diventerai più potente... ma fai attenzione, anche i mob saranno più forti! <br><br>A ogni livello, riceverai 1 punto incantesimo e un aumento della probabilità di trovare oggetti rari e più potenti. <br><br>Al livello 5, si sblocca il secondo slot per gli artefatti. <br><br>Al livello 10, si sblocca il terzo slot per gli artefatti.",
+        "pt": "Derrote criaturas e conclua missões para receber EXP. <br><br>À medida que recebe mais EXP, você sobre de nível e se torna mais poderoso, e as criaturas também, então tenha cuidado! <br><br>Cada novo nível concede 1 Ponto de Encantamento e aumenta a chance de obtenção de itens raros e mais poderosos. <br><br>No nível 5, é desbloqueado o segundo espaço de Artefato. <br><br>No nível 10, o terceiro.",
+        "ru": "Получайте опыт (XP), побеждая мобов и выполняя квесты.<br><br>С получением XP растет уровень, а вместе с ним и мощь — но будьте осторожны: мобы тоже становятся сильнее!<br><br>За каждый новый уровень вы получаете 1 очко зачарования, а шанс найти редкие и более мощные предметы возрастает.<br><br>На 5-м уровне открывается вторая ячейка для артефакта.<br><br>На 10-м уровне открывается третья ячейка для артефакта.",
+        "pl": "Pokonywanie mobów i wykonywanie misji zapewnia ci PD. <br><br>Po zebraniu odpowiedniej liczby PD twoja postać zyskuje na mocy, podobnie jak moby! <br><br>Z każdym nowym poziomem zdobywasz 1 punkt zaklęcia i zyskujesz szansę znalezienia rzadkich, potężniejszych przedmiotów. <br><br>Na poziomie 5 odblokowujesz drugie miejsce na artefakt. <br><br>Na poziomie 10 odblokowujesz trzecie.",
+        "nl": "Je verdient XP door vijanden te verslaan en missies / opdrachten te voltooien. <br><br>Naarmate je meer XP verdient, stijg je in niveau en word je sterker, maar pas op. Dat geldt ook voor de vijanden! <br><br>Bij elke niveaustijging krijg je 1 betoveringspunt en wordt de kans groter dat je zeldzame en krachtigere voorwerpen vindt. <br><br>Op niveau 5 wordt een tweede artefactslot ontgrendeld. <br><br>Op niveau 10 wordt een derde artefactslot ontgrendeld.",
+        "sv": "Du får XP när du besegrar varelser och slutför uppdrag. <br><br>När du får mer XP höjer du din nivå och blir ännu starkare – men kom ihåg att varelserna också blir det! <br><br>Varje gång du höjer din nivå får du 1 förtrollningspoäng och chansen att hitta sällsynta och mer kraftfulla föremål ökar. <br><br>På nivå 5 blir en andra artefaktplats upplåst. <br><br>På nivå 10 blir en tredje artefaktplats upplåst.",
+        "tr": "Canlıları yendiğinde ve görevleri tamamladığında XP kazanırsın. <br><br>Daha fazla XP kazandıkça seviye atlarsın ve daha güçlü olursun. Ancak dikkatli ol, bu canlılar için de geçerli! <br><br>Her seviye atladığında 1 Büyü Puanı kazanırsın. Nadir ve daha güçlü eşya bulma şansın da artar. <br><br>5. seviyede ikinci bir eser yuvasının kilidi açılır. <br><br>10. seviyede ise üçüncü bir eser yuvasının kilidi açılır.",
+        "uk": "Ви отримуєте досвід, перемагаючи мобів і виконуючи завдання.<br><br>Коли ви набираєте достатньо досвіду, рівень персонажа підвищується і ви стаєте сильнішими, але будьте обережні — це стосується і мобів.<br><br>Після кожного підвищення рівня ви отримуєте 1 очко чарів і підвищуєте свої шанси знайти рідкісні й сильніші предмети.<br><br>На рівні 5 ви розблокуєте другий слот для артефактів.<br><br>На рівні 10 розблоковується третій слот для артефактів."
+      },
+      "untranslated": []
+    }
+  },
+  "caps": {
+    "emeralds": 99999,
+    "echoShards": 100,
+    "level": 100
+  },
+  "vendors": [
+    {
+      "id": "merchant",
+      "levels": [
+        {
+          "level": 2,
+          "cost": 10
+        },
+        {
+          "level": 3,
+          "cost": 15
+        }
+      ]
+    },
+    {
+      "id": "blacksmith",
+      "levels": [
+        {
+          "level": 2,
+          "cost": 20
+        },
+        {
+          "level": 3,
+          "cost": 40
+        }
+      ]
+    },
+    {
+      "id": "enchantsmith",
+      "levels": [
+        {
+          "level": 2,
+          "cost": 30
+        },
+        {
+          "level": 3,
+          "cost": 60
+        }
+      ]
+    }
+  ],
+  "merchant": {
+    "slotsPerRarity": 3,
+    "refreshCost": 3,
+    "basePrices": [
+      {
+        "gear": "melee",
+        "price": 20
+      },
+      {
+        "gear": "ranged",
+        "price": 20
+      },
+      {
+        "gear": "helmet",
+        "price": 20
+      },
+      {
+        "gear": "chest",
+        "price": 20
+      },
+      {
+        "gear": "leggings",
+        "price": 20
+      },
+      {
+        "gear": "boots",
+        "price": 20
+      },
+      {
+        "gear": "artifact",
+        "price": 20
+      }
+    ],
+    "multipliers": [
+      {
+        "rarity": "rare",
+        "value": 2
+      },
+      {
+        "rarity": "special",
+        "value": 3
+      },
+      {
+        "rarity": "unique",
+        "value": 4
+      }
+    ]
+  },
+  "enchanting": {
+    "costs": [
+      {
+        "rarity": "common",
+        "points": 1,
+        "pointsPerLevel": 1,
+        "shards": 1,
+        "shardsPerLevel": 0
+      },
+      {
+        "rarity": "rare",
+        "points": 1,
+        "pointsPerLevel": 2,
+        "shards": 1,
+        "shardsPerLevel": 0
+      },
+      {
+        "rarity": "special",
+        "points": 2,
+        "pointsPerLevel": 2,
+        "shards": 1,
+        "shardsPerLevel": 0
+      },
+      {
+        "rarity": "unique",
+        "points": 3,
+        "pointsPerLevel": 2,
+        "shards": 1,
+        "shardsPerLevel": 0
+      }
+    ],
+    "maxLevel": 3
+  },
+  "rarity": {
+    "tiers": [
+      {
+        "rarity": "common",
+        "rerollableEffects": 0,
+        "stormExtraEffects": null,
+        "itemPowerOffset": -2
+      },
+      {
+        "rarity": "rare",
+        "rerollableEffects": 1,
+        "stormExtraEffects": 1,
+        "itemPowerOffset": -2
+      },
+      {
+        "rarity": "special",
+        "rerollableEffects": 2,
+        "stormExtraEffects": 1,
+        "itemPowerOffset": -1
+      },
+      {
+        "rarity": "unique",
+        "rerollableEffects": 1,
+        "stormExtraEffects": 1,
+        "itemPowerOffset": 0
+      }
+    ],
+    "drops": [
+      {
+        "source": "default",
+        "weights": [
+          {
+            "rarity": "common",
+            "weight": 50,
+            "operation": "set"
+          },
+          {
+            "rarity": "rare",
+            "weight": 25,
+            "operation": "set"
+          },
+          {
+            "rarity": "special",
+            "weight": 20,
+            "operation": "set"
+          },
+          {
+            "rarity": "unique",
+            "weight": 5,
+            "operation": "set"
+          }
+        ]
+      },
+      {
+        "source": "boss",
+        "weights": [
+          {
+            "rarity": "common",
+            "weight": 0,
+            "operation": "multiply"
+          },
+          {
+            "rarity": "rare",
+            "weight": 30,
+            "operation": "set"
+          },
+          {
+            "rarity": "special",
+            "weight": 20,
+            "operation": "set"
+          },
+          {
+            "rarity": "unique",
+            "weight": 10,
+            "operation": "set"
+          }
+        ]
+      }
+    ]
+  },
+  "secretTalismans": {
+    "completion": {
+      "html": {
+        "zh": "你已收集到所有秘密護符！",
+        "zh-hans": "你已集齐所有秘密护身符！",
+        "en": "You have collected all the secret Talismans!",
+        "ja": "秘密のタリスマンをすべて収集しました！<br>",
+        "ko": "비밀 부적을 모두 수집했습니다!<br>",
+        "de": "Du hast alle Geheimtalismane gesammelt!<br>",
+        "fr": "Vous avez récupéré tous les talismans secrets !",
+        "es": "¡Has recogido todos los talismanes secretos!<br>",
+        "it": "Hai ottenuto tutti i talismani segreti!",
+        "pt": "Você coletou todos os Talismãs secretos!<br>",
+        "ru": "Вы собрали все тайные талисманы!<br>",
+        "pl": "Zebrano wszystkie sekretne talizmany!<br>",
+        "nl": "Je hebt alle geheime talismannen verzameld!",
+        "sv": "Du har samlat in alla hemliga talismaner!<br>",
+        "tr": "Gizli Tılsımların hepsini topladın!",
+        "uk": "Ви зібрали всі секретні талісмани!"
+      },
+      "untranslated": []
+    },
+    "door": {
+      "html": {
+        "zh": "有一道暗門在世界中開啟。",
+        "zh-hans": "秘门已在世界中开启。",
+        "en": "A secret door has opened in the world.",
+        "ja": "ワールドで秘密の扉が開かれました。",
+        "ko": "세계에 비밀 문이 열렸습니다.",
+        "de": "In der Welt hat sich eine Geheimtür geöffnet.",
+        "fr": "Une porte secrète s&#39;est ouverte dans le monde.",
+        "es": "Se ha abierto una puerta secreta en el mundo.",
+        "it": "Nel mondo si è aperta una porta segreta.",
+        "pt": "Abriu uma porta secreta no mundo.",
+        "ru": "В мире открылась тайная дверь.",
+        "pl": "W świecie otwierają się sekretne drzwi.",
+        "nl": "Er is een geheime deur geopend in de wereld.",
+        "sv": "En hemlig dörr har öppnats i världen.",
+        "tr": "Dünyada gizli bir geçit açıldı.",
+        "uk": "У світі відкрилися потайні двері."
+      },
+      "untranslated": []
+    },
+    "talismans": [
+      {
+        "slug": "double-drop",
+        "chest": true,
+        "quests": []
+      },
+      {
+        "slug": "potion-cooldown",
+        "chest": true,
+        "quests": []
+      },
+      {
+        "slug": "soul-capacity",
+        "chest": true,
+        "quests": []
+      },
+      {
+        "slug": "emerald-increase",
+        "chest": true,
+        "quests": []
+      },
+      {
+        "slug": "plummeting",
+        "chest": true,
+        "quests": []
+      },
+      {
+        "slug": "firing-emeralds",
+        "chest": true,
+        "quests": []
+      },
+      {
+        "slug": "speed-increment",
+        "chest": true,
+        "quests": []
+      },
+      {
+        "slug": "ranged-buff",
+        "chest": true,
+        "quests": [
+          {
+            "id": "CA04_BR",
+            "name": null
+          },
+          {
+            "id": "CA05_BR",
+            "name": {
+              "html": {
+                "zh": "復活的至高附魔師",
+                "zh-hans": "复活的首席附魔师",
+                "en": "The Prime Enchanter Revived",
+                "ja": "復活のプライム・エンチャンター",
+                "ko": "부활한 프라임 마법 부여사",
+                "de": "Auferstehung des Obersten Zauberers",
+                "fr": "L&#39;Enchanteur Primordial ressuscité",
+                "es": "El Hechicero supremo revivido",
+                "it": "L&#39;incantatore supremo rianimato",
+                "pt": "O Encantador Supremo Ressuscitado",
+                "ru": "Главный чародей возродился",
+                "pl": "Ożywiony główny zaklinacz",
+                "nl": "De Aartsbezweerder is weer tot leven gewekt",
+                "sv": "Huvudförtrollaren återupplivad",
+                "tr": "Baş Büyücü Yeniden Canlandı",
+                "uk": "Відродження головного чарівника"
+              },
+              "untranslated": []
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "stages": [
+    {
+      "id": "Town",
+      "level": 1,
+      "name": {
+        "html": {
+          "zh": "英雄港",
+          "zh-hans": "勇者港湾",
+          "en": "Brave Haven",
+          "ja": "ブレイブヘイブン",
+          "ko": "용사의 안식처",
+          "de": "Tapferkeitshafen",
+          "fr": "Havre des Braves",
+          "es": "Refugio de los valientes",
+          "it": "Rifugio dei valorosi",
+          "pt": "Refúgio dos Corajosos",
+          "ru": "Пристанище бравых",
+          "pl": "Siedlisko Śmiałków",
+          "nl": "Dapperenhaven",
+          "sv": "Djärvhamn",
+          "tr": "Yiğitler Sığınağı",
+          "uk": "Прихисток відважних"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "PlainsStart",
+      "level": 2,
+      "name": {
+        "html": {
+          "zh": "蜂巢原野",
+          "zh-hans": "蜜脾原野",
+          "en": "Honeycomb Fields",
+          "ja": "ハニカム畑",
+          "ko": "벌집 들판",
+          "de": "Honigwabenfelder",
+          "fr": "Champs de miel",
+          "es": "Campos de panales",
+          "it": "Campi del favo",
+          "pt": "Campos de Favos de Mel",
+          "ru": "Поля медовых сот",
+          "pl": "Miodowe Pola",
+          "nl": "Honingraatvelden",
+          "sv": "Bikupefälten",
+          "tr": "Bal Peteği Tarlaları",
+          "uk": "Стільникові поля"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "ForestStart",
+      "level": 6,
+      "name": {
+        "html": {
+          "zh": "咆哮森林",
+          "zh-hans": "咆哮树林",
+          "en": "Howling Woods",
+          "ja": "遠吠えの森",
+          "ko": "울부짖는 숲",
+          "de": "Heulwälder",
+          "fr": "Bois hurlant",
+          "es": "Bosques aullantes",
+          "it": "Boschi ululanti",
+          "pt": "Mata Uivante",
+          "ru": "Воющие чащи",
+          "pl": "Wyjąca Knieja",
+          "nl": "Huilende Woud",
+          "sv": "Ylande skogarna",
+          "tr": "Uluyan Orman",
+          "uk": "Ліс завивань"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "DeepDarkStart",
+      "level": 14,
+      "name": {
+        "html": {
+          "zh": "深淵",
+          "zh-hans": "深暗之域",
+          "en": "The Deep Dark",
+          "ja": "ディープダーク",
+          "ko": "깊은 어둠",
+          "de": "Tiefe Dunkelheit",
+          "fr": "Les Abîmes",
+          "es": "Oscuridad profunda",
+          "it": "L&#39;Abisso oscuro",
+          "pt": "Profundezas Escuras",
+          "ru": "Тёмные подземелья",
+          "pl": "Mroczna Otchłań",
+          "nl": "De Diepe Duisternis",
+          "sv": "Djupa mörkret",
+          "tr": "Derin Karanlık",
+          "uk": "Темні глибини"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "PlainsA2Start",
+      "level": 21,
+      "name": {
+        "html": {
+          "zh": "多雨平原",
+          "zh-hans": "多雨平原",
+          "en": "Rainy Plains",
+          "ja": "雨降りの平原",
+          "ko": "비의 평원",
+          "de": "Regenebene",
+          "fr": "Plaines pluvieuses",
+          "es": "Llanura lluviosa",
+          "it": "Pianure piovose",
+          "pt": "Planícies Chuvosas",
+          "ru": "Дождливые равнины",
+          "pl": "Deszczowe Równiny",
+          "nl": "Regenachtige Vlakten",
+          "sv": "Regniga slätterna",
+          "tr": "Yağmurlu Ovalar",
+          "uk": "Дощові рівнини"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "DesertStart",
+      "level": 26,
+      "name": {
+        "html": {
+          "zh": "冰封高地",
+          "zh-hans": "冰封高地",
+          "en": "Frozen Highlands",
+          "ja": "凍てつく高地",
+          "ko": "얼어붙은 고원",
+          "de": "Eishochland",
+          "fr": "Hautes-terres gelées",
+          "es": "Tierras altas heladas",
+          "it": "Alture gelate",
+          "pt": "Terras Altas Congeladas",
+          "ru": "Ледяные нагорья",
+          "pl": "Zmrożone Wyżyny",
+          "nl": "Bevroren Hooglanden",
+          "sv": "Frusna högländerna",
+          "tr": "Donmuş Dağlıklar",
+          "uk": "Крижане високогір’я"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "MeadowA1Start",
+      "level": 33,
+      "name": {
+        "html": {
+          "zh": "吟唱者草甸",
+          "zh-hans": "吟唱者草甸",
+          "en": "Singer&#39;s Meadow",
+          "ja": "シンガーの草地",
+          "ko": "싱어의 초원",
+          "de": "Sängerwiese",
+          "fr": "Prairie du chanteur",
+          "es": "Prado del Cantor",
+          "it": "Prateria del cantore",
+          "pt": "Prado do Cantor",
+          "ru": "Певчий луг",
+          "pl": "Łąka Pieśniarza",
+          "nl": "Zangersweide",
+          "sv": "Sångarens äng",
+          "tr": "Şarkıcının Çayırı",
+          "uk": "Лука співака"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "CarapaceStart",
+      "level": 36,
+      "name": {
+        "html": {
+          "zh": "轟鳴蟲殼骸之地",
+          "zh-hans": "轰鸣虫壳地",
+          "en": "Humbler Huskland",
+          "ja": "ハンブラーハスクランド",
+          "ko": "험블러 외피지대",
+          "de": "Demütigerpanzerland",
+          "fr": "Terres desséchées des Fredonneurs",
+          "es": "Yermo de quitinones",
+          "it": "Cimitero dei solenni",
+          "pt": "Cemitério dos Humilhadores",
+          "ru": "Земли кадавров смиренников",
+          "pl": "Step Spokorniaczy",
+          "nl": "Humblerland der overblijfselen",
+          "sv": "Böjarnas skalmarker",
+          "tr": "Humbler Kalıntısı Diyarı",
+          "uk": "Земля оболонок покірника"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "MeadowA2Start",
+      "level": 42,
+      "name": {
+        "html": {
+          "zh": "安眠丘陵",
+          "zh-hans": "安眠丘陵",
+          "en": "Lullaby Hills",
+          "ja": "子守歌の丘",
+          "ko": "자장가 언덕",
+          "de": "Schlafliedhügel",
+          "fr": "Collines de la berceuse",
+          "es": "Colinas del arrullo",
+          "it": "Colline della ninnananna",
+          "pt": "Colinas de Ninar",
+          "ru": "Колыбельные холмы",
+          "pl": "Wzgórza Kołysanek",
+          "nl": "Wiegeliedheuvels",
+          "sv": "Vaggvisornas kullar",
+          "tr": "Ninni Tepeleri",
+          "uk": "Колискові пагорби"
+        },
+        "untranslated": []
+      }
+    },
+    {
+      "id": "DeepDarkA2Start",
+      "level": 45,
+      "name": {
+        "html": {
+          "zh": "深淵",
+          "zh-hans": "深暗之域",
+          "en": "The Deep Dark",
+          "ja": "ディープダーク",
+          "ko": "깊은 어둠",
+          "de": "Tiefe Dunkelheit",
+          "fr": "Les Abîmes",
+          "es": "Oscuridad profunda",
+          "it": "L&#39;Abisso oscuro",
+          "pt": "Profundezas Escuras",
+          "ru": "Тёмные подземелья",
+          "pl": "Mroczna Otchłań",
+          "nl": "De Diepe Duisternis",
+          "sv": "Djupa mörkret",
+          "tr": "Derin Karanlık",
+          "uk": "Темні глибини"
+        },
+        "untranslated": []
+      }
+    }
+  ]
+}
