@@ -58,7 +58,25 @@ export type IssueType =
   | "soul-storm-row-missing"
   | "soul-storm-row-skipped"
   | "soul-storm-value-missing"
-  | "soul-storm-text-fallback";
+  | "soul-storm-text-fallback"
+  | "missing-quest-tables"
+  | "quest-library-invalid"
+  | "quest-skipped"
+  | "quest-text-missing"
+  | "quest-prerequisite-unknown"
+  | "quest-prerequisite-skipped"
+  | "quest-size-unknown"
+  | "quest-spawn-unresolved"
+  | "quest-reward-unmatched"
+  | "quest-reward-empty"
+  | "quest-area-unnamed"
+  | "quest-mob-unlinked"
+  | "missing-guides-tables"
+  | "guides-value-missing"
+  | "guides-text-fallback"
+  | "guides-stage-unnamed"
+  | "guides-talisman-unlinked"
+  | "guides-quest-unnamed";
 
 export interface Issue {
   readonly type: IssueType;

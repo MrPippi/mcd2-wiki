@@ -1,0 +1,78 @@
+/* Quests: the list is a category page (items.css .catalog) of ruled card grids per section; a quest page is a ruled sheet. */
+
+/* List */
+.quests-intro { margin: var(--space-3) 0 0; max-width: 60ch; color: var(--text-2); text-wrap: balance; }
+.quest-sections { display: grid; gap: var(--space-7); min-width: 0; }
+.quest-section .section-title { margin: 0 0 var(--space-4); font-size: 22px; justify-content: flex-start; }
+.quest-group + .quest-group { margin-top: var(--space-5); }
+.quest-region {
+  margin: 0 0 var(--space-2); font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); overflow-wrap: anywhere;
+}
+.quest-grid {
+  list-style: none; margin: 0; padding: 0; display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr));
+  border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);
+}
+.quest-card {
+  min-width: 0; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  animation: rise-in 420ms var(--ease-out) both; animation-delay: calc(min(var(--i, 0), 30) * 18ms);
+}
+.quest-card-link {
+  position: relative; height: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1);
+  padding: var(--space-4) var(--space-3) var(--space-3); color: var(--text); text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+.quest-card-link:hover, .quest-card-link:focus-visible { background: var(--paper) var(--dots); }
+.quest-card-link:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+.quest-step { font-size: var(--fs-mono-s); color: var(--accent); letter-spacing: 0.05em; }
+.quest-card-names { display: flex; flex-direction: column; gap: 2px; min-width: 0; width: 100%; }
+.quest-card-title { font-family: var(--font-display); font-weight: 700; font-size: 16px; line-height: 1.35; overflow-wrap: anywhere; hyphens: auto; }
+.quest-card-alt {
+  max-width: 100%; font-family: var(--font-mono); font-size: var(--fs-mono-s); line-height: 1.3; color: var(--muted);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.quest-card-meta { margin-top: auto; padding-top: var(--space-2); font-size: 13px; color: var(--text-2); overflow-wrap: anywhere; }
+
+/* Quest page */
+.quest-page { min-width: 0; max-width: 960px; overflow-wrap: anywhere; }
+.quest-page .entry-kicker a { color: inherit; }
+.quest-title { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-2) var(--space-4); }
+.quest-title h1 { margin: 0 0 var(--space-2); min-width: 0; font-size: var(--fs-display-m); line-height: 1.15; overflow-wrap: anywhere; }
+.quest-title h1 .alt { display: block; margin-top: var(--space-1); font-family: var(--font-mono); font-size: var(--fs-mono-m); font-weight: 400; color: var(--muted); }
+.quest-title .tag { margin-top: 0.5em; }
+.quest-facts { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-6); margin: var(--space-4) 0 0; padding: var(--space-3) 0; border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule); }
+.quest-facts > div { display: flex; gap: var(--space-2); align-items: baseline; min-width: 0; }
+.quest-facts dt { font-size: 13px; color: var(--muted); }
+.quest-facts dd { margin: 0; font-weight: 600; min-width: 0; }
+.quest-description { margin: var(--space-5) 0 0; }
+.quest-description p, .quest-completed { margin: 0; max-width: 66ch; font-size: 17px; line-height: 1.7; }
+.quest-completed { color: var(--text-2); }
+.quest-page .tag.warn { margin-top: var(--space-2); }
+
+.quest-chain { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--space-4) var(--space-6); margin-top: var(--space-5); }
+.quest-links h2, .quest-reward-block h3 {
+  margin: 0 0 6px; font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted);
+}
+.quest-links ul { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+.quest-links li { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) 10px; padding: 10px var(--space-1); border-bottom: 1px solid var(--rule); min-width: 0; }
+.quest-links a { font-family: var(--font-display); font-weight: 700; overflow-wrap: anywhere; min-width: 0; }
+.quest-links .item-alt { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); min-width: 0; }
+
+.quest-objectives { margin: 0; padding: 0; list-style: none; counter-reset: objective; border-top: 1px solid var(--rule-strong); }
+.quest-objectives li {
+  counter-increment: objective; display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--space-1) var(--space-3);
+  padding: 10px var(--space-1); border-bottom: 1px solid var(--rule); min-width: 0;
+}
+.quest-objectives li::before { content: counter(objective, decimal-leading-zero); font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); }
+.quest-count { font-size: var(--fs-mono-m); color: var(--accent); }
+
+.quest-rewards { display: grid; gap: var(--space-5); }
+.quest-reward-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+.quest-reward { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-2) var(--space-4); padding: var(--space-3) var(--space-1); border-bottom: 1px solid var(--rule); min-width: 0; }
+.quest-reward-items { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-4); min-width: 0; flex: 1 1 260px; }
+.quest-reward-item { display: inline-flex; align-items: center; gap: var(--space-2); font-family: var(--font-display); font-weight: 700; min-width: 0; overflow-wrap: anywhere; }
+.quest-reward-item span { min-width: 0; }
+.quest-reward-text { font-weight: 600; min-width: 0; }
+.quest-reward-tags { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-2); }
+.quest-reward .mob-drop-rule { flex: 1 1 200px; }

@@ -173,4 +173,16 @@ describe("UI translations", () => {
       expect(UI_DICTS[lang].values.soulStormUnverified, lang).not.toEqual(UI_DICTS.en.values.soulStormUnverified);
     }
   });
+
+  it("has every quest key in every language, with its placeholders", () => {
+    const keys = Object.keys(UI_DICTS.zh.values).filter((key) => key.startsWith("quest"));
+    expect(keys).toHaveLength(25);
+    for (const lang of LANGS) {
+      for (const key of [...keys, "sourceRewardOf"]) expect(UI_DICTS[lang].values[key], `${lang}.${key}`).toBeTypeOf("string");
+      expect(plainText(UI_DICTS[lang].values.questAreaDrop ?? ""), lang).toContain("{area}");
+      expect(plainText(UI_DICTS[lang].values.sourceRewardOf ?? ""), lang).toContain("{quest}");
+    }
+    expect(plainText(UI_DICTS.zh.values.quests ?? "")).toBe("任務");
+    expect(plainText(UI_DICTS.en.values.quests ?? "")).toBe("Quests");
+  });
 });

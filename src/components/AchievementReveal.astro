@@ -3,6 +3,8 @@ import type { AchievementCondition } from "../../scripts/extract/achievement-sch
 import { conditionSentence } from "../lib/achievements";
 import { t, type Lang } from "../lib/i18n";
 import { compareLang, htmlLang } from "../lib/lang";
+import { questSlug } from "../../scripts/extract/quest-graph";
+import { findQuest, questHref } from "../lib/quests";
 
 interface Props {
   lang: Lang;
@@ -15,11 +17,13 @@ const alt = compareLang(lang);
 const own = conditionSentence(condition, lang);
 const other = conditionSentence(condition, alt);
 const fellBack = condition.untranslated?.includes(lang) ?? false;
+// A quest or quest-objective condition links to that quest's page when the site publishes it.
+const quest = condition.quest === undefined ? undefined : findQuest(questSlug(condition.quest));
 ---
 <details class="achievement-condition" data-pagefind-ignore>
   <summary><span class="condition-reveal">{t(lang, "revealCondition")}</span></summary>
   <p class="condition-text lang-text">
-    <span class="primary">{own}</span>
+    {quest ? <a class="primary" href={questHref(lang, quest.slug)} data-testid="condition-quest-link">{own}</a> : <span class="primary">{own}</span>}
     {other !== own && <span class="alt" lang={htmlLang(alt)}>{other}</span>}
   </p>
   {fellBack && <span class="tag warn">{t(lang, "untranslated")}</span>}

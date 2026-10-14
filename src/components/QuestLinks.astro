@@ -1,0 +1,30 @@
+---
+import type { Quest } from "../../scripts/extract/quest-schema";
+import type { Lang } from "../lib/i18n";
+import { compareLang, htmlLang } from "../lib/lang";
+import { questHref } from "../lib/quests";
+
+interface Props {
+  lang: Lang;
+  title: string;
+  quests: readonly Quest[];
+  testid: string;
+}
+
+/* Prerequisites or unlocked quests: each a link to its page, with the comparison-language title. */
+const { lang, title, quests, testid } = Astro.props;
+const alt = compareLang(lang);
+---
+{quests.length > 0 && (
+  <div class="quest-links" data-testid={testid}>
+    <h2>{title}</h2>
+    <ul>
+      {quests.map((quest) => (
+        <li>
+          <a href={questHref(lang, quest.slug)}>{quest.title.text[lang]}</a>
+          {quest.title.text[alt] !== quest.title.text[lang] && <span class="item-alt" lang={htmlLang(alt)}>{quest.title.text[alt]}</span>}
+        </li>
+      ))}
+    </ul>
+  </div>
+)}

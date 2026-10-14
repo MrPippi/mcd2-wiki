@@ -4,6 +4,8 @@ import { t, type Lang } from "../lib/i18n";
 import { areaHref, entrySources, groupIsUntranslated, merchantCategoryLabel, nameIsUntranslated, showsAltName } from "../lib/item-source-view";
 import type { ResolvedSource } from "../lib/item-sources";
 import { compareLang, htmlLang } from "../lib/lang";
+import { listParts, templateParts } from "../lib/quest-view";
+import { questHref, rewardQuests } from "../lib/quests";
 import EntrySection from "./EntrySection.astro";
 
 interface Props {
@@ -19,6 +21,8 @@ const showAlt = (source: ResolvedSource) => showsAltName(source, lang);
 // When a whole group fell back to English, one marker on its heading says so instead of one per row.
 const groupTag = (group: readonly ResolvedSource[]) => groupIsUntranslated(group, lang);
 const rowTag = (source: ResolvedSource, group: readonly ResolvedSource[]) => !groupTag(group) && nameIsUntranslated(source, lang);
+// A quest source the quest data ties to its quests reads "Reward of <quest>", each quest linked; otherwise the generic label stays.
+const rewardOf = templateParts(t(lang, "sourceRewardOf"), "quest");
 ---
 {sources && (
   <EntrySection title={t(lang, "itemSources")} testid="item-sources">
@@ -58,16 +62,24 @@ const rowTag = (source: ResolvedSource, group: readonly ResolvedSource[]) => !gr
         <div class="source-group" data-source-kind="quests">
           <h3>{t(lang, "sourceQuests")} {groupTag(sources.quests) && <span class="tag warn">{t(lang, "untranslated")}</span>}</h3>
           <ul>
-            {sources.quests.map((source) => (
+            {sources.quests.map((source) => {
+              const givers = rewardQuests(source.id);
+              return (
               <li>
-                <span class="source-name">{source.name[lang]}</span>
-                {showAlt(source) && <span class="item-alt" lang={htmlLang(alt)}>{source.name[alt]}</span>}
+                {givers.length > 0 ? (
+                  <span class="source-reward-of" data-testid="source-reward-of">
+                    {rewardOf.map((part) => part.kind === "text" ? part.text : listParts(htmlLang(lang), givers.length).map((piece) =>
+                      piece.kind === "text" ? piece.text : <a href={questHref(lang, givers[piece.index].slug)}>{givers[piece.index].title.text[lang]}</a>))}
+                  </span>
+                ) : <span class="source-name">{source.name[lang]}</span>}
+                {givers.length === 0 && showAlt(source) && <span class="item-alt" lang={htmlLang(alt)}>{source.name[alt]}</span>}
                 {source.picks
                   ? <span class="tag" data-testid="picks">{picksText(source.picks)}</span>
                   : <span class="tag" data-testid="guaranteed">{t(lang, "sourceGuaranteed")}</span>}
                 {rowTag(source, sources.quests) && <span class="tag warn">{t(lang, "untranslated")}</span>}
               </li>
-            ))}
+              );
+            })}
           </ul>
         </div>
       )}

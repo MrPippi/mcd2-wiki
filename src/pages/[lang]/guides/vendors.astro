@@ -1,0 +1,95 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import type { GuidesData } from "../../../../scripts/extract/guides-schema";
+import GuideHeading from "../../../components/GuideHeading.astro";
+import GuideMarker from "../../../components/GuideMarker.astro";
+import GuidePage from "../../../components/GuidePage.astro";
+import GuideText from "../../../components/GuideText.astro";
+import { fill, formatNumber, gearName, guideBySlug, guidesData, plainText, rarityName, textOf, unlockText, VENDOR_TEXTS, type GuideLink } from "../../../lib/guides";
+import { t, type Lang } from "../../../lib/i18n";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+  /** Injected by the component tests; the page itself always shows the extracted data. */
+  data?: GuidesData;
+}
+
+const { lang } = Astro.props;
+const data = Astro.props.data ?? guidesData;
+const guide = guideBySlug("vendors") as GuideLink;
+const echoShards = textOf(data, "echoShards", lang);
+const emeralds = textOf(data, "emeralds", lang);
+const currency = (text: typeof echoShards) => ({ html: text?.html ?? "" });
+const merchant = data.merchant;
+const unlocks = data.vendors.flatMap((vendor) => vendor.levels.map((level) => unlockText(data, vendor.id, level.level, lang)));
+---
+<GuidePage lang={lang} guide={guide}>
+  <section class="entry-section guide-section" data-testid="guide-vendors">
+    <GuideMarker lang={lang} texts={[echoShards, ...unlocks]} />
+    {echoShards && <p class="guide-text" set:html={fill(t(lang, "guideCostsIn"), { currency: currency(echoShards) })} />}
+    <div class="guide-vendor-grid">
+      {data.vendors.map((vendor) => {
+        const texts = VENDOR_TEXTS[vendor.id];
+        const name = textOf(data, texts.name, lang);
+        return (
+          <article class="guide-vendor" data-testid="guide-vendor">
+            <GuideHeading lang={lang} text={name} class="guide-subtitle" />
+            <GuideText lang={lang} text={textOf(data, texts.intro, lang)} />
+            <div class="guide-scroll" tabindex="0" role="region" aria-label={name ? plainText(name.html) : t(lang, "guideVendors")}>
+              <table class="guide-table">
+                <thead><tr><th scope="col">{t(lang, "guideColLevel")}</th><th scope="col">{t(lang, "guideColCost")}</th><th scope="col">{t(lang, "guideColUnlocks")}</th></tr></thead>
+                <tbody>
+                  {vendor.levels.map((level) => {
+                    const unlock = unlockText(data, vendor.id, level.level, lang);
+                    return (
+                      <tr data-testid="guide-vendor-level">
+                        <th scope="row">{level.level}</th>
+                        <td class="guide-number">{formatNumber(level.cost, lang)}</td>
+                        <td class="guide-cell-text">{unlock && <span set:html={unlock.html} />}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+    {data.caps && echoShards && <p class="guide-text" data-testid="guide-echo-cap" set:html={fill(t(lang, "guideEchoShardCap"), { n: formatNumber(data.caps.echoShards, lang), currency: currency(echoShards) })} />}
+  </section>
+  {merchant && (
+    <section class="entry-section guide-section" data-testid="guide-merchant">
+      <h2 class="section-title">{t(lang, "guideMerchantStock")}</h2>
+      <GuideMarker lang={lang} texts={[echoShards, emeralds]} />
+      <GuideText lang={lang} text={textOf(data, "merchantTutorial", lang)} />
+      <ul class="guide-facts">
+        <li>{t(lang, "guideSlotsPerRarity").replace("{n}", () => formatNumber(merchant.slotsPerRarity, lang))}</li>
+        {echoShards && <li set:html={fill(t(lang, "guideRefreshCost"), { n: formatNumber(merchant.refreshCost, lang), currency: currency(echoShards) })} />}
+      </ul>
+      {emeralds && <p class="guide-text" set:html={fill(t(lang, "guidePricesIn"), { currency: currency(emeralds) })} />}
+      <div class="guide-table-pair">
+        <div class="guide-scroll" tabindex="0" role="region" aria-label={t(lang, "guideBasePrice")}>
+          <table class="guide-table" data-testid="guide-base-prices">
+            <thead><tr><th scope="col">{t(lang, "guideGearType")}</th><th scope="col">{t(lang, "guideBasePrice")}</th></tr></thead>
+            <tbody>
+              {merchant.basePrices.map((row) => <tr><th scope="row">{gearName(row.gear, lang)}</th><td class="guide-number">{formatNumber(row.price, lang)}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+        <div class="guide-scroll" tabindex="0" role="region" aria-label={t(lang, "guidePriceMultiplier")}>
+          <table class="guide-table" data-testid="guide-multipliers">
+            <thead><tr><th scope="col">{t(lang, "rarity")}</th><th scope="col">{t(lang, "guidePriceMultiplier")}</th></tr></thead>
+            <tbody>
+              {merchant.multipliers.map((row) => <tr><th scope="row">{rarityName(row.rarity, lang)}</th><td class="guide-number">×{formatNumber(row.value, lang)}</td></tr>)}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  )}
+</GuidePage>

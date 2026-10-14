@@ -1,0 +1,85 @@
+---
+import type { Emeralds, Quest, QuestReward } from "../../scripts/extract/quest-schema";
+import { lootSlotLabel, t, type Lang, type UiKey } from "../lib/i18n";
+import { dropSummary, splitNumbers } from "../lib/mobs";
+import { countMark, RARITY_KEY } from "../lib/quest-view";
+import { rewardEntries, rewardHref } from "../lib/quests";
+import EntryIcon from "./EntryIcon.astro";
+import EntrySection from "./EntrySection.astro";
+
+interface Props {
+  lang: Lang;
+  quest: Quest;
+}
+
+interface Block {
+  readonly label: UiKey;
+  readonly rewards: readonly QuestReward[];
+  readonly emeralds: Emeralds | null;
+  readonly testid: string;
+}
+
+const { lang, quest } = Astro.props;
+const blocks: Block[] = [
+  { label: "questFirstCompletion" as const, rewards: quest.rewards.first, emeralds: null, testid: "quest-rewards-first" },
+  // A quest that cannot be replayed is completed once: its every-completion list is simply what completing it gives.
+  { label: quest.replayable ? ("questEveryCompletion" as const) : ("questOnCompletion" as const), rewards: quest.rewards.every, emeralds: quest.rewards.emeralds, testid: "quest-rewards-every" },
+].filter((block) => block.rewards.length > 0 || block.emeralds !== null);
+const ICON_SIZE = 40;
+const picksText = (picks: { count: number; of: number }) => t(lang, "sourcePicksOf").replace("{count}", String(picks.count)).replace("{of}", String(picks.of));
+const emeraldLines = (emeralds: Emeralds) => dropSummary({ slot: "emeralds", pool: "own", ...emeralds }, lang);
+---
+{blocks.length > 0 && (
+  <EntrySection title={t(lang, "questRewards")} testid="quest-rewards">
+    <div class="quest-rewards">
+      {blocks.map((block) => (
+        <div class="quest-reward-block" data-testid={block.testid}>
+          <h3>{t(lang, block.label)}</h3>
+          <ul class="quest-reward-list">
+            {block.rewards.map((reward) =>
+              reward.kind === "items" ? (
+                <li class="quest-reward" data-reward="items">
+                  <ul class="quest-reward-items">
+                    {rewardEntries(reward.items).map((entry) => {
+                      const target = rewardHref(lang, entry);
+                      const Tag = target ? "a" : "span";
+                      return (
+                        <li>
+                          <Tag class="quest-reward-item" href={target} data-testid="quest-reward-item">
+                            <EntryIcon icon={entry.icon} alt="" size={ICON_SIZE} category={entry.category} variant={entry.variant} />
+                            <span>{entry.name[lang]}</span>
+                          </Tag>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <span class="quest-reward-tags">
+                    {reward.picks
+                      ? <span class="tag" data-testid="picks">{picksText(reward.picks)}</span>
+                      : <span class="tag">{t(lang, "sourceGuaranteed")}</span>}
+                    {reward.rarity && <span class="tag">{t(lang, RARITY_KEY[reward.rarity])}</span>}
+                  </span>
+                </li>
+              ) : (
+                <li class="quest-reward" data-reward="area">
+                  <span class="quest-reward-text">{t(lang, "questAreaDrop").replace("{area}", reward.area.name[lang])} <span class="mono">{countMark(reward.count)}</span></span>
+                  {reward.rarity && <span class="quest-reward-tags"><span class="tag">{t(lang, RARITY_KEY[reward.rarity])}</span></span>}
+                </li>
+              ),
+            )}
+            {block.emeralds && (
+              <li class="quest-reward" data-reward="emeralds" data-testid="quest-emeralds">
+                <span class="quest-reward-text">{lootSlotLabel("emeralds", lang)}</span>
+                <ul class="mob-drop-rule">
+                  {emeraldLines(block.emeralds).map((line) => (
+                    <li>{splitNumbers(line).map((run, i) => (i % 2 === 1 ? <span class="mob-drop-num">{run}</span> : run))}</li>
+                  ))}
+                </ul>
+              </li>
+            )}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </EntrySection>
+)}

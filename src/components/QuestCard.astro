@@ -1,0 +1,32 @@
+---
+import type { Quest } from "../../scripts/extract/quest-schema";
+import { t, type Lang } from "../lib/i18n";
+import { compareLang, htmlLang } from "../lib/lang";
+import { SIZE_KEY } from "../lib/quest-view";
+import { questHref } from "../lib/quests";
+
+interface Props {
+  lang: Lang;
+  quest: Quest;
+  /** Position in the whole list; staggers the cascade-in animation. */
+  index: number;
+  /** Step number in the core chain; only core quests show one. */
+  step?: number;
+}
+
+const { lang, quest, index, step } = Astro.props;
+const alt = compareLang(lang);
+const title = quest.title.text;
+const meta = [quest.region?.name[lang], quest.size === null ? undefined : t(lang, SIZE_KEY[quest.size])].filter((part): part is string => part !== undefined);
+---
+<li class="quest-card" style={`--i:${index}`} data-testid="quest-card">
+  <a class="quest-card-link" href={questHref(lang, quest.slug)}>
+    {step !== undefined && <span class="quest-step mono" aria-hidden="true">{String(step).padStart(2, "0")}</span>}
+    <span class="quest-card-names">
+      <span class="primary quest-card-title">{title[lang]}</span>
+      {title[alt] !== title[lang] && <span class="item-alt quest-card-alt" lang={htmlLang(alt)}>{title[alt]}</span>}
+    </span>
+    <span class="quest-card-meta">{meta.join(" · ")}</span>
+    {quest.title.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+  </a>
+</li>

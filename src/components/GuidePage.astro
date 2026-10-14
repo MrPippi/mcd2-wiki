@@ -1,0 +1,32 @@
+---
+// One mechanics guide: the site layout, a header with the way back to the guides hub, and the guide's sections in the slot.
+import Base from "../layouts/Base.astro";
+import { t, type Lang } from "../lib/i18n";
+import type { GuideLink } from "../lib/guides";
+import { compareLang, htmlLang } from "../lib/lang";
+import { href } from "../lib/url";
+import "../styles/guides.css";
+
+interface Props {
+  lang: Lang;
+  guide: GuideLink;
+}
+
+const { lang, guide } = Astro.props;
+const alt = compareLang(lang);
+const title = t(lang, guide.title);
+const altTitle = t(alt, guide.title);
+---
+<Base lang={lang} title={title} description={t(lang, guide.summary)}>
+  <div class="catalog guide-page" data-pagefind-body>
+    <header class="catalog-head guide-head">
+      <p class="guide-back kicker mono" data-pagefind-ignore><a href={href(lang, "guides")} data-testid="guide-back">{t(lang, "guides")}</a></p>
+      <h1 class="catalog-title"><span data-pagefind-meta="title">{title}</span></h1>
+      {altTitle !== title && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{altTitle}</p>}
+      <p class="guide-lede">{t(lang, guide.summary)}</p>
+    </header>
+    <div class="guide-body">
+      <slot />
+    </div>
+  </div>
+</Base>

@@ -45,7 +45,8 @@
           "sv": "Flykten från Bläckfiskkusten",
           "tr": "Mürekkep Balığı Kıyısı'ndan Kaçış",
           "uk": "Утеча з Узбережжя кальмарів"
-        }
+        },
+        "quest": "CA00"
       },
       "untranslated": [
         "zh-hans",
@@ -107,7 +108,8 @@
           "sv": "Gå in i revan",
           "tr": "Yarığa gir",
           "uk": "Увійти в розлом"
-        }
+        },
+        "quest": "CA01"
       },
       "untranslated": [
         "zh-hans",
@@ -287,7 +289,8 @@
           "sv": "Creeper-ljusets konspiration",
           "tr": "Creeper Mum Komplosu",
           "uk": "Змова навколо свічок кріпера"
-        }
+        },
+        "quest": "PLa1_S08_A"
       },
       "untranslated": [
         "zh-hans",
@@ -349,7 +352,8 @@
           "sv": "Förvriden i skogarna",
           "tr": "Ormandaki Yozlaşma",
           "uk": "Спотворення в лісах"
-        }
+        },
+        "quest": "CA02_B"
       },
       "untranslated": [
         "zh-hans",
@@ -470,7 +474,8 @@
           "sv": "Besegra den förvrängda vakten",
           "tr": "Çarpık Muhafızı yen",
           "uk": "Здолати спотвореного боронителя"
-        }
+        },
+        "quest": "CA03"
       },
       "untranslated": [
         "zh-hans",
@@ -650,7 +655,8 @@
           "sv": "Besegra kopparmonstret",
           "tr": "Bakır Canavarı yen",
           "uk": "Здолати мідного монстра"
-        }
+        },
+        "quest": "CA07"
       },
       "untranslated": [
         "zh-hans",
@@ -771,7 +777,8 @@
           "sv": "Besegra huvudförtrollaren",
           "tr": "Baş Büyücüyü yen",
           "uk": "Здолати головного чарівника"
-        }
+        },
+        "quest": "CA05"
       },
       "untranslated": [
         "zh-hans",
@@ -892,7 +899,8 @@
           "sv": "Prästlärlingen",
           "tr": "Rahip Yardımcısı",
           "uk": "Учень церковника"
-        }
+        },
+        "quest": "FOa1_S10_A"
       },
       "untranslated": [
         "zh-hans",
@@ -1013,7 +1021,8 @@
           "sv": "Aktivera portalen",
           "tr": "Portalı etkinleştir",
           "uk": "Активувати портал"
-        }
+        },
+        "quest": "CA06"
       },
       "untranslated": [
         "zh-hans",
@@ -1075,7 +1084,8 @@
           "sv": "Återvinn ditt monster",
           "tr": "Canavarını Geri Dönüştür",
           "uk": "Переробка монстра"
-        }
+        },
+        "quest": "PLa2_S15_A"
       },
       "untranslated": [
         "zh-hans",
@@ -1137,7 +1147,8 @@
           "sv": "Försvunna harmonier",
           "tr": "Kayıp Armoniler",
           "uk": "Утрачена гармонія"
-        }
+        },
+        "quest": "CA08"
       },
       "untranslated": [
         "zh-hans",
@@ -1199,7 +1210,8 @@
           "sv": "Ta dig till ekokammaren",
           "tr": "Yankı İni'ne ulaş",
           "uk": "Дійти до Ехо-лігва"
-        }
+        },
+        "quest": "CA09"
       },
       "untranslated": [
         "zh-hans",
@@ -1323,7 +1335,8 @@
           "sv": "Fybointelligens",
           "tr": "Illager İstihbaratı",
           "uk": "Розвіддані про лиходіїв"
-        }
+        },
+        "quest": "DEa1_S12_A"
       },
       "untranslated": [
         "zh-hans",
@@ -1385,7 +1398,8 @@
           "sv": "Besegra monstruöst opus",
           "tr": "Canavarca Yapıtı yen",
           "uk": "Здолати монструозного опуса"
-        }
+        },
+        "quest": "CA10"
       },
       "untranslated": [
         "zh-hans",
@@ -1447,7 +1461,8 @@
           "sv": "Det sista själsslaget",
           "tr": "Son Ruh Hesaplaşması",
           "uk": "Останній відлік душ"
-        }
+        },
+        "quest": "CA10"
       },
       "untranslated": [
         "zh-hans",
@@ -1627,7 +1642,8 @@
           "sv": "Skakisrusning",
           "tr": "Titreşik Koşusu",
           "uk": "Забіг із хитунами"
-        }
+        },
+        "quest": "MEa1_S06_A"
       },
       "untranslated": [
         "zh-hans",
@@ -1748,7 +1764,8 @@
           "sv": "Ta ner lägren",
           "tr": "Kampların Yıkılışı",
           "uk": "Розгром таборів"
-        }
+        },
+        "quest": "CAa1_S03_A"
       },
       "untranslated": [
         "zh-hans",
@@ -1869,7 +1886,8 @@
           "sv": "Ensam i Vaggvisornas kullar",
           "tr": "Ninni Tepeleri'nde Tek Başına",
           "uk": "Самотність на Колискових пагорбах"
-        }
+        },
+        "quest": "MEa2_S03_A"
       },
       "untranslated": [
         "zh-hans",
