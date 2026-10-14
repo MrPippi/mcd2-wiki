@@ -45,6 +45,7 @@ import { loadTalismanTables } from "./talisman-tables";
 import { buildTalismanData, withTalismanDescriptions } from "./talismans";
 import { applyEnglishOverrides } from "./text-overrides";
 import { extractSoulStorm, SOUL_STORM_ICON_SOURCES } from "./soul-storm";
+import { extractGuides } from "./guides";
 import { extractQuests } from "./quests";
 import { extractLocations } from "./locations";
 
@@ -56,6 +57,8 @@ export interface ExtractOptions {
   readonly mobPortraitOverrideDir?: string;
   /** The hand-kept Soul Storm status file; defaults to soul-storm-status.json next to the icon overrides. */
   readonly soulStormStatusPath?: string;
+  /** The hand-kept guides status file; defaults to guides-status.json next to the icon overrides. */
+  readonly guidesStatusPath?: string;
 }
 
 export interface ExtractSummary {
@@ -210,6 +213,12 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     quests: quests.data,
     sources: bestiary.sources,
   });
+  const guides = await extractGuides({
+    sourceRoot: options.sourceRoot,
+    locales,
+    entries: output.entries,
+    statusPath: options.guidesStatusPath ?? path.join(path.dirname(options.overridesPath), "guides-status.json"),
+  });
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
   const weapons = weaponTables
@@ -245,6 +254,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...achievements.issues,
     ...bestiary.issues,
     ...soulStorm.issues,
+    ...guides.issues,
     ...quests.issues,
     ...locations.issues,
   ];
@@ -266,7 +276,8 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "soul-storm.json": soulStorm.data,
     "quests.json": quests.data,
     "locations.json": locations.data,
+    "guides.json": guides.data,
   };
   await writeOutputs(options.outRoot, described, extraData, renderReport({ ...described, issues }));
-  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead, ...quests.tablesRead, ...locations.tablesRead], issues };
+  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead, ...guides.tablesRead, ...quests.tablesRead, ...locations.tablesRead], issues };
 }

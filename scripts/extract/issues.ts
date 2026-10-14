@@ -79,7 +79,13 @@ export type IssueType =
   | "location-text-fallback"
   | "location-no-level"
   | "location-no-icon"
-  | "location-area-unowned";
+  | "location-area-unowned"
+  | "missing-guides-tables"
+  | "guides-value-missing"
+  | "guides-text-fallback"
+  | "guides-stage-unnamed"
+  | "guides-talisman-unlinked"
+  | "guides-quest-unnamed";
 
 export interface Issue {
   readonly type: IssueType;

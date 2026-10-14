@@ -1,0 +1,79 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import type { GuidesData } from "../../../../scripts/extract/guides-schema";
+import GuideHeading from "../../../components/GuideHeading.astro";
+import GuideMarker from "../../../components/GuideMarker.astro";
+import GuidePage from "../../../components/GuidePage.astro";
+import GuideText from "../../../components/GuideText.astro";
+import { formatNumber, guideBySlug, guidesData, shown, textOf, type GuideLink } from "../../../lib/guides";
+import { t, type Lang } from "../../../lib/i18n";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+  /** Injected by the component tests; the page itself always shows the extracted data. */
+  data?: GuidesData;
+}
+
+const { lang } = Astro.props;
+const data = Astro.props.data ?? guidesData;
+const guide = guideBySlug("progression") as GuideLink;
+const echoShards = textOf(data, "echoShards", lang);
+const emeralds = textOf(data, "emeralds", lang);
+const caps = data.caps;
+const capRows = caps
+  ? [
+      { label: emeralds?.html, value: caps.emeralds },
+      { label: echoShards?.html, value: caps.echoShards },
+      { label: undefined, plain: t(lang, "guideHeroLevel"), value: caps.level },
+    ]
+  : [];
+const stages = data.stages.map((stage) => ({ stage, name: shown(stage.name, lang) }));
+---
+<GuidePage lang={lang} guide={guide}>
+  {caps && (
+    <section class="entry-section guide-section" data-testid="guide-caps">
+      <h2 class="section-title">{t(lang, "guideCaps")}</h2>
+      <GuideMarker lang={lang} texts={[emeralds, echoShards]} />
+      <dl class="guide-caps">
+        {capRows.map((row) => (
+          <div class="guide-cap" data-testid="guide-cap">
+            {row.label ? <dt set:html={row.label} /> : <dt>{row.plain}</dt>}
+            <dd class="guide-number">{formatNumber(row.value, lang)}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  )}
+  <section class="entry-section guide-section" data-testid="guide-echo-shards">
+    <GuideHeading lang={lang} text={echoShards} />
+    <GuideText lang={lang} text={textOf(data, "echoShardsTutorial", lang)} />
+  </section>
+  <section class="entry-section guide-section" data-testid="guide-leveling">
+    <GuideHeading lang={lang} text={textOf(data, "levelingTitle", lang)} />
+    <GuideText lang={lang} text={textOf(data, "levelingTutorial", lang)} />
+  </section>
+  {stages.length > 0 && (
+    <section class="entry-section guide-section" data-testid="guide-stages">
+      <h2 class="section-title">{t(lang, "guideStages")}</h2>
+      <GuideMarker lang={lang} texts={stages.map(({ name }) => name)} />
+      <div class="guide-scroll" tabindex="0" role="region" aria-label={t(lang, "guideStages")}>
+        <table class="guide-table">
+          <thead><tr><th scope="col">{t(lang, "guideColStage")}</th><th scope="col">{t(lang, "guideColLevel")}</th></tr></thead>
+          <tbody>
+            {stages.map(({ stage, name }) => (
+              <tr data-testid="guide-stage">
+                <th scope="row">{name && <span set:html={name.html} />}</th>
+                <td class="guide-number">{formatNumber(stage.level, lang)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="note guide-note">{t(lang, "guideStagesNote")}</p>
+    </section>
+  )}
+</GuidePage>

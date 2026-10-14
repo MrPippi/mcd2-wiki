@@ -1,0 +1,80 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import type { GuidesData } from "../../../../scripts/extract/guides-schema";
+import GuidePage from "../../../components/GuidePage.astro";
+import GuideUnconfirmed from "../../../components/GuideUnconfirmed.astro";
+import { dropShares, formatNumber, formatShare, formatSigned, guideBySlug, guidesData, rarityName, type GuideLink } from "../../../lib/guides";
+import { t, type Lang } from "../../../lib/i18n";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+  /** Injected by the component tests; the page itself always shows the extracted data. */
+  data?: GuidesData;
+}
+
+const { lang } = Astro.props;
+const data = Astro.props.data ?? guidesData;
+const guide = guideBySlug("rarity") as GuideLink;
+const SOURCE_KEY = { default: "guideSourceDefault", boss: "guideSourceBoss" } as const;
+---
+<GuidePage lang={lang} guide={guide}>
+  {data.rarity.tiers.length > 0 && (
+    <section class="entry-section guide-section" data-testid="guide-rarity-tiers">
+      <h2 class="section-title">{t(lang, "guideRarityEffects")}</h2>
+      <div class="guide-scroll" tabindex="0" role="region" aria-label={t(lang, "guideRarityEffects")}>
+        <table class="guide-table">
+          <thead>
+            <tr>
+              <th scope="col">{t(lang, "rarity")}</th>
+              <th scope="col">{t(lang, "guideColRerollable")}</th>
+              <th scope="col">{t(lang, "guideColStormBonus")}</th>
+              <th scope="col">{t(lang, "guideColItemPower")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.rarity.tiers.map((tier) => (
+              <tr>
+                <th scope="row">{rarityName(tier.rarity, lang)}</th>
+                <td class="guide-number">{formatNumber(tier.rerollableEffects, lang)}</td>
+                <td class="guide-number">{tier.stormExtraEffects === null ? "—" : formatSigned(tier.stormExtraEffects, lang)}</td>
+                <td class="guide-number">{formatSigned(tier.itemPowerOffset, lang)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )}
+  {data.rarity.drops.length > 0 && (
+    <section class="entry-section guide-section" data-testid="guide-rarity-drops">
+      <h2 class="section-title">{t(lang, "guideDropWeights")}</h2>
+      <GuideUnconfirmed lang={lang} message="guideRarityOddsUnconfirmed" verified={data.verified.rarityOdds} />
+      <div class="guide-table-pair">
+        {data.rarity.drops.map((row) => (
+          <div class="guide-drop" data-testid="guide-drop-row">
+            <h3 class="guide-subtitle">{t(lang, SOURCE_KEY[row.source])}</h3>
+            <div class="guide-scroll" tabindex="0" role="region" aria-label={t(lang, SOURCE_KEY[row.source])}>
+              <table class="guide-table">
+                <thead><tr><th scope="col">{t(lang, "rarity")}</th><th scope="col">{t(lang, "guideColWeight")}</th><th scope="col">{t(lang, "guideColShare")}</th></tr></thead>
+                <tbody>
+                  {dropShares(row, lang).map((share) => (
+                    <tr>
+                      <th scope="row">{rarityName(share.rarity, lang)}</th>
+                      <td class="guide-number">{share.weight}</td>
+                      <td class="guide-number">{share.share === null ? "—" : formatShare(share.share, lang)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        ))}
+      </div>
+      <p class="note guide-note">{t(lang, "guideDropNote")}</p>
+    </section>
+  )}
+</GuidePage>

@@ -1,0 +1,19 @@
+---
+// A game text in the page language, with the "untranslated" tag when it fell back to English; nothing when the game has none.
+import { t, type Lang } from "../lib/i18n";
+import type { ShownText } from "../lib/guides";
+
+interface Props {
+  lang: Lang;
+  text: ShownText | undefined;
+  class?: string;
+}
+
+const { lang, text, class: className = "guide-text" } = Astro.props;
+---
+{text && (
+  <p class={className}>
+    <span set:html={text.html} />
+    {text.untranslated && <span class="tag warn guide-untranslated">{t(lang, "untranslated")}</span>}
+  </p>
+)}

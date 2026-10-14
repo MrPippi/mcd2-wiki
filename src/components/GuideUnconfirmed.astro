@@ -1,0 +1,13 @@
+---
+// The one "not yet confirmed in game" warning of a section, shown until guides-status.json marks the fact verified.
+import { t, type Lang, type UiKey } from "../lib/i18n";
+
+interface Props {
+  lang: Lang;
+  message: UiKey;
+  verified: boolean;
+}
+
+const { lang, message, verified } = Astro.props;
+---
+{!verified && <p class="tag warn guide-unconfirmed" data-testid="guide-unconfirmed">{t(lang, message)}</p>}

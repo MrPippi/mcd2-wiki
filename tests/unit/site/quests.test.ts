@@ -84,9 +84,9 @@ describe("quests.json", () => {
     expect(questHref("zh", "ca02")).toBe("/zh/quests/ca02/");
   });
 
-  it("puts the quest list in the menu after the weapon comparison", () => {
+  it("puts the quest list in the menu after the guides", () => {
     const at = SITE_MENU.findIndex((item) => item.segment === "quests");
-    expect(SITE_MENU[at - 1]).toEqual({ key: "weaponCompare", segment: "compare" });
+    expect(SITE_MENU[at - 1]).toEqual({ key: "guides", segment: "guides" });
     expect(SITE_MENU[at]).toEqual({ key: "quests", segment: "quests" });
   });
 });
