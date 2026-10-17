@@ -10,6 +10,6 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Lang;
 ---
-<Base lang={lang} title={t(lang, "home")}>
+<Base lang={lang} title={t(lang, "home")} home>
   <HomeHero lang={lang} />
 </Base>

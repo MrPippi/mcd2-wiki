@@ -4,6 +4,7 @@ import Base from "../layouts/Base.astro";
 import { t, type Lang } from "../lib/i18n";
 import type { GuideLink } from "../lib/guides";
 import { compareLang, htmlLang } from "../lib/lang";
+import { absoluteUrl, articleLd } from "../lib/seo";
 import { href } from "../lib/url";
 import "../styles/guides.css";
 
@@ -16,8 +17,18 @@ const { lang, guide } = Astro.props;
 const alt = compareLang(lang);
 const title = t(lang, guide.title);
 const altTitle = t(alt, guide.title);
+const summary = t(lang, guide.summary);
+const absolute = (path: string): string => absoluteUrl(path, Astro.site);
+const article = articleLd({
+  headline: title,
+  description: summary,
+  url: absolute(Astro.url.pathname),
+  lang: htmlLang(lang),
+  siteName: t(lang, "siteTitle"),
+  siteUrl: absolute(href(lang)),
+});
 ---
-<Base lang={lang} title={title} description={t(lang, guide.summary)}>
+<Base lang={lang} title={title} description={summary} ogType="article" structuredData={[article]}>
   <div class="catalog guide-page" data-pagefind-body>
     <header class="catalog-head guide-head">
       <p class="guide-back kicker mono" data-pagefind-ignore><a href={href(lang, "guides")} data-testid="guide-back">{t(lang, "guides")}</a></p>

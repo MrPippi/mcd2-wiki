@@ -21,8 +21,9 @@ import { t, type Lang } from "../lib/i18n";
 import { splitSiteTitle } from "../lib/site-title";
 import { htmlLang } from "../lib/lang";
 import { extractedBrand } from "../lib/data";
-import { metaDescription } from "../lib/meta";
-import { assetUrl, swapLangPath } from "../lib/url";
+import { breadcrumbTrail } from "../lib/breadcrumbs";
+import { absoluteUrl, breadcrumbLd, pageSummary, serializeJsonLd, websiteLd } from "../lib/seo";
+import { assetUrl, href, swapLangPath } from "../lib/url";
 
 interface Props {
   lang: Lang;
@@ -33,29 +34,44 @@ interface Props {
   description?: string;
   /** Pages without a same-path counterpart in every language (the 404 page) link the menu to each language home and skip hreflang. */
   noAlternates?: boolean;
+  /** A language home: the title is the site name alone and the page describes the whole site. */
+  home?: boolean;
+  /** Keeps the page out of search results (search results, the 404 page). */
+  noindex?: boolean;
+  /** Open Graph type; guides are articles. */
+  ogType?: "website" | "article";
+  /** Extra schema.org objects for this page, beside the breadcrumb trail. */
+  structuredData?: readonly unknown[];
 }
 
 
 /** The issue form picker: data errors, in-game tests, translations, site bugs. */
 const REPORT_URL = "https://github.com/MrPippi/mcd2-wiki/issues/new/choose";
 
-const { lang, title, current, description = "", noAlternates = false } = Astro.props;
+const { lang, title, current, description = "", noAlternates = false, home = false, noindex = false, ogType = "website", structuredData = [] } = Astro.props;
 const siteTitle = t(lang, "siteTitle");
 const footerTitle = splitSiteTitle(siteTitle);
-const fullTitle = `${title} | ${siteTitle}`;
-const summary = metaDescription(description, 160, t(lang, "tagline"));
+const fullTitle = home ? siteTitle : `${title} | ${siteTitle}`;
+const summary = pageSummary({ description, title, tagline: t(lang, "tagline"), home });
 // Game icons from the extract step; the hand-drawn SVG covers a checkout without extracted art.
 const favicon = extractedBrand.favicon
   ? { href: assetUrl(extractedBrand.favicon), type: "image/png" }
   : { href: assetUrl("favicon.svg"), type: "image/svg+xml" };
 const appIcon = extractedBrand["app-icon"] ? assetUrl(extractedBrand["app-icon"]) : undefined;
 // Every language version of this page, plus the root that picks one; absolute when the site address is known.
-const absolute = (path: string): string => (Astro.site ? new URL(path, Astro.site).href : path);
+const absolute = (path: string): string => absoluteUrl(path, Astro.site);
 const alternates = noAlternates
   ? []
   : ALL_LANGS.map((code) => ({ code, href: absolute(swapLangPath(Astro.url.pathname, import.meta.env.BASE_URL, code)) }));
 const rootHref = absolute(assetUrl(""));
 // Link previews need an absolute URL, which needs the deployed site address (SITE_URL at build time).
+const canonical = absolute(Astro.url.pathname);
+const crumbs = breadcrumbTrail(Astro.url.pathname, import.meta.env.BASE_URL, lang, title).map((crumb) => ({ name: crumb.name, url: absolute(crumb.href) }));
+const jsonLd = [
+  ...(home ? [websiteLd({ name: siteTitle, url: canonical, lang: htmlLang(lang), description: summary, searchUrl: absolute(href(lang, "search")) })] : []),
+  ...(crumbs.length > 1 ? [breadcrumbLd(crumbs)] : []),
+  ...structuredData,
+];
 const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extractedBrand.social), Astro.site).href : undefined;
 ---
 <!doctype html>
@@ -65,7 +81,10 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{fullTitle}</title>
     <meta name="description" content={summary} />
-    <meta property="og:type" content="website" />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:site_name" content={t(lang, "siteTitle")} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={summary} />
@@ -81,6 +100,7 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
     <meta name="theme-color" content="#f3f4f1" />
     {alternates.map((alt) => <link rel="alternate" hreflang={LANG_META[alt.code].htmlLang} href={alt.href} />)}
     {alternates.length > 0 && <link rel="alternate" hreflang="x-default" href={rootHref} />}
+    {jsonLd.map((data) => <script type="application/ld+json" set:html={serializeJsonLd(data)} />)}
     <link rel="icon" type={favicon.type} href={favicon.href} />
     {appIcon && <link rel="apple-touch-icon" href={appIcon} />}
     <script is:inline>
