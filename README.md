@@ -72,8 +72,8 @@ npm run dev
 
 ## Disclaimer
 
-This is an unofficial fan site. It is not affiliated with or endorsed by Mojang Studios or Microsoft. Game text and images belong to their respective owners. The site's fonts (Noto Serif, Geist, Geist Mono) are licensed under the SIL Open Font License 1.1.
+This is an unofficial fan site. It is not affiliated with or endorsed by Mojang Studios or Microsoft. Game text and images belong to their respective owners. The site's fonts (Noto Serif, Noto Serif TC/SC/JP/KR, Geist, Geist Mono) are licensed under the SIL Open Font License 1.1.
 
 ## License
 
-The source code is released under the [MIT License](LICENSE). Game text and images are not covered by it; see the disclaimer above.
+The source code is released under the [MIT License](LICENSE). Game text and images are not covered by it. This includes everything extracted from the game under `public/` (map tiles, icons, mob renders), `src/data/`, `src/assets/` and `docs/images/`; see the disclaimer above.

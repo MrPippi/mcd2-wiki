@@ -72,8 +72,8 @@ npm run dev
 
 ## 免責聲明
 
-本站為非官方粉絲網站，與 Mojang Studios、Microsoft 無關，也未獲其背書。遊戲文字與圖像版權歸原權利人所有。網站使用的字型（Noto Serif、Geist、Geist Mono）採用 SIL Open Font License 1.1 授權。
+本站為非官方粉絲網站，與 Mojang Studios、Microsoft 無關，也未獲其背書。遊戲文字與圖像版權歸原權利人所有。網站使用的字型（Noto Serif、Noto Serif TC/SC/JP/KR、Geist、Geist Mono）採用 SIL Open Font License 1.1 授權。
 
 ## 授權
 
-原始碼採用 [MIT License](LICENSE) 授權。遊戲文字與圖像不在此授權範圍內，請見上方免責聲明。
+原始碼採用 [MIT License](LICENSE) 授權。遊戲文字與圖像不在此授權範圍內，包括 `public/`（地圖圖磚、圖示、怪物渲染圖）、`src/data/`、`src/assets/` 與 `docs/images/` 中取自遊戲的內容，請見上方免責聲明。
