@@ -390,7 +390,15 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed"
   ],
   "_english": [
     "normal",
@@ -844,5 +852,13 @@
   "guideDifficultyAssumedUnconfirmed": "Normalny wskazuje wiersz mnożnika, którego nie ma w danych, więc pokazano ×1. Jeszcze nie potwierdzono w grze.",
   "guideColAttackMod": "Modyfikator siły ataku",
   "guideColResistanceMod": "Modyfikator odporności na obrażenia",
-  "guideNoData": "Brak danych"
+  "guideNoData": "Brak danych",
+  "affixOddsTitle": "Szanse na efekty",
+  "affixOddsIntro": "Szansa, że każdy losowy efekt (i poziom) pojawi się przynajmniej raz, przy założeniu, że ten przedmiot i jego rzadkość są już wygenerowane. To nie jest szansa na zdobycie przedmiotu; efekty wbudowane są zawsze.",
+  "affixThreat": "Poziom zagrożenia",
+  "affixSlots": "Losowe efekty",
+  "affixBonus": "Dodatkowy efekt nagrody Burzy dusz",
+  "affixAnyTier": "Dowolny",
+  "affixBuiltIn": "Wbudowany",
+  "affixOddsUnconfirmed": "Te szanse odtworzono z tabel danych gry i porównano z tabelą osób trzecich; nie sprawdzono ich w grze."
 }

@@ -392,7 +392,15 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -837,5 +845,13 @@
   "guideDifficultyAssumedUnconfirmed": "보통은 데이터에 없는 배율 행을 가리키므로 ×1로 표시했습니다. 게임에서 아직 확인하지 않았습니다.",
   "guideColAttackMod": "공격력 보정",
   "guideColResistanceMod": "피해 저항 보정",
-  "guideNoData": "데이터 없음"
+  "guideNoData": "데이터 없음",
+  "affixOddsTitle": "효과 확률",
+  "affixOddsIntro": "이 아이템과 등급이 이미 정해졌을 때, 각 무작위 효과(와 단계)가 한 번 이상 붙을 확률입니다. 드롭률이 아닙니다. 고정 효과는 항상 붙습니다.",
+  "affixThreat": "위협 레벨",
+  "affixSlots": "무작위 효과 수",
+  "affixBonus": "영혼 폭풍 보상의 추가 효과",
+  "affixAnyTier": "아무 단계",
+  "affixBuiltIn": "고정",
+  "affixOddsUnconfirmed": "이 확률은 게임 데이터 테이블에서 재구성하고 제3자 표와 대조한 것이며, 게임 내에서는 확인되지 않았습니다."
 }

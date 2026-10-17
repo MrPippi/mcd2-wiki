@@ -1,0 +1,136 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { affixViewOf } from "../lib/affix-view";
+import { guidesData } from "../lib/guides";
+import { t, type Lang } from "../lib/i18n";
+import { entryHref } from "../lib/url";
+import EntryIcon from "./EntryIcon.astro";
+import EntrySection from "./EntrySection.astro";
+import GuideUnconfirmed from "./GuideUnconfirmed.astro";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  item: Entry;
+}
+
+const TIERS = ["I", "II", "III"] as const;
+const EFFECT_ICON = 32;
+
+const { lang, item } = Astro.props;
+const view = affixViewOf(item);
+const first = view?.rarities[0];
+---
+{view && first && (
+  <EntrySection title={t(lang, "affixOddsTitle")} testid="affix-odds">
+    <div data-affix={view.slug}>
+      <p class="note" data-pagefind-ignore>{t(lang, "affixOddsIntro")}</p>
+      <GuideUnconfirmed lang={lang} message="affixOddsUnconfirmed" verified={guidesData.verified.affixOdds} />
+      {/* Starts hidden: the page script shows it; without scripts the table keeps its default threat and rarity. */}
+      <div class="affix-controls" role="group" aria-label={t(lang, "affixOddsTitle")} data-testid="affix-controls" data-affix-controls hidden>
+        <label>
+          <span>{t(lang, "affixThreat")}</span>
+          <select data-affix-level>
+            {view.levels.map((level) => <option value={level} selected={level === view.level}>{level}</option>)}
+          </select>
+        </label>
+        {view.rarities.length > 1 && (
+          <label>
+            <span>{t(lang, "rarity")}</span>
+            <select data-affix-rarity>
+              {view.rarities.map((one) => <option value={one.rarity} selected={one.rarity === view.rarity}>{t(lang, one.label)}</option>)}
+            </select>
+          </label>
+        )}
+        {view.rarities.some((one) => one.bonusSlots > 0) && (
+          <label class="affix-bonus">
+            <input type="checkbox" data-affix-bonus />
+            <span>{t(lang, "affixBonus")}</span>
+          </label>
+        )}
+      </div>
+      <p class="affix-summary" data-testid="affix-summary" data-pagefind-ignore>
+        <span>{t(lang, "affixThreat")} <b data-affix-level-text>{view.level}</b></span>
+        <span data-affix-rarity-text>{t(lang, first.label)}</span>
+        <span>{t(lang, "affixSlots")} <b data-affix-slots-text>{first.slots}</b></span>
+      </p>
+      <table class="affix-table" data-testid="affix-table" data-pagefind-ignore>
+        <thead>
+          <tr>
+            <th scope="col">{t(lang, "effect")}</th>
+            {TIERS.map((tier) => <th scope="col" class="tier">{tier}</th>)}
+            <th scope="col" class="tier">{t(lang, "affixAnyTier")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {view.rows.map((row) => (
+            <tr data-effect={row.effect.slug} class:list={{ "affix-fixed": row.fixed }}>
+              <th scope="row" class:list={{ "has-icon": row.effect.icon }}>
+                {row.effect.icon && <EntryIcon icon={row.effect.icon} alt="" size={EFFECT_ICON} />}
+                <a class="effect-name" href={entryHref(lang, row.effect)}><LangText lang={lang} value={row.effect.name} /></a>
+                {row.fixed && <span class="tag">{t(lang, "affixBuiltIn")}</span>}
+              </th>
+              {TIERS.map((tier, index) => <td class="tier-value" data-tier={tier} data-cell={index + 1}>{row.tiers[index]}</td>)}
+              <td class="tier-value affix-any" data-tier={t(lang, "affixAnyTier")} data-cell="any">{row.any}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </EntrySection>
+)}
+<script>
+  import { formatOdds, itemOdds, type AffixFile, type AffixOdds } from "../lib/affix-odds";
+
+  // The page prints threat 20, the first rarity and no bonus; this recomputes the table from the same model file, which
+  // is loaded only on pages that have a table.
+  function fill(root: HTMLElement, odds: AffixOdds): void {
+    for (const row of root.querySelectorAll<HTMLElement>("tr[data-effect]:not(.affix-fixed)")) {
+      const effect = row.dataset.effect;
+      for (const cell of row.querySelectorAll<HTMLElement>("td[data-cell]")) {
+        const tier = cell.dataset.cell === "any" ? undefined : Number(cell.dataset.cell);
+        const found = tier === undefined ? odds.effects.find((one) => one.effect === effect) : odds.templates.find((one) => one.effect === effect && one.tier === tier);
+        cell.textContent = formatOdds(found?.probability ?? 0);
+      }
+    }
+  }
+
+  function start(root: HTMLElement, file: AffixFile): void {
+    const slug = root.dataset.affix ?? "";
+    const item = Object.hasOwn(file.items, slug) ? file.items[slug] : undefined;
+    const controls = root.querySelector<HTMLElement>("[data-affix-controls]");
+    const level = root.querySelector<HTMLSelectElement>("[data-affix-level]");
+    const rarity = root.querySelector<HTMLSelectElement>("[data-affix-rarity]");
+    const bonus = root.querySelector<HTMLInputElement>("[data-affix-bonus]");
+    const bonusLabel = bonus?.closest("label");
+    const text = (selector: string, value: string): void => {
+      const target = root.querySelector<HTMLElement>(selector);
+      if (target) target.textContent = value;
+    };
+    if (!item || !controls || !level) return;
+
+    const update = (): void => {
+      const chosen = item.rarities.find((one) => one.rarity === (rarity?.value ?? item.rarities[0]?.rarity));
+      if (!chosen) return;
+      // The bonus slot only exists for rarities that list one.
+      if (bonusLabel) bonusLabel.hidden = chosen.bonusSlots === 0;
+      const withBonus = Boolean(bonus?.checked) && chosen.bonusSlots > 0;
+      const odds = itemOdds(file, slug, { level: Number(level.value), rarity: chosen.rarity, bonus: withBonus });
+      if (!odds) return;
+      fill(root, odds);
+      text("[data-affix-level-text]", level.value);
+      if (rarity?.selectedOptions[0]) text("[data-affix-rarity-text]", rarity.selectedOptions[0].textContent ?? "");
+      text("[data-affix-slots-text]", String(chosen.slots + (withBonus ? chosen.bonusSlots : 0)));
+    };
+    controls.hidden = false;
+    for (const control of [level, rarity, bonus]) control?.addEventListener("change", update);
+    update();
+  }
+
+  const root = document.querySelector<HTMLElement>("[data-affix]");
+  if (root) {
+    import("../data/affix-models.json").then((module) => start(root, module.default as unknown as AffixFile)).catch(() => {
+      // The table keeps its default values.
+    });
+  }
+</script>

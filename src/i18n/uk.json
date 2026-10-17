@@ -392,7 +392,15 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -842,5 +850,13 @@
   "guideDifficultyAssumedUnconfirmed": "Звичайна складність посилається на рядок множника, якого немає в даних, тому показано ×1. Ще не підтверджено в грі.",
   "guideColAttackMod": "Поправка сили атаки",
   "guideColResistanceMod": "Поправка опору шкоді",
-  "guideNoData": "Немає даних"
+  "guideNoData": "Немає даних",
+  "affixOddsTitle": "Шанси ефектів",
+  "affixOddsIntro": "Шанс того, що кожен випадковий ефект (і рівень) з'явиться принаймні раз, якщо предмет і його рідкісність уже визначені. Це не шанс випадіння; вбудовані ефекти є завжди.",
+  "affixThreat": "Рівень загрози",
+  "affixSlots": "Випадкові ефекти",
+  "affixBonus": "Додатковий ефект нагороди Шторму душ",
+  "affixAnyTier": "Будь-який",
+  "affixBuiltIn": "Вбудований",
+  "affixOddsUnconfirmed": "Ці шанси відновлено за таблицями даних гри та звірено з таблицею третьої сторони; у грі їх не перевіряли."
 }

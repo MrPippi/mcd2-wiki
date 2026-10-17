@@ -392,7 +392,15 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -840,5 +848,13 @@
   "guideDifficultyAssumedUnconfirmed": "Normaal verwijst naar een vermenigvuldigerrij die niet in de gegevens staat, dus ×1 wordt getoond. Nog niet bevestigd in het spel.",
   "guideColAttackMod": "Aanvalskracht-modificator",
   "guideColResistanceMod": "Schadeweerstand-modificator",
-  "guideNoData": "Geen gegevens"
+  "guideNoData": "Geen gegevens",
+  "affixOddsTitle": "Effectkansen",
+  "affixOddsIntro": "De kans dat elk willekeurig effect (en elk niveau) minstens één keer voorkomt, als dit voorwerp en zijn zeldzaamheid al vaststaan. Dit is geen droppercentage; ingebouwde effecten zitten er altijd op.",
+  "affixThreat": "Dreigingsniveau",
+  "affixSlots": "Willekeurige effecten",
+  "affixBonus": "Bonuseffect van de Zielenstorm-beloning",
+  "affixAnyTier": "Elk",
+  "affixBuiltIn": "Ingebouwd",
+  "affixOddsUnconfirmed": "Deze kansen zijn herleid uit de gegevenstabellen van het spel en vergeleken met een tabel van derden; ze zijn niet in het spel gecontroleerd."
 }

@@ -57,6 +57,15 @@
 - 兩項尚未在遊戲內確認，標示於頁面，確認後把 `scripts/extract/guides-status.json` 的 `threatBalanceRow` 改為 `true`：遊戲實際使用 `Active` 或 `SecondPass` 哪一列（`Active` 沒有曲線）；一般難度指向 `CT_DifficultySettings` 裡不存在的 `NormalDifficultyMultiplier`，暫以 ×1 顯示。
 - 難度圖示（`T_UI_Threat*`）目前未使用。
 
+## 效果出現機率
+
+近戰、遠程、護甲與神器頁的「效果出現機率」表：在該裝備與稀有度已產生的前提下，各隨機效果（各階級）至少出現一次的機率，可選威脅 1–20、稀有度與靈魂風暴獎勵額外詞條。`npm run extract` 寫入 `src/data/affix-models.json`（約 160 KB，相同效果池的裝備共用一個模型），頁面與瀏覽器腳本用同一份 `src/lib/affix-odds.ts` 計算。
+
+- **效果池的組成**（`scripts/extract/affix-pool.ts` 開頭有完整說明）：`DT_EffectTemplateGroupDropTableDefinition` 的每一列以一個物品標籤為鍵，物品用它所有標籤（含父標籤）和 `SW.Item.Property.Gear` 的列；同一效果群組被多列指定時取最後一個 Set（蘑菇護甲的 Utility 原型 1 對 Gear 0.25，遊戲結果是 0.25）。群組內各模板有自己的權重與運算（Set／Add／Multiply），群組權重只乘 Set／Add。每件裝備還帶有它所屬基底列（TypeTag 出現在它標籤裡的列，如箭袋）的標籤；神器一律視為 `SW.Item.Property.Artifact`。基底模板的 `IncompatibleTagsQuery` 排除不適用的裝備種類。
+- **權重**：同一模板的條目，Set 取最大、Add 加總、Multiply 相乘；階級係數（`DT_GameBalanceDefinition` SecondPass 的 `EffectChanceScalingCurves`，已在 `guides.json` 的 `threat[].effectTiers`）對 Set、Add、Multiply 三者**各乘一次**（多筆 Multiply 只乘一次）。抽 n 個欄位（稀有度的 `BaseNumberOfRerollableEffects`，加靈魂風暴獎勵的 `AdditionalEffectChances`）按權重不放回，抽中後同一效果的所有階級移出。獨特稀有度只給獨特變體，一般裝備給稀有與特殊。
+- **驗證**：與第三方「逐級詞條概率」表（遊戲 1.1.1）逐格比對，363,400 格全數相符（差 < 1e-6）。該表沒有「特殊」稀有度，所以特殊的數字沒有交叉驗證。
+- **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `affixOdds` 改為 `true`。需要留意的假設：Mushroom 以外沒有資料能分辨「最後一個 Set 勝出」與「最小值」；`MinimumRequiredItemPower` 目前全為 0 而被忽略，`SecondaryETG` 全空，非 0／非空時報告 `affix-ignored`。
+
 ## 世界地圖
 
 `/<lang>/map/`（每個語言各一頁）以 Leaflet 顯示遊戲的俯視全圖（主世界、隙浮、營地），標出礦車站、裂隙、傳送雕像、商人、任務與區域名稱，可篩選、搜尋，網址 `?world=` 與 `#z/px/py` 可分享視角。

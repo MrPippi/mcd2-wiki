@@ -111,6 +111,28 @@ a.fixed-name:hover .primary { text-decoration: underline 2px var(--accent); text
 .effect-source { margin: 12px 0 0; font-size: 12px; color: var(--muted); }
 .effect-source a { color: var(--muted); }
 
+/* Effect odds: the effect, a chance per tier and for any tier; the controls the page script reveals sit above the table. */
+.affix-controls { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: end; margin: 12px 0 0; }
+.affix-controls label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); }
+.affix-controls select { min-height: 40px; padding: 0 var(--space-2); border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); font: inherit; font-family: var(--font-mono); }
+.affix-controls select:focus-visible, .affix-controls input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.affix-controls .affix-bonus { display: flex; align-items: center; gap: var(--space-2); min-height: 40px; color: var(--text); }
+.affix-controls .affix-bonus[hidden] { display: none; }
+.affix-summary { display: flex; flex-wrap: wrap; gap: 4px 16px; margin: 12px 0 0; font-size: 14px; color: var(--text-2); }
+.affix-summary b { font-family: var(--font-mono); font-weight: 700; color: var(--text); }
+.affix-table { width: 100%; border-collapse: collapse; margin-top: 8px; border-top: 1px solid var(--rule-strong); }
+.affix-table thead th {
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--rule);
+}
+.affix-table th.tier, .affix-table td.tier-value { width: 5.5em; text-align: right; }
+.affix-table tbody th, .affix-table td { padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: middle; text-align: left; font-weight: 400; }
+.affix-table tbody th.has-icon { display: grid; grid-template-columns: 32px 1fr; align-items: center; column-gap: 12px; }
+.affix-table tbody th > .tag { grid-column: 2; justify-self: start; margin-top: 4px; }
+.affix-table tbody tr:hover { background: var(--paper); }
+.affix-table .affix-any { font-weight: 700; }
+.affix-table tr.affix-fixed { background: var(--paper); box-shadow: inset 3px 0 0 var(--accent); }
+
 /* Talisman levels: the level, its text or companion multipliers, then the XP to the next level. */
 .level-table { width: 100%; border-collapse: collapse; margin-top: 12px; border-top: 1px solid var(--rule-strong); }
 .level-table thead th {
@@ -162,6 +184,13 @@ a.fixed-name:hover .primary { text-decoration: underline 2px var(--accent); text
   .effect-table td.tier-value::before { content: attr(data-tier) " "; color: var(--muted); font-size: var(--fs-mono-s); }
   /* Line the tiers up with the text, past the 32px icon and its 12px gap. */
   .effect-table tbody tr:has(> th.has-icon) > td.tier-value:nth-child(2) { margin-left: 44px; }
+  /* Effect odds: the same, with four values (three tiers and any tier) in the row under the name. */
+  .affix-table thead { display: none; }
+  .affix-table tbody tr { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
+  .affix-table tbody th { flex: 0 0 100%; padding: 0 0 2px; border: 0; }
+  .affix-table td.tier-value { width: auto; padding: 0; border: 0; text-align: left; }
+  .affix-table td.tier-value::before { content: attr(data-tier) " "; color: var(--muted); font-size: var(--fs-mono-s); font-weight: 400; }
+  .affix-table tbody tr:has(> th.has-icon) > td.tier-value:nth-child(2) { margin-left: 44px; }
 }
 
 @media (min-width: 720px) {

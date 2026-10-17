@@ -32,7 +32,7 @@ const Ability = z.object({
   SpecificKeyValues: z.array(KeyValue).optional(),
   CommonKeyValues: z.array(KeyValue).optional(),
 });
-const ItemRow = z.object({ Name: z.string(), Traits: Tags, Effects: Tags, TypeTextData: TextData, KeyValues: z.array(KeyValue).optional() });
+const ItemRow = z.object({ Name: z.string(), TypeTag: Tag.optional(), Traits: Tags, Effects: Tags, TypeTextData: TextData, KeyValues: z.array(KeyValue).optional() });
 const MeleeRow = z.object({
   Name: z.string(),
   AttackVariants: z.object({
@@ -71,10 +71,13 @@ const TemplateRow = z.object({
   TemplateData: z.object({
     Effect: Tag.optional(),
     FixedEffectValue: z.number().optional(),
+    MinimumRequiredItemPower: z.number().optional(),
     IncompatibleTagsQuery: Query.optional(),
   }),
 });
-const WeightedTags = z.object({ Tags: z.array(z.object({ TypeTag: Tag })).optional() }).optional();
+/** A tag with the weight and operation (Set, Add, Multiply) the game combines it by; a missing weight reads as Set 1. */
+const WeightedTag = z.object({ TypeTag: Tag, Weight: z.number().optional(), Operation: z.string().optional() });
+const WeightedTags = z.object({ Tags: z.array(WeightedTag).optional() }).optional();
 const GroupRow = z.object({ TypeTag: Tag, TagList: WeightedTags });
 const DropRow = z.object({ TypeTag: Tag, PrimaryETG: WeightedTags, SecondaryETG: WeightedTags });
 const NamedRow = z.object({ Name: z.string(), TypeTag: Tag, TypeTextData: TextData });
@@ -115,6 +118,7 @@ export const GameTablesSchema = z.object({
   armor: z.array(ItemRow),
 });
 export type GameTables = z.infer<typeof GameTablesSchema>;
+export type WeightedTagValue = z.infer<typeof WeightedTag>;
 export type TextDataValue = z.infer<typeof TextData>;
 export type EnchantmentRowValue = z.infer<typeof EnchantmentRow>;
 export type AbilityValue = z.infer<typeof Ability>;

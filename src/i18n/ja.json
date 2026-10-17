@@ -389,7 +389,15 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -839,5 +847,13 @@
   "guideDifficultyAssumedUnconfirmed": "標準は、データにない倍率行を指しているため、×1 と表示しています。ゲーム内では未確認です。",
   "guideColAttackMod": "攻撃力補正",
   "guideColResistanceMod": "ダメージ耐性補正",
-  "guideNoData": "データなし"
+  "guideNoData": "データなし",
+  "affixOddsTitle": "効果の出現確率",
+  "affixOddsIntro": "このアイテムとレアリティがすでに決まっている場合に、各ランダム効果（とティア）が1回以上つく確率です。ドロップ率ではありません。固定効果は必ずつきます。",
+  "affixThreat": "脅威レベル",
+  "affixSlots": "ランダム効果の数",
+  "affixBonus": "ソウルストーム報酬の追加効果",
+  "affixAnyTier": "いずれか",
+  "affixBuiltIn": "固定",
+  "affixOddsUnconfirmed": "この確率はゲームのデータテーブルから再構成し、第三者の表と照合したもので、ゲーム内では未検証です。"
 }

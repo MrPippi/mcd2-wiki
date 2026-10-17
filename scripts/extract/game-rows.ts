@@ -55,6 +55,22 @@ export function formatMagnitude(value: number, format: EffectFormat | undefined)
   return format.percent ? `${rounded}%` : String(rounded);
 }
 
+/** The tier (0..2) a template tag names (¡KSharpness.II ¡÷ 1); -1 for a unique or base template. */
+export const tierOf = (tag: string): number => TIERS.findIndex((name) => tag.endsWith(`.${name}`));
+
+/** Whether the template's base templates (its Traits) exclude an item with these tags: IncompatibleTagsQuery per base. */
+export function excludedFor(tables: GameTables): (template: GameTables["templates"][number], itemTags: ReadonlySet<string>) => boolean {
+  const baseQueries = new Map(
+    tables.templates.flatMap((template) =>
+      template.TemplateData.IncompatibleTagsQuery ? [[template.TypeTag.TagName, template.TemplateData.IncompatibleTagsQuery] as const] : [],
+    ),
+  );
+  return (template, itemTags) =>
+    tagNames(template.Traits)
+      .flatMap((tag) => baseQueries.get(tag) ?? [])
+      .some((query) => matchesTagQuery(query, itemTags));
+}
+
 /**
  * The effects an item can roll and their tier I/II/III magnitudes, keyed by effect tag. Drop table rows matching the
  * item's tags pick effect template groups; each template's base templates exclude item kinds it cannot go on.
@@ -69,17 +85,8 @@ export function effectPool(itemTags: ReadonlySet<string>, tables: GameTables): M
       .filter((group) => groupTags.includes(group.TypeTag.TagName))
       .flatMap((group) => (group.TagList?.Tags ?? []).map((tag) => tag.TypeTag.TagName)),
   );
-  const baseQueries = new Map(
-    tables.templates.flatMap((template) =>
-      template.TemplateData.IncompatibleTagsQuery ? [[template.TypeTag.TagName, template.TemplateData.IncompatibleTagsQuery] as const] : [],
-    ),
-  );
-  const tierOf = (tag: string) => TIERS.findIndex((name) => tag.endsWith(`.${name}`));
-  const allowed = tables.templates.filter((template) => {
-    if (tierOf(template.TypeTag.TagName) === -1 || !templateTags.has(template.TypeTag.TagName)) return false;
-    const bases = tagNames(template.Traits).flatMap((tag) => baseQueries.get(tag) ?? []);
-    return !bases.some((query) => matchesTagQuery(query, itemTags));
-  });
+  const excluded = excludedFor(tables);
+  const allowed = tables.templates.filter((template) => tierOf(template.TypeTag.TagName) !== -1 && templateTags.has(template.TypeTag.TagName) && !excluded(template, itemTags));
   return allowed.reduce((pool, template) => {
     const effect = template.TemplateData.Effect?.TagName;
     const value = template.TemplateData.FixedEffectValue;

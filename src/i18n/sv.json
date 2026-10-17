@@ -391,7 +391,15 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -842,5 +850,13 @@
   "guideDifficultyAssumedUnconfirmed": "Normal pekar på en multiplikatorrad som saknas i datan, så ×1 visas. Ännu inte bekräftat i spelet.",
   "guideColAttackMod": "Modifierare för attackstyrka",
   "guideColResistanceMod": "Modifierare för skadeskydd",
-  "guideNoData": "Inga data"
+  "guideNoData": "Inga data",
+  "affixOddsTitle": "Effektchanser",
+  "affixOddsIntro": "Chansen att varje slumpmässig effekt (och nivå) dyker upp minst en gång, givet att föremålet och dess sällsynthet redan är skapade. Det är inte en droppchans; inbyggda effekter finns alltid.",
+  "affixThreat": "Hotnivå",
+  "affixSlots": "Slumpmässiga effekter",
+  "affixBonus": "Extra effekt från Själsstorm-belöning",
+  "affixAnyTier": "Valfri",
+  "affixBuiltIn": "Inbyggd",
+  "affixOddsUnconfirmed": "Chanserna är återskapade från spelets datatabeller och jämförda med en tabell från tredje part; de är inte verifierade i spelet."
 }

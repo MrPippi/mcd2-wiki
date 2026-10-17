@@ -5,6 +5,7 @@ import { t, type Lang } from "../lib/i18n";
 import { itemKicker } from "../lib/kicker";
 import { relatedLinks } from "../lib/related";
 import { hasUnknownValues, isSecretTalisman } from "../lib/talisman-view";
+import AffixOdds from "./AffixOdds.astro";
 import ArtifactStats from "./ArtifactStats.astro";
 import BookSource from "./BookSource.astro";
 import EnchantmentTiers from "./EnchantmentTiers.astro";
@@ -58,6 +59,7 @@ const related = relatedLinks(lang, entry);
       {entry.category === "talisman" && <TalismanLevels lang={lang} talisman={entry} />}
       <WeaponStats lang={lang} weapon={entry} />
       <WeaponEffects lang={lang} weapon={entry} />
+      <AffixOdds lang={lang} item={entry} />
       {(entry.category === "enchantment" || entry.category === "effect") && <FixedOn lang={lang} entry={entry} />}
       {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
       <ItemSources lang={lang} entry={entry} />

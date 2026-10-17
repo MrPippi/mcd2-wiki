@@ -388,7 +388,15 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -844,5 +852,13 @@
   "guideDifficultyAssumedUnconfirmed": "Обычная сложность ссылается на строку множителя, которой нет в данных, поэтому показано ×1. Пока не подтверждено в игре.",
   "guideColAttackMod": "Поправка силы атаки",
   "guideColResistanceMod": "Поправка сопротивления урону",
-  "guideNoData": "Нет данных"
+  "guideNoData": "Нет данных",
+  "affixOddsTitle": "Шансы эффектов",
+  "affixOddsIntro": "Шанс того, что каждый случайный эффект (и уровень) появится хотя бы раз, если предмет и его редкость уже определены. Это не шанс выпадения; встроенные эффекты есть всегда.",
+  "affixThreat": "Уровень угрозы",
+  "affixSlots": "Случайные эффекты",
+  "affixBonus": "Дополнительный эффект награды Бури душ",
+  "affixAnyTier": "Любой",
+  "affixBuiltIn": "Встроенный",
+  "affixOddsUnconfirmed": "Эти шансы восстановлены по таблицам данных игры и сверены с таблицей третьей стороны; в игре они не проверялись."
 }
