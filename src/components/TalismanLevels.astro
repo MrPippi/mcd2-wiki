@@ -25,30 +25,32 @@ const hasCompanion = rows?.some((row) => row.companion) ?? false;
         </div>
       </dl>
     )}
-    <table class="level-table" data-pagefind-ignore>
-      <thead>
-        <tr>
-          <th scope="col">{t(lang, "talismanLevel")}</th>
-          {hasValue && <th scope="col">{t(lang, "levelValue")}</th>}
-          {hasCompanion && <th scope="col">{t(lang, "companionAttack")}</th>}
-          {hasCompanion && <th scope="col">{t(lang, "companionDefence")}</th>}
-          {hasCompanion && <th scope="col">{t(lang, "companionCooldown")}</th>}
-          <th scope="col">{t(lang, "xpToNextLevel")}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((row) => (
+    <div class="table-scroll" tabindex="0" role="region" aria-label={t(lang, "talismanLevels")}>
+      <table class="level-table" data-pagefind-ignore>
+        <thead>
           <tr>
-            <th scope="row" class="level-label">{row.label}</th>
-            {hasValue && <td class="num level-value" data-testid="level-value">{row.value}</td>}
-            {hasCompanion && <td class="num">{row.companion?.attack}</td>}
-            {hasCompanion && <td class="num">{row.companion?.defence}</td>}
-            {hasCompanion && <td class="num">{row.companion?.cooldown}</td>}
-            <td class="num">{row.xp}</td>
+            <th scope="col">{t(lang, "talismanLevel")}</th>
+            {hasValue && <th scope="col">{t(lang, "levelValue")}</th>}
+            {hasCompanion && <th scope="col">{t(lang, "companionAttack")}</th>}
+            {hasCompanion && <th scope="col">{t(lang, "companionDefence")}</th>}
+            {hasCompanion && <th scope="col">{t(lang, "companionCooldown")}</th>}
+            <th scope="col">{t(lang, "xpToNextLevel")}</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {rows.map((row) => (
+            <tr>
+              <th scope="row" class="level-label">{row.label}</th>
+              {hasValue && <td class="num level-value" data-testid="level-value">{row.value}</td>}
+              {hasCompanion && <td class="num">{row.companion?.attack}</td>}
+              {hasCompanion && <td class="num">{row.companion?.defence}</td>}
+              {hasCompanion && <td class="num">{row.companion?.cooldown}</td>}
+              <td class="num">{row.xp}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
     <p class="effect-source" data-pagefind-ignore>{t(lang, "talismanLevelsNote")}</p>
   </EntrySection>
 )}
