@@ -4,6 +4,8 @@ export interface CompareWeapon {
   readonly slug: string;
   readonly kind: "melee" | "ranged";
   readonly name: string;
+  /** Folded names the picker's filter matches against. */
+  readonly search: string;
   readonly icon?: string;
   readonly href: string;
   readonly unique?: true;
@@ -30,6 +32,10 @@ export interface CompareLabels {
   readonly ranged: string;
   readonly copied: string;
   readonly copyFailed: string;
+  readonly clear: string;
+  readonly close: string;
+  readonly filter: string;
+  readonly noResults: string;
 }
 
 export interface ComparePayload {
@@ -38,7 +44,7 @@ export interface ComparePayload {
   readonly labels: CompareLabels;
 }
 
-const LABEL_KEYS = ["pick", "column", "stat", "effects", "best", "builtIn", "empty", "dropped", "melee", "ranged", "copied", "copyFailed"] as const satisfies readonly (keyof CompareLabels)[];
+const LABEL_KEYS = ["pick", "column", "stat", "effects", "best", "builtIn", "empty", "dropped", "melee", "ranged", "copied", "copyFailed", "clear", "close", "filter", "noResults"] as const satisfies readonly (keyof CompareLabels)[];
 const PLACEHOLDERS: Partial<Record<keyof CompareLabels, string>> = { column: "{n}", dropped: "{n}" };
 
 const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null && !Array.isArray(value);
@@ -52,6 +58,7 @@ const isWeapon = (value: unknown): value is CompareWeapon =>
   isText(value.slug) &&
   (value.kind === "melee" || value.kind === "ranged") &&
   isText(value.name) &&
+  isText(value.search) &&
   optionalText(value.icon) &&
   isText(value.href) &&
   (value.unique === undefined || value.unique === true) &&

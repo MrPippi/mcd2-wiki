@@ -2,6 +2,11 @@ import { expect, test, type Page } from "@playwright/test";
 
 const horizontalOverflow = (page: Page) => page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
 const table = (page: Page) => page.getByTestId("compare-table");
+const column = (page: Page, n: number) => page.getByTestId(`compare-pick-${n}`);
+const pick = async (page: Page, n: number, slug: string) => {
+  await column(page, n).locator("[data-pick-open]").click();
+  await page.getByTestId("compare-options").locator(`[data-slug="${slug}"]`).click();
+};
 
 test.describe("weapon compare", () => {
   test("starts empty with three pickers", async ({ page }) => {
@@ -14,22 +19,39 @@ test.describe("weapon compare", () => {
 
   test("picking weapons fills the table and the address", async ({ page }) => {
     await page.goto("/en/compare/");
-    await page.getByTestId("compare-pick-1").selectOption("axe");
-    await page.getByTestId("compare-pick-2").selectOption("battlestaff");
+    await pick(page, 1, "axe");
+    await pick(page, 2, "battlestaff");
     await expect(table(page).locator("thead")).toContainText("Axe");
     await expect(table(page).locator("thead")).toContainText("Battlestaff");
     await expect(page).toHaveURL(/\/en\/compare\/\?w=axe,battlestaff$/);
     await expect(table(page).locator("tbody th", { hasText: "Full combo" })).toHaveCount(1);
   });
 
-  test("packs picks to the left and drops a repeated pick", async ({ page }) => {
+  test("packs picks to the left and clears a column", async ({ page }) => {
     await page.goto("/en/compare/");
-    await page.getByTestId("compare-pick-3").selectOption("axe");
-    await expect(page.getByTestId("compare-pick-1")).toHaveValue("axe");
-    await expect(page.getByTestId("compare-pick-3")).toHaveValue("");
-    await page.getByTestId("compare-pick-2").selectOption("axe");
-    await expect(page.getByTestId("compare-pick-2")).toHaveValue("");
-    await expect(page).toHaveURL(/\/en\/compare\/\?w=axe$/);
+    await pick(page, 3, "axe");
+    await expect(column(page, 1)).toHaveAttribute("data-slug", "axe");
+    await expect(column(page, 3)).toHaveAttribute("data-slug", "");
+    await pick(page, 2, "bow");
+    await column(page, 1).locator("[data-clear]").click();
+    await expect(column(page, 1)).toHaveAttribute("data-slug", "bow");
+    await expect(page).toHaveURL(/\/en\/compare\/\?w=bow$/);
+  });
+
+  test("the picker shows icons, filters by name and blocks a weapon already picked", async ({ page }) => {
+    await page.goto("/en/compare/?w=axe");
+    await expect(column(page, 1).locator("[data-icon] img")).toBeVisible();
+    await column(page, 2).locator("[data-pick-open]").click();
+    const options = page.getByTestId("compare-options");
+    await expect(page.getByTestId("compare-dialog")).toBeVisible();
+    await expect(options.locator("[data-slug='axe']")).toBeDisabled();
+    await expect(options.locator("[data-slug='bow'] img")).toBeVisible();
+    await page.getByTestId("compare-filter").fill("crossb");
+    await expect(options.locator("[data-slug='bow']")).toHaveCount(0);
+    await expect(options.locator("[data-slug='crossbow']")).toBeVisible();
+    await page.getByTestId("compare-dialog").locator("[data-close]").click();
+    await expect(page.getByTestId("compare-dialog")).toBeHidden();
+    await expect(column(page, 2).locator("[data-pick-open]")).toBeFocused();
   });
 
   test("highlights the best value in a ranked row", async ({ page }) => {
@@ -41,8 +63,8 @@ test.describe("weapon compare", () => {
 
   test("a shared link restores the columns and mixes melee and ranged", async ({ page }) => {
     await page.goto("/en/compare/?w=axe,bow");
-    await expect(page.getByTestId("compare-pick-1")).toHaveValue("axe");
-    await expect(page.getByTestId("compare-pick-2")).toHaveValue("bow");
+    await expect(column(page, 1)).toHaveAttribute("data-slug", "axe");
+    await expect(column(page, 2)).toHaveAttribute("data-slug", "bow");
     const shots = table(page).locator("tbody tr", { has: page.locator("th", { hasText: "Shots per second" }) });
     await expect(shots.locator("td").first()).toHaveText("—");
   });
@@ -61,7 +83,7 @@ test.describe("weapon compare", () => {
 
   test("the language links keep the comparison", async ({ page }) => {
     await page.goto("/en/compare/");
-    await page.getByTestId("compare-pick-1").selectOption("axe");
+    await pick(page, 1, "axe");
     await expect(page.locator('a[data-lang="ja"]').first()).toHaveAttribute("href", /\/ja\/compare\/\?w=axe$/);
   });
 
