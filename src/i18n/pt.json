@@ -392,7 +392,16 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -841,5 +850,14 @@
   "guideDifficultyAssumedUnconfirmed": "Normal aponta para uma linha de multiplicador que não está nos dados, por isso aparece ×1. Ainda não confirmado no jogo.",
   "guideColAttackMod": "Modificador do poder de ataque",
   "guideColResistanceMod": "Modificador da resistência a dano",
-  "guideNoData": "Sem dados"
+  "guideNoData": "Sem dados",
+  "affixOddsTitle": "Chances de efeitos",
+  "affixOddsIntro": "A chance de cada efeito aleatório (e nível) aparecer pelo menos uma vez, dado que este item e sua raridade já foram gerados. Não é uma taxa de drop; efeitos embutidos estão sempre lá.",
+  "affixThreat": "Nível de ameaça",
+  "affixSlots": "Efeitos aleatórios",
+  "affixBonus": "Efeito extra da recompensa da Tempestade da Alma",
+  "affixAnyTier": "Qualquer",
+  "affixBuiltIn": "Embutido",
+  "affixOddsUnconfirmed": "Estas chances foram reconstruídas a partir das tabelas de dados do jogo e conferidas com uma tabela de terceiros; não foram verificadas no jogo.",
+  "affixControls": "Configurações de chances"
 }

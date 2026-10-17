@@ -11,6 +11,8 @@ export const GuidesStatusSchema = z.strictObject({
   rarityOdds: z.boolean(),
   /** That the game balances threat with the SecondPass row of DT_GameBalanceDefinition, and that Normal difficulty multiplies by 1. */
   threatBalanceRow: z.boolean(),
+  /** That the odds model (affix-pool.ts) matches how the game rolls random effects; reconstructed from the data and a third-party table, not read from the game. */
+  affixOdds: z.boolean().default(false),
 });
 export type GuidesStatus = z.infer<typeof GuidesStatusSchema>;
 

@@ -392,7 +392,16 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -841,5 +850,14 @@
   "guideDifficultyAssumedUnconfirmed": "Normal renvoie à une ligne de multiplicateur absente des données ; ×1 est donc affiché. Pas encore confirmé en jeu.",
   "guideColAttackMod": "Modificateur de puissance d'attaque",
   "guideColResistanceMod": "Modificateur de résistance aux dégâts",
-  "guideNoData": "Aucune donnée"
+  "guideNoData": "Aucune donnée",
+  "affixOddsTitle": "Chances des effets",
+  "affixOddsIntro": "La chance que chaque effet aléatoire (et chaque niveau) apparaisse au moins une fois, une fois cet objet et sa rareté déjà générés. Ce n'est pas un taux de butin ; les effets intégrés sont toujours présents.",
+  "affixThreat": "Niveau de menace",
+  "affixSlots": "Effets aléatoires",
+  "affixBonus": "Effet bonus de la récompense de Tempête d'âmes",
+  "affixAnyTier": "Tous",
+  "affixBuiltIn": "Intégré",
+  "affixOddsUnconfirmed": "Ces chances sont reconstituées à partir des tables de données du jeu et recoupées avec une table tierce ; elles n'ont pas été vérifiées en jeu.",
+  "affixControls": "Réglages des chances"
 }

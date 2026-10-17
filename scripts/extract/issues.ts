@@ -91,7 +91,8 @@ export type IssueType =
   | "missing-curve-tables"
   | "curve-unsupported"
   | "curve-table-invalid"
-  | "curve-table-duplicate";
+  | "curve-table-duplicate"
+  | "affix-ignored";
 
 export interface Issue {
   readonly type: IssueType;

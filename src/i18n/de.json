@@ -390,7 +390,16 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "_english": [
     "armorPiece",
@@ -842,5 +851,14 @@
   "guideDifficultyAssumedUnconfirmed": "Normal verweist auf eine Multiplikatorzeile, die in den Daten fehlt; daher wird ×1 angezeigt. Im Spiel noch nicht bestätigt.",
   "guideColAttackMod": "Angriffswert-Modifikator",
   "guideColResistanceMod": "Schadensresistenz-Modifikator",
-  "guideNoData": "Keine Daten"
+  "guideNoData": "Keine Daten",
+  "affixOddsTitle": "Effektchancen",
+  "affixOddsIntro": "Die Chance, dass jeder zufällige Effekt (und jede Stufe) mindestens einmal erscheint, sofern dieser Gegenstand und seine Seltenheit schon feststehen. Das ist keine Droprate; eingebaute Effekte sind immer da.",
+  "affixThreat": "Bedrohungsstufe",
+  "affixSlots": "Zufällige Effekte",
+  "affixBonus": "Bonus-Effekt der Seelensturm-Belohnung",
+  "affixAnyTier": "Beliebig",
+  "affixBuiltIn": "Eingebaut",
+  "affixOddsUnconfirmed": "Diese Chancen wurden aus den Datentabellen des Spiels rekonstruiert und mit einer Tabelle Dritter abgeglichen; im Spiel sind sie nicht überprüft.",
+  "affixControls": "Chancen-Einstellungen"
 }

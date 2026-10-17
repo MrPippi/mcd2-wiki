@@ -442,5 +442,14 @@
   "guideDifficultyAssumedUnconfirmed": "一般難度指向資料中不存在的倍率列，因此顯示為 ×1；尚未在遊戲中確認。",
   "guideColAttackMod": "攻擊力修正",
   "guideColResistanceMod": "傷害抗性修正",
-  "guideNoData": "無資料"
+  "guideNoData": "無資料",
+  "affixOddsTitle": "效果出現機率",
+  "affixOddsIntro": "在這件裝備與其稀有度已經產生的前提下，每個隨機效果（各階級）至少出現一次的機率。這不是掉落機率；內建效果一定會有。",
+  "affixThreat": "威脅等級",
+  "affixSlots": "隨機效果數",
+  "affixBonus": "靈魂風暴獎勵的額外效果",
+  "affixAnyTier": "任一",
+  "affixBuiltIn": "內建",
+  "affixOddsUnconfirmed": "這些機率由遊戲資料表重建，並與第三方整理的表交叉比對，尚未在遊戲內驗證。",
+  "affixControls": "機率設定"
 }

@@ -392,7 +392,16 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -841,5 +850,14 @@
   "guideDifficultyAssumedUnconfirmed": "Normale rimanda a una riga di moltiplicatore che non è nei dati, quindi viene mostrato ×1. Non ancora confermato nel gioco.",
   "guideColAttackMod": "Modificatore del potere d'attacco",
   "guideColResistanceMod": "Modificatore della resistenza ai danni",
-  "guideNoData": "Nessun dato"
+  "guideNoData": "Nessun dato",
+  "affixOddsTitle": "Probabilità degli effetti",
+  "affixOddsIntro": "La probabilità che ogni effetto casuale (e livello) compaia almeno una volta, dato che questo oggetto e la sua rarità sono già stati generati. Non è un tasso di drop; gli effetti integrati ci sono sempre.",
+  "affixThreat": "Livello di minaccia",
+  "affixSlots": "Effetti casuali",
+  "affixBonus": "Effetto bonus della ricompensa di Tempesta di anime",
+  "affixAnyTier": "Qualsiasi",
+  "affixBuiltIn": "Integrato",
+  "affixOddsUnconfirmed": "Queste probabilità sono ricostruite dalle tabelle dati del gioco e confrontate con una tabella di terzi; non sono state verificate in gioco.",
+  "affixControls": "Impostazioni delle probabilità"
 }

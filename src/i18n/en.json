@@ -445,5 +445,14 @@
   "guideDifficultyAssumedUnconfirmed": "Normal points at a multiplier row the data does not contain, so ×1 is shown; not yet confirmed in game.",
   "guideColAttackMod": "Attack power modifier",
   "guideColResistanceMod": "Damage resistance modifier",
-  "guideNoData": "No data"
+  "guideNoData": "No data",
+  "affixOddsTitle": "Effect odds",
+  "affixOddsIntro": "The chance that each random effect (and tier) appears at least once, given that this item and its rarity are already generated. It is not a drop rate; built-in effects are always there.",
+  "affixThreat": "Threat level",
+  "affixSlots": "Random effects",
+  "affixBonus": "Soul Storm reward bonus effect",
+  "affixAnyTier": "Any",
+  "affixBuiltIn": "Built-in",
+  "affixOddsUnconfirmed": "These odds are rebuilt from the game's data tables and cross-checked against a third-party table; they have not been verified in game.",
+  "affixControls": "Odds settings"
 }

@@ -389,7 +389,16 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -839,5 +848,14 @@
   "guideDifficultyAssumedUnconfirmed": "普通难度指向数据中不存在的倍率行，因此显示为 ×1；尚未在游戏中确认。",
   "guideColAttackMod": "攻击力修正",
   "guideColResistanceMod": "伤害抗性修正",
-  "guideNoData": "无数据"
+  "guideNoData": "无数据",
+  "affixOddsTitle": "效果出现概率",
+  "affixOddsIntro": "在这件装备及其稀有度已经生成的前提下，每个随机效果（各阶级）至少出现一次的概率。这不是掉落概率；内置效果一定会有。",
+  "affixThreat": "威胁等级",
+  "affixSlots": "随机效果数",
+  "affixBonus": "灵魂风暴奖励的额外效果",
+  "affixAnyTier": "任一",
+  "affixBuiltIn": "内置",
+  "affixOddsUnconfirmed": "这些概率由游戏数据表重建，并与第三方整理的表交叉比对，尚未在游戏内验证。",
+  "affixControls": "概率设置"
 }

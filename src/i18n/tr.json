@@ -392,7 +392,16 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -840,5 +849,14 @@
   "guideDifficultyAssumedUnconfirmed": "Normal, verilerde bulunmayan bir çarpan satırına işaret ediyor, bu yüzden ×1 gösteriliyor. Oyunda henüz doğrulanmadı.",
   "guideColAttackMod": "Saldırı gücü düzeltmesi",
   "guideColResistanceMod": "Hasar direnci düzeltmesi",
-  "guideNoData": "Veri yok"
+  "guideNoData": "Veri yok",
+  "affixOddsTitle": "Etki olasılıkları",
+  "affixOddsIntro": "Bu eşya ve nadirliği zaten oluşturulmuşken, her rastgele etkinin (ve kademenin) en az bir kez görünme olasılığı. Bu bir düşme oranı değildir; yerleşik etkiler her zaman vardır.",
+  "affixThreat": "Tehdit seviyesi",
+  "affixSlots": "Rastgele etkiler",
+  "affixBonus": "Ruh Fırtınası ödülünün ek etkisi",
+  "affixAnyTier": "Herhangi",
+  "affixBuiltIn": "Yerleşik",
+  "affixOddsUnconfirmed": "Bu olasılıklar oyunun veri tablolarından yeniden oluşturuldu ve üçüncü taraf bir tabloyla karşılaştırıldı; oyun içinde doğrulanmadı.",
+  "affixControls": "Olasılık ayarları"
 }

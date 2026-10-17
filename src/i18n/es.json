@@ -392,7 +392,16 @@
     "guideDifficultyAssumedUnconfirmed",
     "guideColAttackMod",
     "guideColResistanceMod",
-    "guideNoData"
+    "guideNoData",
+    "affixOddsTitle",
+    "affixOddsIntro",
+    "affixThreat",
+    "affixSlots",
+    "affixBonus",
+    "affixAnyTier",
+    "affixBuiltIn",
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -841,5 +850,14 @@
   "guideDifficultyAssumedUnconfirmed": "Normal apunta a una fila de multiplicador que no está en los datos, así que se muestra ×1. Aún sin confirmar en el juego.",
   "guideColAttackMod": "Modificador de poder de ataque",
   "guideColResistanceMod": "Modificador de resistencia al daño",
-  "guideNoData": "Sin datos"
+  "guideNoData": "Sin datos",
+  "affixOddsTitle": "Probabilidad de efectos",
+  "affixOddsIntro": "La probabilidad de que cada efecto aleatorio (y nivel) aparezca al menos una vez, dado que este objeto y su rareza ya están generados. No es una tasa de botín; los efectos integrados siempre están.",
+  "affixThreat": "Nivel de amenaza",
+  "affixSlots": "Efectos aleatorios",
+  "affixBonus": "Efecto extra de la recompensa de Tormenta de almas",
+  "affixAnyTier": "Cualquiera",
+  "affixBuiltIn": "Integrado",
+  "affixOddsUnconfirmed": "Estas probabilidades se reconstruyen a partir de las tablas de datos del juego y se contrastaron con una tabla de terceros; no se han verificado en el juego.",
+  "affixControls": "Ajustes de probabilidad"
 }
