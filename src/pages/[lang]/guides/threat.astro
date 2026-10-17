@@ -80,6 +80,7 @@ const assumedShown = data.difficulty.some((item) => item.assumed === true);
       )}
       <div class="guide-scroll guide-scroll-tall" tabindex="0" role="region" aria-label={t(lang, "guideThreatByLevel")}>
         <table class="guide-table guide-table-sticky">
+          <caption class="sr-only">{t(lang, "guideThreatByLevel")}</caption>
           <thead>
             <tr>
               <th scope="col" rowspan="2">{t(lang, "threat")}</th>
@@ -92,7 +93,10 @@ const assumedShown = data.difficulty.some((item) => item.assumed === true);
             {data.threat.map((row) => (
               <tr data-testid="guide-threat-row">
                 <th scope="row" class="guide-number">{formatNumber(row.level, lang)}</th>
-                {columns.map((column) => <td class="guide-number">{column.value(row) ?? "—"}</td>)}
+                {columns.map((column) => {
+                  const value = column.value(row);
+                  return <td class="guide-number">{value ?? <><span aria-hidden="true">—</span><span class="sr-only">{t(lang, "guideNoData")}</span></>}</td>;
+                })}
               </tr>
             ))}
           </tbody>

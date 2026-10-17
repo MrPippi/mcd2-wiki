@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
-import { curveNotes, evaluateCurve, findCurve, loadCurveTables, parseCurveRef, sampleThreat, type Curve } from "../../../scripts/extract/curve-tables";
+import { curveNotes, evaluateCurve, findCurve, levelsOf, loadCurveTables, parseCurveRef, sampleThreat, type Curve } from "../../../scripts/extract/curve-tables";
 import { curveFile, curveOf, rawCurveFiles, ref, richRow, simpleRow } from "../../helpers/curve-tables";
 
 let sourceRoot: string;
@@ -32,6 +32,17 @@ describe("evaluateCurve", () => {
 
   it("reads a single key as a constant", () => {
     expect(evaluateCurve(linear([1, 1.5]), 17)).toBe(1.5);
+  });
+});
+
+describe("levelsOf", () => {
+  it("spans the whole levels the curves have keys for", () => {
+    expect(levelsOf([linear([1, 0], [10, 1]), linear([2, 0], [12, 1])])).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+  });
+
+  it("falls back to 1..20 without curves or with a nonsense span", () => {
+    expect(levelsOf([])).toHaveLength(20);
+    expect(levelsOf([linear([1, 0], [5000, 1])])).toHaveLength(20);
   });
 });
 
@@ -100,8 +111,23 @@ describe("loadCurveTables", () => {
     expect(issues.map((item) => item.type)).toEqual(["missing-curve-tables"]);
   });
 
-  it("stops on a table whose shape changed, naming the file", async () => {
-    await put("CT_BAD.json", [{ Name: "CT_BAD", Rows: { A: { Keys: [] } } }]);
-    await expect(loadCurveTables(sourceRoot)).rejects.toThrow(/CT_BAD\.json/);
+  it("reports a malformed row, a malformed file and invalid JSON without stopping, and still reads the good ones", async () => {
+    await put("CT_GOOD.json", curveFile("CT_GOOD", "SimpleCurves", { A: simpleRow([[1, 2]]), Broken: { Keys: [] } }));
+    await put("CT_SHAPE.json", { not: "a curve table" });
+    await writeFile(path.join(sourceRoot, "CurveTables", "CT_JSON.json"), "{oops", "utf8");
+    const { tables, issues } = await loadCurveTables(sourceRoot);
+    expect(Object.keys(tables.CT_GOOD)).toEqual(["A"]);
+    expect(tables.CT_SHAPE).toEqual({});
+    expect(issues.map((item) => [item.type, item.detail.split(":")[0]])).toEqual([
+      ["curve-table-invalid", "CT_GOOD/Broken"], ["curve-table-invalid", "CT_JSON.json"], ["curve-table-invalid", "CT_SHAPE.json"],
+    ]);
+  });
+
+  it("reports a file name found twice and keeps the first", async () => {
+    await put("A/CT_D.json", curveFile("CT_D", "SimpleCurves", { A: simpleRow([[1, 1]]) }));
+    await put("B/CT_D.json", curveFile("CT_D", "SimpleCurves", { A: simpleRow([[1, 9]]) }));
+    const { tables, issues } = await loadCurveTables(sourceRoot);
+    expect(curveOf(tables, "CT_D", "A").keys[0].value).toBe(1);
+    expect(issues.map((item) => item.type)).toEqual(["curve-table-duplicate"]);
   });
 });

@@ -389,7 +389,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -825,15 +828,18 @@
   "guideDifficultyLowDrops": "Aucun objet {special} ou {unique} n'est lâché.",
   "guideThreatByLevel": "Par niveau de menace",
   "guideColRecLevel": "Niveau recommandé",
-  "guideGroupEffects": "Chance des paliers d'effets",
-  "guideGroupRarity": "Chance de butin par rareté",
+  "guideGroupEffects": "Facteur de poids des paliers d'effets",
+  "guideGroupRarity": "Facteur de poids par rareté",
   "guideGroupMobs": "Apparition des monstres",
   "guideColVariant": "Chance d'apparition d'une variante",
-  "guideColSoulStated": "Coût d'apparition (état d'âme)",
+  "guideColSoulStated": "Coût d'apparition (corrompu par les âmes)",
   "guideColMiniboss": "Coût d'apparition (mini-boss)",
   "guideTierStarts": "Les effets de palier {tier} apparaissent à partir de la menace {level}.",
   "guideTierEnds": "À partir de la menace {level}, les effets de palier {tier} n'apparaissent plus.",
-  "guideThreatNote": "Les colonnes de dégâts et de chance sont des facteurs par lesquels le jeu multiplie ; les coûts sont des budgets d'apparition. Les données n'indiquent pas comment ils se combinent avec les zones, les coffres ou la difficulté.",
-  "guideThreatBalanceUnconfirmed": "Les données contiennent deux lignes d'équilibrage (Active et SecondPass). Ces chiffres viennent de SecondPass ; la ligne réellement utilisée par le jeu n'est pas dans les données. Pas encore confirmé en jeu.",
-  "guideDifficultyAssumedUnconfirmed": "Normal renvoie à une ligne de multiplicateur absente des données ; ×1 est donc affiché. Pas encore confirmé en jeu."
+  "guideThreatNote": "Les modificateurs et facteurs de poids multiplient les valeurs de base du jeu (ce ne sont pas des chances) ; les coûts sont des budgets d'apparition. Les données n'indiquent pas comment ils se combinent avec les zones, les coffres ou la difficulté.",
+  "guideThreatBalanceUnconfirmed": "Pas encore confirmé en jeu : les données contiennent deux lignes d'équilibrage (Active et SecondPass) et ces chiffres viennent de SecondPass ; si les courbes de dégâts globales s'appliquent comme indiqué ; le niveau recommandé, déduit par (menace − 1) × niveaux par menace ; et la chance de variante, lue comme une fraction et affichée en pourcentage.",
+  "guideDifficultyAssumedUnconfirmed": "Normal renvoie à une ligne de multiplicateur absente des données ; ×1 est donc affiché. Pas encore confirmé en jeu.",
+  "guideColAttackMod": "Modificateur de puissance d'attaque",
+  "guideColResistanceMod": "Modificateur de résistance aux dégâts",
+  "guideNoData": "Aucune donnée"
 }

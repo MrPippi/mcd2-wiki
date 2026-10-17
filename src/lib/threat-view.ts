@@ -26,8 +26,8 @@ function allColumns(lang: Lang): ThreatColumn[] {
   const share = (value: number): string => formatShare(value, lang);
   return [
     { id: "recommended", label: t(lang, "guideColRecLevel"), value: (row) => (row.recommendedLevel === undefined ? undefined : number(row.recommendedLevel)) },
-    { id: "attack", label: t(lang, "guideAttackPower"), value: (row) => (row.attackPower === undefined ? undefined : formatMultiplier(row.attackPower, lang)) },
-    { id: "resistance", label: t(lang, "guideDamageResistance"), value: (row) => (row.damageResistance === undefined ? undefined : formatMultiplier(row.damageResistance, lang)) },
+    { id: "attack", label: t(lang, "guideColAttackMod"), value: (row) => (row.attackPower === undefined ? undefined : formatMultiplier(row.attackPower, lang)) },
+    { id: "resistance", label: t(lang, "guideColResistanceMod"), value: (row) => (row.damageResistance === undefined ? undefined : formatMultiplier(row.damageResistance, lang)) },
     ...TIERS.map((index): ThreatColumn => ({
       id: `tier-${index + 1}`, label: roman(index + 1), group: "guideGroupEffects", value: (row) => { const factor = row.effectTiers?.[index]; return factor === undefined ? undefined : number(factor); },
     })),

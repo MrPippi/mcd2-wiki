@@ -51,6 +51,8 @@ describe("guides formatting", () => {
   it("writes numbers, signs and shares the page language's way", () => {
     expect(formatNumber(99999, "en")).toBe("99,999");
     expect(formatNumber(99999, "de")).toBe("99.999");
+    expect(formatNumber(0.0625, "en")).toBe("0.0625");
+    expect(formatNumber(0.12345, "en")).toBe("0.1235");
     expect(formatSigned(-2, "en")).toBe("-2");
     expect(formatSigned(1, "en")).toBe("+1");
     expect(formatSigned(0, "en")).toBe("0");
@@ -115,6 +117,13 @@ describe("tierNotes", () => {
       { tier: 1, kind: "ends", level: 20 },
       { tier: 2, kind: "starts", level: 3 },
       { tier: 3, kind: "starts", level: 6 },
+    ]);
+  });
+
+  it("reports every switch of a factor that comes and goes", () => {
+    const rows = [0, 1, 0, 1].map((factor, index) => ({ level: index + 1, effectTiers: [1, factor, 1] as [number, number, number] }));
+    expect(tierNotes(rows)).toEqual([
+      { tier: 2, kind: "starts", level: 2 }, { tier: 2, kind: "ends", level: 3 }, { tier: 2, kind: "starts", level: 4 },
     ]);
   });
 

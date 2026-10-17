@@ -155,6 +155,15 @@ describe("threat guide", () => {
     expect(html).toContain('colspan="3"');
   });
 
+  it("gives the table a hidden caption and the empty cells a text", async () => {
+    const html = await render(ThreatPage, "en");
+    expect(html).toContain('<caption class="sr-only">By threat level</caption>');
+    const sparse = guidesData.threat.map((row, index) => (index === 0 ? row : { level: row.level }));
+    const gaps = await render(ThreatPage, "en", { ...guidesData, threat: sparse });
+    expect(count(gaps, '<span class="sr-only">No data</span>')).toBe(19 * 13);
+    expect(gaps).toContain('<span aria-hidden="true">—</span>');
+  });
+
   it("leaves out a section and a column group whose data is missing", async () => {
     const noDifficulty = await render(ThreatPage, "en", { ...guidesData, difficulty: [] });
     expect(noDifficulty).not.toContain('data-testid="guide-difficulty"');
@@ -163,7 +172,7 @@ describe("threat guide", () => {
     expect(noThreat).not.toContain('data-testid="guide-threat-table"');
     const levelsOnly = await render(ThreatPage, "en", { ...guidesData, threat: bare });
     expect(count(levelsOnly, 'data-testid="guide-threat-row"')).toBe(20);
-    expect(levelsOnly).not.toContain("Effect tier chance");
+    expect(levelsOnly).not.toContain("Effect tier weight factor");
     expect(levelsOnly).not.toContain('data-testid="guide-tier-notes"');
   });
 

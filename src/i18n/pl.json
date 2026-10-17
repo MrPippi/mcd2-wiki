@@ -387,7 +387,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "_english": [
     "normal",
@@ -828,15 +831,18 @@
   "guideDifficultyLowDrops": "Nie wypadają przedmioty o rzadkości {special} ani {unique}.",
   "guideThreatByLevel": "Według poziomu zagrożenia",
   "guideColRecLevel": "Zalecany poziom",
-  "guideGroupEffects": "Szansa stopni efektów",
-  "guideGroupRarity": "Szansa na łup według rzadkości",
+  "guideGroupEffects": "Współczynnik wagi stopni efektów",
+  "guideGroupRarity": "Współczynnik wagi rzadkości",
   "guideGroupMobs": "Pojawianie się mobów",
   "guideColVariant": "Szansa na wariant",
-  "guideColSoulStated": "Koszt pojawienia się (stan duszy)",
+  "guideColSoulStated": "Koszt pojawienia się (wersja splugawiona)",
   "guideColMiniboss": "Koszt pojawienia się (mini-boss)",
   "guideTierStarts": "Efekty stopnia {tier} pojawiają się od zagrożenia {level}.",
   "guideTierEnds": "Od zagrożenia {level} efekty stopnia {tier} już się nie pojawiają.",
-  "guideThreatNote": "Kolumny obrażeń i szans to współczynniki, przez które gra mnoży; koszty to budżety pojawiania się. Dane nie mówią, jak łączą się z obszarami, skrzyniami czy poziomem trudności.",
-  "guideThreatBalanceUnconfirmed": "Dane zawierają dwa wiersze balansu (Active i SecondPass). Te liczby pochodzą z SecondPass; którego wiersza używa gra, nie ma w danych. Jeszcze nie potwierdzono w grze.",
-  "guideDifficultyAssumedUnconfirmed": "Normalny wskazuje wiersz mnożnika, którego nie ma w danych, więc pokazano ×1. Jeszcze nie potwierdzono w grze."
+  "guideThreatNote": "Modyfikatory i współczynniki wagi mnożą bazowe wartości gry (to nie są szanse); koszty to budżety pojawiania się. Dane nie mówią, jak łączą się z obszarami, skrzyniami czy poziomem trudności.",
+  "guideThreatBalanceUnconfirmed": "Jeszcze nie potwierdzono w grze: dane mają dwa wiersze balansu (Active i SecondPass), liczby pochodzą z SecondPass; czy globalne krzywe obrażeń działają tak, jak pokazano; zalecany poziom wyliczono jako (zagrożenie − 1) × poziomy na zagrożenie; szansę na wariant odczytano jako ułamek i pokazano w procentach.",
+  "guideDifficultyAssumedUnconfirmed": "Normalny wskazuje wiersz mnożnika, którego nie ma w danych, więc pokazano ×1. Jeszcze nie potwierdzono w grze.",
+  "guideColAttackMod": "Modyfikator siły ataku",
+  "guideColResistanceMod": "Modyfikator odporności na obrażenia",
+  "guideNoData": "Brak danych"
 }

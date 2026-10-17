@@ -389,7 +389,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -825,15 +828,18 @@
   "guideDifficultyLowDrops": "No caen objetos {special} ni {unique}.",
   "guideThreatByLevel": "Por nivel de amenaza",
   "guideColRecLevel": "Nivel recomendado",
-  "guideGroupEffects": "Probabilidad de niveles de efectos",
-  "guideGroupRarity": "Probabilidad de botín por rareza",
+  "guideGroupEffects": "Factor de peso de niveles de efectos",
+  "guideGroupRarity": "Factor de peso por rareza",
   "guideGroupMobs": "Aparición de monstruos",
   "guideColVariant": "Probabilidad de variante",
-  "guideColSoulStated": "Coste de aparición (estado de alma)",
+  "guideColSoulStated": "Coste de aparición (corrompido por almas)",
   "guideColMiniboss": "Coste de aparición (minijefe)",
   "guideTierStarts": "Los efectos de nivel {tier} aparecen desde la amenaza {level}.",
   "guideTierEnds": "Desde la amenaza {level}, los efectos de nivel {tier} dejan de aparecer.",
-  "guideThreatNote": "Las columnas de daño y probabilidad son factores por los que el juego multiplica; los costes son presupuestos de aparición. Los datos no dicen cómo se combinan con zonas, cofres o dificultad.",
-  "guideThreatBalanceUnconfirmed": "Los datos tienen dos filas de equilibrio (Active y SecondPass). Estas cifras son de SecondPass; cuál usa el juego no consta en los datos. Aún sin confirmar en el juego.",
-  "guideDifficultyAssumedUnconfirmed": "Normal apunta a una fila de multiplicador que no está en los datos, así que se muestra ×1. Aún sin confirmar en el juego."
+  "guideThreatNote": "Los modificadores y factores de peso multiplican los valores base del juego (no son probabilidades); los costes son presupuestos de aparición. Los datos no dicen cómo se combinan con zonas, cofres o dificultad.",
+  "guideThreatBalanceUnconfirmed": "Aún sin confirmar en el juego: los datos tienen dos filas de equilibrio (Active y SecondPass) y estas cifras son de SecondPass; si las curvas de daño globales se aplican como se muestran; el nivel recomendado, calculado como (amenaza − 1) × niveles por amenaza; y la probabilidad de variante, leída como fracción y mostrada en porcentaje.",
+  "guideDifficultyAssumedUnconfirmed": "Normal apunta a una fila de multiplicador que no está en los datos, así que se muestra ×1. Aún sin confirmar en el juego.",
+  "guideColAttackMod": "Modificador de poder de ataque",
+  "guideColResistanceMod": "Modificador de resistencia al daño",
+  "guideNoData": "Sin datos"
 }

@@ -388,7 +388,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -826,15 +829,18 @@
   "guideDifficultyLowDrops": "Inga föremål av sällsyntheten {special} eller {unique} släpps.",
   "guideThreatByLevel": "Per hotnivå",
   "guideColRecLevel": "Rekommenderad nivå",
-  "guideGroupEffects": "Chans för effektnivåer",
-  "guideGroupRarity": "Släppchans per sällsynthet",
+  "guideGroupEffects": "Viktfaktor för effektnivåer",
+  "guideGroupRarity": "Viktfaktor för sällsynthet",
   "guideGroupMobs": "Monster som dyker upp",
   "guideColVariant": "Chans för variant",
-  "guideColSoulStated": "Spawnkostnad (själstillstånd)",
+  "guideColSoulStated": "Spawnkostnad (själsförvriden)",
   "guideColMiniboss": "Spawnkostnad (minibossen)",
   "guideTierStarts": "Effekter på nivå {tier} dyker upp från hot {level}.",
   "guideTierEnds": "Från hot {level} dyker effekter på nivå {tier} inte upp längre.",
-  "guideThreatNote": "Kolumnerna för skada och chans är faktorer som spelet multiplicerar med; kostnader är spawnbudgetar. Datan säger inte hur de kombineras med områden, kistor eller svårighetsgrad.",
-  "guideThreatBalanceUnconfirmed": "Datan innehåller två balansrader (Active och SecondPass). Siffrorna här är från SecondPass; vilken rad spelet använder finns inte i datan. Ännu inte bekräftat i spelet.",
-  "guideDifficultyAssumedUnconfirmed": "Normal pekar på en multiplikatorrad som saknas i datan, så ×1 visas. Ännu inte bekräftat i spelet."
+  "guideThreatNote": "Modifierare och viktfaktorer multiplicerar spelets basvärden (de är inte chanser); kostnader är spawnbudgetar. Datan säger inte hur de kombineras med områden, kistor eller svårighetsgrad.",
+  "guideThreatBalanceUnconfirmed": "Ännu inte bekräftat i spelet: datan har två balansrader (Active och SecondPass) och siffrorna är från SecondPass; om de globala skadekurvorna gäller som visat; den rekommenderade nivån, härledd som (hot − 1) × nivåer per hot; och variantchansen, läst som en andel och visad i procent.",
+  "guideDifficultyAssumedUnconfirmed": "Normal pekar på en multiplikatorrad som saknas i datan, så ×1 visas. Ännu inte bekräftat i spelet.",
+  "guideColAttackMod": "Modifierare för attackstyrka",
+  "guideColResistanceMod": "Modifierare för skadeskydd",
+  "guideNoData": "Inga data"
 }

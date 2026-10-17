@@ -85,11 +85,13 @@ describe("extractGuides", () => {
     expect(issues.map((item) => item.type)).toContain("missing-curve-tables");
   });
 
-  it("reports an assumed Normal row and a changed curve table, and stops on a malformed one", async () => {
+  it("reports an assumed Normal row, and a malformed curve table without stopping", async () => {
     const { issues } = await extractGuides(input());
     expect(issues.filter((item) => item.detail.includes("NormalDifficultyMultiplier"))).toHaveLength(2);
     await putCurves({ CT_BAD: curveFile("CT_BAD", "SimpleCurves", { A: { Keys: [] } }) });
-    await expect(extractGuides(input())).rejects.toThrow(/CT_BAD/);
+    const again = await extractGuides(input());
+    expect(again.data.threat).toHaveLength(20);
+    expect(again.issues.some((item) => item.type === "curve-table-invalid" && item.detail.startsWith("CT_BAD/A"))).toBe(true);
   });
 
   it("stops with the field named when a built value breaks the output schema", async () => {

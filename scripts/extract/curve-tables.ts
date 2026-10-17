@@ -22,7 +22,8 @@ const CurveRowSchema = z.looseObject({
   PreInfinityExtrap: Mode.optional(),
   PostInfinityExtrap: Mode.optional(),
 });
-const CurveTableSchema = z.looseObject({ Rows: z.record(z.string(), CurveRowSchema) });
+/** Rows are checked one by one, so one malformed curve costs only itself. */
+const CurveTableSchema = z.looseObject({ Rows: z.record(z.string(), z.unknown()) });
 const CurveFileSchema = z.tuple([CurveTableSchema]);
 
 export interface CurveKey {
@@ -86,19 +87,40 @@ function readRow(row: z.infer<typeof CurveRowSchema>): Curve {
   };
 }
 
-function readTable(file: string, raw: unknown): { name: string; rows: Record<string, Curve> } {
+interface ReadTable {
+  readonly name: string;
+  readonly rows: Record<string, Curve>;
+  readonly issues: Issue[];
+}
+
+/** One file; whatever is malformed (the file, or single rows) is reported and skipped, so only the curves a guide reads must be valid. */
+function readTable(file: string, raw: unknown): ReadTable {
+  const name = path.basename(file, ".json");
   const parsed = CurveFileSchema.safeParse(raw);
   if (!parsed.success) {
-    throw new ExtractError(`曲線表 ${file} 欄位與預期不符（遊戲更新了格式？）：${parsed.error.issues.slice(0, 3).map(formatZodIssue).join("；")}`);
+    return { name, rows: {}, issues: [issue("curve-table-invalid", `${name}.json: ${parsed.error.issues.slice(0, 2).map(formatZodIssue).join("；")}`)] };
   }
-  const name = path.basename(file, ".json");
-  return { name, rows: Object.fromEntries(Object.entries(parsed.data[0].Rows).map(([row, value]) => [row, readRow(value)])) };
+  const rows = Object.entries(parsed.data[0].Rows).map(([row, value]) => ({ row, parsed: CurveRowSchema.safeParse(value) }));
+  return {
+    name,
+    rows: Object.fromEntries(rows.flatMap(({ row, parsed: one }) => (one.success ? [[row, readRow(one.data)]] : []))),
+    issues: rows.flatMap(({ row, parsed: one }) => (one.success ? [] : [issue("curve-table-invalid", `${name}/${row}: ${one.error.issues.slice(0, 2).map(formatZodIssue).join("；")}`)])),
+  };
+}
+
+async function readCurveFile(file: string): Promise<ReadTable> {
+  try {
+    return readTable(file, await readJsonFile(file, `曲線表 ${path.basename(file)}`));
+  } catch (error) {
+    if (!(error instanceof ExtractError)) throw error;
+    return { name: path.basename(file, ".json"), rows: {}, issues: [issue("curve-table-invalid", `${path.basename(file)}: ${error.message}`)] };
+  }
 }
 
 async function listCurveFiles(dir: string): Promise<string[] | undefined> {
   try {
     const found = await readdir(dir, { recursive: true });
-    return found.filter((file) => /^CT_.+\.json$/.test(path.basename(file))).map((file) => path.join(dir, file));
+    return found.filter((file) => /^CT_.+\.json$/.test(path.basename(file))).sort().map((file) => path.join(dir, file));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code === "ENOENT") return undefined;
     throw new ExtractError(`無法讀取曲線表資料夾：${dir}（${(error as Error).message}）`);
@@ -110,8 +132,11 @@ export async function loadCurveTables(sourceRoot: string): Promise<LoadedCurveTa
   const dir = path.join(sourceRoot, CURVE_TABLES_DIR);
   const files = await listCurveFiles(dir);
   if (!files) return { tables: {}, issues: [issue("missing-curve-tables", CURVE_TABLES_DIR)] };
-  const tables = await Promise.all(files.map(async (file) => readTable(file, await readJsonFile(file, `曲線表 ${path.basename(file)}`))));
-  return { tables: Object.fromEntries(tables.map(({ name, rows }) => [name, rows])), issues: [] };
+  // One file at a time: there are few, and a failure then names its own file.
+  const read = await files.reduce<Promise<ReadTable[]>>(async (done, file) => [...(await done), await readCurveFile(file)], Promise.resolve([]));
+  const first = read.filter((table, index) => read.findIndex((other) => other.name === table.name) === index);
+  const duplicates = read.filter((table) => !first.includes(table)).map((table) => issue("curve-table-duplicate", `${table.name}.json is found more than once; the first is used`));
+  return { tables: Object.fromEntries(first.map(({ name, rows }) => [name, rows])), issues: [...first.flatMap(({ issues }) => issues), ...duplicates] };
 }
 
 const REF_FILE = /\/([^/.']+)\.[^/.']+'?$/;
@@ -144,3 +169,13 @@ export function evaluateCurve(curve: Curve, time: number): number {
 /** The curve's value at each threat level (1..20), cleaned of float noise. */
 export const sampleThreat = (curve: Curve, levels: readonly number[] = THREAT_LEVELS): number[] =>
   levels.map((level) => roundValue(evaluateCurve(curve, level)));
+
+const MAX_LEVELS = 100;
+
+/** The whole threat levels the curves have keys for (first key to last key); 1..20 without curves or when the span makes no sense. */
+export function levelsOf(curves: readonly Curve[]): number[] {
+  if (curves.length === 0) return [...THREAT_LEVELS];
+  const from = Math.max(1, Math.ceil(Math.min(...curves.map((curve) => curve.keys[0].time))));
+  const to = Math.floor(Math.max(...curves.map((curve) => curve.keys[curve.keys.length - 1].time)));
+  return to >= from && to - from < MAX_LEVELS ? Array.from({ length: to - from + 1 }, (_, index) => from + index) : [...THREAT_LEVELS];
+}

@@ -389,7 +389,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -825,15 +828,18 @@
   "guideDifficultyLowDrops": "Nessun oggetto {special} o {unique} viene rilasciato.",
   "guideThreatByLevel": "Per livello di minaccia",
   "guideColRecLevel": "Livello consigliato",
-  "guideGroupEffects": "Probabilità dei livelli degli effetti",
-  "guideGroupRarity": "Probabilità di drop per rarità",
+  "guideGroupEffects": "Fattore di peso dei livelli degli effetti",
+  "guideGroupRarity": "Fattore di peso per rarità",
   "guideGroupMobs": "Comparsa dei mob",
   "guideColVariant": "Probabilità di variante",
-  "guideColSoulStated": "Costo di comparsa (stato d'anima)",
+  "guideColSoulStated": "Costo di comparsa (corrotto dalle anime)",
   "guideColMiniboss": "Costo di comparsa (mini-boss)",
   "guideTierStarts": "Gli effetti di livello {tier} compaiono dalla minaccia {level}.",
   "guideTierEnds": "Dalla minaccia {level} in poi, gli effetti di livello {tier} non compaiono più.",
-  "guideThreatNote": "Le colonne di danno e probabilità sono fattori per cui il gioco moltiplica; i costi sono budget di comparsa. I dati non dicono come si combinano con aree, forzieri o difficoltà.",
-  "guideThreatBalanceUnconfirmed": "I dati contengono due righe di bilanciamento (Active e SecondPass). Questi numeri sono di SecondPass; quale riga usi il gioco non è nei dati. Non ancora confermato nel gioco.",
-  "guideDifficultyAssumedUnconfirmed": "Normale rimanda a una riga di moltiplicatore che non è nei dati, quindi viene mostrato ×1. Non ancora confermato nel gioco."
+  "guideThreatNote": "I modificatori e i fattori di peso moltiplicano i valori di base del gioco (non sono probabilità); i costi sono budget di comparsa. I dati non dicono come si combinano con aree, forzieri o difficoltà.",
+  "guideThreatBalanceUnconfirmed": "Non ancora confermato nel gioco: i dati hanno due righe di bilanciamento (Active e SecondPass) e questi numeri sono di SecondPass; se le curve di danno globali si applicano come mostrato; il livello consigliato, ricavato come (minaccia − 1) × livelli per minaccia; e la probabilità di variante, letta come frazione e mostrata in percentuale.",
+  "guideDifficultyAssumedUnconfirmed": "Normale rimanda a una riga di moltiplicatore che non è nei dati, quindi viene mostrato ×1. Non ancora confermato nel gioco.",
+  "guideColAttackMod": "Modificatore del potere d'attacco",
+  "guideColResistanceMod": "Modificatore della resistenza ai danni",
+  "guideNoData": "Nessun dato"
 }

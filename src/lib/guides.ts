@@ -47,7 +47,7 @@ export const textOf = (data: GuidesData, id: TextId, lang: Lang): ShownText | un
 export const anyUntranslated = (texts: readonly (ShownText | undefined)[]): boolean => texts.some((text) => text?.untranslated === true);
 
 /** A number written the page language's way (99,999 / 99.999 / 99 999). */
-export const formatNumber = (value: number, lang: Lang): string => new Intl.NumberFormat(htmlLang(lang), { maximumFractionDigits: 2 }).format(value);
+export const formatNumber = (value: number, lang: Lang): string => new Intl.NumberFormat(htmlLang(lang), { maximumFractionDigits: 4 }).format(value);
 
 /** A signed number: "+1", "−2", "0". */
 export const formatSigned = (value: number, lang: Lang): string =>
@@ -143,24 +143,21 @@ export interface TierNote {
 const TIERS = [1, 2, 3] as const;
 
 /**
- * Where each effect tier switches on or off, read from the chance factors: the first level with a factor above 0 when the
- * lowest level has none, and the first level of the run of zeros at the top end.
+ * Where each effect tier switches on or off, read from the chance factors: every level where a factor goes from 0 to above 0
+ * ("starts") or from above 0 back to 0 ("ends"). A factor that comes and
+ * goes gives one note for each switch.
  */
 export function tierNotes(threat: readonly ThreatRow[]): TierNote[] {
   const rows = threat.flatMap((row) => (row.effectTiers ? [{ level: row.level, factors: row.effectTiers }] : []));
-  const first = rows[0];
-  const last = rows[rows.length - 1];
-  if (!first || !last) return [];
-  return TIERS.flatMap((tier): TierNote[] => {
-    const factor = (row: { factors: readonly number[] }): number => row.factors[tier - 1];
-    const firstPositive = rows.find((row) => factor(row) > 0);
-    const lastPositive = rows.findLast((row) => factor(row) > 0);
-    if (!firstPositive || !lastPositive) return [];
-    return [
-      ...(factor(first) === 0 ? [{ tier, kind: "starts" as const, level: firstPositive.level }] : []),
-      ...(factor(last) === 0 ? [{ tier, kind: "ends" as const, level: rows[rows.indexOf(lastPositive) + 1].level }] : []),
-    ];
-  });
+  return TIERS.flatMap((tier): TierNote[] =>
+    rows.flatMap((row, index): TierNote[] => {
+      const before = index === 0 ? undefined : rows[index - 1].factors[tier - 1] > 0;
+      const now = row.factors[tier - 1] > 0;
+      if (before === undefined) return [];
+      if (!before && now) return [{ tier, kind: "starts", level: row.level }];
+      return before && !now ? [{ tier, kind: "ends", level: row.level }] : [];
+    }),
+  );
 }
 
 /** A game label without its trailing colon ("Damage dealt: " → "Damage dealt"), for use as a heading. */

@@ -389,7 +389,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -821,15 +824,18 @@
   "guideDifficultyLowDrops": "{special} 및 {unique} 아이템은 드롭되지 않습니다.",
   "guideThreatByLevel": "위협 수준별",
   "guideColRecLevel": "권장 레벨",
-  "guideGroupEffects": "효과 등급 확률",
-  "guideGroupRarity": "희귀도별 드롭 확률",
+  "guideGroupEffects": "효과 등급 가중치 계수",
+  "guideGroupRarity": "희귀도 가중치 계수",
   "guideGroupMobs": "몹 생성",
   "guideColVariant": "변종 생성 확률",
-  "guideColSoulStated": "영혼 상태 생성 비용",
+  "guideColSoulStated": "영혼 오염 생성 비용",
   "guideColMiniboss": "미니 보스 생성 비용",
   "guideTierStarts": "{tier}등급 효과는 위협 {level}부터 나타납니다.",
   "guideTierEnds": "위협 {level}부터는 {tier}등급 효과가 더 이상 나타나지 않습니다.",
-  "guideThreatNote": "피해와 확률 열은 게임이 곱하는 계수이고, 비용은 생성 예산입니다. 지역, 상자, 난이도와 어떻게 합쳐지는지는 데이터에 없습니다.",
-  "guideThreatBalanceUnconfirmed": "데이터에는 두 개의 밸런스 행(Active와 SecondPass)이 있습니다. 여기 수치는 SecondPass의 것이며, 게임이 어느 행을 쓰는지는 데이터에 없습니다. 게임에서 아직 확인하지 않았습니다.",
-  "guideDifficultyAssumedUnconfirmed": "보통은 데이터에 없는 배율 행을 가리키므로 ×1로 표시했습니다. 게임에서 아직 확인하지 않았습니다."
+  "guideThreatNote": "보정과 가중치 계수는 게임이 기본값에 곱하는 계수이며 확률이 아닙니다. 비용은 생성 예산입니다. 지역, 상자, 난이도와 어떻게 합쳐지는지는 데이터에 없습니다.",
+  "guideThreatBalanceUnconfirmed": "게임에서 아직 확인하지 않음: 데이터에 밸런스 행이 둘(Active와 SecondPass) 있으며 여기서는 SecondPass를 사용했습니다. 전역 피해 곡선이 표대로 적용되는지. 권장 레벨은 (위협 − 1) × 위협당 레벨 수로 계산했습니다. 변종 생성 확률은 비율로 읽어 %로 표시했습니다.",
+  "guideDifficultyAssumedUnconfirmed": "보통은 데이터에 없는 배율 행을 가리키므로 ×1로 표시했습니다. 게임에서 아직 확인하지 않았습니다.",
+  "guideColAttackMod": "공격력 보정",
+  "guideColResistanceMod": "피해 저항 보정",
+  "guideNoData": "데이터 없음"
 }

@@ -389,7 +389,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -824,15 +827,18 @@
   "guideDifficultyLowDrops": "Er vallen geen voorwerpen van zeldzaamheid {special} of {unique}.",
   "guideThreatByLevel": "Per bedreigingsniveau",
   "guideColRecLevel": "Aanbevolen niveau",
-  "guideGroupEffects": "Kans op effectniveaus",
-  "guideGroupRarity": "Buitkans per zeldzaamheid",
+  "guideGroupEffects": "Gewichtsfactor effectniveaus",
+  "guideGroupRarity": "Gewichtsfactor zeldzaamheid",
   "guideGroupMobs": "Verschijnen van mobs",
   "guideColVariant": "Kans op een variant",
-  "guideColSoulStated": "Spawnkosten (zielstaat)",
+  "guideColSoulStated": "Spawnkosten (zielsverdorven)",
   "guideColMiniboss": "Spawnkosten (minibaas)",
   "guideTierStarts": "Effecten van niveau {tier} verschijnen vanaf bedreiging {level}.",
   "guideTierEnds": "Vanaf bedreiging {level} verschijnen effecten van niveau {tier} niet meer.",
-  "guideThreatNote": "De kolommen voor schade en kans zijn factoren waarmee het spel vermenigvuldigt; kosten zijn spawnbudgetten. De gegevens zeggen niet hoe ze samengaan met gebieden, kisten of moeilijkheid.",
-  "guideThreatBalanceUnconfirmed": "De gegevens bevatten twee balansrijen (Active en SecondPass). Deze getallen komen uit SecondPass; welke rij het spel gebruikt, staat niet in de gegevens. Nog niet bevestigd in het spel.",
-  "guideDifficultyAssumedUnconfirmed": "Normaal verwijst naar een vermenigvuldigerrij die niet in de gegevens staat, dus ×1 wordt getoond. Nog niet bevestigd in het spel."
+  "guideThreatNote": "Modificatoren en gewichtsfactoren vermenigvuldigen de basiswaarden van het spel (het zijn geen kansen); kosten zijn spawnbudgetten. De gegevens zeggen niet hoe ze samengaan met gebieden, kisten of moeilijkheid.",
+  "guideThreatBalanceUnconfirmed": "Nog niet bevestigd in het spel: de gegevens hebben twee balansrijen (Active en SecondPass) en deze getallen komen uit SecondPass; of de globale schadecurves werken zoals getoond; het aanbevolen niveau, afgeleid als (bedreiging − 1) × niveaus per bedreiging; en de variantkans, gelezen als breuk en getoond als percentage.",
+  "guideDifficultyAssumedUnconfirmed": "Normaal verwijst naar een vermenigvuldigerrij die niet in de gegevens staat, dus ×1 wordt getoond. Nog niet bevestigd in het spel.",
+  "guideColAttackMod": "Aanvalskracht-modificator",
+  "guideColResistanceMod": "Schadeweerstand-modificator",
+  "guideNoData": "Geen gegevens"
 }

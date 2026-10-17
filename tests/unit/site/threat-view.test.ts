@@ -23,8 +23,8 @@ describe("headerCells", () => {
   it("spans each group once and keeps stand-alone columns on their own", () => {
     const cells = headerCells(threatColumns(guidesData.threat, "en"), "en");
     expect(cells.map((cell) => [cell.label, cell.span, cell.column?.id])).toEqual([
-      ["Recommended level", 1, "recommended"], ["Your attack power", 1, "attack"], ["Your damage resistance", 1, "resistance"],
-      ["Effect tier chance", 3, undefined], ["Drop chance by rarity", 4, undefined], ["Mob spawning", 3, undefined],
+      ["Recommended level", 1, "recommended"], ["Attack power modifier", 1, "attack"], ["Damage resistance modifier", 1, "resistance"],
+      ["Effect tier weight factor", 3, undefined], ["Rarity weight factor", 4, undefined], ["Mob spawning", 3, undefined],
     ]);
   });
 });

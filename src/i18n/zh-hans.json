@@ -386,7 +386,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -823,15 +826,18 @@
   "guideDifficultyLowDrops": "不会掉落{special}与{unique}物品。",
   "guideThreatByLevel": "按威胁等级",
   "guideColRecLevel": "推荐等级",
-  "guideGroupEffects": "效果阶级几率",
-  "guideGroupRarity": "按稀有度的掉落几率",
+  "guideGroupEffects": "效果阶级权重系数",
+  "guideGroupRarity": "稀有度权重系数",
   "guideGroupMobs": "怪物生成",
   "guideColVariant": "变种生成几率",
-  "guideColSoulStated": "灵魂态生成花费",
+  "guideColSoulStated": "灵魂腐化生成花费",
   "guideColMiniboss": "小头目生成花费",
   "guideTierStarts": "{tier} 阶效果从威胁 {level} 开始出现。",
   "guideTierEnds": "从威胁 {level} 起，不再出现 {tier} 阶效果。",
-  "guideThreatNote": "伤害与几率栏位是游戏乘上的系数，花费是生成预算；数据没有说明它们如何与区域、宝箱或难度叠加。",
-  "guideThreatBalanceUnconfirmed": "数据中有两行平衡设定（Active 与 SecondPass）。这里的数字取自 SecondPass，游戏实际采用哪一行数据里没有写；尚未在游戏中确认。",
-  "guideDifficultyAssumedUnconfirmed": "普通难度指向数据中不存在的倍率行，因此显示为 ×1；尚未在游戏中确认。"
+  "guideThreatNote": "修正与权重系数是游戏对基础数值相乘的系数（不是几率）；花费是生成预算。数据没有说明它们如何与区域、宝箱或难度叠加。",
+  "guideThreatBalanceUnconfirmed": "尚未在游戏中确认：数据中有两行平衡设定（Active 与 SecondPass），这里取自 SecondPass；全局伤害曲线是否按表中数值套用；推荐等级是按（威胁 − 1）× 每威胁等级数推算；变种生成几率读作比例并以百分比显示。",
+  "guideDifficultyAssumedUnconfirmed": "普通难度指向数据中不存在的倍率行，因此显示为 ×1；尚未在游戏中确认。",
+  "guideColAttackMod": "攻击力修正",
+  "guideColResistanceMod": "伤害抗性修正",
+  "guideNoData": "无数据"
 }

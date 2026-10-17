@@ -386,7 +386,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -823,15 +826,18 @@
   "guideDifficultyLowDrops": "{special}と{unique}のアイテムはドロップしません。",
   "guideThreatByLevel": "脅威レベル別",
   "guideColRecLevel": "推奨レベル",
-  "guideGroupEffects": "エフェクトのティア確率",
-  "guideGroupRarity": "レア度別のドロップ確率",
+  "guideGroupEffects": "エフェクトのティア重み係数",
+  "guideGroupRarity": "レア度の重み係数",
   "guideGroupMobs": "モブの出現",
   "guideColVariant": "バリアント出現確率",
-  "guideColSoulStated": "ソウル状態の出現コスト",
+  "guideColSoulStated": "ソウルに冒された個体の出現コスト",
   "guideColMiniboss": "ミニボスの出現コスト",
   "guideTierStarts": "ティア{tier}のエフェクトは脅威{level}から出現します。",
   "guideTierEnds": "脅威{level}以降、ティア{tier}のエフェクトは出現しません。",
-  "guideThreatNote": "ダメージと確率の列はゲームが掛ける係数で、コストは出現の予算です。エリア、宝箱、難易度との組み合わせ方はデータにありません。",
-  "guideThreatBalanceUnconfirmed": "データには2つのバランス行（Active と SecondPass）があります。ここの数値は SecondPass のもので、ゲームがどちらを使うかはデータにありません。ゲーム内では未確認です。",
-  "guideDifficultyAssumedUnconfirmed": "標準は、データにない倍率行を指しているため、×1 と表示しています。ゲーム内では未確認です。"
+  "guideThreatNote": "補正と重み係数はゲームが基本値に掛ける係数で、確率ではありません。コストは出現の予算です。エリア、宝箱、難易度との組み合わせ方はデータにありません。",
+  "guideThreatBalanceUnconfirmed": "ゲーム内では未確認：データにはバランス行が2つ（Active と SecondPass）あり、ここでは SecondPass を使用。全体のダメージ曲線が表のとおり適用されるか。推奨レベルは（脅威 − 1）×脅威あたりのレベル数で算出。バリアント出現確率は割合として読み、％で表示。",
+  "guideDifficultyAssumedUnconfirmed": "標準は、データにない倍率行を指しているため、×1 と表示しています。ゲーム内では未確認です。",
+  "guideColAttackMod": "攻撃力補正",
+  "guideColResistanceMod": "ダメージ耐性補正",
+  "guideNoData": "データなし"
 }

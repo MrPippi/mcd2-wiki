@@ -387,7 +387,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "_english": [
     "armorPiece",
@@ -826,15 +829,18 @@
   "guideDifficultyLowDrops": "Keine Gegenstände der Seltenheit {special} oder {unique}.",
   "guideThreatByLevel": "Nach Bedrohungsstufe",
   "guideColRecLevel": "Empfohlene Stufe",
-  "guideGroupEffects": "Chance der Effektstufen",
-  "guideGroupRarity": "Beutechance nach Seltenheit",
+  "guideGroupEffects": "Gewichtungsfaktor der Effektstufen",
+  "guideGroupRarity": "Gewichtungsfaktor der Seltenheit",
   "guideGroupMobs": "Mob-Spawns",
   "guideColVariant": "Varianten-Spawnchance",
-  "guideColSoulStated": "Spawnkosten (Seelenzustand)",
+  "guideColSoulStated": "Spawnkosten (Seelenverdorben)",
   "guideColMiniboss": "Spawnkosten (Mini-Boss)",
   "guideTierStarts": "Effekte der Stufe {tier} erscheinen ab Bedrohung {level}.",
   "guideTierEnds": "Ab Bedrohung {level} erscheinen keine Effekte der Stufe {tier} mehr.",
-  "guideThreatNote": "Schadens- und Chancenspalten sind Faktoren, mit denen das Spiel multipliziert; Kosten sind Spawn-Budgets. Wie sie sich mit Gebieten, Truhen oder Schwierigkeit verbinden, steht nicht in den Daten.",
-  "guideThreatBalanceUnconfirmed": "Die Daten enthalten zwei Balance-Zeilen (Active und SecondPass). Diese Zahlen stammen aus SecondPass; welche Zeile das Spiel nutzt, steht nicht in den Daten. Im Spiel noch nicht bestätigt.",
-  "guideDifficultyAssumedUnconfirmed": "Normal verweist auf eine Multiplikatorzeile, die in den Daten fehlt; daher wird ×1 angezeigt. Im Spiel noch nicht bestätigt."
+  "guideThreatNote": "Modifikatoren und Gewichtungsfaktoren multiplizieren die Basiswerte des Spiels (es sind keine Chancen); Kosten sind Spawn-Budgets. Wie sie sich mit Gebieten, Truhen oder Schwierigkeit verbinden, steht nicht in den Daten.",
+  "guideThreatBalanceUnconfirmed": "Im Spiel noch nicht bestätigt: Die Daten enthalten zwei Balance-Zeilen (Active und SecondPass), diese Zahlen sind aus SecondPass; ob die globalen Schadenskurven wie gezeigt gelten; die empfohlene Stufe, abgeleitet als (Bedrohung − 1) × Stufen pro Bedrohung; und die Varianten-Chance, als Bruch gelesen und in Prozent gezeigt.",
+  "guideDifficultyAssumedUnconfirmed": "Normal verweist auf eine Multiplikatorzeile, die in den Daten fehlt; daher wird ×1 angezeigt. Im Spiel noch nicht bestätigt.",
+  "guideColAttackMod": "Angriffswert-Modifikator",
+  "guideColResistanceMod": "Schadensresistenz-Modifikator",
+  "guideNoData": "Keine Daten"
 }

@@ -102,7 +102,7 @@ const DifficultySchema = z.object({
   id: z.enum(DIFFICULTIES),
   scalar: z.number(),
   name: TextSchema,
-  description: TextSchema,
+  description: TextSchema.optional(),
   /** The game's own words for the damage you receive / deal ("Low", "High", "Default"). */
   received: TextSchema.optional(),
   dealt: TextSchema.optional(),

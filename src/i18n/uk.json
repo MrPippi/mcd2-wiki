@@ -389,7 +389,10 @@
     "guideTierEnds",
     "guideThreatNote",
     "guideThreatBalanceUnconfirmed",
-    "guideDifficultyAssumedUnconfirmed"
+    "guideDifficultyAssumedUnconfirmed",
+    "guideColAttackMod",
+    "guideColResistanceMod",
+    "guideNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -826,15 +829,18 @@
   "guideDifficultyLowDrops": "Предмети рідкісності «{special}» та «{unique}» не випадають.",
   "guideThreatByLevel": "За рівнем загрози",
   "guideColRecLevel": "Рекомендований рівень",
-  "guideGroupEffects": "Шанс ступенів ефектів",
-  "guideGroupRarity": "Шанс випадіння за рідкісністю",
+  "guideGroupEffects": "Коефіцієнт ваги ступенів ефектів",
+  "guideGroupRarity": "Коефіцієнт ваги рідкісності",
   "guideGroupMobs": "Поява мобів",
   "guideColVariant": "Шанс появи варіанта",
-  "guideColSoulStated": "Вартість появи (стан душі)",
+  "guideColSoulStated": "Вартість появи (спотворена душами версія)",
   "guideColMiniboss": "Вартість появи (міні-бос)",
   "guideTierStarts": "Ефекти ступеня {tier} з'являються від загрози {level}.",
   "guideTierEnds": "Починаючи із загрози {level}, ефекти ступеня {tier} більше не з'являються.",
-  "guideThreatNote": "Стовпці шкоди та шансів — коефіцієнти, на які гра множить; вартості — бюджети появи. У даних не сказано, як вони поєднуються з областями, скринями чи складністю.",
-  "guideThreatBalanceUnconfirmed": "У даних два рядки балансу (Active і SecondPass). Ці числа взято із SecondPass; який рядок використовує гра, у даних не вказано. Ще не підтверджено в грі.",
-  "guideDifficultyAssumedUnconfirmed": "Звичайна складність посилається на рядок множника, якого немає в даних, тому показано ×1. Ще не підтверджено в грі."
+  "guideThreatNote": "Поправки та коефіцієнти ваги множать базові значення гри (це не шанси); вартості — бюджети появи. У даних не сказано, як вони поєднуються з областями, скринями чи складністю.",
+  "guideThreatBalanceUnconfirmed": "Ще не підтверджено в грі: у даних два рядки балансу (Active і SecondPass), числа взято із SecondPass; чи застосовуються глобальні криві шкоди так, як показано; рекомендований рівень обчислено як (загроза − 1) × рівнів на загрозу; шанс варіанта прочитано як частку й показано у відсотках.",
+  "guideDifficultyAssumedUnconfirmed": "Звичайна складність посилається на рядок множника, якого немає в даних, тому показано ×1. Ще не підтверджено в грі.",
+  "guideColAttackMod": "Поправка сили атаки",
+  "guideColResistanceMod": "Поправка опору шкоді",
+  "guideNoData": "Немає даних"
 }

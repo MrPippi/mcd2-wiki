@@ -269,7 +269,7 @@ describe("runExtract", () => {
     const guides = await readJson<{ threat: { level: number; effectTiers?: number[] }[]; difficulty: { id: string }[] }>("src/data/guides.json");
     expect(guides.threat).toHaveLength(20);
     expect(guides.threat[8]?.effectTiers).toEqual([1, 0.7, 0.4]);
-    expect(guides.difficulty).toEqual([]);
+    expect(guides.difficulty.map((item) => item.id)).toEqual(["low", "normal", "high"]);
   });
 
   it("leaves the threat guide empty and reports it when the CurveTables are missing", async () => {

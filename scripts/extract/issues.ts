@@ -89,7 +89,9 @@ export type IssueType =
   | "guides-talisman-unlinked"
   | "guides-quest-unnamed"
   | "missing-curve-tables"
-  | "curve-unsupported";
+  | "curve-unsupported"
+  | "curve-table-invalid"
+  | "curve-table-duplicate";
 
 export interface Issue {
   readonly type: IssueType;
