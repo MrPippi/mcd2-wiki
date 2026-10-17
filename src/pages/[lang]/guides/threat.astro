@@ -1,0 +1,104 @@
+---
+import { LANGS } from "../../../../scripts/extract/config";
+import type { GuidesData } from "../../../../scripts/extract/guides-schema";
+import GuideMarker from "../../../components/GuideMarker.astro";
+import GuidePage from "../../../components/GuidePage.astro";
+import GuideUnconfirmed from "../../../components/GuideUnconfirmed.astro";
+import {
+  bareLabel, fill, formatMultiplier, formatNumber, guideBySlug, guidesData, rarityName, roman, shown, tierNotes, type GuideLink,
+} from "../../../lib/guides";
+import { t, type Lang } from "../../../lib/i18n";
+import { headerCells, threatColumns } from "../../../lib/threat-view";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+  /** Injected by the component tests; the page itself always shows the extracted data. */
+  data?: GuidesData;
+}
+
+const { lang } = Astro.props;
+const data = Astro.props.data ?? guidesData;
+const guide = guideBySlug("threat") as GuideLink;
+const difficulties = data.difficulty.map((item) => ({
+  item,
+  name: shown(item.name, lang),
+  description: shown(item.description, lang),
+  received: shown(item.received, lang),
+  dealt: shown(item.dealt, lang),
+}));
+const columns = threatColumns(data.threat, lang);
+const header = headerCells(columns, lang);
+const grouped = columns.filter((column) => column.group);
+const notes = tierNotes(data.threat);
+const assumedShown = data.difficulty.some((item) => item.assumed === true);
+---
+<GuidePage lang={lang} guide={guide}>
+  {difficulties.length > 0 && (
+    <section class="entry-section guide-section" data-testid="guide-difficulty">
+      <h2 class="section-title">{t(lang, "guideDifficulty")}</h2>
+      <GuideMarker lang={lang} texts={difficulties.flatMap(({ name, description, received, dealt }) => [name, description, received, dealt])} />
+      <GuideUnconfirmed lang={lang} message="guideDifficultyAssumedUnconfirmed" verified={data.verified.threatBalanceRow || !assumedShown} />
+      <div class="guide-difficulty-grid">
+        {difficulties.map(({ item, name, description, received, dealt }) => (
+          <article class="guide-difficulty" data-testid="guide-difficulty-card" data-difficulty={item.id}>
+            {name && <h3 class="guide-subtitle" set:html={name.html} />}
+            {description && <p class="guide-text" set:html={description.html} />}
+            <dl class="guide-difficulty-facts">
+              <div>
+                <dt>{bareLabel(t(lang, "damageDealt"))}</dt>
+                <dd>{dealt && <span set:html={dealt.html} />} <span class="guide-number">{t(lang, "guideAttackPower")} {formatMultiplier(item.outgoing, lang)}</span></dd>
+              </div>
+              <div>
+                <dt>{bareLabel(t(lang, "damageReceived"))}</dt>
+                <dd>{received && <span set:html={received.html} />} <span class="guide-number">{t(lang, "guideDamageResistance")} {formatMultiplier(item.incoming, lang)}</span></dd>
+              </div>
+            </dl>
+            {item.noRareDrops && (
+              <p class="note guide-note" data-testid="guide-difficulty-drops">
+                {fill(t(lang, "guideDifficultyLowDrops"), { special: rarityName("special", lang), unique: rarityName("unique", lang) })}
+              </p>
+            )}
+          </article>
+        ))}
+      </div>
+    </section>
+  )}
+  {data.threat.length > 0 && (
+    <section class="entry-section guide-section" data-testid="guide-threat-table">
+      <h2 class="section-title">{t(lang, "guideThreatByLevel")}</h2>
+      <GuideUnconfirmed lang={lang} message="guideThreatBalanceUnconfirmed" verified={data.verified.threatBalanceRow} />
+      {notes.length > 0 && (
+        <ul class="guide-facts" data-testid="guide-tier-notes">
+          {notes.map((note) => (
+            <li set:html={fill(t(lang, note.kind === "starts" ? "guideTierStarts" : "guideTierEnds"), { tier: roman(note.tier), level: formatNumber(note.level, lang) })} />
+          ))}
+        </ul>
+      )}
+      <div class="guide-scroll guide-scroll-tall" tabindex="0" role="region" aria-label={t(lang, "guideThreatByLevel")}>
+        <table class="guide-table guide-table-sticky">
+          <thead>
+            <tr>
+              <th scope="col" rowspan="2">{t(lang, "threat")}</th>
+              {header.map((cell) =>
+                cell.column ? <th scope="col" rowspan="2">{cell.label}</th> : <th scope="colgroup" colspan={cell.span}>{cell.label}</th>)}
+            </tr>
+            {grouped.length > 0 && <tr>{grouped.map((column) => <th scope="col">{column.label}</th>)}</tr>}
+          </thead>
+          <tbody>
+            {data.threat.map((row) => (
+              <tr data-testid="guide-threat-row">
+                <th scope="row" class="guide-number">{formatNumber(row.level, lang)}</th>
+                {columns.map((column) => <td class="guide-number">{column.value(row) ?? "—"}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="note guide-note">{t(lang, "guideThreatNote")}</p>
+    </section>
+  )}
+</GuidePage>

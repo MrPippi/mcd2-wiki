@@ -1,7 +1,7 @@
 /** The mechanics guides for the site: data from `npm run extract` and the helpers their pages format with. Server-side only. */
 import { escapeHtml } from "../../scripts/extract/render-markup";
 import {
-  GuidesDataSchema, type DropRow, type GearType, type GuideText, type GuidesData, type Rarity, type TextId, type Vendor,
+  GuidesDataSchema, type DropRow, type GearType, type GuideText, type GuidesData, type Rarity, type TextId, type ThreatRow, type Vendor,
 } from "../../scripts/extract/guides-schema";
 import rawGuides from "../data/guides.json";
 import { t, type Lang, type UiKey } from "./i18n";
@@ -23,6 +23,7 @@ export const GUIDES: readonly GuideLink[] = [
   { slug: "vendors", title: "guideVendors", summary: "guideVendorsSummary" },
   { slug: "enchanting", title: "guideEnchanting", summary: "guideEnchantingSummary" },
   { slug: "rarity", title: "guideRarity", summary: "guideRaritySummary" },
+  { slug: "threat", title: "guideThreat", summary: "guideThreatSummary" },
   { slug: "secret-talismans", title: "guideSecretTalismans", summary: "guideSecretTalismansSummary" },
   { slug: "progression", title: "guideProgression", summary: "guideProgressionSummary" },
 ];
@@ -54,6 +55,13 @@ export const formatSigned = (value: number, lang: Lang): string =>
 
 export const formatShare = (share: number, lang: Lang): string =>
   new Intl.NumberFormat(htmlLang(lang), { style: "percent", maximumFractionDigits: 1 }).format(share);
+
+/** A factor the game multiplies by: "×0.91". */
+export const formatMultiplier = (value: number, lang: Lang): string => `×${formatNumber(value, lang)}`;
+
+/** A from-to pair with an en dash: "5%–10%". */
+export const formatRange = (range: { readonly min: number; readonly max: number }, format: (value: number) => string): string =>
+  `${format(range.min)}–${format(range.max)}`;
 
 /** A UI sentence as HTML: the template is escaped, each `{name}` takes the given HTML (already safe) or escaped plain text. */
 export function fill(template: string, values: Readonly<Record<string, { html: string } | string>>): string {
@@ -124,3 +132,36 @@ export function dropShares(row: DropRow, lang: Lang): ShareRow[] {
     share: readable && total > 0 ? effective[index] / total : null,
   }));
 }
+
+export interface TierNote {
+  readonly tier: 1 | 2 | 3;
+  /** "starts": no such effects below this threat level; "ends": none from this level on. */
+  readonly kind: "starts" | "ends";
+  readonly level: number;
+}
+
+const TIERS = [1, 2, 3] as const;
+
+/**
+ * Where each effect tier switches on or off, read from the chance factors: the first level with a factor above 0 when the
+ * lowest level has none, and the first level of the run of zeros at the top end.
+ */
+export function tierNotes(threat: readonly ThreatRow[]): TierNote[] {
+  const rows = threat.flatMap((row) => (row.effectTiers ? [{ level: row.level, factors: row.effectTiers }] : []));
+  const first = rows[0];
+  const last = rows[rows.length - 1];
+  if (!first || !last) return [];
+  return TIERS.flatMap((tier): TierNote[] => {
+    const factor = (row: { factors: readonly number[] }): number => row.factors[tier - 1];
+    const firstPositive = rows.find((row) => factor(row) > 0);
+    const lastPositive = rows.findLast((row) => factor(row) > 0);
+    if (!firstPositive || !lastPositive) return [];
+    return [
+      ...(factor(first) === 0 ? [{ tier, kind: "starts" as const, level: firstPositive.level }] : []),
+      ...(factor(last) === 0 ? [{ tier, kind: "ends" as const, level: rows[rows.indexOf(lastPositive) + 1].level }] : []),
+    ];
+  });
+}
+
+/** A game label without its trailing colon ("Damage dealt: " → "Damage dealt"), for use as a heading. */
+export const bareLabel = (label: string): string => label.replace(/\s*[:：]\s*$/, "");
