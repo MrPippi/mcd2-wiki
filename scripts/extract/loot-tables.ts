@@ -25,7 +25,15 @@ const LootRowSchema = z.object({
   // Some real rows (10) have no slots at all.
   LootDropDefinition: z.object({ LootSlots: z.record(z.string(), LootSlotSchema).optional() }),
 });
-const ItemTagRowSchema = z.object({ Name: z.string(), TypeTag: Tag, Traits: Tags, TypeTextData: TextData });
+const ItemTagRowSchema = z.object({
+  Name: z.string(),
+  TypeTag: Tag,
+  Traits: Tags,
+  TypeTextData: TextData,
+  // The drop odds read these two: the Unique variant a Unique rarity roll turns an item into, and the rarities it can have.
+  UniqueSubstitutionData: z.object({ UniqueSubstitution: Tag.optional() }).optional(),
+  KeyValues: z.array(z.object({ TypeTag: Tag, GameplayTagContainer: Tags })).optional(),
+});
 
 export const LootTablesSchema = z.object({
   generic: z.array(LootRowSchema),
