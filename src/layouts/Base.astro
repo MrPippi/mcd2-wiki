@@ -36,6 +36,9 @@ interface Props {
 }
 
 
+/** The issue form picker: data errors, in-game tests, translations, site bugs. */
+const REPORT_URL = "https://github.com/MrPippi/mcd2-wiki/issues/new/choose";
+
 const { lang, title, current, description = "", noAlternates = false } = Astro.props;
 const siteTitle = t(lang, "siteTitle");
 const footerTitle = splitSiteTitle(siteTitle);
@@ -102,6 +105,7 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
         <div class="footer-meta">
           <p>{t(lang, "disclaimer")}</p>
           <p>{t(lang, "source")}</p>
+          <p><a class="footer-report" href={REPORT_URL}>{t(lang, "reportIssue")}</a></p>
         </div>
         <p class="footer-license">{t(lang, "fontCredit")}</p>
       </div>

@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 問題與討論 / Questions & discussion
+    url: https://github.com/MrPippi/mcd2-wiki/discussions/categories/q-a
+    about: 遊戲玩法或網站使用問題請到討論區。Ask about the game or the site in Discussions.
+  - name: 功能建議 / Ideas
+    url: https://github.com/MrPippi/mcd2-wiki/discussions/categories/ideas
+    about: 想要新頁面或新功能，先到討論區聊聊。Suggest new pages or features in Discussions.
+  - name: 安全性問題 / Security issue
+    url: https://github.com/MrPippi/mcd2-wiki/security/advisories/new
+    about: 請私下回報，不要開公開 issue。Report privately; please don't open a public issue.

@@ -1,0 +1,13 @@
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: 想法 / Idea
+      description: 想要什麼頁面或功能？Which page or feature would you like?
+    validations:
+      required: true
+  - type: textarea
+    id: why
+    attributes:
+      label: 為什麼需要 / Why it helps
+      description: 你玩的時候會怎麼用它？How would you use it while playing?

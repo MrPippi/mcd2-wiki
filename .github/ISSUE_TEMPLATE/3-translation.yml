@@ -1,0 +1,51 @@
+name: 翻譯問題 / Translation problem
+description: 網站介面文字翻錯或不自然（遊戲本身的文字以遊戲為準）。Wrong or awkward site text (game text follows the game).
+title: "[翻譯] "
+labels: ["translation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        物品名稱與說明取自遊戲語系檔，與遊戲一致；這裡回報的是網站自己的介面文字。
+        Item names and descriptions come from the game's own files; report site interface text here.
+  - type: dropdown
+    id: lang
+    attributes:
+      label: 語言 / Language
+      options:
+        - 繁體中文
+        - 简体中文
+        - English
+        - 日本語
+        - 한국어
+        - Deutsch
+        - Français
+        - Español
+        - Italiano
+        - Português
+        - Русский
+        - Polski
+        - Nederlands
+        - Svenska
+        - Türkçe
+        - Українська
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: 頁面網址 / Page link
+    validations:
+      required: true
+  - type: textarea
+    id: current
+    attributes:
+      label: 目前的文字 / Current text
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建議的文字 / Suggested text
+    validations:
+      required: true

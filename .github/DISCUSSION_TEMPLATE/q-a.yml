@@ -1,0 +1,12 @@
+body:
+  - type: markdown
+    attributes:
+      value: |
+        網站資料有錯請改開 [issue](https://github.com/MrPippi/mcd2-wiki/issues/new/choose)。
+        If something on the site is wrong, please open an [issue](https://github.com/MrPippi/mcd2-wiki/issues/new/choose) instead.
+  - type: textarea
+    id: question
+    attributes:
+      label: 問題 / Question
+    validations:
+      required: true
