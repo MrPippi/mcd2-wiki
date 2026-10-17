@@ -35,3 +35,12 @@ export function bestColumns(values: readonly (number | undefined)[], better: "hi
   const best = present.filter((cell) => cell.value === target).map((cell) => cell.index);
   return best.length === present.length ? [] : best;
 }
+
+/** The picks after `slug` goes into `column`: packed to the left, a weapon already in an earlier column kept there. */
+export function placeWeapon(slugs: readonly string[], column: number, slug: string): string[] {
+  const next = column < slugs.length ? slugs.map((current, index) => (index === column ? slug : current)) : [...slugs, slug];
+  return next.filter((current, index) => next.indexOf(current) === index).slice(0, MAX_WEAPONS);
+}
+
+/** The picks after `column` is emptied: later columns move left. */
+export const removeWeapon = (slugs: readonly string[], column: number): string[] => slugs.filter((_, index) => index !== column);

@@ -11,29 +11,25 @@ interface Props {
 
 const { lang, payload } = Astro.props;
 const columns = Array.from({ length: MAX_WEAPONS }, (_, index) => index);
-const groups = [
-  { label: payload.labels.melee, weapons: payload.weapons.filter((weapon) => weapon.kind === "melee") },
-  { label: payload.labels.ranged, weapons: payload.weapons.filter((weapon) => weapon.kind === "ranged") },
-];
+const columnLabel = (index: number) => payload.labels.column.replace("{n}", () => String(index + 1));
 ---
 {/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
 <div class="compare" data-testid="weapon-compare" data-weapon-compare hidden>
   <p class="compare-notice tag warn" data-testid="compare-notice" data-notice role="status" hidden></p>
-  <div class="compare-picks">
+  <ul class="compare-picks">
     {columns.map((index) => (
-      <label class="compare-pick">
-        <span class="compare-pick-label">{payload.labels.column.replace("{n}", () => String(index + 1))}</span>
-        <select data-testid={`compare-pick-${index + 1}`} data-pick={index}>
-          <option value="">{payload.labels.pick}</option>
-          {groups.map((group) => (
-            <optgroup label={group.label}>
-              {group.weapons.map((weapon) => <option value={weapon.slug}>{weapon.name}</option>)}
-            </optgroup>
-          ))}
-        </select>
-      </label>
+      <li class="compare-pick" data-testid={`compare-pick-${index + 1}`} data-pick={index} data-filled="false">
+        <button type="button" class="compare-pick-button" data-pick-open aria-haspopup="dialog">
+          <span class="compare-icon" data-icon aria-hidden="true"></span>
+          <span class="compare-pick-text">
+            <span class="compare-pick-label">{columnLabel(index)}</span>
+            <span class="compare-pick-name" data-name>{payload.labels.pick}</span>
+          </span>
+        </button>
+        <button type="button" class="compare-clear" data-clear aria-label={`${payload.labels.clear}: ${columnLabel(index)}`} hidden>×</button>
+      </li>
     ))}
-  </div>
+  </ul>
   <p class="note compare-empty" data-testid="compare-empty" data-empty>{payload.labels.empty}</p>
   <div class="compare-scroll" tabindex="0" role="region" aria-label={t(lang, "weaponCompare")} data-scroll hidden>
     <table class="compare-table" data-testid="compare-table" data-table>
@@ -46,6 +42,18 @@ const groups = [
     <p class="note compare-status" data-testid="compare-status" data-status role="status" aria-live="polite"></p>
   </div>
   <input class="compare-url" type="text" data-testid="compare-url" data-url readonly aria-label={t(lang, "buildLink")} hidden />
+  <dialog class="compare-dialog" data-testid="compare-dialog" data-dialog aria-labelledby="compare-dialog-title">
+    {/* Fills the dialog, so a click whose target is the dialog itself can only be on the backdrop. */}
+    <div class="compare-dialog-body">
+      <div class="compare-dialog-head">
+        <h2 class="compare-dialog-title" id="compare-dialog-title" data-dialog-title></h2>
+        <button type="button" class="compare-close" data-close>{payload.labels.close}</button>
+      </div>
+      <input type="search" class="compare-filter" data-testid="compare-filter" data-filter placeholder={payload.labels.filter} aria-label={payload.labels.filter} />
+      <div class="compare-options" data-testid="compare-options" data-options></div>
+      <p class="note" data-no-results hidden>{payload.labels.noResults}</p>
+    </div>
+  </dialog>
   <script type="application/json" data-weapon-compare-json set:html={comparePayloadJson(payload)}></script>
 </div>
 <p class="note" data-testid="compare-failed" data-weapon-compare-failed hidden>{t(lang, "weaponCompareLoadFailed")}</p>

@@ -3,6 +3,7 @@ import type { Entry } from "../../../scripts/extract/schemas";
 import type { WeaponData } from "../../../scripts/extract/weapon-schema";
 import { findBaseEntry, publishedEntries } from "../data";
 import { categoryLabel, t, type Lang } from "../i18n";
+import { searchNames } from "../lang";
 import { assetUrl, entryHref } from "../url";
 import { weaponData } from "../weapon-effects";
 import type { CompareLabels, ComparePayload, CompareWeapon } from "./parse";
@@ -23,6 +24,7 @@ function weaponOf(lang: Lang, entry: Entry, weapons: WeaponData["weapons"]): Com
       slug: entry.slug,
       kind: entry.category,
       name: entry.name[lang],
+      search: searchNames(entry.name, lang),
       ...(entry.icon ? { icon: assetUrl(entry.icon) } : {}),
       href: entryHref(lang, entry),
       ...(entry.variant === "unique" ? { unique: true } : {}),
@@ -49,6 +51,10 @@ const labelsFor = (lang: Lang): CompareLabels => ({
   ranged: categoryLabel("ranged", lang),
   copied: t(lang, "buildCopied"),
   copyFailed: t(lang, "buildCopyFailed"),
+  clear: t(lang, "buildClear"),
+  close: t(lang, "buildClose"),
+  filter: t(lang, "buildSearch"),
+  noResults: t(lang, "buildNoResults"),
 });
 
 export const comparePayload = (lang: Lang): ComparePayload => ({ rows: compareRows(lang), weapons: compareWeapons(lang), labels: labelsFor(lang) });

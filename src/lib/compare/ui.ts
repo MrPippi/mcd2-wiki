@@ -1,13 +1,17 @@
 /** The weapon comparison in the browser: column pickers, the table, the address and the copy button. */
-import { bestColumns, compareSearch, decodeCompare } from "./code";
+import { bestColumns, compareSearch, decodeCompare, placeWeapon, removeWeapon } from "./code";
 import { parseComparePayload, type ComparePayload, type CompareWeapon } from "./parse";
+import { iconImage, openPicker, wirePicker, type PickerParts, type PickerRequest } from "./picker";
 
 /** Fired after replaceState so the language links pick up the new query (SiteHeader listens). */
 const LOCATION_EVENT = "mcd2:locationchange";
 const ICON_SIZE = 40;
 
 interface Parts {
-  readonly selects: readonly HTMLSelectElement[];
+  /** One per column, in order. */
+  readonly columns: readonly HTMLElement[];
+  readonly picker: PickerParts;
+  readonly close: HTMLElement;
   readonly scroll: HTMLElement;
   readonly head: HTMLElement;
   readonly body: HTMLElement;
@@ -27,8 +31,16 @@ function readPayload(root: HTMLElement): ComparePayload | undefined {
 
 function partsOf(root: HTMLElement): Parts | undefined {
   const one = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector) ?? undefined;
-  const selects = [...root.querySelectorAll<HTMLSelectElement>("[data-pick]")];
+  const columns = [...root.querySelectorAll<HTMLElement>("[data-pick]")];
+  const picker = {
+    dialog: one<HTMLDialogElement>("[data-dialog]"),
+    title: one("[data-dialog-title]"),
+    filter: one<HTMLInputElement>("[data-filter]"),
+    options: one("[data-options]"),
+    noResults: one("[data-no-results]"),
+  };
   const parts = {
+    close: one("[data-close]"),
     scroll: one("[data-scroll]"),
     head: one("[data-head]"),
     body: one("[data-body]"),
@@ -37,7 +49,8 @@ function partsOf(root: HTMLElement): Parts | undefined {
     status: one("[data-status]"),
     url: one<HTMLInputElement>("[data-url]"),
   };
-  return selects.length > 0 && Object.values(parts).every(Boolean) ? ({ ...parts, selects } as Parts) : undefined;
+  const complete = columns.length > 0 && [...Object.values(parts), ...Object.values(picker)].every(Boolean);
+  return complete ? ({ ...parts, columns, picker } as Parts) : undefined;
 }
 
 const cell = (tag: "th" | "td", text = ""): HTMLTableCellElement => {
@@ -128,8 +141,20 @@ function render(parts: Parts, payload: ComparePayload, slugs: readonly string[])
   parts.body.replaceChildren(...rows.flatMap((row) => row ?? []));
 }
 
-const selected = (parts: Parts): string[] =>
-  parts.selects.map((select) => select.value).filter((slug, index, all) => slug !== "" && all.indexOf(slug) === index);
+/** The column buttons: icon and name of the weapon each holds, or the prompt when empty. */
+function renderColumns(parts: Parts, payload: ComparePayload, slugs: readonly string[]): void {
+  parts.columns.forEach((column, index) => {
+    const weapon = payload.weapons.find((found) => found.slug === slugs[index]);
+    column.dataset.slug = weapon?.slug ?? "";
+    column.dataset.filled = String(weapon !== undefined);
+    column.dataset.unique = String(weapon?.unique === true);
+    column.querySelector("[data-icon]")?.replaceChildren(...iconImage(weapon?.icon));
+    const name = column.querySelector<HTMLElement>("[data-name]");
+    if (name) name.textContent = weapon?.name ?? payload.labels.pick;
+    const clear = column.querySelector<HTMLElement>("[data-clear]");
+    if (clear) clear.hidden = weapon === undefined;
+  });
+}
 
 function syncUrl(slugs: readonly string[]): void {
   history.replaceState(history.state, "", `${location.pathname}${compareSearch(location.search, slugs)}${location.hash}`);
@@ -156,27 +181,50 @@ async function copyLink(parts: Parts, payload: ComparePayload): Promise<void> {
   }
 }
 
+const columnLabel = (payload: ComparePayload, index: number): string => payload.labels.column.replace("{n}", () => String(index + 1));
+
 /** Wires up the comparison; false when the payload or markup is not what the page should have rendered. */
 export function mountCompare(root: HTMLElement): boolean {
   const payload = readPayload(root);
   const parts = partsOf(root);
   if (!payload || !parts) return false;
   const decoded = decodeCompare(location.search, new Set(payload.weapons.map((weapon) => weapon.slug)));
-  parts.selects.forEach((select, index) => (select.value = decoded.slugs[index] ?? ""));
-  if (decoded.dropped > 0) syncUrl(decoded.slugs);
-  render(parts, payload, decoded.slugs);
-  for (const select of parts.selects) {
-    select.addEventListener("change", () => {
-      const slugs = selected(parts);
-      // Pack the picks to the left without repeats, so the pickers always match the table and the address.
-      parts.selects.forEach((other, index) => (other.value = slugs[index] ?? ""));
-      syncUrl(slugs);
-      render(parts, payload, slugs);
-      parts.notice.hidden = true;
-      parts.url.hidden = true;
-      parts.status.textContent = "";
+  let slugs: readonly string[] = decoded.slugs;
+  let request: PickerRequest | undefined;
+  const show = (next: readonly string[]) => {
+    slugs = next;
+    renderColumns(parts, payload, slugs);
+    render(parts, payload, slugs);
+  };
+  const change = (next: readonly string[], focusColumn: number) => {
+    show(next);
+    syncUrl(slugs);
+    parts.notice.hidden = true;
+    parts.url.hidden = true;
+    parts.status.textContent = "";
+    // Picks pack to the left, so focus the column the weapon landed in, or the first empty one.
+    parts.columns[Math.min(focusColumn, slugs.length, parts.columns.length - 1)]?.querySelector<HTMLElement>("[data-pick-open]")?.focus();
+  };
+  if (decoded.dropped > 0) syncUrl(slugs);
+  show(slugs);
+  parts.columns.forEach((column, index) => {
+    column.querySelector("[data-pick-open]")?.addEventListener("click", () => {
+      const taken = new Map(slugs.flatMap((slug, other) => (other === index ? [] : [[slug, columnLabel(payload, other)] as const])));
+      request = {
+        title: columnLabel(payload, index),
+        current: slugs[index],
+        taken,
+        pick: (slug) => {
+          parts.picker.dialog.close();
+          const next = placeWeapon(slugs, index, slug);
+          change(next, next.indexOf(slug));
+        },
+      };
+      openPicker(parts.picker, payload, request);
     });
-  }
+    column.querySelector("[data-clear]")?.addEventListener("click", () => change(removeWeapon(slugs, index), index));
+  });
+  wirePicker(parts.picker, payload, () => request, parts.close);
   root.querySelector("[data-copy]")?.addEventListener("click", () => void copyLink(parts, payload));
   root.hidden = false;
   if (decoded.dropped > 0) {
