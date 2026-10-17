@@ -4,7 +4,8 @@
 .catalog-count { margin: 0 0 var(--space-2); }
 .catalog-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; font-size: var(--fs-display-l); line-height: 1; }
 .catalog-title .ui-icon { width: 0.5em; height: 0.5em; align-self: center; }
-.catalog-title:lang(en) { font-size: clamp(32px, 12cqi, 72px); }
+/* The display size suits short Chinese names; other languages scale with the column, and a word still too long breaks rather than spilling into the sheet. */
+.catalog-title:not(:lang(zh)) { font-size: clamp(28px, 11cqi, 72px); overflow-wrap: anywhere; hyphens: auto; }
 .catalog-alt { margin: 6px 0 0; font-family: var(--font-mono); font-size: var(--fs-mono-m); text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); }
 
 .list-filter { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 16px; margin: 20px 0 0; }
