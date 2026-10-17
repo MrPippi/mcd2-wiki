@@ -47,6 +47,8 @@ interface Props {
 
 /** The issue form picker: data errors, in-game tests, translations, site bugs. */
 const REPORT_URL = "https://github.com/MrPippi/mcd2-wiki/issues/new/choose";
+/** Cloudflare Web Analytics site token (public, cookie-free); set by the deploy workflow so local builds send nothing. */
+const analyticsToken = import.meta.env.CF_BEACON_TOKEN;
 
 const { lang, title, current, description = "", noAlternates = false, home = false, noindex = false, ogType = "website", structuredData = [] } = Astro.props;
 const siteTitle = t(lang, "siteTitle");
@@ -113,6 +115,9 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
         }
       })();
     </script>
+    {analyticsToken && (
+      <script is:inline defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon={JSON.stringify({ token: analyticsToken })}></script>
+    )}
   </head>
   <body>
     <a class="skip-link" href="#main">{t(lang, "skipToContent")}</a>
