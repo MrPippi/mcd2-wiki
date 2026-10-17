@@ -1,0 +1,57 @@
+---
+import { calcPayloadJson } from "../lib/drop-calc/payload";
+import type { CalcPayload } from "../lib/drop-calc/parse";
+import { t, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang: Lang;
+  payload: CalcPayload;
+}
+
+const { lang, payload } = Astro.props;
+const { labels } = payload;
+---
+{/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
+<div class="drop-calc" data-testid="drop-calc" data-drop-calc hidden>
+  <div class="drop-controls" role="group" aria-label={t(lang, "dropCalc")}>
+    <label class="drop-wide"><span>{labels.filter}</span>
+      <input type="search" data-testid="drop-filter" data-filter placeholder={labels.filter} />
+    </label>
+    <label class="drop-wide"><span>{labels.item}</span>
+      <select data-testid="drop-item" data-item></select>
+    </label>
+    <label><span>{labels.threat}</span><select data-testid="drop-threat" data-level></select></label>
+    <label><span>{labels.difficulty}</span><select data-testid="drop-difficulty" data-difficulty></select></label>
+    <label><span>{labels.rarity}</span><select data-testid="drop-rarity" data-rarity></select></label>
+    <label><span>{labels.source}</span><select data-testid="drop-source" data-source></select></label>
+    <label><span>{labels.area}</span><select data-testid="drop-area" data-area></select></label>
+  </div>
+  <p class="note" data-gear-note hidden>{labels.gearOnly}</p>
+  <p class="drop-summary" data-testid="drop-summary" data-summary role="status" aria-live="polite"></p>
+  <p><a data-item-link hidden></a></p>
+  <div class="table-scroll" tabindex="0" role="region" aria-label={t(lang, "dropOddsTitle")} data-region hidden>
+    <table class="drop-table" data-testid="drop-results">
+      <thead><tr><th scope="col">{labels.source}</th><th scope="col">{labels.area}</th><th scope="col" class="drop-chance">{labels.chance}</th></tr></thead>
+      <tbody data-body></tbody>
+    </table>
+  </div>
+  <script type="application/json" data-drop-json set:html={calcPayloadJson(payload)}></script>
+</div>
+<p class="note" data-testid="drop-failed" data-drop-failed hidden>{t(lang, "dropCalcLoadFailed")}</p>
+
+<script>
+  import { mountCalc } from "../lib/drop-calc/ui";
+
+  const root = document.querySelector<HTMLElement>("[data-drop-calc]");
+  if (root) {
+    // The model file loads only on this page.
+    import("../data/drop-models.json")
+      .then((module) => {
+        if (!mountCalc(root, module.default as never)) throw new Error("bad payload or markup");
+      })
+      .catch((error: unknown) => {
+        console.error("drop calculator:", error);
+        document.querySelector<HTMLElement>("[data-drop-failed]")?.removeAttribute("hidden");
+      });
+  }
+</script>

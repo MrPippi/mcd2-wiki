@@ -50,15 +50,31 @@ function binomial(n: number, k: number, p: number): number {
   return ways * p ** k * (1 - p) ** (n - k);
 }
 
-/** The chance of no hit in `left` more draws, given the latest groups drawn and the items already drawn. Memoized per state. */
-function missChance(candidates: readonly Candidate[], rule: DropSlotRule, draws: number): number {
+/**
+ * Candidates with the same group and the same hit chance only differ in weight, which is all the draws can tell apart, unless
+ * the slot never gives an item twice: those are merged, so a pool of forty weapons draws like one of a few groups.
+ */
+function mergeAlike(candidates: readonly Candidate[], rule: DropSlotRule): readonly Candidate[] {
+  if (rule.oneOfAKind) return candidates;
+  const merged = new Map<string, Candidate>();
+  for (const one of candidates) {
+    const key = `${one.group}|${one.hit}`;
+    const known = merged.get(key);
+    merged.set(key, known ? { ...known, weight: known.weight + one.weight } : one);
+  }
+  return [...merged.values()];
+}
+
+/** The chance of no hit in `draws` draws, given the latest groups drawn and the items already drawn; one memo serves every number of draws. */
+function missChances(candidates: readonly Candidate[], rule: DropSlotRule): (draws: number) => number {
+  const pool = mergeAlike(candidates, rule);
   const memo = new Map<string, number>();
   const miss = (left: number, history: readonly string[], drawn: readonly number[]): number => {
     if (left === 0) return 1;
     const key = `${left}|${history.join(",")}|${drawn.join(",")}`;
     const known = memo.get(key);
     if (known !== undefined) return known;
-    const open = candidates.filter((one) => !history.includes(one.group) && !drawn.includes(one.item));
+    const open = pool.filter((one) => !history.includes(one.group) && !drawn.includes(one.item));
     const total = open.reduce((sum, one) => sum + one.weight, 0);
     const value =
       total > 0
@@ -71,7 +87,7 @@ function missChance(candidates: readonly Candidate[], rule: DropSlotRule, draws:
     memo.set(key, value);
     return value;
   };
-  return miss(draws, [], []);
+  return (draws) => miss(draws, [], []);
 }
 
 /** The chance that one trigger of the slot gives the target at least once; `pool` is the slot's (item, weight) list. */
@@ -82,10 +98,10 @@ export function slotOdds(file: DropFile, slot: DropSlot, pool: readonly (readonl
   if (!candidates.some((one) => one.hit > 0)) return 0;
   const rule = Object.hasOwn(file.slots, slot.slot) ? file.slots[slot.slot] : NO_RULE;
   const rolls = Math.min(MAX_DRAWS, slot.rolls);
-  // One memo per draw count would repeat work; the states are small, so each count is followed on its own.
+  const miss = missChances(candidates, rule);
   return Array.from({ length: rolls + 1 }, (_, successes) => {
     const share = rolls === 0 ? 1 : binomial(rolls, successes, slot.chance);
-    return share * (1 - missChance(candidates, rule, Math.min(MAX_DRAWS, successes + slot.guaranteed)));
+    return share * (1 - miss(Math.min(MAX_DRAWS, successes + slot.guaranteed)));
   }).reduce((sum, value) => sum + value, 0);
 }
 

@@ -1,0 +1,38 @@
+---
+import type { DropRowView } from "../lib/drop-view";
+import { t, type Lang } from "../lib/i18n";
+
+interface Props {
+  lang: Lang;
+  rows: readonly DropRowView[];
+  label: string;
+}
+
+const { lang, rows, label } = Astro.props;
+---
+{/* The table scrolls inside its own region on narrow screens; the page never does. */}
+<div class="table-scroll" tabindex="0" role="region" aria-label={label}>
+  <table class="drop-table" data-testid="drop-table">
+    <thead>
+      <tr>
+        <th scope="col">{t(lang, "dropColSource")}</th>
+        <th scope="col">{t(lang, "soulStormColArea")}</th>
+        <th scope="col" class="drop-chance">{t(lang, "dropColChance")}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr data-testid="drop-row">
+          <th scope="row">
+            {row.source.href ? <a href={row.source.href}>{row.source.name}</a> : <span>{row.source.name}</span>}
+            {row.source.note && <span class="tag">{row.source.note}</span>}
+          </th>
+          <td>
+            {row.area ? (row.area.href ? <a href={row.area.href}>{row.area.name}</a> : row.area.name) : <span class="drop-any">{t(lang, "dropNoArea")}</span>}
+          </td>
+          <td class="drop-chance" data-chance={row.probability}>{row.chance}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>

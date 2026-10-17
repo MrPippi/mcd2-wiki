@@ -18,6 +18,7 @@ const PAGES: readonly { readonly path: string; readonly title: UiKey; readonly i
   { path: "achievements", title: "achievements", intro: "achievementsIntro" },
   { path: "build", title: "build", intro: "buildIntro" },
   { path: "compare", title: "weaponCompare", intro: "weaponCompareIntro" },
+  { path: "drops", title: "dropCalc", intro: "dropCalcIntro" },
 ];
 /** The languages written by hand, so the ones an assistant should quote first. */
 const LISTED: readonly Lang[] = ["en", "zh"];

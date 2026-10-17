@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { buildDropModels, NO_DROPS, parseDropData, type DropInput } from "../../../scripts/extract/drop-models";
 import type { DropTables } from "../../../scripts/extract/drop-tables";
 import { ItemSourcesSchema, MobDataSchema } from "../../../scripts/extract/mob-schema";
+import type { DropSelection } from "../../../src/lib/drop-types";
 import { itemRows } from "../../../src/lib/drop-odds";
 import { makeEntry } from "../../helpers/entries";
 import { dropLoot, gear } from "../../helpers/drop-tables";
@@ -92,7 +93,7 @@ const input: DropInput = {
 const built = buildDropModels(input);
 const data = built.data;
 const UNIQUE_KEY = `melee/${makeEntry("Sword_Unique1", "melee").slug}`;
-const AT_20 = { level: 20, difficulty: "normal", rarity: "any" } as const;
+const AT_20: DropSelection = { level: 20, difficulty: "normal", rarity: "any" };
 const odds = (key: string, selection = AT_20) => Object.fromEntries(itemRows(data, key, selection).map((row) => [`${row.source}@${row.area}`, row.probability]));
 
 describe("buildDropModels", () => {

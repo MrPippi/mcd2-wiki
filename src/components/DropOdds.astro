@@ -1,0 +1,41 @@
+---
+import type { Entry } from "../../scripts/extract/schemas";
+import { dropGroupsOf, dropKeysOf } from "../lib/drop-view";
+import { guidesData } from "../lib/guides";
+import { t, type Lang } from "../lib/i18n";
+import { href } from "../lib/url";
+import DropRowsTable from "./DropRowsTable.astro";
+import EntrySection from "./EntrySection.astro";
+import GuideUnconfirmed from "./GuideUnconfirmed.astro";
+
+interface Props {
+  lang: Lang;
+  item: Entry;
+}
+
+const { lang, item } = Astro.props;
+const groups = dropGroupsOf(item, lang);
+const key = dropKeysOf(item)[0];
+const calculator = key ? `${href(lang, "drops")}?item=${encodeURIComponent(key)}` : undefined;
+---
+{groups.length > 0 && (
+  <EntrySection title={t(lang, "dropOddsTitle")} testid="drop-odds">
+    <div class="drop-odds" data-pagefind-ignore>
+      <p class="note">{t(lang, "dropOddsIntro")}</p>
+      <GuideUnconfirmed lang={lang} message="dropOddsUnconfirmed" verified={guidesData.verified.dropOdds} />
+      {groups.map((group) => (
+        <section class="drop-group" data-kind={group.kind} data-testid={`drop-group-${group.kind}`}>
+          <h3>{t(lang, group.heading)}</h3>
+          <DropRowsTable lang={lang} rows={group.visible} label={t(lang, group.heading)} />
+          {group.folded.length > 0 && (
+            <details class="drop-more" data-testid="drop-more">
+              <summary>{t(lang, "dropMore").replace("{count}", String(group.folded.length))}</summary>
+              <DropRowsTable lang={lang} rows={group.folded} label={t(lang, group.heading)} />
+            </details>
+          )}
+        </section>
+      ))}
+      {calculator && <p class="drop-calc-link"><a href={calculator} data-testid="drop-calc-link">{t(lang, "dropOpenCalc")}</a></p>}
+    </div>
+  </EntrySection>
+)}

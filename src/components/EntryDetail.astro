@@ -6,6 +6,7 @@ import { itemKicker } from "../lib/kicker";
 import { relatedLinks } from "../lib/related";
 import { hasUnknownValues, isSecretTalisman } from "../lib/talisman-view";
 import AffixOdds from "./AffixOdds.astro";
+import DropOdds from "./DropOdds.astro";
 import ArtifactStats from "./ArtifactStats.astro";
 import BookSource from "./BookSource.astro";
 import EnchantmentTiers from "./EnchantmentTiers.astro";
@@ -63,6 +64,7 @@ const related = relatedLinks(lang, entry);
       {(entry.category === "enchantment" || entry.category === "effect") && <FixedOn lang={lang} entry={entry} />}
       {entry.category === "enchantment" && <BookSource lang={lang} enchantment={entry} />}
       <ItemSources lang={lang} entry={entry} />
+      <DropOdds lang={lang} item={entry} />
       {related.length > 0 && (
         <EntrySection title={t(lang, "related")}>
           <ul class="related" data-pagefind-ignore>
