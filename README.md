@@ -1,12 +1,48 @@
+<div align="center">
+
 # Minecraft Dungeons II Wiki
+
+**A fan-made reference built straight from the game's own data, in 16 languages**
+
+Weapons, armor, artifacts, enchantments, the bestiary, the world map, quests, Soul Storms and more,<br>
+with every number and name taken from the game files rather than typed in by hand.
+
+[![Site](https://img.shields.io/badge/site-mrpippi.github.io%2Fmcd2--wiki-2ea44f)](https://mrpippi.github.io/mcd2-wiki/)
+[![Game version](https://img.shields.io/badge/game-1.1.2.0-orange)](#good-to-know)
+[![Languages](https://img.shields.io/badge/languages-16-blue)](#languages)
+[![Deploy](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml/badge.svg)](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/github/license/MrPippi/mcd2-wiki)](LICENSE)
+
+[**Open the wiki**](https://mrpippi.github.io/mcd2-wiki/) · [**FAQ**](#faq) · [**Report a mistake**](https://github.com/MrPippi/mcd2-wiki/issues)
 
 **English** · [繁體中文](README.zh-TW.md)
 
-A fan-made reference for **Minecraft Dungeons II**, built straight from the game's own data and text, in 16 languages. The data matches **game version 1.1.2.0**.
+</div>
 
-**[Open the wiki →](https://mrpippi.github.io/mcd2-wiki/)**
+---
 
 ![The wiki's home page in English](docs/images/en-home.webp)
+
+## Highlights
+
+- **Straight from the game**: names, descriptions and stats are extracted from the game's DataTables and localization. The data matches **game version 1.1.2.0**.
+- **16 languages**: game text uses the official translations, so it matches what you see in game.
+- **Bilingual mode**: show every name and description in a second language as well.
+- **No guessing**: values the data can't explain are left out or marked unconfirmed.
+- **Free, no sign-up**: a static site that works on phones too.
+
+## Contents
+
+- [What you can look up](#what-you-can-look-up)
+- [Handy features](#handy-features)
+- [Languages](#languages)
+- [FAQ](#faq)
+- [For contributors](#for-contributors)
+- [For rights holders](#for-rights-holders)
+- [Security](#security)
+- [License](#license)
+
+---
 
 ## What you can look up
 
@@ -51,15 +87,29 @@ Item pages also list where an item comes from: quest rewards, chests, merchants 
 
 Item names, descriptions and other game text come from the game's own localization, so they match what you see in the game. The site's own wording (menus, labels, notes) is hand-written in Traditional Chinese and English and machine-translated into the other languages. Where a translation was found to be wrong, that line falls back to English.
 
-## Good to know
+---
 
-- **Numbers are base values from the game files.** Difficulty, party size and gear power change what you see in a run.
-- **Some things aren't in the game data.** For example, swing timings and damage per second live in animation files, so the wiki doesn't show them. Entries whose numbers can't be worked out from the data are left out rather than guessed.
-- **When the game updates,** the wiki is updated by extracting the new game files again.
+## FAQ
 
-## Found a mistake?
+<a id="good-to-know"></a>
+
+**Why don't the numbers match what I see in a run?**
+
+They are base values from the game files. Difficulty, party size and gear power change what you see in a run.
+
+**Why is something missing, like swing timings or damage per second?**
+
+Some things aren't in the game data. Swing timings and damage per second live in animation files, so the wiki doesn't show them. Entries whose numbers can't be worked out from the data are left out rather than guessed.
+
+**Will the wiki follow game updates?**
+
+Yes. When the game updates, the wiki is updated by extracting the new game files again. The version the data matches is shown at the top of this page.
+
+**I found a mistake. How do I report it?**
 
 Open an [issue](https://github.com/MrPippi/mcd2-wiki/issues) and include the page link and what you saw in the game. A screenshot helps.
+
+---
 
 ## For contributors
 
@@ -70,10 +120,24 @@ npm install
 npm run dev
 ```
 
-## Disclaimer
+## For rights holders
 
-This is an unofficial fan site. It is not affiliated with or endorsed by Mojang Studios or Microsoft. Game text and images belong to their respective owners. The site's fonts (Noto Serif, Noto Serif TC/SC/JP/KR, Geist, Geist Mono) are licensed under the SIL Open Font License 1.1.
+This is an unofficial fan site. If you hold rights to any of the game text or images shown here and want something removed, [open an issue](https://github.com/MrPippi/mcd2-wiki/issues/new) naming what should be removed, and it will be taken down as soon as possible.
+
+## Security
+
+Please don't disclose security issues in public. Report them privately through GitHub; see [SECURITY.md](SECURITY.md).
 
 ## License
 
-The source code is released under the [MIT License](LICENSE). Game text and images are not covered by it. This includes everything extracted from the game under `public/` (map tiles, icons, mob renders), `src/data/`, `src/assets/` and `docs/images/`; see the disclaimer above.
+- **Source code**: released under the [MIT License](LICENSE).
+- **Game text and images**: not covered by the MIT License. This includes everything extracted from the game under `public/` (map tiles, icons, mob renders), `src/data/`, `src/assets/` and `docs/images/`. They belong to their respective owners.
+- **Fonts**: Noto Serif, Noto Serif TC/SC/JP/KR, Geist and Geist Mono are licensed under the SIL Open Font License 1.1.
+
+---
+
+<div align="center">
+
+Not an official Minecraft product. Not approved by or associated with Mojang Studios or Microsoft.
+
+</div>
