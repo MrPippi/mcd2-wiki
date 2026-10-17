@@ -180,3 +180,52 @@ test("English armor tooltips separate the slot from the name with an ASCII colon
   expect(pieces.some((text) => /^Helmet: \S/.test(text))).toBe(true);
   expect(pieces.join("")).not.toContain("：");
 });
+
+// Display titles are tuned for short Chinese names; a long word (Japanese katakana kept whole by
+// word-break: auto-phrase, German or Russian compounds) must still fit the 280px index card.
+const TITLE_LANGS = ["ja", "de", "ru", "uk", "fr", "pt", "es", "it", "pl", "nl", "sv", "tr", "ko", "en"] as const;
+const TITLE_PATHS = [
+  "melee/", "ranged/", "armor/", "artifact/", "talisman/", "enchantment/", "effect/",
+  "mobs/", "quests/", "locations/", "bosses/", "achievements/", "guides/", "soul-storm/", "build/", "compare/",
+];
+
+for (const lang of TITLE_LANGS) {
+  test(`catalog titles stay inside their column (${lang})`, async ({ page }) => {
+    await page.setViewportSize({ width: 1366, height: 800 });
+    const overflowing: string[] = [];
+    for (const path of TITLE_PATHS) {
+      await page.goto(`/${lang}/${path}`);
+      const spill = await page.locator(".catalog-title").first().evaluate((title) => {
+        const range = document.createRange();
+        range.selectNodeContents(title);
+        return range.getBoundingClientRect().right - title.getBoundingClientRect().right;
+      });
+      if (spill > 1) overflowing.push(`${path} +${Math.round(spill)}px`);
+    }
+    expect(overflowing).toEqual([]);
+  });
+}
+
+// The longest item names per language at the time of writing (katakana phrases, German and Russian compounds).
+const LONG_ENTRY_PAGES = [
+  "/ja/melee/gauntlet-unique1/", "/ja/artifact/redstone-mines/", "/ja/artifact/iron-hide-lute/",
+  "/de/melee/gauntlet-unique1/", "/de/artifact/iron-hide-lute/", "/de/melee/cleaver-unique1/",
+  "/ru/enchantment/blowback/", "/ru/artifact/iron-hide-lute/", "/ru/melee/gauntlet-unique1/",
+];
+
+for (const width of [1366, 390]) {
+  test(`long item names stay inside the entry column (${width}px)`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 800 });
+    const overflowing: string[] = [];
+    for (const path of LONG_ENTRY_PAGES) {
+      await page.goto(path);
+      const spill = await page.locator(".entry-content h1").evaluate((title) => {
+        const range = document.createRange();
+        range.selectNodeContents(title);
+        return range.getBoundingClientRect().right - title.getBoundingClientRect().right;
+      });
+      if (spill > 1) overflowing.push(`${path} +${Math.round(spill)}px`);
+    }
+    expect(overflowing).toEqual([]);
+  });
+}
