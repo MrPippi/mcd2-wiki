@@ -27,6 +27,11 @@ describe("searchMarkers", () => {
     expect(searchMarkers(MARKERS, "  blackSMITH ", "zh").map((m) => m.id)).toEqual(["smith"]);
   });
 
+  it("matches the titles of the quests a quest pin lists", () => {
+    const area = { id: "quest-area:forest", kind: "quest-area" as const, px: 0, py: 0, name: { zh: "咆哮森林", en: "Howling Forest" }, quests: [{ slug: "ca03", title: { zh: "森林之心", en: "Heart of the Forest" } }] };
+    expect(searchMarkers([...MARKERS, area], "heart OF", "zh").map((m) => m.id)).toEqual(["quest-area:forest"]);
+  });
+
   it("matches the area a marker sits in", () => {
     expect(searchMarkers(MARKERS, "  BRAVE haven ", "en").map((m) => m.id)).toEqual(["portal"]);
     expect(searchMarkers(MARKERS, "咆哮", "en").map((m) => m.id)).toEqual(["rift1"]);
@@ -64,7 +69,7 @@ describe("searchMarkers", () => {
 
 describe("countByKind", () => {
   it("counts every kind, including empty ones", () => {
-    expect(countByKind(MARKERS)).toEqual({ minecart: 1, rift: 1, portal: 1, merchant: 1, area: 0 });
+    expect(countByKind(MARKERS)).toEqual({ minecart: 1, rift: 1, portal: 1, merchant: 1, quest: 0, "quest-area": 0, area: 0 });
   });
 });
 
@@ -86,7 +91,7 @@ describe("hidden kinds", () => {
   });
 
   it("never hides area names, which are not a filter, even if an older page saved them", () => {
-    expect(FILTER_KINDS).toEqual(["minecart", "rift", "portal", "merchant"]);
+    expect(FILTER_KINDS).toEqual(["minecart", "rift", "portal", "merchant", "quest", "quest-area"]);
     expect(parseHiddenKinds('["area","rift"]')).toEqual(new Set(["rift"]));
   });
 

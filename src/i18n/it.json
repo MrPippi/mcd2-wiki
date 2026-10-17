@@ -71,6 +71,8 @@
     "mapSource",
     "categorySkin",
     "markerArea",
+    "markerQuest",
+    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -467,6 +469,8 @@
   "markerPortal": "Statua di teletrasporto",
   "markerMerchant": "Mercante",
   "markerArea": "Area",
+  "markerQuest": "Luoghi delle missioni",
+  "markerQuestArea": "Missioni dell'area",
   "unitSeconds": "{n} s",
   "unitBlocks": {
     "one": "{n} blocco",

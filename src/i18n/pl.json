@@ -70,6 +70,8 @@
     "mapSource",
     "categorySkin",
     "markerArea",
+    "markerQuest",
+    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -469,6 +471,8 @@
   "markerPortal": "Posąg teleportujący",
   "markerMerchant": "Kupiec",
   "markerArea": "Obszar",
+  "markerQuest": "Miejsca zadań",
+  "markerQuestArea": "Zadania w obszarze",
   "unitSeconds": "{n} s",
   "unitBlocks": {
     "one": "{n} blok",

@@ -71,6 +71,8 @@
     "mapSource",
     "categorySkin",
     "markerArea",
+    "markerQuest",
+    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -467,6 +469,8 @@
   "markerPortal": "Статуя для телепортування",
   "markerMerchant": "Торговець",
   "markerArea": "Область",
+  "markerQuest": "Місця завдань",
+  "markerQuestArea": "Завдання області",
   "unitSeconds": "{n} с",
   "unitBlocks": {
     "one": "{n} блок",

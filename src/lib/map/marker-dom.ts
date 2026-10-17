@@ -1,7 +1,7 @@
 /** DOM for map pins, popups and search results, built with textContent so game text is never parsed as HTML. */
 import type { PayloadMarker } from "./payload";
 import type { Lang } from "../i18n";
-import { assetUrl } from "../url";
+import { assetUrl, href } from "../url";
 
 function element<K extends keyof HTMLElementTagNameMap>(tag: K, className: string, text?: string): HTMLElementTagNameMap[K] {
   const node = document.createElement(tag);
@@ -57,13 +57,52 @@ export function popupTexts(marker: PayloadMarker, lang: Lang, kindLabel: string)
 export const resultText = (marker: PayloadMarker, lang: Lang, kindLabel: string): string =>
   [marker.name[lang], shownKind(marker.name[lang], kindLabel), marker.area?.[lang]].filter(Boolean).join(" · ");
 
+export interface PopupQuest {
+  readonly title: string;
+  readonly href: string;
+}
+
+export interface PopupLinks {
+  /** The name links straight to its quest when the pin is that one quest's spot. */
+  readonly nameHref?: string;
+  /** Otherwise the quests are listed under the name. */
+  readonly list: PopupQuest[];
+}
+
+export function popupLinks(marker: PayloadMarker, lang: Lang): PopupLinks {
+  const quests = (marker.quests ?? []).map((quest) => ({ title: quest.title[lang] ?? "", href: href(lang, "quests", quest.slug) }));
+  const [only] = quests;
+  if (quests.length === 1 && only.title === marker.name[lang]) return { nameHref: only.href, list: [] };
+  return { list: quests };
+}
+
+function link(text: string, url: string): HTMLAnchorElement {
+  const anchor = element("a", "", text);
+  anchor.href = url;
+  return anchor;
+}
+
 export function popupElement(marker: PayloadMarker, lang: Lang, kindLabel: string): HTMLElement {
   const { kind, name, area, note } = popupTexts(marker, lang, kindLabel);
+  const { nameHref, list } = popupLinks(marker, lang);
   const popup = element("div", "map-popup");
   if (kind) popup.append(element("p", "map-popup-kind mono", kind));
-  popup.append(element("p", "map-popup-name", name));
+  const nameLine = element("p", "map-popup-name");
+  nameLine.append(nameHref ? link(name, nameHref) : document.createTextNode(name));
+  popup.append(nameLine);
   if (area) popup.append(element("p", "map-popup-area", area));
   if (note) popup.append(element("p", "map-popup-note", note));
+  if (list.length > 0) {
+    const items = element("ul", "map-popup-quests");
+    items.append(
+      ...list.map((quest) => {
+        const item = element("li", "");
+        item.append(link(quest.title, quest.href));
+        return item;
+      }),
+    );
+    popup.append(items);
+  }
   return popup;
 }
 

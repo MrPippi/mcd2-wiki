@@ -98,6 +98,8 @@
   "markerPortal": "傳送雕像",
   "markerMerchant": "商人",
   "markerArea": "區域",
+  "markerQuest": "任務地點",
+  "markerQuestArea": "區域任務",
   "unitSeconds": "{n} 秒",
   "unitBlocks": "{n} 格",
   "swingN": "第 {n} 擊",

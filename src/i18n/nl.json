@@ -71,6 +71,8 @@
     "mapSource",
     "categorySkin",
     "markerArea",
+    "markerQuest",
+    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -467,6 +469,8 @@
   "markerPortal": "Teleportatiestandbeeld",
   "markerMerchant": "Handelaar",
   "markerArea": "Gebied",
+  "markerQuest": "Missielocaties",
+  "markerQuestArea": "Missies in het gebied",
   "unitSeconds": "{n} sec",
   "unitBlocks": {
     "one": "{n} blok",
