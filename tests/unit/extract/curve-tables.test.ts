@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
-import { evaluateCurve, findCurve, loadCurveTables, parseCurveRef, sampleThreat, type Curve } from "../../../scripts/extract/curve-tables";
+import { curveNotes, evaluateCurve, findCurve, loadCurveTables, parseCurveRef, sampleThreat, type Curve } from "../../../scripts/extract/curve-tables";
 import { curveFile, curveOf, rawCurveFiles, ref, richRow, simpleRow } from "../../helpers/curve-tables";
 
 let sourceRoot: string;
@@ -12,7 +12,7 @@ const put = async (relative: string, value: unknown): Promise<void> => {
   await writeFile(file, JSON.stringify(value), "utf8");
 };
 const putAll = (files: Record<string, unknown>): Promise<unknown> => Promise.all(Object.entries(files).map(([name, value]) => put(`${name}.json`, value)));
-const linear = (...points: [number, number][]): Curve => ({ keys: points.map(([time, value]) => ({ time, value, step: false })) });
+const linear = (...points: [number, number][]): Curve => ({ keys: points.map(([time, value]) => ({ time, value, step: false })), notes: [] });
 const range = (from: number, to: number): number[] => Array.from({ length: to - from + 1 }, (_, index) => from + index);
 
 beforeEach(async () => { sourceRoot = await mkdtemp(path.join(tmpdir(), "mcd2-curves-")); });
@@ -26,7 +26,7 @@ describe("evaluateCurve", () => {
   });
 
   it("holds a step key's value until the next key", () => {
-    const curve: Curve = { keys: [{ time: 1, value: 4, step: true }, { time: 3, value: 8, step: true }] };
+    const curve: Curve = { keys: [{ time: 1, value: 4, step: true }, { time: 3, value: 8, step: true }], notes: [] };
     expect([1, 2, 2.9, 3, 4].map((time) => evaluateCurve(curve, time))).toEqual([4, 4, 4, 8, 8]);
   });
 
@@ -76,18 +76,21 @@ describe("loadCurveTables", () => {
     expect(evaluateCurve(curveOf(tables, "CT_N", "Step"), 2)).toBe(0);
   });
 
-  it("reads a cubic key as linear and reports it once per row", async () => {
+  it("reads a cubic key as linear and notes it once on the row", async () => {
     await put("CT_C.json", curveFile("CT_C", "RichCurves", { Smooth: richRow([[1, 0], [2, 1], [3, 2]], "RCIM_Cubic") }));
     const { tables, issues } = await loadCurveTables(sourceRoot);
-    expect(issues.map((item) => [item.type, item.detail])).toEqual([["curve-unsupported", "CT_C/Smooth: interpolation cubic (read as linear)"]]);
-    expect(evaluateCurve(curveOf(tables, "CT_C", "Smooth"), 1.5)).toBe(0.5);
+    const smooth = curveOf(tables, "CT_C", "Smooth");
+    expect(issues).toEqual([]);
+    expect(smooth.notes).toEqual(["interpolation cubic (read as linear)"]);
+    expect(curveNotes({ table: "CT_C", row: "Smooth" }, smooth).map((item) => [item.type, item.detail])).toEqual([["curve-unsupported", "CT_C/Smooth: interpolation cubic (read as linear)"]]);
+    expect(evaluateCurve(smooth, 1.5)).toBe(0.5);
   });
 
-  it("reports an extrapolation other than constant and still clamps", async () => {
+  it("notes an extrapolation other than constant and still clamps", async () => {
     const loop = { ...simpleRow([[1, 0], [2, 1]]), PostInfinityExtrap: "ERichCurveExtrapolation::RCCE_Cycle" };
     await put("CT_E.json", curveFile("CT_E", "SimpleCurves", { Loop: loop }));
-    const { tables, issues } = await loadCurveTables(sourceRoot);
-    expect(issues.map((item) => item.detail)).toEqual(["CT_E/Loop: extrapolation (read as constant)"]);
+    const { tables } = await loadCurveTables(sourceRoot);
+    expect(curveOf(tables, "CT_E", "Loop").notes).toEqual(["extrapolation (read as constant)"]);
     expect(evaluateCurve(curveOf(tables, "CT_E", "Loop"), 9)).toBe(1);
   });
 

@@ -1,7 +1,8 @@
 /**
  * The game's CurveTables (CT_*.json, CUE4Parse exports of /Game/Spicewood/GameplayLogic/). Rows are SimpleCurves (a row-level
  * InterpMode) or RichCurves (an InterpMode per key). Only linear and constant (step) interpolation is read; a cubic key is
- * read as linear and reported. Beyond the end keys the value stays constant.
+ * read as linear. Beyond the end keys the value stays constant. A curve carries a note for each such deviation, so the guide
+ * that uses the curve reports it (the many curves nothing reads stay silent).
  */
 import { readdir } from "node:fs/promises";
 import path from "node:path";
@@ -34,6 +35,8 @@ export interface CurveKey {
 export interface Curve {
   /** Sorted by time; never empty. */
   readonly keys: readonly CurveKey[];
+  /** What the export has that this reader does not follow ("interpolation cubic (read as linear)"). */
+  readonly notes: readonly string[];
 }
 
 export type CurveTables = Readonly<Record<string, Readonly<Record<string, Curve>>>>;
@@ -42,6 +45,9 @@ export interface CurveRef {
   readonly table: string;
   readonly row: string;
 }
+
+/** One issue per note of a curve a guide actually reads. */
+export const curveNotes = (ref: CurveRef, curve: Curve): Issue[] => curve.notes.map((note) => issue("curve-unsupported", `${ref.table}/${ref.row}: ${note}`));
 
 export interface LoadedCurveTables {
   readonly tables: CurveTables;
@@ -64,7 +70,7 @@ const roundValue = (value: number): number => Math.round(value * 10_000) / 10_00
 /** A curve value without float noise from the export (0.79999995 → 0.8). */
 export const cleanCurveValue = roundValue;
 
-function readRow(where: string, row: z.infer<typeof CurveRowSchema>): { curve: Curve; issues: Issue[] } {
+function readRow(row: z.infer<typeof CurveRowSchema>): Curve {
   const found = row.Keys.map((key) => {
     const name = interpName(key.InterpMode ?? row.InterpMode ?? "linear");
     return { key, name };
@@ -72,24 +78,21 @@ function readRow(where: string, row: z.infer<typeof CurveRowSchema>): { curve: C
   const unsupported = [...new Set(found.map(({ name }) => name).filter((name) => name !== "linear" && name !== "constant"))];
   const extrapolations = [row.PreInfinityExtrap, row.PostInfinityExtrap].filter((raw): raw is string | number => raw !== undefined);
   return {
-    curve: {
-      keys: found.map(({ key, name }) => ({ time: key.Time, value: key.Value, step: name === "constant" })).sort((a, b) => a.time - b.time),
-    },
-    issues: [
-      ...unsupported.map((name) => issue("curve-unsupported", `${where}: interpolation ${name} (read as linear)`)),
-      ...(extrapolations.every(isConstantExtrapolation) ? [] : [issue("curve-unsupported", `${where}: extrapolation (read as constant)`)]),
+    keys: found.map(({ key, name }) => ({ time: key.Time, value: key.Value, step: name === "constant" })).sort((a, b) => a.time - b.time),
+    notes: [
+      ...unsupported.map((name) => `interpolation ${name} (read as linear)`),
+      ...(extrapolations.every(isConstantExtrapolation) ? [] : ["extrapolation (read as constant)"]),
     ],
   };
 }
 
-function readTable(file: string, raw: unknown): { name: string; rows: Record<string, Curve>; issues: Issue[] } {
+function readTable(file: string, raw: unknown): { name: string; rows: Record<string, Curve> } {
   const parsed = CurveFileSchema.safeParse(raw);
   if (!parsed.success) {
     throw new ExtractError(`曲線表 ${file} 欄位與預期不符（遊戲更新了格式？）：${parsed.error.issues.slice(0, 3).map(formatZodIssue).join("；")}`);
   }
   const name = path.basename(file, ".json");
-  const rows = Object.entries(parsed.data[0].Rows).map(([row, value]) => ({ row, ...readRow(`${name}/${row}`, value) }));
-  return { name, rows: Object.fromEntries(rows.map(({ row, curve }) => [row, curve])), issues: rows.flatMap(({ issues }) => issues) };
+  return { name, rows: Object.fromEntries(Object.entries(parsed.data[0].Rows).map(([row, value]) => [row, readRow(value)])) };
 }
 
 async function listCurveFiles(dir: string): Promise<string[] | undefined> {
@@ -108,10 +111,7 @@ export async function loadCurveTables(sourceRoot: string): Promise<LoadedCurveTa
   const files = await listCurveFiles(dir);
   if (!files) return { tables: {}, issues: [issue("missing-curve-tables", CURVE_TABLES_DIR)] };
   const tables = await Promise.all(files.map(async (file) => readTable(file, await readJsonFile(file, `曲線表 ${path.basename(file)}`))));
-  return {
-    tables: Object.fromEntries(tables.map(({ name, rows }) => [name, rows])),
-    issues: tables.flatMap(({ issues }) => issues),
-  };
+  return { tables: Object.fromEntries(tables.map(({ name, rows }) => [name, rows])), issues: [] };
 }
 
 const REF_FILE = /\/([^/.']+)\.[^/.']+'?$/;

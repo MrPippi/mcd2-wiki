@@ -4,7 +4,7 @@ import path from "node:path";
 import { beforeAll, describe, expect, it } from "vitest";
 import { loadCurveTables, type CurveTables } from "../../../scripts/extract/curve-tables";
 import { buildDifficulty, buildThreat } from "../../../scripts/extract/guides-threat";
-import { curveFile, rawCurveFiles } from "../../helpers/curve-tables";
+import { curveFile, rawCurveFiles, richRow } from "../../helpers/curve-tables";
 import { difficultyRows, gameBalanceRows, guideTables } from "../../helpers/guide-tables";
 import { makeLocales, ns } from "../../helpers/locales";
 
@@ -63,6 +63,17 @@ describe("buildThreat", () => {
     const { threat } = buildThreat(guideTables(), curves);
     expect(threat[2]).toMatchObject({ attackPower: 0.91, damageResistance: 0.83, soulStatedCost: { min: 1000, max: 4000 }, minibossCost: { min: 3750, max: 7500 } });
     expect(threat[3].mobVariantChance).toEqual({ min: 0.1, max: 0.2 });
+  });
+
+  it("reports a curve it reads with a note, such as a cubic key", async () => {
+    const files = rawCurveFiles();
+    files.CT_GlobalDifficultySettings = curveFile("CT_GlobalDifficultySettings", "RichCurves", {
+      PlayerAttackPower: richRow([[1, 1], [20, 0.5]], "RCIM_Cubic"),
+      PlayerDamageResistance: richRow([[1, 1], [20, 0.5]]),
+    });
+    const { threat, issues } = buildThreat(guideTables(), await curvesOf(files));
+    expect(threat[0].attackPower).toBe(1);
+    expect(issues.map((item) => [item.type, item.detail])).toEqual([["curve-unsupported", "CT_GlobalDifficultySettings/PlayerAttackPower: interpolation cubic (read as linear)"]]);
   });
 
   it("leaves out a part whose curve is missing and reports it", async () => {

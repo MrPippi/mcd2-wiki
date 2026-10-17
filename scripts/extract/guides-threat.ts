@@ -3,7 +3,7 @@
  * fixed curve name: DT_GameBalanceDefinition (SecondPass row) names the damage, rarity and effect-tier curves,
  * DT_WorldActorDefinition the mob spawn settings table, and DT_DifficultyDefinition each difficulty's multipliers.
  */
-import { cleanCurveValue, evaluateCurve, findCurve, parseCurveRef, sampleThreat, THREAT_LEVELS, type CurveTables } from "./curve-tables";
+import { cleanCurveValue, curveNotes, evaluateCurve, findCurve, parseCurveRef, sampleThreat, THREAT_LEVELS, type CurveTables } from "./curve-tables";
 import { RARITIES, DIFFICULTIES, type Difficulty, type DifficultyData, type Rarity, type ThreatRow } from "./guides-schema";
 import { rarityOfTag } from "./guides-enchanting";
 import type { DifficultyRow, GameBalanceRow, GuideTables } from "./guides-tables";
@@ -37,7 +37,7 @@ interface Sampled {
 function sample(curves: CurveTables, ref: CurveRefInput | undefined, label: string): Sampled {
   const parsed = ref ? parseCurveRef(ref) : undefined;
   const curve = parsed ? findCurve(curves, parsed) : undefined;
-  if (curve) return { values: sampleThreat(curve), issues: [] };
+  if (parsed && curve) return { values: sampleThreat(curve), issues: curveNotes(parsed, curve) };
   return { issues: [issue("guides-value-missing", parsed ? `${label}: ${parsed.table}/${parsed.row} not in the curve tables` : `${label}: no curve reference`)] };
 }
 
@@ -130,7 +130,7 @@ const difficultyIdOf = (row: DifficultyRow): Difficulty | undefined => DIFFICULT
 function multiplier(curves: CurveTables, ref: CurveRefInput, row: DifficultyRow, id: Difficulty): { value?: number; assumed: boolean; issues: Issue[] } {
   const parsed = parseCurveRef(ref);
   const curve = parsed ? findCurve(curves, parsed) : undefined;
-  if (curve) return { value: cleanCurveValue(evaluateCurve(curve, 1)), assumed: false, issues: [] };
+  if (parsed && curve) return { value: cleanCurveValue(evaluateCurve(curve, 1)), assumed: false, issues: curveNotes(parsed, curve) };
   const where = `DT_DifficultyDefinition ${row.Name}: ${parsed ? `${parsed.table}/${parsed.row}` : "no curve reference"}`;
   return id === "normal"
     ? { value: 1, assumed: true, issues: [issue("guides-value-missing", `${where} (assumed 1)`)] }
