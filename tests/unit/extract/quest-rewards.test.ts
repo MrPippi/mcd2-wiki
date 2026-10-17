@@ -6,6 +6,7 @@ import { lootEntry, lootRow, rawQuest, SIZE_ROWS } from "../../helpers/quest-tab
 
 const noSources = { areas: [], chests: [], merchants: [], bookPools: [] };
 const SOURCES: ItemSourcesData = {
+  bookDrops: [],
   sources: {},
   items: {
     "armor/phantom-boots": { ...noSources, quests: [{ id: "quest:QuestArmourPhantomSet", picks: { count: 1, of: 2 } }] },

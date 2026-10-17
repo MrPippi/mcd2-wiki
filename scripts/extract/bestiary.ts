@@ -37,7 +37,7 @@ export interface BestiaryResult {
 }
 
 const RENDERS_DIR = ["Renders", "Mobs"];
-const EMPTY_SOURCES: ItemSourcesData = { sources: {}, items: {} };
+const EMPTY_SOURCES: ItemSourcesData = { sources: {}, items: {}, bookDrops: [] };
 
 interface MobsPart {
   readonly mobs: MobData;

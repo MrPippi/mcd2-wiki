@@ -1,7 +1,7 @@
 ---
 import type { Category } from "../../scripts/extract/config";
 import { catalogLabel, categoryCount, entryNumber } from "../lib/catalog";
-import { entriesIn, publishedEntries } from "../lib/data";
+import { listedIn, publishedEntries } from "../lib/data";
 import { categoryLabel, t, type Lang } from "../lib/i18n";
 import { compareLang, htmlLang } from "../lib/lang";
 import { itemKicker } from "../lib/kicker";
@@ -31,7 +31,7 @@ const [featured, ...others] = pickShowcase(publishedEntries, ["melee", "ranged",
 const sideSpecimens = others.slice(0, SIDE_SPECIMENS);
 const featuredNumber = featured ? entryNumber(featured) : undefined;
 const PREVIEW_SIZE = 32;
-const previewOf = (category: Category) => entriesIn(category).filter((entry) => entry.icon !== undefined).slice(0, PREVIEW_SPRITES);
+const previewOf = (category: Category) => listedIn(category).filter((entry) => entry.icon !== undefined).slice(0, PREVIEW_SPRITES);
 ---
 <section class="home-hero">
   <div class="hero-copy">

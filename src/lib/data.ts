@@ -55,6 +55,12 @@ export const allArmorSets: readonly ArmorSet[] = z.array(ArmorSetSchema).parse(r
 export const entriesIn = (category: Category): Entry[] =>
   publishedEntries.filter((entry) => entry.category === category);
 
+/** Unique enchantments only come on their weapon (its page shows them): the enchantment list leaves them out, their pages stay. */
+const isListed = (entry: Entry): boolean => !(entry.category === "enchantment" && entry.variant === "unique");
+
+/** What a category page lists. */
+export const listedIn = (category: Category): Entry[] => entriesIn(category).filter(isListed);
+
 export const findEntry = (category: Category, slug: string): Entry | undefined =>
   publishedEntries.find((entry) => entry.category === category && entry.slug === slug);
 

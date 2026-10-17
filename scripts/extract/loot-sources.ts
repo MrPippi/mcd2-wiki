@@ -1,4 +1,4 @@
-/** Reverse index "item -> where to get it": area pools, chests, guaranteed quest rewards, merchants by category, book pools. */
+/** Reverse index "item -> where to get it": area pools, chests, guaranteed quest rewards, merchants by category, book pools and their droppers. */
 import type { Lang } from "./config";
 import { issue, type Issue } from "./issues";
 import type { ItemIndex, ItemRef } from "./loot-items";
@@ -7,7 +7,7 @@ import { reportLootTags } from "./loot-source-report";
 import { hasPoolTags, slotKeyOf, slotsOf } from "./loot-slots";
 import type { LootRow, LootSlotValue, LootTables } from "./loot-tables";
 import { areaPrefix, type AreaNamer } from "./mob-areas";
-import { ItemSourcesSchema, type ItemSources, type ItemSourcesData, type LootSlotKey, type LootSource, type SourceKindName } from "./mob-schema";
+import { ItemSourcesSchema, type BookDrop, type ItemSources, type ItemSourcesData, type LootSlotKey, type LootSource, type SourceKindName } from "./mob-schema";
 import { tagKey } from "./mob-tags";
 import type { LocaleFile } from "./schemas";
 import { SOURCE_NAME_KEYS, sourceName, type NameKeys, type SourceKind, type SourceName } from "./source-names";
@@ -44,7 +44,7 @@ interface Context {
   readonly names: Registry;
 }
 
-const STRIP: Readonly<Record<SourceKind, RegExp | undefined>> = { quest: /^Quest/, bookPool: /^EnchantmentBooks(?=[A-Z])/, chest: undefined, merchant: undefined };
+const STRIP: Readonly<Record<SourceKind, RegExp | undefined>> = { quest: /^Quest/, bookPool: /^EnchantmentBooks(?=[A-Z])/, chest: undefined, mob: undefined, merchant: undefined };
 const AREA_STRIP = /^SW\.Area\./i;
 const GLOBAL_AREA = "sw.area";
 const MERCHANT_PREFIX = "sw.npc.";
@@ -52,6 +52,8 @@ const BOOK_POOL_PREFIX = "sw.lootsource.enchantmentbooks";
 const CHEST_SLOTS: readonly LootSlotKey[] = ["item", "specialGear", "talismans"];
 const QUEST_SLOTS: readonly LootSlotKey[] = ["specialGear", "item", "enchantedBook"];
 const BOOK_SLOTS: readonly LootSlotKey[] = ["enchantedBook", "item"];
+/** A procedural chest row is the same chest the page already names (FancyChest_Procedural -> FancyChest). */
+const PROCEDURAL_SUFFIX = /_Procedural$/;
 
 const compareIds = (a: string, b: string): number => (a < b ? -1 : a > b ? 1 : 0);
 
@@ -171,14 +173,36 @@ function merchantSources(ctx: Context): Contrib<Merchant>[] {
     });
 }
 
-/** Book pools: trait tags expand to every book, minus the books of the exclusion rows the pool names in its traits. */
+/** Book pool tags some area row names in its traits: the pools chests and mobs there draw from. */
+const areaBookPools = (tables: LootTables): ReadonlySet<string> =>
+  new Set(tables.area.flatMap((row) => (row.Traits?.GameplayTags ?? []).map((tag) => tagKey(tag.TagName)).filter((tag) => tag.startsWith(BOOK_POOL_PREFIX))));
+
+/**
+ * Book pools an area draws from (AllEnchantmentBooks, which no area names, is left out): trait tags expand to every
+ * book, minus the books of the exclusion rows the pool names in its traits.
+ */
 function bookSources(ctx: Context): Contrib<string>[] {
+  const used = areaBookPools(ctx.tables);
   return ctx.tables.generic
-    .filter((row) => tagKey(row.TypeTag.TagName).startsWith(BOOK_POOL_PREFIX))
+    .filter((row) => used.has(tagKey(row.TypeTag.TagName)))
     .flatMap((row) => {
       const refs = BOOK_SLOTS.flatMap((key) => resolvePool(row, key, ctx.byTypeTag, ctx.index).items.map((item) => item.ref));
       return refs.length === 0 ? [] : contrib(refs, ctx.names.add("bookPool", row.Name));
     });
+}
+
+/** Chests and mobs whose book slot lists nothing itself and takes the area's book pool. */
+function bookDrops(ctx: Context): BookDrop[] {
+  const droppers = [
+    ...ctx.tables.lootActor.map((row) => ({ row, kind: "chest" as const })),
+    ...ctx.tables.mob.map((row) => ({ row, kind: "mob" as const })),
+  ];
+  return droppers.flatMap(({ row, kind }) => {
+    const slot = slotsOf(row).get("enchantedBook");
+    if (slot === undefined || hasPoolTags(slot) || !slot.InheritParentDropTable) return [];
+    const id = ctx.names.add(kind, row.Name.replace(PROCEDURAL_SUFFIX, ""));
+    return [{ id, guaranteed: slot.NumberOfGuaranteedDrops, rolls: slot.NumberOfRandomRolls, chancePerRoll: slot.DropChancePerRoll }];
+  }).sort((a, b) => compareIds(a.id, b.id));
 }
 
 /** Item key -> its sources, each id once (the first one wins), sorted by id. */
@@ -238,6 +262,7 @@ export function buildItemSources(input: SourcesInput): { data: ItemSourcesData; 
   const chests = chestSources(ctx, uniqueRefs(areas));
   const quests = questSources(ctx);
   const items = assembleItems({ areas, chests: chests.items, quests: quests.items, merchants: merchantSources(ctx), bookPools: bookSources(ctx) });
-  const data = ItemSourcesSchema.parse({ sources: ctx.names.sources(), items });
+  const drops = bookDrops(ctx);
+  const data = ItemSourcesSchema.parse({ sources: ctx.names.sources(), items, bookDrops: drops });
   return { data, issues: [...reportLootTags(rows, input.index), ...quests.issues, ...chests.issues, ...ctx.names.issues()] };
 }

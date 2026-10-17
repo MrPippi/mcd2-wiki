@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { describedEntry, describedLong } from "../../../src/lib/gear-values";
 import { makeEntry } from "../../helpers/entries";
-import { allArmorSets, booksFor, hasRequiredIcon, entriesIn, findArmorSet, findEntry, publishedEntries } from "../../../src/lib/data";
+import { allArmorSets, booksFor, hasRequiredIcon, entriesIn, findArmorSet, findEntry, listedIn, publishedEntries } from "../../../src/lib/data";
 
 describe("site data", () => {
   it("publishes only base entries", () => {
@@ -63,5 +63,17 @@ describe("site data", () => {
   it("finds armor sets", () => {
     expect(allArmorSets.length).toBeGreaterThan(0);
     expect(findArmorSet("disciple")?.name.en).toBe("Disciple");
+  });
+});
+
+describe("listedIn", () => {
+  it("leaves unique enchantments out of the enchantment list but keeps their pages", () => {
+    expect(listedIn("enchantment").some((entry) => entry.variant === "unique")).toBe(false);
+    expect(listedIn("enchantment").map((entry) => entry.slug)).toContain("swirling");
+    expect(findEntry("enchantment", "swirling-unique")).toBeDefined();
+  });
+
+  it("lists every entry of other categories, unique ones included", () => {
+    expect(listedIn("melee")).toEqual(entriesIn("melee"));
   });
 });

@@ -1,3 +1,7 @@
 {
-  "VillageMerchant": { "namespace": "Text/Release/VendorLabels.csv", "key": "vendor_village_merchant_title" }
+  "VillageMerchant": { "namespace": "Text/Release/VendorLabels.csv", "key": "vendor_village_merchant_title" },
+  "PiggyBank": { "namespace": "Text/Release/DT_MobType1Definition.csv", "key": "SW_Mob_PiggyBank_SW_TextEntry_Name" },
+  "EnchantmentBooksRavines": { "namespace": "Text/Release/DT_AreaDefinition.csv", "key": "SW_Area_Ravines_SW_TextEntry_Name" },
+  "EnchantmentBooksMeadow": { "namespace": "Text/Release/DT_AreaDefinition.csv", "key": "SW_Area_Meadow_T1_SW_TextEntry_Name" },
+  "EnchantmentBooksDeepDark": { "namespace": "Text/Release/DT_AreaDefinition.csv", "key": "SW_Area_DeepDark_T1_SW_TextEntry_Name" }
 }

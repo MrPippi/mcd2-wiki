@@ -95,7 +95,7 @@ describe("extractBestiary", () => {
     const bare = await mkdtemp(path.join(tmpdir(), "mcd2-bare-"));
     const result = await extractBestiary({ sourceRoot: bare, outRoot, locales, entries: [], map, overrideDir });
     expect(result.mobs).toEqual({ mobs: [] });
-    expect(result.sources).toEqual({ sources: {}, items: {} });
+    expect(result.sources).toEqual({ sources: {}, items: {}, bookDrops: [] });
     expect(result.issues.map((item) => item.type)).toEqual(expect.arrayContaining(["missing-mob-tables", "missing-loot-tables"]));
   });
 });

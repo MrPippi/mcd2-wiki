@@ -56,7 +56,15 @@ describe("sourceName", () => {
     expect(chest.name.zh).toBe("Fancy Chest");
     expect(chest.untranslated).toHaveLength(15);
     expect(sourceName("VillageMerchant", {}, locales, undefined, "merchant").name.en).toBe("Village Merchant");
-    expect(sourceName("EnchantmentBooksCommon", {}, locales, /^EnchantmentBooks/, "bookPool").name.zh).toBe("Common");
+    expect(sourceName("EnchantmentBooksDeepDark", {}, locales, /^EnchantmentBooks/, "bookPool").name.zh).toBe("Deep Dark");
+  });
+
+  it("names the global book pool by the site's translated label", () => {
+    const common = sourceName("EnchantmentBooksCommon", {}, locales, /^EnchantmentBooks/, "bookPool");
+    expect(common.name.en).toBe("All areas");
+    expect(common.name.ja).toBe("すべての地域");
+    expect(common.untranslated).toEqual([]);
+    expect(common.official).toBe(false);
   });
 
   it("uses the game's text over the kind label when a key is known", () => {

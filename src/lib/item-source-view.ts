@@ -7,8 +7,8 @@ import rawSources from "../data/loot-sources.json";
 import { booksFor } from "./data";
 import { categoryLabel, t } from "./i18n";
 import { compareLang, type Lang } from "./lang";
-import { sourcesFor, type ResolvedItemSources, type ResolvedSource } from "./item-sources";
-import { mapLinkOf, mobData } from "./mobs";
+import { bookDropsOf, sourcesFor, type ResolvedBookDrop, type ResolvedItemSources, type ResolvedSource } from "./item-sources";
+import { mapLinkOf, mobData, mobHref } from "./mobs";
 
 const itemSourcesData = ItemSourcesSchema.parse(rawSources);
 
@@ -71,6 +71,16 @@ const AREA_MARKERS: ReadonlyMap<string, NonNullable<MobArea["map"]>> = new Map(
 export function areaHref(lang: Lang, sourceId: string, name: Localized): string {
   const map = AREA_MARKERS.get(sourceId);
   return mapLinkOf(lang, { areaId: sourceId.replace(/^area:/, ""), name, ...(map ? { map } : {}) });
+}
+
+/** The chests and mobs that drop books from their area's pool: the same for every book, so shown once under the pools. */
+export const bookDroppers: readonly ResolvedBookDrop[] = bookDropsOf(itemSourcesData);
+
+/** A mob dropper's bestiary page; chests have no page. */
+export function dropperHref(lang: Lang, source: ResolvedSource): string | undefined {
+  if (source.kind !== "mob") return undefined;
+  const mob = mobData.mobs.find((candidate) => `mob:${candidate.id}` === source.id);
+  return mob ? mobHref(lang, mob.slug) : undefined;
 }
 
 /** Sources of an item page, or undefined when the game data gives it none (the page then shows no block). */

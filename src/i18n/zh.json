@@ -194,6 +194,8 @@
   "sourcePicksOf": "{of} 選 {count}",
   "sourceMerchantCategory": "商人（{category}）",
   "sourceBookPools": "附魔書池",
+  "sourceBookPoolCommon": "所有地區",
+  "sourceBookDroppers": "附魔書掉落來源",
   "sourcesNote": "依遊戲資料整理，實際掉落可能受遊戲機制影響。",
   "statMovementSpeed": "移動速度",
   "statPoise": "韌性",
