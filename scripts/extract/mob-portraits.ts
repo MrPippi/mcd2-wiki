@@ -1,11 +1,11 @@
-/** Joins each mob to its render through CharacterReference and publishes the portraits as 128 px webp files. */
+/** Joins each mob to its render through CharacterReference and publishes the portraits as 256 px webp files (2× the largest card, sharp on high-DPI screens). */
 import { mkdir, readdir, rm } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
 import { issue, type Issue } from "./issues";
 import type { MobDraft } from "./mobs";
 
-export const PORTRAIT_SIZE = 128;
+export const PORTRAIT_SIZE = 256;
 /** Grey, untextured render: never published, even when a mob points at it. */
 export const PORTRAIT_DENYLIST: readonly string[] = ["Geomancer_BombPillar"];
 
@@ -102,7 +102,7 @@ export async function publishPortraits(outRoot: string, plans: readonly Portrait
   for (const plan of plans) {
     await sharp(plan.from)
       .resize(PORTRAIT_SIZE, PORTRAIT_SIZE, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
-      .webp({ quality: 82 })
+      .webp({ quality: 90 })
       .toFile(path.join(outRoot, "public", plan.published));
   }
 }
