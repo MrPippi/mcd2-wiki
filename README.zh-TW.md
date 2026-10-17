@@ -1,12 +1,48 @@
+<div align="center">
+
 # Minecraft Dungeons II Wiki
+
+**直接取自遊戲資料的玩家自製資料站，支援 16 種語言**
+
+武器、護甲、神器、附魔、怪物圖鑑、世界地圖、任務、靈魂風暴等，<br>
+所有數值與名稱都從遊戲檔案抽取，不是手動輸入。
+
+[![網站](https://img.shields.io/badge/網站-mrpippi.github.io%2Fmcd2--wiki-2ea44f)](https://mrpippi.github.io/mcd2-wiki/zh/)
+[![遊戲版本](https://img.shields.io/badge/遊戲版本-1.1.2.0-orange)](#常見問題)
+[![語言](https://img.shields.io/badge/語言-16-blue)](#支援語言)
+[![Deploy](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml/badge.svg)](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml)
+[![License: MIT](https://img.shields.io/github/license/MrPippi/mcd2-wiki)](LICENSE)
+
+[**進入 Wiki**](https://mrpippi.github.io/mcd2-wiki/zh/) · [**常見問題**](#常見問題) · [**回報錯誤**](https://github.com/MrPippi/mcd2-wiki/issues)
 
 [English](README.md) · **繁體中文**
 
-玩家自製的 **Minecraft Dungeons II** 資料站。內容直接取自遊戲本身的資料與文字，提供 16 種語言。資料對應**遊戲版本 1.1.2.0**。
+</div>
 
-**[進入 Wiki →](https://mrpippi.github.io/mcd2-wiki/zh/)**
+---
 
 ![Wiki 首頁（繁體中文）](docs/images/zh-home.webp)
+
+## 特色
+
+- **資料來自遊戲本身**：名稱、說明與數值都從遊戲的 DataTable 與多語系檔抽取，對應**遊戲版本 1.1.2.0**。
+- **16 種語言**：遊戲文字使用官方翻譯，和遊戲裡看到的一樣。
+- **中英對照**：每個名稱和說明都可以多顯示一種語言。
+- **不用猜的**：資料無法說明的數值會先不上架，或標示為未確認。
+- **免費、免註冊**：靜態網站，手機也好用。
+
+## 目錄
+
+- [可以查什麼](#可以查什麼)
+- [好用的功能](#好用的功能)
+- [支援語言](#支援語言)
+- [常見問題](#常見問題)
+- [參與開發](#參與開發)
+- [給權利人：移除申請](#給權利人移除申請)
+- [安全性回報](#安全性回報)
+- [授權](#授權)
+
+---
 
 ## 可以查什麼
 
@@ -51,15 +87,27 @@
 
 物品名稱、說明等遊戲文字都取自遊戲官方的多語系檔，和你在遊戲裡看到的一樣。網站自己的文字（選單、標籤、註解）繁體中文與英文為人工撰寫，其他語言為機器翻譯；確認翻錯的句子會改顯示英文。
 
-## 使用前須知
+---
 
-- **數值是遊戲資料檔裡的基礎值**，實際遊玩時會受難度、隊伍人數與裝備強度影響。
-- **有些資料不在遊戲資料表裡**：例如每一擊的出手時間與每秒傷害存在動畫檔中，所以網站不顯示。無法從資料算出數值的條目會先不上架，不用猜的。
-- **遊戲改版時**，會重新從新版遊戲檔案抽取資料來更新網站。
+## 常見問題
 
-## 發現錯誤？
+**為什麼數值和實際遊玩看到的不一樣？**
+
+網站顯示的是遊戲資料檔裡的基礎值，實際遊玩時會受難度、隊伍人數與裝備強度影響。
+
+**為什麼沒有出手時間、每秒傷害這類資料？**
+
+有些資料不在遊戲資料表裡。每一擊的出手時間與每秒傷害存在動畫檔中，所以網站不顯示。無法從資料算出數值的條目會先不上架，不用猜的。
+
+**遊戲改版後網站會更新嗎？**
+
+會。遊戲改版時，會重新從新版遊戲檔案抽取資料來更新網站。資料對應的版本標在本頁最上方。
+
+**發現錯誤要怎麼回報？**
 
 請開一則 [Issue](https://github.com/MrPippi/mcd2-wiki/issues)，附上頁面網址，並說明你在遊戲中看到的內容；有截圖更好。
+
+---
 
 ## 參與開發
 
@@ -70,6 +118,24 @@ npm install
 npm run dev
 ```
 
-## 免責聲明
+## 給權利人：移除申請
 
-本站為非官方粉絲網站，與 Mojang Studios、Microsoft 無關，也未獲其背書。遊戲文字與圖像版權歸原權利人所有。網站使用的字型（Noto Serif、Geist、Geist Mono）採用 SIL Open Font License 1.1 授權。
+本站為非官方粉絲網站。如果你是本站所使用的遊戲文字或圖像的權利人，不希望某些內容出現在本站，請到 GitHub [開一個 issue](https://github.com/MrPippi/mcd2-wiki/issues/new) 寫明要移除的內容，我們會儘快處理並移除。
+
+## 安全性回報
+
+如果你發現網站的安全性問題，請不要公開揭露，而是透過 GitHub 的私密回報功能告訴我們，詳細說明請見 [SECURITY.md](SECURITY.md)。
+
+## 授權
+
+- **網站程式**：以 [MIT](LICENSE) 授權釋出。
+- **遊戲文字與圖像**：不在 MIT 授權範圍內，包括 `public/`（地圖圖磚、圖示、怪物渲染圖）、`src/data/`、`src/assets/` 與 `docs/images/` 中取自遊戲的內容，版權歸原權利人所有。
+- **字型**：Noto Serif、Noto Serif TC/SC/JP/KR、Geist 與 Geist Mono 採用 SIL Open Font License 1.1 授權。
+
+---
+
+<div align="center">
+
+本站為非官方 Minecraft 產品，與 Mojang Studios、Microsoft 無關，也未獲其背書。
+
+</div>

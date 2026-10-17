@@ -4,7 +4,6 @@
 - 狀態：已核准（使用者選擇「依照建議」，各段採推薦方案）
 - 基準：`master`（`1e9a5e0`）；分支 `feat/multilingual`（worktree `.claude/worktrees/multilingual`）。PR #12（`fix/map-zoom`）合併後先 rebase。
 - 使用者選擇：完整多語網站；16 種語言（合併地區變體）；每種語言對照英文（英文頁對照繁中）；標題列改下拉選單；介面字串先用遊戲字串、缺的機器翻譯並標註；`/` 依瀏覽器語言導向並記住選擇；資料方案 A（文字擴成 16 語、單一資料檔）
-- 盤點紀錄：`C:\Users\jack3\.claude\jobs\9cd76f52\tmp\i18n-findings.md`（實作時若檔案已不在，以本 spec 為準）
 
 ## 1. 目標
 

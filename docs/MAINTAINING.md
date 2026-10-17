@@ -70,7 +70,7 @@ npm run build        # 產生 dist/ 與 Pagefind 索引
 
 ## 字型
 
-- Noto Serif TC（`@fontsource/noto-serif-tc`，標題）、Geist 與 Geist Mono（`@fontsource-variable/geist`、`@fontsource-variable/geist-mono`，內文與編號）皆為 SIL Open Font License 1.1。
+- Noto Serif 與 Noto Serif TC/SC/JP/KR（`@fontsource/noto-serif*`，標題）、Geist 與 Geist Mono（`@fontsource-variable/geist`、`@fontsource-variable/geist-mono`，內文與編號）皆為 SIL Open Font License 1.1。
 - 授權全文隨各 npm 套件提供；網站頁尾列出使用的字型。
 
 ## 部署
