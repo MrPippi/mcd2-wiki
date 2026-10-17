@@ -14,7 +14,7 @@ const placeholder = t(lang, "search");
 const unavailable = t(lang, "searchUnavailable");
 const SKELETON_ROWS = 3;
 ---
-<Base lang={lang} title={t(lang, "search")}>
+<Base lang={lang} title={t(lang, "search")} noindex>
   <link rel="stylesheet" href={assetUrl("pagefind/pagefind-ui.css")} />
   <div class="search-page">
     <h1>{t(lang, "search")}</h1>

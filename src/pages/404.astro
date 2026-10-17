@@ -6,7 +6,7 @@ import { href } from "../lib/url";
 // One 404 serves both languages: Chinese first, with the English line under it.
 const lang = "zh";
 ---
-<Base lang={lang} title={t(lang, "notFoundTitle")} noAlternates>
+<Base lang={lang} title={t(lang, "notFoundTitle")} noAlternates noindex>
   <section class="not-found">
     <div class="not-found-copy">
       <p class="kicker">ERROR 404 · SLOT EMPTY</p>
