@@ -1,0 +1,23 @@
+name: 網站問題 / Site bug
+description: 版面跑掉、功能壞掉、頁面打不開。Broken layout, features or pages.
+title: "[網站] "
+labels: ["bug"]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: 頁面網址 / Page link
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: 發生什麼事 / What happened
+      description: 怎麼操作、預期看到什麼、實際看到什麼；有截圖更好。Steps, what you expected, what you got. Screenshots help.
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: 裝置與瀏覽器 / Device and browser
+      placeholder: Windows 11 / Chrome、iPhone / Safari

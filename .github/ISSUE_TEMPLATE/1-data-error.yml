@@ -1,0 +1,36 @@
+name: 資料錯誤 / Data error
+description: 網站上的數值、掉落、說明與遊戲不符。Numbers, drops or descriptions that don't match the game.
+title: "[資料] "
+labels: ["data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感謝回報！請附上頁面網址，並說明你在遊戲中看到的內容；有截圖更好。
+        Thanks for reporting! Include the page link and what you saw in the game. A screenshot helps.
+  - type: input
+    id: page
+    attributes:
+      label: 頁面網址 / Page link
+      placeholder: https://mrpippi.github.io/mcd2-wiki/zh/...
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: 網站上寫的 / What the site says
+    validations:
+      required: true
+  - type: textarea
+    id: correct
+    attributes:
+      label: 遊戲中實際看到的 / What you saw in the game
+      description: 可直接貼上截圖。You can paste screenshots here.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 遊戲版本 / Game version
+      description: 不確定可留空。Leave blank if unsure.
+      placeholder: "1.1.2.0"

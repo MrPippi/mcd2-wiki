@@ -13,7 +13,7 @@
 [![Deploy](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml/badge.svg)](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/github/license/MrPippi/mcd2-wiki)](LICENSE)
 
-[**進入 Wiki**](https://mrpippi.github.io/mcd2-wiki/zh/) · [**常見問題**](#常見問題) · [**回報錯誤**](https://github.com/MrPippi/mcd2-wiki/issues)
+[**進入 Wiki**](https://mrpippi.github.io/mcd2-wiki/zh/) · [**常見問題**](#常見問題) · [**回報錯誤**](https://github.com/MrPippi/mcd2-wiki/issues/new/choose) · [**討論區**](https://github.com/MrPippi/mcd2-wiki/discussions)
 
 [English](README.md) · **繁體中文**
 
@@ -105,7 +105,7 @@
 
 **發現錯誤要怎麼回報？**
 
-請開一則 [Issue](https://github.com/MrPippi/mcd2-wiki/issues)，附上頁面網址，並說明你在遊戲中看到的內容；有截圖更好。
+請開一則 [Issue](https://github.com/MrPippi/mcd2-wiki/issues/new/choose) 並選擇對應的表單，附上頁面網址，並說明你在遊戲中看到的內容；有截圖更好。使用問題或功能建議請到[討論區](https://github.com/MrPippi/mcd2-wiki/discussions)。
 
 ---
 

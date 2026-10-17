@@ -13,7 +13,7 @@ with every number and name taken from the game files rather than typed in by han
 [![Deploy](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml/badge.svg)](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/github/license/MrPippi/mcd2-wiki)](LICENSE)
 
-[**Open the wiki**](https://mrpippi.github.io/mcd2-wiki/) · [**FAQ**](#faq) · [**Report a mistake**](https://github.com/MrPippi/mcd2-wiki/issues)
+[**Open the wiki**](https://mrpippi.github.io/mcd2-wiki/) · [**FAQ**](#faq) · [**Report a mistake**](https://github.com/MrPippi/mcd2-wiki/issues/new/choose) · [**Discussions**](https://github.com/MrPippi/mcd2-wiki/discussions)
 
 **English** · [繁體中文](README.zh-TW.md)
 
@@ -107,7 +107,7 @@ Yes. When the game updates, the wiki is updated by extracting the new game files
 
 **I found a mistake. How do I report it?**
 
-Open an [issue](https://github.com/MrPippi/mcd2-wiki/issues) and include the page link and what you saw in the game. A screenshot helps.
+Open an [issue](https://github.com/MrPippi/mcd2-wiki/issues/new/choose), pick the matching form, and include the page link and what you saw in the game. A screenshot helps. Questions and feature ideas go to [Discussions](https://github.com/MrPippi/mcd2-wiki/discussions).
 
 ---
 

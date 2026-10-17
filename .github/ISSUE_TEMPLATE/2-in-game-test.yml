@@ -1,0 +1,41 @@
+name: 遊戲內實測 / In-game test result
+description: 回報你在遊戲中實測的結果，例如標示「未確認」的內容。Share something you tested in the game, such as content marked unconfirmed.
+title: "[實測] "
+labels: ["in-game test"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        有些內容遊戲資料檔裡查不到，只能靠玩家實測。你的結果可以讓「未確認」的標記拿掉。
+        Some facts aren't in the game files and need a player to check. Your result can clear an "unconfirmed" mark.
+  - type: input
+    id: page
+    attributes:
+      label: 頁面網址 / Page link
+      description: 有對應頁面就填。If a page covers it.
+      placeholder: https://mrpippi.github.io/mcd2-wiki/zh/...
+  - type: textarea
+    id: tested
+    attributes:
+      label: 測了什麼 / What you tested
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: 怎麼測的 / How you tested it
+      description: 裝備、難度、次數等，讓別人能重現。Gear, difficulty, number of tries — enough for someone else to repeat it.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: 結果 / Result
+      description: 可直接貼上截圖或影片連結。Paste screenshots or a video link.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 遊戲版本 / Game version
+      placeholder: "1.1.2.0"
