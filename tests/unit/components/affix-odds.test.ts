@@ -68,6 +68,14 @@ describe("effect odds table", () => {
     expect(html).toContain("威脅等級");
   });
 
+  it("announces changes politely, labels its controls with their own string and keeps the table in a scrollable region", async () => {
+    const html = await render("en", "melee", "war-hammer");
+    expect(html).toMatch(/<p class="affix-summary"[^>]*aria-live="polite"/);
+    expect(html).toContain('aria-label="Odds settings"');
+    expect(html).toMatch(/<div class="table-scroll" tabindex="0" role="region"[^>]*>\s*<table class="affix-table"/);
+    expect(html).toMatch(/<thead>/);
+  });
+
   it("renders nothing for other categories", async () => {
     expect(await render("en", "effect", "sharpness")).not.toContain('data-testid="affix-odds"');
   });

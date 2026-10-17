@@ -30,6 +30,11 @@ describe("poolGroups", () => {
     expect(poolGroups(poolTags(["SW.Archetype.Utility"]), AFFIX_TABLES).get(ETG("Archetype.Utility"))).toBe(0.25);
   });
 
+  it("ranks the gear row above every tag even when the item lists the gear tag first", () => {
+    const tags = new Set(["SW.Item.Property.Gear", "SW.Archetype.Utility"]);
+    expect(poolGroups(tags, AFFIX_TABLES).get(ETG("Archetype.Utility"))).toBe(0.25);
+  });
+
   it("reads SecondaryETG like PrimaryETG", () => {
     const tables = { ...AFFIX_TABLES, dropTable: [{ TypeTag: { TagName: "SW.Item.Property.Gear" }, PrimaryETG: {}, SecondaryETG: { Tags: [{ TypeTag: { TagName: ETG("Armor") }, Weight: 2, Operation: "Set" }] } }] };
     expect(poolGroups(poolTags([]), tables).get(ETG("Armor"))).toBe(2);
@@ -38,9 +43,10 @@ describe("poolGroups", () => {
 
 describe("combineGroup", () => {
   it("is (Set + Add) x Multiply with the last Set, and never below 0", () => {
-    expect(combineGroup([{ operation: "set", weight: 1 }, { operation: "set", weight: 0.25 }])).toBe(0.25);
-    expect(combineGroup([{ operation: "set", weight: 1 }, { operation: "add", weight: 0.5 }, { operation: "multiply", weight: 0.5 }])).toBe(0.75);
-    expect(combineGroup([{ operation: "add", weight: -2 }])).toBe(0);
+    expect(combineGroup([{ operation: "set", weight: 1, rank: 0 }, { operation: "set", weight: 0.25, rank: 1 }])).toBe(0.25);
+    expect(combineGroup([{ operation: "set", weight: 0.25, rank: 1 }, { operation: "set", weight: 1, rank: 0 }])).toBe(0.25);
+    expect(combineGroup([{ operation: "set", weight: 1, rank: 0 }, { operation: "add", weight: 0.5, rank: 0 }, { operation: "multiply", weight: 0.5, rank: 0 }])).toBe(0.75);
+    expect(combineGroup([{ operation: "add", weight: -2, rank: 0 }])).toBe(0);
     expect(combineGroup([])).toBe(0);
   });
 });

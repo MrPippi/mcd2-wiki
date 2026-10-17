@@ -399,7 +399,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -858,5 +859,6 @@
   "affixBonus": "Extra effekt från Själsstorm-belöning",
   "affixAnyTier": "Valfri",
   "affixBuiltIn": "Inbyggd",
-  "affixOddsUnconfirmed": "Chanserna är återskapade från spelets datatabeller och jämförda med en tabell från tredje part; de är inte verifierade i spelet."
+  "affixOddsUnconfirmed": "Chanserna är återskapade från spelets datatabeller och jämförda med en tabell från tredje part; de är inte verifierade i spelet.",
+  "affixControls": "Chansinställningar"
 }

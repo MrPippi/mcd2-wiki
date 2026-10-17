@@ -400,7 +400,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -853,5 +854,6 @@
   "affixBonus": "영혼 폭풍 보상의 추가 효과",
   "affixAnyTier": "아무 단계",
   "affixBuiltIn": "고정",
-  "affixOddsUnconfirmed": "이 확률은 게임 데이터 테이블에서 재구성하고 제3자 표와 대조한 것이며, 게임 내에서는 확인되지 않았습니다."
+  "affixOddsUnconfirmed": "이 확률은 게임 데이터 테이블에서 재구성하고 제3자 표와 대조한 것이며, 게임 내에서는 확인되지 않았습니다.",
+  "affixControls": "확률 설정"
 }

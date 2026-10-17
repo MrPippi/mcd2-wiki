@@ -400,7 +400,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -858,5 +859,6 @@
   "affixBonus": "Додатковий ефект нагороди Шторму душ",
   "affixAnyTier": "Будь-який",
   "affixBuiltIn": "Вбудований",
-  "affixOddsUnconfirmed": "Ці шанси відновлено за таблицями даних гри та звірено з таблицею третьої сторони; у грі їх не перевіряли."
+  "affixOddsUnconfirmed": "Ці шанси відновлено за таблицями даних гри та звірено з таблицею третьої сторони; у грі їх не перевіряли.",
+  "affixControls": "Налаштування шансів"
 }

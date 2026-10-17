@@ -9,7 +9,7 @@ import { groupTemplates, inheritedTags, poolGroups, poolTags } from "./affix-poo
 import { effectEntries, entryIndex, excludedFor, locId, tagNames, tierOf } from "./game-rows";
 import type { GameTables } from "./game-tables";
 import type { RarityTier, ThreatRow } from "./guides-schema";
-import { issue, type Issue } from "./issues";
+import { ExtractError, issue, type Issue } from "./issues";
 import type { Entry } from "./schemas";
 
 type Rarity = (typeof AFFIX_RARITIES)[number];
@@ -30,7 +30,18 @@ interface Row {
   readonly siblings: readonly ItemRow[];
 }
 
-const hashOf = (entries: readonly ModelEntry[]): string => createHash("sha1").update(JSON.stringify(entries)).digest("hex").slice(0, 8);
+const hashOf = (entries: readonly ModelEntry[]): string => createHash("sha1").update(JSON.stringify(entries)).digest("hex").slice(0, 16);
+
+/** The models by hash; two different pools under one hash would silently give an item the wrong odds, so that stops the extract. */
+export function modelsByHash(built: readonly { readonly hash: string; readonly model: readonly ModelEntry[] }[]): Record<string, { entries: ModelEntry[] }> {
+  const models = new Map<string, ModelEntry[]>();
+  for (const { hash, model } of built) {
+    const known = models.get(hash);
+    if (known && JSON.stringify(known) !== JSON.stringify(model)) throw new ExtractError(`affix odds: two different effect pools share the hash ${hash}`);
+    models.set(hash, [...model]);
+  }
+  return Object.fromEntries([...models].map(([hash, entries]) => [hash, { entries }]));
+}
 
 function rowsOf(entries: readonly Entry[], tables: GameTables): Row[] {
   const find = entryIndex(entries);
@@ -76,7 +87,7 @@ function poolReader(entries: readonly Entry[], tables: GameTables) {
       return [{ effect, tier: tier as 1 | 2 | 3, ops: ops.map(([op, weight]) => [op, weight] as [typeof op, number]) }];
     });
   const fixedOf = (item: ItemRow): string[] => tagNames(item.Effects).flatMap((tag) => effectOf(tag) ?? []);
-  return { modelOf, fixedOf };
+  return { modelOf, fixedOf, known: new Set([...effects.values()].map((entry) => entry.slug)) };
 }
 
 function raritiesOf(variant: Entry["variant"], tiers: readonly RarityTier[]): AffixItem["rarities"] {
@@ -94,22 +105,26 @@ export function buildAffixModels(
   threat: readonly ThreatRow[],
   rarities: readonly RarityTier[],
 ): { data: AffixData; issues: Issue[] } {
-  const { modelOf, fixedOf } = poolReader(entries, tables);
+  const { modelOf, fixedOf, known } = poolReader(entries, tables);
   const built = rowsOf(entries, tables).map(({ item, entry, implied, siblings }) => {
     const model = modelOf(poolTags([...inheritedTags(item, siblings), ...implied]));
     return { slug: entry.slug, model, hash: hashOf(model), fixed: fixedOf(item), rarities: raritiesOf(entry.variant, rarities) };
   });
   const usable = built.filter(({ model, rarities: allowed }) => model.length > 0 && allowed.length > 0);
+  const skipped = built.filter((one) => !usable.includes(one)).map(({ slug, model, rarities: allowed }) => issue("affix-ignored", `${slug}: no odds table (${model.length === 0 ? "empty effect pool" : "no rarity with random effects"}${allowed.length === 0 && model.length === 0 ? " and no rarity" : ""})`));
+  const unknownFixed = usable.flatMap(({ slug, fixed }) => fixed.filter((effect) => !known.has(effect)).map((effect) => issue("affix-ignored", `${slug}: built-in effect ${effect} has no site entry`)));
   const withFactors = threat.filter((row) => row.effectTiers);
   return {
     data: {
       levels: withFactors.map((row) => row.level),
       tierFactors: withFactors.flatMap((row) => (row.effectTiers ? [row.effectTiers] : [])),
-      models: Object.fromEntries(usable.map(({ hash, model }) => [hash, { entries: model }])),
+      models: modelsByHash(usable),
       items: Object.fromEntries(usable.map(({ slug, hash, fixed, rarities: allowed }) => [slug, { model: hash, fixed, rarities: allowed }])),
     },
     issues: [
       ...(withFactors.length === 0 ? [issue("guides-value-missing", "affix odds: no effect tier factors per threat level")] : []),
+      ...skipped,
+      ...unknownFixed,
       ...ignoredIssues(tables),
     ],
   };

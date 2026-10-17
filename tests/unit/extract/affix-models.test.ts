@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildAffixModels } from "../../../scripts/extract/affix-models";
+import { buildAffixModels, modelsByHash } from "../../../scripts/extract/affix-models";
 import { AffixDataSchema } from "../../../scripts/extract/affix-schema";
 import type { RarityTier, ThreatRow } from "../../../scripts/extract/guides-schema";
 import { AFFIX_TABLES } from "../../helpers/affix-tables";
@@ -89,3 +89,59 @@ describe("buildAffixModels", () => {
     expect(found.map((one) => one.detail).join("\n")).toMatch(/Foo.*SecondaryETG[\s\S]*Looting\.I.*MinimumRequiredItemPower 5/);
   });
 });
+
+describe("model hashes and skipped items", () => {
+  it("uses 16-hex hashes and stops when two different pools share one", () => {
+    const { data } = buildAffixModels(ENTRIES, AFFIX_TABLES, THREAT, RARITIES);
+    expect(Object.keys(data.models).every((hash) => /^[0-9a-f]{16}$/.test(hash))).toBe(true);
+    const one = [{ effect: "a", tier: 1 as const, ops: [["set", 1]] as [["set", number]] }];
+    const two = [{ effect: "b", tier: 1 as const, ops: [["set", 1]] as [["set", number]] }];
+    expect(Object.keys(modelsByHash([{ hash: "h", model: one }, { hash: "h", model: one }]))).toEqual(["h"]);
+    expect(() => modelsByHash([{ hash: "h", model: one }, { hash: "h", model: two }])).toThrow(/share the hash h/);
+  });
+
+  it("reports an item left out for an empty pool or no rarity with random effects", () => {
+    const noRarity = buildAffixModels(ENTRIES, AFFIX_TABLES, THREAT, [tier("common", 0, null)]);
+    expect(noRarity.issues.filter((found) => found.type === "affix-ignored" && /no rarity with random effects/.test(found.detail))).toHaveLength(6);
+    const noPool = buildAffixModels(ENTRIES, { ...AFFIX_TABLES, dropTable: [] }, THREAT, RARITIES);
+    expect(noPool.issues.some((found) => /axe: no odds table \(empty effect pool/.test(found.detail))).toBe(true);
+  });
+
+  it("reports a built-in effect the site has no entry for", () => {
+    const { issues } = buildAffixModels(ENTRIES.filter((one) => one.id !== "Reconstruction"), AFFIX_TABLES, THREAT, RARITIES);
+    expect(issues.map((found) => found.detail)).toEqual(expect.arrayContaining(["axe-unique1: built-in effect SW.Effect.Reconstruction has no site entry"]));
+  });
+});
+
+describe("AffixDataSchema", () => {
+  const { data } = buildAffixModels(ENTRIES, AFFIX_TABLES, THREAT, RARITIES);
+  const failures = (value: unknown) => AffixDataSchema.safeParse(value).error?.issues.map((found) => found.message) ?? [];
+
+  it("rejects unknown fields", () => {
+    expect(AffixDataSchema.safeParse({ ...data, extra: 1 }).success).toBe(false);
+  });
+
+  it("rejects levels that repeat or run backwards, and factors that do not match them", () => {
+    expect(failures({ ...data, levels: [2, 1] }).join()).toMatch(/ascending/);
+    expect(failures({ ...data, levels: [1, 1] }).join()).toMatch(/ascending/);
+    expect(failures({ ...data, tierFactors: [[1, 0, 0]] }).join()).toMatch(/per threat level/);
+  });
+
+  it("rejects an item whose model does not exist", () => {
+    expect(failures({ ...data, items: { axe: { ...data.items.axe, model: "nope" } } }).join()).toMatch(/unknown model nope/);
+  });
+
+  it("rejects negative or infinite weights and factors", () => {
+    const [hash, model] = Object.entries(data.models)[0];
+    const withWeight = (weight: number) => ({ ...data, models: { [hash]: { entries: [{ ...model.entries[0], ops: [["set", weight]] }] } }, items: {} });
+    expect(AffixDataSchema.safeParse(withWeight(-1)).success).toBe(false);
+    expect(AffixDataSchema.safeParse(withWeight(Infinity)).success).toBe(false);
+    expect(AffixDataSchema.safeParse({ ...data, tierFactors: [[-1, 0, 0], [1, 0, 0]] }).success).toBe(false);
+  });
+
+  it("rejects a rarity with more random effects than the draw supports", () => {
+    const item = { ...data.items.axe, rarities: [{ rarity: "rare" as const, slots: 3, bonusSlots: 2 }] };
+    expect(failures({ ...data, items: { axe: item } }).join()).toMatch(/at most 4/);
+  });
+});
+

@@ -398,7 +398,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "_english": [
     "normal",
@@ -860,5 +861,6 @@
   "affixBonus": "Dodatkowy efekt nagrody Burzy dusz",
   "affixAnyTier": "Dowolny",
   "affixBuiltIn": "Wbudowany",
-  "affixOddsUnconfirmed": "Te szanse odtworzono z tabel danych gry i porównano z tabelą osób trzecich; nie sprawdzono ich w grze."
+  "affixOddsUnconfirmed": "Te szanse odtworzono z tabel danych gry i porównano z tabelą osób trzecich; nie sprawdzono ich w grze.",
+  "affixControls": "Ustawienia szans"
 }

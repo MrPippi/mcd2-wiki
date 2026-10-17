@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { affixOdds, entryWeight, formatOdds, itemOdds, type AffixEntry, type AffixFile, type AffixModel, type TierFactors } from "../../../src/lib/affix-odds";
+import { affixOdds, entryWeight, MAX_SLOTS, formatOdds, itemOdds, type AffixEntry, type AffixFile, type AffixModel, type TierFactors } from "../../../src/lib/affix-odds";
 
 const FLAT: TierFactors = [1, 1, 1];
 const entry = (effect: string, tier: 1 | 2 | 3, ...ops: [AffixEntry["ops"][number][0], number][]): AffixEntry => ({ effect, tier, ops });
@@ -66,6 +66,21 @@ describe("affixOdds", () => {
     const result = affixOdds(entries, [1, 0, 1], 1);
     expect(templateOf(result, "a", 2)).toBe(0);
     expect(templateOf(result, "a", 1)).toBeCloseTo(0.5);
+  });
+});
+
+describe("affixOdds on a big pool", () => {
+  it("stays fast and keeps the chances adding up to the slots (40 effects, 4 slots)", () => {
+    const entries = Array.from({ length: 40 }, (_, index) => entry(`e${index}`, 1, ["set", 1 + (index % 3)]));
+    const started = Date.now();
+    const result = affixOdds(model(...entries), FLAT, 4);
+    expect(Date.now() - started).toBeLessThan(5000);
+    expect(result.effects.reduce((sum, found) => sum + found.probability, 0)).toBeCloseTo(4);
+  });
+
+  it("never draws more than the most slots an item can have", () => {
+    const entries = Array.from({ length: 10 }, (_, index) => entry(`e${index}`, 1, ["set", 1]));
+    expect(affixOdds(model(...entries), FLAT, 50).effects.reduce((sum, found) => sum + found.probability, 0)).toBeCloseTo(MAX_SLOTS);
   });
 });
 

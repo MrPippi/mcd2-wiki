@@ -400,7 +400,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -857,5 +858,6 @@
   "affixBonus": "Effetto bonus della ricompensa di Tempesta di anime",
   "affixAnyTier": "Qualsiasi",
   "affixBuiltIn": "Integrato",
-  "affixOddsUnconfirmed": "Queste probabilità sono ricostruite dalle tabelle dati del gioco e confrontate con una tabella di terzi; non sono state verificate in gioco."
+  "affixOddsUnconfirmed": "Queste probabilità sono ricostruite dalle tabelle dati del gioco e confrontate con una tabella di terzi; non sono state verificate in gioco.",
+  "affixControls": "Impostazioni delle probabilità"
 }

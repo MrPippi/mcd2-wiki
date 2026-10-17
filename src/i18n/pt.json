@@ -400,7 +400,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -857,5 +858,6 @@
   "affixBonus": "Efeito extra da recompensa da Tempestade da Alma",
   "affixAnyTier": "Qualquer",
   "affixBuiltIn": "Embutido",
-  "affixOddsUnconfirmed": "Estas chances foram reconstruídas a partir das tabelas de dados do jogo e conferidas com uma tabela de terceiros; não foram verificadas no jogo."
+  "affixOddsUnconfirmed": "Estas chances foram reconstruídas a partir das tabelas de dados do jogo e conferidas com uma tabela de terceiros; não foram verificadas no jogo.",
+  "affixControls": "Configurações de chances"
 }

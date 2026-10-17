@@ -398,7 +398,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "_english": [
     "armorPiece",
@@ -858,5 +859,6 @@
   "affixBonus": "Bonus-Effekt der Seelensturm-Belohnung",
   "affixAnyTier": "Beliebig",
   "affixBuiltIn": "Eingebaut",
-  "affixOddsUnconfirmed": "Diese Chancen wurden aus den Datentabellen des Spiels rekonstruiert und mit einer Tabelle Dritter abgeglichen; im Spiel sind sie nicht überprüft."
+  "affixOddsUnconfirmed": "Diese Chancen wurden aus den Datentabellen des Spiels rekonstruiert und mit einer Tabelle Dritter abgeglichen; im Spiel sind sie nicht überprüft.",
+  "affixControls": "Chancen-Einstellungen"
 }

@@ -30,10 +30,12 @@ interface Weighted {
   readonly target: string;
   readonly operation: Operation;
   readonly weight: number;
+  /** Which Set wins among several: the highest rank (the row of the item's tag order, the gear row last of all). */
+  readonly rank: number;
 }
 
-const weighted = (tags: readonly WeightedTagValue[] | undefined): Weighted[] =>
-  (tags ?? []).map((tag) => ({ target: tag.TypeTag.TagName, operation: operationOf(tag), weight: tag.Weight ?? 1 }));
+const weighted = (tags: readonly WeightedTagValue[] | undefined, rank = 0): Weighted[] =>
+  (tags ?? []).map((tag) => ({ target: tag.TypeTag.TagName, operation: operationOf(tag), weight: tag.Weight ?? 1, rank }));
 
 /** Every tag plus its parents (A.B.C also counts as A.B and A). */
 export function withParents(tags: readonly string[]): Set<string> {
@@ -44,22 +46,25 @@ export function withParents(tags: readonly string[]): Set<string> {
 export const poolTags = (itemTags: readonly string[]): Set<string> => withParents([...itemTags, GEAR_TAG]);
 
 /**
- * Combines the weights several drop table rows give one pool group: the last Set wins (rows are applied in the item's tag
- * order, the gear tag last), Add entries sum and Multiply entries multiply. Only the Mushroom armor shows it: its
- * Utility archetype row says 1, the gear row 0.25, and the game rolls 0.25.
+ * Combines the weights several drop table rows give one pool group: the Set of the highest rank wins (rows rank by the
+ * item's tag order, and the gear row outranks every tag), Add entries sum and Multiply entries multiply. Only the Mushroom
+ * armor shows it: its Utility archetype row says 1, the gear row 0.25, and the game rolls 0.25.
  */
-export function combineGroup(parts: readonly Pick<Weighted, "operation" | "weight">[]): number {
-  const of = (operation: Operation) => parts.filter((part) => part.operation === operation).map((part) => part.weight);
-  const add = of("add").reduce((sum, weight) => sum + weight, 0);
-  const multiply = of("multiply").reduce((product, weight) => product * weight, 1);
-  return Math.max(0, ((of("set").at(-1) ?? 0) + add) * multiply);
+export function combineGroup(parts: readonly Pick<Weighted, "operation" | "weight" | "rank">[]): number {
+  const of = (operation: Operation) => parts.filter((part) => part.operation === operation);
+  const winner = of("set").reduce<Pick<Weighted, "weight" | "rank"> | undefined>((best, part) => (best === undefined || part.rank >= best.rank ? part : best), undefined);
+  const add = of("add").reduce((sum, part) => sum + part.weight, 0);
+  const multiply = of("multiply").reduce((product, part) => product * part.weight, 1);
+  return Math.max(0, ((winner?.weight ?? 0) + add) * multiply);
 }
 
 /** The pool groups an item rolls from and their weights, from the drop table rows its tags match. */
 export function poolGroups(tags: ReadonlySet<string>, tables: GameTables): Map<string, number> {
-  const entries = [...tags]
-    .flatMap((tag) => tables.dropTable.filter((row) => row.TypeTag.TagName === tag))
-    .flatMap((row) => [...weighted(row.PrimaryETG?.Tags), ...weighted(row.SecondaryETG?.Tags)]);
+  const entries = [...tags].flatMap((tag, index) =>
+    tables.dropTable
+      .filter((row) => row.TypeTag.TagName === tag)
+      .flatMap((row) => [...weighted(row.PrimaryETG?.Tags, tag === GEAR_TAG ? Infinity : index), ...weighted(row.SecondaryETG?.Tags, tag === GEAR_TAG ? Infinity : index)]),
+  );
   const targets = [...new Set(entries.map((entry) => entry.target))];
   return new Map(targets.map((target) => [target, combineGroup(entries.filter((entry) => entry.target === target))]));
 }
@@ -89,6 +94,7 @@ export function inheritedTags(item: ItemRow, rows: readonly ItemRow[]): string[]
   const visit = (row: ItemRow, seen: ReadonlySet<string>): string[] =>
     tagNames(row.Traits).flatMap((tag) => {
       const parent = byTag.get(tag);
+      // The tag is listed even when it is a cycle's way back (the final Set drops repeats); only following it again is cut.
       return [tag, ...(parent && !seen.has(tag) ? visit(parent, new Set([...seen, tag])) : [])];
     });
   return [...new Set(visit(item, new Set(item.TypeTag ? [item.TypeTag.TagName] : [])))];

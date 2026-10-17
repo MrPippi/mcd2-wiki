@@ -52,6 +52,18 @@ describe("affixViewOf", () => {
     expect(view?.rows.filter((one) => one.effect.slug === "elemental-protection")).toHaveLength(1);
   });
 
+  it("builds a view once per item and lists a built-in effect once, linked when it has a page", () => {
+    const item = entry("armor", "frost-rime-chest-unique");
+    expect(affixViewOf(item)).toBe(affixViewOf(item));
+    expect(affixViewOf(item)?.rows[0].linked).toBe(true);
+  });
+
+  it("shows a built-in effect with no published page by its name, unlinked", () => {
+    const file = { ...affixData, items: { ...affixData.items, "war-hammer": { ...affixData.items["war-hammer"], fixed: ["sharpness", "sharpness", "no-page-effect"] } } };
+    const rows = affixViewOf(entry("melee", "war-hammer"), file)?.rows.filter((one) => one.fixed) ?? [];
+    expect(rows.map((one) => one.effect.slug)).toEqual(["sharpness"]);
+  });
+
   it("sorts the rolled effects by English name", () => {
     const names = affixViewOf(entry("artifact", "firework-quiver"))?.rows.filter((one) => !one.fixed).map((one) => one.effect.name.en) ?? [];
     expect(names.length).toBeGreaterThan(5);

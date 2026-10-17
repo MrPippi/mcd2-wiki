@@ -397,7 +397,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -855,5 +856,6 @@
   "affixBonus": "ソウルストーム報酬の追加効果",
   "affixAnyTier": "いずれか",
   "affixBuiltIn": "固定",
-  "affixOddsUnconfirmed": "この確率はゲームのデータテーブルから再構成し、第三者の表と照合したもので、ゲーム内では未検証です。"
+  "affixOddsUnconfirmed": "この確率はゲームのデータテーブルから再構成し、第三者の表と照合したもので、ゲーム内では未検証です。",
+  "affixControls": "確率の設定"
 }

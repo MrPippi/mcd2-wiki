@@ -400,7 +400,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -856,5 +857,6 @@
   "affixBonus": "Ruh Fırtınası ödülünün ek etkisi",
   "affixAnyTier": "Herhangi",
   "affixBuiltIn": "Yerleşik",
-  "affixOddsUnconfirmed": "Bu olasılıklar oyunun veri tablolarından yeniden oluşturuldu ve üçüncü taraf bir tabloyla karşılaştırıldı; oyun içinde doğrulanmadı."
+  "affixOddsUnconfirmed": "Bu olasılıklar oyunun veri tablolarından yeniden oluşturuldu ve üçüncü taraf bir tabloyla karşılaştırıldı; oyun içinde doğrulanmadı.",
+  "affixControls": "Olasılık ayarları"
 }

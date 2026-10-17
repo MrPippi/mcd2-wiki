@@ -397,7 +397,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -855,5 +856,6 @@
   "affixBonus": "灵魂风暴奖励的额外效果",
   "affixAnyTier": "任一",
   "affixBuiltIn": "内置",
-  "affixOddsUnconfirmed": "这些概率由游戏数据表重建，并与第三方整理的表交叉比对，尚未在游戏内验证。"
+  "affixOddsUnconfirmed": "这些概率由游戏数据表重建，并与第三方整理的表交叉比对，尚未在游戏内验证。",
+  "affixControls": "概率设置"
 }

@@ -453,5 +453,6 @@
   "affixBonus": "Soul Storm reward bonus effect",
   "affixAnyTier": "Any",
   "affixBuiltIn": "Built-in",
-  "affixOddsUnconfirmed": "These odds are rebuilt from the game's data tables and cross-checked against a third-party table; they have not been verified in game."
+  "affixOddsUnconfirmed": "These odds are rebuilt from the game's data tables and cross-checked against a third-party table; they have not been verified in game.",
+  "affixControls": "Odds settings"
 }

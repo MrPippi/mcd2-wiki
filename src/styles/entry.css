@@ -184,13 +184,9 @@ a.fixed-name:hover .primary { text-decoration: underline 2px var(--accent); text
   .effect-table td.tier-value::before { content: attr(data-tier) " "; color: var(--muted); font-size: var(--fs-mono-s); }
   /* Line the tiers up with the text, past the 32px icon and its 12px gap. */
   .effect-table tbody tr:has(> th.has-icon) > td.tier-value:nth-child(2) { margin-left: 44px; }
-  /* Effect odds: the same, with four values (three tiers and any tier) in the row under the name. */
-  .affix-table thead { display: none; }
-  .affix-table tbody tr { display: flex; flex-wrap: wrap; gap: 4px 14px; padding: 10px 0; border-bottom: 1px solid var(--rule); }
-  .affix-table tbody th { flex: 0 0 100%; padding: 0 0 2px; border: 0; }
-  .affix-table td.tier-value { width: auto; padding: 0; border: 0; text-align: left; }
-  .affix-table td.tier-value::before { content: attr(data-tier) " "; color: var(--muted); font-size: var(--fs-mono-s); font-weight: 400; }
-  .affix-table tbody tr:has(> th.has-icon) > td.tier-value:nth-child(2) { margin-left: 44px; }
+  /* Effect odds: the table keeps its columns and scrolls inside its region; the effect name wraps. */
+  .affix-table { min-width: 340px; }
+  .affix-table th.tier, .affix-table td.tier-value { width: 4.2em; padding-inline: 6px; font-size: 13px; }
 }
 
 @media (min-width: 720px) {

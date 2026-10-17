@@ -400,7 +400,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -857,5 +858,6 @@
   "affixBonus": "Efecto extra de la recompensa de Tormenta de almas",
   "affixAnyTier": "Cualquiera",
   "affixBuiltIn": "Integrado",
-  "affixOddsUnconfirmed": "Estas probabilidades se reconstruyen a partir de las tablas de datos del juego y se contrastaron con una tabla de terceros; no se han verificado en el juego."
+  "affixOddsUnconfirmed": "Estas probabilidades se reconstruyen a partir de las tablas de datos del juego y se contrastaron con una tabla de terceros; no se han verificado en el juego.",
+  "affixControls": "Ajustes de probabilidad"
 }

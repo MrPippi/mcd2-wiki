@@ -396,7 +396,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -860,5 +861,6 @@
   "affixBonus": "Дополнительный эффект награды Бури душ",
   "affixAnyTier": "Любой",
   "affixBuiltIn": "Встроенный",
-  "affixOddsUnconfirmed": "Эти шансы восстановлены по таблицам данных игры и сверены с таблицей третьей стороны; в игре они не проверялись."
+  "affixOddsUnconfirmed": "Эти шансы восстановлены по таблицам данных игры и сверены с таблицей третьей стороны; в игре они не проверялись.",
+  "affixControls": "Настройки шансов"
 }

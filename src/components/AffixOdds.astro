@@ -27,7 +27,7 @@ const first = view?.rarities[0];
       <p class="note" data-pagefind-ignore>{t(lang, "affixOddsIntro")}</p>
       <GuideUnconfirmed lang={lang} message="affixOddsUnconfirmed" verified={guidesData.verified.affixOdds} />
       {/* Starts hidden: the page script shows it; without scripts the table keeps its default threat and rarity. */}
-      <div class="affix-controls" role="group" aria-label={t(lang, "affixOddsTitle")} data-testid="affix-controls" data-affix-controls hidden>
+      <div class="affix-controls" role="group" aria-label={t(lang, "affixControls")} data-testid="affix-controls" data-affix-controls hidden>
         <label>
           <span>{t(lang, "affixThreat")}</span>
           <select data-affix-level>
@@ -49,12 +49,14 @@ const first = view?.rarities[0];
           </label>
         )}
       </div>
-      <p class="affix-summary" data-testid="affix-summary" data-pagefind-ignore>
+      <p class="affix-summary" data-testid="affix-summary" role="status" aria-live="polite" data-pagefind-ignore>
         <span>{t(lang, "affixThreat")} <b data-affix-level-text>{view.level}</b></span>
         <span data-affix-rarity-text>{t(lang, first.label)}</span>
         <span>{t(lang, "affixSlots")} <b data-affix-slots-text>{first.slots}</b></span>
       </p>
-      <table class="affix-table" data-testid="affix-table" data-pagefind-ignore>
+      {/* The table scrolls inside its own region on narrow screens; the page never does. */}
+      <div class="table-scroll" tabindex="0" role="region" aria-label={t(lang, "affixOddsTitle")} data-pagefind-ignore>
+      <table class="affix-table" data-testid="affix-table">
         <thead>
           <tr>
             <th scope="col">{t(lang, "effect")}</th>
@@ -67,7 +69,11 @@ const first = view?.rarities[0];
             <tr data-effect={row.effect.slug} class:list={{ "affix-fixed": row.fixed }}>
               <th scope="row" class:list={{ "has-icon": row.effect.icon }}>
                 {row.effect.icon && <EntryIcon icon={row.effect.icon} alt="" size={EFFECT_ICON} />}
-                <a class="effect-name" href={entryHref(lang, row.effect)}><LangText lang={lang} value={row.effect.name} /></a>
+                {row.linked ? (
+                  <a class="effect-name" href={entryHref(lang, row.effect)}><LangText lang={lang} value={row.effect.name} /></a>
+                ) : (
+                  <span class="effect-name"><LangText lang={lang} value={row.effect.name} /></span>
+                )}
                 {row.fixed && <span class="tag">{t(lang, "affixBuiltIn")}</span>}
               </th>
               {TIERS.map((tier, index) => <td class="tier-value" data-tier={tier} data-cell={index + 1}>{row.tiers[index]}</td>)}
@@ -76,6 +82,7 @@ const first = view?.rarities[0];
           ))}
         </tbody>
       </table>
+      </div>
     </div>
   </EntrySection>
 )}
@@ -116,7 +123,11 @@ const first = view?.rarities[0];
       if (bonusLabel) bonusLabel.hidden = chosen.bonusSlots === 0;
       const withBonus = Boolean(bonus?.checked) && chosen.bonusSlots > 0;
       const odds = itemOdds(file, slug, { level: Number(level.value), rarity: chosen.rarity, bonus: withBonus });
-      if (!odds) return;
+      if (!odds) {
+        // Stale or foreign data: the table keeps what it shows.
+        console.warn(`affix odds: no odds for ${slug} at threat ${level.value}, ${chosen.rarity}`);
+        return;
+      }
       fill(root, odds);
       text("[data-affix-level-text]", level.value);
       if (rarity?.selectedOptions[0]) text("[data-affix-rarity-text]", rarity.selectedOptions[0].textContent ?? "");
@@ -129,8 +140,9 @@ const first = view?.rarities[0];
 
   const root = document.querySelector<HTMLElement>("[data-affix]");
   if (root) {
-    import("../data/affix-models.json").then((module) => start(root, module.default as unknown as AffixFile)).catch(() => {
+    import("../data/affix-models.json").then((module) => start(root, module.default as unknown as AffixFile)).catch((error: unknown) => {
       // The table keeps its default values.
+      console.warn("affix odds: the model file did not load", error);
     });
   }
 </script>

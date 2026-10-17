@@ -400,7 +400,8 @@
     "affixBonus",
     "affixAnyTier",
     "affixBuiltIn",
-    "affixOddsUnconfirmed"
+    "affixOddsUnconfirmed",
+    "affixControls"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -856,5 +857,6 @@
   "affixBonus": "Bonuseffect van de Zielenstorm-beloning",
   "affixAnyTier": "Elk",
   "affixBuiltIn": "Ingebouwd",
-  "affixOddsUnconfirmed": "Deze kansen zijn herleid uit de gegevenstabellen van het spel en vergeleken met een tabel van derden; ze zijn niet in het spel gecontroleerd."
+  "affixOddsUnconfirmed": "Deze kansen zijn herleid uit de gegevenstabellen van het spel en vergeleken met een tabel van derden; ze zijn niet in het spel gecontroleerd.",
+  "affixControls": "Kansinstellingen"
 }
