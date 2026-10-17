@@ -2,6 +2,8 @@ import { describe, expect, it } from "vitest";
 import type { ResolvedItemSources, ResolvedSource } from "../../../src/lib/item-sources";
 import {
   areaHref,
+  bookDroppers,
+  dropperHref,
   entrySources,
   hasAnySource,
   merchantCategoryLabel,
@@ -111,5 +113,19 @@ describe("entrySources", () => {
   it("collects an enchantment's sources from its books", () => {
     const sources = entrySources(makeEntry("Piercing", "enchantment"));
     expect(sources?.quests.map((quest) => quest.id)).toContain("quest:QuestEnchantsmithBookReward");
+  });
+});
+
+describe("bookDroppers", () => {
+  it("lists the chests and the piggy bank that drop books, with their drop rules", () => {
+    expect(bookDroppers.map((drop) => drop.id)).toEqual(["chest:FancyChest", "chest:WellspringChest", "mob:PiggyBank"]);
+    expect(bookDroppers.find((drop) => drop.id === "mob:PiggyBank")).toMatchObject({ kind: "mob", guaranteed: 0, rolls: 1, chancePerRoll: 0.5 });
+  });
+
+  it("links a mob dropper to its bestiary page and leaves chests unlinked", () => {
+    const piggy = bookDroppers.find((drop) => drop.id === "mob:PiggyBank");
+    const chest = bookDroppers.find((drop) => drop.id === "chest:FancyChest");
+    expect(piggy ? dropperHref("zh", piggy) : undefined).toBe(href("zh", "mobs", "piggy-bank"));
+    expect(chest ? dropperHref("zh", chest) : "missing").toBeUndefined();
   });
 });

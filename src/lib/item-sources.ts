@@ -1,5 +1,5 @@
 /** The item page's view of loot-sources.json: an item's source ids joined with their names. Pure; type-only imports. */
-import type { ItemSources, ItemSourcesData, LootSource } from "../../scripts/extract/mob-schema";
+import type { BookDrop, ItemSources, ItemSourcesData, LootSource } from "../../scripts/extract/mob-schema";
 
 export interface ResolvedSource extends LootSource {
   /** The source id ("<kind>:<row id>"). */
@@ -13,6 +13,8 @@ export interface ResolvedItemSources {
   readonly merchants: readonly (ResolvedSource & { readonly category: string })[];
   readonly bookPools: readonly ResolvedSource[];
 }
+
+export type ResolvedBookDrop = ResolvedSource & Omit<BookDrop, "id">;
 
 function source(data: ItemSourcesData, id: string): ResolvedSource {
   const found = Object.hasOwn(data.sources, id) ? data.sources[id] : undefined;
@@ -32,3 +34,7 @@ export function sourcesFor(data: ItemSourcesData, key: string): ResolvedItemSour
     bookPools: item.bookPools.map((id) => source(data, id)),
   };
 }
+
+/** The chests and mobs that drop a book from their area's pool, with names. */
+export const bookDropsOf = (data: ItemSourcesData): ResolvedBookDrop[] =>
+  data.bookDrops.map(({ id, ...rule }) => ({ ...source(data, id), ...rule }));

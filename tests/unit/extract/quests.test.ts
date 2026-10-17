@@ -66,6 +66,7 @@ const mob = (slug: string, kind: Mob["kind"], name: string): Mob => ({
 const MOBS: MobData = { mobs: [mob("pillager", "regular", "Pillager"), mob("maw", "boss", "Maw"), mob("witch", "miniboss", "Witch")] };
 const noSources = { areas: [], chests: [], merchants: [], bookPools: [] };
 const SOURCES: ItemSourcesData = {
+  bookDrops: [],
   sources: {},
   items: {
     "melee/axe": { ...noSources, quests: [{ id: "quest:QuestMeleeAxe" }] },

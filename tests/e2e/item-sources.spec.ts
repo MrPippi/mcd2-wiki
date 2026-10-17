@@ -53,6 +53,25 @@ test.describe("how to obtain", () => {
     await expect(page.getByTestId("item-sources").locator("[data-source-kind='chests'] .source-name").first()).not.toContainText("Chest:");
   });
 
+  test("names an enchantment's book pool by its area and lists what drops the books", async ({ page }) => {
+    await page.goto("/zh/enchantment/ricochet/");
+    const block = page.getByTestId("item-sources");
+    await expect(block.locator("[data-source-kind='book-pools'] .source-name")).toHaveText(["地下城"]);
+    const drops = block.locator("[data-source-kind='book-drops']");
+    await expect(drops.locator("h3")).toContainText("附魔書掉落來源");
+    await expect(drops.locator("li")).toHaveCount(3);
+    await expect(drops.getByRole("link", { name: "寶箱豬" })).toHaveAttribute("href", /\/zh\/mobs\/piggy-bank\/$/);
+    await expect(drops.getByTestId("book-drop-rule").first()).toHaveText("必掉：1");
+  });
+
+  test("leaves unique enchantments out of the enchantment list, but keeps their pages", async ({ page }) => {
+    await page.goto("/zh/enchantment/");
+    await expect(page.locator("a[href$='/zh/enchantment/swirling-unique/']")).toHaveCount(0);
+    await expect(page.locator("a[href$='/zh/enchantment/swirling/']").first()).toBeVisible();
+    const response = await page.goto("/zh/enchantment/swirling-unique/");
+    expect(response?.status()).toBe(200);
+  });
+
   test("has no block for an item the game data gives no source", async ({ page }) => {
     await page.goto("/zh/melee/battlestaff-unique1/");
     await expect(page.getByTestId("item-sources")).toHaveCount(0);
@@ -61,7 +80,7 @@ test.describe("how to obtain", () => {
   for (const lang of ["de", "ru"]) {
     test(`stays inside a 360px screen in ${lang}`, async ({ page }) => {
       await page.setViewportSize({ width: 360, height: 800 });
-      for (const path of [`/${lang}/melee/sickles/`, `/${lang}/armor/piece/mushroom-chest/`, `/${lang}/artifact/firework-quiver/`]) {
+      for (const path of [`/${lang}/melee/sickles/`, `/${lang}/armor/piece/mushroom-chest/`, `/${lang}/artifact/firework-quiver/`, `/${lang}/enchantment/ricochet/`]) {
         await page.goto(path);
         await expect(page.getByTestId("item-sources")).toBeVisible();
         expect(await horizontalOverflow(page), path).toBeLessThanOrEqual(0);

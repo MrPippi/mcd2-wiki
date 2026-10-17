@@ -4,6 +4,7 @@ import { sourcesFor } from "../../../src/lib/item-sources";
 import { loc } from "../../helpers/localized";
 
 const data: ItemSourcesData = {
+  bookDrops: [],
   sources: {
     "chest:FancyChest": { kind: "chest", name: loc({ en: "Chest: Fancy Chest" }), untranslated: ["ja"] },
     "quest:QuestArmourMushroomSet": { kind: "quest", name: loc({ en: "Quest reward: Armour Mushroom Set" }), untranslated: [] },

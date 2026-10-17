@@ -80,7 +80,7 @@ export type Mob = z.infer<typeof MobSchema>;
 export const MobDataSchema = z.object({ mobs: z.array(MobSchema) });
 export type MobData = z.infer<typeof MobDataSchema>;
 
-export const SOURCE_KINDS = ["area", "chest", "quest", "merchant", "bookPool"] as const;
+export const SOURCE_KINDS = ["area", "chest", "mob", "quest", "merchant", "bookPool"] as const;
 export type SourceKindName = (typeof SOURCE_KINDS)[number];
 
 /** A place an item can come from, named once (Ruling 25); its untranslated languages live here only (Ruling 27). */
@@ -99,9 +99,14 @@ export const ItemSourceSchema = z.object({
 });
 export type ItemSources = z.infer<typeof ItemSourceSchema>;
 
+/** A chest or mob that drops a book from the pool its area names (the same rule for every book). */
+export const BookDropSchema = z.object({ id: z.string(), guaranteed: z.number(), rolls: z.number(), chancePerRoll: z.number() });
+export type BookDrop = z.infer<typeof BookDropSchema>;
+
 /** sources keyed by source id ("<kind>:<row id>", e.g. "chest:FancyChest"); items keyed by "<category>/<slug>". */
 export const ItemSourcesSchema = z.object({
   sources: z.record(z.string(), LootSourceSchema),
   items: z.record(z.string(), ItemSourceSchema),
+  bookDrops: z.array(BookDropSchema),
 });
 export type ItemSourcesData = z.infer<typeof ItemSourcesSchema>;

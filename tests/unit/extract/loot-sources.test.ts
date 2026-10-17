@@ -37,11 +37,16 @@ const base = {
   area: [
     lootRow("PlainsA1", "SW.Area.Plains.A1", [slot("Item", 0, 0, 0, true, ["SW.Item.Sickles", "SW.Item.ArmorSet.Mystic"])]),
     lootRow("CampA1", "SW.Area.Camp.A1", [slot("Item", 0, 0, 0, true, [["SW.Item.Sword", 0, "Multiply"]])]),
-    lootRow("GlobalAreaLoot", "SW.Area", [slot("Item", 0, 0, 0, true, ["SW.Item.Sword"])]),
+    // Real shape: an area row names the book pool its chests and mobs draw from in its traits.
+    lootRow("GlobalAreaLoot", "SW.Area", [slot("Item", 0, 0, 0, true, ["SW.Item.Sword"])], ["SW.LootSource.EnchantmentBooks.Common"]),
   ],
   lootActor: [
     lootRow("FancyChest", "SW.LootActor.FancyChest", [slot("Item", 1, 0, 0, true)]),
+    lootRow("FancyChest_Procedural", "SW.LootActor.FancyChest.Procedural", [slot("EnchantedBook", 1, 1, 0.5, true)]),
     lootRow("CampWoodenChest", "SW.LootActor.CampWoodenChest", [slot("Item", 1, 0, 0, false, ["SW.Item.Artifact.FireworkQuiver"])]),
+  ],
+  mob: [
+    lootRow("PiggyBank", "SW.Mob.PiggyBank", [slot("EnchantedBook", 0, 1, 0.5, true)]),
   ],
   quest: [
     lootRow("QuestArmourMushroomSet", "SW.Quest.Loot.Armour.MushroomSet", [slot("SpecialGear", 2, 0, 1, false, PIECES.map((piece) => `SW.Item.Mushroom${piece}`))]),
@@ -104,7 +109,10 @@ describe("buildItemSources", () => {
 
   it("lists only sources some item uses", () => {
     const { raw } = run();
-    const used = new Set(Object.values(raw.items).flatMap((item) => [...item.areas, ...item.bookPools, ...[...item.chests, ...item.quests, ...item.merchants].map((entry) => entry.id)]));
+    const used = new Set([
+      ...Object.values(raw.items).flatMap((item) => [...item.areas, ...item.bookPools, ...[...item.chests, ...item.quests, ...item.merchants].map((entry) => entry.id)]),
+      ...raw.bookDrops.map((drop) => drop.id),
+    ]);
     expect(Object.keys(raw.sources).sort()).toEqual([...used].sort());
   });
 
@@ -191,14 +199,35 @@ describe("buildItemSources", () => {
     expect(merchant?.untranslated).toEqual([]);
   });
 
-  it("puts books in their pools, drops the excluded quest books from the all-books pool, and still lists them as quest rewards", () => {
+  it("puts books in the pools an area draws from, leaves out pools no area names, and still lists quest books as quest rewards", () => {
     const { data } = run();
-    expect(ids(data["enchantment-book/arcane"]?.bookPools)).toEqual(["bookPool:AllEnchantmentBooks", "bookPool:EnchantmentBooksCommon"]);
+    expect(ids(data["enchantment-book/arcane"]?.bookPools)).toEqual(["bookPool:EnchantmentBooksCommon"]);
     expect(data["enchantment-book/piercing"]?.bookPools ?? []).toEqual([]);
     expect(data["enchantment-book/radiance"]?.bookPools ?? []).toEqual([]);
     expect(ids(data["enchantment-book/piercing"]?.quests)).toEqual(["quest:EnchantsmithBookReward"]);
-    expect(ids(data["enchantment-book/ricochet"]?.bookPools)).toEqual(["bookPool:AllEnchantmentBooks", "bookPool:EnchantmentBooksCommon"]);
-    expect(data["enchantment-book/arcane"]?.bookPools[1]?.name.en).toBe("Common");
+    expect(ids(data["enchantment-book/ricochet"]?.bookPools)).toEqual(["bookPool:EnchantmentBooksCommon"]);
+  });
+
+  it("names the global book pool by the site's translated label, with nothing untranslated", () => {
+    const common = run().data["enchantment-book/arcane"]?.bookPools[0];
+    expect(common?.name.en).toBe("All areas");
+    expect(common?.name.zh).toBe("所有地區");
+    expect(common?.untranslated).toEqual([]);
+  });
+
+  it("names a regional book pool by its area's game name", () => {
+    const keys = { EnchantmentBooksCommon: { namespace: ns("DT_AreaDefinition"), key: "ravines" } };
+    const common = run({}, keys, makeLocales({ [ns("DT_AreaDefinition")]: { ravines: { en: "Ravines", zh: "裂谷" } } })).data["enchantment-book/arcane"]?.bookPools[0];
+    expect(common?.name.zh).toBe("裂谷");
+  });
+
+  it("lists the chests and mobs that draw a book from the area's pool, with their drop rule", () => {
+    const { raw } = run();
+    expect(raw.bookDrops).toEqual([
+      { id: "chest:FancyChest", guaranteed: 1, rolls: 1, chancePerRoll: 0.5 },
+      { id: "mob:PiggyBank", guaranteed: 0, rolls: 1, chancePerRoll: 0.5 },
+    ]);
+    expect(raw.sources["mob:PiggyBank"]?.kind).toBe("mob");
   });
 
   it("keeps the untranslated languages on the source, never on the item, and leaves official area names alone", () => {
@@ -296,7 +325,18 @@ describe.skipIf(!hasSourceData)("real source-data", () => {
   it("keeps Piercing out of the all-books pool but lists the enchantsmith quest", async () => {
     expect((await view("enchantment-book/piercing"))?.bookPools ?? []).toEqual([]);
     expect(ids((await view("enchantment-book/piercing"))?.quests)).toEqual(["quest:QuestEnchantsmithBookReward"]);
-    expect(ids((await view("enchantment-book/ricochet"))?.bookPools)).toEqual(["bookPool:AllEnchantmentBooks", "bookPool:EnchantmentBooksDeepDark"]);
+    expect(ids((await view("enchantment-book/ricochet"))?.bookPools)).toEqual(["bookPool:EnchantmentBooksDeepDark"]);
+  });
+
+  it("names the regional book pools by their areas and lists the book droppers", async () => {
+    const { data } = await real();
+    expect(data.sources["bookPool:EnchantmentBooksRavines"]?.name.zh).toBe("裂谷");
+    expect(data.sources["bookPool:EnchantmentBooksMeadow"]?.name.zh).toBe("隙浮");
+    expect(data.sources["bookPool:EnchantmentBooksDeepDark"]?.name.zh).toBe("地下城");
+    expect(data.sources["bookPool:EnchantmentBooksCommon"]?.name.zh).toBe("所有地區");
+    expect(data.sources["bookPool:AllEnchantmentBooks"]).toBeUndefined();
+    expect(data.sources["mob:PiggyBank"]?.name.zh).toBe("寶箱豬");
+    expect(data.bookDrops.map((drop) => drop.id)).toEqual(["chest:FancyChest", "chest:WellspringChest", "mob:PiggyBank"]);
   });
 
   it("lists Wonderful Wheat's guaranteed quest", async () => {

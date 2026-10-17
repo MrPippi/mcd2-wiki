@@ -28,5 +28,6 @@ describe("catalog numbers", () => {
   it("counts armor by set and everything else by entry", () => {
     expect(categoryCount("armor")).toBe(allArmorSets.length);
     expect(categoryCount("melee")).toBe(entriesIn("melee").length);
+    expect(categoryCount("enchantment")).toBe(entriesIn("enchantment").filter((entry) => entry.variant !== "unique").length);
   });
 });

@@ -197,6 +197,8 @@
   "sourcePicksOf": "{count} of {of}",
   "sourceMerchantCategory": "Merchant ({category})",
   "sourceBookPools": "Enchantment book pools",
+  "sourceBookPoolCommon": "All areas",
+  "sourceBookDroppers": "Books drop from",
   "sourcesNote": "Compiled from the game data; actual drops may be affected by game mechanics.",
   "statMovementSpeed": "Movement speed",
   "statPoise": "Poise",
