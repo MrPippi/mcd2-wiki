@@ -70,6 +70,8 @@
     "mapSource",
     "categorySkin",
     "markerArea",
+    "markerQuest",
+    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -464,6 +466,8 @@
   "markerPortal": "Teleportera till staty",
   "markerMerchant": "Köpman",
   "markerArea": "Område",
+  "markerQuest": "Uppdragsplatser",
+  "markerQuestArea": "Uppdrag i området",
   "unitSeconds": "{n} s",
   "unitBlocks": {
     "one": "{n} block",

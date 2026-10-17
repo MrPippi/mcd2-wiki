@@ -66,6 +66,8 @@
     "mapSource",
     "categorySkin",
     "markerArea",
+    "markerQuest",
+    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -467,6 +469,8 @@
   "markerPortal": "Статуя телепортации",
   "markerMerchant": "Торговец",
   "markerArea": "Область",
+  "markerQuest": "Места квестов",
+  "markerQuestArea": "Квесты области",
   "unitSeconds": "{n} с",
   "unitBlocks": {
     "one": "{n} блок",

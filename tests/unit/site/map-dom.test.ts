@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { pinParts, popupTexts, resultText, shownKind } from "../../../src/lib/map/marker-dom";
+import { pinParts, popupLinks, popupTexts, resultText, shownKind } from "../../../src/lib/map/marker-dom";
 import type { PayloadMarker } from "../../../src/lib/map/payload";
 
 const marker = (kind: PayloadMarker["kind"], name: string, extra: Partial<PayloadMarker> = {}): PayloadMarker => ({
@@ -28,6 +28,29 @@ describe("popupTexts", () => {
   it("keeps the kind label above a name that differs from it", () => {
     const smith = marker("merchant", "鐵匠", { note: { zh: "販售武器" } });
     expect(popupTexts(smith, "zh", "商人")).toEqual({ kind: "商人", name: "鐵匠", note: "販售武器" });
+  });
+});
+
+describe("popupLinks", () => {
+  const title = (zh: string) => ({ zh, en: zh });
+
+  it("links the name itself when the pin is one quest's spot", () => {
+    const spot = marker("quest", "小嚎村的沉寂", { quests: [{ slug: "ca02", title: title("小嚎村的沉寂") }] });
+    expect(popupLinks(spot, "zh")).toEqual({ nameHref: "/zh/quests/ca02/", list: [] });
+  });
+
+  it("lists an area's quests under the area name", () => {
+    const area = marker("quest-area", "咆哮森林", { quests: [{ slug: "ca03", title: title("甲") }, { slug: "foa1-s08-a", title: title("乙") }] });
+    expect(popupLinks(area, "zh")).toEqual({
+      list: [
+        { title: "甲", href: "/zh/quests/ca03/" },
+        { title: "乙", href: "/zh/quests/foa1-s08-a/" },
+      ],
+    });
+  });
+
+  it("gives other markers no links", () => {
+    expect(popupLinks(marker("merchant", "鐵匠"), "zh")).toEqual({ list: [] });
   });
 });
 

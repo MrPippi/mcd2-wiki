@@ -6,6 +6,13 @@ import { LocalizedSchema } from "./schemas";
 
 export { MARKER_KINDS, type MarkerKind };
 
+/** A quest a marker leads to: its page slug and title. */
+export const MarkerQuestSchema = z.object({
+  slug: z.string().min(1),
+  title: LocalizedSchema,
+});
+export type MarkerQuest = z.infer<typeof MarkerQuestSchema>;
+
 export const MarkerSchema = z.object({
   id: z.string().min(1),
   kind: z.enum(MARKER_KINDS),
@@ -17,6 +24,8 @@ export const MarkerSchema = z.object({
   note: LocalizedSchema.optional(),
   /** Published path under public/. */
   icon: z.string().optional(),
+  /** Quest markers: the quests found here, linked from the popup. */
+  quests: z.array(MarkerQuestSchema).min(1).optional(),
 });
 export type MapMarker = z.infer<typeof MarkerSchema>;
 

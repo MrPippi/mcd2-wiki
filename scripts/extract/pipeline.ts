@@ -20,6 +20,7 @@ import {
 import { buildMapData, type MapResult } from "./map";
 import { MapDataSchema } from "./map-schema";
 import { loadMapTables } from "./map-tables";
+import { addQuestMarkers, loadQuestLocations } from "./map-quests";
 import type { LocaleFile } from "./schemas";
 import { groupEntries, type RawEntry } from "./group-entries";
 import { WeaponDataSchema, type WeaponData } from "./weapon-schema";
@@ -203,6 +204,10 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     mobs: bestiary.mobs,
     map: map.data,
   });
+  // The quest pins need the quests; map.json is written with them, while the other extractors read the plain map.
+  const questMap = addQuestMarkers(map.data, quests.data.quests, await loadQuestLocations(options.sourceRoot), (relative) =>
+    existsSync(path.join(options.sourceRoot, ...relative.split("/"))),
+  );
   // After copyIcons too: it publishes the area icons.
   const locations = await extractLocations({
     sourceRoot: options.sourceRoot,
@@ -250,6 +255,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...enchantments.issues,
     ...talismans.issues,
     ...map.issues,
+    ...questMap.issues,
     ...uiStrings.issues,
     ...achievements.issues,
     ...bestiary.issues,
@@ -268,7 +274,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "enchantments.json": EnchantmentDataSchema.parse(enchantments.data),
     "effects.json": EnchantmentDataSchema.parse(effectValues),
     "talismans.json": TalismanDataSchema.parse(talismans.data),
-    "map.json": MapDataSchema.parse(map.data),
+    "map.json": MapDataSchema.parse(questMap.data),
     "ui-game-strings.json": uiStrings.strings,
     "achievements.json": achievements.data,
     "mobs.json": bestiary.mobs,

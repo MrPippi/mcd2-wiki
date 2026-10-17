@@ -34,6 +34,13 @@ const WORLD_MAP_ICON_DIR = "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Wor
 const MINECART_ICON = "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/Icons/T_UI_Icon_Minecart.png";
 const RIFT_ICON = `${WORLD_MAP_ICON_DIR}/T_UI_Icon_Rift.png`;
 const MERCHANT_ICON = `${WORLD_MAP_ICON_DIR}/T_UI_Icon_VillageMerchant.png`;
+const MINIMAP_ICON_DIR = "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/Icons";
+/** Quest pins: the game's core (gold) and side (blue) quest-giver icons, and its plain one for a whole area's quests. */
+export const QUEST_ICONS = {
+  core: `${MINIMAP_ICON_DIR}/T_UI_Icon_CoreQuestGiver_Minimap.png`,
+  side: `${MINIMAP_ICON_DIR}/T_UI_Icon_SideQuestGiver_Minimap.png`,
+  area: `${WORLD_MAP_ICON_DIR}/T_UI_Icon_QuestGiver.png`,
+} as const;
 /** DT_MerchantLocationsDefinition MarkerType → icon. */
 const MERCHANT_ICONS: Readonly<Record<string, string>> = {
   Merchant: MERCHANT_ICON,
@@ -46,12 +53,14 @@ const LEGEND_SOURCES: Readonly<Record<string, string>> = {
   rift: RIFT_ICON,
   portal: PORTAL_ICON,
   merchant: MERCHANT_ICON,
+  quest: QUEST_ICONS.core,
+  "quest-area": QUEST_ICONS.area,
 };
 
 /** A point found in the tables, before it is placed in a world. */
 interface Candidate {
   readonly id: string;
-  readonly kind: Exclude<MarkerKind, "area">;
+  readonly kind: Exclude<MarkerKind, "area" | "quest" | "quest-area">;
   readonly block: BlockPoint;
   readonly areaTag?: string;
   readonly name: Localized;
@@ -197,7 +206,7 @@ function merchants(tables: MapTables, ctx: Context): Gathered {
   );
 }
 
-const publishedIcon = (source: string): string => `icons/map/${path.posix.basename(source).toLowerCase()}`;
+export const publishedIcon = (source: string): string => `icons/map/${path.posix.basename(source).toLowerCase()}`;
 
 function toMarker(candidate: Candidate, frame: WorldFrame, iconExists: (relative: string) => boolean): MapMarker {
   const { px, py } = toImagePixel(frame, candidate.block);
@@ -240,7 +249,8 @@ function buildWorld(frame: Frame, candidates: readonly Candidate[], ctx: Context
 }
 
 function iconsOf(candidates: readonly Candidate[], iconExists: (relative: string) => boolean): MapIcon[] {
-  const sources = candidates.map((candidate) => candidate.iconSource);
+  // Quest pins are added after the quests are read, so their icons are published up front.
+  const sources = [...candidates.map((candidate) => candidate.iconSource), ...Object.values(QUEST_ICONS)];
   const present = [...new Set(sources.filter((source): source is string => source !== undefined && iconExists(source)))];
   return present.map((from) => ({ from, published: publishedIcon(from) }));
 }

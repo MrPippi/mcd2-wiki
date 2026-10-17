@@ -94,6 +94,9 @@
 .map-popup-name { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
 .map-popup-area { color: var(--text-2); }
 .map-popup-note { margin-top: 6px !important; color: var(--text-2); }
+.map-popup a { color: inherit; text-decoration: underline 1px var(--rule-strong); text-underline-offset: 0.2em; }
+.map-popup a:hover, .map-popup a:focus-visible { text-decoration: underline 2px var(--accent); }
+.map-popup-quests { list-style: none; display: grid; gap: 4px; margin: 8px 0 0; padding: 8px 0 0; border-top: 1px solid var(--rule); }
 
 @media (min-width: 760px) {
   .map-panel { grid-template-columns: minmax(0, 420px) minmax(0, 1fr); column-gap: 32px; }

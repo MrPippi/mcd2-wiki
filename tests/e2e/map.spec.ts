@@ -18,8 +18,18 @@ test("map page shows its title, world tabs and marker filters", async ({ page })
   await expect(page.locator("h1")).toHaveText("世界地圖");
   await expect(page.locator(".map-tabs a")).toHaveText([/主世界/, /隙浮/, /營地/]);
   await expect(page.locator(".map-tabs [aria-current='page']")).toHaveText(/主世界/);
-  await expect(page.locator(".map-filter")).toHaveCount(4);
+  await expect(page.locator(".map-filter")).toHaveCount(6);
   await expect(page.locator("[data-count='rift']")).toHaveText(/^[1-9]\d*$/);
+  await expect(page.locator("[data-count='quest']")).toHaveText(/^[1-9]\d*$/);
+  await expect(page.locator("[data-count='quest-area']")).toHaveText(/^[1-9]\d*$/);
+});
+
+test("an area's quest pin lists links to its quest pages", async ({ page }) => {
+  await page.goto("/zh/map/#4/4242/4046");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+  await page.locator(".map-marker--quest-area[title='咆哮森林']").click();
+  const links = page.locator(".leaflet-popup-content .map-popup-quests a");
+  await expect(links.first()).toHaveAttribute("href", /\/zh\/quests\/[a-z0-9-]+\/$/);
 });
 
 test("the rift filter swatch is the game's icon", async ({ page }) => {
@@ -70,7 +80,9 @@ test("world tabs switch maps and record the world in the URL", async ({ page }) 
   await expect(page.locator("[data-count='rift']")).toHaveText("0");
   await page.locator(".map-tabs a", { hasText: "營地" }).click();
   await expect(page).toHaveURL(/\?world=camp/);
-  await expect(page.locator(".map-marker")).toHaveCount(0);
+  // The camp has no stations or merchants, only the first quest's spots.
+  await expect(page.locator(".map-marker:not(.map-marker--quest)")).toHaveCount(0);
+  await expect(page.locator(".map-marker--quest").first()).toBeAttached();
   await expect(page.locator(".leaflet-tile-loaded").first()).toBeVisible();
 });
 
@@ -193,7 +205,8 @@ test("area labels do not capture clicks meant for the pin beneath", async ({ pag
 
 test("area names are not a marker filter", async ({ page }) => {
   await page.goto("/zh/map/");
-  await expect(page.locator(".map-filters")).not.toContainText("區域");
+  // 「區域任務」 is the area quest pins' filter; plain 「區域」 (the area names) must not be one.
+  expect(await page.locator(".map-filter-label").allTextContents()).not.toContain("區域");
   await expect(kindToggle(page, "area")).toHaveCount(0);
 });
 

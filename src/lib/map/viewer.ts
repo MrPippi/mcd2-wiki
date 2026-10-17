@@ -19,6 +19,8 @@ const FOCUS_LEVELS = 1;
 const PIN_SIZE: L.PointTuple = [16, 16];
 const ICON_PIN_SIZE: L.PointTuple = [28, 28];
 const POPUP_OPTIONS: L.PopupOptions = { minWidth: 200, maxWidth: 280 };
+/** Gap in screen pixels between an area's quest pin and the area name under it. */
+const QUEST_AREA_LIFT = 8;
 
 interface Payload {
   readonly worlds: readonly PayloadWorld[];
@@ -70,14 +72,23 @@ function pinSize(marker: PayloadWorld["markers"][number]): L.PointTuple {
   return marker.icon ? ICON_PIN_SIZE : PIN_SIZE;
 }
 
+/** An area's quest pin shares its spot with the area's name: it stands just above the text instead of on it. */
+function pinAnchor(marker: PayloadWorld["markers"][number]): L.PointTuple | undefined {
+  if (marker.kind !== "quest-area") return undefined;
+  const [width, height] = pinSize(marker);
+  return [width / 2, height + QUEST_AREA_LIFT];
+}
+
 function addPins(map: L.Map, world: PayloadWorld, lang: Lang, labels: Payload["labels"], hidden: ReadonlySet<FilterKind>) {
   const layers = new Map(MARKER_KINDS.map((kind) => [kind, L.layerGroup()] as const));
   const pins = new Map<string, L.Marker>();
   for (const marker of world.markers) {
+    const anchor = pinAnchor(marker);
     const icon = L.divIcon({
       className: `map-marker map-marker--${marker.kind}`,
       html: pinElement(marker, lang),
       iconSize: pinSize(marker),
+      ...(anchor ? { iconAnchor: anchor } : {}),
     });
     // Area labels sit on top of the teleport-statue pins: they stay inert so clicks reach the pin beneath.
     const isArea = marker.kind === "area";

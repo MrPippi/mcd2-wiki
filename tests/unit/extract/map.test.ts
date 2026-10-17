@@ -112,6 +112,8 @@ describe("buildMapData", () => {
       rift: "icons/map/t_ui_icon_rift.png",
       portal: "icons/map/t_ui_icon_town_portal.png",
       merchant: "icons/map/t_ui_icon_villagemerchant.png",
+      quest: "icons/map/t_ui_icon_corequestgiver_minimap.png",
+      "quest-area": "icons/map/t_ui_icon_questgiver.png",
     });
     expect(run(MAP_TABLES, noIcon).data.legend).toEqual({});
     expect(run(MAP_TABLES, (source) => source.endsWith("T_UI_Icon_Rift.png")).data.legend).toEqual({ rift: "icons/map/t_ui_icon_rift.png" });
@@ -174,6 +176,10 @@ describe("buildMapData", () => {
       { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/WorldMap/Icons/T_UI_Icon_Rift.png", published: "icons/map/t_ui_icon_rift.png" },
       { from: "Assets/UI/Icons/Location/AreaIcons/T_UI_Icon_Town_Portal.png", published: "icons/map/t_ui_icon_town_portal.png" },
       { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/WorldMap/Icons/T_UI_Icon_Blacksmith.png", published: "icons/map/t_ui_icon_blacksmith.png" },
+      // Quest pins come later, from the quests, so their icons are always published.
+      { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/Icons/T_UI_Icon_CoreQuestGiver_Minimap.png", published: "icons/map/t_ui_icon_corequestgiver_minimap.png" },
+      { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/Icons/T_UI_Icon_SideQuestGiver_Minimap.png", published: "icons/map/t_ui_icon_sidequestgiver_minimap.png" },
+      { from: "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/WorldMap/Icons/T_UI_Icon_QuestGiver.png", published: "icons/map/t_ui_icon_questgiver.png" },
     ]);
   });
 

@@ -97,6 +97,8 @@
   "markerPortal": "Teleport statue",
   "markerMerchant": "Merchant",
   "markerArea": "Area",
+  "markerQuest": "Quest locations",
+  "markerQuestArea": "Area quests",
   "unitSeconds": "{n} sec",
   "unitBlocks": {
     "one": "{n} block",

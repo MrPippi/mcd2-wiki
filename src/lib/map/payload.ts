@@ -6,10 +6,16 @@ import type { Lang } from "../lang";
 /** Text in some languages; the viewer reads only the page language and its comparison language. */
 export type SomeLangs = Partial<Localized>;
 
-export interface PayloadMarker extends Omit<MapMarker, "name" | "area" | "note"> {
+export interface PayloadQuest {
+  readonly slug: string;
+  readonly title: SomeLangs;
+}
+
+export interface PayloadMarker extends Omit<MapMarker, "name" | "area" | "note" | "quests"> {
   readonly name: SomeLangs;
   readonly area?: SomeLangs;
   readonly note?: SomeLangs;
+  readonly quests?: readonly PayloadQuest[];
 }
 
 export interface PayloadWorld extends Omit<WorldMap, "name" | "markers"> {
@@ -24,6 +30,7 @@ const trimMarker = (marker: MapMarker, langs: readonly Lang[]): PayloadMarker =>
   name: keep(marker.name, langs),
   ...(marker.area ? { area: keep(marker.area, langs) } : {}),
   ...(marker.note ? { note: keep(marker.note, langs) } : {}),
+  ...(marker.quests ? { quests: marker.quests.map((quest) => ({ slug: quest.slug, title: keep(quest.title, langs) })) } : {}),
 });
 
 /** A copy of the world with every name, area and note cut down to `langs`. */

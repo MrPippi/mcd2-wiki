@@ -70,6 +70,8 @@
     "mapSource",
     "categorySkin",
     "markerArea",
+    "markerQuest",
+    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -465,6 +467,8 @@
   "markerPortal": "Işınlanma Heykeli",
   "markerMerchant": "Tüccar",
   "markerArea": "Bölge",
+  "markerQuest": "Görev konumları",
+  "markerQuestArea": "Bölge görevleri",
   "unitSeconds": "{n} sn",
   "unitBlocks": {
     "one": "{n} blok",

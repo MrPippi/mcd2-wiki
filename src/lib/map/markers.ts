@@ -5,13 +5,15 @@ import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "./
 
 const DEFAULT_LIMIT = 20;
 
-/** Names and areas in the page language and its comparison language, each folded by its own language's rules. */
+/** Names, areas and quest titles in the page language and its comparison language, each folded by its own language's rules. */
 const searchableText = (marker: PayloadMarker, lang: Lang): string[] =>
   [lang, compareLang(lang)].flatMap((l) =>
-    [marker.name[l], marker.area?.[l]].filter((text): text is string => text !== undefined).map((text) => searchFold(text, l)),
+    [marker.name[l], marker.area?.[l], ...(marker.quests ?? []).map((quest) => quest.title[l])]
+      .filter((text): text is string => text !== undefined)
+      .map((text) => searchFold(text, l)),
   );
 
-/** Markers whose name or area contains the query, in their original order. */
+/** Markers whose name, area or quest titles contain the query, in their original order. */
 export function searchMarkers<M extends PayloadMarker>(markers: readonly M[], query: string, lang: Lang, limit = DEFAULT_LIMIT): M[] {
   const needle = searchFold(query.trim(), lang);
   if (needle === "") return [];

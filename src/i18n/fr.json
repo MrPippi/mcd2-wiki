@@ -70,6 +70,8 @@
     "mapSource",
     "categorySkin",
     "markerArea",
+    "markerQuest",
+    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -465,6 +467,8 @@
   "markerPortal": "Statue de téléportation",
   "markerMerchant": "Commerçant",
   "markerArea": "Zone",
+  "markerQuest": "Lieux de quête",
+  "markerQuestArea": "Quêtes de la zone",
   "unitSeconds": "{n} s",
   "unitBlocks": {
     "one": "{n} bloc",

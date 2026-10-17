@@ -71,6 +71,8 @@ export type IssueType =
   | "quest-reward-empty"
   | "quest-area-unnamed"
   | "quest-mob-unlinked"
+  | "quest-location-unmatched"
+  | "quest-location-off-map"
   | "missing-location-tables"
   | "location-excluded"
   | "location-unassigned"
