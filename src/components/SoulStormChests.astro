@@ -1,7 +1,7 @@
 ---
 import type { Chest, SoulStormData } from "../../scripts/extract/soul-storm-schema";
 import { lootSlotLabel, t, type Lang, type UiKey } from "../lib/i18n";
-import { dropSummary } from "../lib/mobs";
+import { dropSummary, splitNumbers } from "../lib/mobs";
 import { chestLabel, chestsOf, rarityLine, slotRows, textOf } from "../lib/soul-storm";
 
 interface Props {
@@ -48,7 +48,7 @@ const hasNoList = (chests: readonly Chest[], key: Slot["slot"]): boolean => ches
                   </th>
                   {chests.map((chest) => {
                     const slot = slotOf(chest, key);
-                    return <td>{slot ? dropSummary(slot, lang).map((line) => <span class="soul-storm-line">{line}</span>) : "—"}</td>;
+                    return <td>{slot ? dropSummary(slot, lang).map((line) => <span class="soul-storm-line">{splitNumbers(line).map((part, i) => (i % 2 === 1 ? <span class="soul-storm-num">{part}</span> : part))}</span>) : "—"}</td>;
                   })}
                 </tr>
               ))}
