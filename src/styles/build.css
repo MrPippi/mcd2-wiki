@@ -16,16 +16,19 @@
 .build-effect-list { list-style: none; margin: 0 0 var(--space-1); padding: 0; display: grid; gap: var(--space-1); }
 .build-effect { display: flex; align-items: center; gap: var(--space-2); }
 .build-effect-name { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
-.build-add-effect { font-size: 0.9rem; border-style: dashed; }
 .build-effect-note { margin: var(--space-3) 0 0; }
 .build-enchant { display: flex; align-items: center; gap: var(--space-2); }
-.build-enchant-pick {
-  flex: 1 1 auto; min-width: 0; display: flex; align-items: center; justify-content: flex-start; gap: var(--space-2);
-  padding: var(--space-1); border: 1px dashed var(--rule-strong); background: none; text-align: start; font-size: 0.95rem;
+/* "Add effect" and the enchantment picker share one look: full-width dashed slot, solid once filled. */
+.build-add-effect, .build-enchant-pick {
+  min-width: 0; min-height: 40px; display: flex; align-items: center; justify-content: flex-start; gap: var(--space-2);
+  padding: 2px var(--space-2); border: 1px dashed var(--rule-strong); background: none; text-align: start; font-size: 0.95rem;
 }
+.build-add-effect { width: 100%; }
+.build-enchant-pick { flex: 1 1 auto; }
 .build-enchant[data-filled="true"] .build-enchant-pick { border-style: solid; font-weight: 700; }
 .build-icon.build-icon-small { width: 32px; height: 32px; border-width: 1px; }
-.build-icon-small img { width: 28px; height: 28px; }
+/* Two classes so the 48px/40px slot-icon sizes below never stretch the small icon past its box. */
+.build-icon.build-icon-small img { width: 28px; height: 28px; }
 .build-icon-small:empty { display: none; }
 .build-tier { min-height: 40px; padding: 0 var(--space-2); border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); font: inherit; font-family: var(--font-mono); }
 .build-pick {

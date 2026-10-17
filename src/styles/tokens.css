@@ -35,8 +35,10 @@
   --slot-unique-border: var(--accent);
 
   --font-display: "Noto Serif", "Noto Serif TC", "Songti TC", "PMingLiU", serif;
-  --font-body: "Geist Variable", "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, "Cascadia Mono", monospace;
+  /* Geist and Geist Mono have no CJK glyphs; both stacks fall back to the same CJK fonts so Chinese in a mono label matches the body text. */
+  --font-cjk: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC";
+  --font-body: "Geist Variable", var(--font-cjk), system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, "Cascadia Mono", var(--font-cjk), monospace;
 
   /* Spacing steps; new and touched rules use these instead of raw pixels. */
   --space-1: 4px;
@@ -69,19 +71,19 @@
 
 /* Display and body fonts follow the page language (<html lang> = LANG_META.htmlLang).
    :lang(zh-TW) and :lang(zh-CN) are separate rules; Geist covers Latin and Cyrillic,
-   so only CJK languages swap the body fallbacks. */
+   so only CJK languages swap the CJK fallbacks (shared by the body and mono stacks). */
 :root:lang(zh-TW) {
   --font-display: "Noto Serif TC", "Songti TC", "PMingLiU", serif;
 }
 :root:lang(zh-CN) {
   --font-display: "Noto Serif SC", "Songti SC", "SimSun", serif;
-  --font-body: "Geist Variable", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif;
+  --font-cjk: "PingFang SC", "Microsoft YaHei", "Noto Sans SC";
 }
 :root:lang(ja) {
   --font-display: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --font-body: "Geist Variable", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", system-ui, sans-serif;
+  --font-cjk: "Hiragino Sans", "Yu Gothic", "Noto Sans JP";
 }
 :root:lang(ko) {
   --font-display: "Noto Serif KR", "Apple Myungjo", "Batang", serif;
-  --font-body: "Geist Variable", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+  --font-cjk: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR";
 }

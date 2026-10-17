@@ -40,6 +40,10 @@
 .soul-storm-cell-note, .soul-storm-line { display: block; }
 .soul-storm-cell-note { margin-top: var(--space-1); font-size: 0.85rem; color: var(--muted); }
 .soul-storm-chest-table td { min-width: 9em; }
+/* Chest cells and headers carry game text: body font like the bestiary drops, with only the numbers in mono. */
+.soul-storm-chest-table td { font-family: var(--font-body); font-size: inherit; }
+.soul-storm-chest-table thead th { font-family: var(--font-body); font-size: 0.9rem; letter-spacing: 0; text-transform: none; }
+.soul-storm-num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
 /* Rotation: numbered in table order, two columns when there is room. */
 .soul-storm-rotation {

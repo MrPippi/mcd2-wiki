@@ -35,12 +35,14 @@
   image-rendering: pixelated; color: var(--ink); font-weight: 700; font-size: 14px; line-height: 1.5;
 }
 
-/* Display sizes are tuned for four-character Chinese names; English names scale with the column instead. */
+/* Display sizes are tuned for four-character Chinese names; every other language scales with the column instead,
+   and a name that still cannot fit (one long word or Japanese phrase) breaks rather than widening the page. */
 .entry-content { min-width: 0; container-type: inline-size; }
 .entry-kicker { margin-bottom: 14px; }
 .entry-content h1 { margin: 0 0 8px; font-size: var(--fs-display-xl); line-height: 1; }
+.entry-content h1 .primary { overflow-wrap: anywhere; }
 .entry-content h1.is-unique .primary { color: var(--accent); }
-.entry-content h1:lang(en) { font-size: clamp(36px, 11cqi, 96px); line-height: 1.02; }
+.entry-content h1:not(:lang(zh)) { font-size: clamp(36px, 11cqi, 96px); line-height: 1.02; }
 .entry-content p, .book-source .book p { max-width: 62ch; }
 .description { font-size: 19px; line-height: 1.7; }
 .description .alt, .description-long .alt { display: block; margin-top: 10px; font-size: 15px; }
@@ -125,13 +127,16 @@ a.fixed-name:hover .primary { text-decoration: underline 2px var(--accent); text
 .secret-badge { margin: 0 0 8px; }
 
 .related { list-style: none; padding: 0; margin: 0; display: grid; }
-.related li { display: grid; grid-template-columns: 7em 1fr; align-items: center; gap: 12px; padding: 10px 0; }
+.related li { display: grid; grid-template-columns: 7em minmax(0, 1fr); align-items: center; gap: 12px; padding: 10px 0; }
 .related li + li { border-top: 1px solid var(--rule); }
 .related-label { font-size: 13px; color: var(--muted); }
 .related a { display: flex; align-items: center; gap: 14px; color: var(--text); text-decoration: none; }
 .related a .icon-frame, .set-piece a .icon-frame { transition: transform var(--dur) var(--ease-spring); }
 .related a:hover .icon-frame, .set-piece a:hover .icon-frame { transform: translateY(-3px) scale(1.05); }
 .related a .primary, .set-piece a .primary { font-family: var(--font-display); font-weight: 700; font-size: 18px; }
+/* Long compound names (German "Traumherrscherpantoffeln") break inside the column instead of widening the page. */
+.related a, .set-piece a, .related a .lang-text, .set-piece a > span { min-width: 0; }
+.related a .primary, .set-piece a .primary, .set-piece p { overflow-wrap: anywhere; }
 .related a:hover .primary, .set-piece a:hover .primary { text-decoration: underline 2px var(--accent); text-underline-offset: 0.2em; }
 
 /* Set pieces: one ruled row each, sprite and name on the left, the game text beside them. */
