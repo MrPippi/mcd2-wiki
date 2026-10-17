@@ -50,7 +50,6 @@
 /* Mob page */
 /* Square like an item plate (entry.css); the portrait fills most of it, scaled up crisp. */
 .mob-plate.specimen-plate.entry-head .mob-portrait { width: 84%; height: 84%; }
-.mob-plate.specimen-plate.entry-head .mob-portrait img { image-rendering: pixelated; }
 .mob-page .entry-kicker a { color: inherit; }
 .mob-title { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--space-2) var(--space-4); }
 .mob-title h1 { min-width: 0; overflow-wrap: anywhere; }

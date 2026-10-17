@@ -104,7 +104,7 @@ describe("withPortraits", () => {
 });
 
 describe("publishPortraits", () => {
-  it("writes 128 px webp files, replacing what was there", async () => {
+  it("writes 256 px webp files, replacing what was there", async () => {
     const root = await mkdtemp(path.join(tmpdir(), "mcd2-portrait-"));
     const source = path.join(root, "Zombie.png");
     await sharp({ create: { width: 256, height: 256, channels: 4, background: { r: 0, g: 128, b: 0, alpha: 0.5 } } }).png().toFile(source);
