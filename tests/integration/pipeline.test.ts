@@ -9,8 +9,19 @@ import { ExtractError } from "../../scripts/extract/issues";
 import { runExtract } from "../../scripts/extract/pipeline";
 import { SOUL_STORM_ICON_SOURCES } from "../../scripts/extract/soul-storm";
 import type { ArmorSet, Entry } from "../../scripts/extract/schemas";
+import { rawCurveFiles } from "../helpers/curve-tables";
+import { GUIDE_TABLE_FILES } from "../../scripts/extract/guides-tables";
+import { REAL_GUIDE_ROWS } from "../helpers/guide-tables";
 import { makeLocales, ns } from "../helpers/locales";
 
+/** The DataTables the threat guide reads; the other guide tables stay absent so the other extractors' own fixtures are untouched. */
+const THREAT_TABLES = ["gameBalance", "difficulty", "worldActor", "rarityChance"] as const;
+/** The DataTables the weapon extract needs before it reads anything else; empty is enough. */
+const GAME_TABLES = [
+  "DT_ItemDefinitionMelee", "DT_ItemDefinitionRanged", "DT_MeleePropertyDefinition", "DT_RangedPropertyDefinition",
+  "DT_ProjectileDefinition", "DT_EffectTemplateDefinition", "DT_EffectTemplateGroupDefinition",
+  "DT_EffectTemplateGroupDropTableDefinition", "DT_EffectDefinition", "DT_EnchantmentDefinition", "DT_ItemDefinitionArtifact", "DT_ItemDefinitionArmor",
+];
 const ICON_ROOT = "Assets/Art/Characters/Player/Equipment";
 const QUIVER = `${ICON_ROOT}/Artifacts/Quivers/T_UI_Quiver_Freezing_Icon.png`;
 const JA_LOCALE = {
@@ -92,7 +103,7 @@ beforeEach(async () => {
   await put(sourceRoot, QUIVER, "png:quiver");
   await writeFile(overridesPath, JSON.stringify({ Artifact_FrostQuiver: QUIVER }), "utf8");
   await writeFile(path.join(sourceRoot, "soul-storm-status.json"), JSON.stringify({ verified: false, anchorOffsetMinutes: 0, rotationOffset: 0 }), "utf8");
-  await writeFile(path.join(sourceRoot, "guides-status.json"), JSON.stringify({ enchantCostPerLevel: false, rarityOdds: false }), "utf8");
+  await writeFile(path.join(sourceRoot, "guides-status.json"), JSON.stringify({ enchantCostPerLevel: false, rarityOdds: false, threatBalanceRow: false }), "utf8");
   await put(sourceRoot, SOUL_STORM_ICON_SOURCES.header, "png:soul-storm-header");
   await put(sourceRoot, SOUL_STORM_ICON_SOURCES.generator, "png:soul-storm-generator");
 });
@@ -151,12 +162,7 @@ describe("runExtract", () => {
   });
 
   it("takes an icon the DataTables' IconReference names, even when no file name matches", async () => {
-    const tables = [
-      "DT_ItemDefinitionMelee", "DT_ItemDefinitionRanged", "DT_MeleePropertyDefinition", "DT_RangedPropertyDefinition",
-      "DT_ProjectileDefinition", "DT_EffectTemplateDefinition", "DT_EffectTemplateGroupDefinition",
-      "DT_EffectTemplateGroupDropTableDefinition", "DT_EffectDefinition", "DT_EnchantmentDefinition", "DT_ItemDefinitionArtifact",
-    ];
-    await Promise.all(tables.map((name) => put(sourceRoot, `DataTables/UFS/${name}.json`, "[]")));
+    await Promise.all(GAME_TABLES.map((name) => put(sourceRoot, `DataTables/UFS/${name}.json`, "[]")));
     const reference = "/Game/Spicewood/Art/Characters/Player/Equipment/Armor/Disciple_Armor/Chest_Texture.Chest_Texture";
     await put(sourceRoot, "DataTables/UFS/DT_ItemDefinitionArmor.json", JSON.stringify([{ Name: "DiscipleChest", IconReference: reference }]));
     await put(sourceRoot, `${ICON_ROOT}/Armor/Disciple_Armor/Chest_Texture.png`, "png:referenced-chest");
@@ -252,6 +258,24 @@ describe("runExtract", () => {
     const empty = await mkdtemp(path.join(tmpdir(), "mcd2-empty-"));
     await expect(runExtract({ sourceRoot: empty, outRoot, overridesPath })).rejects.toThrow(ExtractError);
     await expect(runExtract({ sourceRoot: empty, outRoot, overridesPath })).rejects.toThrow("找不到語系檔");
+  });
+
+  it("writes the threat table and the difficulties from the guide tables and CurveTables", async () => {
+    const rows = REAL_GUIDE_ROWS();
+    await Promise.all(GAME_TABLES.map((name) => put(sourceRoot, `DataTables/UFS/${name}.json`, "[]")));
+    await Promise.all(THREAT_TABLES.map((key) => put(sourceRoot, `DataTables/UFS/${GUIDE_TABLE_FILES[key]}.json`, JSON.stringify(rows[key]))));
+    await Promise.all(Object.entries(rawCurveFiles()).map(([name, curve]) => put(sourceRoot, `CurveTables/${name}.json`, JSON.stringify(curve))));
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    const guides = await readJson<{ threat: { level: number; effectTiers?: number[] }[]; difficulty: { id: string }[] }>("src/data/guides.json");
+    expect(guides.threat).toHaveLength(20);
+    expect(guides.threat[8]?.effectTiers).toEqual([1, 0.7, 0.4]);
+    expect(guides.difficulty.map((item) => item.id)).toEqual(["low", "normal", "high"]);
+  });
+
+  it("leaves the threat guide empty and reports it when the CurveTables are missing", async () => {
+    await runExtract({ sourceRoot, outRoot, overridesPath });
+    expect(await readJson<{ threat: unknown[]; difficulty: unknown[] }>("src/data/guides.json")).toMatchObject({ threat: [], difficulty: [] });
+    expect(await readFile(path.join(outRoot, "extract-report.md"), "utf8")).toContain("### missing-curve-tables (1)\n\n- CurveTables");
   });
 
   it("writes an empty map and reports it when the map tables are missing", async () => {

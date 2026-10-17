@@ -1,7 +1,8 @@
 {
   "verified": {
     "enchantCostPerLevel": false,
-    "rarityOdds": false
+    "rarityOdds": false,
+    "threatBalanceRow": false
   },
   "texts": {
     "echoShards": {
@@ -1020,6 +1021,862 @@
         },
         "untranslated": []
       }
+    }
+  ],
+  "threat": [
+    {
+      "level": 1,
+      "recommendedLevel": 0,
+      "attackPower": 1,
+      "damageResistance": 1,
+      "effectTiers": [
+        1,
+        0,
+        0
+      ],
+      "rarity": {
+        "common": 1,
+        "rare": 0.6,
+        "special": 0,
+        "unique": 0
+      },
+      "mobVariantChance": {
+        "min": 0.05,
+        "max": 0.1
+      },
+      "soulStatedCost": {
+        "min": 1000,
+        "max": 4000
+      },
+      "minibossCost": {
+        "min": 4000,
+        "max": 8000
+      }
+    },
+    {
+      "level": 2,
+      "recommendedLevel": 5,
+      "attackPower": 0.95,
+      "damageResistance": 0.91,
+      "effectTiers": [
+        1,
+        0,
+        0
+      ],
+      "rarity": {
+        "common": 0.9,
+        "rare": 0.7,
+        "special": 0.1,
+        "unique": 0
+      },
+      "mobVariantChance": {
+        "min": 0.08,
+        "max": 0.15
+      },
+      "soulStatedCost": {
+        "min": 1000,
+        "max": 4000
+      },
+      "minibossCost": {
+        "min": 4000,
+        "max": 8000
+      }
+    },
+    {
+      "level": 3,
+      "recommendedLevel": 10,
+      "attackPower": 0.91,
+      "damageResistance": 0.83,
+      "effectTiers": [
+        1,
+        0.1,
+        0
+      ],
+      "rarity": {
+        "common": 0.8,
+        "rare": 0.8,
+        "special": 0.2,
+        "unique": 0
+      },
+      "mobVariantChance": {
+        "min": 0.08,
+        "max": 0.2
+      },
+      "soulStatedCost": {
+        "min": 1000,
+        "max": 4000
+      },
+      "minibossCost": {
+        "min": 3750,
+        "max": 7500
+      }
+    },
+    {
+      "level": 4,
+      "recommendedLevel": 15,
+      "attackPower": 0.83,
+      "damageResistance": 0.77,
+      "effectTiers": [
+        1,
+        0.2,
+        0
+      ],
+      "rarity": {
+        "common": 0.7,
+        "rare": 0.9,
+        "special": 0.3,
+        "unique": 0.1
+      },
+      "mobVariantChance": {
+        "min": 0.1,
+        "max": 0.2
+      },
+      "soulStatedCost": {
+        "min": 1000,
+        "max": 3750
+      },
+      "minibossCost": {
+        "min": 3500,
+        "max": 7000
+      }
+    },
+    {
+      "level": 5,
+      "recommendedLevel": 20,
+      "attackPower": 0.77,
+      "damageResistance": 0.71,
+      "effectTiers": [
+        1,
+        0.3,
+        0
+      ],
+      "rarity": {
+        "common": 0.6,
+        "rare": 1,
+        "special": 0.4,
+        "unique": 0.2
+      },
+      "mobVariantChance": {
+        "min": 0.1,
+        "max": 0.3
+      },
+      "soulStatedCost": {
+        "min": 1000,
+        "max": 3500
+      },
+      "minibossCost": {
+        "min": 3250,
+        "max": 6500
+      }
+    },
+    {
+      "level": 6,
+      "recommendedLevel": 25,
+      "attackPower": 0.71,
+      "damageResistance": 0.67,
+      "effectTiers": [
+        1,
+        0.4,
+        0.1
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 1,
+        "special": 0.5,
+        "unique": 0.3
+      },
+      "mobVariantChance": {
+        "min": 0.15,
+        "max": 0.3
+      },
+      "soulStatedCost": {
+        "min": 1000,
+        "max": 3250
+      },
+      "minibossCost": {
+        "min": 3000,
+        "max": 6000
+      }
+    },
+    {
+      "level": 7,
+      "recommendedLevel": 30,
+      "attackPower": 0.67,
+      "damageResistance": 0.63,
+      "effectTiers": [
+        1,
+        0.5,
+        0.2
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 1,
+        "special": 0.6,
+        "unique": 0.4
+      },
+      "mobVariantChance": {
+        "min": 0.15,
+        "max": 0.4
+      },
+      "soulStatedCost": {
+        "min": 900,
+        "max": 3000
+      },
+      "minibossCost": {
+        "min": 2500,
+        "max": 6000
+      }
+    },
+    {
+      "level": 8,
+      "recommendedLevel": 35,
+      "attackPower": 0.63,
+      "damageResistance": 0.59,
+      "effectTiers": [
+        1,
+        0.6,
+        0.3
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 1,
+        "special": 0.7,
+        "unique": 0.5
+      },
+      "mobVariantChance": {
+        "min": 0.2,
+        "max": 0.4
+      },
+      "soulStatedCost": {
+        "min": 900,
+        "max": 2750
+      },
+      "minibossCost": {
+        "min": 2250,
+        "max": 5800
+      }
+    },
+    {
+      "level": 9,
+      "recommendedLevel": 40,
+      "attackPower": 0.59,
+      "damageResistance": 0.56,
+      "effectTiers": [
+        1,
+        0.7,
+        0.4
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 1,
+        "special": 0.8,
+        "unique": 0.6
+      },
+      "mobVariantChance": {
+        "min": 0.2,
+        "max": 0.5
+      },
+      "soulStatedCost": {
+        "min": 850,
+        "max": 2500
+      },
+      "minibossCost": {
+        "min": 1800,
+        "max": 5500
+      }
+    },
+    {
+      "level": 10,
+      "recommendedLevel": 45,
+      "attackPower": 0.56,
+      "damageResistance": 0.53,
+      "effectTiers": [
+        1,
+        0.8,
+        0.5
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 1,
+        "special": 0.9,
+        "unique": 0.7
+      },
+      "mobVariantChance": {
+        "min": 0.25,
+        "max": 0.5
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2250
+      },
+      "minibossCost": {
+        "min": 1700,
+        "max": 5250
+      }
+    },
+    {
+      "level": 11,
+      "recommendedLevel": 50,
+      "attackPower": 0.53,
+      "damageResistance": 0.5,
+      "effectTiers": [
+        0.9,
+        0.9,
+        0.6
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.9,
+        "special": 1,
+        "unique": 0.8
+      },
+      "mobVariantChance": {
+        "min": 0.25,
+        "max": 0.6
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1600,
+        "max": 5000
+      }
+    },
+    {
+      "level": 12,
+      "recommendedLevel": 55,
+      "attackPower": 0.5,
+      "damageResistance": 0.49,
+      "effectTiers": [
+        0.8,
+        1,
+        0.7
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.8,
+        "special": 1,
+        "unique": 0.9
+      },
+      "mobVariantChance": {
+        "min": 0.3,
+        "max": 0.6
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    },
+    {
+      "level": 13,
+      "recommendedLevel": 60,
+      "attackPower": 0.48,
+      "damageResistance": 0.48,
+      "effectTiers": [
+        0.7,
+        1,
+        0.8
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.7,
+        "special": 1,
+        "unique": 1
+      },
+      "mobVariantChance": {
+        "min": 0.3,
+        "max": 0.6
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    },
+    {
+      "level": 14,
+      "recommendedLevel": 65,
+      "attackPower": 0.45,
+      "damageResistance": 0.47,
+      "effectTiers": [
+        0.6,
+        1,
+        0.9
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.6,
+        "special": 1,
+        "unique": 1
+      },
+      "mobVariantChance": {
+        "min": 0.3,
+        "max": 0.6
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    },
+    {
+      "level": 15,
+      "recommendedLevel": 70,
+      "attackPower": 0.43,
+      "damageResistance": 0.46,
+      "effectTiers": [
+        0.5,
+        1,
+        1
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.5,
+        "special": 1,
+        "unique": 1
+      },
+      "mobVariantChance": {
+        "min": 0.3,
+        "max": 0.65
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    },
+    {
+      "level": 16,
+      "recommendedLevel": 75,
+      "attackPower": 0.42,
+      "damageResistance": 0.45,
+      "effectTiers": [
+        0.4,
+        1,
+        1
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.5,
+        "special": 1,
+        "unique": 1
+      },
+      "mobVariantChance": {
+        "min": 0.35,
+        "max": 0.65
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    },
+    {
+      "level": 17,
+      "recommendedLevel": 80,
+      "attackPower": 0.4,
+      "damageResistance": 0.44,
+      "effectTiers": [
+        0.3,
+        1,
+        1
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.5,
+        "special": 1,
+        "unique": 1
+      },
+      "mobVariantChance": {
+        "min": 0.35,
+        "max": 0.65
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    },
+    {
+      "level": 18,
+      "recommendedLevel": 85,
+      "attackPower": 0.38,
+      "damageResistance": 0.43,
+      "effectTiers": [
+        0.2,
+        1,
+        1
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.5,
+        "special": 1,
+        "unique": 1
+      },
+      "mobVariantChance": {
+        "min": 0.35,
+        "max": 0.65
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    },
+    {
+      "level": 19,
+      "recommendedLevel": 90,
+      "attackPower": 0.37,
+      "damageResistance": 0.42,
+      "effectTiers": [
+        0.1,
+        1,
+        1
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.5,
+        "special": 1,
+        "unique": 1
+      },
+      "mobVariantChance": {
+        "min": 0.4,
+        "max": 0.65
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    },
+    {
+      "level": 20,
+      "recommendedLevel": 95,
+      "attackPower": 0.36,
+      "damageResistance": 0.41,
+      "effectTiers": [
+        0,
+        1,
+        1
+      ],
+      "rarity": {
+        "common": 0.5,
+        "rare": 0.5,
+        "special": 1,
+        "unique": 1
+      },
+      "mobVariantChance": {
+        "min": 0.4,
+        "max": 0.65
+      },
+      "soulStatedCost": {
+        "min": 700,
+        "max": 2000
+      },
+      "minibossCost": {
+        "min": 1500,
+        "max": 5000
+      }
+    }
+  ],
+  "difficulty": [
+    {
+      "id": "low",
+      "scalar": -1,
+      "name": {
+        "html": {
+          "zh": "簡單",
+          "zh-hans": "简单",
+          "en": "Easy",
+          "ja": "イージー",
+          "ko": "쉬움",
+          "de": "Einfach",
+          "fr": "Facile",
+          "es": "Fácil",
+          "it": "Facile",
+          "pt": "Fácil",
+          "ru": "Легко",
+          "pl": "Łatwy",
+          "nl": "Makkelijk",
+          "sv": "Lätt",
+          "tr": "Kolay",
+          "uk": "Легка"
+        },
+        "untranslated": []
+      },
+      "description": {
+        "html": {
+          "zh": "適合偏好輕鬆遊戲的玩家。",
+          "zh-hans": "适合喜欢休闲玩法的玩家。",
+          "en": "For players who prefer a casual play.",
+          "ja": "カジュアルに楽しみたいプレイヤーにお勧めです。",
+          "ko": "가벼운 플레이를 선호하는 플레이어에게 적합합니다.",
+          "de": "Für Spieler, die gern zur Entspannung und Unterhaltung spielen.",
+          "fr": "Pour les joueurs qui préfèrent une partie détendue.",
+          "es": "Para los jugadores que prefieren un estilo de juego más relajado.",
+          "it": "Per i giocatori che preferiscono uno stile di gioco rilassato.",
+          "pt": "Para jogadores que preferem um jogo casual.",
+          "ru": "Для игроков, которые предпочитают спокойную игру.",
+          "pl": "Dla graczy preferujących spokojną grę.",
+          "nl": "Voor spelers die liever op een ontspannen manier spelen.",
+          "sv": "För spelare som spelar för skojs skull.",
+          "tr": "Daha rahat oynamayı tercih eden oyuncular için bire bir.",
+          "uk": "Для гравців, яким подобаються казуальні ігри."
+        },
+        "untranslated": []
+      },
+      "received": {
+        "html": {
+          "zh": "低",
+          "zh-hans": "低",
+          "en": "Low",
+          "ja": "低",
+          "ko": "낮음",
+          "de": "Niedrig",
+          "fr": "Faibles",
+          "es": "Bajo",
+          "it": "Ridotto",
+          "pt": "Baixa",
+          "ru": "Низкий",
+          "pl": "Niskie",
+          "nl": "Laag",
+          "sv": "Låg",
+          "tr": "Düşük",
+          "uk": "Низька"
+        },
+        "untranslated": []
+      },
+      "dealt": {
+        "html": {
+          "zh": "高",
+          "zh-hans": "高",
+          "en": "High",
+          "ja": "高",
+          "ko": "높음",
+          "de": "Hoch",
+          "fr": "Élevés",
+          "es": "Alto",
+          "it": "Elevato",
+          "pt": "Alta",
+          "ru": "Высокий",
+          "pl": "Wysokie",
+          "nl": "Hoog",
+          "sv": "Hög",
+          "tr": "Yüksek",
+          "uk": "Висока"
+        },
+        "untranslated": []
+      },
+      "incoming": 2,
+      "outgoing": 1.5,
+      "noRareDrops": true
+    },
+    {
+      "id": "normal",
+      "scalar": 0,
+      "name": {
+        "html": {
+          "zh": "普通",
+          "zh-hans": "普通",
+          "en": "Normal",
+          "ja": "ノーマル",
+          "ko": "일반",
+          "de": "Normal",
+          "fr": "Normal",
+          "es": "Normal",
+          "it": "Normale",
+          "pt": "Normal",
+          "ru": "Обычно",
+          "pl": "Normalny",
+          "nl": "Normaal",
+          "sv": "Normal",
+          "tr": "Normal",
+          "uk": "Нормальна"
+        },
+        "untranslated": []
+      },
+      "description": {
+        "html": {
+          "zh": "挑戰度較適中，推薦大部分玩家選擇。不確定的話，就由此開始。",
+          "zh-hans": "挑战适中，推荐大多数玩家选择。不确定的话，就从这个难度开始。",
+          "en": "A balanced challenge, recommended for most players. If in doubt, start here.",
+          "ja": "バランスの取れた難易度で、ほぼすべてのプレイヤーにお勧めできます。迷ったらこの難易度で始めましょう。",
+          "ko": "균형 잡힌 도전으로, 대부분의 플레이어에게 추천합니다. 고민된다면 이 난이도로 시작하세요.",
+          "de": "Eine ausgeglichene Herausforderung, die für die meisten Spieler empfohlen wird. Wenn du dir nicht sicher bist, fang hier an.",
+          "fr": "Un défi équilibré, recommandé pour la plupart des joueurs. En cas de doute, commencez ici.",
+          "es": "Un desafío equilibrado, recomendado para la mayoría de los jugadores. Si tienes dudas, empieza por este.",
+          "it": "Una sfida bilanciata, adatta alla maggior parte dei giocatori. Sceglila se non sai da dove cominciare.",
+          "pt": "Um desafio equilibrado, recomendado para a maioria dos jogadores. Se tiver dúvida, comece aqui.",
+          "ru": "Сбалансированная сложность, рекомендуется большинству игроков. Если сомневаетесь, начните с этого варианта.",
+          "pl": "Zrównoważone wyzwanie, polecane większości graczy. Nie masz pewności? Zacznij od niego.",
+          "nl": "Een gebalanceerde uitdaging, geschikt voor de meeste spelers. Begin hier als je twijfelt.",
+          "sv": "En balanserad utmaning som rekommenderas för de flesta spelarna. Börja här om du är osäker.",
+          "tr": "Çoğu oyuncu için tavsiye edilen, dengeli bir zorluk seviyesi sunar. Kararsız kaldıysan bunu seç.",
+          "uk": "Збалансований виклик, рекомендований більшості гравців. Якщо сумніваєтесь, починайте із цього."
+        },
+        "untranslated": []
+      },
+      "received": {
+        "html": {
+          "zh": "預設",
+          "zh-hans": "默认",
+          "en": "Default",
+          "ja": "デフォルト",
+          "ko": "기본",
+          "de": "Standard",
+          "fr": "Par défaut",
+          "es": "Por defecto",
+          "it": "Predefinito",
+          "pt": "Padrão",
+          "ru": "По умолчанию",
+          "pl": "Domyślne",
+          "nl": "Standaard",
+          "sv": "Standard",
+          "tr": "Varsayılan",
+          "uk": "За замовчуванням"
+        },
+        "untranslated": []
+      },
+      "dealt": {
+        "html": {
+          "zh": "預設",
+          "zh-hans": "默认",
+          "en": "Default",
+          "ja": "デフォルト",
+          "ko": "기본",
+          "de": "Standard",
+          "fr": "Par défaut",
+          "es": "Por defecto",
+          "it": "Predefinito",
+          "pt": "Padrão",
+          "ru": "По умолчанию",
+          "pl": "Domyślne",
+          "nl": "Standaard",
+          "sv": "Standard",
+          "tr": "Varsayılan",
+          "uk": "За замовчуванням"
+        },
+        "untranslated": []
+      },
+      "incoming": 1,
+      "outgoing": 1,
+      "assumed": true
+    },
+    {
+      "id": "high",
+      "scalar": 1,
+      "name": {
+        "html": {
+          "zh": "困難",
+          "zh-hans": "困难",
+          "en": "Hard",
+          "ja": "ハード",
+          "ko": "어려움",
+          "de": "Schwer",
+          "fr": "Difficile",
+          "es": "Difícil",
+          "it": "Difficile",
+          "pt": "Difícil",
+          "ru": "Сложно",
+          "pl": "Trudny",
+          "nl": "Moeilijk",
+          "sv": "Svår",
+          "tr": "Zor",
+          "uk": "Складна"
+        },
+        "untranslated": []
+      },
+      "description": {
+        "html": {
+          "zh": "適合喜歡適度挑戰的玩家。",
+          "zh-hans": "适合喜欢适度挑战的玩家。",
+          "en": "For players who like some challenge.",
+          "ja": "挑戦を楽しみたいプレイヤーにお勧めです。",
+          "ko": "적당한 도전을 좋아하는 플레이어에게 적합합니다.",
+          "de": "Für Spieler, die Herausforderungen mögen.",
+          "fr": "Pour les joueurs qui aiment les défis.",
+          "es": "Para los jugadores a los que les gustan los retos.",
+          "it": "Per i giocatori che amano le sfide.",
+          "pt": "Para jogadores que gostam de desafio.",
+          "ru": "Для игроков, которые любят испытания.",
+          "pl": "Dla graczy lubiących wyzwania.",
+          "nl": "Voor spelers die van een uitdaging houden.",
+          "sv": "För spelare som gillar utmaningar.",
+          "tr": "Biraz zorluktan hoşlanan oyuncular için birebir.",
+          "uk": "Для гравців, які люблять виклики."
+        },
+        "untranslated": []
+      },
+      "received": {
+        "html": {
+          "zh": "高",
+          "zh-hans": "高",
+          "en": "High",
+          "ja": "高",
+          "ko": "높음",
+          "de": "Hoch",
+          "fr": "Élevés",
+          "es": "Alto",
+          "it": "Elevato",
+          "pt": "Alta",
+          "ru": "Высокий",
+          "pl": "Wysokie",
+          "nl": "Hoog",
+          "sv": "Hög",
+          "tr": "Yüksek",
+          "uk": "Висока"
+        },
+        "untranslated": []
+      },
+      "dealt": {
+        "html": {
+          "zh": "低",
+          "zh-hans": "低",
+          "en": "Low",
+          "ja": "低",
+          "ko": "낮음",
+          "de": "Niedrig",
+          "fr": "Faibles",
+          "es": "Bajo",
+          "it": "Ridotto",
+          "pt": "Baixa",
+          "ru": "Низкий",
+          "pl": "Niskie",
+          "nl": "Laag",
+          "sv": "Låg",
+          "tr": "Düşük",
+          "uk": "Низька"
+        },
+        "untranslated": []
+      },
+      "incoming": 0.8,
+      "outgoing": 0.6
     }
   ]
 }

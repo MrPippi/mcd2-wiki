@@ -44,5 +44,8 @@
   "questTypeCore": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestType_CoreQuest" },
   "questTypeSide": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestType_SideQuest" },
   "questObjectives": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestDetail_Objectives" },
-  "questRewards": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestDetail_Rewards" }
+  "questRewards": { "namespace": "Text/Release/QuestUILabels.csv", "key": "QuestDetail_Rewards" },
+  "threat": { "namespace": "Text/Release/InventoryLabels.csv", "key": "action_threat_selection" },
+  "damageDealt": { "namespace": "Text/Release/DT_DifficultyDefinition.csv", "key": "DifficultyLevelDamageDealt" },
+  "damageReceived": { "namespace": "Text/Release/DT_DifficultyDefinition.csv", "key": "DifficultyLevelDamageReceived" }
 }

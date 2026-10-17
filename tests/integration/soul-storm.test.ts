@@ -44,7 +44,7 @@ beforeEach(async () => {
   statusPath = path.join(sourceRoot, "soul-storm-status.json");
   await writeFile(overridesPath, "{}", "utf8");
   await writeFile(statusPath, JSON.stringify({ verified: false, anchorOffsetMinutes: 0, rotationOffset: 0 }), "utf8");
-  await writeFile(path.join(sourceRoot, "guides-status.json"), JSON.stringify({ enchantCostPerLevel: false, rarityOdds: false }), "utf8");
+  await writeFile(path.join(sourceRoot, "guides-status.json"), JSON.stringify({ enchantCostPerLevel: false, rarityOdds: false, threatBalanceRow: false }), "utf8");
   const title = { [ns("OnboardingLabels")]: { tutoriallog_soulstorms_title: "Soul Storms" } };
   await Promise.all(ALL_LANGS.map((lang) => putJson(`Localization/All/${LANG_META[lang].culture}/All.json`, lang === "en" ? title : {})));
   await putTable("OnlineConstants", { ApiKey: SECRET });

@@ -65,3 +65,21 @@
 .guide-chip { border: 1px solid var(--rule-strong); padding: 0 var(--space-2); font-size: 0.8rem; }
 .guide-talisman-quests { margin: 0; font-size: 0.8rem; color: var(--text-2); }
 .guide-quest { display: block; margin-top: var(--space-1); color: var(--text); }
+
+/* Difficulty cards */
+.guide-difficulty-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--space-5); margin: var(--space-4) 0; }
+.guide-difficulty { min-width: 0; padding: var(--space-4); border: 1px solid var(--rule-strong); background: var(--paper); }
+.guide-difficulty .guide-subtitle { margin-top: 0; }
+.guide-difficulty-facts { margin: 0; }
+.guide-difficulty-facts div + div { margin-top: var(--space-2); }
+.guide-difficulty-facts dt { color: var(--muted); font-size: 0.9rem; }
+.guide-difficulty-facts dd { margin: var(--space-1) 0 0; color: var(--text-2); }
+
+/* Threat table: its own scroll box; the whole header block sticks (so its two rows need no fixed offset) and so does the threat column. */
+.guide-scroll-tall { max-height: min(75vh, 44rem); }
+.guide-table-sticky { border-collapse: separate; border-spacing: 0; }
+.guide-table-sticky thead { position: sticky; top: 0; z-index: 3; background: var(--bg); }
+.guide-table-sticky thead th { white-space: nowrap; background: var(--bg); }
+.guide-table-sticky thead th[colspan] { text-align: center; border-bottom: 1px solid var(--rule); }
+.guide-table-sticky tbody th { position: sticky; left: 0; z-index: 1; background: var(--bg); }
+.guide-table-sticky thead tr:first-child th:first-child { position: sticky; left: 0; z-index: 2; }

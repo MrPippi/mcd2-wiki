@@ -1,4 +1,5 @@
 {
   "enchantCostPerLevel": false,
-  "rarityOdds": false
+  "rarityOdds": false,
+  "threatBalanceRow": false
 }

@@ -1,5 +1,6 @@
 /** Hand-made guide DataTable rows in the game's export shape, with the real 1.1.2.0 values. */
 import { GuideTablesSchema, type GuideTables } from "../../scripts/extract/guides-tables";
+import { ref } from "./curve-tables";
 
 const tag = (TagName: string) => ({ TagName });
 const keyValue = (name: string, value: number, type: "Int" | "Float" = "Int") =>
@@ -85,6 +86,7 @@ export const rarityChanceRows = () => [
   { Name: "Default", TypeTag: tag("SW.RarityChanceDefinition.Default"), TagList: { Tags: [weight("Common", 50), weight("Rare", 25), weight("Special", 20), weight("Unique", 5)] } },
   { Name: "Player", TypeTag: tag("SW.Player"), TagList: {} },
   { Name: "Boss", TypeTag: tag("SW.Trait.Boss"), TagList: { Tags: [weight("Common", 0, "Multiply"), weight("Rare", 30), weight("Special", 20), weight("Unique", 10)] } },
+  { Name: "LowDifficulty", TypeTag: tag("SW.Difficulty.Low"), TagList: { Tags: [weight("Special", 0, "Multiply"), weight("Unique", 0, "Multiply")] } },
 ];
 
 const progression = (Name: string, TagName: string, PlayerLevel: number) => ({ Name, TypeTag: tag(TagName), ProgressionData: { PlayerLevel, AdditionalGearItems: 0 } });
@@ -157,6 +159,66 @@ export const questLibraryRows = () => [
 
 export const enchantmentRows = () => ["SW.Enchantment.Burning", "SW.Enchantment.Burning.I", "SW.Enchantment.Burning.II", "SW.Enchantment.Burning.III"].map((TagName) => ({ Name: TagName, TypeTag: tag(TagName) }));
 
+const curveRef = (table: string, row: string) => ref(table, row);
+const RARITY_CURVES = "CT_RarityChanceSettings";
+const EFFECT_CURVES = "CT_EffectThreatBasedChanceAdjustments";
+/** SecondPass is the row with curves; Active has none, as in the game's data. */
+export const gameBalanceRows = () => [
+  {
+    Name: "Active",
+    GameBalanceDefinition: {
+      GlobalDifficultyScalingSettings: { OutgoingDamageModifierCurve: { CurveTable: "None", RowName: "None" }, IncomingDamageModifierCurve: { CurveTable: "None", RowName: "None" } },
+      CharacterLevelsPerThreat: 0,
+    },
+    ItemCreatorConstants: { NumberOfEffectsMax: 4 },
+  },
+  {
+    Name: "SecondPass",
+    GameBalanceDefinition: {
+      GlobalDifficultyScalingSettings: {
+        OutgoingDamageModifierCurve: curveRef("CT_GlobalDifficultySettings", "PlayerAttackPower"),
+        IncomingDamageModifierCurve: curveRef("CT_GlobalDifficultySettings", "PlayerDamageResistance"),
+      },
+      CharacterLevelsPerThreat: 5,
+    },
+    ItemCreatorConstants: {
+      RarityChanceMap: Object.fromEntries(["Common", "Rare", "Special", "Unique"].map((name) => [mapKey(`SW.Rarity.${name}`), curveRef(RARITY_CURVES, name)])),
+      EffectChanceScalingCurves: Object.fromEntries([1, 2, 3].map((tier) => [mapKey(`SW.Effect.Tier.${tier}`), curveRef(EFFECT_CURVES, `Tier${tier}Effects`)])),
+    },
+  },
+];
+
+const DIFFICULTY_CSV = "DT_DifficultyDefinition.csv";
+const difficultyRow = (Name: string, scalar: number, incoming: string, outgoing: string) => {
+  const key = (entry: string) => `SW_Difficulty_${Name}_SW_TextEntry_${entry}`;
+  return {
+    Name,
+    TypeTag: tag(`SW.Difficulty.${Name}`),
+    DifficultyDefinition: {
+      DifficultyScalar: scalar,
+      DifficultyCurveIncomingDamage: curveRef("CT_DifficultySettings", incoming),
+      DifficultyCurveOutgoingDamage: curveRef("CT_DifficultySettings", outgoing),
+      Icon: `/OreUI/UI/Icons/Threat/T_UI_Threat${Name}.T_UI_Threat${Name}`,
+    },
+    TypeTextData: texts({
+      "SW.TextEntry.Name": loc(DIFFICULTY_CSV, key("Name")),
+      "SW.TextEntry.Description": loc(DIFFICULTY_CSV, key("Description")),
+      "SW.TextEntry.Description.DifficultyDamageReceived": loc(DIFFICULTY_CSV, key("Description_DifficultyDamageReceived")),
+      "SW.TextEntry.Description.DifficultyDamageDealt": loc(DIFFICULTY_CSV, key("Description_DifficultyDamageDealt")),
+    }),
+  };
+};
+/** Normal points at a row that CT_DifficultySettings does not have, as in the game's data. */
+export const difficultyRows = () => [
+  difficultyRow("Normal", 0, "NormalDifficultyMultiplier", "NormalDifficultyMultiplier"),
+  difficultyRow("Low", -1, "DifficultyMultiplierLowResistance", "DifficultyMultiplierLowAttackPower"),
+  difficultyRow("High", 1, "DifficultyMultiplierHighResistance", "DifficultyMultiplierHighAttackPower"),
+];
+
+export const worldActorRows = () => [
+  { Name: "WorldActor", AdditionalAssets: { Name: "None", Assets: [{ Name: "SW.Asset.MobSpawnSettings", Object: "/Game/Spicewood/GameplayLogic/CT_MobSpawnSettings.CT_MobSpawnSettings" }] } },
+];
+
 export const REAL_GUIDE_ROWS = () => ({
   player: [playerRow()],
   npcs: [merchantRow()],
@@ -170,6 +232,9 @@ export const REAL_GUIDE_ROWS = () => ({
   questLoot: questLootRows(),
   quests: questLibraryRows(),
   enchantments: enchantmentRows(),
+  gameBalance: gameBalanceRows(),
+  difficulty: difficultyRows(),
+  worldActor: worldActorRows(),
 });
 
 export const guideTables = (overrides: Partial<Record<keyof GuideTables, unknown[]>> = {}): GuideTables =>

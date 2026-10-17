@@ -4,6 +4,7 @@ import HubPage from "../../../src/pages/[lang]/guides/index.astro";
 import EnchantingPage from "../../../src/pages/[lang]/guides/enchanting.astro";
 import ProgressionPage from "../../../src/pages/[lang]/guides/progression.astro";
 import RarityPage from "../../../src/pages/[lang]/guides/rarity.astro";
+import ThreatPage from "../../../src/pages/[lang]/guides/threat.astro";
 import SecretPage from "../../../src/pages/[lang]/guides/secret-talismans.astro";
 import VendorsPage from "../../../src/pages/[lang]/guides/vendors.astro";
 import { guidesData } from "../../../src/lib/guides";
@@ -16,13 +17,13 @@ type Page = typeof VendorsPage;
 const render = (page: Page, lang: string, data: GuidesData = guidesData) => container.renderToString(page, { props: { lang, data }, params: { lang } });
 const count = (html: string, needle: string): number => html.split(needle).length - 1;
 const UNCONFIRMED = 'data-testid="guide-unconfirmed"';
-const ALL_PAGES: readonly Page[] = [VendorsPage, EnchantingPage, RarityPage, SecretPage, ProgressionPage];
+const ALL_PAGES: readonly Page[] = [VendorsPage, EnchantingPage, RarityPage, ThreatPage, SecretPage, ProgressionPage];
 
 describe("guides hub", () => {
-  it("lists the five guides with a summary each, linked in the page language", async () => {
+  it("lists the six guides with a summary each, linked in the page language", async () => {
     const html = await container.renderToString(HubPage, { props: { lang: "en" }, params: { lang: "en" } });
-    expect(count(html, 'data-testid="guide-card"')).toBe(5);
-    for (const slug of ["vendors", "enchanting", "rarity", "secret-talismans", "progression"]) expect(html).toContain(`href="/en/guides/${slug}/"`);
+    expect(count(html, 'data-testid="guide-card"')).toBe(6);
+    for (const slug of ["vendors", "enchanting", "rarity", "threat", "secret-talismans", "progression"]) expect(html).toContain(`href="/en/guides/${slug}/"`);
     expect(html).toContain("What it costs to level up the Town Merchant, Blacksmith and Enchantsmith");
   });
 });
@@ -60,9 +61,9 @@ describe("vendors guide", () => {
 });
 
 describe("unconfirmed tags", () => {
-  it("appear once on enchanting (cost table) and once on rarity (drop weights), nowhere else", async () => {
+  it("appear once on enchanting (cost table) and rarity (drop weights), twice on threat (balance row, assumed Normal), nowhere else", async () => {
     const counts = await Promise.all(ALL_PAGES.map(async (page) => count(await render(page, "en"), UNCONFIRMED)));
-    expect(counts).toEqual([0, 1, 1, 0, 0]);
+    expect(counts).toEqual([0, 1, 1, 2, 0, 0]);
     const enchanting = await render(EnchantingPage, "en");
     const costs = enchanting.slice(enchanting.indexOf('data-testid="guide-enchant-costs"'), enchanting.indexOf('data-testid="guide-enchant-points"'));
     expect(costs).toContain(UNCONFIRMED);
@@ -71,9 +72,10 @@ describe("unconfirmed tags", () => {
   });
 
   it("go away once the status file confirms the fact", async () => {
-    const verified = { ...guidesData, verified: { enchantCostPerLevel: true, rarityOdds: true } };
+    const verified = { ...guidesData, verified: { enchantCostPerLevel: true, rarityOdds: true, threatBalanceRow: true } };
     expect(await render(EnchantingPage, "en", verified)).not.toContain(UNCONFIRMED);
     expect(await render(RarityPage, "en", verified)).not.toContain(UNCONFIRMED);
+    expect(await render(ThreatPage, "en", verified)).not.toContain(UNCONFIRMED);
   });
 });
 
@@ -101,6 +103,83 @@ describe("rarity guide", () => {
     expect(html).toContain("×0");
     expect(html).toContain("16.7%");
     expect(html).toContain("Extra effects on Soul Storm rewards");
+  });
+});
+
+describe("threat guide", () => {
+  const section = (html: string, testId: string): string => html.slice(html.indexOf(`data-testid="${testId}"`));
+
+  it("shows the three difficulties with the game's texts and their multipliers", async () => {
+    const html = await render(ThreatPage, "en");
+    expect(count(html, 'data-testid="guide-difficulty-card"')).toBe(3);
+    for (const name of ["Easy", "Normal", "Hard"]) expect(html).toContain(name);
+    const low = html.slice(html.indexOf('data-difficulty="low"'), html.indexOf('data-difficulty="normal"'));
+    expect(low).toContain("Your attack power ×1.5");
+    expect(low).toContain("Your damage resistance ×2");
+    expect(low).toContain("Damage dealt");
+    expect(html).toContain("For players who prefer a casual play.");
+  });
+
+  it("says only the low difficulty drops no Special or Unique items", async () => {
+    const html = await render(ThreatPage, "en");
+    expect(count(html, 'data-testid="guide-difficulty-drops"')).toBe(1);
+    expect(html).toContain("No Special or Unique item drops.");
+    expect(html.slice(html.indexOf('data-difficulty="low"'), html.indexOf('data-difficulty="normal"'))).toContain("guide-difficulty-drops");
+  });
+
+  it("lists threat 1 to 20 with the tier and rarity factors", async () => {
+    const html = await render(ThreatPage, "en");
+    expect(count(html, 'data-testid="guide-threat-row"')).toBe(20);
+    const rows = [...html.matchAll(/<tr data-testid="guide-threat-row">([\s\S]*?)<\/tr>/g)].map((match) => [...match[1].matchAll(/>([^<]+)</g)].map((cell) => cell[1]));
+    expect(rows[0]).toEqual(["1", "0", "×1", "×1", "1", "0", "0", "1", "0.6", "0", "0", "5%–10%", "1,000–4,000", "4,000–8,000"]);
+    expect(rows[19]).toEqual(["20", "95", "×0.36", "×0.41", "0", "1", "1", "0.5", "0.5", "1", "1", "40%–65%", "700–2,000", "1,500–5,000"]);
+  });
+
+  it("derives the tier notes from the data", async () => {
+    const notes = section(await render(ThreatPage, "en"), "guide-tier-notes");
+    expect(notes).toContain("Tier II effects appear from threat 3.");
+    expect(notes).toContain("Tier III effects appear from threat 6.");
+    expect(notes).toContain("From threat 20 on, tier I effects no longer appear.");
+  });
+
+  it("uses the game's word for threat and its own texts in Chinese", async () => {
+    const html = await render(ThreatPage, "zh");
+    expect(html).toContain("威脅");
+    expect(html).toContain("簡單");
+  });
+
+  it("keeps the header sticky inside a keyboard-scrollable box", async () => {
+    const html = await render(ThreatPage, "en");
+    expect(html).toContain('class="guide-scroll guide-scroll-tall" tabindex="0" role="region"');
+    expect(html).toContain("guide-table-sticky");
+    expect(html).toContain('colspan="3"');
+  });
+
+  it("gives the table a hidden caption and the empty cells a text", async () => {
+    const html = await render(ThreatPage, "en");
+    expect(html).toContain('<caption class="sr-only">By threat level</caption>');
+    const sparse = guidesData.threat.map((row, index) => (index === 0 ? row : { level: row.level }));
+    const gaps = await render(ThreatPage, "en", { ...guidesData, threat: sparse });
+    expect(count(gaps, '<span class="sr-only">No data</span>')).toBe(19 * 13);
+    expect(gaps).toContain('<span aria-hidden="true">—</span>');
+  });
+
+  it("leaves out a section and a column group whose data is missing", async () => {
+    const noDifficulty = await render(ThreatPage, "en", { ...guidesData, difficulty: [] });
+    expect(noDifficulty).not.toContain('data-testid="guide-difficulty"');
+    const bare = guidesData.threat.map(({ level }) => ({ level }));
+    const noThreat = await render(ThreatPage, "en", { ...guidesData, threat: [] });
+    expect(noThreat).not.toContain('data-testid="guide-threat-table"');
+    const levelsOnly = await render(ThreatPage, "en", { ...guidesData, threat: bare });
+    expect(count(levelsOnly, 'data-testid="guide-threat-row"')).toBe(20);
+    expect(levelsOnly).not.toContain("Effect tier weight factor");
+    expect(levelsOnly).not.toContain('data-testid="guide-tier-notes"');
+  });
+
+  it("marks the difficulty section when a game text fell back to English", async () => {
+    const [first, ...rest] = guidesData.difficulty;
+    const data = { ...guidesData, difficulty: [{ ...first, name: { ...first.name, untranslated: ["ja" as const] } }, ...rest] };
+    expect(count(section(await render(ThreatPage, "ja", data), "guide-difficulty"), 'data-testid="guide-section-untranslated"')).toBe(1);
   });
 });
 
@@ -194,7 +273,7 @@ describe("every guide", () => {
     for (const page of ALL_PAGES) {
       const html = await render(page, "ru");
       expect(html).toContain('href="/ru/guides/"');
-      const scrolls = html.match(/<div[^>]*class="guide-scroll"[^>]*>/g) ?? [];
+      const scrolls = html.match(/<div[^>]*class="guide-scroll[^"]*"[^>]*>/g) ?? [];
       if (page !== SecretPage) expect(scrolls.length).toBeGreaterThan(0);   // the talisman page has cards, no tables
       for (const tag of scrolls) {
         expect(tag).toContain('tabindex="0"');

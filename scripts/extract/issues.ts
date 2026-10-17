@@ -87,7 +87,11 @@ export type IssueType =
   | "guides-text-fallback"
   | "guides-stage-unnamed"
   | "guides-talisman-unlinked"
-  | "guides-quest-unnamed";
+  | "guides-quest-unnamed"
+  | "missing-curve-tables"
+  | "curve-unsupported"
+  | "curve-table-invalid"
+  | "curve-table-duplicate";
 
 export interface Issue {
   readonly type: IssueType;

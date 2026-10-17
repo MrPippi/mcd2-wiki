@@ -1,7 +1,7 @@
 /** The mechanics guides for the site: data from `npm run extract` and the helpers their pages format with. Server-side only. */
 import { escapeHtml } from "../../scripts/extract/render-markup";
 import {
-  GuidesDataSchema, type DropRow, type GearType, type GuideText, type GuidesData, type Rarity, type TextId, type Vendor,
+  GuidesDataSchema, type DropRow, type GearType, type GuideText, type GuidesData, type Rarity, type TextId, type ThreatRow, type Vendor,
 } from "../../scripts/extract/guides-schema";
 import rawGuides from "../data/guides.json";
 import { t, type Lang, type UiKey } from "./i18n";
@@ -23,6 +23,7 @@ export const GUIDES: readonly GuideLink[] = [
   { slug: "vendors", title: "guideVendors", summary: "guideVendorsSummary" },
   { slug: "enchanting", title: "guideEnchanting", summary: "guideEnchantingSummary" },
   { slug: "rarity", title: "guideRarity", summary: "guideRaritySummary" },
+  { slug: "threat", title: "guideThreat", summary: "guideThreatSummary" },
   { slug: "secret-talismans", title: "guideSecretTalismans", summary: "guideSecretTalismansSummary" },
   { slug: "progression", title: "guideProgression", summary: "guideProgressionSummary" },
 ];
@@ -46,7 +47,7 @@ export const textOf = (data: GuidesData, id: TextId, lang: Lang): ShownText | un
 export const anyUntranslated = (texts: readonly (ShownText | undefined)[]): boolean => texts.some((text) => text?.untranslated === true);
 
 /** A number written the page language's way (99,999 / 99.999 / 99 999). */
-export const formatNumber = (value: number, lang: Lang): string => new Intl.NumberFormat(htmlLang(lang), { maximumFractionDigits: 2 }).format(value);
+export const formatNumber = (value: number, lang: Lang): string => new Intl.NumberFormat(htmlLang(lang), { maximumFractionDigits: 4 }).format(value);
 
 /** A signed number: "+1", "−2", "0". */
 export const formatSigned = (value: number, lang: Lang): string =>
@@ -54,6 +55,13 @@ export const formatSigned = (value: number, lang: Lang): string =>
 
 export const formatShare = (share: number, lang: Lang): string =>
   new Intl.NumberFormat(htmlLang(lang), { style: "percent", maximumFractionDigits: 1 }).format(share);
+
+/** A factor the game multiplies by: "×0.91". */
+export const formatMultiplier = (value: number, lang: Lang): string => `×${formatNumber(value, lang)}`;
+
+/** A from-to pair with an en dash: "5%–10%". */
+export const formatRange = (range: { readonly min: number; readonly max: number }, format: (value: number) => string): string =>
+  `${format(range.min)}–${format(range.max)}`;
 
 /** A UI sentence as HTML: the template is escaped, each `{name}` takes the given HTML (already safe) or escaped plain text. */
 export function fill(template: string, values: Readonly<Record<string, { html: string } | string>>): string {
@@ -124,3 +132,33 @@ export function dropShares(row: DropRow, lang: Lang): ShareRow[] {
     share: readable && total > 0 ? effective[index] / total : null,
   }));
 }
+
+export interface TierNote {
+  readonly tier: 1 | 2 | 3;
+  /** "starts": no such effects below this threat level; "ends": none from this level on. */
+  readonly kind: "starts" | "ends";
+  readonly level: number;
+}
+
+const TIERS = [1, 2, 3] as const;
+
+/**
+ * Where each effect tier switches on or off, read from the chance factors: every level where a factor goes from 0 to above 0
+ * ("starts") or from above 0 back to 0 ("ends"). A factor that comes and
+ * goes gives one note for each switch.
+ */
+export function tierNotes(threat: readonly ThreatRow[]): TierNote[] {
+  const rows = threat.flatMap((row) => (row.effectTiers ? [{ level: row.level, factors: row.effectTiers }] : []));
+  return TIERS.flatMap((tier): TierNote[] =>
+    rows.flatMap((row, index): TierNote[] => {
+      const before = index === 0 ? undefined : rows[index - 1].factors[tier - 1] > 0;
+      const now = row.factors[tier - 1] > 0;
+      if (before === undefined) return [];
+      if (!before && now) return [{ tier, kind: "starts", level: row.level }];
+      return before && !now ? [{ tier, kind: "ends", level: row.level }] : [];
+    }),
+  );
+}
+
+/** A game label without its trailing colon ("Damage dealt: " → "Damage dealt"), for use as a heading. */
+export const bareLabel = (label: string): string => label.replace(/\s*[:：]\s*$/, "");

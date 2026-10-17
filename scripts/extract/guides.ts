@@ -1,11 +1,13 @@
 /** Builds src/data/guides.json: the mechanics guides' numbers and the game's own texts, plus the hand-kept "unconfirmed" flags. */
 import path from "node:path";
+import { loadCurveTables, type CurveTables } from "./curve-tables";
 import { buildEnchantCosts, maxEnchantmentLevel } from "./guides-enchanting";
 import { buildStages } from "./guides-progression";
 import { buildDropWeights, buildRarityTiers } from "./guides-rarity";
 import { GuidesDataSchema, GuidesStatusSchema, type GuidesData, type GuidesStatus } from "./guides-schema";
 import { loadGuideTables, type GuideTables } from "./guides-tables";
 import { buildSecretTalismans } from "./guides-talismans";
+import { buildDifficulty, buildThreat } from "./guides-threat";
 import { buildGuideTexts, type Locales } from "./guides-texts";
 import { buildCaps, buildMerchant, buildVendors } from "./guides-vendors";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
@@ -35,7 +37,7 @@ export async function readGuidesStatus(statusPath: string): Promise<GuidesStatus
   return parsed.data;
 }
 
-function buildData(tables: GuideTables, input: GuidesInput, status: GuidesStatus): { data: GuidesData; issues: Issue[] } {
+function buildData(tables: GuideTables, curves: CurveTables, input: GuidesInput, status: GuidesStatus): { data: GuidesData; issues: Issue[] } {
   const texts = buildGuideTexts(input.locales);
   const caps = buildCaps(tables);
   const vendors = buildVendors(tables);
@@ -46,6 +48,8 @@ function buildData(tables: GuideTables, input: GuidesInput, status: GuidesStatus
   const secret = buildSecretTalismans({ tables, locales: input.locales, entries: input.entries });
   const stages = buildStages(tables, input.locales);
   const maxLevel = maxEnchantmentLevel(tables);
+  const threat = buildThreat(tables, curves);
+  const difficulty = buildDifficulty(tables, curves, input.locales);
   const data = {
     verified: status,
     texts: texts.texts,
@@ -56,8 +60,10 @@ function buildData(tables: GuideTables, input: GuidesInput, status: GuidesStatus
     rarity: { tiers: tiers.tiers, drops: drops.drops },
     secretTalismans: secret.secretTalismans,
     stages: stages.stages,
+    threat: threat.threat,
+    difficulty: difficulty.difficulty,
   };
-  const issues = [texts, caps, vendors, merchant, enchanting, maxLevel, tiers, drops, secret, stages].flatMap((part) => part.issues);
+  const issues = [texts, caps, vendors, merchant, enchanting, maxLevel, tiers, drops, secret, stages, threat, difficulty].flatMap((part) => part.issues);
   const parsed = GuidesDataSchema.safeParse(data);
   if (!parsed.success) throw new ExtractError(`攻略資料 guides.json 不符合格式：${parsed.error.issues.slice(0, 3).map(formatZodIssue).join("；")}`);
   return { data: parsed.data, issues };
@@ -70,6 +76,7 @@ export async function extractGuides(input: GuidesInput): Promise<GuidesResult> {
     tablesRead.push(file);
   });
   const missing = loaded.missing.length > 0 ? [issue("missing-guides-tables", loaded.missing.join(", "))] : [];
-  const built = buildData(loaded.tables, input, status);
-  return { data: built.data, issues: [...missing, ...built.issues], tablesRead };
+  const curves = await loadCurveTables(input.sourceRoot);
+  const built = buildData(loaded.tables, curves.tables, input, status);
+  return { data: built.data, issues: [...missing, ...curves.issues, ...built.issues], tablesRead };
 }

@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test";
 import { horizontalOverflow } from "./helpers/overflow";
 
-const GUIDE_SLUGS = ["vendors", "enchanting", "rarity", "secret-talismans", "progression"] as const;
+const GUIDE_SLUGS = ["vendors", "enchanting", "rarity", "threat", "secret-talismans", "progression"] as const;
 
 test.describe("guides hub", () => {
-  test("lists the five guides and every card opens its guide, which links back", async ({ page }) => {
+  test("lists the six guides and every card opens its guide, which links back", async ({ page }) => {
     await page.goto("/en/guides/");
     const cards = page.getByTestId("guide-card");
     await expect(cards).toHaveCount(GUIDE_SLUGS.length);
