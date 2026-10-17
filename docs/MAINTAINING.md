@@ -15,6 +15,8 @@
 
 網站圖示（favicon、主畫面圖示、分享預覽圖）與首頁背景取自遊戲 `Assets/UI/Icons/` 的 Logo 與 SplashScreen，同樣由 `npm run extract` 複製；首頁背景在 build 時轉成 WebP。分享預覽圖需要絕對網址，部署時由 `SITE_URL` 提供。
 
+流量統計用 Cloudflare Web Analytics（無 cookie），部署 workflow 以 `CF_BEACON_TOKEN` 傳入站點 token，本機 build 不載入；搜尋曝光與索引狀態看 Google Search Console。
+
 ## 原始素材索引
 
 `npm run assets` 掃描 `source-data/Assets/`，依分類／分項／細項整理所有素材，並以檔案內容比對 `public/icons/` 標出用途（網站已發布、網站介面、已抽取未發布、未使用）。
