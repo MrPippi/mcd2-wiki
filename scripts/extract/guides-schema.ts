@@ -9,6 +9,8 @@ export const GuidesStatusSchema = z.strictObject({
   enchantCostPerLevel: z.boolean(),
   /** How the drop-weight rows combine, and the odds at each threat level. */
   rarityOdds: z.boolean(),
+  /** That the game balances threat with the SecondPass row of DT_GameBalanceDefinition, and that Normal difficulty multiplies by 1. */
+  threatBalanceRow: z.boolean(),
 });
 export type GuidesStatus = z.infer<typeof GuidesStatusSchema>;
 
@@ -75,6 +77,45 @@ const SecretTalismanSchema = z.object({
   quests: z.array(z.object({ id: z.string(), name: TextSchema.nullable() })),
 });
 
+const Range = z.object({ min: z.number(), max: z.number() });
+
+/** One threat level (1..20). A part whose curve is missing from the data is left out. */
+const ThreatRowSchema = z.object({
+  level: z.number().int().min(1),
+  recommendedLevel: Count.optional(),
+  /** Multiplier on the player's attack power (CT_GlobalDifficultySettings). */
+  attackPower: z.number().optional(),
+  /** Multiplier on the player's damage resistance. */
+  damageResistance: z.number().optional(),
+  /** Chance factor of effect tiers I, II and III. */
+  effectTiers: z.tuple([z.number(), z.number(), z.number()]).optional(),
+  /** Drop chance factor of each rarity. */
+  rarity: z.object({ common: z.number(), rare: z.number(), special: z.number(), unique: z.number() }).optional(),
+  mobVariantChance: Range.optional(),
+  soulStatedCost: Range.optional(),
+  minibossCost: Range.optional(),
+});
+
+export const DIFFICULTIES = ["low", "normal", "high"] as const;
+
+const DifficultySchema = z.object({
+  id: z.enum(DIFFICULTIES),
+  scalar: z.number(),
+  name: TextSchema,
+  description: TextSchema,
+  /** The game's own words for the damage you receive / deal ("Low", "High", "Default"). */
+  received: TextSchema.optional(),
+  dealt: TextSchema.optional(),
+  /** Multiplier on your damage resistance. */
+  incoming: z.number(),
+  /** Multiplier on your attack power. */
+  outgoing: z.number(),
+  /** The multipliers' curve row is missing from the data, so 1 is assumed. */
+  assumed: z.boolean().optional(),
+  /** This difficulty zeroes the Special and Unique drop chance (DT_RarityChanceDefinition). */
+  noRareDrops: z.boolean().optional(),
+});
+
 export const GuidesDataSchema = z.object({
   verified: GuidesStatusSchema,
   texts: z.record(z.enum(TEXT_IDS), TextSchema),
@@ -92,6 +133,8 @@ export const GuidesDataSchema = z.object({
     talismans: z.array(SecretTalismanSchema),
   }),
   stages: z.array(z.object({ id: z.string(), level: Count, name: TextSchema })),
+  threat: z.array(ThreatRowSchema),
+  difficulty: z.array(DifficultySchema),
 });
 export type GuidesData = z.infer<typeof GuidesDataSchema>;
 export type VendorData = GuidesData["vendors"][number];
@@ -101,3 +144,6 @@ export type RarityTier = GuidesData["rarity"]["tiers"][number];
 export type DropRow = GuidesData["rarity"]["drops"][number];
 export type SecretTalisman = GuidesData["secretTalismans"]["talismans"][number];
 export type Stage = GuidesData["stages"][number];
+export type ThreatRow = GuidesData["threat"][number];
+export type DifficultyData = GuidesData["difficulty"][number];
+export type Difficulty = (typeof DIFFICULTIES)[number];

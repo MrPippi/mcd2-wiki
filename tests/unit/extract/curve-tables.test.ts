@@ -1,0 +1,104 @@
+import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { beforeEach, describe, expect, it } from "vitest";
+import { evaluateCurve, findCurve, loadCurveTables, parseCurveRef, sampleThreat, type Curve } from "../../../scripts/extract/curve-tables";
+import { curveFile, curveOf, rawCurveFiles, ref, richRow, simpleRow } from "../../helpers/curve-tables";
+
+let sourceRoot: string;
+const put = async (relative: string, value: unknown): Promise<void> => {
+  const file = path.join(sourceRoot, "CurveTables", ...relative.split("/"));
+  await mkdir(path.dirname(file), { recursive: true });
+  await writeFile(file, JSON.stringify(value), "utf8");
+};
+const putAll = (files: Record<string, unknown>): Promise<unknown> => Promise.all(Object.entries(files).map(([name, value]) => put(`${name}.json`, value)));
+const linear = (...points: [number, number][]): Curve => ({ keys: points.map(([time, value]) => ({ time, value, step: false })) });
+const range = (from: number, to: number): number[] => Array.from({ length: to - from + 1 }, (_, index) => from + index);
+
+beforeEach(async () => { sourceRoot = await mkdtemp(path.join(tmpdir(), "mcd2-curves-")); });
+
+describe("evaluateCurve", () => {
+  it("moves linearly between keys and holds the end values", () => {
+    const curve = linear([1, 0], [3, 10]);
+    expect(evaluateCurve(curve, 2)).toBe(5);
+    expect(evaluateCurve(curve, 0)).toBe(0);
+    expect(evaluateCurve(curve, 99)).toBe(10);
+  });
+
+  it("holds a step key's value until the next key", () => {
+    const curve: Curve = { keys: [{ time: 1, value: 4, step: true }, { time: 3, value: 8, step: true }] };
+    expect([1, 2, 2.9, 3, 4].map((time) => evaluateCurve(curve, time))).toEqual([4, 4, 4, 8, 8]);
+  });
+
+  it("reads a single key as a constant", () => {
+    expect(evaluateCurve(linear([1, 1.5]), 17)).toBe(1.5);
+  });
+});
+
+describe("parseCurveRef", () => {
+  it("takes the table name from the object path", () => {
+    expect(parseCurveRef(ref("CT_RarityChanceSettings", "Rare"))).toEqual({ table: "CT_RarityChanceSettings", row: "Rare" });
+  });
+
+  it("reads None as no reference", () => {
+    expect(parseCurveRef({ CurveTable: "None", RowName: "None" })).toBeUndefined();
+    expect(parseCurveRef({ CurveTable: ref("CT_X", "a").CurveTable, RowName: "None" })).toBeUndefined();
+  });
+});
+
+describe("loadCurveTables", () => {
+  it("reads SimpleCurves and RichCurves and matches the game's cross-check numbers", async () => {
+    await putAll(rawCurveFiles());
+    const { tables, issues } = await loadCurveTables(sourceRoot);
+    expect(issues).toEqual([]);
+    const effects = (row: string, from: number, to: number): number[] => sampleThreat(curveOf(tables, "CT_EffectThreatBasedChanceAdjustments", row), range(from, to));
+    expect(effects("Tier1Effects", 9, 20)).toEqual([1, 1, 0.9, 0.8, 0.7, 0.6, 0.5, 0.4, 0.3, 0.2, 0.1, 0]);
+    expect(effects("Tier2Effects", 9, 12)).toEqual([0.7, 0.8, 0.9, 1]);
+    expect(effects("Tier3Effects", 9, 15)).toEqual([0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]);
+    expect(sampleThreat(curveOf(tables, "CT_DifficultySettings", "DifficultyMultiplierHighAttackPower"), [1])).toEqual([0.6]);
+    expect(sampleThreat(curveOf(tables, "CT_RarityChanceSettings", "Rare"))).toHaveLength(20);
+  });
+
+  it("finds tables in sub-folders by file name", async () => {
+    await put("Spicewood/GameplayLogic/CT_X.json", curveFile("CT_X", "SimpleCurves", { A: simpleRow([[1, 2]]) }));
+    const { tables } = await loadCurveTables(sourceRoot);
+    expect(findCurve(tables, { table: "CT_X", row: "A" })?.keys).toEqual([{ time: 1, value: 2, step: false }]);
+    expect(findCurve(tables, { table: "CT_X", row: "B" })).toBeUndefined();
+    expect(findCurve(tables, { table: "CT_Y", row: "A" })).toBeUndefined();
+  });
+
+  it("reads numeric interpolation modes: 0 linear, 1 constant", async () => {
+    const row = simpleRow([[1, 0], [3, 10]]);
+    await put("CT_N.json", curveFile("CT_N", "SimpleCurves", { Lin: { ...row, InterpMode: 0 }, Step: { ...row, InterpMode: 1 } }));
+    const { tables, issues } = await loadCurveTables(sourceRoot);
+    expect(issues).toEqual([]);
+    expect(evaluateCurve(curveOf(tables, "CT_N", "Lin"), 2)).toBe(5);
+    expect(evaluateCurve(curveOf(tables, "CT_N", "Step"), 2)).toBe(0);
+  });
+
+  it("reads a cubic key as linear and reports it once per row", async () => {
+    await put("CT_C.json", curveFile("CT_C", "RichCurves", { Smooth: richRow([[1, 0], [2, 1], [3, 2]], "RCIM_Cubic") }));
+    const { tables, issues } = await loadCurveTables(sourceRoot);
+    expect(issues.map((item) => [item.type, item.detail])).toEqual([["curve-unsupported", "CT_C/Smooth: interpolation cubic (read as linear)"]]);
+    expect(evaluateCurve(curveOf(tables, "CT_C", "Smooth"), 1.5)).toBe(0.5);
+  });
+
+  it("reports an extrapolation other than constant and still clamps", async () => {
+    const loop = { ...simpleRow([[1, 0], [2, 1]]), PostInfinityExtrap: "ERichCurveExtrapolation::RCCE_Cycle" };
+    await put("CT_E.json", curveFile("CT_E", "SimpleCurves", { Loop: loop }));
+    const { tables, issues } = await loadCurveTables(sourceRoot);
+    expect(issues.map((item) => item.detail)).toEqual(["CT_E/Loop: extrapolation (read as constant)"]);
+    expect(evaluateCurve(curveOf(tables, "CT_E", "Loop"), 9)).toBe(1);
+  });
+
+  it("reads a missing folder as no tables and reports it", async () => {
+    const { tables, issues } = await loadCurveTables(sourceRoot);
+    expect(tables).toEqual({});
+    expect(issues.map((item) => item.type)).toEqual(["missing-curve-tables"]);
+  });
+
+  it("stops on a table whose shape changed, naming the file", async () => {
+    await put("CT_BAD.json", [{ Name: "CT_BAD", Rows: { A: { Keys: [] } } }]);
+    await expect(loadCurveTables(sourceRoot)).rejects.toThrow(/CT_BAD\.json/);
+  });
+});

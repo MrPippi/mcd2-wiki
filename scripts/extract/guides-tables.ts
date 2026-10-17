@@ -20,6 +20,9 @@ export const GUIDE_TABLE_FILES = {
   questLoot: "DT_LootSourceDefinition_Quest",
   quests: "DT_QuestLibraries",
   enchantments: "DT_EnchantmentDefinition",
+  gameBalance: "DT_GameBalanceDefinition",
+  difficulty: "DT_DifficultyDefinition",
+  worldActor: "DT_WorldActorDefinition",
 } as const;
 
 type TableKey = keyof typeof GUIDE_TABLE_FILES;
@@ -71,6 +74,33 @@ const CollectionRow = z.looseObject({
 });
 const QuestLibraryRow = z.looseObject({ Name: z.string(), RawQuestData: z.string().optional() });
 const EnchantmentRow = z.looseObject({ Name: z.string(), TypeTag: Tag });
+/** A reference to a CurveTable row; the game writes "None" for no curve. */
+const CurveRef = z.looseObject({ CurveTable: z.string(), RowName: z.string() });
+const GameBalanceRow = z.looseObject({
+  Name: z.string(),
+  GameBalanceDefinition: z.looseObject({
+    GlobalDifficultyScalingSettings: z.looseObject({ OutgoingDamageModifierCurve: CurveRef, IncomingDamageModifierCurve: CurveRef }).optional(),
+    CharacterLevelsPerThreat: z.number().optional(),
+  }).optional(),
+  ItemCreatorConstants: z.looseObject({
+    RarityChanceMap: z.record(z.string(), CurveRef).optional(),
+    EffectChanceScalingCurves: z.record(z.string(), CurveRef).optional(),
+  }).optional(),
+});
+const DifficultyRow = z.looseObject({
+  Name: z.string(),
+  TypeTag: Tag,
+  DifficultyDefinition: z.looseObject({
+    DifficultyScalar: z.number(),
+    DifficultyCurveIncomingDamage: CurveRef,
+    DifficultyCurveOutgoingDamage: CurveRef,
+  }),
+  TypeTextData: TextData.optional(),
+});
+const WorldActorRow = z.looseObject({
+  Name: z.string(),
+  AdditionalAssets: z.looseObject({ Assets: z.array(z.looseObject({ Name: z.string(), Object: z.string() })) }).optional(),
+});
 
 export const GuideTablesSchema = z.object({
   player: z.array(PlayerRow),
@@ -85,10 +115,15 @@ export const GuideTablesSchema = z.object({
   questLoot: LootTablesSchema.shape.quest,
   quests: z.array(QuestLibraryRow),
   enchantments: z.array(EnchantmentRow),
+  gameBalance: z.array(GameBalanceRow),
+  difficulty: z.array(DifficultyRow),
+  worldActor: z.array(WorldActorRow),
 });
 export type GuideTables = z.infer<typeof GuideTablesSchema>;
 export type PlayerRow = GuideTables["player"][number];
 export type AreaRow = GuideTables["areas"][number];
+export type GameBalanceRow = GuideTables["gameBalance"][number];
+export type DifficultyRow = GuideTables["difficulty"][number];
 export type TextDataValue = z.infer<typeof TextData>;
 
 export interface LoadedGuideTables {
