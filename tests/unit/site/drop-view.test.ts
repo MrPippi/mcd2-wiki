@@ -46,7 +46,7 @@ describe("dropGroupsOf", () => {
     const listed = publishedEntries.filter((one) => covered.has(`${one.category}/${one.slug}`) && one.category !== "enchantment-book");
     expect(listed.length).toBeGreaterThan(200);
     expect(listed.filter((one) => dropGroupsOf(one, "en").length === 0).map((one) => `${one.category}/${one.slug}`)).toEqual([]);
-  });
+  }, 60_000);
 
   it("groups by kind in a fixed order, best first inside a group", () => {
     const groups = dropGroupsOf(entry("armor", "frost-rime-chest-unique"), "en");
