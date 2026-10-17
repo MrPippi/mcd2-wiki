@@ -48,6 +48,15 @@
 - 效果、附魔、附魔書與護符的說明若有遊戲資料算不出的數值，整個條目暫不上架（附魔書無法填值時，其附魔也一併隱藏）；獨特武器的固定效果卡同理。
 - 資料表沒有的固定效果數值（存在技能藍圖中）寫在 `src/data/fixed-bonus-overrides.json`，每筆註明確認來源。
 
+## 威脅與難度（曲線表）
+
+`/<lang>/guides/threat/` 讀 `source-data/CurveTables/CT_*.json`（CUE4Parse 匯出的 CurveTable，來源為 `Spicewood/Content/Spicewood/GameplayLogic/CT_*.json`，含 `AttributeCurves/CT_AttributeAdjustments`），寫入 `src/data/guides.json` 的 `threat`（威脅 1–20）與 `difficulty`（低／一般／高）。
+
+- 曲線一律經資料表的參照找到，不寫死曲線名稱：`DT_GameBalanceDefinition` 的 `SecondPass` 列（傷害、稀有度、效果階級曲線與每威脅角色等級）、`DT_DifficultyDefinition`（各難度倍率與文字）、`DT_WorldActorDefinition`（怪物生成設定表）、`DT_RarityChanceDefinition`（低難度不掉特殊／獨特）。
+- 只支援線性與常數（階梯）插值，超出端點時取端點值；其他插值或外插寫進報告（`curve-unsupported`），讀作線性／常數。缺少 `CurveTables/` 時報告 `missing-curve-tables`，攻略頁該區段隱藏。
+- 兩項尚未在遊戲內確認，標示於頁面，確認後把 `scripts/extract/guides-status.json` 的 `threatBalanceRow` 改為 `true`：遊戲實際使用 `Active` 或 `SecondPass` 哪一列（`Active` 沒有曲線）；一般難度指向 `CT_DifficultySettings` 裡不存在的 `NormalDifficultyMultiplier`，暫以 ×1 顯示。
+- 難度圖示（`T_UI_Threat*`）目前未使用。
+
 ## 世界地圖
 
 `/<lang>/map/`（每個語言各一頁）以 Leaflet 顯示遊戲的俯視全圖（主世界、隙浮、營地），標出礦車站、裂隙、傳送雕像、商人、任務與區域名稱，可篩選、搜尋，網址 `?world=` 與 `#z/px/py` 可分享視角。
