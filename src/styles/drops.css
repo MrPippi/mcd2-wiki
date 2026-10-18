@@ -16,3 +16,6 @@
   .drops-body { display: grid; grid-column: 2; gap: 28px; min-width: 0; }
   .drops-body > .note { margin: 0; }
 }
+/* Area icon and name as one unit, so the name never wraps under the icon. */
+.drops-page .drop-area { display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
+.drops-page .drop-area-icon { flex-shrink: 0; width: 24px; height: 24px; image-rendering: pixelated; }

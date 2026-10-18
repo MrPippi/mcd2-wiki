@@ -1,7 +1,9 @@
 /** How a drop source and its area are named on a page: the name in the language, a link where there is a page, and a small note. Server-side only. */
 import type { DropSource } from "./drop-types";
 import { t, type Lang } from "./i18n";
+import { assetUrl } from "./url";
 import { areaHref, lootSource } from "./item-source-view";
+import { locationOf } from "./locations";
 import { mobData, mobHref } from "./mobs";
 import { findQuest, questData, questHref } from "./quests";
 
@@ -12,6 +14,8 @@ export interface DropLabel {
   readonly note?: string;
   /** The data does not say where the source appears. */
   readonly unplaced?: true;
+  /** The area's game icon (asset URL), for area labels. */
+  readonly icon?: string;
 }
 
 const PROCEDURAL = /_Procedural$/;
@@ -72,5 +76,8 @@ export function sourceLabel(lang: Lang, source: DropSource, all: readonly DropSo
 /** The label of an area source id ("area:SW.Area.Plains.A1", "bookPool:..."); undefined for no area or one nothing names. */
 export function areaLabel(lang: Lang, id: string): DropLabel | undefined {
   const source = id === "" ? undefined : lootSource(id);
-  return source ? { name: source.name[lang], ...(source.kind === "area" ? { href: areaHref(lang, id, source.name) } : {}) } : undefined;
+  if (!source) return undefined;
+  if (source.kind !== "area") return { name: source.name[lang] };
+  const icon = locationOf(id.replace(/^area:/, ""))?.icon;
+  return { name: source.name[lang], href: areaHref(lang, id, source.name), ...(icon ? { icon: assetUrl(icon) } : {}) };
 }
