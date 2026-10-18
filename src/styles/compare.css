@@ -57,3 +57,9 @@
 @media (max-width: 599px) {
   .compare-dialog { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border: 0; }
 }
+
+/* Picker options with a frame (enchantment books, item-picker.ts): the icon fills the book's diamond window
+   (x 39–217, y 13–195 of the 256px art) and the frame image is drawn on top, like frames.css. */
+.compare-icon.is-framed { position: relative; border: 0; background: none; }
+.compare-icon.is-framed img.picker-art { position: absolute; left: 15.2%; top: 5%; width: 69.6%; height: 71.5%; object-fit: fill; image-rendering: pixelated; }
+.compare-icon.is-framed img.picker-frame { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; pointer-events: none; }

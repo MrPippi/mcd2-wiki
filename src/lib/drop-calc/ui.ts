@@ -1,7 +1,7 @@
 /** The drop calculator in the browser: choices, a live result table and the address. */
-import { foldForSearch } from "../lang";
 import type { DropFile, DropRow } from "../drop-types";
-import { parseCalcPayload, type CalcLabel, type CalcPayload } from "./parse";
+import { mountPicker, optionArt, type PickerGroup, type PickerParts } from "../item-picker";
+import { parseCalcPayload, type CalcItem, type CalcLabel, type CalcPayload } from "./parse";
 import { allRows, decodeState, encodeState, formatOdds, narrowRows, narrowing, type CalcState } from "./state";
 
 /** Fired after replaceState so the language links pick up the new query (SiteHeader listens). */
@@ -41,8 +41,10 @@ function nameCell(label: CalcLabel | undefined, fallback: string, unplaced: stri
 }
 
 interface Parts {
-  readonly filter: HTMLInputElement;
-  readonly item: HTMLSelectElement;
+  readonly itemPick: HTMLButtonElement;
+  readonly itemIcon: HTMLElement;
+  readonly itemName: HTMLElement;
+  readonly picker: PickerParts;
   readonly level: HTMLSelectElement;
   readonly difficulty: HTMLSelectElement;
   readonly rarity: HTMLSelectElement;
@@ -56,9 +58,20 @@ interface Parts {
 }
 
 function partsOf(root: HTMLElement): Parts | undefined {
-  const found = {
+  const picker = {
+    dialog: pick<HTMLDialogElement>(root, "[data-dialog]"),
+    title: pick(root, "[data-dialog-title]"),
     filter: pick<HTMLInputElement>(root, "[data-filter]"),
-    item: pick<HTMLSelectElement>(root, "[data-item]"),
+    options: pick(root, "[data-options]"),
+    noResults: pick(root, "[data-no-results]"),
+    close: pick(root, "[data-close]"),
+  };
+  if (!Object.values(picker).every(Boolean)) return undefined;
+  const found = {
+    picker: picker as PickerParts,
+    itemPick: pick<HTMLButtonElement>(root, "[data-item-pick]"),
+    itemIcon: pick(root, "[data-item-icon]"),
+    itemName: pick(root, "[data-item-name]"),
     level: pick<HTMLSelectElement>(root, "[data-level]"),
     difficulty: pick<HTMLSelectElement>(root, "[data-difficulty]"),
     rarity: pick<HTMLSelectElement>(root, "[data-rarity]"),
@@ -104,11 +117,27 @@ function summaryOf(payload: CalcPayload, state: CalcState, rows: number): string
     .replace("{count}", String(rows));
 }
 
-/** The item menu for the filter text; the chosen item stays in it even when the text no longer matches it. */
-function fillItems(parts: Parts, payload: CalcPayload, state: CalcState): void {
-  const query = foldForSearch(parts.filter.value.trim(), document.documentElement.lang);
-  const shown = payload.items.filter((one) => one.key === state.item || query === "" || one.search.includes(query));
-  options(parts.item, [["", payload.labels.pick], ...shown.map((one) => [one.key, one.name] as const)], state.item);
+/** A book's icon sits in the enchantment book frame, like on the build planner. */
+const frameOf = (payload: CalcPayload, item: CalcItem): string | undefined => (item.category === "enchantment-book" ? payload.bookFrame : undefined);
+
+/** Every item in the picker, grouped by page category in the site's order. */
+const itemGroups = (payload: CalcPayload): PickerGroup[] =>
+  payload.categories.map((category) => ({
+    label: category.name,
+    options: payload.items
+      .filter((item) => item.category === category.id)
+      .map((item) => ({ key: item.key, name: item.name, search: item.search, icon: item.icon, unique: item.unique === true, frame: frameOf(payload, item) })),
+  }));
+
+/** The item button: the chosen item's icon and name, or the prompt. */
+function renderItemPick(parts: Parts, payload: CalcPayload, state: CalcState): void {
+  const item = payload.items.find((one) => one.key === state.item);
+  const art = item ? optionArt({ icon: item.icon, frame: frameOf(payload, item) }) : undefined;
+  parts.itemIcon.className = art?.className ?? "compare-icon";
+  parts.itemIcon.replaceChildren(...(art ? [...art.childNodes] : []));
+  parts.itemPick.dataset.filled = String(item !== undefined);
+  parts.itemPick.dataset.unique = String(item?.unique === true);
+  parts.itemName.textContent = item?.name ?? payload.labels.pick;
 }
 
 /** Shows the state: the menus, the rows, the notes and the address; returns the state with source and area choices that no longer apply cleared. */
@@ -120,6 +149,7 @@ function show(parts: Parts, payload: CalcPayload, file: DropFile, chosen: CalcSt
   options(parts.area, [["", payload.labels.allAreas], ...areas.map((id) => [id, payload.areas[id]?.name ?? id] as const)], state.area);
   const rows = narrowRows(everything, state);
   const item = payload.items.find((one) => one.key === state.item);
+  renderItemPick(parts, payload, state);
   renderRows(parts, payload, rows);
   parts.region.hidden = rows.length === 0;
   parts.note.hidden = !(state.rarity !== "any" && item && /^(enchantment-book|talisman)\//.test(item.key));
@@ -147,9 +177,20 @@ export function mountCalc(root: HTMLElement, file: DropFile): boolean {
     state = show(parts, payload, file, { ...state, ...change });
   };
   fillStatic(parts, payload, state);
-  fillItems(parts, payload, state);
-  parts.filter.addEventListener("input", () => fillItems(parts, payload, state));
-  parts.item.addEventListener("change", () => set({ item: parts.item.value, source: "", area: "" }));
+  const openPicker = mountPicker(parts.picker);
+  const groups = itemGroups(payload);
+  parts.itemPick.addEventListener("click", () =>
+    openPicker({
+      title: payload.labels.item,
+      groups,
+      current: state.item || undefined,
+      pick: (key) => {
+        parts.picker.dialog.close();
+        set({ item: key, source: "", area: "" });
+        parts.itemPick.focus();
+      },
+    }),
+  );
   parts.level.addEventListener("change", () => set({ level: Number(parts.level.value) }));
   parts.difficulty.addEventListener("change", () => set({ difficulty: parts.difficulty.value }));
   parts.rarity.addEventListener("change", () => set({ rarity: parts.rarity.value as CalcState["rarity"] }));

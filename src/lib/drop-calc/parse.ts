@@ -7,6 +7,9 @@ export interface CalcItem {
   readonly search: string;
   readonly href: string;
   readonly icon?: string;
+  /** The page category ("melee", "enchantment-book"…): the picker groups by it, in `categories` order. */
+  readonly category: string;
+  readonly unique?: true;
 }
 
 export interface CalcLabel {
@@ -20,7 +23,7 @@ export interface CalcLabel {
 }
 
 export interface CalcLabels {
-  readonly pick: string; readonly item: string; readonly filter: string; readonly noItems: string;
+  readonly pick: string; readonly item: string; readonly filter: string; readonly noItems: string; readonly close: string;
   readonly threat: string; readonly difficulty: string; readonly rarity: string;
   readonly source: string; readonly area: string; readonly chance: string;
   readonly allSources: string; readonly allAreas: string; readonly anyArea: string; readonly unplaced: string;
@@ -32,6 +35,10 @@ export interface CalcPayload {
   /** False when the build has no drop data; the page then says so instead of loading the calculator. */
   readonly available: boolean;
   readonly items: readonly CalcItem[];
+  /** Picker groups in page order, each with its name in the language. */
+  readonly categories: readonly { readonly id: string; readonly name: string }[];
+  /** The enchantment book frame drawn over book icons in the picker. */
+  readonly bookFrame?: string;
   readonly levels: readonly number[];
   readonly defaultLevel: number;
   readonly difficulties: readonly { readonly id: string; readonly name: string }[];
@@ -50,7 +57,8 @@ export function parseCalcPayload(raw: unknown): CalcPayload | undefined {
   if (!isRecord(raw) || typeof raw.available !== "boolean" || !isRecord(raw.labels) || !isRecord(raw.sources) || !isRecord(raw.areas)) return undefined;
   const list = (value: unknown): value is unknown[] => Array.isArray(value) && value.length > 0;
   const ok =
-    list(raw.items) && raw.items.every((one) => isRecord(one) && isText(one.key) && isText(one.name) && typeof one.search === "string" && isText(one.href)) &&
+    list(raw.items) && raw.items.every((one) => isRecord(one) && isText(one.key) && isText(one.name) && typeof one.search === "string" && isText(one.href) && isText(one.category)) &&
+    list(raw.categories) && raw.categories.every((one) => isRecord(one) && isText(one.id) && isText(one.name)) &&
     list(raw.levels) && raw.levels.every((one) => Number.isInteger(one)) && Number.isInteger(raw.defaultLevel) &&
     list(raw.difficulties) && raw.difficulties.every((one) => isRecord(one) && isText(one.id) && isText(one.name)) &&
     list(raw.rarities) && raw.rarities.every((one) => isRecord(one) && isText(one.id) && isText(one.name)) &&

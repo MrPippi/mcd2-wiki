@@ -46,21 +46,38 @@ test.describe("drop odds", () => {
     expect(errors).toEqual([]);
   });
 
-  test("the chosen item stays in the menu while the filter hides the others", async ({ page }) => {
+  test("the item picker lists every item by category with icons, books in their frame", async ({ page }) => {
+    await page.goto("/en/drops/");
+    await page.getByTestId("drop-item-pick").click();
+    const options = page.getByTestId("drop-options");
+    await expect(page.getByTestId("drop-dialog")).toBeVisible();
+    await expect(options.locator("h3")).toHaveText(["Melee Weapons", "Ranged Weapons", "Armor", "Artifacts", "Talismans", "Enchantment Books"]);
+    await expect(options.locator("[data-key='melee/sword'] img")).toBeVisible();
+    await expect(options.locator("[data-key='enchantment-book/channeling'] img.picker-frame")).toHaveCount(1);
+  });
+
+  test("the picker marks the chosen item and keeps the result while it is open", async ({ page }) => {
     await page.goto("/en/drops/?item=talisman%2Fplummeting");
+    await expect(page.getByTestId("drop-item-pick")).toContainText("Ocelot's Paw");
+    await page.getByTestId("drop-item-pick").click();
+    await expect(page.getByTestId("drop-options").locator("[aria-current='true']")).toHaveAttribute("data-key", "talisman/plummeting");
     await page.getByTestId("drop-filter").fill("zzzz-no-match");
-    await expect(page.getByTestId("drop-item").locator("option")).toHaveCount(2);
-    await expect(page.getByTestId("drop-item")).toHaveValue("talisman/plummeting");
+    await expect(page.getByTestId("drop-dialog").locator("[data-no-results]")).toBeVisible();
+    await page.getByTestId("drop-dialog").locator("[data-close]").click();
+    await expect(page.getByTestId("drop-item-pick")).toBeFocused();
     await expect(page.getByTestId("drop-results").locator("tbody tr").first()).toBeVisible();
   });
 
   test("the calculator picks an item by name filter", async ({ page }) => {
     await page.goto("/en/drops/");
     await expect(page.getByTestId("drop-summary")).toContainText("Choose an item");
+    await page.getByTestId("drop-item-pick").click();
     await page.getByTestId("drop-filter").fill("ocelot");
-    const options = page.getByTestId("drop-item").locator("option");
-    await expect(options).toHaveCount(2);
-    await page.getByTestId("drop-item").selectOption({ index: 1 });
+    const options = page.getByTestId("drop-options").locator("button");
+    await expect(options).toHaveCount(1);
+    await options.first().click();
+    await expect(page.getByTestId("drop-dialog")).toBeHidden();
+    await expect(page.getByTestId("drop-item-pick")).toBeFocused();
     await expect(page.getByTestId("drop-results").locator("tbody tr").first()).toContainText("100.00%");
   });
 
