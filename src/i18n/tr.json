@@ -435,7 +435,9 @@
     "markerStorm",
     "markerTalismanChest",
     "markerDungeon",
-    "mapNoteStorm"
+    "mapNoteStorm",
+    "dropRegularMobs",
+    "dropRegularNote"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -620,7 +622,7 @@
   "mobDropRolls": "Rastgele çekiliş: {n}, her biri {chance}",
   "mobDropPoolArea": "Eşyalar bölgenin ganimet havuzundan gelir.",
   "mobDropPoolOwn": "Eşyalar bu yaratığın kendi listesinden gelir.",
-  "mobDropPoolNone": "Verilerde bunun için eşya listesi yok.",
+  "mobDropPoolNone": "Veriler bu yaratık için bir eşya listesi belirtmiyor; düşme şansları bulunduğu bölgenin havuzuna göre hesaplanır.",
   "mobVariants": "Varyantlar",
   "mobVariantOf": "Ana yaratık",
   "mobPortraitCredit": "Portreler, oyun modellerinden oluşturulmuş görsellerdir.",
@@ -910,7 +912,7 @@
   "dropColChance": "Olasılık",
   "dropOpenCalc": "Koşulları düşme hesaplayıcısında değiştir",
   "dropCalcIntro": "Bir eşya, tehdit seviyesi, zorluk ve nadirlik seçin; her kaynağın tek tetiklemede onu verme olasılığını görün.",
-  "dropCalcCoverage": "Kapsam: eşya sayfalarında listelenen sandıklar, yayımlanan görevlerin her ödül grubu ile patronlar, ara patronlar ve Kumbara Domuz. Tüccarlar, sıradan yaratıklar, Ruh Fırtınası sandıkları ve anahtarlı sandıklar kapsam dışıdır.",
+  "dropCalcCoverage": "Kapsam: eşya sayfalarında listelenen sandıklar, yayımlanan görevlerin her ödül grubu, patronlar, ara patronlar ve Kumbara Domuz ile her bölgedeki sıradan yaratıklar (Ruhu Yozlaşmış olanlar ve Toprak Falcısı dahil). Tüccarlar, Ruh Fırtınası sandıkları ve anahtarlı sandıklar kapsam dışıdır.",
   "dropCalcNoScript": "Hesaplayıcı JavaScript gerektirir. JavaScript olmasa da her eşya sayfasında tehdit seviyesi 20 ve normal zorluktaki düşme olasılıkları görünür.",
   "dropCalcLoadFailed": "Düşme verileri yüklenemedi.",
   "dropPickItem": "Eşya seç…",
@@ -924,7 +926,9 @@
   "dropNoResult": "Bu koşullarda hiçbir kaynak bu eşyayı veremez.",
   "dropEmpty": "Nerede ve hangi olasılıkla düştüğünü görmek için bir eşya seçin.",
   "dropCalc": "Düşme hesaplayıcısı",
-  "dropNotIncluded": "Henüz dahil değil: sıradan yaratıklar ve tüccarlar.",
+  "dropNotIncluded": "Henüz dahil değil: tüccarlar, Ruh Fırtınası sandıkları ve anahtarlı sandıklar.",
+  "dropRegularMobs": "Sıradan yaratıklar",
+  "dropRegularNote": "Yenilen yaratık başına şans; bir bölgedeki tüm sıradan yaratıklar, hangisi olursa olsun aynı değeri verir. Ruhu Yozlaşmış yaratıklar çok daha sık eşya düşürür ve ayrı satırlarda gösterilir; Toprak Falcısı eserlerin ağırlığını ikiye katlar. Yaratıkların ne sıklıkla ortaya çıktığı dahil değildir.",
   "dropAreaUnconfirmed": "Bölge doğrulanmadı: veriler bu kaynağın nerede çıktığını söylemiyor",
   "dropCalcNoData": "Bu sürümde düşme verisi yok."
 }

@@ -86,7 +86,7 @@ test.describe("static sections", () => {
     const chests = page.getByTestId("soul-storm-chests");
     await expect(chests.getByTestId("soul-storm-unconfirmed")).toHaveCount(2);
     await expect(chests).toContainText("Guaranteed: 4");
-    await expect(chests).toContainText("The data has no item list for this.");
+    await expect(chests).toContainText("The data names no item list for this mob; the drop odds use the pool of the area it is in.");
     await expect(page.locator("body")).not.toContainText("Nearly as cool as Kira");
   });
 

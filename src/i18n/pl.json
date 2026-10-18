@@ -433,7 +433,9 @@
     "markerStorm",
     "markerTalismanChest",
     "markerDungeon",
-    "mapNoteStorm"
+    "mapNoteStorm",
+    "dropRegularMobs",
+    "dropRegularNote"
   ],
   "_english": [
     "normal",
@@ -624,7 +626,7 @@
   "mobDropRolls": "Losowania: {n}, każde {chance}",
   "mobDropPoolArea": "Przedmioty pochodzą z puli łupu obszaru.",
   "mobDropPoolOwn": "Przedmioty pochodzą z własnej listy tego moba.",
-  "mobDropPoolNone": "Dane nie zawierają listy przedmiotów.",
+  "mobDropPoolNone": "Dane nie podają listy przedmiotów dla tego potwora; szanse wypadnięcia liczone są z puli obszaru, w którym się znajduje.",
   "mobVariants": "Warianty",
   "mobVariantOf": "Mob bazowy",
   "mobPortraitCredit": "Portrety to rendery modeli z gry.",
@@ -914,7 +916,7 @@
   "dropColChance": "Szansa",
   "dropOpenCalc": "Zmień warunki w kalkulatorze łupu",
   "dropCalcIntro": "Wybierz przedmiot, poziom zagrożenia, poziom trudności i rzadkość, aby zobaczyć, jak prawdopodobne jest, że każde źródło da go przy jednym uruchomieniu.",
-  "dropCalcCoverage": "Uwzględniono: skrzynie z stron przedmiotów, każdy zestaw nagród opublikowanych zadań oraz bossy, minibossy i skarbonkę. Nie uwzględniono kupców, zwykłych potworów, skrzyń Burzy Dusz ani skrzyń na klucz.",
+  "dropCalcCoverage": "Uwzględniono: skrzynie z stron przedmiotów, każdy zestaw nagród opublikowanych zadań, bossy, minibossy i skarbonkę oraz zwykłe potwory z każdego obszaru (razem z wersjami splugawionymi i geomantą). Nie uwzględniono kupców, skrzyń Burzy Dusz ani skrzyń na klucz.",
   "dropCalcNoScript": "Kalkulator wymaga JavaScriptu. Bez niego strona każdego przedmiotu nadal pokazuje szanse na łup przy poziomie zagrożenia 20 na normalnym poziomie trudności.",
   "dropCalcLoadFailed": "Nie udało się wczytać danych o łupach.",
   "dropPickItem": "Wybierz przedmiot…",
@@ -928,7 +930,9 @@
   "dropNoResult": "W tych warunkach żadne źródło nie może dać tego przedmiotu.",
   "dropEmpty": "Wybierz przedmiot, aby zobaczyć, gdzie wypada i z jaką szansą.",
   "dropCalc": "Kalkulator łupu",
-  "dropNotIncluded": "Jeszcze nie uwzględniono: zwykłych potworów i kupców.",
+  "dropNotIncluded": "Jeszcze nie uwzględniono: kupców, skrzyń Burzy Dusz i skrzyń na klucz.",
+  "dropRegularMobs": "Zwykłe potwory",
+  "dropRegularNote": "Szansa za jednego pokonanego potwora; wszystkie zwykłe potwory w danym obszarze dają tę samą wartość, niezależnie od potwora. Wersje splugawione wyrzucają przedmioty znacznie częściej i mają osobne wiersze; geomanta podwaja wagę artefaktów. Nie uwzględniono tego, jak często potwory się pojawiają.",
   "dropAreaUnconfirmed": "Obszar niepotwierdzony: dane nie mówią, gdzie pojawia się to źródło",
   "dropCalcNoData": "Ta wersja nie ma danych o łupach."
 }

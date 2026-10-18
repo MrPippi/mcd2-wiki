@@ -127,7 +127,7 @@ describe("UI translations", () => {
       "mobs", "mobsIntro", "mobKindBoss", "mobKindMiniboss", "mobKindRegular", "mobKindVariant", "mobStats", "mobBaseValues",
       "mobSoulCorrupted", "mobAreas", "mobAreasNote", "mobDrops", "mobDropsNote", "mobDropGuaranteed", "mobDropRolls",
       "mobDropPoolArea", "mobDropPoolOwn", "mobDropPoolNone", "mobVariants", "mobVariantOf", "mobPortraitCredit", "mobNoPortrait",
-      "mobWorldOverworld", "mobWorldWellspring",
+      "mobWorldOverworld", "mobWorldWellspring", "dropRegularMobs", "dropRegularNote",
       "itemSources", "sourceAreas", "sourceChests", "sourceChestArea", "sourceChestFixed", "sourceQuests", "sourceGuaranteed",
       "sourcePicksOf", "sourceMerchants", "sourceMerchantCategory", "sourceBookPools", "sourcesNote",
       "statHealth", "statMovementSpeed", "statPoise", "statPoiseDelay", "statPoiseRecovery", "statSightRadius", "statMass",

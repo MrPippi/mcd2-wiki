@@ -26,7 +26,10 @@ const loot = dropLoot({
     gear("enchantmentBook", "Dynamo", "SW.Item.EnchantmentBook.Dynamo", { traits: [SPAWN, "SW.Item.Property.EnchantmentBook"] }),
   ],
   talisman: [gear("talisman", "Wolf", "SW.Item.Talisman.Wolf", { traits: [SPAWN, "SW.Item.Property.Talisman"] })],
-  generic: [lootRow("BooksCommon", "SW.LootSource.Books.Common", [slot("EnchantedBook", 0, 0, 0, false, [["SW.Item.EnchantmentBook.Arcane", 1000, "Set"], ["SW.Item.EnchantmentBook.Dynamo", 1000, "Set"], "SW.Item.Currency.SpringStone"])])],
+  generic: [
+    lootRow("Geomancer", "SW.Mob.Geomancer", [slot("Item", 0, 0, 0, true, [["SW.Item.Mace", 2, "Multiply"]])]),
+    lootRow("BooksCommon", "SW.LootSource.Books.Common", [slot("EnchantedBook", 0, 0, 0, false, [["SW.Item.EnchantmentBook.Arcane", 1000, "Set"], ["SW.Item.EnchantmentBook.Dynamo", 1000, "Set"], "SW.Item.Currency.SpringStone"])]),
+  ],
   area: [
     lootRow("Global", "SW.Area", [slot("EnchantedBook", 0, 0, 0, true)], ["SW.LootSource.Books.Common"]),
     lootRow("PlainsA1", AREA, [slot("Item", 0, 0, 0, true, ["SW.Item.Sword", "SW.Item.Mace"])]),
@@ -70,12 +73,18 @@ const sources = ItemSourcesSchema.parse({
   items: { "melee/sword": { areas: [`area:${AREA}`], chests: [{ id: "chest:FancyChest", pool: "area" }, { id: "chest:TalismansChest_Wolf", pool: "fixed" }], quests: [], merchants: [], bookPools: [] } },
   bookDrops: [],
 });
+const HOSTILE = { slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125, pool: "area" } as const;
+const SOUL = { ...HOSTILE, chancePerRoll: 0.25 } as const;
 const mobs = MobDataSchema.parse({
   mobs: [
     { slug: "big-boss", id: "BigBoss", kind: "boss", world: null, name: loc({ en: "Boss" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [{ slot: "item", guaranteed: 1, rolls: 0, chancePerRoll: 0, pool: "area" }, { slot: "specialGear", guaranteed: 1, rolls: 0, chancePerRoll: 1, pool: "own" }] },
     { slug: "piggy", id: "PiggyBank", kind: "regular", world: null, name: loc({ en: "Piggy" }), untranslated: [], stats: [], variants: [], areas: [], drops: [{ slot: "item", guaranteed: 1, rolls: 0, chancePerRoll: 0, pool: "area" }, { slot: "enchantedBook", guaranteed: 0, rolls: 1, chancePerRoll: 0.5, pool: "area" }] },
     { slug: "greedy", id: "Greedy", kind: "boss", world: null, name: loc({ en: "Greedy" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [{ slot: "item", guaranteed: 1, rolls: 20, chancePerRoll: 0.5, pool: "area" }] },
-    { slug: "zombie", id: "Zombie", kind: "regular", world: null, name: loc({ en: "Zombie" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [{ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125, pool: "area" }] },
+    { slug: "zombie", id: "Zombie", kind: "regular", world: null, name: loc({ en: "Zombie" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [HOSTILE], soulCorrupted: { stats: [], drops: [SOUL] } },
+    { slug: "husk", id: "Husk", kind: "variant", world: null, name: loc({ en: "Husk" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: `${AREA}.Cellar`, name: loc({ en: "Cellar" }) }, { areaId: "SW.Area.Nowhere.A1", name: loc({ en: "Nowhere" }) }], drops: [{ ...HOSTILE, pool: "none" }], soulCorrupted: { stats: [], drops: [SOUL] } },
+    { slug: "geomancer", id: "Geomancer", kind: "regular", world: null, name: loc({ en: "Geomancer" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [{ ...HOSTILE, pool: "none" }], soulCorrupted: { stats: [], drops: [SOUL] } },
+    { slug: "oddball", id: "Oddball", kind: "regular", world: null, name: loc({ en: "Oddball" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [{ ...HOSTILE, chancePerRoll: 0.5 }] },
+    { slug: "lost", id: "Lost", kind: "regular", world: null, name: loc({ en: "Lost" }), untranslated: [], stats: [], variants: [], areas: [], drops: [HOSTILE] },
   ],
 });
 const input: DropInput = {
@@ -108,9 +117,9 @@ describe("buildDropModels", () => {
     expect(data.rarityFactors[1]).toEqual([0.5, 0.5, 1, 1]);
   });
 
-  it("covers listed chests, their procedural versions, quests and bosses, and nothing else", () => {
+  it("covers listed chests, their procedural versions, quests, bosses and regular mobs, and nothing else", () => {
     expect(data.sources.map((source) => source.id).sort()).toEqual(
-      ["chest:FancyChest", "chest:FancyChest_Procedural", "chest:TalismansChest_Wolf", "mob:BigBoss", "mob:PiggyBank", "quest:Q1:0", "quest:Q1:1"].sort(),
+      ["chest:FancyChest", "chest:FancyChest_Procedural", "chest:TalismansChest_Wolf", "mob:BigBoss", "mob:PiggyBank", "quest:Q1:0", "quest:Q1:1", "regular:Geomancer", "regular:Geomancer:soul", "regular:Hostile", "regular:SoulStated"].sort(),
     );
   });
 
@@ -182,6 +191,34 @@ describe("buildDropModels", () => {
 
   it("gives a boss the counts and area pool the bestiary shows", () => {
     expect(odds("melee/mace")[`mob:BigBoss@area:${AREA}`]).toBeCloseTo(0.5);
+  });
+
+  it("gives regular mobs one source with a context per area: the mob's counts over the area pool and default rarity", () => {
+    // Pool Sword 1, Mace 1; Hostile row 0+1 at 1.25%, Soul Corrupted 25%; Default rarity has Unique 5 of 100.
+    const hostile = (key: string) => odds(key)[`regular:Hostile@area:${AREA}`];
+    expect(hostile("melee/mace")).toBeCloseTo(0.0125 * 0.5);
+    expect(hostile("melee/sword")).toBeCloseTo(0.0125 * 0.5 * 0.95);
+    expect(hostile(UNIQUE_KEY)).toBeCloseTo(0.0125 * 0.5 * 0.05);
+    expect(odds("melee/mace")[`regular:SoulStated@area:${AREA}`]).toBeCloseTo(0.25 * 0.5);
+    expect(data.sources.find((source) => source.id === "regular:Hostile")?.contexts.map(([area]) => area)).toEqual([`area:${AREA}`]);
+  });
+
+  it("maps a sub-area to the nearest area with a pool and counts it once, not per mob", () => {
+    // Husk lives in Plains.A1.Cellar, Zombie in Plains.A1: one context. Plains.A1 is the only place any regular mob reaches.
+    expect(data.sources.find((source) => source.id === "regular:Hostile")?.contexts).toHaveLength(1);
+    expect(odds("melee/mace")[`regular:Hostile@area:${FOREST}`]).toBeUndefined();
+  });
+
+  it("weighs the Geomancer's pool by its row on top of the area pool", () => {
+    // Mace x2 against Sword 1: Mace is 2 of 3 of the pool.
+    expect(odds("melee/mace")[`regular:Geomancer@area:${AREA}`]).toBeCloseTo(0.0125 * (2 / 3));
+    expect(odds("melee/mace")[`regular:Geomancer:soul@area:${AREA}`]).toBeCloseTo(0.25 * (2 / 3));
+  });
+
+  it("reports the areas without a pool and the mobs whose counts differ, and uses the majority counts", () => {
+    const details = built.issues.map((one) => one.detail);
+    expect(details).toContain("regular:Hostile: SW.Area.Nowhere.A1 has no drop pool, its mobs are not covered there");
+    expect(details).toContain("regular:Hostile: 1 of 4 regular mobs differ from the item slot 0+1@0.0125; those counts are not used");
   });
 
   it("reports what it leaves out", () => {

@@ -36,7 +36,7 @@ describe("Soul Storm page", () => {
   it("says the gear has no item list and marks each chest group unconfirmed once", async () => {
     const html = await render("en");
     expect(count(html, 'data-testid="soul-storm-unconfirmed"')).toBe(2);
-    expect(html).toContain("The data has no item list for this.");
+    expect(html).toContain("The data names no item list for this mob; the drop odds use the pool of the area it is in.");
     expect(html).toContain("In Soul Storms, items have a chance to drop with an extra effect!");
   });
   it("shows one untranslated marker for the rotation, not one per area", async () => {

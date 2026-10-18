@@ -435,7 +435,9 @@
     "markerStorm",
     "markerTalismanChest",
     "markerDungeon",
-    "mapNoteStorm"
+    "mapNoteStorm",
+    "dropRegularMobs",
+    "dropRegularNote"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -621,7 +623,7 @@
   "mobDropRolls": "Tiradas aleatorias: {n}, {chance} cada una",
   "mobDropPoolArea": "Los objetos salen de la reserva de botín de la zona.",
   "mobDropPoolOwn": "Los objetos salen de la lista propia de esta criatura.",
-  "mobDropPoolNone": "Los datos no tienen una lista de objetos para esto.",
+  "mobDropPoolNone": "Los datos no indican una lista de objetos para este monstruo; las probabilidades de botín usan el grupo de la zona en la que está.",
   "mobVariants": "Variantes",
   "mobVariantOf": "Variante de",
   "mobPortraitCredit": "Los retratos son renders de los modelos del juego.",
@@ -911,7 +913,7 @@
   "dropColChance": "Probabilidad",
   "dropOpenCalc": "Cambiar las condiciones en la calculadora de botín",
   "dropCalcIntro": "Elige un objeto, un nivel de amenaza, una dificultad y una rareza para ver la probabilidad de que cada fuente lo dé en cada activación.",
-  "dropCalcCoverage": "Incluye los cofres que aparecen en las páginas de objetos, cada lote de recompensas de las misiones publicadas, y los jefes, minijefes y la hucha. No incluye mercaderes, monstruos normales, cofres de la Tormenta de almas ni cofres con llave.",
+  "dropCalcCoverage": "Incluye los cofres que aparecen en las páginas de objetos, cada lote de recompensas de las misiones publicadas, los jefes, minijefes y la hucha, y los monstruos normales de cada zona (con los corrompidos por almas y el Geomante). No incluye mercaderes, cofres de la Tormenta de almas ni cofres con llave.",
   "dropCalcNoScript": "La calculadora necesita JavaScript. Sin JavaScript, cada página de objeto muestra sus probabilidades de botín con nivel de amenaza 20 en dificultad normal.",
   "dropCalcLoadFailed": "No se pudieron cargar los datos de botín.",
   "dropPickItem": "Elige un objeto…",
@@ -925,7 +927,9 @@
   "dropNoResult": "Ninguna fuente puede dar este objeto en estas condiciones.",
   "dropEmpty": "Elige un objeto para ver dónde cae y con qué probabilidad.",
   "dropCalc": "Calculadora de botín",
-  "dropNotIncluded": "Aún no incluidos: monstruos normales y mercaderes.",
+  "dropNotIncluded": "Aún no incluidos: mercaderes, cofres de la Tormenta de almas y cofres con llave.",
+  "dropRegularMobs": "Monstruos normales",
+  "dropRegularNote": "Probabilidad por monstruo derrotado; todos los monstruos normales de una zona dan el mismo valor, sea cual sea el monstruo. Los monstruos corrompidos por almas sueltan objetos mucho más a menudo y tienen sus propias filas; el Geomante duplica el peso de los artefactos. No se incluye la frecuencia con la que aparecen los monstruos.",
   "dropAreaUnconfirmed": "Zona sin confirmar: los datos no dicen dónde aparece esta fuente",
   "dropCalcNoData": "Esta versión no tiene datos de botín."
 }

@@ -434,7 +434,9 @@
     "markerStorm",
     "markerTalismanChest",
     "markerDungeon",
-    "mapNoteStorm"
+    "mapNoteStorm",
+    "dropRegularMobs",
+    "dropRegularNote"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -619,7 +621,7 @@
   "mobDropRolls": "Slumpade dragningar: {n}, {chance} vardera",
   "mobDropPoolArea": "Föremålen kommer från områdets bytespool.",
   "mobDropPoolOwn": "Föremålen kommer från varelsens egen lista.",
-  "mobDropPoolNone": "Datan har ingen föremålslista för detta.",
+  "mobDropPoolNone": "Datan anger ingen föremålslista för detta monster; släppchanserna räknas på poolen för området där det finns.",
   "mobVariants": "Varianter",
   "mobVariantOf": "Variant av",
   "mobPortraitCredit": "Porträtten är renderingar av spelets modeller.",
@@ -912,7 +914,7 @@
   "dropColChance": "Chans",
   "dropOpenCalc": "Ändra villkoren i släppräknaren",
   "dropCalcIntro": "Välj ett föremål, en hotnivå, en svårighetsgrad och en sällsynthet för att se hur sannolikt det är att varje källa ger det vid en aktivering.",
-  "dropCalcCoverage": "Med: kistorna på föremålssidorna, varje belöningsuppsättning i de publicerade uppdragen samt bossar, minibossar och Spargrisen. Inte med: handlare, vanliga monster, Själsstormskistor och nyckelkistor.",
+  "dropCalcCoverage": "Med: kistorna på föremålssidorna, varje belöningsuppsättning i de publicerade uppdragen, bossar, minibossar och Spargrisen samt de vanliga monstren i varje område (inklusive själsförvridna monster och Geomanten). Inte med: handlare, Själsstormskistor och nyckelkistor.",
   "dropCalcNoScript": "Räknaren kräver JavaScript. Utan JavaScript visar varje föremålssida ändå sina släppchanser på hotnivå 20 med normal svårighetsgrad.",
   "dropCalcLoadFailed": "Släppdatan kunde inte läsas in.",
   "dropPickItem": "Välj ett föremål…",
@@ -926,7 +928,9 @@
   "dropNoResult": "Ingen källa kan ge det här föremålet under de här villkoren.",
   "dropEmpty": "Välj ett föremål för att se var det släpps och hur troligt det är.",
   "dropCalc": "Släppräknare",
-  "dropNotIncluded": "Ännu inte med: vanliga monster och handlare.",
+  "dropNotIncluded": "Ännu inte med: handlare, Själsstormskistor och nyckelkistor.",
+  "dropRegularMobs": "Vanliga monster",
+  "dropRegularNote": "Chans per besegrat monster; alla vanliga monster i ett område ger samma värde, oavsett monster. Själsförvridna monster släpper föremål mycket oftare och har egna rader; Geomanten fördubblar vikten för artefakter. Hur ofta monster dyker upp ingår inte.",
   "dropAreaUnconfirmed": "Område obekräftat: datan säger inte var den här källan finns",
   "dropCalcNoData": "Den här versionen har ingen släppdata."
 }

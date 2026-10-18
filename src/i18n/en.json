@@ -182,7 +182,7 @@
   "mobDropRolls": "Random rolls: {n}, {chance} each",
   "mobDropPoolArea": "Items come from the area's drop pool.",
   "mobDropPoolOwn": "Items come from this mob's own list.",
-  "mobDropPoolNone": "The data has no item list for this.",
+  "mobDropPoolNone": "The data names no item list for this mob; the drop odds use the pool of the area it is in.",
   "mobVariants": "Variants",
   "mobVariantOf": "Variant of",
   "mobPortraitCredit": "Portraits are renders of the game's models.",
@@ -472,7 +472,7 @@
   "dropColChance": "Chance",
   "dropOpenCalc": "Change the conditions in the drop calculator",
   "dropCalcIntro": "Choose an item, a threat level, a difficulty and a rarity to see how likely each source is to give it per trigger.",
-  "dropCalcCoverage": "Covered: the chests listed on item pages, every reward batch of the published quests, and bosses, minibosses and the Piggy Bank. Merchants, regular mobs, Soul Storm chests and key chests are not.",
+  "dropCalcCoverage": "Covered: the chests listed on item pages, every reward batch of the published quests, bosses, minibosses and the Piggy Bank, and the regular mobs of each area (Soul Corrupted ones and the Geomancer included). Merchants, Soul Storm chests and key chests are not.",
   "dropCalcNoScript": "The calculator needs JavaScript. Without it, every item page still shows its drop odds at threat level 20 on Normal difficulty.",
   "dropCalcLoadFailed": "The drop data could not be loaded.",
   "dropPickItem": "Choose an item…",
@@ -486,7 +486,9 @@
   "dropNoResult": "No source can give this item under these conditions.",
   "dropEmpty": "Choose an item to see where it drops and how likely that is.",
   "dropCalc": "Drop Calculator",
-  "dropNotIncluded": "Not included yet: regular mobs and merchants.",
+  "dropNotIncluded": "Not included yet: merchants, Soul Storm chests and key chests.",
+  "dropRegularMobs": "Regular mobs",
+  "dropRegularNote": "Chance per kill; every regular mob in an area gives the same number, whatever the mob. Soul Corrupted mobs drop far more often and have their own rows; the Geomancer doubles the weight of artifacts. How often mobs appear is not included.",
   "dropAreaUnconfirmed": "Area unconfirmed: the data does not say where this source appears",
   "dropCalcNoData": "This build has no drop data."
 }

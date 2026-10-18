@@ -432,7 +432,9 @@
     "markerStorm",
     "markerTalismanChest",
     "markerDungeon",
-    "mapNoteStorm"
+    "mapNoteStorm",
+    "dropRegularMobs",
+    "dropRegularNote"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -619,7 +621,7 @@
   "mobDropRolls": "随机次数：{n}，每次 {chance}",
   "mobDropPoolArea": "物品取自所在区域的掉落池。",
   "mobDropPoolOwn": "物品取自此怪物自己的列表。",
-  "mobDropPoolNone": "数据中没有物品列表。",
+  "mobDropPoolNone": "数据没有为该怪物指定物品列表；掉落概率表按其所在区域的掉落池计算。",
   "mobVariants": "变种",
   "mobVariantOf": "变种来源",
   "mobPortraitCredit": "头像为游戏模型渲染。",
@@ -909,7 +911,7 @@
   "dropColChance": "概率",
   "dropOpenCalc": "在掉落概率计算器中调整条件",
   "dropCalcIntro": "选择物品、威胁等级、难度和目标稀有度，查看每个来源触发一次时掉出它的概率。",
-  "dropCalcCoverage": "涵盖范围：物品页列出的宝箱、已发布任务的每一批奖励，以及首领、副首领和宝箱猪。商人、普通怪物、灵魂风暴宝箱和钥匙宝箱不在其中。",
+  "dropCalcCoverage": "涵盖范围：物品页列出的宝箱、已发布任务的每一批奖励、首领、副首领和宝箱猪，以及各区域的普通怪物（含灵魂腐化怪物和地卜师）。商人、灵魂风暴宝箱和钥匙宝箱不在其中。",
   "dropCalcNoScript": "计算器需要 JavaScript。没有 JavaScript 时，每件物品的页面仍有威胁等级 20、普通难度下的掉落概率。",
   "dropCalcLoadFailed": "无法加载掉落数据。",
   "dropPickItem": "选择物品…",
@@ -923,7 +925,9 @@
   "dropNoResult": "在这些条件下，没有任何来源能掉出这个物品。",
   "dropEmpty": "选择一个物品，查看它在哪里掉落、概率多少。",
   "dropCalc": "掉落概率计算器",
-  "dropNotIncluded": "尚未收录：普通怪物和商人。",
+  "dropNotIncluded": "尚未收录：商人、灵魂风暴宝箱和钥匙宝箱。",
+  "dropRegularMobs": "普通怪物",
+  "dropRegularNote": "击败一次怪物的概率；同一区域的普通怪物都一样，不分怪物种类。灵魂腐化的怪物掉落概率高得多，另列一行；地卜师的法器权重加倍。不含怪物出现的频率。",
   "dropAreaUnconfirmed": "区域未确认：数据没有说明此来源出现在哪里",
   "dropCalcNoData": "这个版本没有掉落数据。"
 }

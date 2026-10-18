@@ -1,7 +1,7 @@
 /** How a drop source and its area are named on a page: the name in the language, a link where there is a page, and a small note. Server-side only. */
 import type { DropSource } from "./drop-types";
 import { t, type Lang } from "./i18n";
-import { assetUrl } from "./url";
+import { assetUrl, href } from "./url";
 import { areaHref, lootSource } from "./item-source-view";
 import { locationOf } from "./locations";
 import { mobData, mobHref } from "./mobs";
@@ -67,9 +67,19 @@ function mobLabel(lang: Lang, source: DropSource): DropLabel {
   return { name: mob?.name[lang] ?? lootSource(source.id)?.name[lang] ?? id, ...(mob ? { href: mobHref(lang, mob.slug) } : {}) };
 }
 
+/** The Soul Corrupted state of a regular mob source: "regular:SoulStated" and "regular:Geomancer:soul". */
+const SOUL_SOURCE = /:(SoulStated|soul)$/;
+
+/** Regular mobs: one name for every mob of the area, or the Geomancer's; the calculator lists names only, so Soul Corrupted is told apart in the name. */
+function regularLabel(lang: Lang, source: DropSource): DropLabel {
+  const mob = mobsById.get(source.id.split(":")[1]);
+  const base = mob?.name[lang] ?? t(lang, "dropRegularMobs");
+  return { name: SOUL_SOURCE.test(source.id) ? `${base} · ${t(lang, "mobSoulCorrupted")}` : base, href: mob ? mobHref(lang, mob.slug) : href(lang, "mobs") };
+}
+
 /** The label of a source; `all` is the file's sources, which number a quest's reward batches. */
 export function sourceLabel(lang: Lang, source: DropSource, all: readonly DropSource[] = [source]): DropLabel {
-  const label = source.kind === "quest" ? questLabel(lang, source, sourceIndex(all)) : source.kind === "mob" ? mobLabel(lang, source) : chestLabel(lang, source);
+  const label = source.kind === "quest" ? questLabel(lang, source, sourceIndex(all)) : source.kind === "mob" ? mobLabel(lang, source) : source.kind === "regular" ? regularLabel(lang, source) : chestLabel(lang, source);
   return source.unplaced ? { ...label, unplaced: true } : label;
 }
 

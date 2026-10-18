@@ -179,7 +179,7 @@
   "mobDropRolls": "隨機次數：{n}，每次 {chance}",
   "mobDropPoolArea": "物品取自所在區域的掉落池。",
   "mobDropPoolOwn": "物品取自此怪物自己的清單。",
-  "mobDropPoolNone": "資料中沒有物品清單。",
+  "mobDropPoolNone": "資料沒有為此怪物指定物品清單；掉落機率表依所在區域的掉落池計算。",
   "mobVariants": "變種",
   "mobVariantOf": "變種來源",
   "mobPortraitCredit": "頭像為遊戲模型渲染。",
@@ -469,7 +469,7 @@
   "dropColChance": "機率",
   "dropOpenCalc": "在掉落機率計算器中調整條件",
   "dropCalcIntro": "選擇物品、威脅等級、難度與目標稀有度，查看每個來源觸發一次時掉出它的機率。",
-  "dropCalcCoverage": "涵蓋範圍：物品頁列出的寶箱、已發布任務的每一批獎勵，以及首領、副首領與寶箱豬。商人、一般怪物、靈魂風暴寶箱與鑰匙寶箱不在其中。",
+  "dropCalcCoverage": "涵蓋範圍：物品頁列出的寶箱、已發布任務的每一批獎勵、首領、副首領與寶箱豬，以及各區域的一般怪物（含靈魂腐化與地卜師）。商人、靈魂風暴寶箱與鑰匙寶箱不在其中。",
   "dropCalcNoScript": "計算器需要 JavaScript。沒有 JavaScript 時，每件物品的頁面仍有威脅等級 20、一般難度下的掉落機率。",
   "dropCalcLoadFailed": "無法載入掉落資料。",
   "dropPickItem": "選擇物品…",
@@ -483,7 +483,9 @@
   "dropNoResult": "在這些條件下，沒有任何來源能掉出這個物品。",
   "dropEmpty": "選擇一個物品，查看它在哪裡掉落、機率多少。",
   "dropCalc": "掉落機率計算器",
-  "dropNotIncluded": "尚未收錄：一般怪物與商人。",
+  "dropNotIncluded": "尚未收錄：商人、靈魂風暴寶箱與鑰匙寶箱。",
+  "dropRegularMobs": "一般怪物",
+  "dropRegularNote": "擊敗一次怪物的機率；同一區域的一般怪物都一樣，不分怪物種類。靈魂腐化的怪物掉落機率高得多，另列一行；地卜師的法器權重加倍。不含怪物出現的頻率。",
   "dropAreaUnconfirmed": "區域未確認：資料沒有說明此來源出現在哪裡",
   "dropCalcNoData": "這個版本沒有掉落資料。"
 }

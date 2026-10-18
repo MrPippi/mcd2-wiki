@@ -82,8 +82,8 @@ test.describe("mob page", () => {
     await expect(dungeon.locator("a.mob-area-map")).toHaveAttribute("href", "/zh/map/");
     const gear = dropRow(page, "裝備").first();
     await expect(gear).toContainText("隨機次數：1，每次 1.25%");
-    await expect(gear).toContainText("資料中沒有物品清單。");
-    await expect(gear).not.toContainText("區域");
+    await expect(gear).toContainText("資料沒有為此怪物指定物品清單；掉落機率表依所在區域的掉落池計算。");
+    await expect(gear).not.toContainText("物品取自所在區域的掉落池");
     await expect(page.getByTestId("mob-drops-note").first()).toHaveText("依遊戲資料整理，實際掉落可能受遊戲機制影響。");
     await expect(page.getByTestId("mob-variants").locator("a")).toHaveCount(4);
   });
