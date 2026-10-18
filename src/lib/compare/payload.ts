@@ -39,8 +39,8 @@ export const compareWeapons = (lang: Lang, entries: readonly Entry[] = published
   entries.flatMap((entry) => weaponOf(lang, entry, weapons));
 
 const labelsFor = (lang: Lang): CompareLabels => ({
-  pick: t(lang, "weaponComparePick"),
-  column: t(lang, "weaponCompareColumn"),
+  add: t(lang, "weaponCompareAdd"),
+  added: t(lang, "weaponCompareAdded"),
   stat: t(lang, "weaponCompareStat"),
   effects: t(lang, "weaponCompareEffects"),
   best: t(lang, "weaponCompareBest"),

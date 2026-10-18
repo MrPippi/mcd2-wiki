@@ -18,9 +18,10 @@ export interface CompareWeapon {
 }
 
 export interface CompareLabels {
-  readonly pick: string;
-  /** Has an `{n}` placeholder. */
-  readonly column: string;
+  /** The one "Add weapon" button and the picker's title. */
+  readonly add: string;
+  /** Marks a weapon already in the comparison inside the picker. */
+  readonly added: string;
   readonly stat: string;
   readonly effects: string;
   readonly best: string;
@@ -44,8 +45,8 @@ export interface ComparePayload {
   readonly labels: CompareLabels;
 }
 
-const LABEL_KEYS = ["pick", "column", "stat", "effects", "best", "builtIn", "empty", "dropped", "melee", "ranged", "copied", "copyFailed", "clear", "close", "filter", "noResults"] as const satisfies readonly (keyof CompareLabels)[];
-const PLACEHOLDERS: Partial<Record<keyof CompareLabels, string>> = { column: "{n}", dropped: "{n}" };
+const LABEL_KEYS = ["add", "added", "stat", "effects", "best", "builtIn", "empty", "dropped", "melee", "ranged", "copied", "copyFailed", "clear", "close", "filter", "noResults"] as const satisfies readonly (keyof CompareLabels)[];
+const PLACEHOLDERS: Partial<Record<keyof CompareLabels, string>> = { dropped: "{n}" };
 
 const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null && !Array.isArray(value);
 const isText = (value: unknown): value is string => typeof value === "string" && value !== "";

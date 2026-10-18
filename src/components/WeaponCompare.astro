@@ -10,26 +10,18 @@ interface Props {
 }
 
 const { lang, payload } = Astro.props;
-const columns = Array.from({ length: MAX_WEAPONS }, (_, index) => index);
-const columnLabel = (index: number) => payload.labels.column.replace("{n}", () => String(index + 1));
 ---
 {/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
 <div class="compare" data-testid="weapon-compare" data-weapon-compare hidden>
   <p class="compare-notice tag warn" data-testid="compare-notice" data-notice role="status" hidden></p>
-  <ul class="compare-picks">
-    {columns.map((index) => (
-      <li class="compare-pick" data-testid={`compare-pick-${index + 1}`} data-pick={index} data-filled="false">
-        <button type="button" class="compare-pick-button" data-pick-open aria-haspopup="dialog">
-          <span class="compare-icon" data-icon aria-hidden="true"></span>
-          <span class="compare-pick-text">
-            <span class="compare-pick-label">{columnLabel(index)}</span>
-            <span class="compare-pick-name" data-name>{payload.labels.pick}</span>
-          </span>
-        </button>
-        <button type="button" class="compare-clear" data-clear aria-label={`${payload.labels.clear}: ${columnLabel(index)}`} hidden>×</button>
-      </li>
-    ))}
-  </ul>
+  {/* One button adds a weapon; each compared weapon shows once, in the table head, with its own remove button. */}
+  <div class="compare-toolbar">
+    <button type="button" class="compare-add" data-testid="compare-add" data-add aria-haspopup="dialog">
+      <span class="compare-add-mark" aria-hidden="true">+</span>
+      <span>{payload.labels.add}</span>
+      <span class="compare-count" data-count>{`0 / ${MAX_WEAPONS}`}</span>
+    </button>
+  </div>
   <p class="note compare-empty" data-testid="compare-empty" data-empty>{payload.labels.empty}</p>
   <div class="compare-scroll" tabindex="0" role="region" aria-label={t(lang, "weaponCompare")} data-scroll hidden>
     <table class="compare-table" data-testid="compare-table" data-table>

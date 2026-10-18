@@ -1,15 +1,15 @@
-/** The weapon comparison in the browser: column pickers, the table, the address and the copy button. */
-import { bestColumns, compareSearch, decodeCompare, placeWeapon, removeWeapon } from "./code";
+/** The weapon comparison in the browser: the add button, the table, the address and the copy button. */
+import { addWeapon, bestColumns, compareSearch, decodeCompare, MAX_WEAPONS, removeWeapon } from "./code";
 import { parseComparePayload, type ComparePayload, type CompareWeapon } from "./parse";
-import { iconImage, openPicker, wirePicker, type PickerParts, type PickerRequest } from "./picker";
+import { openPicker, wirePicker, type PickerParts, type PickerRequest } from "./picker";
 
 /** Fired after replaceState so the language links pick up the new query (SiteHeader listens). */
 const LOCATION_EVENT = "mcd2:locationchange";
 const ICON_SIZE = 40;
 
 interface Parts {
-  /** One per column, in order. */
-  readonly columns: readonly HTMLElement[];
+  readonly add: HTMLButtonElement;
+  readonly count: HTMLElement;
   readonly picker: PickerParts;
   readonly close: HTMLElement;
   readonly scroll: HTMLElement;
@@ -31,7 +31,6 @@ function readPayload(root: HTMLElement): ComparePayload | undefined {
 
 function partsOf(root: HTMLElement): Parts | undefined {
   const one = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector) ?? undefined;
-  const columns = [...root.querySelectorAll<HTMLElement>("[data-pick]")];
   const picker = {
     dialog: one<HTMLDialogElement>("[data-dialog]"),
     title: one("[data-dialog-title]"),
@@ -40,6 +39,8 @@ function partsOf(root: HTMLElement): Parts | undefined {
     noResults: one("[data-no-results]"),
   };
   const parts = {
+    add: one<HTMLButtonElement>("[data-add]"),
+    count: one("[data-count]"),
     close: one("[data-close]"),
     scroll: one("[data-scroll]"),
     head: one("[data-head]"),
@@ -49,8 +50,8 @@ function partsOf(root: HTMLElement): Parts | undefined {
     status: one("[data-status]"),
     url: one<HTMLInputElement>("[data-url]"),
   };
-  const complete = columns.length > 0 && [...Object.values(parts), ...Object.values(picker)].every(Boolean);
-  return complete ? ({ ...parts, columns, picker } as Parts) : undefined;
+  const complete = [...Object.values(parts), ...Object.values(picker)].every(Boolean);
+  return complete ? ({ ...parts, picker } as Parts) : undefined;
 }
 
 const cell = (tag: "th" | "td", text = ""): HTMLTableCellElement => {
@@ -59,9 +60,11 @@ const cell = (tag: "th" | "td", text = ""): HTMLTableCellElement => {
   return element;
 };
 
-function weaponHead(weapon: CompareWeapon): HTMLTableCellElement {
+/** A weapon's column head: icon and name linking to its page, and the button that takes it out of the comparison. */
+function weaponHead(weapon: CompareWeapon, index: number, clear: string): HTMLTableCellElement {
   const head = cell("th");
   head.scope = "col";
+  head.dataset.slug = weapon.slug;
   const link = document.createElement("a");
   link.href = weapon.href;
   link.className = "compare-weapon";
@@ -77,7 +80,16 @@ function weaponHead(weapon: CompareWeapon): HTMLTableCellElement {
   const name = document.createElement("span");
   name.textContent = weapon.name;
   link.append(name);
-  head.append(link);
+  const remove = document.createElement("button");
+  remove.type = "button";
+  remove.className = "compare-remove";
+  remove.dataset.remove = String(index);
+  remove.setAttribute("aria-label", `${clear}: ${weapon.name}`);
+  remove.textContent = "×";
+  const holder = document.createElement("div");
+  holder.className = "compare-head-cell";
+  holder.append(link, remove);
+  head.append(holder);
   return head;
 }
 
@@ -130,7 +142,7 @@ function render(parts: Parts, payload: ComparePayload, slugs: readonly string[])
   const headRow = document.createElement("tr");
   const corner = cell("th", payload.labels.stat);
   corner.scope = "col";
-  headRow.append(corner, ...weapons.map(weaponHead));
+  headRow.append(corner, ...weapons.map((weapon, index) => weaponHead(weapon, index, payload.labels.clear)));
   parts.head.replaceChildren(headRow);
   const { labels } = payload;
   const rows = [
@@ -141,19 +153,10 @@ function render(parts: Parts, payload: ComparePayload, slugs: readonly string[])
   parts.body.replaceChildren(...rows.flatMap((row) => row ?? []));
 }
 
-/** The column buttons: icon and name of the weapon each holds, or the prompt when empty. */
-function renderColumns(parts: Parts, payload: ComparePayload, slugs: readonly string[]): void {
-  parts.columns.forEach((column, index) => {
-    const weapon = payload.weapons.find((found) => found.slug === slugs[index]);
-    column.dataset.slug = weapon?.slug ?? "";
-    column.dataset.filled = String(weapon !== undefined);
-    column.dataset.unique = String(weapon?.unique === true);
-    column.querySelector("[data-icon]")?.replaceChildren(...iconImage(weapon?.icon));
-    const name = column.querySelector<HTMLElement>("[data-name]");
-    if (name) name.textContent = weapon?.name ?? payload.labels.pick;
-    const clear = column.querySelector<HTMLElement>("[data-clear]");
-    if (clear) clear.hidden = weapon === undefined;
-  });
+/** The add button: hidden once the comparison is full, with how many places are used. */
+function renderAdd(parts: Parts, slugs: readonly string[]): void {
+  parts.add.hidden = slugs.length >= MAX_WEAPONS;
+  parts.count.textContent = `${slugs.length} / ${MAX_WEAPONS}`;
 }
 
 function syncUrl(slugs: readonly string[]): void {
@@ -181,8 +184,6 @@ async function copyLink(parts: Parts, payload: ComparePayload): Promise<void> {
   }
 }
 
-const columnLabel = (payload: ComparePayload, index: number): string => payload.labels.column.replace("{n}", () => String(index + 1));
-
 /** Wires up the comparison; false when the payload or markup is not what the page should have rendered. */
 export function mountCompare(root: HTMLElement): boolean {
   const payload = readPayload(root);
@@ -193,36 +194,37 @@ export function mountCompare(root: HTMLElement): boolean {
   let request: PickerRequest | undefined;
   const show = (next: readonly string[]) => {
     slugs = next;
-    renderColumns(parts, payload, slugs);
+    renderAdd(parts, slugs);
     render(parts, payload, slugs);
   };
-  const change = (next: readonly string[], focusColumn: number) => {
+  const change = (next: readonly string[]) => {
     show(next);
     syncUrl(slugs);
     parts.notice.hidden = true;
     parts.url.hidden = true;
     parts.status.textContent = "";
-    // Picks pack to the left, so focus the column the weapon landed in, or the first empty one.
-    parts.columns[Math.min(focusColumn, slugs.length, parts.columns.length - 1)]?.querySelector<HTMLElement>("[data-pick-open]")?.focus();
   };
   if (decoded.dropped > 0) syncUrl(slugs);
   show(slugs);
-  parts.columns.forEach((column, index) => {
-    column.querySelector("[data-pick-open]")?.addEventListener("click", () => {
-      const taken = new Map(slugs.flatMap((slug, other) => (other === index ? [] : [[slug, columnLabel(payload, other)] as const])));
-      request = {
-        title: columnLabel(payload, index),
-        current: slugs[index],
-        taken,
-        pick: (slug) => {
-          parts.picker.dialog.close();
-          const next = placeWeapon(slugs, index, slug);
-          change(next, next.indexOf(slug));
-        },
-      };
-      openPicker(parts.picker, payload, request);
-    });
-    column.querySelector("[data-clear]")?.addEventListener("click", () => change(removeWeapon(slugs, index), index));
+  parts.add.addEventListener("click", () => {
+    request = {
+      title: payload.labels.add,
+      taken: new Map(slugs.map((slug) => [slug, payload.labels.added] as const)),
+      pick: (slug) => {
+        parts.picker.dialog.close();
+        change(addWeapon(slugs, slug));
+        // The add button hides once the comparison is full: then focus the new weapon's link instead.
+        (parts.add.hidden ? parts.head.querySelector<HTMLElement>(`th[data-slug="${slug}"] a`) : parts.add)?.focus();
+      },
+    };
+    openPicker(parts.picker, payload, request);
+  });
+  // The head is rebuilt on every change, so remove clicks are delegated.
+  parts.head.addEventListener("click", (event) => {
+    const button = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-remove]") : null;
+    if (!button?.dataset.remove) return;
+    change(removeWeapon(slugs, Number(button.dataset.remove)));
+    parts.add.focus(); // the column and its button are gone
   });
   wirePicker(parts.picker, payload, () => request, parts.close);
   root.querySelector("[data-copy]")?.addEventListener("click", () => void copyLink(parts, payload));
