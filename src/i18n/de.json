@@ -509,7 +509,7 @@
   "reportIssue": "Fehler melden",
   "map": "Karte",
   "worldMap": "Weltkarte",
-  "mapIntro": "Die Draufsicht-Karte des Spiels mit Lorenstationen, Rissen, der Teleportierungsstatue, Händlern und Gebieten.",
+  "mapIntro": "Die spieleigene Übersichtskarte mit Lorenstationen, Rissen, der Teleportstatue, Händlern, Haupt- und Nebenquests, Sturmgeneratoren, Talismantruhen, Dungeons und Gebieten.",
   "mapMarkers": "Markierungen",
   "mapSearch": "Orte suchen",
   "mapSearchPlaceholder": "Name oder Gebiet …",

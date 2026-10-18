@@ -509,7 +509,7 @@
   "reportIssue": "报告错误",
   "map": "地图",
   "worldMap": "世界地图",
-  "mapIntro": "游戏内的俯视全图，标出矿车站、裂隙、传送雕像、商人与各区域。",
+  "mapIntro": "游戏内的俯视全图，标出矿车站、裂隙、传送雕像、商人、主线与支线任务、风暴发生器、护符宝箱、地下城与各区域。",
   "mapMarkers": "标记",
   "mapSearch": "搜索地点",
   "mapSearchPlaceholder": "名称或区域…",

@@ -507,7 +507,7 @@
   "reportIssue": "Informar de un error",
   "map": "Mapa",
   "worldMap": "Mapa del mundo",
-  "mapIntro": "El mapa cenital del propio juego, con estaciones de vagonetas, grietas, la estatua de teletransporte, comerciantes y zonas.",
+  "mapIntro": "El mapa cenital del propio juego, con estaciones de vagoneta, grietas, la estatua de teletransporte, mercaderes, misiones principales y secundarias, generadores de tormenta, cofres de talismán, mazmorras y zonas.",
   "mapMarkers": "Marcadores",
   "mapSearch": "Buscar lugares",
   "mapSearchPlaceholder": "Nombre o zona…",

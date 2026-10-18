@@ -507,7 +507,7 @@
   "reportIssue": "Segnala un errore",
   "map": "Mappa",
   "worldMap": "Mappa del mondo",
-  "mapIntro": "La mappa dall'alto del gioco, con stazioni dei vagonetti, varchi, la statua di teletrasporto, mercanti e aree.",
+  "mapIntro": "La mappa dall'alto del gioco, con stazioni dei carrelli, fenditure, la statua del teletrasporto, mercanti, missioni principali e secondarie, generatori di tempesta, forzieri dei talismani, dungeon e aree.",
   "mapMarkers": "Indicatori",
   "mapSearch": "Cerca luoghi",
   "mapSearchPlaceholder": "Nome o area…",

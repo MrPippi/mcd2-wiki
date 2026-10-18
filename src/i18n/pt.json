@@ -507,7 +507,7 @@
   "reportIssue": "Relatar um erro",
   "map": "Mapa",
   "worldMap": "Mapa do mundo",
-  "mapIntro": "O mapa visto de cima do próprio jogo, com estações de vagonetas, fendas, a estátua de teletransporte, mercadores e áreas.",
+  "mapIntro": "O mapa visto de cima do próprio jogo, com estações de carrinho, fendas, a estátua de teleporte, mercadores, missões principais e secundárias, geradores de tempestade, baús de talismã, masmorras e áreas.",
   "mapMarkers": "Marcadores",
   "mapSearch": "Buscar lugares",
   "mapSearchPlaceholder": "Nome ou área…",

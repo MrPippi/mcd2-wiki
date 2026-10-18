@@ -69,7 +69,7 @@
   "reportIssue": "回報錯誤",
   "map": "地圖",
   "worldMap": "世界地圖",
-  "mapIntro": "遊戲內的俯視全圖，標出礦車站、裂隙、傳送雕像、商人與各區域。",
+  "mapIntro": "遊戲內的俯視全圖，標出礦車站、裂隙、傳送雕像、商人、主線與支線任務、風暴產生器、護符寶箱、地下城與各區域。",
   "mapMarkers": "標記",
   "mapSearch": "搜尋地點",
   "mapSearchPlaceholder": "名稱或區域…",

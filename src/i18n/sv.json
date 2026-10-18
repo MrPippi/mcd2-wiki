@@ -506,7 +506,7 @@
   "reportIssue": "Rapportera ett fel",
   "map": "Karta",
   "worldMap": "Världskarta",
-  "mapIntro": "Spelets egen karta sedd ovanifrån, med gruvvagnsstationer, revor, teleporteringsstatyn, handlare och områden.",
+  "mapIntro": "Spelets egen karta sedd ovanifrån, med gruvvagnsstationer, sprickor, teleportstatyn, handlare, huvud- och sidouppdrag, stormgeneratorer, talismankistor, grottor och områden.",
   "mapMarkers": "Markörer",
   "mapSearch": "Sök platser",
   "mapSearchPlaceholder": "Namn eller område…",

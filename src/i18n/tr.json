@@ -507,7 +507,7 @@
   "reportIssue": "Hata bildir",
   "map": "Harita",
   "worldMap": "Dünya haritası",
-  "mapIntro": "Oyunun kendi kuşbakışı haritası; maden arabası istasyonları, yarıklar, ışınlanma heykeli, tüccarlar ve bölgelerle.",
+  "mapIntro": "Oyunun kendi kuşbakışı haritası: maden arabası istasyonları, yarıklar, ışınlanma heykeli, tüccarlar, ana ve yan görevler, fırtına jeneratörleri, tılsım sandıkları, zindanlar ve bölgeler.",
   "mapMarkers": "İşaretler",
   "mapSearch": "Yer ara",
   "mapSearchPlaceholder": "Ad veya bölge…",

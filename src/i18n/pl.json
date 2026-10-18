@@ -509,7 +509,7 @@
   "reportIssue": "Zgłoś błąd",
   "map": "Mapa",
   "worldMap": "Mapa świata",
-  "mapIntro": "Mapa z samej gry w widoku z góry, ze stacjami wagoników, szczelinami, posągiem teleportującym, kupcami i obszarami.",
+  "mapIntro": "Mapa z lotu ptaka z gry: stacje wagoników, szczeliny, posąg teleportacji, kupcy, zadania główne i poboczne, generatory burzy, skrzynie z talizmanami, lochy i obszary.",
   "mapMarkers": "Znaczniki",
   "mapSearch": "Szukaj miejsc",
   "mapSearchPlaceholder": "Nazwa lub obszar…",
