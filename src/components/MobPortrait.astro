@@ -1,13 +1,16 @@
 ---
 import type { Mob } from "../../scripts/extract/mob-schema";
 import { t, type Lang } from "../lib/i18n";
+import { largePortraitPath } from "../lib/mob-portrait-path";
 import { assetUrl } from "../lib/url";
 
 interface Props {
   lang: Lang;
   mob: Mob;
-  /** Rendered side in CSS pixels; the published webp is 128px. */
+  /** Rendered side in CSS pixels; the published webp is 256px. */
   size: number;
+  /** The mob page plate, drawn much larger than its width attribute: uses the 768px render. */
+  large?: boolean;
   loading?: "lazy" | "eager";
   /** Inside a link that already names the mob: the picture is decoration and stays silent. */
   decorative?: boolean;
@@ -16,11 +19,12 @@ interface Props {
 /** Below this side the plate is too small to carry its "no image" label. */
 const EMPTY_LABEL_MIN_SIZE = 72;
 
-const { lang, mob, size, loading = "lazy", decorative = false } = Astro.props;
+const { lang, mob, size, large = false, loading = "lazy", decorative = false } = Astro.props;
+const src = mob.portrait && assetUrl(large ? largePortraitPath(mob.portrait) : mob.portrait);
 ---
 {mob.portrait ? (
   <span class="mob-portrait" style={`--size:${size}px`}>
-    <img src={assetUrl(mob.portrait)} alt={decorative ? "" : mob.name[lang]} width={size} height={size} loading={loading} decoding="async" />
+    <img src={src} alt={decorative ? "" : mob.name[lang]} width={size} height={size} loading={loading} decoding="async" />
   </span>
 ) : (
   <span

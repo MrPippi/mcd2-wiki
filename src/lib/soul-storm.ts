@@ -1,11 +1,14 @@
 /** The Soul Storm page for the site: data from `npm run extract` and the helpers its components format with. Server-side only. */
-import type { Mob } from "../../scripts/extract/mob-schema";
+import type { Mob, MobArea } from "../../scripts/extract/mob-schema";
+import type { Location } from "../../scripts/extract/location-schema";
 import { SoulStormDataSchema, type Chest, type Generator, type SoulStormData, type TextId } from "../../scripts/extract/soul-storm-schema";
 import rawSoulStorm from "../data/soul-storm.json";
 import { t, type Lang, type UiKey } from "./i18n";
 import { htmlLang } from "./lang";
+import { locationOf } from "./locations";
 import { findMob, formatChance, mapLinkOf } from "./mobs";
-import type { ClockPayload, StormSchedule } from "./soul-storm-schedule";
+import type { ClockArea, ClockPayload, StormSchedule } from "./soul-storm-schedule";
+import { assetUrl } from "./url";
 
 /** Soul Storm data from `npm run extract`, validated at build time. */
 export const soulStormData: SoulStormData = SoulStormDataSchema.parse(rawSoulStorm);
@@ -30,12 +33,20 @@ export const scheduleOf = (data: SoulStormData): StormSchedule => ({
 /** Whether there is a schedule to show: no rotation or no cadence means the tables were missing (P13). */
 export const hasSchedule = (data: SoulStormData): boolean => data.rotation.length > 0 && data.schedule.cadenceSeconds > 0;
 
+/** The location a rotation area belongs to, if the site has a page for it. */
+export const areaLocation = (area: MobArea): Location | undefined => locationOf(area.areaId);
+
+const clockArea = (area: MobArea, lang: Lang): ClockArea => {
+  const icon = areaLocation(area)?.icon;
+  return { name: area.name[lang], href: mapLinkOf(lang, area), ...(icon ? { icon: assetUrl(icon) } : {}) };
+};
+
 /** Everything the browser clock needs, every string already in the page language; undefined without a schedule. */
 export function clockPayload(lang: Lang, data: SoulStormData = soulStormData): ClockPayload | undefined {
   if (!hasSchedule(data)) return undefined;
   return {
     ...scheduleOf(data),
-    areas: data.rotation.map((area) => ({ name: area.name[lang], href: mapLinkOf(lang, area) })),
+    areas: data.rotation.map((area) => clockArea(area, lang)),
     labels: {
       now: t(lang, "soulStormNow"),
       next: t(lang, "soulStormNext"),

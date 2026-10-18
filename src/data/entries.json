@@ -15404,7 +15404,7 @@
       "uk": "Гілка темного дуба"
     },
     "description": {
-      "zh": "Carry <span class=\"placeholder\" data-slot=\"0\">{value}</span> more ammo.",
+      "zh": "箭矢攜帶量提高 <span class=\"placeholder\" data-slot=\"0\">{value}</span>。",
       "zh-hans": "箭矢携带量增加 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
       "en": "Carry <span class=\"placeholder\" data-slot=\"0\">{value}</span> more ammo.",
       "ja": "Carry <span class=\"placeholder\" data-slot=\"0\">{value}</span> more ammo.",
@@ -15423,7 +15423,6 @@
     },
     "icon": "icons/talisman/ammo-capacity.png",
     "untranslated": [
-      "zh",
       "ja",
       "ko",
       "ru",
@@ -21478,7 +21477,7 @@
       "uk": "Сагайдак"
     },
     "description": {
-      "zh": "Carry <span class=\"placeholder\" data-slot=\"0\">{value}</span> more ammo.",
+      "zh": "箭矢攜帶量提高 <span class=\"placeholder\" data-slot=\"0\">{value}</span>。",
       "zh-hans": "箭矢携带量增加 <span class=\"placeholder\" data-slot=\"0\">{数值}</span>。",
       "en": "Carry <span class=\"placeholder\" data-slot=\"0\">{value}</span> more ammo.",
       "ja": "Carry <span class=\"placeholder\" data-slot=\"0\">{value}</span> more ammo.",
@@ -21497,7 +21496,6 @@
     },
     "icon": "icons/effect/ammo-capacity.png",
     "untranslated": [
-      "zh",
       "ja",
       "ko",
       "ru",

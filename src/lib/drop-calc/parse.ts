@@ -15,6 +15,8 @@ export interface CalcLabel {
   readonly note?: string;
   /** The data does not say where the source appears. */
   readonly unplaced?: true;
+  /** Area labels: the area's game icon URL. */
+  readonly icon?: string;
 }
 
 export interface CalcLabels {

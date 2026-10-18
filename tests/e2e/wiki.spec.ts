@@ -127,7 +127,7 @@ test("icons sit inside the game's slot frames", async ({ page, request }) => {
   await page.goto("/zh/melee/sword/");
   await expect(page.locator(".entry-head .icon-frame.frame-inventory img")).toBeVisible();
   await page.goto("/zh/enchantment/arcane/");
-  await expect(page.locator(".entry-head .icon-frame.frame-enchantment img")).toBeVisible();
+  await expect(page.locator(".entry-head .icon-frame.frame-enchantment img.entry-icon")).toBeVisible();
   expect((await request.get("/icons/frames/enchantment.png")).status()).toBe(200);
 });
 
@@ -201,16 +201,18 @@ test("artifacts are shown bare on the plate like other gear", async ({ page }) =
 test("enchantment icons fill the diamond window of the book frame", async ({ page }) => {
   await page.goto("/zh/enchantment/arcane/");
   const frame = await page.locator(".entry-head .icon-frame").boundingBox();
-  const icon = await page.locator(".entry-head .icon-frame img").boundingBox();
+  const icon = await page.locator(".entry-head .icon-frame img.entry-icon").boundingBox();
   if (!frame || !icon) throw new Error("icon or frame not rendered");
   // The diamond window spans x 39–217 and y 13–195 of the 256px frame art.
   expect(icon.width / frame.width).toBeCloseTo(178 / 256, 1);
   expect((icon.x - frame.x) / frame.width).toBeCloseTo(39 / 256, 1);
   expect((icon.y + icon.height / 2 - frame.y) / frame.height).toBeCloseTo(104 / 256, 1);
-  const frameOnTop = await page.locator(".entry-head .icon-frame").evaluate(
-    (el) => getComputedStyle(el, "::after").backgroundImage,
-  );
-  expect(frameOnTop).toContain("frames/enchantment.png");
+  // The frame is an <img> drawn after the icon, so it stays on top and survives extensions that strip CSS backgrounds.
+  const frameArt = page.locator(".entry-head .icon-frame img.entry-icon + img.frame-art");
+  await expect(frameArt).toHaveAttribute("src", /frames\/enchantment\.png$/);
+  const art = await frameArt.boundingBox();
+  if (!art) throw new Error("frame art not rendered");
+  expect(art.width).toBeCloseTo(frame.width, 0);
 });
 
 test("navigation, home cards and headings show the game's category icons", async ({ page }) => {

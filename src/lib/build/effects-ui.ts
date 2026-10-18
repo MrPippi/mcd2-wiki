@@ -42,7 +42,7 @@ export function keptEffects(payload: BuildPayload, build: Build, effects: Effect
   ) as Effects;
 }
 
-/** One picked effect: name (linked), level select, remove button. Events are handled by the list's owner. */
+/** One picked effect: icon and name (a button that swaps the effect, like the enchantment picker), level select, remove button. Events are handled by the list's owner. */
 function effectRow(pick: EffectPick, option: EffectOption, labels: BuildPayload["labels"]): HTMLLIElement {
   const row = document.createElement("li");
   row.className = "build-effect";
@@ -58,10 +58,18 @@ function effectRow(pick: EffectPick, option: EffectOption, labels: BuildPayload[
     image.height = ICON_SIZE;
     icon.append(image);
   }
-  const name = document.createElement("a");
+  const pickButton = document.createElement("button");
+  pickButton.type = "button";
+  pickButton.className = "build-effect-pick";
+  pickButton.dataset.effectChange = pick.slug;
+  pickButton.setAttribute("aria-haspopup", "dialog");
+  const spoken = document.createElement("span");
+  spoken.className = "sr-only";
+  spoken.textContent = `${labels.effect}: `;
+  const name = document.createElement("span");
   name.className = "build-effect-name";
-  name.href = option.href;
   name.textContent = option.name;
+  pickButton.append(icon, spoken, name);
   const tier = document.createElement("select");
   tier.className = "build-tier";
   tier.dataset.effectTier = pick.slug;
@@ -73,7 +81,7 @@ function effectRow(pick: EffectPick, option: EffectOption, labels: BuildPayload[
   remove.dataset.effectRemove = pick.slug;
   remove.setAttribute("aria-label", `${labels.removeEffect}: ${option.name}`);
   remove.textContent = "×";
-  row.append(icon, name, tier, remove);
+  row.append(pickButton, tier, remove);
   return row;
 }
 

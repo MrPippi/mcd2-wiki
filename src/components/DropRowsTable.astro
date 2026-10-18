@@ -9,6 +9,7 @@ interface Props {
 }
 
 const { lang, rows, label } = Astro.props;
+const AREA_ICON_SIZE = 24;
 ---
 {/* The table scrolls inside its own region on narrow screens; the page never does. */}
 <div class="table-scroll" tabindex="0" role="region" aria-label={label}>
@@ -29,7 +30,12 @@ const { lang, rows, label } = Astro.props;
             {row.source.unplaced && <span class="tag warn" data-testid="drop-unplaced">{t(lang, "dropAreaUnconfirmed")}</span>}
           </th>
           <td>
-            {row.area ? (row.area.href ? <a href={row.area.href}>{row.area.name}</a> : row.area.name) : <span class="drop-any">{t(lang, "dropNoArea")}</span>}
+            {row.area ? (
+              <span class="drop-area">
+                {row.area.icon && <img class="drop-area-icon" src={row.area.icon} alt="" width={AREA_ICON_SIZE} height={AREA_ICON_SIZE} loading="lazy" decoding="async" />}
+                {row.area.href ? <a href={row.area.href}>{row.area.name}</a> : row.area.name}
+              </span>
+            ) : <span class="drop-any">{t(lang, "dropNoArea")}</span>}
           </td>
           <td class="drop-chance" data-chance={row.probability}>{row.chance}</td>
         </tr>

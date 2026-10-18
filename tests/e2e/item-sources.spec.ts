@@ -2,12 +2,12 @@ import { expect, test } from "@playwright/test";
 import { horizontalOverflow } from "./helpers/overflow";
 
 test.describe("how to obtain", () => {
-  test("lists areas, chests, quest and merchant for the sickles", async ({ page }) => {
+  test("lists areas, quest and merchant for the sickles, and leaves area-pool chests to the calculator", async ({ page }) => {
     await page.goto("/zh/melee/sickles/");
     const block = page.getByTestId("item-sources");
     await expect(block.locator("h2")).toHaveText("取得方式");
     await expect(block.locator("[data-source-kind='areas'] a").first()).toHaveAttribute("href", /\/zh\/map\//);
-    await expect(block.locator("[data-source-kind='chests'] li").first().locator(".tag").first()).toBeVisible();
+    await expect(block.locator("[data-source-kind='chests']")).toHaveCount(0);
     await expect(block.locator("[data-source-kind='quests'] [data-testid='guaranteed']")).toHaveCount(1);
     await expect(block.locator("[data-source-kind='merchants'] [data-testid='merchant-category']")).toContainText("近戰");
     await expect(block.locator(".note")).toBeVisible();
@@ -29,7 +29,8 @@ test.describe("how to obtain", () => {
     await page.goto("/zh/artifact/firework-quiver/");
     const block = page.getByTestId("item-sources");
     await expect(block.getByTestId("chest-fixed")).toHaveCount(1);
-    await expect(block.getByTestId("chest-area").first()).toBeVisible();
+    // Gear pages leave area-pool chests to the drop calculator.
+    await expect(block.getByTestId("chest-area")).toHaveCount(0);
     await expect(block.locator(".tag.warn").first()).toHaveText("未翻譯");
     const chests = block.locator("[data-source-kind='chests']");
     await expect(chests.locator("h3 .tag.warn")).toHaveText("未翻譯");
@@ -38,6 +39,11 @@ test.describe("how to obtain", () => {
     await expect(block.locator("[data-source-kind='areas'] .tag.warn")).toHaveCount(0);
     await expect(page.locator("main h1 ~ .tag.warn, .entry-title .tag.warn")).toHaveCount(0);
     expect(await block.innerText()).not.toContain("%");
+  });
+
+  test("a gear piece found only in area-pool chests lists no chests", async ({ page }) => {
+    await page.goto("/zh/armor/piece/hewn-bark-helmet/");
+    await expect(page.getByTestId("item-sources").locator("[data-source-kind='chests']")).toHaveCount(0);
   });
 
   test("gathers an enchantment's sources from its books", async ({ page }) => {
@@ -49,8 +55,6 @@ test.describe("how to obtain", () => {
   test("an English page shows no untranslated marker and no Chinese fallback line", async ({ page }) => {
     await page.goto("/en/melee/sickles/");
     await expect(page.getByTestId("item-sources").locator(".tag.warn")).toHaveCount(0);
-    await expect(page.getByTestId("item-sources").locator("[data-source-kind='chests'] .item-alt")).toHaveCount(0);
-    await expect(page.getByTestId("item-sources").locator("[data-source-kind='chests'] .source-name").first()).not.toContainText("Chest:");
   });
 
   test("names an enchantment's book pool by its area and lists what drops the books", async ({ page }) => {

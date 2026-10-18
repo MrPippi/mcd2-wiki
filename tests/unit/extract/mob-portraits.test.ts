@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import sharp from "sharp";
 import { describe, expect, it } from "vitest";
-import { listPortraitFiles, planPortraits, PORTRAIT_SIZE, publishPortraits, renderAssetName, withPortraits, type PortraitInput } from "../../../scripts/extract/mob-portraits";
+import { LARGE_PORTRAIT_SIZE, listPortraitFiles, planPortraits, PORTRAIT_SIZE, publishPortraits, renderAssetName, withPortraits, type PortraitInput } from "../../../scripts/extract/mob-portraits";
 import type { MobDraft } from "../../../scripts/extract/mobs";
 import type { Mob } from "../../../scripts/extract/mob-schema";
 import { loadMobTables } from "../../../scripts/extract/mob-tables";
@@ -104,16 +104,18 @@ describe("withPortraits", () => {
 });
 
 describe("publishPortraits", () => {
-  it("writes 256 px webp files, replacing what was there", async () => {
+  it("writes 256 px and 768 px webp files, replacing what was there", async () => {
     const root = await mkdtemp(path.join(tmpdir(), "mcd2-portrait-"));
     const source = path.join(root, "Zombie.png");
     await sharp({ create: { width: 256, height: 256, channels: 4, background: { r: 0, g: 128, b: 0, alpha: 0.5 } } }).png().toFile(source);
     await mkdir(path.join(root, "public", "mobs"), { recursive: true });
     await writeFile(path.join(root, "public", "mobs", "stale.webp"), "old");
     await publishPortraits(root, [{ slug: "zombie", from: source, source: "render", published: "mobs/zombie.webp" }]);
-    expect(await readdir(path.join(root, "public", "mobs"))).toEqual(["zombie.webp"]);
+    expect((await readdir(path.join(root, "public", "mobs"))).sort()).toEqual(["large", "zombie.webp"]);
     const meta = await sharp(path.join(root, "public", "mobs", "zombie.webp")).metadata();
     expect([meta.format, meta.width, meta.height, meta.hasAlpha]).toEqual(["webp", PORTRAIT_SIZE, PORTRAIT_SIZE, true]);
+    const large = await sharp(path.join(root, "public", "mobs", "large", "zombie.webp")).metadata();
+    expect([large.format, large.width, large.height]).toEqual(["webp", LARGE_PORTRAIT_SIZE, LARGE_PORTRAIT_SIZE]);
   });
 });
 

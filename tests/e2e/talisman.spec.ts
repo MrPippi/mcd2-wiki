@@ -30,12 +30,12 @@ test("a companion talisman shows its cooldown and per-level multipliers", async 
   await expect(page.getByTestId("secret-talisman")).toHaveCount(0);
 });
 
-test("a talisman whose translation misreads a percentage shows the English sentence, marked untranslated", async ({ page }) => {
+test("a talisman whose game translation misreads a percentage shows the corrected sentence", async ({ page }) => {
   await page.goto("/zh/talisman/ammo-capacity/");
-  await expect(page.locator(".description .primary")).toHaveText("Carry 20%~60% more ammo.");
-  await expect(page.getByTestId("info-box").locator(".tag.warn")).toHaveText("未翻譯");
+  await expect(page.locator(".description .primary")).toHaveText("箭矢攜帶量提高 20%~60%。");
+  await expect(page.getByTestId("info-box").locator(".tag.warn")).toHaveCount(0);
   await page.goto("/zh/effect/");
-  await expect(page.locator("tr", { has: page.locator("#ammo-capacity") })).toContainText("more ammo");
+  await expect(page.locator("tr", { has: page.locator("#ammo-capacity") })).toContainText("箭矢攜帶量提高");
 });
 
 test("talismans whose values are not in the game data show unknown markers and a note", async ({ page }) => {

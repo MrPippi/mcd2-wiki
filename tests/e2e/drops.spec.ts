@@ -12,6 +12,13 @@ test.describe("drop odds", () => {
     expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
   });
 
+  test("gear pages leave shared chests to the calculator; a talisman page keeps the talisman's own chest", async ({ page }) => {
+    await page.goto("/en/melee/sword/");
+    await expect(page.getByTestId("drop-odds").getByTestId("drop-group-chest")).toHaveCount(0);
+    await page.goto("/en/talisman/plummeting/");
+    await expect(page.getByTestId("drop-odds").getByTestId("drop-group-chest")).toBeVisible();
+  });
+
   test("the page says what is not included and flags chests whose area the data does not give", async ({ page }) => {
     await page.goto("/en/enchantment/channeling/");
     await expect(page.getByTestId("drop-not-included")).toContainText("regular mobs and merchants");

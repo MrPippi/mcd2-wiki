@@ -120,6 +120,10 @@ describe("parseClockPayload", () => {
   it("accepts the page's payload", () => {
     expect(parseClockPayload(JSON.parse(JSON.stringify(good)))).toEqual(good);
   });
+  it("keeps an area's icon when it has one", () => {
+    const withIcon = { ...good, areas: good.areas.map((area, index) => (index === 0 ? { ...area, icon: "/icons/locations/a.png" } : area)) };
+    expect(parseClockPayload(JSON.parse(JSON.stringify(withIcon)))?.areas[0]?.icon).toBe("/icons/locations/a.png");
+  });
   it("rejects anything malformed instead of throwing", () => {
     for (const bad of [null, "x", { ...good, areaCount: 0 }, { ...good, areas: good.areas.slice(1) }, { ...good, cadenceMs: good.durationMs }, { ...good, labels: { ...good.labels, now: 1 } }]) {
       expect(parseClockPayload(bad)).toBeUndefined();
@@ -130,6 +134,7 @@ describe("parseClockPayload", () => {
       { ...good, areas: "x" },
       { ...good, areas: [...good.areas.slice(1), { name: "x", href: 3 }] },
       { ...good, areas: [...good.areas.slice(1), null] },
+      { ...good, areas: [...good.areas.slice(1), { name: "x", href: "/", icon: 3 }] },
       { ...good, anchorMs: "0" },
       { ...good, durationMs: Number.NaN },
       { ...good, rotationOffset: Number.POSITIVE_INFINITY },

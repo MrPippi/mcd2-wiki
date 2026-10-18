@@ -67,7 +67,8 @@ describe("extractBestiary", () => {
     expect(maw?.portrait).toBeUndefined();   // no Maw render in this source
     const sickles = result.sources.items["melee/sickles"];
     expect(sickles?.areas).toEqual(["area:SW.Area.Plains.A1"]);
-    expect(await readdir(path.join(outRoot, "public", "mobs"))).toEqual(["zombie.webp"]);
+    expect((await readdir(path.join(outRoot, "public", "mobs"))).sort()).toEqual(["large", "zombie.webp"]);
+    expect(await readdir(path.join(outRoot, "public", "mobs", "large"))).toEqual(["zombie.webp"]);
   });
 
   it("reports renders with no mob page and mobs with no render, and publishes neither", async () => {

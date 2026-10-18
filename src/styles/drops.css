@@ -8,3 +8,14 @@
 .drops-page .drop-table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--rule-strong); }
 .drops-page .drop-table th, .drops-page .drop-table td { padding: 8px 10px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; overflow-wrap: anywhere; font-weight: 400; }
 .drops-page .drop-table .drop-chance { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* Everything after the sticky title sits in one right-hand cell, so nothing can slide under the pinned head. */
+.drops-body { display: contents; }
+@media (min-width: 1000px) {
+  .drops-page .catalog-head { grid-row: auto; }
+  .drops-body { display: grid; grid-column: 2; gap: 28px; min-width: 0; }
+  .drops-body > .note { margin: 0; }
+}
+/* Area icon and name as one unit, so the name never wraps under the icon. */
+.drops-page .drop-area { display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
+.drops-page .drop-area-icon { flex-shrink: 0; width: 24px; height: 24px; image-rendering: pixelated; }

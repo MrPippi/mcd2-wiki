@@ -167,10 +167,10 @@ describe("UI translations", () => {
     expect(plainText(UI_DICTS.en.values.soulStorm ?? "")).toBe("Soul Storms");
   });
 
-  it("translates the Soul Storm warning instead of copying English", () => {
+  it("translates the Soul Storm generator count instead of copying English", () => {
     for (const lang of TRANSLATED) {
-      if (UI_DICTS[lang].english.includes("soulStormUnverified")) continue;
-      expect(UI_DICTS[lang].values.soulStormUnverified, lang).not.toEqual(UI_DICTS.en.values.soulStormUnverified);
+      if (UI_DICTS[lang].english.includes("soulStormGeneratorCount")) continue;
+      expect(UI_DICTS[lang].values.soulStormGeneratorCount, lang).not.toEqual(UI_DICTS.en.values.soulStormGeneratorCount);
     }
   });
 

@@ -28,10 +28,38 @@ describe("applyEnglishOverrides", () => {
   });
 });
 
+describe("applyEnglishOverrides with replacements", () => {
+  const overrides = [
+    { category: "effect" as const, id: "AmmoCapacity", field: "description" as const, langs: ["zh" as const, "ja" as const], reason: "count word", replacements: { zh: "箭矢攜帶量提高 {0}。" } },
+  ];
+  const slot = '<span class="placeholder" data-slot="0">{value}</span>';
+  const withZhGap = { ...quiver, untranslated: ["de" as const, "zh" as const] };
+  const [fixed] = applyEnglishOverrides([withZhGap], overrides);
+
+  it("uses the replacement with the English value markup and keeps the rest English", () => {
+    expect(fixed?.description?.zh).toBe(`箭矢攜帶量提高 ${slot}。`);
+    expect(fixed?.description?.ja).toBe(QUIVER_TEXT.en);
+  });
+
+  it("marks only the languages without a replacement as untranslated", () => {
+    expect(fixed?.untranslated).toEqual(["de", "ja"]);
+  });
+
+  it("keeps an unknown slot token as written", () => {
+    const odd = [{ ...overrides[0]!, replacements: { zh: "共 {3} 支" } }];
+    expect(applyEnglishOverrides([quiver], odd)[0]?.description?.zh).toBe("共 {3} 支");
+  });
+});
+
 describe("ENGLISH_OVERRIDES", () => {
   it("sends the Quiver sentence to English where a percentage lands on a count word", () => {
     const quiverOverride = ENGLISH_OVERRIDES.find((override) => override.id === "AmmoCapacity");
     expect(quiverOverride?.category).toBe("effect");
     expect([...(quiverOverride?.langs ?? [])].sort()).toEqual(["es", "fr", "ja", "ko", "ru", "zh"]);
+  });
+
+  it("gives Traditional Chinese a percentage sentence", () => {
+    const quiverOverride = ENGLISH_OVERRIDES.find((override) => override.id === "AmmoCapacity");
+    expect(quiverOverride?.replacements?.zh).toBe("箭矢攜帶量提高 {0}。");
   });
 });

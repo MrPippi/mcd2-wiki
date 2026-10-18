@@ -44,6 +44,7 @@ const { lang, payload } = Astro.props;
   } from "../lib/soul-storm-schedule";
 
   const TICK_MS = 1000;
+  const ICON_SIZE = 28;
 
   interface ClockParts {
     readonly status: HTMLElement;
@@ -69,6 +70,20 @@ const { lang, payload } = Astro.props;
     return status && countdown && rows && zone ? { status, countdown, rows, zone } : undefined;
   }
 
+  function areaIcon(src: string | undefined): HTMLElement[] {
+    if (!src) return [];
+    const mount = document.createElement("span");
+    mount.className = "location-icon";
+    mount.style.setProperty("--size", `${ICON_SIZE}px`);
+    const image = document.createElement("img");
+    image.src = src;
+    image.alt = "";
+    image.width = ICON_SIZE;
+    image.height = ICON_SIZE;
+    mount.append(image);
+    return [mount];
+  }
+
   function windowRow(payload: ClockPayload, startMs: number, areaIndex: number, locale: string): HTMLTableRowElement {
     const row = document.createElement("tr");
     const when = document.createElement("td");
@@ -81,7 +96,7 @@ const { lang, payload } = Astro.props;
     const area = payload.areas[areaIndex];
     link.href = area.href;
     link.textContent = area.name;
-    where.append(link);
+    where.append(...areaIcon(area.icon), link);
     row.append(when, where);
     return row;
   }

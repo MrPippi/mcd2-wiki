@@ -21,8 +21,18 @@ function options(select: HTMLSelectElement, entries: readonly (readonly [string,
   select.replaceChildren(...entries.map(([id, text]) => Object.assign(document.createElement("option"), { value: id, textContent: text, selected: id === value })));
 }
 
+const AREA_ICON_SIZE = 24;
+
+function areaIcon(src: string): HTMLImageElement {
+  return Object.assign(document.createElement("img"), { className: "drop-area-icon", src, alt: "", width: AREA_ICON_SIZE, height: AREA_ICON_SIZE, loading: "lazy" as const });
+}
+
 function nameCell(label: CalcLabel | undefined, fallback: string, unplaced: string): HTMLElement {
   const holder = document.createElement("span");
+  if (label?.icon) {
+    holder.className = "drop-area";
+    holder.append(areaIcon(label.icon));
+  }
   if (label?.href) holder.append(Object.assign(document.createElement("a"), { href: label.href, textContent: label.name }));
   else holder.textContent = label?.name ?? fallback;
   if (label?.note) holder.append(" ", Object.assign(document.createElement("span"), { className: "tag", textContent: label.note }));

@@ -45,6 +45,8 @@ interface Choice {
   readonly search: string;
   readonly icon?: string;
   readonly unique?: true;
+  /** Enchantments: the icon sits in the game's book frame (this URL) instead of the square slot box. */
+  readonly book?: string;
   readonly disabled: boolean;
   /** Already in the slot being picked for: marked, still selectable. */
   readonly current?: boolean;
@@ -119,6 +121,20 @@ function iconImage(src: string | undefined): HTMLImageElement[] {
   return [image];
 }
 
+/** An enchantment icon behind the book frame's diamond window; the frame is an <img> so extensions that strip backgrounds keep it. */
+function bookArt(src: string | undefined, frame: string | undefined): HTMLImageElement[] {
+  const icon = iconImage(src);
+  if (icon.length === 0 || !frame) return icon;
+  const art = document.createElement("img");
+  art.className = "build-book-frame";
+  art.src = frame;
+  art.alt = "";
+  art.width = ICON_SIZE;
+  art.height = ICON_SIZE;
+  art.loading = "lazy";
+  return [...icon, art];
+}
+
 function renderSlot(element: HTMLElement, option: BuildOption | undefined, payload: BuildPayload): void {
   element.querySelector("[data-icon]")?.replaceChildren(...iconImage(option?.icon));
   const name = element.querySelector<HTMLElement>("[data-name]");
@@ -148,8 +164,8 @@ function choiceRow(choice: Choice, equipped: string): HTMLLIElement {
   button.disabled = choice.disabled;
   if (choice.unique) button.dataset.unique = "true";
   const art = document.createElement("span");
-  art.className = "build-icon";
-  art.append(...iconImage(choice.icon));
+  art.className = choice.book ? "build-icon build-icon-book" : "build-icon";
+  art.append(...(choice.book ? bookArt(choice.icon, choice.book) : iconImage(choice.icon)));
   const name = document.createElement("span");
   name.className = "build-option-name";
   name.textContent = choice.name;
@@ -179,12 +195,12 @@ const showNotice = (planner: Planner, text: string): void => {
 };
 
 /** The enchantment row under a gear slot: shown once the slot holds an item. */
-function renderEnchant(element: HTMLElement, filled: boolean, pick: Enchants[EnchantSlotKey], payload: BuildPayload): void {
+function renderEnchant(element: HTMLElement, filled: boolean, pick: Enchants[EnchantSlotKey], payload: BuildPayload, frame: string | undefined): void {
   const row = element.querySelector<HTMLElement>("[data-enchant]");
   if (!row) return;
   row.hidden = !filled;
   const option = enchantOption(payload, pick?.slug);
-  row.querySelector("[data-enchant-icon]")?.replaceChildren(...iconImage(option?.icon));
+  row.querySelector("[data-enchant-icon]")?.replaceChildren(...bookArt(option?.icon, frame));
   const name = row.querySelector<HTMLElement>("[data-enchant-name]");
   if (name) name.textContent = option?.name ?? payload.labels.addEnchant;
   row.dataset.filled = String(option !== undefined);
@@ -202,7 +218,7 @@ function render(planner: Planner): void {
     const element = planner.slots.get(slot.key)!;
     renderSlot(element, optionFor(planner.payload, slot, planner.build[slot.key]), planner.payload);
     if (isEffectSlot(slot.key)) renderEffects(element, planner.payload, slot.key, planner.build[slot.key], planner.effects[slot.key] ?? []);
-    if (isEnchantSlot(slot.key)) renderEnchant(element, planner.build[slot.key] !== undefined, planner.enchants[slot.key], planner.payload);
+    if (isEnchantSlot(slot.key)) renderEnchant(element, planner.build[slot.key] !== undefined, planner.enchants[slot.key], planner.payload, planner.root.dataset.bookFrame);
   }
 }
 
@@ -290,6 +306,7 @@ function enchantChoices(planner: Planner, key: EnchantSlotKey): Choice[] {
     name: option.name,
     search: option.search,
     icon: option.icon,
+    book: planner.root.dataset.bookFrame,
     disabled: false,
     current: planner.enchants[key]?.slug === option.slug,
     pick: () => {
@@ -318,17 +335,24 @@ function wireEnchant(planner: Planner, key: EnchantSlotKey, element: HTMLElement
   });
 }
 
-function effectChoices(planner: Planner, key: EffectSlotKey): Choice[] {
-  const picked = new Set((planner.effects[key] ?? []).map((pick) => pick.slug));
+/** Picks for adding an effect, or with `replacing`, for swapping that picked effect in place (its level is kept). */
+function effectChoices(planner: Planner, key: EffectSlotKey, replacing?: string): Choice[] {
+  const current = planner.effects[key] ?? [];
+  const picked = new Set(current.map((pick) => pick.slug));
+  const nextPicks = (slug: string) =>
+    replacing === undefined
+      ? [...current, { slug, tier: ENCHANT_TIERS[0] }]
+      : current.map((pick) => (pick.slug === replacing ? { ...pick, slug } : pick));
   return rollable(planner.payload, key, planner.build[key]).map((option) => ({
     key: option.slug,
     name: option.name,
     search: option.search,
     icon: option.icon,
-    disabled: picked.has(option.slug),
+    disabled: picked.has(option.slug) && option.slug !== replacing,
+    current: option.slug === replacing || undefined,
     pick: () => {
       planner.parts.dialog.close();
-      update(planner, planner.build, planner.enchants, { ...planner.effects, [key]: [...(planner.effects[key] ?? []), { slug: option.slug, tier: ENCHANT_TIERS[0] }] });
+      update(planner, planner.build, planner.enchants, { ...planner.effects, [key]: nextPicks(option.slug) });
       const slot = planner.slots.get(key);
       const added = slot?.querySelector<HTMLElement>(`[data-effect-tier="${option.slug}"]`);
       (added ?? slot?.querySelector<HTMLElement>("[data-add-effect]"))?.focus();
@@ -351,6 +375,11 @@ function wireEffects(planner: Planner, key: EffectSlotKey, element: HTMLElement)
     element.querySelector<HTMLElement>(`[data-effect-tier="${select.dataset.effectTier}"]`)?.focus();
   });
   list?.addEventListener("click", (event) => {
+    const change = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-effect-change]") : null;
+    if (change?.dataset.effectChange) {
+      openDialog(planner, `${planner.payload.labels.effect}: ${label}`, effectChoices(planner, key, change.dataset.effectChange));
+      return;
+    }
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-effect-remove]") : null;
     if (!button?.dataset.effectRemove) return;
     const picks = (planner.effects[key] ?? []).filter((pick) => pick.slug !== button.dataset.effectRemove);

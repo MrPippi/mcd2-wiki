@@ -22,6 +22,13 @@ export const VISIBLE_ROWS = 10;
 export type DropKind = DropFile["sources"][number]["kind"];
 /** Groups in page order. */
 const KIND_ORDER: readonly DropKind[] = ["chest", "mob", "quest"];
+/** Gear pages leave out the shared chests (Fancy, Wooden, Wellspring…): they say little about one item and the calculator
+ *  still lists them. Enchantment pages keep them (books come mostly from chests), and a talisman chest holds its own
+ *  talisman, often the only source, so it stays too. */
+const KEPT_CHEST = /^chest:TalismansChest/;
+const KEEPS_CHESTS: ReadonlySet<Entry["category"]> = new Set(["enchantment", "enchantment-book"]);
+const shownOn = (entry: Entry, source: DropFile["sources"][number] | undefined): boolean =>
+  source?.kind !== "chest" || KEEPS_CHESTS.has(entry.category) || KEPT_CHEST.test(source.id);
 const KIND_HEADING: Readonly<Record<DropKind, UiKey>> = { chest: "sourceChests", mob: "questRelatedMobs", quest: "sourceQuests" };
 
 export interface DropRowView {
@@ -70,7 +77,7 @@ export function dropGroupsOf(entry: Entry, lang: Lang, file: DropFile = dropData
   const { byId } = sourceIndex(file.sources);
   return KIND_ORDER.flatMap((kind): DropGroupView[] => {
     const views = rows
-      .filter((row) => byId.get(row.source)?.kind === kind)
+      .filter((row) => byId.get(row.source)?.kind === kind && shownOn(entry, byId.get(row.source)))
       .map((row): DropRowView => {
         const source = byId.get(row.source);
         const area = areaLabel(lang, row.area);

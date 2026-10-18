@@ -26,6 +26,8 @@ export interface StormState {
 export interface ClockArea {
   readonly name: string;
   readonly href: string;
+  /** The area's location icon, when it has one. */
+  readonly icon?: string;
 }
 
 export interface ClockLabels {
@@ -95,7 +97,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> => typeof va
 
 const isFiniteNumber = (value: unknown): value is number => typeof value === "number" && Number.isFinite(value);
 
-const isArea = (value: unknown): value is ClockArea => isRecord(value) && typeof value.name === "string" && typeof value.href === "string";
+const isArea = (value: unknown): value is ClockArea => isRecord(value) && typeof value.name === "string" && typeof value.href === "string" && (value.icon === undefined || typeof value.icon === "string");
 
 const isLabels = (value: unknown): value is ClockLabels =>
   isRecord(value) &&
@@ -120,7 +122,7 @@ export function parseClockPayload(raw: unknown): ClockPayload | undefined {
     areaCount,
     rotationOffset,
     upcoming,
-    areas: areas.map((area) => ({ name: area.name, href: area.href })),
+    areas: areas.map((area) => ({ name: area.name, href: area.href, ...(area.icon === undefined ? {} : { icon: area.icon }) })),
     labels: {
       now: labels.now,
       next: labels.next,

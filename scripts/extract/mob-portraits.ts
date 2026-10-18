@@ -1,11 +1,14 @@
-/** Joins each mob to its render through CharacterReference and publishes the portraits as 256 px webp files (2× the largest card, sharp on high-DPI screens). */
+/** Joins each mob to its render through CharacterReference and publishes each portrait twice: 256 px for cards (2× the largest card) and 768 px for the mob page plate. */
 import { mkdir, readdir, rm } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
+import { LARGE_PORTRAIT_DIR, largePortraitPath } from "../../src/lib/mob-portrait-path";
 import { issue, type Issue } from "./issues";
 import type { MobDraft } from "./mobs";
 
 export const PORTRAIT_SIZE = 256;
+/** The mob page plate is drawn up to about 380 CSS px wide; 768 px stays sharp there on high-DPI screens. */
+export const LARGE_PORTRAIT_SIZE = 768;
 /** Grey, untextured render: never published, even when a mob points at it. */
 export const PORTRAIT_DENYLIST: readonly string[] = ["Geomancer_BombPillar"];
 
@@ -98,13 +101,18 @@ export async function listPortraitFiles(dir: string, extension: ".png" | ".webp"
 export async function publishPortraits(outRoot: string, plans: readonly PortraitPlan[]): Promise<void> {
   const target = path.join(outRoot, "public", "mobs");
   await rm(target, { recursive: true, force: true });
-  await mkdir(target, { recursive: true });
+  await mkdir(path.join(target, LARGE_PORTRAIT_DIR), { recursive: true });
   for (const plan of plans) {
-    await sharp(plan.from)
-      .resize(PORTRAIT_SIZE, PORTRAIT_SIZE, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
-      .webp({ quality: 90 })
-      .toFile(path.join(outRoot, "public", plan.published));
+    await writePortrait(plan.from, PORTRAIT_SIZE, path.join(outRoot, "public", plan.published));
+    await writePortrait(plan.from, LARGE_PORTRAIT_SIZE, path.join(outRoot, "public", largePortraitPath(plan.published)));
   }
+}
+
+async function writePortrait(from: string, size: number, to: string): Promise<void> {
+  await sharp(from)
+    .resize(size, size, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+    .webp({ quality: 90 })
+    .toFile(to);
 }
 
 export function withPortraits(drafts: readonly MobDraft[], plans: readonly PortraitPlan[]): MobDraft[] {

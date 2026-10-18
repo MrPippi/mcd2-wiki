@@ -140,6 +140,9 @@ a.fixed-name:hover .primary { text-decoration: underline 2px var(--accent); text
 .drop-table tbody th > a, .drop-table tbody th > span:first-child { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
 .drop-table tbody th > .tag { margin-inline-start: 8px; }
 .drop-table tbody tr:hover { background: var(--paper); }
+/* Area icon and name as one unit, so the name never wraps under the icon. */
+.drop-area { display: inline-flex; align-items: center; gap: var(--space-2); white-space: nowrap; }
+.drop-area-icon { flex-shrink: 0; width: 24px; height: 24px; image-rendering: pixelated; }
 .drop-table .drop-chance { width: 6.5em; text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .drop-table td.drop-chance { font-weight: 700; }
 .drop-any { color: var(--muted); }

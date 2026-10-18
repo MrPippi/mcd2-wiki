@@ -147,6 +147,18 @@ test.describe("build planner", () => {
       await expect(options.getByRole("button", { name: "Impact", exact: true })).toHaveCount(0);
     });
 
+    test("clicking a picked effect swaps it in place and keeps its level", async ({ page }) => {
+      await page.goto("/en/build/?v=1&m=axe&x=critical-edge:3~looting:1");
+      await effectArea(page, "melee").locator("[data-effect-change='critical-edge']").click();
+      const options = page.getByTestId("build-options");
+      await expect(options.getByRole("button", { name: /Critical Edge/ })).toHaveAttribute("aria-current", "true");
+      await expect(options.getByRole("button", { name: /Looter/ })).toBeDisabled();
+      await page.getByTestId("build-filter").fill("Sharpness");
+      await options.getByRole("button", { name: "Sharpness", exact: true }).click();
+      await expect(page).toHaveURL(/&m=axe&x=sharpness:3~looting:1$/);
+      await expect(effectArea(page, "melee").locator("[data-effect-tier='sharpness']")).toBeFocused();
+    });
+
     test("restores armor and artifact effects from a link", async ({ page }) => {
       await page.goto("/en/build/?v=1&h=cave-crawler-helmet&a=blizzard-staff&x=,,roll-cooldown:2,,,,cooldown:3");
       await expect(effectArea(page, "helmet")).toContainText("Acrobat");

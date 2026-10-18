@@ -62,6 +62,14 @@ describe("dropGroupsOf", () => {
     expect(listed.filter((one) => dropGroupsOf(one, "en").length === 0).map((one) => `${one.category}/${one.slug}`)).toEqual([]);
   }, 60_000);
 
+  it("leaves shared chests off gear pages, keeps them on enchantment pages, and keeps a talisman's own chest", () => {
+    const chestIds = (category: Parameters<typeof entry>[0], slug: string) =>
+      dropGroupsOf(entry(category, slug), "en").filter((group) => group.kind === "chest").flatMap((group) => group.rows.map((row) => row.source.name));
+    expect(chestIds("armor", "frost-rime-chest-unique")).toEqual([]);
+    expect(chestIds("talisman", "plummeting").length).toBeGreaterThan(0);
+    expect(chestIds("enchantment", "channeling").length).toBeGreaterThan(0);
+  });
+
   it("groups by kind in a fixed order, best first inside a group", () => {
     const groups = dropGroupsOf(entry("armor", "frost-rime-chest-unique"), "en");
     expect(groups.map((group) => group.kind)).toEqual(["chest", "mob", "quest"].filter((kind) => groups.some((group) => group.kind === kind)));
