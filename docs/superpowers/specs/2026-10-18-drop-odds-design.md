@@ -59,3 +59,11 @@ Against `drop_baselines.json` (15,938 rows, threat 20, Normal), match = |diff| <
 | final (repo code) | | | 15,802 / 15,938 (99.147%) |
 
 The 136 left are all `SW.Item.Consumable.Throwable.TNT` from the Piggy Bank (consumable slot, 0.0125); TNT is not an item the site has a page for. No numeric mismatch remains, so no version-change difference (1.1.1 baseline vs 1.1.2 data) shows in the threat 20 Normal cells.
+
+### Review fixes
+
+- **Chest areas**: no map marker data exists for chests, but `DT_AreaDefinition.LootSpawnVolumeDefinition.Quotas` says which areas spawn which chest types (FancyChest: Plains A2, its boss arena, the Deep Dark dungeons; WoodenChest, DeepDarkChest elsewhere). A chest with quotas is paired only with the pools those areas reach (parents followed); a chest no area spawns (Wellspring, the procedural versions) keeps every pool but is marked `unplaced` and shows an "area unconfirmed" tag. Mobs with no known area publish their book slot once, for no area, `unplaced`.
+- **Rarity**: an item rolls only the rarities it may have (`PossibleRarities`, else Common to Special, plus Unique when it has a Unique variant); the roll is renormalized over them, so a target rarity works for artifacts and other items without a variant. Books and talismans have no rarity and match only "any".
+- **Several books** of one enchantment are one set target: the chance of at least one, summed per draw.
+- **Bounds**: a slot may make at most 12 draws and need at most 200,000 states; a slot over either is left out of the model and reported, the calculation throws on it.
+- Not included yet (said on the pages): regular mobs and merchants.
