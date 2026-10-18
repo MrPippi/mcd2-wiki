@@ -14,12 +14,14 @@ const { labels } = payload;
 {/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
 <div class="drop-calc" data-testid="drop-calc" data-drop-calc hidden>
   <div class="drop-controls" role="group" aria-label={t(lang, "dropCalc")}>
-    <label class="drop-wide"><span>{labels.filter}</span>
-      <input type="search" data-testid="drop-filter" data-filter placeholder={labels.filter} />
-    </label>
-    <label class="drop-wide"><span>{labels.item}</span>
-      <select data-testid="drop-item" data-item></select>
-    </label>
+    {/* The item opens a picker like the build planner's: every item by category, with icons and a filter. */}
+    <div class="drop-wide drop-item-field">
+      <span id="drop-item-label">{labels.item}</span>
+      <button type="button" class="drop-item-pick" data-testid="drop-item-pick" data-item-pick aria-haspopup="dialog" aria-describedby="drop-item-label">
+        <span class="compare-icon" data-item-icon aria-hidden="true"></span>
+        <span class="drop-item-name" data-item-name>{labels.pick}</span>
+      </button>
+    </div>
     <label><span>{labels.threat}</span><select data-testid="drop-threat" data-level></select></label>
     <label><span>{labels.difficulty}</span><select data-testid="drop-difficulty" data-difficulty></select></label>
     <label><span>{labels.rarity}</span><select data-testid="drop-rarity" data-rarity></select></label>
@@ -35,6 +37,18 @@ const { labels } = payload;
       <tbody data-body></tbody>
     </table>
   </div>
+  <dialog class="compare-dialog" data-testid="drop-dialog" data-dialog aria-labelledby="drop-dialog-title">
+    {/* Fills the dialog, so a click whose target is the dialog itself can only be on the backdrop. */}
+    <div class="compare-dialog-body">
+      <div class="compare-dialog-head">
+        <h2 class="compare-dialog-title" id="drop-dialog-title" data-dialog-title></h2>
+        <button type="button" class="compare-close" data-close>{labels.close}</button>
+      </div>
+      <input type="search" class="compare-filter" data-testid="drop-filter" data-filter placeholder={labels.filter} aria-label={labels.filter} />
+      <div class="compare-options" data-testid="drop-options" data-options></div>
+      <p class="note" data-no-results hidden>{labels.noItems}</p>
+    </div>
+  </dialog>
   <script type="application/json" data-drop-json set:html={calcPayloadJson(payload)}></script>
 </div>
 <p class="note" data-testid="drop-failed" data-drop-failed hidden>{t(lang, "dropCalcLoadFailed")}</p>
