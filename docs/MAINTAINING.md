@@ -101,3 +101,8 @@ npm run build        # 產生 dist/ 與 Pagefind 索引
 
 `.github/workflows/deploy.yml` 在推送到 `master` 時建置並發布到 GitHub Pages，`BASE_PATH` 自動設為 `/<repo>/`。
 若 repo 是 `<user>.github.io`，請把 `BASE_PATH` 改成 `/`。
+
+## Drop odds
+
+- `npm run extract` writes `src/data/drop-models.json` (scripts/extract/drop-*.ts, rules in drop-slots.ts, drop-pool.ts, drop-rarity-rows.ts, drop-universe.ts). The item pages and `/<lang>/drops/` compute from it with `src/lib/drop-odds.ts`.
+- **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `dropOdds` 改為 `true`。資料表沒有寶箱出現的區域，故區域寶箱配對所有有掉落池的區域；商人、一般怪物、靈魂風暴寶箱、鑰匙寶箱不在範圍。被略過的來源與無法套用的資料會以 `drop-ignored` 報告。

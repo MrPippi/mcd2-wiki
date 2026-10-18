@@ -13,6 +13,8 @@ export const GuidesStatusSchema = z.strictObject({
   threatBalanceRow: z.boolean(),
   /** That the odds model (affix-pool.ts) matches how the game rolls random effects; reconstructed from the data and a third-party table, not read from the game. */
   affixOdds: z.boolean().default(false),
+  /** That the drop odds model (drop-models.ts) matches how the game rolls loot; rebuilt from the data and a third-party table, and the tables do not say where chests spawn. */
+  dropOdds: z.boolean().default(false),
 });
 export type GuidesStatus = z.infer<typeof GuidesStatusSchema>;
 

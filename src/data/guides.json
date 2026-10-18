@@ -3,7 +3,8 @@
     "enchantCostPerLevel": false,
     "rarityOdds": false,
     "threatBalanceRow": false,
-    "affixOdds": false
+    "affixOdds": false,
+    "dropOdds": false
   },
   "texts": {
     "echoShards": {

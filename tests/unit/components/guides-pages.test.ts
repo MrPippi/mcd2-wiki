@@ -72,7 +72,7 @@ describe("unconfirmed tags", () => {
   });
 
   it("go away once the status file confirms the fact", async () => {
-    const verified = { ...guidesData, verified: { enchantCostPerLevel: true, rarityOdds: true, threatBalanceRow: true, affixOdds: true } };
+    const verified = { ...guidesData, verified: { enchantCostPerLevel: true, rarityOdds: true, threatBalanceRow: true, affixOdds: true, dropOdds: true } };
     expect(await render(EnchantingPage, "en", verified)).not.toContain(UNCONFIRMED);
     expect(await render(RarityPage, "en", verified)).not.toContain(UNCONFIRMED);
     expect(await render(ThreatPage, "en", verified)).not.toContain(UNCONFIRMED);

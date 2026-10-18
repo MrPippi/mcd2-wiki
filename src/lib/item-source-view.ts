@@ -1,7 +1,7 @@
 /** How an item page presents loot-sources.json: the entry's sources, area links and labels. Server-side only. */
 import type { Localized } from "../../scripts/extract/schemas";
 import type { Category } from "../../scripts/extract/config";
-import { ItemSourcesSchema, type MobArea } from "../../scripts/extract/mob-schema";
+import { ItemSourcesSchema, type LootSource, type MobArea } from "../../scripts/extract/mob-schema";
 import type { Entry } from "../../scripts/extract/schemas";
 import rawSources from "../data/loot-sources.json";
 import { booksFor } from "./data";
@@ -11,6 +11,9 @@ import { bookDropsOf, sourcesFor, type ResolvedBookDrop, type ResolvedItemSource
 import { mapLinkOf, mobData, mobHref } from "./mobs";
 
 const itemSourcesData = ItemSourcesSchema.parse(rawSources);
+
+/** A source by id ("chest:FancyChest", "area:SW.Area.Plains.A1", "bookPool:..."); undefined for an id the data does not name. */
+export const lootSource = (id: string): LootSource | undefined => (Object.hasOwn(itemSourcesData.sources, id) ? itemSourcesData.sources[id] : undefined);
 
 /** The category a merchant's stored pool tag stands for. */
 const MERCHANT_CATEGORY: Readonly<Record<string, Category>> = {

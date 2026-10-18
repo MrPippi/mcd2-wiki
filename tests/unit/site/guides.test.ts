@@ -12,9 +12,9 @@ describe("guides site data", () => {
     expect(guideBySlug("nope")).toBeUndefined();
   });
 
-  it("puts the guides hub in the menu after weapon compare", () => {
+  it("puts the guides hub in the menu after the drop calculator", () => {
     const segments = SITE_MENU.map((item) => item.segment);
-    expect(segments[segments.indexOf("compare") + 1]).toBe("guides");
+    expect(segments[segments.indexOf("drops") + 1]).toBe("guides");
   });
 
   it("holds the extracted game values", () => {

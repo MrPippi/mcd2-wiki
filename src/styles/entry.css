@@ -132,6 +132,21 @@ a.fixed-name:hover .primary { text-decoration: underline 2px var(--accent); text
 .affix-table tbody tr:hover { background: var(--paper); }
 .affix-table .affix-any { font-weight: 700; }
 .affix-table tr.affix-fixed { background: var(--paper); box-shadow: inset 3px 0 0 var(--accent); }
+/* Drop odds: one ruled table per kind of source; the rows past the tenth fold into a details block. */
+.drop-group h3 { margin: var(--space-4) 0 6px; font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.drop-table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--rule-strong); }
+.drop-table thead th { padding: 6px 10px; border-bottom: 1px solid var(--rule-strong); text-align: left; font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; color: var(--muted); }
+.drop-table tbody th, .drop-table td { padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; text-align: left; font-weight: 400; overflow-wrap: anywhere; }
+.drop-table tbody th > a, .drop-table tbody th > span:first-child { font-family: var(--font-display); font-weight: 700; font-size: 16px; }
+.drop-table tbody th > .tag { margin-inline-start: 8px; }
+.drop-table tbody tr:hover { background: var(--paper); }
+.drop-table .drop-chance { width: 6.5em; text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.drop-table td.drop-chance { font-weight: 700; }
+.drop-any { color: var(--muted); }
+.drop-more { margin-top: var(--space-2); }
+.drop-more > summary { cursor: pointer; padding: 6px 0; color: var(--text-2); }
+.drop-more > summary:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.drop-calc-link { margin: var(--space-4) 0 0; }
 
 /* Talisman levels: the level, its text or companion multipliers, then the XP to the next level. */
 .level-table { width: 100%; border-collapse: collapse; margin-top: 12px; border-top: 1px solid var(--rule-strong); }

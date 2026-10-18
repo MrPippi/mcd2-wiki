@@ -37,7 +37,7 @@ export function validateOutput(entries: readonly Entry[], armorSets: readonly Ar
 
 const toJson = (value: unknown): string => `${JSON.stringify(value, null, 2)}\n`;
 /** The bestiary files and the affix pools are written on one line each so they stay under the 200 KB data-file limit (the pools: 300 KB). */
-const COMPACT_FILES: ReadonlySet<string> = new Set(["mobs.json", "loot-sources.json", "affix-models.json"]);
+const COMPACT_FILES: ReadonlySet<string> = new Set(["mobs.json", "loot-sources.json", "affix-models.json", "drop-models.json"]);
 const serialize = (fileName: string, value: unknown): string => (COMPACT_FILES.has(fileName) ? `${JSON.stringify(value)}\n` : toJson(value));
 
 export async function writeOutputs(

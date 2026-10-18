@@ -18,12 +18,12 @@ test.describe("guides hub", () => {
     }
   });
 
-  test("the menu lists the guides after weapon compare and marks the hub on its page", async ({ page }) => {
+  test("the menu lists the guides after the drop calculator and marks the hub on its page", async ({ page }) => {
     await page.goto("/zh/guides/");
     await page.getByTestId("site-menu").click();
     const links = page.locator(".site-menu a");
     const texts = await links.allTextContents();
-    expect(texts.indexOf("攻略")).toBe(texts.indexOf("武器比較") + 1);
+    expect(texts.indexOf("攻略")).toBe(texts.indexOf("掉落機率計算器") + 1);
     await expect(links.filter({ hasText: "攻略" })).toHaveAttribute("href", "/zh/guides/");
     await expect(page.locator(".site-menu [aria-current='page']")).toHaveText("攻略");
   });

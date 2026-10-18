@@ -1,0 +1,41 @@
+---
+import { LANGS } from "../../../scripts/extract/config";
+import DropCalculator from "../../components/DropCalculator.astro";
+import GuideUnconfirmed from "../../components/GuideUnconfirmed.astro";
+import Base from "../../layouts/Base.astro";
+import { calcPayload } from "../../lib/drop-calc/payload";
+import { guidesData } from "../../lib/guides";
+import { t, type Lang } from "../../lib/i18n";
+import { compareLang, htmlLang } from "../../lib/lang";
+import "../../styles/compare.css";
+import "../../styles/drops.css";
+
+export function getStaticPaths() {
+  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const alt = compareLang(lang);
+const payload = calcPayload(lang);
+---
+<Base lang={lang} title={t(lang, "dropCalc")} description={t(lang, "dropCalcIntro")}>
+  <div class="catalog compare-page drops-page" data-pagefind-body>
+    <header class="catalog-head compare-head">
+      <h1 class="catalog-title"><span data-pagefind-meta="title">{t(lang, "dropCalc")}</span></h1>
+      {t(alt, "dropCalc") !== t(lang, "dropCalc") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "dropCalc")}</p>}
+      <p class="compare-intro">{t(lang, "dropCalcIntro")}</p>
+    </header>
+    <noscript><p class="note" data-testid="drop-noscript">{t(lang, "dropCalcNoScript")}</p></noscript>
+    <p class="note">{t(lang, "dropOddsIntro")}</p>
+    <p class="note">{t(lang, "dropCalcCoverage")}</p>
+    <p class="note" data-testid="drop-not-included">{t(lang, "dropNotIncluded")}</p>
+    <GuideUnconfirmed lang={lang} message="dropOddsUnconfirmed" verified={guidesData.verified.dropOdds} />
+    {payload.available
+      ? <DropCalculator lang={lang} payload={payload} />
+      : <p class="note" data-testid="drop-no-data">{t(lang, "dropCalcNoData")}</p>}
+  </div>
+</Base>

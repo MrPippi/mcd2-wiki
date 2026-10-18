@@ -51,6 +51,8 @@ import { extractSoulStorm, SOUL_STORM_ICON_SOURCES } from "./soul-storm";
 import { extractGuides } from "./guides";
 import { extractQuests } from "./quests";
 import { extractLocations } from "./locations";
+import { extractDrops } from "./drops";
+import { DropDataSchema } from "./drop-schema";
 
 export interface ExtractOptions {
   readonly sourceRoot: string;
@@ -226,6 +228,15 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     entries: output.entries,
     statusPath: options.guidesStatusPath ?? path.join(path.dirname(options.overridesPath), "guides-status.json"),
   });
+  const drops = await extractDrops({
+    sourceRoot: options.sourceRoot,
+    entries: output.entries,
+    threat: guides.data.threat,
+    sources: bestiary.sources,
+    quests: quests.data,
+    mobs: bestiary.mobs,
+    tagIndex: bestiary.links.tagIndex,
+  });
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
   const weapons = weaponTables
@@ -268,6 +279,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...guides.issues,
     ...quests.issues,
     ...locations.issues,
+    ...drops.issues,
   ];
   const extraData = {
     "frames.json": frames.paths,
@@ -277,6 +289,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "artifacts.json": ArtifactDataSchema.parse(artifacts.data),
     "armor-effects.json": ArmorEffectDataSchema.parse(armorEffects.data),
     "affix-models.json": AffixDataSchema.parse(affix.data),
+    "drop-models.json": DropDataSchema.parse(drops.data),
     "enchantments.json": EnchantmentDataSchema.parse(enchantments.data),
     "effects.json": EnchantmentDataSchema.parse(effectValues),
     "talismans.json": TalismanDataSchema.parse(talismans.data),
@@ -291,5 +304,5 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "guides.json": guides.data,
   };
   await writeOutputs(options.outRoot, described, extraData, renderReport({ ...described, issues }));
-  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead, ...guides.tablesRead, ...quests.tablesRead, ...locations.tablesRead], issues };
+  return { entries: described.entries.length, armorSets: output.armorSets.length, icons: copies.length, mobs: bestiary.mobs.mobs.length, tablesRead: [...bestiary.tablesRead, ...soulStorm.tablesRead, ...guides.tablesRead, ...quests.tablesRead, ...locations.tablesRead, ...drops.tablesRead], issues };
 }

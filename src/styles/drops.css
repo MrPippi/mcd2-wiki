@@ -1,0 +1,10 @@
+/* Drop calculator: a wrapping grid of choices over the same ruled table the item pages use. */
+.drop-controls { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); margin: var(--space-4) 0; }
+.drop-controls label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); min-width: 0; }
+.drop-controls .drop-wide { grid-column: 1 / -1; }
+.drop-controls select, .drop-controls input { min-height: 40px; max-width: 100%; padding: 0 var(--space-2); border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); font: inherit; }
+.drop-controls select:focus-visible, .drop-controls input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.drop-summary { margin: 0 0 var(--space-3); color: var(--text-2); }
+.drops-page .drop-table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--rule-strong); }
+.drops-page .drop-table th, .drops-page .drop-table td { padding: 8px 10px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; overflow-wrap: anywhere; font-weight: 400; }
+.drops-page .drop-table .drop-chance { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
