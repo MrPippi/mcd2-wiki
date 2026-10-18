@@ -1,5 +1,7 @@
 ---
+import { frameFor } from "../lib/frames";
 import { categoryLabel, t, type Lang } from "../lib/i18n";
+import { assetUrl } from "../lib/url";
 import { payloadJson, slotLabel } from "../lib/build/payload";
 import type { BuildPayload } from "../lib/build/parse";
 import { ROMAN } from "../lib/build/card";
@@ -12,6 +14,8 @@ interface Props {
 }
 
 const { lang, payload } = Astro.props;
+/** The game's enchantment book: the planner draws it over every enchantment icon. */
+const bookFrame = frameFor("enchantment")?.path;
 const isEnchantable = (key: SlotKey): boolean => (ENCHANT_SLOT_KEYS as readonly SlotKey[]).includes(key);
 const hasEffects = (key: SlotKey): boolean => (EFFECT_SLOT_KEYS as readonly SlotKey[]).includes(key);
 /** Group titles: the game's own category names, plus one word for both weapon kinds. */
@@ -19,7 +23,7 @@ const groupTitle = (group: SlotGroup): string =>
   group === "weapons" ? t(lang, "buildGroupWeapons") : categoryLabel(group === "armor" ? "armor" : group === "artifacts" ? "artifact" : "talisman", lang);
 ---
 {/* Starts hidden: the page script shows it once the payload checks out; without scripts the page's noscript note stands in. */}
-<div class="build" data-testid="build-planner" data-build hidden>
+<div class="build" data-testid="build-planner" data-build data-book-frame={bookFrame && assetUrl(bookFrame)} hidden>
   <p class="build-notice tag warn" data-testid="build-notice" data-notice role="status" hidden></p>
   <p class="note build-effect-note" data-testid="build-effect-note">{t(lang, "buildEffectLimit").replace("{n}", () => String(MAX_EFFECTS))}</p>
   <div class="build-groups">
@@ -58,7 +62,7 @@ const groupTitle = (group: SlotGroup): string =>
                 <div class="build-enchant" data-testid={`build-enchant-${slot.key}`} data-enchant hidden>
                   <button type="button" class="build-enchant-pick" data-enchant-pick aria-haspopup="dialog">
                     <span class="sr-only">{`${slotLabel(slot, lang)}, ${t(lang, "buildEnchant")}: `}</span>
-                    <span class="build-icon build-icon-small build-icon-bare" data-enchant-icon aria-hidden="true"></span>
+                    <span class="build-icon build-icon-small build-icon-book" data-enchant-icon aria-hidden="true"></span>
                     <span class="build-enchant-name" data-enchant-name>{t(lang, "buildAddEnchant")}</span>
                   </button>
                   <select class="build-tier" data-tier aria-label={`${t(lang, "buildTier")}: ${slotLabel(slot, lang)}`} hidden>
