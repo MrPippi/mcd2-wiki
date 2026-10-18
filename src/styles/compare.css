@@ -1,26 +1,19 @@
-/* Weapon compare: column pickers over a ruled table that scrolls sideways on narrow screens. */
+/* Weapon compare: one add button over a ruled table that scrolls sideways on narrow screens. */
 .compare-intro { margin: var(--space-3) 0 0; max-width: 60ch; color: var(--text-2); text-wrap: balance; }
 .compare { min-width: 0; }
 .compare-notice { margin: 0 0 var(--space-3); padding: var(--space-1) var(--space-2); white-space: normal; }
-.compare-picks { list-style: none; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); margin: 0 0 var(--space-4); }
-.compare-pick { display: flex; align-items: stretch; min-width: 0; border: 1px solid var(--rule-strong); background: var(--paper); }
-.compare-pick-button {
-  flex: 1 1 auto; min-width: 0; min-height: 56px; display: flex; align-items: center; justify-content: flex-start; gap: var(--space-2);
-  padding: var(--space-1) var(--space-2); border: 0; background: none; text-align: start; color: var(--text); font-size: 1rem;
-}
-.compare-pick-button:hover { background: var(--plate); }
-.compare-pick-text { display: flex; flex-direction: column; min-width: 0; }
-.compare-pick-label { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); }
-.compare-pick-name { overflow-wrap: anywhere; }
-.compare-pick[data-filled="false"] .compare-pick-name { color: var(--muted); }
-.compare-pick[data-filled="true"] .compare-pick-name { font-weight: 700; }
-.compare-pick[data-filled="false"] .compare-icon { border-style: dashed; }
-.compare-clear { flex-shrink: 0; display: inline-grid; place-items: center; min-width: 40px; padding: 0; border: 0; border-inline-start: 1px solid var(--rule); background: none; }
+/* The one add button, dashed like an empty slot; it hides once three weapons are compared. */
+.compare-toolbar { margin: 0 0 var(--space-4); }
+.compare-add { display: inline-flex; align-items: center; gap: var(--space-2); min-height: 48px; padding: 0 var(--space-4); border: 1px dashed var(--rule-strong); background: none; font-size: 1rem; }
+.compare-add:hover { background: var(--plate); }
+.compare-add[hidden] { display: none; }
+.compare-add-mark { font-family: var(--font-mono); font-size: 1.25rem; line-height: 1; }
+.compare-count { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); }
 .compare-icon {
   flex-shrink: 0; display: grid; place-items: center; width: 48px; height: 48px;
   border: 2px solid var(--slot-border); background: var(--plate);
 }
-.compare-pick[data-unique="true"] .compare-icon, .compare-option[data-unique="true"] .compare-icon { --slot-border: var(--slot-unique-border); }
+.compare-option[data-unique="true"] .compare-icon { --slot-border: var(--slot-unique-border); }
 .compare-icon img { display: block; width: 40px; height: 40px; object-fit: contain; }
 
 /* Picker dialog */
@@ -51,6 +44,8 @@
 .compare-table thead th { border-bottom: 2px solid var(--ink); vertical-align: bottom; }
 .compare-table tbody th { font-weight: 400; color: var(--text-2); white-space: nowrap; }
 .compare-table td[data-best="true"] { font-weight: 700; box-shadow: inset 3px 0 0 var(--accent); }
+.compare-head-cell { display: flex; align-items: center; justify-content: space-between; gap: var(--space-1); }
+.compare-remove { flex-shrink: 0; display: inline-grid; place-items: center; min-width: 32px; min-height: 32px; padding: 0; }
 .compare-weapon { display: flex; align-items: center; gap: var(--space-2); min-width: 9rem; text-decoration: none; }
 .compare-weapon img { flex-shrink: 0; border: 2px solid var(--slot-border); background: var(--plate); }
 .compare-weapon[data-unique="true"] img { border-color: var(--slot-unique-border); }

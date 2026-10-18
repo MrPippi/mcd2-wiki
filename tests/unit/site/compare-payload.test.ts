@@ -84,7 +84,8 @@ describe("comparePayload", () => {
     ["a bad ranking", () => ({ ...comparePayload("en"), rows: [{ key: "x", label: "X", better: "up" }] })],
     ["a weapon of another kind", () => ({ ...comparePayload("en"), weapons: [{ ...comparePayload("en").weapons[0], kind: "talisman" }] })],
     ["a cell value that is not a number", () => ({ ...comparePayload("en"), weapons: [{ ...comparePayload("en").weapons[0], cells: { ammo: { text: "1", value: "1" } } }] })],
-    ["a column label without {n}", () => ({ ...comparePayload("en"), labels: { ...comparePayload("en").labels, column: "Weapon" } })],
+    ["a dropped label without {n}", () => ({ ...comparePayload("en"), labels: { ...comparePayload("en").labels, dropped: "Left out" } })],
+    ["a missing add label", () => ({ ...comparePayload("en"), labels: { ...comparePayload("en").labels, add: undefined } })],
   ])("rejects %s", (_name, make) => {
     expect(parseComparePayload(make())).toBeUndefined();
   });

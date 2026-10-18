@@ -1,4 +1,4 @@
-/** The weapon picker dialog: icon grid grouped melee/ranged, a filter, and the column buttons it fills. */
+/** The weapon picker dialog: icon grid grouped melee/ranged and a filter; it adds one weapon to the comparison. */
 import { foldForSearch } from "../lang";
 import type { ComparePayload, CompareWeapon } from "./parse";
 
@@ -15,14 +15,14 @@ export interface PickerParts {
 /** What the open dialog is picking for. */
 export interface PickerRequest {
   readonly title: string;
-  /** The weapon already in this column: marked, still selectable. */
+  /** A weapon to mark as current: marked, still selectable. */
   readonly current?: string;
-  /** Weapons in other columns, by slug, with that column's label: shown but not selectable. */
+  /** Weapons already compared, by slug, with the tag to show: listed but not selectable. */
   readonly taken: ReadonlyMap<string, string>;
   readonly pick: (slug: string) => void;
 }
 
-export function iconImage(src: string | undefined): HTMLImageElement[] {
+function iconImage(src: string | undefined): HTMLImageElement[] {
   if (!src) return [];
   const image = document.createElement("img");
   image.src = src;

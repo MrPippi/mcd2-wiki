@@ -2,24 +2,23 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { runtimeImports } from "../../helpers/imports";
-import { bestColumns, compareSearch, decodeCompare, MAX_WEAPONS, placeWeapon, removeWeapon } from "../../../src/lib/compare/code";
+import { addWeapon, bestColumns, compareSearch, decodeCompare, MAX_WEAPONS, removeWeapon } from "../../../src/lib/compare/code";
 
 const KNOWN = new Set(["sword", "axe", "bow", "crossbow"]);
 
-describe("placeWeapon", () => {
-  it("replaces a filled column and appends past the last one", () => {
-    expect(placeWeapon(["sword", "axe"], 1, "bow")).toEqual(["sword", "bow"]);
-    expect(placeWeapon(["sword"], 2, "bow")).toEqual(["sword", "bow"]);
-    expect(placeWeapon([], 0, "bow")).toEqual(["bow"]);
+describe("addWeapon", () => {
+  it("appends a new weapon at the end", () => {
+    expect(addWeapon([], "bow")).toEqual(["bow"]);
+    expect(addWeapon(["sword"], "bow")).toEqual(["sword", "bow"]);
   });
 
-  it("keeps a weapon in its earlier column instead of repeating it", () => {
-    expect(placeWeapon(["sword", "axe"], 2, "sword")).toEqual(["sword", "axe"]);
-    expect(placeWeapon(["sword", "axe"], 1, "sword")).toEqual(["sword"]);
+  it("ignores a weapon already compared", () => {
+    const picks = ["sword", "axe"];
+    expect(addWeapon(picks, "sword")).toBe(picks);
   });
 
   it("never holds more than three", () => {
-    expect(placeWeapon(["sword", "axe", "bow"], 5, "crossbow")).toHaveLength(MAX_WEAPONS);
+    expect(addWeapon(["sword", "axe", "bow"], "crossbow")).toHaveLength(MAX_WEAPONS);
   });
 });
 
