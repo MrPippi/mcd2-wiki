@@ -1,16 +1,20 @@
 /** Server side of the drop calculator: the item list, source and area names and labels in one language. No zod: the types are shared with the browser script. */
 import { CATEGORIES } from "../../../scripts/extract/config";
+import { ARMOR_PIECES, type Entry } from "../../../scripts/extract/schemas";
 import { findEntry } from "../data";
 import { areaLabel, sourceLabel, type DropLabel } from "../drop-labels";
 import { dropAvailable, dropData } from "../drop-view";
 import { frameFor } from "../frames";
 import { guidesData, plainText } from "../guides";
-import { categoryLabel, t, type Lang } from "../i18n";
+import { categoryLabel, pieceLabel, t, type Lang } from "../i18n";
 import { searchNames } from "../lang";
 import { assetUrl, entryHref } from "../url";
 import type { CalcItem, CalcPayload } from "./parse";
 
 const RARITY_LABEL = { common: "rarityCommon", rare: "rarityRare", special: "raritySpecial", unique: "unique" } as const;
+
+/** Armor is split by piece so its long list reads like the build planner's slots. */
+const groupOf = (entry: Entry): string => (entry.category === "armor" && entry.armorPiece ? `armor-${entry.armorPiece}` : entry.category);
 
 function itemsOf(lang: Lang): CalcItem[] {
   return dropData.items.flatMap((item) => {
@@ -24,6 +28,7 @@ function itemsOf(lang: Lang): CalcItem[] {
       href: entryHref(lang, entry),
       ...(entry.icon ? { icon: assetUrl(entry.icon) } : {}),
       category: entry.category,
+      group: groupOf(entry),
       ...(entry.variant === "unique" ? { unique: true as const } : {}),
     }];
   }).sort((a, b) => a.name.localeCompare(b.name, lang));
@@ -32,9 +37,15 @@ function itemsOf(lang: Lang): CalcItem[] {
 const labelRecord = (entries: readonly (readonly [string, DropLabel | undefined])[]): Record<string, DropLabel> =>
   Object.fromEntries(entries.flatMap(([id, label]) => (label ? [[id, label]] : [])));
 
-/** Picker groups in the site's category order, only those that have items. */
-const categoriesOf = (lang: Lang, items: readonly CalcItem[]): CalcPayload["categories"] =>
-  CATEGORIES.filter((category) => items.some((item) => item.category === category)).map((id) => ({ id, name: categoryLabel(id, lang) }));
+/** Picker groups in the site's category order (armor by piece, helmet to boots), only those that have items. */
+function groupsOf(lang: Lang, items: readonly CalcItem[]): CalcPayload["groups"] {
+  const all = CATEGORIES.flatMap((category) =>
+    category === "armor"
+      ? [...ARMOR_PIECES.map((piece) => ({ id: `armor-${piece}`, name: `${categoryLabel("armor", lang)} · ${pieceLabel(piece, lang)}` })), { id: "armor", name: categoryLabel("armor", lang) }]
+      : [{ id: category, name: categoryLabel(category, lang) }],
+  );
+  return all.filter((group) => items.some((item) => item.group === group.id));
+}
 
 export function calcPayload(lang: Lang): CalcPayload {
   const items = itemsOf(lang);
@@ -43,7 +54,7 @@ export function calcPayload(lang: Lang): CalcPayload {
   return {
     available: dropAvailable,
     items,
-    categories: categoriesOf(lang, items),
+    groups: groupsOf(lang, items),
     ...(bookFrame ? { bookFrame: assetUrl(bookFrame) } : {}),
     levels: dropData.levels,
     defaultLevel: dropData.levels.at(-1) ?? 1,

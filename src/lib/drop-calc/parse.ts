@@ -7,8 +7,10 @@ export interface CalcItem {
   readonly search: string;
   readonly href: string;
   readonly icon?: string;
-  /** The page category ("melee", "enchantment-book"…): the picker groups by it, in `categories` order. */
+  /** The page category ("melee", "enchantment-book"…). */
   readonly category: string;
+  /** The picker group, in `groups` order: the category, or for armor one group per piece ("armor-helmet"). */
+  readonly group: string;
   readonly unique?: true;
 }
 
@@ -36,7 +38,7 @@ export interface CalcPayload {
   readonly available: boolean;
   readonly items: readonly CalcItem[];
   /** Picker groups in page order, each with its name in the language. */
-  readonly categories: readonly { readonly id: string; readonly name: string }[];
+  readonly groups: readonly { readonly id: string; readonly name: string }[];
   /** The enchantment book frame drawn over book icons in the picker. */
   readonly bookFrame?: string;
   readonly levels: readonly number[];
@@ -57,8 +59,8 @@ export function parseCalcPayload(raw: unknown): CalcPayload | undefined {
   if (!isRecord(raw) || typeof raw.available !== "boolean" || !isRecord(raw.labels) || !isRecord(raw.sources) || !isRecord(raw.areas)) return undefined;
   const list = (value: unknown): value is unknown[] => Array.isArray(value) && value.length > 0;
   const ok =
-    list(raw.items) && raw.items.every((one) => isRecord(one) && isText(one.key) && isText(one.name) && typeof one.search === "string" && isText(one.href) && isText(one.category)) &&
-    list(raw.categories) && raw.categories.every((one) => isRecord(one) && isText(one.id) && isText(one.name)) &&
+    list(raw.items) && raw.items.every((one) => isRecord(one) && isText(one.key) && isText(one.name) && typeof one.search === "string" && isText(one.href) && isText(one.category) && isText(one.group)) &&
+    list(raw.groups) && raw.groups.every((one) => isRecord(one) && isText(one.id) && isText(one.name)) &&
     list(raw.levels) && raw.levels.every((one) => Number.isInteger(one)) && Number.isInteger(raw.defaultLevel) &&
     list(raw.difficulties) && raw.difficulties.every((one) => isRecord(one) && isText(one.id) && isText(one.name)) &&
     list(raw.rarities) && raw.rarities.every((one) => isRecord(one) && isText(one.id) && isText(one.name)) &&
