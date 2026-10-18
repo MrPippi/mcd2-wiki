@@ -1,7 +1,7 @@
 /** The weapon comparison in the browser: the add button, the table, the address and the copy button. */
 import { addWeapon, bestColumns, compareSearch, decodeCompare, MAX_WEAPONS, removeWeapon } from "./code";
 import { parseComparePayload, type ComparePayload, type CompareWeapon } from "./parse";
-import { openPicker, wirePicker, type PickerParts, type PickerRequest } from "./picker";
+import { mountPicker, pickerParts, type PickerGroup, type PickerParts } from "../item-picker";
 
 /** Fired after replaceState so the language links pick up the new query (SiteHeader listens). */
 const LOCATION_EVENT = "mcd2:locationchange";
@@ -11,7 +11,6 @@ interface Parts {
   readonly add: HTMLButtonElement;
   readonly count: HTMLElement;
   readonly picker: PickerParts;
-  readonly close: HTMLElement;
   readonly scroll: HTMLElement;
   readonly head: HTMLElement;
   readonly body: HTMLElement;
@@ -31,17 +30,10 @@ function readPayload(root: HTMLElement): ComparePayload | undefined {
 
 function partsOf(root: HTMLElement): Parts | undefined {
   const one = <T extends HTMLElement>(selector: string) => root.querySelector<T>(selector) ?? undefined;
-  const picker = {
-    dialog: one<HTMLDialogElement>("[data-dialog]"),
-    title: one("[data-dialog-title]"),
-    filter: one<HTMLInputElement>("[data-filter]"),
-    options: one("[data-options]"),
-    noResults: one("[data-no-results]"),
-  };
+  const picker = pickerParts(root.querySelector<HTMLDialogElement>("[data-dialog]"));
   const parts = {
     add: one<HTMLButtonElement>("[data-add]"),
     count: one("[data-count]"),
-    close: one("[data-close]"),
     scroll: one("[data-scroll]"),
     head: one("[data-head]"),
     body: one("[data-body]"),
@@ -50,8 +42,20 @@ function partsOf(root: HTMLElement): Parts | undefined {
     status: one("[data-status]"),
     url: one<HTMLInputElement>("[data-url]"),
   };
-  const complete = [...Object.values(parts), ...Object.values(picker)].every(Boolean);
-  return complete ? ({ ...parts, picker } as Parts) : undefined;
+  return picker && Object.values(parts).every(Boolean) ? ({ ...parts, picker } as Parts) : undefined;
+}
+
+/** Melee then ranged; weapons already compared are listed but cannot be added again. */
+function weaponGroups(payload: ComparePayload, slugs: readonly string[]): PickerGroup[] {
+  const option = (weapon: CompareWeapon) => {
+    const added = slugs.includes(weapon.slug);
+    return { key: weapon.slug, name: weapon.name, search: weapon.search, icon: weapon.icon, unique: weapon.unique, disabled: added, tag: added ? payload.labels.added : undefined };
+  };
+  const { labels, weapons } = payload;
+  return [
+    { label: labels.melee, options: weapons.filter((weapon) => weapon.kind === "melee").map(option) },
+    { label: labels.ranged, options: weapons.filter((weapon) => weapon.kind === "ranged").map(option) },
+  ];
 }
 
 const cell = (tag: "th" | "td", text = ""): HTMLTableCellElement => {
@@ -191,7 +195,6 @@ export function mountCompare(root: HTMLElement): boolean {
   if (!payload || !parts) return false;
   const decoded = decodeCompare(location.search, new Set(payload.weapons.map((weapon) => weapon.slug)));
   let slugs: readonly string[] = decoded.slugs;
-  let request: PickerRequest | undefined;
   const show = (next: readonly string[]) => {
     slugs = next;
     renderAdd(parts, slugs);
@@ -206,19 +209,19 @@ export function mountCompare(root: HTMLElement): boolean {
   };
   if (decoded.dropped > 0) syncUrl(slugs);
   show(slugs);
-  parts.add.addEventListener("click", () => {
-    request = {
+  const openPicker = mountPicker(parts.picker);
+  parts.add.addEventListener("click", () =>
+    openPicker({
       title: payload.labels.add,
-      taken: new Map(slugs.map((slug) => [slug, payload.labels.added] as const)),
+      groups: weaponGroups(payload, slugs),
       pick: (slug) => {
         parts.picker.dialog.close();
         change(addWeapon(slugs, slug));
         // The add button hides once the comparison is full: then focus the new weapon's link instead.
         (parts.add.hidden ? parts.head.querySelector<HTMLElement>(`th[data-slug="${slug}"] a`) : parts.add)?.focus();
       },
-    };
-    openPicker(parts.picker, payload, request);
-  });
+    }),
+  );
   // The head is rebuilt on every change, so remove clicks are delegated.
   parts.head.addEventListener("click", (event) => {
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-remove]") : null;
@@ -226,7 +229,6 @@ export function mountCompare(root: HTMLElement): boolean {
     change(removeWeapon(slugs, Number(button.dataset.remove)));
     parts.add.focus(); // the column and its button are gone
   });
-  wirePicker(parts.picker, payload, () => request, parts.close);
   root.querySelector("[data-copy]")?.addEventListener("click", () => void copyLink(parts, payload));
   root.hidden = false;
   if (decoded.dropped > 0) {

@@ -305,7 +305,7 @@ test.describe("build planner", () => {
     await expect(page.getByTestId("build-options").locator("button").first()).toBeVisible();
     await page.getByTestId("build-filter").fill("zzzz-nothing");
     await expect(page.getByTestId("build-options").locator("button")).toHaveCount(0);
-    await expect(page.getByTestId("build-dialog").locator("[data-empty]")).toBeVisible();
+    await expect(page.getByTestId("build-dialog").locator("[data-no-results]")).toBeVisible();
     // The first Escape clears the search box (the browser's own behaviour), the next closes the dialog.
     await page.getByTestId("build-filter").fill("");
     await page.keyboard.press("Escape");

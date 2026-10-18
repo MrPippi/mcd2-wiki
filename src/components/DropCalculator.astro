@@ -1,4 +1,5 @@
 ---
+import ItemPickerDialog from "./ItemPickerDialog.astro";
 import { calcPayloadJson } from "../lib/drop-calc/payload";
 import type { CalcPayload } from "../lib/drop-calc/parse";
 import { t, type Lang } from "../lib/i18n";
@@ -18,7 +19,7 @@ const { labels } = payload;
     <div class="drop-wide drop-item-field">
       <span id="drop-item-label">{labels.item}</span>
       <button type="button" class="drop-item-pick" data-testid="drop-item-pick" data-item-pick aria-haspopup="dialog" aria-describedby="drop-item-label">
-        <span class="compare-icon" data-item-icon aria-hidden="true"></span>
+        <span class="picker-icon" data-item-icon aria-hidden="true"></span>
         <span class="drop-item-name" data-item-name>{labels.pick}</span>
       </button>
     </div>
@@ -37,18 +38,7 @@ const { labels } = payload;
       <tbody data-body></tbody>
     </table>
   </div>
-  <dialog class="compare-dialog" data-testid="drop-dialog" data-dialog aria-labelledby="drop-dialog-title">
-    {/* Fills the dialog, so a click whose target is the dialog itself can only be on the backdrop. */}
-    <div class="compare-dialog-body">
-      <div class="compare-dialog-head">
-        <h2 class="compare-dialog-title" id="drop-dialog-title" data-dialog-title></h2>
-        <button type="button" class="compare-close" data-close>{labels.close}</button>
-      </div>
-      <input type="search" class="compare-filter" data-testid="drop-filter" data-filter placeholder={labels.filter} aria-label={labels.filter} />
-      <div class="compare-options" data-testid="drop-options" data-options></div>
-      <p class="note" data-no-results hidden>{labels.noItems}</p>
-    </div>
-  </dialog>
+  <ItemPickerDialog prefix="drop" close={labels.close} filter={labels.filter} noResults={labels.noItems} />
   <script type="application/json" data-drop-json set:html={calcPayloadJson(payload)}></script>
 </div>
 <p class="note" data-testid="drop-failed" data-drop-failed hidden>{t(lang, "dropCalcLoadFailed")}</p>

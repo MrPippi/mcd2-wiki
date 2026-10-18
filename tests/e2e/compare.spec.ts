@@ -5,7 +5,7 @@ const table = (page: Page) => page.getByTestId("compare-table");
 const addButton = (page: Page) => page.getByTestId("compare-add");
 const add = async (page: Page, slug: string) => {
   await addButton(page).click();
-  await page.getByTestId("compare-options").locator(`[data-slug="${slug}"]`).click();
+  await page.getByTestId("compare-options").locator(`[data-key="${slug}"]`).click();
 };
 const heads = (page: Page) => table(page).locator("thead th[data-slug]");
 
@@ -56,12 +56,12 @@ test.describe("weapon compare", () => {
     await addButton(page).click();
     const options = page.getByTestId("compare-options");
     await expect(page.getByTestId("compare-dialog")).toBeVisible();
-    await expect(options.locator("[data-slug='axe']")).toBeDisabled();
-    await expect(options.locator("[data-slug='axe']")).toContainText("Added");
-    await expect(options.locator("[data-slug='bow'] img")).toBeVisible();
+    await expect(options.locator("[data-key='axe']")).toBeDisabled();
+    await expect(options.locator("[data-key='axe']")).toContainText("Added");
+    await expect(options.locator("[data-key='bow'] img")).toBeVisible();
     await page.getByTestId("compare-filter").fill("crossb");
-    await expect(options.locator("[data-slug='bow']")).toHaveCount(0);
-    await expect(options.locator("[data-slug='crossbow']")).toBeVisible();
+    await expect(options.locator("[data-key='bow']")).toHaveCount(0);
+    await expect(options.locator("[data-key='crossbow']")).toBeVisible();
     await page.getByTestId("compare-dialog").locator("[data-close]").click();
     await expect(page.getByTestId("compare-dialog")).toBeHidden();
     await expect(addButton(page)).toBeFocused();

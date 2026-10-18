@@ -1,6 +1,6 @@
 /** The drop calculator in the browser: choices, a live result table and the address. */
 import type { DropFile, DropRow } from "../drop-types";
-import { mountPicker, optionArt, type PickerGroup, type PickerParts } from "../item-picker";
+import { mountPicker, optionArt, pickerParts, type PickerGroup, type PickerParts } from "../item-picker";
 import { parseCalcPayload, type CalcItem, type CalcLabel, type CalcPayload } from "./parse";
 import { allRows, decodeState, encodeState, formatOdds, narrowRows, narrowing, type CalcState } from "./state";
 
@@ -58,17 +58,10 @@ interface Parts {
 }
 
 function partsOf(root: HTMLElement): Parts | undefined {
-  const picker = {
-    dialog: pick<HTMLDialogElement>(root, "[data-dialog]"),
-    title: pick(root, "[data-dialog-title]"),
-    filter: pick<HTMLInputElement>(root, "[data-filter]"),
-    options: pick(root, "[data-options]"),
-    noResults: pick(root, "[data-no-results]"),
-    close: pick(root, "[data-close]"),
-  };
-  if (!Object.values(picker).every(Boolean)) return undefined;
+  const picker = pickerParts(root.querySelector<HTMLDialogElement>("[data-dialog]"));
+  if (!picker) return undefined;
   const found = {
-    picker: picker as PickerParts,
+    picker,
     itemPick: pick<HTMLButtonElement>(root, "[data-item-pick]"),
     itemIcon: pick(root, "[data-item-icon]"),
     itemName: pick(root, "[data-item-name]"),
@@ -133,7 +126,7 @@ const itemGroups = (payload: CalcPayload): PickerGroup[] =>
 function renderItemPick(parts: Parts, payload: CalcPayload, state: CalcState): void {
   const item = payload.items.find((one) => one.key === state.item);
   const art = item ? optionArt({ icon: item.icon, frame: frameOf(payload, item) }) : undefined;
-  parts.itemIcon.className = art?.className ?? "compare-icon";
+  parts.itemIcon.className = art?.className ?? "picker-icon";
   parts.itemIcon.replaceChildren(...(art ? [...art.childNodes] : []));
   parts.itemPick.dataset.filled = String(item !== undefined);
   parts.itemPick.dataset.unique = String(item?.unique === true);
