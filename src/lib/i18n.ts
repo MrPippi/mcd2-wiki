@@ -35,8 +35,11 @@ const MARKER_KEY = {
   rift: "markerRift",
   portal: "markerPortal",
   merchant: "markerMerchant",
-  quest: "markerQuest",
-  "quest-area": "markerQuestArea",
+  "quest-main": "markerQuestMain",
+  "quest-side": "markerQuestSide",
+  storm: "markerStorm",
+  "talisman-chest": "markerTalismanChest",
+  dungeon: "markerDungeon",
   area: "markerArea",
 } as const satisfies Record<MarkerKind, UiKey>;
 

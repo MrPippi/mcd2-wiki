@@ -5,7 +5,7 @@ import path from "node:path";
 import sharp from "sharp";
 import { SOURCE_TILE, TILE, imageSizeOf, zMaxFor } from "../../src/lib/map/worlds";
 import { childrenOf, levelTiles, sourceCut, sourceName, tileKey, type TileId } from "./pyramid";
-import { clearVoid, dilate, voidMask, type VoidCut } from "./void-mask";
+import { clearVoid, dilate, featherMask, voidMask, type VoidCut } from "./void-mask";
 
 export interface TileWorld {
   readonly key: string;
@@ -48,8 +48,11 @@ const TRANSPARENT = { r: 0, g: 0, b: 0, alpha: 0 };
 const MASK_SCALE = 4;
 /** Smallest void region (in mask cells, 256×256 render pixels) cleared; smaller tan patches are content. */
 const VOID_MIN_AREA = 4096;
-/** Bumped when the void clearing changes, so unchanged sources still rebuild. */
-const VOID_MASK_VERSION = 1;
+/** The land edge fades out over this many mask cells (4 render pixels each), in FEATHER_STEPS flat levels. */
+const FEATHER_RADIUS = 16;
+const FEATHER_STEPS = 6;
+/** Bumped when the void clearing or the edge fade changes, so unchanged sources still rebuild. */
+const VOID_MASK_VERSION = 2;
 
 type WorldVoid = Omit<VoidCut, "left" | "top">;
 
@@ -87,7 +90,7 @@ async function worldVoid(world: TileWorld, sourceDir: string): Promise<WorldVoid
   }
   const rgb = await sharp({ create: { width, height: width, channels: 3, background: { r: 0, g: 0, b: 0 } } }).composite(parts).removeAlpha().raw().toBuffer();
   const core = voidMask(new Uint8Array(rgb), width, width, VOID_MIN_AREA);
-  return { core, fringe: dilate(core, width, width), width, scale: MASK_SCALE };
+  return { core, fringe: dilate(core, width, width), feather: featherMask(core, width, width, FEATHER_RADIUS, FEATHER_STEPS), width, scale: MASK_SCALE };
 }
 
 async function cutSource(file: string, tiles: readonly TileId[], quality: number, cut: VoidCut): Promise<[string, Buffer][]> {

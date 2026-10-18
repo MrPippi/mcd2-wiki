@@ -1,7 +1,7 @@
 {
   "imageSize": 3072,
   "zMax": 4,
-  "voidMask": 1,
+  "voidMask": 2,
   "sources": [
     {
       "name": "Camp_00_00.png",

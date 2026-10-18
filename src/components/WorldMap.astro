@@ -5,7 +5,7 @@ import { markerLabel, t, type Lang } from "../lib/i18n";
 import { compareLang } from "../lib/lang";
 import { countByKind } from "../lib/map/markers";
 import { trimWorld } from "../lib/map/payload";
-import { overviewTile } from "../lib/map/tiles";
+import { keyGlyph, overviewTile, tabArt } from "../lib/map/tiles";
 import { assetUrl } from "../lib/url";
 
 interface Props {
@@ -21,20 +21,25 @@ const labels = Object.fromEntries(MARKER_KINDS.map((kind) => [kind, markerLabel(
 // Only the page language and its comparison language go to the browser (spec §2.6).
 const shownLangs = [lang, compareLang(lang)];
 // Escape "<" so no game text can close the script element early.
-const payload = JSON.stringify({ worlds: worlds.map((world) => trimWorld(world, shownLangs)), labels }).replace(/</g, "\\u003c");
+const notes = { storm: t(lang, "mapNoteStorm") };
+const payload = JSON.stringify({ worlds: worlds.map((world) => trimWorld(world, shownLangs)), labels, notes }).replace(/</g, "\\u003c");
 ---
 {first ? (
   <div class="world-map" data-lang={lang} data-world={first.key}>
     <nav class="map-tabs" aria-label={t(lang, "worldMap")}>
+      {/* Z and X switch to the previous and next world, as in the game; the glyphs are its own keycaps. */}
+      <img class="map-key" src={assetUrl(keyGlyph("z"))} alt="" width="28" height="28" aria-hidden="true" />
       <ol>
         {worlds.map((world) => (
           <li>
             <a href={`?world=${world.key}`} data-world={world.key} aria-current={world.key === first.key ? "page" : undefined}>
-              {world.name[lang]}
+              <img class="map-tab-art" src={assetUrl(tabArt(world.key))} alt="" width="96" height="40" />
+              <span class="map-tab-name">{world.name[lang]}</span>
             </a>
           </li>
         ))}
       </ol>
+      <img class="map-key" src={assetUrl(keyGlyph("x"))} alt="" width="28" height="28" aria-hidden="true" />
     </nav>
     <div class="map-body">
       <div class="map-stage">

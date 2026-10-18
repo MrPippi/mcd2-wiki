@@ -16,6 +16,8 @@ const TABLE = "DT_QuestLocationDefinition";
 const TAG_PREFIX = "sw.questlocation.";
 /** The persistent level every map world is drawn from; spots in other levels (caves, boss arenas) have no map. */
 const MAP_LEVEL = "Overworld";
+/** An area's main and side pins share its spot; they stand this far (render pixels) either side of it. */
+const AREA_PIN_OFFSET = 16;
 /** A quest's spots closer than this (render pixels) are one pin: the game often stacks a few on one spot. */
 const MERGE_PX = 24;
 
@@ -82,14 +84,16 @@ function spotsOf(rows: readonly QuestLocationRowValue[], quests: readonly Quest[
 }
 
 const questLink = (quest: Quest) => ({ slug: quest.slug, title: quest.title.text });
+const isMain = (quest: Quest): boolean => quest.type === "core";
+const kindOf = (quest: Quest): "quest-main" | "quest-side" => (isMain(quest) ? "quest-main" : "quest-side");
+const iconSourceOf = (quest: Quest): string => (isMain(quest) ? QUEST_ICONS.core : QUEST_ICONS.side);
 
 function spotMarker(spot: Spot, icon: (source: string) => string | undefined): MapMarker {
-  const source = spot.quest.type === "core" ? QUEST_ICONS.core : QUEST_ICONS.side;
-  const iconPath = icon(source);
+  const iconPath = icon(iconSourceOf(spot.quest));
   const area = spot.quest.region?.name;
   return {
     id: `quest:${spot.id}`,
-    kind: "quest",
+    kind: kindOf(spot.quest),
     px: spot.px,
     py: spot.py,
     name: spot.quest.title.text,
@@ -99,25 +103,30 @@ function spotMarker(spot: Spot, icon: (source: string) => string | undefined): M
   };
 }
 
-/** One pin per area position for the quests with no spot of their own, listing them in quest-list order. */
+/** One main and one side pin per area position for the quests with no spot of their own, each listing its quests in quest-list order. */
 function areaMarkers(quests: readonly Quest[], world: WorldMap["key"], icon: (source: string) => string | undefined): MapMarker[] {
   const placed = quests.flatMap((quest) => (quest.region?.map?.world === world ? [{ quest, region: quest.region, map: quest.region.map }] : []));
   const positionOf = ({ map }: (typeof placed)[number]) => `${map.px},${map.py}`;
   const positions = [...new Set(placed.map(positionOf))];
-  const iconPath = icon(QUEST_ICONS.area);
-  return positions.map((position) => {
+  return positions.flatMap((position) => {
     const members = placed.filter((member) => positionOf(member) === position);
-    // The base area (Desert.A1 rather than Desert.A1.FortressInt) names the pin.
+    // The base area (Desert.A1 rather than Desert.A1.FortressInt) names the pins.
     const [base] = [...members].sort((a, b) => a.region.areaId.length - b.region.areaId.length);
-    return {
-      id: `quest-area:${base.region.areaId.toLowerCase()}`,
-      kind: "quest-area" as const,
-      px: base.map.px,
-      py: base.map.py,
-      name: base.region.name,
-      ...(iconPath ? { icon: iconPath } : {}),
-      quests: members.map(({ quest }) => questLink(quest)),
-    };
+    const groups = [true, false].map((main) => ({ main, quests: members.filter(({ quest }) => isMain(quest) === main).map(({ quest }) => quest) })).filter((group) => group.quests.length > 0);
+    return groups.map(({ main, quests: listed }) => {
+      const iconPath = icon(main ? QUEST_ICONS.core : QUEST_ICONS.side);
+      // Both kinds at one spot: main to the left, side to the right.
+      const shift = groups.length === 2 ? (main ? -AREA_PIN_OFFSET : AREA_PIN_OFFSET) : 0;
+      return {
+        id: `quest-area:${base.region.areaId.toLowerCase()}:${main ? "main" : "side"}`,
+        kind: main ? ("quest-main" as const) : ("quest-side" as const),
+        px: round1(base.map.px + shift),
+        py: base.map.py,
+        name: base.region.name,
+        ...(iconPath ? { icon: iconPath } : {}),
+        quests: listed.map(questLink),
+      };
+    });
   });
 }
 

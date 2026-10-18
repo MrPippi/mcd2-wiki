@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { clearVoid, dilate, isVoidColour, voidMask } from "../../../scripts/map-tiles/void-mask";
+import { clearVoid, dilate, featherMask, isVoidColour, voidMask } from "../../../scripts/map-tiles/void-mask";
 
 const VOID = [153, 146, 132] as const;
 const GRASS = [70, 110, 40] as const;
@@ -108,5 +108,36 @@ describe("clearVoid", () => {
     const out = clearVoid(rgba(() => GRASS, 2), 2, 2, { core, fringe: core, width: 2, scale: 2, left: 2, top: 2 });
     // The 2x2 image sits on mask cell (1,1).
     expect(Array.from({ length: 4 }, (_, i) => out[i * 4 + 3])).toEqual([0, 0, 0, 0]);
+  });
+});
+
+describe("featherMask", () => {
+  // A 12x1 strip: void on the left half, land on the right.
+  const core = Uint8Array.from({ length: 12 }, (_, x) => (x < 6 ? 1 : 0));
+
+  it("keeps void cells fully transparent and fades land in from its border", () => {
+    const feather = featherMask(core, 12, 1, 3, 4);
+    expect(Array.from(feather.slice(0, 6))).toEqual([0, 0, 0, 0, 0, 0]);
+    expect(feather[6]).toBeLessThan(feather[8]);
+    expect(feather[11]).toBe(255);
+  });
+
+  it("uses only the requested number of opacity levels", () => {
+    const levels = new Set(featherMask(core, 12, 1, 3, 4));
+    expect([...levels].every((level) => [0, 64, 128, 191, 255].includes(level))).toBe(true);
+  });
+
+  it("leaves land with no void nearby fully opaque", () => {
+    expect(Array.from(featherMask(new Uint8Array(9), 3, 3, 1, 4))).toEqual(Array(9).fill(255));
+  });
+});
+
+describe("clearVoid with a feather", () => {
+  it("scales the opacity of land pixels by their cell's feather", () => {
+    const image = new Uint8Array(2 * 2 * 4);
+    for (let i = 0; i < 4; i += 1) image.set([...GRASS, 255], i * 4);
+    const core = Uint8Array.from([0]);
+    const out = clearVoid(image, 2, 2, { core, fringe: core, feather: Uint8Array.from([128]), width: 1, scale: 2, left: 0, top: 0 });
+    expect(out[3]).toBe(128);
   });
 });

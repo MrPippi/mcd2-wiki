@@ -77,6 +77,43 @@ export function dilate(mask: Uint8Array, width: number, height: number): Uint8Ar
   return out;
 }
 
+/** Average of each cell's (2·radius+1)² neighbourhood of a 0/1 mask, as 0..1; cells beyond the border count as the nearest edge cell. */
+function boxBlur(mask: Uint8Array, width: number, height: number, radius: number): Float32Array {
+  const clamp = (value: number, max: number): number => Math.min(max, Math.max(0, value));
+  const across = new Float32Array(mask.length);
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      let sum = 0;
+      for (let d = -radius; d <= radius; d += 1) sum += mask[y * width + clamp(x + d, width - 1)];
+      across[y * width + x] = sum / (2 * radius + 1);
+    }
+  }
+  const out = new Float32Array(mask.length);
+  for (let y = 0; y < height; y += 1) {
+    for (let x = 0; x < width; x += 1) {
+      let sum = 0;
+      for (let d = -radius; d <= radius; d += 1) sum += across[clamp(y + d, height - 1) * width + x];
+      out[y * width + x] = sum / (2 * radius + 1);
+    }
+  }
+  return out;
+}
+
+/**
+ * Opacity (0..255) per mask cell for a soft land edge: 0 at the land border, rising over about `radius` cells to full,
+ * in `steps` flat levels so the fade stays pixel-art. `core` is 1 inside void; void cells themselves stay 0.
+ */
+export function featherMask(core: Uint8Array, width: number, height: number, radius: number, steps: number): Uint8Array {
+  const land = core.map((cell) => 1 - cell);
+  const blurred = boxBlur(land, width, height, radius);
+  return Uint8Array.from(blurred, (value, i) => {
+    if (!land[i]) return 0;
+    // A land cell at the border averages about one half; a cell a full radius inside averages higher.
+    const level = Math.min(1, Math.max(0, (value - 0.5) * 2.4));
+    return Math.round((Math.ceil(level * steps) / steps) * 255);
+  });
+}
+
 /** A world's void mask, held at 1/`scale` of the render, and where an image sits in the render. */
 export interface VoidCut {
   /** Cells inside a void region: always cleared. */
@@ -87,6 +124,8 @@ export interface VoidCut {
   readonly width: number;
   /** Render pixels per mask cell. */
   readonly scale: number;
+  /** Opacity per cell for the soft land edge (see featherMask); absent means fully opaque. */
+  readonly feather?: Uint8Array;
   /** The image's top-left corner in render pixels. */
   readonly left: number;
   readonly top: number;
@@ -100,9 +139,9 @@ export function clearVoid(rgba: Uint8Array, width: number, height: number, cut: 
     const row = Math.floor((cut.top + y) / cut.scale) * cut.width;
     for (let x = 0; x < width; x += 1) {
       const cell = row + Math.floor((cut.left + x) / cut.scale);
-      if (!cut.fringe[cell]) continue;
       const p = (y * width + x) * 4;
-      if (cut.core[cell] || isVoidColour(out[p], out[p + 1], out[p + 2])) out[p + 3] = 0;
+      if (cut.fringe[cell] && (cut.core[cell] || isVoidColour(out[p], out[p + 1], out[p + 2]))) out[p + 3] = 0;
+      else if (cut.feather && cut.feather[cell] < 255) out[p + 3] = Math.round((out[p + 3] * cut.feather[cell]) / 255);
     }
   }
   return out;

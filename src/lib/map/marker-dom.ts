@@ -46,11 +46,12 @@ export interface PopupTexts {
   readonly note?: string;
 }
 
-export function popupTexts(marker: PayloadMarker, lang: Lang, kindLabel: string): PopupTexts {
+/** A kind's own note (a storm generator spot) shows when the marker has none of its own. */
+export function popupTexts(marker: PayloadMarker, lang: Lang, kindLabel: string, kindNote?: string): PopupTexts {
   const name = marker.name[lang] ?? "";
   const kind = shownKind(name, kindLabel);
   const area = marker.area?.[lang];
-  const note = marker.note?.[lang];
+  const note = marker.note?.[lang] ?? kindNote;
   return { ...(kind ? { kind } : {}), name, ...(area ? { area } : {}), ...(note ? { note } : {}) };
 }
 
@@ -70,6 +71,8 @@ export interface PopupLinks {
 }
 
 export function popupLinks(marker: PayloadMarker, lang: Lang): PopupLinks {
+  // A talisman chest names its talisman, which the name links to.
+  if (marker.entry) return { nameHref: href(lang, marker.entry.category, marker.entry.slug), list: [] };
   const quests = (marker.quests ?? []).map((quest) => ({ title: quest.title[lang] ?? "", href: href(lang, "quests", quest.slug) }));
   const [only] = quests;
   if (quests.length === 1 && only.title === marker.name[lang]) return { nameHref: only.href, list: [] };
@@ -82,8 +85,8 @@ function link(text: string, url: string): HTMLAnchorElement {
   return anchor;
 }
 
-export function popupElement(marker: PayloadMarker, lang: Lang, kindLabel: string): HTMLElement {
-  const { kind, name, area, note } = popupTexts(marker, lang, kindLabel);
+export function popupElement(marker: PayloadMarker, lang: Lang, kindLabel: string, kindNote?: string): HTMLElement {
+  const { kind, name, area, note } = popupTexts(marker, lang, kindLabel, kindNote);
   const { nameHref, list } = popupLinks(marker, lang);
   const popup = element("div", "map-popup");
   if (kind) popup.append(element("p", "map-popup-kind mono", kind));
