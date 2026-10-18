@@ -87,9 +87,13 @@ export function dropperHref(lang: Lang, source: ResolvedSource): string | undefi
 }
 
 /** Sources of an item page, or undefined when the game data gives it none (the page then shows no block). */
+/** Pages that keep area-pool chests: books come mostly from chests. Gear pages list only chests fixed to the item (as the drop odds do). */
+const KEEPS_AREA_CHESTS: ReadonlySet<Entry["category"]> = new Set(["enchantment", "enchantment-book"]);
+
 export function entrySources(entry: Entry): ResolvedItemSources | undefined {
   const keys = entry.category === "enchantment" ? booksFor(entry.slug).map((book) => `${book.category}/${book.slug}`) : [`${entry.category}/${entry.slug}`];
   const found = keys.flatMap((key) => sourcesFor(itemSourcesData, key) ?? []);
-  const merged = mergeSources(found);
+  const all = mergeSources(found);
+  const merged = KEEPS_AREA_CHESTS.has(entry.category) ? all : { ...all, chests: all.chests.filter((source) => source.pool === "fixed") };
   return hasAnySource(merged) ? merged : undefined;
 }
