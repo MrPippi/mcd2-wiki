@@ -179,6 +179,7 @@
   "mobDropRolls": "隨機次數：{n}，每次 {chance}",
   "mobDropPoolArea": "物品取自所在區域的掉落池。",
   "mobDropPoolOwn": "物品取自此怪物自己的清單。",
+  "lootNoList": "資料中沒有物品清單。",
   "mobDropPoolNone": "資料沒有為此怪物指定物品清單；掉落機率表依所在區域的掉落池計算。",
   "mobVariants": "變種",
   "mobVariantOf": "變種來源",

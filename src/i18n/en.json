@@ -182,6 +182,7 @@
   "mobDropRolls": "Random rolls: {n}, {chance} each",
   "mobDropPoolArea": "Items come from the area's drop pool.",
   "mobDropPoolOwn": "Items come from this mob's own list.",
+  "lootNoList": "The data has no item list for this.",
   "mobDropPoolNone": "The data names no item list for this mob; the drop odds use the pool of the area it is in.",
   "mobVariants": "Variants",
   "mobVariantOf": "Variant of",
