@@ -1,0 +1,27 @@
+---
+import "../styles/picker.css";
+
+interface Props {
+  /** Test ids are `<prefix>-dialog`, `-filter` and `-options`; also names the title's id. */
+  prefix: string;
+  close: string;
+  filter: string;
+  noResults: string;
+}
+
+const { prefix, close, filter, noResults } = Astro.props;
+const titleId = `${prefix}-dialog-title`;
+---
+{/* Filled and opened by item-picker.ts. */}
+<dialog class="picker-dialog" data-testid={`${prefix}-dialog`} data-dialog aria-labelledby={titleId}>
+  {/* Fills the dialog, so a click whose target is the dialog itself can only be on the backdrop. */}
+  <div class="picker-dialog-body">
+    <div class="picker-dialog-head">
+      <h2 class="picker-dialog-title" id={titleId} data-dialog-title></h2>
+      <button type="button" class="picker-close" data-close>{close}</button>
+    </div>
+    <input type="search" class="picker-filter" data-testid={`${prefix}-filter`} data-filter placeholder={filter} aria-label={filter} />
+    <div class="picker-options" data-testid={`${prefix}-options`} data-options></div>
+    <p class="note" data-no-results hidden>{noResults}</p>
+  </div>
+</dialog>

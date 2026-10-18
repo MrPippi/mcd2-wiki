@@ -13,9 +13,14 @@ export interface PickerOption {
   readonly unique?: boolean;
   /** Enchantment books: the frame image drawn over the icon instead of the square slot. */
   readonly frame?: string;
+  /** Listed but not selectable, e.g. already compared or worn in another slot. */
+  readonly disabled?: boolean;
+  /** A short note after the name, e.g. "Added". */
+  readonly tag?: string;
 }
 
 export interface PickerGroup {
+  /** Empty for a dialog with one group: no heading is drawn. */
   readonly label: string;
   readonly options: readonly PickerOption[];
 }
@@ -43,7 +48,7 @@ const image = (src: string, className: string): HTMLImageElement =>
 /** The option's art: the icon in the square slot, or behind its frame image. */
 export function optionArt(option: Pick<PickerOption, "icon" | "frame">): HTMLSpanElement {
   const art = document.createElement("span");
-  art.className = option.frame ? "compare-icon is-framed" : "compare-icon";
+  art.className = option.frame ? "picker-icon is-framed" : "picker-icon";
   art.setAttribute("aria-hidden", "true");
   if (option.icon) art.append(image(option.icon, "picker-art"));
   if (option.icon && option.frame) art.append(image(option.frame, "picker-frame"));
@@ -53,12 +58,14 @@ export function optionArt(option: Pick<PickerOption, "icon" | "frame">): HTMLSpa
 function optionRow(option: PickerOption, request: PickerRequest): HTMLLIElement {
   const button = document.createElement("button");
   button.type = "button";
-  button.className = "compare-option";
+  button.className = "picker-option";
   button.dataset.key = option.key;
+  button.disabled = option.disabled === true;
   if (option.unique) button.dataset.unique = "true";
   if (request.current === option.key) button.setAttribute("aria-current", "true");
-  const name = Object.assign(document.createElement("span"), { className: "compare-option-name", textContent: option.name });
+  const name = Object.assign(document.createElement("span"), { className: "picker-option-name", textContent: option.name });
   button.append(optionArt(option), name);
+  if (option.tag) button.append(Object.assign(document.createElement("span"), { className: "picker-option-tag", textContent: option.tag }));
   button.addEventListener("click", () => request.pick(option.key));
   const row = document.createElement("li");
   row.append(button);
@@ -68,11 +75,11 @@ function optionRow(option: PickerOption, request: PickerRequest): HTMLLIElement 
 function groupSection(label: string, options: readonly PickerOption[], request: PickerRequest): HTMLElement[] {
   if (options.length === 0) return [];
   const section = document.createElement("section");
-  const heading = Object.assign(document.createElement("h3"), { className: "compare-option-heading", textContent: label });
   const list = document.createElement("ul");
-  list.className = "compare-option-list";
+  list.className = "picker-option-list";
   list.append(...options.map((option) => optionRow(option, request)));
-  section.append(heading, list);
+  if (label) section.append(Object.assign(document.createElement("h3"), { className: "picker-option-heading", textContent: label }));
+  section.append(list);
   return [section];
 }
 
@@ -81,6 +88,20 @@ function showOptions(parts: PickerParts, request: PickerRequest): void {
   const groups = request.groups.map((group) => ({ ...group, options: group.options.filter((option) => query === "" || option.search.includes(query)) }));
   parts.options.replaceChildren(...groups.flatMap((group) => groupSection(group.label, group.options, request)));
   parts.noResults.hidden = groups.some((group) => group.options.length > 0);
+}
+
+/** Finds the parts of an ItemPickerDialog; undefined when one is missing. */
+export function pickerParts(dialog: HTMLDialogElement | null): PickerParts | undefined {
+  const one = <T extends HTMLElement>(selector: string) => dialog?.querySelector<T>(selector) ?? undefined;
+  const parts = {
+    dialog: dialog ?? undefined,
+    title: one("[data-dialog-title]"),
+    filter: one<HTMLInputElement>("[data-filter]"),
+    options: one("[data-options]"),
+    noResults: one("[data-no-results]"),
+    close: one("[data-close]"),
+  };
+  return Object.values(parts).every(Boolean) ? (parts as PickerParts) : undefined;
 }
 
 /** Wires the close button, backdrop click and live filtering; returns the function that opens the dialog for a request. */

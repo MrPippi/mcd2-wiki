@@ -1,0 +1,39 @@
+/* The item picker dialog (ItemPickerDialog.astro, item-picker.ts): icon grid in labelled groups and a filter. */
+.picker-icon {
+  flex-shrink: 0; display: grid; place-items: center; width: 48px; height: 48px;
+  border: 2px solid var(--slot-border); background: var(--plate);
+}
+.picker-option[data-unique="true"] .picker-icon { --slot-border: var(--slot-unique-border); }
+.picker-icon img { display: block; width: 40px; height: 40px; object-fit: contain; }
+
+.picker-dialog {
+  width: min(720px, calc(100vw - 2 * var(--space-4))); max-height: min(80vh, 760px); max-height: min(80svh, 760px);
+  padding: 0; border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); box-shadow: var(--shadow-hard);
+}
+.picker-dialog[open] { display: flex; flex-direction: column; }
+.picker-dialog-body { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.picker-dialog::backdrop { background: rgb(0 0 0 / 0.45); }
+.picker-dialog-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--rule); }
+.picker-dialog-title { margin: 0; font-size: 20px; overflow-wrap: anywhere; }
+.picker-filter { margin: var(--space-3) var(--space-4) 0; width: auto; }
+.picker-options { overflow-y: auto; padding: 0 var(--space-4) var(--space-4); }
+.picker-option-heading { margin: var(--space-3) 0 var(--space-2); font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 400; color: var(--muted); text-transform: uppercase; }
+/* An unlabelled group has no heading: keep the same gap above its grid. */
+.picker-option-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+.picker-options > section:not(:has(.picker-option-heading)) { padding-top: var(--space-3); }
+.picker-dialog [data-no-results] { margin: 0 var(--space-4) var(--space-4); }
+.picker-option { display: flex; align-items: center; justify-content: flex-start; gap: var(--space-2); width: 100%; padding: var(--space-1); text-align: start; }
+.picker-option[aria-current="true"] { box-shadow: inset 3px 0 0 var(--accent); }
+.picker-option:disabled { opacity: 0.55; cursor: not-allowed; }
+.picker-option-name { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; }
+.picker-option-tag { font-size: 0.8rem; color: var(--muted); }
+
+/* Options with a frame (enchantment books): the icon fills the book's diamond window
+   (x 39–217, y 13–195 of the 256px art) and the frame image is drawn on top, like frames.css. */
+.picker-icon.is-framed { position: relative; border: 0; background: none; }
+.picker-icon.is-framed img.picker-art { position: absolute; left: 15.2%; top: 5%; width: 69.6%; height: 71.5%; object-fit: fill; image-rendering: pixelated; }
+.picker-icon.is-framed img.picker-frame { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; pointer-events: none; }
+
+@media (max-width: 599px) {
+  .picker-dialog { width: 100vw; max-width: 100vw; height: 100dvh; max-height: 100dvh; margin: 0; border: 0; }
+}

@@ -1,5 +1,5 @@
 /** The build page in the browser: slots, the picker dialog, the URL and the share buttons. */
-import { foldForSearch } from "../lang";
+import { mountPicker, pickerParts, type PickerParts, type PickerRequest } from "../item-picker";
 import { ROMAN } from "./card";
 import { buildSearch, decodeBuild, type DecodedBuild, type EnchantPools, type Pools } from "./code";
 import { drawCard, type CardTheme } from "./draw";
@@ -31,11 +31,7 @@ interface Parts {
   readonly notice: HTMLElement;
   readonly status: HTMLElement;
   readonly url: HTMLInputElement;
-  readonly dialog: HTMLDialogElement;
-  readonly dialogTitle: HTMLElement;
-  readonly filter: HTMLInputElement;
-  readonly options: HTMLElement;
-  readonly empty: HTMLElement;
+  readonly picker: PickerParts;
 }
 
 /** A row in the picker: an item for a slot, or a whole armor set. */
@@ -46,7 +42,7 @@ interface Choice {
   readonly icon?: string;
   readonly unique?: true;
   /** Enchantments: the icon sits in the game's book frame (this URL) instead of the square slot box. */
-  readonly book?: string;
+  readonly frame?: string;
   readonly disabled: boolean;
   /** Already in the slot being picked for: marked, still selectable. */
   readonly current?: boolean;
@@ -62,7 +58,7 @@ interface Planner {
   build: Build;
   enchants: Enchants;
   effects: Effects;
-  choices: readonly Choice[];
+  readonly openPicker: (request: PickerRequest) => void;
 }
 
 const isEnchantSlot = (key: SlotKey): key is EnchantSlotKey => (ENCHANT_SLOT_KEYS as readonly SlotKey[]).includes(key);
@@ -81,11 +77,7 @@ function partsOf(root: HTMLElement): Parts | undefined {
     notice: get("[data-notice]"),
     status: get("[data-status]"),
     url: get<HTMLInputElement>("[data-url]"),
-    dialog: get<HTMLDialogElement>("[data-dialog]"),
-    dialogTitle: get("[data-dialog-title]"),
-    filter: get<HTMLInputElement>("[data-filter]"),
-    options: get("[data-options]"),
-    empty: get("[data-empty]"),
+    picker: pickerParts(root.querySelector<HTMLDialogElement>("[data-dialog]")),
   };
   return Object.values(parts).every(Boolean) ? (parts as Parts) : undefined;
 }
@@ -157,32 +149,6 @@ function renderSlot(element: HTMLElement, option: BuildOption | undefined, paylo
   if (clear) clear.hidden = option === undefined;
 }
 
-function choiceRow(choice: Choice, equipped: string): HTMLLIElement {
-  const button = document.createElement("button");
-  button.type = "button";
-  button.className = "build-option";
-  button.disabled = choice.disabled;
-  if (choice.unique) button.dataset.unique = "true";
-  const art = document.createElement("span");
-  art.className = choice.book ? "build-icon build-icon-book" : "build-icon";
-  art.append(...(choice.book ? bookArt(choice.icon, choice.book) : iconImage(choice.icon)));
-  const name = document.createElement("span");
-  name.className = "build-option-name";
-  name.textContent = choice.name;
-  button.append(art, name);
-  if (choice.current) button.setAttribute("aria-current", "true");
-  if (choice.disabled || choice.current) {
-    const tag = document.createElement("span");
-    tag.className = "build-option-tag";
-    tag.textContent = equipped;
-    button.append(tag);
-  }
-  button.addEventListener("click", choice.pick);
-  const row = document.createElement("li");
-  row.append(button);
-  return row;
-}
-
 /** Sets a live region's text, clearing it first so the same message is announced again. */
 function announce(element: HTMLElement, text: string): void {
   element.textContent = "";
@@ -249,26 +215,20 @@ function update(planner: Planner, next: Build, enchants: Enchants = planner.ench
 
 const without = (build: Build, key: SlotKey): Build => Object.fromEntries(Object.entries(build).filter(([slot]) => slot !== key)) as Build;
 
-function showChoices(planner: Planner): void {
-  const { parts, payload } = planner;
-  const query = foldForSearch(parts.filter.value.trim(), document.documentElement.lang);
-  const shown = planner.choices.filter((choice) => query === "" || choice.search.includes(query));
-  parts.options.replaceChildren(...shown.map((choice) => choiceRow(choice, payload.labels.equipped)));
-  parts.empty.hidden = shown.length > 0;
-}
-
+/** Opens the shared picker on one unlabelled group; items worn elsewhere or already in this slot carry the "equipped" tag. */
 function openDialog(planner: Planner, title: string, choices: readonly Choice[]): void {
-  planner.choices = choices;
-  planner.parts.dialogTitle.textContent = title;
-  planner.parts.filter.value = "";
-  showChoices(planner);
-  planner.parts.dialog.showModal();
-  planner.parts.filter.focus();
+  const equipped = planner.payload.labels.equipped;
+  planner.openPicker({
+    title,
+    groups: [{ label: "", options: choices.map(({ pick: _pick, current, ...option }) => ({ ...option, tag: option.disabled || current ? equipped : undefined })) }],
+    current: choices.find((choice) => choice.current)?.key,
+    pick: (key) => choices.find((choice) => choice.key === key)?.pick(),
+  });
 }
 
 /** Picks from the dialog, then hands focus back to the slot the change landed in. */
 function choose(planner: Planner, next: Build, focusSlot: SlotKey): void {
-  planner.parts.dialog.close();
+  planner.parts.picker.dialog.close();
   update(planner, next);
   planner.slots.get(focusSlot)?.querySelector<HTMLElement>("[data-pick]")?.focus();
 }
@@ -306,11 +266,11 @@ function enchantChoices(planner: Planner, key: EnchantSlotKey): Choice[] {
     name: option.name,
     search: option.search,
     icon: option.icon,
-    book: planner.root.dataset.bookFrame,
+    frame: planner.root.dataset.bookFrame,
     disabled: false,
     current: planner.enchants[key]?.slug === option.slug,
     pick: () => {
-      planner.parts.dialog.close();
+      planner.parts.picker.dialog.close();
       const tier = planner.enchants[key]?.tier ?? ENCHANT_TIERS[0];
       update(planner, planner.build, { ...planner.enchants, [key]: { slug: option.slug, tier } });
       planner.slots.get(key)?.querySelector<HTMLElement>("[data-enchant-pick]")?.focus();
@@ -351,7 +311,7 @@ function effectChoices(planner: Planner, key: EffectSlotKey, replacing?: string)
     disabled: picked.has(option.slug) && option.slug !== replacing,
     current: option.slug === replacing || undefined,
     pick: () => {
-      planner.parts.dialog.close();
+      planner.parts.picker.dialog.close();
       update(planner, planner.build, planner.enchants, { ...planner.effects, [key]: nextPicks(option.slug) });
       const slot = planner.slots.get(key);
       const added = slot?.querySelector<HTMLElement>(`[data-effect-tier="${option.slug}"]`);
@@ -404,18 +364,6 @@ function wireSlots(planner: Planner): void {
   planner.root.querySelector("[data-open-sets]")?.addEventListener("click", () => openDialog(planner, planner.payload.labels.wholeSet, setChoices(planner)));
 }
 
-function wireDialog(planner: Planner): void {
-  const { dialog, filter } = planner.parts;
-  planner.root.querySelector("[data-close]")?.addEventListener("click", () => dialog.close());
-  // The body fills the dialog, so only the backdrop has the dialog as target; a drag that starts inside never closes it.
-  let pressedBackdrop = false;
-  dialog.addEventListener("pointerdown", (event) => (pressedBackdrop = event.target === dialog));
-  dialog.addEventListener("click", (event) => {
-    if (pressedBackdrop && event.target === dialog) dialog.close();
-  });
-  filter.addEventListener("input", () => showChoices(planner));
-}
-
 function wireShare(planner: Planner): void {
   planner.root.querySelector("[data-reset]")?.addEventListener("click", () => update(planner, {}, {}, {}));
   planner.root.querySelector("[data-copy]")?.addEventListener("click", () => void copyLink(planner));
@@ -440,9 +388,8 @@ export function mountPlanner(root: HTMLElement): boolean {
   const slots = slotsOf(root);
   if (!payload || !parts || !slots) return false;
   const decoded = decodeBuild(location.search, poolsOf(payload), enchantPoolsOf(payload), effectRulesOf(payload));
-  const planner: Planner = { root, payload, parts, slots, build: decoded.build, enchants: decoded.enchants, effects: decoded.effects, choices: [] };
+  const planner: Planner = { root, payload, parts, slots, build: decoded.build, enchants: decoded.enchants, effects: decoded.effects, openPicker: mountPicker(parts.picker) };
   wireSlots(planner);
-  wireDialog(planner);
   wireShare(planner);
   render(planner);
   // Drop what could not be read from the address, so the language links do not carry it on.

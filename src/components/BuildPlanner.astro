@@ -1,4 +1,5 @@
 ---
+import ItemPickerDialog from "./ItemPickerDialog.astro";
 import { frameFor } from "../lib/frames";
 import { categoryLabel, t, type Lang } from "../lib/i18n";
 import { assetUrl } from "../lib/url";
@@ -87,18 +88,7 @@ const groupTitle = (group: SlotGroup): string =>
     <p class="note build-status" data-testid="build-status" data-status role="status" aria-live="polite"></p>
     <input class="build-url" type="text" data-testid="build-url" data-url readonly aria-label={t(lang, "buildLink")} hidden />
   </section>
-  <dialog class="build-dialog" data-testid="build-dialog" data-dialog aria-labelledby="build-dialog-title">
-    {/* Fills the dialog, so a click whose target is the dialog itself can only be on the backdrop. */}
-    <div class="build-dialog-body">
-    <div class="build-dialog-head">
-      <h2 class="build-dialog-title" id="build-dialog-title" data-dialog-title></h2>
-      <button type="button" class="build-close" data-close>{t(lang, "buildClose")}</button>
-    </div>
-    <input type="search" class="build-filter" data-testid="build-filter" data-filter placeholder={t(lang, "buildSearch")} aria-label={t(lang, "buildSearch")} />
-    <ul class="build-options" data-testid="build-options" data-options></ul>
-    <p class="note" data-empty hidden>{t(lang, "buildNoResults")}</p>
-    </div>
-  </dialog>
+  <ItemPickerDialog prefix="build" close={t(lang, "buildClose")} filter={t(lang, "buildSearch")} noResults={t(lang, "buildNoResults")} />
   <script type="application/json" data-build-json set:html={payloadJson(payload)}></script>
 </div>
 <p class="note build-failed" data-testid="build-failed" data-build-failed hidden>{t(lang, "buildLoadFailed")}</p>

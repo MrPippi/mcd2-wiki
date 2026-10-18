@@ -26,8 +26,8 @@
   border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); font-size: 1rem; text-align: start;
 }
 .drop-item-pick:hover { background: var(--plate); }
-.drop-item-pick[data-filled="false"] .compare-icon { border-style: dashed; }
+.drop-item-pick[data-filled="false"] .picker-icon { border-style: dashed; }
 .drop-item-pick[data-filled="false"] .drop-item-name { color: var(--muted); }
 .drop-item-pick[data-filled="true"] .drop-item-name { font-weight: 700; }
-.drop-item-pick[data-unique="true"] .compare-icon { --slot-border: var(--slot-unique-border); }
+.drop-item-pick[data-unique="true"] .picker-icon { --slot-border: var(--slot-unique-border); }
 .drop-item-name { min-width: 0; overflow-wrap: anywhere; }
