@@ -7,6 +7,7 @@ test.describe("how to obtain", () => {
     const block = page.getByTestId("item-sources");
     await expect(block.locator("h2")).toHaveText("取得方式");
     await expect(block.locator("[data-source-kind='areas'] a").first()).toHaveAttribute("href", /\/zh\/map\//);
+    await expect(block.locator("[data-source-kind='areas'] .source-area-icon").first()).toHaveAttribute("src", /\/icons\/locations\//);
     await expect(block.locator("[data-source-kind='chests']")).toHaveCount(0);
     await expect(block.locator("[data-source-kind='quests'] [data-testid='guaranteed']")).toHaveCount(1);
     await expect(block.locator("[data-source-kind='merchants'] [data-testid='merchant-category']")).toContainText("近戰");
