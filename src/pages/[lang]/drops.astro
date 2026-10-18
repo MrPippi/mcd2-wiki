@@ -29,6 +29,7 @@ const payload = calcPayload(lang);
       {t(alt, "dropCalc") !== t(lang, "dropCalc") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "dropCalc")}</p>}
       <p class="compare-intro">{t(lang, "dropCalcIntro")}</p>
     </header>
+    <div class="drops-body">
     <noscript><p class="note" data-testid="drop-noscript">{t(lang, "dropCalcNoScript")}</p></noscript>
     <p class="note">{t(lang, "dropOddsIntro")}</p>
     <p class="note">{t(lang, "dropCalcCoverage")}</p>
@@ -37,5 +38,6 @@ const payload = calcPayload(lang);
     {payload.available
       ? <DropCalculator lang={lang} payload={payload} />
       : <p class="note" data-testid="drop-no-data">{t(lang, "dropCalcNoData")}</p>}
+    </div>
   </div>
 </Base>
