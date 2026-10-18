@@ -55,6 +55,8 @@
   box-shadow: var(--shadow-faint);
   animation: fade-in-quick 120ms var(--ease-out);
 }
+/* Block-level, unlike inline .lang-text: a short name would otherwise share its line with the description. */
+.tooltip-name, .tooltip-desc { display: flex; }
 .tooltip-name { font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.25; margin: 4px 0 8px; }
 .tooltip-desc { margin: 0 0 8px; font-size: 14px; color: var(--text-2); }
 .tooltip-pieces { list-style: none; padding: 0; margin: 0 0 8px; font-size: 14px; }

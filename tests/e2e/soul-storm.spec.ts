@@ -103,7 +103,7 @@ test.describe("menu and search", () => {
   test("the menu lists Soul Storms after the bestiary and marks it on its page", async ({ page }) => {
     await page.goto("/zh/soul-storm/");
     await page.getByTestId("site-menu").click();
-    await expect(page.locator(".site-menu a")).toHaveText(["地圖", "成就", "怪物圖鑑", "靈魂風暴", "配裝", "武器比較", "攻略", "任務", "地點", "頭目"]);
+    await expect(page.locator(".site-menu a")).toHaveText(["地圖", "成就", "怪物圖鑑", "靈魂風暴", "配裝", "武器比較", "掉落機率計算器", "攻略", "任務", "地點", "頭目"]);
     await expect(page.locator(".site-menu [aria-current='page']")).toHaveText("靈魂風暴");
   });
 
