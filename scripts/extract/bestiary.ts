@@ -73,7 +73,8 @@ function composeMobs(input: BestiaryInput, tables: MobTables | undefined, loot: 
 
 async function composeFrom(input: BestiaryInput, tables: MobTables, loot: LootTables | undefined): Promise<MobsPart> {
   const built = await loadAndBuildMobs(input, tables);
-  const dropped = attachDrops(built.drafts, loot?.mob ?? []);
+  const index = loot ? buildItemIndex(loot, input.entries) : undefined;
+  const dropped = attachDrops(built.drafts, loot?.mob ?? [], (tag) => index?.resolve(tag).map((ref) => ref.key) ?? []);
   return {
     mobs: MobDataSchema.parse({ mobs: dropped.drafts.map((draft) => draft.mob) }),
     issues: [...built.issues, ...(loot ? [...dropped.issues, ...unusedMobRows(built.drafts, loot.mob)] : [])],

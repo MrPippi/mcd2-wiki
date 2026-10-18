@@ -11,12 +11,15 @@ import { existsSync } from "node:fs";
 import { copyFile, mkdir } from "node:fs/promises";
 import path from "node:path";
 import type { Lang } from "./config";
+import { loadDropTables } from "./drop-tables";
 import { referencePaths } from "./icon-references";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { assignRows, foldSubLocations, ownerOf, rowName, type RegionRows } from "./location-assign";
 import { EMPTY_LOCATIONS, LocationDataSchema, RegionListSchema, type Location, type LocationData, type RegionList, type RegionRule } from "./location-schema";
+import { addLocationBooks } from "./location-books";
 import { loadLocationTables, type LocationTables, type ProgressionRow } from "./location-tables";
 import type { MapData } from "./map-schema";
+import { loadLootTables } from "./loot-tables";
 import { areaMarkers, type AreaMarker } from "./mob-areas";
 import type { ItemSourcesData, MobData } from "./mob-schema";
 import { tagKey } from "./mob-tags";
@@ -24,8 +27,10 @@ import type { QuestData } from "./quest-schema";
 import type { LocaleFile } from "./schemas";
 import regionData from "./location-regions.json";
 
-/** Only the game's area icons are published; other AreaIcon textures (world-map pins) are not area art. */
+/** The game's area icons, published first. */
 const AREA_ICON_DIR = "/Icons/Location/AreaIcons/";
+/** The world-map pins (SpicewoodUI mount); the game gives these to regions with no area art (the Deep Dark, the Ravines), so they are the fallback. */
+const WORLD_MAP_PIN_DIR = "/Texture/WorldMap/Icons/";
 const NO_PROGRESSION = "SW.Progression.None";
 const AREA_SOURCE = "area:";
 export function parseRegionList(raw: unknown): RegionList {
@@ -87,11 +92,12 @@ function regionLevels(slug: string, rows: RegionRows, levels: ReadonlyMap<string
   };
 }
 
-/** The region's area icon: the first own row's AreaIcon that is a game area icon with a file. */
+/** The region's area icon: the first own row's AreaIcon that is a game area icon, else a world-map pin, with a file. */
 function regionIcon(slug: string, rows: RegionRows, ctx: BuildContext): { icon?: IconCopy; issues: Issue[] } {
-  const reference = rows.own.map((row) => row.AreaIcon ?? "None").find((one) => one !== "None");
-  if (!reference) return { issues: [issue("location-no-icon", `${slug}: no AreaIcon`)] };
-  if (!reference.includes(AREA_ICON_DIR)) return { issues: [issue("location-no-icon", `${slug}: ${reference} is not an area icon`)] };
+  const references = rows.own.map((row) => row.AreaIcon ?? "None").filter((one) => one !== "None");
+  if (references.length === 0) return { issues: [issue("location-no-icon", `${slug}: no AreaIcon`)] };
+  const reference = references.find((one) => one.includes(AREA_ICON_DIR)) ?? references.find((one) => one.includes(WORLD_MAP_PIN_DIR));
+  if (!reference) return { issues: [issue("location-no-icon", `${slug}: ${references[0]} is not an area icon`)] };
   const file = ctx.iconFile(reference);
   return file ? { icon: { from: file, published: locationIconPath(slug) }, issues: [] } : { issues: [issue("location-no-icon", `${slug}: ${reference} has no file`)] };
 }
@@ -193,6 +199,13 @@ export interface LocationsResult {
   readonly tablesRead: readonly string[];
 }
 
+/** Adds the enchantment books of each region; without the loot and drop tables (a source-data without them) the regions get none. */
+async function withBooks(input: LocationsInput, data: LocationData, onRead: (file: string) => void): Promise<LocationData> {
+  const loot = await loadLootTables(input.sourceRoot, onRead);
+  const { tables } = await loadDropTables(input.sourceRoot, onRead);
+  return loot && tables ? addLocationBooks({ data, sources: input.sources, loot, placements: tables.placements }) : data;
+}
+
 export async function extractLocations(input: LocationsInput): Promise<LocationsResult> {
   const tablesRead: string[] = [];
   const loaded = await loadLocationTables(input.sourceRoot, (file) => {
@@ -204,5 +217,8 @@ export async function extractLocations(input: LocationsInput): Promise<Locations
   const ctx: BuildContext = { locales: input.locales, markers: areaMarkers(input.map), levels: levelsOf(loaded.tables.progression), iconFile };
   const built = buildLocationData(loaded.tables, input.regions ?? REGION_LIST, input, ctx);
   await publishIcons(input.outRoot, built.icons);
-  return { data: built.data, issues: [...loaded.issues, ...built.issues], tablesRead };
+  const data = await withBooks(input, built.data, (file) => {
+    tablesRead.push(file);
+  });
+  return { data, issues: [...loaded.issues, ...built.issues], tablesRead };
 }

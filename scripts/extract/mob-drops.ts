@@ -45,8 +45,22 @@ function candidateRows(tags: readonly string[], closure: readonly string[], rows
   return [...new Set(ordered)].flatMap((key) => byKey.get(key) ?? []);
 }
 
+/** Item keys a tag stands for; an item tag gives one, anything else none. */
+export type ItemKeysOf = (tag: string) => readonly string[];
+
+const NO_ITEMS: ItemKeysOf = () => [];
+
+/** The items an own-list slot adds itself (Set entries with a weight), as item keys, each once. */
+const ownItems = (slots: readonly LootSlotValue[], keysOf: ItemKeysOf): string[] => [
+  ...new Set(
+    slots.filter(hasOwnPool).flatMap((slot) =>
+      (slot.DropTable.Tags ?? []).filter((entry) => entry.Operation === "Set" && entry.Weight > 0).flatMap((entry) => keysOf(entry.TypeTag.TagName)),
+    ),
+  ),
+];
+
 /** undefined = no loot row found; [] = rows exist but nothing drops (CannotDropLoot or empty slots). */
-export function resolveDrops(tags: readonly string[], closure: readonly string[], rows: readonly LootRow[]): MobDrop[] | undefined {
+export function resolveDrops(tags: readonly string[], closure: readonly string[], rows: readonly LootRow[], keysOf: ItemKeysOf = NO_ITEMS): MobDrop[] | undefined {
   if (closure.some((tag) => tagKey(tag) === NO_LOOT)) return [];
   const candidates = candidateRows(tags, closure, rows);
   if (candidates.length === 0) return undefined;
@@ -58,19 +72,21 @@ export function resolveDrops(tags: readonly string[], closure: readonly string[]
     const at = defined.findIndex((value) => suppresses(key, value) || hasCounts(value));
     const slot = defined[at];
     if (slot === undefined || suppresses(key, slot)) return [];
-    const ownList = defined.slice(0, at + 1).some(hasOwnPool);
+    const used = defined.slice(0, at + 1);
+    const ownList = used.some(hasOwnPool);
     const pool = ownList ? "own" : slot.InheritParentDropTable ? "area" : "none";
-    return [{ slot: key, guaranteed: slot.NumberOfGuaranteedDrops, rolls: slot.NumberOfRandomRolls, chancePerRoll: slot.DropChancePerRoll, pool }];
+    const items = ownList ? ownItems(used, keysOf) : [];
+    return [{ slot: key, guaranteed: slot.NumberOfGuaranteedDrops, rolls: slot.NumberOfRandomRolls, chancePerRoll: slot.DropChancePerRoll, pool, ...(items.length > 0 ? { items } : {}) }];
   });
 }
 
 /** Fills both the normal and the Soul Corrupted drops. Returns new drafts; the input is untouched. */
-export function attachDrops(drafts: readonly MobDraft[], mobRows: readonly LootRow[]): { drafts: MobDraft[]; issues: Issue[] } {
+export function attachDrops(drafts: readonly MobDraft[], mobRows: readonly LootRow[], keysOf: ItemKeysOf = NO_ITEMS): { drafts: MobDraft[]; issues: Issue[] } {
   const issues: Issue[] = [];
   const result = drafts.map((draft): MobDraft => {
-    const normal = resolveDrops(draft.tags, draft.closure, mobRows);
+    const normal = resolveDrops(draft.tags, draft.closure, mobRows, keysOf);
     if (normal === undefined) issues.push(issue("mob-loot-unresolved", draft.mob.slug));
-    const soul = draft.soul === undefined ? undefined : resolveDrops(draft.soul.tags, draft.soul.closure, mobRows);
+    const soul = draft.soul === undefined ? undefined : resolveDrops(draft.soul.tags, draft.soul.closure, mobRows, keysOf);
     const soulCorrupted = draft.mob.soulCorrupted === undefined ? undefined : { ...draft.mob.soulCorrupted, drops: soul ?? [] };
     return { ...draft, mob: { ...draft.mob, drops: normal ?? [], ...(soulCorrupted ? { soulCorrupted } : {}) } };
   });

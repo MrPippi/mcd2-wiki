@@ -36,7 +36,23 @@
       "quests": [],
       "lootSources": [
         "area:SW.Area.Town"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "squid-coast",
@@ -169,7 +185,23 @@
       ],
       "lootSources": [
         "area:SW.Area.Plains.A1"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "howling-woods",
@@ -309,7 +341,23 @@
       ],
       "lootSources": [
         "area:SW.Area.Forest.A1"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "the-deep-dark",
@@ -333,6 +381,7 @@
         "uk": "Темні глибини"
       },
       "untranslated": [],
+      "icon": "icons/locations/the-deep-dark.png",
       "levels": [
         14,
         45
@@ -429,7 +478,29 @@
       ],
       "lootSources": [
         "area:SW.Area.DeepDark.A1"
-      ]
+      ],
+      "books": {
+        "certain": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/multi-roll",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/ricochet",
+          "enchantment-book/shadow-strike",
+          "enchantment-book/shockwave",
+          "enchantment-book/spring-loaded",
+          "enchantment-book/tempo-theft",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ],
+        "inferred": []
+      }
     },
     {
       "slug": "rainy-plains",
@@ -584,7 +655,23 @@
       ],
       "lootSources": [
         "area:SW.Area.Plains.A2"
-      ]
+      ],
+      "books": {
+        "certain": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ],
+        "inferred": []
+      }
     },
     {
       "slug": "frozen-highlands",
@@ -874,7 +961,23 @@
       ],
       "lootSources": [
         "area:SW.Area.Desert.A1"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "singers-meadow",
@@ -959,7 +1062,23 @@
       ],
       "lootSources": [
         "area:SW.Area.Meadow.A1"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "humbler-huskland",
@@ -1064,7 +1183,23 @@
       ],
       "lootSources": [
         "area:SW.Area.Carapace.A1"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "lullaby-hills",
@@ -1142,7 +1277,23 @@
       ],
       "lootSources": [
         "area:SW.Area.Meadow.A2"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "the-sift",
@@ -1229,7 +1380,29 @@
         "scavenger-melee"
       ],
       "quests": [],
-      "lootSources": []
+      "lootSources": [],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/burst-bowstring",
+          "enchantment-book/channeling",
+          "enchantment-book/critical-quiver",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/guarding-strike",
+          "enchantment-book/lingering-power",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-barrier",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/swirling",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "ravines",
@@ -1253,6 +1426,7 @@
         "uk": "Яри"
       },
       "untranslated": [],
+      "icon": "icons/locations/ravines.png",
       "levels": [],
       "subLocations": [
         {
@@ -1302,7 +1476,29 @@
       "quests": [],
       "lootSources": [
         "area:SW.Area.Ravines"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/arcane",
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/chain-reaction",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/gravity-pulse",
+          "enchantment-book/health-synergy",
+          "enchantment-book/multi-potion",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/soul-aspect",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     },
     {
       "slug": "lush-caves",
@@ -1427,7 +1623,23 @@
       "quests": [],
       "lootSources": [
         "area:SW.Area.Peaks.A1"
-      ]
+      ],
+      "books": {
+        "certain": [],
+        "inferred": [
+          "enchantment-book/blowback",
+          "enchantment-book/borealis",
+          "enchantment-book/channeling",
+          "enchantment-book/dynamo",
+          "enchantment-book/expanded-quiver",
+          "enchantment-book/fire-aspect",
+          "enchantment-book/frost-crescent",
+          "enchantment-book/poison-fog",
+          "enchantment-book/potion-sharing",
+          "enchantment-book/thundering",
+          "enchantment-book/unstoppable"
+        ]
+      }
     }
   ],
   "areas": {

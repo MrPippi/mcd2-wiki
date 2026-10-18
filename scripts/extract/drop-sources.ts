@@ -66,22 +66,31 @@ const hasContent = (profile: RawProfile): boolean => profile.slots.length > 0;
 const skippedIssues = (id: string, contexts: readonly (readonly [string, RawProfile])[]): Issue[] =>
   [...new Set(contexts.flatMap(([, profile]) => profile.skipped))].map((reason) => issue("drop-ignored", `${id}: slot left out, ${reason}`));
 
+/** Book pool source id -> the shallowest area row that carries the pool (its books drop there and in everything below it); a pool no area carries is left out. */
+export function bookPoolCarriers(sources: ItemSourcesData, loot: LootTables): Map<string, string> {
+  const carriers = new Map<string, string>();
+  for (const [id, source] of Object.entries(sources.sources)) {
+    if (source.kind !== "bookPool") continue;
+    const row = loot.generic.find((one) => one.Name === id.replace(/^bookPool:/, ""));
+    const carrier = loot.area
+      .filter((area) => row !== undefined && (area.Traits?.GameplayTags ?? []).some((trait) => tagKey(trait.TagName) === tagKey(row.TypeTag.TagName)))
+      .map((area) => area.TypeTag.TagName)
+      .sort((a, b) => a.split(".").length - b.split(".").length || a.localeCompare(b))[0];
+    if (carrier) carriers.set(id, carrier);
+  }
+  return carriers;
+}
+
 /** Area and enchantment book pool places: the areas with a drop pool, and for each book pool the area that carries it. */
 export function placesOf(input: PlanInput): { areas: Place[]; bookPools: Place[]; issues: Issue[] } {
   const named = Object.entries(input.sources.sources);
   const areas = named.filter(([, source]) => source.kind === "area").map(([id]): Place => ({ id, tag: id.replace(/^area:/, "") }));
-  const books = named.filter(([, source]) => source.kind === "bookPool").map(([id]) => {
-    const row = input.loot.generic.find((one) => one.Name === id.replace(/^bookPool:/, ""));
-    const carrier = input.loot.area
-      .filter((area) => row !== undefined && (area.Traits?.GameplayTags ?? []).some((trait) => tagKey(trait.TagName) === tagKey(row.TypeTag.TagName)))
-      .map((area) => area.TypeTag.TagName)
-      .sort((a, b) => a.split(".").length - b.split(".").length || a.localeCompare(b))[0];
-    return { id, carrier };
-  });
+  const carriers = bookPoolCarriers(input.sources, input.loot);
+  const pools = named.filter(([, source]) => source.kind === "bookPool").map(([id]) => id);
   return {
     areas,
-    bookPools: books.flatMap((one) => (one.carrier ? [{ id: one.id, tag: one.carrier }] : [])),
-    issues: books.filter((one) => !one.carrier).map((one) => issue("drop-ignored", `${one.id}: no area carries this book pool`)),
+    bookPools: pools.flatMap((id) => (carriers.has(id) ? [{ id, tag: carriers.get(id) as string }] : [])),
+    issues: pools.filter((id) => !carriers.has(id)).map((id) => issue("drop-ignored", `${id}: no area carries this book pool`)),
   };
 }
 

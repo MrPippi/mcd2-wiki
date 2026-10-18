@@ -12,9 +12,11 @@ import {
   locationDescription,
   locationHref,
   locationLoot,
+  locationLootGroups,
   locationMobGroups,
   locationOf,
   locationQuests,
+  locationRewardGroups,
 } from "../../../src/lib/locations";
 import { findMob, mobData } from "../../../src/lib/mobs";
 import { findQuest, questData } from "../../../src/lib/quests";
@@ -44,9 +46,9 @@ describe("locations.json", () => {
     for (const slug of ["squid-coast", "the-sift", "ravines", "lush-caves", "deadleaf-forest", "cinder-crags"]) expect(location(slug).levels, slug).toEqual([]);
   });
 
-  it("publishes only the game's area icons, and only files that exist", () => {
-    expect(location("the-deep-dark").icon).toBeUndefined();
-    expect(location("ravines").icon).toBeUndefined();
+  it("publishes the game's area icons (the world-map pin for the Deep Dark and the Ravines), and only files that exist", () => {
+    expect(location("the-deep-dark").icon).toBe("icons/locations/the-deep-dark.png");
+    expect(location("ravines").icon).toBe("icons/locations/ravines.png");
     for (const one of locationData.locations) {
       if (one.icon) expect(existsSync(path.join("public", one.icon)), one.icon).toBe(true);
     }
@@ -84,7 +86,38 @@ describe("location lookups", () => {
     expect(locationMobGroups(location("frozen-highlands")).map((group) => group.kind)).toEqual(["boss", "miniboss", "regular", "variant"]);
     expect(locationQuests(location("howling-woods")).map((quest) => quest.slug)).toContain("ca03");
     expect(locationLoot(location("cinder-crags")).length).toBeGreaterThan(0);
-    expect(locationLoot(location("lush-caves"))).toEqual([]);
+    expect(locationLoot(location("lush-caves"))).toEqual([]);   // the area pool only; the page list adds the Llama talisman
+  });
+
+  it("groups the area drops by category in order and counts them", () => {
+    const groups = locationLootGroups(location("howling-woods"));
+    const order = ["melee", "ranged", "armor", "artifact", "talisman", "enchantment-book"];
+    expect(groups.map((group) => group.category)).toEqual(order.filter((category) => groups.some((group) => group.category === category)));
+    expect(groups.find((group) => group.category === "armor")?.items.length).toBe(16);
+  });
+
+  it("adds the certain extras by data, not by slug: boss drops and the books of placed chests", () => {
+    const keys = (slug: string) => locationLootGroups(location(slug)).flatMap((group) => group.items.map((item) => `${item.entry.category}/${item.entry.slug}:${item.unconfirmed ? "u" : "c"}`));
+    expect(keys("lush-caves")).toEqual(["talisman/llama:c"]);
+    expect(keys("frozen-highlands")).toContain("artifact/witches-brew:c");
+    const deep = locationLootGroups(location("the-deep-dark")).find((group) => group.category === "enchantment-book");
+    expect(deep?.items.length).toBe(17);
+    expect(deep?.items.every((item) => !item.unconfirmed)).toBe(true);
+    expect(locationLootGroups(location("rainy-plains")).find((group) => group.category === "enchantment-book")?.items.length).toBe(11);
+  });
+
+  it("marks books of a pool that reaches the region without a placed chest as unconfirmed", () => {
+    const books = locationLootGroups(location("ravines")).find((group) => group.category === "enchantment-book");
+    expect(books?.items.length).toBe(17);
+    expect(books?.items.every((item) => item.unconfirmed)).toBe(true);
+    expect(locationLootGroups(location("squid-coast"))).toEqual([]);
+    expect(locationLootGroups(location("deadleaf-forest"))).toEqual([]);
+  });
+
+  it("lists a region's quest rewards in their own groups, once each", () => {
+    const groups = locationRewardGroups(location("squid-coast"));
+    expect(groups.map((group) => [group.category, group.items.length])).toEqual([["armor", 4]]);
+    expect(locationRewardGroups(location("ravines"))).toEqual([]);
   });
 
   it("links and describes a location", () => {

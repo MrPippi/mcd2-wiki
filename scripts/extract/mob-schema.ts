@@ -50,6 +50,8 @@ export const MobDropSchema = z.object({
   rolls: z.number(),
   chancePerRoll: z.number(),
   pool: z.enum(["area", "own", "none"]),
+  /** Item keys ("<category>/<slug>") an "own" slot names itself (Mosstrosity: the Llama talisman); absent when it names none. */
+  items: z.array(z.string()).optional(),
 });
 export type MobDrop = z.infer<typeof MobDropSchema>;
 

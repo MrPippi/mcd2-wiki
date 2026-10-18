@@ -8,9 +8,9 @@ import rawSources from "../data/loot-sources.json";
 import { bossGroups, type BossGroup } from "./boss-view";
 import { findEntry } from "./data";
 import type { Lang } from "./lang";
-import { locationCounts, locationOfArea, lootKeys, type LocationCounts } from "./location-view";
+import { groupLoot, locationCounts, locationOfArea, lootKeys, mobSureItemKeys, questRewardKeys, type LocationCounts, type LootGroup, type LootItem } from "./location-view";
 import { findMob, mobData, mobGroups, type MobGroup } from "./mobs";
-import { questData, questsOf } from "./quests";
+import { questData, questsOf, rewardEntries } from "./quests";
 import type { Quest } from "../../scripts/extract/quest-schema";
 import { GAME_NAME } from "./site-title";
 import { t } from "./ui-strings";
@@ -41,6 +41,24 @@ export const locationLoot = (location: Location): Entry[] =>
     const [category, slug] = key.split("/");
     return (category && slug && findEntry(category as Category, slug)) || [];
   });
+
+const groupedItems = (entries: readonly Entry[], flags: Pick<LootItem, "extra" | "unconfirmed">): LootItem[] => entries.map((entry) => ({ entry, ...flags }));
+
+/**
+ * What the region's loot list shows, by category: the area drop pool, then what the data makes certain beyond it (items its
+ * bosses always drop, books of chests placed there), then books whose pool reaches the region without a placed chest, marked unconfirmed.
+ */
+export const locationLootGroups = (location: Location): LootGroup[] =>
+  groupLoot([
+    ...groupedItems(locationLoot(location), { extra: false, unconfirmed: false }),
+    ...groupedItems(rewardEntries(mobSureItemKeys(location.mobs.flatMap((slug) => findMob(slug) ?? []))), { extra: true, unconfirmed: false }),
+    ...groupedItems(rewardEntries(location.books?.certain ?? []), { extra: true, unconfirmed: false }),
+    ...groupedItems(rewardEntries(location.books?.inferred ?? []), { extra: true, unconfirmed: true }),
+  ]);
+
+/** The fixed items of the region's quests, by category. */
+export const locationRewardGroups = (location: Location): LootGroup[] =>
+  groupLoot(groupedItems(rewardEntries(questRewardKeys(locationQuests(location))), { extra: false, unconfirmed: false }));
 
 /** A location page's meta description: its name, the locations page and the game, in the page language. */
 export const locationDescription = (location: Location, lang: Lang): string => [location.name[lang], t(lang, "locations"), GAME_NAME].join(" · ");

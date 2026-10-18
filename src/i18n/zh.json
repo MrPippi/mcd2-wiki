@@ -362,6 +362,8 @@
   "locationQuests": "此區域的任務",
   "locationLoot": "區域掉落物",
   "locationLootNote": "此區域掉落池中的物品。",
+  "locationBookUnconfirmed": "未確認",
+  "locationLootExtraNote": "另列：首領必定掉落的物品，以及此區域已有箱子出現的附魔書。標示「未確認」的附魔書來自會涵蓋此區域的書池，但資料沒有指出此處有掉書的箱子。",
   "locationCountMobs": "怪物",
   "locationCountBosses": "頭目",
   "bosses": "頭目",

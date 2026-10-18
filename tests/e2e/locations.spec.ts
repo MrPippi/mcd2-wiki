@@ -36,6 +36,41 @@ test.describe("locations", () => {
     await expect(page).toHaveURL(/\/zh\/map\/\?world=overworld#4\/6611\/4173/);
   });
 
+  test("groups the area drops by category, with the certain extras and the unconfirmed books marked", async ({ page }) => {
+    await page.goto("/zh/locations/the-deep-dark/");
+    const groups = page.getByTestId("location-loot").locator(".location-loot-group");
+    await expect(groups).toHaveCount(5);
+    await expect(groups.locator(".location-subhead")).toHaveText([/^近戰武器 \(9\)$/, /^遠程武器 \(4\)$/, /^護甲 \(20\)$/, /^神器 \(10\)$/, /^附魔書 \(17\)$/]);
+    await expect(page.getByTestId("location-loot").getByTestId("location-loot-item")).toHaveCount(60);
+    await expect(page.getByTestId("location-loot-unconfirmed")).toHaveCount(0);
+    await expect(page.getByTestId("location-loot-extra-note")).toBeVisible();
+    await expect(page.locator(".location-title img").first()).toBeVisible();
+
+    await page.goto("/zh/locations/ravines/");
+    const books = page.locator(".location-loot-group[data-group='enchantment-book']");
+    await expect(books.getByTestId("location-loot-item")).toHaveCount(17);
+    await expect(books.getByTestId("location-loot-unconfirmed")).toHaveCount(17);
+    await expect(page.locator(".location-title img").first()).toBeVisible();
+  });
+
+  test("shows the guaranteed boss drop where the area has no pool, and hides the section where nothing is known", async ({ page }) => {
+    await page.goto("/zh/locations/lush-caves/");
+    await expect(page.getByTestId("location-loot").getByTestId("location-loot-item")).toHaveCount(1);
+    await expect(page.locator(".location-loot-group[data-group='talisman'] .location-subhead")).toContainText("(1)");
+    await page.goto("/zh/locations/squid-coast/");
+    await expect(page.getByTestId("location-loot")).toHaveCount(0);
+  });
+
+  test("lists the quest rewards in their own section", async ({ page }) => {
+    await page.goto("/zh/locations/squid-coast/");
+    const rewards = page.getByTestId("location-rewards");
+    await expect(rewards.locator("h2")).toHaveText("任務獎勵");
+    await expect(rewards.getByTestId("location-reward-item")).toHaveCount(4);
+    await expect(rewards.locator(".location-subhead")).toHaveText([/^護甲 \(4\)$/]);
+    await page.goto("/zh/locations/ravines/");
+    await expect(page.getByTestId("location-rewards")).toHaveCount(0);
+  });
+
   test("the menu lists locations and bosses after the quests", async ({ page }) => {
     await page.goto("/zh/");
     await page.getByTestId("site-menu").click();

@@ -188,7 +188,7 @@ describe("UI translations", () => {
 
   it("has every location and boss key in every language and names both pages in the menu language", () => {
     const keys = Object.keys(UI_DICTS.zh.values).filter((key) => key.startsWith("location") || key.startsWith("boss"));
-    expect(keys).toHaveLength(17);
+    expect(keys).toHaveLength(19);
     for (const lang of LANGS) for (const key of keys) expect(UI_DICTS[lang].values[key], `${lang}.${key}`).toBeTypeOf("string");
     for (const lang of TRANSLATED) {
       for (const key of ["locationsIntro", "bossesIntro", "bossesOrder"]) expect(UI_DICTS[lang].values[key], `${lang}.${key}`).not.toEqual(UI_DICTS.en.values[key]);

@@ -54,6 +54,12 @@ export const LocationSchema = z.object({
   quests: z.array(z.string()),
   /** loot-sources.json area source ids ("area:<tag>") of the region's drop pools. */
   lootSources: z.array(z.string()),
+  /**
+   * Enchantment book keys ("enchantment-book/<slug>") of the book pools that reach the region: `certain` when a chest that
+   * drops books spawns there (DT_AreaDefinition quotas), `inferred` when the pool reaches it but no such chest is placed there.
+   * Absent when the region has no book pool.
+   */
+  books: z.object({ certain: z.array(z.string()), inferred: z.array(z.string()) }).optional(),
 });
 export type Location = z.infer<typeof LocationSchema>;
 

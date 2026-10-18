@@ -67,7 +67,7 @@ const CTX: BuildContext = {
   locales: LOCALES,
   markers: MARKERS,
   levels: levelsOf(TABLES.progression),
-  iconFile: (reference) => (reference.includes("HowlingWoods") ? "/src/HowlingWoods.png" : undefined),
+  iconFile: (reference) => (reference.includes("HowlingWoods") ? "/src/HowlingWoods.png" : reference.includes("DeepDarkEntrance") ? "/src/DeepDarkEntrance.png" : undefined),
 };
 
 const area = (areaId: string): MobArea => ({ areaId, name: localizedFrom(() => areaId) });
@@ -110,12 +110,23 @@ describe("buildLocationData", () => {
     expect(built.issues).toContainEqual({ type: "location-no-level", detail: "squid-coast: SW.Area.Camp.A1 has no progression" });
   });
 
-  it("publishes only game area icons that exist and reports the rest", () => {
+  it("publishes area icons, falls back to the world-map pin the game assigns, and reports the rest", () => {
     expect(location("howling-woods")?.icon).toBe("icons/locations/howling-woods.png");
-    expect(built.icons).toEqual([{ from: "/src/HowlingWoods.png", published: "icons/locations/howling-woods.png" }]);
-    expect(location("the-deep-dark")?.icon).toBeUndefined();
-    expect(built.issues).toContainEqual({ type: "location-no-icon", detail: `the-deep-dark: ${MAP_PIN} is not an area icon` });
+    expect(location("the-deep-dark")?.icon).toBe("icons/locations/the-deep-dark.png");
+    expect(built.icons).toEqual([
+      { from: "/src/HowlingWoods.png", published: "icons/locations/howling-woods.png" },
+      { from: "/src/DeepDarkEntrance.png", published: "icons/locations/the-deep-dark.png" },
+    ]);
+    expect(built.issues.filter((one) => one.detail.startsWith("the-deep-dark")).map((one) => one.type)).not.toContain("location-no-icon");
     expect(built.issues).toContainEqual(expect.objectContaining({ type: "location-no-icon", detail: expect.stringMatching(/^squid-coast: .* has no file$/) }));
+  });
+
+  it("does not publish a texture that is neither an area icon nor a world-map pin", () => {
+    const banner = "/SpicewoodUI/Spicewood/UI/Texture/Banners/T_Banner.T_Banner";
+    const tables = { ...TABLES, areas: TABLES.areas.map((row) => (row.Name === "CampA1" ? { ...row, AreaIcon: banner } : row)) };
+    const odd = buildLocationData(tables, LIST, JOINS, { ...CTX, iconFile: () => "/src/x.png" });
+    expect(odd.data.locations.find((one) => one.slug === "squid-coast")?.icon).toBeUndefined();
+    expect(odd.issues).toContainEqual({ type: "location-no-icon", detail: `squid-coast: ${banner} is not an area icon` });
   });
 
   it("gives the map marker of an own row when the map has one", () => {
