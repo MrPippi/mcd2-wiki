@@ -1,19 +1,18 @@
 ---
 import { LANGS } from "../../../../scripts/extract/config";
 import type { Location } from "../../../../scripts/extract/location-schema";
-import EntryIcon from "../../../components/EntryIcon.astro";
 import EntrySection from "../../../components/EntrySection.astro";
 import LangText from "../../../components/LangText.astro";
 import LocationIcon from "../../../components/LocationIcon.astro";
+import LocationLootGroups from "../../../components/LocationLootGroups.astro";
 import MobCard from "../../../components/MobCard.astro";
 import QuestCard from "../../../components/QuestCard.astro";
 import Base from "../../../layouts/Base.astro";
 import { mobKindLabel, t, type Lang } from "../../../lib/i18n";
 import { compareLang, htmlLang } from "../../../lib/lang";
 import { formatLevels, sharesRegionName } from "../../../lib/location-view";
-import { locationData, locationDescription, locationLoot, locationMobGroups, locationQuests } from "../../../lib/locations";
+import { locationData, locationDescription, locationLootGroups, locationMobGroups, locationQuests, locationRewardGroups } from "../../../lib/locations";
 import { mapLinkOf } from "../../../lib/mobs";
-import { rewardHref } from "../../../lib/quests";
 import { href } from "../../../lib/url";
 import "../../../styles/mobs.css";
 import "../../../styles/quests.css";
@@ -33,9 +32,9 @@ const alt = compareLang(lang);
 const groups = locationMobGroups(location);
 const starts = groups.map((_, i) => groups.slice(0, i).reduce((sum, group) => sum + group.mobs.length, 0));
 const quests = locationQuests(location);
-const loot = locationLoot(location);
+const loot = locationLootGroups(location);
+const rewards = locationRewardGroups(location);
 const PLATE_ICON_SIZE = 84;
-const LOOT_ICON_SIZE = 40;
 ---
 <Base lang={lang} title={location.name[lang]} description={locationDescription(location, lang)}>
   <article class="entry-detail location-page" data-pagefind-body>
@@ -94,21 +93,14 @@ const LOOT_ICON_SIZE = 40;
     )}
     {loot.length > 0 && (
       <EntrySection title={t(lang, "locationLoot")} testid="location-loot">
-        <ul class="location-loot">
-          {loot.map((entry) => {
-            const target = rewardHref(lang, entry);
-            const Tag = target ? "a" : "span";
-            return (
-              <li>
-                <Tag class="quest-reward-item" href={target} data-testid="location-loot-item">
-                  <EntryIcon icon={entry.icon} alt="" size={LOOT_ICON_SIZE} category={entry.category} variant={entry.variant} />
-                  <span>{entry.name[lang]}</span>
-                </Tag>
-              </li>
-            );
-          })}
-        </ul>
+        <LocationLootGroups lang={lang} groups={loot} itemTestid="location-loot-item" />
         <p class="note">{t(lang, "locationLootNote")}</p>
+        {loot.some((group) => group.items.some((item) => item.extra)) && <p class="note" data-testid="location-loot-extra-note">{t(lang, "locationLootExtraNote")}</p>}
+      </EntrySection>
+    )}
+    {rewards.length > 0 && (
+      <EntrySection title={t(lang, "sourceQuests")} testid="location-rewards">
+        <LocationLootGroups lang={lang} groups={rewards} itemTestid="location-reward-item" />
       </EntrySection>
     )}
   </article>

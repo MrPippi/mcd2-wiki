@@ -1,0 +1,36 @@
+---
+import type { LootGroup } from "../lib/location-view";
+import { categoryLabel, t, type Lang } from "../lib/i18n";
+import { rewardHref } from "../lib/quests";
+import EntryIcon from "./EntryIcon.astro";
+
+interface Props {
+  lang: Lang;
+  groups: readonly LootGroup[];
+  /** Test id of each item link, so the area drops and the quest rewards can be told apart. */
+  itemTestid: string;
+}
+
+const { lang, groups, itemTestid } = Astro.props;
+const LOOT_ICON_SIZE = 40;
+---
+{groups.map((group) => (
+  <div class="location-loot-group" data-group={group.category}>
+    <h3 class="location-subhead">{categoryLabel(group.category, lang)} <span class="count">({group.items.length})</span></h3>
+    <ul class="location-loot">
+      {group.items.map(({ entry, unconfirmed }) => {
+        const target = rewardHref(lang, entry);
+        const Tag = target ? "a" : "span";
+        return (
+          <li>
+            <Tag class="quest-reward-item" href={target} data-testid={itemTestid} data-unconfirmed={unconfirmed ? "true" : undefined}>
+              <EntryIcon icon={entry.icon} alt="" size={LOOT_ICON_SIZE} category={entry.category} variant={entry.variant} />
+              <span>{entry.name[lang]}</span>
+              {unconfirmed && <span class="tag warn" data-testid="location-loot-unconfirmed">{t(lang, "locationBookUnconfirmed")}</span>}
+            </Tag>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+))}

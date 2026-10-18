@@ -365,6 +365,8 @@
   "locationQuests": "Quests in this region",
   "locationLoot": "Area loot",
   "locationLootNote": "Items in this region's area drop pool.",
+  "locationBookUnconfirmed": "Unconfirmed",
+  "locationLootExtraNote": "Also listed: items a boss always drops and enchantment books from chests placed in this region. Books marked unconfirmed come from a pool that reaches this region, but the data places no book chest here.",
   "locationCountMobs": "Monsters",
   "locationCountBosses": "Bosses",
   "bosses": "Bosses",

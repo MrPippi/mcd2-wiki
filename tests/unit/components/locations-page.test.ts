@@ -45,7 +45,7 @@ describe("location list", () => {
   });
 
   it("gives a location without a game icon an empty mount and one without a level no level line", async () => {
-    const only = { ...locationData, locations: [realLocation("ravines")] };
+    const only = { ...locationData, locations: [{ ...realLocation("ravines"), icon: undefined }] };
     const html = await renderList("zh", only);
     expect(html).toContain('class="location-icon is-empty"');
     expect(html).not.toContain("location-card-level");
@@ -89,8 +89,25 @@ describe("location page", () => {
 
   it("leaves out empty sections", async () => {
     const html = await renderLocation(realLocation("lush-caves"));
-    for (const id of ["location-places", "location-quests", "location-loot", "location-facts"]) expect(html, id).not.toContain(`data-testid="${id}"`);
+    for (const id of ["location-places", "location-quests", "location-rewards", "location-facts"]) expect(html, id).not.toContain(`data-testid="${id}"`);
     expect(html).toContain('data-testid="location-mobs"');
+    const bare = await renderLocation({ ...realLocation("lush-caves"), mobs: [] });
+    expect(bare).not.toContain('data-testid="location-loot"');   // nothing known: the section stays hidden
+  });
+
+  it("groups the loot under category subheadings and marks unconfirmed books", async () => {
+    const lush = section(await renderLocation(realLocation("lush-caves")), "location-loot");
+    expect(lush).toContain('data-group="talisman"');
+    expect(lush).toContain('location-subhead">Talismans <span class="count">(1)</span>');
+    const ravines = section(await renderLocation(realLocation("ravines")), "location-loot");
+    expect(count(ravines, 'data-testid="location-loot-unconfirmed"')).toBe(17);
+    expect(ravines.indexOf('data-group="melee"')).toBeLessThan(ravines.indexOf('data-group="enchantment-book"'));
+  });
+
+  it("lists quest rewards in their own section", async () => {
+    const html = await renderLocation(realLocation("squid-coast"));
+    expect(count(section(html, "location-rewards"), 'data-testid="location-reward-item"')).toBe(4);
+    expect(html).not.toContain('data-testid="location-loot"');
   });
 
   it("never skips a heading level", async () => {

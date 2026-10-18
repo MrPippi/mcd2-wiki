@@ -123,6 +123,24 @@ const realShapes = lootTables({
   ],
 }).mob;
 
+describe("resolveDrops items of an own list", () => {
+  const own = lootTables({ mob: [
+    lootRow("Mosstrosity", "SW.Mob.Monstrosity.Moss", [slot("Talismans", 1, 0, 0, true, ["sw.Item.Talisman.Llama"])]),
+    lootRow("Boss", "SW.Trait.Boss", [slot("Item", 1, 6, 0.5, true)]),
+  ] }).mob;
+  const keysOf = (tag: string): string[] => (tag.toLowerCase() === "sw.item.talisman.llama" ? ["talisman/llama"] : []);
+
+  it("names the items the slot adds itself, through the key lookup", () => {
+    const drops = resolveDrops(["SW.Mob.Monstrosity.Moss"], ["SW.Trait.Boss", ...HOSTILE], own, keysOf);
+    expect(drops?.find((drop) => drop.slot === "talismans")).toEqual({ slot: "talismans", guaranteed: 1, rolls: 0, chancePerRoll: 0, pool: "own", items: ["talisman/llama"] });
+  });
+
+  it("names nothing for an area list or a tag that is no item", () => {
+    expect(item(resolveDrops(["SW.Mob.Other"], ["SW.Trait.Boss", ...HOSTILE], own, keysOf))).toEqual({ slot: "item", guaranteed: 1, rolls: 6, chancePerRoll: 0.5, pool: "area" });
+    expect(resolveDrops(["SW.Mob.Monstrosity.Moss"], ["SW.Trait.Boss", ...HOSTILE], own)?.find((drop) => drop.slot === "talismans")).not.toHaveProperty("items");
+  });
+});
+
 describe("resolveDrops with modifier and exclusion slots (real shapes)", () => {
   const slots = (drops: ReturnType<typeof resolveDrops>) => drops?.map((drop) => drop.slot);
 

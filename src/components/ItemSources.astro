@@ -4,9 +4,11 @@ import { t, type Lang } from "../lib/i18n";
 import { areaHref, bookDroppers, dropperHref, entrySources, groupIsUntranslated, merchantCategoryLabel, nameIsUntranslated, showsAltName } from "../lib/item-source-view";
 import type { ResolvedSource } from "../lib/item-sources";
 import { compareLang, htmlLang } from "../lib/lang";
+import { locationOf } from "../lib/locations";
 import { dropSummary } from "../lib/mobs";
 import { listParts, templateParts } from "../lib/quest-view";
 import { questHref, rewardQuests } from "../lib/quests";
+import { assetUrl } from "../lib/url";
 import EntrySection from "./EntrySection.astro";
 
 interface Props {
@@ -22,6 +24,12 @@ const showAlt = (source: ResolvedSource) => showsAltName(source, lang);
 // When a whole group fell back to English, one marker on its heading says so instead of one per row.
 const groupTag = (group: readonly ResolvedSource[]) => groupIsUntranslated(group, lang);
 const rowTag = (source: ResolvedSource, group: readonly ResolvedSource[]) => !groupTag(group) && nameIsUntranslated(source, lang);
+const AREA_ICON_SIZE = 24;
+// An area pool's location icon, when the area belongs to a location that has one.
+const areaIcon = (source: ResolvedSource): string | undefined => {
+  const icon = locationOf(source.id.replace(/^area:/, ""))?.icon;
+  return icon ? assetUrl(icon) : undefined;
+};
 // A quest source the quest data ties to its quests reads "Reward of <quest>", each quest linked; otherwise the generic label stays.
 const rewardOf = templateParts(t(lang, "sourceRewardOf"), "quest");
 ---
@@ -34,7 +42,10 @@ const rewardOf = templateParts(t(lang, "sourceRewardOf"), "quest");
           <ul>
             {sources.areas.map((source) => (
               <li>
-                <a href={areaHref(lang, source.id, source.name)}>{source.name[lang]}</a>
+                <span class="source-area">
+                  {areaIcon(source) && <img class="source-area-icon" src={areaIcon(source)} alt="" width={AREA_ICON_SIZE} height={AREA_ICON_SIZE} loading="lazy" decoding="async" />}
+                  <a href={areaHref(lang, source.id, source.name)}>{source.name[lang]}</a>
+                </span>
                 {showAlt(source) && <span class="item-alt" lang={htmlLang(alt)}>{source.name[alt]}</span>}
                 {rowTag(source, sources.areas) && <span class="tag warn">{t(lang, "untranslated")}</span>}
               </li>

@@ -52,11 +52,13 @@
   margin: var(--space-4) 0 var(--space-2); font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500;
   letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted);
 }
-.location-mob-group:first-of-type .location-subhead { margin-top: 0; }
+.location-mob-group:first-of-type .location-subhead, .location-loot-group:first-of-type .location-subhead { margin-top: 0; }
 .location-page .entry-section > .note { margin: 10px 0 0; }
 
-.location-loot { list-style: none; margin: 0; padding: var(--space-3) 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: var(--space-2) var(--space-4); border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule); }
+.location-loot { list-style: none; margin: 0; padding: var(--space-3) 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: var(--space-2) var(--space-4); border-top: 1px solid var(--rule-strong); border-bottom: 1px solid var(--rule); }
 .location-loot li { min-width: 0; }
+.location-loot .quest-reward-item { flex-wrap: wrap; }
+.location-loot .tag { font-family: var(--font-body); font-weight: 400; }
 
 /* Bosses */
 .boss-groups { display: grid; gap: var(--space-7); min-width: 0; }
