@@ -69,7 +69,7 @@ test.describe("mob page", () => {
     await expect(page.locator("h1 .primary")).toHaveText("殭屍");
     await expect(page.locator("h1 .alt")).toHaveText("Zombie");
     await expect(page.locator(".mob-plate .mob-portrait img")).toHaveAttribute("alt", "殭屍");
-    await expect(page.locator(".mob-plate .mob-portrait img")).toHaveAttribute("src", "/mobs/zombie.webp");
+    await expect(page.locator(".mob-plate .mob-portrait img")).toHaveAttribute("src", "/mobs/large/zombie.webp");
     const stats = page.getByTestId("mob-stats");
     await expect(stats.locator("tr", { hasText: "生命值" }).locator("td")).toHaveText("8");
     await expect(stats.locator("tr", { hasText: "爆炸抗性倍率" }).locator("td")).toHaveText("×1.5");

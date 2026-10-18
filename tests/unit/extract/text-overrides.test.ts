@@ -33,7 +33,7 @@ describe("applyEnglishOverrides with replacements", () => {
     { category: "effect" as const, id: "AmmoCapacity", field: "description" as const, langs: ["zh" as const, "ja" as const], reason: "count word", replacements: { zh: "箭矢攜帶量提高 {0}。" } },
   ];
   const slot = '<span class="placeholder" data-slot="0">{value}</span>';
-  const withZhGap = { ...quiver, untranslated: ["de", "zh"] as const };
+  const withZhGap = { ...quiver, untranslated: ["de" as const, "zh" as const] };
   const [fixed] = applyEnglishOverrides([withZhGap], overrides);
 
   it("uses the replacement with the English value markup and keeps the rest English", () => {
