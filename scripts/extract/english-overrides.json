@@ -4,6 +4,7 @@
     "id": "AmmoCapacity",
     "field": "description",
     "langs": ["zh", "ja", "ko", "ru", "fr", "es"],
+    "replacements": { "zh": "箭矢攜帶量提高 {0}。" },
     "reason": "The game fills {0} with a percentage, but these translations read it as a count of arrows (支, 本, 개, ед.) or as \"N munitions\"."
   }
 ]
