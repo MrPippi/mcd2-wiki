@@ -20,6 +20,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const alt = compareLang(lang);
+const payload = calcPayload(lang);
 ---
 <Base lang={lang} title={t(lang, "dropCalc")} description={t(lang, "dropCalcIntro")}>
   <div class="catalog compare-page drops-page" data-pagefind-body>
@@ -31,7 +32,10 @@ const alt = compareLang(lang);
     <noscript><p class="note" data-testid="drop-noscript">{t(lang, "dropCalcNoScript")}</p></noscript>
     <p class="note">{t(lang, "dropOddsIntro")}</p>
     <p class="note">{t(lang, "dropCalcCoverage")}</p>
+    <p class="note" data-testid="drop-not-included">{t(lang, "dropNotIncluded")}</p>
     <GuideUnconfirmed lang={lang} message="dropOddsUnconfirmed" verified={guidesData.verified.dropOdds} />
-    <DropCalculator lang={lang} payload={calcPayload(lang)} />
+    {payload.available
+      ? <DropCalculator lang={lang} payload={payload} />
+      : <p class="note" data-testid="drop-no-data">{t(lang, "dropCalcNoData")}</p>}
   </div>
 </Base>

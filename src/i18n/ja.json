@@ -423,7 +423,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -885,7 +888,7 @@
   "affixControls": "確率の設定",
   "dropOddsTitle": "ドロップ確率",
   "dropOddsIntro": "入手元を1回発動したとき（チェストを1回開ける、モブを1体倒す、クエスト報酬を1回受け取る）に、このアイテムが少なくとも1個出る確率です。脅威レベル20、通常の難易度で計算しています。ソロプレイ、直近のドロップ履歴が空、アイテム未所持、追加ドロップ・ドロップ率・レアリティ上昇の属性なしを前提とします。",
-  "dropOddsUnconfirmed": "この確率はゲームのデータテーブルから再構築し、第三者がまとめた表と照合したものです。データテーブルにはチェストが出現する場所の記載がないため、エリアのドロッププールにこのアイテムを含むすべてのエリアにチェストを表示しています。ゲーム内では未検証です。",
+  "dropOddsUnconfirmed": "この確率はゲームのデータテーブルから再構築し、第三者がまとめた表と照合したものです。ゲーム内では未検証です。",
   "dropMore": "ほか {count} 件",
   "dropQuestBatch": "報酬 {n}",
   "dropProcedural": "ダンジョン・裂け目版",
@@ -907,5 +910,8 @@
   "dropSummary": "{item}：脅威レベル {threat}、{difficulty}、{rarity}。入手元は {count} 件。",
   "dropNoResult": "この条件では、このアイテムが出る入手元はありません。",
   "dropEmpty": "アイテムを選ぶと、どこで出るか、その確率がわかります。",
-  "dropCalc": "ドロップ確率計算機"
+  "dropCalc": "ドロップ確率計算機",
+  "dropNotIncluded": "未対応：通常のモブと商人。",
+  "dropAreaUnconfirmed": "エリア未確認：この入手元がどこに出現するかデータにありません",
+  "dropCalcNoData": "このビルドにはドロップデータがありません。"
 }

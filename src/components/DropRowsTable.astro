@@ -26,6 +26,7 @@ const { lang, rows, label } = Astro.props;
           <th scope="row">
             {row.source.href ? <a href={row.source.href}>{row.source.name}</a> : <span>{row.source.name}</span>}
             {row.source.note && <span class="tag">{row.source.note}</span>}
+            {row.source.unplaced && <span class="tag warn" data-testid="drop-unplaced">{t(lang, "dropAreaUnconfirmed")}</span>}
           </th>
           <td>
             {row.area ? (row.area.href ? <a href={row.area.href}>{row.area.name}</a> : row.area.name) : <span class="drop-any">{t(lang, "dropNoArea")}</span>}

@@ -12,6 +12,15 @@ test.describe("drop odds", () => {
     expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
   });
 
+  test("the page says what is not included and flags chests whose area the data does not give", async ({ page }) => {
+    await page.goto("/en/enchantment/channeling/");
+    await expect(page.getByTestId("drop-not-included")).toContainText("regular mobs and merchants");
+    await expect(page.getByTestId("drop-unplaced").first()).toBeVisible();
+    await page.goto("/en/drops/?item=enchantment-book%2Fchanneling");
+    await expect(page.getByTestId("drop-not-included")).toBeVisible();
+    await expect(page.getByTestId("drop-results").locator(".tag.warn").first()).toBeVisible();
+  });
+
   test("the calculator recomputes when the threat level, difficulty or rarity changes", async ({ page }) => {
     const errors: string[] = [];
     page.on("console", (message) => message.type() === "error" && errors.push(message.text()));
@@ -28,6 +37,14 @@ test.describe("drop odds", () => {
     await page.getByTestId("drop-difficulty").selectOption("low");
     await expect(page.getByTestId("drop-summary")).toContainText("No source can give this item");
     expect(errors).toEqual([]);
+  });
+
+  test("the chosen item stays in the menu while the filter hides the others", async ({ page }) => {
+    await page.goto("/en/drops/?item=talisman%2Fplummeting");
+    await page.getByTestId("drop-filter").fill("zzzz-no-match");
+    await expect(page.getByTestId("drop-item").locator("option")).toHaveCount(2);
+    await expect(page.getByTestId("drop-item")).toHaveValue("talisman/plummeting");
+    await expect(page.getByTestId("drop-results").locator("tbody tr").first()).toBeVisible();
   });
 
   test("the calculator picks an item by name filter", async ({ page }) => {

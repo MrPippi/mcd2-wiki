@@ -1,6 +1,6 @@
 ---
 import type { Entry } from "../../scripts/extract/schemas";
-import { dropGroupsOf, dropKeysOf } from "../lib/drop-view";
+import { dropAvailable, dropGroupsOf, dropKeysOf } from "../lib/drop-view";
 import { guidesData } from "../lib/guides";
 import { t, type Lang } from "../lib/i18n";
 import { href } from "../lib/url";
@@ -14,7 +14,8 @@ interface Props {
 }
 
 const { lang, item } = Astro.props;
-const groups = dropGroupsOf(item, lang);
+// Without drop data (no tables in source-data) the section is not rendered at all.
+const groups = dropAvailable ? dropGroupsOf(item, lang) : [];
 const key = dropKeysOf(item)[0];
 const calculator = key ? `${href(lang, "drops")}?item=${encodeURIComponent(key)}` : undefined;
 ---
@@ -22,6 +23,7 @@ const calculator = key ? `${href(lang, "drops")}?item=${encodeURIComponent(key)}
   <EntrySection title={t(lang, "dropOddsTitle")} testid="drop-odds">
     <div class="drop-odds" data-pagefind-ignore>
       <p class="note">{t(lang, "dropOddsIntro")}</p>
+      <p class="note" data-testid="drop-not-included">{t(lang, "dropNotIncluded")}</p>
       <GuideUnconfirmed lang={lang} message="dropOddsUnconfirmed" verified={guidesData.verified.dropOdds} />
       {groups.map((group) => (
         <section class="drop-group" data-kind={group.kind} data-testid={`drop-group-${group.kind}`}>

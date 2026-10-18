@@ -1,7 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { findEntry, publishedEntries } from "../../../src/lib/data";
 import { dropData, dropGroupsOf, dropKeysOf, dropRowsOf, DEFAULT_SELECTION, VISIBLE_ROWS } from "../../../src/lib/drop-view";
-import { areaLabel, sourceLabel } from "../../../src/lib/drop-labels";
+import { itemRows } from "../../../src/lib/drop-odds";
+import { areaLabel, sourceIndex, sourceLabel } from "../../../src/lib/drop-labels";
 import { t } from "../../../src/lib/i18n";
 
 const entry = (category: Parameters<typeof findEntry>[0], slug: string) => {
@@ -40,6 +41,19 @@ describe("dropRowsOf", () => {
   });
 });
 
+describe("several books of one enchantment", () => {
+  it("combine as the chance of at least one of them, which no single book beats", () => {
+    const books = dropData.items.filter((item) => item.key.startsWith("enchantment-book/")).slice(0, 2).map((item) => item.key);
+    const both = itemRows(dropData, books, DEFAULT_SELECTION);
+    const first = itemRows(dropData, books[0], DEFAULT_SELECTION);
+    expect(both.length).toBeGreaterThanOrEqual(first.length);
+    for (const row of first) {
+      const joint = both.find((one) => one.source === row.source && one.area === row.area);
+      expect(joint?.probability).toBeGreaterThanOrEqual(row.probability);
+    }
+  });
+});
+
 describe("dropGroupsOf", () => {
   it("covers every published gear piece, book and talisman that has a source in the data", () => {
     const covered = new Set(dropData.items.map((item) => item.key));
@@ -73,6 +87,18 @@ describe("dropGroupsOf", () => {
 });
 
 describe("labels", () => {
+  it("builds the source index once per list", () => {
+    expect(sourceIndex(dropData.sources)).toBe(sourceIndex(dropData.sources));
+    expect(sourceIndex(dropData.sources).byId.get("chest:FancyChest")?.kind).toBe("chest");
+  });
+
+  it("flags a chest or mob the data does not place, and shows no flag for one it does", () => {
+    const placed = dropData.sources.find((one) => one.id === "chest:FancyChest");
+    const unplaced = dropData.sources.find((one) => one.unplaced);
+    expect(placed && sourceLabel("en", placed).unplaced).toBeUndefined();
+    expect(unplaced && sourceLabel("en", unplaced).unplaced).toBe(true);
+  });
+
   it("names a quest reward batch with its quest, whether it is the first completion, and its number", () => {
     const source = dropData.sources.find((one) => one.kind === "quest" && one.first);
     if (!source) throw new Error("no first-completion quest batch in the data");

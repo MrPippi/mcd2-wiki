@@ -426,7 +426,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -886,7 +889,7 @@
   "affixControls": "Olasılık ayarları",
   "dropOddsTitle": "Düşme olasılıkları",
   "dropOddsIntro": "Bir kaynağı bir kez tetiklediğinizde (bir sandık açmak, bir yaratığı yenmek, bir görev ödülü grubu almak) bu eşyadan en az bir tane çıkma olasılığı; tehdit seviyesi 20 ve normal zorlukta. Tek kişilik oyun, boş bir son düşmeler geçmişi, henüz sahip olunan eşya olmaması ve ek ganimet, düşme şansı ya da nadirlik artırma özelliklerinin bulunmaması varsayılır.",
-  "dropOddsUnconfirmed": "Bu olasılıklar oyunun veri tablolarından yeniden oluşturuldu ve üçüncü bir tarafın tablosuyla karşılaştırıldı. Tablolar sandıkların nerede çıktığını söylemez; bu yüzden ganimet havuzunda eşya bulunan her bölge için bir sandık listelenir. Oyun içinde doğrulanmadı.",
+  "dropOddsUnconfirmed": "Bu olasılıklar oyunun veri tablolarından yeniden oluşturuldu ve üçüncü bir tarafın tablosuyla karşılaştırıldı; oyun içinde doğrulanmadı.",
   "dropMore": "{count} tane daha",
   "dropQuestBatch": "Ödül {n}",
   "dropProcedural": "zindan ve yarık sürümü",
@@ -908,5 +911,8 @@
   "dropSummary": "{item}: tehdit {threat}, {difficulty}, {rarity}. {count} kaynak.",
   "dropNoResult": "Bu koşullarda hiçbir kaynak bu eşyayı veremez.",
   "dropEmpty": "Nerede ve hangi olasılıkla düştüğünü görmek için bir eşya seçin.",
-  "dropCalc": "Düşme hesaplayıcısı"
+  "dropCalc": "Düşme hesaplayıcısı",
+  "dropNotIncluded": "Henüz dahil değil: sıradan yaratıklar ve tüccarlar.",
+  "dropAreaUnconfirmed": "Bölge doğrulanmadı: veriler bu kaynağın nerede çıktığını söylemiyor",
+  "dropCalcNoData": "Bu sürümde düşme verisi yok."
 }

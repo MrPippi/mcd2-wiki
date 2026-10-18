@@ -454,7 +454,7 @@
   "affixControls": "機率設定",
   "dropOddsTitle": "掉落機率",
   "dropOddsIntro": "觸發一次來源（開一次寶箱、擊敗一次怪物、領一次任務獎勵）時，至少掉出一件這個物品的機率，以威脅等級 20、一般難度計算。預設為單人遊玩、近期掉落紀錄為空、尚未擁有任何物品，且沒有額外掉落、掉落機率或稀有度提升屬性。",
-  "dropOddsUnconfirmed": "這些機率由遊戲資料表重建，並與第三方整理的表交叉比對。資料表沒有記錄寶箱出現在哪些區域，因此凡是區域掉落池含有此物品的區域都會列出寶箱。尚未在遊戲內驗證。",
+  "dropOddsUnconfirmed": "這些機率由遊戲資料表重建，並與第三方整理的表交叉比對，尚未在遊戲內驗證。",
   "dropMore": "其餘 {count} 筆",
   "dropQuestBatch": "獎勵 {n}",
   "dropProcedural": "副本與裂隙版",
@@ -476,5 +476,8 @@
   "dropSummary": "{item}：威脅等級 {threat}，{difficulty}，{rarity}。共 {count} 個來源。",
   "dropNoResult": "在這些條件下，沒有任何來源能掉出這個物品。",
   "dropEmpty": "選擇一個物品，查看它在哪裡掉落、機率多少。",
-  "dropCalc": "掉落機率計算器"
+  "dropCalc": "掉落機率計算器",
+  "dropNotIncluded": "尚未收錄：一般怪物與商人。",
+  "dropAreaUnconfirmed": "區域未確認：資料沒有說明此來源出現在哪裡",
+  "dropCalcNoData": "這個版本沒有掉落資料。"
 }

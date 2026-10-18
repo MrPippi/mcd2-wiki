@@ -457,7 +457,7 @@
   "affixControls": "Odds settings",
   "dropOddsTitle": "Drop odds",
   "dropOddsIntro": "The chance that one trigger of a source (a chest opened, a mob defeated, a quest reward batch) gives at least one of this item, at threat level 20 on Normal difficulty. It assumes solo play, an empty recent-drop history, nothing owned yet, and no extra drop, drop chance or rarity upgrade attributes.",
-  "dropOddsUnconfirmed": "These odds are rebuilt from the game's data tables and cross-checked against a third-party table. The tables do not say where chests appear, so a chest is listed for every area whose drop pool has the item. Not verified in game.",
+  "dropOddsUnconfirmed": "These odds are rebuilt from the game's data tables and cross-checked against a third-party table; they have not been verified in game.",
   "dropMore": "{count} more",
   "dropQuestBatch": "Reward {n}",
   "dropProcedural": "dungeon and rift version",
@@ -479,5 +479,8 @@
   "dropSummary": "{item}: threat {threat}, {difficulty}, {rarity}. {count} sources.",
   "dropNoResult": "No source can give this item under these conditions.",
   "dropEmpty": "Choose an item to see where it drops and how likely that is.",
-  "dropCalc": "Drop Calculator"
+  "dropCalc": "Drop Calculator",
+  "dropNotIncluded": "Not included yet: regular mobs and merchants.",
+  "dropAreaUnconfirmed": "Area unconfirmed: the data does not say where this source appears",
+  "dropCalcNoData": "This build has no drop data."
 }

@@ -12,6 +12,7 @@ import { lootEntry, rawQuest } from "../../helpers/quest-tables";
 
 const SPAWN = "SW.Property.Spawnable";
 const AREA = "SW.Area.Plains.A1";
+const FOREST = "SW.Area.Forest.A1";
 const rarityEntry = (rarity: string, weight: number, operation: "Set" | "Multiply") => ({ TypeTag: { TagName: `SW.Rarity.${rarity}` }, Weight: weight, Operation: operation });
 
 const loot = dropLoot({
@@ -29,6 +30,7 @@ const loot = dropLoot({
   area: [
     lootRow("Global", "SW.Area", [slot("EnchantedBook", 0, 0, 0, true)], ["SW.LootSource.Books.Common"]),
     lootRow("PlainsA1", AREA, [slot("Item", 0, 0, 0, true, ["SW.Item.Sword", "SW.Item.Mace"])]),
+    lootRow("ForestA1", FOREST, [slot("Item", 0, 0, 0, true, ["SW.Item.Mace"])]),
   ],
   lootActor: [
     lootRow("FancyChest", "SW.LootActor.FancyChest", [slot("Item", 1, 0, 0, true)]),
@@ -53,13 +55,14 @@ const tables: DropTables = {
     { TypeTag: { TagName: "SW.Difficulty.Low" }, TagList: { Tags: [rarityEntry("Special", 0, "Multiply"), rarityEntry("Unique", 0, "Multiply")] } },
   ],
   hierarchy: [],
-  areas: [],
+  placements: new Map([["sw.lootactor.fancychest", [AREA]]]),
   difficulties: [{ Name: "Normal", TypeTag: { TagName: "SW.Difficulty.Normal" } }, { Name: "Low", TypeTag: { TagName: "SW.Difficulty.Low" } }],
 };
 const named = (kind: string) => ({ kind, name: loc({ en: kind }), untranslated: [] });
 const sources = ItemSourcesSchema.parse({
   sources: {
     [`area:${AREA}`]: named("area"),
+    [`area:${FOREST}`]: named("area"),
     "chest:FancyChest": named("chest"),
     "chest:TalismansChest_Wolf": named("chest"),
     "bookPool:BooksCommon": named("bookPool"),
@@ -70,6 +73,8 @@ const sources = ItemSourcesSchema.parse({
 const mobs = MobDataSchema.parse({
   mobs: [
     { slug: "big-boss", id: "BigBoss", kind: "boss", world: null, name: loc({ en: "Boss" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [{ slot: "item", guaranteed: 1, rolls: 0, chancePerRoll: 0, pool: "area" }, { slot: "specialGear", guaranteed: 1, rolls: 0, chancePerRoll: 1, pool: "own" }] },
+    { slug: "piggy", id: "PiggyBank", kind: "regular", world: null, name: loc({ en: "Piggy" }), untranslated: [], stats: [], variants: [], areas: [], drops: [{ slot: "item", guaranteed: 1, rolls: 0, chancePerRoll: 0, pool: "area" }, { slot: "enchantedBook", guaranteed: 0, rolls: 1, chancePerRoll: 0.5, pool: "area" }] },
+    { slug: "greedy", id: "Greedy", kind: "boss", world: null, name: loc({ en: "Greedy" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [{ slot: "item", guaranteed: 1, rolls: 20, chancePerRoll: 0.5, pool: "area" }] },
     { slug: "zombie", id: "Zombie", kind: "regular", world: null, name: loc({ en: "Zombie" }), untranslated: [], stats: [], variants: [], areas: [{ areaId: AREA, name: loc({ en: "Plains" }) }], drops: [{ slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125, pool: "area" }] },
   ],
 });
@@ -105,7 +110,7 @@ describe("buildDropModels", () => {
 
   it("covers listed chests, their procedural versions, quests and bosses, and nothing else", () => {
     expect(data.sources.map((source) => source.id).sort()).toEqual(
-      ["chest:FancyChest", "chest:FancyChest_Procedural", "chest:TalismansChest_Wolf", "mob:BigBoss", "quest:Q1:0", "quest:Q1:1"].sort(),
+      ["chest:FancyChest", "chest:FancyChest_Procedural", "chest:TalismansChest_Wolf", "mob:BigBoss", "mob:PiggyBank", "quest:Q1:0", "quest:Q1:1"].sort(),
     );
   });
 
@@ -113,6 +118,32 @@ describe("buildDropModels", () => {
     const find = (id: string) => data.sources.find((source) => source.id === id)?.contexts.map(([area]) => area);
     expect(find("chest:FancyChest")).toEqual([`area:${AREA}`]);
     expect(find("chest:TalismansChest_Wolf")).toEqual([""]);
+  });
+
+  it("pairs a chest the area quotas place with those areas only, and says how many pairings that dropped", () => {
+    const fancy = data.sources.find((source) => source.id === "chest:FancyChest");
+    expect(fancy?.contexts.map(([area]) => area)).toEqual([`area:${AREA}`]);
+    expect(fancy?.unplaced).toBeUndefined();
+    expect(built.issues.map((one) => one.detail)).toContain("chest:FancyChest: spawns in 1 areas (area quotas), listed for 2 of 3 pools; 1 pairings dropped");
+  });
+
+  it("lists a chest no area spawns for every pool, marks it unplaced and reports it", () => {
+    const procedural = data.sources.find((source) => source.id === "chest:FancyChest_Procedural");
+    expect(procedural?.unplaced).toBe(true);
+    expect(procedural?.contexts.length).toBeGreaterThan(1);
+    expect(built.issues.map((one) => one.detail)).toContain("chest:FancyChest_Procedural: no area spawns it in the data, listed for all 3 pools and marked unconfirmed");
+  });
+
+  it("publishes a mob with no known area once, for no area, with its book slot only, and marks it unplaced", () => {
+    const piggy = data.sources.find((source) => source.id === "mob:PiggyBank");
+    expect(piggy?.unplaced).toBe(true);
+    expect(piggy?.contexts.map(([area]) => area)).toEqual([""]);
+    expect(built.issues.map((one) => one.detail)).toContain("PiggyBank: found in no area with a drop pool, its non-book slots are not covered");
+  });
+
+  it("leaves out a slot with too many draws and reports it instead of stopping", () => {
+    expect(data.sources.some((source) => source.id === "mob:Greedy")).toBe(false);
+    expect(built.issues.map((one) => one.detail)).toContain("mob:Greedy: slot left out, item: 21 draws (at most 12)");
   });
 
   it("marks the quest batch given on the first completion only", () => {

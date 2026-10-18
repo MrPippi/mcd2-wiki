@@ -52,10 +52,15 @@ export function compileDrops(universe: Universe, planned: readonly Planned[]): C
       key: keyOf(id, universe),
       group: universe.groupOf(id),
       ...(published && sub !== undefined ? { sub } : {}),
-      ...(published && known?.uniqueOnly ? { unique: true as const } : {}),
+      ...(published && known?.allowed !== undefined ? { allowed: known.allowed } : {}),
       ...(published ? {} : { opaque: true as const }),
     };
   });
+  const slotIndex = (id: string, owner: string): number => {
+    const index = indexOf.get(id);
+    if (index === undefined) throw new ExtractError(`drop odds: ${owner} draws ${id}, which is not among the items`);
+    return index;
+  };
   const pools = new Map<string, [number, number][]>();
   const profiles = new Map<string, DropProfile>();
   const profileOf = (profile: RawProfile): string =>
@@ -67,7 +72,7 @@ export function compileDrops(universe: Universe, planned: readonly Planned[]): C
           guaranteed: slot.guaranteed,
           rolls: slot.rolls,
           chance: slot.chance,
-          pool: store(pools, slot.pool.map(([id, weight]): [number, number] => [indexOf.get(id) ?? -1, weight]).sort((a, b) => a[0] - b[0]), "pools"),
+          pool: store(pools, slot.pool.map(([id, weight]): [number, number] => [slotIndex(id, slot.slot), weight]).sort((a, b) => a[0] - b[0]), "pools"),
         })),
         rarity: profile.rarity,
       },
@@ -77,6 +82,7 @@ export function compileDrops(universe: Universe, planned: readonly Planned[]): C
     id: one.id,
     kind: one.kind,
     ...(one.first ? { first: true as const } : {}),
+    ...(one.unplaced ? { unplaced: true as const } : {}),
     contexts: one.contexts.map(([area, profile]) => [area, profileOf(profile)] as const),
   }));
   return { items, pools: Object.fromEntries(pools), profiles: Object.fromEntries(profiles), sources };

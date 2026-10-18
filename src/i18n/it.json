@@ -426,7 +426,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -887,7 +890,7 @@
   "affixControls": "Impostazioni delle probabilità",
   "dropOddsTitle": "Probabilità di bottino",
   "dropOddsIntro": "La probabilità che una singola attivazione di una fonte (un baule aperto, un mostro sconfitto, un gruppo di ricompense di missione) dia almeno uno di questo oggetto, a livello di minaccia 20 in difficoltà normale. Si presume gioco in singolo, una cronologia dei bottini recenti vuota, nessun oggetto già posseduto e nessun attributo di bottino extra, probabilità di bottino o miglioramento della rarità.",
-  "dropOddsUnconfirmed": "Queste probabilità sono ricostruite dalle tabelle di dati del gioco e confrontate con una tabella di terzi. Le tabelle non dicono dove compaiono i bauli, quindi un baule è elencato per ogni area il cui pool di bottino contiene l'oggetto. Non verificato nel gioco.",
+  "dropOddsUnconfirmed": "Queste probabilità sono ricostruite dalle tabelle di dati del gioco e confrontate con una tabella di terzi; non sono state verificate nel gioco.",
   "dropMore": "altri {count}",
   "dropQuestBatch": "Ricompensa {n}",
   "dropProcedural": "versione per segrete e fenditure",
@@ -909,5 +912,8 @@
   "dropSummary": "{item}: minaccia {threat}, {difficulty}, {rarity}. {count} fonti.",
   "dropNoResult": "Nessuna fonte può dare questo oggetto in queste condizioni.",
   "dropEmpty": "Scegli un oggetto per vedere dove cade e con quale probabilità.",
-  "dropCalc": "Calcolatore di bottino"
+  "dropCalc": "Calcolatore di bottino",
+  "dropNotIncluded": "Non ancora inclusi: mostri normali e mercanti.",
+  "dropAreaUnconfirmed": "Area non confermata: i dati non dicono dove compare questa fonte",
+  "dropCalcNoData": "Questa versione non ha dati di bottino."
 }

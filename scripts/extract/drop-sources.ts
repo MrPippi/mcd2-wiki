@@ -1,13 +1,16 @@
 /**
- * Which triggers the drop odds cover, and their profiles. Only triggers the site already shows are covered, and only where the
- * site's own data says they can happen (the tables do not place chests in areas):
+ * Which triggers the drop odds cover, and their profiles. Only triggers the site already shows are covered:
  * - chests the item pages list (loot-sources.json), plus the procedural dungeon and rift versions that carry one of them as a
- *   trait; chests with a fixed pool have no area, chests that draw from their area's pool are paired with each area that has a
- *   drop pool and each enchantment book pool;
+ *   trait; chests with a fixed pool have no area. A chest that draws from its area's pool is paired with the areas whose spawn
+ *   quotas (DT_AreaDefinition) include it; a chest no area row spawns is paired with every area that has a drop pool and every
+ *   enchantment book pool, and marked `unplaced`, because the data does not say where it appears;
  * - every reward batch of a published quest: the entry's own tags together with the quest's reward area;
- * - bosses, minibosses and the Piggy Bank, with the counts the bestiary shows, over the pool of each area they are found in.
- * Mercenaries, regular mobs, merchants, Soul Storm chests and key chests are left out; the extract reports what it skips.
+ * - bosses, minibosses and the Piggy Bank, with the counts the bestiary shows, over the pool of each area they are found in; one
+ *   with no known area that has a book slot is published once, for no area, and marked `unplaced`.
+ * Regular mobs and merchants are left out of this model (a later change), and so are Soul Storm and key chests; the extract reports
+ * what it skips.
  */
+import { closureOf } from "./drop-slots";
 import { issue, type Issue } from "./issues";
 import { profileOfSpecs, profileOfTags, ITEM_SLOTS, type ProfileContext, type RawProfile } from "./drop-profile";
 import type { LootRow, LootTables } from "./loot-tables";
@@ -20,6 +23,8 @@ export interface Planned {
   readonly kind: "chest" | "quest" | "mob";
   /** A quest batch given on the first completion only. */
   readonly first?: boolean;
+  /** The data does not say where the source appears. */
+  readonly unplaced?: boolean;
   /** Area source id ("" for none) and the trigger's profile there. */
   readonly contexts: readonly (readonly [string, RawProfile])[];
 }
@@ -33,6 +38,8 @@ export interface PlanInput {
   readonly mobs: MobData;
   /** Mob slug → the tags its rows go by. */
   readonly mobTags: ReadonlyMap<string, readonly string[]>;
+  /** Lower-cased chest tag → the area tags that spawn it. */
+  readonly placements: ReadonlyMap<string, readonly string[]>;
 }
 
 interface Place {
@@ -49,9 +56,15 @@ const NONE_TAG = "None";
 const ENCHANTED_BOOK = "enchantedbook";
 const MOB_KINDS: ReadonlySet<string> = new Set(["boss", "miniboss"]);
 const PIGGY_BANK = "PiggyBank";
+/** The area every other area inherits from; it carries the books that drop everywhere. */
+const GLOBAL_AREA = "SW.Area";
 const SUFFIX = (kind: string, id: string): string => `${kind}:${id}`;
 
 const hasContent = (profile: RawProfile): boolean => profile.slots.length > 0;
+
+/** One issue per slot the calculation would not follow, once per source and reason. */
+const skippedIssues = (id: string, contexts: readonly (readonly [string, RawProfile])[]): Issue[] =>
+  [...new Set(contexts.flatMap(([, profile]) => profile.skipped))].map((reason) => issue("drop-ignored", `${id}: slot left out, ${reason}`));
 
 /** Area and enchantment book pool places: the areas with a drop pool, and for each book pool the area that carries it. */
 export function placesOf(input: PlanInput): { areas: Place[]; bookPools: Place[]; issues: Issue[] } {
@@ -88,15 +101,25 @@ function planChests(input: PlanInput, context: ProfileContext, places: readonly 
   const variants = input.loot.lootActor
     .filter((row) => !siteIds.includes(SUFFIX("chest", row.Name)) && parentOf(row) !== undefined)
     .map((row) => ({ id: SUFFIX("chest", row.Name), row, areas: parentOf(row)?.areas ?? false }));
+  const notes: Issue[] = [];
   const planned = [...site, ...variants].map(({ id, row, areas }): Planned => {
-    const where: readonly (readonly [string, readonly string[]])[] = areas ? places.map((place) => [place.id, [row.TypeTag.TagName, place.tag]] as const) : [["", [row.TypeTag.TagName]]];
-    return { id, kind: "chest", contexts: where.map(([area, tags]) => [area, profileOfTags(context, tags)] as const).filter(([, profile]) => hasContent(profile)) };
+    const spots = input.placements.get(tagKey(row.TypeTag.TagName));
+    const reached = (place: Place): boolean => (spots ?? []).some((spot) => closureOf([spot], context.parents).includes(tagKey(place.tag)));
+    const chosen = !areas ? [] : spots ? places.filter(reached) : places;
+    if (areas && spots) notes.push(issue("drop-ignored", `${id}: spawns in ${spots.length} areas (area quotas), listed for ${chosen.length} of ${places.length} pools; ${places.length - chosen.length} pairings dropped`));
+    if (areas && !spots) notes.push(issue("drop-ignored", `${id}: no area spawns it in the data, listed for all ${places.length} pools and marked unconfirmed`));
+    const where: readonly (readonly [string, readonly string[]])[] = areas ? chosen.map((place) => [place.id, [row.TypeTag.TagName, place.tag]] as const) : [["", [row.TypeTag.TagName]]];
+    const built = where.map(([area, tags]) => [area, profileOfTags(context, tags)] as const);
+    notes.push(...skippedIssues(id, built));
+    const contexts = built.filter(([, profile]) => hasContent(profile));
+    return { id, kind: "chest", ...(areas && !spots ? { unplaced: true } : {}), contexts };
   });
   return {
     planned: planned.filter((one) => one.contexts.length > 0),
     issues: [
       ...siteIds.filter((id) => !site.some((chest) => chest.id === id)).map((id) => issue("drop-ignored", `${id}: no loot actor row`)),
       ...planned.filter((one) => one.contexts.length === 0).map((one) => issue("drop-ignored", `${one.id}: no item it can give`)),
+      ...notes,
     ],
   };
 }
@@ -119,14 +142,18 @@ function planQuests(input: PlanInput, context: ProfileContext): Planning {
   const kept = planned.filter((one) => hasContent(one.contexts[0][1]));
   return {
     planned: kept,
-    issues: [issue("drop-ignored", `${input.quests.length - published.length} unpublished quests have no drop odds`), ...(kept.length === planned.length ? [] : [issue("drop-ignored", `${planned.length - kept.length} quest reward batches give no item`)])],
+    issues: [
+      issue("drop-ignored", `${input.quests.length - published.length} unpublished quests have no drop odds`),
+      ...(kept.length === planned.length ? [] : [issue("drop-ignored", `${planned.length - kept.length} quest reward batches give no item`)]),
+      ...planned.flatMap((one) => skippedIssues(one.id, one.contexts)),
+    ],
   };
 }
 
 const lowerSlot = (slot: string): string => slot.toLowerCase();
 
 /** Bosses, minibosses and the Piggy Bank: the bestiary's counts for the slots that draw from the area pool. */
-function planMobs(input: PlanInput, context: ProfileContext, places: { areas: readonly Place[]; bookPools: readonly Place[] }): Planning {
+function planMobs(input: PlanInput, context: ProfileContext, places: { areas: readonly Place[] }): Planning {
   const mobs = input.mobs.mobs.filter((mob) => MOB_KINDS.has(mob.kind) || mob.id === PIGGY_BANK);
   const issues: Issue[] = [];
   const planned = mobs.flatMap((mob): Planned[] => {
@@ -134,13 +161,15 @@ function planMobs(input: PlanInput, context: ProfileContext, places: { areas: re
     issues.push(...drops.filter((drop) => drop.pool === "own").map((drop) => issue("drop-ignored", `${mob.id}: ${drop.slot} draws from its own list, not covered`)));
     const specs = drops.filter((drop) => drop.pool === "area").map((drop) => ({ slot: lowerSlot(drop.slot), guaranteed: drop.guaranteed, rolls: drop.rolls, chance: drop.chancePerRoll }));
     const found = places.areas.filter((place) => mob.areas.some((area) => tagKey(area.areaId) === tagKey(place.tag)));
-    // A mob with no known area can still give books, which depend on the book pool of the place.
     const books = specs.filter((spec) => spec.slot === ENCHANTED_BOOK);
-    const where = found.length > 0 ? found.map((place) => ({ place, specs })) : books.length > 0 ? places.bookPools.map((place) => ({ place, specs: books })) : [];
-    if (specs.length > 0 && where.length === 0) issues.push(issue("drop-ignored", `${mob.id}: found in no area with a drop pool`));
     const tags = input.mobTags.get(mob.slug) ?? [];
-    const contexts = where.map(({ place, specs: used }) => [place.id, profileOfSpecs(context, used, place.tag, tags)] as const).filter(([, profile]) => hasContent(profile));
-    return contexts.length > 0 ? [{ id: `mob:${mob.id}`, kind: "mob", contexts }] : [];
+    if (found.length === 0 && specs.length > books.length) issues.push(issue("drop-ignored", `${mob.id}: found in no area with a drop pool, its non-book slots are not covered`));
+    // A mob with no known area can still give books: the global pool, once, for no area, marked unconfirmed.
+    const where = found.length > 0 ? found.map((place) => ({ id: place.id, tag: place.tag, used: specs })) : books.length > 0 ? [{ id: "", tag: GLOBAL_AREA, used: books }] : [];
+    const built = where.map(({ id, tag, used }) => [id, profileOfSpecs(context, used, tag, tags)] as const);
+    issues.push(...skippedIssues(`mob:${mob.id}`, built));
+    const contexts = built.filter(([, profile]) => hasContent(profile));
+    return contexts.length > 0 ? [{ id: `mob:${mob.id}`, kind: "mob", ...(found.length === 0 ? { unplaced: true } : {}), contexts }] : [];
   });
   return { planned, issues };
 }

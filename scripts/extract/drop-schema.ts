@@ -4,6 +4,8 @@ import { MAX_DRAWS } from "../../src/lib/drop-odds";
 /** The slots a profile can hold (extractor and site agree on these names). */
 export const DROP_SLOT_NAMES = ["item", "specialgear", "enchantedbook", "talismans", "none"] as const;
 
+/** The rarity mask of an item that only exists as Unique. */
+const UNIQUE_ONLY = 8;
 const Rarity = z.union([z.literal(0), z.literal(1), z.literal(2), z.literal(3)]);
 const RarityOpSchema = z.tuple([Rarity, z.enum(["s", "a", "m"]), z.number().finite()]);
 const Weight = z.number().finite().positive();
@@ -14,7 +16,7 @@ const ItemSchema = z.strictObject({
   key: z.string().min(1),
   group: z.string().min(1),
   sub: Index.optional(),
-  unique: z.literal(true).optional(),
+  allowed: z.number().int().min(1).max(15).optional(),
   opaque: z.literal(true).optional(),
 });
 
@@ -35,6 +37,7 @@ const SourceSchema = z.strictObject({
   id: z.string().min(1),
   kind: z.enum(["chest", "quest", "mob"]),
   first: z.literal(true).optional(),
+  unplaced: z.literal(true).optional(),
   /** Area source id ("" for none) and the profile that applies there. */
   contexts: z.array(z.tuple([z.string(), z.string().min(1)])).min(1),
 });
@@ -65,7 +68,8 @@ export const DropDataSchema = z
     const keys = data.items.map((item) => item.key);
     if (new Set(keys).size !== keys.length) fail(["items"], "item keys must be unique");
     data.items.forEach((item, at) => {
-      if (item.sub !== undefined && !data.items[item.sub]?.unique) fail(["items", at, "sub"], `item ${item.key} turns into an item that is not Unique`);
+      if (item.sub !== undefined && data.items[item.sub]?.allowed !== UNIQUE_ONLY) fail(["items", at, "sub"], `item ${item.key} turns into an item that is not Unique`);
+      if (item.opaque && item.allowed !== undefined) fail(["items", at, "allowed"], `item ${item.key} has no page, so no rarity`);
     });
     for (const [hash, pool] of Object.entries(data.pools)) {
       pool.forEach(([item], at) => {

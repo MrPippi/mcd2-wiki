@@ -426,7 +426,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -887,7 +890,7 @@
   "affixControls": "Configurações de chances",
   "dropOddsTitle": "Chances de saque",
   "dropOddsIntro": "A chance de uma ativação de uma fonte (abrir um baú, derrotar um monstro, receber um lote de recompensas de missão) dar pelo menos um deste item, no nível de ameaça 20 em dificuldade normal. Presume-se jogo solo, um histórico de saques recentes vazio, nenhum item já possuído e nenhum atributo de saque extra, chance de saque ou melhoria de raridade.",
-  "dropOddsUnconfirmed": "Estas chances foram reconstruídas a partir das tabelas de dados do jogo e conferidas com uma tabela de terceiros. As tabelas não dizem onde os baús aparecem, por isso um baú é listado em cada área cujo conjunto de saque tem o item. Não verificado no jogo.",
+  "dropOddsUnconfirmed": "Estas chances foram reconstruídas a partir das tabelas de dados do jogo e conferidas com uma tabela de terceiros; não foram verificadas no jogo.",
   "dropMore": "mais {count}",
   "dropQuestBatch": "Recompensa {n}",
   "dropProcedural": "versão de masmorra e fenda",
@@ -909,5 +912,8 @@
   "dropSummary": "{item}: ameaça {threat}, {difficulty}, {rarity}. {count} fontes.",
   "dropNoResult": "Nenhuma fonte pode dar este item nessas condições.",
   "dropEmpty": "Escolha um item para ver onde ele cai e com que chance.",
-  "dropCalc": "Calculadora de saque"
+  "dropCalc": "Calculadora de saque",
+  "dropNotIncluded": "Ainda não incluídos: monstros comuns e mercadores.",
+  "dropAreaUnconfirmed": "Área não confirmada: os dados não dizem onde esta fonte aparece",
+  "dropCalcNoData": "Esta versão não tem dados de saque."
 }

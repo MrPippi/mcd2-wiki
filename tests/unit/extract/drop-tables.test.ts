@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it, vi } from "vitest";
-import { loadDropTables, slotRuleOf } from "../../../scripts/extract/drop-tables";
+import { chestPlacements, loadDropTables, slotRuleOf } from "../../../scripts/extract/drop-tables";
 import { ExtractError } from "../../../scripts/extract/issues";
 
 const NAMES = ["DT_LootSlotDefinition", "DT_RarityChanceDefinition", "DT_LootActorDefinition", "DT_AreaDefinition", "DT_DifficultyDefinition"];
@@ -62,5 +62,28 @@ describe("slotRuleOf", () => {
 
   it("has no rule for a slot with no modification function", () => {
     expect(rule(0)).toEqual({ history: 0, oneOfAKind: false });
+  });
+});
+
+describe("chestPlacements", () => {
+  const area = (tagName: string, quotas: Record<string, number> = {}) => ({
+    TypeTag: tag(tagName),
+    LootSpawnVolumeDefinition: { Quotas: Object.fromEntries(Object.entries(quotas).map(([name, count]) => [`(TagName="${name}")`, count])) },
+  });
+
+  it("lists the areas that spawn each chest, by lower-cased chest tag", () => {
+    const placements = chestPlacements([
+      area("SW.Area.A", { "SW.LootActor.FancyChest": 10, "SW.LootActor.WoodenChest": 2 }),
+      area("SW.Area.B", { "SW.LootActor.FancyChest": 3 }),
+      area("SW.Area.C"),
+    ]);
+    expect(placements.get("sw.lootactor.fancychest")).toEqual(["SW.Area.A", "SW.Area.B"]);
+    expect(placements.get("sw.lootactor.woodenchest")).toEqual(["SW.Area.A"]);
+    expect(placements.has("sw.lootactor.deepdarkchest")).toBe(false);
+  });
+
+  it("ignores a quota of 0 and an area row with no spawn volume", () => {
+    const placements = chestPlacements([area("SW.Area.A", { "SW.LootActor.FancyChest": 0 }), { TypeTag: tag("SW.Area.B") }]);
+    expect(placements.size).toBe(0);
   });
 });

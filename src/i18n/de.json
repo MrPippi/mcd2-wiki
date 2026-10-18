@@ -424,7 +424,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "_english": [
     "armorPiece",
@@ -888,7 +891,7 @@
   "affixControls": "Chancen-Einstellungen",
   "dropOddsTitle": "Drop-Chancen",
   "dropOddsIntro": "Die Chance, dass ein einmaliges Auslösen einer Quelle (eine Truhe öffnen, einen Gegner besiegen, eine Questbelohnung erhalten) mindestens einmal diesen Gegenstand liefert, bei Bedrohungsstufe 20 und normaler Schwierigkeit. Angenommen werden Einzelspiel, ein leerer Verlauf der letzten Drops, noch kein Gegenstand im Besitz und keine Attribute für zusätzliche Drops, Drop-Chance oder Seltenheitssteigerung.",
-  "dropOddsUnconfirmed": "Diese Chancen wurden aus den Datentabellen des Spiels rekonstruiert und mit einer Tabelle Dritter abgeglichen. Die Tabellen verraten nicht, wo Truhen stehen; deshalb wird eine Truhe für jedes Gebiet aufgeführt, dessen Beute-Pool den Gegenstand enthält. Im Spiel nicht überprüft.",
+  "dropOddsUnconfirmed": "Diese Chancen wurden aus den Datentabellen des Spiels rekonstruiert und mit einer Tabelle Dritter abgeglichen; im Spiel sind sie nicht überprüft.",
   "dropMore": "{count} weitere",
   "dropQuestBatch": "Belohnung {n}",
   "dropProcedural": "Verlies- und Rissversion",
@@ -910,5 +913,8 @@
   "dropSummary": "{item}: Bedrohungsstufe {threat}, {difficulty}, {rarity}. {count} Quellen.",
   "dropNoResult": "Unter diesen Bedingungen kann keine Quelle diesen Gegenstand liefern.",
   "dropEmpty": "Wähle einen Gegenstand, um zu sehen, wo er droppt und wie wahrscheinlich das ist.",
-  "dropCalc": "Drop-Rechner"
+  "dropCalc": "Drop-Rechner",
+  "dropNotIncluded": "Noch nicht enthalten: normale Gegner und Händler.",
+  "dropAreaUnconfirmed": "Gebiet unbestätigt: Die Daten sagen nicht, wo diese Quelle vorkommt",
+  "dropCalcNoData": "Dieser Build enthält keine Drop-Daten."
 }

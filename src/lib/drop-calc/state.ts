@@ -39,7 +39,7 @@ export function encodeState(search: string, state: CalcState, payload: CalcPaylo
   const params = new URLSearchParams(search);
   for (const name of ["item", "threat", "diff", "rarity"]) params.delete(name);
   const own = [
-    state.item ? `item=${state.item}` : "",
+    state.item ? `item=${encodeURIComponent(state.item)}` : "",
     state.level !== payload.defaultLevel ? `threat=${state.level}` : "",
     state.difficulty !== "normal" ? `diff=${encodeURIComponent(state.difficulty)}` : "",
     state.rarity !== "any" ? `rarity=${state.rarity}` : "",
@@ -50,13 +50,17 @@ export function encodeState(search: string, state: CalcState, payload: CalcPaylo
   return query ? `?${query}` : "";
 }
 
-/** Every source and area that can give the chosen item, narrowed by the source and area choices. */
-export function stateRows(file: DropFile, state: CalcState): DropRow[] {
-  if (!state.item) return [];
-  return itemRows(file, state.item, { level: state.level, difficulty: state.difficulty, rarity: state.rarity }).filter(
-    (row) => (state.source === "" || row.source === state.source) && (state.area === "" || row.area === state.area),
-  );
+/** Every source and area that can give the chosen item, before the source and area choices narrow them. */
+export function allRows(file: DropFile, state: CalcState): DropRow[] {
+  return state.item ? itemRows(file, state.item, { level: state.level, difficulty: state.difficulty, rarity: state.rarity }) : [];
 }
+
+/** The rows the source and area choices keep. */
+export const narrowRows = (rows: readonly DropRow[], state: CalcState): DropRow[] =>
+  rows.filter((row) => (state.source === "" || row.source === state.source) && (state.area === "" || row.area === state.area));
+
+/** Every source and area that can give the chosen item, narrowed by the source and area choices. */
+export const stateRows = (file: DropFile, state: CalcState): DropRow[] => narrowRows(allRows(file, state), state);
 
 /** The sources and areas the unnarrowed rows have, for the two narrowing menus. */
 export function narrowing(rows: readonly DropRow[]): { sources: string[]; areas: string[] } {

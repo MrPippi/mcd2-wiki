@@ -426,7 +426,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -886,7 +889,7 @@
   "affixControls": "Kansinstellingen",
   "dropOddsTitle": "Dropkansen",
   "dropOddsIntro": "De kans dat één activering van een bron (een kist openen, een monster verslaan, een set questbeloningen) minstens één van dit voorwerp oplevert, op dreigingsniveau 20 met normale moeilijkheid. Uitgegaan wordt van solospel, een lege geschiedenis van recente drops, nog geen voorwerpen in bezit en geen attributen voor extra drops, dropkans of zeldzaamheidsverhoging.",
-  "dropOddsUnconfirmed": "Deze kansen zijn herbouwd uit de gegevenstabellen van het spel en vergeleken met een tabel van derden. De tabellen zeggen niet waar kisten verschijnen, dus een kist wordt vermeld voor elk gebied waarvan de buitpool het voorwerp bevat. Niet in het spel gecontroleerd.",
+  "dropOddsUnconfirmed": "Deze kansen zijn herbouwd uit de gegevenstabellen van het spel en vergeleken met een tabel van derden; ze zijn niet in het spel gecontroleerd.",
   "dropMore": "nog {count}",
   "dropQuestBatch": "Beloning {n}",
   "dropProcedural": "kerker- en spleetversie",
@@ -908,5 +911,8 @@
   "dropSummary": "{item}: dreiging {threat}, {difficulty}, {rarity}. {count} bronnen.",
   "dropNoResult": "Onder deze voorwaarden kan geen enkele bron dit voorwerp opleveren.",
   "dropEmpty": "Kies een voorwerp om te zien waar het valt en met welke kans.",
-  "dropCalc": "Dropcalculator"
+  "dropCalc": "Dropcalculator",
+  "dropNotIncluded": "Nog niet opgenomen: gewone monsters en handelaren.",
+  "dropAreaUnconfirmed": "Gebied onbevestigd: de gegevens zeggen niet waar deze bron voorkomt",
+  "dropCalcNoData": "Deze versie heeft geen dropgegevens."
 }

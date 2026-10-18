@@ -426,7 +426,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -887,7 +890,7 @@
   "affixControls": "Réglages des chances",
   "dropOddsTitle": "Probabilités de butin",
   "dropOddsIntro": "La probabilité qu'un déclenchement d'une source (un coffre ouvert, un monstre vaincu, un lot de récompenses de quête) donne au moins un exemplaire de cet objet, au niveau de menace 20 en difficulté normale. On suppose une partie en solo, un historique de butin récent vide, aucun objet possédé et aucun attribut de butin supplémentaire, de chance de butin ou d'amélioration de rareté.",
-  "dropOddsUnconfirmed": "Ces probabilités sont reconstruites à partir des tables de données du jeu et recoupées avec un tableau tiers. Les tables n'indiquent pas où apparaissent les coffres : un coffre est donc listé pour chaque zone dont la réserve de butin contient l'objet. Non vérifié en jeu.",
+  "dropOddsUnconfirmed": "Ces probabilités sont reconstruites à partir des tables de données du jeu et recoupées avec un tableau tiers ; elles n'ont pas été vérifiées en jeu.",
   "dropMore": "{count} de plus",
   "dropQuestBatch": "Récompense {n}",
   "dropProcedural": "version donjon et faille",
@@ -909,5 +912,8 @@
   "dropSummary": "{item} : menace {threat}, {difficulty}, {rarity}. {count} sources.",
   "dropNoResult": "Aucune source ne peut donner cet objet dans ces conditions.",
   "dropEmpty": "Choisissez un objet pour voir où il tombe et avec quelle probabilité.",
-  "dropCalc": "Calculateur de butin"
+  "dropCalc": "Calculateur de butin",
+  "dropNotIncluded": "Pas encore inclus : les monstres ordinaires et les marchands.",
+  "dropAreaUnconfirmed": "Zone non confirmée : les données n'indiquent pas où apparaît cette source",
+  "dropCalcNoData": "Cette version ne contient pas de données de butin."
 }

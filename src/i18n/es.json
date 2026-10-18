@@ -426,7 +426,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -887,7 +890,7 @@
   "affixControls": "Ajustes de probabilidad",
   "dropOddsTitle": "Probabilidades de botín",
   "dropOddsIntro": "La probabilidad de que una activación de una fuente (abrir un cofre, derrotar a un monstruo, recibir un lote de recompensas de misión) dé al menos uno de este objeto, con nivel de amenaza 20 en dificultad normal. Se supone juego en solitario, un historial de botín reciente vacío, ningún objeto en posesión y ningún atributo de botín extra, de probabilidad de botín o de mejora de rareza.",
-  "dropOddsUnconfirmed": "Estas probabilidades se reconstruyen a partir de las tablas de datos del juego y se contrastan con una tabla de terceros. Las tablas no indican dónde aparecen los cofres, así que se muestra un cofre en cada zona cuya reserva de botín contiene el objeto. No verificado en el juego.",
+  "dropOddsUnconfirmed": "Estas probabilidades se reconstruyen a partir de las tablas de datos del juego y se contrastan con una tabla de terceros; no se han verificado en el juego.",
   "dropMore": "{count} más",
   "dropQuestBatch": "Recompensa {n}",
   "dropProcedural": "versión de mazmorra y grieta",
@@ -909,5 +912,8 @@
   "dropSummary": "{item}: amenaza {threat}, {difficulty}, {rarity}. {count} fuentes.",
   "dropNoResult": "Ninguna fuente puede dar este objeto en estas condiciones.",
   "dropEmpty": "Elige un objeto para ver dónde cae y con qué probabilidad.",
-  "dropCalc": "Calculadora de botín"
+  "dropCalc": "Calculadora de botín",
+  "dropNotIncluded": "Aún no incluidos: monstruos normales y mercaderes.",
+  "dropAreaUnconfirmed": "Zona sin confirmar: los datos no dicen dónde aparece esta fuente",
+  "dropCalcNoData": "Esta versión no tiene datos de botín."
 }

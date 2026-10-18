@@ -13,18 +13,22 @@ export interface CalcLabel {
   readonly name: string;
   readonly href?: string;
   readonly note?: string;
+  /** The data does not say where the source appears. */
+  readonly unplaced?: true;
 }
 
 export interface CalcLabels {
   readonly pick: string; readonly item: string; readonly filter: string; readonly noItems: string;
   readonly threat: string; readonly difficulty: string; readonly rarity: string;
   readonly source: string; readonly area: string; readonly chance: string;
-  readonly allSources: string; readonly allAreas: string; readonly anyArea: string;
+  readonly allSources: string; readonly allAreas: string; readonly anyArea: string; readonly unplaced: string;
   /** Has {item}, {threat}, {difficulty}, {rarity} and {count} placeholders. */
   readonly summary: string; readonly none: string; readonly empty: string; readonly gearOnly: string;
 }
 
 export interface CalcPayload {
+  /** False when the build has no drop data; the page then says so instead of loading the calculator. */
+  readonly available: boolean;
   readonly items: readonly CalcItem[];
   readonly levels: readonly number[];
   readonly defaultLevel: number;
@@ -41,7 +45,7 @@ const named = (value: unknown): boolean => isRecord(value) && isText(value.name)
 
 /** The payload when it has the shape the page renders; undefined otherwise (the caller reports it). */
 export function parseCalcPayload(raw: unknown): CalcPayload | undefined {
-  if (!isRecord(raw) || !isRecord(raw.labels) || !isRecord(raw.sources) || !isRecord(raw.areas)) return undefined;
+  if (!isRecord(raw) || typeof raw.available !== "boolean" || !isRecord(raw.labels) || !isRecord(raw.sources) || !isRecord(raw.areas)) return undefined;
   const list = (value: unknown): value is unknown[] => Array.isArray(value) && value.length > 0;
   const ok =
     list(raw.items) && raw.items.every((one) => isRecord(one) && isText(one.key) && isText(one.name) && typeof one.search === "string" && isText(one.href)) &&

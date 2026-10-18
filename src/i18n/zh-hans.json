@@ -423,7 +423,10 @@
     "dropSummary",
     "dropNoResult",
     "dropEmpty",
-    "dropCalc"
+    "dropCalc",
+    "dropNotIncluded",
+    "dropAreaUnconfirmed",
+    "dropCalcNoData"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -885,7 +888,7 @@
   "affixControls": "概率设置",
   "dropOddsTitle": "掉落概率",
   "dropOddsIntro": "触发一次来源（开一次宝箱、击败一次怪物、领一次任务奖励）时，至少掉出一件这个物品的概率，按威胁等级 20、普通难度计算。默认为单人游玩、近期掉落记录为空、尚未拥有任何物品，且没有额外掉落、掉落概率或稀有度提升属性。",
-  "dropOddsUnconfirmed": "这些概率由游戏数据表重建，并与第三方整理的表交叉比对。数据表没有记录宝箱出现在哪些区域，因此凡是区域掉落池含有此物品的区域都会列出宝箱。尚未在游戏内验证。",
+  "dropOddsUnconfirmed": "这些概率由游戏数据表重建，并与第三方整理的表交叉比对，尚未在游戏内验证。",
   "dropMore": "其余 {count} 条",
   "dropQuestBatch": "奖励 {n}",
   "dropProcedural": "副本与裂隙版",
@@ -907,5 +910,8 @@
   "dropSummary": "{item}：威胁等级 {threat}，{difficulty}，{rarity}。共 {count} 个来源。",
   "dropNoResult": "在这些条件下，没有任何来源能掉出这个物品。",
   "dropEmpty": "选择一个物品，查看它在哪里掉落、概率多少。",
-  "dropCalc": "掉落概率计算器"
+  "dropCalc": "掉落概率计算器",
+  "dropNotIncluded": "尚未收录：普通怪物和商人。",
+  "dropAreaUnconfirmed": "区域未确认：数据没有说明此来源出现在哪里",
+  "dropCalcNoData": "这个版本没有掉落数据。"
 }

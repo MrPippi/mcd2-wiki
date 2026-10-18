@@ -30,9 +30,10 @@ export interface TaggedRow {
 export const SLOT_ORDER: readonly string[] = ["item", "specialgear", "enchantedbook", "talismans", "none"];
 const OPS: readonly OpName[] = ["set", "add", "multiply"];
 const SLOT_NAME = /SW\.LootSlot\.(\w+)/i;
+const EMPTY_SLOT = '(TagName="")';
 
-/** '(TagName="SW.LootSlot.EnchantedBook")' → "enchantedbook"; a slot with an empty tag name → "none". */
-export const slotNameOf = (rawKey: string): string => SLOT_NAME.exec(rawKey)?.[1]?.toLowerCase() ?? "none";
+/** '(TagName="SW.LootSlot.EnchantedBook")' → "enchantedbook"; a slot with an empty tag name → "none"; any other key → "?<key>", which no profile uses. */
+export const slotNameOf = (rawKey: string): string => SLOT_NAME.exec(rawKey)?.[1]?.toLowerCase() ?? (rawKey === EMPTY_SLOT ? "none" : `?${rawKey}`);
 
 const slotEntries = (row: LootRow): [string, LootSlotValue][] => {
   const named = Object.entries(row.LootDropDefinition.LootSlots ?? {}).map(([key, value]): [string, LootSlotValue] => [slotNameOf(key), value]);
@@ -102,6 +103,8 @@ export interface SlotResolver {
   readonly resolve: (tag: string, slot: string) => Resolved | undefined;
   /** The names of the slots any row of the tags' chains has, in SLOT_ORDER. */
   readonly slotNames: (tags: readonly string[]) => string[];
+  /** The loops of parents met so far ("a > b > a"), each once. */
+  readonly cycles: () => string[];
 }
 
 export interface ResolverInput {
@@ -110,14 +113,32 @@ export interface ResolverInput {
   readonly membersOf: MembersOf;
 }
 
+/** Slots a row lists twice (the first is used) and slot keys that name no known slot: nothing is shadowed or misread without a report. */
+export function slotProblems(rows: readonly LootRow[]): string[] {
+  return rows.flatMap((row) => {
+    const keys = Object.keys(row.LootDropDefinition.LootSlots ?? {});
+    const names = keys.map(slotNameOf);
+    const unknown = keys.filter((key) => key !== EMPTY_SLOT && !SLOT_NAME.test(key)).map((key) => `${row.Name}: slot key ${key} is not a loot slot`);
+    const repeated = [...new Set(names.filter((name, index) => names.indexOf(name) !== index))].map((name) => `${row.Name}: slot ${name} is listed twice, the first is used`);
+    return [...unknown, ...repeated];
+  });
+}
+
 export function createSlotResolver({ rows, parents, membersOf }: ResolverInput): SlotResolver {
   const byTag = rowsByTag(rows);
   const memo = new Map<string, Resolved | undefined>();
+  const walking: string[] = [];
+  const found = new Set<string>();
   const resolve = (tag: string, name: string): Resolved | undefined => {
     const key = `${tagKey(tag)}|${name}`;
     if (memo.has(key)) return memo.get(key);
-    // A loop of traits reads as "nothing here" while it is followed.
-    memo.set(key, undefined);
+    const at = walking.indexOf(key);
+    if (at !== -1) {
+      found.add([...walking.slice(at), key].map((one) => one.split("|")[0]).join(" > "));
+      return undefined;
+    }
+    walking.push(key);
+    const before = found.size;
     const row = byTag.get(tagKey(tag));
     const own = row ? slotOfRow(row, name) : undefined;
     const inherited = (): Resolved | undefined => mergeSlots(parents(tag).map((parent) => resolve(parent, name)));
@@ -130,7 +151,9 @@ export function createSlotResolver({ rows, parents, membersOf }: ResolverInput):
           pool: applyOps(base?.pool ?? new Map(), opsOf(own), membersOf),
         }
       : inherited();
-    memo.set(key, resolved);
+    walking.pop();
+    // Only a result that did not meet a loop is final; one that did may miss what the loop cut off.
+    if (found.size === before) memo.set(key, resolved);
     return resolved;
   };
   const slotNames = (tags: readonly string[]): string[] => {
@@ -138,5 +161,5 @@ export function createSlotResolver({ rows, parents, membersOf }: ResolverInput):
     const rank = (name: string): number => (SLOT_ORDER.includes(name) ? SLOT_ORDER.indexOf(name) : SLOT_ORDER.length);
     return [...names].sort((a, b) => rank(a) - rank(b) || a.localeCompare(b));
   };
-  return { resolve, slotNames };
+  return { resolve, slotNames, cycles: () => [...found] };
 }

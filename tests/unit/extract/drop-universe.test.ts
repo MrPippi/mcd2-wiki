@@ -56,9 +56,15 @@ describe("buildUniverse", () => {
     expect(universe.items.get("sw.item.artifact.totem")?.key).toBeUndefined();
   });
 
-  it("knows the Unique variant of an item, and which items are Unique only", () => {
-    expect(universe.items.get("sw.item.sword")).toMatchObject({ sub: "sw.item.sword_unique1", uniqueOnly: false });
-    expect(universe.items.get("sw.item.sword_unique1")).toMatchObject({ uniqueOnly: true });
+  it("knows the Unique variant of an item, and which rarities each gear item can roll", () => {
+    expect(universe.items.get("sw.item.sword")).toMatchObject({ sub: "sw.item.sword_unique1", allowed: 15 });
+    expect(universe.items.get("sw.item.sword_unique1")).toMatchObject({ allowed: 8 });
+  });
+
+  it("lets gear roll the rarities its row lists, else Common to Special and Unique when it has a variant; books have none", () => {
+    expect(universe.items.get("sw.item.mystichelmet")?.allowed).toBe(7);
+    expect(universe.items.get("sw.item.artifact.flamequiver")?.allowed).toBe(7);
+    expect(universe.items.get("sw.item.enchantmentbook.arcane")?.allowed).toBeUndefined();
   });
 
   it("groups gear for the recent-drop history: weapon type, artifact, armor piece; anything else on its own", () => {

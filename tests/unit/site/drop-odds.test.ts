@@ -1,15 +1,15 @@
 import { describe, expect, it } from "vitest";
-import { itemRows, MAX_DRAWS, profileOdds, slotOdds } from "../../../src/lib/drop-odds";
+import { itemRows, MAX_DRAWS, MAX_STATES, profileOdds, slotOdds, slotStates } from "../../../src/lib/drop-odds";
 import { rarityShares, rarityWeights } from "../../../src/lib/drop-rarity";
 import type { DropFile, DropItem, DropSlot } from "../../../src/lib/drop-types";
 
 // Items: 0 A and 1 B share a history group, 2 C is alone, 3 is a currency the site has no page for, 4 Z is the unique variant of A.
 const ITEMS: DropItem[] = [
-  { key: "melee/a", group: "x", sub: 4 },
-  { key: "melee/b", group: "x" },
-  { key: "artifact/c", group: "y" },
+  { key: "melee/a", group: "x", sub: 4, allowed: 15 },
+  { key: "melee/b", group: "x", allowed: 7 },
+  { key: "artifact/c", group: "y", allowed: 7 },
   { key: "~springstone", group: "~springstone", opaque: true },
-  { key: "melee/z", group: "z", unique: true },
+  { key: "melee/z", group: "z", allowed: 8 },
 ];
 const FLAT: [number, number, number, number] = [1, 1, 1, 1];
 const NORMAL = { level: 1, difficulty: "normal", rarity: "any" } as const;
@@ -30,8 +30,8 @@ const file = (over: Partial<DropFile> = {}): DropFile => ({
   sources: [],
   ...over,
 });
-const odds = (over: Partial<DropSlot>, target: number, pool: [number, number][] = [[0, 1], [1, 1], [2, 2]], shares = NONE) =>
-  slotOdds(file(), slot(over), pool, target, { shares, rarity: "any" });
+const odds = (over: Partial<DropSlot>, target: number | number[], pool: [number, number][] = [[0, 1], [1, 1], [2, 2]], shares = NONE) =>
+  slotOdds(file(), slot(over), pool, [target].flat(), { shares, rarity: "any" });
 
 describe("rarityWeights", () => {
   it("takes the largest Set, sums Add, multiplies Multiply, each scaled once by the threat factor", () => {
@@ -91,8 +91,33 @@ describe("slotOdds", () => {
     expect(odds({ slot: "specialgear", guaranteed: 2 }, 0, [[0, 1], [1, 1]])).toBeCloseTo(0.75);
   });
 
-  it("follows at most MAX_DRAWS draws", () => {
-    expect(odds({ slot: "specialgear", guaranteed: MAX_DRAWS + 5 }, 0, [[0, 1], [1, 1]])).toBeCloseTo(1 - 0.5 ** MAX_DRAWS);
+  it("refuses a slot with more than MAX_DRAWS draws instead of cutting it short", () => {
+    expect(odds({ slot: "specialgear", guaranteed: MAX_DRAWS }, 0, [[0, 1], [1, 1]])).toBeCloseTo(1 - 0.5 ** MAX_DRAWS);
+    expect(() => odds({ slot: "specialgear", guaranteed: MAX_DRAWS - 1, rolls: 2, chance: 0.5 }, 0, [[0, 1], [1, 1]])).toThrow(RangeError);
+  });
+
+  it("bounds the states a slot can need", () => {
+    expect(slotStates(32, 32, { history: 4, oneOfAKind: true }, 2)).toBe(1 + 32 + 32 * 31);
+    expect(slotStates(40, 8, { history: 3, oneOfAKind: false }, 7)).toBe(7 * 9 ** 3);
+    expect(slotStates(40, 8, { history: 0, oneOfAKind: false }, 0)).toBe(1);
+    expect(slotStates(60, 60, { history: 0, oneOfAKind: true }, 12)).toBeGreaterThan(MAX_STATES);
+  });
+
+  it("adds up the chances of several targets: any of them", () => {
+    expect(odds({}, [0, 1])).toBeCloseTo(0.5);
+    expect(odds({}, [0, 2])).toBeCloseTo(0.75);
+    expect(odds({ guaranteed: 2 }, [0, 1, 2])).toBeCloseTo(1);
+  });
+
+  it("lets only the rarities an item may have decide its rarity roll", () => {
+    // Item B (Common, Rare, Special) with Unique weight dropped: Rare is 1 / (2 + 1 + 1) of the roll, not 1 / 5.
+    const rolls = rarityShares([2, 1, 1, 1]);
+    expect(slotOdds(file(), slot(), [[1, 1]], [1], { shares: rolls, rarity: "rare" })).toBeCloseTo(0.25);
+    // An item with no Unique variant that rolls Unique is limited to the rest: with only Unique weighted, Common is certain.
+    expect(slotOdds(file(), slot(), [[2, 1]], [2], { shares: rarityShares([0, 0, 0, 1]), rarity: "common" })).toBe(1);
+    // Gear rolls a rarity, books and talismans do not: they only match "any".
+    expect(slotOdds(file({ items: [{ key: "book/x", group: "x" }] }), slot(), [[0, 1]], [0], { shares: rolls, rarity: "rare" })).toBe(0);
+    expect(slotOdds(file({ items: [{ key: "book/x", group: "x" }] }), slot(), [[0, 1]], [0], { shares: rolls, rarity: "any" })).toBe(1);
   });
 
   it("counts a base item only when its roll is not Unique, and the unique variant only when it is", () => {
@@ -111,7 +136,7 @@ describe("slotOdds", () => {
 
   it("filters by target rarity", () => {
     const rolls = rarityShares([1, 1, 2, 0]);
-    const by = (rarity: "common" | "rare" | "special" | "unique", target = 0) => slotOdds(file(), slot(), [[0, 1]], target, { shares: rolls, rarity });
+    const by = (rarity: "common" | "rare" | "special" | "unique", target = 0) => slotOdds(file(), slot(), [[0, 1]], [target], { shares: rolls, rarity });
     expect(by("rare")).toBeCloseTo(0.25);
     expect(by("special")).toBeCloseTo(0.5);
     expect(by("unique", 0)).toBe(0);
@@ -125,8 +150,8 @@ describe("profileOdds", () => {
       pools: { p: [[0, 1], [1, 1]], r: [[0, 1]] },
       profiles: { q: { slots: [slot(), slot({ slot: "specialgear", pool: "r" })], rarity: [] } },
     });
-    expect(profileOdds(f, f.profiles.q, 0, NORMAL)).toBeCloseTo(1);
-    expect(profileOdds(f, f.profiles.q, 1, NORMAL)).toBeCloseTo(0.5);
+    expect(profileOdds(f, f.profiles.q, [0], NORMAL)).toBeCloseTo(1);
+    expect(profileOdds(f, f.profiles.q, [1], NORMAL)).toBeCloseTo(0.5);
   });
 
   it("applies the threat factors and the difficulty row to the rarity", () => {
@@ -137,7 +162,7 @@ describe("profileOdds", () => {
       pools: { u: [[0, 1]] },
       profiles: { q: { slots: [slot({ pool: "u" })], rarity: [[0, "s", 1], [1, "s", 1], [3, "s", 2]] } },
     });
-    const at = (target: number, level: number, difficulty: string) => profileOdds(f, f.profiles.q, target, { level, difficulty, rarity: "any" });
+    const at = (target: number, level: number, difficulty: string) => profileOdds(f, f.profiles.q, [target], { level, difficulty, rarity: "any" });
     // Level 1: weights 1, 1, 0, 2 -> Unique is 1/2, so base item A and its variant Z are each hit half the time.
     expect(at(0, 1, "normal")).toBeCloseTo(0.5);
     expect(at(4, 1, "normal")).toBeCloseTo(0.5);
@@ -168,6 +193,21 @@ describe("itemRows", () => {
       ["chest:Two", "", 0.5],
     ]);
     expect(itemRows(f, "artifact/c", NORMAL)).toEqual([]);
+  });
+
+  it("gives the chance of at least one of several items, not the best of them", () => {
+    const rows = itemRows(f, ["melee/a", "melee/b"], NORMAL);
+    expect(rows.map((row) => [row.source, row.area, Number(row.probability.toFixed(2))])).toEqual([
+      ["chest:One", "area:Plains", 1],
+      ["chest:One", "area:Forest", 1],
+      ["chest:Two", "", 1],
+    ]);
+  });
+
+  it("answers the same again for the same file, profile, targets and selection, and differently for another selection", () => {
+    const first = profileOdds(f, f.profiles.w, [0], NORMAL);
+    expect(profileOdds(f, f.profiles.w, [0], NORMAL)).toBe(first);
+    expect(profileOdds(f, f.profiles.w, [0], { ...NORMAL, rarity: "unique" })).not.toBe(first);
   });
 
   it("is empty for an item, a threat level or a difficulty the file does not know", () => {

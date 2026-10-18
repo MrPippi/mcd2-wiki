@@ -2,15 +2,18 @@
 import { DropDataSchema } from "../../scripts/extract/drop-schema";
 import type { Entry } from "../../scripts/extract/schemas";
 import rawDrops from "../data/drop-models.json";
-import { areaLabel, sourceLabel, type DropLabel } from "./drop-labels";
-import { itemRows } from "./drop-odds";
-import type { DropFile, DropRow, DropSelection } from "./drop-types";
 import { formatOdds } from "./affix-odds";
 import { booksFor } from "./data";
+import { areaLabel, sourceIndex, sourceLabel, type DropLabel } from "./drop-labels";
+import { itemRows } from "./drop-odds";
+import type { DropFile, DropRow, DropSelection } from "./drop-types";
 import type { Lang, UiKey } from "./i18n";
 
 /** The drop model from `npm run extract`, validated at build time. */
 export const dropData: DropFile = DropDataSchema.parse(rawDrops);
+
+/** False when the extract found no drop tables or rarity factors: the pages then show no drop odds at all. */
+export const dropAvailable: boolean = dropData.levels.length > 0 && dropData.sources.length > 0;
 
 export const DEFAULT_SELECTION: DropSelection = { level: dropData.levels.at(-1) ?? 1, difficulty: "normal", rarity: "any" };
 /** Rows a group shows before the rest fold away. */
@@ -44,41 +47,32 @@ export function dropKeysOf(entry: Entry): string[] {
   return CATEGORIES.has(entry.category) ? [`${entry.category}/${entry.slug}`] : [];
 }
 
-/** Rows of several keys as one list: the same source and area collects the largest chance. */
-function mergeRows(lists: readonly (readonly DropRow[])[]): DropRow[] {
-  const best = new Map<string, DropRow>();
-  for (const row of lists.flat()) {
-    const key = `${row.source}|${row.area}`;
-    const known = best.get(key);
-    if (!known || row.probability > known.probability) best.set(key, row);
-  }
-  return [...best.values()].sort((a, b) => b.probability - a.probability);
-}
-
 const cache = new Map<string, readonly DropRow[]>();
 
-/** The rows of an item page at the default view, best first; built once per item (they do not depend on the language). */
+/**
+ * The rows of an item page at the default view, best first; built once per item (they do not depend on the language). An
+ * enchantment with several books gives the chance of at least one of them, not the best of them.
+ */
 export function dropRowsOf(entry: Entry, file: DropFile = dropData): readonly DropRow[] {
   const keys = dropKeysOf(entry);
+  if (file !== dropData) return itemRows(file, keys, DEFAULT_SELECTION);
   const id = `${entry.category}/${entry.slug}`;
-  if (file !== dropData) return mergeRows(keys.map((key) => itemRows(file, key, DEFAULT_SELECTION)));
   const known = cache.get(id);
   if (known) return known;
-  const rows = mergeRows(keys.map((key) => itemRows(file, key, DEFAULT_SELECTION)));
+  const rows = itemRows(file, keys, DEFAULT_SELECTION);
   cache.set(id, rows);
   return rows;
 }
 
-const kindOf = (file: DropFile, id: string): DropKind => file.sources.find((source) => source.id === id)?.kind ?? "chest";
-
 /** The page's groups in a language; empty for a page that is no item or an item nothing drops. */
 export function dropGroupsOf(entry: Entry, lang: Lang, file: DropFile = dropData): DropGroupView[] {
   const rows = dropRowsOf(entry, file);
+  const { byId } = sourceIndex(file.sources);
   return KIND_ORDER.flatMap((kind): DropGroupView[] => {
     const views = rows
-      .filter((row) => kindOf(file, row.source) === kind)
+      .filter((row) => byId.get(row.source)?.kind === kind)
       .map((row): DropRowView => {
-        const source = file.sources.find((one) => one.id === row.source);
+        const source = byId.get(row.source);
         const area = areaLabel(lang, row.area);
         return {
           source: source ? sourceLabel(lang, source, file.sources) : { name: row.source },

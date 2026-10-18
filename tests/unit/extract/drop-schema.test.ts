@@ -7,7 +7,7 @@ const valid = () => ({
   rarityFactors: [[1, 1, 1, 1], [0.5, 0.5, 1, 1]],
   difficulties: { normal: [], low: [[3, "m", 0]] },
   slots: { item: { history: 3, oneOfAKind: false } },
-  items: [{ key: "melee/sword", group: "melee", sub: 1 }, { key: "melee/sword-unique1", group: "melee", unique: true }, { key: "~currency", group: "~currency", opaque: true }],
+  items: [{ key: "melee/sword", group: "melee", sub: 1 }, { key: "melee/sword-unique1", group: "melee", allowed: 8 }, { key: "~currency", group: "~currency", opaque: true }],
   pools: { aaa: [[0, 1], [2, 0.5]] },
   profiles: { bbb: { slots: [{ slot: "item", guaranteed: 1, rolls: 0, chance: 0, pool: "aaa" }], rarity: [[0, "s", 50]] } },
   sources: [{ id: "chest:FancyChest", kind: "chest", contexts: [["area:SW.Area.Plains.A1", "bbb"]] }],
@@ -53,6 +53,13 @@ describe("DropDataSchema", () => {
     expect(parse(slot({ chance: 1.5 })).success).toBe(false);
     expect(parse(slot({ slot: "emeralds" })).success).toBe(false);
     expect(parse((data) => ({ ...data, pools: { aaa: [[0, 0]] } })).success).toBe(false);
+  });
+
+  it("keeps rarity masks in range, off items without a page, and accepts an unplaced source", () => {
+    expect(parse((data) => ({ ...data, items: [{ ...data.items[0], allowed: 16 }, data.items[1], data.items[2]] })).success).toBe(false);
+    expect(parse((data) => ({ ...data, items: [{ ...data.items[0], allowed: 0 }, data.items[1], data.items[2]] })).success).toBe(false);
+    expect(messages(parse((data) => ({ ...data, items: [data.items[0], data.items[1], { ...data.items[2], allowed: 7 }] })))).toContain("item ~currency has no page, so no rarity");
+    expect(parse((data) => ({ ...data, sources: [{ ...data.sources[0], unplaced: true }] })).success).toBe(true);
   });
 
   it("refuses a profile or source with nothing in it", () => {

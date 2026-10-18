@@ -22,8 +22,8 @@ export interface UniverseItem {
   readonly all: ReadonlySet<string>;
   /** Id of the Unique variant a Unique rarity roll turns this item into. */
   readonly sub?: string;
-  /** Limited to the Unique rarity by its own row. */
-  readonly uniqueOnly: boolean;
+  /** The rarities the item can roll (bit mask: 1 Common, 2 Rare, 4 Special, 8 Unique); none for what has no rarity. */
+  readonly allowed?: number;
 }
 
 export interface Universe {
@@ -34,7 +34,6 @@ export interface Universe {
 }
 
 const SPAWNABLE = "sw.property.spawnable";
-const UNIQUE_RARITY = "sw.rarity.unique";
 /** Tags every row of a table has in game without listing them. */
 const IMPLIED: Readonly<Partial<Record<(typeof ITEM_TABLE_KEYS)[number], readonly string[]>>> = { artifact: ["sw.item.property.artifact"] };
 /**
@@ -68,11 +67,20 @@ function traitsOf(row: ItemTagRow, byTag: ReadonlyMap<string, ItemTagRow>): Set<
   return new Set(visit(row, new Set([tagKey(row.TypeTag.TagName)])));
 }
 
-const isUniqueOnly = (row: ItemTagRow): boolean => {
+const RARITY_MASK: Readonly<Record<string, number>> = { "sw.rarity.common": 1, "sw.rarity.rare": 2, "sw.rarity.special": 4, "sw.rarity.unique": 8 };
+/** Tables whose items roll a rarity when they drop. */
+const ROLLS_RARITY: ReadonlySet<string> = new Set(["melee", "ranged", "armor", "artifact"]);
+
+/**
+ * The rarities an item can roll: those its row lists as PossibleRarities, else Common, Rare and Special, and Unique too when it
+ * has a Unique variant to turn into. Books, talismans and currencies have no rarity.
+ */
+function allowedRarities(table: string, row: ItemTagRow, hasVariant: boolean): number | undefined {
+  if (!ROLLS_RARITY.has(table)) return undefined;
   const limited = (row.KeyValues ?? []).find((value) => tagKey(value.TypeTag.TagName) === "sw.keyvalue.possiblerarities");
-  const rarities = (limited?.GameplayTagContainer?.GameplayTags ?? []).map((rarity) => tagKey(rarity.TagName));
-  return rarities.length === 1 && rarities[0] === UNIQUE_RARITY;
-};
+  const listed = (limited?.GameplayTagContainer?.GameplayTags ?? []).reduce((mask, rarity) => mask | (RARITY_MASK[tagKey(rarity.TagName)] ?? 0), 0);
+  return listed > 0 ? listed : hasVariant ? 15 : 7;
+}
 
 export function buildUniverse(loot: LootTables, entries: readonly Entry[]): Universe {
   const find = entryIndex(entries);
@@ -85,12 +93,14 @@ export function buildUniverse(loot: LootTables, entries: readonly Entry[]): Univ
     if (!all.has(SPAWNABLE)) return [];
     const entry = find(ITEM_TABLE_CATEGORY[table], locId(row.TypeTextData) ?? row.Name);
     const sub = row.UniqueSubstitutionData?.UniqueSubstitution?.TagName;
+    const variant = sub !== undefined && sub !== "None" ? tagKey(sub) : undefined;
+    const allowed = allowedRarities(table, row, variant !== undefined);
     return [{
       id: tagKey(row.TypeTag.TagName),
       ...(entry ? { key: `${ITEM_TABLE_CATEGORY[table]}/${entry.slug}` } : {}),
       all,
-      ...(sub && sub !== "None" ? { sub: tagKey(sub) } : {}),
-      uniqueOnly: isUniqueOnly(row),
+      ...(variant ? { sub: variant } : {}),
+      ...(allowed === undefined ? {} : { allowed }),
     }];
   });
   const byId = new Map(items.map((item) => [item.id, item] as const));

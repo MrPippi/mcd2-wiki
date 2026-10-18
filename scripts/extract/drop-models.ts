@@ -6,7 +6,7 @@
  * table of 15,938 chances at threat 20 on Normal.
  */
 import { compileDrops } from "./drop-compile";
-import { buildHierarchy, createSlotResolver, slotNameOf, unknownOperations } from "./drop-slots";
+import { buildHierarchy, createSlotResolver, slotNameOf, slotProblems, unknownOperations } from "./drop-slots";
 import { difficultyRarityOps } from "./drop-rarity-rows";
 import { DropDataSchema, type DropData } from "./drop-schema";
 import type { DropFile } from "../../src/lib/drop-types";
@@ -19,7 +19,7 @@ import type { ThreatRow } from "./guides-schema";
 import { issue, type Issue } from "./issues";
 import type { Entry } from "./schemas";
 
-export interface DropInput extends PlanInput {
+export interface DropInput extends Omit<PlanInput, "placements"> {
   readonly tables: DropTables;
   readonly entries: readonly Entry[];
   readonly threat: readonly ThreatRow[];
@@ -54,6 +54,8 @@ export function createDropContext(loot: LootTables, tables: DropTables, entries:
       parents,
       rarityRows: tables.rarityChance,
       isPublished: (id) => universe.items.get(id)?.key !== undefined,
+      rules: Object.fromEntries(tables.slotRules.map((row) => [slotNameOf(row.TypeTag.TagName), slotRuleOf(row)])),
+      groupOf: universe.groupOf,
     },
   };
 }
@@ -62,10 +64,11 @@ export function buildDropModels(input: DropInput): { data: DropFile; issues: Iss
   const withFactors = input.threat.filter((row) => row.rarity);
   if (withFactors.length === 0) return { data: NO_DROPS, issues: [issue("guides-value-missing", "drop odds: no rarity chance factors per threat level")] };
   const { universe, context } = createDropContext(input.loot, input.tables, input.entries);
-  const planning = planSources(input, context);
+  const rows = [input.loot.generic, input.loot.mob, input.loot.area, input.loot.lootActor, input.loot.quest].flat();
+  const planning = planSources({ ...input, placements: input.tables.placements }, context);
   const compiled = compileDrops(universe, planning.planned);
   const used = new Set(Object.values(compiled.profiles).flatMap((profile) => profile.slots.map((slot) => slot.slot)));
-  const unknown = unknownOperations([input.loot.generic, input.loot.mob, input.loot.area, input.loot.lootActor, input.loot.quest].flat());
+  const unknown = unknownOperations(rows);
   return {
     data: {
       levels: withFactors.map((row) => row.level),
@@ -76,6 +79,8 @@ export function buildDropModels(input: DropInput): { data: DropFile; issues: Iss
     },
     issues: [
       ...planning.issues,
+      ...slotProblems(rows).map((detail) => issue("drop-ignored", detail)),
+      ...context.resolver.cycles().map((loop) => issue("drop-ignored", `loot rows: parents loop ${loop}; the slots on the loop are read without it`)),
       ...unknown.map((name) => issue("drop-ignored", `loot rows: operation ${name} is not applied`)),
       ...[...used].filter((name) => name !== "none" && !input.tables.slotRules.some((row) => slotNameOf(row.TypeTag.TagName) === name)).map((name) => issue("drop-ignored", `slot ${name} has no slot rule: its draws are independent`)),
     ],

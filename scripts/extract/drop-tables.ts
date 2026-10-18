@@ -10,11 +10,17 @@ import type { TaggedRow } from "./drop-slots";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue } from "./issues";
 import { loadMobTables } from "./mob-tables";
+import { tagKey } from "./mob-tags";
 import { readDataTable } from "./table-reader";
 
 const Tag = z.object({ TagName: z.string() });
 const Traits = z.object({ GameplayTags: z.array(Tag).optional() }).optional();
 const TaggedRowSchema = z.object({ TypeTag: Tag, Traits });
+
+/** An area row also says how many chests of each type the area spawns (LootSpawnVolumeDefinition.Quotas, keyed by '(TagName="...")'). */
+const AreaRowSchema = TaggedRowSchema.extend({
+  LootSpawnVolumeDefinition: z.object({ Quotas: z.record(z.string(), z.number()).optional() }).optional(),
+});
 
 const SlotRuleSchema = z.object({
   TypeTag: Tag,
@@ -31,7 +37,7 @@ const FILES = {
   slotRules: ["DT_LootSlotDefinition", z.array(SlotRuleSchema)],
   rarityChance: ["DT_RarityChanceDefinition", z.array(RarityRowSchema)],
   actors: ["DT_LootActorDefinition", z.array(TaggedRowSchema)],
-  areas: ["DT_AreaDefinition", z.array(TaggedRowSchema)],
+  areas: ["DT_AreaDefinition", z.array(AreaRowSchema)],
   difficulties: ["DT_DifficultyDefinition", z.array(DifficultySchema)],
 } as const;
 
@@ -41,8 +47,22 @@ export interface DropTables {
   /** Rows of loot actors, areas and mobs: only their tags and traits, for the tag hierarchy. */
   readonly hierarchy: readonly TaggedRow[];
   readonly difficulties: readonly z.infer<typeof DifficultySchema>[];
-  /** Area rows (tag and traits), the contexts of area chests and mobs. */
-  readonly areas: readonly TaggedRow[];
+  /** Lower-cased chest tag → the area tags that spawn it (a quota above 0); a chest in no area row is not placed by the data. */
+  readonly placements: ReadonlyMap<string, readonly string[]>;
+}
+
+const QUOTA_TAG = /TagName="([^"]+)"/;
+
+/** Which areas spawn which chests, from the quotas of the area rows. */
+export function chestPlacements(areas: readonly z.infer<typeof AreaRowSchema>[]): Map<string, string[]> {
+  const placements = new Map<string, string[]>();
+  for (const area of areas) {
+    for (const [key, quota] of Object.entries(area.LootSpawnVolumeDefinition?.Quotas ?? {})) {
+      const tag = QUOTA_TAG.exec(key)?.[1];
+      if (tag !== undefined && quota > 0) placements.set(tagKey(tag), [...(placements.get(tagKey(tag)) ?? []), area.TypeTag.TagName]);
+    }
+  }
+  return placements;
 }
 
 /** The slot rules the model knows: how many latest drops block their group, and whether the slot never gives an item twice. */
@@ -77,5 +97,5 @@ export async function loadDropTables(sourceRoot: string, onRead?: (file: string)
     read("slotRules"), read("rarityChance"), read("actors"), read("areas"), read("difficulties"), loadMobTables(sourceRoot, onRead),
   ]);
   const mobRows = mobs ? [...mobs.definitions, ...mobs.type1, ...mobs.type2, ...mobs.type3, ...mobs.soulStated, ...mobs.variants] : [];
-  return { missing: [], tables: { slotRules, rarityChance, hierarchy: [...actors, ...areas, ...mobRows], difficulties, areas } };
+  return { missing: [], tables: { slotRules, rarityChance, hierarchy: [...actors, ...areas, ...mobRows], difficulties, placements: chestPlacements(areas) } };
 }

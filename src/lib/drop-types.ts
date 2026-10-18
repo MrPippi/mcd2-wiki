@@ -15,8 +15,11 @@ export interface DropItem {
   readonly group: string;
   /** Index of the Unique variant a Unique rarity roll turns this base item into. */
   readonly sub?: number;
-  /** The item only exists as Unique: a pick of it is a Unique drop. */
-  readonly unique?: true;
+  /**
+   * The rarities the item can roll, as a bit mask (1 Common, 2 Rare, 4 Special, 8 Unique); none for what has no rarity (books,
+   * talismans, currencies). A mask of 8 is an item that only exists as Unique.
+   */
+  readonly allowed?: number;
   readonly opaque?: true;
 }
 
@@ -49,6 +52,8 @@ export interface DropSource {
   readonly kind: "chest" | "quest" | "mob";
   /** A quest reward batch given on the first completion only. */
   readonly first?: true;
+  /** The game data does not say where this chest appears; it is listed for every area whose pool has the item. */
+  readonly unplaced?: true;
   /** Where it can happen: the area source id ("area:SW.Area.Plains.A1", "bookPool:...") or "" for none, and the profile that applies there. */
   readonly contexts: readonly (readonly [area: string, profile: string])[];
 }

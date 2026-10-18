@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { buildHierarchy, closureOf, createSlotResolver, mergeSlots, type Resolved } from "../../../scripts/extract/drop-slots";
+import { buildHierarchy, closureOf, createSlotResolver, mergeSlots, slotNameOf, slotProblems, type Resolved } from "../../../scripts/extract/drop-slots";
 import { poolWeights } from "../../../scripts/extract/drop-pool";
+import type { LootRow } from "../../../scripts/extract/loot-tables";
 import { lootRow, slot } from "../../helpers/mob-tables";
 
 const ITEMS: Readonly<Record<string, readonly string[]>> = {
@@ -90,6 +91,38 @@ describe("createSlotResolver", () => {
       membersOf: members,
     });
     expect(loop.resolve("SW.A", "item")).toMatchObject({ guaranteed: 1 });
+  });
+
+  it("reports a loop once and does not keep a result that the loop cut short", () => {
+    const rows = [
+      lootRow("A", "SW.A", [slot("Item", 1, 0, 0, true, ["SW.Item.Sword"])], ["SW.B"]),
+      lootRow("B", "SW.B", [slot("Item", 1, 0, 0, true, ["SW.Item.Mace"])], ["SW.A"]),
+    ];
+    const loop = createSlotResolver({ rows, parents: buildHierarchy(rows), membersOf: members });
+    expect(weights(loop.resolve("SW.A", "item"))).toEqual({ "sw.item.mace": 1, "sw.item.sword": 1 });
+    // B asked directly walks the loop from B, so it sees A's own entries too; a result kept from the first walk would miss them.
+    expect(weights(loop.resolve("SW.B", "item"))).toEqual({ "sw.item.mace": 1, "sw.item.sword": 1 });
+    expect(loop.cycles()).toEqual(["sw.a > sw.b > sw.a", "sw.b > sw.a > sw.b"]);
+  });
+
+  it("reports nothing for a chain without a loop", () => {
+    expect(resolver.cycles()).toEqual([]);
+  });
+});
+
+describe("slotNameOf and slotProblems", () => {
+  it("reads a key that names no slot as its own unusable slot instead of the nameless one", () => {
+    expect(slotNameOf('(TagName="SW.LootSlot.Item")')).toBe("item");
+    expect(slotNameOf('(TagName="")')).toBe("none");
+    expect(slotNameOf('(TagName="Foo")')).toBe('?(TagName="Foo")');
+  });
+
+  it("reports a slot key that is no loot slot and a slot a row lists twice", () => {
+    const rows = [
+      { ...lootRow("Odd", "SW.Odd", []), LootDropDefinition: { LootSlots: { '(TagName="SW.LootSlot.Item")': slot("Item", 1, 0, 0, false)[1], '(TagName="sw.lootslot.item")': slot("Item", 2, 0, 0, false)[1] } } },
+      { ...lootRow("Bad", "SW.Bad", []), LootDropDefinition: { LootSlots: { '(TagName="Foo")': slot("Item", 1, 0, 0, false)[1] } } },
+    ];
+    expect(slotProblems(rows as unknown as LootRow[])).toEqual(["Odd: slot item is listed twice, the first is used", 'Bad: slot key (TagName="Foo") is not a loot slot']);
   });
 });
 

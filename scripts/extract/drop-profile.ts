@@ -6,7 +6,8 @@ import { poolWeights } from "./drop-pool";
 import { contextRarityOps, type RarityRow } from "./drop-rarity-rows";
 import { tagKey } from "./mob-tags";
 import { closureOf, mergeSlots, type Resolved, type SlotResolver } from "./drop-slots";
-import type { RarityOp } from "../../src/lib/drop-types";
+import { MAX_DRAWS, MAX_STATES, slotStates } from "../../src/lib/drop-odds";
+import type { DropSlotRule, RarityOp } from "../../src/lib/drop-types";
 
 /** The slots that can give an item; emeralds, spring stones, food and TNT are not items the site has pages for. */
 export const ITEM_SLOTS: readonly string[] = ["item", "specialgear", "enchantedbook", "talismans", "none"];
@@ -23,6 +24,8 @@ export interface RawSlot {
 export interface RawProfile {
   readonly slots: readonly RawSlot[];
   readonly rarity: readonly RarityOp[];
+  /** Slots left out because the calculation would not follow them, each with the reason. */
+  readonly skipped: readonly string[];
 }
 
 export interface ProfileContext {
@@ -31,28 +34,47 @@ export interface ProfileContext {
   readonly rarityRows: readonly RarityRow[];
   /** Whether an item id is one the site has a page for (a pool without one tells nothing a page can show). */
   readonly isPublished: (id: string) => boolean;
+  /** The slot rules by slot name. */
+  readonly rules: Readonly<Record<string, DropSlotRule>>;
+  /** The recent-drop history group of an item id. */
+  readonly groupOf: (id: string) => string;
 }
 
-/** A slot that draws at least once and can draw a published item; the others are dropped. */
-function usable(context: ProfileContext, name: string, merged: Resolved | undefined): RawSlot[] {
-  if (!merged || (merged.guaranteed <= 0 && !(merged.rolls > 0 && merged.chance > 0))) return [];
+interface Built {
+  readonly slots: RawSlot[];
+  readonly skipped: string[];
+}
+
+/** Why the calculation would not follow a slot, or undefined when it would. */
+function tooBig(context: ProfileContext, name: string, draws: number, pool: readonly (readonly [string, number])[]): string | undefined {
+  if (draws > MAX_DRAWS) return `${name}: ${draws} draws (at most ${MAX_DRAWS})`;
+  const rule = Object.hasOwn(context.rules, name) ? context.rules[name] : { history: 0, oneOfAKind: false };
+  const states = slotStates(pool.length, new Set(pool.map(([id]) => context.groupOf(id))).size, rule, draws);
+  return states > MAX_STATES ? `${name}: about ${states} states for ${draws} draws from ${pool.length} items (at most ${MAX_STATES})` : undefined;
+}
+
+/** A slot that draws at least once and can draw a published item; the others are dropped, those too big to follow are reported. */
+function usable(context: ProfileContext, name: string, merged: Resolved | undefined): Built {
+  if (!merged || (merged.guaranteed <= 0 && !(merged.rolls > 0 && merged.chance > 0))) return { slots: [], skipped: [] };
   const pool = poolWeights(merged.pool);
-  return pool.some(([id]) => context.isPublished(id))
-    ? [{ slot: name, guaranteed: merged.guaranteed, rolls: merged.rolls, chance: merged.chance, pool }]
-    : [];
+  if (!pool.some(([id]) => context.isPublished(id))) return { slots: [], skipped: [] };
+  const reason = tooBig(context, name, merged.guaranteed + merged.rolls, pool);
+  if (reason) return { slots: [], skipped: [reason] };
+  return { slots: [{ slot: name, guaranteed: merged.guaranteed, rolls: merged.rolls, chance: merged.chance, pool }], skipped: [] };
 }
 
-const rarityOf = (context: ProfileContext, tags: readonly string[]): RarityOp[] => contextRarityOps(closureOf(tags, context.parents), context.rarityRows);
+const profileOf = (context: ProfileContext, built: readonly Built[], tags: readonly string[]): RawProfile => ({
+  slots: built.flatMap((one) => one.slots),
+  skipped: built.flatMap((one) => one.skipped),
+  rarity: contextRarityOps(closureOf(tags, context.parents), context.rarityRows),
+});
 
 /** The profile of a trigger made of these tags together (a chest and its area, a quest reward and its areas). */
 export function profileOfTags(context: ProfileContext, tags: readonly string[]): RawProfile {
   // A tag twice (a quest's area named by the entry and by the quest) must not count twice.
   const once = tags.filter((tag, index) => tags.findIndex((other) => tagKey(other) === tagKey(tag)) === index);
   const names = context.resolver.slotNames(once).filter((name) => ITEM_SLOTS.includes(name));
-  return {
-    slots: names.flatMap((name) => usable(context, name, mergeSlots(once.map((tag) => context.resolver.resolve(tag, name))))),
-    rarity: rarityOf(context, once),
-  };
+  return profileOf(context, names.map((name) => usable(context, name, mergeSlots(once.map((tag) => context.resolver.resolve(tag, name))))), once);
 }
 
 export interface SlotSpec {
@@ -64,11 +86,9 @@ export interface SlotSpec {
 
 /** The profile of a source whose counts are given (a mob) and whose pools come from the area tag; `tags` feed the rarity rows. */
 export function profileOfSpecs(context: ProfileContext, specs: readonly SlotSpec[], areaTag: string, tags: readonly string[]): RawProfile {
-  return {
-    slots: specs.flatMap((spec) => {
-      const area = context.resolver.resolve(areaTag, spec.slot);
-      return usable(context, spec.slot, area && { ...spec, pool: area.pool });
-    }),
-    rarity: rarityOf(context, [...tags, areaTag]),
-  };
+  const built = specs.map((spec) => {
+    const area = context.resolver.resolve(areaTag, spec.slot);
+    return usable(context, spec.slot, area && { ...spec, pool: area.pool });
+  });
+  return profileOf(context, built, [...tags, areaTag]);
 }
