@@ -335,17 +335,24 @@ function wireEnchant(planner: Planner, key: EnchantSlotKey, element: HTMLElement
   });
 }
 
-function effectChoices(planner: Planner, key: EffectSlotKey): Choice[] {
-  const picked = new Set((planner.effects[key] ?? []).map((pick) => pick.slug));
+/** Picks for adding an effect, or with `replacing`, for swapping that picked effect in place (its level is kept). */
+function effectChoices(planner: Planner, key: EffectSlotKey, replacing?: string): Choice[] {
+  const current = planner.effects[key] ?? [];
+  const picked = new Set(current.map((pick) => pick.slug));
+  const nextPicks = (slug: string) =>
+    replacing === undefined
+      ? [...current, { slug, tier: ENCHANT_TIERS[0] }]
+      : current.map((pick) => (pick.slug === replacing ? { ...pick, slug } : pick));
   return rollable(planner.payload, key, planner.build[key]).map((option) => ({
     key: option.slug,
     name: option.name,
     search: option.search,
     icon: option.icon,
-    disabled: picked.has(option.slug),
+    disabled: picked.has(option.slug) && option.slug !== replacing,
+    current: option.slug === replacing || undefined,
     pick: () => {
       planner.parts.dialog.close();
-      update(planner, planner.build, planner.enchants, { ...planner.effects, [key]: [...(planner.effects[key] ?? []), { slug: option.slug, tier: ENCHANT_TIERS[0] }] });
+      update(planner, planner.build, planner.enchants, { ...planner.effects, [key]: nextPicks(option.slug) });
       const slot = planner.slots.get(key);
       const added = slot?.querySelector<HTMLElement>(`[data-effect-tier="${option.slug}"]`);
       (added ?? slot?.querySelector<HTMLElement>("[data-add-effect]"))?.focus();
@@ -368,6 +375,11 @@ function wireEffects(planner: Planner, key: EffectSlotKey, element: HTMLElement)
     element.querySelector<HTMLElement>(`[data-effect-tier="${select.dataset.effectTier}"]`)?.focus();
   });
   list?.addEventListener("click", (event) => {
+    const change = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-effect-change]") : null;
+    if (change?.dataset.effectChange) {
+      openDialog(planner, `${planner.payload.labels.effect}: ${label}`, effectChoices(planner, key, change.dataset.effectChange));
+      return;
+    }
     const button = event.target instanceof Element ? event.target.closest<HTMLElement>("[data-effect-remove]") : null;
     if (!button?.dataset.effectRemove) return;
     const picks = (planner.effects[key] ?? []).filter((pick) => pick.slug !== button.dataset.effectRemove);
