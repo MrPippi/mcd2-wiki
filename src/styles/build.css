@@ -30,6 +30,8 @@
 /* Two classes so the 48px/40px slot-icon sizes below never stretch the small icon past its box. */
 .build-icon.build-icon-small img { width: 28px; height: 28px; }
 .build-icon.build-icon-bare { border: 0; background: none; }
+/* Enchantment art is a filled square; the game only shows it through the book's diamond window, so clip it to that diamond. */
+.build-icon.build-icon-bare img { clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%); }
 .build-icon-small:empty { display: none; }
 .build-tier { min-height: 40px; padding: 0 var(--space-2); border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); font: inherit; font-family: var(--font-mono); }
 .build-pick {

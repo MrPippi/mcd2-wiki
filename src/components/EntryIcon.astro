@@ -26,9 +26,7 @@ const imageMeta = searchImage ? "image[src], image_alt[alt]" : undefined;
 const frame = category ? frameFor(category) : undefined;
 const box = `width:${size}px;height:${size}px`;
 const unique = frame?.name === "inventory" && variant === "unique";
-const frameStyle = frame?.path
-  ? `${box};--frame:url("${assetUrl(frame.path)}")`
-  : `${box};--px:${(size / INVENTORY_SLOT_PX).toFixed(3)}px`;
+const frameStyle = frame?.path ? box : `${box};--px:${(size / INVENTORY_SLOT_PX).toFixed(3)}px`;
 ---
 {frame ? (
   <span class:list={["icon-frame", `frame-${frame.name}`, { "is-unique": unique }]} style={frameStyle}>
@@ -37,6 +35,8 @@ const frameStyle = frame?.path
     ) : (
       <span class="entry-icon framed-placeholder" role="img" aria-label={alt}>?</span>
     )}
+    {/* A real image, not a CSS background: dark-mode extensions strip backgrounds and the frame would vanish. */}
+    {frame.path && <img class="frame-art" src={assetUrl(frame.path)} alt="" width={size} height={size} loading={loading} decoding="async" aria-hidden="true" />}
     {unique && <span class="slot-mark" aria-hidden="true" />}
   </span>
 ) : icon ? (
