@@ -69,8 +69,6 @@
     "mapSource",
     "categorySkin",
     "markerArea",
-    "markerQuest",
-    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -429,7 +427,13 @@
     "dropCalc",
     "dropNotIncluded",
     "dropAreaUnconfirmed",
-    "dropCalcNoData"
+    "dropCalcNoData",
+    "markerQuestMain",
+    "markerQuestSide",
+    "markerStorm",
+    "markerTalismanChest",
+    "markerDungeon",
+    "mapNoteStorm"
   ],
   "_english": [
     "armorPiece",
@@ -534,8 +538,12 @@
   "markerPortal": "Teleportierungsstatue",
   "markerMerchant": "Händler",
   "markerArea": "Gebiet",
-  "markerQuest": "Questorte",
-  "markerQuestArea": "Quests im Gebiet",
+  "markerQuestMain": "Hauptquests",
+  "markerQuestSide": "Nebenquests",
+  "markerStorm": "Sturmgeneratoren",
+  "markerTalismanChest": "Talisman-Truhen",
+  "markerDungeon": "Dungeons",
+  "mapNoteStorm": "Möglicher Standort eines Sturmgenerators: Während eines Seelensturms in diesem Gebiet kann hier ein Generator zufälliger Stufe erscheinen.",
   "unitSeconds": "{n} Sek.",
   "unitBlocks": {
     "one": "{n} Block",

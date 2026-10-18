@@ -2,6 +2,7 @@
 import { z } from "zod";
 import { MARKER_KINDS, type MarkerKind } from "../../src/lib/map/kinds";
 import { WORLD_KEYS } from "../../src/lib/map/worlds";
+import { CATEGORIES } from "./config";
 import { LocalizedSchema } from "./schemas";
 
 export { MARKER_KINDS, type MarkerKind };
@@ -12,6 +13,13 @@ export const MarkerQuestSchema = z.object({
   title: LocalizedSchema,
 });
 export type MarkerQuest = z.infer<typeof MarkerQuestSchema>;
+
+/** A wiki entry a marker leads to (a talisman chest links to its talisman). */
+export const MarkerEntrySchema = z.object({
+  category: z.enum(CATEGORIES),
+  slug: z.string().min(1),
+});
+export type MarkerEntry = z.infer<typeof MarkerEntrySchema>;
 
 export const MarkerSchema = z.object({
   id: z.string().min(1),
@@ -26,6 +34,8 @@ export const MarkerSchema = z.object({
   icon: z.string().optional(),
   /** Quest markers: the quests found here, linked from the popup. */
   quests: z.array(MarkerQuestSchema).min(1).optional(),
+  /** Talisman chests: the talisman inside, linked from the popup. */
+  entry: MarkerEntrySchema.optional(),
 });
 export type MapMarker = z.infer<typeof MarkerSchema>;
 

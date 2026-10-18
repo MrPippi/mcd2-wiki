@@ -5,9 +5,10 @@ import type { PayloadMarker, PayloadWorld } from "./payload";
 import type { Lang } from "../i18n";
 import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "./kinds";
 import { pinElement, popupElement, resultElement } from "./marker-dom";
-import { countByKind, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "./markers";
+import { countByKind, isAreaQuestPin, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "./markers";
 import { tileUrlTemplate } from "./tiles";
 import { formatView, parseView, parseWorld, worldSearch } from "./view-state";
+import { adjacentWorld, isTypingTarget, worldStep } from "./world-keys";
 import { TILE } from "./worlds";
 import { fillZoom } from "./zoom";
 
@@ -18,6 +19,10 @@ const LABEL_LEVELS = 3;
 const FOCUS_LEVELS = 1;
 const PIN_SIZE: L.PointTuple = [16, 16];
 const ICON_PIN_SIZE: L.PointTuple = [28, 28];
+/** Storm generator slots and dungeon doors are many: smaller pins, drawn under the rest so they never hide a quest or a chest. */
+const CROWD_PIN_SIZE: L.PointTuple = [22, 22];
+const CROWD_KINDS: ReadonlySet<MarkerKind> = new Set(["storm", "dungeon"]);
+const CROWD_Z_OFFSET = -300;
 const POPUP_OPTIONS: L.PopupOptions = { minWidth: 200, maxWidth: 280 };
 /** Gap in screen pixels between an area's quest pin and the area name under it. */
 const QUEST_AREA_LIFT = 8;
@@ -25,6 +30,8 @@ const QUEST_AREA_LIFT = 8;
 interface Payload {
   readonly worlds: readonly PayloadWorld[];
   readonly labels: Readonly<Record<MarkerKind, string>>;
+  /** A note every popup of the kind shows (storm generator spots). */
+  readonly notes: Readonly<Partial<Record<MarkerKind, string>>>;
 }
 
 interface Shown {
@@ -69,17 +76,18 @@ const isHidden = (hidden: ReadonlySet<FilterKind>, kind: MarkerKind): boolean =>
 
 function pinSize(marker: PayloadWorld["markers"][number]): L.PointTuple {
   if (marker.kind === "area") return [0, 0];
-  return marker.icon ? ICON_PIN_SIZE : PIN_SIZE;
+  if (!marker.icon) return PIN_SIZE;
+  return CROWD_KINDS.has(marker.kind) ? CROWD_PIN_SIZE : ICON_PIN_SIZE;
 }
 
 /** An area's quest pin shares its spot with the area's name: it stands just above the text instead of on it. */
 function pinAnchor(marker: PayloadWorld["markers"][number]): L.PointTuple | undefined {
-  if (marker.kind !== "quest-area") return undefined;
+  if (!isAreaQuestPin(marker)) return undefined;
   const [width, height] = pinSize(marker);
   return [width / 2, height + QUEST_AREA_LIFT];
 }
 
-function addPins(map: L.Map, world: PayloadWorld, lang: Lang, labels: Payload["labels"], hidden: ReadonlySet<FilterKind>) {
+function addPins(map: L.Map, world: PayloadWorld, lang: Lang, labels: Payload["labels"], notes: Payload["notes"], hidden: ReadonlySet<FilterKind>) {
   const layers = new Map(MARKER_KINDS.map((kind) => [kind, L.layerGroup()] as const));
   const pins = new Map<string, L.Marker>();
   for (const marker of world.markers) {
@@ -92,8 +100,8 @@ function addPins(map: L.Map, world: PayloadWorld, lang: Lang, labels: Payload["l
     });
     // Area labels sit on top of the teleport-statue pins: they stay inert so clicks reach the pin beneath.
     const isArea = marker.kind === "area";
-    const pin = L.marker(toLatLng(world, marker.px, marker.py), { icon, title: marker.name[lang], keyboard: !isArea, interactive: !isArea });
-    if (!isArea) pin.bindPopup(popupElement(marker, lang, labels[marker.kind]), POPUP_OPTIONS);
+    const pin = L.marker(toLatLng(world, marker.px, marker.py), { icon, title: marker.name[lang], keyboard: !isArea, interactive: !isArea, zIndexOffset: CROWD_KINDS.has(marker.kind) ? CROWD_Z_OFFSET : 0 });
+    if (!isArea) pin.bindPopup(popupElement(marker, lang, labels[marker.kind], notes[marker.kind]), POPUP_OPTIONS);
     layers.get(marker.kind)?.addLayer(pin);
     pins.set(marker.id, pin);
   }
@@ -130,7 +138,7 @@ function showWorld(root: HTMLElement, canvas: HTMLElement, world: PayloadWorld, 
   const map = L.map(canvas, { crs: L.CRS.Simple, minZoom: 0, maxZoom: world.zMax, zoomSnap: 1, maxBounds: bounds, maxBoundsViscosity: 1, attributionControl: false });
   limitZoomOut(map, world);
   L.tileLayer(tileUrlTemplate(import.meta.env.BASE_URL, world.key), { tileSize: TILE, maxNativeZoom: world.zMax, maxZoom: world.zMax, noWrap: true, bounds }).addTo(map);
-  const { layers, pins } = addPins(map, world, lang, payload.labels, hidden);
+  const { layers, pins } = addPins(map, world, lang, payload.labels, payload.notes ?? {}, hidden);
   const view = useHash ? parseView(location.hash, { zMin: map.getMinZoom(), zMax: world.zMax, imageSize: size }) : undefined;
   if (view) map.setView(toLatLng(world, view.px, view.py), view.z, { animate: false });
   else if (world.markers.length > 0) map.fitBounds(L.latLngBounds(world.markers.map((m) => toLatLng(world, m.px, m.py))).pad(0.1), { animate: false });
@@ -201,6 +209,17 @@ function bindTabs(root: HTMLElement, payload: Payload, onSwitch: (next: PayloadW
   }
 }
 
+/** Z and X step to the previous and next world, unless the press belongs to a text field or carries a modifier. */
+function bindWorldKeys(payload: Payload, getShown: () => Shown, onSwitch: (next: PayloadWorld) => void): void {
+  document.addEventListener("keydown", (event) => {
+    const step = event.defaultPrevented || event.repeat ? undefined : worldStep(event);
+    if (step === undefined || isTypingTarget(event.target as HTMLElement | null)) return;
+    const key = adjacentWorld(payload.worlds.map((world) => world.key), getShown().world.key, step);
+    const next = payload.worlds.find((world) => world.key === key);
+    if (next) onSwitch(next);
+  });
+}
+
 /** Pasting a shared link into the same tab only changes the hash: follow it. Our own replaceState never fires this. */
 function bindHash(getShown: () => Shown): void {
   window.addEventListener("hashchange", () => {
@@ -260,6 +279,7 @@ export function mountWorldMap(root: HTMLElement): void {
   prepareFilterPanel(root);
   trackCanvasSize(canvas, () => shown.map);
   bindTabs(root, payload, switchWorld);
+  bindWorldKeys(payload, () => shown, switchWorld);
   bindHash(() => shown);
   search?.addEventListener("input", () => renderResults(root, shown, payload.labels, search.value, focus));
 }

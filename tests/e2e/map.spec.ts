@@ -18,18 +18,123 @@ test("map page shows its title, world tabs and marker filters", async ({ page })
   await expect(page.locator("h1")).toHaveText("世界地圖");
   await expect(page.locator(".map-tabs a")).toHaveText([/主世界/, /隙浮/, /營地/]);
   await expect(page.locator(".map-tabs [aria-current='page']")).toHaveText(/主世界/);
-  await expect(page.locator(".map-filter")).toHaveCount(6);
-  await expect(page.locator("[data-count='rift']")).toHaveText(/^[1-9]\d*$/);
-  await expect(page.locator("[data-count='quest']")).toHaveText(/^[1-9]\d*$/);
-  await expect(page.locator("[data-count='quest-area']")).toHaveText(/^[1-9]\d*$/);
+  await expect(page.locator(".map-filter")).toHaveCount(9);
+  for (const kind of ["rift", "quest-main", "quest-side", "storm", "talisman-chest", "dungeon"]) {
+    await expect(page.locator(`[data-count='${kind}']`)).toHaveText(/^[1-9]\d*$/);
+  }
+  await expect(page.locator(".map-filter-label")).toContainText(["主線任務", "支線任務", "風暴產生器", "護符寶箱", "地下城"]);
 });
 
-test("an area's quest pin lists links to its quest pages", async ({ page }) => {
+test("the world tabs are the game's pixelated map crops, the active one framed and the others dimmed", async ({ page }) => {
+  await page.goto("/zh/map/");
+  const arts = page.locator(".map-tab-art");
+  await expect(arts).toHaveCount(3);
+  await expect(arts.first()).toHaveAttribute("src", /map\/tabs\/overworld\.webp$/);
+  expect(await arts.first().evaluate((el) => getComputedStyle(el).imageRendering)).toBe("pixelated");
+  const filter = (index: number) => arts.nth(index).evaluate((el) => getComputedStyle(el).filter);
+  expect(await filter(0)).toBe("none");
+  expect(await filter(1)).toContain("brightness(0.5)");
+  await expect(page.locator(".map-tab-name").first()).toHaveText("主世界");
+});
+
+test("the Z and X keycaps flank the tabs", async ({ page }, testInfo) => {
+  test.skip(testInfo.project.name === "mobile", "keycap hints are hidden on touch screens");
+  await page.goto("/zh/map/");
+  const keys = page.locator(".map-key");
+  await expect(keys).toHaveCount(2);
+  await expect(keys.first()).toHaveAttribute("src", /map\/keys\/z\.png$/);
+  await expect(keys.last()).toHaveAttribute("src", /map\/keys\/x\.png$/);
+  const [z, first, last, x] = await Promise.all([keys.first().boundingBox(), page.locator(".map-tabs a").first().boundingBox(), page.locator(".map-tabs a").last().boundingBox(), keys.last().boundingBox()]);
+  expect(z!.x + z!.width).toBeLessThanOrEqual(first!.x);
+  expect(x!.x).toBeGreaterThanOrEqual(last!.x + last!.width);
+});
+
+test("X and Z switch to the next and previous world and keep the URL in step", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+  await page.keyboard.press("x");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-world", "sift");
+  await expect(page).toHaveURL(/\?world=sift/);
+  await expect(page.locator(".map-tabs [aria-current='page']")).toHaveText(/隙浮/);
+  await page.keyboard.press("x");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-world", "camp");
+  await page.keyboard.press("z");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-world", "sift");
+  await page.keyboard.press("z");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-world", "overworld");
+});
+
+test("Z and X are ignored while typing in the search box and with modifier keys", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+  await page.getByTestId("map-search").fill("");
+  await page.getByTestId("map-search").press("x");
+  await expect(page.getByTestId("map-search")).toHaveValue("x");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-world", "overworld");
+  await page.locator(".map-stage").click({ position: { x: 5, y: 300 } });
+  await page.keyboard.press("Control+x");
+  await page.keyboard.press("Shift+x");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-world", "overworld");
+});
+
+test("the empty area around the land is the game's fog sand", async ({ page }) => {
+  await page.goto("/zh/map/");
+  expect(await page.locator(".map-stage").evaluate((el) => getComputedStyle(el).backgroundColor)).toBe("rgb(210, 178, 135)");
+});
+
+test("an area's main and side quest pins each list only their own quests", async ({ page }) => {
   await page.goto("/zh/map/#4/4242/4046");
   await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
-  await page.locator(".map-marker--quest-area[title='咆哮森林']").click();
+  // Spot pins are titled after their quest; only an area's pins carry the area's name.
+  await expect(page.locator(".map-marker--quest-main[title='咆哮森林']")).toHaveCount(1);
+  await page.locator(".map-marker--quest-side[title='咆哮森林']").click();
   const links = page.locator(".leaflet-popup-content .map-popup-quests a");
   await expect(links.first()).toHaveAttribute("href", /\/zh\/quests\/[a-z0-9-]+\/$/);
+  const side = await links.count();
+  await page.locator(".leaflet-popup-close-button").click();
+  await page.locator(".map-marker--quest-main[title='咆哮森林']").click();
+  const main = await links.count();
+  expect(side).toBeGreaterThan(0);
+  expect(main).toBeGreaterThan(0);
+  expect(side + main).toBeGreaterThanOrEqual(5);
+});
+
+test("a storm generator pin names its area and says it is a possible spot", async ({ page }) => {
+  await page.goto("/zh/map/#4/4047/3955");
+  await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
+  await page.locator(".map-marker--storm[title='咆哮森林']").first().evaluate((el) => (el as HTMLElement).click());
+  const popup = page.locator(".leaflet-popup-content .map-popup");
+  await expect(popup.locator(".map-popup-kind")).toHaveText("風暴產生器");
+  await expect(popup.locator(".map-popup-name")).toHaveText("咆哮森林");
+  await expect(popup.locator(".map-popup-note")).toContainText("可能出現風暴產生器的位置");
+});
+
+test("a talisman chest pin links to the talisman it holds", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await page.getByTestId("map-search").fill("幸運草");
+  await page.getByTestId("map-results").getByRole("button", { name: /幸運草/ }).first().click();
+  const popup = page.locator(".leaflet-popup-content .map-popup");
+  await expect(popup.locator(".map-popup-kind")).toHaveText("護符寶箱");
+  await expect(popup.locator(".map-popup-name a")).toHaveAttribute("href", /\/zh\/talisman\/[a-z0-9-]+\/$/);
+});
+
+test("dungeon pins are drawn and can be hidden with their filter", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await expect(page.locator(".map-marker--dungeon").first()).toBeAttached();
+  await openFilters(page);
+  await kindToggle(page, "dungeon").click();
+  await expect(page.locator(".map-marker--dungeon")).toHaveCount(0);
+  await kindToggle(page, "dungeon").click();
+  await expect(page.locator(".map-marker--dungeon").first()).toBeAttached();
+});
+
+test("the main quest filter hides main quest pins and keeps the side ones", async ({ page }) => {
+  await page.goto("/zh/map/");
+  await expect(page.locator(".map-marker--quest-main").first()).toBeAttached();
+  await openFilters(page);
+  await kindToggle(page, "quest-main").click();
+  await expect(page.locator(".map-marker--quest-main")).toHaveCount(0);
+  await expect(page.locator(".map-marker--quest-side").first()).toBeAttached();
 });
 
 test("the rift filter swatch is the game's icon", async ({ page }) => {
@@ -81,8 +186,8 @@ test("world tabs switch maps and record the world in the URL", async ({ page }) 
   await page.locator(".map-tabs a", { hasText: "營地" }).click();
   await expect(page).toHaveURL(/\?world=camp/);
   // The camp has no stations or merchants, only the first quest's spots.
-  await expect(page.locator(".map-marker:not(.map-marker--quest)")).toHaveCount(0);
-  await expect(page.locator(".map-marker--quest").first()).toBeAttached();
+  await expect(page.locator(".map-marker:not(.map-marker--quest-main):not(.map-marker--quest-side)")).toHaveCount(0);
+  await expect(page.locator(".map-marker--quest-main").first()).toBeAttached();
   await expect(page.locator(".leaflet-tile-loaded").first()).toBeVisible();
 });
 
@@ -205,7 +310,7 @@ test("area labels do not capture clicks meant for the pin beneath", async ({ pag
 
 test("area names are not a marker filter", async ({ page }) => {
   await page.goto("/zh/map/");
-  // 「區域任務」 is the area quest pins' filter; plain 「區域」 (the area names) must not be one.
+  // Plain 「區域」 (the area names) must not be a filter.
   expect(await page.locator(".map-filter-label").allTextContents()).not.toContain("區域");
   await expect(kindToggle(page, "area")).toHaveCount(0);
 });

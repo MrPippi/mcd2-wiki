@@ -21,6 +21,8 @@ export interface MapResult {
   readonly data: MapData;
   readonly icons: MapIcon[];
   readonly issues: Issue[];
+  /** An area tag's name in every language, for the markers added after the tables are read. */
+  readonly areaName: (tag: string) => Localized | undefined;
 }
 
 const WORLD_LABELS = "Text/Release/WorldMapLabels.csv";
@@ -35,11 +37,16 @@ const MINECART_ICON = "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/
 const RIFT_ICON = `${WORLD_MAP_ICON_DIR}/T_UI_Icon_Rift.png`;
 const MERCHANT_ICON = `${WORLD_MAP_ICON_DIR}/T_UI_Icon_VillageMerchant.png`;
 const MINIMAP_ICON_DIR = "Plugins/SpicewoodUI/Content/Spicewood/UI/Texture/Minimap/Icons";
-/** Quest pins: the game's core (gold) and side (blue) quest-giver icons, and its plain one for a whole area's quests. */
+/** Quest pins: the game's core (gold) and side (blue) quest-giver icons. */
 export const QUEST_ICONS = {
   core: `${MINIMAP_ICON_DIR}/T_UI_Icon_CoreQuestGiver_Minimap.png`,
   side: `${MINIMAP_ICON_DIR}/T_UI_Icon_SideQuestGiver_Minimap.png`,
-  area: `${WORLD_MAP_ICON_DIR}/T_UI_Icon_QuestGiver.png`,
+} as const;
+/** Pins from the level data (storm generator slots, talisman chests, dungeon doors), added after the tables are read. */
+export const SPOT_ICONS = {
+  storm: `${WORLD_MAP_ICON_DIR}/T_UI_Icon_Storminator.png`,
+  chest: `${WORLD_MAP_ICON_DIR}/T_UI_Icon_Chest.png`,
+  dungeon: `${WORLD_MAP_ICON_DIR}/T_UI_Icon_Dungeon_LV1.png`,
 } as const;
 /** DT_MerchantLocationsDefinition MarkerType → icon. */
 const MERCHANT_ICONS: Readonly<Record<string, string>> = {
@@ -53,14 +60,17 @@ const LEGEND_SOURCES: Readonly<Record<string, string>> = {
   rift: RIFT_ICON,
   portal: PORTAL_ICON,
   merchant: MERCHANT_ICON,
-  quest: QUEST_ICONS.core,
-  "quest-area": QUEST_ICONS.area,
+  "quest-main": QUEST_ICONS.core,
+  "quest-side": QUEST_ICONS.side,
+  storm: SPOT_ICONS.storm,
+  "talisman-chest": SPOT_ICONS.chest,
+  dungeon: SPOT_ICONS.dungeon,
 };
 
 /** A point found in the tables, before it is placed in a world. */
 interface Candidate {
   readonly id: string;
-  readonly kind: Exclude<MarkerKind, "area" | "quest" | "quest-area">;
+  readonly kind: "minecart" | "rift" | "portal" | "merchant";
   readonly block: BlockPoint;
   readonly areaTag?: string;
   readonly name: Localized;
@@ -249,8 +259,8 @@ function buildWorld(frame: Frame, candidates: readonly Candidate[], ctx: Context
 }
 
 function iconsOf(candidates: readonly Candidate[], iconExists: (relative: string) => boolean): MapIcon[] {
-  // Quest pins are added after the quests are read, so their icons are published up front.
-  const sources = [...candidates.map((candidate) => candidate.iconSource), ...Object.values(QUEST_ICONS)];
+  // Quest and level-data pins are added after this, so their icons are published up front.
+  const sources = [...candidates.map((candidate) => candidate.iconSource), ...Object.values(QUEST_ICONS), ...Object.values(SPOT_ICONS)];
   const present = [...new Set(sources.filter((source): source is string => source !== undefined && iconExists(source)))];
   return present.map((from) => ({ from, published: publishedIcon(from) }));
 }
@@ -273,6 +283,7 @@ export function buildMapData(tables: MapTables, locales: Locales, iconExists: (r
       legend: legendOf(iconExists),
     },
     icons: iconsOf(placedCandidates, iconExists),
+    areaName: ctx.areaName,
     issues: [
       ...frameIssues,
       ...gathered.issues,

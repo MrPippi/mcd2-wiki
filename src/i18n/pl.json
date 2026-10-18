@@ -70,8 +70,6 @@
     "mapSource",
     "categorySkin",
     "markerArea",
-    "markerQuest",
-    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -429,7 +427,13 @@
     "dropCalc",
     "dropNotIncluded",
     "dropAreaUnconfirmed",
-    "dropCalcNoData"
+    "dropCalcNoData",
+    "markerQuestMain",
+    "markerQuestSide",
+    "markerStorm",
+    "markerTalismanChest",
+    "markerDungeon",
+    "mapNoteStorm"
   ],
   "_english": [
     "normal",
@@ -534,8 +538,12 @@
   "markerPortal": "Posąg teleportujący",
   "markerMerchant": "Kupiec",
   "markerArea": "Obszar",
-  "markerQuest": "Miejsca zadań",
-  "markerQuestArea": "Zadania w obszarze",
+  "markerQuestMain": "Zadania główne",
+  "markerQuestSide": "Zadania poboczne",
+  "markerStorm": "Generatory burzy",
+  "markerTalismanChest": "Skrzynie z talizmanami",
+  "markerDungeon": "Lochy",
+  "mapNoteStorm": "Możliwe miejsce generatora: podczas burzy dusz w tym obszarze może się tu pojawić generator losowego poziomu.",
   "unitSeconds": "{n} s",
   "unitBlocks": {
     "one": "{n} blok",

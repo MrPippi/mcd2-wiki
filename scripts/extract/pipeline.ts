@@ -18,10 +18,13 @@ import {
   type Lang,
 } from "./config";
 import { buildMapData, type MapResult } from "./map";
+import type { MapData } from "./map-schema";
 import { MapDataSchema } from "./map-schema";
 import { loadMapTables } from "./map-tables";
 import { addQuestMarkers, loadQuestLocations } from "./map-quests";
-import type { LocaleFile } from "./schemas";
+import { addSpotMarkers, chestTalismans, loadMapSpots, type SpotMarkersResult } from "./map-spots";
+import type { Entry, LocaleFile } from "./schemas";
+import { loadGuideTables } from "./guides-tables";
 import { groupEntries, type RawEntry } from "./group-entries";
 import { WeaponDataSchema, type WeaponData } from "./weapon-schema";
 import { DATATABLES_DIR, loadGameTables } from "./game-tables";
@@ -148,9 +151,24 @@ async function copySplash(sourceRoot: string, outRoot: string): Promise<Issue[]>
 async function extractMap(sourceRoot: string, locales: Readonly<Record<Lang, LocaleFile>>): Promise<MapResult> {
   const tables = await loadMapTables(sourceRoot);
   if (!tables) {
-    return { data: { worlds: [], legend: {} }, icons: [], issues: [issue("missing-map-tables", `${DATATABLES_DIR}/DT_WorldRegionMapData.json`)] };
+    return { data: { worlds: [], legend: {} }, icons: [], areaName: () => undefined, issues: [issue("missing-map-tables", `${DATATABLES_DIR}/DT_WorldRegionMapData.json`)] };
   }
   return buildMapData(tables, locales, (relative) => existsSync(path.join(sourceRoot, ...relative.split("/"))));
+}
+
+/** Storm generator slots, talisman chests and dungeon doors, placed on the map that already has the quest pins. */
+async function extractSpotMarkers(sourceRoot: string, map: MapResult, base: MapData, entries: readonly Entry[]): Promise<SpotMarkersResult> {
+  // No map at all: the missing region table is already reported.
+  if (base.worlds.length === 0) return { data: base, issues: [] };
+  const spots = await loadMapSpots(sourceRoot);
+  if (!spots) return { data: base, issues: [issue("missing-map-tables", "MapSpots/map-spots.json")] };
+  const { tables } = await loadGuideTables(sourceRoot);
+  return addSpotMarkers(base, {
+    spots,
+    areaName: map.areaName,
+    talismans: chestTalismans(tables, entries),
+    iconExists: (relative) => existsSync(path.join(sourceRoot, ...relative.split("/"))),
+  });
 }
 
 export async function runExtract(options: ExtractOptions): Promise<ExtractSummary> {
@@ -237,6 +255,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     mobs: bestiary.mobs,
     tagIndex: bestiary.links.tagIndex,
   });
+  const spotMap = await extractSpotMarkers(options.sourceRoot, map, questMap.data, output.entries);
   const splashIssues = await copySplash(options.sourceRoot, options.outRoot);
   const weaponTables = await loadGameTables(options.sourceRoot);
   const weapons = weaponTables
@@ -272,6 +291,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     ...talismans.issues,
     ...map.issues,
     ...questMap.issues,
+    ...spotMap.issues,
     ...uiStrings.issues,
     ...achievements.issues,
     ...bestiary.issues,
@@ -293,7 +313,7 @@ export async function runExtract(options: ExtractOptions): Promise<ExtractSummar
     "enchantments.json": EnchantmentDataSchema.parse(enchantments.data),
     "effects.json": EnchantmentDataSchema.parse(effectValues),
     "talismans.json": TalismanDataSchema.parse(talismans.data),
-    "map.json": MapDataSchema.parse(questMap.data),
+    "map.json": MapDataSchema.parse(spotMap.data),
     "ui-game-strings.json": uiStrings.strings,
     "achievements.json": achievements.data,
     "mobs.json": bestiary.mobs,

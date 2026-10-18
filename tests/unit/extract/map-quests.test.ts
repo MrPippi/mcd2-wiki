@@ -66,7 +66,7 @@ describe("addQuestMarkers", () => {
     expect(questMarkers(data, "overworld")).toEqual([
       {
         id: "quest:SW.QuestLocation.CA02.K01",
-        kind: "quest",
+        kind: "quest-main",
         px: Math.round(expected.px * 10) / 10,
         py: Math.round(expected.py * 10) / 10,
         name: loc({ en: "Quest CA02" }),
@@ -78,11 +78,11 @@ describe("addQuestMarkers", () => {
     expect(issues).toEqual([]);
   });
 
-  it("uses the side-quest icon for side quests and places spots in the world that contains them", () => {
+  it("makes side quests their own kind, with the side-quest icon, and places spots in the world that contains them", () => {
     const quests = [quest("FOa1_S10_A", { type: "side" }), quest("CA00", { region: null })];
     const rows = [row("SW.QuestLocation.FOa1.S10.A.F02", 16600, 39100), row("SW.QuestLocation.CA00.K01", -260150, -9200)];
     const { data } = addQuestMarkers(MAP, quests, rows, everyIcon);
-    expect(questMarkers(data, "overworld").map((m) => m.icon)).toEqual(["icons/map/t_ui_icon_sidequestgiver_minimap.png"]);
+    expect(questMarkers(data, "overworld").map((m) => [m.kind, m.icon])).toEqual([["quest-side", "icons/map/t_ui_icon_sidequestgiver_minimap.png"]]);
     expect(questMarkers(data, "camp").map((m) => [m.id, m.area])).toEqual([["quest:SW.QuestLocation.CA00.K01", undefined]]);
   });
 
@@ -105,32 +105,44 @@ describe("addQuestMarkers", () => {
       ["quest-location-unmatched", "SW.QuestLocation.ZZ99.K01"],
     ]);
     // With no spot on the map, the quest falls back to its area.
-    expect(questMarkers(data, "overworld").map((m) => m.kind)).toEqual(["quest-area"]);
+    expect(questMarkers(data, "overworld").map((m) => m.kind)).toEqual(["quest-main"]);
   });
 
-  it("gathers quests without spots into one pin per area, named by the base area", () => {
+  it("gathers quests without spots into a main and a side pin per area, named by the base area", () => {
     const fortress = { ...FOREST, areaId: "SW.Area.Forest.A1.Inside", name: loc({ en: "Inside" }) };
     const quests = [quest("CA03"), quest("FOa1_S08_A", { type: "side", region: fortress }), quest("CT_S01_A", { region: null })];
     const { data } = addQuestMarkers(MAP, quests, [], everyIcon);
     expect(questMarkers(data, "overworld")).toEqual([
       {
-        id: "quest-area:sw.area.forest.a1",
-        kind: "quest-area",
-        px: 4241.8,
+        id: "quest-area:sw.area.forest.a1:main",
+        kind: "quest-main",
+        // Both kinds at one spot: main a little to the left, side to the right.
+        px: 4225.8,
         py: 4046.3,
         name: FOREST.name,
-        icon: "icons/map/t_ui_icon_questgiver.png",
-        quests: [
-          { slug: "ca03", title: loc({ en: "Quest CA03" }) },
-          { slug: "foa1-s08-a", title: loc({ en: "Quest FOa1_S08_A" }) },
-        ],
+        icon: "icons/map/t_ui_icon_corequestgiver_minimap.png",
+        quests: [{ slug: "ca03", title: loc({ en: "Quest CA03" }) }],
+      },
+      {
+        id: "quest-area:sw.area.forest.a1:side",
+        kind: "quest-side",
+        px: 4257.8,
+        py: 4046.3,
+        name: FOREST.name,
+        icon: "icons/map/t_ui_icon_sidequestgiver_minimap.png",
+        quests: [{ slug: "foa1-s08-a", title: loc({ en: "Quest FOa1_S08_A" }) }],
       },
     ]);
   });
 
+  it("keeps an area's single quest type on the spot, unshifted", () => {
+    const { data } = addQuestMarkers(MAP, [quest("FOa1_S08_A", { type: "side" })], [], everyIcon);
+    expect(questMarkers(data, "overworld").map((m) => [m.id, m.kind, m.px])).toEqual([["quest-area:sw.area.forest.a1:side", "quest-side", 4241.8]]);
+  });
+
   it("keeps the other markers and the kind order, and leaves the input map unchanged", () => {
     const { data } = addQuestMarkers(MAP, [quest("CA03")], [], () => false);
-    expect(data.worlds[0].markers.map((m) => m.kind)).toEqual(["minecart", "quest-area"]);
+    expect(data.worlds[0].markers.map((m) => m.kind)).toEqual(["minecart", "quest-main"]);
     expect(data.worlds[0].markers[1].icon).toBeUndefined();
     expect(MAP.worlds[0].markers).toHaveLength(1);
   });

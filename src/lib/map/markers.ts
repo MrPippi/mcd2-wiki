@@ -20,6 +20,9 @@ export function searchMarkers<M extends PayloadMarker>(markers: readonly M[], qu
   return markers.filter((marker) => searchableText(marker, lang).some((text) => text.includes(needle))).slice(0, limit);
 }
 
+/** The pins listing an area's quests (one per quest type) rather than marking one quest's spot. */
+export const isAreaQuestPin = (marker: Pick<PayloadMarker, "id">): boolean => marker.id.startsWith("quest-area:");
+
 export const countByKind = (markers: readonly PayloadMarker[]): Record<MarkerKind, number> =>
   Object.fromEntries(MARKER_KINDS.map((kind) => [kind, markers.filter((marker) => marker.kind === kind).length])) as Record<
     MarkerKind,

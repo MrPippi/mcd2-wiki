@@ -67,8 +67,6 @@
     "mapSource",
     "categorySkin",
     "markerArea",
-    "markerQuest",
-    "markerQuestArea",
     "unitSeconds",
     "unitBlocks",
     "swingN",
@@ -427,7 +425,13 @@
     "dropCalc",
     "dropNotIncluded",
     "dropAreaUnconfirmed",
-    "dropCalcNoData"
+    "dropCalcNoData",
+    "markerQuestMain",
+    "markerQuestSide",
+    "markerStorm",
+    "markerTalismanChest",
+    "markerDungeon",
+    "mapNoteStorm"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -534,8 +538,12 @@
   "markerPortal": "Статуя телепортации",
   "markerMerchant": "Торговец",
   "markerArea": "Область",
-  "markerQuest": "Места квестов",
-  "markerQuestArea": "Квесты области",
+  "markerQuestMain": "Основные квесты",
+  "markerQuestSide": "Побочные квесты",
+  "markerStorm": "Генераторы бури",
+  "markerTalismanChest": "Сундуки с талисманами",
+  "markerDungeon": "Подземелья",
+  "mapNoteStorm": "Возможное место генератора: во время бури душ в этой области здесь может появиться генератор случайного уровня.",
   "unitSeconds": "{n} с",
   "unitBlocks": {
     "one": "{n} блок",

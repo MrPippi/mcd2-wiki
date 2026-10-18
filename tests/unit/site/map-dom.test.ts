@@ -31,22 +31,39 @@ describe("popupTexts", () => {
   });
 });
 
+describe("popupTexts kind note", () => {
+  it("shows the kind's own note when the marker has none", () => {
+    const storm = marker("storm", "咆哮森林");
+    expect(popupTexts(storm, "zh", "風暴產生器", "可能出現的位置")).toEqual({ kind: "風暴產生器", name: "咆哮森林", note: "可能出現的位置" });
+  });
+
+  it("lets a marker's own note win", () => {
+    const smith = marker("merchant", "鐵匠", { note: { zh: "販售武器" } });
+    expect(popupTexts(smith, "zh", "商人", "別的").note).toBe("販售武器");
+  });
+});
+
 describe("popupLinks", () => {
   const title = (zh: string) => ({ zh, en: zh });
 
   it("links the name itself when the pin is one quest's spot", () => {
-    const spot = marker("quest", "小嚎村的沉寂", { quests: [{ slug: "ca02", title: title("小嚎村的沉寂") }] });
+    const spot = marker("quest-main", "小嚎村的沉寂", { quests: [{ slug: "ca02", title: title("小嚎村的沉寂") }] });
     expect(popupLinks(spot, "zh")).toEqual({ nameHref: "/zh/quests/ca02/", list: [] });
   });
 
   it("lists an area's quests under the area name", () => {
-    const area = marker("quest-area", "咆哮森林", { quests: [{ slug: "ca03", title: title("甲") }, { slug: "foa1-s08-a", title: title("乙") }] });
+    const area = marker("quest-side", "咆哮森林", { quests: [{ slug: "ca03", title: title("甲") }, { slug: "foa1-s08-a", title: title("乙") }] });
     expect(popupLinks(area, "zh")).toEqual({
       list: [
         { title: "甲", href: "/zh/quests/ca03/" },
         { title: "乙", href: "/zh/quests/foa1-s08-a/" },
       ],
     });
+  });
+
+  it("links a talisman chest's name to its talisman", () => {
+    const chest = marker("talisman-chest", "幸運草", { entry: { category: "talisman", slug: "lucky-clover" } });
+    expect(popupLinks(chest, "zh")).toEqual({ nameHref: "/zh/talisman/lucky-clover/", list: [] });
   });
 
   it("gives other markers no links", () => {

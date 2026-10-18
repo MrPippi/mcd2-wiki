@@ -28,8 +28,8 @@ describe("searchMarkers", () => {
   });
 
   it("matches the titles of the quests a quest pin lists", () => {
-    const area = { id: "quest-area:forest", kind: "quest-area" as const, px: 0, py: 0, name: { zh: "咆哮森林", en: "Howling Forest" }, quests: [{ slug: "ca03", title: { zh: "森林之心", en: "Heart of the Forest" } }] };
-    expect(searchMarkers([...MARKERS, area], "heart OF", "zh").map((m) => m.id)).toEqual(["quest-area:forest"]);
+    const area = { id: "quest-area:forest:side", kind: "quest-side" as const, px: 0, py: 0, name: { zh: "咆哮森林", en: "Howling Forest" }, quests: [{ slug: "ca03", title: { zh: "森林之心", en: "Heart of the Forest" } }] };
+    expect(searchMarkers([...MARKERS, area], "heart OF", "zh").map((m) => m.id)).toEqual(["quest-area:forest:side"]);
   });
 
   it("matches the area a marker sits in", () => {
@@ -69,7 +69,7 @@ describe("searchMarkers", () => {
 
 describe("countByKind", () => {
   it("counts every kind, including empty ones", () => {
-    expect(countByKind(MARKERS)).toEqual({ minecart: 1, rift: 1, portal: 1, merchant: 1, quest: 0, "quest-area": 0, area: 0 });
+    expect(countByKind(MARKERS)).toEqual({ minecart: 1, rift: 1, portal: 1, merchant: 1, "quest-main": 0, "quest-side": 0, storm: 0, "talisman-chest": 0, dungeon: 0, area: 0 });
   });
 });
 
@@ -91,7 +91,7 @@ describe("hidden kinds", () => {
   });
 
   it("never hides area names, which are not a filter, even if an older page saved them", () => {
-    expect(FILTER_KINDS).toEqual(["minecart", "rift", "portal", "merchant", "quest", "quest-area"]);
+    expect(FILTER_KINDS).toEqual(["minecart", "rift", "portal", "merchant", "quest-main", "quest-side", "storm", "talisman-chest", "dungeon"]);
     expect(parseHiddenKinds('["area","rift"]')).toEqual(new Set(["rift"]));
   });
 
