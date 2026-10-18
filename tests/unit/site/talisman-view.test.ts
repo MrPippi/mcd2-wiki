@@ -16,10 +16,12 @@ describe("talisman descriptions", () => {
     expect(describedEntry(talisman("potion-cooldown"))?.ja).toContain('<span class="value">10%~25%</span>');
   });
 
-  it("shows the Quiver sentence in English where the translation puts a percentage on a count word", () => {
+  it("words the Quiver sentence as a percentage in zh-TW and keeps English where a translation reads it as a count", () => {
     const ammo = talisman("ammo-capacity");
-    expect(describedEntry(ammo)?.zh).toBe('Carry <span class="value">20%~60%</span> more ammo.');
-    expect(ammo.untranslated).toEqual(expect.arrayContaining(["zh", "ja", "ko", "ru", "fr", "es"]));
+    expect(describedEntry(ammo)?.zh).toBe('箭矢攜帶量提高 <span class="value">20%~60%</span>。');
+    expect(describedEntry(ammo)?.ja).toBe('Carry <span class="value">20%~60%</span> more ammo.');
+    expect(ammo.untranslated).toEqual(expect.arrayContaining(["ja", "ko", "ru", "fr", "es"]));
+    expect(ammo.untranslated).not.toContain("zh");
     expect(ammo.untranslated).not.toContain("de");
   });
 
