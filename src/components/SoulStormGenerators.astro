@@ -37,6 +37,7 @@ const ICON_SIZE = 48;
       <h2 class="section-title" data-pagefind-ignore>{name ? <Fragment set:html={name.html} /> : t(lang, "soulStormTier")}</h2>
       {untranslated && <span class="tag warn">{t(lang, "untranslated")}</span>}
     </div>
+    <p class="soul-storm-text" data-testid="soul-storm-generator-count">{t(lang, "soulStormGeneratorCount")}</p>
     {hints.map((hint) => <p class="soul-storm-text" set:html={hint.html} />)}
     <div class="soul-storm-scroll" tabindex="0" role="region" aria-label={tableLabel}>
       <table class="soul-storm-table soul-storm-generator-table">

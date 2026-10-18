@@ -246,7 +246,7 @@
   "soulStorm": "Soul Storms",
   "soulStormIntro": "Live Soul Storm schedule, area rotation, Storm Generators and reward chests.",
   "soulStormSchedule": "Schedule and area rotation",
-  "soulStormUnverified": "Estimated times, not yet confirmed in game",
+  "soulStormGeneratorCount": "Each Soul Storm requires destroying 3 Storm Generators (observed in game)",
   "soulStormNow": "Now: {area}",
   "soulStormNext": "Next: {area}",
   "soulStormEndsIn": "{time} left",

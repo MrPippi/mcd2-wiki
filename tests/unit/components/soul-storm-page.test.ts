@@ -10,13 +10,19 @@ const render = (lang: string, data: SoulStormData = soulStormData) => container.
 const count = (html: string, needle: string): number => html.split(needle).length - 1;
 
 describe("Soul Storm page", () => {
-  it("warns once that the times are estimated while unverified", async () => {
+  it("no longer warns that the times are estimated", async () => {
     const html = await render("zh");
-    expect(count(html, 'data-testid="soul-storm-unverified"')).toBe(1);
-    expect(html).toContain("推算時刻，尚未經遊戲內確認");
+    expect(html).not.toContain('data-testid="soul-storm-unverified"');
+    expect(html).not.toContain("推算時刻");
   });
-  it("drops the warning once verified", async () => {
-    expect(await render("zh", { ...soulStormData, verified: true })).not.toContain('data-testid="soul-storm-unverified"');
+  it("gives every rotation area its location icon", async () => {
+    const html = await render("en");
+    const rotation = html.slice(html.indexOf('data-testid="soul-storm-rotation"'));
+    expect(count(rotation.slice(0, rotation.indexOf("</ol>")), 'class="location-icon"')).toBe(7);
+  });
+  it("says each storm needs 3 generators destroyed", async () => {
+    expect(await render("zh")).toContain("每場靈魂風暴需摧毀 3 座風暴產生器（遊戲內觀察）");
+    expect(await render("en")).toContain("Each Soul Storm requires destroying 3 Storm Generators (observed in game)");
   });
   it("keeps the schedule readable without JavaScript", async () => {
     const html = await render("en");

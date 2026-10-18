@@ -39,9 +39,10 @@ test.describe("live schedule (UTC)", () => {
     await expect(page.getByTestId("soul-storm-upcoming").locator("tbody tr")).toHaveCount(7);
   });
 
-  test("always warns that the times are estimated", async ({ page }) => {
+  test("no longer warns that the times are estimated", async ({ page }) => {
     await page.goto("/zh/soul-storm/");
-    await expect(page.getByTestId("soul-storm-unverified")).toHaveText("推算時刻，尚未經遊戲內確認");
+    await expect(page.getByTestId("soul-storm-unverified")).toHaveCount(0);
+    await expect(page.getByTestId("soul-storm-upcoming").locator("tbody tr").first().locator("img")).toBeVisible();
   });
 });
 
@@ -62,7 +63,7 @@ test.describe("without JavaScript", () => {
     await expect(page.getByTestId("soul-storm-clock")).toBeHidden();
     await expect(page.getByTestId("soul-storm-cadence")).toContainText("every 40 minutes");
     await expect(page.getByTestId("soul-storm-rotation").locator("a")).toHaveCount(7);
-    await expect(page.getByTestId("soul-storm-unverified")).toBeVisible();
+    await expect(page.getByTestId("soul-storm-rotation").locator("img")).toHaveCount(7);
   });
 });
 

@@ -11,6 +11,7 @@ import { t, type Lang } from "../../lib/i18n";
 import { compareLang, htmlLang } from "../../lib/lang";
 import { anyUntranslated, cadenceLine, clockPayload, hasSchedule, soulStormData, summonedMobs, textOf, unlockLine } from "../../lib/soul-storm";
 import { assetUrl } from "../../lib/url";
+import "../../styles/locations.css";
 import "../../styles/mobs.css";
 import "../../styles/soul-storm.css";
 
@@ -54,7 +55,6 @@ const HEADER_ICON_SIZE = 72;
       </section>
       <section class="entry-section soul-storm-schedule" data-testid="soul-storm-schedule">
         <h2 class="section-title" data-pagefind-ignore>{t(lang, "soulStormSchedule")}</h2>
-        {scheduled && !data.verified && <p class="tag warn soul-storm-unverified" data-testid="soul-storm-unverified">{t(lang, "soulStormUnverified")}</p>}
         {scheduled ? <p class="soul-storm-text" data-testid="soul-storm-cadence">{cadenceLine(data, lang)}</p> : <p class="soul-storm-text">{t(lang, "soulStormNoData")}</p>}
         {scheduled && <noscript data-testid="soul-storm-noscript"><p class="note">{t(lang, "soulStormNoScript")}</p></noscript>}
         {payload && <SoulStormClock lang={lang} payload={payload} />}

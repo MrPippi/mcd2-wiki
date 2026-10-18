@@ -16,6 +16,11 @@ describe("Soul Storm site data", () => {
     expect(payload?.areas[3].href).toMatch(/^\/zh\/map\/\?world=sift#4\//);
     expect(payload?.labels.now).toBe("進行中：{area}");
   });
+  it("carries each area's location icon for the client-built rows", () => {
+    const icons = clockPayload("zh")?.areas.map((area) => area.icon ?? "");
+    expect(icons).toHaveLength(7);
+    for (const icon of icons ?? []) expect(icon).toMatch(/icons\/locations\/[a-z-]+\.png$/);
+  });
   it("agrees with the browser module on a real instant", () => {
     const state = stormState(scheduleOf(soulStormData), Date.parse("2026-10-11T00:00:00Z"));
     expect(soulStormData.rotation[state.window.areaIndex].name.en).toBe("Humbler Huskland");
