@@ -58,7 +58,7 @@ const groupTitle = (group: SlotGroup): string =>
                 <div class="build-enchant" data-testid={`build-enchant-${slot.key}`} data-enchant hidden>
                   <button type="button" class="build-enchant-pick" data-enchant-pick aria-haspopup="dialog">
                     <span class="sr-only">{`${slotLabel(slot, lang)}, ${t(lang, "buildEnchant")}: `}</span>
-                    <span class="build-icon build-icon-small" data-enchant-icon aria-hidden="true"></span>
+                    <span class="build-icon build-icon-small build-icon-bare" data-enchant-icon aria-hidden="true"></span>
                     <span class="build-enchant-name" data-enchant-name>{t(lang, "buildAddEnchant")}</span>
                   </button>
                   <select class="build-tier" data-tier aria-label={`${t(lang, "buildTier")}: ${slotLabel(slot, lang)}`} hidden>

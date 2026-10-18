@@ -45,6 +45,8 @@ interface Choice {
   readonly search: string;
   readonly icon?: string;
   readonly unique?: true;
+  /** Icon art with transparent corners (enchantments): shown without the square slot box. */
+  readonly bare?: true;
   readonly disabled: boolean;
   /** Already in the slot being picked for: marked, still selectable. */
   readonly current?: boolean;
@@ -148,7 +150,7 @@ function choiceRow(choice: Choice, equipped: string): HTMLLIElement {
   button.disabled = choice.disabled;
   if (choice.unique) button.dataset.unique = "true";
   const art = document.createElement("span");
-  art.className = "build-icon";
+  art.className = choice.bare ? "build-icon build-icon-bare" : "build-icon";
   art.append(...iconImage(choice.icon));
   const name = document.createElement("span");
   name.className = "build-option-name";
@@ -290,6 +292,7 @@ function enchantChoices(planner: Planner, key: EnchantSlotKey): Choice[] {
     name: option.name,
     search: option.search,
     icon: option.icon,
+    bare: true,
     disabled: false,
     current: planner.enchants[key]?.slug === option.slug,
     pick: () => {
