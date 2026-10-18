@@ -2,6 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { WORLDS } from "../../src/lib/map/worlds";
 import { buildWorldTiles, type TileSummary } from "./build";
+import { buildTabArt } from "./tab-art";
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const QUALITY = 80;
@@ -20,7 +21,8 @@ async function main(): Promise<void> {
   // One world at a time keeps memory to a single pyramid.
   const summaries: TileSummary[] = [];
   for (const world of WORLDS) summaries.push(await buildWorldTiles(world, options));
-  console.log(["地圖圖塊完成：", ...summaries.map(describe)].join("\n"));
+  const art = await buildTabArt({ assetsDir: path.join(sourceRoot, "Assets"), outDir: options.outDir, worlds: WORLDS });
+  console.log(["地圖圖塊完成：", ...summaries.map(describe), `分頁圖與按鍵圖示：${art} 張`].join("\n"));
 }
 
 main().catch((error: unknown) => {

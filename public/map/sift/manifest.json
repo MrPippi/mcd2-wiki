@@ -1,7 +1,7 @@
 {
   "imageSize": 7168,
   "zMax": 5,
-  "voidMask": 1,
+  "voidMask": 2,
   "sources": [
     {
       "name": "Sift_00_00.png",
