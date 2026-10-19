@@ -25,36 +25,7 @@ const VARIANTS = ["all", "normal", "unique"] as const;
   )}
 </div>
 <script>
-  import { foldForSearch } from "../../shared/lang";
+  import { mountListFilter } from "../client/list-filter";
 
-  const filter = document.querySelector<HTMLElement>(".list-filter");
-  const input = filter?.querySelector<HTMLInputElement>(".filter-text");
-  const buttons = [...(filter?.querySelectorAll<HTMLButtonElement>("button[data-variant]") ?? [])];
-  const items = [...document.querySelectorAll<HTMLElement>("[data-names]")];
-  const noResults = document.querySelector<HTMLElement>(".no-results");
-  let variant = "all";
-
-  const apply = () => {
-    const text = foldForSearch(input?.value.trim() ?? "", document.documentElement.lang);
-    let visible = 0;
-    for (const item of items) {
-      const show = (variant === "all" || item.dataset.variant === variant) && (item.dataset.names ?? "").includes(text);
-      item.hidden = !show;
-      if (show) visible += 1;
-    }
-    if (noResults) noResults.hidden = visible > 0;
-    // A grouped list (the bestiary) hides a group's heading once every card in it is filtered out.
-    for (const group of document.querySelectorAll<HTMLElement>("[data-group]")) {
-      group.hidden = [...group.querySelectorAll<HTMLElement>("[data-names]")].every((item) => item.hidden);
-    }
-  };
-
-  input?.addEventListener("input", apply);
-  for (const button of buttons) {
-    button.addEventListener("click", () => {
-      variant = button.dataset.variant ?? "all";
-      for (const other of buttons) other.setAttribute("aria-pressed", String(other === button));
-      apply();
-    });
-  }
+  mountListFilter(document);
 </script>
