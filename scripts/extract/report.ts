@@ -1,4 +1,5 @@
-import { CATEGORIES, type Category, type Release } from "../../shared/config";
+import type { Release } from "./config";
+import { CATEGORIES, type Category } from "../../shared/config";
 import type { Issue, IssueType } from "./issues";
 import type { ArmorSet, Entry } from "../../shared/schemas";
 

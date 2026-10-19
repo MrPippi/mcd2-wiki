@@ -10,8 +10,6 @@ interface Props {
   label: (lang: Lang) => string;
   count?: number;
   icon?: string;
-  /** Show the second-language line even when it matches the title (the item category pages do). */
-  repeatAlt?: boolean;
   /** The lede; also the page description for search engines. */
   intro?: string;
   introClass?: string;
@@ -24,11 +22,11 @@ interface Props {
   pagefindBody?: boolean;
 }
 
-const { lang, label, count, icon, repeatAlt, intro, introClass, current, class: className, headClass, pagefindBody } = Astro.props;
+const { lang, label, count, icon, intro, introClass, current, class: className, headClass, pagefindBody } = Astro.props;
 ---
 <Base lang={lang} title={label(lang)} description={intro} current={current}>
   <div class:list={["catalog", className]} data-pagefind-body={pagefindBody ? "" : undefined}>
-    <CatalogHead lang={lang} label={label} count={count} icon={icon} repeatAlt={repeatAlt} intro={intro} introClass={introClass} class={headClass}>
+    <CatalogHead lang={lang} label={label} count={count} icon={icon} intro={intro} introClass={introClass} class={headClass}>
       <slot name="head" />
     </CatalogHead>
     <slot />

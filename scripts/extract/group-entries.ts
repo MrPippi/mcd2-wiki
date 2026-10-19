@@ -1,4 +1,5 @@
-import { CATEGORIES, LANGS, type Category, type Lang, type Release, type TableSource } from "../../shared/config";
+import type { Release, TableSource } from "./config";
+import { CATEGORIES, LANGS, type Category, type Lang } from "../../shared/config";
 import { byLang } from "../../shared/lang";
 import { issue, type Issue } from "./issues";
 import { resolveTexts } from "./game-text";

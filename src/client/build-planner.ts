@@ -1,10 +1,10 @@
 /** The build page in the browser: slots, the picker dialog, the URL and the share buttons. */
-import { mountPicker, pickerParts, type PickerParts, type PickerRequest } from "../item-picker";
-import { ROMAN } from "./card";
-import { buildSearch, decodeBuild, type DecodedBuild, type EnchantPools, type Pools } from "./code";
-import { drawCard, type CardTheme } from "./draw";
-import { effectRulesOf, effectsLine, isEffectSlot, keptEffects, renderEffects, rollable } from "./effects-ui";
-import { parseBuildPayload, type BuildOption, type BuildPayload, type EnchantOption } from "./parse";
+import { mountPicker, pickerParts, type PickerParts, type PickerRequest } from "./item-picker";
+import { ROMAN } from "../lib/build/card";
+import { buildSearch, decodeBuild, type DecodedBuild, type EnchantPools, type Pools } from "../lib/build/code";
+import { drawCard, type CardTheme } from "./build-draw";
+import { effectRulesOf, effectsLine, isEffectSlot, keptEffects, renderEffects, rollable } from "./build-effects";
+import { parseBuildPayload, type BuildOption, type BuildPayload, type EnchantOption } from "../lib/build/parse";
 import {
   BUILD_SLOTS,
   byPool,
@@ -18,7 +18,7 @@ import {
   type Enchants,
   type EnchantSlotKey,
   type SlotKey,
-} from "./slots";
+} from "../lib/build/slots";
 
 const FILE_NAME = "mcd2-build.png";
 /** Keeps the image URL alive long enough for the download to start. */

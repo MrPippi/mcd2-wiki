@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { pinParts, popupLinks, popupTexts, resultText, shownKind } from "../../../src/lib/map/marker-dom";
+import { pinParts, popupLinks, popupTexts, resultText, shownKind } from "../../../src/client/map-marker-dom";
 import type { PayloadMarker } from "../../../src/lib/map/payload";
 
 const marker = (kind: PayloadMarker["kind"], name: string, extra: Partial<PayloadMarker> = {}): PayloadMarker => ({

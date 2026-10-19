@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { stripEdges } from "../../../src/client/category-tabs";
+import { dismissesSheet, staleOverlays } from "../../../src/client/item-browser";
 import { cellText, slotCount } from "../../../src/client/affix-odds";
 import { groupHidden, matchesFilter } from "../../../src/client/list-filter";
 import { isComparePressed, nextCompare, searchOpensOnClick } from "../../../src/client/site-header";
@@ -90,5 +92,27 @@ describe("soul storm clock text", () => {
     expect(text.status).toBe("Next: Meadow");
     expect(text.countdown).toMatch(/^starts in /);
     expect(text.windowIndex).toBe(1);
+  });
+});
+
+describe("item browser", () => {
+  it("closes the sheet and hides the tooltip only for filtered-out cards", () => {
+    expect(staleOverlays(true, false)).toEqual({ closeSheet: true, hideTooltip: false });
+    expect(staleOverlays(false, true)).toEqual({ closeSheet: false, hideTooltip: true });
+    expect(staleOverlays(undefined, undefined)).toEqual({ closeSheet: false, hideTooltip: false });
+  });
+
+  it("dismisses the sheet on a click outside it and the item links", () => {
+    expect(dismissesSheet(false)).toBe(true);
+    expect(dismissesSheet(true)).toBe(false);
+  });
+});
+
+describe("category tabs", () => {
+  it("flags the strip's ends within one pixel", () => {
+    expect(stripEdges(0, 500, 300)).toEqual({ atStart: true, atEnd: false });
+    expect(stripEdges(100, 500, 300)).toEqual({ atStart: false, atEnd: false });
+    expect(stripEdges(199.5, 500, 300)).toEqual({ atStart: false, atEnd: true });
+    expect(stripEdges(0, 300, 300)).toEqual({ atStart: true, atEnd: true });
   });
 });

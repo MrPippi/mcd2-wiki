@@ -85,7 +85,7 @@ const payload = JSON.stringify({ worlds: worlds.map((world) => trimWorld(world, 
 )}
 
 <script>
-  import { mountWorldMap } from "../lib/map/viewer";
+  import { mountWorldMap } from "../client/map-viewer";
 
   const root = document.querySelector<HTMLElement>(".world-map");
   if (root) mountWorldMap(root);

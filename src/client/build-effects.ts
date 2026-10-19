@@ -1,8 +1,8 @@
 /** Effects in the build page's browser script: which an item can roll, keeping a build valid, and the effect rows. */
-import { ROMAN } from "./card";
-import { effectCap, type EffectRules } from "./code";
-import type { BuildOption, BuildPayload, EffectOption } from "./parse";
-import { BUILD_SLOTS, EFFECT_SLOT_KEYS, ENCHANT_TIERS, type Build, type EffectPick, type Effects, type EffectSlotKey, type SlotKey } from "./slots";
+import { ROMAN } from "../lib/build/card";
+import { effectCap, type EffectRules } from "../lib/build/code";
+import type { BuildOption, BuildPayload, EffectOption } from "../lib/build/parse";
+import { BUILD_SLOTS, EFFECT_SLOT_KEYS, ENCHANT_TIERS, type Build, type EffectPick, type Effects, type EffectSlotKey, type SlotKey } from "../lib/build/slots";
 
 const ICON_SIZE = 28;
 

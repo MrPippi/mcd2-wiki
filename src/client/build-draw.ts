@@ -1,7 +1,7 @@
 /** Draws the build image on a canvas (browser only; the layout comes from card.ts). */
-import { CARD_GAP, CARD_HEIGHT, CARD_ICON, CARD_PADDING, CARD_WIDTH, cardCells, fitText } from "./card";
-import type { BuildLabels, BuildOption } from "./parse";
-import type { EffectSlotKey, EnchantSlotKey, SlotKey } from "./slots";
+import { CARD_GAP, CARD_HEIGHT, CARD_ICON, CARD_PADDING, CARD_WIDTH, cardCells, fitText } from "../lib/build/card";
+import type { BuildLabels, BuildOption } from "../lib/build/parse";
+import type { EffectSlotKey, EnchantSlotKey, SlotKey } from "../lib/build/slots";
 
 export interface CardInput {
   readonly title: string;

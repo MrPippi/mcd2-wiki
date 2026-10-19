@@ -44,7 +44,7 @@ const { labels } = payload;
 <p class="note" data-testid="drop-failed" data-drop-failed hidden>{t(lang, "dropCalcLoadFailed")}</p>
 
 <script>
-  import { mountCalc } from "../lib/drop-calc/ui";
+  import { mountCalc } from "../client/drop-calc";
 
   const root = document.querySelector<HTMLElement>("[data-drop-calc]");
   if (root) {

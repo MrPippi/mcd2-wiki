@@ -1,8 +1,8 @@
 /** The drop calculator in the browser: choices, a live result table and the address. */
-import type { DropFile, DropRow } from "../../../shared/drop-types";
-import { mountPicker, optionArt, pickerParts, type PickerGroup, type PickerParts } from "../item-picker";
-import { parseCalcPayload, type CalcItem, type CalcLabel, type CalcPayload } from "./parse";
-import { allRows, decodeState, encodeState, formatDropOdds, narrowRows, narrowing, type CalcState } from "./state";
+import type { DropFile, DropRow } from "../../shared/drop-types";
+import { mountPicker, optionArt, pickerParts, type PickerGroup, type PickerParts } from "./item-picker";
+import { parseCalcPayload, type CalcItem, type CalcLabel, type CalcPayload } from "../lib/drop-calc/parse";
+import { allRows, decodeState, encodeState, formatDropOdds, narrowRows, narrowing, type CalcState } from "../lib/drop-calc/state";
 
 /** Fired after replaceState so the language links pick up the new query (SiteHeader listens). */
 const LOCATION_EVENT = "mcd2:locationchange";

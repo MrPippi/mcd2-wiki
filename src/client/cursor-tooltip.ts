@@ -1,4 +1,4 @@
-import { besideElement, followCursor, type Size } from "./tooltip-position";
+import { besideElement, followCursor, type Size } from "../lib/tooltip-position";
 
 export interface CursorTooltip {
   /** Hides the tooltip, e.g. when the list filter hides the item under it. */

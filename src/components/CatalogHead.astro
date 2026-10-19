@@ -10,8 +10,6 @@ interface Props {
   /** The number printed above the title; omitted on pages that are not a numbered list. */
   count?: number;
   icon?: string;
-  /** Show the second-language line even when it matches the title. */
-  repeatAlt?: boolean;
   /** The lede under the title, and the class that styles it. */
   intro?: string;
   introClass?: string;
@@ -19,7 +17,7 @@ interface Props {
   class?: string;
 }
 
-const { lang, label, count, icon, repeatAlt, intro, introClass, class: className } = Astro.props;
+const { lang, label, count, icon, intro, introClass, class: className } = Astro.props;
 const alt = compareLang(lang);
 ---
 <header class:list={["catalog-head", className]}>
@@ -28,7 +26,7 @@ const alt = compareLang(lang);
     <UiIcon src={icon} />
     <span data-pagefind-meta="title">{label(lang)}</span>
   </h1>
-  {(repeatAlt || label(alt) !== label(lang)) && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{label(alt)}</p>}
+  {label(alt) !== label(lang) && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{label(alt)}</p>}
   {intro && <p class={introClass}>{intro}</p>}
   <slot />
 </header>
