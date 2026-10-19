@@ -5,7 +5,8 @@ import { plainText, UI_DICTS } from "../../src/lib/ui-dicts";
 import type { Lang } from "./config";
 import { ExtractError } from "./issues";
 import { LANGS } from "./langs";
-import { englishFallbacks, localize, type LocRef } from "./loc-table";
+import { gameText } from "./game-text";
+import type { LocRef } from "./loc-table";
 import type { LocaleFile, Localized } from "./schemas";
 import keyData from "./source-name-keys.json";
 
@@ -66,8 +67,8 @@ export const talismanChestName = (item: Localized, itemUntranslated: readonly La
  */
 export function sourceName(id: string, keys: NameKeys, locales: Readonly<Record<Lang, LocaleFile>>, stripPrefix?: RegExp, kind?: SourceKind): SourceName {
   const ref = Object.hasOwn(keys, id) ? keys[id] : undefined;
-  const official = ref ? localize(locales, ref.namespace, ref.key) : undefined;
-  if (ref && official) return { name: official, untranslated: englishFallbacks(locales, ref.namespace, ref.key), official: true };
+  const official = ref ? gameText(locales, ref.namespace, ref.key) : undefined;
+  if (official) return { name: official.text, untranslated: official.untranslated, official: true };
   const labelKey = kind === "quest" ? QUEST_LABEL_KEY : Object.hasOwn(SITE_LABEL_KEYS, id) ? SITE_LABEL_KEYS[id] : undefined;
   if (labelKey !== undefined) return { name: localizedFrom(siteLabel(labelKey)), untranslated: [], official: false };
   const words = humanizeId(id, stripPrefix);

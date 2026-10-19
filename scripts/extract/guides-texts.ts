@@ -4,8 +4,8 @@ import type { Lang } from "./config";
 import type { GuideText, TextId } from "./guides-schema";
 import type { TextDataValue } from "./guides-tables";
 import { issue, type Issue } from "./issues";
-import { englishFallbacks, gameTexts, locRef } from "./loc-table";
-import { renderMarkup } from "./render-markup";
+import { gameHtml } from "./game-text";
+import { locRef } from "./loc-table";
 import type { LocaleFile } from "./schemas";
 
 export type Locales = Readonly<Record<Lang, LocaleFile>>;
@@ -55,16 +55,8 @@ const label = (namespace: string, key: string): string => `${namespace.slice(REL
 
 /** One game text in every language; undefined (with an issue) when the game has no English for it. */
 export function gameText(locales: Locales, namespace: string, key: string): { text?: GuideText; issues: Issue[] } {
-  const texts = gameTexts(locales, namespace, key);
-  if (!texts?.en) return { issues: [issue("guides-text-fallback", label(namespace, key))] };
-  const english = texts.en;
-  return {
-    text: {
-      html: localizedFrom((lang) => renderMarkup(texts[lang] ?? english, lang).html),
-      untranslated: englishFallbacks(locales, namespace, key),
-    },
-    issues: [],
-  };
+  const text = gameHtml(locales, namespace, key);
+  return text ? { text, issues: [] } : { issues: [issue("guides-text-fallback", label(namespace, key))] };
 }
 
 /** The text a row's TypeTextData names under `entryTag` (e.g. SW.TextEntry.Name); undefined (with an issue) when the row has none. */

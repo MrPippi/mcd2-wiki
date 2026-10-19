@@ -5,7 +5,8 @@ import { WORLDS, imageSizeOf, zMaxFor, type WorldSource } from "../../src/lib/ma
 import { localizedFrom } from "../../src/lib/lang";
 import type { Lang } from "./config";
 import { issue, type Issue } from "./issues";
-import { englishFallbacks, localize, locRef } from "./loc-table";
+import { gameText } from "./game-text";
+import { locRef } from "./loc-table";
 import { MARKER_KINDS, type MapData, type MapMarker, type MarkerKind, type WorldMap } from "./map-schema";
 import type { AreaRowValue, MapTables, TeleportRowValue } from "./map-tables";
 import type { LocaleFile, Localized } from "./schemas";
@@ -110,11 +111,11 @@ function makeContext(tables: MapTables, locales: Locales): Context {
   const used = new Map<string, { namespace: string; key: string }>();
   const text = (namespace: string, key: string) => {
     used.set(`${namespace} ${key}`, { namespace, key });
-    return localize(locales, namespace, key);
+    return gameText(locales, namespace, key)?.text;
   };
   const fallbackIssues = (): Issue[] =>
     [...used.values()].flatMap(({ namespace, key }) => {
-      const langs = englishFallbacks(locales, namespace, key);
+      const langs = gameText(locales, namespace, key)?.untranslated ?? [];
       return langs.length ? [issue("map-text-fallback", `${namespace} ${key}: ${langs.join(", ")}`)] : [];
     });
   const loc = (value: string) => {

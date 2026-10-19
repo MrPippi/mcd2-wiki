@@ -2,7 +2,8 @@
 import { localizedFrom } from "../../src/lib/lang";
 import { LANGS, type Lang } from "./config";
 import { ExtractError, issue, type Issue } from "./issues";
-import { englishFallbacks, localize, locRef } from "./loc-table";
+import { gameText } from "./game-text";
+import { locRef } from "./loc-table";
 import type { AreaMarker } from "./mob-areas";
 import type { MobArea } from "./mob-schema";
 import type { AreaRow } from "./mob-tables";
@@ -68,14 +69,15 @@ function nameRef(row: AreaRow | undefined): ReturnType<typeof locRef> {
 
 function nameArea(tag: string, rows: ReadonlyMap<string, AreaRow>, locales: Locales, markers: ReadonlyMap<string, AreaMarker>): NamedArea {
   const ref = nameRef(rows.get(tagKey(tag)));
-  const name = ref ? localize(locales, ref.namespace, ref.key) : undefined;
+  const found = ref ? gameText(locales, ref.namespace, ref.key) : undefined;
+  const name = found?.text;
   const marker = markers.get(tagKey(tag));
   const map = marker ? { map: { world: marker.world, px: marker.px, py: marker.py } } : {};
   if (!ref || !name?.en) {
     const label = tagLabel(tag);
     return { area: { areaId: tag, name: localizedFrom(() => label), ...map }, fallbacks: LANGS.filter((lang) => lang !== "en"), issue: issue("soul-storm-area-unnamed", tag) };
   }
-  return { area: { areaId: tag, name, ...map }, fallbacks: englishFallbacks(locales, ref.namespace, ref.key) };
+  return { area: { areaId: tag, name, ...map }, fallbacks: found?.untranslated ?? [] };
 }
 
 export function buildRotation(row: RotationRow, areas: readonly AreaRow[], locales: Locales, markers: ReadonlyMap<string, AreaMarker>): RotationResult {

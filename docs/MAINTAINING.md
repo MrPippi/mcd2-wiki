@@ -50,6 +50,13 @@
 - `readTableFile(file, label)`：回傳原始 JSON（缺檔為 `undefined`），給要自己驗證的表（曲線表、成就定義等）。
 - 兩者都會拒讀 `OnlineConstants`（內含遙測金鑰）；`tests/unit/extract/table-reader.test.ts` 也限制只有少數非資料表的載入器可以 import `read-json`，新程式繞過讀取器會讓測試失敗。
 
+## 讀取遊戲文字
+
+遊戲文字的在地化一律走 `scripts/extract/game-text.ts`，不要自己組各語言的記錄或英文 fallback：
+
+- `gameText(locales, namespace, key, accept?)`：回傳 `{ text, untranslated }`；沒有英文就回傳 `undefined`，其他語言缺字就補英文並列入 `untranslated`。`gameHtml` 同上，另把遊戲標記轉成 HTML。
+- `accept(lang, text)` 決定某語言能不能發布這段字（回傳 `undefined` 代表不行）：有語言問題的翻譯在這裡擋掉，網站就顯示英文並標為未翻譯（「語言有問題一律退回英文」的規則）。
+
 ## 原始素材索引
 
 `npm run assets` 掃描 `source-data/Assets/`，依分類／分項／細項整理所有素材，並以檔案內容比對 `public/icons/` 標出用途（網站已發布、網站介面、已抽取未發布、未使用）。

@@ -8,7 +8,7 @@ import type { AchievementCondition } from "./achievement-schema";
 import type { Lang } from "./config";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
-import { englishFallbacks, localize } from "./loc-table";
+import { gameText } from "./game-text";
 import { readTableFile } from "./table-reader";
 import type { LocaleFile } from "./schemas";
 
@@ -80,9 +80,9 @@ function conditionFor(row: AchievementDefinition, locales: Locales): Achievement
   const id = row.AchievementId;
   const where = textKey(row, locales);
   if (!where) return issue("missing-achievement-condition", id);
-  const name = localize(locales, where.namespace, where.key);
-  if (!name) return issue("missing-achievement-condition", `${id}: ${where.namespace.replace("Text/Release/", "")} ${where.key}`);
-  const untranslated = englishFallbacks(locales, where.namespace, where.key);
+  const found = gameText(locales, where.namespace, where.key);
+  if (!found) return issue("missing-achievement-condition", `${id}: ${where.namespace.replace("Text/Release/", "")} ${where.key}`);
+  const { text: name, untranslated } = found;
   return { type: where.type, name, ...(untranslated.length > 0 ? { untranslated } : {}), ...(where.quest ? { quest: where.quest } : {}) };
 }
 

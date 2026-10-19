@@ -1,6 +1,7 @@
 import { CATEGORIES, LANGS, type Category, type Lang, type Release, type TableSource } from "./config";
-import { byLang, localizedFrom } from "../../src/lib/lang";
+import { byLang } from "../../src/lib/lang";
 import { issue, type Issue } from "./issues";
+import { resolveTexts } from "./game-text";
 import { parseKey } from "./keys";
 import type { LocaleFile, Localized } from "./schemas";
 
@@ -46,13 +47,7 @@ const isPlaceholderOnly = (text: Localized): boolean => PLACEHOLDER_ONLY.test(te
 
 /** Text in every language: no English means no text; any other missing language takes the English and is flagged. */
 export function resolveText(key: string, texts: Partial<Record<Lang, string>>): { text?: Localized; untranslated: Lang[] } {
-  const en = texts.en;
-  if (!isPresent(en, key)) return { untranslated: [] };
-  const textFor = (lang: Lang): string => {
-    const value = texts[lang];
-    return isPresent(value, key) ? value : en;
-  };
-  return { text: localizedFrom(textFor), untranslated: LANGS.filter((lang) => !isPresent(texts[lang], key)) };
+  return resolveTexts(texts, (_lang, value) => (isPresent(value, key) ? value : undefined)) ?? { untranslated: [] };
 }
 
 type Texts = Partial<Record<Lang, string>>;

@@ -1,7 +1,8 @@
 /** Which areas each bestiary mob is known to appear in: area standing mobs plus arena-wave mobs mapped through a hand-written prefix table. */
 import { z } from "zod";
 import { issue, type Issue } from "./issues";
-import { localize, locRef } from "./loc-table";
+import { localize } from "./game-text";
+import { locRef } from "./loc-table";
 import type { MapData } from "./map-schema";
 import type { Lang } from "./config";
 import type { MobArea } from "./mob-schema";
