@@ -44,7 +44,7 @@ const hasNoList = (chests: readonly Chest[], key: Slot["slot"]): boolean => ches
                 <tr>
                   <th scope="row">
                     {lootSlotLabel(key, lang)}
-                    {hasNoList(chests, key) && <span class="soul-storm-cell-note">{t(lang, "mobDropPoolNone")}</span>}
+                    {hasNoList(chests, key) && <span class="soul-storm-cell-note">{t(lang, "lootNoList")}</span>}
                   </th>
                   {chests.map((chest) => {
                     const slot = slotOf(chest, key);

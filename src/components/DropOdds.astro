@@ -28,6 +28,7 @@ const calculator = key ? `${href(lang, "drops")}?item=${encodeURIComponent(key)}
       {groups.map((group) => (
         <section class="drop-group" data-kind={group.kind} data-testid={`drop-group-${group.kind}`}>
           <h3>{t(lang, group.heading)}</h3>
+          {group.kind === "regular" && <p class="note" data-testid="drop-regular-note">{t(lang, "dropRegularNote")}</p>}
           <DropRowsTable lang={lang} rows={group.visible} label={t(lang, group.heading)} />
           {group.folded.length > 0 && (
             <details class="drop-more" data-testid="drop-more">

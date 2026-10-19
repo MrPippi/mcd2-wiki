@@ -72,12 +72,47 @@ describe("dropGroupsOf", () => {
 
   it("groups by kind in a fixed order, best first inside a group", () => {
     const groups = dropGroupsOf(entry("armor", "frost-rime-chest-unique"), "en");
-    expect(groups.map((group) => group.kind)).toEqual(["chest", "mob", "quest"].filter((kind) => groups.some((group) => group.kind === kind)));
+    expect(groups.map((group) => group.kind)).toEqual(["chest", "mob", "regular", "quest"].filter((kind) => groups.some((group) => group.kind === kind)));
     for (const group of groups) {
       const values = group.rows.map((row) => row.probability);
       expect(values).toEqual([...values].sort((a, b) => b - a));
       expect(group.rows.every((row) => row.chance.endsWith("%"))).toBe(true);
     }
+  });
+
+  it("shows regular mobs on gear pages as their own group, with the Geomancer on artifact pages only", () => {
+    const names = (category: Parameters<typeof entry>[0], slug: string) =>
+      dropGroupsOf(entry(category, slug), "en").filter((group) => group.kind === "regular").flatMap((group) => group.rows.map((row) => row.source.name));
+    const sword = names("melee", "sword");
+    expect(sword).toContain("Regular mobs");
+    expect(sword).toContain("Regular mobs · Soul Corrupted");
+    expect(sword.some((name) => name.startsWith("Geomancer"))).toBe(false);
+    const artifact = dropData.items.find((item) => item.key.startsWith("artifact/") && itemRows(dropData, item.key, DEFAULT_SELECTION).some((row) => row.source === "regular:Geomancer"));
+    const [category, slug] = (artifact?.key ?? "").split("/");
+    expect(names(category as Parameters<typeof entry>[0], slug)).toContain("Geomancer");
+  });
+
+  it("gives a regular mob the odds of one area draw: 1.25% of the pool share on Plains.A1, 25% when Soul Corrupted", () => {
+    // Third-party WellspringChest baseline (one guaranteed Item draw from the same pool and rarity): sword 0.0438095, sword-unique1 0.0038095.
+    const at = (key: string, id: string) => itemRows(dropData, key, DEFAULT_SELECTION).find((row) => row.source === id && row.area === "area:SW.Area.Plains.A1")?.probability;
+    expect(at("melee/sword", "regular:Hostile")).toBeCloseTo(0.0125 * 0.0438095238, 9);
+    expect(at("melee/sword-unique1", "regular:Hostile")).toBeCloseTo(0.0125 * 0.0038095238, 9);
+    expect(at("melee/sword", "regular:SoulStated")).toBeCloseTo(0.25 * 0.0438095238, 9);
+  });
+
+  it("covers every area a regular mob is found in that has a drop pool, once per source", () => {
+    const contexts = (id: string) => dropData.sources.find((source) => source.id === id)?.contexts.map(([area]) => area) ?? [];
+    expect(contexts("regular:Hostile")).toHaveLength(9);
+    expect(new Set(contexts("regular:Hostile")).size).toBe(9);
+    expect(contexts("regular:SoulStated")).toEqual(contexts("regular:Hostile"));
+  });
+
+  it("labels the regular mob sources and links them to the bestiary or the Geomancer", () => {
+    const source = (id: string) => dropData.sources.find((one) => one.id === id);
+    const hostile = sourceLabel("en", source("regular:Hostile") ?? dropData.sources[0]);
+    expect(hostile).toEqual({ name: "Regular mobs", href: "/en/mobs/" });
+    expect(sourceLabel("zh", source("regular:SoulStated") ?? dropData.sources[0]).name).toBe("一般怪物 · 靈魂腐化");
+    expect(sourceLabel("en", source("regular:Geomancer:soul") ?? dropData.sources[0]).href).toMatch(/\/mobs\/geomancer/);
   });
 
   it("keeps the first rows visible and the rest for the fold", () => {

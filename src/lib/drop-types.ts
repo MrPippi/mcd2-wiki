@@ -49,7 +49,7 @@ export interface DropProfile {
 export interface DropSource {
   /** The loot-sources id ("chest:FancyChest", "mob:PiggyBank") or "quest:<quest id>:<reward batch>". */
   readonly id: string;
-  readonly kind: "chest" | "quest" | "mob";
+  readonly kind: "chest" | "quest" | "mob" | "regular";
   /** A quest reward batch given on the first completion only. */
   readonly first?: true;
   /** The game data does not say where this chest appears; it is listed for every area whose pool has the item. */

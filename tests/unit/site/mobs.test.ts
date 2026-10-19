@@ -58,11 +58,11 @@ describe("formatting", () => {
 });
 
 describe("dropPoolNote", () => {
-  it("says where gear comes from, and that the data names no list when the pool is none", () => {
+  it("says where gear comes from, and that the odds use the area pool when the data names no list", () => {
     const item = { slot: "item", guaranteed: 0, rolls: 1, chancePerRoll: 0.0125 } as const;
     expect(dropPoolNote({ ...item, pool: "area" }, "en")).toBe("Items come from the area's drop pool.");
     expect(dropPoolNote({ ...item, pool: "own" }, "en")).toBe("Items come from this mob's own list.");
-    expect(dropPoolNote({ ...item, pool: "none" }, "en")).toBe("The data has no item list for this.");
+    expect(dropPoolNote({ ...item, pool: "none" }, "en")).toBe("The data names no item list for this mob; the drop odds use the pool of the area it is in.");
   });
 
   it("adds nothing to slots whose label already says what drops", () => {

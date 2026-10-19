@@ -20,6 +20,11 @@ describe("DropDataSchema", () => {
     expect(DropDataSchema.safeParse(valid()).success).toBe(true);
   });
 
+  it("knows the regular mob source kind and no other new one", () => {
+    expect(parse((data) => ({ ...data, sources: [{ id: "regular:Hostile", kind: "regular", contexts: [["area:SW.Area.Plains.A1", "bbb"]] }] })).success).toBe(true);
+    expect(parse((data) => ({ ...data, sources: [{ id: "x", kind: "merchant", contexts: [["", "bbb"]] }] })).success).toBe(false);
+  });
+
   it("refuses fields it does not know, at any level", () => {
     expect(parse((data) => ({ ...data, extra: 1 })).success).toBe(false);
     expect(parse((data) => ({ ...data, items: [{ ...data.items[0], extra: 1 }] })).success).toBe(false);

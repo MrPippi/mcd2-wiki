@@ -29,6 +29,13 @@ describe("calcPayload", () => {
     expect(parseCalcPayload({ ...payload, available: undefined })).toBeUndefined();
   });
 
+  it("lists the regular mobs once per state, not once per area", () => {
+    const names = Object.entries(payload.sources).filter(([id]) => id.startsWith("regular:")).map(([, label]) => label.name);
+    expect(names).toEqual(["Regular mobs", "Regular mobs · Soul Corrupted", "Geomancer", "Geomancer · Soul Corrupted"]);
+    const sources = narrowing(stateRows(dropData, decodeState("?item=melee/sword", payload))).sources;
+    expect(sources.filter((id) => id.startsWith("regular:")).sort()).toEqual(["regular:Geomancer", "regular:Geomancer:soul", "regular:Hostile", "regular:SoulStated"]);
+  });
+
   it("marks a source the data does not place", () => {
     expect(Object.values(payload.sources).some((label) => label.unplaced)).toBe(true);
     expect(Object.values(payload.sources).filter((label) => label.unplaced).length).toBeLessThan(Object.keys(payload.sources).length);

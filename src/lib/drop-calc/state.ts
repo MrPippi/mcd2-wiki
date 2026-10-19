@@ -1,5 +1,5 @@
 /** The calculator's choices, their place in the page URL (`?item=melee/sword&threat=20&diff=normal&rarity=any`), and the rows they give. */
-import { formatOdds } from "../affix-odds";
+import { formatDropOdds } from "../drop-format";
 import { itemRows } from "../drop-odds";
 import type { DropFile, DropRow, TargetRarity } from "../drop-types";
 import type { CalcPayload } from "./parse";
@@ -67,4 +67,4 @@ export function narrowing(rows: readonly DropRow[]): { sources: string[]; areas:
   return { sources: [...new Set(rows.map((row) => row.source))], areas: [...new Set(rows.map((row) => row.area).filter((area) => area !== ""))] };
 }
 
-export { formatOdds };
+export { formatDropOdds };

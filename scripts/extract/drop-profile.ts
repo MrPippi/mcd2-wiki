@@ -2,7 +2,7 @@
  * The profile of one trigger: the item-bearing slots it can roll and the rarity rows that apply, before items are numbered.
  * A trigger is several tags together (see drop-slots.ts); a mob is a counted list of slots over its area's pool instead.
  */
-import { poolWeights } from "./drop-pool";
+import { mergePools, poolWeights } from "./drop-pool";
 import { contextRarityOps, type RarityRow } from "./drop-rarity-rows";
 import { tagKey } from "./mob-tags";
 import { closureOf, mergeSlots, type Resolved, type SlotResolver } from "./drop-slots";
@@ -84,11 +84,15 @@ export interface SlotSpec {
   readonly chance: number;
 }
 
-/** The profile of a source whose counts are given (a mob) and whose pools come from the area tag; `tags` feed the rarity rows. */
-export function profileOfSpecs(context: ProfileContext, specs: readonly SlotSpec[], areaTag: string, tags: readonly string[]): RawProfile {
+/**
+ * The profile of a source whose counts are given (a mob) and whose pools come from the area tag; `tags` feed the rarity rows.
+ * `poolTags` name rows whose own pool ops (a Multiply on artifacts) are merged into the area's pool.
+ */
+export function profileOfSpecs(context: ProfileContext, specs: readonly SlotSpec[], areaTag: string, tags: readonly string[], poolTags: readonly string[] = []): RawProfile {
   const built = specs.map((spec) => {
     const area = context.resolver.resolve(areaTag, spec.slot);
-    return usable(context, spec.slot, area && { ...spec, pool: area.pool });
+    const extra = poolTags.map((tag) => context.resolver.resolve(tag, spec.slot)?.pool);
+    return usable(context, spec.slot, area && { ...spec, pool: mergePools([area.pool, ...extra.filter((pool) => pool !== undefined)]) });
   });
   return profileOf(context, built, [...tags, areaTag]);
 }

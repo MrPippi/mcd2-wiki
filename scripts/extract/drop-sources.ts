@@ -7,20 +7,21 @@
  * - every reward batch of a published quest: the entry's own tags together with the quest's reward area;
  * - bosses, minibosses and the Piggy Bank, with the counts the bestiary shows, over the pool of each area they are found in; one
  *   with no known area that has a book slot is published once, for no area, and marked `unplaced`.
- * Regular mobs and merchants are left out of this model (a later change), and so are Soul Storm and key chests; the extract reports
- * what it skips.
+ * - regular mobs and their Soul Corrupted state, one source with a context per area (drop-regular.ts), and the Geomancer apart.
+ * Merchants are left out of this model (a later change), and so are Soul Storm and key chests; the extract reports what it skips.
  */
 import { closureOf } from "./drop-slots";
 import { issue, type Issue } from "./issues";
 import { profileOfSpecs, profileOfTags, ITEM_SLOTS, type ProfileContext, type RawProfile } from "./drop-profile";
 import type { LootRow, LootTables } from "./loot-tables";
 import type { ItemSourcesData, MobData } from "./mob-schema";
+import { nearestPlace, planRegular } from "./drop-regular";
 import { tagKey } from "./mob-tags";
 import type { LibraryQuest } from "./quest-tables";
 
 export interface Planned {
   readonly id: string;
-  readonly kind: "chest" | "quest" | "mob";
+  readonly kind: "chest" | "quest" | "mob" | "regular";
   /** A quest batch given on the first completion only. */
   readonly first?: boolean;
   /** The data does not say where the source appears. */
@@ -42,12 +43,12 @@ export interface PlanInput {
   readonly placements: ReadonlyMap<string, readonly string[]>;
 }
 
-interface Place {
+export interface Place {
   readonly id: string;
   readonly tag: string;
 }
 
-interface Planning {
+export interface Planning {
   readonly planned: Planned[];
   readonly issues: Issue[];
 }
@@ -161,15 +162,15 @@ function planQuests(input: PlanInput, context: ProfileContext): Planning {
 
 const lowerSlot = (slot: string): string => slot.toLowerCase();
 
-/** Bosses, minibosses and the Piggy Bank: the bestiary's counts for the slots that draw from the area pool. */
+/** Bosses, minibosses and the Piggy Bank: the bestiary's counts for the slots that draw from the area pool (a slot with no list of its own does too), in the nearest area with a pool. */
 function planMobs(input: PlanInput, context: ProfileContext, places: { areas: readonly Place[] }): Planning {
   const mobs = input.mobs.mobs.filter((mob) => MOB_KINDS.has(mob.kind) || mob.id === PIGGY_BANK);
   const issues: Issue[] = [];
   const planned = mobs.flatMap((mob): Planned[] => {
     const drops = mob.drops.filter((drop) => ITEM_SLOTS.includes(lowerSlot(drop.slot)) && (drop.guaranteed > 0 || drop.rolls > 0));
     issues.push(...drops.filter((drop) => drop.pool === "own").map((drop) => issue("drop-ignored", `${mob.id}: ${drop.slot} draws from its own list, not covered`)));
-    const specs = drops.filter((drop) => drop.pool === "area").map((drop) => ({ slot: lowerSlot(drop.slot), guaranteed: drop.guaranteed, rolls: drop.rolls, chance: drop.chancePerRoll }));
-    const found = places.areas.filter((place) => mob.areas.some((area) => tagKey(area.areaId) === tagKey(place.tag)));
+    const specs = drops.filter((drop) => drop.pool !== "own").map((drop) => ({ slot: lowerSlot(drop.slot), guaranteed: drop.guaranteed, rolls: drop.rolls, chance: drop.chancePerRoll }));
+    const found = [...new Map(mob.areas.flatMap((area) => { const place = nearestPlace(area.areaId, places.areas, context.parents); return place ? [[place.id, place] as const] : []; })).values()];
     const books = specs.filter((spec) => spec.slot === ENCHANTED_BOOK);
     const tags = input.mobTags.get(mob.slug) ?? [];
     if (found.length === 0 && specs.length > books.length) issues.push(issue("drop-ignored", `${mob.id}: found in no area with a drop pool, its non-book slots are not covered`));
@@ -191,5 +192,9 @@ export function planSources(input: PlanInput, context: ProfileContext): Planning
   const chests = planChests(input, context, [...places.areas, ...extra]);
   const quests = planQuests(input, context);
   const mobs = planMobs(input, context, places);
-  return { planned: [...chests.planned, ...mobs.planned, ...quests.planned], issues: [...places.issues, ...chests.issues, ...mobs.issues, ...quests.issues] };
+  const regular = planRegular(input, context, places);
+  return {
+    planned: [...chests.planned, ...mobs.planned, ...regular.planned, ...quests.planned],
+    issues: [...places.issues, ...chests.issues, ...mobs.issues, ...regular.issues, ...quests.issues],
+  };
 }

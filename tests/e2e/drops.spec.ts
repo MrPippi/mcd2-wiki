@@ -21,11 +21,34 @@ test.describe("drop odds", () => {
 
   test("the page says what is not included and flags chests whose area the data does not give", async ({ page }) => {
     await page.goto("/en/enchantment/channeling/");
-    await expect(page.getByTestId("drop-not-included")).toContainText("regular mobs and merchants");
+    await expect(page.getByTestId("drop-not-included")).toContainText("merchants, Soul Storm chests and key chests");
     await expect(page.getByTestId("drop-unplaced").first()).toBeVisible();
     await page.goto("/en/drops/?item=enchantment-book%2Fchanneling");
     await expect(page.getByTestId("drop-not-included")).toBeVisible();
     await expect(page.getByTestId("drop-results").locator(".tag.warn").first()).toBeVisible();
+  });
+
+  test("gear pages list regular mobs in their own group, with an area link and the per-kill note", async ({ page }) => {
+    await page.goto("/en/melee/sword/");
+    const group = page.getByTestId("drop-odds").getByTestId("drop-group-regular");
+    await expect(group).toBeVisible();
+    await expect(group.getByTestId("drop-regular-note")).toBeVisible();
+    await expect(group).toContainText("Regular mobs");
+    await expect(group).toContainText("Soul Corrupted");
+    await expect(group.locator("tbody")).not.toContainText("Geomancer");
+    await expect(group.locator("tbody a").first()).toBeVisible();
+    await expect(page.getByTestId("drop-not-included")).not.toContainText("regular mobs");
+    expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
+  });
+
+  test("the calculator lists regular mobs once in the source menu and prints small chances with two significant digits", async ({ page }) => {
+    await page.goto("/en/drops/?item=melee/sword-unique1");
+    const menu = page.getByTestId("drop-source");
+    await expect(menu.locator("option", { hasText: /^Regular mobs$/ })).toHaveCount(1);
+    await menu.selectOption("regular:Hostile");
+    const rows = page.getByTestId("drop-results").locator("tbody tr");
+    await expect(rows.first()).toBeVisible();
+    await expect(rows.first().locator("td.drop-chance")).toHaveText(/^0\.00\d+%$/);
   });
 
   test("the calculator recomputes when the threat level, difficulty or rarity changes", async ({ page }) => {

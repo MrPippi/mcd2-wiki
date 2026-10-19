@@ -2,7 +2,7 @@
 import type { DropFile, DropRow } from "../drop-types";
 import { mountPicker, optionArt, pickerParts, type PickerGroup, type PickerParts } from "../item-picker";
 import { parseCalcPayload, type CalcItem, type CalcLabel, type CalcPayload } from "./parse";
-import { allRows, decodeState, encodeState, formatOdds, narrowRows, narrowing, type CalcState } from "./state";
+import { allRows, decodeState, encodeState, formatDropOdds, narrowRows, narrowing, type CalcState } from "./state";
 
 /** Fired after replaceState so the language links pick up the new query (SiteHeader listens). */
 const LOCATION_EVENT = "mcd2:locationchange";
@@ -89,7 +89,7 @@ function renderRows(parts: Parts, payload: CalcPayload, rows: readonly DropRow[]
       source.append(nameCell(payload.sources[row.source], row.source, payload.labels.unplaced));
       const area = document.createElement("td");
       area.append(row.area === "" ? payload.labels.anyArea : nameCell(payload.areas[row.area], row.area, payload.labels.unplaced));
-      const chance = Object.assign(document.createElement("td"), { className: "drop-chance", textContent: formatOdds(row.probability) });
+      const chance = Object.assign(document.createElement("td"), { className: "drop-chance", textContent: formatDropOdds(row.probability) });
       tr.append(source, area, chance);
       return tr;
     }),

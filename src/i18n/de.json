@@ -143,7 +143,7 @@
     "mobDropRolls",
     "mobDropPoolArea",
     "mobDropPoolOwn",
-    "mobDropPoolNone",
+    "lootNoList", "mobDropPoolNone",
     "mobVariants",
     "mobVariantOf",
     "mobPortraitCredit",
@@ -433,7 +433,9 @@
     "markerStorm",
     "markerTalismanChest",
     "markerDungeon",
-    "mapNoteStorm"
+    "mapNoteStorm",
+    "dropRegularMobs",
+    "dropRegularNote"
   ],
   "_english": [
     "armorPiece",
@@ -622,7 +624,8 @@
   "mobDropRolls": "Zufallswürfe: {n}, je {chance}",
   "mobDropPoolArea": "Gegenstände stammen aus dem Beute-Pool des Gebiets.",
   "mobDropPoolOwn": "Gegenstände stammen aus der eigenen Liste dieser Kreatur.",
-  "mobDropPoolNone": "Die Daten enthalten hierfür keine Gegenstandsliste.",
+  "lootNoList": "Die Daten enthalten hierfür keine Gegenstandsliste.",
+  "mobDropPoolNone": "Die Daten nennen für diesen Gegner keine Gegenstandsliste; die Drop-Chancen verwenden den Pool des Gebiets, in dem er vorkommt.",
   "mobVariants": "Varianten",
   "mobVariantOf": "Variante von",
   "mobPortraitCredit": "Porträts sind Renderings der Spielmodelle.",
@@ -912,7 +915,7 @@
   "dropColChance": "Chance",
   "dropOpenCalc": "Bedingungen im Drop-Rechner ändern",
   "dropCalcIntro": "Wähle einen Gegenstand, eine Bedrohungsstufe, eine Schwierigkeit und eine Seltenheit, um zu sehen, wie wahrscheinlich jede Quelle ihn pro Auslösung liefert.",
-  "dropCalcCoverage": "Abgedeckt sind die Truhen der Gegenstandsseiten, jede Belohnung der veröffentlichten Quests sowie Bosse, Minibosse und das Sparschwein. Händler, normale Gegner, Seelensturm-Truhen und Schlüsseltruhen nicht.",
+  "dropCalcCoverage": "Abgedeckt sind die Truhen der Gegenstandsseiten, jede Belohnung der veröffentlichten Quests, Bosse, Minibosse und das Sparschwein sowie die normalen Gegner jedes Gebiets (einschließlich seelenverdorbener Gegner und des Geomanten). Händler, Seelensturm-Truhen und Schlüsseltruhen nicht.",
   "dropCalcNoScript": "Der Rechner braucht JavaScript. Ohne JavaScript zeigt jede Gegenstandsseite ihre Drop-Chancen bei Bedrohungsstufe 20 und normaler Schwierigkeit.",
   "dropCalcLoadFailed": "Die Drop-Daten konnten nicht geladen werden.",
   "dropPickItem": "Gegenstand wählen …",
@@ -926,7 +929,9 @@
   "dropNoResult": "Unter diesen Bedingungen kann keine Quelle diesen Gegenstand liefern.",
   "dropEmpty": "Wähle einen Gegenstand, um zu sehen, wo er droppt und wie wahrscheinlich das ist.",
   "dropCalc": "Drop-Rechner",
-  "dropNotIncluded": "Noch nicht enthalten: normale Gegner und Händler.",
+  "dropNotIncluded": "Noch nicht enthalten: Händler, Seelensturm-Truhen und Schlüsseltruhen.",
+  "dropRegularMobs": "Normale Gegner",
+  "dropRegularNote": "Chance pro besiegtem Gegner; jeder normale Gegner eines Gebiets liefert denselben Wert, egal welcher. Seelenverdorbene Gegner lassen weit öfter etwas fallen und haben eigene Zeilen; der Geomant verdoppelt das Gewicht von Artefakten. Wie oft Gegner auftauchen, ist nicht enthalten.",
   "dropAreaUnconfirmed": "Gebiet unbestätigt: Die Daten sagen nicht, wo diese Quelle vorkommt",
   "dropCalcNoData": "Dieser Build enthält keine Drop-Daten."
 }

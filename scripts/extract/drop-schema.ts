@@ -35,7 +35,7 @@ const ProfileSchema = z.strictObject({ slots: z.array(SlotSchema).min(1), rarity
 const SourceSchema = z.strictObject({
   /** The loot-sources id ("chest:FancyChest", "mob:PiggyBank") or "quest:<quest id>:<reward batch>". */
   id: z.string().min(1),
-  kind: z.enum(["chest", "quest", "mob"]),
+  kind: z.enum(["chest", "quest", "mob", "regular"]),
   first: z.literal(true).optional(),
   unplaced: z.literal(true).optional(),
   /** Area source id ("" for none) and the profile that applies there. */

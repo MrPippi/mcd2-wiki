@@ -142,7 +142,7 @@
     "mobDropRolls",
     "mobDropPoolArea",
     "mobDropPoolOwn",
-    "mobDropPoolNone",
+    "lootNoList", "mobDropPoolNone",
     "mobVariants",
     "mobVariantOf",
     "mobPortraitCredit",
@@ -432,7 +432,9 @@
     "markerStorm",
     "markerTalismanChest",
     "markerDungeon",
-    "mapNoteStorm"
+    "mapNoteStorm",
+    "dropRegularMobs",
+    "dropRegularNote"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -619,7 +621,8 @@
   "mobDropRolls": "ランダム抽選：{n} 回（各 {chance}）",
   "mobDropPoolArea": "アイテムはエリアのドロッププールから選ばれます。",
   "mobDropPoolOwn": "アイテムはこのモブ専用のリストから選ばれます。",
-  "mobDropPoolNone": "データにアイテムのリストがありません。",
+  "lootNoList": "データにアイテムのリストがありません。",
+  "mobDropPoolNone": "データにはこのモブのアイテムリストがありません。ドロップ確率は、いるエリアのドロッププールで計算しています。",
   "mobVariants": "亜種",
   "mobVariantOf": "亜種の元",
   "mobPortraitCredit": "画像はゲームのモデルをレンダリングしたものです。",
@@ -909,7 +912,7 @@
   "dropColChance": "確率",
   "dropOpenCalc": "ドロップ確率計算機で条件を変える",
   "dropCalcIntro": "アイテム、脅威レベル、難易度、狙うレアリティを選ぶと、各入手元を1回発動したときに出る確率がわかります。",
-  "dropCalcCoverage": "対象：アイテムページに載っているチェスト、公開済みクエストのすべての報酬、ボス、ミニボス、ブタの貯金箱。商人、通常のモブ、ソウルストームのチェスト、鍵付きチェストは含みません。",
+  "dropCalcCoverage": "対象：アイテムページに載っているチェスト、公開済みクエストのすべての報酬、ボス、ミニボス、ブタの貯金箱、そして各エリアの通常のモブ（ソウルに冒された個体とジオマンサーを含む）。商人、ソウルストームのチェスト、鍵付きチェストは含みません。",
   "dropCalcNoScript": "計算機には JavaScript が必要です。JavaScript がなくても、各アイテムのページに脅威レベル20・通常難易度のドロップ確率が表示されます。",
   "dropCalcLoadFailed": "ドロップデータを読み込めませんでした。",
   "dropPickItem": "アイテムを選択…",
@@ -923,7 +926,9 @@
   "dropNoResult": "この条件では、このアイテムが出る入手元はありません。",
   "dropEmpty": "アイテムを選ぶと、どこで出るか、その確率がわかります。",
   "dropCalc": "ドロップ確率計算機",
-  "dropNotIncluded": "未対応：通常のモブと商人。",
+  "dropNotIncluded": "未対応：商人、ソウルストームのチェスト、鍵付きチェスト。",
+  "dropRegularMobs": "通常のモブ",
+  "dropRegularNote": "1体倒したときの確率です。同じエリアの通常のモブは種類を問わず同じ値になります。ソウルに冒された個体ははるかに落としやすいため別の行に分けてあり、ジオマンサーはアーティファクトの重みが2倍になります。モブの出現頻度は含みません。",
   "dropAreaUnconfirmed": "エリア未確認：この入手元がどこに出現するかデータにありません",
   "dropCalcNoData": "このビルドにはドロップデータがありません。"
 }

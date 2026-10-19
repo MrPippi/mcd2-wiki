@@ -2,9 +2,9 @@
 import { DropDataSchema } from "../../scripts/extract/drop-schema";
 import type { Entry } from "../../scripts/extract/schemas";
 import rawDrops from "../data/drop-models.json";
-import { formatOdds } from "./affix-odds";
 import { booksFor } from "./data";
 import { areaLabel, sourceIndex, sourceLabel, type DropLabel } from "./drop-labels";
+import { formatDropOdds } from "./drop-format";
 import { itemRows } from "./drop-odds";
 import type { DropFile, DropRow, DropSelection } from "./drop-types";
 import type { Lang, UiKey } from "./i18n";
@@ -21,15 +21,19 @@ export const VISIBLE_ROWS = 10;
 
 export type DropKind = DropFile["sources"][number]["kind"];
 /** Groups in page order. */
-const KIND_ORDER: readonly DropKind[] = ["chest", "mob", "quest"];
+const KIND_ORDER: readonly DropKind[] = ["chest", "mob", "regular", "quest"];
 /** Gear pages leave out the shared chests (Fancy, Wooden, Wellspring…): they say little about one item and the calculator
  *  still lists them. Enchantment pages keep them (books come mostly from chests), and a talisman chest holds its own
  *  talisman, often the only source, so it stays too. */
 const KEPT_CHEST = /^chest:TalismansChest/;
 const KEEPS_CHESTS: ReadonlySet<Entry["category"]> = new Set(["enchantment", "enchantment-book"]);
-const shownOn = (entry: Entry, source: DropFile["sources"][number] | undefined): boolean =>
-  source?.kind !== "chest" || KEEPS_CHESTS.has(entry.category) || KEPT_CHEST.test(source.id);
-const KIND_HEADING: Readonly<Record<DropKind, UiKey>> = { chest: "sourceChests", mob: "questRelatedMobs", quest: "sourceQuests" };
+/** The Geomancer doubles the weight of artifacts; for any other item it is one more row of the same small number. */
+const GEOMANCER_SOURCE = /^regular:Geomancer/;
+const shownOn = (entry: Entry, source: DropFile["sources"][number] | undefined): boolean => {
+  if (source?.kind === "regular") return !GEOMANCER_SOURCE.test(source.id) || entry.category === "artifact";
+  return source?.kind !== "chest" || KEEPS_CHESTS.has(entry.category) || KEPT_CHEST.test(source.id);
+};
+const KIND_HEADING: Readonly<Record<DropKind, UiKey>> = { chest: "sourceChests", mob: "questRelatedMobs", regular: "dropRegularMobs", quest: "sourceQuests" };
 
 export interface DropRowView {
   readonly source: DropLabel;
@@ -84,7 +88,7 @@ export function dropGroupsOf(entry: Entry, lang: Lang, file: DropFile = dropData
         return {
           source: source ? sourceLabel(lang, source, file.sources) : { name: row.source },
           ...(area ? { area } : {}),
-          chance: formatOdds(row.probability),
+          chance: formatDropOdds(row.probability),
           probability: row.probability,
         };
       });

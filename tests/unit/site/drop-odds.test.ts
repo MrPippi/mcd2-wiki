@@ -154,6 +154,14 @@ describe("profileOdds", () => {
     expect(profileOdds(f, f.profiles.q, [1], NORMAL)).toBeCloseTo(0.5);
   });
 
+  it("gives a mob roll its chance times the share of one guaranteed draw, as the history of a single draw changes nothing", () => {
+    const f = file({
+      pools: { p: [[0, 1], [1, 1], [2, 2]] },
+      profiles: { once: { slots: [slot()], rarity: [] }, mob: { slots: [slot({ guaranteed: 0, rolls: 1, chance: 0.0125 })], rarity: [] } },
+    });
+    for (const target of [0, 1, 2]) expect(profileOdds(f, f.profiles.mob, [target], NORMAL)).toBeCloseTo(0.0125 * profileOdds(f, f.profiles.once, [target], NORMAL), 12);
+  });
+
   it("applies the threat factors and the difficulty row to the rarity", () => {
     const f = file({
       levels: [1, 2],
