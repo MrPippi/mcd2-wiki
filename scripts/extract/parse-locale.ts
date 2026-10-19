@@ -1,4 +1,5 @@
-import { LANGS, LANG_META, PATHS, type Lang } from "../../shared/config";
+import { PATHS } from "./config";
+import { LANGS, LANG_META, type Lang } from "../../shared/config";
 import { byLang } from "../../shared/lang";
 import { ExtractError, formatZodIssue } from "./issues";
 import { readJsonFile } from "./read-json";

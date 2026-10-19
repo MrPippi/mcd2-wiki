@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { copyFile, mkdir } from "node:fs/promises";
 import path from "node:path";
-import { SPLASH_SOURCE, SPLASH_TARGET } from "../../../shared/config";
+import { SPLASH_SOURCE, SPLASH_TARGET } from "../config";
 import { issue } from "../issues";
 import { defineStep } from "../step";
 

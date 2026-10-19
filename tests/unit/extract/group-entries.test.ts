@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { TableSource } from "../../../shared/config";
+import type { TableSource } from "../../../scripts/extract/config";
 import { groupEntries, resolveText } from "../../../scripts/extract/group-entries";
 import { makeLocales, ns } from "../../helpers/locales";
 import { loc } from "../../helpers/localized";

@@ -1,7 +1,8 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { assembleEntry, assertUniqueSlugs } from "../assemble";
-import { ICON_SOURCES, TABLES, type IconSource } from "../../../shared/config";
+import { TABLES } from "../config";
+import { ICON_SOURCES, type IconSource } from "../../../shared/config";
 import { dedupeByName } from "../dedupe";
 import { groupEntries, type RawEntry } from "../group-entries";
 import { listIconFiles, loadOverrides } from "../icon-files";
