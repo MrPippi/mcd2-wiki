@@ -10,7 +10,7 @@ import { areaPrefix, type AreaNamer } from "./mob-areas";
 import { ItemSourcesSchema, type BookDrop, type ItemSources, type ItemSourcesData, type LootSlotKey, type LootSource, type SourceKindName } from "./mob-schema";
 import { tagKey } from "./mob-tags";
 import type { LocaleFile } from "./schemas";
-import { SOURCE_NAME_KEYS, sourceName, type NameKeys, type SourceKind, type SourceName } from "./source-names";
+import { SOURCE_NAME_KEYS, sourceName, talismanChestName, type NameKeys, type SourceKind, type SourceName } from "./source-names";
 
 export interface SourcesInput {
   readonly tables: LootTables;
@@ -32,7 +32,8 @@ interface Contrib<T> {
 
 /** Names each source once and hands out its id ("<kind>:<row id>"); fallback names are reported once per row id. */
 interface Registry {
-  readonly add: (kind: SourceKindName, id: string) => string;
+  /** `name` replaces the name the id would get (a chest named by what it holds). */
+  readonly add: (kind: SourceKindName, id: string, name?: SourceName) => string;
   readonly sources: () => Record<string, LootSource>;
   readonly issues: () => Issue[];
 }
@@ -52,6 +53,8 @@ const BOOK_POOL_PREFIX = "sw.lootsource.enchantmentbooks";
 const CHEST_SLOTS: readonly LootSlotKey[] = ["item", "specialGear", "talismans"];
 const QUEST_SLOTS: readonly LootSlotKey[] = ["specialGear", "item", "enchantedBook"];
 const BOOK_SLOTS: readonly LootSlotKey[] = ["enchantedBook", "item"];
+/** A secret talisman chest row (TalismansChest_SpeedIncrement): named by the one talisman it holds. */
+const TALISMAN_CHEST = /^TalismansChest_/;
 /** A procedural chest row is the same chest the page already names (FancyChest_Procedural -> FancyChest). */
 const PROCEDURAL_SUFFIX = /_Procedural$/;
 
@@ -67,10 +70,10 @@ function makeRegistry(input: SourcesInput): Registry {
     return name ? { name, untranslated: [], official: true } : sourceName(id, {}, input.locales, AREA_STRIP);
   };
   return {
-    add: (kind, id) => {
+    add: (kind, id, name) => {
       const sourceId = `${kind}:${id}`;
       if (!named.has(sourceId)) {
-        const made = nameOf(kind, id);
+        const made = name ?? nameOf(kind, id);
         named.set(sourceId, { kind, name: made.name, untranslated: [...made.untranslated] });
         if (!made.official) fallbacks.push(id);
       }
@@ -93,6 +96,9 @@ function areaSources(ctx: Context): Contrib<string>[] {
     });
 }
 
+const chestNameOf = (row: LootRow, refs: readonly ItemRef[]): SourceName | undefined =>
+  TALISMAN_CHEST.test(row.Name) && refs.length === 1 ? talismanChestName(refs[0].entry.name, refs[0].entry.untranslated ?? []) : undefined;
+
 /** A chest slot with its own pool gives the exact items and sets it lists; category tags are reported, not spread over every item. */
 function fixedChestSlot(ctx: Context, row: LootRow, slot: LootSlotValue): { items: Contrib<Chest>[]; issues: Issue[] } {
   const tags = poolTags(slot, exclusionRowsOf(row, ctx.byTypeTag));
@@ -100,7 +106,7 @@ function fixedChestSlot(ctx: Context, row: LootRow, slot: LootSlotValue): { item
   const categories = tags.filter((tag) => ctx.index.resolve(tag).length === 0 && ctx.index.withTrait(tag).length > 0);
   const issues = categories.length > 0 ? [issue("loot-chest-by-category", `${row.Name}: ${categories.join(", ")}`)] : [];
   if (refs.length === 0) return { items: [], issues };
-  return { items: contrib(refs, { id: ctx.names.add("chest", row.Name), pool: "fixed" as const }), issues };
+  return { items: contrib(refs, { id: ctx.names.add("chest", row.Name, chestNameOf(row, refs)), pool: "fixed" as const }), issues };
 }
 
 /** Slots whose name is no known loot slot but which list items (CampWoodenChest): they count as fixed contents (Ruling 26). */

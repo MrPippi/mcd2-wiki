@@ -1,6 +1,6 @@
 /* Drop calculator: a wrapping grid of choices over the same ruled table the item pages use. */
 .drop-controls { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); margin: var(--space-4) 0; }
-.drop-controls label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); min-width: 0; }
+.drop-controls label { display: grid; gap: 4px; font-size: 13px; color: var(--muted); min-width: 0; grid-template-columns: minmax(0, 1fr); }
 .drop-controls .drop-wide { grid-column: 1 / -1; }
 .drop-controls select, .drop-controls input { min-height: 40px; max-width: 100%; padding: 0 var(--space-2); border: 1px solid var(--rule-strong); background: var(--paper); color: var(--text); font: inherit; }
 .drop-controls select:focus-visible, .drop-controls input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }

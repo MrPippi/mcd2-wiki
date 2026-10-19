@@ -51,6 +51,15 @@ test.describe("drop odds", () => {
     await expect(rows.first().locator("td.drop-chance")).toHaveText(/^0\.00\d+%$/);
   });
 
+  test("the calculator names every source in the menu once, with the dungeon and rift note on procedural chests", async ({ page }) => {
+    await page.goto("/en/drops/?item=melee/sword-unique1");
+    const menu = page.getByTestId("drop-source");
+    await expect(menu.locator("option", { hasText: /^Fancy Chest$/ })).toHaveCount(1);
+    await expect(menu.locator("option", { hasText: /^Fancy Chest · dungeon and rift version$/ })).toHaveCount(1);
+    const texts = await menu.locator("option").allTextContents();
+    expect(new Set(texts).size).toBe(texts.length);
+  });
+
   test("the calculator recomputes when the threat level, difficulty or rarity changes", async ({ page }) => {
     const errors: string[] = [];
     page.on("console", (message) => message.type() === "error" && errors.push(message.text()));

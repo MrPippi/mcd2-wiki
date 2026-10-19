@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { humanizeId, SOURCE_NAME_KEYS, sourceName } from "../../../scripts/extract/source-names";
+import type { Localized } from "../../../scripts/extract/schemas";
+import { humanizeId, SOURCE_NAME_KEYS, sourceName, talismanChestName } from "../../../scripts/extract/source-names";
 import { makeLocales, ns } from "../../helpers/locales";
 
 const locales = makeLocales({
@@ -52,8 +53,8 @@ describe("sourceName", () => {
   });
 
   it("gives chests, merchants and book pools their English words with no kind prefix (the group heading says the kind)", () => {
-    const chest = sourceName("FancyChest", {}, locales, undefined, "chest");
-    expect(chest.name.zh).toBe("Fancy Chest");
+    const chest = sourceName("OtherChest", {}, locales, undefined, "chest");
+    expect(chest.name.zh).toBe("Other Chest");
     expect(chest.untranslated).toHaveLength(15);
     expect(sourceName("VillageMerchant", {}, locales, undefined, "merchant").name.en).toBe("Village Merchant");
     expect(sourceName("EnchantmentBooksDeepDark", {}, locales, /^EnchantmentBooks/, "bookPool").name.zh).toBe("Deep Dark");
@@ -65,6 +66,24 @@ describe("sourceName", () => {
     expect(common.name.ja).toBe("すべての地域");
     expect(common.untranslated).toEqual([]);
     expect(common.official).toBe(false);
+  });
+
+  it("names the chests the game gives no text by the site's translated labels", () => {
+    const fancy = sourceName("FancyChest", {}, locales, undefined, "chest");
+    expect(fancy.name.en).toBe("Fancy Chest");
+    expect(fancy.name.zh).toBe("華麗寶箱");
+    expect(fancy.untranslated).toEqual([]);
+    expect(fancy.official).toBe(false);
+    expect(sourceName("WellspringChest", {}, locales, undefined, "chest").name.zh).toBe("隙浮寶箱");
+    expect(sourceName("CampWoodenChest", {}, locales, undefined, "chest").name.zh).toBe("營地木箱");
+  });
+
+  it("names a chest by the one item it holds after the site's label", () => {
+    const name = talismanChestName({ en: "Speed", zh: "速度" } as Localized, ["ja"]);
+    expect(name.name.en).toBe("Talisman Chest · Speed");
+    expect(name.name.zh).toBe("護符寶箱 · 速度");
+    expect(name.untranslated).toEqual(["ja"]);
+    expect(name.official).toBe(false);
   });
 
   it("uses the game's text over the kind label when a key is known", () => {

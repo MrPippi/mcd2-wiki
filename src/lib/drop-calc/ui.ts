@@ -27,6 +27,9 @@ function areaIcon(src: string): HTMLImageElement {
   return Object.assign(document.createElement("img"), { className: "drop-area-icon", src, alt: "", width: AREA_ICON_SIZE, height: AREA_ICON_SIZE, loading: "lazy" as const });
 }
 
+/** A menu has no tags: the note goes after the name, so the procedural version of a chest is not a second identical line. */
+const menuText = (label: CalcLabel | undefined, fallback: string): string => (label?.note ? `${label.name} · ${label.note}` : (label?.name ?? fallback));
+
 function nameCell(label: CalcLabel | undefined, fallback: string, unplaced: string): HTMLElement {
   const holder = document.createElement("span");
   if (label?.icon) {
@@ -138,7 +141,7 @@ function show(parts: Parts, payload: CalcPayload, file: DropFile, chosen: CalcSt
   const everything = allRows(file, chosen);
   const { sources, areas } = narrowing(everything);
   const state = { ...chosen, source: sources.includes(chosen.source) ? chosen.source : "", area: areas.includes(chosen.area) ? chosen.area : "" };
-  options(parts.source, [["", payload.labels.allSources], ...sources.map((id) => [id, payload.sources[id]?.name ?? id] as const)], state.source);
+  options(parts.source, [["", payload.labels.allSources], ...sources.map((id) => [id, menuText(payload.sources[id], id)] as const)], state.source);
   options(parts.area, [["", payload.labels.allAreas], ...areas.map((id) => [id, payload.areas[id]?.name ?? id] as const)], state.area);
   const rows = narrowRows(everything, state);
   const item = payload.items.find((one) => one.key === state.item);

@@ -103,7 +103,7 @@ describe("buildItemSources", () => {
       merchants: [{ id: "merchant:VillageMerchant", category: "SW.Item.Property.MeleeWeapon" }],
       bookPools: [],
     });
-    expect(raw.sources["chest:FancyChest"]).toEqual({ kind: "chest", name: expect.objectContaining({ en: "Fancy Chest" }), untranslated: expect.arrayContaining(["ja"]) });
+    expect(raw.sources["chest:FancyChest"]).toEqual({ kind: "chest", name: expect.objectContaining({ en: "Fancy Chest", zh: "華麗寶箱" }), untranslated: [] });
     expect(ItemSourcesSchema.parse(raw)).toEqual(raw);
   });
 
@@ -161,6 +161,15 @@ describe("buildItemSources", () => {
     expect(data["melee/sickles"]?.chests).toEqual([expect.objectContaining({ id: "chest:FancyChest", name: expect.objectContaining({ en: "Fancy Chest" }), pool: "area" })]);
     expect(data["artifact/firework-quiver"]?.chests).toEqual([expect.objectContaining({ id: "chest:CampWoodenChest", name: expect.objectContaining({ en: "Camp Wooden Chest" }), pool: "fixed" })]);
     expect(data["melee/sword"]?.chests ?? []).toEqual([]);   // Sword is in no area pool, so the fancy chest cannot give it
+  });
+
+  it("names a secret talisman chest by the site's label and the one item it holds", () => {
+    const lootActor = [...base.lootActor, lootRow("TalismansChest_Firework", "SW.LootActor.TalismansChest.Firework", [slot("Talismans", 1, 0, 0, false, ["SW.Item.Artifact.FireworkQuiver"])])];
+    const source = run({ lootActor }).raw.sources["chest:TalismansChest_Firework"];
+    const quiver = entries.find((entry) => entry.id === "Artifact_FireworkQuiver");
+    expect(source?.name.en).toBe(`Talisman Chest · ${quiver?.name.en}`);
+    expect(source?.name.zh).toBe(`護符寶箱 · ${quiver?.name.zh}`);
+    expect(source?.untranslated).toEqual(quiver?.untranslated ?? []);
   });
 
   it("does not spread a chest's category pool over every item, and reports it", () => {
@@ -232,8 +241,9 @@ describe("buildItemSources", () => {
 
   it("keeps the untranslated languages on the source, never on the item, and leaves official area names alone", () => {
     const { raw, data } = run();
-    expect(raw.sources["chest:FancyChest"]?.untranslated).toContain("ja");   // the chest's name is English words
-    expect(raw.sources["chest:FancyChest"]?.untranslated).not.toContain("en");
+    const lootActor = [...base.lootActor, lootRow("OtherChest", "SW.LootActor.OtherChest", [slot("Item", 1, 0, 0, false, ["SW.Item.Sword"])])];
+    expect(run({ lootActor }).raw.sources["chest:OtherChest"]?.untranslated).toContain("ja");   // the chest's name is English words
+    expect(run({ lootActor }).raw.sources["chest:OtherChest"]?.untranslated).not.toContain("en");
     expect(raw.sources["area:SW.Area.Plains.A1"]?.untranslated).toEqual([]);
     expect(Object.values(raw.items).some((item) => "untranslated" in item)).toBe(false);
     expect(data["melee/sword-unique1"]).toBeUndefined();   // no source at all -> no entry
