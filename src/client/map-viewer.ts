@@ -1,16 +1,16 @@
 /** The map page's client: Leaflet in CRS.Simple over the tile pyramid, plus the filter and search panel. */
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import type { PayloadMarker, PayloadWorld } from "./payload";
-import type { Lang } from "../i18n";
-import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "../../../shared/map/kinds";
-import { pinElement, popupElement, resultElement } from "./marker-dom";
-import { countByKind, isAreaQuestPin, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "./markers";
-import { tileUrlTemplate } from "./tiles";
-import { formatView, parseView, parseWorld, worldSearch } from "./view-state";
-import { adjacentWorld, isTypingTarget, worldStep } from "./world-keys";
-import { TILE } from "../../../shared/map/worlds";
-import { fillZoom } from "./zoom";
+import type { PayloadMarker, PayloadWorld } from "../lib/map/payload";
+import type { Lang } from "../lib/i18n";
+import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "../../shared/map/kinds";
+import { pinElement, popupElement, resultElement } from "./map-marker-dom";
+import { countByKind, isAreaQuestPin, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "../lib/map/markers";
+import { tileUrlTemplate } from "../lib/map/tiles";
+import { formatView, parseView, parseWorld, worldSearch } from "../lib/map/view-state";
+import { adjacentWorld, isTypingTarget, worldStep } from "../lib/map/world-keys";
+import { TILE } from "../../shared/map/worlds";
+import { fillZoom } from "../lib/map/zoom";
 
 const STORAGE_KEY = "mcd2-map-hidden";
 /** Area names show from this many levels below the top zoom. */

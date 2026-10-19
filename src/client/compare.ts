@@ -1,7 +1,7 @@
 /** The weapon comparison in the browser: the add button, the table, the address and the copy button. */
-import { addWeapon, bestColumns, compareSearch, decodeCompare, MAX_WEAPONS, removeWeapon } from "./code";
-import { parseComparePayload, type ComparePayload, type CompareWeapon } from "./parse";
-import { mountPicker, pickerParts, type PickerGroup, type PickerParts } from "../item-picker";
+import { addWeapon, bestColumns, compareSearch, decodeCompare, MAX_WEAPONS, removeWeapon } from "../lib/compare/code";
+import { parseComparePayload, type ComparePayload, type CompareWeapon } from "../lib/compare/parse";
+import { mountPicker, pickerParts, type PickerGroup, type PickerParts } from "./item-picker";
 
 /** Fired after replaceState so the language links pick up the new query (SiteHeader listens). */
 const LOCATION_EVENT = "mcd2:locationchange";

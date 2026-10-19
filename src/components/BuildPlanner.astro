@@ -94,7 +94,7 @@ const groupTitle = (group: SlotGroup): string =>
 <p class="note build-failed" data-testid="build-failed" data-build-failed hidden>{t(lang, "buildLoadFailed")}</p>
 
 <script>
-  import { mountPlanner } from "../lib/build/planner";
+  import { mountPlanner } from "../client/build-planner";
 
   const root = document.querySelector<HTMLElement>("[data-build]");
   if (root && !mountPlanner(root)) {

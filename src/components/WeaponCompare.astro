@@ -41,7 +41,7 @@ const { lang, payload } = Astro.props;
 <p class="note" data-testid="compare-failed" data-weapon-compare-failed hidden>{t(lang, "weaponCompareLoadFailed")}</p>
 
 <script>
-  import { mountCompare } from "../lib/compare/ui";
+  import { mountCompare } from "../client/compare";
 
   const root = document.querySelector<HTMLElement>("[data-weapon-compare]");
   if (root && !mountCompare(root)) {

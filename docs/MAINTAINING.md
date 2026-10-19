@@ -37,6 +37,10 @@
 
 `shared/` 放抽取程式與網站都要用的東西：各份輸出的 schema（`*-schema.ts`、`schemas.ts`）、分類與語言清單（`config.ts`、`langs.ts`）、介面字串與 `shared/i18n/*.json`、分區登記（`sections.ts`）、機率公式（`affix-odds.ts`、`drop-odds.ts`）等純程式。依賴方向是 `scripts/ → shared/ ← src/`：`src/` 與 `scripts/` 不互相 import（兩邊只透過 `shared/` 或 `src/data/` 的檔案溝通），`shared/` 也不能 import 它們；`tests/unit/site/shared-seam.test.ts` 會檢查。放進 `shared/` 的檔案可能被瀏覽器腳本打包，不要加進 Node 模組或建立會一次拉進整包的 barrel 檔。
 
+## 瀏覽器模組（`src/client/`）
+
+會碰 DOM 的模組（mount 函式、事件綁定、`document` / `window`）一律放 `src/client/`，由 `.astro` 的 `<script>` 只留 import 與 mount 呼叫；純邏輯（解析、編碼、計算、排序）留在 `src/lib/` 或 `shared/`，才能直接用 vitest 測。`tests/unit/site/dom-boundary.test.ts` 會檢查 `src/lib/` 與 `shared/` 沒有 `document.` / `window.` 等瀏覽器全域參照（目前沒有例外；若真的需要，在該測試的 `ALLOWED` 寫明理由）。`client-bundle.test.ts` 另外限制瀏覽器腳本不能拉進介面字串與 zod。
+
 ## 新增網站分區
 
 網站有哪些分區由 `shared/sections.ts` 統一登記：

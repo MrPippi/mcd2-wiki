@@ -17,7 +17,7 @@ const { lang } = Astro.props;
   <a class="sheet-view button" href="#">{t(lang, "view")} ›</a>
 </div>
 <script>
-  import { bindCursorTooltip, type CursorTooltip } from "../lib/cursor-tooltip";
+  import { bindCursorTooltip, type CursorTooltip } from "../client/cursor-tooltip";
 
   const browser = document.querySelector<HTMLElement>(".item-browser");
   const grid = browser?.querySelector<HTMLElement>(".item-grid");
