@@ -23,11 +23,11 @@ const group = (html: string, kind: string): string => {
 };
 
 describe("item sources block", () => {
-  it("marks a group whose every name fell back to English once, on its heading, without the English repeated", async () => {
+  it("names a chest the game gives no text by the site's translated label, unmarked, with the comparison name", async () => {
     const chests = group(await render("zh", "artifact", "firework-quiver"), "chests");
-    expect(chests).toMatch(/<h3[^>]*>[^]*?class="tag warn"[^]*?<\/h3>/);
-    expect(chests.split("tag warn").length - 1).toBe(1);
-    expect(chests).not.toContain("item-alt");
+    expect(chests).toContain("營地木箱");
+    expect(chests).not.toContain("tag warn");
+    expect(chests).toContain("item-alt");
   });
 
   it("keeps translated groups unmarked, with the comparison name", async () => {
@@ -46,12 +46,11 @@ describe("item sources block", () => {
 
   it("names a chest without repeating the kind the heading already gives", async () => {
     const chests = group(await render("zh", "artifact", "firework-quiver"), "chests");
-    expect(chests).toContain("Camp Wooden Chest");
     expect(chests).not.toContain("寶箱：");
   });
 
-  it("shows no Chinese fallback line on an English page", async () => {
-    expect(group(await render("en", "artifact", "firework-quiver"), "chests")).not.toContain("item-alt");
+  it("shows the English chest label on an English page", async () => {
+    expect(group(await render("en", "artifact", "firework-quiver"), "chests")).toContain("Camp Wooden Chest");
   });
 
   it("marks nothing on an English page", async () => {

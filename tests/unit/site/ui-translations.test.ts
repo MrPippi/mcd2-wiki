@@ -128,7 +128,7 @@ describe("UI translations", () => {
       "mobSoulCorrupted", "mobAreas", "mobAreasNote", "mobDrops", "mobDropsNote", "mobDropGuaranteed", "mobDropRolls",
       "mobDropPoolArea", "mobDropPoolOwn", "mobDropPoolNone", "lootNoList", "mobVariants", "mobVariantOf", "mobPortraitCredit", "mobNoPortrait",
       "mobWorldOverworld", "mobWorldWellspring", "dropRegularMobs", "dropRegularNote",
-      "itemSources", "sourceAreas", "sourceChests", "sourceChestArea", "sourceChestFixed", "sourceQuests", "sourceGuaranteed",
+      "itemSources", "sourceAreas", "sourceChests", "sourceChestArea", "sourceChestFixed", "sourceChestFancy", "sourceChestWellspring", "sourceChestCamp", "sourceChestTalisman", "sourceQuests", "sourceGuaranteed",
       "sourcePicksOf", "sourceMerchants", "sourceMerchantCategory", "sourceBookPools", "sourcesNote",
       "statHealth", "statMovementSpeed", "statPoise", "statPoiseDelay", "statPoiseRecovery", "statSightRadius", "statMass",
       "statSoulYield", "statMeleeAttackSpeed", "statRangedAttackSpeed", "statShield", "statKnockbackResistance",

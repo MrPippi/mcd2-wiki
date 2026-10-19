@@ -15,8 +15,15 @@ export type SourceKind = "merchant" | "chest" | "mob" | "quest" | "bookPool";
 
 /** A quest with no game name is shown by this site label alone: its row id (QuestArtifactsCA10_BR_B) is not a name. */
 const QUEST_LABEL_KEY = "sourceQuestReward";
-/** Rows the game gives no name but the site labels: the global book pool every area draws from. */
-const SITE_LABEL_KEYS: Readonly<Record<string, string>> = { EnchantmentBooksCommon: "sourceBookPoolCommon" };
+/** Rows the game gives no name but the site labels: the global book pool every area draws from, and the chests. */
+const SITE_LABEL_KEYS: Readonly<Record<string, string>> = {
+  EnchantmentBooksCommon: "sourceBookPoolCommon",
+  FancyChest: "sourceChestFancy",
+  WellspringChest: "sourceChestWellspring",
+  CampWoodenChest: "sourceChestCamp",
+};
+/** A secret talisman chest has no game name either: the site's label, then the one talisman it holds. */
+const TALISMAN_CHEST_KEY = "sourceChestTalisman";
 const NON_ENGLISH: readonly Lang[] = LANGS.filter((lang) => lang !== "en");
 
 export const SOURCE_NAME_KEYS: NameKeys = z.record(z.string(), z.object({ namespace: z.string(), key: z.string() })).parse(keyData);
@@ -44,6 +51,12 @@ const siteLabel = (key: string) => (lang: Lang): string => {
   const value = UI_DICTS[lang].values[key];
   if (value === undefined) throw new ExtractError(`src/i18n/${lang}.json 缺少介面字串 ${key}`);
   return plainText(value);
+};
+
+/** "Talisman Chest · <item>"; the item name's untranslated languages carry over. */
+export const talismanChestName = (item: Localized, itemUntranslated: readonly Lang[]): SourceName => {
+  const label = siteLabel(TALISMAN_CHEST_KEY);
+  return { name: localizedFrom((lang) => `${label(lang)} · ${item[lang]}`), untranslated: itemUntranslated, official: false };
 };
 
 /**
