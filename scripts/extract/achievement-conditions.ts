@@ -9,7 +9,7 @@ import type { Lang } from "./config";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { englishFallbacks, localize } from "./loc-table";
-import { readJsonFile } from "./read-json";
+import { readTableFile } from "./table-reader";
 import type { LocaleFile } from "./schemas";
 
 export const ACHIEVEMENT_DEFINITIONS_FILE = `${DATATABLES_DIR}/DT_AchievementDefinition.json`;
@@ -53,7 +53,7 @@ export function parseAchievementDefinitions(raw: unknown, filePath: string): Ach
 /** The DataTable rows, validated; undefined when source-data has no such table. */
 export async function loadAchievementDefinitions(sourceRoot: string): Promise<AchievementDefinition[] | undefined> {
   const filePath = path.join(sourceRoot, ...ACHIEVEMENT_DEFINITIONS_FILE.split("/"));
-  const raw = await readJsonFile(filePath, "成就定義資料表");
+  const raw = await readTableFile(filePath, "成就定義資料表");
   return raw === undefined ? undefined : parseAchievementDefinitions(raw, filePath);
 }
 

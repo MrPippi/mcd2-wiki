@@ -92,7 +92,7 @@ export async function loadLootTables(sourceRoot: string, onRead?: (file: string)
   if (!existsSync(path.join(dir, `${FILES.area}.json`))) return undefined;
   const entries = await Promise.all(
     KEYS.map(async (key) => {
-      const all = await readDataTable(dir, FILES[key], onRead);
+      const all = await readDataTable(dir, FILES[key], { onRead });
       // Base* rows (BaseMeleeWeapon, BaseEnchanmentBook…) are templates other rows inherit from, not items.
       const rows = ITEM_KEYS.includes(key) ? all.filter((row) => !isTemplateRow(row)) : all;
       const parsed = LootTablesSchema.shape[key].safeParse(rows);

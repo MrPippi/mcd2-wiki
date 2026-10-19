@@ -10,7 +10,7 @@ import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { publishedIcon, QUEST_ICONS } from "./map";
 import { MARKER_KINDS, type MapData, type MapMarker, type WorldMap } from "./map-schema";
 import type { Quest } from "./quest-schema";
-import { readJsonFile } from "./read-json";
+import { readTableFile } from "./table-reader";
 
 const TABLE = "DT_QuestLocationDefinition";
 const TAG_PREFIX = "sw.questlocation.";
@@ -38,7 +38,7 @@ export interface QuestMarkersResult {
 /** Reads the quest location table; empty when source-data has none (every quest then falls back to its area). */
 export async function loadQuestLocations(sourceRoot: string): Promise<QuestLocationRowValue[]> {
   const file = path.join(sourceRoot, ...DATATABLES_DIR.split("/"), `${TABLE}.json`);
-  const rows = await readJsonFile(file, `資料表 ${TABLE}`);
+  const rows = await readTableFile(file, `資料表 ${TABLE}`);
   if (rows === undefined) return [];
   const parsed = z.array(QuestLocationRow).safeParse(rows);
   if (!parsed.success) {

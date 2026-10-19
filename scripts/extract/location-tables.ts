@@ -38,7 +38,7 @@ export async function loadLocationTables(sourceRoot: string, onRead?: (file: str
   const dir = path.join(sourceRoot, ...DATATABLES_DIR.split("/"));
   const present = (key: (typeof KEYS)[number]): boolean => existsSync(path.join(dir, `${LOCATION_TABLE_FILES[key]}.json`));
   if (!present("areas")) return { issues: [issue("missing-location-tables", `${LOCATION_TABLE_FILES.areas}.json`)] };
-  const rows = await Promise.all(KEYS.map((key) => (present(key) ? readDataTable(dir, LOCATION_TABLE_FILES[key], onRead) : Promise.resolve([]))));
+  const rows = await Promise.all(KEYS.map((key) => (present(key) ? readDataTable(dir, LOCATION_TABLE_FILES[key], { onRead }) : Promise.resolve([]))));
   const parsed = TablesSchema.safeParse({ areas: rows[0], progression: rows[1] });
   if (!parsed.success) {
     throw new ExtractError(`地區資料表欄位與預期不符（遊戲更新了格式？）：${parsed.error.issues.slice(0, 2).map(formatZodIssue).join("；")}`);

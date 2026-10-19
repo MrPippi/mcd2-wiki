@@ -87,7 +87,7 @@ export async function loadDropTables(sourceRoot: string, onRead?: (file: string)
   if (missing.length > 0) return { missing };
   const read = async <K extends keyof typeof FILES>(key: K): Promise<z.infer<(typeof FILES)[K][1]>> => {
     const [name, schema] = FILES[key];
-    const parsed = schema.safeParse(await readDataTable(dir, name, onRead));
+    const parsed = schema.safeParse(await readDataTable(dir, name, { onRead }));
     if (!parsed.success) {
       throw new ExtractError(`資料表 ${name}（${key}）欄位與預期不符（遊戲更新了格式？）：${parsed.error.issues.slice(0, 3).map(formatZodIssue).join("；")}`);
     }

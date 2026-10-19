@@ -33,6 +33,14 @@
 
 需要的順序都寫成 `needs`：例如任務釘點（`quest-markers`）需要 `quests`；`icons` 步驟會先清空 `public/icons/` 再複製，所有要往 `public/icons/` 寫檔的步驟（成就、怪物頭像、區域圖示）都要列 `icons`。世界地圖有兩份：`map` 是純地圖，給各抽取步驟讀；寫出的 `map.json` 是 `spot-markers` 步驟在加上任務釘點之後的結果。
 
+## 讀取新的資料表
+
+抽取程式讀 DataTable／CurveTable 一律走 `scripts/extract/table-reader.ts`，不要直接用 `readJsonFile`：
+
+- `readDataTable(dir, "DT_Foo", { onRead, optional, dropBase })`：回傳列陣列；缺檔或不是陣列會報錯，`optional` 缺檔時回傳空陣列，`dropBase` 濾掉 `Base*` 範本列，`onRead` 登記到 `tablesRead`。
+- `readTableFile(file, label)`：回傳原始 JSON（缺檔為 `undefined`），給要自己驗證的表（曲線表、成就定義等）。
+- 兩者都會拒讀 `OnlineConstants`（內含遙測金鑰）；`tests/unit/extract/table-reader.test.ts` 也限制只有少數非資料表的載入器可以 import `read-json`，新程式繞過讀取器會讓測試失敗。
+
 ## 原始素材索引
 
 `npm run assets` 掃描 `source-data/Assets/`，依分類／分項／細項整理所有素材，並以檔案內容比對 `public/icons/` 標出用途（網站已發布、網站介面、已抽取未發布、未使用）。

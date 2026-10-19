@@ -4,7 +4,7 @@ import path from "node:path";
 import { z } from "zod";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue } from "./issues";
-import { readJsonFile } from "./read-json";
+import { readDataTable } from "./table-reader";
 
 const Tag = z.object({ TagName: z.string() });
 const Vec = z.object({ X: z.number(), Y: z.number(), Z: z.number() });
@@ -49,11 +49,7 @@ export async function loadMapTables(sourceRoot: string): Promise<MapTables | und
   const dir = path.join(sourceRoot, ...DATATABLES_DIR.split("/"));
   if (!existsSync(path.join(dir, `${FILES.regions}.json`))) return undefined;
   const entries = await Promise.all(
-    Object.entries(FILES).map(async ([key, name]) => {
-      const rows = await readJsonFile(path.join(dir, `${name}.json`), `資料表 ${name}`);
-      if (!Array.isArray(rows)) throw new ExtractError(`資料表 ${name} 不存在或不是陣列：${dir}`);
-      return [key, rows] as const;
-    }),
+    Object.entries(FILES).map(async ([key, name]) => [key, await readDataTable(dir, name)] as const),
   );
   const parsed = MapTablesSchema.safeParse(Object.fromEntries(entries));
   if (!parsed.success) {
