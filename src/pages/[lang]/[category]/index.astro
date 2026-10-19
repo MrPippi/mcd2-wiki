@@ -24,7 +24,7 @@ const entries = listedIn(category);
 const isTable = (TABLE_CATEGORIES as readonly Category[]).includes(category);
 const hasUnique = entries.some((entry) => entry.variant === "unique");
 ---
-<CatalogPage lang={lang} label={(l) => categoryLabel(category, l)} count={entries.length} icon={categoryIcon(category)} repeatAlt current={category}>
+<CatalogPage lang={lang} label={(l) => categoryLabel(category, l)} count={entries.length} icon={categoryIcon(category)} current={category}>
   <ListFilter slot="head" lang={lang} showVariant={!isTable && hasUnique} />
   <p class="no-results" hidden>{t(lang, "noResults")}</p>
   {isTable ? (

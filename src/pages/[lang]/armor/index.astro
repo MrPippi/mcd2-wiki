@@ -23,7 +23,7 @@ const cards = allArmorSets.map((set) => {
   return { set, pieces, icon: pieces[0]?.entry.icon };
 });
 ---
-<CatalogPage lang={lang} label={(l) => categoryLabel("armor", l)} count={cards.length} icon={categoryIcon("armor")} repeatAlt current="armor">
+<CatalogPage lang={lang} label={(l) => categoryLabel("armor", l)} count={cards.length} icon={categoryIcon("armor")} current="armor">
   <ListFilter slot="head" lang={lang} showVariant={true} />
   <p class="no-results" hidden>{t(lang, "noResults")}</p>
   <ItemBrowser lang={lang}>
