@@ -2,13 +2,14 @@
 import { LANGS, type Category } from "../../../../shared/config";
 import EntryTable from "../../../components/EntryTable.astro";
 import ItemBrowser from "../../../components/ItemBrowser.astro";
-import CatalogHead from "../../../components/CatalogHead.astro";
+import ListFilter from "../../../components/ListFilter.astro";
 import ItemCard from "../../../components/ItemCard.astro";
-import Base from "../../../layouts/Base.astro";
+import CatalogPage from "../../../layouts/CatalogPage.astro";
 import { listedIn } from "../../../lib/data";
 import { describedEntry } from "../../../lib/gear-values";
 import { categoryLabel, GRID_CATEGORIES, TABLE_CATEGORIES, t, type Lang } from "../../../lib/i18n";
 import { itemKicker } from "../../../lib/kicker";
+import { categoryIcon } from "../../../lib/ui-icons";
 import { entryHref } from "../../../lib/url";
 
 export function getStaticPaths() {
@@ -23,9 +24,8 @@ const entries = listedIn(category);
 const isTable = (TABLE_CATEGORIES as readonly Category[]).includes(category);
 const hasUnique = entries.some((entry) => entry.variant === "unique");
 ---
-<Base lang={lang} title={categoryLabel(category, lang)} current={category}>
-  <div class="catalog">
-  <CatalogHead lang={lang} category={category} count={entries.length} showVariant={!isTable && hasUnique} />
+<CatalogPage lang={lang} label={(l) => categoryLabel(category, l)} count={entries.length} icon={categoryIcon(category)} repeatAlt current={category}>
+  <ListFilter slot="head" lang={lang} showVariant={!isTable && hasUnique} />
   <p class="no-results" hidden>{t(lang, "noResults")}</p>
   {isTable ? (
     <>
@@ -48,5 +48,4 @@ const hasUnique = entries.some((entry) => entry.variant === "unique");
       ))}
     </ItemBrowser>
   )}
-  </div>
-</Base>
+</CatalogPage>

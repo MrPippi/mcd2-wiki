@@ -1,44 +1,28 @@
 ---
-import { LANGS } from "../../../shared/config";
+import { langPaths } from "../../lib/lang-paths";
 import AchievementCard from "../../components/AchievementCard.astro";
-import Base from "../../layouts/Base.astro";
+import CatalogPage from "../../layouts/CatalogPage.astro";
 import { achievementData, achievementsByRate, formatRetrieved, untranslatedMarkers } from "../../lib/achievements";
 import { t, type Lang } from "../../lib/i18n";
-import { compareLang, htmlLang } from "../../../shared/lang";
 import "../../styles/achievements.css";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-const alt = compareLang(lang);
 const achievements = achievementsByRate(achievementData.achievements);
 const markers = untranslatedMarkers(achievements, lang);
 const credit = t(lang, "achievementsCredit").replace("{date}", formatRetrieved(achievementData.retrieved, lang));
 ---
-<Base lang={lang} title={t(lang, "achievements")} description={t(lang, "achievementsIntro")}>
-  <div class="catalog achievements-page">
-    <header class="catalog-head achievements-head">
-      <p class="catalog-count kicker mono">{achievements.length}</p>
-      <h1 class="catalog-title">
-        <span data-pagefind-meta="title">{t(lang, "achievements")}</span>
-      </h1>
-      {t(alt, "achievements") !== t(lang, "achievements") && (
-        <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "achievements")}</p>
-      )}
-      <p class="achievements-intro">{t(lang, "achievementsIntro")}</p>
-      {markers.page && <span class="tag warn achievements-untranslated">{t(lang, "untranslated")}</span>}
-    </header>
+<CatalogPage lang={lang} label={(l) => t(l, "achievements")} count={achievements.length} intro={t(lang, "achievementsIntro")} introClass="achievements-intro" class="achievements-page" headClass="achievements-head">
+    {markers.page && <span slot="head" class="tag warn achievements-untranslated">{t(lang, "untranslated")}</span>}
     <ol class="achievement-grid" data-pagefind-body>
       {achievements.map((achievement, index) => (
         <AchievementCard lang={lang} achievement={achievement} index={index} markUntranslated={markers.cards.has(achievement.id)} />
       ))}
     </ol>
     <p class="achievements-credit">{credit}</p>
-  </div>
-</Base>
+</CatalogPage>

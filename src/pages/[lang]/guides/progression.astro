@@ -1,5 +1,5 @@
 ---
-import { LANGS } from "../../../../shared/config";
+import { langPaths } from "../../../lib/lang-paths";
 import type { GuidesData } from "../../../../shared/guides-schema";
 import GuideHeading from "../../../components/GuideHeading.astro";
 import GuideMarker from "../../../components/GuideMarker.astro";
@@ -8,9 +8,7 @@ import GuideText from "../../../components/GuideText.astro";
 import { formatNumber, guideBySlug, guidesData, shown, textOf, type GuideLink } from "../../../lib/guides";
 import { t, type Lang } from "../../../lib/i18n";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 interface Props {
   lang: Lang;

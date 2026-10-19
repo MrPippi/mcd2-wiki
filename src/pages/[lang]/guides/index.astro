@@ -1,32 +1,21 @@
 ---
-import { LANGS } from "../../../../shared/config";
-import Base from "../../../layouts/Base.astro";
+import { langPaths } from "../../../lib/lang-paths";
+import CatalogPage from "../../../layouts/CatalogPage.astro";
 import { catalogLabel } from "../../../lib/catalog";
 import { GUIDES } from "../../../lib/guides";
 import { t, type Lang } from "../../../lib/i18n";
-import { compareLang, htmlLang } from "../../../../shared/lang";
 import { href } from "../../../lib/url";
 import "../../../styles/guides.css";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-const alt = compareLang(lang);
 ---
-<Base lang={lang} title={t(lang, "guides")} description={t(lang, "guidesIntro")}>
-  <div class="catalog guide-page guides-hub" data-pagefind-body>
-    <header class="catalog-head guide-head">
-      <p class="catalog-count kicker mono">{GUIDES.length}</p>
-      <h1 class="catalog-title"><span data-pagefind-meta="title">{t(lang, "guides")}</span></h1>
-      {t(alt, "guides") !== t(lang, "guides") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "guides")}</p>}
-      <p class="guide-lede">{t(lang, "guidesIntro")}</p>
-    </header>
+<CatalogPage lang={lang} label={(l) => t(l, "guides")} count={GUIDES.length} intro={t(lang, "guidesIntro")} introClass="guide-lede" class="guide-page guides-hub" headClass="guide-head" pagefindBody>
     <ol class="guide-cards">
       {GUIDES.map((guide, index) => (
         <li class="guide-card" style={`--i:${index}`} data-testid="guide-card">
@@ -38,5 +27,4 @@ const alt = compareLang(lang);
         </li>
       ))}
     </ol>
-  </div>
-</Base>
+</CatalogPage>

@@ -1,27 +1,34 @@
 ---
-import type { Category } from "../../shared/config";
-import { categoryLabel, type Lang } from "../lib/i18n";
 import { compareLang, htmlLang } from "../../shared/lang";
-import { categoryIcon } from "../lib/ui-icons";
-import ListFilter from "./ListFilter.astro";
+import type { Lang } from "../lib/i18n";
 import UiIcon from "./UiIcon.astro";
 
 interface Props {
   lang: Lang;
-  category: Category;
-  count: number;
-  showVariant: boolean;
+  /** The page title in a given language; the second-language line under the title is taken from the same function. */
+  label: (lang: Lang) => string;
+  /** The number printed above the title; omitted on pages that are not a numbered list. */
+  count?: number;
+  icon?: string;
+  /** Show the second-language line even when it matches the title. */
+  repeatAlt?: boolean;
+  /** The lede under the title, and the class that styles it. */
+  intro?: string;
+  introClass?: string;
+  /** Page-specific class next to `catalog-head`. */
+  class?: string;
 }
 
-const { lang, category, count, showVariant } = Astro.props;
+const { lang, label, count, icon, repeatAlt, intro, introClass, class: className } = Astro.props;
 const alt = compareLang(lang);
 ---
-<header class="catalog-head">
-  <p class="catalog-count kicker mono">{count}</p>
+<header class:list={["catalog-head", className]}>
+  {count !== undefined && <p class="catalog-count kicker mono">{count}</p>}
   <h1 class="catalog-title">
-    <UiIcon src={categoryIcon(category)} />
-    <span data-pagefind-meta="title">{categoryLabel(category, lang)}</span>
+    <UiIcon src={icon} />
+    <span data-pagefind-meta="title">{label(lang)}</span>
   </h1>
-  <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{categoryLabel(category, alt)}</p>
-  <ListFilter lang={lang} showVariant={showVariant} />
+  {(repeatAlt || label(alt) !== label(lang)) && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{label(alt)}</p>}
+  {intro && <p class={introClass}>{intro}</p>}
+  <slot />
 </header>

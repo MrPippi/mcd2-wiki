@@ -46,6 +46,14 @@
 
 新增分區：在 `PAGE_SECTIONS` 加一列、新增頁面本身、在 16 份 `shared/i18n/*.json` 補上對應字串（`tests/unit/site/sections.test.ts` 會檢查路由與字串都在）。首頁精選（`HomeHero.astro`）、圖示（`ui-icons.ts`）、邊框（`frames.ts`）、標籤（`kicker.ts`）是各自挑選或針對全部分類的清單，不由此推導。
 
+## 新增目錄頁
+
+目錄頁（標題、數量、第二語言標題、簡介的版型）共用 `src/layouts/CatalogPage.astro`，新頁面只需要填內容：
+
+- `getStaticPaths`：每個語言一頁的頁面寫 `export const getStaticPaths = langPaths;`（`src/lib/lang-paths.ts`），語言從 `Astro.props.lang` 取。
+- 頁首：`<CatalogPage lang label={(l) => t(l, "key")} count intro introClass class headClass pagefindBody>`。`label` 回傳指定語言的頁名（同時產生頁面標題、`<h1>` 與第二語言標題）；`intro` 同時是頁面描述；`count` 與 `icon` 可省略。頁首要多放的東西（篩選列、備註、標籤）用 `slot="head"`，其餘內容直接寫在標籤內。
+- 沒有套用的頁面：`GuidePage`（附返回連結）與靈魂風暴（標題是遊戲文字 HTML，前面有圖示）頁首結構不同，仍自己寫。
+
 ## 讀取新的資料表
 
 抽取程式讀 DataTable／CurveTable 一律走 `scripts/extract/table-reader.ts`，不要直接用 `readJsonFile`：

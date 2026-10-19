@@ -1,17 +1,14 @@
 ---
-import { LANGS } from "../../../../shared/config";
+import { langPaths } from "../../../lib/lang-paths";
 import type { QuestData } from "../../../../shared/quest-schema";
 import QuestCard from "../../../components/QuestCard.astro";
-import Base from "../../../layouts/Base.astro";
+import CatalogPage from "../../../layouts/CatalogPage.astro";
 import { t, type Lang } from "../../../lib/i18n";
-import { compareLang, htmlLang } from "../../../../shared/lang";
 import { questSections, SECTION_KEY } from "../../../lib/quest-view";
 import { questData } from "../../../lib/quests";
 import "../../../styles/quests.css";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 interface Props {
   lang: Lang;
@@ -21,21 +18,11 @@ interface Props {
 
 const { lang } = Astro.props;
 const data = Astro.props.data ?? questData;
-const alt = compareLang(lang);
 const sections = questSections(data.quests);
 // Cards stagger their entrance across the whole list, like one printed catalogue.
 const offsets = sections.map((_, i) => sections.slice(0, i).reduce((sum, section) => sum + section.count, 0));
 ---
-<Base lang={lang} title={t(lang, "quests")} description={t(lang, "questsIntro")}>
-  <div class="catalog quests-page" data-pagefind-body>
-    <header class="catalog-head quests-head">
-      <p class="catalog-count kicker mono">{data.quests.length}</p>
-      <h1 class="catalog-title">
-        <span data-pagefind-meta="title">{t(lang, "quests")}</span>
-      </h1>
-      {t(alt, "quests") !== t(lang, "quests") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "quests")}</p>}
-      <p class="quests-intro">{t(lang, "questsIntro")}</p>
-    </header>
+<CatalogPage lang={lang} label={(l) => t(l, "quests")} count={data.quests.length} intro={t(lang, "questsIntro")} introClass="quests-intro" class="quests-page" headClass="quests-head" pagefindBody>
     <div class="quest-sections">
       {sections.map((section, s) => (
         <section class="quest-section" data-section={section.section} data-testid={`quest-section-${section.section}`}>
@@ -58,5 +45,4 @@ const offsets = sections.map((_, i) => sections.slice(0, i).reduce((sum, section
         </section>
       ))}
     </div>
-  </div>
-</Base>
+</CatalogPage>

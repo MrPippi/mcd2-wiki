@@ -1,12 +1,10 @@
 ---
-import { LANGS } from "../../../shared/config";
+import { langPaths } from "../../lib/lang-paths";
 import Base from "../../layouts/Base.astro";
 import { t, type Lang } from "../../lib/i18n";
 import { assetUrl, href } from "../../lib/url";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 const lang = Astro.params.lang as Lang;
 const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");

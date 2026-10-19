@@ -1,17 +1,14 @@
 ---
-import { LANGS } from "../../../shared/config";
+import { langPaths } from "../../lib/lang-paths";
 import type { BossGroup } from "../../lib/boss-view";
 import BossCard from "../../components/BossCard.astro";
-import Base from "../../layouts/Base.astro";
+import CatalogPage from "../../layouts/CatalogPage.astro";
 import { mobKindLabel, t, type Lang } from "../../lib/i18n";
-import { compareLang, htmlLang } from "../../../shared/lang";
 import { bossList } from "../../lib/locations";
 import "../../styles/mobs.css";
 import "../../styles/locations.css";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 interface Props {
   lang: Lang;
@@ -21,21 +18,11 @@ interface Props {
 
 const { lang } = Astro.props;
 const groups = Astro.props.groups ?? bossList();
-const alt = compareLang(lang);
 const total = groups.reduce((sum, group) => sum + group.bosses.length, 0);
 const starts = groups.map((_, i) => groups.slice(0, i).reduce((sum, group) => sum + group.bosses.length, 0));
 ---
-<Base lang={lang} title={t(lang, "bosses")} description={t(lang, "bossesIntro")}>
-  <div class="catalog bosses-page" data-pagefind-body>
-    <header class="catalog-head bosses-head">
-      <p class="catalog-count kicker mono">{total}</p>
-      <h1 class="catalog-title">
-        <span data-pagefind-meta="title">{t(lang, "bosses")}</span>
-      </h1>
-      {t(alt, "bosses") !== t(lang, "bosses") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "bosses")}</p>}
-      <p class="locations-intro">{t(lang, "bossesIntro")}</p>
-      <p class="note" data-testid="bosses-order">{t(lang, "bossesOrder")}</p>
-    </header>
+<CatalogPage lang={lang} label={(l) => t(l, "bosses")} count={total} intro={t(lang, "bossesIntro")} introClass="locations-intro" class="bosses-page" headClass="bosses-head" pagefindBody>
+    <p slot="head" class="note" data-testid="bosses-order">{t(lang, "bossesOrder")}</p>
     <div class="boss-groups">
       {groups.map((group, g) => (
         <section class="boss-group" data-group={group.kind} data-testid={`boss-group-${group.kind}`}>
@@ -46,5 +33,4 @@ const starts = groups.map((_, i) => groups.slice(0, i).reduce((sum, group) => su
         </section>
       ))}
     </div>
-  </div>
-</Base>
+</CatalogPage>

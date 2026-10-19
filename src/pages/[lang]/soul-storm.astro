@@ -1,5 +1,5 @@
 ---
-import { LANGS } from "../../../shared/config";
+import { langPaths } from "../../lib/lang-paths";
 import type { SoulStormData } from "../../../shared/soul-storm-schema";
 import MobCard from "../../components/MobCard.astro";
 import SoulStormChests from "../../components/SoulStormChests.astro";
@@ -15,9 +15,7 @@ import "../../styles/locations.css";
 import "../../styles/mobs.css";
 import "../../styles/soul-storm.css";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 interface Props {
   lang: Lang;
