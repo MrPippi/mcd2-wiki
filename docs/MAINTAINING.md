@@ -17,6 +17,22 @@
 
 流量統計用 Cloudflare Web Analytics（無 cookie），部署 workflow 以 `CF_BEACON_TOKEN` 傳入站點 token，本機 build 不載入；搜尋曝光與索引狀態看 Google Search Console。
 
+## 新增抽取步驟
+
+`npm run extract` 由 `scripts/extract/pipeline.ts` 依序跑 `scripts/extract/steps/index.ts` 裡登記的步驟，每個步驟一個檔案（`scripts/extract/steps/<名稱>.ts`），用 `defineStep`（`scripts/extract/step.ts`）宣告：
+
+- `name`：步驟名稱。
+- `needs`：用到的其他步驟，例如 `{ locales: localesStep, quests: questsStep }`。`run` 的第二個參數只拿得到這些步驟的 `value`，型別由步驟本身推得；沒列的拿不到。
+- `writes`：會寫進 `src/data/` 的檔名（`run` 回傳的 `files` 必須剛好是這些，否則報錯；兩個步驟寫同一個檔也會報錯）。
+- `run(context, needs)`：回傳 `{ value, issues?, files?, tablesRead? }`，`value` 給後面的步驟用。
+
+新增一個資料頁的抽取：
+
+1. 新增 `scripts/extract/steps/foo.ts`，呼叫現有的抽取函式並回傳上述結果（抽取邏輯本身放在 `scripts/extract/foo*.ts`）。
+2. 在 `steps/index.ts` 的 `EXTRACT_STEPS` 加一行。清單順序決定 `extract-report.md` 內問題的排列；執行順序由 `needs` 決定，清單裡漏登記、重名、`needs` 形成迴圈都會在啟動時報錯（`validateSteps`）。
+
+需要的順序都寫成 `needs`：例如任務釘點（`quest-markers`）需要 `quests`；`icons` 步驟會先清空 `public/icons/` 再複製，所有要往 `public/icons/` 寫檔的步驟（成就、怪物頭像、區域圖示）都要列 `icons`。世界地圖有兩份：`map` 是純地圖，給各抽取步驟讀；寫出的 `map.json` 是 `spot-markers` 步驟在加上任務釘點之後的結果。
+
 ## 原始素材索引
 
 `npm run assets` 掃描 `source-data/Assets/`，依分類／分項／細項整理所有素材，並以檔案內容比對 `public/icons/` 標出用途（網站已發布、網站介面、已抽取未發布、未使用）。
