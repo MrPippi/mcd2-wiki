@@ -1,6 +1,8 @@
 /** The breadcrumb trail of a page, read from its path: home, the section it belongs to, the page. Server-side only. */
 import type { Category } from "../../scripts/extract/config";
-import { categoryLabel, t, type Lang, type UiKey } from "./i18n";
+import { categoryLabel, t, type Lang } from "./i18n";
+import { pageSection, sectionTitle } from "./sections";
+import { TAB_ORDER } from "./tabs";
 import { withBase } from "./url";
 
 export interface PageCrumb {
@@ -8,20 +10,13 @@ export interface PageCrumb {
   readonly href: string;
 }
 
-/** First path segments that are a section with its own index page, other than the item categories. */
-const SECTION_KEY: Readonly<Record<string, UiKey>> = {
-  guides: "guides",
-  mobs: "mobs",
-  quests: "quests",
-  locations: "locations",
-  map: "worldMap",
-};
-const CATEGORY_SECTIONS: ReadonlySet<string> = new Set<Category>(["melee", "ranged", "armor", "artifact", "talisman", "enchantment", "effect"]);
+/** Item categories (the tab strip) and page sections each have an index page that a deeper path can sit under. */
+const CATEGORY_SECTIONS: ReadonlySet<string> = new Set<Category>(TAB_ORDER);
 
 function sectionName(segment: string, lang: Lang): string | undefined {
   if (CATEGORY_SECTIONS.has(segment)) return categoryLabel(segment as Category, lang);
-  const key = SECTION_KEY[segment];
-  return key === undefined ? undefined : t(lang, key);
+  const section = pageSection(segment);
+  return section === undefined ? undefined : t(lang, sectionTitle(section));
 }
 
 /** Home › section › page; empty on a language home. A section the site cannot name is left out. */

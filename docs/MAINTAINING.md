@@ -33,6 +33,15 @@
 
 需要的順序都寫成 `needs`：例如任務釘點（`quest-markers`）需要 `quests`；`icons` 步驟會先清空 `public/icons/` 再複製，所有要往 `public/icons/` 寫檔的步驟（成就、怪物頭像、區域圖示）都要列 `icons`。世界地圖有兩份：`map` 是純地圖，給各抽取步驟讀；寫出的 `map.json` 是 `spot-markers` 步驟在加上任務釘點之後的結果。
 
+## 新增網站分區
+
+網站有哪些分區由 `src/lib/sections.ts` 統一登記：
+
+- 道具分類（分頁列、分類頁）：`NAV_GROUPS`（分頁順序，麵包屑與 `llms.txt` 的分類清單也從這裡來）、`GRID_CATEGORIES` / `TABLE_CATEGORIES`（有分類頁的分類）。
+- 分類以外的頁面（漢堡選單、麵包屑、`llms.txt`）：`PAGE_SECTIONS` 加一列 `{ segment, key }`，`segment` 要與 `src/pages/[lang]/` 的路徑一致；頁名與選單文字不同時加 `title`，要列進 `llms.txt` 時加 `llms: { intro, rank }`（`rank` 是在 `llms.txt` 的順序）。
+
+新增分區：在 `PAGE_SECTIONS` 加一列、新增頁面本身、在 16 份 `src/i18n/*.json` 補上對應字串（`tests/unit/site/sections.test.ts` 會檢查路由與字串都在）。首頁精選（`HomeHero.astro`）、圖示（`ui-icons.ts`）、邊框（`frames.ts`）、標籤（`kicker.ts`）是各自挑選或針對全部分類的清單，不由此推導。
+
 ## 讀取新的資料表
 
 抽取程式讀 DataTable／CurveTable 一律走 `scripts/extract/table-reader.ts`，不要直接用 `readJsonFile`：

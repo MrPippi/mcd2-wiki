@@ -20,7 +20,7 @@ import {
 } from "../../../src/lib/locations";
 import { findMob, mobData } from "../../../src/lib/mobs";
 import { findQuest, questData } from "../../../src/lib/quests";
-import { SITE_MENU } from "../../../src/lib/site-menu";
+import { SITE_MENU } from "../../../src/lib/sections";
 
 const location = (slug: string) => {
   const found = findLocation(slug);

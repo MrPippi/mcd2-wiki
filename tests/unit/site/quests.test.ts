@@ -5,7 +5,7 @@ import rawSources from "../../../src/data/loot-sources.json";
 import { findMob } from "../../../src/lib/mobs";
 import { questSections } from "../../../src/lib/quest-view";
 import { findQuest, questData, questDescription, questHref, rewardEntries, rewardQuests } from "../../../src/lib/quests";
-import { SITE_MENU } from "../../../src/lib/site-menu";
+import { SITE_MENU } from "../../../src/lib/sections";
 
 describe("quests.json", () => {
   it("validates against the schema", () => {

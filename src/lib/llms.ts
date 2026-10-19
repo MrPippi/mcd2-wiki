@@ -1,25 +1,13 @@
 /** The /llms.txt file (https://llmstxt.org): a Markdown map of the site for answer engines and AI assistants. Server-side only. */
-import { ALL_LANGS, LANG_META, type Category } from "../../scripts/extract/config";
+import { ALL_LANGS, LANG_META } from "../../scripts/extract/config";
 import { GAME_VERSION } from "./game-version";
 import { GUIDES } from "./guides";
-import { categoryLabel, t, type Lang, type UiKey } from "./i18n";
+import { categoryLabel, t, type Lang } from "./i18n";
+import { LLMS_SECTIONS, sectionTitle } from "./sections";
 import { absoluteUrl } from "./seo";
+import { TAB_ORDER } from "./tabs";
 import { withBase } from "./url";
 
-const CATALOG: readonly Category[] = ["melee", "ranged", "armor", "artifact", "talisman", "enchantment", "effect"];
-/** Pages outside the item catalog, with the intro line each one opens with. */
-const PAGES: readonly { readonly path: string; readonly title: UiKey; readonly intro: UiKey }[] = [
-  { path: "mobs", title: "mobs", intro: "mobsIntro" },
-  { path: "bosses", title: "bosses", intro: "bossesIntro" },
-  { path: "locations", title: "locations", intro: "locationsIntro" },
-  { path: "quests", title: "quests", intro: "questsIntro" },
-  { path: "map", title: "worldMap", intro: "mapIntro" },
-  { path: "soul-storm", title: "soulStorm", intro: "soulStormIntro" },
-  { path: "achievements", title: "achievements", intro: "achievementsIntro" },
-  { path: "build", title: "build", intro: "buildIntro" },
-  { path: "compare", title: "weaponCompare", intro: "weaponCompareIntro" },
-  { path: "drops", title: "dropCalc", intro: "dropCalcIntro" },
-];
 /** The languages written by hand, so the ones an assistant should quote first. */
 const LISTED: readonly Lang[] = ["en", "zh"];
 
@@ -29,8 +17,8 @@ function languageSection(lang: Lang, url: (path: string) => string): string[] {
   return [
     `## ${LANG_META[lang].nativeName}`,
     "",
-    ...CATALOG.map((category) => link(categoryLabel(category, lang), url(`${lang}/${category}/`))),
-    ...PAGES.map((page) => link(t(lang, page.title), url(`${lang}/${page.path}/`), t(lang, page.intro))),
+    ...TAB_ORDER.map((category) => link(categoryLabel(category, lang), url(`${lang}/${category}/`))),
+    ...LLMS_SECTIONS.map((section) => link(t(lang, sectionTitle(section)), url(`${lang}/${section.segment}/`), t(lang, section.llms.intro))),
     link(t(lang, "guides"), url(`${lang}/guides/`), t(lang, "guidesIntro")),
     ...GUIDES.map((guide) => link(t(lang, guide.title), url(`${lang}/guides/${guide.slug}/`), t(lang, guide.summary))),
     "",

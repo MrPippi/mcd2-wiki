@@ -8,7 +8,7 @@ import {
   formatRetrieved,
   untranslatedMarkers,
 } from "../../../src/lib/achievements";
-import { SITE_MENU, isMenuPage } from "../../../src/lib/site-menu";
+import { SITE_MENU, isMenuPage } from "../../../src/lib/sections";
 import type { Achievement } from "../../../scripts/extract/achievement-schema";
 import { loc } from "../../helpers/localized";
 

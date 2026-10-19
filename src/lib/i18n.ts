@@ -94,4 +94,4 @@ export const statLabel = (key: StatKey, lang: Lang): string => t(lang, STAT_UI_K
 export const lootSlotLabel = (slot: LootSlotKey, lang: Lang): string => t(lang, LOOT_SLOT_UI_KEY[slot]);
 export const mobKindLabel = (kind: Mob["kind"], lang: Lang): string => t(lang, MOB_KIND_UI_KEY[kind]);
 
-export { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES } from "./nav";
+export { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES } from "./sections";
