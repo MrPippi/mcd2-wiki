@@ -29,36 +29,7 @@ const { lang, current } = Astro.props;
   </ol>
 </nav>
 <script>
-  import type { Category } from "../../shared/config";
-  import { adjacentCategory, keyStep } from "../../shared/tabs";
+  import { mountCategoryTabs } from "../client/category-tabs";
 
-  const nav = document.querySelector<HTMLElement>(".category-tabs");
-  const links = [...(nav?.querySelectorAll<HTMLAnchorElement>("a[data-category]") ?? [])];
-  const order = links.map((link) => link.dataset.category as Category);
-  nav?.querySelector("[aria-current='page']")?.scrollIntoView({ block: "nearest", inline: "center" });
-
-  // Mark the strip's ends so CSS fades only an edge with more tabs beyond it.
-  const strip = nav?.querySelector<HTMLElement>(".tab-list");
-  const markEdges = (): void => {
-    if (!strip) return;
-    const end = strip.scrollWidth - strip.clientWidth;
-    strip.toggleAttribute("data-at-start", strip.scrollLeft <= 1);
-    strip.toggleAttribute("data-at-end", strip.scrollLeft >= end - 1);
-  };
-  strip?.addEventListener("scroll", markEdges, { passive: true });
-  window.addEventListener("resize", markEdges);
-  markEdges();
-
-  document.addEventListener("keydown", (event) => {
-    const target = event.target as HTMLElement | null;
-    const step = keyStep(event.key, {
-      tagName: target?.tagName,
-      isContentEditable: target?.isContentEditable ?? false,
-      modifier: event.ctrlKey || event.metaKey || event.altKey,
-    });
-    if (step === null || order.length === 0) return;
-    const next = adjacentCategory(order, nav?.dataset.current as Category | undefined, step);
-    const link = links.find((candidate) => candidate.dataset.category === next);
-    if (link) window.location.assign(link.href);
-  });
+  mountCategoryTabs(document);
 </script>
