@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { addQuestMarkers, questOfRow, type QuestLocationRowValue } from "../../../scripts/extract/map-quests";
-import type { MapData } from "../../../scripts/extract/map-schema";
-import type { Quest } from "../../../scripts/extract/quest-schema";
-import { toBlocks, toImagePixel } from "../../../src/lib/map/transform";
+import type { MapData } from "../../../shared/map-schema";
+import type { Quest } from "../../../shared/quest-schema";
+import { toBlocks, toImagePixel } from "../../../shared/map/transform";
 import { loc } from "../../helpers/localized";
 
 const OVERWORLD = { minX: -599, maxX: 444, minY: -172, maxY: 1371, span: 1544, ratio: 0.965, imageSize: 8192 };

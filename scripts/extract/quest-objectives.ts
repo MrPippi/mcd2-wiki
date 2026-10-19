@@ -1,5 +1,5 @@
 /** Walks a quest's goal tree: the labelled objectives a player sees, and the mob and arena tags its tasks name. */
-import type { RawGoal } from "./quest-schema";
+import type { RawGoal } from "../../shared/quest-schema";
 
 export interface GoalObjective {
   /** The goal name, which is also its QuestTrackerLabels key. */

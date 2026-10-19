@@ -7,13 +7,13 @@
  */
 import { descriptionOf, entryIndex, formatMagnitude, locId, toFormat } from "./game-rows";
 import type { GameTables } from "./game-tables";
-import type { TalismanData, TalismanLevel } from "./gear-schema";
+import type { TalismanData, TalismanLevel } from "../../shared/gear-schema";
 import { issue, type Issue } from "./issues";
-import { localizedFrom } from "../../src/lib/lang";
-import { LANGS } from "./config";
-import type { Entry, Localized } from "./schemas";
+import { localizedFrom } from "../../shared/lang";
+import { LANGS } from "../../shared/config";
+import type { Entry, Localized } from "../../shared/schemas";
 import type { TalismanItemRow, TalismanPropertyRow, TalismanTables } from "./talisman-tables";
-import type { EffectFormat } from "./weapon-schema";
+import type { EffectFormat } from "../../shared/weapon-schema";
 
 const MAGNITUDE_GETTER = "SW.TextEntry.DataGetter.GetEffectMagnitude";
 const SECRET_COLLECTION = "SecretTalismans";

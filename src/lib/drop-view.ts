@@ -1,12 +1,12 @@
 /** The drop odds table of an item page: rows by kind of source, with the default view (threat 20, Normal, any rarity). Server-side only. */
-import { DropDataSchema } from "../../scripts/extract/drop-schema";
-import type { Entry } from "../../scripts/extract/schemas";
+import { DropDataSchema } from "../../shared/drop-schema";
+import type { Entry } from "../../shared/schemas";
 import rawDrops from "../data/drop-models.json";
 import { booksFor } from "./data";
 import { areaLabel, sourceIndex, sourceLabel, type DropLabel } from "./drop-labels";
 import { formatDropOdds } from "./drop-format";
-import { itemRows } from "./drop-odds";
-import type { DropFile, DropRow, DropSelection } from "./drop-types";
+import { itemRows } from "../../shared/drop-odds";
+import type { DropFile, DropRow, DropSelection } from "../../shared/drop-types";
 import type { Lang, UiKey } from "./i18n";
 
 /** The drop model from `npm run extract`, validated at build time. */

@@ -3,7 +3,7 @@ import {
   chestLabel, clockPayload, formatMultipliers, pickCount, rarityLine, scheduleOf, sharedMultipliers, soulStormData, spawnWeightText, summonedMobs, summonLine,
 } from "../../../src/lib/soul-storm";
 import { parseClockPayload, stormState } from "../../../src/lib/soul-storm-schedule";
-import { SITE_MENU } from "../../../src/lib/sections";
+import { SITE_MENU } from "../../../shared/sections";
 
 describe("Soul Storm site data", () => {
   it("turns the extracted schedule into the real anchor and lengths", () => {

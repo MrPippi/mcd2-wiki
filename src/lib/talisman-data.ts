@@ -1,4 +1,4 @@
-import { TalismanDataSchema, type TalismanData } from "../../scripts/extract/gear-schema";
+import { TalismanDataSchema, type TalismanData } from "../../shared/gear-schema";
 import rawTalismans from "../data/talismans.json";
 
 /** Talisman levels read from the game's DataTables by `npm run extract`. */

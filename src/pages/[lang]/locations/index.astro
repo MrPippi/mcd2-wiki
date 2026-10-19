@@ -1,10 +1,10 @@
 ---
-import { LANGS } from "../../../../scripts/extract/config";
-import type { LocationData } from "../../../../scripts/extract/location-schema";
+import { LANGS } from "../../../../shared/config";
+import type { LocationData } from "../../../../shared/location-schema";
 import LocationCard from "../../../components/LocationCard.astro";
 import Base from "../../../layouts/Base.astro";
 import { t, type Lang } from "../../../lib/i18n";
-import { compareLang, htmlLang } from "../../../lib/lang";
+import { compareLang, htmlLang } from "../../../../shared/lang";
 import { locationData } from "../../../lib/locations";
 import "../../../styles/locations.css";
 

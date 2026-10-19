@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { beforeAll, describe, expect, it } from "vitest";
-import type { Category } from "../../../scripts/extract/config";
+import type { Category } from "../../../shared/config";
 import AffixOdds from "../../../src/components/AffixOdds.astro";
 import { findEntry } from "../../../src/lib/data";
 

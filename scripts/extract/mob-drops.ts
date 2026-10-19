@@ -2,7 +2,7 @@
 import { issue, type Issue } from "./issues";
 import { exclusionOnlyTags, hasOwnPool, slotsOf } from "./loot-slots";
 import type { LootRow, LootSlotValue } from "./loot-tables";
-import { LOOT_SLOT_KEYS, type LootSlotKey, type MobDrop } from "./mob-schema";
+import { LOOT_SLOT_KEYS, type LootSlotKey, type MobDrop } from "../../shared/mob-schema";
 import { tagKey } from "./mob-tags";
 import type { MobDraft } from "./mobs";
 

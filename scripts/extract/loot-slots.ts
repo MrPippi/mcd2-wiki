@@ -1,6 +1,6 @@
 /** Loot slot helpers shared by the mob drop rules and the area/chest/quest loot sources. */
 import type { LootRow, LootSlotValue } from "./loot-tables";
-import { LOOT_SLOT_KEYS, type LootSlotKey } from "./mob-schema";
+import { LOOT_SLOT_KEYS, type LootSlotKey } from "../../shared/mob-schema";
 
 const SLOT_PATTERN = /SW\.LootSlot\.(\w+)/i;
 const SLOT_BY_NAME: Readonly<Record<string, LootSlotKey>> = {

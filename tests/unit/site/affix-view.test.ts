@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { itemOdds } from "../../../src/lib/affix-odds";
+import { itemOdds } from "../../../shared/affix-odds";
 import { affixData, affixViewOf } from "../../../src/lib/affix-view";
 import { findEntry, publishedEntries } from "../../../src/lib/data";
 

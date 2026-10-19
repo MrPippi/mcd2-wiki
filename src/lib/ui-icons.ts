@@ -1,5 +1,5 @@
-import type { Category, UiIconKey } from "../../scripts/extract/config";
-import type { ArmorPiece, UiIcons } from "../../scripts/extract/schemas";
+import type { Category, UiIconKey } from "../../shared/config";
+import type { ArmorPiece, UiIcons } from "../../shared/schemas";
 import { extractedUiIcons } from "./data";
 
 /** Game inventory tab icon for each site category; statuses and skins have none in game. */

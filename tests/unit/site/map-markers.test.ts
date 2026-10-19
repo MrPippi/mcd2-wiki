@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import type { MapMarker } from "../../../scripts/extract/map-schema";
-import type { Localized } from "../../../scripts/extract/schemas";
+import type { MapMarker } from "../../../shared/map-schema";
+import type { Localized } from "../../../shared/schemas";
 import { loc } from "../../helpers/localized";
-import { FILTER_KINDS } from "../../../src/lib/map/kinds";
+import { FILTER_KINDS } from "../../../shared/map/kinds";
 import { countByKind, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "../../../src/lib/map/markers";
 
 const marker = (id: string, kind: MapMarker["kind"], zh: string, en: string, area?: [string, string], extra: Partial<Localized> = {}): MapMarker => ({

@@ -90,7 +90,7 @@ test.describe("build planner", () => {
   });
 
   test("shows the game version and warns about a build made for another one", async ({ page }) => {
-    const { version } = JSON.parse(await readFile("scripts/extract/game-version.json", "utf8")) as { version: string };
+    const { version } = JSON.parse(await readFile("shared/game-version.json", "utf8")) as { version: string };
     await page.goto("/en/build/?v=1&gv=0.9.0.0&m=axe");
     await expect(page.getByTestId("build-game-version")).toHaveText(`Game version ${version}`);
     await expect(page.getByTestId("build-notice")).toContainText(`game version 0.9.0.0; the data is now ${version}`);
@@ -101,7 +101,7 @@ test.describe("build planner", () => {
   });
 
   test("a link for the current game version shows no notice", async ({ page }) => {
-    const { version } = JSON.parse(await readFile("scripts/extract/game-version.json", "utf8")) as { version: string };
+    const { version } = JSON.parse(await readFile("shared/game-version.json", "utf8")) as { version: string };
     await page.goto(`/en/build/?v=1&gv=${version}&m=axe`);
     await expect(slot(page, "melee")).toContainText("Axe");
     await expect(page.getByTestId("build-notice")).toBeHidden();

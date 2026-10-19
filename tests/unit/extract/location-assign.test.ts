@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { assignRows, covers, foldSubLocations, ownerOf, rowName } from "../../../scripts/extract/location-assign";
-import type { RegionList } from "../../../scripts/extract/location-schema";
+import type { RegionList } from "../../../shared/location-schema";
 import { makeSparseLocales, ns } from "../../helpers/locales";
 import { locationRow } from "../../helpers/location-tables";
 

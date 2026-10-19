@@ -1,13 +1,13 @@
 /** Merges the mob DataTable rows into one bestiary entry per named mob: names, kind, world, base stats, variants and Soul Corrupted versions. */
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { ExtractError, issue, type Issue } from "./issues";
 import { toSlug } from "./keys";
 import { gameText, localize } from "./game-text";
 import { locRef, type LocRef } from "./loc-table";
-import { STAT_ATTRIBUTES, STAT_KEYS, type Mob, type StatKey } from "./mob-schema";
+import { STAT_ATTRIBUTES, STAT_KEYS, type Mob, type StatKey } from "../../shared/mob-schema";
 import type { MobRow, MobTables } from "./mob-tables";
 import { normalizeTag, tagKey, traitClosure } from "./mob-tags";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 
 export interface MobDraft {
   readonly mob: Mob;

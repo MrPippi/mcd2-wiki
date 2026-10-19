@@ -4,14 +4,14 @@
  */
 import path from "node:path";
 import { z } from "zod";
-import { isInside, toBlocks, toImagePixel } from "../../src/lib/map/transform";
+import { isInside, toBlocks, toImagePixel } from "../../shared/map/transform";
 import { entryIndex, locId } from "./game-rows";
 import type { GuideTables } from "./guides-tables";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { publishedIcon, SPOT_ICONS } from "./map";
-import { MARKER_KINDS, type MapData, type MapMarker, type WorldMap } from "./map-schema";
+import { MARKER_KINDS, type MapData, type MapMarker, type WorldMap } from "../../shared/map-schema";
 import { readJsonFile } from "./read-json";
-import type { Entry, Localized } from "./schemas";
+import type { Entry, Localized } from "../../shared/schemas";
 
 const SPOTS_FILE = ["MapSpots", "map-spots.json"] as const;
 const CHEST_PREFIX = "sw.lootactor.talismanschest.";

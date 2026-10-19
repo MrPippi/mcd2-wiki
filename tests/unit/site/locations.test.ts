@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { LocationDataSchema } from "../../../scripts/extract/location-schema";
+import { LocationDataSchema } from "../../../shared/location-schema";
 import rawLocations from "../../../src/data/locations.json";
 import rawSources from "../../../src/data/loot-sources.json";
 import {
@@ -20,7 +20,7 @@ import {
 } from "../../../src/lib/locations";
 import { findMob, mobData } from "../../../src/lib/mobs";
 import { findQuest, questData } from "../../../src/lib/quests";
-import { SITE_MENU } from "../../../src/lib/sections";
+import { SITE_MENU } from "../../../shared/sections";
 
 const location = (slug: string) => {
   const found = findLocation(slug);

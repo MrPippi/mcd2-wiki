@@ -1,4 +1,4 @@
-import type { Entry, Localized } from "../../scripts/extract/schemas";
+import type { Entry, Localized } from "../../shared/schemas";
 import {
   ArmorEffectDataSchema,
   ArtifactDataSchema,
@@ -6,16 +6,16 @@ import {
   type ArmorEffectData,
   type ArtifactData,
   type EnchantmentData,
-} from "../../scripts/extract/gear-schema";
+} from "../../shared/gear-schema";
 import { z } from "zod";
 import rawArmorEffects from "../data/armor-effects.json";
 import rawArtifacts from "../data/artifacts.json";
 import rawEffects from "../data/effects.json";
 import rawEnchantments from "../data/enchantments.json";
-import { LANGS } from "../../scripts/extract/langs";
+import { LANGS } from "../../shared/langs";
 import type { Lang } from "./i18n";
 import { talismanTiers } from "./talisman-data";
-import { htmlLang, mapLocalized } from "./lang";
+import { htmlLang, mapLocalized } from "../../shared/lang";
 import { t, type UiKey } from "./ui-strings";
 import { blocksText, roundText, secondsText } from "./units";
 

@@ -1,11 +1,11 @@
 /** The /llms.txt file (https://llmstxt.org): a Markdown map of the site for answer engines and AI assistants. Server-side only. */
-import { ALL_LANGS, LANG_META } from "../../scripts/extract/config";
+import { ALL_LANGS, LANG_META } from "../../shared/config";
 import { GAME_VERSION } from "./game-version";
 import { GUIDES } from "./guides";
 import { categoryLabel, t, type Lang } from "./i18n";
-import { LLMS_SECTIONS, sectionTitle } from "./sections";
+import { LLMS_SECTIONS, sectionTitle } from "../../shared/sections";
 import { absoluteUrl } from "./seo";
-import { TAB_ORDER } from "./tabs";
+import { TAB_ORDER } from "../../shared/tabs";
 import { withBase } from "./url";
 
 /** The languages written by hand, so the ones an assistant should quote first. */

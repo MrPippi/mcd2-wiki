@@ -1,12 +1,12 @@
 /** The game's own texts the guides quote, rendered to HTML in every language, with the languages that fall back to English. */
-import { localizedFrom } from "../../src/lib/lang";
-import type { Lang } from "./config";
-import type { GuideText, TextId } from "./guides-schema";
+import { localizedFrom } from "../../shared/lang";
+import type { Lang } from "../../shared/config";
+import type { GuideText, TextId } from "../../shared/guides-schema";
 import type { TextDataValue } from "./guides-tables";
 import { issue, type Issue } from "./issues";
 import { gameHtml } from "./game-text";
 import { locRef } from "./loc-table";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 
 export type Locales = Readonly<Record<Lang, LocaleFile>>;
 

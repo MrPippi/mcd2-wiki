@@ -1,4 +1,4 @@
-import { TalismanDataSchema } from "../gear-schema";
+import { TalismanDataSchema } from "../../../shared/gear-schema";
 import { defineStep } from "../step";
 import { loadTalismanTables } from "../talisman-tables";
 import { buildTalismanData } from "../talismans";

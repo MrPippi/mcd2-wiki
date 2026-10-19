@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Entry } from "../../../scripts/extract/schemas";
+import type { Entry } from "../../../shared/schemas";
 import { pickShowcase } from "../../../src/lib/showcase";
 
 const entry = (slug: string, category: Entry["category"], variant: Entry["variant"], icon?: string): Entry =>

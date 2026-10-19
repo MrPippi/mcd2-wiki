@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { beforeAll, describe, expect, it } from "vitest";
-import type { Mob } from "../../../scripts/extract/mob-schema";
+import type { Mob } from "../../../shared/mob-schema";
 import MobPage from "../../../src/pages/[lang]/mobs/[slug].astro";
 import { findMob } from "../../../src/lib/mobs";
 

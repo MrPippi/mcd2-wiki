@@ -1,5 +1,5 @@
-import type { Entry } from "../../scripts/extract/schemas";
-import type { TalismanLevel } from "../../scripts/extract/gear-schema";
+import type { Entry } from "../../shared/schemas";
+import type { TalismanLevel } from "../../shared/gear-schema";
 import type { Lang } from "./i18n";
 import { talismanData } from "./talisman-data";
 import { t } from "./ui-strings";

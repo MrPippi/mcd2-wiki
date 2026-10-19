@@ -2,8 +2,8 @@
 // outside them (hamburger menu, breadcrumbs, llms.txt). Type-only imports: browser scripts (the category
 // tabs, the header menu) read this, so it must not pull in the UI dictionaries.
 // To add a page: add a row to PAGE_SECTIONS, the page itself under src/pages/[lang]/, and its UI strings.
-import type { Category } from "../../scripts/extract/config";
-import type { UiKey } from "./ui-strings";
+import type { Category } from "./config";
+import type { UiKey } from "./ui-dicts";
 
 export const NAV_GROUPS: readonly { key: UiKey; categories: readonly Category[] }[] = [
   { key: "equipment", categories: ["melee", "ranged", "armor", "artifact", "talisman"] },

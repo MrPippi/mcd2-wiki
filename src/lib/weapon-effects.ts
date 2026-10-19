@@ -1,6 +1,6 @@
 import { z } from "zod";
-import { SlugSchema, type Entry } from "../../scripts/extract/schemas";
-import { WeaponDataSchema, type EffectFormat, type WeaponData } from "../../scripts/extract/weapon-schema";
+import { SlugSchema, type Entry } from "../../shared/schemas";
+import { WeaponDataSchema, type EffectFormat, type WeaponData } from "../../shared/weapon-schema";
 import rawOverrides from "../data/fixed-bonus-overrides.json";
 import rawWeapons from "../data/weapons.json";
 import { findBaseEntry, publishedEntries } from "./data";

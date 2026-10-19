@@ -1,4 +1,4 @@
-import { LANGS, LANG_META, type Lang } from "./config";
+import { LANGS, LANG_META, type Lang } from "../../shared/config";
 
 const MIN_SET_NAME_LENGTH = 2;
 const MIN_COMPOUND_PREFIX_LENGTH = 4;

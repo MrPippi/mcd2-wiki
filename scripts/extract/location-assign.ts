@@ -3,15 +3,15 @@
  * or an exclusion's alike. Area rows then split into a region's own rows, its sub-locations (folded by name) and the
  * rows left out; every row left out or without a name is reported.
  */
-import { localizedFrom } from "../../src/lib/lang";
-import { LANGS, type Lang } from "./config";
+import { localizedFrom } from "../../shared/lang";
+import { LANGS, type Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
 import { locRef, type LocRef } from "./loc-table";
-import type { RegionList, RegionRule, SubLocation } from "./location-schema";
+import type { RegionList, RegionRule, SubLocation } from "../../shared/location-schema";
 import type { LocationAreaRow } from "./location-tables";
 import { tagKey } from "./mob-tags";
 import { questText, type QuestText } from "./quest-texts";
-import type { LocaleFile, Localized } from "./schemas";
+import type { LocaleFile, Localized } from "../../shared/schemas";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
 

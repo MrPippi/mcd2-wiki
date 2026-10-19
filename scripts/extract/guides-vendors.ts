@@ -2,7 +2,7 @@
  * Town vendors and the player's caps, from DT_PlayerDefinition (DefaultPlayer) and DT_NPCDefinition.
  * GA_UpgradeMerchant's VendorUpgradeDefinition prices each vendor level; the Town Merchant's KeyValues hold its stock and prices.
  */
-import type { GearType, GuidesData, MerchantData, Rarity, Vendor, VendorData } from "./guides-schema";
+import type { GearType, GuidesData, MerchantData, Rarity, Vendor, VendorData } from "../../shared/guides-schema";
 import type { GuideTables, PlayerRow } from "./guides-tables";
 import { issue, type Issue } from "./issues";
 

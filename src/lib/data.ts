@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { ICON_SOURCES, type Category } from "../../scripts/extract/config";
+import { ICON_SOURCES, type Category } from "../../shared/config";
 import {
   ArmorSetSchema,
   BrandSchema,
@@ -11,7 +11,7 @@ import {
   type Entry,
   type Frames,
   type UiIcons,
-} from "../../scripts/extract/schemas";
+} from "../../shared/schemas";
 import rawSets from "../data/armor-sets.json";
 import rawBrand from "../data/brand.json";
 import rawCategoryIcons from "../data/category-icons.json";

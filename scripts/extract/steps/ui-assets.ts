@@ -1,4 +1,4 @@
-import { BRAND_SOURCES, FRAME_SOURCES, UI_ICON_SOURCES } from "../config";
+import { BRAND_SOURCES, FRAME_SOURCES, UI_ICON_SOURCES } from "../../../shared/config";
 import { SOUL_STORM_ICON_SOURCES } from "../soul-storm";
 import { defineStep } from "../step";
 import { planAssets } from "../ui-assets";

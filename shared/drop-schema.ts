@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { MAX_DRAWS } from "../../src/lib/drop-odds";
+import { MAX_DRAWS } from "./drop-odds";
 
 /** The slots a profile can hold (extractor and site agree on these names). */
 export const DROP_SLOT_NAMES = ["item", "specialgear", "enchantedbook", "talismans", "none"] as const;

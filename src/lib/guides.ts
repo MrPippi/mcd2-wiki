@@ -1,11 +1,11 @@
 /** The mechanics guides for the site: data from `npm run extract` and the helpers their pages format with. Server-side only. */
-import { escapeHtml } from "../../scripts/extract/render-markup";
+import { escapeHtml } from "../../shared/render-markup";
 import {
   GuidesDataSchema, type DropRow, type GearType, type GuideText, type GuidesData, type Rarity, type TextId, type ThreatRow, type Vendor,
-} from "../../scripts/extract/guides-schema";
+} from "../../shared/guides-schema";
 import rawGuides from "../data/guides.json";
 import { t, type Lang, type UiKey } from "./i18n";
-import { htmlLang } from "./lang";
+import { htmlLang } from "../../shared/lang";
 import { RARITY_LABEL } from "./rarity";
 
 /** Guides data from `npm run extract`, validated at build time. */

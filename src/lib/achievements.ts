@@ -3,9 +3,9 @@ import {
   type Achievement,
   type AchievementCondition,
   type AchievementData,
-} from "../../scripts/extract/achievement-schema";
+} from "../../shared/achievement-schema";
 import rawAchievements from "../data/achievements.json";
-import { htmlLang, type Lang } from "./lang";
+import { htmlLang, type Lang } from "../../shared/lang";
 import { t, type UiKey } from "./ui-strings";
 
 /** Steam achievements from `npm run extract`, validated at build time. */

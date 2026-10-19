@@ -1,5 +1,5 @@
-import type { Category, Lang } from "../../scripts/extract/config";
-import { ARMOR_PIECES, type ArmorSet, type Entry, type Localized } from "../../scripts/extract/schemas";
+import type { Category, Lang } from "../../shared/config";
+import { ARMOR_PIECES, type ArmorSet, type Entry, type Localized } from "../../shared/schemas";
 import { findArmorSet, findEntry } from "./data";
 import type { UiKey } from "./i18n";
 import { entryHref, href } from "./url";

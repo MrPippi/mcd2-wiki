@@ -1,13 +1,13 @@
 /** Server side of the drop calculator: the item list, source and area names and labels in one language. No zod: the types are shared with the browser script. */
-import { CATEGORIES } from "../../../scripts/extract/config";
-import { ARMOR_PIECES, type Entry } from "../../../scripts/extract/schemas";
+import { CATEGORIES } from "../../../shared/config";
+import { ARMOR_PIECES, type Entry } from "../../../shared/schemas";
 import { findEntry } from "../data";
 import { areaLabel, sourceLabel, type DropLabel } from "../drop-labels";
 import { dropAvailable, dropData } from "../drop-view";
 import { frameFor } from "../frames";
 import { guidesData, plainText } from "../guides";
 import { categoryLabel, pieceLabel, t, type Lang } from "../i18n";
-import { searchNames } from "../lang";
+import { searchNames } from "../../../shared/lang";
 import { assetUrl, entryHref } from "../url";
 import type { CalcItem, CalcPayload } from "./parse";
 

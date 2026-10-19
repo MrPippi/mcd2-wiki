@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildEffectData } from "../../../scripts/extract/effects";
-import type { Entry } from "../../../scripts/extract/schemas";
+import type { Entry } from "../../../shared/schemas";
 import { TABLES } from "../../helpers/datatables";
 import { loc } from "../../helpers/localized";
 

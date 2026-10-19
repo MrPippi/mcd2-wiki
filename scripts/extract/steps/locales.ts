@@ -1,5 +1,5 @@
-import type { Lang } from "../config";
-import type { LocaleFile } from "../schemas";
+import type { Lang } from "../../../shared/config";
+import type { LocaleFile } from "../../../shared/schemas";
 import { loadLocales } from "../parse-locale";
 import { defineStep } from "../step";
 

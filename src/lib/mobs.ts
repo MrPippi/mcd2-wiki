@@ -7,9 +7,9 @@ import {
   type MobData,
   type MobDrop,
   type StatKey,
-} from "../../scripts/extract/mob-schema";
+} from "../../shared/mob-schema";
 import rawMobs from "../data/mobs.json";
-import { htmlLang, type Lang } from "./lang";
+import { htmlLang, type Lang } from "../../shared/lang";
 import { mobKindLabel } from "./i18n";
 import { formatView, worldSearch } from "./map/view-state";
 import { GAME_NAME } from "./site-title";

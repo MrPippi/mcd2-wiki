@@ -1,8 +1,8 @@
 /** The breadcrumb trail of a page, read from its path: home, the section it belongs to, the page. Server-side only. */
-import type { Category } from "../../scripts/extract/config";
+import type { Category } from "../../shared/config";
 import { categoryLabel, t, type Lang } from "./i18n";
-import { pageSection, sectionTitle } from "./sections";
-import { TAB_ORDER } from "./tabs";
+import { pageSection, sectionTitle } from "../../shared/sections";
+import { TAB_ORDER } from "../../shared/tabs";
 import { withBase } from "./url";
 
 export interface PageCrumb {

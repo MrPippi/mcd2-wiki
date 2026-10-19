@@ -8,7 +8,7 @@ import ThreatPage from "../../../src/pages/[lang]/guides/threat.astro";
 import SecretPage from "../../../src/pages/[lang]/guides/secret-talismans.astro";
 import VendorsPage from "../../../src/pages/[lang]/guides/vendors.astro";
 import { guidesData } from "../../../src/lib/guides";
-import type { GuidesData } from "../../../scripts/extract/guides-schema";
+import type { GuidesData } from "../../../shared/guides-schema";
 
 let container: AstroContainer;
 beforeAll(async () => { container = await AstroContainer.create(); });

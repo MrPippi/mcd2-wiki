@@ -11,7 +11,7 @@ import { entryIndex, locId } from "./game-rows";
 import { ITEM_TABLE_CATEGORY, ITEM_TABLE_KEYS, type ItemTagRow, type LootTables } from "./loot-tables";
 import { tagKey } from "./mob-tags";
 import type { MembersOf } from "./drop-pool";
-import type { Entry } from "./schemas";
+import type { Entry } from "../../shared/schemas";
 
 export interface UniverseItem {
   /** The lower-cased item tag. */

@@ -4,12 +4,12 @@
  */
 import path from "node:path";
 import { z } from "zod";
-import { isInside, toBlocks, toImagePixel } from "../../src/lib/map/transform";
+import { isInside, toBlocks, toImagePixel } from "../../shared/map/transform";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { publishedIcon, QUEST_ICONS } from "./map";
-import { MARKER_KINDS, type MapData, type MapMarker, type WorldMap } from "./map-schema";
-import type { Quest } from "./quest-schema";
+import { MARKER_KINDS, type MapData, type MapMarker, type WorldMap } from "../../shared/map-schema";
+import type { Quest } from "../../shared/quest-schema";
 import { readTableFile } from "./table-reader";
 
 const TABLE = "DT_QuestLocationDefinition";

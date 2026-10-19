@@ -1,5 +1,5 @@
-import type { Category } from "../../scripts/extract/config";
-import type { ArmorSet, Entry } from "../../scripts/extract/schemas";
+import type { Category } from "../../shared/config";
+import type { ArmorSet, Entry } from "../../shared/schemas";
 import { allArmorSets, listedIn } from "./data";
 
 const CATALOG_DIGITS = 3;

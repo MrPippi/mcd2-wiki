@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { buildDropModels, NO_DROPS, parseDropData, type DropInput } from "../../../scripts/extract/drop-models";
 import type { DropTables } from "../../../scripts/extract/drop-tables";
-import { ItemSourcesSchema, MobDataSchema } from "../../../scripts/extract/mob-schema";
-import type { DropSelection } from "../../../src/lib/drop-types";
-import { itemRows } from "../../../src/lib/drop-odds";
+import { ItemSourcesSchema, MobDataSchema } from "../../../shared/mob-schema";
+import type { DropSelection } from "../../../shared/drop-types";
+import { itemRows } from "../../../shared/drop-odds";
 import { makeEntry } from "../../helpers/entries";
 import { dropLoot, gear } from "../../helpers/drop-tables";
 import { loc } from "../../helpers/localized";

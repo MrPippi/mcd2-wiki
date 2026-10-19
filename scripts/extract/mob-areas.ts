@@ -3,12 +3,12 @@ import { z } from "zod";
 import { issue, type Issue } from "./issues";
 import { localize } from "./game-text";
 import { locRef } from "./loc-table";
-import type { MapData } from "./map-schema";
-import type { Lang } from "./config";
-import type { MobArea } from "./mob-schema";
+import type { MapData } from "../../shared/map-schema";
+import type { Lang } from "../../shared/config";
+import type { MobArea } from "../../shared/mob-schema";
 import type { AreaRow, MobTables } from "./mob-tables";
 import { normalizeTag, tagKey } from "./mob-tags";
-import type { LocaleFile, Localized } from "./schemas";
+import type { LocaleFile, Localized } from "../../shared/schemas";
 import prefixData from "./spawn-area-prefixes.json";
 
 const NAME_KEY = 'TagName="SW.TextEntry.Name"';

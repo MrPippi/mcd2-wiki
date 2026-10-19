@@ -1,5 +1,5 @@
 import { buildAffixModels } from "../affix-models";
-import { AffixDataSchema, type AffixData } from "../affix-schema";
+import { AffixDataSchema, type AffixData } from "../../../shared/affix-schema";
 import { defineStep } from "../step";
 import { entriesStep } from "./entries";
 import { gameTablesStep } from "./gear";

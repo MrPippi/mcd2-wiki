@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { LANGS } from "../../../scripts/extract/config";
-import type { Weapon } from "../../../scripts/extract/weapon-schema";
+import { LANGS } from "../../../shared/config";
+import type { Weapon } from "../../../shared/weapon-schema";
 import { comparePayload, comparePayloadJson, compareWeapons } from "../../../src/lib/compare/payload";
 import { parseComparePayload } from "../../../src/lib/compare/parse";
 import { compareCells, compareRows, COMPARE_KEYS } from "../../../src/lib/compare/rows";

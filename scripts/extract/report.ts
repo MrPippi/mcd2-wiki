@@ -1,6 +1,6 @@
-import { CATEGORIES, type Category, type Release } from "./config";
+import { CATEGORIES, type Category, type Release } from "../../shared/config";
 import type { Issue, IssueType } from "./issues";
-import type { ArmorSet, Entry } from "./schemas";
+import type { ArmorSet, Entry } from "../../shared/schemas";
 
 const COUNT_ONLY: ReadonlySet<IssueType> = new Set(["ignored-field", "placeholder-only"]);
 

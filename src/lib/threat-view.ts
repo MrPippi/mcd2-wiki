@@ -1,5 +1,5 @@
 /** The threat table's columns and two-row header, built from whichever parts of the threat data exist. Server-side only. */
-import { RARITIES, type ThreatRow } from "../../scripts/extract/guides-schema";
+import { RARITIES, type ThreatRow } from "../../shared/guides-schema";
 import { formatMultiplier, formatNumber, formatRange, formatShare, rarityName, roman } from "./guides";
 import { t, type Lang, type UiKey } from "./i18n";
 

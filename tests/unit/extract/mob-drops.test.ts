@@ -7,7 +7,7 @@ import { loadLocales } from "../../../scripts/extract/parse-locale";
 import { hasOwnPool, hasPoolTags, slotKeyOf, slotsOf } from "../../../scripts/extract/loot-slots";
 import { attachDrops, resolveDrops, unusedMobRows } from "../../../scripts/extract/mob-drops";
 import type { MobDraft } from "../../../scripts/extract/mobs";
-import type { Mob } from "../../../scripts/extract/mob-schema";
+import type { Mob } from "../../../shared/mob-schema";
 import { loc } from "../../helpers/localized";
 import { lootRow, lootTables, slot } from "../../helpers/mob-tables";
 

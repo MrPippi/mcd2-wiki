@@ -1,23 +1,23 @@
 /**
  * The drop odds model (src/data/drop-models.json): for each trigger the site covers (drop-sources.ts) the slots it rolls with
  * their pools, the rarity rows that apply, and the tables the browser needs to turn those into a chance for any threat level,
- * difficulty and target rarity (src/lib/drop-odds.ts). Nothing here is read from the game's code; the rules are what the 1.1.2
+ * difficulty and target rarity (shared/drop-odds.ts). Nothing here is read from the game's code; the rules are what the 1.1.2
  * data supports (drop-slots.ts, drop-pool.ts, drop-rarity-rows.ts, drop-universe.ts say which), checked against a third-party
  * table of 15,938 chances at threat 20 on Normal.
  */
 import { compileDrops } from "./drop-compile";
 import { buildHierarchy, createSlotResolver, slotNameOf, slotProblems, unknownOperations } from "./drop-slots";
 import { difficultyRarityOps } from "./drop-rarity-rows";
-import { DropDataSchema, type DropData } from "./drop-schema";
-import type { DropFile } from "../../src/lib/drop-types";
+import { DropDataSchema, type DropData } from "../../shared/drop-schema";
+import type { DropFile } from "../../shared/drop-types";
 import { planSources, type PlanInput } from "./drop-sources";
 import { slotRuleOf, type DropTables } from "./drop-tables";
 import type { ProfileContext } from "./drop-profile";
 import { buildUniverse, type Universe } from "./drop-universe";
 import type { LootTables } from "./loot-tables";
-import type { ThreatRow } from "./guides-schema";
+import type { ThreatRow } from "../../shared/guides-schema";
 import { issue, type Issue } from "./issues";
-import type { Entry } from "./schemas";
+import type { Entry } from "../../shared/schemas";
 
 export interface DropInput extends Omit<PlanInput, "placements"> {
   readonly tables: DropTables;

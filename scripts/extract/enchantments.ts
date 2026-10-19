@@ -6,8 +6,8 @@
 import { descriptionOf, entryIndex, formatMagnitude, locId, tagNames, TIERS, toFormat } from "./game-rows";
 import type { AbilityValue, EnchantmentRowValue, GameTables } from "./game-tables";
 import { issue, type Issue } from "./issues";
-import type { Entry } from "./schemas";
-import { ENCHANT_SLOTS, type EnchantmentData, type EnchantSlot } from "./gear-schema";
+import type { Entry } from "../../shared/schemas";
+import { ENCHANT_SLOTS, type EnchantmentData, type EnchantSlot } from "../../shared/gear-schema";
 
 const ABILITY_GETTER = "SW.TextEntry.DataGetter.GetAbilityKeyValues";
 const MAGNITUDE_GETTER = "SW.TextEntry.DataGetter.GetEffectMagnitude";

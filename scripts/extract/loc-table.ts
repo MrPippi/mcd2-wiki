@@ -1,6 +1,6 @@
-import { LANGS } from "./langs";
-import type { Lang } from "./config";
-import type { LocaleFile } from "./schemas";
+import { LANGS } from "../../shared/langs";
+import type { Lang } from "../../shared/config";
+import type { LocaleFile } from "../../shared/schemas";
 
 const LOCTABLE = /^LOCTABLE\("([^"]+)",\s*"([^"]+)"\)$/;
 

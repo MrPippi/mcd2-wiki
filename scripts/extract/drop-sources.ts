@@ -14,7 +14,7 @@ import { closureOf } from "./drop-slots";
 import { issue, type Issue } from "./issues";
 import { profileOfSpecs, profileOfTags, ITEM_SLOTS, type ProfileContext, type RawProfile } from "./drop-profile";
 import type { LootRow, LootTables } from "./loot-tables";
-import type { ItemSourcesData, MobData } from "./mob-schema";
+import type { ItemSourcesData, MobData } from "../../shared/mob-schema";
 import { nearestPlace, planRegular } from "./drop-regular";
 import { tagKey } from "./mob-tags";
 import type { LibraryQuest } from "./quest-tables";

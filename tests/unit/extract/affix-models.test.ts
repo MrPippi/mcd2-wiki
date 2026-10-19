@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildAffixModels, modelsByHash } from "../../../scripts/extract/affix-models";
-import { AffixDataSchema } from "../../../scripts/extract/affix-schema";
-import type { RarityTier, ThreatRow } from "../../../scripts/extract/guides-schema";
+import { AffixDataSchema } from "../../../shared/affix-schema";
+import type { RarityTier, ThreatRow } from "../../../shared/guides-schema";
 import { AFFIX_TABLES } from "../../helpers/affix-tables";
 import { makeEntry } from "../../helpers/entries";
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Mob, MobArea } from "../../../scripts/extract/mob-schema";
+import type { Mob, MobArea } from "../../../shared/mob-schema";
 import {
   dropPoolNote,
   dropSummary,

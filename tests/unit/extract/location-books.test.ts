@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { addLocationBooks } from "../../../scripts/extract/location-books";
-import type { Location, LocationData } from "../../../scripts/extract/location-schema";
-import type { ItemSourcesData } from "../../../scripts/extract/mob-schema";
-import { localizedFrom } from "../../../src/lib/lang";
+import type { Location, LocationData } from "../../../shared/location-schema";
+import type { ItemSourcesData } from "../../../shared/mob-schema";
+import { localizedFrom } from "../../../shared/lang";
 import { lootRow, lootTables } from "../../helpers/mob-tables";
 
 const place = (slug: string, areaId: string, lootSources: string[], areaIds: string[] = []): Location => ({

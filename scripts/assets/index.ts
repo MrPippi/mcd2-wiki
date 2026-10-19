@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { TAB_ORDER } from "../../src/lib/tabs";
+import { TAB_ORDER } from "../../shared/tabs";
 import { assetKind, classifyAsset } from "./classify";
 import { renderGallery } from "./gallery";
 import { sortRecords, type AssetRecord } from "./record";

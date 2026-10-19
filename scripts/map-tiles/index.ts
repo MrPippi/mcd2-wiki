@@ -1,6 +1,6 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { WORLDS } from "../../src/lib/map/worlds";
+import { WORLDS } from "../../shared/map/worlds";
 import { buildWorldTiles, type TileSummary } from "./build";
 import { buildTabArt } from "./tab-art";
 

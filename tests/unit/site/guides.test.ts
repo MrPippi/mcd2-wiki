@@ -3,7 +3,7 @@ import {
   anyUntranslated, dropShares, fill, formatMultiplier, formatNumber, formatRange, formatShare, formatSigned, gearName, guideBySlug, guidesData, GUIDES,
   plainText, rarityName, roman, shown, textOf, tierNotes, unlockText,
 } from "../../../src/lib/guides";
-import { SITE_MENU } from "../../../src/lib/sections";
+import { SITE_MENU } from "../../../shared/sections";
 
 describe("guides site data", () => {
   it("lists six guides and finds each by slug", () => {

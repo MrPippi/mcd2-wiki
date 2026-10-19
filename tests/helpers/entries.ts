@@ -1,6 +1,6 @@
-import type { Category } from "../../scripts/extract/config";
+import type { Category } from "../../shared/config";
 import { armorPieceOf, toSlug, variantOf } from "../../scripts/extract/keys";
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Entry } from "../../shared/schemas";
 import { loc } from "./localized";
 
 export function makeEntry(id: string, category: Category, extra: Partial<Entry> = {}): Entry {

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import type { Location } from "../../../scripts/extract/location-schema";
-import type { Mob } from "../../../scripts/extract/mob-schema";
-import type { Quest } from "../../../scripts/extract/quest-schema";
+import type { Location } from "../../../shared/location-schema";
+import type { Mob } from "../../../shared/mob-schema";
+import type { Quest } from "../../../shared/quest-schema";
 import { bossGroups, healthOf } from "../../../src/lib/boss-view";
 import { loc } from "../../helpers/localized";
 

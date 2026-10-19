@@ -1,9 +1,9 @@
 /** Server side of the weapon comparison: every released weapon's cells and effects, in one language. */
-import type { Entry } from "../../../scripts/extract/schemas";
-import type { WeaponData } from "../../../scripts/extract/weapon-schema";
+import type { Entry } from "../../../shared/schemas";
+import type { WeaponData } from "../../../shared/weapon-schema";
 import { findBaseEntry, publishedEntries } from "../data";
 import { categoryLabel, t, type Lang } from "../i18n";
-import { searchNames } from "../lang";
+import { searchNames } from "../../../shared/lang";
 import { assetUrl, entryHref } from "../url";
 import { weaponData } from "../weapon-effects";
 import type { CompareLabels, ComparePayload, CompareWeapon } from "./parse";

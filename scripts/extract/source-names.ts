@@ -1,13 +1,13 @@
 /** Display names for item sources (merchants, chests, mobs, quests, book pools, areas): the game's text when known, else English words. */
 import { z } from "zod";
-import { localizedFrom } from "../../src/lib/lang";
-import { plainText, UI_DICTS } from "../../src/lib/ui-dicts";
-import type { Lang } from "./config";
+import { localizedFrom } from "../../shared/lang";
+import { plainText, UI_DICTS } from "../../shared/ui-dicts";
+import type { Lang } from "../../shared/config";
 import { ExtractError } from "./issues";
-import { LANGS } from "./langs";
+import { LANGS } from "../../shared/langs";
 import { gameText } from "./game-text";
 import type { LocRef } from "./loc-table";
-import type { LocaleFile, Localized } from "./schemas";
+import type { LocaleFile, Localized } from "../../shared/schemas";
 import keyData from "./source-name-keys.json";
 
 export type NameKeys = Readonly<Record<string, LocRef>>;
@@ -50,7 +50,7 @@ export interface SourceName {
 
 const siteLabel = (key: string) => (lang: Lang): string => {
   const value = UI_DICTS[lang].values[key];
-  if (value === undefined) throw new ExtractError(`src/i18n/${lang}.json 缺少介面字串 ${key}`);
+  if (value === undefined) throw new ExtractError(`shared/i18n/${lang}.json 缺少介面字串 ${key}`);
   return plainText(value);
 };
 

@@ -1,9 +1,9 @@
-import { CATEGORIES, LANGS, type Category, type Lang, type Release, type TableSource } from "./config";
-import { byLang } from "../../src/lib/lang";
+import { CATEGORIES, LANGS, type Category, type Lang, type Release, type TableSource } from "../../shared/config";
+import { byLang } from "../../shared/lang";
 import { issue, type Issue } from "./issues";
 import { resolveTexts } from "./game-text";
 import { parseKey } from "./keys";
-import type { LocaleFile, Localized } from "./schemas";
+import type { LocaleFile, Localized } from "../../shared/schemas";
 
 export interface RawEntry {
   readonly id: string;

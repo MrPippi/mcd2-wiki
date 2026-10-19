@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { buildMapData } from "../../../scripts/extract/map";
-import type { MapMarker } from "../../../scripts/extract/map-schema";
-import { toBlocks, toImagePixel } from "../../../src/lib/map/transform";
+import type { MapMarker } from "../../../shared/map-schema";
+import { toBlocks, toImagePixel } from "../../../shared/map/transform";
 import { MAP_LOCALES, MAP_TABLES } from "../../helpers/map-tables";
 import { loc } from "../../helpers/localized";
 

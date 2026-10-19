@@ -2,7 +2,7 @@
 import { entryIndex, locId } from "./game-rows";
 import { ITEM_TABLE_CATEGORY, ITEM_TABLE_KEYS, type LootTables } from "./loot-tables";
 import { tagKey } from "./mob-tags";
-import { ARMOR_PIECES, type Entry } from "./schemas";
+import { ARMOR_PIECES, type Entry } from "../../shared/schemas";
 
 export interface ItemRef {
   /** `${category}/${slug}` */

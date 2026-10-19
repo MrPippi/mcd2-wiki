@@ -5,9 +5,9 @@
  * quest's mob list); one with no core quest sorts after those, by the lowest player level among the regions of its
  * areas; one with neither goes last. Ties go by English name. Bosses come first, then mini-bosses, each ordered this way.
  */
-import type { Location } from "../../scripts/extract/location-schema";
-import type { Mob } from "../../scripts/extract/mob-schema";
-import type { Quest } from "../../scripts/extract/quest-schema";
+import type { Location } from "../../shared/location-schema";
+import type { Mob } from "../../shared/mob-schema";
+import type { Quest } from "../../shared/quest-schema";
 
 export const BOSS_KINDS = ["boss", "miniboss"] as const satisfies readonly Mob["kind"][];
 export type BossKind = (typeof BOSS_KINDS)[number];

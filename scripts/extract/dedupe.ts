@@ -1,6 +1,6 @@
-import type { Category } from "./config";
+import type { Category } from "../../shared/config";
 import { issue, type Issue } from "./issues";
-import type { Entry } from "./schemas";
+import type { Entry } from "../../shared/schemas";
 
 /** Cosmetic tables keep legacy rows that repeat another item's name (e.g. two "Corrupted Creeper Cape"). */
 const DEDUPED_CATEGORIES: ReadonlySet<Category> = new Set(["cape", "pet", "skin"]);

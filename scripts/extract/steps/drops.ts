@@ -1,4 +1,4 @@
-import { DropDataSchema } from "../drop-schema";
+import { DropDataSchema } from "../../../shared/drop-schema";
 import { extractDrops } from "../drops";
 import { defineStep } from "../step";
 import { bestiaryStep } from "./bestiary";

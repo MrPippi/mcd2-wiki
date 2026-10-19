@@ -1,10 +1,10 @@
 ---
-import { LANGS } from "../../../scripts/extract/config";
+import { LANGS } from "../../../shared/config";
 import WeaponCompare from "../../components/WeaponCompare.astro";
 import Base from "../../layouts/Base.astro";
 import { comparePayload } from "../../lib/compare/payload";
 import { t, type Lang } from "../../lib/i18n";
-import { compareLang, htmlLang } from "../../lib/lang";
+import { compareLang, htmlLang } from "../../../shared/lang";
 import "../../styles/compare.css";
 
 export function getStaticPaths() {

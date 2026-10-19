@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { CATEGORIES } from "../../../scripts/extract/config";
-import { MARKER_KINDS } from "../../../scripts/extract/map-schema";
-import { LANGS } from "../../../scripts/extract/langs";
+import { CATEGORIES } from "../../../shared/config";
+import { MARKER_KINDS } from "../../../shared/map-schema";
+import { LANGS } from "../../../shared/langs";
 import { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES, categoryLabel, lootSlotLabel, markerLabel, mobKindLabel, pieceLabel, statLabel, t } from "../../../src/lib/i18n";
-import { LOOT_SLOT_KEYS, STAT_KEYS } from "../../../scripts/extract/mob-schema";
+import { LOOT_SLOT_KEYS, STAT_KEYS } from "../../../shared/mob-schema";
 import { machineKeys, tCount } from "../../../src/lib/ui-strings";
-import { UI_DICTS } from "../../../src/lib/ui-dicts";
-import zh from "../../../src/i18n/zh.json";
+import { UI_DICTS } from "../../../shared/ui-dicts";
+import zh from "../../../shared/i18n/zh.json";
 
 const keysOf = (file: Record<string, unknown>): string[] => Object.keys(file).filter((key) => key !== "_machine" && key !== "_english").sort();
 

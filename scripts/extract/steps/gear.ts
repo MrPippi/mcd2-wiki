@@ -3,10 +3,10 @@ import { buildArtifactData } from "../artifacts";
 import { buildEffectData } from "../effects";
 import { buildEnchantmentData } from "../enchantments";
 import { DATATABLES_DIR, loadGameTables } from "../game-tables";
-import { ArmorEffectDataSchema, ArtifactDataSchema, EnchantmentDataSchema } from "../gear-schema";
+import { ArmorEffectDataSchema, ArtifactDataSchema, EnchantmentDataSchema } from "../../../shared/gear-schema";
 import { issue } from "../issues";
 import { defineStep } from "../step";
-import { WeaponDataSchema, type WeaponData } from "../weapon-schema";
+import { WeaponDataSchema, type WeaponData } from "../../../shared/weapon-schema";
 import { buildWeaponData } from "../weapons";
 import { entriesStep } from "./entries";
 

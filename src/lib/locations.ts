@@ -1,17 +1,17 @@
 /** The location and boss pages' data from `npm run extract`, validated at build time, and the lookups they link with. Server-side only. */
-import type { Category } from "../../scripts/extract/config";
-import { LocationDataSchema, type Location, type LocationData } from "../../scripts/extract/location-schema";
-import { ItemSourcesSchema, type Mob } from "../../scripts/extract/mob-schema";
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Category } from "../../shared/config";
+import { LocationDataSchema, type Location, type LocationData } from "../../shared/location-schema";
+import { ItemSourcesSchema, type Mob } from "../../shared/mob-schema";
+import type { Entry } from "../../shared/schemas";
 import rawLocations from "../data/locations.json";
 import rawSources from "../data/loot-sources.json";
 import { bossGroups, type BossGroup } from "./boss-view";
 import { findEntry } from "./data";
-import type { Lang } from "./lang";
+import type { Lang } from "../../shared/lang";
 import { groupLoot, locationCounts, locationOfArea, lootKeys, mobSureItemKeys, questRewardKeys, type LocationCounts, type LootGroup, type LootItem } from "./location-view";
 import { findMob, mobData, mobGroups, type MobGroup } from "./mobs";
 import { questData, questsOf, rewardEntries } from "./quests";
-import type { Quest } from "../../scripts/extract/quest-schema";
+import type { Quest } from "../../shared/quest-schema";
 import { GAME_NAME } from "./site-title";
 import { t } from "./ui-strings";
 import { href } from "./url";

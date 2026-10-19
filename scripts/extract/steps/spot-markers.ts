@@ -1,11 +1,11 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
-import type { Entry } from "../schemas";
+import type { Entry } from "../../../shared/schemas";
 import { loadGuideTables } from "../guides-tables";
 import { issue } from "../issues";
 import type { MapResult } from "../map";
-import type { MapData } from "../map-schema";
-import { MapDataSchema } from "../map-schema";
+import type { MapData } from "../../../shared/map-schema";
+import { MapDataSchema } from "../../../shared/map-schema";
 import { addSpotMarkers, chestTalismans, loadMapSpots, type SpotMarkersResult } from "../map-spots";
 import { defineStep } from "../step";
 import { entriesStep } from "./entries";

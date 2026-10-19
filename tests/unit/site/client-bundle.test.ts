@@ -6,7 +6,7 @@ import { runtimeImports } from "../../helpers/imports";
 // Browser scripts must not pull in the UI dictionaries, the game strings or zod: every page would ship them.
 const ROOT = resolve(__dirname, "../../..");
 const posix = (path: string): string => path.split(sep).join("/");
-const FORBIDDEN = [/src\/lib\/ui-strings\.ts$/, /src\/lib\/ui-dicts\.ts$/, /src\/i18n\/.*\.json$/, /ui-game-strings\.json$/, /^zod$/];
+const FORBIDDEN = [/src\/lib\/ui-strings\.ts$/, /shared\/ui-dicts\.ts$/, /shared\/i18n\/.*\.json$/, /ui-game-strings\.json$/, /^zod$/];
 
 const resolveFile = (from: string, specifier: string): string => {
   if (!specifier.startsWith(".")) return specifier;

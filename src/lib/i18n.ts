@@ -1,7 +1,7 @@
-import type { Category, Lang } from "../../scripts/extract/config";
-import type { ArmorPiece } from "../../scripts/extract/schemas";
-import type { LootSlotKey, Mob, StatKey } from "../../scripts/extract/mob-schema";
-import type { MarkerKind } from "./map/kinds";
+import type { Category, Lang } from "../../shared/config";
+import type { ArmorPiece } from "../../shared/schemas";
+import type { LootSlotKey, Mob, StatKey } from "../../shared/mob-schema";
+import type { MarkerKind } from "../../shared/map/kinds";
 import { t, type UiKey } from "./ui-strings";
 
 export type { Lang };
@@ -94,4 +94,4 @@ export const statLabel = (key: StatKey, lang: Lang): string => t(lang, STAT_UI_K
 export const lootSlotLabel = (slot: LootSlotKey, lang: Lang): string => t(lang, LOOT_SLOT_UI_KEY[slot]);
 export const mobKindLabel = (kind: Mob["kind"], lang: Lang): string => t(lang, MOB_KIND_UI_KEY[kind]);
 
-export { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES } from "./sections";
+export { GRID_CATEGORIES, NAV_GROUPS, TABLE_CATEGORIES } from "../../shared/sections";

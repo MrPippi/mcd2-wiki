@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { MAX_SLOTS } from "../../src/lib/affix-odds";
+import { MAX_SLOTS } from "./affix-odds";
 import { SlugSchema } from "./schemas";
 
 /** The rarities an item page can show odds for (Common has no random effect). */

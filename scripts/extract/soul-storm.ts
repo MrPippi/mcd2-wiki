@@ -1,12 +1,12 @@
 /** Builds src/data/soul-storm.json: the schedule, the area rotation, the fight (generators, chests, unlock) and the game's own texts. */
 import path from "node:path";
 import type { BestiaryLinks } from "./bestiary";
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
-import type { MapData } from "./map-schema";
+import type { MapData } from "../../shared/map-schema";
 import { areaMarkers } from "./mob-areas";
 import { readJsonFile } from "./read-json";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 import { buildChests, buildGenerators, chestRarity, unlockOf } from "./soul-storm-combat";
 import { buildRotation, buildSchedule } from "./soul-storm-schedule-data";
 import {
@@ -15,7 +15,7 @@ import {
   SoulStormStatusSchema,
   type SoulStormData,
   type SoulStormStatus,
-} from "./soul-storm-schema";
+} from "../../shared/soul-storm-schema";
 import { buildSoulStormTexts } from "./soul-storm-texts";
 import { loadSoulStormTables, type SoulStormTables } from "./soul-storm-tables";
 

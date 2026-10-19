@@ -2,7 +2,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
-import type { Category } from "./config";
+import type { Category } from "../../shared/config";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue } from "./issues";
 import { readDataTable } from "./table-reader";

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { LANGS } from "../../../scripts/extract/config";
-import type { ArmorSet, Entry } from "../../../scripts/extract/schemas";
+import { LANGS } from "../../../shared/config";
+import type { ArmorSet, Entry } from "../../../shared/schemas";
 import { buildPayload, effectOptions, enchantOptions, inPool, payloadJson, poolOptions, slotLabel, wholeSets } from "../../../src/lib/build/payload";
 import { parseBuildPayload } from "../../../src/lib/build/parse";
 import { BUILD_SLOTS, POOL_KEYS } from "../../../src/lib/build/slots";

@@ -1,8 +1,8 @@
 ---
-import type { Entry, Localized } from "../../scripts/extract/schemas";
-import { LANGS } from "../../scripts/extract/config";
+import type { Entry, Localized } from "../../shared/schemas";
+import { LANGS } from "../../shared/config";
 import { t, type Lang } from "../lib/i18n";
-import { mapLocalized } from "../lib/lang";
+import { mapLocalized } from "../../shared/lang";
 import { entryHref } from "../lib/url";
 import { fillPlaceholders } from "../lib/gear-values";
 import { tierRange, weaponEffectsOf } from "../lib/weapon-effects";

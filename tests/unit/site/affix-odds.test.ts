@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { affixOdds, entryWeight, MAX_SLOTS, formatOdds, itemOdds, type AffixEntry, type AffixFile, type AffixModel, type TierFactors } from "../../../src/lib/affix-odds";
+import { affixOdds, entryWeight, MAX_SLOTS, formatOdds, itemOdds, type AffixEntry, type AffixFile, type AffixModel, type TierFactors } from "../../../shared/affix-odds";
 
 const FLAT: TierFactors = [1, 1, 1];
 const entry = (effect: string, tier: 1 | 2 | 3, ...ops: [AffixEntry["ops"][number][0], number][]): AffixEntry => ({ effect, tier, ops });

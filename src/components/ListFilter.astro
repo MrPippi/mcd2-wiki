@@ -25,7 +25,7 @@ const VARIANTS = ["all", "normal", "unique"] as const;
   )}
 </div>
 <script>
-  import { foldForSearch } from "../lib/lang";
+  import { foldForSearch } from "../../shared/lang";
 
   const filter = document.querySelector<HTMLElement>(".list-filter");
   const input = filter?.querySelector<HTMLInputElement>(".filter-text");

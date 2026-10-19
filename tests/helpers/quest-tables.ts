@@ -1,6 +1,6 @@
 /** Small quest-library and quest-loot rows shaped like the game's, for the quest extractor tests. */
 import type { LootRow } from "../../scripts/extract/loot-tables";
-import type { RawGoal, RawQuest } from "../../scripts/extract/quest-schema";
+import type { RawGoal, RawQuest } from "../../shared/quest-schema";
 
 type RawLoot = RawQuest["RewardData"]["lootSourceData"];
 

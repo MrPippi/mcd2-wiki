@@ -1,12 +1,12 @@
 /** How an item page presents loot-sources.json: the entry's sources, area links and labels. Server-side only. */
-import type { Localized } from "../../scripts/extract/schemas";
-import type { Category } from "../../scripts/extract/config";
-import { ItemSourcesSchema, type LootSource, type MobArea } from "../../scripts/extract/mob-schema";
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Localized } from "../../shared/schemas";
+import type { Category } from "../../shared/config";
+import { ItemSourcesSchema, type LootSource, type MobArea } from "../../shared/mob-schema";
+import type { Entry } from "../../shared/schemas";
 import rawSources from "../data/loot-sources.json";
 import { booksFor } from "./data";
 import { categoryLabel, t } from "./i18n";
-import { compareLang, type Lang } from "./lang";
+import { compareLang, type Lang } from "../../shared/lang";
 import { bookDropsOf, sourcesFor, type ResolvedBookDrop, type ResolvedItemSources, type ResolvedSource } from "./item-sources";
 import { mapLinkOf, mobData, mobHref } from "./mobs";
 

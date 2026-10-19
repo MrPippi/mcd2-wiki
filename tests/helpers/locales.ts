@@ -1,6 +1,6 @@
-import type { Lang } from "../../scripts/extract/config";
-import type { LocaleFile } from "../../scripts/extract/schemas";
-import { byLang } from "../../src/lib/lang";
+import type { Lang } from "../../shared/config";
+import type { LocaleFile } from "../../shared/schemas";
+import { byLang } from "../../shared/lang";
 
 export const ns = (table: string): string => `Text/Release/${table}.csv`;
 

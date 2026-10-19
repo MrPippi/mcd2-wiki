@@ -1,10 +1,10 @@
 /** The game's own Soul Storm texts, rendered to HTML in every language. The tutorial's second paragraph is out of date, so only the first is published. */
-import { localizedFrom } from "../../src/lib/lang";
-import type { Lang } from "./config";
+import { localizedFrom } from "../../shared/lang";
+import type { Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
 import { gameHtml, type Accept } from "./game-text";
-import type { LocaleFile } from "./schemas";
-import { TEXT_IDS, type SoulStormData, type TextId } from "./soul-storm-schema";
+import type { LocaleFile } from "../../shared/schemas";
+import { TEXT_IDS, type SoulStormData, type TextId } from "../../shared/soul-storm-schema";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
 type Text = SoulStormData["texts"][TextId];

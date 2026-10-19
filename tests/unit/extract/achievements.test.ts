@@ -13,10 +13,10 @@ import {
   parseSteamAchievements,
   type SteamAchievements,
 } from "../../../scripts/extract/achievements";
-import { AchievementDataSchema } from "../../../scripts/extract/achievement-schema";
-import { LANGS } from "../../../scripts/extract/config";
+import { AchievementDataSchema } from "../../../shared/achievement-schema";
+import { LANGS } from "../../../shared/config";
 import { ExtractError } from "../../../scripts/extract/issues";
-import { localizedFrom } from "../../../src/lib/lang";
+import { localizedFrom } from "../../../shared/lang";
 import { makeLocales } from "../../helpers/locales";
 
 const steamRow = (id: string, globalPercent: number, en: [string, string], zh: [string, string]) => ({

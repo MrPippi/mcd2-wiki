@@ -1,15 +1,15 @@
 /** World map markers from the game's DataTables: minecart stations, rifts, the teleport statue, merchants, area names. */
 import path from "node:path";
-import { isInside, toBlocks, toImagePixel, type BlockPoint, type WorldFrame } from "../../src/lib/map/transform";
-import { WORLDS, imageSizeOf, zMaxFor, type WorldSource } from "../../src/lib/map/worlds";
-import { localizedFrom } from "../../src/lib/lang";
-import type { Lang } from "./config";
+import { isInside, toBlocks, toImagePixel, type BlockPoint, type WorldFrame } from "../../shared/map/transform";
+import { WORLDS, imageSizeOf, zMaxFor, type WorldSource } from "../../shared/map/worlds";
+import { localizedFrom } from "../../shared/lang";
+import type { Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
 import { gameText } from "./game-text";
 import { locRef } from "./loc-table";
-import { MARKER_KINDS, type MapData, type MapMarker, type MarkerKind, type WorldMap } from "./map-schema";
+import { MARKER_KINDS, type MapData, type MapMarker, type MarkerKind, type WorldMap } from "../../shared/map-schema";
 import type { AreaRowValue, MapTables, TeleportRowValue } from "./map-tables";
-import type { LocaleFile, Localized } from "./schemas";
+import type { LocaleFile, Localized } from "../../shared/schemas";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
 

@@ -3,10 +3,10 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { breadcrumbTrail } from "../../../src/lib/breadcrumbs";
 import { llmsTxt } from "../../../src/lib/llms";
-import { ALL_LANGS } from "../../../scripts/extract/config";
+import { ALL_LANGS } from "../../../shared/config";
 import { t } from "../../../src/lib/i18n";
-import { LLMS_SECTIONS, PAGE_SECTIONS, SITE_MENU, TABLE_CATEGORIES, pageSection, sectionTitle } from "../../../src/lib/sections";
-import { TAB_ORDER } from "../../../src/lib/tabs";
+import { LLMS_SECTIONS, PAGE_SECTIONS, SITE_MENU, TABLE_CATEGORIES, pageSection, sectionTitle } from "../../../shared/sections";
+import { TAB_ORDER } from "../../../shared/tabs";
 import { entryHref } from "../../../src/lib/url";
 
 const PAGES_DIR = resolve(__dirname, "../../../src/pages/[lang]");

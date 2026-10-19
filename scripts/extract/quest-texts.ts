@@ -1,7 +1,7 @@
 /** The game's quest texts: titles and objective labels (QuestTrackerLabels), descriptions and completed texts (markup rendered). */
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { gameHtml, gameText, type Accept, type GameHtml, type GameText } from "./game-text";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
 

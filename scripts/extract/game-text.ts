@@ -1,10 +1,10 @@
 /** The one place a game text becomes a per-language record: English fills every language that has no usable text of its own, and those languages are listed. */
-import { localizedFrom } from "../../src/lib/lang";
-import type { Lang } from "./config";
-import { LANGS } from "./langs";
+import { localizedFrom } from "../../shared/lang";
+import type { Lang } from "../../shared/config";
+import { LANGS } from "../../shared/langs";
 import { gameTexts } from "./loc-table";
-import { renderMarkup } from "./render-markup";
-import type { LocaleFile, Localized } from "./schemas";
+import { renderMarkup } from "../../shared/render-markup";
+import type { LocaleFile, Localized } from "../../shared/schemas";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
 

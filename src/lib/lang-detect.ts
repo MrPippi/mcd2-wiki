@@ -1,4 +1,4 @@
-import { ALL_LANGS, LANG_META, type Lang } from "../../scripts/extract/langs";
+import { ALL_LANGS, LANG_META, type Lang } from "../../shared/langs";
 
 const FALLBACK: Lang = "zh";
 const isLang = (code: string): code is Lang => ALL_LANGS.some((lang) => lang === code);

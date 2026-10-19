@@ -1,9 +1,9 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { beforeAll, describe, expect, it } from "vitest";
-import type { Quest, QuestData } from "../../../scripts/extract/quest-schema";
+import type { Quest, QuestData } from "../../../shared/quest-schema";
 import AchievementReveal from "../../../src/components/AchievementReveal.astro";
 import ItemSources from "../../../src/components/ItemSources.astro";
-import { localizedFrom } from "../../../src/lib/lang";
+import { localizedFrom } from "../../../shared/lang";
 import { findEntry } from "../../../src/lib/data";
 import { findQuest, questData } from "../../../src/lib/quests";
 import QuestPage from "../../../src/pages/[lang]/quests/[slug].astro";

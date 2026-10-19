@@ -1,7 +1,7 @@
 /** Hand-made talisman DataTable rows in the game's export shape (values copied from the real tables). */
 import type { GameTables } from "../../scripts/extract/game-tables";
 import type { TalismanTables } from "../../scripts/extract/talisman-tables";
-import type { Entry, Localized } from "../../scripts/extract/schemas";
+import type { Entry, Localized } from "../../shared/schemas";
 import { loc } from "./localized";
 
 const tag = (TagName: string) => ({ TagName });

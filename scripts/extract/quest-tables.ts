@@ -9,7 +9,7 @@ import { z } from "zod";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { LootTablesSchema, type LootRow } from "./loot-tables";
-import { QuestLibraryRowSchema, RawQuestSchema, type RawQuest } from "./quest-schema";
+import { QuestLibraryRowSchema, RawQuestSchema, type RawQuest } from "../../shared/quest-schema";
 import { readDataTable } from "./table-reader";
 
 export const QUEST_TABLE_FILES = {

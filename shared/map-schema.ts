@@ -1,7 +1,7 @@
 /** Shape of src/data/map.json: one entry per world with its frame, top zoom and markers (spec §4.2). */
 import { z } from "zod";
-import { MARKER_KINDS, type MarkerKind } from "../../src/lib/map/kinds";
-import { WORLD_KEYS } from "../../src/lib/map/worlds";
+import { MARKER_KINDS, type MarkerKind } from "./map/kinds";
+import { WORLD_KEYS } from "./map/worlds";
 import { CATEGORIES } from "./config";
 import { LocalizedSchema } from "./schemas";
 

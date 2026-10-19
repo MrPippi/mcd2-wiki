@@ -4,13 +4,13 @@
  */
 import path from "node:path";
 import { z } from "zod";
-import type { AchievementCondition } from "./achievement-schema";
-import type { Lang } from "./config";
+import type { AchievementCondition } from "../../shared/achievement-schema";
+import type { Lang } from "../../shared/config";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { gameText } from "./game-text";
 import { readTableFile } from "./table-reader";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 
 export const ACHIEVEMENT_DEFINITIONS_FILE = `${DATATABLES_DIR}/DT_AchievementDefinition.json`;
 const QUEST_LABELS = "Text/Release/QuestTrackerLabels.csv";

@@ -3,7 +3,7 @@ import { ExtractError, issue, type Issue } from "./issues";
 import { hasPoolTags, slotsOf } from "./loot-slots";
 import type { LootRow } from "./loot-tables";
 import { normalizeTag, tagKey } from "./mob-tags";
-import { GENERATOR_TIERS, type Chest, type Generator, type SoulStormData } from "./soul-storm-schema";
+import { GENERATOR_TIERS, type Chest, type Generator, type SoulStormData } from "../../shared/soul-storm-schema";
 import type { GameBalanceRow, PropRow, RarityChanceRow, SoulStormTables, SpawnRow } from "./soul-storm-tables";
 
 type Tier = (typeof GENERATOR_TIERS)[number];

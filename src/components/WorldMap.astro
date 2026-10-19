@@ -1,8 +1,8 @@
 ---
-import { MARKER_KINDS, type MapData, type WorldMap } from "../../scripts/extract/map-schema";
-import { FILTER_KINDS } from "../lib/map/kinds";
+import { MARKER_KINDS, type MapData, type WorldMap } from "../../shared/map-schema";
+import { FILTER_KINDS } from "../../shared/map/kinds";
 import { markerLabel, t, type Lang } from "../lib/i18n";
-import { compareLang } from "../lib/lang";
+import { compareLang } from "../../shared/lang";
 import { countByKind } from "../lib/map/markers";
 import { trimWorld } from "../lib/map/payload";
 import { keyGlyph, overviewTile, tabArt } from "../lib/map/tiles";

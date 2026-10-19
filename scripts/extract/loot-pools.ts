@@ -2,7 +2,7 @@
 import type { ItemIndex, ItemRef } from "./loot-items";
 import { slotsOf } from "./loot-slots";
 import type { LootRow, LootSlotValue } from "./loot-tables";
-import type { LootSlotKey } from "./mob-schema";
+import type { LootSlotKey } from "../../shared/mob-schema";
 import { tagKey } from "./mob-tags";
 
 interface PoolEntry {

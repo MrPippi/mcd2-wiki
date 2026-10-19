@@ -1,4 +1,4 @@
-import type { Category } from "../../scripts/extract/config";
+import type { Category } from "./config";
 import { NAV_GROUPS } from "./sections";
 
 /** The category tab strip, in navigation order. */

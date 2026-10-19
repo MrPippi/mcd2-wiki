@@ -1,4 +1,4 @@
-import type { ArmorPiece } from "./schemas";
+import type { ArmorPiece } from "../../shared/schemas";
 
 const KEY_PATTERN = /^SW_(Item|Enchantment|Effect|Status|Skin)_(.+?)_SW_TextEntry_(.+)$/i;
 const SLUG_PREFIX = /^(?:Artifact_|EnchantmentBook_|Talisman_|Cosmetic_(?:Cape|Pet)_)/;

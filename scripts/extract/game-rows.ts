@@ -1,7 +1,7 @@
 /** Helpers shared by the weapon, artifact and enchantment builders that read the game's DataTables. */
-import type { Entry } from "./schemas";
+import type { Entry } from "../../shared/schemas";
 import { matchesTagQuery } from "./tag-query";
-import type { EffectFormat } from "./weapon-schema";
+import type { EffectFormat } from "../../shared/weapon-schema";
 import type { GameTables, TextDataValue } from "./game-tables";
 
 /** Game distances are in centimetres; a block is 100. */
@@ -55,7 +55,7 @@ export function formatMagnitude(value: number, format: EffectFormat | undefined)
   return format.percent ? `${rounded}%` : String(rounded);
 }
 
-/** The tier (0..2) a template tag names (¡KSharpness.II ¡÷ 1); -1 for a unique or base template. */
+/** The tier (0..2) a template tag names (ï¿½KSharpness.II ï¿½ï¿½ 1); -1 for a unique or base template. */
 export const tierOf = (tag: string): number => TIERS.findIndex((name) => tag.endsWith(`.${name}`));
 
 /** Whether the template's base templates (its Traits) exclude an item with these tags: IncompatibleTagsQuery per base. */

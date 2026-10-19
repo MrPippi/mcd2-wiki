@@ -1,5 +1,5 @@
 ---
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Entry } from "../../shared/schemas";
 import { affixViewOf } from "../lib/affix-view";
 import { guidesData } from "../lib/guides";
 import { t, type Lang } from "../lib/i18n";
@@ -87,7 +87,7 @@ const first = view?.rarities[0];
   </EntrySection>
 )}
 <script>
-  import { formatOdds, itemOdds, type AffixFile, type AffixOdds } from "../lib/affix-odds";
+  import { formatOdds, itemOdds, type AffixFile, type AffixOdds } from "../../shared/affix-odds";
 
   // The page prints threat 20, the first rarity and no bonus; this recomputes the table from the same model file, which
   // is loaded only on pages that have a table.

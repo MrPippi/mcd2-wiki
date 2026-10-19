@@ -8,10 +8,10 @@ import {
   loadAchievementDefinitions,
   parseAchievementDefinitions,
 } from "../../../scripts/extract/achievement-conditions";
-import { LANGS, type Lang } from "../../../scripts/extract/config";
+import { LANGS, type Lang } from "../../../shared/config";
 import { ExtractError } from "../../../scripts/extract/issues";
-import type { LocaleFile } from "../../../scripts/extract/schemas";
-import { byLang } from "../../../src/lib/lang";
+import type { LocaleFile } from "../../../shared/schemas";
+import { byLang } from "../../../shared/lang";
 import { makeLocales, ns } from "../../helpers/locales";
 
 const QUEST_LABELS = "Text/Release/QuestTrackerLabels.csv";

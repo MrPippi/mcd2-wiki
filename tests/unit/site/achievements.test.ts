@@ -8,8 +8,8 @@ import {
   formatRetrieved,
   untranslatedMarkers,
 } from "../../../src/lib/achievements";
-import { SITE_MENU, isMenuPage } from "../../../src/lib/sections";
-import type { Achievement } from "../../../scripts/extract/achievement-schema";
+import { SITE_MENU, isMenuPage } from "../../../shared/sections";
+import type { Achievement } from "../../../shared/achievement-schema";
 import { loc } from "../../helpers/localized";
 
 const achievement = (id: string, globalPercent: number): Achievement => ({

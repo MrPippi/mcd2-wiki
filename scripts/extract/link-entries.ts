@@ -1,9 +1,9 @@
-import { byLang, localizedFrom } from "../../src/lib/lang";
-import { LANGS, LANG_META, type Lang } from "./config";
+import { byLang, localizedFrom } from "../../shared/lang";
+import { LANGS, LANG_META, type Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
 import { baseId, toSlug } from "./keys";
 import { collectTails, setNameFor, type NamesByLang, type SetTails } from "./set-names";
-import { ARMOR_PIECES, type ArmorSet, type Entry } from "./schemas";
+import { ARMOR_PIECES, type ArmorSet, type Entry } from "../../shared/schemas";
 
 export { commonPrefix, setNameFor } from "./set-names";
 

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { itemRows, MAX_DRAWS, MAX_STATES, profileOdds, slotOdds, slotStates } from "../../../src/lib/drop-odds";
-import { rarityShares, rarityWeights } from "../../../src/lib/drop-rarity";
-import type { DropFile, DropItem, DropSlot } from "../../../src/lib/drop-types";
+import { itemRows, MAX_DRAWS, MAX_STATES, profileOdds, slotOdds, slotStates } from "../../../shared/drop-odds";
+import { rarityShares, rarityWeights } from "../../../shared/drop-rarity";
+import type { DropFile, DropItem, DropSlot } from "../../../shared/drop-types";
 
 // Items: 0 A and 1 B share a history group, 2 C is alone, 3 is a currency the site has no page for, 4 Z is the unique variant of A.
 const ITEMS: DropItem[] = [

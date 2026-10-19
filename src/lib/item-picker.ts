@@ -1,5 +1,5 @@
 /** A picker dialog in the browser: icon grid in labelled groups, a filter, and one pick per opening. No imports beyond search folding: page scripts load it. */
-import { foldForSearch } from "./lang";
+import { foldForSearch } from "../../shared/lang";
 
 const ICON_SIZE = 40;
 

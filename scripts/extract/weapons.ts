@@ -9,8 +9,8 @@ import { enchantmentValues } from "./enchantments";
 import { blocks, compatibleEffects, descriptionOf, effectEntries, entryIndex, GEAR_TAG, locId, tagNames, toFormat } from "./game-rows";
 import type { GameTables } from "./game-tables";
 import { issue, type Issue } from "./issues";
-import type { Entry } from "./schemas";
-import { ARCHETYPES, WEIGHTS, type EffectFormat, type Weapon, type WeaponData } from "./weapon-schema";
+import type { Entry } from "../../shared/schemas";
+import { ARCHETYPES, WEIGHTS, type EffectFormat, type Weapon, type WeaponData } from "../../shared/weapon-schema";
 
 const MAGNITUDE_GETTER = "SW.TextEntry.DataGetter.GetEffectMagnitude";
 
