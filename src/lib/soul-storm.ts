@@ -1,10 +1,10 @@
 /** The Soul Storm page for the site: data from `npm run extract` and the helpers its components format with. Server-side only. */
-import type { Mob, MobArea } from "../../scripts/extract/mob-schema";
-import type { Location } from "../../scripts/extract/location-schema";
-import { SoulStormDataSchema, type Chest, type Generator, type SoulStormData, type TextId } from "../../scripts/extract/soul-storm-schema";
+import type { Mob, MobArea } from "../../shared/mob-schema";
+import type { Location } from "../../shared/location-schema";
+import { SoulStormDataSchema, type Chest, type Generator, type SoulStormData, type TextId } from "../../shared/soul-storm-schema";
 import rawSoulStorm from "../data/soul-storm.json";
 import { t, type Lang, type UiKey } from "./i18n";
-import { htmlLang } from "./lang";
+import { htmlLang } from "../../shared/lang";
 import { locationOf } from "./locations";
 import { findMob, formatChance, mapLinkOf } from "./mobs";
 import type { ClockArea, ClockPayload, StormSchedule } from "./soul-storm-schedule";

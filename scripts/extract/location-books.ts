@@ -7,9 +7,9 @@
  * Mobs that drop books (the Piggy Bank) have no area, so they place nothing.
  */
 import { bookPoolCarriers } from "./drop-sources";
-import type { Location, LocationData } from "./location-schema";
+import type { Location, LocationData } from "../../shared/location-schema";
 import type { LootTables } from "./loot-tables";
-import type { ItemSourcesData } from "./mob-schema";
+import type { ItemSourcesData } from "../../shared/mob-schema";
 import { tagKey } from "./mob-tags";
 
 export interface BookInput {

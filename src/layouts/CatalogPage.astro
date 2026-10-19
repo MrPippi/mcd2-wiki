@@ -1,0 +1,36 @@
+---
+import type { Category } from "../../shared/config";
+import CatalogHead from "../components/CatalogHead.astro";
+import type { Lang } from "../lib/i18n";
+import Base from "./Base.astro";
+
+interface Props {
+  lang: Lang;
+  /** The page name in a given language: the page title, the heading, and the second-language line. */
+  label: (lang: Lang) => string;
+  count?: number;
+  icon?: string;
+  /** Show the second-language line even when it matches the title (the item category pages do). */
+  repeatAlt?: boolean;
+  /** The lede; also the page description for search engines. */
+  intro?: string;
+  introClass?: string;
+  /** The category this page belongs to; highlights its tab. */
+  current?: Category;
+  /** Page-specific class next to `catalog`, and on the header next to `catalog-head`. */
+  class?: string;
+  headClass?: string;
+  /** Marks the whole page as searchable; leave off when the page marks a part of itself. */
+  pagefindBody?: boolean;
+}
+
+const { lang, label, count, icon, repeatAlt, intro, introClass, current, class: className, headClass, pagefindBody } = Astro.props;
+---
+<Base lang={lang} title={label(lang)} description={intro} current={current}>
+  <div class:list={["catalog", className]} data-pagefind-body={pagefindBody ? "" : undefined}>
+    <CatalogHead lang={lang} label={label} count={count} icon={icon} repeatAlt={repeatAlt} intro={intro} introClass={introClass} class={headClass}>
+      <slot name="head" />
+    </CatalogHead>
+    <slot />
+  </div>
+</Base>

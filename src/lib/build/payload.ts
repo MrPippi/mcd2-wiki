@@ -1,12 +1,12 @@
 /** Server side of the build page: the item lists and texts its browser script needs, in one language. */
-import type { Category } from "../../../scripts/extract/config";
-import type { ArmorSet, ArmorPiece, Entry } from "../../../scripts/extract/schemas";
-import type { EnchantmentData } from "../../../scripts/extract/gear-schema";
+import type { Category } from "../../../shared/config";
+import type { ArmorSet, ArmorPiece, Entry } from "../../../shared/schemas";
+import type { EnchantmentData } from "../../../shared/gear-schema";
 import { allArmorSets, findBaseEntry, publishedEntries } from "../data";
 import { enchantmentData } from "../gear-values";
 import { GAME_VERSION } from "../game-version";
 import { categoryLabel, pieceLabel, t, type Lang, type UiKey } from "../i18n";
-import { searchNames } from "../lang";
+import { searchNames } from "../../../shared/lang";
 import { assetUrl, entryHref } from "../url";
 import { compatibleOf, fixedOf, GEAR, type GearSources } from "./gear";
 import type { BuildLabels, BuildOption, BuildPayload, BuildSet, EffectOption, EnchantOption } from "./parse";

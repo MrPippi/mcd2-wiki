@@ -9,7 +9,7 @@ import { profileOfSpecs, type ProfileContext, type RawProfile, type SlotSpec } f
 import { closureOf } from "./drop-slots";
 import type { Place, Planned, Planning, PlanInput } from "./drop-sources";
 import { issue, type Issue } from "./issues";
-import type { Mob, MobDrop } from "./mob-schema";
+import type { Mob, MobDrop } from "../../shared/mob-schema";
 import { tagKey } from "./mob-tags";
 
 const HOSTILE_TAG = "SW.Mob.Default.Hostile";

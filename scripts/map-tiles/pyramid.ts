@@ -1,5 +1,5 @@
 /** Tile arithmetic for the map pyramid: zMax holds the render at full size, each level below halves it. */
-import { SOURCE_TILE, TILE } from "../../src/lib/map/worlds";
+import { SOURCE_TILE, TILE } from "../../shared/map/worlds";
 
 export interface TileId {
   readonly z: number;

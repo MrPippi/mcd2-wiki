@@ -114,7 +114,7 @@ const tablePath = (dir: string, key: TableKey): string => path.join(dir, `${SOUL
 /** Rows of one table, or undefined when its file is absent (the caller records it as missing). */
 async function readOptional(dir: string, key: TableKey, onRead?: (file: string) => void): Promise<unknown[] | undefined> {
   if (!existsSync(tablePath(dir, key))) return undefined;
-  return readDataTable(dir, SOUL_STORM_TABLE_FILES[key], onRead);
+  return readDataTable(dir, SOUL_STORM_TABLE_FILES[key], { onRead });
 }
 
 function parseTables(rowsByKey: Readonly<Record<TableKey, readonly unknown[]>>): SoulStormTables {

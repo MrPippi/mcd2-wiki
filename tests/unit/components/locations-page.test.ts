@@ -1,6 +1,6 @@
 import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { beforeAll, describe, expect, it } from "vitest";
-import type { Location } from "../../../scripts/extract/location-schema";
+import type { Location } from "../../../shared/location-schema";
 import MobAreas from "../../../src/components/MobAreas.astro";
 import { bossList, findLocation, locationData } from "../../../src/lib/locations";
 import { findMob } from "../../../src/lib/mobs";

@@ -3,9 +3,9 @@ import { describe, expect, it } from "vitest";
 import { loadMobTables } from "../../../scripts/extract/mob-tables";
 import { buildMobs } from "../../../scripts/extract/mobs";
 import { loadLocales } from "../../../scripts/extract/parse-locale";
-import { MapDataSchema } from "../../../scripts/extract/map-schema";
+import { MapDataSchema } from "../../../shared/map-schema";
 import { areaMarkers, areaPrefix, buildAreaNamer, buildMobAreas, SPAWN_AREA_PREFIXES, type AreaMarker } from "../../../scripts/extract/mob-areas";
-import { byLang } from "../../../src/lib/lang";
+import { byLang } from "../../../shared/lang";
 import { makeLocales, ns } from "../../helpers/locales";
 import { areaRow, mobTables, waveRow } from "../../helpers/mob-tables";
 

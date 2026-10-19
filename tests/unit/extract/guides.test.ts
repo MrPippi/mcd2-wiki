@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
 import { extractGuides, readGuidesStatus, type GuidesInput } from "../../../scripts/extract/guides";
-import { GuidesDataSchema, GuidesStatusSchema } from "../../../scripts/extract/guides-schema";
+import { GuidesDataSchema, GuidesStatusSchema } from "../../../shared/guides-schema";
 import { GUIDE_TABLE_FILES, parseGuideTables } from "../../../scripts/extract/guides-tables";
 import { curveFile, rawCurveFiles } from "../../helpers/curve-tables";
 import { makeEntry } from "../../helpers/entries";

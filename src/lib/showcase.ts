@@ -1,5 +1,5 @@
-import type { Category } from "../../scripts/extract/config";
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Category } from "../../shared/config";
+import type { Entry } from "../../shared/schemas";
 
 /** One iconed entry per category for the home page showcase, unique gear first. */
 export function pickShowcase(entries: readonly Entry[], categories: readonly Category[]): Entry[] {

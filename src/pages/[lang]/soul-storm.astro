@@ -1,6 +1,6 @@
 ---
-import { LANGS } from "../../../scripts/extract/config";
-import type { SoulStormData } from "../../../scripts/extract/soul-storm-schema";
+import { langPaths } from "../../lib/lang-paths";
+import type { SoulStormData } from "../../../shared/soul-storm-schema";
 import MobCard from "../../components/MobCard.astro";
 import SoulStormChests from "../../components/SoulStormChests.astro";
 import SoulStormClock from "../../components/SoulStormClock.astro";
@@ -8,16 +8,14 @@ import SoulStormGenerators from "../../components/SoulStormGenerators.astro";
 import SoulStormRotation from "../../components/SoulStormRotation.astro";
 import Base from "../../layouts/Base.astro";
 import { t, type Lang } from "../../lib/i18n";
-import { compareLang, htmlLang } from "../../lib/lang";
+import { compareLang, htmlLang } from "../../../shared/lang";
 import { anyUntranslated, cadenceLine, clockPayload, hasSchedule, soulStormData, summonedMobs, textOf, unlockLine } from "../../lib/soul-storm";
 import { assetUrl } from "../../lib/url";
 import "../../styles/locations.css";
 import "../../styles/mobs.css";
 import "../../styles/soul-storm.css";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 interface Props {
   lang: Lang;

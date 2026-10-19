@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, rm, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
-import { SOURCE_TILE, TILE, imageSizeOf, zMaxFor } from "../../src/lib/map/worlds";
+import { SOURCE_TILE, TILE, imageSizeOf, zMaxFor } from "../../shared/map/worlds";
 import { childrenOf, levelTiles, sourceCut, sourceName, tileKey, type TileId } from "./pyramid";
 import { clearVoid, dilate, featherMask, voidMask, type VoidCut } from "./void-mask";
 

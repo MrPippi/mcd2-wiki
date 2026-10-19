@@ -4,13 +4,13 @@
  */
 import path from "node:path";
 import { z } from "zod";
-import type { AchievementCondition } from "./achievement-schema";
-import type { Lang } from "./config";
+import type { AchievementCondition } from "../../shared/achievement-schema";
+import type { Lang } from "../../shared/config";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
-import { englishFallbacks, localize } from "./loc-table";
-import { readJsonFile } from "./read-json";
-import type { LocaleFile } from "./schemas";
+import { gameText } from "./game-text";
+import { readTableFile } from "./table-reader";
+import type { LocaleFile } from "../../shared/schemas";
 
 export const ACHIEVEMENT_DEFINITIONS_FILE = `${DATATABLES_DIR}/DT_AchievementDefinition.json`;
 const QUEST_LABELS = "Text/Release/QuestTrackerLabels.csv";
@@ -53,7 +53,7 @@ export function parseAchievementDefinitions(raw: unknown, filePath: string): Ach
 /** The DataTable rows, validated; undefined when source-data has no such table. */
 export async function loadAchievementDefinitions(sourceRoot: string): Promise<AchievementDefinition[] | undefined> {
   const filePath = path.join(sourceRoot, ...ACHIEVEMENT_DEFINITIONS_FILE.split("/"));
-  const raw = await readJsonFile(filePath, "成就定義資料表");
+  const raw = await readTableFile(filePath, "成就定義資料表");
   return raw === undefined ? undefined : parseAchievementDefinitions(raw, filePath);
 }
 
@@ -80,9 +80,9 @@ function conditionFor(row: AchievementDefinition, locales: Locales): Achievement
   const id = row.AchievementId;
   const where = textKey(row, locales);
   if (!where) return issue("missing-achievement-condition", id);
-  const name = localize(locales, where.namespace, where.key);
-  if (!name) return issue("missing-achievement-condition", `${id}: ${where.namespace.replace("Text/Release/", "")} ${where.key}`);
-  const untranslated = englishFallbacks(locales, where.namespace, where.key);
+  const found = gameText(locales, where.namespace, where.key);
+  if (!found) return issue("missing-achievement-condition", `${id}: ${where.namespace.replace("Text/Release/", "")} ${where.key}`);
+  const { text: name, untranslated } = found;
   return { type: where.type, name, ...(untranslated.length > 0 ? { untranslated } : {}), ...(where.quest ? { quest: where.quest } : {}) };
 }
 

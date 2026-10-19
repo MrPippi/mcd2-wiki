@@ -1,4 +1,4 @@
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Entry } from "../../shared/schemas";
 import type { UiKey } from "./i18n";
 
 /** The game's four rarity tiers (SW.Rarity.*), lowest first. */

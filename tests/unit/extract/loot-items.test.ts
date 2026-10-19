@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import { z } from "zod";
 import { buildItemIndex } from "../../../scripts/extract/loot-items";
 import { loadLootTables } from "../../../scripts/extract/loot-tables";
-import { EntrySchema } from "../../../scripts/extract/schemas";
+import { EntrySchema } from "../../../shared/schemas";
 import { makeEntry } from "../../helpers/entries";
 import { itemRow, lootTables } from "../../helpers/mob-tables";
 

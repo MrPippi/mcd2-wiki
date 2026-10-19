@@ -1,12 +1,13 @@
 /** Merges the mob DataTable rows into one bestiary entry per named mob: names, kind, world, base stats, variants and Soul Corrupted versions. */
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { ExtractError, issue, type Issue } from "./issues";
 import { toSlug } from "./keys";
-import { englishFallbacks, localize, locRef, type LocRef } from "./loc-table";
-import { STAT_ATTRIBUTES, STAT_KEYS, type Mob, type StatKey } from "./mob-schema";
+import { gameText, localize } from "./game-text";
+import { locRef, type LocRef } from "./loc-table";
+import { STAT_ATTRIBUTES, STAT_KEYS, type Mob, type StatKey } from "../../shared/mob-schema";
 import type { MobRow, MobTables } from "./mob-tables";
 import { normalizeTag, tagKey, traitClosure } from "./mob-tags";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 
 export interface MobDraft {
   readonly mob: Mob;
@@ -243,7 +244,7 @@ interface Context {
 function toDraft(candidate: Candidate, ctx: Context): MobDraft | undefined {
   const slug = ctx.slugs.get(candidate.id);
   const [rep] = candidate.rows;
-  const name = localize(ctx.locales, candidate.ref.namespace, candidate.ref.key);
+  const name = gameText(ctx.locales, candidate.ref.namespace, candidate.ref.key);
   if (slug === undefined || rep === undefined || name === undefined) return undefined;
   const closure = traitClosure(rep, ctx.rowsByKey);
   const foldedRows = (ctx.folded.get(candidate.id) ?? []).flatMap((entry) => entry.rows);
@@ -253,8 +254,8 @@ function toDraft(candidate: Candidate, ctx: Context): MobDraft | undefined {
   const variants = candidate.kind === "variant" ? [] : variantSlugs(candidate, ctx);
   const [soulRep] = soulRows;
   const mob: Mob = {
-    slug, id: candidate.id, kind: candidate.kind, world: worldOf(closure), name,
-    untranslated: englishFallbacks(ctx.locales, candidate.ref.namespace, candidate.ref.key),
+    slug, id: candidate.id, kind: candidate.kind, world: worldOf(closure), name: name.text,
+    untranslated: name.untranslated,
     stats: statsOf(rep, ancestorRows(closure, ctx.rowsByKey)), variants, areas: [], drops: [],
     ...(ownerSlug === undefined ? {} : { variantOf: ownerSlug }),
     ...(soulRep === undefined ? {} : { soulCorrupted: { stats: statsOf(soulRep), drops: [] } }),

@@ -1,13 +1,13 @@
 ---
-import type { Category } from "../../scripts/extract/config";
+import type { Category } from "../../shared/config";
 import { catalogLabel, categoryCount, entryNumber } from "../lib/catalog";
 import { listedIn, publishedEntries } from "../lib/data";
 import { categoryLabel, t, type Lang } from "../lib/i18n";
-import { compareLang, htmlLang } from "../lib/lang";
+import { compareLang, htmlLang } from "../../shared/lang";
 import { itemKicker } from "../lib/kicker";
 import { pickShowcase } from "../lib/showcase";
 import { splitSiteTitle } from "../lib/site-title";
-import { TAB_ORDER } from "../lib/tabs";
+import { TAB_ORDER } from "../../shared/tabs";
 import { categoryIcon } from "../lib/ui-icons";
 import { entryHref, href } from "../lib/url";
 import EntryIcon from "./EntryIcon.astro";

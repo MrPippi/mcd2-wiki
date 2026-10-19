@@ -1,5 +1,5 @@
 /** Enchanting costs (DefaultPlayer GA_ItemEnchant EnchantCostMap) and the highest enchantment level the enchantment table defines. */
-import type { EnchantCost, Rarity } from "./guides-schema";
+import type { EnchantCost, Rarity } from "../../shared/guides-schema";
 import type { GuideTables } from "./guides-tables";
 import { abilityData, defaultPlayer, mapKeyTag } from "./guides-vendors";
 import { issue, type Issue } from "./issues";

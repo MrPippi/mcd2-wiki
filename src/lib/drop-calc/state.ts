@@ -1,7 +1,7 @@
 /** The calculator's choices, their place in the page URL (`?item=melee/sword&threat=20&diff=normal&rarity=any`), and the rows they give. */
 import { formatDropOdds } from "../drop-format";
-import { itemRows } from "../drop-odds";
-import type { DropFile, DropRow, TargetRarity } from "../drop-types";
+import { itemRows } from "../../../shared/drop-odds";
+import type { DropFile, DropRow, TargetRarity } from "../../../shared/drop-types";
 import type { CalcPayload } from "./parse";
 
 export interface CalcState {

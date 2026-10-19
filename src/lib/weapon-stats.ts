@@ -1,5 +1,5 @@
-import type { Entry } from "../../scripts/extract/schemas";
-import type { Weapon } from "../../scripts/extract/weapon-schema";
+import type { Entry } from "../../shared/schemas";
+import type { Weapon } from "../../shared/weapon-schema";
 import type { Lang } from "./i18n";
 import { t, tCount, type UiKey } from "./ui-strings";
 import { blocksText, roundText, secondsText } from "./units";

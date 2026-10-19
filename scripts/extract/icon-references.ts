@@ -2,10 +2,10 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
-import type { Category } from "./config";
+import type { Category } from "../../shared/config";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue } from "./issues";
-import { readJsonFile } from "./read-json";
+import { readTableFile } from "./table-reader";
 
 const Rows = z.array(z.object({ Name: z.string(), IconReference: z.string().optional() }));
 type RowList = z.infer<typeof Rows>;
@@ -62,7 +62,7 @@ export async function loadIconReferences(sourceRoot: string): Promise<IconRefere
   if (!existsSync(dir)) return new Map();
   const loaded = await Promise.all(
     Object.entries(CATEGORY_TABLES).map(async ([category, name]) => {
-      const json = await readJsonFile(path.join(dir, `${name}.json`), `資料表 ${name}`);
+      const json = await readTableFile(path.join(dir, `${name}.json`), `資料表 ${name}`);
       if (json === undefined) return [category, []] as const;
       const parsed = Rows.safeParse(json);
       if (!parsed.success) throw new ExtractError(`資料表 ${name} 不是預期的列陣列：${formatZodIssue(parsed.error.issues[0])}`);

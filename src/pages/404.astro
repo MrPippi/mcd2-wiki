@@ -29,7 +29,7 @@ const lang = "zh";
   </section>
 </Base>
 <script>
-  import { ALL_LANGS } from "../../scripts/extract/langs";
+  import { ALL_LANGS } from "../../shared/langs";
 
   // A missing page keeps the language of the URL it was asked for: /ja/nope/ goes home to /ja/.
   const base = document.documentElement.dataset.base ?? "/";

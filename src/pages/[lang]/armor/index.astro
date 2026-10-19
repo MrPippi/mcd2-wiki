@@ -1,18 +1,17 @@
 ---
-import { LANGS } from "../../../../scripts/extract/config";
-import { ARMOR_PIECES } from "../../../../scripts/extract/schemas";
+import { langPaths } from "../../../lib/lang-paths";
+import { ARMOR_PIECES } from "../../../../shared/schemas";
 import ItemBrowser from "../../../components/ItemBrowser.astro";
-import CatalogHead from "../../../components/CatalogHead.astro";
+import ListFilter from "../../../components/ListFilter.astro";
 import ItemCard from "../../../components/ItemCard.astro";
-import Base from "../../../layouts/Base.astro";
+import CatalogPage from "../../../layouts/CatalogPage.astro";
 import { allArmorSets, findEntry } from "../../../lib/data";
 import { categoryLabel, pieceLabel, t, type Lang } from "../../../lib/i18n";
 import { setKicker } from "../../../lib/kicker";
+import { categoryIcon } from "../../../lib/ui-icons";
 import { href } from "../../../lib/url";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 const lang = Astro.params.lang as Lang;
 const cards = allArmorSets.map((set) => {
@@ -24,9 +23,8 @@ const cards = allArmorSets.map((set) => {
   return { set, pieces, icon: pieces[0]?.entry.icon };
 });
 ---
-<Base lang={lang} title={categoryLabel("armor", lang)} current="armor">
-  <div class="catalog">
-  <CatalogHead lang={lang} category="armor" count={cards.length} showVariant={true} />
+<CatalogPage lang={lang} label={(l) => categoryLabel("armor", l)} count={cards.length} icon={categoryIcon("armor")} repeatAlt current="armor">
+  <ListFilter slot="head" lang={lang} showVariant={true} />
   <p class="no-results" hidden>{t(lang, "noResults")}</p>
   <ItemBrowser lang={lang}>
     {cards.map(({ set, pieces, icon }, index) => (
@@ -46,5 +44,4 @@ const cards = allArmorSets.map((set) => {
       </ItemCard>
     ))}
   </ItemBrowser>
-  </div>
-</Base>
+</CatalogPage>

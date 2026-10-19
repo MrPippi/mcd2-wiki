@@ -7,9 +7,9 @@ import { issue, type Issue } from "./issues";
 import { slotsOf } from "./loot-slots";
 import type { LootRow } from "./loot-tables";
 import type { AreaNamer } from "./mob-areas";
-import type { ItemSourcesData } from "./mob-schema";
+import type { ItemSourcesData } from "../../shared/mob-schema";
 import { tagKey } from "./mob-tags";
-import type { Emeralds, QuestRarity, QuestReward, RawLootEntry, RawQuest } from "./quest-schema";
+import type { Emeralds, QuestRarity, QuestReward, RawLootEntry, RawQuest } from "../../shared/quest-schema";
 
 export interface SourceItems {
   readonly items: readonly string[];

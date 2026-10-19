@@ -1,5 +1,5 @@
-import { LANG_META, type Lang } from "../../scripts/extract/langs";
-import type { Localized } from "../../scripts/extract/schemas";
+import { LANG_META, type Lang } from "./langs";
+import type { Localized } from "./schemas";
 
 export type { Lang };
 

@@ -4,7 +4,7 @@ import { loadCurveTables, type CurveTables } from "./curve-tables";
 import { buildEnchantCosts, maxEnchantmentLevel } from "./guides-enchanting";
 import { buildStages } from "./guides-progression";
 import { buildDropWeights, buildRarityTiers } from "./guides-rarity";
-import { GuidesDataSchema, GuidesStatusSchema, type GuidesData, type GuidesStatus } from "./guides-schema";
+import { GuidesDataSchema, GuidesStatusSchema, type GuidesData, type GuidesStatus } from "../../shared/guides-schema";
 import { loadGuideTables, type GuideTables } from "./guides-tables";
 import { buildSecretTalismans } from "./guides-talismans";
 import { buildDifficulty, buildThreat } from "./guides-threat";
@@ -12,7 +12,7 @@ import { buildGuideTexts, type Locales } from "./guides-texts";
 import { buildCaps, buildMerchant, buildVendors } from "./guides-vendors";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { readJsonFile } from "./read-json";
-import type { Entry } from "./schemas";
+import type { Entry } from "../../shared/schemas";
 
 export interface GuidesInput {
   readonly sourceRoot: string;

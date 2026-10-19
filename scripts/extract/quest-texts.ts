@@ -1,10 +1,7 @@
 /** The game's quest texts: titles and objective labels (QuestTrackerLabels), descriptions and completed texts (markup rendered). */
-import { localizedFrom } from "../../src/lib/lang";
-import type { Lang } from "./config";
-import { LANGS } from "./langs";
-import { gameTexts } from "./loc-table";
-import { renderMarkup } from "./render-markup";
-import type { LocaleFile, Localized } from "./schemas";
+import type { Lang } from "../../shared/config";
+import { gameHtml, gameText, type Accept, type GameHtml, type GameText } from "./game-text";
+import type { LocaleFile } from "../../shared/schemas";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
 
@@ -14,45 +11,27 @@ export const QUEST_COMPLETED = "Text/Release/QuestDescriptionsCompleted.csv";
 /** The game's placeholder for a text nobody wrote: never published. */
 const BROKEN = "ERROR";
 
-export interface QuestText {
-  readonly text: Localized;
-  /** Languages that show the English text. */
-  readonly untranslated: Lang[];
-}
-
-export interface QuestHtml {
-  readonly html: Localized;
-  readonly untranslated: Lang[];
-}
+export type QuestText = GameText;
+export type QuestHtml = GameHtml;
 
 const usable = (text: string | undefined): text is string => text !== undefined && text.trim() !== "" && text.trim() !== BROKEN;
 
 /** A text a language must not publish for this key (a known language problem); it shows English instead. */
 export type Reject = (lang: Lang, text: string) => boolean;
 
+const acceptUsable = (reject: Reject = () => false): Accept => (lang, text) => (usable(text) && (lang === "en" || !reject(lang, text)) ? text : undefined);
+
 /**
  * The game's text in every language; a language with no text, "ERROR", or a rejected text shows English and is listed
  * as untranslated. Undefined without usable English.
  */
-export function questText(locales: Locales, namespace: string, key: string, reject: Reject = () => false): QuestText | undefined {
-  const texts = gameTexts(locales, namespace, key);
-  const english = texts?.en;
-  if (!usable(english)) return undefined;
-  const own = (lang: Lang): string | undefined => {
-    const text = texts?.[lang];
-    return usable(text) && (lang === "en" || !reject(lang, text)) ? text : undefined;
-  };
-  return {
-    text: localizedFrom((lang) => own(lang) ?? english),
-    untranslated: LANGS.filter((lang) => own(lang) === undefined),
-  };
+export function questText(locales: Locales, namespace: string, key: string, reject?: Reject): QuestText | undefined {
+  return gameText(locales, namespace, key, acceptUsable(reject));
 }
 
 /** Like questText, with the game's markup (<emphasis>…</>) rendered to HTML. */
 export function questHtml(locales: Locales, namespace: string, key: string, reject?: Reject): QuestHtml | undefined {
-  const found = questText(locales, namespace, key, reject);
-  if (!found) return undefined;
-  return { html: localizedFrom((lang) => renderMarkup(found.text[lang], lang).html), untranslated: found.untranslated };
+  return gameHtml(locales, namespace, key, acceptUsable(reject));
 }
 
 /** Texts compared as the player reads them: markup spacing and line breaks do not count. */

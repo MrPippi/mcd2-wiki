@@ -1,4 +1,4 @@
-import type { WorldKey } from "./worlds";
+import type { WorldKey } from "../../../shared/map/worlds";
 
 /** The keys the game's world map binds to the previous (Z) and next (X) dimension. */
 export const PREVIOUS_WORLD_KEY = "z";

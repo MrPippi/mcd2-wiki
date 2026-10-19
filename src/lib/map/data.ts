@@ -1,4 +1,4 @@
-import { MapDataSchema, type MapData } from "../../../scripts/extract/map-schema";
+import { MapDataSchema, type MapData } from "../../../shared/map-schema";
 import rawMap from "../../data/map.json";
 
 /** World maps from `npm run extract`, validated at build time. */

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { WorldMap } from "../../../scripts/extract/map-schema";
+import type { WorldMap } from "../../../shared/map-schema";
 import { trimWorld } from "../../../src/lib/map/payload";
 import { loc } from "../../helpers/localized";
 

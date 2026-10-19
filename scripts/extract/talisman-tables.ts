@@ -4,7 +4,7 @@ import path from "node:path";
 import { z } from "zod";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue } from "./issues";
-import { readJsonFile } from "./read-json";
+import { readDataTable } from "./table-reader";
 
 const Tag = z.object({ TagName: z.string() });
 const Tags = z.object({ GameplayTags: z.array(Tag).optional() }).optional();
@@ -62,14 +62,9 @@ const FILES: Readonly<Record<keyof TalismanTables, string>> = {
 };
 /** Collections only add the secret-talisman mark, so the site builds without that table. */
 const OPTIONAL: ReadonlySet<keyof TalismanTables> = new Set(["collections"]);
-const BASE_ROW = /^Base[A-Z]/;
 
 async function readRows(dir: string, key: keyof TalismanTables): Promise<unknown[]> {
-  const name = FILES[key];
-  const rows = await readJsonFile(path.join(dir, `${name}.json`), `資料表 ${name}`);
-  if (rows === undefined && OPTIONAL.has(key)) return [];
-  if (!Array.isArray(rows)) throw new ExtractError(`資料表 ${name} 不存在或不是陣列：${dir}`);
-  return rows.filter((row: { Name?: unknown }) => !BASE_ROW.test(String(row?.Name ?? "")));
+  return readDataTable(dir, FILES[key], { optional: OPTIONAL.has(key), dropBase: true });
 }
 
 /** Reads the talisman tables; undefined when source-data has no talisman property table (talisman values are then left out). */

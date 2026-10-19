@@ -1,15 +1,15 @@
 /** One quest page from one library quest: texts, region, objectives, rewards and related mobs. Links between quests come later. */
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
 import { areaPrefix, type AreaMarker, type AreaNamer } from "./mob-areas";
-import type { MobArea, MobData } from "./mob-schema";
+import type { MobArea, MobData } from "../../shared/mob-schema";
 import { normalizeTag, tagKey } from "./mob-tags";
-import { questSlug, sectionOf, sizeOf } from "./quest-graph";
+import { questSlug, sectionOf, sizeOf } from "../../shared/quest-graph";
 import { dedupeObjectives, goalArenaTags, goalMobTags, labelledGoals } from "./quest-objectives";
 import { emeraldsOf, rewardsOf, type RewardContext } from "./quest-rewards";
-import type { Quest, RawQuest } from "./quest-schema";
+import type { Quest, RawQuest } from "../../shared/quest-schema";
 import { descriptionIsCompletedText, hasLabel, QUEST_COMPLETED, QUEST_DESCRIPTIONS, QUEST_LABELS, questHtml, questText } from "./quest-texts";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
 

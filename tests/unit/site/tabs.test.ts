@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { TAB_ORDER, adjacentCategory, keyStep } from "../../../src/lib/tabs";
+import { TAB_ORDER, adjacentCategory, keyStep } from "../../../shared/tabs";
 
 describe("adjacentCategory", () => {
   const order = ["melee", "ranged", "armor"] as const;

@@ -2,8 +2,8 @@
 import { blocks, compatibleEffects, effectEntries, entryIndex, GEAR_TAG, locId, tagNames } from "./game-rows";
 import type { GameTables } from "./game-tables";
 import { issue, type Issue } from "./issues";
-import type { Entry } from "./schemas";
-import type { ArtifactData } from "./gear-schema";
+import type { Entry } from "../../shared/schemas";
+import type { ArtifactData } from "../../shared/gear-schema";
 
 const KEY = {
   cooldownSeconds: "SW.KeyValue.CooldownDuration",

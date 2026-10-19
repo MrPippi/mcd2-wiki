@@ -1,9 +1,9 @@
 import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
-import { CATEGORIES, type Category } from "./config";
+import { CATEGORIES, type Category } from "../../shared/config";
 import { ExtractError, formatZodIssue } from "./issues";
-import { ArmorSetSchema, EntrySchema, type ArmorSet, type Entry } from "./schemas";
+import { ArmorSetSchema, EntrySchema, type ArmorSet, type Entry } from "../../shared/schemas";
 
 export interface IconCopy {
   readonly from: string;

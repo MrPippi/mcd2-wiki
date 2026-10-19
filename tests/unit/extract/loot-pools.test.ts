@@ -6,7 +6,7 @@ import { excludedTags, poolTags, rawSlots, resolvePool, rowPool, tagVariants } f
 import { slotsOf } from "../../../scripts/extract/loot-slots";
 import { loadLootTables, type LootRow, type LootTables } from "../../../scripts/extract/loot-tables";
 import { tagKey } from "../../../scripts/extract/mob-tags";
-import { EntrySchema } from "../../../scripts/extract/schemas";
+import { EntrySchema } from "../../../shared/schemas";
 import { makeEntry } from "../../helpers/entries";
 import { itemRow, lootRow, lootTables, slot } from "../../helpers/mob-tables";
 

@@ -1,16 +1,13 @@
 ---
-import { LANGS } from "../../../../scripts/extract/config";
-import type { LocationData } from "../../../../scripts/extract/location-schema";
+import { langPaths } from "../../../lib/lang-paths";
+import type { LocationData } from "../../../../shared/location-schema";
 import LocationCard from "../../../components/LocationCard.astro";
-import Base from "../../../layouts/Base.astro";
+import CatalogPage from "../../../layouts/CatalogPage.astro";
 import { t, type Lang } from "../../../lib/i18n";
-import { compareLang, htmlLang } from "../../../lib/lang";
 import { locationData } from "../../../lib/locations";
 import "../../../styles/locations.css";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang }, props: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 interface Props {
   lang: Lang;
@@ -20,20 +17,9 @@ interface Props {
 
 const { lang } = Astro.props;
 const data = Astro.props.data ?? locationData;
-const alt = compareLang(lang);
 ---
-<Base lang={lang} title={t(lang, "locations")} description={t(lang, "locationsIntro")}>
-  <div class="catalog locations-page" data-pagefind-body>
-    <header class="catalog-head locations-head">
-      <p class="catalog-count kicker mono">{data.locations.length}</p>
-      <h1 class="catalog-title">
-        <span data-pagefind-meta="title">{t(lang, "locations")}</span>
-      </h1>
-      {t(alt, "locations") !== t(lang, "locations") && <p class="catalog-alt item-alt" lang={htmlLang(alt)}>{t(alt, "locations")}</p>}
-      <p class="locations-intro">{t(lang, "locationsIntro")}</p>
-    </header>
+<CatalogPage lang={lang} label={(l) => t(l, "locations")} count={data.locations.length} intro={t(lang, "locationsIntro")} introClass="locations-intro" class="locations-page" headClass="locations-head" pagefindBody>
     <ol class="location-grid" data-testid="location-grid">
       {data.locations.map((location, index) => <LocationCard lang={lang} location={location} index={index} />)}
     </ol>
-  </div>
-</Base>
+</CatalogPage>

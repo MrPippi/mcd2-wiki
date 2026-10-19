@@ -1,14 +1,12 @@
 ---
-import { LANGS } from "../../../../scripts/extract/config";
+import { langPaths } from "../../../lib/lang-paths";
 import WorldMap from "../../../components/WorldMap.astro";
 import Base from "../../../layouts/Base.astro";
 import { t, type Lang } from "../../../lib/i18n";
 import { mapData } from "../../../lib/map/data";
 import "../../../styles/map.css";
 
-export function getStaticPaths() {
-  return LANGS.map((lang) => ({ params: { lang } }));
-}
+export const getStaticPaths = langPaths;
 
 const lang = Astro.params.lang as Lang;
 ---

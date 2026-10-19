@@ -4,9 +4,9 @@
  */
 import { compatibleEffects, effectEntries, entryIndex, GEAR_TAG, locId, tagNames } from "./game-rows";
 import type { GameTables } from "./game-tables";
-import type { ArmorEffectData } from "./gear-schema";
+import type { ArmorEffectData } from "../../shared/gear-schema";
 import { issue, type Issue } from "./issues";
-import type { Entry } from "./schemas";
+import type { Entry } from "../../shared/schemas";
 
 export function buildArmorEffects(entries: readonly Entry[], tables: GameTables): { data: ArmorEffectData; issues: Issue[] } {
   const find = entryIndex(entries);

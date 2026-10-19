@@ -1,10 +1,10 @@
-import { byLang, localizedFrom, mapLocalized } from "../../src/lib/lang";
-import { LANGS } from "./config";
+import { byLang, localizedFrom, mapLocalized } from "../../shared/lang";
+import { LANGS } from "../../shared/config";
 import type { RawEntry } from "./group-entries";
 import { ExtractError, issue, type Issue } from "./issues";
 import { armorPieceOf, toSlug, variantOf } from "./keys";
-import { renderMarkup, stripMarkup } from "./render-markup";
-import type { Entry, Localized } from "./schemas";
+import { renderMarkup, stripMarkup } from "../../shared/render-markup";
+import type { Entry, Localized } from "../../shared/schemas";
 
 interface Rendered {
   readonly value: Localized;

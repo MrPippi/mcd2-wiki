@@ -4,13 +4,13 @@
  * compute the odds for any threat, rarity and Soul Storm bonus. Items with the same pool share one model.
  */
 import { createHash } from "node:crypto";
-import { AFFIX_RARITIES, type AffixData, type AffixItem } from "./affix-schema";
+import { AFFIX_RARITIES, type AffixData, type AffixItem } from "../../shared/affix-schema";
 import { groupTemplates, inheritedTags, poolGroups, poolTags } from "./affix-pool";
 import { effectEntries, entryIndex, excludedFor, locId, tagNames, tierOf } from "./game-rows";
 import type { GameTables } from "./game-tables";
-import type { RarityTier, ThreatRow } from "./guides-schema";
+import type { RarityTier, ThreatRow } from "../../shared/guides-schema";
 import { ExtractError, issue, type Issue } from "./issues";
-import type { Entry } from "./schemas";
+import type { Entry } from "../../shared/schemas";
 
 type Rarity = (typeof AFFIX_RARITIES)[number];
 type ItemRow = GameTables["items"][number];

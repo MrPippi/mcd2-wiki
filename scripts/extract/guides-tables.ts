@@ -136,7 +136,7 @@ const tablePath = (dir: string, key: TableKey): string => path.join(dir, `${GUID
 
 async function readOptional(dir: string, key: TableKey, onRead?: (file: string) => void): Promise<unknown[] | undefined> {
   if (!existsSync(tablePath(dir, key))) return undefined;
-  return readDataTable(dir, GUIDE_TABLE_FILES[key], onRead);
+  return readDataTable(dir, GUIDE_TABLE_FILES[key], { onRead });
 }
 
 /** Validates every table at once so one run names every changed table. */

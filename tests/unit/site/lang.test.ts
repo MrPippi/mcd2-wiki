@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { ALL_LANGS, LANG_META } from "../../../scripts/extract/config";
-import { compareLang, foldForSearch, langMenuLabel, lowerFor, mapLocalized, pick, searchFold, searchNames } from "../../../src/lib/lang";
+import { ALL_LANGS, LANG_META } from "../../../shared/config";
+import { compareLang, foldForSearch, langMenuLabel, lowerFor, mapLocalized, pick, searchFold, searchNames } from "../../../shared/lang";
 import { loc } from "../../helpers/localized";
 
 describe("language registry", () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import ko from "../../../src/i18n/ko.json";
+import ko from "../../../shared/i18n/ko.json";
 import { lookupWith, resolveUiValue, t } from "../../../src/lib/ui-strings";
 
 describe("resolveUiValue", () => {

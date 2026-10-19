@@ -4,9 +4,9 @@
  * DT_QuestLibraries actually lists its loot tag; DT_LootSourceDefinition_Quest alone has rows no quest uses.
  */
 import { z } from "zod";
-import type { Entry } from "./schemas";
+import type { Entry } from "../../shared/schemas";
 import { entryIndex, locId } from "./game-rows";
-import type { GuidesData, SecretTalisman } from "./guides-schema";
+import type { GuidesData, SecretTalisman } from "../../shared/guides-schema";
 import type { GuideTables } from "./guides-tables";
 import { gameText, rowText, type Locales } from "./guides-texts";
 import { issue, type Issue } from "./issues";

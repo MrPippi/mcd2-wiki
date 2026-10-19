@@ -1,7 +1,7 @@
 /** Pure helpers the quest pages and item pages format quest data with. Type-only imports, so tests need no data files. */
-import type { MobArea } from "../../scripts/extract/mob-schema";
-import type { Quest, QuestData, QuestRarity, QuestSection, QuestSize } from "../../scripts/extract/quest-schema";
-import { QUEST_SECTIONS } from "../../scripts/extract/quest-schema";
+import type { MobArea } from "../../shared/mob-schema";
+import type { Quest, QuestData, QuestRarity, QuestSection, QuestSize } from "../../shared/quest-schema";
+import { QUEST_SECTIONS } from "../../shared/quest-schema";
 import type { UiKey } from "./ui-strings";
 
 export const SECTION_KEY: Readonly<Record<QuestSection, UiKey>> = {

@@ -1,12 +1,12 @@
 /**
  * The rarity rows (DT_RarityChanceDefinition) a drop matches, as the ops the site combines with the threat factors
- * (src/lib/drop-rarity.ts). A row applies when its TypeTag is a tag of the drop's context (the source, its area, their parents);
+ * (shared/drop-rarity.ts). A row applies when its TypeTag is a tag of the drop's context (the source, its area, their parents);
  * a row's own traits lead on to further rows, which is how every area, mob and the player reach the Default weights. The
  * player is always part of the context, and the difficulty row is added on top when one is chosen. Rows that set the weight
  * of None (talismans, books, currencies) change nothing for gear, so None is left out.
  */
 import { tagKey } from "./mob-tags";
-import type { RarityIndex, RarityOp, RarityOpName } from "../../src/lib/drop-types";
+import type { RarityIndex, RarityOp, RarityOpName } from "../../shared/drop-types";
 
 export interface RarityRow {
   readonly TypeTag: { readonly TagName: string };

@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
-import { MapDataSchema } from "../../../scripts/extract/map-schema";
+import { MapDataSchema } from "../../../shared/map-schema";
 import { extractSoulStorm, type SoulStormInput } from "../../../scripts/extract/soul-storm";
 import { SOUL_STORM_TABLE_FILES } from "../../../scripts/extract/soul-storm-tables";
 import { makeLocales } from "../../helpers/locales";

@@ -6,8 +6,8 @@ import { mergePools, poolWeights } from "./drop-pool";
 import { contextRarityOps, type RarityRow } from "./drop-rarity-rows";
 import { tagKey } from "./mob-tags";
 import { closureOf, mergeSlots, type Resolved, type SlotResolver } from "./drop-slots";
-import { MAX_DRAWS, MAX_STATES, slotStates } from "../../src/lib/drop-odds";
-import type { DropSlotRule, RarityOp } from "../../src/lib/drop-types";
+import { MAX_DRAWS, MAX_STATES, slotStates } from "../../shared/drop-odds";
+import type { DropSlotRule, RarityOp } from "../../shared/drop-types";
 
 /** The slots that can give an item; emeralds, spring stones, food and TNT are not items the site has pages for. */
 export const ITEM_SLOTS: readonly string[] = ["item", "specialgear", "enchantedbook", "talismans", "none"];

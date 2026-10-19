@@ -2,7 +2,7 @@
  * Rarity facts: per-rarity effect counts and item power offset (DT_RarityDefinition), and the base drop weights of the
  * Default and Boss rows (DT_RarityChanceDefinition). How rows combine is engine logic, so no combined odds are built.
  */
-import { DROP_SOURCES, RARITIES, type DropRow, type RarityTier } from "./guides-schema";
+import { DROP_SOURCES, RARITIES, type DropRow, type RarityTier } from "../../shared/guides-schema";
 import { rarityOfTag } from "./guides-enchanting";
 import type { GuideTables } from "./guides-tables";
 import { issue, type Issue } from "./issues";

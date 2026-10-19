@@ -1,8 +1,8 @@
 /** Effect description values per tier, from DT_EffectTemplateDefinition (the same magnitudes everywhere the effect rolls). */
 import { descriptionOf, effectEntries, entryIndex, formatMagnitude, TIERS, toFormat } from "./game-rows";
 import type { GameTables } from "./game-tables";
-import type { EnchantmentData } from "./gear-schema";
-import type { Entry } from "./schemas";
+import type { EnchantmentData } from "../../shared/gear-schema";
+import type { Entry } from "../../shared/schemas";
 
 const MAGNITUDE_GETTER = "SW.TextEntry.DataGetter.GetEffectMagnitude";
 

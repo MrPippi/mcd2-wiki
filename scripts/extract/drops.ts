@@ -1,15 +1,15 @@
 /** Builds src/data/drop-models.json: reads the tables the drop odds need (drop-models.ts says what the model is) and joins them to the finished bestiary, quests and guides. */
 import { buildDropModels, NO_DROPS } from "./drop-models";
 import { loadDropTables } from "./drop-tables";
-import type { ThreatRow } from "./guides-schema";
+import type { ThreatRow } from "../../shared/guides-schema";
 import { issue, type Issue } from "./issues";
 import { loadLootTables } from "./loot-tables";
-import type { ItemSourcesData, MobData } from "./mob-schema";
+import type { ItemSourcesData, MobData } from "../../shared/mob-schema";
 import { tagKey } from "./mob-tags";
-import type { QuestData } from "./quest-schema";
+import type { QuestData } from "../../shared/quest-schema";
 import { loadQuestTables } from "./quest-tables";
-import type { Entry } from "./schemas";
-import type { DropFile } from "../../src/lib/drop-types";
+import type { Entry } from "../../shared/schemas";
+import type { DropFile } from "../../shared/drop-types";
 
 export interface DropsInput {
   readonly sourceRoot: string;

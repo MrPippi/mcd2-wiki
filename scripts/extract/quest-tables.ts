@@ -9,7 +9,7 @@ import { z } from "zod";
 import { DATATABLES_DIR } from "./game-tables";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { LootTablesSchema, type LootRow } from "./loot-tables";
-import { QuestLibraryRowSchema, RawQuestSchema, type RawQuest } from "./quest-schema";
+import { QuestLibraryRowSchema, RawQuestSchema, type RawQuest } from "../../shared/quest-schema";
 import { readDataTable } from "./table-reader";
 
 export const QUEST_TABLE_FILES = {
@@ -142,7 +142,7 @@ export async function loadQuestTables(sourceRoot: string, onRead?: (file: string
   const present = (key: Key): boolean => existsSync(path.join(dir, `${QUEST_TABLE_FILES[key]}.json`));
   if (!present("libraries")) return { issues: [issue("missing-quest-tables", `${QUEST_TABLE_FILES.libraries}.json`)] };
   const missing = KEYS.filter((key) => !present(key));
-  const rows = await Promise.all(KEYS.map((key) => (present(key) ? readDataTable(dir, QUEST_TABLE_FILES[key], onRead) : Promise.resolve([]))));
+  const rows = await Promise.all(KEYS.map((key) => (present(key) ? readDataTable(dir, QUEST_TABLE_FILES[key], { onRead }) : Promise.resolve([]))));
   const raw = parseTables({ libraries: rows[0], loot: rows[1], arenas: rows[2], waves: rows[3], spawns: rows[4] });
   const libraries = parseLibraries(raw.libraries);
   return {

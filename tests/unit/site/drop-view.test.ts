@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { findEntry, publishedEntries } from "../../../src/lib/data";
 import { dropData, dropGroupsOf, dropKeysOf, dropRowsOf, DEFAULT_SELECTION, VISIBLE_ROWS } from "../../../src/lib/drop-view";
-import { itemRows } from "../../../src/lib/drop-odds";
+import { itemRows } from "../../../shared/drop-odds";
 import { areaLabel, sourceIndex, sourceLabel } from "../../../src/lib/drop-labels";
 import { t } from "../../../src/lib/i18n";
 

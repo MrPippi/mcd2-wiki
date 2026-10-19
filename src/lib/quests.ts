@@ -1,15 +1,15 @@
 /** The quest pages' data from `npm run extract`, validated at build time, and the lookups the pages link with. Server-side only. */
-import type { Category } from "../../scripts/extract/config";
-import type { Entry } from "../../scripts/extract/schemas";
-import { QuestDataSchema, type Quest, type QuestData } from "../../scripts/extract/quest-schema";
+import type { Category } from "../../shared/config";
+import type { Entry } from "../../shared/schemas";
+import { QuestDataSchema, type Quest, type QuestData } from "../../shared/quest-schema";
 import rawQuests from "../data/quests.json";
 import { findEntry } from "./data";
 import { findMob } from "./mobs";
-import type { Mob } from "../../scripts/extract/mob-schema";
+import type { Mob } from "../../shared/mob-schema";
 import { rewardQuestSlugs, SECTION_KEY, splitItemKey, TYPE_KEY } from "./quest-view";
 import { GAME_NAME } from "./site-title";
 import { t } from "./ui-strings";
-import type { Lang } from "./lang";
+import type { Lang } from "../../shared/lang";
 import { entryHref, href } from "./url";
 
 export const questData: QuestData = QuestDataSchema.parse(rawQuests);

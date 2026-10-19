@@ -3,13 +3,13 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { PayloadMarker, PayloadWorld } from "./payload";
 import type { Lang } from "../i18n";
-import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "./kinds";
+import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "../../../shared/map/kinds";
 import { pinElement, popupElement, resultElement } from "./marker-dom";
 import { countByKind, isAreaQuestPin, parseHiddenKinds, searchMarkers, serializeHiddenKinds, withKind } from "./markers";
 import { tileUrlTemplate } from "./tiles";
 import { formatView, parseView, parseWorld, worldSearch } from "./view-state";
 import { adjacentWorld, isTypingTarget, worldStep } from "./world-keys";
-import { TILE } from "./worlds";
+import { TILE } from "../../../shared/map/worlds";
 import { fillZoom } from "./zoom";
 
 const STORAGE_KEY = "mcd2-map-hidden";

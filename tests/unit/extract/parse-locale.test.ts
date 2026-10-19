@@ -2,7 +2,7 @@ import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { beforeEach, describe, expect, it } from "vitest";
-import { ALL_LANGS, LANG_META } from "../../../scripts/extract/config";
+import { ALL_LANGS, LANG_META } from "../../../shared/config";
 import { ExtractError } from "../../../scripts/extract/issues";
 import { loadLocaleFile, loadLocales } from "../../../scripts/extract/parse-locale";
 

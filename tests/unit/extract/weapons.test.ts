@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Entry } from "../../../scripts/extract/schemas";
+import type { Entry } from "../../../shared/schemas";
 import { buildWeaponData } from "../../../scripts/extract/weapons";
 import { TABLES } from "../../helpers/datatables";
 import { loc } from "../../helpers/localized";

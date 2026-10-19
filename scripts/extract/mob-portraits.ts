@@ -2,7 +2,7 @@
 import { mkdir, readdir, rm } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
-import { LARGE_PORTRAIT_DIR, largePortraitPath } from "../../src/lib/mob-portrait-path";
+import { LARGE_PORTRAIT_DIR, largePortraitPath } from "../../shared/mob-portrait-path";
 import { issue, type Issue } from "./issues";
 import type { MobDraft } from "./mobs";
 

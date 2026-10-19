@@ -1,11 +1,10 @@
 /** The game's own Soul Storm texts, rendered to HTML in every language. The tutorial's second paragraph is out of date, so only the first is published. */
-import { localizedFrom } from "../../src/lib/lang";
-import { LANGS, type Lang } from "./config";
+import { localizedFrom } from "../../shared/lang";
+import type { Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
-import { englishFallbacks, gameTexts } from "./loc-table";
-import { renderMarkup } from "./render-markup";
-import type { LocaleFile } from "./schemas";
-import { TEXT_IDS, type SoulStormData, type TextId } from "./soul-storm-schema";
+import { gameHtml, type Accept } from "./game-text";
+import type { LocaleFile } from "../../shared/schemas";
+import { TEXT_IDS, type SoulStormData, type TextId } from "../../shared/soul-storm-schema";
 
 type Locales = Readonly<Record<Lang, LocaleFile>>;
 type Text = SoulStormData["texts"][TextId];
@@ -43,27 +42,11 @@ export function firstParagraph(text: string): string | undefined {
 const EMPTY_TEXT: Text = { html: localizedFrom(() => ""), untranslated: [] };
 const label = (entry: TextKey): string => `${entry.namespace.slice(RELEASE.length)}/${entry.key}`;
 
-function render(texts: Partial<Record<Lang, string>>, english: string): Text {
-  return {
-    html: localizedFrom((lang) => renderMarkup(texts[lang] ?? english, lang).html),
-    untranslated: [],
-  };
-}
+const firstOnly: Accept = (_lang, text) => (text === undefined ? undefined : firstParagraph(text));
 
 function buildOne(locales: Locales, entry: TextKey): { text: Text; issues: Issue[] } {
-  const texts = gameTexts(locales, entry.namespace, entry.key);
-  const missing = { text: EMPTY_TEXT, issues: [issue("soul-storm-text-fallback", label(entry))] };
-  if (!texts?.en) return missing;
-  if (!entry.firstParagraph) {
-    return { text: { ...render(texts, texts.en), untranslated: englishFallbacks(locales, entry.namespace, entry.key) }, issues: [] };
-  }
-  const english = firstParagraph(texts.en);
-  if (english === undefined) return missing;
-  const firsts: Partial<Record<Lang, string>> = Object.fromEntries(LANGS.flatMap((lang) => {
-    const first = texts[lang] === undefined ? undefined : firstParagraph(texts[lang]);
-    return first === undefined ? [] : [[lang, first]];
-  }));
-  return { text: { ...render(firsts, english), untranslated: LANGS.filter((lang) => firsts[lang] === undefined) }, issues: [] };
+  const text = gameHtml(locales, entry.namespace, entry.key, entry.firstParagraph ? firstOnly : undefined);
+  return text ? { text, issues: [] } : { text: EMPTY_TEXT, issues: [issue("soul-storm-text-fallback", label(entry))] };
 }
 
 export function buildSoulStormTexts(locales: Locales): { texts: SoulStormData["texts"]; issues: Issue[] } {

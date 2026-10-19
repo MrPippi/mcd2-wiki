@@ -1,7 +1,7 @@
 import type { Lang } from "../i18n";
-import { compareLang, searchFold } from "../lang";
+import { compareLang, searchFold } from "../../../shared/lang";
 import type { PayloadMarker } from "./payload";
-import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "./kinds";
+import { FILTER_KINDS, MARKER_KINDS, type FilterKind, type MarkerKind } from "../../../shared/map/kinds";
 
 const DEFAULT_LIMIT = 20;
 

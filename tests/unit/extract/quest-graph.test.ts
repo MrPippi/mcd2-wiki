@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { byProgress, chainOrder, progressOf, questSlug, sectionOf, sizeOf, unlocksOf } from "../../../scripts/extract/quest-graph";
+import { byProgress, chainOrder, progressOf, questSlug, sectionOf, sizeOf, unlocksOf } from "../../../shared/quest-graph";
 
 describe("questSlug", () => {
   it("kebab-cases the quest id", () => {

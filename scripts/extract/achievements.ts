@@ -7,7 +7,7 @@ import { existsSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
 import sharp from "sharp";
-import { localizedFrom } from "../../src/lib/lang";
+import { localizedFrom } from "../../shared/lang";
 import { ACHIEVEMENT_DEFINITIONS_FILE, buildConditions, loadAchievementDefinitions } from "./achievement-conditions";
 import {
   AchievementDataSchema,
@@ -17,11 +17,11 @@ import {
   type AchievementData,
   type SteamAchievement,
   type SteamAchievements,
-} from "./achievement-schema";
-import { LANGS, type Lang } from "./langs";
+} from "../../shared/achievement-schema";
+import { LANGS, type Lang } from "../../shared/langs";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { readJsonFile } from "./read-json";
-import type { LocaleFile, Localized } from "./schemas";
+import type { LocaleFile, Localized } from "../../shared/schemas";
 
 export type { SteamAchievements };
 

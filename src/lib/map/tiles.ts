@@ -1,5 +1,5 @@
 import { withBase } from "../url";
-import type { WorldKey } from "./worlds";
+import type { WorldKey } from "../../../shared/map/worlds";
 
 /** Leaflet tile URL for a world, written by `npm run tiles` to public/map/<world>/<z>/<x>/<y>.webp. */
 export const tileUrlTemplate = (base: string, world: WorldKey): string => withBase(base, `map/${world}/{z}/{x}/{y}.webp`);

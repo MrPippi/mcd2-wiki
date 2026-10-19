@@ -8,7 +8,7 @@ import { readdir } from "node:fs/promises";
 import path from "node:path";
 import { z } from "zod";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
-import { readJsonFile } from "./read-json";
+import { readTableFile } from "./table-reader";
 
 export const CURVE_TABLES_DIR = "CurveTables";
 /** The threat levels the game offers. */
@@ -110,7 +110,7 @@ function readTable(file: string, raw: unknown): ReadTable {
 
 async function readCurveFile(file: string): Promise<ReadTable> {
   try {
-    return readTable(file, await readJsonFile(file, `曲線表 ${path.basename(file)}`));
+    return readTable(file, await readTableFile(file, `曲線表 ${path.basename(file)}`));
   } catch (error) {
     if (!(error instanceof ExtractError)) throw error;
     return { name: path.basename(file, ".json"), rows: {}, issues: [issue("curve-table-invalid", `${path.basename(file)}: ${error.message}`)] };

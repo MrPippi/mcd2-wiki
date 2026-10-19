@@ -1,7 +1,7 @@
 /** Server side: which effects a piece of gear can roll and what it always carries, from the extracted data. */
-import type { ArmorEffectData, ArtifactData } from "../../../scripts/extract/gear-schema";
-import type { Entry } from "../../../scripts/extract/schemas";
-import type { WeaponData } from "../../../scripts/extract/weapon-schema";
+import type { ArmorEffectData, ArtifactData } from "../../../shared/gear-schema";
+import type { Entry } from "../../../shared/schemas";
+import type { WeaponData } from "../../../shared/weapon-schema";
 import { armorEffectData, artifactData } from "../gear-values";
 import { weaponData } from "../weapon-effects";
 

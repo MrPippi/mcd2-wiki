@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import type { Quest } from "../../../scripts/extract/quest-schema";
+import type { Quest } from "../../../shared/quest-schema";
 import { countMark, listParts, questSections, rewardQuestSlugs, splitItemKey, templateParts } from "../../../src/lib/quest-view";
-import { localizedFrom } from "../../../src/lib/lang";
+import { localizedFrom } from "../../../shared/lang";
 
 const area = (id: string) => ({ areaId: id, name: localizedFrom(() => id) });
 const quest = (slug: string, section: Quest["section"], region: string | null = null): Quest => ({

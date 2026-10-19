@@ -3,11 +3,11 @@
  * count word). Per the site's policy those languages show the English text and are marked untranslated.
  */
 import { z } from "zod";
-import { CATEGORIES, LANGS } from "./config";
+import { CATEGORIES, LANGS } from "../../shared/config";
 import rawOverrides from "./english-overrides.json";
-import { localizedFrom } from "../../src/lib/lang";
-import type { Entry } from "./schemas";
-import type { Lang } from "../../src/lib/lang";
+import { localizedFrom } from "../../shared/lang";
+import type { Entry } from "../../shared/schemas";
+import type { Lang } from "../../shared/lang";
 
 const OverrideSchema = z.object({
   category: z.enum(CATEGORIES),

@@ -1,5 +1,5 @@
-import type { Category, FrameName } from "../../scripts/extract/config";
-import type { Frames } from "../../scripts/extract/schemas";
+import type { Category, FrameName } from "../../shared/config";
+import type { Frames } from "../../shared/schemas";
 import { extractedFrames } from "./data";
 
 /** "inventory" is the in-game gear slot, drawn in CSS, so it is always available. */

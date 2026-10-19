@@ -1,5 +1,5 @@
 /** Server side of the weapon comparison: one row per stat, a cell per weapon with its printed text and raw number. */
-import type { Weapon } from "../../../scripts/extract/weapon-schema";
+import type { Weapon } from "../../../shared/weapon-schema";
 import { t, type Lang, type UiKey } from "../i18n";
 import { blocksText, round, roundText, secondsText } from "../units";
 

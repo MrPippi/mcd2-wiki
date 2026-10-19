@@ -71,7 +71,7 @@ export async function loadMobTables(sourceRoot: string, onRead?: (file: string) 
   if (!existsSync(path.join(dir, `${FILES.type1}.json`))) return undefined;
   const entries = await Promise.all(
     KEYS.map(async (key) => {
-      const rows = await readDataTable(dir, FILES[key], onRead);
+      const rows = await readDataTable(dir, FILES[key], { onRead });
       const parsed = MobTablesSchema.shape[key].safeParse(rows);
       if (!parsed.success) {
         throw new ExtractError(`資料表 ${FILES[key]}（${key}）欄位與預期不符（遊戲更新了格式？）：${parsed.error.issues.slice(0, 3).map(formatZodIssue).join("；")}`);

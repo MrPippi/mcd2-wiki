@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { loadLocationTables } from "../../../scripts/extract/location-tables";
-import { LocationDataSchema, type Location, type RegionList } from "../../../scripts/extract/location-schema";
+import { LocationDataSchema, type Location, type RegionList } from "../../../shared/location-schema";
 import {
   buildLocationData,
   extractLocations,
@@ -16,10 +16,10 @@ import {
   type Joins,
   type LocationsInput,
 } from "../../../scripts/extract/locations";
-import type { MapData } from "../../../scripts/extract/map-schema";
-import type { ItemSourcesData, Mob, MobArea } from "../../../scripts/extract/mob-schema";
-import type { Quest, QuestData } from "../../../scripts/extract/quest-schema";
-import { localizedFrom } from "../../../src/lib/lang";
+import type { MapData } from "../../../shared/map-schema";
+import type { ItemSourcesData, Mob, MobArea } from "../../../shared/mob-schema";
+import type { Quest, QuestData } from "../../../shared/quest-schema";
+import { localizedFrom } from "../../../shared/lang";
 import { makeSparseLocales, ns } from "../../helpers/locales";
 import { AREA_ICON, locationRow, MAP_PIN, progressionRow } from "../../helpers/location-tables";
 

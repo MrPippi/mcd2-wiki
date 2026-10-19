@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import type { Location, LocationData } from "../../../scripts/extract/location-schema";
-import type { Mob, MobDrop } from "../../../scripts/extract/mob-schema";
-import type { Quest } from "../../../scripts/extract/quest-schema";
-import type { Entry } from "../../../scripts/extract/schemas";
+import type { Location, LocationData } from "../../../shared/location-schema";
+import type { Mob, MobDrop } from "../../../shared/mob-schema";
+import type { Quest } from "../../../shared/quest-schema";
+import type { Entry } from "../../../shared/schemas";
 import { formatLevels, groupLoot, locationCounts, locationOfArea, lootKeys, mobSureItemKeys, questRewardKeys, sharesRegionName, type LootItem } from "../../../src/lib/location-view";
 import { loc } from "../../helpers/localized";
 

@@ -1,6 +1,8 @@
-import type { Lang } from "../../scripts/extract/config";
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Lang } from "../../shared/config";
+import type { Entry } from "../../shared/schemas";
 
+// Categories listed as table rows, linked by anchor. A superset of sections.ts TABLE_CATEGORIES (statuses have no page
+// yet); kept local because url.ts is bundled into browser scripts, and importing sections would add a shared chunk.
 const TABLE_CATEGORIES: ReadonlySet<Entry["category"]> = new Set(["effect", "status"]);
 const ensureSlash = (base: string): string => (base.endsWith("/") ? base : `${base}/`);
 

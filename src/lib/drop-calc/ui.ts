@@ -1,5 +1,5 @@
 /** The drop calculator in the browser: choices, a live result table and the address. */
-import type { DropFile, DropRow } from "../drop-types";
+import type { DropFile, DropRow } from "../../../shared/drop-types";
 import { mountPicker, optionArt, pickerParts, type PickerGroup, type PickerParts } from "../item-picker";
 import { parseCalcPayload, type CalcItem, type CalcLabel, type CalcPayload } from "./parse";
 import { allRows, decodeState, encodeState, formatDropOdds, narrowRows, narrowing, type CalcState } from "./state";

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Localized } from "../../../scripts/extract/schemas";
+import type { Localized } from "../../../shared/schemas";
 import { humanizeId, SOURCE_NAME_KEYS, sourceName, talismanChestName } from "../../../scripts/extract/source-names";
 import { makeLocales, ns } from "../../helpers/locales";
 

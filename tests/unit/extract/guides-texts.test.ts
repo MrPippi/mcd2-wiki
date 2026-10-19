@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { TEXT_IDS } from "../../../scripts/extract/guides-schema";
+import { TEXT_IDS } from "../../../shared/guides-schema";
 import { buildGuideTexts, englishOnly, gameText, GUIDE_ENGLISH_ONLY, GUIDE_TEXT_KEYS, rowText } from "../../../scripts/extract/guides-texts";
 import { makeSparseLocales } from "../../helpers/locales";
 

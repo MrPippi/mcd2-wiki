@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { WORLDS, WORLD_KEYS, imageSizeOf, zMaxFor } from "../../../src/lib/map/worlds";
+import { WORLDS, WORLD_KEYS, imageSizeOf, zMaxFor } from "../../../shared/map/worlds";
 
 describe("map worlds", () => {
   it("lists the three worlds in display order", () => {

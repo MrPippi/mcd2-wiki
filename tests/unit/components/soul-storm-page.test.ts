@@ -2,7 +2,7 @@ import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { beforeAll, describe, expect, it } from "vitest";
 import SoulStormPage from "../../../src/pages/[lang]/soul-storm.astro";
 import { soulStormData } from "../../../src/lib/soul-storm";
-import type { SoulStormData } from "../../../scripts/extract/soul-storm-schema";
+import type { SoulStormData } from "../../../shared/soul-storm-schema";
 
 let container: AstroContainer;
 beforeAll(async () => { container = await AstroContainer.create(); });

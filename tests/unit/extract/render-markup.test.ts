@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { renderMarkup, stripMarkup } from "../../../scripts/extract/render-markup";
+import { renderMarkup, stripMarkup } from "../../../shared/render-markup";
 
 describe("renderMarkup", () => {
   it("escapes HTML special characters in plain text", () => {

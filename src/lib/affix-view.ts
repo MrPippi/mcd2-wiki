@@ -1,8 +1,8 @@
 /** The effect odds table of an item page: rows and the default (threat 20, first rarity, no bonus) values the page prints without scripts. Server-side only. */
-import { AffixDataSchema } from "../../scripts/extract/affix-schema";
-import type { Entry } from "../../scripts/extract/schemas";
+import { AffixDataSchema } from "../../shared/affix-schema";
+import type { Entry } from "../../shared/schemas";
 import rawAffix from "../data/affix-models.json";
-import { formatOdds, itemOdds, type AffixFile, type AffixOdds } from "./affix-odds";
+import { formatOdds, itemOdds, type AffixFile, type AffixOdds } from "../../shared/affix-odds";
 import { findBaseEntry, publishedEntries } from "./data";
 import type { UiKey } from "./i18n";
 import { RARITY_LABEL, type RarityTier } from "./rarity";

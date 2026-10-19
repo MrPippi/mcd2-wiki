@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { DropDataSchema } from "../../../scripts/extract/drop-schema";
-import { MAX_DRAWS } from "../../../src/lib/drop-odds";
+import { DropDataSchema } from "../../../shared/drop-schema";
+import { MAX_DRAWS } from "../../../shared/drop-odds";
 
 const valid = () => ({
   levels: [1, 2],

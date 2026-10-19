@@ -1,5 +1,5 @@
 /** Reverse index "item -> where to get it": area pools, chests, guaranteed quest rewards, merchants by category, book pools and their droppers. */
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
 import type { ItemIndex, ItemRef } from "./loot-items";
 import { exclusionRowsOf, excludedTags, poolTags, rawSlots, resolvePool, rowPool } from "./loot-pools";
@@ -7,9 +7,9 @@ import { reportLootTags } from "./loot-source-report";
 import { hasPoolTags, slotKeyOf, slotsOf } from "./loot-slots";
 import type { LootRow, LootSlotValue, LootTables } from "./loot-tables";
 import { areaPrefix, type AreaNamer } from "./mob-areas";
-import { ItemSourcesSchema, type BookDrop, type ItemSources, type ItemSourcesData, type LootSlotKey, type LootSource, type SourceKindName } from "./mob-schema";
+import { ItemSourcesSchema, type BookDrop, type ItemSources, type ItemSourcesData, type LootSlotKey, type LootSource, type SourceKindName } from "../../shared/mob-schema";
 import { tagKey } from "./mob-tags";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 import { SOURCE_NAME_KEYS, sourceName, talismanChestName, type NameKeys, type SourceKind, type SourceName } from "./source-names";
 
 export interface SourcesInput {

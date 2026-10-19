@@ -3,7 +3,7 @@
  * content (many areas share a pool, many triggers share a profile), and each source pointing at its profiles.
  */
 import { createHash } from "node:crypto";
-import type { DropItem, DropProfile, DropSource } from "../../src/lib/drop-types";
+import type { DropItem, DropProfile, DropSource } from "../../shared/drop-types";
 import type { Planned } from "./drop-sources";
 import type { RawProfile } from "./drop-profile";
 import { ExtractError } from "./issues";

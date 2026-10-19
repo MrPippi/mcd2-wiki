@@ -1,5 +1,5 @@
 ---
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Entry } from "../../shared/schemas";
 import { affixViewOf } from "../lib/affix-view";
 import { guidesData } from "../lib/guides";
 import { t, type Lang } from "../lib/i18n";
@@ -87,62 +87,8 @@ const first = view?.rarities[0];
   </EntrySection>
 )}
 <script>
-  import { formatOdds, itemOdds, type AffixFile, type AffixOdds } from "../lib/affix-odds";
-
-  // The page prints threat 20, the first rarity and no bonus; this recomputes the table from the same model file, which
-  // is loaded only on pages that have a table.
-  function fill(root: HTMLElement, odds: AffixOdds): void {
-    for (const row of root.querySelectorAll<HTMLElement>("tr[data-effect]:not(.affix-fixed)")) {
-      const effect = row.dataset.effect;
-      for (const cell of row.querySelectorAll<HTMLElement>("td[data-cell]")) {
-        const tier = cell.dataset.cell === "any" ? undefined : Number(cell.dataset.cell);
-        const found = tier === undefined ? odds.effects.find((one) => one.effect === effect) : odds.templates.find((one) => one.effect === effect && one.tier === tier);
-        cell.textContent = formatOdds(found?.probability ?? 0);
-      }
-    }
-  }
-
-  function start(root: HTMLElement, file: AffixFile): void {
-    const slug = root.dataset.affix ?? "";
-    const item = Object.hasOwn(file.items, slug) ? file.items[slug] : undefined;
-    const controls = root.querySelector<HTMLElement>("[data-affix-controls]");
-    const level = root.querySelector<HTMLSelectElement>("[data-affix-level]");
-    const rarity = root.querySelector<HTMLSelectElement>("[data-affix-rarity]");
-    const bonus = root.querySelector<HTMLInputElement>("[data-affix-bonus]");
-    const bonusLabel = bonus?.closest("label");
-    const text = (selector: string, value: string): void => {
-      const target = root.querySelector<HTMLElement>(selector);
-      if (target) target.textContent = value;
-    };
-    if (!item || !controls || !level) return;
-
-    const update = (): void => {
-      const chosen = item.rarities.find((one) => one.rarity === (rarity?.value ?? item.rarities[0]?.rarity));
-      if (!chosen) return;
-      // The bonus slot only exists for rarities that list one.
-      if (bonusLabel) bonusLabel.hidden = chosen.bonusSlots === 0;
-      const withBonus = Boolean(bonus?.checked) && chosen.bonusSlots > 0;
-      const odds = itemOdds(file, slug, { level: Number(level.value), rarity: chosen.rarity, bonus: withBonus });
-      if (!odds) {
-        // Stale or foreign data: the table keeps what it shows.
-        console.warn(`affix odds: no odds for ${slug} at threat ${level.value}, ${chosen.rarity}`);
-        return;
-      }
-      fill(root, odds);
-      text("[data-affix-level-text]", level.value);
-      if (rarity?.selectedOptions[0]) text("[data-affix-rarity-text]", rarity.selectedOptions[0].textContent ?? "");
-      text("[data-affix-slots-text]", String(chosen.slots + (withBonus ? chosen.bonusSlots : 0)));
-    };
-    controls.hidden = false;
-    for (const control of [level, rarity, bonus]) control?.addEventListener("change", update);
-    update();
-  }
+  import { mountAffixOdds } from "../client/affix-odds";
 
   const root = document.querySelector<HTMLElement>("[data-affix]");
-  if (root) {
-    import("../data/affix-models.json").then((module) => start(root, module.default as unknown as AffixFile)).catch((error: unknown) => {
-      // The table keeps its default values.
-      console.warn("affix odds: the model file did not load", error);
-    });
-  }
+  if (root) mountAffixOdds(root, () => import("../data/affix-models.json"));
 </script>

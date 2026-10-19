@@ -1,5 +1,5 @@
 /** The item page's view of loot-sources.json: an item's source ids joined with their names. Pure; type-only imports. */
-import type { BookDrop, ItemSources, ItemSourcesData, LootSource } from "../../scripts/extract/mob-schema";
+import type { BookDrop, ItemSources, ItemSourcesData, LootSource } from "../../shared/mob-schema";
 
 export interface ResolvedSource extends LootSource {
   /** The source id ("<kind>:<row id>"). */

@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { EMPTY_SOUL_STORM, SoulStormDataSchema, SoulStormStatusSchema } from "../../../scripts/extract/soul-storm-schema";
+import { EMPTY_SOUL_STORM, SoulStormDataSchema, SoulStormStatusSchema } from "../../../shared/soul-storm-schema";
 
 describe("Soul Storm schema", () => {
   // Only the shape: verifying in game or setting an offset (the documented procedure) changes the values.

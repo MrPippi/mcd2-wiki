@@ -1,7 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { englishFallbacks, gameTexts, localize, locRef } from "../../../scripts/extract/loc-table";
+import { gameTexts, locRef } from "../../../scripts/extract/loc-table";
 import { makeLocales, ns } from "../../helpers/locales";
-import { loc } from "../../helpers/localized";
 
 describe("locRef", () => {
   it("reads the table and key of a LOCTABLE reference", () => {
@@ -14,29 +13,6 @@ describe("locRef", () => {
   it("ignores plain text", () => {
     expect(locRef("Blacksmith")).toBeUndefined();
     expect(locRef("None")).toBeUndefined();
-  });
-});
-
-describe("localize", () => {
-  const locales = {
-    ...makeLocales({
-      [ns("VendorLabels")]: { smith: { en: "Blacksmith", zh: "鐵匠", ja: "鍛冶屋" }, cost: { en: "Cost", zh: "", ja: "" } },
-    }),
-    de: {},
-  };
-
-  it("returns every language", () => {
-    expect(localize(locales, ns("VendorLabels"), "smith")).toEqual(loc({ en: "Blacksmith", zh: "鐵匠", ja: "鍛冶屋" }));
-  });
-
-  it("falls back to English for an empty text or a language without the namespace", () => {
-    expect(localize(locales, ns("VendorLabels"), "cost")).toEqual(loc({ en: "Cost" }));
-    expect(localize(locales, ns("VendorLabels"), "smith")?.de).toBe("Blacksmith");
-  });
-
-  it("returns undefined when the key is missing", () => {
-    expect(localize(locales, ns("VendorLabels"), "nope")).toBeUndefined();
-    expect(localize(locales, ns("Nope"), "smith")).toBeUndefined();
   });
 });
 
@@ -55,10 +31,5 @@ describe("gameTexts", () => {
 
   it("returns undefined without English", () => {
     expect(gameTexts(locales, ns("VendorLabels"), "nope")).toBeUndefined();
-  });
-
-  it("lists the languages that fall back to English", () => {
-    expect(englishFallbacks(locales, ns("VendorLabels"), "smith")).toEqual(["ja", "de"]);
-    expect(englishFallbacks(locales, ns("VendorLabels"), "nope")).toEqual([]);
   });
 });

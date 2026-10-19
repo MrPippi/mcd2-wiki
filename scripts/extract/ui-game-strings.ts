@@ -1,7 +1,7 @@
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
 import { gameTexts } from "./loc-table";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 
 /** Where the game keeps the text for a site UI key. */
 export interface UiGameKey {

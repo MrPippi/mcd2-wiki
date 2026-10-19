@@ -1,9 +1,9 @@
 ---
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Entry } from "../../shared/schemas";
 import { t, type Lang } from "../lib/i18n";
 import { areaHref, bookDroppers, dropperHref, entrySources, groupIsUntranslated, merchantCategoryLabel, nameIsUntranslated, showsAltName } from "../lib/item-source-view";
 import type { ResolvedSource } from "../lib/item-sources";
-import { compareLang, htmlLang } from "../lib/lang";
+import { compareLang, htmlLang } from "../../shared/lang";
 import { locationOf } from "../lib/locations";
 import { dropSummary } from "../lib/mobs";
 import { listParts, templateParts } from "../lib/quest-view";

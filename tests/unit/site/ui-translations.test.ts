@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import gameKeys from "../../../scripts/extract/ui-game-keys.json";
-import { LANGS, LANG_META, type Lang } from "../../../scripts/extract/langs";
-import { UI_DICTS, plainText } from "../../../src/lib/ui-dicts";
+import { LANGS, LANG_META, type Lang } from "../../../shared/langs";
+import { UI_DICTS, plainText } from "../../../shared/ui-dicts";
 
 const HAND_WRITTEN: readonly Lang[] = ["zh", "en"];
 const TRANSLATED = LANGS.filter((lang) => !HAND_WRITTEN.includes(lang));

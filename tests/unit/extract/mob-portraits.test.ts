@@ -6,7 +6,7 @@ import sharp from "sharp";
 import { describe, expect, it } from "vitest";
 import { LARGE_PORTRAIT_SIZE, listPortraitFiles, planPortraits, PORTRAIT_SIZE, publishPortraits, renderAssetName, withPortraits, type PortraitInput } from "../../../scripts/extract/mob-portraits";
 import type { MobDraft } from "../../../scripts/extract/mobs";
-import type { Mob } from "../../../scripts/extract/mob-schema";
+import type { Mob } from "../../../shared/mob-schema";
 import { loadMobTables } from "../../../scripts/extract/mob-tables";
 import { buildMobs } from "../../../scripts/extract/mobs";
 import { loadLocales } from "../../../scripts/extract/parse-locale";

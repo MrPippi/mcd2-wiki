@@ -1,5 +1,5 @@
 /** How a drop source and its area are named on a page: the name in the language, a link where there is a page, and a small note. Server-side only. */
-import type { DropSource } from "./drop-types";
+import type { DropSource } from "../../shared/drop-types";
 import { t, type Lang } from "./i18n";
 import { assetUrl, href } from "./url";
 import { areaHref, lootSource } from "./item-source-view";

@@ -1,4 +1,4 @@
-import { fileValue, plainText } from "../../src/lib/ui-dicts";
+import { fileValue, plainText } from "./ui-dicts";
 import type { Lang } from "./config";
 
 /** The label shown in place of a value that is filled in later, from the language file (wrapped in braces). */

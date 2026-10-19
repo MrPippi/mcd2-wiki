@@ -1,8 +1,8 @@
-import { LANGS, LANG_META, PATHS, type Lang } from "./config";
-import { byLang } from "../../src/lib/lang";
+import { LANGS, LANG_META, PATHS, type Lang } from "../../shared/config";
+import { byLang } from "../../shared/lang";
 import { ExtractError, formatZodIssue } from "./issues";
 import { readJsonFile } from "./read-json";
-import { LocaleFileSchema, type LocaleFile } from "./schemas";
+import { LocaleFileSchema, type LocaleFile } from "../../shared/schemas";
 
 export async function loadLocaleFile(filePath: string): Promise<LocaleFile> {
   const json = await readJsonFile(filePath, "語系檔");

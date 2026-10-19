@@ -4,7 +4,7 @@ import path from "node:path";
 import sharp from "sharp";
 import { beforeEach, describe, expect, it } from "vitest";
 import { extractBestiary } from "../../scripts/extract/bestiary";
-import { MapDataSchema } from "../../scripts/extract/map-schema";
+import { MapDataSchema } from "../../shared/map-schema";
 import { makeEntry } from "../helpers/entries";
 import { makeLocales, ns } from "../helpers/locales";
 import { areaRow, itemRow, lootRow, mobRow, slot, waveRow } from "../helpers/mob-tables";

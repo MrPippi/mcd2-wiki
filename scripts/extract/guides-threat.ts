@@ -4,15 +4,15 @@
  * DT_WorldActorDefinition the mob spawn settings table, and DT_DifficultyDefinition each difficulty's multipliers.
  * The threat levels shown are the whole levels the curves have keys for (1..20 in the game).
  */
-import { localizedFrom } from "../../src/lib/lang";
+import { localizedFrom } from "../../shared/lang";
 import { cleanCurveValue, curveNotes, findCurve, levelsOf, parseCurveRef, sampleThreat, type Curve, type CurveTables } from "./curve-tables";
-import { RARITIES, DIFFICULTIES, type Difficulty, type DifficultyData, type Rarity, type ThreatRow } from "./guides-schema";
+import { RARITIES, DIFFICULTIES, type Difficulty, type DifficultyData, type Rarity, type ThreatRow } from "../../shared/guides-schema";
 import { rarityOfTag } from "./guides-enchanting";
 import type { DifficultyRow, GameBalanceRow, GuideTables } from "./guides-tables";
 import { rowText, type Locales } from "./guides-texts";
 import { mapKeyTag } from "./guides-vendors";
 import { issue, type Issue } from "./issues";
-import { escapeHtml } from "./render-markup";
+import { escapeHtml } from "../../shared/render-markup";
 
 /** Which of the game's two balance rows carries the curves; "Active" lists none (which one the game runs is not in the data). */
 const BALANCE_ROW = "SecondPass";

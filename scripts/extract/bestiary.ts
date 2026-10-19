@@ -1,6 +1,6 @@
 /** Wires the mob and loot DataTables into the two bestiary outputs: the mob list and the item-to-source index. */
 import path from "node:path";
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
 import { buildItemIndex } from "./loot-items";
 import { buildItemSources } from "./loot-sources";
@@ -8,11 +8,11 @@ import { loadLootTables, type LootTables } from "./loot-tables";
 import { areaMarkers, buildAreaNamer, buildMobAreas, SPAWN_AREA_PREFIXES } from "./mob-areas";
 import { attachDrops, unusedMobRows } from "./mob-drops";
 import { listPortraitFiles, planPortraits, publishPortraits, withPortraits } from "./mob-portraits";
-import { ItemSourcesSchema, MobDataSchema, type ItemSourcesData, type MobData } from "./mob-schema";
+import { ItemSourcesSchema, MobDataSchema, type ItemSourcesData, type MobData } from "../../shared/mob-schema";
 import { loadMobTables, type AreaRow, type MobTables } from "./mob-tables";
 import { buildMobs, type MobDraft } from "./mobs";
-import type { MapData } from "./map-schema";
-import type { LocaleFile, Entry } from "./schemas";
+import type { MapData } from "../../shared/map-schema";
+import type { LocaleFile, Entry } from "../../shared/schemas";
 
 export interface BestiaryInput {
   readonly sourceRoot: string;

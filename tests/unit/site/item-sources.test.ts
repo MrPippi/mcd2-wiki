@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { ItemSourcesData } from "../../../scripts/extract/mob-schema";
+import type { ItemSourcesData } from "../../../shared/mob-schema";
 import { sourcesFor } from "../../../src/lib/item-sources";
 import { loc } from "../../helpers/localized";
 

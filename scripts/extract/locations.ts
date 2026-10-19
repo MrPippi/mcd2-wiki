@@ -10,21 +10,21 @@
 import { existsSync } from "node:fs";
 import { copyFile, mkdir } from "node:fs/promises";
 import path from "node:path";
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { loadDropTables } from "./drop-tables";
 import { referencePaths } from "./icon-references";
 import { ExtractError, formatZodIssue, issue, type Issue } from "./issues";
 import { assignRows, foldSubLocations, ownerOf, rowName, type RegionRows } from "./location-assign";
-import { EMPTY_LOCATIONS, LocationDataSchema, RegionListSchema, type Location, type LocationData, type RegionList, type RegionRule } from "./location-schema";
+import { EMPTY_LOCATIONS, LocationDataSchema, RegionListSchema, type Location, type LocationData, type RegionList, type RegionRule } from "../../shared/location-schema";
 import { addLocationBooks } from "./location-books";
 import { loadLocationTables, type LocationTables, type ProgressionRow } from "./location-tables";
-import type { MapData } from "./map-schema";
+import type { MapData } from "../../shared/map-schema";
 import { loadLootTables } from "./loot-tables";
 import { areaMarkers, type AreaMarker } from "./mob-areas";
-import type { ItemSourcesData, MobData } from "./mob-schema";
+import type { ItemSourcesData, MobData } from "../../shared/mob-schema";
 import { tagKey } from "./mob-tags";
-import type { QuestData } from "./quest-schema";
-import type { LocaleFile } from "./schemas";
+import type { QuestData } from "../../shared/quest-schema";
+import type { LocaleFile } from "../../shared/schemas";
 import regionData from "./location-regions.json";
 
 /** The game's area icons, published first. */

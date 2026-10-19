@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { descriptionIsCompletedText, hasLabel, QUEST_COMPLETED, QUEST_DESCRIPTIONS, QUEST_LABELS, questHtml, questText } from "../../../scripts/extract/quest-texts";
-import { LANGS } from "../../../scripts/extract/langs";
+import { LANGS } from "../../../shared/langs";
 import { makeSparseLocales } from "../../helpers/locales";
 
 const LOCALES = makeSparseLocales({

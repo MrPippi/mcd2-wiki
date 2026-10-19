@@ -1,17 +1,17 @@
 /** Builds src/data/quests.json: every published quest in list order, linked by prerequisites, plus the item-page reward links. */
 import type { BestiaryLinks } from "./bestiary";
-import type { Lang } from "./config";
+import type { Lang } from "../../shared/config";
 import { issue, type Issue } from "./issues";
-import type { MapData } from "./map-schema";
+import type { MapData } from "../../shared/map-schema";
 import { areaMarkers, buildAreaNamer } from "./mob-areas";
-import type { ItemSourcesData, MobData } from "./mob-schema";
+import type { ItemSourcesData, MobData } from "../../shared/mob-schema";
 import { arenaMobIndex } from "./quest-arenas";
 import { draftQuest, skipReason, type DraftContext, type QuestDraft } from "./quest-draft";
-import { byProgress, chainOrder, progressOf, questSlug, unlocksOf } from "./quest-graph";
+import { byProgress, chainOrder, progressOf, questSlug, unlocksOf } from "../../shared/quest-graph";
 import { itemsBySource, questSourceId, rewardRowNames, rowsByTag } from "./quest-rewards";
-import { EMPTY_QUESTS, QuestDataSchema, type Quest, type QuestData, type RawQuest } from "./quest-schema";
+import { EMPTY_QUESTS, QuestDataSchema, type Quest, type QuestData, type RawQuest } from "../../shared/quest-schema";
 import { loadQuestTables, type QuestTables } from "./quest-tables";
-import type { LocaleFile } from "./schemas";
+import type { LocaleFile } from "../../shared/schemas";
 
 export interface QuestsInput {
   readonly sourceRoot: string;

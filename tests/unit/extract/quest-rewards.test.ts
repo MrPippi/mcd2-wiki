@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { emeraldsOf, itemsBySource, rewardRowNames, rewardsOf, rowsByTag, type RewardContext } from "../../../scripts/extract/quest-rewards";
-import type { ItemSourcesData } from "../../../scripts/extract/mob-schema";
-import { localizedFrom } from "../../../src/lib/lang";
+import type { ItemSourcesData } from "../../../shared/mob-schema";
+import { localizedFrom } from "../../../shared/lang";
 import { lootEntry, lootRow, rawQuest, SIZE_ROWS } from "../../helpers/quest-tables";
 
 const noSources = { areas: [], chests: [], merchants: [], bookPools: [] };

@@ -1,9 +1,9 @@
 /** Pure helpers the location pages format location data with. Type-only imports, so tests need no data files. */
-import type { Category } from "../../scripts/extract/config";
-import type { Location, LocationData, SubLocation } from "../../scripts/extract/location-schema";
-import type { ItemSources, Mob } from "../../scripts/extract/mob-schema";
-import type { Quest } from "../../scripts/extract/quest-schema";
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Category } from "../../shared/config";
+import type { Location, LocationData, SubLocation } from "../../shared/location-schema";
+import type { ItemSources, Mob } from "../../shared/mob-schema";
+import type { Quest } from "../../shared/quest-schema";
+import type { Entry } from "../../shared/schemas";
 
 export interface LocationCounts {
   readonly mobs: number;

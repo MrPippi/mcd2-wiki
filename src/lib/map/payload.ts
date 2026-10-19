@@ -1,7 +1,7 @@
 /** The map data embedded in a map page: only the languages that page shows (spec §2.6). */
-import type { MapMarker, WorldMap } from "../../../scripts/extract/map-schema";
-import type { Localized } from "../../../scripts/extract/schemas";
-import type { Lang } from "../lang";
+import type { MapMarker, WorldMap } from "../../../shared/map-schema";
+import type { Localized } from "../../../shared/schemas";
+import type { Lang } from "../../../shared/lang";
 
 /** Text in some languages; the viewer reads only the page language and its comparison language. */
 export type SomeLangs = Partial<Localized>;

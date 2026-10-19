@@ -1,6 +1,6 @@
 ---
-import { LANGS } from "../../../../scripts/extract/config";
-import type { Location } from "../../../../scripts/extract/location-schema";
+import { LANGS } from "../../../../shared/config";
+import type { Location } from "../../../../shared/location-schema";
 import EntrySection from "../../../components/EntrySection.astro";
 import LangText from "../../../components/LangText.astro";
 import LocationIcon from "../../../components/LocationIcon.astro";
@@ -9,7 +9,7 @@ import MobCard from "../../../components/MobCard.astro";
 import QuestCard from "../../../components/QuestCard.astro";
 import Base from "../../../layouts/Base.astro";
 import { mobKindLabel, t, type Lang } from "../../../lib/i18n";
-import { compareLang, htmlLang } from "../../../lib/lang";
+import { compareLang, htmlLang } from "../../../../shared/lang";
 import { formatLevels, sharesRegionName } from "../../../lib/location-view";
 import { locationData, locationDescription, locationLootGroups, locationMobGroups, locationQuests, locationRewardGroups } from "../../../lib/locations";
 import { mapLinkOf } from "../../../lib/mobs";

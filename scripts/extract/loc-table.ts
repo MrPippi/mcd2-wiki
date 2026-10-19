@@ -1,7 +1,6 @@
-import { localizedFrom } from "../../src/lib/lang";
-import { LANGS } from "./langs";
-import type { Lang } from "./config";
-import type { LocaleFile, Localized } from "./schemas";
+import { LANGS } from "../../shared/langs";
+import type { Lang } from "../../shared/config";
+import type { LocaleFile } from "../../shared/schemas";
 
 const LOCTABLE = /^LOCTABLE\("([^"]+)",\s*"([^"]+)"\)$/;
 
@@ -23,18 +22,4 @@ export function gameTexts(locales: Readonly<Record<Lang, LocaleFile>>, namespace
     const text = locales[lang][namespace]?.[key];
     return text ? [[lang, text]] : [];
   }));
-}
-
-/** Languages that have no text of their own for an English key (and so show English). */
-export function englishFallbacks(locales: Readonly<Record<Lang, LocaleFile>>, namespace: string, key: string): Lang[] {
-  const texts = gameTexts(locales, namespace, key);
-  return texts ? LANGS.filter((lang) => !texts[lang]) : [];
-}
-
-/** Text in every language; a missing language falls back to English, and no English means no text. */
-export function localize(locales: Readonly<Record<Lang, LocaleFile>>, namespace: string, key: string): Localized | undefined {
-  const texts = gameTexts(locales, namespace, key);
-  if (!texts) return undefined;
-  const en = texts.en ?? "";
-  return localizedFrom((lang) => texts[lang] ?? en);
 }

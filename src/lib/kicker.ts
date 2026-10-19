@@ -1,5 +1,5 @@
-import type { Category } from "../../scripts/extract/config";
-import type { Entry } from "../../scripts/extract/schemas";
+import type { Category } from "../../shared/config";
+import type { Entry } from "../../shared/schemas";
 
 const SINGULAR: Readonly<Record<Category, string>> = {
   melee: "MELEE WEAPON",

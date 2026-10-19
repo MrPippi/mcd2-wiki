@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { QuestDataSchema } from "../../../scripts/extract/quest-schema";
+import { QuestDataSchema } from "../../../shared/quest-schema";
 import rawQuests from "../../../src/data/quests.json";
 import rawSources from "../../../src/data/loot-sources.json";
 import { findMob } from "../../../src/lib/mobs";
 import { questSections } from "../../../src/lib/quest-view";
 import { findQuest, questData, questDescription, questHref, rewardEntries, rewardQuests } from "../../../src/lib/quests";
-import { SITE_MENU } from "../../../src/lib/site-menu";
+import { SITE_MENU } from "../../../shared/sections";
 
 describe("quests.json", () => {
   it("validates against the schema", () => {

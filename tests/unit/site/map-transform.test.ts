@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { isInside, toBlocks, toImagePixel, type WorldFrame } from "../../../src/lib/map/transform";
+import { isInside, toBlocks, toImagePixel, type WorldFrame } from "../../../shared/map/transform";
 
 // Overworld, from DT_WorldRegionMapData.
 const OVERWORLD: WorldFrame = { minX: -599, maxX: 444, minY: -172, maxY: 1371, span: 1544, ratio: 0.965, imageSize: 8192 };

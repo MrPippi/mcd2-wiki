@@ -3,7 +3,7 @@
  * the start of an area (SW.Progression.<Area>.Start, or .FirstVisit for the town) and that area has a name in the game
  * text (DT_AreaDefinition); other stages (Outpost, WitchT3, Maw, ...) have no clean name and are left out and reported.
  */
-import type { Stage } from "./guides-schema";
+import type { Stage } from "../../shared/guides-schema";
 import type { GuideTables } from "./guides-tables";
 import { rowText, type Locales } from "./guides-texts";
 import { issue, type Issue } from "./issues";

@@ -1,11 +1,11 @@
-import type { Lang } from "../../scripts/extract/langs";
+import type { Lang } from "../../shared/langs";
 import rawGameStrings from "../data/ui-game-strings.json";
-import zh from "../i18n/zh.json";
+import zh from "../../shared/i18n/zh.json";
 import { z } from "zod";
-import { LANGS, LANG_META } from "../../scripts/extract/langs";
-import { UI_DICTS, fileValue, plainText, type UiValue } from "./ui-dicts";
+import { LANGS, LANG_META } from "../../shared/langs";
+import { UI_DICTS, fileValue, plainText, type UiKey, type UiValue } from "../../shared/ui-dicts";
 
-export type UiKey = Exclude<keyof typeof zh, "_machine">;
+export type { UiKey };
 
 const GameStringsSchema = z.record(z.string(), z.partialRecord(z.enum(LANGS), z.string()));
 type GameStrings = z.infer<typeof GameStringsSchema>;

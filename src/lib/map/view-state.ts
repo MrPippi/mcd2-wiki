@@ -1,4 +1,4 @@
-import type { WorldKey } from "./worlds";
+import type { WorldKey } from "../../../shared/map/worlds";
 
 /** A map view: zoom level and centre, as pixels on the full-size render. */
 export interface View {

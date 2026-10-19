@@ -3,7 +3,7 @@ import { existsSync } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
 import { ExtractError, formatZodIssue } from "./issues";
-import { readJsonFile } from "./read-json";
+import { readDataTable } from "./table-reader";
 
 const Tag = z.object({ TagName: z.string() });
 const Tags = z.object({ GameplayTags: z.array(Tag).optional() }).optional();
@@ -144,12 +144,7 @@ const FILES: Readonly<Record<keyof GameTables, readonly string[]>> = {
 export async function loadGameTables(sourceRoot: string): Promise<GameTables | undefined> {
   const dir = path.join(sourceRoot, ...DATATABLES_DIR.split("/"));
   if (!existsSync(dir)) return undefined;
-  const readTable = async (name: string): Promise<unknown[]> => {
-    const rows = await readJsonFile(path.join(dir, `${name}.json`), `資料表 ${name}`);
-    if (!Array.isArray(rows)) throw new ExtractError(`資料表 ${name} 不存在或不是陣列：${dir}`);
-    // Base* rows (BaseMeleeWeapon, BaseRanged, BaseProjectile…) are templates other rows inherit from, not items.
-    return rows.filter((row) => !/^Base[A-Z]/.test(String((row as { Name?: unknown }).Name ?? "")));
-  };
+  const readTable = (name: string): Promise<unknown[]> => readDataTable(dir, name, { dropBase: true });
   const raw = Object.fromEntries(
     await Promise.all(
       Object.entries(FILES).map(async ([key, names]) => [key, (await Promise.all(names.map(readTable))).flat()] as const),
