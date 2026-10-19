@@ -83,7 +83,7 @@ test.describe("drop odds", () => {
     await page.getByTestId("drop-item-pick").click();
     const options = page.getByTestId("drop-options");
     await expect(page.getByTestId("drop-dialog")).toBeVisible();
-    await expect(options.locator("h3")).toHaveText(["Melee Weapons", "Ranged Weapons", "Armor", "Artifacts", "Talismans", "Enchantment Books"]);
+    await expect(options.locator("h3")).toHaveText(["Melee Weapons", "Ranged Weapons", "Armor · Helmet", "Armor · Chest", "Armor · Leggings", "Armor · Boots", "Artifacts", "Talismans", "Enchantment Books"]);
     await expect(options.locator("[data-key='melee/sword'] img")).toBeVisible();
     await expect(options.locator("[data-key='enchantment-book/channeling'] img.picker-frame")).toHaveCount(1);
   });

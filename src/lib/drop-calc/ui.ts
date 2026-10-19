@@ -116,12 +116,12 @@ function summaryOf(payload: CalcPayload, state: CalcState, rows: number): string
 /** A book's icon sits in the enchantment book frame, like on the build planner. */
 const frameOf = (payload: CalcPayload, item: CalcItem): string | undefined => (item.category === "enchantment-book" ? payload.bookFrame : undefined);
 
-/** Every item in the picker, grouped by page category in the site's order. */
+/** Every item in the picker, grouped by page category in the site's order (armor by piece). */
 const itemGroups = (payload: CalcPayload): PickerGroup[] =>
-  payload.categories.map((category) => ({
-    label: category.name,
+  payload.groups.map((group) => ({
+    label: group.name,
     options: payload.items
-      .filter((item) => item.category === category.id)
+      .filter((item) => item.group === group.id)
       .map((item) => ({ key: item.key, name: item.name, search: item.search, icon: item.icon, unique: item.unique === true, frame: frameOf(payload, item) })),
   }));
 

@@ -41,9 +41,10 @@ describe("calcPayload", () => {
     expect(Object.values(payload.sources).filter((label) => label.unplaced).length).toBeLessThan(Object.keys(payload.sources).length);
   });
 
-  it("groups the picker by page category in site order, with the book frame for books", () => {
-    expect(payload.categories.map((one) => one.id)).toEqual(["melee", "ranged", "armor", "artifact", "talisman", "enchantment-book"]);
-    expect(payload.items.every((item) => payload.categories.some((one) => one.id === item.category))).toBe(true);
+  it("groups the picker by page category in site order, armor by piece, with the book frame for books", () => {
+    expect(payload.groups.map((one) => one.id)).toEqual(["melee", "ranged", "armor-helmet", "armor-chest", "armor-leggings", "armor-boots", "artifact", "talisman", "enchantment-book"]);
+    expect(payload.items.every((item) => payload.groups.some((one) => one.id === item.group))).toBe(true);
+    expect(payload.items.filter((item) => item.category === "armor").every((item) => item.group.startsWith("armor-"))).toBe(true);
     expect(payload.items.some((item) => item.unique)).toBe(true);
     expect(payload.bookFrame).toMatch(/frames\/enchantment\.png$/);
   });
@@ -53,8 +54,9 @@ describe("calcPayload", () => {
     expect(parseCalcPayload({ ...payload, items: [] })).toBeUndefined();
     expect(parseCalcPayload({ ...payload, labels: { ...payload.labels, pick: "" } })).toBeUndefined();
     expect(parseCalcPayload({ ...payload, levels: [1.5] })).toBeUndefined();
-    expect(parseCalcPayload({ ...payload, categories: [] })).toBeUndefined();
+    expect(parseCalcPayload({ ...payload, groups: [] })).toBeUndefined();
     expect(parseCalcPayload({ ...payload, items: payload.items.map((item) => ({ ...item, category: "" })) })).toBeUndefined();
+    expect(parseCalcPayload({ ...payload, items: payload.items.map((item) => ({ ...item, group: "" })) })).toBeUndefined();
   });
 });
 
