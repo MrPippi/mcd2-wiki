@@ -10,6 +10,7 @@
     "tiles": "tsx scripts/map-tiles/index.ts",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview --port 4329",
+    "typecheck": "astro sync && tsc --noEmit",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "npm run build && playwright test"

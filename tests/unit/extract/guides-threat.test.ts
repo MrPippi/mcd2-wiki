@@ -133,7 +133,7 @@ describe("buildDifficulty", () => {
     const [low, , high] = difficulty;
     expect(low).toMatchObject({ scalar: -1, incoming: 2, outgoing: 1.5, noRareDrops: true });
     expect(low.name).toMatchObject({ html: { en: "Low", zh: "Low-zh" }, untranslated: [] });
-    expect(low.description.html.en).toBe("Low description");
+    expect(low.description?.html.en).toBe("Low description");
     expect(low.received?.html.en).toBe("Low received");
     expect(low.dealt?.html.en).toBe("Low dealt");
     expect(high).toMatchObject({ scalar: 1, incoming: 0.8, outgoing: 0.6 });

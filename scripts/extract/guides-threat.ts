@@ -185,18 +185,26 @@ function zeroesRareDrops(tables: GuideTables, row: DifficultyRow, id: Difficulty
   return { zeroed: zeroed("special") && zeroed("unique"), issues: [] };
 }
 
+/** One difficulty row as read; rows that are not low, normal or high carry only their issue. */
+interface BuiltDifficulty {
+  readonly id?: Difficulty;
+  readonly difficulty?: DifficultyData;
+  readonly noRareDrops?: boolean;
+  readonly issues: Issue[];
+}
+
 /** Low, Normal and High in that order, each with the game's texts, multipliers and whether it zeroes the rare drops. */
 export function buildDifficulty(tables: GuideTables, curves: CurveTables, locales: Locales): { difficulty: DifficultyData[]; issues: Issue[] } {
-  const built = tables.difficulty.flatMap((row) => {
+  const built = tables.difficulty.map((row): BuiltDifficulty => {
     const id = difficultyIdOf(row);
-    if (!id) return [{ issues: [issue("guides-value-missing", `DT_DifficultyDefinition: ${row.Name} is not low, normal or high`)] }];
+    if (!id) return { issues: [issue("guides-value-missing", `DT_DifficultyDefinition: ${row.Name} is not low, normal or high`)] };
     const drops = zeroesRareDrops(tables, row, id);
     const one = difficultyOf(row, id, curves, locales);
-    return [{ id, difficulty: one.difficulty, noRareDrops: drops.zeroed, issues: [...one.issues, ...drops.issues] }];
+    return { id, difficulty: one.difficulty, noRareDrops: drops.zeroed, issues: [...one.issues, ...drops.issues] };
   });
-  const ordered = DIFFICULTIES.flatMap((id) => built.filter((one) => "id" in one && one.id === id));
+  const ordered = DIFFICULTIES.flatMap((id) => built.filter((one) => one.id === id));
   return {
-    difficulty: ordered.flatMap((one) => ("difficulty" in one && one.difficulty ? [{ ...one.difficulty, ...optional("noRareDrops", one.noRareDrops) }] : [])),
+    difficulty: ordered.flatMap((one) => (one.difficulty ? [{ ...one.difficulty, ...optional("noRareDrops", one.noRareDrops) }] : [])),
     issues: built.flatMap(({ issues }) => issues),
   };
 }

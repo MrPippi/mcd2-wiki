@@ -150,6 +150,7 @@
 ```bash
 npm install
 npm run dev          # 開發伺服器（搜尋需 build 後才可用）
+npm run typecheck    # 產生 Astro 型別後執行 tsc
 npm test             # 單元＋整合測試
 npm run test:e2e     # build 後執行 Playwright（預覽伺服器使用 port 4329）
 npm run build        # 產生 dist/ 與 Pagefind 索引
@@ -162,7 +163,9 @@ npm run build        # 產生 dist/ 與 Pagefind 索引
 
 ## 部署
 
-`.github/workflows/deploy.yml` 在推送到 `master` 時建置並發布到 GitHub Pages，`BASE_PATH` 自動設為 `/<repo>/`。
+`.github/workflows/ci.yml` 在每個 PR 上執行型別檢查、單元測試、build 與 Playwright；任一失敗時 PR 會顯示紅叉，e2e 失敗的截圖與 trace 上傳為 `playwright-results`。CI 不跑 `npm run extract`（沒有 `source-data/`），資料以 commit 的 `src/data/` 為準。
+
+`.github/workflows/deploy.yml` 在推送到 `master` 時再跑一次型別檢查與單元測試，通過後建置並發布到 GitHub Pages，`BASE_PATH` 自動設為 `/<repo>/`。
 若 repo 是 `<user>.github.io`，請把 `BASE_PATH` 改成 `/`。
 
 ## Drop odds
