@@ -15,6 +15,8 @@ export const GuidesStatusSchema = z.strictObject({
   affixOdds: z.boolean().default(false),
   /** That the drop odds model (drop-models.ts) matches how the game rolls loot; rebuilt from the data and a third-party table, and the tables do not say where chests spawn. */
   dropOdds: z.boolean().default(false),
+  /** That a soul enchantment tier applies only its own row's modifiers (not also the family row's or the generic Lvl.I–III rows'), and that ThreatLevelSettings gates the tiers. */
+  soulEnchantmentLevels: z.boolean().default(false),
 });
 export type GuidesStatus = z.infer<typeof GuidesStatusSchema>;
 

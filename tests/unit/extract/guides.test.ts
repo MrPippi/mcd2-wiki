@@ -54,7 +54,7 @@ describe("extractGuides", () => {
   it("builds valid guides data from the tables and copies the status flags", async () => {
     const { data, tablesRead } = await extractGuides(input());
     expect(GuidesDataSchema.parse(data)).toEqual(data);
-    expect(data.verified).toEqual({ enchantCostPerLevel: false, rarityOdds: false, threatBalanceRow: false, affixOdds: false, dropOdds: false });
+    expect(data.verified).toEqual({ enchantCostPerLevel: false, rarityOdds: false, threatBalanceRow: false, affixOdds: false, dropOdds: false, soulEnchantmentLevels: false });
     expect(data.vendors).toHaveLength(3);
     expect(data.caps).toEqual({ emeralds: 99999, echoShards: 100, level: 100 });
     expect(data.enchanting.maxLevel).toBe(3);
@@ -116,12 +116,12 @@ describe("readGuidesStatus", () => {
 
   it("accepts the repository's own status file", () => {
     const raw: unknown = JSON.parse(readFileSync(path.resolve(__dirname, "../../../scripts/extract/guides-status.json"), "utf8"));
-    expect(GuidesStatusSchema.parse(raw)).toEqual({ enchantCostPerLevel: false, rarityOdds: false, threatBalanceRow: false, affixOdds: false, dropOdds: false });
+    expect(GuidesStatusSchema.parse(raw)).toEqual({ enchantCostPerLevel: false, rarityOdds: false, threatBalanceRow: false, affixOdds: false, dropOdds: false, soulEnchantmentLevels: false });
   });
 
   it("reads a status file written before the affix and drop odds flags as unconfirmed", () => {
     const old = GuidesStatusSchema.parse({ enchantCostPerLevel: true, rarityOdds: true, threatBalanceRow: true });
-    expect([old.affixOdds, old.dropOdds]).toEqual([false, false]);
+    expect([old.affixOdds, old.dropOdds, old.soulEnchantmentLevels]).toEqual([false, false, false]);
   });
 });
 

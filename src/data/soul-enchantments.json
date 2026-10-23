@@ -1,0 +1,1505 @@
+{
+  "verified": false,
+  "families": [
+    {
+      "id": "Poison",
+      "slug": "poison",
+      "name": {
+        "zh": "劇毒",
+        "zh-hans": "剧毒",
+        "en": "Toxic",
+        "ja": "トキシック",
+        "ko": "유독",
+        "de": "Giftig",
+        "fr": "Toxique",
+        "es": "Envenenamiento",
+        "it": "Tossico",
+        "pt": "Tóxico",
+        "ru": "Токсичность",
+        "pl": "Toksyna",
+        "nl": "Giftig",
+        "sv": "Giftig",
+        "tr": "Zehirli",
+        "uk": "Токсичний"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/poison.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damagePoison",
+              "op": "multiply",
+              "value": 1.5
+            },
+            {
+              "attribute": "resistPoison",
+              "op": "add",
+              "value": -0.5
+            },
+            {
+              "attribute": "resistLightning",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 1
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.1
+            },
+            {
+              "key": "blastRange",
+              "value": 5
+            },
+            {
+              "key": "blastCone",
+              "value": 110
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damagePoison",
+              "op": "multiply",
+              "value": 2
+            },
+            {
+              "attribute": "resistPoison",
+              "op": "add",
+              "value": -0.66
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 1
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.35
+            },
+            {
+              "key": "blastRange",
+              "value": 5.5
+            },
+            {
+              "key": "blastCone",
+              "value": 110
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damagePoison",
+              "op": "multiply",
+              "value": 2.5
+            },
+            {
+              "attribute": "resistPoison",
+              "op": "add",
+              "value": -0.75
+            },
+            {
+              "attribute": "healthMax",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 1
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.5
+            },
+            {
+              "key": "blastRange",
+              "value": 6
+            },
+            {
+              "key": "blastCone",
+              "value": 110
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": [
+        "ca04"
+      ]
+    },
+    {
+      "id": "Ice",
+      "slug": "ice",
+      "name": {
+        "zh": "霜凍",
+        "zh-hans": "冰冻",
+        "en": "Freezing",
+        "ja": "フリージング",
+        "ko": "빙결",
+        "de": "Frost",
+        "fr": "Gel",
+        "es": "Congelamiento",
+        "it": "Congelamento",
+        "pt": "Congelante",
+        "ru": "Заморозка",
+        "pl": "Zamrożenie",
+        "nl": "Bevriezen",
+        "sv": "Iskall",
+        "tr": "Donma",
+        "uk": "Замороження"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/ice.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageIce",
+              "op": "multiply",
+              "value": 1.5
+            },
+            {
+              "attribute": "resistIce",
+              "op": "add",
+              "value": -0.5
+            },
+            {
+              "attribute": "resistFire",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 10
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.66
+            },
+            {
+              "key": "blastRange",
+              "value": 6
+            },
+            {
+              "key": "blastCone",
+              "value": 90
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageIce",
+              "op": "multiply",
+              "value": 2
+            },
+            {
+              "attribute": "resistIce",
+              "op": "add",
+              "value": -0.66
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 10
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.35
+            },
+            {
+              "key": "blastRange",
+              "value": 6.5
+            },
+            {
+              "key": "blastCone",
+              "value": 90
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageIce",
+              "op": "multiply",
+              "value": 2.5
+            },
+            {
+              "attribute": "resistIce",
+              "op": "add",
+              "value": -0.75
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 10
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.5
+            },
+            {
+              "key": "blastRange",
+              "value": 7
+            },
+            {
+              "key": "blastCone",
+              "value": 90
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": []
+    },
+    {
+      "id": "Lightning",
+      "slug": "lightning",
+      "name": {
+        "zh": "電擊",
+        "zh-hans": "电击",
+        "en": "Zapping",
+        "ja": "ザッピング",
+        "ko": "감전",
+        "de": "Schocken",
+        "fr": "Électrocution",
+        "es": "Chispazo",
+        "it": "Folgorazione",
+        "pt": "Eletrificante",
+        "ru": "Прожарка",
+        "pl": "Rażenie",
+        "nl": "Zappen",
+        "sv": "Zappa",
+        "tr": "Çarpma",
+        "uk": "Ураження блискавкою"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/lightning.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageLightning",
+              "op": "multiply",
+              "value": 1.5
+            },
+            {
+              "attribute": "resistLightning",
+              "op": "add",
+              "value": -0.5
+            },
+            {
+              "attribute": "resistPoison",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 10
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.75
+            },
+            {
+              "key": "blastRange",
+              "value": 6.5
+            },
+            {
+              "key": "blastCone",
+              "value": 20
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageLightning",
+              "op": "multiply",
+              "value": 2
+            },
+            {
+              "attribute": "resistLightning",
+              "op": "add",
+              "value": -0.66
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 10
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.35
+            },
+            {
+              "key": "blastRange",
+              "value": 7
+            },
+            {
+              "key": "blastCone",
+              "value": 20
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageLightning",
+              "op": "multiply",
+              "value": 2.5
+            },
+            {
+              "attribute": "resistLightning",
+              "op": "add",
+              "value": -0.75
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 10
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.5
+            },
+            {
+              "key": "blastRange",
+              "value": 7.5
+            },
+            {
+              "key": "blastCone",
+              "value": 20
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": []
+    },
+    {
+      "id": "Fire",
+      "slug": "fire",
+      "name": {
+        "zh": "燃燒",
+        "zh-hans": "燃烧",
+        "en": "Burning",
+        "ja": "バーニング",
+        "ko": "연소",
+        "de": "Brennen",
+        "fr": "Brûlure",
+        "es": "Combustión",
+        "it": "Combustione",
+        "pt": "Flamejante",
+        "ru": "Горение",
+        "pl": "Płonięcie",
+        "nl": "Branden",
+        "sv": "Brinner",
+        "tr": "Yanma",
+        "uk": "Горіння"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/fire.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageFire",
+              "op": "multiply",
+              "value": 1.5
+            },
+            {
+              "attribute": "resistFire",
+              "op": "add",
+              "value": -0.5
+            },
+            {
+              "attribute": "resistIce",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 3
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.2
+            },
+            {
+              "key": "blastRange",
+              "value": 5
+            },
+            {
+              "key": "blastCone",
+              "value": 40
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageFire",
+              "op": "multiply",
+              "value": 2
+            },
+            {
+              "attribute": "resistFire",
+              "op": "add",
+              "value": -0.66
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 3
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.35
+            },
+            {
+              "key": "blastRange",
+              "value": 5.5
+            },
+            {
+              "key": "blastCone",
+              "value": 40
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageFire",
+              "op": "multiply",
+              "value": 2.5
+            },
+            {
+              "attribute": "resistFire",
+              "op": "add",
+              "value": -0.75
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 3
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.5
+            },
+            {
+              "key": "blastRange",
+              "value": 6
+            },
+            {
+              "key": "blastCone",
+              "value": 40
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": [
+        "ca04"
+      ]
+    },
+    {
+      "id": "Melee",
+      "slug": "melee",
+      "name": {
+        "zh": "斬擊",
+        "zh-hans": "斩击",
+        "en": "Slasher",
+        "ja": "スラッシャー",
+        "ko": "슬래셔",
+        "de": "Zerschlitzer",
+        "fr": "Trancheur",
+        "es": "Tajo brutal",
+        "it": "Lacerante",
+        "pt": "Cortante",
+        "ru": "Рассекатель",
+        "pl": "Siekacz",
+        "nl": "Snijder",
+        "sv": "Hugger",
+        "tr": "Biçici",
+        "uk": "Рубака"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/melee.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 3,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageMelee",
+              "op": "multiply",
+              "value": 1.25
+            },
+            {
+              "attribute": "resistMelee",
+              "op": "add",
+              "value": -0.5
+            },
+            {
+              "attribute": "resistRanged",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 5
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.5
+            },
+            {
+              "key": "blastRange",
+              "value": 3
+            },
+            {
+              "key": "blastCone",
+              "value": 360
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageMelee",
+              "op": "multiply",
+              "value": 1.5
+            },
+            {
+              "attribute": "resistMelee",
+              "op": "add",
+              "value": -0.66
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 5
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.5
+            },
+            {
+              "key": "blastRange",
+              "value": 3
+            },
+            {
+              "key": "blastCone",
+              "value": 360
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageMelee",
+              "op": "multiply",
+              "value": 1.75
+            },
+            {
+              "attribute": "resistMelee",
+              "op": "add",
+              "value": -0.75
+            }
+          ],
+          "ability": [
+            {
+              "key": "blastBaseDamage",
+              "value": 5
+            },
+            {
+              "key": "blastDamageMultiplier",
+              "value": 0.5
+            },
+            {
+              "key": "blastRange",
+              "value": 3
+            },
+            {
+              "key": "blastCone",
+              "value": 360
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [
+        {
+          "slug": "skeleton",
+          "partial": true
+        },
+        {
+          "slug": "pillager",
+          "partial": true
+        }
+      ],
+      "excludedQuests": []
+    },
+    {
+      "id": "Ranged",
+      "slug": "ranged",
+      "name": {
+        "zh": "狙擊",
+        "zh-hans": "狙击",
+        "en": "Sniper",
+        "ja": "狙撃手",
+        "ko": "저격수",
+        "de": "Heckenschütze",
+        "fr": "Sniper",
+        "es": "Francotirador",
+        "it": "Cecchino",
+        "pt": "Atirador de Elite",
+        "ru": "Снайпер",
+        "pl": "Sokole oko",
+        "nl": "Sluipschutter",
+        "sv": "Krypskytt",
+        "tr": "Keskin Nişancı",
+        "uk": "Снайпер"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/ranged.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 3,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageRanged",
+              "op": "multiply",
+              "value": 1.25
+            },
+            {
+              "attribute": "resistRanged",
+              "op": "add",
+              "value": -0.5
+            },
+            {
+              "attribute": "projectileDeflectChance",
+              "op": "add",
+              "value": 0.33
+            },
+            {
+              "attribute": "resistMelee",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": []
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageRanged",
+              "op": "multiply",
+              "value": 1.5
+            },
+            {
+              "attribute": "resistRanged",
+              "op": "add",
+              "value": -0.66
+            },
+            {
+              "attribute": "projectileDeflectChance",
+              "op": "add",
+              "value": 0.5
+            }
+          ],
+          "ability": []
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "damageRanged",
+              "op": "multiply",
+              "value": 1.75
+            },
+            {
+              "attribute": "resistRanged",
+              "op": "add",
+              "value": -0.75
+            },
+            {
+              "attribute": "projectileDeflectChance",
+              "op": "add",
+              "value": 0.66
+            }
+          ],
+          "ability": []
+        }
+      ],
+      "excludedMobs": [
+        {
+          "slug": "geomancer",
+          "partial": false
+        },
+        {
+          "slug": "zombie",
+          "partial": true
+        },
+        {
+          "slug": "husk",
+          "partial": false
+        },
+        {
+          "slug": "vindicator",
+          "partial": true
+        },
+        {
+          "slug": "deep-dark-illager",
+          "partial": true
+        }
+      ],
+      "excludedQuests": []
+    },
+    {
+      "id": "Speed",
+      "slug": "speed",
+      "name": {
+        "zh": "迅捷",
+        "zh-hans": "迅捷",
+        "en": "Swiftness",
+        "ja": "敏捷",
+        "ko": "신속",
+        "de": "Flinke Füße",
+        "fr": "Rapidité",
+        "es": "Velocidad",
+        "it": "Rapidità",
+        "pt": "Agilidade",
+        "ru": "Быстрота",
+        "pl": "Szybka ręka",
+        "nl": "Gezwindheid",
+        "sv": "Snabbhet",
+        "tr": "Çeviklik",
+        "uk": "Спритність"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/speed.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 3,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "movementSpeed",
+              "op": "multiply",
+              "value": 1.2
+            },
+            {
+              "attribute": "meleeAttackSpeed",
+              "op": "multiply",
+              "value": 1.1
+            },
+            {
+              "attribute": "rangedAttackSpeed",
+              "op": "multiply",
+              "value": 1.1
+            },
+            {
+              "attribute": "poise",
+              "op": "multiply",
+              "value": 0.75
+            }
+          ],
+          "ability": [
+            {
+              "key": "swiftnessChance",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "movementSpeed",
+              "op": "multiply",
+              "value": 1.3
+            },
+            {
+              "attribute": "meleeAttackSpeed",
+              "op": "multiply",
+              "value": 1.2
+            },
+            {
+              "attribute": "rangedAttackSpeed",
+              "op": "multiply",
+              "value": 1.2
+            }
+          ],
+          "ability": [
+            {
+              "key": "swiftnessChance",
+              "value": 0.4
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "movementSpeed",
+              "op": "multiply",
+              "value": 1.4
+            },
+            {
+              "attribute": "meleeAttackSpeed",
+              "op": "multiply",
+              "value": 1.3
+            },
+            {
+              "attribute": "rangedAttackSpeed",
+              "op": "multiply",
+              "value": 1.3
+            }
+          ],
+          "ability": [
+            {
+              "key": "swiftnessChance",
+              "value": 0.5
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": []
+    },
+    {
+      "id": "Health",
+      "slug": "health",
+      "name": {
+        "zh": "背水一戰",
+        "zh-hans": "不屈",
+        "en": "Persistence",
+        "ja": "不屈",
+        "ko": "끈기",
+        "de": "Hartnäckigkeit",
+        "fr": "Persistance",
+        "es": "Persistencia",
+        "it": "Perseveranza",
+        "pt": "Persistência",
+        "ru": "Упорство",
+        "pl": "Upór",
+        "nl": "Volharding",
+        "sv": "Uthållighet",
+        "tr": "Azim",
+        "uk": "Стійкість"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/health.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 3,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "healthMax",
+              "op": "multiply",
+              "value": 1.2
+            },
+            {
+              "attribute": "poise",
+              "op": "multiply",
+              "value": 1.5
+            },
+            {
+              "attribute": "knockbackResistance",
+              "op": "add",
+              "value": -0.5
+            },
+            {
+              "attribute": "resistTnt",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": []
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "healthMax",
+              "op": "multiply",
+              "value": 1.4
+            },
+            {
+              "attribute": "poise",
+              "op": "multiply",
+              "value": 1.75
+            },
+            {
+              "attribute": "knockbackResistance",
+              "op": "add",
+              "value": -0.5
+            }
+          ],
+          "ability": []
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "healthMax",
+              "op": "multiply",
+              "value": 1.6
+            },
+            {
+              "attribute": "poise",
+              "op": "multiply",
+              "value": 2
+            },
+            {
+              "attribute": "knockbackResistance",
+              "op": "add",
+              "value": -0.5
+            }
+          ],
+          "ability": []
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": []
+    },
+    {
+      "id": "SoulOrbs",
+      "slug": "soul-orbs",
+      "name": {
+        "zh": "寶珠施放",
+        "zh-hans": "法球施放者",
+        "en": "Orb Caster",
+        "ja": "オーブキャスター",
+        "ko": "구슬 시전자",
+        "de": "Orbschießer",
+        "fr": "Lanceur d'orbes",
+        "es": "Invocador de orbes",
+        "it": "Lanciasfere",
+        "pt": "Lança-orbe",
+        "ru": "Метатель сфер",
+        "pl": "Kulomiot",
+        "nl": "Bolschieter",
+        "sv": "Klotkastare",
+        "tr": "Küre Fırlatıcı",
+        "uk": "Метальник сфер"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/soul-orbs.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 5,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "resistElemental",
+              "op": "multiply",
+              "value": 1.5
+            }
+          ],
+          "ability": [
+            {
+              "key": "orbCount",
+              "value": 1
+            },
+            {
+              "key": "orbDamage",
+              "value": 0
+            },
+            {
+              "key": "orbCharge",
+              "value": 3
+            },
+            {
+              "key": "orbRange",
+              "value": 7.5
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "orbCount",
+              "value": 2
+            },
+            {
+              "key": "orbDamage",
+              "value": 7
+            },
+            {
+              "key": "orbCharge",
+              "value": 3.5
+            },
+            {
+              "key": "orbRange",
+              "value": 7.5
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "orbCount",
+              "value": 3
+            },
+            {
+              "key": "orbDamage",
+              "value": 9
+            },
+            {
+              "key": "orbCharge",
+              "value": 3
+            },
+            {
+              "key": "orbRange",
+              "value": 7.5
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": []
+    },
+    {
+      "id": "SoulLeech",
+      "slug": "soul-leech",
+      "name": {
+        "zh": "吸血",
+        "zh-hans": "吸血",
+        "en": "Life Leech",
+        "ja": "ライフリーチ",
+        "ko": "생명력 흡수",
+        "de": "Lebensegel",
+        "fr": "Vol de vie",
+        "es": "Drenavidas",
+        "it": "Sanguisuga",
+        "pt": "Sanguessuga",
+        "ru": "Пиявка",
+        "pl": "Wysysanie życia",
+        "nl": "Levensbloedzuiger",
+        "sv": "Livsstöld",
+        "tr": "Can Emici",
+        "uk": "Висмоктування життя"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/soul-leech.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 5,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "leechInterval",
+              "value": 1
+            },
+            {
+              "key": "leechRange",
+              "value": 7.5
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "leechInterval",
+              "value": 1.5
+            },
+            {
+              "key": "leechRange",
+              "value": 7.5
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "leechInterval",
+              "value": 1
+            },
+            {
+              "key": "leechRange",
+              "value": 7.5
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": []
+    },
+    {
+      "id": "SoulRipple",
+      "slug": "soul-ripple",
+      "name": {
+        "zh": "靈魂波",
+        "zh-hans": "灵魂波",
+        "en": "Soul Wave",
+        "ja": "ソウルウェーブ",
+        "ko": "영혼 파도",
+        "de": "Seelenwelle",
+        "fr": "Vague d'âmes",
+        "es": "Marea de almas",
+        "it": "Ondata di anime",
+        "pt": "Onda Anímica",
+        "ru": "Волна душ",
+        "pl": "Fala dusz",
+        "nl": "Zielsgolf",
+        "sv": "Själsvåg",
+        "tr": "Ruh Dalgası",
+        "uk": "Хвиля душ"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/soul-ripple.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 5,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "negativeStatusDuration",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": [
+            {
+              "key": "rippleDamage",
+              "value": 10
+            },
+            {
+              "key": "rippleRadius",
+              "value": 7.5
+            },
+            {
+              "key": "rippleDelay",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "rippleDamage",
+              "value": 15
+            },
+            {
+              "key": "rippleRadius",
+              "value": 7.5
+            },
+            {
+              "key": "rippleDelay",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "rippleDamage",
+              "value": 20
+            },
+            {
+              "key": "rippleRadius",
+              "value": 7.5
+            },
+            {
+              "key": "rippleDelay",
+              "value": 2
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": []
+    },
+    {
+      "id": "SoulSuppression",
+      "slug": "soul-suppression",
+      "name": {
+        "zh": "氣泡護盾",
+        "zh-hans": "泡泡护盾",
+        "en": "Bubble Shield",
+        "ja": "バブルシールド",
+        "ko": "거품 방패",
+        "de": "Blasenschild",
+        "fr": "Bulle de protection",
+        "es": "Escudo esférico",
+        "it": "Scudo bolla",
+        "pt": "Escudo-bolha",
+        "ru": "Пузырьковый щит",
+        "pl": "Sfera ochronna",
+        "nl": "Bubbelschild",
+        "sv": "Bubbelsköld",
+        "tr": "Baloncuk Kalkanı",
+        "uk": "Бульбашковий щит"
+      },
+      "untranslated": [],
+      "icon": "icons/soul-enchantments/soul-suppression.png",
+      "tiers": [
+        {
+          "tier": "I",
+          "threat": {
+            "min": 5,
+            "max": 20
+          },
+          "modifiers": [
+            {
+              "attribute": "resistSoul",
+              "op": "multiply",
+              "value": 2
+            }
+          ],
+          "ability": [
+            {
+              "key": "bubbleRadius",
+              "value": 8
+            }
+          ]
+        },
+        {
+          "tier": "II",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "bubbleRadius",
+              "value": 6
+            }
+          ]
+        },
+        {
+          "tier": "III",
+          "threat": {
+            "min": 0,
+            "max": 20
+          },
+          "modifiers": [],
+          "ability": [
+            {
+              "key": "bubbleRadius",
+              "value": 4
+            }
+          ]
+        }
+      ],
+      "excludedMobs": [],
+      "excludedQuests": []
+    }
+  ],
+  "levels": [
+    {
+      "tier": "I",
+      "modifiers": [
+        {
+          "attribute": "healthMax",
+          "op": "multiply",
+          "value": 1.25
+        }
+      ]
+    },
+    {
+      "tier": "II",
+      "modifiers": [
+        {
+          "attribute": "healthMax",
+          "op": "multiply",
+          "value": 1.5
+        }
+      ]
+    },
+    {
+      "tier": "III",
+      "modifiers": [
+        {
+          "attribute": "healthMax",
+          "op": "multiply",
+          "value": 2
+        }
+      ]
+    }
+  ]
+}

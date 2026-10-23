@@ -12,6 +12,7 @@ import { locationsStep } from "./locations";
 import { mapStep } from "./map";
 import { questMarkersStep } from "./quest-markers";
 import { questsStep } from "./quests";
+import { soulEnchantmentsStep } from "./soul-enchantments";
 import { soulStormStep } from "./soul-storm";
 import { splashStep } from "./splash";
 import { spotMarkersStep } from "./spot-markers";
@@ -47,6 +48,7 @@ export const EXTRACT_STEPS: readonly AnyStep[] = [
   achievementsStep,
   bestiaryStep,
   soulStormStep,
+  soulEnchantmentsStep,
   guidesStep,
   questsStep,
   locationsStep,

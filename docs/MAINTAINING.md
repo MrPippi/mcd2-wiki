@@ -122,6 +122,15 @@
 - **驗證**：與第三方「逐級詞條概率」表（遊戲 1.1.1）逐格比對，363,400 格全數相符（差 < 1e-6）。該表沒有「特殊」稀有度，所以特殊的數字沒有交叉驗證。
 - **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `affixOdds` 改為 `true`。需要留意的假設：Mushroom 以外沒有資料能分辨「最後一個 Set 勝出」與「最小值」；`MinimumRequiredItemPower` 目前全為 0 而被忽略，`SecondaryETG` 全空，非 0／非空時報告 `affix-ignored`。
 
+## 靈魂附魔
+
+`/<lang>/soul-enchantments/` 讀 `DT_SoulEnchantmentDefinition`（名稱取自 `DT_SoulEnchantmentDefinition.csv`，遊戲沒有說明文字），寫入 `src/data/soul-enchantments.json`，圖示複製到 `public/icons/soul-enchantments/`（`/OreUI/...` 參照依上方規則找到 `Assets/UI/Icons/SoulStated/`）。
+
+- 每個附魔有一列基底（`Poison`：名稱、圖示、技能）與 `.I/.II/.III` 三列；各等級顯示該列自己的效果修正（`MultiplyAdditive`／`MultiplyCompound` 顯示為 ×、`AddBase` 為 +/−，+0 略過），技能數值取基底列的技能 key value 再套用該等級的 Override／Add（與裝備附魔相同）。只顯示 `scripts/extract/soul-enchantments.ts` 的 `SHOWN_VALUES` 列出的 key value；距離 ÷100 為格。
+- 怪物帶哪種附魔由遊戲程式（`GA_TriggerSoulEnchantmentOnSpawn`）決定，資料只有排除條件：怪物列的 `MobConditions.ExcludedSoulEnchantments`（經 trait 繼承，如 `SoulStatedHusk` → `Husk`）與競技場波次的 `ExcludedSoulEnchantmentsOverride`（以波次標籤中的任務 id 對回任務）。
+- **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `soulEnchantmentLevels` 改為 `true`：基底列與通用 `Lvl.I–III` 列（最大生命值 ×1.25／×1.5／×2）的修正是否也疊加；`ThreatLevelSettings` 是否就是等級的威脅門檻；`ThreatLevelArea` key value 的意義不明，未顯示。
+- 無法顯示的修正或技能寫進報告（`soul-enchantment-ignored`），對不到怪物頁或任務的排除寫進 `soul-enchantment-unlinked`。
+
 ## 世界地圖
 
 `/<lang>/map/`（每個語言各一頁）以 Leaflet 顯示遊戲的俯視全圖（主世界、隙浮、營地），標出礦車站、裂隙、傳送雕像、商人、主線／支線任務、風暴產生器、護符寶箱、地下城與區域名稱，可篩選、搜尋，網址 `?world=` 與 `#z/px/py` 可分享視角。

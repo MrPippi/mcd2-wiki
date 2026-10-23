@@ -54,6 +54,6 @@ describe("Soul Storm site data", () => {
     expect(rarityLine({ ...soulStormData, chestRarity: null }, "en")).toBeUndefined();
   });
   it("lists the page in the menu after the bestiary", () => {
-    expect(SITE_MENU.map((item) => item.segment)).toEqual(["map", "achievements", "mobs", "soul-storm", "build", "compare", "drops", "guides", "quests", "locations", "bosses"]);
+    expect(SITE_MENU.map((item) => item.segment)).toEqual(["map", "achievements", "mobs", "soul-storm", "soul-enchantments", "build", "compare", "drops", "guides", "quests", "locations", "bosses"]);
   });
 });
