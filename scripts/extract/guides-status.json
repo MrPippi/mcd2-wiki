@@ -3,5 +3,6 @@
   "rarityOdds": false,
   "threatBalanceRow": false,
   "affixOdds": false,
-  "dropOdds": false
+  "dropOdds": false,
+  "soulEnchantmentLevels": false
 }

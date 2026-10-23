@@ -1,0 +1,29 @@
+---
+import { langPaths } from "../../lib/lang-paths";
+import GuideUnconfirmed from "../../components/GuideUnconfirmed.astro";
+import SoulEnchantmentCard from "../../components/SoulEnchantmentCard.astro";
+import CatalogPage from "../../layouts/CatalogPage.astro";
+import { t, type Lang } from "../../lib/i18n";
+import { levelBonuses, soulEnchantmentData } from "../../lib/soul-enchantments";
+import "../../styles/soul-enchantments.css";
+
+export const getStaticPaths = langPaths;
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const { families, levels, verified } = soulEnchantmentData;
+const levelNote = levels.length > 0 ? t(lang, "soulLevelsNote").replace("{list}", levelBonuses(soulEnchantmentData, lang)) : undefined;
+---
+<CatalogPage lang={lang} label={(l) => t(l, "soulEnchantments")} count={families.length} intro={t(lang, "soulEnchantmentsIntro")} introClass="soul-ench-intro" class="soul-ench-page" headClass="soul-ench-page-head" pagefindBody>
+    <p slot="head" class="note soul-ench-about">{t(lang, "soulEnchantmentsAbout")}</p>
+    <div class="soul-ench-notes">
+      <GuideUnconfirmed lang={lang} message="soulEnchantmentsUnconfirmed" verified={verified} />
+      {levelNote && <p class="note" data-testid="soul-levels-note">{levelNote}</p>}
+    </div>
+    <ol class="soul-ench-list">
+      {families.map((family, index) => <SoulEnchantmentCard lang={lang} family={family} index={index} />)}
+    </ol>
+</CatalogPage>

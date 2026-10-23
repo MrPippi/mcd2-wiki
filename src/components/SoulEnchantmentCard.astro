@@ -1,0 +1,72 @@
+---
+// One soul enchantment family: icon, name, a stat table with a column per tier, and the mobs and quests that exclude it.
+import { SOUL_TIERS, type SoulFamily } from "../../shared/soul-enchantment-schema";
+import { t, type Lang } from "../lib/i18n";
+import { findMob, mobHref } from "../lib/mobs";
+import { findQuest, questHref } from "../lib/quests";
+import { familyRows } from "../lib/soul-enchantments";
+import { assetUrl } from "../lib/url";
+import LangText from "./LangText.astro";
+
+interface Props {
+  lang: Lang;
+  family: SoulFamily;
+  /** Position in the list; staggers the cascade-in animation. */
+  index: number;
+}
+
+const { lang, family, index } = Astro.props;
+// Half the 92px source, so a 2× screen shows the pixel art at its own resolution.
+const ICON_SIZE = 46;
+const rows = familyRows(family, lang);
+const mobs = family.excludedMobs.flatMap((excluded) => {
+  const mob = findMob(excluded.slug);
+  return mob ? [{ mob, partial: excluded.partial }] : [];
+});
+const quests = family.excludedQuests.flatMap((slug) => findQuest(slug) ?? []);
+---
+<li class="soul-ench-card" id={family.slug} style={`--i:${index}`} data-testid="soul-enchantment" data-slug={family.slug}>
+  <div class="soul-ench-head">
+    {family.icon ? (
+      <img class="soul-ench-icon" src={assetUrl(family.icon)} alt="" width={ICON_SIZE} height={ICON_SIZE} loading="lazy" decoding="async" />
+    ) : (
+      <span class="soul-ench-icon is-empty" aria-hidden="true" />
+    )}
+    <LangText as="h2" class="soul-ench-name" lang={lang} value={family.name} />
+    {family.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
+  </div>
+  <table class="soul-ench-table">
+    <thead>
+      <tr>
+        <th scope="col">{t(lang, "soulColStat")}</th>
+        {SOUL_TIERS.map((tier) => <th scope="col" class="soul-ench-tier">{tier}</th>)}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr data-row={row.id}>
+          <th scope="row">{row.label}</th>
+          {row.values.map((value) => <td>{value ?? "—"}</td>)}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  {mobs.length > 0 && (
+    <p class="soul-ench-excluded" data-testid="soul-excluded-mobs">
+      <span class="soul-ench-excluded-label">{t(lang, "soulExcludedMobs")}</span>
+      {mobs.map(({ mob, partial }, i) => (
+        <span>
+          <a href={mobHref(lang, mob.slug)}>{mob.name[lang]}</a>{partial && ` (${t(lang, "soulSomeVariants")})`}{i < mobs.length - 1 && ", "}
+        </span>
+      ))}
+    </p>
+  )}
+  {quests.length > 0 && (
+    <p class="soul-ench-excluded" data-testid="soul-excluded-quests">
+      <span class="soul-ench-excluded-label">{t(lang, "soulExcludedQuests")}</span>
+      {quests.map((quest, i) => (
+        <span><a href={questHref(lang, quest.slug)}>{quest.title.text[lang]}</a>{i < quests.length - 1 && ", "}</span>
+      ))}
+    </p>
+  )}
+</li>

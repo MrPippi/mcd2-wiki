@@ -1,0 +1,56 @@
+/* Soul enchantments: a ruled sheet of cards, one per family, each with its tiers side by side like a spec table. */
+/* Laid out like a category page: the sticky index card on the left, the sheet on the right (items.css .catalog). */
+.soul-ench-intro { margin: 12px 0 0; max-width: 60ch; color: var(--text-2); text-wrap: balance; }
+.soul-ench-about { margin: 12px 0 0; max-width: 60ch; }
+
+.soul-ench-notes { display: grid; gap: 8px; min-width: 0; }
+.soul-ench-notes > * { margin: 0; }
+.soul-ench-notes .tag { justify-self: start; white-space: normal; text-align: left; line-height: 1.5; }
+
+.soul-ench-list {
+  list-style: none; margin: 0; padding: 0; display: grid; min-width: 0;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 360px), 1fr));
+  border-top: 1px solid var(--rule-strong); border-left: 1px solid var(--rule);
+}
+.soul-ench-card {
+  display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 18px 18px 16px;
+  border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  animation: rise-in 420ms var(--ease-out) both; animation-delay: calc(min(var(--i, 0), 30) * 18ms);
+  scroll-margin-top: 24px;
+}
+.soul-ench-card:target { background: var(--paper) var(--dots); }
+
+.soul-ench-head { display: flex; align-items: center; gap: 14px; min-width: 0; }
+/* The icon is an <img> on the plate colour, so it survives a reader that strips CSS backgrounds. */
+.soul-ench-icon { flex-shrink: 0; display: block; width: 46px; height: 46px; border: 1px solid var(--rule-strong); background: var(--plate); image-rendering: pixelated; }
+.soul-ench-icon.is-empty { border-style: dashed; }
+.soul-ench-name { margin: 0; min-width: 0; font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 1.25; overflow-wrap: anywhere; }
+.soul-ench-name .alt {
+  display: block; margin-top: 2px; font-family: var(--font-mono); font-weight: 400; font-size: var(--fs-mono-s);
+  letter-spacing: 0.02em; color: var(--muted);
+}
+
+.soul-ench-table { width: 100%; border-collapse: collapse; border-top: 1px solid var(--rule-strong); font-variant-numeric: tabular-nums; font-size: 14px; }
+.soul-ench-table th, .soul-ench-table td { padding: 7px 4px; border-bottom: 1px solid var(--rule); vertical-align: baseline; }
+.soul-ench-table thead th { font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); text-align: left; }
+.soul-ench-table thead th.soul-ench-tier { text-align: right; }
+.soul-ench-table tbody th { text-align: left; font-weight: 400; color: var(--text-2); overflow-wrap: anywhere; hyphens: auto; }
+.soul-ench-table td { width: 4.6em; text-align: right; font-family: var(--font-mono); white-space: nowrap; padding-left: 8px; }
+
+.soul-ench-excluded { margin: 0; font-size: 13px; color: var(--text-2); overflow-wrap: anywhere; }
+.soul-ench-excluded-label { margin-right: 6px; font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+
+@media (min-width: 1000px) {
+  .soul-ench-page > .soul-ench-notes, .soul-ench-page > .soul-ench-list { grid-column: 2; }
+  .soul-ench-intro { font-size: 14px; }
+}
+
+@media (max-width: 699px) {
+  .soul-ench-card { padding: 16px 14px 14px; }
+  .soul-ench-name { font-size: 18px; }
+  /* Too narrow for a label column beside three values: each stat's label sits on its own line above the tier values. */
+  .soul-ench-table thead tr, .soul-ench-table tbody tr { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .soul-ench-table thead th:first-child { display: none; }
+  .soul-ench-table tbody th { grid-column: 1 / -1; padding-bottom: 0; border-bottom: 0; }
+  .soul-ench-table td { width: auto; padding-top: 2px; }
+}

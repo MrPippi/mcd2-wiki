@@ -53,6 +53,9 @@ const WORLD_KEY = { overworld: "mobWorldOverworld", wellspring: "mobWorldWellspr
             <h2 class="section-title" data-pagefind-ignore>{t(lang, "mobSoulCorrupted")}</h2>
             <MobStats lang={lang} stats={mob.soulCorrupted.stats} level={3} testid="mob-stats-soul" />
             <MobDrops lang={lang} drops={mob.soulCorrupted.drops} level={3} showNote={false} testid="mob-drops-soul" />
+            <p class="note mob-soul-enchantments" data-testid="mob-soul-enchantments">
+              {t(lang, "mobSoulEnchantmentsNote")} <a href={href(lang, "soul-enchantments")}>{t(lang, "soulEnchantments")}</a>
+            </p>
           </section>
         )}
         {variants.length > 0 && (

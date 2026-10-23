@@ -97,7 +97,12 @@ export type IssueType =
   | "curve-table-duplicate"
   | "affix-ignored"
   | "missing-drop-tables"
-  | "drop-ignored";
+  | "drop-ignored"
+  | "missing-soul-enchantment-tables"
+  | "soul-enchantment-ignored"
+  | "soul-enchantment-unnamed"
+  | "soul-enchantment-no-icon"
+  | "soul-enchantment-unlinked";
 
 export interface Issue {
   readonly type: IssueType;
