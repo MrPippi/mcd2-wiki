@@ -75,10 +75,11 @@ test.describe("locations", () => {
     await page.goto("/zh/");
     await page.getByTestId("site-menu").click();
     const links = page.locator(".site-menu a");
-    await expect(links.nth(-3)).toHaveText("任務");
-    await expect(links.nth(-2)).toHaveText("地點");
-    await expect(links.nth(-1)).toHaveText("頭目");
-    await links.nth(-2).click();
+    await expect(links.nth(-4)).toHaveText("任務");
+    await expect(links.nth(-3)).toHaveText("地點");
+    await expect(links.nth(-2)).toHaveText("頭目");
+    await expect(links.nth(-1)).toHaveText("更新日誌");
+    await links.nth(-3).click();
     await expect(page).toHaveURL(/\/zh\/locations\/$/);
     await expect(page.locator(".site-menu [aria-current='page']")).toHaveText("地點");
   });
