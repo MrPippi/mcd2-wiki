@@ -474,7 +474,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "_english": [
     "normal",
@@ -1013,5 +1018,10 @@
   "soulRippleDamage": "Obrażenia fali dusz",
   "soulRippleRadius": "Promień fali dusz",
   "soulRippleDelay": "Czas między falami dusz",
-  "soulBubbleRadius": "Promień bańki (wartość z gry)"
+  "soulBubbleRadius": "Promień bańki (wartość z gry)",
+  "changelog": "Dziennik zmian",
+  "changelogIntro": "Co zmieniło się w serwisie z każdą aktualizacją, od najnowszych.",
+  "changelogNew": "Nowość",
+  "changelogImproved": "Ulepszenie",
+  "changelogFixed": "Poprawka"
 }

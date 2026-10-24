@@ -476,7 +476,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1010,5 +1015,10 @@
   "soulRippleDamage": "Danno dell'ondata di anime",
   "soulRippleRadius": "Raggio dell'ondata di anime",
   "soulRippleDelay": "Tempo tra le ondate di anime",
-  "soulBubbleRadius": "Raggio della bolla (valore del gioco)"
+  "soulBubbleRadius": "Raggio della bolla (valore del gioco)",
+  "changelog": "Registro delle modifiche",
+  "changelogIntro": "Cosa è cambiato sul sito a ogni aggiornamento, dal più recente.",
+  "changelogNew": "Nuovo",
+  "changelogImproved": "Migliorato",
+  "changelogFixed": "Corretto"
 }

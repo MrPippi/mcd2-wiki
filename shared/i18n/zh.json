@@ -527,5 +527,10 @@
   "soulRippleDamage": "靈魂波傷害",
   "soulRippleRadius": "靈魂波半徑",
   "soulRippleDelay": "靈魂波間隔",
-  "soulBubbleRadius": "泡泡半徑（遊戲數值）"
+  "soulBubbleRadius": "泡泡半徑（遊戲數值）",
+  "changelog": "更新日誌",
+  "changelogIntro": "網站每次更新的內容，由新到舊。",
+  "changelogNew": "新增",
+  "changelogImproved": "改進",
+  "changelogFixed": "修正"
 }

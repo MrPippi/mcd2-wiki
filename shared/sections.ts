@@ -40,6 +40,7 @@ export const PAGE_SECTIONS: readonly PageSection[] = [
   { segment: "quests", key: "quests", llms: { intro: "questsIntro", rank: 4 } },
   { segment: "locations", key: "locations", llms: { intro: "locationsIntro", rank: 3 } },
   { segment: "bosses", key: "bosses", llms: { intro: "bossesIntro", rank: 2 } },
+  { segment: "changelog", key: "changelog", llms: { intro: "changelogIntro", rank: 11 } },
 ];
 
 export interface MenuItem {

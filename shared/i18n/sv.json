@@ -475,7 +475,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1011,5 +1016,10 @@
   "soulRippleDamage": "Själsvågens skada",
   "soulRippleRadius": "Själsvågens radie",
   "soulRippleDelay": "Tid mellan själsvågor",
-  "soulBubbleRadius": "Bubbelradie (spelvärde)"
+  "soulBubbleRadius": "Bubbelradie (spelvärde)",
+  "changelog": "Ändringslogg",
+  "changelogIntro": "Vad som ändrats på webbplatsen i varje uppdatering, nyaste först.",
+  "changelogNew": "Nytt",
+  "changelogImproved": "Förbättrat",
+  "changelogFixed": "Åtgärdat"
 }

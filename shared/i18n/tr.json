@@ -476,7 +476,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1009,5 +1014,10 @@
   "soulRippleDamage": "Ruh dalgası hasarı",
   "soulRippleRadius": "Ruh dalgası yarıçapı",
   "soulRippleDelay": "Ruh dalgaları arası süre",
-  "soulBubbleRadius": "Baloncuk yarıçapı (oyun değeri)"
+  "soulBubbleRadius": "Baloncuk yarıçapı (oyun değeri)",
+  "changelog": "Değişiklik günlüğü",
+  "changelogIntro": "Sitede her güncellemeyle nelerin değiştiği, en yeniden eskiye.",
+  "changelogNew": "Yeni",
+  "changelogImproved": "İyileştirildi",
+  "changelogFixed": "Düzeltildi"
 }

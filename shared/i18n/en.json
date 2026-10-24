@@ -530,5 +530,10 @@
   "soulRippleDamage": "Soul wave damage",
   "soulRippleRadius": "Soul wave radius",
   "soulRippleDelay": "Time between soul waves",
-  "soulBubbleRadius": "Bubble radius (game value)"
+  "soulBubbleRadius": "Bubble radius (game value)",
+  "changelog": "Changelog",
+  "changelogIntro": "What changed on the site with each update, newest first.",
+  "changelogNew": "New",
+  "changelogImproved": "Improved",
+  "changelogFixed": "Fixed"
 }

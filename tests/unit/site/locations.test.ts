@@ -126,7 +126,7 @@ describe("location lookups", () => {
   });
 
   it("puts locations and bosses in the menu after the quests", () => {
-    expect(SITE_MENU.slice(-3).map((item) => item.segment)).toEqual(["quests", "locations", "bosses"]);
+    expect(SITE_MENU.slice(-4, -1).map((item) => item.segment)).toEqual(["quests", "locations", "bosses"]);
   });
 });
 

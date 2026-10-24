@@ -472,7 +472,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1013,5 +1018,10 @@
   "soulRippleDamage": "Урон волны душ",
   "soulRippleRadius": "Радиус волны душ",
   "soulRippleDelay": "Время между волнами душ",
-  "soulBubbleRadius": "Радиус пузыря (значение игры)"
+  "soulBubbleRadius": "Радиус пузыря (значение игры)",
+  "changelog": "Журнал изменений",
+  "changelogIntro": "Что менялось на сайте с каждым обновлением, начиная с последнего.",
+  "changelogNew": "Новое",
+  "changelogImproved": "Улучшено",
+  "changelogFixed": "Исправлено"
 }

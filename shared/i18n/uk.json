@@ -476,7 +476,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1011,5 +1016,10 @@
   "soulRippleDamage": "Шкода хвилі душ",
   "soulRippleRadius": "Радіус хвилі душ",
   "soulRippleDelay": "Час між хвилями душ",
-  "soulBubbleRadius": "Радіус бульбашки (значення гри)"
+  "soulBubbleRadius": "Радіус бульбашки (значення гри)",
+  "changelog": "Журнал змін",
+  "changelogIntro": "Що змінювалося на сайті з кожним оновленням, починаючи з останнього.",
+  "changelogNew": "Нове",
+  "changelogImproved": "Покращено",
+  "changelogFixed": "Виправлено"
 }

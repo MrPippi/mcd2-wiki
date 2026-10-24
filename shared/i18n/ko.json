@@ -476,7 +476,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1006,5 +1011,10 @@
   "soulRippleDamage": "영혼 파도 피해",
   "soulRippleRadius": "영혼 파도 반경",
   "soulRippleDelay": "영혼 파도 간격",
-  "soulBubbleRadius": "거품 반경(게임 내 값)"
+  "soulBubbleRadius": "거품 반경(게임 내 값)",
+  "changelog": "업데이트 기록",
+  "changelogIntro": "사이트의 업데이트 내용을 최신순으로 정리했습니다.",
+  "changelogNew": "신규",
+  "changelogImproved": "개선",
+  "changelogFixed": "수정"
 }

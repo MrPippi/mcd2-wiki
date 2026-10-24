@@ -476,7 +476,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1009,5 +1014,10 @@
   "soulRippleDamage": "Schade van de zielsgolf",
   "soulRippleRadius": "Straal van de zielsgolf",
   "soulRippleDelay": "Tijd tussen zielsgolven",
-  "soulBubbleRadius": "Bubbelstraal (spelwaarde)"
+  "soulBubbleRadius": "Bubbelstraal (spelwaarde)",
+  "changelog": "Wijzigingslogboek",
+  "changelogIntro": "Wat er bij elke update van de site is veranderd, nieuwste eerst.",
+  "changelogNew": "Nieuw",
+  "changelogImproved": "Verbeterd",
+  "changelogFixed": "Opgelost"
 }

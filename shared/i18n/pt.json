@@ -476,7 +476,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1010,5 +1015,10 @@
   "soulRippleDamage": "Dano da onda anímica",
   "soulRippleRadius": "Raio da onda anímica",
   "soulRippleDelay": "Tempo entre ondas anímicas",
-  "soulBubbleRadius": "Raio da bolha (valor do jogo)"
+  "soulBubbleRadius": "Raio da bolha (valor do jogo)",
+  "changelog": "Registro de alterações",
+  "changelogIntro": "O que mudou no site a cada atualização, do mais recente ao mais antigo.",
+  "changelogNew": "Novo",
+  "changelogImproved": "Melhorado",
+  "changelogFixed": "Corrigido"
 }

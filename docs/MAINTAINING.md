@@ -154,6 +154,15 @@
 - **鍵盤**：Z／X 切換到前一個／下一個世界（照遊戲 `DT_WorldMapActions`，到頭會繞回；在輸入框內或按著修飾鍵時忽略）。
 - 設計與驗證紀錄：`docs/superpowers/specs/2026-10-10-world-map-design.md`。
 
+## 更新日誌
+
+`/<lang>/changelog/` 讀手寫的 `src/changelog.json`（不是抽取產物）。合併玩家看得到的變更時，在最上面加一筆（同一天合併到同一筆）：
+
+- `date` 為 `YYYY-MM-DD`，由新到舊、每天一筆；`kind` 為 `new`／`improved`／`fixed`。
+- 只寫繁中（`zh`）與英文（`en`）；其他語言顯示英文，並標上 `lang="en"`。
+- `link` 是語言後面的路徑（如 `guides/threat`），單元測試會檢查頁面存在。
+- 重構、CI、文件等玩家看不到的變更不列。
+
 ## 開發
 
 ```bash

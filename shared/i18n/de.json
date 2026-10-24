@@ -474,7 +474,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "_english": [
     "armorPiece",
@@ -1011,5 +1016,10 @@
   "soulRippleDamage": "Schaden der Seelenwelle",
   "soulRippleRadius": "Radius der Seelenwelle",
   "soulRippleDelay": "Zeit zwischen Seelenwellen",
-  "soulBubbleRadius": "Blasenradius (Spielwert)"
+  "soulBubbleRadius": "Blasenradius (Spielwert)",
+  "changelog": "Änderungsprotokoll",
+  "changelogIntro": "Was sich mit jedem Update der Website geändert hat, das Neueste zuerst.",
+  "changelogNew": "Neu",
+  "changelogImproved": "Verbessert",
+  "changelogFixed": "Behoben"
 }

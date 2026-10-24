@@ -473,7 +473,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1008,5 +1013,10 @@
   "soulRippleDamage": "ソウルウェーブのダメージ",
   "soulRippleRadius": "ソウルウェーブの半径",
   "soulRippleDelay": "ソウルウェーブの間隔",
-  "soulBubbleRadius": "バブルの半径（ゲーム内の値）"
+  "soulBubbleRadius": "バブルの半径（ゲーム内の値）",
+  "changelog": "更新履歴",
+  "changelogIntro": "サイトの更新内容を新しい順に掲載しています。",
+  "changelogNew": "新規",
+  "changelogImproved": "改善",
+  "changelogFixed": "修正"
 }

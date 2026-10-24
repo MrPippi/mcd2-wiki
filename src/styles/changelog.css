@@ -1,0 +1,30 @@
+/* Changelog: one ruled row per update day, the date on the left and its changes on the right. */
+.changelog-intro { margin: 12px 0 0; max-width: 60ch; color: var(--text-2); text-wrap: balance; }
+
+.changelog-list { list-style: none; margin: 0; padding: 0; min-width: 0; border-top: 1px solid var(--rule-strong); }
+.changelog-entry {
+  display: grid; grid-template-columns: minmax(0, 11em) minmax(0, 1fr); gap: 8px 24px; padding: 18px 0;
+  border-bottom: 1px solid var(--rule); scroll-margin-top: 24px;
+  animation: rise-in 420ms var(--ease-out) both; animation-delay: calc(min(var(--i, 0), 30) * 18ms);
+}
+.changelog-entry:target { background: var(--paper) var(--dots); }
+.changelog-date { margin: 0; font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 400; letter-spacing: 0.05em; color: var(--muted); line-height: 1.9; }
+
+.changelog-changes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 12px; min-width: 0; }
+/* Subgrid so the kind tags of one day share a width and the texts line up. */
+.changelog-change { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; align-items: baseline; min-width: 0; line-height: 1.6; }
+.changelog-kind {
+  min-width: 5.5em; padding: 1px 6px; border: 1px solid var(--rule-strong); text-align: center;
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-2);
+}
+.changelog-kind.is-new { border-color: var(--accent); color: var(--accent); }
+.changelog-text { min-width: 0; overflow-wrap: anywhere; }
+
+@media (min-width: 1000px) {
+  .changelog-page > .changelog-list { grid-column: 2; }
+  .changelog-intro { font-size: 14px; }
+}
+
+@media (max-width: 699px) {
+  .changelog-entry { grid-template-columns: minmax(0, 1fr); padding: 16px 0; }
+}

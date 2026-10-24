@@ -473,7 +473,12 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogImproved",
+    "changelogFixed"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1008,5 +1013,10 @@
   "soulRippleDamage": "灵魂波伤害",
   "soulRippleRadius": "灵魂波半径",
   "soulRippleDelay": "灵魂波间隔",
-  "soulBubbleRadius": "泡泡半径（游戏数值）"
+  "soulBubbleRadius": "泡泡半径（游戏数值）",
+  "changelog": "更新日志",
+  "changelogIntro": "网站每次更新的内容，从新到旧。",
+  "changelogNew": "新增",
+  "changelogImproved": "改进",
+  "changelogFixed": "修复"
 }
