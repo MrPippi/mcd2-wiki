@@ -11,7 +11,8 @@
    圖示依序取自：`icon-overrides.json` → 資料表每列的 `IconReference`（`/Game/Spicewood/X` 對應 `Assets/X.png`；其他 `/<外掛>/X` 先找 `Plugins/<外掛>/Content/X.png`、再找 `Assets/X.png`）→ 依檔名比對。神器、護符、披風、寵物的資料列名稱與條目 id 對不上，仍靠檔名比對與覆寫清單。
    部分圖示在遊戲外掛裡，不在 `Assets/` 下：把解包的 `Plugins/OreUI/Content/` 與 `Plugins/SpicewoodUI/Content/` 以相同路徑放進 `source-data/`。效果沒有圖示時照常發布，只是不顯示圖。缺少 `SpicewoodUI` 時，世界地圖的標記圖示會全部被略過，且 `extract-report.md` 不會有任何提示，務必放入。
 4. 遊戲地圖有變動時跑 `npm run tiles`（見下方「世界地圖」）。
-5. Commit `src/data`、`public/icons`、`public/map`、`src/assets/brand`、`scripts/extract/icon-overrides.json`。
+5. 改好 `shared/game-version.json` 後跑 `npm run game-diff -- <上一版資料的 commit>`（通常是 `master`），把數值變動寫進 `src/data/game-changes.json`；並在 `src/game-updates.json` 補上新版本（見下方「更新日誌」）。
+6. Commit `src/data`、`public/icons`、`public/map`、`src/assets/brand`、`scripts/extract/icon-overrides.json`。
 
 網站圖示（favicon、主畫面圖示、分享預覽圖）與首頁背景取自遊戲 `Assets/UI/Icons/` 的 Logo 與 SplashScreen，同樣由 `npm run extract` 複製；首頁背景在 build 時轉成 WebP。分享預覽圖需要絕對網址，部署時由 `SITE_URL` 提供。
 
@@ -156,12 +157,15 @@
 
 ## 更新日誌
 
-`/<lang>/changelog/` 讀手寫的 `src/changelog.json`（不是抽取產物）。合併玩家看得到的變更時，在最上面加一筆（同一天合併到同一筆）：
+`/<lang>/changelog/` 列出遊戲各版本的更新，由兩份資料組成：
 
-- `date` 為 `YYYY-MM-DD`，由新到舊、每天一筆；`kind` 為 `new`／`improved`／`fixed`。
-- 只寫繁中（`zh`）與英文（`en`）；其他語言顯示英文，並標上 `lang="en"`。
-- `link` 是語言後面的路徑（如 `guides/threat`），單元測試會檢查頁面存在。
-- 重構、CI、文件等玩家看不到的變更不列。
+- `src/game-updates.json`（手寫）：每個版本一筆，`version`、`date`（`YYYY-MM-DD`，由新到舊、每天一筆）、`platforms`、`source`（官方更新說明網址，[Minecraft Feedback 的 Dungeons II Changelogs](https://feedback.minecraft.net/hc/en-us/sections/49286492925453-Minecraft-Dungeons-II-Changelogs)）與 `changes`。同一版本號推出兩次時以 `build` 區分。
+  - 以自己的話寫重點摘要，不要整段複製官方原文；`kind` 為 `new`／`changed`／`fixed`。
+  - 只寫繁中（`zh`）與英文（`en`）；其他語言顯示英文並標上 `lang="en"`。名稱用站內譯名（怪物、任務等）。
+  - `link` 是語言後面的路徑（如 `quests/ca09`），單元測試會檢查頁面存在。
+- `src/data/game-changes.json`（`npm run game-diff` 產生）：本站資料換到新版本時，與上一版比對的數值變動。
+
+頁面依 `shared/game-version.json` 標出本站資料對應的版本，之後的版本註明「尚未更新」。
 
 ## 開發
 

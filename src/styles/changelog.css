@@ -1,24 +1,43 @@
-/* Changelog: one ruled row per update day, the date on the left and its changes on the right. */
+/* Game update log: one ruled row per game version, its facts on the left and its changes on the right. */
 .changelog-intro { margin: 12px 0 0; max-width: 60ch; color: var(--text-2); text-wrap: balance; }
+.changelog-about { margin: 12px 0 0; max-width: 60ch; }
 
 .changelog-list { list-style: none; margin: 0; padding: 0; min-width: 0; border-top: 1px solid var(--rule-strong); }
 .changelog-entry {
-  display: grid; grid-template-columns: minmax(0, 11em) minmax(0, 1fr); gap: 8px 24px; padding: 18px 0;
+  display: grid; grid-template-columns: minmax(0, 13em) minmax(0, 1fr); gap: 10px 24px; padding: 20px 0;
   border-bottom: 1px solid var(--rule); scroll-margin-top: 24px;
   animation: rise-in 420ms var(--ease-out) both; animation-delay: calc(min(var(--i, 0), 30) * 18ms);
 }
 .changelog-entry:target { background: var(--paper) var(--dots); }
-.changelog-date { margin: 0; font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 400; letter-spacing: 0.05em; color: var(--muted); line-height: 1.9; }
 
+.changelog-head { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
+.changelog-version { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.changelog-build { margin-left: 8px; font-family: var(--font-mono); font-weight: 400; font-size: var(--fs-mono-s); color: var(--muted); }
+.changelog-meta { margin: 0; font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.03em; color: var(--muted); overflow-wrap: anywhere; }
+.changelog-site-data { margin: 2px 0; }
+
+.changelog-body { display: grid; gap: 14px; min-width: 0; }
 .changelog-changes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 12px; min-width: 0; }
-/* Subgrid so the kind tags of one day share a width and the texts line up. */
+/* Subgrid so the kind tags of one version share a width and the texts line up. */
 .changelog-change { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; align-items: baseline; min-width: 0; line-height: 1.6; }
 .changelog-kind {
   min-width: 5.5em; padding: 1px 6px; border: 1px solid var(--rule-strong); text-align: center;
   font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-2);
 }
-.changelog-kind.is-new { border-color: var(--accent); color: var(--accent); }
+.changelog-kind.is-new, .changelog-kind.is-added { border-color: var(--accent); color: var(--accent); }
 .changelog-text { min-width: 0; overflow-wrap: anywhere; }
+.changelog-not-yet { margin: 0; }
+
+.changelog-data { border-top: 1px solid var(--rule); padding-top: 10px; min-width: 0; }
+.changelog-data summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.05em; color: var(--text-2); }
+.changelog-data-group h3 { margin: 14px 0 6px; font-size: 15px; }
+.changelog-data-group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.changelog-data-entity { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+.changelog-data-detail { min-width: 0; }
+.changelog-data-detail dl { margin: 4px 0 0; display: grid; gap: 2px; font-family: var(--font-mono); font-size: var(--fs-mono-s); }
+.changelog-data-detail dl > div { display: flex; flex-wrap: wrap; gap: 0 10px; min-width: 0; }
+.changelog-data-detail dt { color: var(--muted); overflow-wrap: anywhere; }
+.changelog-data-detail dd { margin: 0; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 
 @media (min-width: 1000px) {
   .changelog-page > .changelog-list { grid-column: 2; }
@@ -27,4 +46,6 @@
 
 @media (max-width: 699px) {
   .changelog-entry { grid-template-columns: minmax(0, 1fr); padding: 16px 0; }
+  .changelog-head { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
+  .changelog-version { width: 100%; }
 }

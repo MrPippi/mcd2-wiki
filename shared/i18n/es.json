@@ -480,8 +480,16 @@
     "changelog",
     "changelogIntro",
     "changelogNew",
-    "changelogImproved",
-    "changelogFixed"
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1017,8 +1025,16 @@
   "soulRippleDelay": "Tiempo entre mareas de almas",
   "soulBubbleRadius": "Radio de la burbuja (valor del juego)",
   "changelog": "Registro de cambios",
-  "changelogIntro": "Lo que cambió en el sitio con cada actualización, de lo más reciente a lo más antiguo.",
+  "changelogIntro": "Lo que cambió cada actualización de Minecraft Dungeons II, de la más reciente a la más antigua; cada versión enlaza a sus notas oficiales.",
   "changelogNew": "Nuevo",
-  "changelogImproved": "Mejorado",
-  "changelogFixed": "Corregido"
+  "changelogFixed": "Corregido",
+  "changelogChanged": "Cambiado",
+  "changelogRemoved": "Eliminado",
+  "changelogOfficial": "Notas oficiales",
+  "changelogSiteData": "Datos del sitio",
+  "changelogNotYet": "Los datos del sitio siguen siendo de {version} y aún no se han actualizado a esta versión.",
+  "changelogDataChanges": "Cambios en los datos (comparados con {version})",
+  "changelogDataNote": "Cuando los datos del sitio pasan a una nueva versión del juego, se comparan con la anterior y los valores modificados se muestran bajo esa versión.",
+  "changelogSourceItems": "Objetos",
+  "changelogSourceWeapons": "Estadísticas de armas"
 }

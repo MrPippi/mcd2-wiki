@@ -480,8 +480,16 @@
     "changelog",
     "changelogIntro",
     "changelogNew",
-    "changelogImproved",
-    "changelogFixed"
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1016,8 +1024,16 @@
   "soulRippleDelay": "Tijd tussen zielsgolven",
   "soulBubbleRadius": "Bubbelstraal (spelwaarde)",
   "changelog": "Wijzigingslogboek",
-  "changelogIntro": "Wat er bij elke update van de site is veranderd, nieuwste eerst.",
+  "changelogIntro": "Wat elke update van Minecraft Dungeons II veranderde, nieuwste eerst; elke versie linkt naar de officiële notities.",
   "changelogNew": "Nieuw",
-  "changelogImproved": "Verbeterd",
-  "changelogFixed": "Opgelost"
+  "changelogFixed": "Opgelost",
+  "changelogChanged": "Gewijzigd",
+  "changelogRemoved": "Verwijderd",
+  "changelogOfficial": "Officiële notities",
+  "changelogSiteData": "Sitegegevens",
+  "changelogNotYet": "De gegevens van de site zijn nog van {version} en zijn nog niet bijgewerkt naar deze versie.",
+  "changelogDataChanges": "Gegevenswijzigingen (vergeleken met {version})",
+  "changelogDataNote": "Wanneer de gegevens van de site naar een nieuwe gameversie gaan, worden ze vergeleken met de vorige en staan de gewijzigde waarden onder die versie.",
+  "changelogSourceItems": "Voorwerpen",
+  "changelogSourceWeapons": "Wapenwaarden"
 }

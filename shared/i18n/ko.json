@@ -480,8 +480,16 @@
     "changelog",
     "changelogIntro",
     "changelogNew",
-    "changelogImproved",
-    "changelogFixed"
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1013,8 +1021,16 @@
   "soulRippleDelay": "영혼 파도 간격",
   "soulBubbleRadius": "거품 반경(게임 내 값)",
   "changelog": "업데이트 기록",
-  "changelogIntro": "사이트의 업데이트 내용을 최신순으로 정리했습니다.",
+  "changelogIntro": "Minecraft Dungeons II 업데이트별 변경 사항을 최신순으로 정리했습니다. 각 버전에서 공식 안내로 연결됩니다.",
   "changelogNew": "신규",
-  "changelogImproved": "개선",
-  "changelogFixed": "수정"
+  "changelogFixed": "수정",
+  "changelogChanged": "변경",
+  "changelogRemoved": "삭제",
+  "changelogOfficial": "공식 안내",
+  "changelogSiteData": "사이트 데이터",
+  "changelogNotYet": "사이트 데이터는 아직 {version} 기준이며 이 버전으로 업데이트되지 않았습니다.",
+  "changelogDataChanges": "데이터 변경 ({version}과 비교)",
+  "changelogDataNote": "사이트 데이터를 새 버전으로 업데이트하면 이전 버전과 비교해 바뀐 수치를 해당 버전 아래에 표시합니다.",
+  "changelogSourceItems": "아이템",
+  "changelogSourceWeapons": "무기 수치"
 }

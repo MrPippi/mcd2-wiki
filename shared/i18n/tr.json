@@ -480,8 +480,16 @@
     "changelog",
     "changelogIntro",
     "changelogNew",
-    "changelogImproved",
-    "changelogFixed"
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1016,8 +1024,16 @@
   "soulRippleDelay": "Ruh dalgaları arası süre",
   "soulBubbleRadius": "Baloncuk yarıçapı (oyun değeri)",
   "changelog": "Değişiklik günlüğü",
-  "changelogIntro": "Sitede her güncellemeyle nelerin değiştiği, en yeniden eskiye.",
+  "changelogIntro": "Minecraft Dungeons II’nin her güncellemesinde nelerin değiştiği, en yeniden eskiye; her sürüm resmî notlara bağlanır.",
   "changelogNew": "Yeni",
-  "changelogImproved": "İyileştirildi",
-  "changelogFixed": "Düzeltildi"
+  "changelogFixed": "Düzeltildi",
+  "changelogChanged": "Değiştirildi",
+  "changelogRemoved": "Kaldırıldı",
+  "changelogOfficial": "Resmî notlar",
+  "changelogSiteData": "Site verileri",
+  "changelogNotYet": "Sitenin verileri hâlâ {version} sürümüne ait ve henüz bu sürüme güncellenmedi.",
+  "changelogDataChanges": "Veri değişiklikleri ({version} ile karşılaştırıldığında)",
+  "changelogDataNote": "Sitenin verileri yeni bir oyun sürümüne geçtiğinde önceki sürümle karşılaştırılır ve değişen değerler o sürümün altında listelenir.",
+  "changelogSourceItems": "Eşyalar",
+  "changelogSourceWeapons": "Silah değerleri"
 }

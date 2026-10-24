@@ -480,8 +480,16 @@
     "changelog",
     "changelogIntro",
     "changelogNew",
-    "changelogImproved",
-    "changelogFixed"
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1018,8 +1026,16 @@
   "soulRippleDelay": "Час між хвилями душ",
   "soulBubbleRadius": "Радіус бульбашки (значення гри)",
   "changelog": "Журнал змін",
-  "changelogIntro": "Що змінювалося на сайті з кожним оновленням, починаючи з останнього.",
+  "changelogIntro": "Що змінювало кожне оновлення Minecraft Dungeons II, починаючи з останнього; кожна версія має посилання на офіційний опис.",
   "changelogNew": "Нове",
-  "changelogImproved": "Покращено",
-  "changelogFixed": "Виправлено"
+  "changelogFixed": "Виправлено",
+  "changelogChanged": "Змінено",
+  "changelogRemoved": "Вилучено",
+  "changelogOfficial": "Офіційний опис",
+  "changelogSiteData": "Дані сайту",
+  "changelogNotYet": "Дані сайту досі з версії {version} і ще не оновлені до цієї версії.",
+  "changelogDataChanges": "Зміни даних (порівняно з {version})",
+  "changelogDataNote": "Коли дані сайту переходять на нову версію гри, їх порівнюють із попередньою, а змінені значення наводять під цією версією.",
+  "changelogSourceItems": "Предмети",
+  "changelogSourceWeapons": "Характеристики зброї"
 }
