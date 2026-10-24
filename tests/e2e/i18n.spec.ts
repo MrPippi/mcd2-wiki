@@ -186,7 +186,7 @@ test("English armor tooltips separate the slot from the name with an ASCII colon
 const TITLE_LANGS = ["ja", "de", "ru", "uk", "fr", "pt", "es", "it", "pl", "nl", "sv", "tr", "ko", "en"] as const;
 const TITLE_PATHS = [
   "melee/", "ranged/", "armor/", "artifact/", "talisman/", "enchantment/", "effect/",
-  "mobs/", "quests/", "locations/", "bosses/", "achievements/", "guides/", "soul-storm/", "soul-enchantments/", "build/", "compare/",
+  "mobs/", "quests/", "locations/", "bosses/", "achievements/", "guides/", "soul-storm/", "soul-enchantments/", "build/", "compare/", "changelog/",
 ];
 
 for (const lang of TITLE_LANGS) {

@@ -8,6 +8,7 @@
     "extract": "tsx scripts/extract/index.ts",
     "assets": "tsx scripts/assets/index.ts",
     "tiles": "tsx scripts/map-tiles/index.ts",
+    "game-diff": "tsx scripts/game-diff/index.ts",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview --port 4329",
     "typecheck": "astro sync && tsc --noEmit",

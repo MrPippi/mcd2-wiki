@@ -45,7 +45,7 @@ describe("lists derived from the registry", () => {
   });
 
   it("lists every section but the guides in llms.txt, in rank order", () => {
-    expect(LLMS_SECTIONS.map((section) => section.segment)).toEqual(["mobs", "bosses", "locations", "quests", "map", "soul-storm", "soul-enchantments", "achievements", "build", "compare", "drops"]);
+    expect(LLMS_SECTIONS.map((section) => section.segment)).toEqual(["mobs", "bosses", "locations", "quests", "map", "soul-storm", "soul-enchantments", "achievements", "build", "compare", "drops", "changelog"]);
     expect(PAGE_SECTIONS.filter((section) => section.llms === undefined).map((section) => section.segment)).toEqual(["guides"]);
     const text = llmsTxt(undefined, "/");
     for (const section of PAGE_SECTIONS) expect(text).toContain(`/en/${section.segment}/`);

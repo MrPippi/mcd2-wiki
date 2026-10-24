@@ -474,7 +474,20 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "_english": [
     "armorPiece",
@@ -1011,5 +1024,18 @@
   "soulRippleDamage": "Schaden der Seelenwelle",
   "soulRippleRadius": "Radius der Seelenwelle",
   "soulRippleDelay": "Zeit zwischen Seelenwellen",
-  "soulBubbleRadius": "Blasenradius (Spielwert)"
+  "soulBubbleRadius": "Blasenradius (Spielwert)",
+  "changelog": "Änderungsprotokoll",
+  "changelogIntro": "Was jedes Update von Minecraft Dungeons II geändert hat, das Neueste zuerst; jede Version verlinkt die offiziellen Hinweise.",
+  "changelogNew": "Neu",
+  "changelogFixed": "Behoben",
+  "changelogChanged": "Geändert",
+  "changelogRemoved": "Entfernt",
+  "changelogOfficial": "Offizielle Hinweise",
+  "changelogSiteData": "Website-Daten",
+  "changelogNotYet": "Die Daten der Website stammen noch aus {version} und wurden noch nicht auf diese Version aktualisiert.",
+  "changelogDataChanges": "Datenänderungen (verglichen mit {version})",
+  "changelogDataNote": "Wenn die Daten der Website auf eine neue Spielversion wechseln, werden sie mit der vorherigen verglichen und die geänderten Werte unter dieser Version aufgeführt.",
+  "changelogSourceItems": "Gegenstände",
+  "changelogSourceWeapons": "Waffenwerte"
 }

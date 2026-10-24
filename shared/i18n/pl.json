@@ -474,7 +474,20 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "_english": [
     "normal",
@@ -1013,5 +1026,18 @@
   "soulRippleDamage": "Obrażenia fali dusz",
   "soulRippleRadius": "Promień fali dusz",
   "soulRippleDelay": "Czas między falami dusz",
-  "soulBubbleRadius": "Promień bańki (wartość z gry)"
+  "soulBubbleRadius": "Promień bańki (wartość z gry)",
+  "changelog": "Dziennik zmian",
+  "changelogIntro": "Co zmieniła każda aktualizacja Minecraft Dungeons II, od najnowszej; każda wersja prowadzi do oficjalnych informacji.",
+  "changelogNew": "Nowość",
+  "changelogFixed": "Poprawka",
+  "changelogChanged": "Zmiana",
+  "changelogRemoved": "Usunięto",
+  "changelogOfficial": "Oficjalne informacje",
+  "changelogSiteData": "Dane serwisu",
+  "changelogNotYet": "Dane serwisu pochodzą jeszcze z wersji {version} i nie zostały zaktualizowane do tej wersji.",
+  "changelogDataChanges": "Zmiany danych (w porównaniu z {version})",
+  "changelogDataNote": "Gdy dane serwisu przechodzą na nową wersję gry, są porównywane z poprzednią, a zmienione wartości pojawiają się pod tą wersją.",
+  "changelogSourceItems": "Przedmioty",
+  "changelogSourceWeapons": "Statystyki broni"
 }

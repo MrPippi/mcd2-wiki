@@ -15,7 +15,7 @@ test.describe("header menu", () => {
     await expect(page.getByTestId("site-menu")).toHaveAttribute("aria-label", "選單");
     await openSiteMenu(page);
     const links = siteMenu(page).locator("a");
-    await expect(links).toHaveText(["地圖", "成就", "怪物圖鑑", "靈魂風暴", "靈魂附魔", "配裝", "武器比較", "掉落機率計算器", "攻略", "任務", "地點", "頭目"]);
+    await expect(links).toHaveText(["地圖", "成就", "怪物圖鑑", "靈魂風暴", "靈魂附魔", "配裝", "武器比較", "掉落機率計算器", "攻略", "任務", "地點", "頭目", "更新日誌"]);
     await expect(links.nth(0)).toHaveAttribute("href", "/zh/map/");
     await expect(links.nth(1)).toHaveAttribute("href", "/zh/achievements/");
     await expect(links.nth(2)).toHaveAttribute("href", "/zh/mobs/");
@@ -35,7 +35,7 @@ test.describe("header menu", () => {
   test("marks the current page and speaks the language of the page", async ({ page }) => {
     await page.goto("/ja/achievements/");
     await openSiteMenu(page);
-    await expect(siteMenu(page).locator("a")).toHaveText(["マップ", "実績", "モンスター図鑑", "ソウルストーム", "ソウルエンチャント", "ビルドプランナー", "武器比較", "ドロップ確率計算機", "攻略", "クエスト", "ロケーション", "ボス"]);
+    await expect(siteMenu(page).locator("a")).toHaveText(["マップ", "実績", "モンスター図鑑", "ソウルストーム", "ソウルエンチャント", "ビルドプランナー", "武器比較", "ドロップ確率計算機", "攻略", "クエスト", "ロケーション", "ボス", "更新履歴"]);
     await expect(siteMenu(page).locator("[aria-current='page']")).toHaveText("実績");
     await page.goto("/ja/map/");
     await openSiteMenu(page);

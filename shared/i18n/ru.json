@@ -472,7 +472,20 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1013,5 +1026,18 @@
   "soulRippleDamage": "Урон волны душ",
   "soulRippleRadius": "Радиус волны душ",
   "soulRippleDelay": "Время между волнами душ",
-  "soulBubbleRadius": "Радиус пузыря (значение игры)"
+  "soulBubbleRadius": "Радиус пузыря (значение игры)",
+  "changelog": "Журнал изменений",
+  "changelogIntro": "Что меняло каждое обновление Minecraft Dungeons II, начиная с последнего; у каждой версии есть ссылка на официальное описание.",
+  "changelogNew": "Новое",
+  "changelogFixed": "Исправлено",
+  "changelogChanged": "Изменено",
+  "changelogRemoved": "Удалено",
+  "changelogOfficial": "Официальное описание",
+  "changelogSiteData": "Данные сайта",
+  "changelogNotYet": "Данные сайта всё ещё от версии {version} и пока не обновлены до этой версии.",
+  "changelogDataChanges": "Изменения данных (по сравнению с {version})",
+  "changelogDataNote": "Когда данные сайта переходят на новую версию игры, они сравниваются с предыдущей, и изменённые значения перечисляются под этой версией.",
+  "changelogSourceItems": "Предметы",
+  "changelogSourceWeapons": "Характеристики оружия"
 }

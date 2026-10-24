@@ -130,7 +130,7 @@ const socialImage = extractedBrand.social && Astro.site ? new URL(assetUrl(extra
         <div class="footer-meta">
           <p>{t(lang, "disclaimer")}</p>
           <p>{t(lang, "source")}</p>
-          <p><a class="footer-report" href={REPORT_URL}>{t(lang, "reportIssue")}</a></p>
+          <p><a class="footer-report" href={REPORT_URL}>{t(lang, "reportIssue")}</a> · <a class="footer-report" href={href(lang, "changelog")} data-testid="footer-changelog">{t(lang, "changelog")}</a></p>
         </div>
         <p class="footer-license">{t(lang, "fontCredit")}</p>
       </div>

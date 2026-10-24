@@ -1,0 +1,98 @@
+---
+import { langPaths } from "../../lib/lang-paths";
+import CatalogPage from "../../layouts/CatalogPage.astro";
+import { GAME_VERSION } from "../../lib/game-version";
+import {
+  CHANGE_KIND_KEY,
+  DIFF_SOURCE_KEY,
+  DIFF_STATUS_KEY,
+  changeText,
+  dataChangesFor,
+  dataStatus,
+  gameUpdates,
+  updateAnchor,
+  updateDate,
+} from "../../lib/game-updates";
+import { t, type Lang } from "../../lib/i18n";
+import { href } from "../../lib/url";
+import { htmlLang } from "../../../shared/lang";
+import "../../styles/changelog.css";
+
+export const getStaticPaths = langPaths;
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const link = (path: string): string => href(lang, ...path.split("/"));
+---
+<CatalogPage lang={lang} label={(l) => t(l, "changelog")} count={gameUpdates.length} intro={t(lang, "changelogIntro")} introClass="changelog-intro" class="changelog-page" pagefindBody>
+  <p slot="head" class="note changelog-about">{t(lang, "changelogDataNote")}</p>
+  <ol class="changelog-list" data-testid="game-updates">
+    {gameUpdates.map((update, index) => {
+      const status = dataStatus(gameUpdates, update);
+      const data = dataChangesFor(update);
+      return (
+        <li class="changelog-entry" id={updateAnchor(update)} style={`--i: ${index}`} data-testid="game-update" data-version={update.version}>
+          <header class="changelog-head">
+            <h2 class="changelog-version">
+              {update.version}
+              {update.build && <span class="changelog-build">{update.build}</span>}
+            </h2>
+            <p class="changelog-meta"><time datetime={update.date}>{updateDate(update.date, lang)}</time></p>
+            <p class="changelog-meta changelog-platforms">{update.platforms.join(" · ")}</p>
+            {status === "current" && <p class="tag changelog-site-data" data-testid="site-data-version">{t(lang, "changelogSiteData")}</p>}
+            <p class="changelog-meta"><a href={update.source} rel="noopener" data-testid="official-notes">{t(lang, "changelogOfficial")}</a></p>
+          </header>
+          <div class="changelog-body">
+            <ul class="changelog-changes">
+              {update.changes.map((change) => {
+                const { text, lang: textLang } = changeText(change, lang);
+                return (
+                  <li class="changelog-change" data-kind={change.kind}>
+                    <span class:list={["changelog-kind", `is-${change.kind}`]}>{t(lang, CHANGE_KIND_KEY[change.kind])}</span>
+                    <span class="changelog-text" lang={textLang === lang ? undefined : htmlLang(textLang)}>
+                      {change.link ? <a href={link(change.link)}>{text}</a> : text}
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
+            {status === "ahead" && <p class="note changelog-not-yet" data-testid="data-not-yet">{t(lang, "changelogNotYet").replace("{version}", GAME_VERSION)}</p>}
+            {data && (
+              <details class="changelog-data" data-testid="data-changes">
+                <summary>{t(lang, "changelogDataChanges").replace("{version}", data.from)}</summary>
+                {data.groups.map((group) => (
+                  <section class="changelog-data-group">
+                    <h3>{t(lang, DIFF_SOURCE_KEY[group.source])}</h3>
+                    <ul>
+                      {group.entities.map((entity) => (
+                        <li class="changelog-data-entity" data-status={entity.status}>
+                          <span class:list={["changelog-kind", `is-${entity.status}`]}>{t(lang, DIFF_STATUS_KEY[entity.status])}</span>
+                          <div class="changelog-data-detail">
+                            {entity.link ? <a href={link(entity.link)}>{entity.name[lang]}</a> : <span>{entity.name[lang]}</span>}
+                            {entity.fields.length > 0 && (
+                              <dl>
+                                {entity.fields.map((field) => (
+                                  <div>
+                                    <dt>{field.path}</dt>
+                                    <dd>{field.before ?? "—"} → {field.after ?? "—"}</dd>
+                                  </div>
+                                ))}
+                              </dl>
+                            )}
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                ))}
+              </details>
+            )}
+          </div>
+        </li>
+      );
+    })}
+  </ol>
+</CatalogPage>

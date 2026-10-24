@@ -530,5 +530,18 @@
   "soulRippleDamage": "Soul wave damage",
   "soulRippleRadius": "Soul wave radius",
   "soulRippleDelay": "Time between soul waves",
-  "soulBubbleRadius": "Bubble radius (game value)"
+  "soulBubbleRadius": "Bubble radius (game value)",
+  "changelog": "Changelog",
+  "changelogIntro": "What each Minecraft Dungeons II update changed, newest first; each version links to its official notes.",
+  "changelogNew": "New",
+  "changelogFixed": "Fixed",
+  "changelogChanged": "Changed",
+  "changelogRemoved": "Removed",
+  "changelogOfficial": "Official notes",
+  "changelogSiteData": "Site data",
+  "changelogNotYet": "The site's data is still from {version} and has not been updated to this version yet.",
+  "changelogDataChanges": "Data changes (compared with {version})",
+  "changelogDataNote": "When the site's data moves to a new game version, it is compared with the previous one and the changed values are listed under that version.",
+  "changelogSourceItems": "Items",
+  "changelogSourceWeapons": "Weapon stats"
 }

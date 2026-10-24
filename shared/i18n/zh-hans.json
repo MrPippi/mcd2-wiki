@@ -473,7 +473,20 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1008,5 +1021,18 @@
   "soulRippleDamage": "灵魂波伤害",
   "soulRippleRadius": "灵魂波半径",
   "soulRippleDelay": "灵魂波间隔",
-  "soulBubbleRadius": "泡泡半径（游戏数值）"
+  "soulBubbleRadius": "泡泡半径（游戏数值）",
+  "changelog": "更新日志",
+  "changelogIntro": "Minecraft Dungeons II 各版本的更新要点，从新到旧；完整内容请见各版本的官方说明。",
+  "changelogNew": "新增",
+  "changelogFixed": "修复",
+  "changelogChanged": "变更",
+  "changelogRemoved": "移除",
+  "changelogOfficial": "官方说明",
+  "changelogSiteData": "本站数据",
+  "changelogNotYet": "本站数据仍为 {version}，尚未更新到此版本。",
+  "changelogDataChanges": "数据变动（与 {version} 比较）",
+  "changelogDataNote": "本站数据更新到新版本时，会与上一版比对，把数值变动列在该版本下。",
+  "changelogSourceItems": "物品",
+  "changelogSourceWeapons": "武器数值"
 }

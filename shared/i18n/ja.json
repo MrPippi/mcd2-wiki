@@ -473,7 +473,20 @@
     "soulRippleDamage",
     "soulRippleRadius",
     "soulRippleDelay",
-    "soulBubbleRadius"
+    "soulBubbleRadius",
+    "changelog",
+    "changelogIntro",
+    "changelogNew",
+    "changelogFixed",
+    "changelogChanged",
+    "changelogRemoved",
+    "changelogOfficial",
+    "changelogSiteData",
+    "changelogNotYet",
+    "changelogDataChanges",
+    "changelogDataNote",
+    "changelogSourceItems",
+    "changelogSourceWeapons"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1008,5 +1021,18 @@
   "soulRippleDamage": "ソウルウェーブのダメージ",
   "soulRippleRadius": "ソウルウェーブの半径",
   "soulRippleDelay": "ソウルウェーブの間隔",
-  "soulBubbleRadius": "バブルの半径（ゲーム内の値）"
+  "soulBubbleRadius": "バブルの半径（ゲーム内の値）",
+  "changelog": "更新履歴",
+  "changelogIntro": "Minecraft Dungeons II の各アップデートの変更点を新しい順に掲載しています。各バージョンから公式の説明へリンクしています。",
+  "changelogNew": "新規",
+  "changelogFixed": "修正",
+  "changelogChanged": "変更",
+  "changelogRemoved": "削除",
+  "changelogOfficial": "公式の説明",
+  "changelogSiteData": "サイトのデータ",
+  "changelogNotYet": "サイトのデータはまだ {version} のもので、このバージョンには更新されていません。",
+  "changelogDataChanges": "データの変更（{version} との比較）",
+  "changelogDataNote": "サイトのデータを新しいバージョンに更新すると、前のバージョンと比較し、変わった数値をそのバージョンの下に掲載します。",
+  "changelogSourceItems": "アイテム",
+  "changelogSourceWeapons": "武器の数値"
 }

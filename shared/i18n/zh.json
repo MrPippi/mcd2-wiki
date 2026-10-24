@@ -527,5 +527,18 @@
   "soulRippleDamage": "靈魂波傷害",
   "soulRippleRadius": "靈魂波半徑",
   "soulRippleDelay": "靈魂波間隔",
-  "soulBubbleRadius": "泡泡半徑（遊戲數值）"
+  "soulBubbleRadius": "泡泡半徑（遊戲數值）",
+  "changelog": "更新日誌",
+  "changelogIntro": "Minecraft Dungeons II 各版本的更新重點，由新到舊；完整內容請見各版本的官方說明。",
+  "changelogNew": "新增",
+  "changelogFixed": "修正",
+  "changelogChanged": "變更",
+  "changelogRemoved": "移除",
+  "changelogOfficial": "官方說明",
+  "changelogSiteData": "本站資料",
+  "changelogNotYet": "本站資料仍為 {version}，尚未更新到此版本。",
+  "changelogDataChanges": "資料變動（與 {version} 比較）",
+  "changelogDataNote": "本站資料更新到新版本時，會與前一版比對，把數值變動列在該版本下。",
+  "changelogSourceItems": "物品",
+  "changelogSourceWeapons": "武器數值"
 }
