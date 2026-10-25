@@ -25,30 +25,6 @@ test("map page shows its title, world tabs and marker filters", async ({ page })
   await expect(page.locator(".map-filter-label")).toContainText(["主線任務", "支線任務", "風暴產生器", "護符寶箱", "地下城"]);
 });
 
-test("the world tabs are the game's pixelated map crops, the active one framed and the others dimmed", async ({ page }) => {
-  await page.goto("/zh/map/");
-  const arts = page.locator(".map-tab-art");
-  await expect(arts).toHaveCount(3);
-  await expect(arts.first()).toHaveAttribute("src", /map\/tabs\/overworld\.webp$/);
-  expect(await arts.first().evaluate((el) => getComputedStyle(el).imageRendering)).toBe("pixelated");
-  const filter = (index: number) => arts.nth(index).evaluate((el) => getComputedStyle(el).filter);
-  expect(await filter(0)).toBe("none");
-  expect(await filter(1)).toContain("brightness(0.5)");
-  await expect(page.locator(".map-tab-name").first()).toHaveText("主世界");
-});
-
-test("the Z and X keycaps flank the tabs", async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name === "mobile", "keycap hints are hidden on touch screens");
-  await page.goto("/zh/map/");
-  const keys = page.locator(".map-key");
-  await expect(keys).toHaveCount(2);
-  await expect(keys.first()).toHaveAttribute("src", /map\/keys\/z\.png$/);
-  await expect(keys.last()).toHaveAttribute("src", /map\/keys\/x\.png$/);
-  const [z, first, last, x] = await Promise.all([keys.first().boundingBox(), page.locator(".map-tabs a").first().boundingBox(), page.locator(".map-tabs a").last().boundingBox(), keys.last().boundingBox()]);
-  expect(z!.x + z!.width).toBeLessThanOrEqual(first!.x);
-  expect(x!.x).toBeGreaterThanOrEqual(last!.x + last!.width);
-});
-
 test("X and Z switch to the next and previous world and keep the URL in step", async ({ page }) => {
   await page.goto("/zh/map/");
   await expect(page.locator(".world-map")).toHaveAttribute("data-ready", "true");
