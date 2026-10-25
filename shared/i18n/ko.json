@@ -489,7 +489,8 @@
     "changelogDataChanges",
     "changelogDataNote",
     "changelogSourceItems",
-    "changelogSourceWeapons"
+    "changelogSourceWeapons",
+    "changelogNoDataChanges"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1032,5 +1033,6 @@
   "changelogDataChanges": "데이터 변경 ({version}과 비교)",
   "changelogDataNote": "사이트 데이터를 새 버전으로 업데이트하면 이전 버전과 비교해 바뀐 수치를 해당 버전 아래에 표시합니다.",
   "changelogSourceItems": "아이템",
-  "changelogSourceWeapons": "무기 수치"
+  "changelogSourceWeapons": "무기 수치",
+  "changelogNoDataChanges": "{version}과(와) 비교했습니다. 데이터 변경 사항이 없습니다."
 }

@@ -50,7 +50,9 @@ describe("game updates", () => {
     const groups = [{ source: "weapons" as const, entities: [{ slug: "axe", name: { en: "Axe" } as never, status: "changed" as const, fields: [] }] }];
     const changes = [{ from: "1.2", to: "1.3", groups }, { from: "1.1", to: "1.2", groups: [] }];
     expect(dataChangesFor(update("1.3", "2026-10-22"), changes)?.from).toBe("1.2");
-    expect(dataChangesFor(update("1.2", "2026-10-07"), changes)).toBeUndefined();
+    // A comparison that found nothing is still recorded, so the page can say so.
+    expect(dataChangesFor(update("1.2", "2026-10-07"), changes)?.groups).toEqual([]);
+    expect(dataChangesFor(update("1.1", "2026-10-01"), changes)).toBeUndefined();
   });
 
   it("shows Traditional Chinese on the zh site and English everywhere else", () => {

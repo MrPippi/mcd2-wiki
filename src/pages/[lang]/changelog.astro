@@ -60,7 +60,10 @@ const link = (path: string): string => href(lang, ...path.split("/"));
               })}
             </ul>
             {status === "ahead" && <p class="note changelog-not-yet" data-testid="data-not-yet">{t(lang, "changelogNotYet").replace("{version}", GAME_VERSION)}</p>}
-            {data && (
+            {data && data.groups.length === 0 && (
+              <p class="note changelog-no-changes" data-testid="data-no-changes">{t(lang, "changelogNoDataChanges").replace("{version}", data.from)}</p>
+            )}
+            {data && data.groups.length > 0 && (
               <details class="changelog-data" data-testid="data-changes">
                 <summary>{t(lang, "changelogDataChanges").replace("{version}", data.from)}</summary>
                 {data.groups.map((group) => (

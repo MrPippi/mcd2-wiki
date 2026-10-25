@@ -26,6 +26,14 @@ test.describe("game update log", () => {
     if ((await ahead.count()) > 0) await expect(ahead.first()).toContainText(`still from ${version}`);
   });
 
+  test("says so when the comparison into a version found no data changes", async ({ page }) => {
+    await page.goto("/en/changelog/");
+    const none = page.getByTestId("data-no-changes");
+    test.skip((await none.count()) === 0, "every recorded comparison has changes");
+    await expect(none.first()).toContainText(/^Compared with \d+(\.\d+)+: no data changes\.$/);
+    await expect(none.first().locator("xpath=ancestor::li[@data-testid='game-update']").getByTestId("data-changes")).toHaveCount(0);
+  });
+
   test("shows English change text, marked as English, on other languages", async ({ page }) => {
     await page.goto("/ja/changelog/");
     await expect(page.locator("h1")).toContainText("更新履歴");

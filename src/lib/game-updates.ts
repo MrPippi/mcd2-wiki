@@ -71,9 +71,9 @@ export function dataStatus(updates: readonly GameUpdate[], update: GameUpdate, v
   return index < current ? "ahead" : undefined;
 }
 
-/** The recorded data changes into an update's version, if the site has them. */
+/** The recorded comparison into an update's version, if the site has one; its groups are empty when nothing changed. */
 export const dataChangesFor = (update: GameUpdate, changes: readonly VersionChanges[] = gameChanges): VersionChanges | undefined =>
-  changes.find((one) => one.to === update.version && one.groups.length > 0);
+  changes.find((one) => one.to === update.version);
 
 /**
  * A change's text in `lang`. Only Traditional Chinese and English are written; every other language shows the
