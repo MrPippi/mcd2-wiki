@@ -407,7 +407,6 @@
   "guideEchoShardCap": "最多只能攜帶 {n} 個{currency}。",
   "guideEnchantCosts": "依物品稀有度的附魔花費",
   "guideColPerLevel": "{name}（每級增加）",
-  "guideMaxEnchantLevel": "附魔最高到等級 {level}。",
   "guideUpgradeEnchantments": "升級附魔",
   "guideRarityEffects": "各稀有度的效果",
   "guideColRerollable": "可重擲的效果數",

@@ -410,7 +410,6 @@
   "guideEchoShardCap": "You can carry at most {n} {currency}.",
   "guideEnchantCosts": "Enchanting cost by item rarity",
   "guideColPerLevel": "{name}, added per level",
-  "guideMaxEnchantLevel": "Enchantments go up to level {level}.",
   "guideUpgradeEnchantments": "Upgrading enchantments",
   "guideRarityEffects": "Effects by rarity",
   "guideColRerollable": "Effects you can re-roll",
