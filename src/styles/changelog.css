@@ -12,7 +12,7 @@
 
 .changelog-head { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 0; }
 .changelog-version { margin: 0; font-family: var(--font-display); font-weight: 700; font-size: 22px; line-height: 1.2; font-variant-numeric: tabular-nums; }
-.changelog-build { margin-left: 8px; font-family: var(--font-mono); font-weight: 400; font-size: var(--fs-mono-s); color: var(--muted); }
+.changelog-label { display: block; margin-top: 2px; font-family: var(--font-body); font-weight: 600; font-size: 15px; color: var(--text-2); }
 .changelog-meta { margin: 0; font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.03em; color: var(--muted); overflow-wrap: anywhere; }
 .changelog-site-data { margin: 2px 0; }
 

@@ -23,16 +23,22 @@ const ChangeSchema = z.object({
 });
 export type Change = z.infer<typeof ChangeSchema>;
 
-const UpdateSchema = z.object({
+const LabelSchema = z.object({ zh: z.string().min(1), en: z.string().min(1) });
+
+const UpdateSchema = z
+  .object({
   version: z.string().regex(/^[0-9][0-9A-Za-z._-]*$/),
-  /** The build number, for a version the game shipped twice. */
+  /** The build number, for a version the game shipped twice; only in the anchor, the page shows the label. */
   build: z.string().regex(/^[0-9]+$/).optional(),
+  /** What tells this release apart from another of the same version, e.g. "Steam Deck 更新". */
+  label: LabelSchema.optional(),
   date: z.iso.date(),
   platforms: z.array(z.string().min(1)).min(1),
   /** The official notes or announcement. */
   source: z.url({ protocol: /^https$/ }),
   changes: z.array(ChangeSchema).min(1),
-});
+  })
+  .refine((update) => update.build === undefined || update.label !== undefined, "an update with a build needs a label");
 export type GameUpdate = z.infer<typeof UpdateSchema>;
 
 /** Updates must be newest first, one per date, so the page needs no sorting. */
@@ -79,7 +85,7 @@ export const dataChangesFor = (update: GameUpdate, changes: readonly VersionChan
  * A change's text in `lang`. Only Traditional Chinese and English are written; every other language shows the
  * English text (the site's fallback for text without a checked translation), marked with its language.
  */
-export const changeText = (change: Change, lang: Lang): { text: string; lang: Lang } =>
+export const changeText = (change: Pick<Change, "zh" | "en">, lang: Lang): { text: string; lang: Lang } =>
   lang === "zh" ? { text: change.zh, lang: "zh" } : { text: change.en, lang: "en" };
 
 /** A date in `lang`'s long form; the date is a calendar day, so it is formatted in UTC. */
