@@ -199,6 +199,15 @@
 
 頁面依 `shared/game-version.json` 標出本站資料對應的版本，之後的版本註明「尚未更新」。
 
+## 社群配裝（Cloudflare Worker）
+
+`/<lang>/builds/` 與配裝頁的「發布到社群配裝」是網站唯一的後端：Cloudflare Worker `mcd2-wiki-builds` 加 D1 資料庫，程式在 `workers/community-builds/`，部署、設定、API 與管理方式見該資料夾的 README。
+
+- 網站端：API 網址與 Turnstile site key 寫在 `src/lib/community/config.ts`（公開值）；瀏覽器程式在 `src/client/community-*.ts`，Turnstile 腳本只在第一次發布、按讚或檢舉時才載入（`src/client/turnstile.ts`）。
+- Worker 的 `ALLOWED_ORIGINS` 只放行 `https://mrpippi.github.io` 與本機 4321、4329 埠；網站換網域時要一併更新，Turnstile widget 的網域也是。
+- 檢舉達 3 次自動隱藏；刪除或恢復配裝見 Worker README 的「Moderation」。管理用的 `ADMIN_TOKEN` 只存在 Worker 的 secret，不在 repo 裡。
+- e2e 測試以 `page.route` 攔截 API 與 Turnstile，不會連到正式服務。
+
 ## 開發
 
 ```bash

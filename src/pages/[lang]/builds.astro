@@ -1,0 +1,38 @@
+---
+import { langPaths } from "../../lib/lang-paths";
+import CatalogPage from "../../layouts/CatalogPage.astro";
+import { communityJson, communityListPayload } from "../../lib/community/payload";
+import { t, type Lang } from "../../lib/i18n";
+import "../../styles/community.css";
+
+export const getStaticPaths = langPaths;
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+<CatalogPage lang={lang} label={(l) => t(l, "communityBuilds")} intro={t(lang, "communityBuildsIntro")} class="community-page">
+  <noscript><p class="note" data-testid="community-noscript">{t(lang, "communityNoScript")}</p></noscript>
+  {/* Starts hidden: the script shows it once the payload checks out. */}
+  <div class="community" data-testid="community-builds" data-community hidden>
+    <div class="community-sort" role="group" aria-label={t(lang, "communityBuilds")}>
+      <button type="button" data-sort="top" aria-pressed="true">{t(lang, "communitySortTop")}</button>
+      <button type="button" data-sort="new" aria-pressed="false">{t(lang, "communitySortNew")}</button>
+    </div>
+    <ul class="community-list" data-list data-testid="community-list" role="list"></ul>
+    <p class="note community-status" data-status data-testid="community-status" role="status" aria-live="polite"></p>
+    <button type="button" class="community-more" data-more hidden>{t(lang, "communityMore")}</button>
+    <div class="community-turnstile" data-turnstile></div>
+    <p class="note community-privacy">{t(lang, "communityPrivacy")}</p>
+    <script type="application/json" data-community-json set:html={communityJson(communityListPayload(lang))}></script>
+  </div>
+</CatalogPage>
+
+<script>
+  import { mountCommunityList } from "../../client/community-builds";
+
+  const root = document.querySelector<HTMLElement>("[data-community]");
+  if (root && !mountCommunityList(root)) console.error("community builds: bad payload or markup");
+</script>

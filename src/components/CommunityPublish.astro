@@ -1,0 +1,35 @@
+---
+import { MAX_TITLE_LENGTH } from "../lib/community/config";
+import { communityJson, communityPayload } from "../lib/community/payload";
+import { t, type Lang } from "../lib/i18n";
+import { href } from "../lib/url";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+{/* Starts hidden: the script shows it; without scripts there is nothing to send. */}
+<section class="community-publish" data-testid="community-publish" data-community-publish aria-labelledby="community-publish-title" hidden>
+  <h2 class="section-title" id="community-publish-title">{t(lang, "communityPublish")}</h2>
+  <p class="note">{t(lang, "communityPublishIntro")}</p>
+  <form class="community-publish-form" data-publish-form>
+    <label class="community-publish-label">
+      <span>{t(lang, "communityTitle")}</span>
+      <input type="text" data-publish-title data-testid="community-title" required maxlength={MAX_TITLE_LENGTH} placeholder={t(lang, "communityTitlePlaceholder")} autocomplete="off" />
+    </label>
+    <button type="submit" data-publish-submit data-testid="community-submit">{t(lang, "communityPublishButton")}</button>
+  </form>
+  <p class="note community-publish-status" data-publish-status data-testid="community-publish-status" role="status" aria-live="polite"></p>
+  <a class="community-publish-link" data-publish-link href={href(lang, "builds")} hidden>{t(lang, "communityView")}</a>
+  <div class="community-turnstile" data-turnstile></div>
+  <script type="application/json" data-community-json set:html={communityJson(communityPayload(lang))}></script>
+</section>
+
+<script>
+  import { mountCommunityPublish } from "../client/community-publish";
+
+  const root = document.querySelector<HTMLElement>("[data-community-publish]");
+  if (root && !mountCommunityPublish(root)) console.error("community publish: bad payload or markup");
+</script>
