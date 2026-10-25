@@ -1,30 +1,14 @@
 .map-page h1 { font-family: var(--font-display); font-size: var(--fs-display-m); margin: 0 0 8px; }
 .map-intro { color: var(--text-2); margin: 0 0 20px; max-width: 60ch; text-wrap: balance; }
 
-/* World tabs, as in the game: a pixelated crop of each world's map, the active one bright and framed, the others dimmed; Z and X keycaps at the ends. */
-.map-tabs { --tab-light: #e3e5e8; --tab-dark: #17140f; display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 0 14px; }
-.map-tabs ol { list-style: none; display: flex; flex: 0 1 640px; gap: 12px; min-width: 0; padding: 0; margin: 0; }
-.map-tabs li { flex: 1 1 0; min-width: 0; }
+.map-tabs ol { list-style: none; display: flex; padding: 0; margin: 0 0 12px; box-shadow: inset 0 -1px 0 var(--rule-strong); overflow-x: auto; overflow-y: hidden; }
 .map-tabs a {
-  position: relative; display: block; aspect-ratio: 96 / 40; overflow: hidden; background: #2c2a26; color: var(--tab-light);
-  text-decoration: none; box-shadow: 0 0 0 2px var(--tab-dark);
+  display: block; padding: 10px 16px; white-space: nowrap;
+  color: var(--muted); text-decoration: none; font-weight: 600; border-bottom: 3px solid transparent;
+  transition: color var(--dur-fast) var(--ease-out), border-color var(--dur-fast) var(--ease-out);
 }
-.map-tab-art {
-  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated;
-  filter: brightness(0.5) saturate(0.7); transition: filter var(--dur-fast) var(--ease-out);
-}
-.map-tabs a:hover .map-tab-art { filter: brightness(0.75) saturate(0.85); }
-.map-tabs a[aria-current="page"] { box-shadow: 0 0 0 2px var(--tab-light), 0 0 0 5px var(--tab-dark); }
-.map-tabs a[aria-current="page"] .map-tab-art { filter: none; }
-.map-tab-name {
-  position: absolute; inset: 0; display: grid; place-items: center; padding: 0 6px; text-align: center;
-  font-family: var(--font-display); font-weight: 700; font-size: clamp(13px, 3.4vw, 18px); line-height: 1.1;
-  -webkit-text-stroke: 3px var(--tab-dark); paint-order: stroke fill; text-shadow: 0 1px 0 var(--tab-dark);
-}
-.map-tabs a:focus-visible { outline: 3px solid var(--focus); outline-offset: 5px; }
-.map-key { flex: none; width: 28px; height: 28px; image-rendering: pixelated; }
-/* No keyboard on a touch screen: the key hints would only confuse. */
-@media (hover: none) and (pointer: coarse) { .map-key { display: none; } }
+.map-tabs a:hover { color: var(--text); }
+.map-tabs a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
 
 .map-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
 /* The map takes the full content width; the marker filter floats on it, so nothing shares its row. */
