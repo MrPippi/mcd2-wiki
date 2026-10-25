@@ -2,7 +2,7 @@
 import type { SoulStormData } from "../../shared/soul-storm-schema";
 import { t, type Lang } from "../lib/i18n";
 import { mapLinkOf } from "../lib/mobs";
-import { areaLocation } from "../lib/soul-storm";
+import { areaLocation, generatorSpots } from "../lib/soul-storm";
 import LocationIcon from "./LocationIcon.astro";
 
 interface Props {
@@ -19,7 +19,10 @@ const untranslated = data.rotationUntranslated.includes(lang);
   {data.rotation.map((area) => (
     <li>
       {areaLocation(area) && <LocationIcon location={areaLocation(area)!} size={ICON_SIZE} />}
-      <a href={mapLinkOf(lang, area)}>{area.name[lang]}</a>
+      <span class="soul-storm-area">
+        <a href={mapLinkOf(lang, area)}>{area.name[lang]}</a>
+        {generatorSpots(area.areaId) > 0 && <span class="soul-storm-spots" data-testid="soul-storm-spots">{t(lang, "soulStormGeneratorSpots").replace("{count}", () => String(generatorSpots(area.areaId)))}</span>}
+      </span>
     </li>
   ))}
 </ol>

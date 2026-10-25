@@ -20,9 +20,17 @@ describe("Soul Storm page", () => {
     const rotation = html.slice(html.indexOf('data-testid="soul-storm-rotation"'));
     expect(count(rotation.slice(0, rotation.indexOf("</ol>")), 'class="location-icon"')).toBe(7);
   });
-  it("says each storm needs 3 generators destroyed", async () => {
-    expect(await render("zh")).toContain("每場靈魂風暴需摧毀 3 座風暴產生器（遊戲內觀察）");
-    expect(await render("en")).toContain("Each Soul Storm requires destroying 3 Storm Generators (observed in game)");
+  it("fills the objective's count with the observed 3 and says the number is not in the game data", async () => {
+    const zh = await render("zh");
+    expect(zh).toContain('摧毀 <span class="soul-storm-count">3</span>* 個風暴產生器');
+    expect(zh).toContain("* 遊戲資料中沒有這個數字，3 座是遊戲內觀察到的數量。");
+    expect(await render("en")).toContain("* The game data has no such number; 3 is what we observed in game.");
+  });
+  it("lists how many generator spots each rotation area has", async () => {
+    const html = await render("zh");
+    const rotation = html.slice(html.indexOf('data-testid="soul-storm-rotation"'), html.indexOf("</ol>", html.indexOf('data-testid="soul-storm-rotation"')));
+    expect(count(rotation, 'data-testid="soul-storm-spots"')).toBe(soulStormData.rotation.length);
+    expect(rotation).toMatch(/[5-9] 處產生器位置/);
   });
   it("keeps the schedule readable without JavaScript", async () => {
     const html = await render("en");
@@ -45,10 +53,10 @@ describe("Soul Storm page", () => {
     const rotation = html.slice(html.indexOf('data-testid="soul-storm-rotation"'));
     expect(count(rotation.slice(0, rotation.indexOf("</ol>") + 400), "tag warn")).toBe(1);
   });
-  it("shows the official objective with its placeholder in the generator section", async () => {
+  it("shows the official objective in the generator section", async () => {
     const html = await render("en");
     const generators = html.slice(html.indexOf('data-testid="soul-storm-generators"'));
-    expect(generators).toContain('data-slot="0"');
+    expect(generators).not.toContain('data-slot="0"');
     expect(generators).toContain("Storm Generators to quell");
   });
   it("says how many mobs each final wave summons", async () => {

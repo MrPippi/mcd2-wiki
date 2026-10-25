@@ -6,6 +6,7 @@ import rawSoulStorm from "../data/soul-storm.json";
 import { t, type Lang, type UiKey } from "./i18n";
 import { htmlLang } from "../../shared/lang";
 import { locationOf } from "./locations";
+import { mapData } from "./map/data";
 import { findMob, formatChance, mapLinkOf } from "./mobs";
 import type { ClockArea, ClockPayload, StormSchedule } from "./soul-storm-schedule";
 import { assetUrl } from "./url";
@@ -18,6 +19,22 @@ const SECONDS_PER_MINUTE = 60;
 
 /** Storms the clock lists: one whole rotation (P11). */
 export const UPCOMING_STORMS = 7;
+
+/**
+ * Storm Generators a storm asks you to destroy. The game fills the objective's {0} at run time and no table holds the
+ * number, so this is what was observed in game; the page says so next to it.
+ */
+export const OBSERVED_GENERATORS = 3;
+
+/** The objective with its {0} slot filled with the observed count, marked for the note that explains it. */
+export const objectiveWithCount = (html: string): string =>
+  html.replace(/<span class="placeholder" data-slot="0">[^<]*<\/span>/, `<span class="soul-storm-count">${OBSERVED_GENERATORS}</span>*`);
+
+/** How many Storm Generator spots the level data places in an area (the map's storm markers). */
+export const generatorSpots = (areaId: string): number => {
+  const prefix = `storm:${areaId.toLowerCase()}:`;
+  return mapData.worlds.reduce((sum, world) => sum + world.markers.filter((marker) => marker.id.startsWith(prefix)).length, 0);
+};
 
 /** The only unlock state the page can put into words. */
 const MAIN_QUEST_COMPLETE = "SW.GameState.MainQuestComplete";

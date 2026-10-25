@@ -4,7 +4,8 @@ import { statLabel, t, type Lang } from "../lib/i18n";
 import { plainText } from "../lib/meta";
 import { formatChance, formatStat, mobHref } from "../lib/mobs";
 import {
-  anyUntranslated, formatMultipliers, generatorTierLabel, sharedMultipliers, spawnWeightText, summonedMobs, summonLine, textOf,
+  anyUntranslated, formatMultipliers, generatorTierLabel, objectiveWithCount, OBSERVED_GENERATORS, sharedMultipliers, spawnWeightText, summonedMobs,
+  summonLine, textOf,
 } from "../lib/soul-storm";
 import { assetUrl } from "../lib/url";
 
@@ -16,8 +17,9 @@ interface Props {
 const { lang, data } = Astro.props;
 const { generators } = data;
 const name = textOf(data, "generatorName", lang);
-// The official objective keeps its {0} slot as the shared .placeholder mark (base.css), like item pages.
-const hints = [textOf(data, "objective", lang), textOf(data, "generatorHint", lang), textOf(data, "shieldHint", lang)].flatMap((text) => text ?? []);
+// The official objective's {0} slot is filled with the observed count; the note under it says where the number comes from.
+const objective = textOf(data, "objective", lang);
+const hints = [textOf(data, "generatorHint", lang), textOf(data, "shieldHint", lang)].flatMap((text) => text ?? []);
 const untranslated = anyUntranslated(data, ["generatorName", "objective", "generatorHint", "shieldHint"], lang);
 const shared = sharedMultipliers(generators);
 const shieldText = (shield: SoulStormData["generators"][number]["shield"]): string =>
@@ -37,7 +39,8 @@ const ICON_SIZE = 48;
       <h2 class="section-title" data-pagefind-ignore>{name ? <Fragment set:html={name.html} /> : t(lang, "soulStormTier")}</h2>
       {untranslated && <span class="tag warn">{t(lang, "untranslated")}</span>}
     </div>
-    <p class="soul-storm-text" data-testid="soul-storm-generator-count">{t(lang, "soulStormGeneratorCount")}</p>
+    {objective && <p class="soul-storm-text" data-testid="soul-storm-objective" set:html={objectiveWithCount(objective.html)} />}
+    <p class="note soul-storm-count-note" data-testid="soul-storm-generator-count">{t(lang, "soulStormGeneratorCount").replace("{count}", () => String(OBSERVED_GENERATORS))}</p>
     {hints.map((hint) => <p class="soul-storm-text" set:html={hint.html} />)}
     <div class="soul-storm-scroll" tabindex="0" role="region" aria-label={tableLabel}>
       <table class="soul-storm-table soul-storm-generator-table">
