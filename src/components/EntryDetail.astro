@@ -13,6 +13,7 @@ import EnchantmentTiers from "./EnchantmentTiers.astro";
 import EntryIcon from "./EntryIcon.astro";
 import EntrySection from "./EntrySection.astro";
 import ItemSources from "./ItemSources.astro";
+import StatusDetails from "./StatusDetails.astro";
 import InfoBox from "./InfoBox.astro";
 import LangText from "./LangText.astro";
 import TalismanLevels from "./TalismanLevels.astro";
@@ -58,6 +59,7 @@ const related = relatedLinks(lang, entry);
       {entry.category === "enchantment" && <EnchantmentTiers lang={lang} enchantment={entry} />}
       {entry.category === "artifact" && <ArtifactStats lang={lang} artifact={entry} />}
       {entry.category === "talisman" && <TalismanLevels lang={lang} talisman={entry} />}
+      {entry.category === "status" && <StatusDetails lang={lang} status={entry} />}
       <WeaponStats lang={lang} weapon={entry} />
       <WeaponEffects lang={lang} weapon={entry} />
       <AffixOdds lang={lang} item={entry} />

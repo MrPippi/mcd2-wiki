@@ -102,7 +102,10 @@ export type IssueType =
   | "soul-enchantment-ignored"
   | "soul-enchantment-unnamed"
   | "soul-enchantment-no-icon"
-  | "soul-enchantment-unlinked";
+  | "soul-enchantment-unlinked"
+  | "missing-status-tables"
+  | "status-ignored"
+  | "status-source-unlinked";
 
 export interface Issue {
   readonly type: IssueType;

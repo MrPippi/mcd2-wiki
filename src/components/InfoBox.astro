@@ -32,10 +32,12 @@ const PLATE_ICON_SIZE = 200;
       <dt data-pagefind-ignore>{t(lang, "category")}</dt>
       <dd><a href={href(lang, listCategory)}><UiIcon src={categoryIcon(entry.category)} />{categoryLabel(entry.category, lang)}</a></dd>
     </div>
-    <div>
-      <dt data-pagefind-ignore><RarityTerm lang={lang} variant={entry.variant} /></dt>
-      <dd class:list={{ "is-unique": entry.variant === "unique" }}><RarityTags lang={lang} variant={entry.variant} /></dd>
-    </div>
+    {entry.category !== "status" && (
+      <div>
+        <dt data-pagefind-ignore><RarityTerm lang={lang} variant={entry.variant} /></dt>
+        <dd class:list={{ "is-unique": entry.variant === "unique" }}><RarityTags lang={lang} variant={entry.variant} /></dd>
+      </div>
+    )}
     {entry.armorPiece && (
       <div>
         <dt data-pagefind-ignore>{t(lang, "armorPiece")}</dt>

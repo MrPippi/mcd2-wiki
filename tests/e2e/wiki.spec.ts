@@ -237,12 +237,12 @@ test("talismans have their own pages", async ({ page }) => {
   await expect(page.locator(".entry-head img.entry-icon")).toBeVisible();
 });
 
-test("statuses and cosmetics are not published for now", async ({ page, request }) => {
+test("cosmetics are not published for now", async ({ page, request }) => {
   await page.goto("/zh/");
-  for (const label of ["狀態", "披風", "寵物", "外觀"]) {
+  for (const label of ["披風", "寵物", "外觀"]) {
     await expect(page.locator(".site-nav a", { hasText: label })).toHaveCount(0);
   }
-  for (const path of ["/zh/status/", "/zh/cape/", "/zh/pet/", "/zh/skin/", "/zh/cape/hero/"]) {
+  for (const path of ["/zh/status/burning-infinite/", "/zh/cape/", "/zh/pet/", "/zh/skin/", "/zh/cape/hero/"]) {
     expect((await request.get(path)).status(), path).toBe(404);
   }
 });
@@ -350,7 +350,7 @@ test("Q and E switch between category tabs", async ({ page }, testInfo) => {
   await expect(page).toHaveURL(/\/zh\/melee\/$/);
   await page.waitForLoadState("domcontentloaded");
   await page.keyboard.press("q");
-  await expect(page).toHaveURL(/\/zh\/effect\/$/);
+  await expect(page).toHaveURL(/\/zh\/status\/$/);
 });
 
 test("typing in search boxes never switches tabs", async ({ page }, testInfo) => {
@@ -391,8 +391,8 @@ test("the home page is a cover with a featured specimen and a row for every cate
   await page.goto("/zh/");
   await expect(page.locator(".home-hero .kicker")).toHaveText("UNOFFICIAL FAN WIKI");
   await expect(page.locator(".home-title")).toContainText("Minecraft Dungeons II");
-  await expect(page.locator(".category-grid li")).toHaveCount(7);
-  await expect(page.locator(".category-grid .category-slot img.ui-icon")).toHaveCount(7);
+  await expect(page.locator(".category-grid li")).toHaveCount(8);
+  await expect(page.locator(".category-grid .category-slot img.ui-icon")).toHaveCount(8);
   await expect(page.locator(".hero-specimen .specimen-plate img.entry-icon")).toBeVisible();
   await page.locator(".home-search input").fill("劍");
   await page.locator(".home-search button").click();
@@ -689,14 +689,14 @@ test("wide touch screens label the category tabs", async ({ browser }, testInfo)
   const page = await context.newPage();
   await page.goto("/zh/melee/");
   const labels = page.locator(".category-tabs .tab-label");
-  await expect(labels).toHaveCount(7);
+  await expect(labels).toHaveCount(8);
   const shown = await labels.evaluateAll((els) =>
     els.map((el) => {
       const box = el.getBoundingClientRect();
       return getComputedStyle(el).opacity === "1" && box.width > 10 && box.height > 10;
     }),
   );
-  expect(shown).toEqual(Array(7).fill(true));
+  expect(shown).toEqual(Array(8).fill(true));
   await context.close();
 });
 

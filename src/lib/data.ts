@@ -17,6 +17,8 @@ import rawBrand from "../data/brand.json";
 import rawCategoryIcons from "../data/category-icons.json";
 import rawEntries from "../data/entries.json";
 import rawFrames from "../data/frames.json";
+import rawStatuses from "../data/statuses.json";
+import { StatusDataSchema } from "../../shared/status-schema";
 import { isFullyDescribed } from "./gear-values";
 
 export const extractedFrames: Frames = FramesSchema.parse(rawFrames);
@@ -42,8 +44,17 @@ const hasKnownValues = (entry: Entry): boolean => !VALUE_CATEGORIES.has(entry.ca
 /** Unique enchantments come fixed on unique gear and cannot be rerolled, so their books are not obtainable. */
 const isObtainable = (entry: Entry): boolean => !(entry.category === "enchantment-book" && entry.variant === "unique");
 
+/**
+ * Statuses the game data types as a buff, debuff or neutral; the rest are internal copies of another status (the
+ * permanent Burning_Infinite, the Maw's and spiders' own Slowed) and stay unpublished.
+ */
+const TYPED_STATUSES: ReadonlySet<string> = new Set(
+  StatusDataSchema.parse(rawStatuses).statuses.flatMap((status) => (status.alignment ? [status.slug] : [])),
+);
+const isTypedStatus = (entry: Entry): boolean => entry.category !== "status" || TYPED_STATUSES.has(entry.slug);
+
 export const publishedEntries: readonly Entry[] = entries.filter(
-  (entry) => entry.release === "base" && hasRequiredIcon(entry) && isObtainable(entry) && hasKnownValues(entry),
+  (entry) => entry.release === "base" && hasRequiredIcon(entry) && isObtainable(entry) && hasKnownValues(entry) && isTypedStatus(entry),
 );
 
 /** Any released entry, published or not: for text and art shown inside another entry's page. */

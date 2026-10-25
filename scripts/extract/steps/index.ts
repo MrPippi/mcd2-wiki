@@ -16,6 +16,7 @@ import { soulEnchantmentsStep } from "./soul-enchantments";
 import { soulStormStep } from "./soul-storm";
 import { splashStep } from "./splash";
 import { spotMarkersStep } from "./spot-markers";
+import { statusesStep } from "./statuses";
 import { talismansStep } from "./talismans";
 import { uiAssetsStep } from "./ui-assets";
 import { uiStringsStep } from "./ui-strings";
@@ -49,6 +50,7 @@ export const EXTRACT_STEPS: readonly AnyStep[] = [
   bestiaryStep,
   soulStormStep,
   soulEnchantmentsStep,
+  statusesStep,
   guidesStep,
   questsStep,
   locationsStep,

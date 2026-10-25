@@ -54,6 +54,7 @@ with every number and name taken from the game files rather than typed in by han
 | **Talismans** | The value at each level and the XP needed to reach the next one |
 | **Enchantments** | Values at levels I, II and III, and which enchantment books carry them |
 | **Effects** | Every effect with its values at each level |
+| **Statuses** | Burning, Frozen, Poisoned and the rest: buff or debuff, default duration and modifiers, status fusion, and the artifacts, enchantments, effects and mobs that use them |
 | **Bestiary** | A portrait, health, toughness, resistances, soul yield and drops for each mob, including the Soul Corrupted versions, and the areas where they spawn |
 | **Soul Enchantments** | The buffs Soul Corrupted mobs can spawn with, their values at each tier, and which mobs or arenas never get them |
 | **World map** | The Overworld, the Sift and the Camp, with minecart stations, rifts, the teleport statue, merchants, main and side quests, Storm Generators, talisman chests, dungeons and area names |

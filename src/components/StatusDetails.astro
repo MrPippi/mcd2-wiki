@@ -1,0 +1,76 @@
+---
+import type { Entry } from "../../shared/schemas";
+import { t, type Lang } from "../lib/i18n";
+import { findStatus, statusLink, statusRows, statusSourceLinks } from "../lib/statuses";
+import { secondsText } from "../lib/units";
+import EntryIcon from "./EntryIcon.astro";
+import EntrySection from "./EntrySection.astro";
+import LangText from "./LangText.astro";
+import MobPortrait from "./MobPortrait.astro";
+
+interface Props {
+  lang: Lang;
+  status: Entry;
+}
+
+const { lang, status } = Astro.props;
+const info = findStatus(status.slug);
+const rows = info ? statusRows(info, lang) : [];
+const fusions = (info?.fusions ?? []).flatMap((fusion) => {
+  const other = statusLink(lang, "status", fusion.with);
+  return other ? [{ ...fusion, other }] : [];
+});
+const sources = info ? statusSourceLinks(lang, info) : [];
+---
+{info && (
+  <EntrySection title={t(lang, "statusData")} testid="status-data">
+    <dl class="stat-grid" data-pagefind-ignore>
+      {rows.map(({ id, label, value }) => (
+        <div data-row={id}>
+          <dt>{label}</dt>
+          <dd>{value}</dd>
+        </div>
+      ))}
+    </dl>
+    <p class="note" data-pagefind-ignore>{t(lang, "statusDataNote")}</p>
+  </EntrySection>
+)}
+{fusions.length > 0 && (
+  <EntrySection title={t(lang, "statusFusion")} testid="status-fusion">
+    {fusions.map((fusion) => (
+      <dl class="stat-grid" data-pagefind-ignore>
+        <div>
+          <dt>{t(lang, "statusFusionWith")}</dt>
+          <dd><a href={fusion.other.href}><LangText lang={lang} value={fusion.other.name} /></a></dd>
+        </div>
+        <div>
+          <dt>{t(lang, "statusFusionResult")}</dt>
+          <dd lang="en">{fusion.result}</dd>
+        </div>
+        <div>
+          <dt>{t(lang, "statusFusionImmunity")}</dt>
+          <dd>{secondsText(lang, fusion.immunity)}</dd>
+        </div>
+      </dl>
+    ))}
+    <p class="note" data-pagefind-ignore>{t(lang, "statusFusionNote")}</p>
+  </EntrySection>
+)}
+{sources.length > 0 && (
+  <EntrySection title={t(lang, "statusSources")} testid="status-sources">
+    <p class="note" data-pagefind-ignore>{t(lang, "statusSourcesNote")}</p>
+    <ul class="related" data-pagefind-ignore>
+      {sources.map((source) => (
+        <li data-kind={source.kind}>
+          <span class="related-label">{source.label}</span>
+          <a href={source.href}>
+            {source.mob
+              ? <MobPortrait lang={lang} mob={source.mob} size={40} decorative />
+              : source.icon && <EntryIcon icon={source.icon} alt="" size={40} category={source.category} variant={source.variant} />}
+            <LangText lang={lang} value={source.name} />
+          </a>
+        </li>
+      ))}
+    </ul>
+  </EntrySection>
+)}
