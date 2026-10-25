@@ -6,7 +6,7 @@ import GuideMarker from "../../../components/GuideMarker.astro";
 import GuidePage from "../../../components/GuidePage.astro";
 import GuideText from "../../../components/GuideText.astro";
 import GuideUnconfirmed from "../../../components/GuideUnconfirmed.astro";
-import { fill, formatNumber, guideBySlug, guidesData, rarityName, roman, textOf, unlockText, type GuideLink } from "../../../lib/guides";
+import { fill, formatNumber, guideBySlug, guidesData, rarityName, textOf, unlockText, type GuideLink } from "../../../lib/guides";
 import { t, type Lang } from "../../../lib/i18n";
 
 export const getStaticPaths = langPaths;
@@ -26,7 +26,7 @@ const pointsName = { html: points?.html ?? "" };
 const shardsName = { html: shards?.html ?? "" };
 const perLevel = (name: { html: string }) => fill(t(lang, "guideColPerLevel"), { name });
 const enchantsmith = data.vendors.find((vendor) => vendor.id === "enchantsmith");
-const upgrades = (enchantsmith?.levels ?? []).flatMap((level) => unlockText(data, "enchantsmith", level.level, lang) ?? []);
+const upgrades = (enchantsmith?.levels ?? []).map((level) => ({ ...level, unlock: unlockText(data, "enchantsmith", level.level, lang) }));
 ---
 <GuidePage lang={lang} guide={guide}>
   {data.enchanting.costs.length > 0 && (
@@ -68,12 +68,23 @@ const upgrades = (enchantsmith?.levels ?? []).flatMap((level) => unlockText(data
     <GuideHeading lang={lang} text={textOf(data, "enchantsmithName", lang)} />
     <GuideText lang={lang} text={textOf(data, "enchantsmithTutorial", lang)} />
     <h3 class="guide-subtitle">{t(lang, "guideUpgradeEnchantments")}</h3>
-    <GuideMarker lang={lang} texts={upgrades} />
-    {data.enchanting.maxLevel > 0 && <p class="guide-text" data-testid="guide-max-level">{t(lang, "guideMaxEnchantLevel").replace("{level}", () => roman(data.enchanting.maxLevel))}</p>}
+    <GuideMarker lang={lang} texts={upgrades.map((level) => level.unlock)} />
+    {/* One row per Enchantsmith level: what it costs in Echo Shards and the upgrade it unlocks (the game's own unlock line). */}
     {upgrades.length > 0 && (
-      <ul class="guide-facts">
-        {upgrades.map((text) => <li set:html={text.html} />)}
-      </ul>
+      <div class="guide-scroll" tabindex="0" role="region" aria-label={t(lang, "guideUpgradeEnchantments")}>
+        <table class="guide-table" data-testid="guide-enchant-upgrades">
+          <thead><tr><th scope="col">{t(lang, "guideColLevel")}</th><th scope="col">{shards ? <span set:html={shards.html} /> : t(lang, "guideColCost")}</th><th scope="col">{t(lang, "guideColUnlocks")}</th></tr></thead>
+          <tbody>
+            {upgrades.map((level) => (
+              <tr>
+                <th scope="row">{level.level}</th>
+                <td class="guide-number">{formatNumber(level.cost, lang)}</td>
+                <td class="guide-cell-text">{level.unlock && <span set:html={level.unlock.html} />}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     )}
   </section>
 </GuidePage>

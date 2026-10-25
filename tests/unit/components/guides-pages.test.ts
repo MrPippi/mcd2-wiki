@@ -80,12 +80,16 @@ describe("unconfirmed tags", () => {
 });
 
 describe("enchanting guide", () => {
-  it("shows the cost table, the official tutorial texts and the highest level", async () => {
+  it("shows the cost table, the official tutorial texts and the upgrade each Enchantsmith level unlocks", async () => {
     const html = await render(EnchantingPage, "en");
     expect(html).toContain("Enchantment points, added per level");
     expect(html).toContain("You earn one enchantment point each time you level up");
-    expect(html).toContain("Enchantments go up to level III.");
-    expect(html).toContain("You&#39;ll unlock upgrading enchantments to level III");
+    const upgrades = html.slice(html.indexOf('data-testid="guide-enchant-upgrades"'), html.indexOf("</table>", html.indexOf('data-testid="guide-enchant-upgrades"')));
+    expect(count(upgrades, "<tr")).toBe(3);
+    expect(upgrades).toContain("You&#39;ll unlock upgrading enchantments to level III");
+    // Each upgrade line shows once: the table replaced a separate list and a "goes up to level III" line saying the same.
+    expect(count(html, "You&#39;ll unlock upgrading enchantments to level III")).toBe(1);
+    expect(html).not.toContain("Enchantments go up to level III.");
   });
 
   it("marks the Dutch enchantment points title untranslated", async () => {
