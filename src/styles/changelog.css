@@ -16,8 +16,8 @@
 .changelog-meta { margin: 0; font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.03em; color: var(--muted); overflow-wrap: anywhere; }
 .changelog-site-data { margin: 2px 0; }
 
-.changelog-body { display: grid; gap: 14px; min-width: 0; }
-.changelog-group { display: grid; gap: 8px; min-width: 0; }
+.changelog-body { display: grid; align-content: start; gap: 14px; min-width: 0; }
+.changelog-group { display: grid; align-content: start; gap: 8px; min-width: 0; }
 .changelog-kind-title {
   justify-self: start; margin: 0; padding: 1px 8px; border: 1px solid var(--rule-strong);
   font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-2);
