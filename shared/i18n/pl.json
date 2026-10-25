@@ -881,7 +881,7 @@
   "bossesOrder": "Kolejność: według pierwszej misji głównej, w której występuje każdy z nich; pozostali według najniższego poziomu gracza spośród ich regionów, potem według nazwy.",
   "bossReplay": "Powtórka walki z bossem",
   "guides": "Poradniki",
-  "guidesIntro": "Jak działa gra, odczytane z jej własnych danych: kupcy w mieście, zaklinanie, rzadkość, sekretne talizmany, waluty i poziomy.",
+  "guidesIntro": "Jak działa gra, odczytane z jej własnych danych: kupcy w mieście, zaklinanie, rzadkość, zagrożenie i poziom trudności, sekretne talizmany, waluty i poziomy.",
   "guideVendors": "Kupcy w mieście",
   "guideVendorsSummary": "Ile kosztuje podniesienie poziomu Miejskiego kupca, Kowala i Zaklinacza oraz co odblokowuje każdy poziom.",
   "guideEnchanting": "Zaklinanie",

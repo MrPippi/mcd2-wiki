@@ -878,7 +878,7 @@
   "bossesOrder": "Ordre : selon la première quête principale où chacun apparaît ; les autres selon le plus bas niveau du joueur de leurs régions, puis par nom.",
   "bossReplay": "Boss à rejouer",
   "guides": "Guides",
-  "guidesIntro": "Le fonctionnement du jeu, lu dans ses propres données : marchands de la ville, enchantement, rareté, talismans secrets, monnaies et niveaux.",
+  "guidesIntro": "Le fonctionnement du jeu, lu dans ses propres données : marchands de la ville, enchantement, rareté, menace et difficulté, talismans secrets, monnaies et niveaux.",
   "guideVendors": "Marchands de la ville",
   "guideVendorsSummary": "Le coût pour faire monter de niveau le Commerçant du village, le Forgeron et l'Enchanteur, et ce que débloque chaque niveau.",
   "guideEnchanting": "Enchantement",
