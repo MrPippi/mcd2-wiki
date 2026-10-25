@@ -7,12 +7,12 @@
 1. 將遊戲解包檔放在 `source-data/`（不進 git）。
 2. `npm run extract` → 更新 `src/data/*.json`、`public/icons/`，並產生 `extract-report.md`。
 3. 檢查報告；缺圖示時編輯 `scripts/extract/icon-overrides.json` 後重跑。
-   - 遊戲版本不在解包檔裡，`npm run extract` 會從遊戲的 `MicrosoftGame.config`（`<Identity … Version="…">`）讀出版本，寫進 `shared/game-version.json` 並替換兩份 README 開頭的版本號。依序找 `source-data/MicrosoftGame.config`、`GAME_DIR` 指定的安裝目錄（預設 `C:\XboxGames\Minecraft Dungeons II\Content`）。已安裝的遊戲可能比解包檔新，所以解包時最好把當時的 `MicrosoftGame.config` 一起複製進 `source-data/`；版本取自安裝目錄時終端機會提醒。都找不到就不改版本。配裝頁會把版本寫進分享連結，打開舊版本的連結時會提示。
+   - 遊戲版本不在解包檔裡，`npm run extract` 會從遊戲的 `MicrosoftGame.config`（`<Identity … Version="…">`）讀出版本，寫進 `shared/game-version.json`，並替換兩份 README 與兩個 issue 表單（資料錯誤、遊戲內測試）裡的版本號。依序找 `source-data/MicrosoftGame.config`、`GAME_DIR` 指定的安裝目錄（預設 `C:\XboxGames\Minecraft Dungeons II\Content`）。已安裝的遊戲可能比解包檔新，所以解包時最好把當時的 `MicrosoftGame.config` 一起複製進 `source-data/`；版本取自安裝目錄時終端機會提醒。都找不到就不改版本。配裝頁會把版本寫進分享連結，打開舊版本的連結時會提示。
    圖示依序取自：`icon-overrides.json` → 資料表每列的 `IconReference`（`/Game/Spicewood/X` 對應 `Assets/X.png`；其他 `/<外掛>/X` 先找 `Plugins/<外掛>/Content/X.png`、再找 `Assets/X.png`）→ 依檔名比對。神器、護符、披風、寵物的資料列名稱與條目 id 對不上，仍靠檔名比對與覆寫清單。
    部分圖示在遊戲外掛裡，不在 `Assets/` 下：把解包的 `Plugins/OreUI/Content/` 與 `Plugins/SpicewoodUI/Content/` 以相同路徑放進 `source-data/`。效果沒有圖示時照常發布，只是不顯示圖。缺少 `SpicewoodUI` 時，世界地圖的標記圖示會全部被略過，且 `extract-report.md` 不會有任何提示，務必放入。
 4. 遊戲地圖有變動時跑 `npm run tiles`（見下方「世界地圖」）。
 5. 抽取更新 `shared/game-version.json` 後跑 `npm run game-diff -- <上一版資料的 commit>`（通常是 `master`），把數值變動寫進 `src/data/game-changes.json`；並在 `src/game-updates.json` 補上新版本（見下方「更新日誌」）。
-6. Commit `shared/game-version.json`、兩份 README、`src/data`、`public/icons`、`public/map`、`src/assets/brand`、`scripts/extract/icon-overrides.json`。
+6. Commit `shared/game-version.json`、兩份 README、`.github/ISSUE_TEMPLATE/`、`src/data`、`public/icons`、`public/map`、`public/mobs`、`src/assets/brand`、`scripts/extract/icon-overrides.json`、`scripts/extract/mob-portrait-overrides/`。重新匯出的 PNG 常只是編碼不同、像素完全一樣，這類圖示的變動不必 commit。
 
 網站圖示（favicon、主畫面圖示、分享預覽圖）與首頁背景取自遊戲 `Assets/UI/Icons/` 的 Logo 與 SplashScreen，同樣由 `npm run extract` 複製；首頁背景在 build 時轉成 WebP。分享預覽圖需要絕對網址，部署時由 `SITE_URL` 提供。
 
@@ -123,6 +123,14 @@
 - **驗證**：與第三方「逐級詞條概率」表（遊戲 1.1.1）逐格比對，363,400 格全數相符（差 < 1e-6）。該表沒有「特殊」稀有度，所以特殊的數字沒有交叉驗證。
 - **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `affixOdds` 改為 `true`。需要留意的假設：Mushroom 以外沒有資料能分辨「最後一個 Set 勝出」與「最小值」；`MinimumRequiredItemPower` 目前全為 0 而被忽略，`SecondaryETG` 全空，非 0／非空時報告 `affix-ignored`。
 
+## 掉落機率
+
+物品頁的「掉落機率」表與 `/<lang>/drops/` 掉落機率計算器：觸發一次來源（開一次寶箱、擊敗一次怪物、領一次任務獎勵）時至少掉出一件該物品的機率。`npm run extract` 寫入 `src/data/drop-models.json`（`scripts/extract/drop-*.ts`，規則在 `drop-slots.ts`、`drop-pool.ts`、`drop-rarity-rows.ts`、`drop-universe.ts`），頁面與計算器用同一份 `shared/drop-odds.ts` 計算。
+
+- 涵蓋物品頁列出的寶箱、已發布任務的每一批獎勵、頭目、小頭目與寶箱豬，以及各區域的一般怪物（含靈魂腐化與地卜師）。商人、靈魂風暴寶箱、鑰匙寶箱不在範圍。
+- 資料表沒有寶箱出現的區域，故區域寶箱配對所有有掉落池的區域。被略過的來源與無法套用的資料會以 `drop-ignored` 報告。
+- **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `dropOdds` 改為 `true`。
+
 ## 靈魂附魔
 
 `/<lang>/soul-enchantments/` 讀 `DT_SoulEnchantmentDefinition`（名稱取自 `DT_SoulEnchantmentDefinition.csv`，遊戲沒有說明文字），寫入 `src/data/soul-enchantments.json`，圖示複製到 `public/icons/soul-enchantments/`（`/OreUI/...` 參照依上方規則找到 `Assets/UI/Icons/SoulStated/`）。
@@ -131,6 +139,22 @@
 - 怪物帶哪種附魔由遊戲程式（`GA_TriggerSoulEnchantmentOnSpawn`）決定，資料只有排除條件：怪物列的 `MobConditions.ExcludedSoulEnchantments`（經 trait 繼承，如 `SoulStatedHusk` → `Husk`）與競技場波次的 `ExcludedSoulEnchantmentsOverride`（以波次標籤中的任務 id 對回任務）。
 - **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `soulEnchantmentLevels` 改為 `true`：基底列與通用 `Lvl.I–III` 列（最大生命值 ×1.25／×1.5／×2）的修正是否也疊加；`ThreatLevelSettings` 是否就是等級的威脅門檻；`ThreatLevelArea` key value 的意義不明，未顯示。
 - 無法顯示的修正或技能寫進報告（`soul-enchantment-ignored`），對不到怪物頁或任務的排除寫進 `soul-enchantment-unlinked`。
+
+## 靈魂風暴
+
+`/<lang>/soul-storm/` 讀 `DT_SoulStormTimeSchedule`（起點、每場長度與間隔）、`DT_SoulStormScheduleAreaRotation`（區域輪替）、`DT_SoulStormPropActorDefinition`（風暴產生器各難度）、`DT_SpawnDefinition`、`DT_LootSourceDefinition`、`DT_RarityChanceDefinition` 與 `DT_GameBalanceDefinition`，寫入 `src/data/soul-storm.json`。倒數在瀏覽器依時程與輪替計算。
+
+- 每場需摧毀幾座風暴產生器不在資料裡（遊戲目標文字的 `{0}` 在執行時填入），頁面用 `src/lib/soul-storm.ts` 的 `OBSERVED_GENERATORS`（遊戲內觀察值 3）填入並註明來源；遊戲改了數量時改這個常數。
+- 各區的風暴產生器位置數在 build 時由 `map.json` 的風暴產生器標記計算（見下方「世界地圖」的關卡資料點位）。
+
+## 怪物頭像
+
+怪物圖鑑的頭像是遊戲模型的渲染圖，`npm run extract` 依序取：`scripts/extract/mob-portrait-overrides/<slug>.webp`（進 git）→ `source-data/Renders/Mobs/<資產名>.png`（依怪物資料列的角色參照對到渲染檔），輸出 256 px（`public/mobs/`）與 768 px（`public/mobs/large/`，怪物頁的大圖）。`scripts/extract/mob-portraits.ts` 的 `PORTRAIT_DENYLIST` 列出不採用的渲染檔。
+
+- 渲染工具在 `source-data/Renders/tools/`（不進 git）：用 FModel 匯出怪物的 BP（Save Properties (.json)）、SkeletalMesh（Save Model，產生 `.uemodel` 與材質 `MI_*.json`）與貼圖後，`python -I render_mobs.py <Exports\Dungeons\Content> <Enemies 資料夾> <輸出資料夾> --size 768`。BP 經父類別鏈找模型與材質覆寫。
+- 工具會跳過名稱含 `SoulStated`、`Proj`、`Clone` 等的 BP，也只掃傳入的資料夾（`Friendlies/` 下的怪物如寶箱豬要另外指定）。這類頭像渲染後放進覆寫資料夾，目前有寶箱豬、靈魂腐化女巫與扭曲伏守者。
+- 靈魂腐化版本的外觀是材質發光與光環特效，渲染工具做不出來，頭像與一般版本相同。
+- 扭曲伏守者的觸角材質（`MI_Maw_Antenna`）是 16×8 格的動畫序列圖，直接渲染會把整張圖貼上去；覆寫的頭像只取第 5 列最後一格（螺旋，與製作名單的手繪圖一致）。
 
 ## 世界地圖
 
@@ -188,8 +212,3 @@ npm run build        # 產生 dist/ 與 Pagefind 索引
 
 `.github/workflows/deploy.yml` 在推送到 `master` 時再跑一次型別檢查與單元測試，通過後建置並發布到 GitHub Pages，`BASE_PATH` 自動設為 `/<repo>/`。
 若 repo 是 `<user>.github.io`，請把 `BASE_PATH` 改成 `/`。
-
-## Drop odds
-
-- `npm run extract` writes `src/data/drop-models.json` (scripts/extract/drop-*.ts, rules in drop-slots.ts, drop-pool.ts, drop-rarity-rows.ts, drop-universe.ts). The item pages and `/<lang>/drops/` compute from it with `shared/drop-odds.ts`.
-- **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `dropOdds` 改為 `true`。資料表沒有寶箱出現的區域，故區域寶箱配對所有有掉落池的區域；商人、一般怪物、靈魂風暴寶箱、鑰匙寶箱不在範圍。被略過的來源與無法套用的資料會以 `drop-ignored` 報告。

@@ -4,7 +4,7 @@
 
 **A fan-made reference built straight from the game's own data, in 16 languages**
 
-Weapons, armor, artifacts, enchantments, the bestiary, the world map, quests, Soul Storms and more,<br>
+Weapons, armor, artifacts, enchantments, the bestiary, the world map, quests, Soul Storms, drop odds and more,<br>
 with every number and name taken from the game files rather than typed in by hand.
 
 [![Site](https://img.shields.io/badge/site-mrpippi.github.io%2Fmcd2--wiki-2ea44f)](https://mrpippi.github.io/mcd2-wiki/)
@@ -48,24 +48,27 @@ with every number and name taken from the game files rather than typed in by han
 
 | Section | What's in it |
 | --- | --- |
-| **Melee and ranged weapons** | Damage, stagger, reach and knockback for every hit of the combo, the weapon's role and weight, and every effect it can roll at levels I, II and III |
-| **Armor** | Every set and each of its pieces, with the slot, description and unique variant |
-| **Artifacts** | Cooldown, soul cost, duration and area, plus the effects they can roll |
+| **Melee and ranged weapons** | Damage, stagger, reach and knockback for every hit of the combo, the weapon's role and weight, every effect it can roll at levels I, II and III, and the odds of each effect by threat level |
+| **Armor** | Every set and each of its pieces, with the slot, description, unique variant and effect odds |
+| **Artifacts** | Cooldown, soul cost, duration and area, plus the effects they can roll and their odds |
 | **Talismans** | The value at each level and the XP needed to reach the next one |
 | **Enchantments** | Values at levels I, II and III, and which enchantment books carry them |
 | **Effects** | Every effect with its values at each level |
-| **Bestiary** | Health, toughness, resistances, soul yield and drops for each mob, including the Soul-corrupted versions, and the areas where they spawn |
-| **World map** | The Overworld, the Sift and the Camp, with minecart stations, rifts, teleport statues, merchants and area names |
-| **Soul Storms** | A live countdown to the current and next storm in your time zone, the area rotation, Storm Generator difficulty, health and shields, and what the reward chests drop. The times are worked out from the game data and are marked as estimates until confirmed in game |
+| **Bestiary** | A portrait, health, toughness, resistances, soul yield and drops for each mob, including the Soul Corrupted versions, and the areas where they spawn |
+| **Soul Enchantments** | The buffs Soul Corrupted mobs can spawn with, their values at each tier, and which mobs or arenas never get them |
+| **World map** | The Overworld, the Sift and the Camp, with minecart stations, rifts, the teleport statue, merchants, main and side quests, Storm Generators, talisman chests, dungeons and area names |
+| **Soul Storms** | A live countdown to the current and next storm in your time zone, the area rotation with how many Storm Generator spots each area has, Storm Generator difficulty, health and shields, and what the reward chests drop |
 | **Build Planner** | Pick your weapons, armor, artifacts and talismans, then share the build as a link (it opens the same build) or download it as an image for social media |
 | **Weapon Compare** | Up to three weapons side by side: combo damage, fire rate, reach, stagger, built-in bonus and the effects each can roll, with the best value marked; share it as a link |
-| **Guides** | Game mechanics from the game's own data: vendor upgrade costs and unlocks, enchanting costs, rarity effects and drop weights, secret talismans, currency caps and recommended level by story stage; anything the data cannot explain is marked unconfirmed |
+| **Drop Calculator** | Pick an item, threat level, difficulty and rarity to see how likely each source (chests, quest rewards, bosses and regular mobs) is to drop it |
+| **Guides** | Game mechanics from the game's own data: vendor upgrade costs and unlocks, enchanting costs and upgrades, rarity effects and drop weights, threat levels and difficulty, secret talismans, currency caps and recommended level by story stage; anything the data cannot explain is marked unconfirmed |
 | **Quests** | Every core quest in story order, side quests by region, Echo Golem quests and boss replays, each with its objectives, prerequisites, the quests it unlocks, first-completion and repeat rewards, emeralds by quest size, and the mobs you fight. Item pages name the quest a reward comes from |
 | **Locations** | One page per region with its area icon and the player level the game sets for it (where the game has them), a link to its spot on the map where the map marks it, the places inside it, the monsters found there by kind, its quests and its area loot. Mob and quest pages link to the region |
 | **Bosses** | The 10 bosses and 6 mini-bosses in story order, with health, region, and the core quest and boss replay each one appears in, where the game data names them |
 | **Achievements** | All Steam achievements with global unlock rates. Hidden ones stay hidden until you choose to reveal how to unlock them |
+| **Changelog** | What each game update changed (grouped into new, changed and fixed, then by topic) with a link to the official notes, the version the site's data comes from, and the changed values whenever the data moves to a new version |
 
-Item pages also list where an item comes from: quest rewards, chests, merchants or enchantment book pools.
+Item pages also list where an item comes from (quest rewards, chests, merchants or enchantment book pools) and the drop odds from each source.
 
 ![An item page: stats, rollable effects and where to get it](docs/images/en-item.webp)
 
@@ -75,6 +78,7 @@ Item pages also list where an item comes from: quest rewards, chests, merchants 
 - **Search everything.** Search by name in your language or in English, from any page.
 - **Filter lists.** Type to narrow a category, or show only Normal or Unique items.
 - **Share a map view.** The map's address keeps the world, zoom and position, so you can send someone the exact spot. You can also filter the markers or search for a place.
+- **Keyboard shortcuts.** Q and E switch to the previous or next item category, and Z and X switch worlds on the map, as in the game.
 - **Works on phones.** Every page is laid out for small screens.
 
 ![The world map with minecart stations, rifts and merchants](docs/images/en-map.webp)
