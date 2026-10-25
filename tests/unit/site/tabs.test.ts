@@ -49,7 +49,7 @@ describe("keyStep", () => {
 });
 
 describe("TAB_ORDER", () => {
-  it("lists the seven published categories in navigation order", () => {
-    expect(TAB_ORDER).toEqual(["melee", "ranged", "armor", "artifact", "talisman", "enchantment", "effect"]);
+  it("lists the eight published categories in navigation order", () => {
+    expect(TAB_ORDER).toEqual(["melee", "ranged", "armor", "artifact", "talisman", "enchantment", "effect", "status"]);
   });
 });

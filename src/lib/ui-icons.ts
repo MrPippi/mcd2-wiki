@@ -2,7 +2,7 @@ import type { Category, UiIconKey } from "../../shared/config";
 import type { ArmorPiece, UiIcons } from "../../shared/schemas";
 import { extractedUiIcons } from "./data";
 
-/** Game inventory tab icon for each site category; statuses and skins have none in game. */
+/** Game inventory tab icon for each site category; skins have none in game, statuses borrow the stats tab icon. */
 const CATEGORY_ICON: Readonly<Partial<Record<Category, UiIconKey>>> = {
   melee: "melee",
   ranged: "ranged",
@@ -11,6 +11,7 @@ const CATEGORY_ICON: Readonly<Partial<Record<Category, UiIconKey>>> = {
   enchantment: "enchantment",
   "enchantment-book": "enchantment",
   effect: "effect",
+  status: "status",
   talisman: "talisman",
   cape: "cape",
   pet: "pet",

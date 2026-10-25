@@ -1,0 +1,760 @@
+{
+  "statuses": [
+    {
+      "slug": "acceleration",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 4,
+      "modifiers": [
+        {
+          "attribute": "meleeAttackSpeed",
+          "op": "multiply",
+          "value": 2.5
+        },
+        {
+          "attribute": "rangedAttackSpeed",
+          "op": "multiply",
+          "value": 2.5
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "maiming-mushroom"
+        }
+      ]
+    },
+    {
+      "slug": "arcane",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 6,
+      "modifiers": [
+        {
+          "attribute": "artifactCooldown",
+          "op": "add",
+          "value": -0.5
+        },
+        {
+          "attribute": "artifactDamage",
+          "op": "add",
+          "value": 0.2
+        },
+        {
+          "attribute": "soulGathering",
+          "op": "multiply",
+          "value": 1.15
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "enchantment",
+          "slug": "arcane"
+        }
+      ]
+    },
+    {
+      "slug": "buff-conductive-bracelet",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "conductive-bracelet"
+        },
+        {
+          "kind": "effect",
+          "slug": "elemental-hit"
+        }
+      ]
+    },
+    {
+      "slug": "buff-deathcap-mushroom",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 6,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "add",
+          "value": 0.25
+        },
+        {
+          "attribute": "meleeAttackSpeed",
+          "op": "add",
+          "value": 0.3
+        },
+        {
+          "attribute": "rangedAttackSpeed",
+          "op": "add",
+          "value": 0.3
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "deathcap-mushroom"
+        }
+      ]
+    },
+    {
+      "slug": "buff-fire-bracelet",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "fire-bracelet"
+        },
+        {
+          "kind": "effect",
+          "slug": "elemental-hit"
+        }
+      ]
+    },
+    {
+      "slug": "buff-frost-bracelet",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "frost-bracelet"
+        },
+        {
+          "kind": "effect",
+          "slug": "elemental-hit"
+        }
+      ]
+    },
+    {
+      "slug": "buff-grindstone",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 6,
+      "modifiers": [
+        {
+          "attribute": "damageBonus",
+          "op": "add",
+          "value": 15
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "grindstone"
+        }
+      ]
+    },
+    {
+      "slug": "buff-poison-bracelet",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "poison-bracelet"
+        },
+        {
+          "kind": "effect",
+          "slug": "elemental-hit"
+        }
+      ]
+    },
+    {
+      "slug": "buff-powershaker",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 6,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "powershaker"
+        }
+      ]
+    },
+    {
+      "slug": "burning",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 4,
+      "modifiers": [],
+      "fusions": [
+        {
+          "with": "conductive",
+          "result": "Overload",
+          "negative": true,
+          "immunity": 2.3
+        }
+      ],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "satchel-fire"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "fire-aspect"
+        },
+        {
+          "kind": "mob",
+          "slug": "deep-dark-golem"
+        },
+        {
+          "kind": "mob",
+          "slug": "red-stone-cube"
+        },
+        {
+          "kind": "mob",
+          "slug": "soul-construct"
+        }
+      ]
+    },
+    {
+      "slug": "burning-infinite",
+      "nonStacking": false,
+      "duration": null,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "chained",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 5,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "multiply",
+          "value": 0
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "effect",
+          "slug": "chains"
+        }
+      ]
+    },
+    {
+      "slug": "chained-propagated",
+      "nonStacking": false,
+      "duration": 5,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "conductive",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "multiply",
+          "value": 1.2
+        },
+        {
+          "attribute": "damageTaken",
+          "op": "multiply",
+          "value": 1.25
+        }
+      ],
+      "fusions": [
+        {
+          "with": "burning",
+          "result": "Overload",
+          "negative": true,
+          "immunity": 2.3
+        }
+      ],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "satchel-conductive"
+        },
+        {
+          "kind": "artifact",
+          "slug": "lightning-rod"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "channeling"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "thundering"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "mauler-dive"
+        },
+        {
+          "kind": "mob",
+          "slug": "monstrosity-copper"
+        }
+      ]
+    },
+    {
+      "slug": "critical-chance-increase",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 4,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "critical-damage-increase",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 4,
+      "modifiers": [
+        {
+          "attribute": "critMultiplier",
+          "op": "add",
+          "value": 2
+        }
+      ],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "deflection",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [
+        {
+          "attribute": "deflectChance",
+          "op": "add",
+          "value": 1
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "carapace-ocarina"
+        }
+      ]
+    },
+    {
+      "slug": "freezing",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 15,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "multiply",
+          "value": 0.7
+        },
+        {
+          "attribute": "meleeAttackSpeed",
+          "op": "multiply",
+          "value": 0.4
+        },
+        {
+          "attribute": "rangedAttackSpeed",
+          "op": "multiply",
+          "value": 0.4
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "satchel-freezing"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "frost-crescent"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "mauler-dive"
+        }
+      ]
+    },
+    {
+      "slug": "gloaming",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "honeyed",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 6,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "multiply",
+          "value": 0.5
+        }
+      ],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "invulnerable",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 4,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "warding-chimes"
+        },
+        {
+          "kind": "mob",
+          "slug": "warden"
+        },
+        {
+          "kind": "mob",
+          "slug": "maw"
+        }
+      ]
+    },
+    {
+      "slug": "invulnerable-infinite",
+      "nonStacking": false,
+      "duration": null,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "poisoned",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 15,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "corrupted-seeds"
+        },
+        {
+          "kind": "artifact",
+          "slug": "satchel-poison"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "poison-fog"
+        },
+        {
+          "kind": "mob",
+          "slug": "cave-spider"
+        }
+      ]
+    },
+    {
+      "slug": "poisoned-infinite",
+      "nonStacking": false,
+      "duration": null,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "regeneration",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 4.5,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "regeneration-infinite",
+      "nonStacking": false,
+      "duration": null,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "resistance",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 5,
+      "modifiers": [
+        {
+          "attribute": "damageTaken",
+          "op": "multiply",
+          "value": 0.3
+        }
+      ],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "shadow-form",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [
+        {
+          "attribute": "critChance",
+          "op": "add",
+          "value": 1
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "smoke-bomb"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "shadow-strike"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "clawing-shadow-unique"
+        }
+      ]
+    },
+    {
+      "slug": "slowed",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 6,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "multiply",
+          "value": 0.5
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "mob",
+          "slug": "slime"
+        },
+        {
+          "kind": "mob",
+          "slug": "bonker"
+        },
+        {
+          "kind": "mob",
+          "slug": "monstrosity-moss"
+        }
+      ]
+    },
+    {
+      "slug": "slowed-slowed-maw",
+      "nonStacking": false,
+      "duration": 1.5,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "multiply",
+          "value": 0.5
+        }
+      ],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "slowed-slowed-spider",
+      "nonStacking": false,
+      "duration": 6,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "mob",
+          "slug": "spider-jockey"
+        }
+      ]
+    },
+    {
+      "slug": "soul-charged",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 5,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "enchantment",
+          "slug": "soul-fire-aspect"
+        },
+        {
+          "kind": "mob",
+          "slug": "maw"
+        },
+        {
+          "kind": "mob",
+          "slug": "monstrosity-sculk"
+        }
+      ]
+    },
+    {
+      "slug": "strength",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 4,
+      "modifiers": [
+        {
+          "attribute": "damage",
+          "op": "add",
+          "value": 1
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "effect",
+          "slug": "status-on-hit-strength"
+        }
+      ]
+    },
+    {
+      "slug": "strength-infinite",
+      "nonStacking": false,
+      "duration": null,
+      "modifiers": [],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "swiftness",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 4,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "add",
+          "value": 0.5
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "haste-mushroom"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "tempo-theft"
+        },
+        {
+          "kind": "enchantment",
+          "slug": "spring-loaded"
+        }
+      ]
+    },
+    {
+      "slug": "unstoppable",
+      "alignment": "positive",
+      "nonStacking": true,
+      "duration": 4,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "add",
+          "value": 0.15
+        }
+      ],
+      "fusions": [],
+      "sources": []
+    },
+    {
+      "slug": "vined",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 8,
+      "modifiers": [],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "artifact",
+          "slug": "corrupted-seeds"
+        }
+      ]
+    },
+    {
+      "slug": "weakness",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 5,
+      "modifiers": [
+        {
+          "attribute": "damage",
+          "op": "add",
+          "value": -0.5
+        },
+        {
+          "attribute": "damageTaken",
+          "op": "multiply",
+          "value": 1.5
+        }
+      ],
+      "fusions": [],
+      "sources": [
+        {
+          "kind": "mob",
+          "slug": "ravager"
+        },
+        {
+          "kind": "mob",
+          "slug": "warden"
+        },
+        {
+          "kind": "mob",
+          "slug": "wellspring-miniboss"
+        }
+      ]
+    },
+    {
+      "slug": "webbed",
+      "alignment": "negative",
+      "nonStacking": true,
+      "duration": 3,
+      "modifiers": [
+        {
+          "attribute": "movementSpeed",
+          "op": "multiply",
+          "value": 0.3
+        }
+      ],
+      "fusions": [],
+      "sources": []
+    }
+  ]
+}

@@ -131,6 +131,15 @@
 - 資料表沒有寶箱出現的區域，故區域寶箱配對所有有掉落池的區域。被略過的來源與無法套用的資料會以 `drop-ignored` 報告。
 - **尚未在遊戲內確認**，頁面標示，確認後把 `scripts/extract/guides-status.json` 的 `dropOdds` 改為 `true`。
 
+## 狀態
+
+`/<lang>/status/` 與各狀態頁讀 `DT_StatusDefinition`（以 `SW_Status_<id>` 文字鍵對回狀態條目）與 `DT_StatusFusionDefinition`，寫入 `src/data/statuses.json`（`scripts/extract/statuses.ts`）。
+
+- 只發布資料有增益／減益／中性類型（`SW.Status.Alignment.*`）的狀態；`Burning_Infinite` 這類沒有類型的內部複本不發布（`src/lib/data.ts` 的 `isTypedStatus`）。
+- 持續時間是 `StatusData.DefaultDuration`（-1 為直到移除），施加的來源可另行指定。效果修正只顯示 `STATUS_ATTRIBUTE_KEYS` 列出的屬性，且只顯示 `ScalableFloat` 的 `MultiplyAdditive`／`MultiplyCompound`（×）與 `AddBase`（+/−）；生命值與靈魂的持續數值由遊戲程式計算，`Override` 的語意不明，都寫進報告（`status-ignored`）。
+- 相關來源：掃描神器、附魔、效果、效果範本與怪物資料表列中的 `SW.Status.*` 標籤（略過 `ParentTags` 與 `IgnoreActorsWithTags`），未知子標籤往上找到有條目的狀態（`SW.Status.Slowed.Slime` → 緩速）。對不到頁面的列寫進 `status-source-unlinked`。網站未發布的條目不顯示。
+- 唯一的融合（燃燒＋觸電 → `Overload`）在遊戲裡沒有名稱與圖示，頁面以列名顯示並註明可能尚未啟用。
+
 ## 靈魂附魔
 
 `/<lang>/soul-enchantments/` 讀 `DT_SoulEnchantmentDefinition`（名稱取自 `DT_SoulEnchantmentDefinition.csv`，遊戲沒有說明文字），寫入 `src/data/soul-enchantments.json`，圖示複製到 `public/icons/soul-enchantments/`（`/OreUI/...` 參照依上方規則找到 `Assets/UI/Icons/SoulStated/`）。

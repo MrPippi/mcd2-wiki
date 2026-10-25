@@ -27,13 +27,13 @@ describe("i18n", () => {
     expect(NAV_GROUPS.find((group) => group.key === "equipment")?.categories).toContain("talisman");
   });
 
-  it("does not publish statuses or cosmetics for now", () => {
+  it("does not publish cosmetics for now", () => {
     const published = [...NAV_GROUPS.flatMap((group) => group.categories), ...GRID_CATEGORIES, ...TABLE_CATEGORIES];
-    for (const hidden of ["status", "cape", "pet", "skin"]) expect(published).not.toContain(hidden);
+    for (const hidden of ["cape", "pet", "skin"]) expect(published).not.toContain(hidden);
   });
 
   it("navigates to every published category; books merge into enchantments", () => {
-    const hidden = new Set(["enchantment-book", "status", "cape", "pet", "skin"]);
+    const hidden = new Set(["enchantment-book", "cape", "pet", "skin"]);
     const shown = CATEGORIES.filter((category) => !hidden.has(category)).sort();
     expect(NAV_GROUPS.flatMap((group) => group.categories).sort()).toEqual(shown);
     expect([...GRID_CATEGORIES, ...TABLE_CATEGORIES, "armor"].sort()).toEqual(shown);

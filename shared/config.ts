@@ -68,7 +68,7 @@ export type FrameName = keyof typeof FRAME_SOURCES;
 
 const categoryIcon = (name: string): string => `Assets/UI/Icons/Categories/T_UI_Icon_Category_${name}.png`;
 
-/** In-game inventory tab icons, copied to public/icons/ui/<key>.png. Statuses and skins have none. */
+/** In-game inventory tab icons, copied to public/icons/ui/<key>.png. Skins have none. */
 export const UI_ICON_SOURCES = {
   melee: categoryIcon("Melee"),
   ranged: categoryIcon("Ranged"),
@@ -77,6 +77,8 @@ export const UI_ICON_SOURCES = {
   artifact: categoryIcon("Potion"),
   enchantment: categoryIcon("Enchantment"),
   effect: categoryIcon("Effects"),
+  // Statuses have no tab in game; the character stats tab icon stands in.
+  status: categoryIcon("Stats"),
   helmet: categoryIcon("Helmet"),
   chest: categoryIcon("Chest"),
   leggings: categoryIcon("Legs"),
