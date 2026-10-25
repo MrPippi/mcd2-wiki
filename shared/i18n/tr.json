@@ -490,6 +490,10 @@
     "changelogDataNote",
     "changelogSourceItems",
     "changelogSourceWeapons",
+    "changelogTopicGeneral",
+    "changelogTopicStability",
+    "changelogTopicItems",
+    "changelogTopicQuests",
     "changelogNoDataChanges"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
@@ -1037,5 +1041,9 @@
   "changelogDataNote": "Sitenin verileri yeni bir oyun sürümüne geçtiğinde önceki sürümle karşılaştırılır ve değişen değerler o sürümün altında listelenir.",
   "changelogSourceItems": "Eşyalar",
   "changelogSourceWeapons": "Silah değerleri",
+  "changelogTopicGeneral": "Genel",
+  "changelogTopicStability": "Performans ve kararlılık",
+  "changelogTopicItems": "Eşyalar",
+  "changelogTopicQuests": "Görevler",
   "changelogNoDataChanges": "{version} ile karşılaştırıldı: veri değişikliği yok."
 }
