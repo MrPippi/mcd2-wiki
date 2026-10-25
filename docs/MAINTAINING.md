@@ -7,12 +7,12 @@
 1. 將遊戲解包檔放在 `source-data/`（不進 git）。
 2. `npm run extract` → 更新 `src/data/*.json`、`public/icons/`，並產生 `extract-report.md`。
 3. 檢查報告；缺圖示時編輯 `scripts/extract/icon-overrides.json` 後重跑。
-   - 遊戲版本不在解包檔裡，要手動把 `shared/game-version.json` 的 `version` 改成新版本（可從安裝目錄的 `MicrosoftGame.config` 的 `Version` 讀到），同時更新兩份 README 開頭的版本號。配裝頁會把版本寫進分享連結，打開舊版本的連結時會提示。
+   - 遊戲版本不在解包檔裡，`npm run extract` 會從遊戲的 `MicrosoftGame.config`（`<Identity … Version="…">`）讀出版本，寫進 `shared/game-version.json` 並替換兩份 README 開頭的版本號。依序找 `source-data/MicrosoftGame.config`、`GAME_DIR` 指定的安裝目錄（預設 `C:\XboxGames\Minecraft Dungeons II\Content`）。已安裝的遊戲可能比解包檔新，所以解包時最好把當時的 `MicrosoftGame.config` 一起複製進 `source-data/`；版本取自安裝目錄時終端機會提醒。都找不到就不改版本。配裝頁會把版本寫進分享連結，打開舊版本的連結時會提示。
    圖示依序取自：`icon-overrides.json` → 資料表每列的 `IconReference`（`/Game/Spicewood/X` 對應 `Assets/X.png`；其他 `/<外掛>/X` 先找 `Plugins/<外掛>/Content/X.png`、再找 `Assets/X.png`）→ 依檔名比對。神器、護符、披風、寵物的資料列名稱與條目 id 對不上，仍靠檔名比對與覆寫清單。
    部分圖示在遊戲外掛裡，不在 `Assets/` 下：把解包的 `Plugins/OreUI/Content/` 與 `Plugins/SpicewoodUI/Content/` 以相同路徑放進 `source-data/`。效果沒有圖示時照常發布，只是不顯示圖。缺少 `SpicewoodUI` 時，世界地圖的標記圖示會全部被略過，且 `extract-report.md` 不會有任何提示，務必放入。
 4. 遊戲地圖有變動時跑 `npm run tiles`（見下方「世界地圖」）。
-5. 改好 `shared/game-version.json` 後跑 `npm run game-diff -- <上一版資料的 commit>`（通常是 `master`），把數值變動寫進 `src/data/game-changes.json`；並在 `src/game-updates.json` 補上新版本（見下方「更新日誌」）。
-6. Commit `src/data`、`public/icons`、`public/map`、`src/assets/brand`、`scripts/extract/icon-overrides.json`。
+5. 抽取更新 `shared/game-version.json` 後跑 `npm run game-diff -- <上一版資料的 commit>`（通常是 `master`），把數值變動寫進 `src/data/game-changes.json`；並在 `src/game-updates.json` 補上新版本（見下方「更新日誌」）。
+6. Commit `shared/game-version.json`、兩份 README、`src/data`、`public/icons`、`public/map`、`src/assets/brand`、`scripts/extract/icon-overrides.json`。
 
 網站圖示（favicon、主畫面圖示、分享預覽圖）與首頁背景取自遊戲 `Assets/UI/Icons/` 的 Logo 與 SplashScreen，同樣由 `npm run extract` 複製；首頁背景在 build 時轉成 WebP。分享預覽圖需要絕對網址，部署時由 `SITE_URL` 提供。
 

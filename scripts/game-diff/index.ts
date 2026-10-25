@@ -1,5 +1,5 @@
 /**
- * `npm run game-diff -- <git ref>`: after extracting a new game version (and setting shared/game-version.json),
+ * `npm run game-diff -- <git ref>`: after extracting a new game version (which sets shared/game-version.json),
  * compares the data committed at <ref> (the previous version) with the working tree and records the result in
  * src/data/game-changes.json for the update log page.
  */
