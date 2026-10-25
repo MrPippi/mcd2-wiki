@@ -40,18 +40,23 @@ describe("updateGameVersion", () => {
     await writeFile(path.join(root, "shared", "game-version.json"), `{\n  "version": "1.1.2.0"\n}\n`);
     await writeFile(path.join(root, "README.md"), "game-1.1.2.0-orange");
     await writeFile(path.join(root, "README.zh-TW.md"), "遊戲版本-1.1.2.0-orange");
+    await mkdir(path.join(root, ".github", "ISSUE_TEMPLATE"), { recursive: true });
+    for (const form of ["1-data-error.yml", "2-in-game-test.yml"]) {
+      await writeFile(path.join(root, ".github", "ISSUE_TEMPLATE", form), 'placeholder: "1.1.2.0"');
+    }
     await writeFile(path.join(game, "MicrosoftGame.config"), config(installed));
     if (unpacked !== undefined) await writeFile(path.join(source, "MicrosoftGame.config"), config(unpacked));
     return { root, source, game };
   }
   const read = (root: string, file: string) => readFile(path.join(root, file), "utf8");
 
-  it("writes the installed version into the version file and both READMEs", async () => {
+  it("writes the installed version into the version file, both READMEs and the issue forms", async () => {
     const { root, source, game } = await project("1.1.3.0");
     expect(await updateGameVersion(root, source, game)).toEqual({ version: "1.1.3.0", previous: "1.1.2.0", config: path.join(game, "MicrosoftGame.config") });
     expect(await read(root, "shared/game-version.json")).toBe(`{\n  "version": "1.1.3.0"\n}\n`);
     expect(await read(root, "README.md")).toBe("game-1.1.3.0-orange");
     expect(await read(root, "README.zh-TW.md")).toBe("遊戲版本-1.1.3.0-orange");
+    expect(await read(root, ".github/ISSUE_TEMPLATE/2-in-game-test.yml")).toBe('placeholder: "1.1.3.0"');
   });
 
   it("prefers a config copied next to the unpacked files", async () => {

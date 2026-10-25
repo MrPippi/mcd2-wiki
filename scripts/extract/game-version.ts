@@ -1,6 +1,7 @@
 /**
  * The game version the extracted data matches. The unpacked files do not carry it, so it is read from the game's
- * MicrosoftGame.config (`<Identity … Version="1.1.3.0" />`) and written to shared/game-version.json and the READMEs.
+ * MicrosoftGame.config (`<Identity … Version="1.1.3.0" />`) and written to shared/game-version.json, the READMEs and
+ * the issue forms' version placeholders.
  */
 import { existsSync } from "node:fs";
 import { readFile, writeFile } from "node:fs/promises";
@@ -10,7 +11,8 @@ import path from "node:path";
 export const DEFAULT_GAME_DIR = "C:\\XboxGames\\Minecraft Dungeons II\\Content";
 export const CONFIG_NAME = "MicrosoftGame.config";
 export const VERSION_FILE = "shared/game-version.json";
-export const README_FILES = ["README.md", "README.zh-TW.md"];
+/** Files that mention the version in prose or as an example; the old version is replaced wherever it appears. */
+export const VERSION_TEXT_FILES = ["README.md", "README.zh-TW.md", ".github/ISSUE_TEMPLATE/1-data-error.yml", ".github/ISSUE_TEMPLATE/2-in-game-test.yml"];
 
 const VERSION = /^\d+(\.\d+)+$/;
 
@@ -49,7 +51,7 @@ export async function updateGameVersion(projectRoot: string, sourceRoot: string,
   const previous = (JSON.parse(await readFile(versionPath, "utf8")) as { version: string }).version;
   if (previous !== version) {
     await writeFile(versionPath, `${JSON.stringify({ version }, null, 2)}\n`);
-    for (const readme of README_FILES) {
+    for (const readme of VERSION_TEXT_FILES) {
       const file = path.join(projectRoot, readme);
       await writeFile(file, withReadmeVersion(await readFile(file, "utf8"), previous, version));
     }

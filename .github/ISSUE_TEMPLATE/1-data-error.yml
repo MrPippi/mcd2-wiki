@@ -33,4 +33,4 @@ body:
     attributes:
       label: 遊戲版本 / Game version
       description: 不確定可留空。Leave blank if unsure.
-      placeholder: "1.1.2.0"
+      placeholder: "1.1.3.0"

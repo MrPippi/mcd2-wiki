@@ -384,7 +384,7 @@
   "bossesOrder": "Order: by the first core quest that features each one; the rest by the lowest player level among their regions, then by name.",
   "bossReplay": "Boss replay",
   "guides": "Guides",
-  "guidesIntro": "How the game works, read from its own data: town vendors, enchanting, rarity, secret talismans, currencies and levels.",
+  "guidesIntro": "How the game works, read from its own data: town vendors, enchanting, rarity, threat and difficulty, secret talismans, currencies and levels.",
   "guideVendors": "Town vendors",
   "guideVendorsSummary": "What it costs to level up the Town Merchant, Blacksmith and Enchantsmith, and what each level unlocks.",
   "guideEnchanting": "Enchanting",

@@ -882,7 +882,7 @@
   "bossesOrder": "Ordine: in base alla prima missione principale in cui compare ciascuno; gli altri in base al livello del giocatore più basso tra le loro regioni, poi per nome.",
   "bossReplay": "Boss da rigiocare",
   "guides": "Guide",
-  "guidesIntro": "Come funziona il gioco, letto dai suoi stessi dati: mercanti della città, incantesimi, rarità, talismani segreti, valute e livelli.",
+  "guidesIntro": "Come funziona il gioco, letto dai suoi stessi dati: mercanti della città, incantesimi, rarità, minaccia e difficoltà, talismani segreti, valute e livelli.",
   "guideVendors": "Mercanti della città",
   "guideVendorsSummary": "Quanto costa far salire di livello il Mercante cittadino, il Fabbro e il Fabbro incantatore, e cosa sblocca ogni livello.",
   "guideEnchanting": "Incantesimi",
