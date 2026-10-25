@@ -17,9 +17,15 @@
 .changelog-site-data { margin: 2px 0; }
 
 .changelog-body { display: grid; gap: 14px; min-width: 0; }
-.changelog-changes { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 10px 12px; min-width: 0; }
-/* Subgrid so the kind tags of one version share a width and the texts line up. */
-.changelog-change { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; align-items: baseline; min-width: 0; line-height: 1.6; }
+.changelog-group { display: grid; gap: 8px; min-width: 0; }
+.changelog-kind-title {
+  justify-self: start; margin: 0; padding: 1px 8px; border: 1px solid var(--rule-strong);
+  font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 400; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-2);
+}
+.changelog-kind-title.is-new { border-color: var(--accent); color: var(--accent); }
+.changelog-topic h4 { margin: 4px 0 2px; font-size: 15px; font-weight: 700; }
+.changelog-changes { margin: 0; padding-left: 1.2em; display: grid; gap: 4px; min-width: 0; }
+.changelog-change { min-width: 0; line-height: 1.6; }
 .changelog-kind {
   min-width: 5.5em; padding: 1px 6px; border: 1px solid var(--rule-strong); text-align: center;
   font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-2);

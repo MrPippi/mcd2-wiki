@@ -490,6 +490,10 @@
     "changelogDataNote",
     "changelogSourceItems",
     "changelogSourceWeapons",
+    "changelogTopicGeneral",
+    "changelogTopicStability",
+    "changelogTopicItems",
+    "changelogTopicQuests",
     "changelogNoDataChanges"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
@@ -1034,5 +1038,9 @@
   "changelogDataNote": "사이트 데이터를 새 버전으로 업데이트하면 이전 버전과 비교해 바뀐 수치를 해당 버전 아래에 표시합니다.",
   "changelogSourceItems": "아이템",
   "changelogSourceWeapons": "무기 수치",
+  "changelogTopicGeneral": "일반",
+  "changelogTopicStability": "성능 및 안정성",
+  "changelogTopicItems": "아이템",
+  "changelogTopicQuests": "퀘스트",
   "changelogNoDataChanges": "{version}과(와) 비교했습니다. 데이터 변경 사항이 없습니다."
 }

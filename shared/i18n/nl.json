@@ -490,6 +490,10 @@
     "changelogDataNote",
     "changelogSourceItems",
     "changelogSourceWeapons",
+    "changelogTopicGeneral",
+    "changelogTopicStability",
+    "changelogTopicItems",
+    "changelogTopicQuests",
     "changelogNoDataChanges"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
@@ -1037,5 +1041,9 @@
   "changelogDataNote": "Wanneer de gegevens van de site naar een nieuwe gameversie gaan, worden ze vergeleken met de vorige en staan de gewijzigde waarden onder die versie.",
   "changelogSourceItems": "Voorwerpen",
   "changelogSourceWeapons": "Wapenwaarden",
+  "changelogTopicGeneral": "Algemeen",
+  "changelogTopicStability": "Prestaties en stabiliteit",
+  "changelogTopicItems": "Voorwerpen",
+  "changelogTopicQuests": "Missies",
   "changelogNoDataChanges": "Vergeleken met {version}: geen gegevenswijzigingen."
 }

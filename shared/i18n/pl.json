@@ -488,6 +488,10 @@
     "changelogDataNote",
     "changelogSourceItems",
     "changelogSourceWeapons",
+    "changelogTopicGeneral",
+    "changelogTopicStability",
+    "changelogTopicItems",
+    "changelogTopicQuests",
     "changelogNoDataChanges"
   ],
   "_english": [
@@ -1041,5 +1045,9 @@
   "changelogDataNote": "Gdy dane serwisu przechodzą na nową wersję gry, są porównywane z poprzednią, a zmienione wartości pojawiają się pod tą wersją.",
   "changelogSourceItems": "Przedmioty",
   "changelogSourceWeapons": "Statystyki broni",
+  "changelogTopicGeneral": "Ogólne",
+  "changelogTopicStability": "Wydajność i stabilność",
+  "changelogTopicItems": "Przedmioty",
+  "changelogTopicQuests": "Zadania",
   "changelogNoDataChanges": "Porównano z {version}: brak zmian w danych."
 }

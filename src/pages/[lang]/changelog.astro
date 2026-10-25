@@ -4,12 +4,14 @@ import CatalogPage from "../../layouts/CatalogPage.astro";
 import { GAME_VERSION } from "../../lib/game-version";
 import {
   CHANGE_KIND_KEY,
+  CHANGE_TOPIC_KEY,
   DIFF_SOURCE_KEY,
   DIFF_STATUS_KEY,
   changeText,
   dataChangesFor,
   dataStatus,
   gameUpdates,
+  groupChanges,
   updateAnchor,
   updateDate,
 } from "../../lib/game-updates";
@@ -46,19 +48,29 @@ const link = (path: string): string => href(lang, ...path.split("/"));
             <p class="changelog-meta"><a href={update.source} rel="noopener" data-testid="official-notes">{t(lang, "changelogOfficial")}</a></p>
           </header>
           <div class="changelog-body">
-            <ul class="changelog-changes">
-              {update.changes.map((change) => {
-                const { text, lang: textLang } = changeText(change, lang);
-                return (
-                  <li class="changelog-change" data-kind={change.kind}>
-                    <span class:list={["changelog-kind", `is-${change.kind}`]}>{t(lang, CHANGE_KIND_KEY[change.kind])}</span>
-                    <span class="changelog-text" lang={textLang === lang ? undefined : htmlLang(textLang)}>
-                      {change.link ? <a href={link(change.link)}>{text}</a> : text}
-                    </span>
-                  </li>
-                );
-              })}
-            </ul>
+            {/* As the Minecraft Wiki lays out a version: a heading per kind, then the changes under their topic. */}
+            {groupChanges(update.changes).map((group) => (
+              <section class="changelog-group" data-kind={group.kind} data-testid="change-group">
+                <h3 class:list={["changelog-kind-title", `is-${group.kind}`]}>{t(lang, CHANGE_KIND_KEY[group.kind])}</h3>
+                {group.topics.map(({ topic, changes }) => (
+                  <div class="changelog-topic" data-topic={topic}>
+                    <h4>{t(lang, CHANGE_TOPIC_KEY[topic])}</h4>
+                    <ul class="changelog-changes">
+                      {changes.map((change) => {
+                        const { text, lang: textLang } = changeText(change, lang);
+                        return (
+                          <li class="changelog-change" data-kind={change.kind}>
+                            <span class="changelog-text" lang={textLang === lang ? undefined : htmlLang(textLang)}>
+                              {change.link ? <a href={link(change.link)}>{text}</a> : text}
+                            </span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                ))}
+              </section>
+            ))}
             {status === "ahead" && <p class="note changelog-not-yet" data-testid="data-not-yet">{t(lang, "changelogNotYet").replace("{version}", GAME_VERSION)}</p>}
             {data && data.groups.length === 0 && (
               <p class="note changelog-no-changes" data-testid="data-no-changes">{t(lang, "changelogNoDataChanges").replace("{version}", data.from)}</p>
