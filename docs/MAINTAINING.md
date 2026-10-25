@@ -159,7 +159,7 @@
 
 `/<lang>/changelog/` 列出遊戲各版本的更新，由兩份資料組成：
 
-- `src/game-updates.json`（手寫）：每個版本一筆，`version`、`date`（`YYYY-MM-DD`，由新到舊、每天一筆）、`platforms`、`source`（官方更新說明網址，[Minecraft Feedback 的 Dungeons II Changelogs](https://feedback.minecraft.net/hc/en-us/sections/49286492925453-Minecraft-Dungeons-II-Changelogs)）與 `changes`。同一版本號推出兩次時以 `build`（組建號，只用在網址錨點）區分，並必須加上 `label`（`zh`／`en`，例如「Steam Deck 更新」），頁面在版本號下方顯示這個說明而不是組建號。
+- `src/game-updates.json`（手寫）：每個版本一筆，`version`、`date`（`YYYY-MM-DD`，由新到舊、每天一筆）、`platforms`、`source`（官方更新說明網址，[Minecraft Feedback 的 Dungeons II Changelogs](https://feedback.minecraft.net/hc/en-us/sections/49286492925453-Minecraft-Dungeons-II-Changelogs)）與 `changes`（每項有 `kind`：`new`／`changed`／`fixed`，與 `topic`：`general`／`stability`／`items`／`quests`，頁面依此分組，比照 Minecraft Wiki 的更新日誌）。同一版本號推出兩次時以 `build`（組建號，只用在網址錨點）區分，並必須加上 `label`（`zh`／`en`，例如「Steam Deck 更新」），頁面在版本號下方顯示這個說明而不是組建號。
   - 以自己的話寫重點摘要，不要整段複製官方原文；`kind` 為 `new`／`changed`／`fixed`。
   - 只寫繁中（`zh`）與英文（`en`）；其他語言顯示英文並標上 `lang="en"`。名稱用站內譯名（怪物、任務等）。
   - `link` 是語言後面的路徑（如 `quests/ca09`），單元測試會檢查頁面存在。

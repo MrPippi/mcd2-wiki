@@ -5,16 +5,16 @@
     "platforms": ["Windows", "Xbox", "PlayStation 5", "Nintendo Switch", "Nintendo Switch 2"],
     "source": "https://feedback.minecraft.net/hc/en-us/articles/49736028710541-Minecraft-Dungeons-II-1-1-3-0-Hotfix",
     "changes": [
-      { "kind": "changed", "zh": "更新 Switch、Switch 2、PS5 與 Xbox、Windows 部分畫面上的遊戲圖示。", "en": "Updated the game icon on Switch, Switch 2 and PS5, and in some places on Xbox and Windows." },
-      { "kind": "fixed", "zh": "修正多種遊戲中的當機。", "en": "Fixed several crashes during gameplay." },
-      { "kind": "fixed", "zh": "修正同機合作時從主世界回到主選單會卡住，第二位玩家可能在建立或選擇英雄時被踢出。", "en": "Fixed a hard lock in couch co-op when returning to the main menu from the Overworld, which could kick the second player while creating or picking a hero." },
-      { "kind": "fixed", "zh": "改善錯誤代碼「CH1」相關的登入穩定性。", "en": "Improved login stability around error code \"CH1\"." },
-      { "kind": "fixed", "zh": "修正快速連續使用後神器欄位無法使用（MCD2-135）。", "en": "Fixed artifact slots becoming unusable after rapid repeated use (MCD2-135)." },
-      { "kind": "fixed", "link": "mobs/frostbite-desert-boss", "zh": "修正離開再重新加入後，至高附魔師的競技場維持降下而卡住進度（MCD2-67）。", "en": "Fixed The Prime Enchanter's arena staying lowered after leaving and rejoining, which blocked progress (MCD2-67)." },
-      { "kind": "fixed", "link": "quests/ca09", "zh": "修正「伏聆者之怒」的任務標記指向錯誤位置。", "en": "Fixed quest markers pointing to the wrong places in \"Wrath of the Sculkers\"." },
-      { "kind": "fixed", "link": "quests/ca02-c", "zh": "修正「附魔匠的訓練」的任務標記（MCD2-23）。", "en": "Fixed the quest marker for \"Training with the Enchantsmith\" (MCD2-23)." },
-      { "kind": "fixed", "zh": "修正線上遊戲時任務日誌顯示過多玩家圖示。", "en": "Fixed the quest journal showing too many player icons in online games." },
-      { "kind": "fixed", "zh": "修正 Switch 與 Switch 2 上無法開啟豪華版商店頁面。", "en": "Fixed the Deluxe Edition store page not opening on Switch and Switch 2." }
+      { "kind": "changed", "topic": "general", "zh": "更新 Switch、Switch 2、PS5 與 Xbox、Windows 部分畫面上的遊戲圖示。", "en": "Updated the game icon on Switch, Switch 2 and PS5, and in some places on Xbox and Windows." },
+      { "kind": "fixed", "topic": "stability", "zh": "修正多種遊戲中的當機。", "en": "Fixed several crashes during gameplay." },
+      { "kind": "fixed", "topic": "stability", "zh": "修正同機合作時從主世界回到主選單會卡住，第二位玩家可能在建立或選擇英雄時被踢出。", "en": "Fixed a hard lock in couch co-op when returning to the main menu from the Overworld, which could kick the second player while creating or picking a hero." },
+      { "kind": "fixed", "topic": "stability", "zh": "改善錯誤代碼「CH1」相關的登入穩定性。", "en": "Improved login stability around error code \"CH1\"." },
+      { "kind": "fixed", "topic": "items", "zh": "修正快速連續使用後神器欄位無法使用（MCD2-135）。", "en": "Fixed artifact slots becoming unusable after rapid repeated use (MCD2-135)." },
+      { "kind": "fixed", "topic": "quests", "link": "mobs/frostbite-desert-boss", "zh": "修正離開再重新加入後，至高附魔師的競技場維持降下而卡住進度（MCD2-67）。", "en": "Fixed The Prime Enchanter's arena staying lowered after leaving and rejoining, which blocked progress (MCD2-67)." },
+      { "kind": "fixed", "topic": "quests", "link": "quests/ca09", "zh": "修正「伏聆者之怒」的任務標記指向錯誤位置。", "en": "Fixed quest markers pointing to the wrong places in \"Wrath of the Sculkers\"." },
+      { "kind": "fixed", "topic": "quests", "link": "quests/ca02-c", "zh": "修正「附魔匠的訓練」的任務標記（MCD2-23）。", "en": "Fixed the quest marker for \"Training with the Enchantsmith\" (MCD2-23)." },
+      { "kind": "fixed", "topic": "quests", "zh": "修正線上遊戲時任務日誌顯示過多玩家圖示。", "en": "Fixed the quest journal showing too many player icons in online games." },
+      { "kind": "fixed", "topic": "general", "zh": "修正 Switch 與 Switch 2 上無法開啟豪華版商店頁面。", "en": "Fixed the Deluxe Edition store page not opening on Switch and Switch 2." }
     ]
   },
   {
@@ -23,10 +23,10 @@
     "platforms": ["Steam", "Windows", "Xbox"],
     "source": "https://feedback.minecraft.net/hc/en-us/articles/49427995539981-Minecraft-Dungeons-II-1-1-2-0-Hotfix",
     "changes": [
-      { "kind": "fixed", "zh": "修正多種遊戲中的用戶端與伺服器當機。", "en": "Fixed several client and server crashes during gameplay." },
-      { "kind": "fixed", "link": "mobs/frostbite-desert-boss", "zh": "修正至高附魔師的雷擊重擊與 TNT 爆炸同時發生時的當機。", "en": "Fixed a crash when The Prime Enchanter's Lightning Slam hit at the same moment as a TNT explosion." },
-      { "kind": "fixed", "zh": "修正離開線上遊戲時的當機。", "en": "Fixed a crash when leaving an online game." },
-      { "kind": "fixed", "zh": "修正以 Ultra 畫質啟動遊戲時畫面模糊。", "en": "Fixed blurry visuals when the game was started with Ultra graphics quality." }
+      { "kind": "fixed", "topic": "stability", "zh": "修正多種遊戲中的用戶端與伺服器當機。", "en": "Fixed several client and server crashes during gameplay." },
+      { "kind": "fixed", "topic": "stability", "link": "mobs/frostbite-desert-boss", "zh": "修正至高附魔師的雷擊重擊與 TNT 爆炸同時發生時的當機。", "en": "Fixed a crash when The Prime Enchanter's Lightning Slam hit at the same moment as a TNT explosion." },
+      { "kind": "fixed", "topic": "stability", "zh": "修正離開線上遊戲時的當機。", "en": "Fixed a crash when leaving an online game." },
+      { "kind": "fixed", "topic": "general", "zh": "修正以 Ultra 畫質啟動遊戲時畫面模糊。", "en": "Fixed blurry visuals when the game was started with Ultra graphics quality." }
     ]
   },
   {
@@ -37,8 +37,8 @@
     "platforms": ["Steam"],
     "source": "https://feedback.minecraft.net/hc/en-us/articles/49305373167629-New-Update-Steam-Deck-Playable",
     "changes": [
-      { "kind": "new", "zh": "Steam Deck 可以遊玩（部分支援，完整驗證將在之後的更新）。", "en": "The game is playable on Steam Deck (partial support; full verification is planned for a later update)." },
-      { "kind": "changed", "zh": "綠寶石上限從 9,999 提高到 99,999（伺服器端調整，所有平台適用）。", "en": "The emerald cap went up from 9,999 to 99,999 (a server-side change, so on every platform)." }
+      { "kind": "new", "topic": "general", "zh": "Steam Deck 可以遊玩（部分支援，完整驗證將在之後的更新）。", "en": "The game is playable on Steam Deck (partial support; full verification is planned for a later update)." },
+      { "kind": "changed", "topic": "items", "zh": "綠寶石上限從 9,999 提高到 99,999（伺服器端調整，所有平台適用）。", "en": "The emerald cap went up from 9,999 to 99,999 (a server-side change, so on every platform)." }
     ]
   },
   {
@@ -49,7 +49,7 @@
     "platforms": ["Windows", "Xbox", "PlayStation 5", "Nintendo Switch", "Nintendo Switch 2", "Steam"],
     "source": "https://www.minecraft.net/en-us/article/minecraft-dungeons-ii-is-live",
     "changes": [
-      { "kind": "new", "zh": "Minecraft Dungeons II 正式推出。", "en": "Minecraft Dungeons II launches." }
+      { "kind": "new", "topic": "general", "zh": "Minecraft Dungeons II 正式推出。", "en": "Minecraft Dungeons II launches." }
     ]
   }
 ]

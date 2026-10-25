@@ -487,6 +487,10 @@
     "changelogDataNote",
     "changelogSourceItems",
     "changelogSourceWeapons",
+    "changelogTopicGeneral",
+    "changelogTopicStability",
+    "changelogTopicItems",
+    "changelogTopicQuests",
     "changelogNoDataChanges"
   ],
   "_english": [
@@ -1036,5 +1040,9 @@
   "changelogDataNote": "サイトのデータを新しいバージョンに更新すると、前のバージョンと比較し、変わった数値をそのバージョンの下に掲載します。",
   "changelogSourceItems": "アイテム",
   "changelogSourceWeapons": "武器の数値",
+  "changelogTopicGeneral": "全般",
+  "changelogTopicStability": "パフォーマンスと安定性",
+  "changelogTopicItems": "アイテム",
+  "changelogTopicQuests": "クエスト",
   "changelogNoDataChanges": "{version} と比較しました。データの変更はありません。"
 }

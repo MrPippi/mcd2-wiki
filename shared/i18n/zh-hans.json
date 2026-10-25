@@ -487,6 +487,10 @@
     "changelogDataNote",
     "changelogSourceItems",
     "changelogSourceWeapons",
+    "changelogTopicGeneral",
+    "changelogTopicStability",
+    "changelogTopicItems",
+    "changelogTopicQuests",
     "changelogNoDataChanges"
   ],
   "_english": [
@@ -1036,5 +1040,9 @@
   "changelogDataNote": "本站数据更新到新版本时，会与上一版比对，把数值变动列在该版本下。",
   "changelogSourceItems": "物品",
   "changelogSourceWeapons": "武器数值",
+  "changelogTopicGeneral": "一般",
+  "changelogTopicStability": "性能与稳定性",
+  "changelogTopicItems": "物品",
+  "changelogTopicQuests": "任务",
   "changelogNoDataChanges": "已与 {version} 比对，没有数值变动。"
 }

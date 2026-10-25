@@ -541,5 +541,9 @@
   "changelogDataNote": "本站資料更新到新版本時，會與前一版比對，把數值變動列在該版本下。",
   "changelogSourceItems": "物品",
   "changelogSourceWeapons": "武器數值",
+  "changelogTopicGeneral": "一般",
+  "changelogTopicStability": "效能與穩定性",
+  "changelogTopicItems": "物品",
+  "changelogTopicQuests": "任務",
   "changelogNoDataChanges": "已與 {version} 比對，沒有數值變動。"
 }

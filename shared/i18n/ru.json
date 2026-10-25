@@ -486,6 +486,10 @@
     "changelogDataNote",
     "changelogSourceItems",
     "changelogSourceWeapons",
+    "changelogTopicGeneral",
+    "changelogTopicStability",
+    "changelogTopicItems",
+    "changelogTopicQuests",
     "changelogNoDataChanges"
   ],
   "_english": [
@@ -1041,5 +1045,9 @@
   "changelogDataNote": "Когда данные сайта переходят на новую версию игры, они сравниваются с предыдущей, и изменённые значения перечисляются под этой версией.",
   "changelogSourceItems": "Предметы",
   "changelogSourceWeapons": "Характеристики оружия",
+  "changelogTopicGeneral": "Общее",
+  "changelogTopicStability": "Производительность и стабильность",
+  "changelogTopicItems": "Предметы",
+  "changelogTopicQuests": "Задания",
   "changelogNoDataChanges": "Сравнено с {version}: изменений в данных нет."
 }

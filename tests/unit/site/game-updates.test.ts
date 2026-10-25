@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import mobsData from "../../../src/data/mobs.json";
 import questsData from "../../../src/data/quests.json";
-import { GameUpdatesSchema, changeText, dataChangesFor, dataStatus, gameUpdates, updateAnchor, updateDate, type GameUpdate } from "../../../src/lib/game-updates";
+import { GameUpdatesSchema, changeText, dataChangesFor, dataStatus, gameUpdates, groupChanges, updateAnchor, updateDate, type Change, type GameUpdate } from "../../../src/lib/game-updates";
 
 const PAGES = "src/pages/[lang]";
 /** Slugs of the pages generated from data, by first path segment. */
@@ -17,7 +17,7 @@ const pageExists = (link: string): boolean => {
 };
 
 const update = (version: string, date: string, build?: string): GameUpdate => ({
-  version, date, ...(build ? { build, label: { zh: "標籤", en: "Label" } } : {}), platforms: ["Steam"], source: "https://example.com/", changes: [{ kind: "fixed", zh: "甲", en: "A" }],
+  version, date, ...(build ? { build, label: { zh: "標籤", en: "Label" } } : {}), platforms: ["Steam"], source: "https://example.com/", changes: [{ kind: "fixed", topic: "general", zh: "甲", en: "A" }],
 });
 
 describe("game updates", () => {
@@ -62,7 +62,7 @@ describe("game updates", () => {
   });
 
   it("shows Traditional Chinese on the zh site and English everywhere else", () => {
-    const change = { kind: "fixed", zh: "甲", en: "A" } as const;
+    const change = { kind: "fixed", topic: "general", zh: "甲", en: "A" } as const;
     expect(changeText(change, "zh")).toEqual({ text: "甲", lang: "zh" });
     expect(changeText(change, "ja")).toEqual({ text: "A", lang: "en" });
     expect(changeText(change, "zh-hans")).toEqual({ text: "A", lang: "en" });
@@ -71,5 +71,23 @@ describe("game updates", () => {
   it("formats the date in the page language without shifting the day", () => {
     expect(updateDate("2026-10-22", "en")).toBe("October 22, 2026");
     expect(updateDate("2026-10-22", "zh")).toBe("2026年10月22日");
+  });
+});
+
+describe("groupChanges", () => {
+  const change = (kind: Change["kind"], topic: Change["topic"], en: string): Change => ({ kind, topic, zh: en, en });
+
+  it("orders kinds new, changed, fixed and topics as the wiki does, keeping the written order inside a topic", () => {
+    const groups = groupChanges([change("fixed", "quests", "q1"), change("fixed", "stability", "s"), change("changed", "general", "g"), change("fixed", "quests", "q2")]);
+    expect(groups.map((group) => [group.kind, group.topics.map(({ topic, changes }) => [topic, changes.map((one) => one.en)])])).toEqual([
+      ["changed", [["general", ["g"]]]],
+      ["fixed", [["stability", ["s"]], ["quests", ["q1", "q2"]]]],
+    ]);
+  });
+
+  it("puts every written change in exactly one group", () => {
+    for (const update of gameUpdates) {
+      expect(groupChanges(update.changes).flatMap((group) => group.topics.flatMap((topic) => topic.changes))).toHaveLength(update.changes.length);
+    }
   });
 });

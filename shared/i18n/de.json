@@ -488,6 +488,10 @@
     "changelogDataNote",
     "changelogSourceItems",
     "changelogSourceWeapons",
+    "changelogTopicGeneral",
+    "changelogTopicStability",
+    "changelogTopicItems",
+    "changelogTopicQuests",
     "changelogNoDataChanges"
   ],
   "_english": [
@@ -1039,5 +1043,9 @@
   "changelogDataNote": "Wenn die Daten der Website auf eine neue Spielversion wechseln, werden sie mit der vorherigen verglichen und die geänderten Werte unter dieser Version aufgeführt.",
   "changelogSourceItems": "Gegenstände",
   "changelogSourceWeapons": "Waffenwerte",
+  "changelogTopicGeneral": "Allgemein",
+  "changelogTopicStability": "Leistung und Stabilität",
+  "changelogTopicItems": "Gegenstände",
+  "changelogTopicQuests": "Quests",
   "changelogNoDataChanges": "Mit {version} verglichen: keine Datenänderungen."
 }

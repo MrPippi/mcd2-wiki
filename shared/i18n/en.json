@@ -544,5 +544,9 @@
   "changelogDataNote": "When the site's data moves to a new game version, it is compared with the previous one and the changed values are listed under that version.",
   "changelogSourceItems": "Items",
   "changelogSourceWeapons": "Weapon stats",
+  "changelogTopicGeneral": "General",
+  "changelogTopicStability": "Performance and stability",
+  "changelogTopicItems": "Items",
+  "changelogTopicQuests": "Quests",
   "changelogNoDataChanges": "Compared with {version}: no data changes."
 }

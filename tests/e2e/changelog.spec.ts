@@ -12,7 +12,8 @@ test.describe("game update log", () => {
     const latest = updates.first();
     await expect(latest.getByTestId("official-notes")).toHaveAttribute("href", /^https:\/\/feedback\.minecraft\.net\//);
     await expect(latest.locator(".changelog-change a", { hasText: "伏聆者之怒" })).toHaveAttribute("href", "/zh/quests/ca09/");
-    await expect(latest.locator(".changelog-kind.is-fixed").first()).toHaveText("修正");
+    await expect(latest.locator(".changelog-kind-title.is-fixed")).toHaveText("修正");
+    await expect(latest.locator(".changelog-group[data-kind='fixed'] h4")).toHaveText(["一般", "效能與穩定性", "物品", "任務"]);
     expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
   });
 

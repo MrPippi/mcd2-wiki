@@ -13,9 +13,13 @@ import type { UiKey } from "./ui-strings";
 
 export const CHANGE_KINDS = ["new", "changed", "fixed"] as const;
 export type ChangeKind = (typeof CHANGE_KINDS)[number];
+/** What part of the game a change is about, in the order the page lists them (as the Minecraft Wiki groups them). */
+export const CHANGE_TOPICS = ["general", "stability", "items", "quests"] as const;
+export type ChangeTopic = (typeof CHANGE_TOPICS)[number];
 
 const ChangeSchema = z.object({
   kind: z.enum(CHANGE_KINDS),
+  topic: z.enum(CHANGE_TOPICS),
   /** Path under the language of a site page the change is about, e.g. "quests/ca09". */
   link: z.string().regex(/^[a-z0-9-]+(\/[a-z0-9-]+)*$/).optional(),
   zh: z.string().min(1),
@@ -51,6 +55,27 @@ export const gameUpdates: readonly GameUpdate[] = GameUpdatesSchema.parse(rawUpd
 const gameChanges: readonly VersionChanges[] = GameChangesSchema.parse(rawChanges);
 
 export const CHANGE_KIND_KEY: Readonly<Record<ChangeKind, UiKey>> = { new: "changelogNew", changed: "changelogChanged", fixed: "changelogFixed" };
+export const CHANGE_TOPIC_KEY: Readonly<Record<ChangeTopic, UiKey>> = {
+  general: "changelogTopicGeneral",
+  stability: "changelogTopicStability",
+  items: "changelogTopicItems",
+  quests: "changelogTopicQuests",
+};
+
+export interface ChangeGroup {
+  readonly kind: ChangeKind;
+  readonly topics: readonly { readonly topic: ChangeTopic; readonly changes: readonly Change[] }[];
+}
+
+/** An update's changes by kind (new, changed, fixed), then by topic, keeping their written order; empty groups are left out. */
+export const groupChanges = (changes: readonly Change[]): ChangeGroup[] =>
+  CHANGE_KINDS.flatMap((kind) => {
+    const topics = CHANGE_TOPICS.flatMap((topic) => {
+      const matching = changes.filter((change) => change.kind === kind && change.topic === topic);
+      return matching.length === 0 ? [] : [{ topic, changes: matching }];
+    });
+    return topics.length === 0 ? [] : [{ kind, topics }];
+  });
 export const DIFF_STATUS_KEY = { added: "changelogNew", removed: "changelogRemoved", changed: "changelogChanged" } as const satisfies Record<string, UiKey>;
 export const DIFF_SOURCE_KEY: Readonly<Record<DiffSource, UiKey>> = {
   items: "changelogSourceItems",
