@@ -34,6 +34,7 @@ export const PAGE_SECTIONS: readonly PageSection[] = [
   { segment: "soul-storm", key: "soulStorm", llms: { intro: "soulStormIntro", rank: 6 } },
   { segment: "soul-enchantments", key: "soulEnchantments", llms: { intro: "soulEnchantmentsIntro", rank: 6.5 } },
   { segment: "build", key: "build", llms: { intro: "buildIntro", rank: 8 } },
+  { segment: "builds", key: "communityBuilds", llms: { intro: "communityBuildsIntro", rank: 8.5 } },
   { segment: "compare", key: "weaponCompare", llms: { intro: "weaponCompareIntro", rank: 9 } },
   { segment: "drops", key: "dropCalc", llms: { intro: "dropCalcIntro", rank: 10 } },
   { segment: "guides", key: "guides" },

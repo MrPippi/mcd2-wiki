@@ -1,11 +1,13 @@
 ---
 import { langPaths } from "../../lib/lang-paths";
 import BuildPlanner from "../../components/BuildPlanner.astro";
+import CommunityPublish from "../../components/CommunityPublish.astro";
 import CatalogPage from "../../layouts/CatalogPage.astro";
 import { buildPayload } from "../../lib/build/payload";
 import { GAME_VERSION } from "../../lib/game-version";
 import { t, type Lang } from "../../lib/i18n";
 import "../../styles/build.css";
+import "../../styles/community.css";
 
 export const getStaticPaths = langPaths;
 
@@ -19,4 +21,5 @@ const { lang } = Astro.props;
     <p slot="head" class="note build-version" data-testid="build-game-version">{t(lang, "buildGameVersion").replace("{version}", () => GAME_VERSION)}</p>
     <noscript><p class="note" data-testid="build-noscript">{t(lang, "buildNoScript")}</p></noscript>
     <BuildPlanner lang={lang} payload={buildPayload(lang)} />
+    <CommunityPublish lang={lang} />
 </CatalogPage>

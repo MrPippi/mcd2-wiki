@@ -1,0 +1,26 @@
+/* Community builds: shared builds as ruled cards with their item icons, and the publish form on the build page. */
+.community { min-width: 0; }
+.community-sort { display: flex; gap: var(--space-2); margin: 0 0 var(--space-4); }
+.community-list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); }
+.community-card { display: grid; gap: var(--space-2); align-content: start; min-width: 0; padding: var(--space-3) var(--space-4); border: 1px solid var(--rule-strong); background: var(--paper); }
+.community-card[data-reported="true"] { opacity: 0.55; }
+.community-title { margin: 0; font-size: 18px; overflow-wrap: anywhere; }
+.community-items { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px; }
+.community-item { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--rule); background: var(--plate); }
+.community-item img { width: 40px; height: 40px; object-fit: contain; image-rendering: pixelated; }
+.community-item-name { font-size: 10px; text-align: center; overflow-wrap: anywhere; line-height: 1.1; }
+.community-meta { margin: 0; font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); }
+.community-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+.community-open { margin-right: auto; font-weight: 600; }
+.community-report { font-size: 0.85rem; color: var(--muted); }
+.community-status:empty { display: none; }
+.community-more { margin: var(--space-4) 0 0; }
+.community-privacy { margin: var(--space-6) 0 0; max-width: 70ch; }
+.community-turnstile:empty { display: none; }
+.community-turnstile { margin: var(--space-3) 0 0; }
+
+.community-publish .section-title { font-size: 20px; margin: var(--space-6) 0 var(--space-3); }
+.community-publish-form { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-2); margin: var(--space-3) 0 0; }
+.community-publish-label { display: grid; gap: 4px; flex: 1 1 260px; min-width: 0; font-size: 13px; color: var(--muted); }
+.community-publish-label input { width: 100%; font: inherit; font-size: 16px; color: var(--text); padding: 6px 8px; border: 1px solid var(--rule-strong); background: var(--paper); }
+.community-publish-status:empty { display: none; }

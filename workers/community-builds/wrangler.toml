@@ -1,0 +1,15 @@
+# Community builds API (Cloudflare Worker + D1). Deployed by hand; see README.md in this folder.
+name = "mcd2-wiki-builds"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://mrpippi.github.io,http://localhost:4321,http://localhost:4329"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "mcd2-wiki-builds"
+database_id = "a41885c6-0c73-448b-9566-f9927f36c343"
+
+# Secrets (wrangler secret put): TURNSTILE_SECRET, HASH_SALT, ADMIN_TOKEN
