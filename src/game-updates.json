@@ -32,6 +32,7 @@
   {
     "version": "1.1.1.0",
     "build": "52099637",
+    "label": { "zh": "Steam Deck 更新", "en": "Steam Deck update" },
     "date": "2026-10-01",
     "platforms": ["Steam"],
     "source": "https://feedback.minecraft.net/hc/en-us/articles/49305373167629-New-Update-Steam-Deck-Playable",
@@ -43,6 +44,7 @@
   {
     "version": "1.1.1.0",
     "build": "50349472",
+    "label": { "zh": "正式上市", "en": "Launch" },
     "date": "2026-09-29",
     "platforms": ["Windows", "Xbox", "PlayStation 5", "Nintendo Switch", "Nintendo Switch 2", "Steam"],
     "source": "https://www.minecraft.net/en-us/article/minecraft-dungeons-ii-is-live",

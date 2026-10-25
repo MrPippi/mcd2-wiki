@@ -17,7 +17,7 @@ const pageExists = (link: string): boolean => {
 };
 
 const update = (version: string, date: string, build?: string): GameUpdate => ({
-  version, date, ...(build ? { build } : {}), platforms: ["Steam"], source: "https://example.com/", changes: [{ kind: "fixed", zh: "甲", en: "A" }],
+  version, date, ...(build ? { build, label: { zh: "標籤", en: "Label" } } : {}), platforms: ["Steam"], source: "https://example.com/", changes: [{ kind: "fixed", zh: "甲", en: "A" }],
 });
 
 describe("game updates", () => {
@@ -37,6 +37,12 @@ describe("game updates", () => {
     const anchors = gameUpdates.map(updateAnchor);
     expect(new Set(anchors).size).toBe(anchors.length);
     expect(updateAnchor(update("1.1.1.0", "2026-10-01", "52099637"))).toBe("v1.1.1.0-52099637");
+  });
+
+  it("needs a label for an update with a build, since the page shows the label instead of the number", () => {
+    const { label: _label, ...unlabelled } = update("1.1.1.0", "2026-10-01", "52099637");
+    expect(GameUpdatesSchema.safeParse([unlabelled]).success).toBe(false);
+    expect(GameUpdatesSchema.safeParse([update("1.1.1.0", "2026-10-01", "52099637")]).success).toBe(true);
   });
 
   it("marks the newest update of the site's version as current and later ones as ahead", () => {

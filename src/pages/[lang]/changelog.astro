@@ -38,7 +38,7 @@ const link = (path: string): string => href(lang, ...path.split("/"));
           <header class="changelog-head">
             <h2 class="changelog-version">
               {update.version}
-              {update.build && <span class="changelog-build">{update.build}</span>}
+              {update.label && <span class="changelog-label" lang={lang === "zh" || lang === "en" ? undefined : "en"}>{changeText(update.label, lang).text}</span>}
             </h2>
             <p class="changelog-meta"><time datetime={update.date}>{updateDate(update.date, lang)}</time></p>
             <p class="changelog-meta changelog-platforms">{update.platforms.join(" · ")}</p>
