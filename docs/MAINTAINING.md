@@ -163,7 +163,7 @@
   - 以自己的話寫重點摘要，不要整段複製官方原文；`kind` 為 `new`／`changed`／`fixed`。
   - 只寫繁中（`zh`）與英文（`en`）；其他語言顯示英文並標上 `lang="en"`。名稱用站內譯名（怪物、任務等）。
   - `link` 是語言後面的路徑（如 `quests/ca09`），單元測試會檢查頁面存在。
-- `src/data/game-changes.json`（`npm run game-diff` 產生）：本站資料換到新版本時，與上一版比對的數值變動。
+- `src/data/game-changes.json`（`npm run game-diff` 產生）：本站資料換到新版本時，與上一版比對的數值變動。比對沒有找到變動時也會記錄，頁面顯示「沒有數值變動」。
 
 頁面依 `shared/game-version.json` 標出本站資料對應的版本，之後的版本註明「尚未更新」。
 

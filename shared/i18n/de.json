@@ -487,7 +487,8 @@
     "changelogDataChanges",
     "changelogDataNote",
     "changelogSourceItems",
-    "changelogSourceWeapons"
+    "changelogSourceWeapons",
+    "changelogNoDataChanges"
   ],
   "_english": [
     "armorPiece",
@@ -1037,5 +1038,6 @@
   "changelogDataChanges": "Datenänderungen (verglichen mit {version})",
   "changelogDataNote": "Wenn die Daten der Website auf eine neue Spielversion wechseln, werden sie mit der vorherigen verglichen und die geänderten Werte unter dieser Version aufgeführt.",
   "changelogSourceItems": "Gegenstände",
-  "changelogSourceWeapons": "Waffenwerte"
+  "changelogSourceWeapons": "Waffenwerte",
+  "changelogNoDataChanges": "Mit {version} verglichen: keine Datenänderungen."
 }

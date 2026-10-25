@@ -540,5 +540,6 @@
   "changelogDataChanges": "資料變動（與 {version} 比較）",
   "changelogDataNote": "本站資料更新到新版本時，會與前一版比對，把數值變動列在該版本下。",
   "changelogSourceItems": "物品",
-  "changelogSourceWeapons": "武器數值"
+  "changelogSourceWeapons": "武器數值",
+  "changelogNoDataChanges": "已與 {version} 比對，沒有數值變動。"
 }

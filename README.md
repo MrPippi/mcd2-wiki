@@ -8,7 +8,7 @@ Weapons, armor, artifacts, enchantments, the bestiary, the world map, quests, So
 with every number and name taken from the game files rather than typed in by hand.
 
 [![Site](https://img.shields.io/badge/site-mrpippi.github.io%2Fmcd2--wiki-2ea44f)](https://mrpippi.github.io/mcd2-wiki/)
-[![Game version](https://img.shields.io/badge/game-1.1.2.0-orange)](#good-to-know)
+[![Game version](https://img.shields.io/badge/game-1.1.3.0-orange)](#good-to-know)
 [![Languages](https://img.shields.io/badge/languages-16-blue)](#languages)
 [![Deploy](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml/badge.svg)](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/github/license/MrPippi/mcd2-wiki)](LICENSE)
@@ -25,7 +25,7 @@ with every number and name taken from the game files rather than typed in by han
 
 ## Highlights
 
-- **Straight from the game**: names, descriptions and stats are extracted from the game's DataTables and localization. The data matches **game version 1.1.2.0**.
+- **Straight from the game**: names, descriptions and stats are extracted from the game's DataTables and localization. The data matches **game version 1.1.3.0**.
 - **16 languages**: game text uses the official translations, so it matches what you see in game.
 - **Bilingual mode**: show every name and description in a second language as well.
 - **No guessing**: values the data can't explain are left out or marked unconfirmed.

@@ -487,7 +487,8 @@
     "changelogDataChanges",
     "changelogDataNote",
     "changelogSourceItems",
-    "changelogSourceWeapons"
+    "changelogSourceWeapons",
+    "changelogNoDataChanges"
   ],
   "_english": [
     "normal",
@@ -1039,5 +1040,6 @@
   "changelogDataChanges": "Zmiany danych (w porównaniu z {version})",
   "changelogDataNote": "Gdy dane serwisu przechodzą na nową wersję gry, są porównywane z poprzednią, a zmienione wartości pojawiają się pod tą wersją.",
   "changelogSourceItems": "Przedmioty",
-  "changelogSourceWeapons": "Statystyki broni"
+  "changelogSourceWeapons": "Statystyki broni",
+  "changelogNoDataChanges": "Porównano z {version}: brak zmian w danych."
 }

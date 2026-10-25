@@ -26,7 +26,8 @@
 }
 .changelog-kind.is-new, .changelog-kind.is-added { border-color: var(--accent); color: var(--accent); }
 .changelog-text { min-width: 0; overflow-wrap: anywhere; }
-.changelog-not-yet { margin: 0; }
+.changelog-not-yet,
+.changelog-no-changes { margin: 0; }
 
 .changelog-data { border-top: 1px solid var(--rule); padding-top: 10px; min-width: 0; }
 .changelog-data summary { cursor: pointer; font-family: var(--font-mono); font-size: var(--fs-mono-s); letter-spacing: 0.05em; color: var(--text-2); }

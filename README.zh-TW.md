@@ -8,7 +8,7 @@
 所有數值與名稱都從遊戲檔案抽取，不是手動輸入。
 
 [![網站](https://img.shields.io/badge/網站-mrpippi.github.io%2Fmcd2--wiki-2ea44f)](https://mrpippi.github.io/mcd2-wiki/zh/)
-[![遊戲版本](https://img.shields.io/badge/遊戲版本-1.1.2.0-orange)](#常見問題)
+[![遊戲版本](https://img.shields.io/badge/遊戲版本-1.1.3.0-orange)](#常見問題)
 [![語言](https://img.shields.io/badge/語言-16-blue)](#支援語言)
 [![Deploy](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml/badge.svg)](https://github.com/MrPippi/mcd2-wiki/actions/workflows/deploy.yml)
 [![License: MIT](https://img.shields.io/github/license/MrPippi/mcd2-wiki)](LICENSE)
@@ -25,7 +25,7 @@
 
 ## 特色
 
-- **資料來自遊戲本身**：名稱、說明與數值都從遊戲的 DataTable 與多語系檔抽取，對應**遊戲版本 1.1.2.0**。
+- **資料來自遊戲本身**：名稱、說明與數值都從遊戲的 DataTable 與多語系檔抽取，對應**遊戲版本 1.1.3.0**。
 - **16 種語言**：遊戲文字使用官方翻譯，和遊戲裡看到的一樣。
 - **中英對照**：每個名稱和說明都可以多顯示一種語言。
 - **不用猜的**：資料無法說明的數值會先不上架，或標示為未確認。

@@ -489,7 +489,8 @@
     "changelogDataChanges",
     "changelogDataNote",
     "changelogSourceItems",
-    "changelogSourceWeapons"
+    "changelogSourceWeapons",
+    "changelogNoDataChanges"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1036,5 +1037,6 @@
   "changelogDataChanges": "Changements de données (par rapport à {version})",
   "changelogDataNote": "Quand les données du site passent à une nouvelle version du jeu, elles sont comparées à la précédente et les valeurs modifiées sont listées sous cette version.",
   "changelogSourceItems": "Objets",
-  "changelogSourceWeapons": "Statistiques des armes"
+  "changelogSourceWeapons": "Statistiques des armes",
+  "changelogNoDataChanges": "Comparé à {version} : aucune donnée modifiée."
 }

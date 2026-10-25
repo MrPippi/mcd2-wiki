@@ -485,7 +485,8 @@
     "changelogDataChanges",
     "changelogDataNote",
     "changelogSourceItems",
-    "changelogSourceWeapons"
+    "changelogSourceWeapons",
+    "changelogNoDataChanges"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1039,5 +1040,6 @@
   "changelogDataChanges": "Изменения данных (по сравнению с {version})",
   "changelogDataNote": "Когда данные сайта переходят на новую версию игры, они сравниваются с предыдущей, и изменённые значения перечисляются под этой версией.",
   "changelogSourceItems": "Предметы",
-  "changelogSourceWeapons": "Характеристики оружия"
+  "changelogSourceWeapons": "Характеристики оружия",
+  "changelogNoDataChanges": "Сравнено с {version}: изменений в данных нет."
 }

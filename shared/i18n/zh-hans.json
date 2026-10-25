@@ -486,7 +486,8 @@
     "changelogDataChanges",
     "changelogDataNote",
     "changelogSourceItems",
-    "changelogSourceWeapons"
+    "changelogSourceWeapons",
+    "changelogNoDataChanges"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1034,5 +1035,6 @@
   "changelogDataChanges": "数据变动（与 {version} 比较）",
   "changelogDataNote": "本站数据更新到新版本时，会与上一版比对，把数值变动列在该版本下。",
   "changelogSourceItems": "物品",
-  "changelogSourceWeapons": "武器数值"
+  "changelogSourceWeapons": "武器数值",
+  "changelogNoDataChanges": "已与 {version} 比对，没有数值变动。"
 }
