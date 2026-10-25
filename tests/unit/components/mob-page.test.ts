@@ -19,6 +19,16 @@ const render = (mob: Mob, lang = "zh") => container.renderToString(MobPage, { pr
 const count = (html: string, needle: string): number => html.split(needle).length - 1;
 
 describe("mob page", () => {
+  it("shows a labelled empty frame for a mob without a portrait", async () => {
+    // Every real bestiary mob has a portrait now, so the frame is checked on a fixture.
+    const { portrait: _portrait, ...noPortrait } = realMob("zombie");
+    const html = await render(noPortrait as Mob, "en");
+    expect(html).toContain('data-testid="mob-portrait-placeholder"');
+    expect(html).toContain('aria-label="No portrait yet"');
+    const plate = html.slice(html.indexOf('class="entry-head specimen-plate mob-plate"'), html.indexOf("</aside>"));
+    expect(plate).not.toContain("<img");
+  });
+
   it("marks an untranslated name once, next to the title", async () => {
     const fixture: Mob = { ...realMob("zombie"), untranslated: ["zh"] };
     const html = await render(fixture);
