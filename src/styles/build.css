@@ -5,7 +5,20 @@
 
 .build-groups { display: grid; gap: 0 var(--space-6); grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
 .build-group-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--space-2); }
-.build-group .section-title, .build-share .section-title { font-size: 20px; margin: var(--space-6) 0 var(--space-3); }
+.build-group .section-title, .build-share .section-title, .build-totals .section-title { font-size: 20px; margin: var(--space-6) 0 var(--space-3); }
+
+/* The build's effects and enchantments in one list, with a total for an effect on several items. */
+.build-total-groups { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.build-total-title { margin: 0 0 var(--space-2); font-family: var(--font-mono); font-size: var(--fs-mono-s); font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--muted); }
+.build-total-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule-strong); }
+.build-total { padding: var(--space-2) 0; border-bottom: 1px solid var(--rule); min-width: 0; }
+.build-total-head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); min-width: 0; }
+.build-total-name { display: flex; align-items: center; gap: var(--space-2); min-width: 0; color: var(--text); text-decoration: none; font-weight: 600; overflow-wrap: anywhere; }
+.build-total-name:hover span:last-child { text-decoration: underline; }
+.build-total-sum { display: flex; align-items: baseline; gap: 6px; flex: 0 0 auto; }
+.build-total-sum-label { font-size: 12px; color: var(--muted); }
+.build-total-sum-value { font-family: var(--font-mono); font-size: 18px; font-variant-numeric: tabular-nums; }
+.build-total-parts { list-style: none; margin: 4px 0 0; padding: 0 0 0 40px; display: grid; gap: 2px; font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--text-2); }
 .build-set-button { font-size: 0.9rem; }
 
 .build-slots { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--rule); }

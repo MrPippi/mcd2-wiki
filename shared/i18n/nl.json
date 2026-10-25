@@ -520,7 +520,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1096,5 +1102,11 @@
   "statusFusionImmunity": "Immuniteit na fusie",
   "statusFusionNote": "De spelgegevens definiëren deze fusie, maar de samengesmolten status heeft geen naam, beschrijving of pictogram en is in het spel mogelijk nog niet actief; hij wordt getoond met de rijnaam uit de datatabel.",
   "statusSources": "Gebruikt door",
-  "statusSourcesNote": "Deze onderdelen in de spelgegevens noemen deze status, om hem op een doel toe te passen of als eigen versterking."
+  "statusSourcesNote": "Deze onderdelen in de spelgegevens noemen deze status, om hem op een doel toe te passen of als eigen versterking.",
+  "buildTotals": "Effecten van de uitrusting",
+  "buildTotalsNote": "Staat een effect op meerdere voorwerpen, dan telt het totaal hun waarden gewoon op; hoe het spel ze stapelt is in het spel nog niet bevestigd. Betoveringen worden één voor één vermeld, niet opgeteld.",
+  "buildTotalsEffects": "Effecten",
+  "buildTotalsEnchants": "Betoveringen",
+  "buildTotalsSum": "Totaal",
+  "buildTotalsBuiltIn": "Ingebouwd"
 }

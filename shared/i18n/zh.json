@@ -570,5 +570,11 @@
   "statusFusionImmunity": "融合後免疫時間",
   "statusFusionNote": "遊戲資料定義了這個融合，但融合後的狀態沒有名稱、說明與圖示，可能尚未在遊戲中啟用；結果以資料表的列名顯示。",
   "statusSources": "相關來源",
-  "statusSourcesNote": "以下項目的資料引用了這個狀態：施加給目標，或作為自身的增益。"
+  "statusSourcesNote": "以下項目的資料引用了這個狀態：施加給目標，或作為自身的增益。",
+  "buildTotals": "整套效果",
+  "buildTotalsNote": "同一個效果出現在多件裝備上時，「合計」是把各件的數值直接相加；遊戲實際如何疊加尚未在遊戲內確認。附魔各自列出，不相加。",
+  "buildTotalsEffects": "效果",
+  "buildTotalsEnchants": "附魔",
+  "buildTotalsSum": "合計",
+  "buildTotalsBuiltIn": "內建"
 }

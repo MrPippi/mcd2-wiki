@@ -518,7 +518,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "_english": [
     "normal",
@@ -1100,5 +1106,11 @@
   "statusFusionImmunity": "Odporność po połączeniu",
   "statusFusionNote": "Dane gry definiują to połączenie, ale powstały efekt nie ma nazwy, opisu ani ikony, więc może jeszcze nie działać w grze; jest pokazany pod nazwą wiersza tabeli danych.",
   "statusSources": "Używane przez",
-  "statusSourcesNote": "Te pozycje w danych gry odwołują się do tego efektu – aby nałożyć go na cel lub jako własne wzmocnienie."
+  "statusSourcesNote": "Te pozycje w danych gry odwołują się do tego efektu – aby nałożyć go na cel lub jako własne wzmocnienie.",
+  "buildTotals": "Efekty zestawu",
+  "buildTotalsNote": "Gdy efekt jest na kilku przedmiotach, suma po prostu dodaje ich wartości; sposób, w jaki gra je łączy, nie został jeszcze potwierdzony w grze. Zaklęcia są wymienione osobno, bez sumowania.",
+  "buildTotalsEffects": "Efekty",
+  "buildTotalsEnchants": "Zaklęcia",
+  "buildTotalsSum": "Suma",
+  "buildTotalsBuiltIn": "Wbudowany"
 }

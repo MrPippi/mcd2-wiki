@@ -2,13 +2,15 @@
 import type { Category } from "../../../shared/config";
 import type { ArmorSet, ArmorPiece, Entry } from "../../../shared/schemas";
 import type { EnchantmentData } from "../../../shared/gear-schema";
+import type { WeaponData } from "../../../shared/weapon-schema";
 import { allArmorSets, findBaseEntry, publishedEntries } from "../data";
 import { enchantmentData } from "../gear-values";
 import { GAME_VERSION } from "../game-version";
 import { categoryLabel, pieceLabel, t, type Lang, type UiKey } from "../i18n";
 import { searchNames } from "../../../shared/lang";
 import { assetUrl, entryHref } from "../url";
-import { compatibleOf, fixedOf, GEAR, type GearSources } from "./gear";
+import { weaponData } from "../weapon-effects";
+import { compatibleRowsOf, fixedOf, GEAR, type GearSources } from "./gear";
 import type { BuildLabels, BuildOption, BuildPayload, BuildSet, EffectOption, EnchantOption } from "./parse";
 import { BUILD_SLOTS, byPool, type BuildSlot, type PoolKey } from "./slots";
 
@@ -30,34 +32,58 @@ const POOL_CATEGORY: Readonly<Record<PoolKey, Category>> = {
 export const inPool = (entry: Entry, pool: PoolKey): boolean =>
   entry.category === POOL_CATEGORY[pool] && (!isArmorPool(pool) || entry.armorPiece === pool);
 
-/** The effect or enchantment a unique item always carries, when it has a released entry. */
-function fixedBonus(entry: Entry, lang: Lang, gear: GearSources): { fixed?: BuildOption["fixed"] } {
+/** The effect or enchantment a unique item always carries, when it has a released entry; a built-in effect also points into the effect list. */
+function fixedBonus(entry: Entry, lang: Lang, gear: GearSources, effectIndex: ReadonlyMap<string, number>): { fixed?: BuildOption["fixed"] } {
   const fixed = fixedOf(entry, gear);
   const bonus = fixed ? findBaseEntry(fixed.kind, fixed.slug) : undefined;
-  if (!bonus) return {};
-  return { fixed: { name: bonus.name[lang], href: entryHref(lang, bonus), ...(fixed?.kind === "effect" ? { effect: true as const } : {}) } };
+  if (!fixed || !bonus) return {};
+  const index = fixed.kind === "effect" ? effectIndex.get(fixed.slug) : undefined;
+  const effect = fixed.kind === "effect" ? { effect: true as const, ...(index !== undefined ? { index } : {}), ...(fixed.value !== undefined ? { value: fixed.value } : {}) } : {};
+  return { fixed: { name: bonus.name[lang], href: entryHref(lang, bonus), ...effect } };
 }
 
 /**
  * Positions in the payload's effect list of the effects this item can roll (only those the list has), without its
  * built-in effect: an item never carries the same effect twice.
  */
-function effectIndexes(entry: Entry, gear: GearSources, effectIndex: ReadonlyMap<string, number>): { effects?: number[] } {
+function effectIndexes(entry: Entry, gear: GearSources, effectIndex: ReadonlyMap<string, number>, tierSets: TierSets): { effects?: number[]; effectTiers?: number[] } {
   const fixed = fixedOf(entry, gear);
   const builtIn = fixed?.kind === "effect" ? fixed.slug : undefined;
-  const indexes = compatibleOf(entry, gear).flatMap((slug) => (slug === builtIn ? [] : (effectIndex.get(slug) ?? [])));
-  return indexes.length > 0 ? { effects: indexes } : {};
+  const rows = compatibleRowsOf(entry, gear).flatMap(({ effect, tiers }) => {
+    const index = effect === builtIn ? undefined : effectIndex.get(effect);
+    return index === undefined ? [] : [{ index, tiers }];
+  });
+  return rows.length > 0 ? { effects: rows.map((row) => row.index), effectTiers: rows.map((row) => tierSets.indexOf(row.tiers)) } : {};
 }
 
-const optionOf = (entry: Entry, lang: Lang, gear: GearSources, effectIndex: ReadonlyMap<string, number>): BuildOption => ({
+/** Distinct tier lists, so items that share one point at it instead of repeating it. */
+export class TierSets {
+  private readonly byKey = new Map<string, number>();
+  private readonly lists: number[][] = [];
+
+  indexOf(tiers: readonly number[]): number {
+    const key = tiers.join(",");
+    const found = this.byKey.get(key);
+    if (found !== undefined) return found;
+    this.lists.push([...tiers]);
+    this.byKey.set(key, this.lists.length - 1);
+    return this.lists.length - 1;
+  }
+
+  get all(): readonly (readonly number[])[] {
+    return this.lists;
+  }
+}
+
+const optionOf = (entry: Entry, lang: Lang, gear: GearSources, effectIndex: ReadonlyMap<string, number>, tierSets: TierSets): BuildOption => ({
   slug: entry.slug,
   name: entry.name[lang],
   search: searchNames(entry.name, lang),
   ...(entry.icon ? { icon: assetUrl(entry.icon) } : {}),
   href: entryHref(lang, entry),
   ...(entry.variant === "unique" ? { unique: true } : {}),
-  ...fixedBonus(entry, lang, gear),
-  ...effectIndexes(entry, gear, effectIndex),
+  ...fixedBonus(entry, lang, gear, effectIndex),
+  ...effectIndexes(entry, gear, effectIndex, tierSets),
 });
 
 const NO_EFFECTS: ReadonlyMap<string, number> = new Map();
@@ -68,10 +94,11 @@ export const poolOptions = (
   entries: readonly Entry[] = publishedEntries,
   gear: GearSources = GEAR,
   effectIndex: ReadonlyMap<string, number> = NO_EFFECTS,
-): BuildOption[] => entries.filter((entry) => inPool(entry, pool)).map((entry) => optionOf(entry, lang, gear, effectIndex));
+  tierSets: TierSets = new TierSets(),
+): BuildOption[] => entries.filter((entry) => inPool(entry, pool)).map((entry) => optionOf(entry, lang, gear, effectIndex, tierSets));
 
-/** Released effects, as the payload's shared effect list. */
-export const effectOptions = (lang: Lang, entries: readonly Entry[] = publishedEntries): EffectOption[] =>
+/** Released effects, as the payload's shared effect list, with how the game prints each one's magnitude. */
+export const effectOptions = (lang: Lang, entries: readonly Entry[] = publishedEntries, formats: WeaponData["effectFormats"] = weaponData.effectFormats): EffectOption[] =>
   entries
     .filter((entry) => entry.category === "effect")
     .map((entry) => ({
@@ -80,6 +107,7 @@ export const effectOptions = (lang: Lang, entries: readonly Entry[] = publishedE
       search: searchNames(entry.name, lang),
       ...(entry.icon ? { icon: assetUrl(entry.icon) } : {}),
       href: entryHref(lang, entry),
+      ...(formats[entry.slug] ? { format: formats[entry.slug] } : {}),
     }));
 
 /** Enchantments a player can put on gear: released, not a unique weapon's own, and naming at least one slot. */
@@ -95,6 +123,7 @@ export function enchantOptions(lang: Lang, entries: readonly Entry[] = published
         ...(entry.icon ? { icon: assetUrl(entry.icon) } : {}),
         href: entryHref(lang, entry),
         slots,
+        tiers: data[entry.slug]?.tiers ?? [],
       },
     ];
   });
@@ -146,15 +175,24 @@ const labelsFor = (lang: Lang): BuildLabels => ({
   builtIn: t(lang, "buildBuiltIn"),
   cardTitle: t(lang, "build"),
   siteTitle: t(lang, "siteTitle"),
+  totals: t(lang, "buildTotals"),
+  totalsNote: t(lang, "buildTotalsNote"),
+  totalsEffects: t(lang, "buildTotalsEffects"),
+  totalsEnchants: t(lang, "buildTotalsEnchants"),
+  totalsSum: t(lang, "buildTotalsSum"),
+  totalsBuiltIn: t(lang, "buildTotalsBuiltIn"),
 });
 
 export function buildPayload(lang: Lang): BuildPayload {
   const effects = effectOptions(lang);
   const effectIndex = new Map(effects.map((effect, index) => [effect.slug, index]));
+  const tierSets = new TierSets();
+  const pools = byPool((pool) => poolOptions(pool, lang, publishedEntries, GEAR, effectIndex, tierSets));
   return {
     gameVersion: GAME_VERSION,
-    pools: byPool((pool) => poolOptions(pool, lang, publishedEntries, GEAR, effectIndex)),
+    pools,
     effects,
+    tierSets: tierSets.all,
     sets: wholeSets(lang),
     enchantments: enchantOptions(lang),
     labels: labelsFor(lang),

@@ -88,8 +88,8 @@ describe("buildPayload", () => {
   });
 
   it("stays small enough to inline", () => {
-    // Items, enchantments and the effect list (each item points into it by index); about 90 KB raw, far less gzipped.
-    for (const lang of LANGS) expect(payloadJson(buildPayload(lang)).length, lang).toBeLessThan(120_000);
+    // Items, enchantments, the effect list and the shared tier lists (items point into both by index); 110–123 KB raw, about 19 KB gzipped.
+    for (const lang of LANGS) expect(payloadJson(buildPayload(lang)).length, lang).toBeLessThan(130_000);
   });
 
   it("escapes < so the JSON cannot close its script tag", () => {
@@ -138,10 +138,10 @@ describe("enchantOptions", () => {
     "swirling-unique": { tiers: [["1"]], slots: ["melee" as const] },
   };
 
-  it("offers released, non-unique enchantments that name a slot, with those slots", () => {
+  it("offers released, non-unique enchantments that name a slot, with those slots and their tier values", () => {
     expect(enchantOptions("en", enchantments, data)).toEqual([
-      { slug: "fire-aspect", name: "fire-aspect", search: expect.any(String), icon: "/icons/enchantment/fire-aspect.png", href: "/en/enchantment/fire-aspect/", slots: ["melee"] },
-      { slug: "multi-roll", name: "multi-roll", search: expect.any(String), icon: "/icons/enchantment/multi-roll.png", href: "/en/enchantment/multi-roll/", slots: ["helmet", "chest", "leggings", "boots"] },
+      { slug: "fire-aspect", name: "fire-aspect", search: expect.any(String), icon: "/icons/enchantment/fire-aspect.png", href: "/en/enchantment/fire-aspect/", slots: ["melee"], tiers: [["1"]] },
+      { slug: "multi-roll", name: "multi-roll", search: expect.any(String), icon: "/icons/enchantment/multi-roll.png", href: "/en/enchantment/multi-roll/", slots: ["helmet", "chest", "leggings", "boots"], tiers: [["1"]] },
     ]);
   });
 

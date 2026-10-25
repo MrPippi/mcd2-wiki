@@ -517,7 +517,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1095,5 +1101,11 @@
   "statusFusionImmunity": "融合後の免疫時間",
   "statusFusionNote": "ゲームデータにこの融合は定義されていますが、融合後の状態には名前・説明・アイコンがなく、まだゲーム内で有効になっていない可能性があります。結果はデータテーブルの行名で表示しています。",
   "statusSources": "関連する出どころ",
-  "statusSourcesNote": "以下の項目のデータがこの状態を参照しています（対象への付与、または自身の強化）。"
+  "statusSourcesNote": "以下の項目のデータがこの状態を参照しています（対象への付与、または自身の強化）。",
+  "buildTotals": "ビルド全体の効果",
+  "buildTotalsNote": "同じ効果が複数の装備にある場合、「合計」は各装備の値を単純に足したものです。ゲーム内での重なり方はまだ確認していません。エンチャントは個別に表示し、合計しません。",
+  "buildTotalsEffects": "効果",
+  "buildTotalsEnchants": "エンチャント",
+  "buildTotalsSum": "合計",
+  "buildTotalsBuiltIn": "固有"
 }

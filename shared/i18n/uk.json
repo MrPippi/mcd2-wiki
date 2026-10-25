@@ -520,7 +520,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1098,5 +1104,11 @@
   "statusFusionImmunity": "Несприйнятливість після злиття",
   "statusFusionNote": "У даних гри є це злиття, але отриманий ефект не має назви, опису та значка, тож, можливо, ще не діє в грі; його показано за назвою рядка таблиці даних.",
   "statusSources": "Використовується в",
-  "statusSourcesNote": "Ці записи в даних гри посилаються на цей ефект — щоб накласти його на ціль або як власне посилення."
+  "statusSourcesNote": "Ці записи в даних гри посилаються на цей ефект — щоб накласти його на ціль або як власне посилення.",
+  "buildTotals": "Ефекти спорядження",
+  "buildTotalsNote": "Якщо ефект є на кількох предметах, підсумок просто додає їхні значення; як гра їх поєднує, у грі ще не перевірено. Зачарування наведено окремо, без додавання.",
+  "buildTotalsEffects": "Ефекти",
+  "buildTotalsEnchants": "Зачарування",
+  "buildTotalsSum": "Разом",
+  "buildTotalsBuiltIn": "Вбудований"
 }

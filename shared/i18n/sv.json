@@ -519,7 +519,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1098,5 +1104,11 @@
   "statusFusionImmunity": "Immunitet efter sammanslagning",
   "statusFusionNote": "Speldata definierar denna sammanslagning, men den sammanslagna statusen saknar namn, beskrivning och ikon och är kanske inte aktiv i spelet än; den visas med radnamnet i datatabellen.",
   "statusSources": "Används av",
-  "statusSourcesNote": "Dessa poster i speldatan nämner statusen, antingen för att ge den till ett mål eller som egen förstärkning."
+  "statusSourcesNote": "Dessa poster i speldatan nämner statusen, antingen för att ge den till ett mål eller som egen förstärkning.",
+  "buildTotals": "Utrustningens effekter",
+  "buildTotalsNote": "När en effekt finns på flera föremål lägger summan bara ihop deras värden; hur spelet staplar dem är ännu inte bekräftat i spelet. Förtrollningar listas var för sig och läggs inte ihop.",
+  "buildTotalsEffects": "Effekter",
+  "buildTotalsEnchants": "Förtrollningar",
+  "buildTotalsSum": "Summa",
+  "buildTotalsBuiltIn": "Inbyggd"
 }

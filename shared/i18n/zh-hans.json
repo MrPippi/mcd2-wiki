@@ -517,7 +517,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1095,5 +1101,11 @@
   "statusFusionImmunity": "融合后免疫时间",
   "statusFusionNote": "游戏数据定义了这个融合，但融合后的状态没有名称、说明与图标，可能尚未在游戏中启用；结果以数据表的行名显示。",
   "statusSources": "相关来源",
-  "statusSourcesNote": "以下项目的数据引用了这个状态：施加给目标，或作为自身的增益。"
+  "statusSourcesNote": "以下项目的数据引用了这个状态：施加给目标，或作为自身的增益。",
+  "buildTotals": "整套效果",
+  "buildTotalsNote": "同一个效果出现在多件装备上时，“合计”是把各件的数值直接相加；游戏实际如何叠加尚未在游戏内确认。附魔逐一列出，不相加。",
+  "buildTotalsEffects": "效果",
+  "buildTotalsEnchants": "附魔",
+  "buildTotalsSum": "合计",
+  "buildTotalsBuiltIn": "内置"
 }

@@ -4,6 +4,7 @@ import { ROMAN } from "../lib/build/card";
 import { buildSearch, decodeBuild, type DecodedBuild, type EnchantPools, type Pools } from "../lib/build/code";
 import { drawCard, type CardTheme } from "./build-draw";
 import { effectRulesOf, effectsLine, isEffectSlot, keptEffects, renderEffects, rollable } from "./build-effects";
+import { renderTotals } from "./build-totals";
 import { parseBuildPayload, type BuildOption, type BuildPayload, type EnchantOption } from "../lib/build/parse";
 import {
   BUILD_SLOTS,
@@ -31,6 +32,7 @@ interface Parts {
   readonly notice: HTMLElement;
   readonly status: HTMLElement;
   readonly url: HTMLInputElement;
+  readonly totals: HTMLElement;
   readonly picker: PickerParts;
 }
 
@@ -77,6 +79,7 @@ function partsOf(root: HTMLElement): Parts | undefined {
     notice: get("[data-notice]"),
     status: get("[data-status]"),
     url: get<HTMLInputElement>("[data-url]"),
+    totals: get("[data-totals]"),
     picker: pickerParts(root.querySelector<HTMLDialogElement>("[data-dialog]")),
   };
   return Object.values(parts).every(Boolean) ? (parts as Parts) : undefined;
@@ -186,6 +189,7 @@ function render(planner: Planner): void {
     if (isEffectSlot(slot.key)) renderEffects(element, planner.payload, slot.key, planner.build[slot.key], planner.effects[slot.key] ?? []);
     if (isEnchantSlot(slot.key)) renderEnchant(element, planner.build[slot.key] !== undefined, planner.enchants[slot.key], planner.payload, planner.root.dataset.bookFrame);
   }
+  renderTotals(planner.parts.totals, planner.payload, planner.build, planner.effects, planner.enchants);
 }
 
 /** Writes the build into the address (other parameters kept) and tells the language links. */

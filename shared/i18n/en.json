@@ -573,5 +573,11 @@
   "statusFusionImmunity": "Immunity after fusing",
   "statusFusionNote": "The game data defines this fusion, but the fused status has no name, description or icon, so it may not be active in the game yet; it is shown by its data table row name.",
   "statusSources": "Used by",
-  "statusSourcesNote": "These rows in the game data name this status, either to apply it to a target or as their own buff."
+  "statusSourcesNote": "These rows in the game data name this status, either to apply it to a target or as their own buff.",
+  "buildTotals": "Build effects",
+  "buildTotalsNote": "When an effect is on more than one item, the total simply adds up their values; how the game stacks them is not yet confirmed in game. Enchantments are listed one by one, not added up.",
+  "buildTotalsEffects": "Effects",
+  "buildTotalsEnchants": "Enchantments",
+  "buildTotalsSum": "Total",
+  "buildTotalsBuiltIn": "Built-in"
 }
