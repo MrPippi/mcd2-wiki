@@ -161,7 +161,7 @@ describe("UI translations", () => {
 
   it("has every Soul Storm key in every language and names it in the menu language", () => {
     const keys = Object.keys(UI_DICTS.zh.values).filter((key) => key.startsWith("soulStorm"));
-    expect(keys).toHaveLength(38);
+    expect(keys).toHaveLength(39);
     for (const lang of LANGS) for (const key of keys) expect(UI_DICTS[lang].values[key], `${lang}.${key}`).toBeTypeOf("string");
     expect(plainText(UI_DICTS.zh.values.soulStorm ?? "")).toBe("靈魂風暴");
     expect(plainText(UI_DICTS.en.values.soulStorm ?? "")).toBe("Soul Storms");

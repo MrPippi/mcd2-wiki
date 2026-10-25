@@ -51,6 +51,10 @@
 .soul-storm-rotation li { counter-increment: storm; display: flex; align-items: center; gap: var(--space-2); min-width: 0; padding: var(--space-2) var(--space-1); border-bottom: 1px solid var(--rule); }
 .soul-storm-rotation li::before { content: counter(storm); font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); min-width: 1.5em; }
 .soul-storm-rotation a { min-width: 0; }
+.soul-storm-area { display: flex; flex-direction: column; min-width: 0; }
+.soul-storm-spots { font-family: var(--font-mono); font-size: var(--fs-mono-s); color: var(--muted); }
+.soul-storm-count { font-weight: 700; color: var(--text); }
+.soul-storm-count-note { margin-top: 0; }
 
 /* Generators */
 .soul-storm-summons { display: grid; gap: var(--space-3); margin: var(--space-4) 0; }
