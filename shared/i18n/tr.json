@@ -520,7 +520,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1096,5 +1102,11 @@
   "statusFusionImmunity": "Birleşme sonrası bağışıklık",
   "statusFusionNote": "Oyun verileri bu birleşmeyi tanımlıyor, ancak ortaya çıkan durumun adı, açıklaması ve simgesi yok; oyunda henüz etkin olmayabilir. Veri tablosundaki satır adıyla gösterilir.",
   "statusSources": "Kullanan",
-  "statusSourcesNote": "Oyun verilerindeki bu öğeler bu duruma atıfta bulunur: bir hedefe uygulamak ya da kendi güçlendirmesi olarak."
+  "statusSourcesNote": "Oyun verilerindeki bu öğeler bu duruma atıfta bulunur: bir hedefe uygulamak ya da kendi güçlendirmesi olarak.",
+  "buildTotals": "Teçhizat efektleri",
+  "buildTotalsNote": "Bir efekt birden fazla eşyada olduğunda toplam, değerleri yalnızca toplar; oyunun bunları nasıl birleştirdiği oyunda henüz doğrulanmadı. Büyüler tek tek listelenir, toplanmaz.",
+  "buildTotalsEffects": "Efektler",
+  "buildTotalsEnchants": "Büyüler",
+  "buildTotalsSum": "Toplam",
+  "buildTotalsBuiltIn": "Yerleşik"
 }

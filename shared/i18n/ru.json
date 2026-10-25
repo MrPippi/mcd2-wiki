@@ -516,7 +516,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "_english": [
     "compatibleEffectsIntro",
@@ -1100,5 +1106,11 @@
   "statusFusionImmunity": "Невосприимчивость после слияния",
   "statusFusionNote": "В данных игры есть это слияние, но у итогового эффекта нет названия, описания и значка, поэтому он, возможно, ещё не включён в игре; он показан по имени строки таблицы данных.",
   "statusSources": "Используется в",
-  "statusSourcesNote": "Эти записи в данных игры ссылаются на этот эффект — чтобы наложить его на цель или как собственное усиление."
+  "statusSourcesNote": "Эти записи в данных игры ссылаются на этот эффект — чтобы наложить его на цель или как собственное усиление.",
+  "buildTotals": "Эффекты снаряжения",
+  "buildTotalsNote": "Если эффект есть на нескольких предметах, итог просто складывает их значения; как игра их суммирует, в игре пока не проверено. Зачарования перечислены по отдельности и не складываются.",
+  "buildTotalsEffects": "Эффекты",
+  "buildTotalsEnchants": "Зачарования",
+  "buildTotalsSum": "Итого",
+  "buildTotalsBuiltIn": "Встроенный"
 }

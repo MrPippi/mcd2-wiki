@@ -1,9 +1,10 @@
 import { z } from "zod";
 import { SlugSchema, type Entry } from "../../shared/schemas";
-import { WeaponDataSchema, type EffectFormat, type WeaponData } from "../../shared/weapon-schema";
+import { WeaponDataSchema, type WeaponData } from "../../shared/weapon-schema";
 import rawOverrides from "../data/fixed-bonus-overrides.json";
 import rawWeapons from "../data/weapons.json";
 import { findBaseEntry, publishedEntries } from "./data";
+import { formatMagnitude } from "./effect-format";
 import { artifactData } from "./gear-values";
 
 /** Weapon stats and effect rules read from the game's DataTables by `npm run extract`. */
@@ -34,14 +35,7 @@ export interface ResolvedWeaponEffects {
 /** Tier I to tier III as one range, e.g. "5%~15%"; a single value when the tiers do not differ. */
 export const tierRange = ([low, , high]: readonly [string, string, string]): string => (low === high ? low : `${low}~${high}`);
 
-/** A magnitude the way the game prints it: scaled, offset, as a percentage when the effect says so. */
-export function formatMagnitude(value: number, format: EffectFormat | undefined): string {
-  if (!format) return String(value);
-  const scaled = (value * format.multiplier + format.offset) * (format.percent ? 100 : 1);
-  const factor = 10 ** format.maxFractionDigits;
-  const rounded = Math.round(scaled * factor) / factor;
-  return format.percent ? `${rounded}%` : String(rounded);
-}
+export { formatMagnitude };
 
 const published = (category: Entry["category"], slug: string): Entry | undefined =>
   publishedEntries.find((entry) => entry.category === category && entry.slug === slug);

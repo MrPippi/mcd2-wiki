@@ -520,7 +520,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "siteTitle": "Minecraft Dungeons II Wiki",
   "siteShort": "MCD2 Wiki",
@@ -1097,5 +1103,11 @@
   "statusFusionImmunity": "Immunità dopo la fusione",
   "statusFusionNote": "I dati di gioco definiscono questa fusione, ma lo stato risultante non ha nome, descrizione né icona, quindi potrebbe non essere ancora attivo nel gioco; è mostrato con il nome della sua riga nella tabella dati.",
   "statusSources": "Usato da",
-  "statusSourcesNote": "Questi elementi dei dati di gioco fanno riferimento a questo stato, per applicarlo a un bersaglio o come potenziamento proprio."
+  "statusSourcesNote": "Questi elementi dei dati di gioco fanno riferimento a questo stato, per applicarlo a un bersaglio o come potenziamento proprio.",
+  "buildTotals": "Effetti dell'equipaggiamento",
+  "buildTotalsNote": "Quando un effetto è su più oggetti, il totale somma semplicemente i loro valori; come il gioco li cumuli non è ancora confermato in gioco. Gli incantesimi sono elencati uno per uno, senza sommarli.",
+  "buildTotalsEffects": "Effetti",
+  "buildTotalsEnchants": "Incantesimi",
+  "buildTotalsSum": "Totale",
+  "buildTotalsBuiltIn": "Integrato"
 }

@@ -13,8 +13,8 @@ export interface GearSources {
 
 export const GEAR: GearSources = { weapons: weaponData.weapons, artifacts: artifactData, armor: armorEffectData };
 
-/** The effect slugs an item can roll; empty for items that roll none (talismans) or have no data. */
-export function compatibleOf(entry: Entry, gear: GearSources = GEAR): string[] {
+/** The effects an item can roll with their raw tier I/II/III magnitudes; empty for items that roll none (talismans) or have no data. */
+export function compatibleRowsOf(entry: Entry, gear: GearSources = GEAR): { effect: string; tiers: number[] }[] {
   const rows =
     entry.category === "melee" || entry.category === "ranged"
       ? gear.weapons[entry.slug]?.compatible
@@ -23,15 +23,15 @@ export function compatibleOf(entry: Entry, gear: GearSources = GEAR): string[] {
         : entry.category === "armor"
           ? gear.armor[entry.slug]?.compatible
           : undefined;
-  return (rows ?? []).map((row) => row.effect);
+  return (rows ?? []).map((row) => ({ effect: row.effect, tiers: [...row.tiers] }));
 }
 
-/** The effect or enchantment a unique item always carries, as a category and slug. */
-export function fixedOf(entry: Entry, gear: GearSources = GEAR): { kind: "effect" | "enchantment" | "enchantment-book"; slug: string } | undefined {
+/** The effect or enchantment a unique item always carries, as a category and slug, with an effect's raw magnitude when known. */
+export function fixedOf(entry: Entry, gear: GearSources = GEAR): { kind: "effect" | "enchantment" | "enchantment-book"; slug: string; value?: number } | undefined {
   if (entry.category === "melee" || entry.category === "ranged") {
     const fixed = gear.weapons[entry.slug]?.fixed;
-    return fixed ? { kind: fixed.kind, slug: fixed.slug } : undefined;
+    return fixed ? { kind: fixed.kind, slug: fixed.slug, ...(fixed.kind === "effect" && fixed.value !== undefined ? { value: fixed.value } : {}) } : undefined;
   }
   const armor = entry.category === "armor" ? gear.armor[entry.slug]?.fixed : undefined;
-  return armor ? { kind: "effect", slug: armor.effect } : undefined;
+  return armor ? { kind: "effect", slug: armor.effect, value: armor.value } : undefined;
 }

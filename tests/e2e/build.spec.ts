@@ -383,3 +383,21 @@ test.describe("without JavaScript", () => {
     await expect(page.getByTestId("build-planner")).toBeHidden();
   });
 });
+
+test.describe("build effects", () => {
+  test("list every effect and enchantment, and total an effect on two items", async ({ page }) => {
+    await page.goto("/en/build/?v=1&m=axe&h=cave-crawler-helmet&c=scamp-chest&e=fire-aspect:2&x=,,roll-cooldown:2,roll-cooldown:3");
+    const totals = page.getByTestId("build-totals");
+    await expect(totals).toBeVisible();
+    const roll = totals.locator('[data-kind="effects"] [data-total="roll-cooldown"]');
+    await expect(roll.locator(".build-total-sum-value")).toHaveText("40%");
+    await expect(roll.locator(".build-total-parts li")).toHaveText(["Helmet · II · 15%", "Chest · III · 25%"]);
+    await expect(totals.locator('[data-kind="enchants"] [data-total="fire-aspect"] .build-total-parts li')).toContainText(" · II · ");
+  });
+
+  test("stay hidden until the build has an effect or an enchantment", async ({ page }) => {
+    await page.goto("/en/build/?v=1&m=axe");
+    await expect(page.getByTestId("build-planner")).toBeVisible();
+    await expect(page.getByTestId("build-totals")).toBeHidden();
+  });
+});

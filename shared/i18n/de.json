@@ -518,7 +518,13 @@
     "statusFusionImmunity",
     "statusFusionNote",
     "statusSources",
-    "statusSourcesNote"
+    "statusSourcesNote",
+    "buildTotals",
+    "buildTotalsNote",
+    "buildTotalsEffects",
+    "buildTotalsEnchants",
+    "buildTotalsSum",
+    "buildTotalsBuiltIn"
   ],
   "_english": [
     "armorPiece",
@@ -1098,5 +1104,11 @@
   "statusFusionImmunity": "Immunität nach der Fusion",
   "statusFusionNote": "Die Spieldaten definieren diese Fusion, aber der verschmolzene Zustand hat keinen Namen, keine Beschreibung und kein Symbol und ist im Spiel womöglich noch nicht aktiv; er wird mit dem Zeilennamen der Datentabelle angezeigt.",
   "statusSources": "Verwendet von",
-  "statusSourcesNote": "Diese Einträge in den Spieldaten nennen diesen Zustand – um ihn einem Ziel zuzufügen oder als eigene Stärkung."
+  "statusSourcesNote": "Diese Einträge in den Spieldaten nennen diesen Zustand – um ihn einem Ziel zuzufügen oder als eigene Stärkung.",
+  "buildTotals": "Effekte der Ausrüstung",
+  "buildTotalsNote": "Steht ein Effekt auf mehreren Gegenständen, addiert die Summe einfach ihre Werte; wie das Spiel sie verrechnet, ist im Spiel noch nicht bestätigt. Verzauberungen werden einzeln aufgeführt, nicht addiert.",
+  "buildTotalsEffects": "Effekte",
+  "buildTotalsEnchants": "Verzauberungen",
+  "buildTotalsSum": "Summe",
+  "buildTotalsBuiltIn": "Eingebaut"
 }

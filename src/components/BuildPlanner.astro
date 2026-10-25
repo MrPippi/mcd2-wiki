@@ -78,6 +78,11 @@ const groupTitle = (group: SlotGroup): string =>
       </section>
     ))}
   </div>
+  <section class="build-totals" data-testid="build-totals" data-totals aria-labelledby="build-totals-title" hidden>
+    <h2 class="section-title" id="build-totals-title">{t(lang, "buildTotals")}</h2>
+    <div class="build-total-groups" data-totals-body></div>
+    <p class="note">{t(lang, "buildTotalsNote")}</p>
+  </section>
   <section class="build-share" aria-labelledby="build-share-title">
     <h2 class="section-title" id="build-share-title">{t(lang, "buildShare")}</h2>
     <div class="build-actions">
