@@ -9,11 +9,16 @@ test.describe("game update log", () => {
     const dates = await updates.locator("time").evaluateAll((times) => times.map((time) => time.getAttribute("datetime") ?? ""));
     expect(dates.length).toBeGreaterThan(1);
     expect([...dates].sort().reverse()).toEqual(dates);
-    const latest = updates.first();
-    await expect(latest.getByTestId("official-notes")).toHaveAttribute("href", /^https:\/\/feedback\.minecraft\.net\//);
-    await expect(latest.locator(".changelog-change a", { hasText: "伏聆者之怒" })).toHaveAttribute("href", "/zh/quests/ca09/");
-    await expect(latest.locator(".changelog-kind-title.is-fixed")).toHaveText("修正");
-    await expect(latest.locator(".changelog-group[data-kind='fixed'] h4")).toHaveText(["一般", "效能與穩定性", "物品", "任務"]);
+    await expect(updates.first().getByTestId("official-notes")).toHaveAttribute("href", /^https:\/\/feedback\.minecraft\.net\//);
+    const hotfix = page.locator("[data-testid='game-update'][data-version='1.1.3.0']");
+    await expect(hotfix.locator(".changelog-change a", { hasText: "伏聆者之怒" })).toHaveAttribute("href", "/zh/quests/ca09/");
+    await expect(hotfix.locator(".changelog-kind-title.is-fixed")).toHaveText("修正");
+    await expect(hotfix.locator(".changelog-group[data-kind='fixed'] h4")).toHaveText(["一般", "效能與穩定性", "物品", "任務"]);
+    const balance = page.locator("[data-testid='game-update'][data-version='1.1.4.0']");
+    await expect(balance.locator(".changelog-group[data-kind='changed'] h4")).toHaveText(["一般", "生物", "物品"]);
+    await expect(balance.locator(".changelog-change a", { hasText: "靈魂腐化女巫" })).toHaveAttribute("href", "/zh/mobs/soul-corrupted-witch/");
+    await expect(balance.getByTestId("data-server-side")).toBeVisible();
+    await expect(balance.getByTestId("data-not-yet")).toHaveCount(0);
     expect(await horizontalOverflow(page)).toBeLessThanOrEqual(0);
   });
 

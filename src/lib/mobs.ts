@@ -12,12 +12,14 @@ import rawMobs from "../data/mobs.json";
 import { htmlLang, type Lang } from "../../shared/lang";
 import { mobKindLabel } from "./i18n";
 import { formatView, worldSearch } from "./map/view-state";
+import { applyMobOverrides } from "./server-overrides";
 import { GAME_NAME } from "./site-title";
 import { t, type UiKey } from "./ui-strings";
 import { href } from "./url";
 
-/** Mobs from `npm run extract`, validated at build time. */
-export const mobData: MobData = MobDataSchema.parse(rawMobs);
+/** Mobs from `npm run extract`, validated at build time, with the stats the servers changed since. */
+const extractedMobs: MobData = MobDataSchema.parse(rawMobs);
+export const mobData: MobData = { ...extractedMobs, mobs: applyMobOverrides(extractedMobs.mobs) };
 
 /** The order the bestiary lists its groups in. */
 export const MOB_KIND_ORDER: readonly Mob["kind"][] = ["boss", "miniboss", "regular", "variant"];

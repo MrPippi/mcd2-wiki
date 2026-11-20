@@ -36,6 +36,13 @@ describe("mob page", () => {
     expect(html).toMatch(/class="mob-title"[^]*?class="tag warn"/);
   });
 
+  it("notes a stat the servers changed after the game files", async () => {
+    const html = await render(realMob("soul-corrupted-witch"));
+    expect(count(html, 'data-testid="mob-server-override"')).toBe(1);
+    expect(html).toContain("1.1.4.0 伺服器端更新為 1000，遊戲檔案中仍為 1200。");
+    expect(count(await render(realMob("zombie")), "mob-server-override")).toBe(0);
+  });
+
   it("shows no untranslated marker when the name is translated", async () => {
     expect(count(await render(realMob("zombie")), "tag warn")).toBe(0);
   });

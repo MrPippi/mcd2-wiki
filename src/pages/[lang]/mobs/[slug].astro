@@ -11,6 +11,7 @@ import MobStats from "../../../components/MobStats.astro";
 import Base from "../../../layouts/Base.astro";
 import { mobKindLabel, t, type Lang, type UiKey } from "../../../lib/i18n";
 import { findMob, mobData, mobDescription, mobHref } from "../../../lib/mobs";
+import { mobOverrides } from "../../../lib/server-overrides";
 import { href } from "../../../lib/url";
 import "../../../styles/mobs.css";
 
@@ -45,7 +46,7 @@ const WORLD_KEY = { overworld: "mobWorldOverworld", wellspring: "mobWorldWellspr
           <LangText as="h1" lang={lang} value={mob.name} searchTitle />
           {mob.untranslated.includes(lang) && <span class="tag warn">{t(lang, "untranslated")}</span>}
         </div>
-        <MobStats lang={lang} stats={mob.stats} />
+        <MobStats lang={lang} stats={mob.stats} overrides={mobOverrides(mob.slug)} />
         <MobAreas lang={lang} areas={mob.areas} />
         <MobDrops lang={lang} drops={mob.drops} />
         {mob.soulCorrupted && (

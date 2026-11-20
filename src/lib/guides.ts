@@ -7,9 +7,11 @@ import rawGuides from "../data/guides.json";
 import { t, type Lang, type UiKey } from "./i18n";
 import { htmlLang } from "../../shared/lang";
 import { RARITY_LABEL } from "./rarity";
+import { applyCapOverrides } from "./server-overrides";
 
-/** Guides data from `npm run extract`, validated at build time. */
-export const guidesData: GuidesData = GuidesDataSchema.parse(rawGuides);
+/** Guides data from `npm run extract`, validated at build time, with the caps the servers changed since. */
+const extractedGuides: GuidesData = GuidesDataSchema.parse(rawGuides);
+export const guidesData: GuidesData = extractedGuides.caps ? { ...extractedGuides, caps: applyCapOverrides(extractedGuides.caps) } : extractedGuides;
 
 export interface GuideLink {
   /** Path segment after /<lang>/guides/. */

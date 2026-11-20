@@ -43,7 +43,7 @@ describe("vendors guide", () => {
     const html = await render(VendorsPage, "en");
     expect(html).toContain("Items on sale per rarity: 3");
     expect(html).toContain("Refreshing the stock right away: 3 Echo Shards");
-    expect(html).toContain("You can carry at most 100 Echo Shards.");
+    expect(html).toContain("You can carry at most 999 Echo Shards.");
     expect(count(html.slice(html.indexOf('data-testid="guide-base-prices"')), "<td class=\"guide-number\">20</td>")).toBe(7);
     expect(html).toContain("×4");
     expect(html).not.toMatch(/SpringStone/i);
@@ -204,9 +204,15 @@ describe("progression guide", () => {
   it("shows the caps, the Echo Shard sources and the stage levels", async () => {
     const html = await render(ProgressionPage, "de");
     expect(count(html, 'data-testid="guide-cap"')).toBe(3);
-    expect(html).toContain("99.999");
+    expect(html).toContain("999.999");
     expect(count(html, 'data-testid="guide-stage"')).toBe(guidesData.stages.length);
     expect(html).toContain("Echoscherben");
+  });
+
+  it("notes each cap the servers changed after the game files", async () => {
+    const html = await render(ProgressionPage, "en");
+    expect(count(html, 'data-testid="guide-server-override"')).toBe(2);
+    expect(html).toContain("999,999 since the 1.1.4.0 server-side update; the game files still say 99,999.");
   });
 
   it("marks the stage table once when a name fell back to English", async () => {

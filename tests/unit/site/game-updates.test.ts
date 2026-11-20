@@ -56,6 +56,12 @@ describe("game updates", () => {
     expect(list.map((one) => dataStatus(list, one, "9.9"))).toEqual([undefined, undefined, undefined, undefined]);
   });
 
+  it("marks a server-side update after the site's version as server, not ahead", () => {
+    const list = [{ ...update("1.3", "2026-11-16"), serverSide: true as const }, update("1.2", "2026-10-22"), update("1.1", "2026-10-07")];
+    expect(list.map((one) => dataStatus(list, one, "1.2"))).toEqual(["server", "current", undefined]);
+    expect(list.map((one) => dataStatus(list, one, "1.1"))).toEqual(["server", "ahead", "current"]);
+  });
+
   it("finds the data changes recorded into an update's version", () => {
     const groups = [{ source: "weapons" as const, entities: [{ slug: "axe", name: { en: "Axe" } as never, status: "changed" as const, fields: [] }] }];
     const changes = [{ from: "1.2", to: "1.3", groups }, { from: "1.1", to: "1.2", groups: [] }];

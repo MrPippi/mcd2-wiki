@@ -5,8 +5,9 @@ import GuideHeading from "../../../components/GuideHeading.astro";
 import GuideMarker from "../../../components/GuideMarker.astro";
 import GuidePage from "../../../components/GuidePage.astro";
 import GuideText from "../../../components/GuideText.astro";
-import { formatNumber, guideBySlug, guidesData, shown, textOf, type GuideLink } from "../../../lib/guides";
+import { fill, formatNumber, guideBySlug, guidesData, shown, textOf, type GuideLink } from "../../../lib/guides";
 import { t, type Lang } from "../../../lib/i18n";
+import { capOverride } from "../../../lib/server-overrides";
 
 export const getStaticPaths = langPaths;
 
@@ -24,11 +25,18 @@ const emeralds = textOf(data, "emeralds", lang);
 const caps = data.caps;
 const capRows = caps
   ? [
-      { label: emeralds?.html, value: caps.emeralds },
-      { label: echoShards?.html, value: caps.echoShards },
-      { label: undefined, plain: t(lang, "guideHeroLevel"), value: caps.level },
+      { key: "emeralds" as const, label: emeralds?.html, value: caps.emeralds },
+      { key: "echoShards" as const, label: echoShards?.html, value: caps.echoShards },
+      { key: "level" as const, label: undefined, plain: t(lang, "guideHeroLevel"), value: caps.level },
     ]
   : [];
+/** Caps the servers changed after the game files, each with a note. */
+const serverNotes = capRows.flatMap((row) => {
+  const one = capOverride(row.key);
+  if (!one) return [];
+  const stat = row.label ? { html: row.label } : row.plain ?? "";
+  return [fill(t(lang, "serverOverrideNote"), { stat, value: formatNumber(one.value, lang), was: formatNumber(one.was, lang), version: one.version })];
+});
 const stages = data.stages.map((stage) => ({ stage, name: shown(stage.name, lang) }));
 ---
 <GuidePage lang={lang} guide={guide}>
@@ -44,6 +52,7 @@ const stages = data.stages.map((stage) => ({ stage, name: shown(stage.name, lang
           </div>
         ))}
       </dl>
+      {serverNotes.map((html) => <p class="note guide-note" data-testid="guide-server-override" set:html={html} />)}
     </section>
   )}
   <section class="entry-section guide-section" data-testid="guide-echo-shards">
