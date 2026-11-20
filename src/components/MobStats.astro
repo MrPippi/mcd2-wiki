@@ -1,7 +1,9 @@
 ---
 import type { Mob } from "../../shared/mob-schema";
 import { statLabel, t, type Lang } from "../lib/i18n";
+import { fill } from "../lib/guides";
 import { RAW_UNIT_STATS, formatStat } from "../lib/mobs";
+import type { MobOverride } from "../lib/server-overrides";
 
 interface Props {
   lang: Lang;
@@ -10,9 +12,14 @@ interface Props {
   level?: 2 | 3;
   /** Test id of the section, so the Soul Corrupted stats can be told apart from the page's own. */
   testid?: string;
+  /** Stats the servers changed after the game files; each gets a note. */
+  overrides?: readonly MobOverride[];
 }
 
-const { lang, stats, level = 2, testid = "mob-stats" } = Astro.props;
+const { lang, stats, level = 2, testid = "mob-stats", overrides = [] } = Astro.props;
+const serverNotes = overrides.map((one) =>
+  fill(t(lang, "serverOverrideNote"), { stat: statLabel(one.key, lang), value: formatStat(one.key, one.value), was: formatStat(one.key, one.was), version: one.version }),
+);
 const Heading = level === 3 ? "h3" : "h2";
 ---
 {stats.length > 0 && (
@@ -28,6 +35,7 @@ const Heading = level === 3 ? "h3" : "h2";
         ))}
       </tbody>
     </table>
+    {serverNotes.map((html) => <p class="note" data-testid="mob-server-override" set:html={html} />)}
     <p class="note">{t(lang, "mobBaseValues")}</p>
     {stats.some((stat) => RAW_UNIT_STATS.has(stat.key)) && <p class="note">{t(lang, "mobUnitsNote")}</p>}
   </section>

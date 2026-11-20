@@ -1,10 +1,13 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import entriesData from "../../../src/data/entries.json";
 import mobsData from "../../../src/data/mobs.json";
 import questsData from "../../../src/data/quests.json";
 import { GameUpdatesSchema, changeText, dataChangesFor, dataStatus, gameUpdates, groupChanges, updateAnchor, updateDate, type Change, type GameUpdate } from "../../../src/lib/game-updates";
 
 const PAGES = "src/pages/[lang]";
+/** Entry pages (src/pages/[lang]/[category]/[slug]), as "category/slug". */
+const ENTRY_PAGES: ReadonlySet<string> = new Set(entriesData.map((entry) => `${entry.category}/${entry.slug}`));
 /** Slugs of the pages generated from data, by first path segment. */
 const DYNAMIC: Readonly<Record<string, ReadonlySet<string>>> = {
   mobs: new Set(mobsData.mobs.map((mob) => mob.slug)),
@@ -13,6 +16,7 @@ const DYNAMIC: Readonly<Record<string, ReadonlySet<string>>> = {
 const pageExists = (link: string): boolean => {
   const [first = "", second] = link.split("/");
   if (second !== undefined && DYNAMIC[first]) return DYNAMIC[first].has(second);
+  if (ENTRY_PAGES.has(link)) return true;
   return existsSync(`${PAGES}/${link}.astro`) || existsSync(`${PAGES}/${link}/index.astro`);
 };
 
@@ -50,6 +54,12 @@ describe("game updates", () => {
     expect(list.map((one) => dataStatus(list, one, "1.2"))).toEqual(["ahead", "current", undefined, undefined]);
     expect(list.map((one) => dataStatus(list, one, "1.1"))).toEqual(["ahead", "ahead", "current", undefined]);
     expect(list.map((one) => dataStatus(list, one, "9.9"))).toEqual([undefined, undefined, undefined, undefined]);
+  });
+
+  it("marks a server-side update after the site's version as server, not ahead", () => {
+    const list = [{ ...update("1.3", "2026-11-16"), serverSide: true as const }, update("1.2", "2026-10-22"), update("1.1", "2026-10-07")];
+    expect(list.map((one) => dataStatus(list, one, "1.2"))).toEqual(["server", "current", undefined]);
+    expect(list.map((one) => dataStatus(list, one, "1.1"))).toEqual(["server", "ahead", "current"]);
   });
 
   it("finds the data changes recorded into an update's version", () => {

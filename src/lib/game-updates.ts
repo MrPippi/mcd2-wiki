@@ -14,7 +14,7 @@ import type { UiKey } from "./ui-strings";
 export const CHANGE_KINDS = ["new", "changed", "fixed"] as const;
 export type ChangeKind = (typeof CHANGE_KINDS)[number];
 /** What part of the game a change is about, in the order the page lists them (as the Minecraft Wiki groups them). */
-export const CHANGE_TOPICS = ["general", "stability", "items", "quests"] as const;
+export const CHANGE_TOPICS = ["general", "stability", "mobs", "items", "quests"] as const;
 export type ChangeTopic = (typeof CHANGE_TOPICS)[number];
 
 const ChangeSchema = z.object({
@@ -37,6 +37,8 @@ const UpdateSchema = z
   /** What tells this release apart from another of the same version, e.g. "Steam Deck 更新". */
   label: LabelSchema.optional(),
   date: z.iso.date(),
+  /** Changed only on the game's servers, with no client download: the site applies its values via src/server-overrides.json. */
+  serverSide: z.literal(true).optional(),
   platforms: z.array(z.string().min(1)).min(1),
   /** The official notes or announcement. */
   source: z.url({ protocol: /^https$/ }),
@@ -58,6 +60,7 @@ export const CHANGE_KIND_KEY: Readonly<Record<ChangeKind, UiKey>> = { new: "chan
 export const CHANGE_TOPIC_KEY: Readonly<Record<ChangeTopic, UiKey>> = {
   general: "changelogTopicGeneral",
   stability: "changelogTopicStability",
+  mobs: "changelogTopicMobs",
   items: "changelogTopicItems",
   quests: "changelogTopicQuests",
 };
@@ -92,14 +95,18 @@ export const updateAnchor = (update: GameUpdate): string => `v${update.version}$
 
 /**
  * Where the site's data stands against an update: "current" for the newest update of the version the site was
- * extracted from, "ahead" for any update after it, otherwise undefined.
+ * extracted from, "ahead" for any update after it, "server" for a server-side update after it (no game files to
+ * extract; the site applies its values by hand), otherwise undefined.
  */
-export function dataStatus(updates: readonly GameUpdate[], update: GameUpdate, version: string = GAME_VERSION): "current" | "ahead" | undefined {
+export function dataStatus(
+  updates: readonly GameUpdate[], update: GameUpdate, version: string = GAME_VERSION,
+): "current" | "ahead" | "server" | undefined {
   const current = updates.findIndex((one) => one.version === version);
   const index = updates.indexOf(update);
   if (current < 0 || index < 0) return undefined;
   if (index === current) return "current";
-  return index < current ? "ahead" : undefined;
+  if (index > current) return undefined;
+  return update.serverSide ? "server" : "ahead";
 }
 
 /** The recorded comparison into an update's version, if the site has one; its groups are empty when nothing changed. */

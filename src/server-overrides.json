@@ -1,0 +1,9 @@
+{
+  "caps": [
+    { "key": "emeralds", "value": 999999, "was": 99999, "version": "1.1.4.0" },
+    { "key": "echoShards", "value": 999, "was": 100, "version": "1.1.4.0" }
+  ],
+  "mobStats": [
+    { "mob": "soul-corrupted-witch", "key": "health", "value": 1000, "was": 1200, "version": "1.1.4.0" }
+  ]
+}

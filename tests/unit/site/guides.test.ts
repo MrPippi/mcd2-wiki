@@ -19,7 +19,8 @@ describe("guides site data", () => {
 
   it("holds the extracted game values", () => {
     expect(guidesData.vendors.map((vendor) => vendor.levels.map((level) => level.cost))).toEqual([[10, 15], [20, 40], [30, 60]]);
-    expect(guidesData.caps).toEqual({ emeralds: 99999, echoShards: 100, level: 100 });
+    // Emeralds and Echo Shards are the 1.1.4.0 server values (src/server-overrides.json); the game files hold 99999 and 100.
+    expect(guidesData.caps).toEqual({ emeralds: 999999, echoShards: 999, level: 100 });
     expect(guidesData.secretTalismans.talismans).toHaveLength(8);
     expect(guidesData.stages.length).toBeGreaterThan(0);
   });

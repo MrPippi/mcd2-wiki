@@ -191,13 +191,23 @@
 
 `/<lang>/changelog/` 列出遊戲各版本的更新，由兩份資料組成：
 
-- `src/game-updates.json`（手寫）：每個版本一筆，`version`、`date`（`YYYY-MM-DD`，由新到舊、每天一筆）、`platforms`、`source`（官方更新說明網址，[Minecraft Feedback 的 Dungeons II Changelogs](https://feedback.minecraft.net/hc/en-us/sections/49286492925453-Minecraft-Dungeons-II-Changelogs)）與 `changes`（每項有 `kind`：`new`／`changed`／`fixed`，與 `topic`：`general`／`stability`／`items`／`quests`，頁面依此分組，比照 Minecraft Wiki 的更新日誌）。同一版本號推出兩次時以 `build`（組建號，只用在網址錨點）區分，並必須加上 `label`（`zh`／`en`，例如「Steam Deck 更新」），頁面在版本號下方顯示這個說明而不是組建號。
+- `src/game-updates.json`（手寫）：每個版本一筆，`version`、`date`（`YYYY-MM-DD`，由新到舊、每天一筆）、`platforms`、`source`（官方更新說明網址，[Minecraft Feedback 的 Dungeons II Changelogs](https://feedback.minecraft.net/hc/en-us/sections/49286492925453-Minecraft-Dungeons-II-Changelogs)）與 `changes`（每項有 `kind`：`new`／`changed`／`fixed`，與 `topic`：`general`／`stability`／`mobs`／`items`／`quests`，頁面依此分組，比照 Minecraft Wiki 的更新日誌）。同一版本號推出兩次時以 `build`（組建號，只用在網址錨點）區分，並必須加上 `label`（`zh`／`en`，例如「Steam Deck 更新」），頁面在版本號下方顯示這個說明而不是組建號。
   - 以自己的話寫重點摘要，不要整段複製官方原文；`kind` 為 `new`／`changed`／`fixed`。
   - 只寫繁中（`zh`）與英文（`en`）；其他語言顯示英文並標上 `lang="en"`。名稱用站內譯名（怪物、任務等）。
-  - `link` 是語言後面的路徑（如 `quests/ca09`），單元測試會檢查頁面存在。
+  - `link` 是語言後面的路徑（如 `quests/ca09`、`artifact/corrupted-beacon`），單元測試會檢查頁面存在。
+  - 只在伺服器端調整、不需下載的更新（如 1.1.4.0）加上 `"serverSide": true`，頁面改註明「伺服器端更新」而不是「尚未更新」；網站上受影響的數值寫進 `src/server-overrides.json`（見下方「伺服器端數值」）。
 - `src/data/game-changes.json`（`npm run game-diff` 產生）：本站資料換到新版本時，與上一版比對的數值變動。比對沒有找到變動時也會記錄，頁面顯示「沒有數值變動」。
 
 頁面依 `shared/game-version.json` 標出本站資料對應的版本，之後的版本註明「尚未更新」。
+
+## 伺服器端數值
+
+有些更新只改遊戲伺服器下發的數值，不發新的客戶端（例如 1.1.4.0：啟動器不會更新，`MicrosoftGame.config` 仍是舊版本），`npm run extract` 讀不到。這些值手寫在 `src/server-overrides.json`，網站載入資料時套用（`src/lib/server-overrides.ts`），`src/data/` 仍是遊戲檔案的原值，`npm run game-diff` 也照常只比對遊戲檔案。
+
+- `caps`：指南頁的上限（`emeralds`／`echoShards`／`level`）；`mobStats`：怪物的基礎數值（`mob` 為怪物 slug，`key` 為 `shared/mob-schema.ts` 的 `STAT_KEYS`）。
+- 每筆都要寫 `was`（遊戲檔案裡的值）與 `version`（改動的更新）。頁面在該數值旁註明「依 {version} 伺服器端更新為…，遊戲檔案中仍為…」。
+- 重新抽取後，若遊戲檔案已經是新值（客戶端跟上了）或變成別的值，build 會報錯，請刪掉或重新確認該筆覆寫。
+- 本站沒有顯示的數值（例如 1.1.4.0 的腐化燈塔傷害、節儉墜飾門檻）只寫在更新日誌，不必覆寫。
 
 ## 社群配裝（Cloudflare Worker）
 
