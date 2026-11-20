@@ -1,10 +1,13 @@
 import { existsSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import entriesData from "../../../src/data/entries.json";
 import mobsData from "../../../src/data/mobs.json";
 import questsData from "../../../src/data/quests.json";
 import { GameUpdatesSchema, changeText, dataChangesFor, dataStatus, gameUpdates, groupChanges, updateAnchor, updateDate, type Change, type GameUpdate } from "../../../src/lib/game-updates";
 
 const PAGES = "src/pages/[lang]";
+/** Entry pages (src/pages/[lang]/[category]/[slug]), as "category/slug". */
+const ENTRY_PAGES: ReadonlySet<string> = new Set(entriesData.map((entry) => `${entry.category}/${entry.slug}`));
 /** Slugs of the pages generated from data, by first path segment. */
 const DYNAMIC: Readonly<Record<string, ReadonlySet<string>>> = {
   mobs: new Set(mobsData.mobs.map((mob) => mob.slug)),
@@ -13,6 +16,7 @@ const DYNAMIC: Readonly<Record<string, ReadonlySet<string>>> = {
 const pageExists = (link: string): boolean => {
   const [first = "", second] = link.split("/");
   if (second !== undefined && DYNAMIC[first]) return DYNAMIC[first].has(second);
+  if (ENTRY_PAGES.has(link)) return true;
   return existsSync(`${PAGES}/${link}.astro`) || existsSync(`${PAGES}/${link}/index.astro`);
 };
 

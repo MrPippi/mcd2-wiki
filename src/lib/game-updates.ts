@@ -14,7 +14,7 @@ import type { UiKey } from "./ui-strings";
 export const CHANGE_KINDS = ["new", "changed", "fixed"] as const;
 export type ChangeKind = (typeof CHANGE_KINDS)[number];
 /** What part of the game a change is about, in the order the page lists them (as the Minecraft Wiki groups them). */
-export const CHANGE_TOPICS = ["general", "stability", "items", "quests"] as const;
+export const CHANGE_TOPICS = ["general", "stability", "mobs", "items", "quests"] as const;
 export type ChangeTopic = (typeof CHANGE_TOPICS)[number];
 
 const ChangeSchema = z.object({
@@ -58,6 +58,7 @@ export const CHANGE_KIND_KEY: Readonly<Record<ChangeKind, UiKey>> = { new: "chan
 export const CHANGE_TOPIC_KEY: Readonly<Record<ChangeTopic, UiKey>> = {
   general: "changelogTopicGeneral",
   stability: "changelogTopicStability",
+  mobs: "changelogTopicMobs",
   items: "changelogTopicItems",
   quests: "changelogTopicQuests",
 };

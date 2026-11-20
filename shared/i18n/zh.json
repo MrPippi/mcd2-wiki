@@ -545,6 +545,7 @@
   "changelogTopicStability": "效能與穩定性",
   "changelogTopicItems": "物品",
   "changelogTopicQuests": "任務",
+  "changelogTopicMobs": "生物",
   "changelogNoDataChanges": "已與 {version} 比對，沒有數值變動。",
   "statusData": "狀態資料",
   "statusDataNote": "持續時間為預設值，施加的來源可另行指定。持續傷害與回復的每次數值由遊戲程式計算，不在資料表中，故未列出。",

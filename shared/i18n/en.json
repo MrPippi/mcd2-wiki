@@ -548,6 +548,7 @@
   "changelogTopicStability": "Performance and stability",
   "changelogTopicItems": "Items",
   "changelogTopicQuests": "Quests",
+  "changelogTopicMobs": "Mobs",
   "changelogNoDataChanges": "Compared with {version}: no data changes.",
   "statusData": "Status data",
   "statusDataNote": "The duration is the default; a source that applies the status can set its own. Damage and healing over time are worked out by game code, not the data tables, so they are not listed.",
