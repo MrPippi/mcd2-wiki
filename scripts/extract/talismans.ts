@@ -9,7 +9,7 @@ import { descriptionOf, entryIndex, formatMagnitude, locId, toFormat } from "./g
 import type { GameTables } from "./game-tables";
 import type { TalismanData, TalismanLevel } from "../../shared/gear-schema";
 import { issue, type Issue } from "./issues";
-import { localizedFrom } from "../../shared/lang";
+import { localizedFrom, type Lang } from "../../shared/lang";
 import { LANGS } from "../../shared/config";
 import type { Entry, Localized } from "../../shared/schemas";
 import type { TalismanItemRow, TalismanPropertyRow, TalismanTables } from "./talisman-tables";
@@ -134,11 +134,17 @@ export function buildTalismanData(entries: readonly Entry[], tables: TalismanTab
   return { data: Object.fromEntries(built.map(({ slug, data }) => [slug, data])), issues: built.flatMap((one) => one.issues) };
 }
 
-/** The English text with each value shown as unknown, for every language (the values cannot be filled in any). */
-const unknownValues = (text: Localized): Localized => {
-  const english = text.en.replace(PLACEHOLDER, UNKNOWN_VALUE);
-  return localizedFrom(() => english);
-};
+const PLURAL = /<span class="plural"/;
+
+/**
+ * Each language's text with every value shown as unknown. A language whose text bends a word to the missing number (a
+ * plural span) cannot read right without it, so it shows the English instead and is returned in `english`.
+ */
+function unknownValues(text: Localized): { text: Localized; english: Lang[] } {
+  const english = LANGS.filter((lang) => lang !== "en" && PLURAL.test(text[lang]));
+  const marked = (lang: Lang): string => (english.includes(lang) ? text.en : text[lang]).replace(PLACEHOLDER, UNKNOWN_VALUE);
+  return { text: localizedFrom(marked), english };
+}
 
 const mergeUntranslated = (entry: Entry, langs: readonly Entry["untranslated"][]): Entry["untranslated"] => {
   const merged = [...new Set([...(entry.untranslated ?? []), ...langs.flatMap((list) => list ?? [])])];
@@ -147,15 +153,15 @@ const mergeUntranslated = (entry: Entry, langs: readonly Entry["untranslated"][]
 
 /**
  * Entries with each stub-described talisman given its effect's description (and that effect's untranslated languages),
- * and each talisman whose values the data lacks shown in English with unknown markers, untranslated elsewhere.
+ * and each talisman whose values the data lacks shown with unknown markers in every language.
  */
 export function withTalismanDescriptions(entries: readonly Entry[], data: TalismanData): Entry[] {
   const effects = new Map(entries.filter((entry) => entry.category === "effect").map((entry) => [entry.slug, entry]));
-  const nonEnglish = LANGS.filter((lang) => lang !== "en");
   return entries.map((entry) => {
     if (entry.category === "talisman" && entry.description && data[entry.slug]?.valuesUnknown) {
-      const untranslated = mergeUntranslated(entry, [nonEnglish]);
-      return { ...entry, description: unknownValues(entry.description), ...(untranslated ? { untranslated } : {}) };
+      const { text, english } = unknownValues(entry.description);
+      const untranslated = mergeUntranslated(entry, [english]);
+      return { ...entry, description: text, ...(untranslated ? { untranslated } : {}) };
     }
     const effectSlug = entry.category === "talisman" && !entry.description ? data[entry.slug]?.effect : undefined;
     const effect = effectSlug ? effects.get(effectSlug) : undefined;

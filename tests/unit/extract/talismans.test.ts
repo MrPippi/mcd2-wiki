@@ -71,13 +71,20 @@ describe("withTalismanDescriptions", () => {
     expect(find("talisman", "potion-cooldown")?.untranslated).toBeUndefined();
   });
 
-  it("shows a text whose values the data lacks in English, with unknown markers, untranslated in every other language", () => {
+  it("shows a text whose values the data lacks in each language, with unknown markers", () => {
     const strike = find("talisman", "healthy-strike");
-    const english = 'Grants a <span class="unknown-value">?</span> damage increase.';
-    expect(strike?.description?.en).toBe(english);
-    expect(strike?.description?.zh).toBe(english);
-    expect(strike?.untranslated).toHaveLength(15);
-    expect(strike?.untranslated).not.toContain("en");
+    expect(strike?.description?.en).toBe('Grants a <span class="unknown-value">?</span> damage increase.');
+    expect(strike?.description?.zh).toBe('傷害提高 <span class="unknown-value">?</span>。');
+    expect(strike?.untranslated).toBeUndefined();
+  });
+
+  it("keeps English for a language whose text bends a word to the missing value", () => {
+    const plural = '<span class="plural" data-slot="1" data-forms="Smaragd|Smaragde">{1}</span>';
+    const entry = talismanEntry("bent", "Talisman_Bent", { en: 'Up to <span class="placeholder" data-slot="0">{0}</span> emeralds.' });
+    const description = entry.description ? { ...entry.description, de: `Bis zu ${plural}.` } : undefined;
+    const [out] = withTalismanDescriptions([{ ...entry, description }], { bent: { valuesUnknown: true, levels: [] } });
+    expect(out?.description?.de).toBe('Up to <span class="unknown-value">?</span> emeralds.');
+    expect(out?.untranslated).toEqual(["de"]);
   });
 
   it("leaves other entries alone and does not change its input", () => {

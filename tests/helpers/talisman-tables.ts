@@ -159,7 +159,7 @@ export const TALISMAN_ENTRIES: readonly Entry[] = [
   talismanEntry("ammo-capacity", "Talisman_AmmoCapacity"),
   talismanEntry("potion-cooldown", "Talisman_PotionCooldown"),
   talismanEntry("ranged-buff", "Talisman_RangedBuff"),
-  talismanEntry("healthy-strike", "Talisman_HealthyStrike", { en: `Grants a ${SLOT} damage increase.` }),
+  talismanEntry("healthy-strike", "Talisman_HealthyStrike", { en: `Grants a ${SLOT} damage increase.`, zh: `傷害提高 ${SLOT}。` }),
   talismanEntry("wolf", "Talisman_Wolf", { en: "Summons a furry friend to fight by your side!" }),
   talismanEntry("llama", "Talisman_Llama", { en: "Summons a woolly wanderer to watch over you in battle!" }),
   talismanEntry("rolled", "Talisman_Rolled"),
