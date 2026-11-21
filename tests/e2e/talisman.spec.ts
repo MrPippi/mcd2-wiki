@@ -41,10 +41,10 @@ test("a talisman whose game translation misreads a percentage shows the correcte
 test("talismans whose values are not in the game data show unknown markers and a note", async ({ page }) => {
   await page.goto("/zh/talisman/speed-increment/");
   const description = page.locator(".description .primary");
-  await expect(description).toContainText("Increases movement speed by");
+  await expect(description).toContainText("移動速度提高");
   await expect(description.locator(".unknown-value")).toHaveText(["?", "?"]);
   await expect(page.getByTestId("values-unknown")).toContainText("數值不在遊戲資料檔中");
-  await expect(page.getByTestId("info-box").locator(".tag.warn")).toHaveText("未翻譯");
+  await expect(page.getByTestId("info-box").locator(".tag.warn")).toHaveCount(0);
   await expect(page.getByTestId("secret-talisman")).toHaveText("秘密護符");
   await expect(page.locator(".placeholder")).toHaveCount(0);
 });

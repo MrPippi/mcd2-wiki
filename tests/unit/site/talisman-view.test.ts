@@ -25,12 +25,13 @@ describe("talisman descriptions", () => {
     expect(ammo.untranslated).not.toContain("de");
   });
 
-  it("publishes talismans whose values are not in the data, in English with unknown markers", () => {
+  it("publishes talismans whose values are not in the data, in each language with unknown markers", () => {
     for (const slug of ["healthy-strike", "speed-increment", "firing-emeralds"]) {
       const entry = talisman(slug);
-      expect(entry.description?.zh, slug).toBe(entry.description?.en);
+      expect(entry.description?.zh, slug).not.toBe(entry.description?.en);
+      expect(entry.description?.zh, slug).toContain('<span class="unknown-value">?</span>');
       expect(entry.description?.en, slug).toContain('<span class="unknown-value">?</span>');
-      expect(entry.untranslated, slug).toContain("ja");
+      expect(entry.untranslated ?? [], slug).not.toContain("zh");
       expect(hasUnknownValues(entry), slug).toBe(true);
     }
     expect(hasUnknownValues(talisman("ammo-capacity"))).toBe(false);
