@@ -1,7 +1,7 @@
 /**
- * Steam achievements (source-data/Steam/Achievements): names, descriptions and global unlock rates in English and
- * Traditional Chinese, plus one 256×256 jpg per achievement. The game ships no achievement text of its own, so every
- * other language shows the English text and is recorded in `untranslated`.
+ * Steam achievements (source-data/Steam/Achievements): names, descriptions and global unlock rates in each language
+ * Steam has (`npm run steam-achievements` fetches them), plus one 256×256 jpg per achievement. The game ships no
+ * achievement text of its own, so a language Steam lacks shows the English text and is recorded in `untranslated`.
  */
 import { existsSync } from "node:fs";
 import { mkdir } from "node:fs/promises";
@@ -54,9 +54,9 @@ export function parseSteamAchievements(raw: unknown, filePath: string): SteamAch
   return parsed.data;
 }
 
-/** Text in every language: Steam's own English and Chinese, English for the rest; `missing` lists the English stand-ins. */
-function localizeSteam(text: { readonly en: string; readonly zh: string }): { value: Localized; missing: Lang[] } {
-  const own = (lang: Lang): string | undefined => (lang === "en" ? text.en : lang === "zh" ? text.zh.trim() || undefined : undefined);
+/** Text in every language: Steam's own where it has one, English for the rest; `missing` lists the English stand-ins. */
+function localizeSteam(text: SteamAchievement["name"]): { value: Localized; missing: Lang[] } {
+  const own = (lang: Lang): string | undefined => (lang === "en" ? text.en : text[lang]?.trim() || undefined);
   return {
     value: localizedFrom((lang) => own(lang) ?? text.en),
     missing: LANGS.filter((lang) => own(lang) === undefined),

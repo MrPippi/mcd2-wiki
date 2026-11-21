@@ -187,6 +187,14 @@
 - **鍵盤**：Z／X 切換到前一個／下一個世界（照遊戲 `DT_WorldMapActions`，到頭會繞回；在輸入框內或按著修飾鍵時忽略）。
 - 設計與驗證紀錄：`docs/superpowers/specs/2026-10-10-world-map-design.md`。
 
+## 成就（Steam）
+
+遊戲本身沒有成就文字，成就的圖示、名稱、說明與全球解鎖率都取自 Steam（app 1912410），放在 `source-data/Steam/Achievements/achievements.json`。
+
+- `npm run steam-achievements`：從 Steam 社群的成就頁抓取各語言的名稱與說明（依語言 cookie 切換，以 API 名稱對應成就 id），寫回該檔，接著跑 `npm run extract`。隱藏成就的說明維持空白，頁面改顯示遊戲資料裡的解鎖條件。
+- Steam 整個語言都只給英文時，視為沒有該語言，網站顯示英文並標「未翻譯」；個別名稱和英文相同（例如「Ka-BOOM!」）仍算翻譯。
+- `retrieved` 是解鎖率的日期（頁尾顯示），文字的抓取日期另記在 `textsRetrieved`；這個指令不更新解鎖率。
+
 ## 更新日誌
 
 `/<lang>/changelog/` 列出遊戲各版本的更新，由兩份資料組成：

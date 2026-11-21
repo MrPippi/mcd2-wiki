@@ -92,6 +92,16 @@ describe("buildAchievements", () => {
     expect([...(unique?.untranslated ?? [])].sort()).toEqual([...OTHER_LANGS].sort());
   });
 
+  it("uses every other language Steam has, and marks only the rest untranslated", () => {
+    const row = steamRow("EQUIP_A_UNIQUE_ITEM", 76.9, ["One-of-a-Kind", "Equip a unique item"], ["獨一無二", "裝備一件獨特物品"]);
+    const withGerman = { ...row, name: { ...row.name, de: "Einzigartig" }, description: { ...row.description, de: "Rüste einen einzigartigen Gegenstand aus" } };
+    const [unique] = buildAchievements({ ...STEAM, achievements: [withGerman] }, () => true).data.achievements;
+    expect(unique?.name.de).toBe("Einzigartig");
+    expect(unique?.description?.de).toBe("Rüste einen einzigartigen Gegenstand aus");
+    expect(unique?.untranslated).not.toContain("de");
+    expect(unique?.untranslated).toContain("ja");
+  });
+
   it("marks Chinese untranslated too when Steam has no Chinese text", () => {
     const books = byId("COLLECT_ALL_ENCHANTMENT_BOOKS");
     expect(books?.name.zh).toBe("Bookworm");

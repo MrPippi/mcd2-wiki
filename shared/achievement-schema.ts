@@ -3,7 +3,8 @@ import { z } from "zod";
 import { LANGS } from "./langs";
 import { LocalizedSchema, SlugSchema } from "./schemas";
 
-const SteamTextSchema = z.object({ en: z.string(), zh: z.string() });
+/** Steam text by site language: English always, the others where `npm run steam-achievements` found a translation. */
+const SteamTextSchema = z.intersection(z.object({ en: z.string() }), z.partialRecord(z.enum(LANGS), z.string()));
 
 /** One row of source-data/Steam/Achievements/achievements.json; extra fields (icon URL, mapping notes) are ignored. */
 export const SteamAchievementSchema = z.object({
@@ -11,7 +12,7 @@ export const SteamAchievementSchema = z.object({
   /** The icon's file name in the same folder. */
   file: z.string().regex(/^[\w-]+\.jpe?g$/i, "must be a plain .jpg file name in the achievements folder"),
   globalPercent: z.number().min(0).max(100),
-  name: z.object({ en: z.string().min(1), zh: z.string() }),
+  name: z.intersection(z.object({ en: z.string().min(1) }), z.partialRecord(z.enum(LANGS), z.string())),
   description: SteamTextSchema,
 });
 export type SteamAchievement = z.infer<typeof SteamAchievementSchema>;

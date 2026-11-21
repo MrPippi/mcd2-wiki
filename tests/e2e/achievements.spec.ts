@@ -131,14 +131,13 @@ test.describe("achievements page", () => {
     await expect.poll(() => icons.evaluateAll((nodes) => nodes.filter((node) => node instanceof HTMLImageElement && node.naturalWidth > 0).length)).toBe(32);
   });
 
-  test("marks the English stand-in text on languages Steam does not cover", async ({ page }) => {
+  test("shows Steam's own text in other languages", async ({ page }) => {
     await page.goto("/ja/achievements/");
     await expect(page.locator("html")).toHaveAttribute("lang", "ja");
     await expect(page).toHaveTitle(/^実績 \| /);
     await expect(page.locator("h1")).toContainText("実績");
-    await expect(page.locator(".achievement-card").first().locator(".achievement-name .primary")).toHaveText("Home is Where Your Stuff Is");
-    await expect(page.locator(".achievements-head .tag.warn")).toHaveCount(1);
-    await expect(page.locator(".achievements-head .tag.warn")).toHaveText("未翻訳");
+    await expect(page.locator(".achievement-card").first().locator(".achievement-name .primary")).toHaveText("慣れ親しんだ故郷");
+    await expect(page.locator(".achievements-head .tag.warn")).toHaveCount(0);
     await expect(page.locator(".achievement-card .tag.warn")).toHaveCount(0);
     await expect(page.locator(".achievement-hidden").first()).toHaveText("隠し実績");
   });

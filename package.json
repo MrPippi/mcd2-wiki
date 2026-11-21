@@ -9,6 +9,7 @@
     "assets": "tsx scripts/assets/index.ts",
     "tiles": "tsx scripts/map-tiles/index.ts",
     "game-diff": "tsx scripts/game-diff/index.ts",
+    "steam-achievements": "tsx scripts/steam-achievements/index.ts",
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview --port 4329",
     "typecheck": "astro sync && tsc --noEmit",
