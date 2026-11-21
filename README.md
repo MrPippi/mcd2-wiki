@@ -5,7 +5,7 @@
 **A fan-made reference built straight from the game's own data, in 16 languages**
 
 Weapons, armor, artifacts, enchantments, the bestiary, the world map, quests, Soul Storms, drop odds and more,<br>
-with every number and name taken from the game files rather than typed in by hand.
+with numbers and names taken from the game's own data rather than typed in by hand.
 
 [![Site](https://img.shields.io/badge/site-mrpippi.github.io%2Fmcd2--wiki-2ea44f)](https://mrpippi.github.io/mcd2-wiki/)
 [![Game version](https://img.shields.io/badge/game-1.1.3.0-orange)](#good-to-know)
@@ -25,7 +25,7 @@ with every number and name taken from the game files rather than typed in by han
 
 ## Highlights
 
-- **Straight from the game**: names, descriptions and stats are extracted from the game's DataTables and localization. The data matches **game version 1.1.3.0**.
+- **Straight from the game**: names, descriptions and stats are extracted from the game's DataTables and localization. The data matches **game version 1.1.3.0**; values changed later on the game's servers only are added on top and noted on the page.
 - **16 languages**: game text uses the official translations, so it matches what you see in game.
 - **Bilingual mode**: show every name and description in a second language as well.
 - **No guessing**: values the data can't explain are left out or marked unconfirmed.
@@ -67,8 +67,8 @@ with every number and name taken from the game files rather than typed in by han
 | **Quests** | Every core quest in story order, side quests by region, Echo Golem quests and boss replays, each with its objectives, prerequisites, the quests it unlocks, first-completion and repeat rewards, emeralds by quest size, and the mobs you fight. Item pages name the quest a reward comes from |
 | **Locations** | One page per region with its area icon and the player level the game sets for it (where the game has them), a link to its spot on the map where the map marks it, the places inside it, the monsters found there by kind, its quests and its area loot. Mob and quest pages link to the region |
 | **Bosses** | The 10 bosses and 6 mini-bosses in story order, with health, region, and the core quest and boss replay each one appears in, where the game data names them |
-| **Achievements** | All Steam achievements with global unlock rates. Hidden ones stay hidden until you choose to reveal how to unlock them |
-| **Changelog** | What each game update changed (grouped into new, changed and fixed, then by topic) with a link to the official notes, the version the site's data comes from, and the changed values whenever the data moves to a new version |
+| **Achievements** | All Steam achievements, in all 16 languages, with global unlock rates. Hidden ones stay hidden until you choose to reveal how to unlock them |
+| **Changelog** | What each game update changed (grouped into new, changed and fixed, then by topic) with a link to the official notes, the version the site's data comes from, which updates were server-side only with no download, and the changed values whenever the data moves to a new version |
 
 Item pages also list where an item comes from (quest rewards, chests, merchants or enchantment book pools) and the drop odds from each source.
 
@@ -91,7 +91,7 @@ Item pages also list where an item comes from (quest rewards, chests, merchants 
 
 繁體中文 · 简体中文 · English · 日本語 · 한국어 · Deutsch · Français · Español · Italiano · Português (Brasil) · Русский · Polski · Nederlands · Svenska · Türkçe · Українська
 
-Item names, descriptions and other game text come from the game's own localization, so they match what you see in the game. The site's own wording (menus, labels, notes) is hand-written in Traditional Chinese and English and machine-translated into the other languages. Where a translation was found to be wrong, that line falls back to English.
+Item names, descriptions and other game text come from the game's own localization, so they match what you see in the game. The game has no achievement text of its own, so achievement names and descriptions come from Steam in each language. The site's own wording (menus, labels, notes) is hand-written in Traditional Chinese and English and machine-translated into the other languages. Where a translation was found to be wrong, that line falls back to English.
 
 ---
 
@@ -110,6 +110,8 @@ Some things aren't in the game data. Swing timings and damage per second live in
 **Will the wiki follow game updates?**
 
 Yes. When the game updates, the wiki is updated by extracting the new game files again. The version the data matches is shown at the top of this page.
+
+Some updates only change values on the game's servers, with no download and no launcher update (1.1.4.0, for example). Those values aren't in the game files, so the few the wiki shows are entered by hand, with a note next to each naming the server-side update.
 
 **I found a mistake. How do I report it?**
 
